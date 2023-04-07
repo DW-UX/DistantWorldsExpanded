@@ -1,0 +1,82 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: DistantWorlds.Types.ComponentType
+// Assembly: DistantWorlds.Types, Version=1.9.5.12, Culture=neutral, PublicKeyToken=null
+// MVID: C87DBA0E-BD3A-46BA-A8F0-EE9F5E5721E2
+// Assembly location: H:\7\DistantWorlds.Types.dll
+
+using System;
+
+namespace DistantWorlds.Types
+{
+  [Serializable]
+  public enum ComponentType : byte
+  {
+    Undefined,
+    WeaponBeam,
+    WeaponTorpedo,
+    WeaponBombard,
+    WeaponMissile,
+    WeaponPointDefense,
+    WeaponIonCannon,
+    WeaponIonPulse,
+    WeaponIonDefense,
+    WeaponTractorBeam,
+    WeaponGravityBeam,
+    WeaponAreaGravity,
+    AssaultPod,
+    HyperDeny,
+    HyperStop,
+    WeaponAreaDestruction,
+    WeaponSuperBeam,
+    WeaponSuperArea,
+    FighterBay,
+    Armor,
+    Shields,
+    ShieldRecharge,
+    EngineMainThrust,
+    EngineVectoring,
+    HyperDrive,
+    Reactor,
+    EnergyCollector,
+    ExtractorMine,
+    ExtractorGasExtractor,
+    ExtractorLuxury,
+    ManufacturerWeaponsPlant,
+    ManufacturerEnergyPlant,
+    ManufacturerHighTechPlant,
+    StorageFuel,
+    StorageCargo,
+    StorageTroop,
+    StoragePassenger,
+    StorageDockingBay,
+    SensorProximityArray,
+    SensorResourceProfileSensor,
+    SensorLongRange,
+    SensorTraceScanner,
+    SensorScannerJammer,
+    SensorStealth,
+    ComputerTargetting,
+    ComputerTargettingFleet,
+    ComputerCountermeasures,
+    ComputerCountermeasuresFleet,
+    ComputerCommandCenter,
+    ComputerCommerceCenter,
+    LabsWeaponsLab,
+    LabsEnergyLab,
+    LabsHighTechLab,
+    ConstructionBuild,
+    HabitationLifeSupport,
+    HabitationHabModule,
+    DamageControl,
+    HabitationMedicalCenter,
+    HabitationRecreationCenter,
+    HabitationColonization,
+    WeaponPhaser,
+    WeaponRailGun,
+    EnergyToFuel,
+    WeaponSuperTorpedo,
+    WeaponSuperMissile,
+    WeaponSuperPhaser,
+    WeaponSuperRailGun,
+  }
+}

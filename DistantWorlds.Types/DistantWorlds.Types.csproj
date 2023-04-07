@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{61610AA1-00EE-4FB7-BCC9-58FC5E115BEA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DistantWorlds.Types</RootNamespace>
+    <AssemblyName>DistantWorlds.Types</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BaconDistantWorlds">
+      <HintPath>..\..\BaconDistantWorlds\bin\Debug\BaconDistantWorlds.dll</HintPath>
+    </Reference>
+    <Reference Include="DW_Steam, Version=1.0.5257.18237, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Distant Worlds Universe\DW_Steam.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Achievement.cs" />
+    <Compile Include="AchievementList.cs" />
+    <Compile Include="AchievementType.cs" />
+    <Compile Include="AdvisorMessageType.cs" />
+    <Compile Include="Animation.cs" />
+    <Compile Include="AnimationList.cs" />
+    <Compile Include="AnimationSystem.cs" />
+    <Compile Include="AutomationLevel.cs" />
+    <Compile Include="AutomationResponse.cs" />
+    <Compile Include="BasicStopWatch.cs" />
+    <Compile Include="BattleTactics.cs" />
+    <Compile Include="Blockade.cs" />
+    <Compile Include="BlockadeList.cs" />
+    <Compile Include="BuiltObject.cs" />
+    <Compile Include="BuiltObjectComponent.cs" />
+    <Compile Include="BuiltObjectComponentList.cs" />
+    <Compile Include="BuiltObjectEncounterAction.cs" />
+    <Compile Include="BuiltObjectEncounterEventType.cs" />
+    <Compile Include="BuiltObjectFleeWhen.cs" />
+    <Compile Include="BuiltObjectImageCache.cs" />
+    <Compile Include="BuiltObjectImageData.cs" />
+    <Compile Include="BuiltObjectImageSize.cs" />
+    <Compile Include="BuiltObjectList.cs" />
+    <Compile Include="BuiltObjectMission.cs" />
+    <Compile Include="BuiltObjectMissionList.cs" />
+    <Compile Include="BuiltObjectMissionPriority.cs" />
+    <Compile Include="BuiltObjectMissionType.cs" />
+    <Compile Include="BuiltObjectRole.cs" />
+    <Compile Include="BuiltObjectStance.cs" />
+    <Compile Include="BuiltObjectSubRole.cs" />
+    <Compile Include="Cargo.cs" />
+    <Compile Include="CargoList.cs" />
+    <Compile Include="Character.cs" />
+    <Compile Include="CharacterDeathType.cs" />
+    <Compile Include="CharacterEvent.cs" />
+    <Compile Include="CharacterEventList.cs" />
+    <Compile Include="CharacterEventType.cs" />
+    <Compile Include="CharacterImageCache.cs" />
+    <Compile Include="CharacterImageChangedEventArgs.cs" />
+    <Compile Include="CharacterList.cs" />
+    <Compile Include="CharacterRole.cs" />
+    <Compile Include="CharacterSkill.cs" />
+    <Compile Include="CharacterSkillList.cs" />
+    <Compile Include="CharacterSkillType.cs" />
+    <Compile Include="CharacterTraitType.cs" />
+    <Compile Include="ColonyInvasion.cs" />
+    <Compile Include="ColonyPopulationPolicy.cs" />
+    <Compile Include="ColonyResourceEffect.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="CommandAction.cs" />
+    <Compile Include="CommandQueue.cs" />
+    <Compile Include="CompletionType.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="ComponentCategoryType.cs" />
+    <Compile Include="ComponentDefinition.cs" />
+    <Compile Include="ComponentDefinitionList.cs" />
+    <Compile Include="ComponentImprovement.cs" />
+    <Compile Include="ComponentImprovementList.cs" />
+    <Compile Include="ComponentList.cs" />
+    <Compile Include="ComponentResource.cs" />
+    <Compile Include="ComponentResourceList.cs" />
+    <Compile Include="ComponentStatus.cs" />
+    <Compile Include="ComponentType.cs" />
+    <Compile Include="ConstructionQueue.cs" />
+    <Compile Include="ConstructionYard.cs" />
+    <Compile Include="ConstructionYardList.cs" />
+    <Compile Include="Contract.cs" />
+    <Compile Include="ContractList.cs" />
+    <Compile Include="ConversationOption.cs" />
+    <Compile Include="ConversationOptionList.cs" />
+    <Compile Include="Creature.cs" />
+    <Compile Include="CreatureList.cs" />
+    <Compile Include="CreatureType.cs" />
+    <Compile Include="CryptoRandom.cs" />
+    <Compile Include="DeclinedTask.cs" />
+    <Compile Include="DeclinedTaskList.cs" />
+    <Compile Include="Design.cs" />
+    <Compile Include="DesignImageScalingMode.cs" />
+    <Compile Include="DesignList.cs" />
+    <Compile Include="DesignSpecification.cs" />
+    <Compile Include="DesignSpecificationComponentRule.cs" />
+    <Compile Include="DesignSpecificationComponentRuleList.cs" />
+    <Compile Include="DesignSpecificationComponentRuleType.cs" />
+    <Compile Include="DesignSpecificationList.cs" />
+    <Compile Include="DialogPart.cs" />
+    <Compile Include="DialogPartList.cs" />
+    <Compile Include="DialogPartType.cs" />
+    <Compile Include="DialogSet.cs" />
+    <Compile Include="DiplomaticRelation.cs" />
+    <Compile Include="DiplomaticRelationList.cs" />
+    <Compile Include="DiplomaticRelationType.cs" />
+    <Compile Include="DiplomaticStrategy.cs" />
+    <Compile Include="DisasterEventType.cs" />
+    <Compile Include="DistressSignal.cs" />
+    <Compile Include="DistressSignalList.cs" />
+    <Compile Include="DistressSignalType.cs" />
+    <Compile Include="DockingBay.cs" />
+    <Compile Include="DockingBayList.cs" />
+    <Compile Include="EditorMode.cs" />
+    <Compile Include="Empire.cs" />
+    <Compile Include="EmpireActivity.cs" />
+    <Compile Include="EmpireActivityList.cs" />
+    <Compile Include="EmpireActivityType.cs" />
+    <Compile Include="EmpireComparisonType.cs" />
+    <Compile Include="EmpireCounters.cs" />
+    <Compile Include="EmpireEvaluation.cs" />
+    <Compile Include="EmpireEvaluationList.cs" />
+    <Compile Include="EmpireList.cs" />
+    <Compile Include="EmpireMessage.cs" />
+    <Compile Include="EmpireMessageList.cs" />
+    <Compile Include="EmpireMessageType.cs" />
+    <Compile Include="EmpirePolicy.cs" />
+    <Compile Include="EmpirePriority.cs" />
+    <Compile Include="EmpirePriorityList.cs" />
+    <Compile Include="EmpireRelationshipFactor.cs" />
+    <Compile Include="EmpireRelationshipFactorList.cs" />
+    <Compile Include="EmpireStart.cs" />
+    <Compile Include="EmpireStartList.cs" />
+    <Compile Include="EmpireSummary.cs" />
+    <Compile Include="EmpireSummaryList.cs" />
+    <Compile Include="EmpireSystemSummary.cs" />
+    <Compile Include="EmpireSystemSummaryList.cs" />
+    <Compile Include="EmpireTerritory.cs" />
+    <Compile Include="EmpireTerritoryColony.cs" />
+    <Compile Include="EmpireTerritoryColonyList.cs" />
+    <Compile Include="EmpireVictoryConditions.cs" />
+    <Compile Include="EncyclopediaCategory.cs" />
+    <Compile Include="EncyclopediaItem.cs" />
+    <Compile Include="EncyclopediaItemList.cs" />
+    <Compile Include="EngineType.cs" />
+    <Compile Include="EventAction.cs" />
+    <Compile Include="EventActionExecutionPackage.cs" />
+    <Compile Include="EventActionExecutionPackageList.cs" />
+    <Compile Include="EventActionExecutionType.cs" />
+    <Compile Include="EventActionList.cs" />
+    <Compile Include="EventActionType.cs" />
+    <Compile Include="EventMessageType.cs" />
+    <Compile Include="EventTriggerType.cs" />
+    <Compile Include="Explosion.cs" />
+    <Compile Include="ExplosionList.cs" />
+    <Compile Include="FastBitmap.cs" />
+    <Compile Include="FbmNoise.cs" />
+    <Compile Include="Fighter.cs" />
+    <Compile Include="FighterList.cs" />
+    <Compile Include="FighterMissionType.cs" />
+    <Compile Include="FighterSpecification.cs" />
+    <Compile Include="FighterSpecificationList.cs" />
+    <Compile Include="FighterType.cs" />
+    <Compile Include="FighterWeapon.cs" />
+    <Compile Include="FighterWeaponList.cs" />
+    <Compile Include="FleetAttack.cs" />
+    <Compile Include="FleetAttackList.cs" />
+    <Compile Include="FleetPosture.cs" />
+    <Compile Include="ForceStructureProjection.cs" />
+    <Compile Include="ForceStructureProjectionList.cs" />
+    <Compile Include="FuelSourceSystem.cs" />
+    <Compile Include="FuelSourceSystemList.cs" />
+    <Compile Include="Galaxy.cs" />
+    <Compile Include="GalaxyImages.cs" />
+    <Compile Include="GalaxyIndex.cs" />
+    <Compile Include="GalaxyIndexList.cs" />
+    <Compile Include="GalaxyLocation.cs" />
+    <Compile Include="GalaxyLocationEffectType.cs" />
+    <Compile Include="GalaxyLocationList.cs" />
+    <Compile Include="GalaxyLocationShape.cs" />
+    <Compile Include="GalaxyLocationType.cs" />
+    <Compile Include="GalaxyNebulaeGenerator.cs" />
+    <Compile Include="GalaxyResourceMap.cs" />
+    <Compile Include="GalaxyShape.cs" />
+    <Compile Include="GalaxySummary.cs" />
+    <Compile Include="GalaxySummaryList.cs" />
+    <Compile Include="GalaxyTimeState.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameEndEventArgs.cs" />
+    <Compile Include="GameEndOutcome.cs" />
+    <Compile Include="GameEvent.cs" />
+    <Compile Include="GameEventList.cs" />
+    <Compile Include="GameMode.cs" />
+    <Compile Include="GameOptions.cs" />
+    <Compile Include="GameStartResets.cs" />
+    <Compile Include="GameSummary.cs" />
+    <Compile Include="GameSummaryList.cs" />
+    <Compile Include="GovernmentAttributes.cs" />
+    <Compile Include="GovernmentAttributesList.cs" />
+    <Compile Include="GovernmentBiasList.cs" />
+    <Compile Include="GovernmentStyle.cs" />
+    <Compile Include="GraphicsHelper.cs" />
+    <Compile Include="GraphicsQuality.cs" />
+    <Compile Include="Habitat.cs" />
+    <Compile Include="HabitatAtmosphereType.cs" />
+    <Compile Include="HabitatAttitudeFactor.cs" />
+    <Compile Include="HabitatAttitudeFactorList.cs" />
+    <Compile Include="HabitatCategoryType.cs" />
+    <Compile Include="HabitatImageCache.cs" />
+    <Compile Include="HabitatList.cs" />
+    <Compile Include="HabitatPrioritization.cs" />
+    <Compile Include="HabitatPrioritizationList.cs" />
+    <Compile Include="HabitatResource.cs" />
+    <Compile Include="HabitatResourceList.cs" />
+    <Compile Include="HabitatType.cs" />
+    <Compile Include="Hotspot.cs" />
+    <Compile Include="HotspotList.cs" />
+    <Compile Include="IAutomationAuthorizer.cs" />
+    <Compile Include="IEventMessageRecipient.cs" />
+    <Compile Include="IMessageRecipient.cs" />
+    <Compile Include="IndustryType.cs" />
+    <Compile Include="IntelligenceMission.cs" />
+    <Compile Include="IntelligenceMissionList.cs" />
+    <Compile Include="IntelligenceMissionOutcome.cs" />
+    <Compile Include="IntelligenceMissionType.cs" />
+    <Compile Include="InvasionStats.cs" />
+    <Compile Include="InvasionTactics.cs" />
+    <Compile Include="LightningPathNode.cs" />
+    <Compile Include="LightningPathNodeList.cs" />
+    <Compile Include="ListHelper.cs" />
+    <Compile Include="Manufacturer.cs" />
+    <Compile Include="ManufacturerList.cs" />
+    <Compile Include="ManufacturingQueue.cs" />
+    <Compile Include="MessageImageType.cs" />
+    <Compile Include="Mods\ModEvents.cs" />
+    <Compile Include="MouseHelper.cs" />
+    <Compile Include="MouseHoverMode.cs" />
+    <Compile Include="MultipleEventActionType.cs" />
+    <Compile Include="MusicMood.cs" />
+    <Compile Include="Number.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderList.cs" />
+    <Compile Include="OrderType.cs" />
+    <Compile Include="PirateColonyControl.cs" />
+    <Compile Include="PirateColonyControlList.cs" />
+    <Compile Include="PirateEconomy.cs" />
+    <Compile Include="PirateEconomyYear.cs" />
+    <Compile Include="PirateExpenseType.cs" />
+    <Compile Include="PirateIncomeType.cs" />
+    <Compile Include="PiratePlayStyle.cs" />
+    <Compile Include="PirateRelation.cs" />
+    <Compile Include="PirateRelationEvaluationType.cs" />
+    <Compile Include="PirateRelationList.cs" />
+    <Compile Include="PirateRelationType.cs" />
+    <Compile Include="Plague.cs" />
+    <Compile Include="PlagueList.cs" />
+    <Compile Include="PlagueType.cs" />
+    <Compile Include="PlanetaryFacility.cs" />
+    <Compile Include="PlanetaryFacilityBuildDate.cs" />
+    <Compile Include="PlanetaryFacilityBuildDateList.cs" />
+    <Compile Include="PlanetaryFacilityDefinition.cs" />
+    <Compile Include="PlanetaryFacilityDefinitionList.cs" />
+    <Compile Include="PlanetaryFacilityList.cs" />
+    <Compile Include="PlanetaryFacilityType.cs" />
+    <Compile Include="Population.cs" />
+    <Compile Include="PopulationList.cs" />
+    <Compile Include="PreWarpProgressEventType.cs" />
+    <Compile Include="PrioritizedTarget.cs" />
+    <Compile Include="PrioritizedTargetList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.cs" />
+    <Compile Include="Race.cs" />
+    <Compile Include="RaceBiasList.cs" />
+    <Compile Include="RaceEvent.cs" />
+    <Compile Include="RaceEventList.cs" />
+    <Compile Include="RaceEventType.cs" />
+    <Compile Include="RaceFamily.cs" />
+    <Compile Include="RaceFamilyBiasList.cs" />
+    <Compile Include="RaceFamilyList.cs" />
+    <Compile Include="RaceFamilyType.cs" />
+    <Compile Include="RaceImageCache.cs" />
+    <Compile Include="RaceList.cs" />
+    <Compile Include="RaceSummary.cs" />
+    <Compile Include="RaceSummarySection.cs" />
+    <Compile Include="RaceVictoryCondition.cs" />
+    <Compile Include="RaceVictoryConditionList.cs" />
+    <Compile Include="RaceVictoryConditionProgress.cs" />
+    <Compile Include="RaceVictoryConditionProgressList.cs" />
+    <Compile Include="RaceVictoryConditionType.cs" />
+    <Compile Include="RefreshViewEventArgs.cs" />
+    <Compile Include="ResearchAbility.cs" />
+    <Compile Include="ResearchAbilityList.cs" />
+    <Compile Include="ResearchAbilityType.cs" />
+    <Compile Include="ResearchArea.cs" />
+    <Compile Include="ResearchAreaList.cs" />
+    <Compile Include="ResearchNode.cs" />
+    <Compile Include="ResearchNodeDefinition.cs" />
+    <Compile Include="ResearchNodeDefinitionList.cs" />
+    <Compile Include="ResearchNodeList.cs" />
+    <Compile Include="ResearchSystem.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="ResourceBonus.cs" />
+    <Compile Include="ResourceBonusList.cs" />
+    <Compile Include="ResourceCategoryType.cs" />
+    <Compile Include="ResourceDatePair.cs" />
+    <Compile Include="ResourceDatePairList.cs" />
+    <Compile Include="ResourceDefinition.cs" />
+    <Compile Include="ResourceDefinitionList.cs" />
+    <Compile Include="ResourceGroup.cs" />
+    <Compile Include="ResourceList.cs" />
+    <Compile Include="ResourcePrevalanceList.cs" />
+    <Compile Include="ResourcePrevalence.cs" />
+    <Compile Include="ResourceSystem.cs" />
+    <Compile Include="ResourceType.cs" />
+    <Compile Include="Ruin.cs" />
+    <Compile Include="RuinList.cs" />
+    <Compile Include="RuinType.cs" />
+    <Compile Include="Scenario.cs" />
+    <Compile Include="ScenarioObjective.cs" />
+    <Compile Include="ScenarioObjectiveList.cs" />
+    <Compile Include="ScenarioObjectiveType.cs" />
+    <Compile Include="ScenarioResult.cs" />
+    <Compile Include="ScenarioResultList.cs" />
+    <Compile Include="ScenarioResultType.cs" />
+    <Compile Include="ScenarioStep.cs" />
+    <Compile Include="ScenarioStepList.cs" />
+    <Compile Include="Sector.cs" />
+    <Compile Include="SectorList.cs" />
+    <Compile Include="ShipAction.cs" />
+    <Compile Include="ShipActionType.cs" />
+    <Compile Include="ShipDesignFocus.cs" />
+    <Compile Include="ShipGroup.cs" />
+    <Compile Include="ShipGroupList.cs" />
+    <Compile Include="ShipImageHelper.cs" />
+    <Compile Include="SortableStellarObject.cs" />
+    <Compile Include="SortableStellarObjectList.cs" />
+    <Compile Include="SoundVolume.cs" />
+    <Compile Include="SpaceBattleStats.cs" />
+    <Compile Include="StartGameOptions.cs" />
+    <Compile Include="SteamAPI.cs" />
+    <Compile Include="StellarObject.cs" />
+    <Compile Include="StellarObjectList.cs" />
+    <Compile Include="SubRoleNameList.cs" />
+    <Compile Include="SubRoleNameSet.cs" />
+    <Compile Include="SyncListEnumerator`1.cs" />
+    <Compile Include="SyncList`1.cs" />
+    <Compile Include="SystemInfo.cs" />
+    <Compile Include="SystemInfoDistance.cs" />
+    <Compile Include="SystemInfoDistanceList.cs" />
+    <Compile Include="SystemInfoList.cs" />
+    <Compile Include="SystemVisibility.cs" />
+    <Compile Include="SystemVisibilityList.cs" />
+    <Compile Include="SystemVisibilityStatus.cs" />
+    <Compile Include="TextResolver.cs" />
+    <Compile Include="TradeableItem.cs" />
+    <Compile Include="TradeableItemList.cs" />
+    <Compile Include="TradeableItemType.cs" />
+    <Compile Include="TradeOfferResponse.cs" />
+    <Compile Include="Troop.cs" />
+    <Compile Include="TroopList.cs" />
+    <Compile Include="TroopType.cs" />
+    <Compile Include="TurnDirection.cs" />
+    <Compile Include="VictoryConditionProgress.cs" />
+    <Compile Include="VictoryConditionProgressList.cs" />
+    <Compile Include="VictoryConditions.cs" />
+    <Compile Include="WarEndReason.cs" />
+    <Compile Include="WarObjective.cs" />
+    <Compile Include="Weapon.cs" />
+    <Compile Include="WeaponList.cs" />
+    <Compile Include="WonderType.cs" />
+    <Compile Include="YearlyTradeValue.cs" />
+    <Compile Include="YearlyTradeValueList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
