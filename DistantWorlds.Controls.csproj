@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: H:\7\DistantWorlds.Controls.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{66BF916C-C205-43A4-840D-C207E73A2A22}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>DistantWorlds.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <ApplicationVersion>1.9.5.12</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>DistantWorlds</RootNamespace>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DistantWorlds.Types, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BaconDistantWorlds\bin\Debug\DistantWorlds.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gdi32.cs" />
+    <Compile Include="Mods\ModArgs.cs" />
+    <Compile Include="User32.cs" />
+    <Compile Include="Controls\ListViewBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TroopListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ShipGroupListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ResourceDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageBoxExButton.cs" />
+    <Compile Include="Controls\InfoPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DesignListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ConstructionYardListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ComponentDetail.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CollapsingHabitatTypeSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LabelledTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DropLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TopColonies.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SystemDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SpecialRuin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MessagePopup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HabitatListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GenericIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireMessageListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DesignDefense.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CommandListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterMission.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BuiltObjectMissionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ResearchNodeDefinitionDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GameSummaryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TroopDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\StartingEmpiresListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RaceDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageBoxExForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\LinearGradientMode.cs" />
+    <Compile Include="Controls\DiplomacyEmpireSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ColorDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SmoothLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GalaxySummaryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FleetHabitatDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireSummaryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterSkillTraitEditPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PopulationListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ManufacturerListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\HabitatDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DockingBayListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DiplomaticRelationTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGridViewTextBoxDropShadowColumn.cs" />
+    <Compile Include="Controls\CharacterListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ResearchTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EventActionListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ResearchProgress.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageBoxExManager.cs" />
+    <Compile Include="Controls\FleetDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DiplomacyTradeTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ResearchProjectHoveredEventArgs.cs" />
+    <Compile Include="Controls\DesignMovement.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGridViewNumericUpDownColumn.cs" />
+    <Compile Include="Controls\ColorSlider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterTroopListIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GalaxySummaryListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DesignImageScalingModeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterTraitTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ComponentCategoryDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GlassButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EncyclopediaItemChangedEventArgs.cs" />
+    <Compile Include="Controls\EncyclopediaTopicTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ListBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DesignWarnings.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ComponentResourceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ComponentListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NotifyAnimationCallback.cs" />
+    <Compile Include="Controls\NotifyAnimationFinishedCallback.cs" />
+    <Compile Include="Controls\BufferPaintingCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CornerCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ExtendedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NotifyAnimationEvent.cs" />
+    <Compile Include="Controls\NotifyAnimationFinishedEvent.cs" />
+    <Compile Include="Controls\CollapseAnimation.cs" />
+    <Compile Include="Controls\CaptionDraggingEvent.cs" />
+    <Compile Include="Controls\CaptionCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PiratePlaystyleDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HoverDetail.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterEventListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ScrollingLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\RuinPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageBoxExResult.cs" />
+    <Compile Include="Controls\HabitatResourceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FontSize.cs" />
+    <Compile Include="Controls\EmpireListViewBasic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DesignIndustry.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DesignEnergy.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CargoListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PirateColonyControlListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MultipleEventActionTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EventActionTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\IFontCache.cs" />
+    <Compile Include="Controls\GovernmentStyleDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DiplomaticRelationColorKey.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CreatureTypeIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PlanetaryFacilityDefinitionDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GameEventListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EventTriggerTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ColonyPopulationPolicyDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ColonyInvasionPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\WeaponListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TransparentButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HabitatTypeIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BorderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ScreenPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FlagShapeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DiplomaticRelationListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataGridViewTextBoxDropShadowCell.cs" />
+    <Compile Include="Controls\DataGridViewNumericUpDownCell.cs" />
+    <Compile Include="Controls\ConstructionYardPurchaser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Win32Wrapper.cs" />
+    <Compile Include="Controls\RaceVictoryConditionsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DiplomaticRelationTypeActualDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterSkillTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HoverButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EnhancedTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CaptionDraggingEventArgs.cs" />
+    <Compile Include="Controls\BuiltObjectListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\HoverMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireComparison.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GameEventPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EventActionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireSummaryListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterSkillsTraitsProgress.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EnabledLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ResearchSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ResearchFacilities.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MapKey.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HabitatPrioritizationListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuiltObjectDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BuiltObjectComponentListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ScrollingCreditsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CreatureTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageBoxExIcon.cs" />
+    <Compile Include="Controls\DataGridViewNumericUpDownEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DirectionCtrlStyleChangedEvent.cs" />
+    <Compile Include="Controls\DirectionCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PlanetaryFacilityListIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LabelDropshadow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HeaderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HabitatAttitudeSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DiplomaticRelationCell.cs" />
+    <Compile Include="Controls\DesignDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\BuiltObjectSubRoleDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireRelationList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DiplomaticRelationColumn.cs" />
+    <Compile Include="Controls\ChangeStyleEventArgs.cs" />
+    <Compile Include="Controls\TradeRestrictedResourcesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ResearchButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GalaxyLocationDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EventActionExecutionTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ResourceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PersistentGradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TimeoutResult.cs" />
+    <Compile Include="Controls\MessageBoxExButtons.cs" />
+    <Compile Include="Controls\GameVictoryConditions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\RaceSummaryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HoverMenuGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FleetBuiltObjectHabitatDropdown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MessagePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MessageBoxEx.cs" />
+    <Compile Include="Controls\EmpireDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireDetailView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CornerCurveMode.cs" />
+    <Compile Include="Controls\Animation.cs" />
+    <Compile Include="Controls\ExtendedPanelState.cs" />
+    <Compile Include="Controls\CornerStyle.cs" />
+    <Compile Include="Controls\DirectionStyle.cs" />
+    <Compile Include="Controls\BrushType.cs" />
+    <Compile Include="Controls\TextAnimationMode.cs" />
+    <Compile Include="Controls\CloseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\RoundRectanglePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Properties\Resources.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\BuiltObjectDropDown.resx" />
+    <EmbeddedResource Include="Controls\BuiltObjectListView.resx" />
+    <EmbeddedResource Include="Controls\BuiltObjectMissionView.resx" />
+    <EmbeddedResource Include="Controls\CharacterMission.resx" />
+    <EmbeddedResource Include="Controls\CharacterSkillTraitEditPanel.resx" />
+    <EmbeddedResource Include="Controls\CharacterSummary.resx" />
+    <EmbeddedResource Include="Controls\CollapsingHabitatTypeSelector.resx" />
+    <EmbeddedResource Include="Controls\ColorSlider.resx" />
+    <EmbeddedResource Include="Controls\ComponentListView.resx" />
+    <EmbeddedResource Include="Controls\ConstructionYardPurchaser.resx" />
+    <EmbeddedResource Include="Controls\DiplomacyTradeTree.resx" />
+    <EmbeddedResource Include="Controls\DiplomaticRelationListView.resx" />
+    <EmbeddedResource Include="Controls\EmpireDetailView.resx" />
+    <EmbeddedResource Include="Controls\EncyclopediaItemChangedEventArgs.resx" />
+    <EmbeddedResource Include="Controls\EventActionPanel.resx" />
+    <EmbeddedResource Include="Controls\ExtendedPanel.resx" />
+    <EmbeddedResource Include="Controls\GameEventPanel.resx" />
+    <EmbeddedResource Include="Controls\GlassButton.resx" />
+    <EmbeddedResource Include="Controls\HeaderPanel.resx" />
+    <EmbeddedResource Include="Controls\ListViewBase.resx" />
+    <EmbeddedResource Include="Controls\MessageBoxExForm.resx" />
+    <EmbeddedResource Include="Controls\Properties\Resources.resx" />
+    <EmbeddedResource Include="Controls\ResearchProgress.resx" />
+    <EmbeddedResource Include="Controls\RuinPanel.resx" />
+    <EmbeddedResource Include="Controls\ScreenPanel.resx" />
+    <EmbeddedResource Include="Controls\SpecialRuin.resx" />
+    <EmbeddedResource Include="Controls\TradeRestrictedResourcesPanel.resx" />
+    <EmbeddedResource Include="Controls\TroopListView.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
