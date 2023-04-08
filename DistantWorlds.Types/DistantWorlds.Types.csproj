@@ -246,6 +246,7 @@
     <Compile Include="HabitatAttitudeFactor.cs" />
     <Compile Include="HabitatAttitudeFactorList.cs" />
     <Compile Include="HabitatCategoryType.cs" />
+    <Compile Include="HabitatPrioritizationListFilter.cs" />
     <Compile Include="HabitatImageCache.cs" />
     <Compile Include="HabitatList.cs" />
     <Compile Include="HabitatPrioritization.cs" />
