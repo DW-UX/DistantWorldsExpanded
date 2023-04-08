@@ -26,7 +26,7 @@ namespace DistantWorlds.Controls
 
             public TargetClickedEventArgs(PrioritizedTarget target, MouseButtons buttonClicked):base()
             {
-                Class7.VEFSJNszvZKMZ();
+                
                 Target = target;
                 ButtonClicked = buttonClicked;
             }
@@ -64,7 +64,7 @@ namespace DistantWorlds.Controls
 
         private int int_2;
 
-        private double double_0;
+        //private double double_0;
 
         private int int_3;
 
@@ -88,8 +88,9 @@ namespace DistantWorlds.Controls
 
         private double double_1;
 
+        //проверить что переменная не используется
         private ShipGroupList shipGroupList_0;
-
+        //проверить что переменная не используется
         private PrioritizedTarget prioritizedTarget_2;
 
         private Bitmap[] bitmap_0;
@@ -112,9 +113,9 @@ namespace DistantWorlds.Controls
 
         protected IFontCache _FontCache;
 
-        private float float_1;
+        //private float float_1;
 
-        private bool bool_4;
+        //private bool bool_4;
 
         public PrioritizedTargetList Targets => prioritizedTargetList_0;
 
@@ -285,7 +286,7 @@ namespace DistantWorlds.Controls
             main_0 = parentForm;
             rectangle_0 = area;
             int_2 = 46;
-            double_0 = 20.0;
+            //double_0 = 20.0;
             int_0 = (area.Height - (int_4 + 5 + int_5)) / int_2;
             Reset();
         }
@@ -900,7 +901,7 @@ namespace DistantWorlds.Controls
 
         public TargetAssignmentList():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             Visible = true;
             bool_0 = true;
             Expanded = true;
@@ -912,7 +913,7 @@ namespace DistantWorlds.Controls
             dateTime_0 = DateTime.MinValue;
             rectangle_0 = new Rectangle(10, 100, 200, 50);
             int_2 = 46;
-            double_0 = 20.0;
+            //double_0 = 20.0;
             int_3 = 30;
             float_0 = 0.6f;
             int_4 = 17;

@@ -127,12 +127,12 @@ namespace DistantWorlds
 
         public ItemListPanel(string title, Bitmap iconImage, Type itemType) : this(title, iconImage, itemType, new List<string[]>())
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
 
         public ItemListPanel(string title, Bitmap iconImage, Type itemType, List<string[]> toggleButtonText):base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             TitleBarHeight = 18;
             ToggleButtonHeight = 14;
             ScrollUpHeight = 14;

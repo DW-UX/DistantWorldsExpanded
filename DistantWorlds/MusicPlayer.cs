@@ -99,7 +99,7 @@ namespace DistantWorlds
 
         public MusicPlayer(Main mainForm, string folder, string themeMusic):base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             double_0 = -1.0;
             double_1 = 0.02;
             main_0 = mainForm;

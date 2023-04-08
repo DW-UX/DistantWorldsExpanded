@@ -13,12 +13,12 @@ namespace DistantWorlds
 {
     public class Splash : Form
     {
-        private IContainer icontainer_0;
+        //private IContainer icontainer_0;
         internal LabelDropshadow lblMessage;
 
         public Splash() : base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             // ISSUE: explicit constructor call
             this.InitializeComponent();
             ((Control)this.lblMessage).Location = new Point(86, 228);
@@ -27,8 +27,8 @@ namespace DistantWorlds
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && this.icontainer_0 != null)
-                this.icontainer_0.Dispose();
+            //if (disposing && this.icontainer_0 != null)
+            //    this.icontainer_0.Dispose();
             base.Dispose(disposing);
         }
 

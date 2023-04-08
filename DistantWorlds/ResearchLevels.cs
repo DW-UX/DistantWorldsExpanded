@@ -19,7 +19,7 @@ namespace DistantWorlds
 
         private ResearchAreaList researchAreaList_0;
 
-        private IContainer icontainer_0;
+        //private IContainer icontainer_0;
 
         private ResearchLevelSlider resBeamWeapon;
 
@@ -65,7 +65,7 @@ namespace DistantWorlds
 
         public ResearchLevels():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             InitializeComponent();
         }
 
@@ -175,10 +175,10 @@ namespace DistantWorlds
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && icontainer_0 != null)
-            {
-                icontainer_0.Dispose();
-            }
+            //if (disposing && icontainer_0 != null)
+            //{
+            //    icontainer_0.Dispose();
+            //}
             base.Dispose(disposing);
         }
 

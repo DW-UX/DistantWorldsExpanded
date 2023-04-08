@@ -8,7 +8,6 @@ using AxWMPLib;
 using BaconDistantWorlds;
 using DistantWorlds.Controls;
 using DistantWorlds.Controls.Mods;
-using DistantWorlds.Mods;
 using DistantWorlds.Types;
 using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
@@ -1073,11 +1072,11 @@ namespace DistantWorlds
 
         protected static IntPtr m_HBitmap;
 
-        private Delegate11 delegate11_0;
+        //private Delegate11 delegate11_0;
 
         private string string_1;
 
-        private bool bool_4;
+        //private bool bool_4;
 
         private string wjhRtsSwmsa;
 
@@ -7431,7 +7430,7 @@ namespace DistantWorlds
 
         public Start():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             bool_0 = true;
             color_0 = Color.FromArgb(96, 255, 64, 64);
             oyxRtRyAwjg = new BackgroundWorker();
@@ -7440,7 +7439,7 @@ namespace DistantWorlds
             list_0 = new List<Control>();
             galaxySummaryList_0 = new GalaxySummaryList();
             string_1 = string.Empty;
-            bool_4 = true;
+            //bool_4 = true;
             wjhRtsSwmsa = string.Empty;
             try
             {
@@ -10375,7 +10374,7 @@ namespace DistantWorlds
 
         private Race method_48(Galaxy galaxy_0, string string_2, DistantWorlds.Types.EmpireList empireList_0, bool bool_5)
         {
-            Race race = null;
+            //Race race = null;
             if (string_2 == "(" + TextResolver.GetText("Random") + ")")
             {
                 RaceList raceList = new RaceList();
@@ -10662,7 +10661,7 @@ namespace DistantWorlds
         {
             sector_0 = null;
             string text = TextResolver.GetText("Sector");
-            double num = 0.0;
+            //double num = 0.0;
             double num2 = 0.05;
             double num3 = 1.0;
             if (string_2 == TextResolver.GetText("Random"))
@@ -10813,8 +10812,6 @@ namespace DistantWorlds
             if (string_2 == TextResolver.GetText("PreWarp"))
             {
                 num = 0;
-                num = 0;
-                int num2 = 0;
             }
             else
             {
@@ -10822,7 +10819,7 @@ namespace DistantWorlds
                 if (string_2 == TextResolver.GetText("Starting"))
                 {
                     num = 1;
-                    int num2 = 1;
+                    //int num2 = 1;
                     goto IL_00e8;
                 }
                 if (string_2 == TextResolver.GetText("Young"))
@@ -13555,7 +13552,7 @@ namespace DistantWorlds
                 {
                     num3 = 3;
                     subRole = BuiltObjectSubRole.Undefined;
-                    int num6 = 3;
+                    //int num6 = 3;
                 }
                 else
                 {
@@ -15154,7 +15151,7 @@ namespace DistantWorlds
         private string method_108(string string_2, Random random_0)
         {
             string result = "(" + TextResolver.GetText("Random") + ")";
-            int num = 0;
+            //int num = 0;
             if (string_2 == TextResolver.GetText("PreWarp"))
             {
                 result = TextResolver.GetText("PreWarp");
@@ -15253,7 +15250,7 @@ namespace DistantWorlds
         private string method_109(string string_2, Random random_0)
         {
             string result = "(" + TextResolver.GetText("Random") + ")";
-            int num = 0;
+            //int num = 0;
             if (string_2 == TextResolver.GetText("PreWarp"))
             {
                 result = TextResolver.GetText("PreWarp");
@@ -19401,7 +19398,7 @@ namespace DistantWorlds
 
         private int method_190()
         {
-            int num = 0;
+            //int num = 0;
             return cmbStartNewGameTheGalaxyPirateProximity.SelectedIndex switch
             {
                 0 => 0,
@@ -19413,7 +19410,7 @@ namespace DistantWorlds
 
         private PiratePlayStyle method_191()
         {
-            PiratePlayStyle piratePlayStyle = PiratePlayStyle.Undefined;
+            //PiratePlayStyle piratePlayStyle = PiratePlayStyle.Undefined;
             return cmbVictoryPiratePlayStyle.SelectedIndex switch
             {
                 0 => PiratePlayStyle.Balanced,
@@ -19426,7 +19423,7 @@ namespace DistantWorlds
 
         private PiratePlayStyle method_192()
         {
-            PiratePlayStyle piratePlayStyle = PiratePlayStyle.Undefined;
+            //PiratePlayStyle piratePlayStyle = PiratePlayStyle.Undefined;
             return cmbJumpStartVictoryPiratePlayStyle.SelectedIndex switch
             {
                 0 => PiratePlayStyle.Balanced,
@@ -19439,7 +19436,7 @@ namespace DistantWorlds
 
         private PiratePlayStyle method_193(int int_1)
         {
-            PiratePlayStyle piratePlayStyle = PiratePlayStyle.Undefined;
+            //PiratePlayStyle piratePlayStyle = PiratePlayStyle.Undefined;
             return int_1 switch
             {
                 0 => PiratePlayStyle.Balanced,
@@ -19598,7 +19595,7 @@ namespace DistantWorlds
 
         private void method_196(StartGameOptions startGameOptions_0)
         {
-            bool_4 = false;
+            //bool_4 = false;
             tbarJumpStartTheGalaxyStarDensity.Value = startGameOptions_0.GalaxySize;
             tbarJumpStartTheGalaxyDimensions.Value = startGameOptions_0.GalaxyDimensions;
             tbarJumpStartTheGalaxyDifficulty.Value = startGameOptions_0.GalaxyDifficulty;
@@ -19713,7 +19710,7 @@ namespace DistantWorlds
             {
                 cmbVictoryThresholdPercentage.SelectedIndex = startGameOptions_0.VictoryConditionsVictoryThresholdPercent;
             }
-            bool_4 = true;
+            //bool_4 = true;
         }
 
         private void method_197()
@@ -20581,7 +20578,7 @@ namespace DistantWorlds
 
         private int method_209(int int_1)
         {
-            int num = 0;
+            //int num = 0;
             if (int_1 <= 30000)
             {
                 return 4;
@@ -20603,7 +20600,7 @@ namespace DistantWorlds
 
         private int meEawywtba(int int_1)
         {
-            int num = 120000;
+            //int num = 120000;
             return int_1 switch
             {
                 0 => 480000,

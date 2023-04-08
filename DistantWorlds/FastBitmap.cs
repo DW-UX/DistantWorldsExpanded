@@ -35,7 +35,7 @@ namespace DistantWorlds
 
         public unsafe FastBitmap(Bitmap image):base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             pByte_0 = null;
             bitmap_0 = image;
             try

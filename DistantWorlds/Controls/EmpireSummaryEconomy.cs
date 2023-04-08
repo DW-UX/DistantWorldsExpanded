@@ -39,7 +39,7 @@ namespace DistantWorlds.Controls
 
         public EmpireSummaryEconomy() : base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             int_0 = 13;
             int_1 = 10;
             GqYieCfHe = 10;

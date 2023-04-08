@@ -36,7 +36,7 @@ namespace DistantWorlds.Controls
 
         public EmpireSummaryBonusesTitle():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             _BonusesPanel = new EmpireSummaryBonuses();
             _Container = new Panel();
             int_0 = 15;

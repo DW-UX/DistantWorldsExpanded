@@ -16,15 +16,15 @@ namespace DistantWorlds.Controls
 {
     public class ResearchLevelSlider : UserControl
     {
-        private int int_0;
+        //private int int_0;
 
-        private int int_1;
+        //private int int_1;
 
         private Main main_0;
 
         private ResearchArea researchArea_0;
 
-        private IContainer icontainer_0;
+        //private IContainer icontainer_0;
 
         private ColorSlider sldResearchLevel;
 
@@ -40,7 +40,7 @@ namespace DistantWorlds.Controls
 
         public ResearchLevelSlider() : base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             InitializeComponent();
             LayoutControls();
         }
@@ -96,7 +96,8 @@ namespace DistantWorlds.Controls
 
         public void LayoutControls()
         {
-            int num = base.ClientRectangle.Width - (388 + int_1);
+            //int num = base.ClientRectangle.Width - (388 + int_1);
+            int num = base.ClientRectangle.Width - (388);
             SuspendLayout();
             picResearchArea.Location = new Point(0, 0);
             lblResearchArea.Location = new Point(24, 2);
@@ -249,10 +250,10 @@ namespace DistantWorlds.Controls
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && icontainer_0 != null)
-            {
-                icontainer_0.Dispose();
-            }
+            //if (disposing && icontainer_0 != null)
+            //{
+            //    icontainer_0.Dispose();
+            //}
             base.Dispose(disposing);
         }
 

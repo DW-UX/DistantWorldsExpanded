@@ -67,12 +67,12 @@ namespace DistantWorlds
 
         public NebulaCloudGenerator(int randomSeed):this(randomSeed, -1)
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
 
         public NebulaCloudGenerator(int randomSeed, int colorScheme):base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             NebulaCloudScaleFactor = 4.5;
             hQjZroaYr7 = 170;
             int_2 = 200;
@@ -701,7 +701,7 @@ namespace DistantWorlds
         private Rectangle method_12(Bitmap bitmap_0, int int_5, Color color_0, int int_6)
         {
             int num = int_4;
-            Rectangle rectangle = default(Rectangle);
+            //Rectangle rectangle = default(Rectangle);
             DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_0);
             int num2 = 0;
             int num3 = 0;

@@ -1122,7 +1122,7 @@ namespace DistantWorlds.Controls
 
         public SystemView()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             bool_5 = true;
             double_0 = 2500.0;
             double_1 = 25000.0;

@@ -70,9 +70,9 @@ namespace DistantWorlds
 
         protected IFontCache _FontCache;
 
-        private float float_0;
+        //private float float_0;
 
-        private bool bool_1;
+        //private bool bool_1;
 
         public Game Game
         {
@@ -844,7 +844,7 @@ namespace DistantWorlds
 
         public HoverPanel():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             int_0 = 16;
             int_1 = 5;
             int_2 = 6;

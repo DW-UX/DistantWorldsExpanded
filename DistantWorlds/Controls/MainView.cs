@@ -5,7 +5,8 @@
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
 //using BaconDistantWorlds;
-using DistantWorlds.Mods;
+
+using BaconDistantWorlds;
 using DistantWorlds.Types;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Xna.Framework;
@@ -429,7 +430,7 @@ namespace DistantWorlds.Controls
 
         private PlanetaryRingsGenerator planetaryRingsGenerator_0;
 
-        private GalaxyNebulaeGenerator galaxyNebulaeGenerator_0;
+        //private GalaxyNebulaeGenerator galaxyNebulaeGenerator_0;
 
         private LightningGenerator lightningGenerator_0;
 
@@ -449,7 +450,7 @@ namespace DistantWorlds.Controls
 
         private double double_5;
 
-        private double double_6;
+        //private double double_6;
 
         public DistantWorlds.AnimationSystem animationSystem_0;
 
@@ -586,14 +587,6 @@ namespace DistantWorlds.Controls
         public GraphicsDevice GraphicsDevice => class1_0.GraphicsDevice;
 
         public ServiceContainer Services => serviceContainer_0;
-
-        public static event EventHandler<ReturnDoubleModsArgs> MinZoomLevelForWeaponsCirclesMods;
-        public static event EventHandler<ReturnDoubleModsArgs> BackgroundStarsAtZoomLevelMods;
-        public static event EventHandler<DrawRangeModsArgs> DrawWeaponRanges;
-        public static event EventHandler<DrawRangeModsArgs> DrawGravityWellRange;
-        public static event EventHandler<DrawPathLineModsArgs> DrawPathLineMods;
-
-
 
         public void Extinguish()
         {
@@ -1341,7 +1334,7 @@ namespace DistantWorlds.Controls
 
         public MainView() : base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             solidBrush_0 = new SolidBrush(System.Drawing.Color.White);
             solidBrush_1 = new SolidBrush(System.Drawing.Color.Yellow);
             solidBrush_2 = new SolidBrush(System.Drawing.Color.Black);
@@ -1452,7 +1445,7 @@ namespace DistantWorlds.Controls
             int_6 = 20;
             dateTime_2 = DateTime.Now;
             double_5 = 0.2;
-            double_6 = 0.4;
+            //double_6 = 0.4;
             double_7 = 1.5;
             double_8 = 1.0;
             bitmap_5 = new Bitmap[3];
@@ -1535,8 +1528,7 @@ namespace DistantWorlds.Controls
                 {
                     method_76();
                 }
-                //if (main_0.double_0 > BaconMain.minZoomLevelForWeaponsCircles)
-                if (main_0.double_0 > MainView.OnMinZoomLevelForWeaponsCirclesMods())
+                if (main_0.double_0 > BaconMain.minZoomLevelForWeaponsCircles)
                 {
                     int num = (int)((main_0.double_0 - 70.0) * 1.2);
                     if (num < 0)
@@ -3417,7 +3409,7 @@ namespace DistantWorlds.Controls
                 {
                     systemVisibilityStatus = SystemVisibilityStatus.Visible;
                     rectangle = default(System.Drawing.Rectangle);
-                    SystemVisibilityStatus systemVisibilityStatus2 = SystemVisibilityStatus.Visible;
+                    //SystemVisibilityStatus systemVisibilityStatus2 = SystemVisibilityStatus.Visible;
                     goto IL_05d0;
                 }
                 rectangle = default(System.Drawing.Rectangle);
@@ -5079,7 +5071,8 @@ namespace DistantWorlds.Controls
                 switch (habitat_1.Type)
                 {
                     case HabitatType.MainSequence:
-                        return (habitat_1.MapPictureRef - main_0.int_6) switch
+                        //return (habitat_1.MapPictureRef - main_0.int_6) switch
+                        return (habitat_1.MapPictureRef) switch
                         {
                             0 => System.Drawing.Color.FromArgb(255, 255, 200),
                             1 => System.Drawing.Color.FromArgb(255, 248, 160),
@@ -5245,7 +5238,7 @@ namespace DistantWorlds.Controls
                 {
                     systemVisibilityStatus = SystemVisibilityStatus.Visible;
                     rectangle = default(System.Drawing.Rectangle);
-                    SystemVisibilityStatus systemVisibilityStatus2 = SystemVisibilityStatus.Visible;
+                    //SystemVisibilityStatus systemVisibilityStatus2 = SystemVisibilityStatus.Visible;
                     goto IL_05ae;
                 }
                 rectangle = default(System.Drawing.Rectangle);
@@ -5435,8 +5428,7 @@ namespace DistantWorlds.Controls
                         }
                     }
                 }
-                //if (main_0.double_0 < BaconMain.backgroundStarsAtZoomLevel)
-                if (main_0.double_0 < MainView.OnBackgroundStarsAtZoomLevelMods())
+                if (main_0.double_0 < BaconMain.backgroundStarsAtZoomLevel)
                 {
                     if (bool_9)
                     {
@@ -8485,21 +8477,21 @@ namespace DistantWorlds.Controls
             int num4 = 0;
             int num5 = 0;
             int num6 = 0;
-            if (int_11 > int_11)
-            {
-                num3 = 0;
-                num4 = int_11 - int_11;
-            }
+            //if (int_11 > int_11)
+            //{
+            //    num3 = 0;
+            //    num4 = int_11 - int_11;
+            //}
             if (num2 < 0)
             {
                 num5 = num2 + int_11;
                 num6 = int_11;
             }
-            if (int_11 > int_11)
-            {
-                num5 = 0;
-                num6 = int_11 - int_11;
-            }
+            //if (int_11 > int_11)
+            //{
+            //    num5 = 0;
+            //    num6 = int_11 - int_11;
+            //}
             new System.Drawing.Rectangle(num, num2, int_11 - num, int_11 - num2);
             new System.Drawing.Rectangle(num3, num2, num4 - num3, int_11 - num2);
             new System.Drawing.Rectangle(num, num5, int_11 - num, num6 - num5);
@@ -15299,8 +15291,7 @@ namespace DistantWorlds.Controls
                         }
                     }
                 }
-                //BaconMain.DrawWeaponRanges(spriteBatch_2, int_16, int_18, double_15);
-                MainView.OnDrawWeaponRangesMods(spriteBatch_2, int_16, int_18, double_15);
+                BaconMain.DrawWeaponRanges(spriteBatch_2, int_16, int_18, double_15);
                 if (double_15 > num16)
                 {
                     if (main_0._Game.SelectedObject == systemInfo)
@@ -15804,8 +15795,7 @@ namespace DistantWorlds.Controls
                     builtObject2 = shipGroup.LeadShip;
                     num70 = shipGroup.CurrentRange();
                 }
-                //BaconMain.DrawGravityWellRange(spriteBatch_2, int_16, int_18, double_15);
-                MainView.OnDrawGravityWellRangeMods(spriteBatch_2, int_16, int_18, double_15);
+                BaconMain.DrawGravityWellRange(spriteBatch_2, int_16, int_18, double_15);
                 if (builtObject2 != null && builtObject2.Role != BuiltObjectRole.Base && builtObject2.ActualEmpire == empire)
                 {
                     double num71 = builtObject2.Xpos - num70;
@@ -15951,8 +15941,7 @@ namespace DistantWorlds.Controls
 
         private void method_253(SpriteBatch spriteBatch_2, BuiltObject builtObject_1, int int_11, int int_12, int int_13, int int_14, double double_15, bool bool_13, System.Drawing.Color color_18, int int_15)
         {
-            //BaconMainView.method_253(this, spriteBatch_2, builtObject_1, int_11, int_12, int_13, int_14, double_15, bool_13, color_18, int_15);
-            MainView.OnDrawPathLineMods(this, spriteBatch_2, builtObject_1, int_11, int_12, int_13, int_14, double_15, bool_13, color_18, int_15);
+            BaconMainView.method_253(this, spriteBatch_2, builtObject_1, int_11, int_12, int_13, int_14, double_15, bool_13, color_18, int_15);
         }
 
         private void method_254(Graphics graphics_0, BuiltObject builtObject_1, int int_11, int int_12, int int_13, int int_14, double double_15, bool bool_13)
@@ -16510,68 +16499,6 @@ namespace DistantWorlds.Controls
                 {
                     graphics.SamplerStates[i] = previousSamplerStates[i];
                 }
-            }
-        }
-
-        private static double OnMinZoomLevelForWeaponsCirclesMods()
-        {
-            var tmp = MainView.MinZoomLevelForWeaponsCirclesMods;
-            double res = 0.9;
-            if (tmp != null)
-            {
-                var args = new ReturnDoubleModsArgs();
-                tmp(null, args);
-                res = args.Result;
-            }
-            return res;
-        }
-        private static double OnBackgroundStarsAtZoomLevelMods()
-        {
-            var tmp = MainView.BackgroundStarsAtZoomLevelMods;
-            double res = 0.9;
-            if (tmp != null)
-            {
-                var args = new ReturnDoubleModsArgs();
-                tmp(null, args);
-                res = args.Result;
-            }
-            return res;
-        }
-        private static void OnDrawWeaponRangesMods(SpriteBatch spriteBatch_2,      int num14,      int num16,      double zoomLevel)
-        {
-            var tmp = MainView.DrawWeaponRanges;
-            if (tmp != null)
-            {
-                var args = new DrawRangeModsArgs(spriteBatch_2, num14, num16, zoomLevel);
-                tmp(null, args);
-            }
-        }
-        private static void OnDrawGravityWellRangeMods(SpriteBatch spriteBatch_2, int num14, int num16, double zoomLevel)
-        {
-            var tmp = MainView.DrawGravityWellRange;
-            if (tmp != null)
-            {
-                var args = new DrawRangeModsArgs(spriteBatch_2, num14, num16, zoomLevel);
-                tmp(null, args);
-            }
-        }
-        private static void OnDrawPathLineMods(MainView mainview,
-                                                      SpriteBatch spriteBatch_2,
-                                                      BuiltObject builtObject_1,
-                                                      int int_11,
-                                                      int int_12,
-                                                      int int_13,
-                                                      int int_14,
-                                                      double double_15,
-                                                      bool bool_13,
-                                                      System.Drawing.Color color_18,
-                                                      int int_15)
-        {
-            var tmp = MainView.DrawPathLineMods;
-            if (tmp != null)
-            {
-                var args = new DrawPathLineModsArgs(mainview, spriteBatch_2, builtObject_1, int_11, int_12, int_13, int_14, double_15, bool_13, color_18, int_15);
-                tmp(null, args);
             }
         }
     }

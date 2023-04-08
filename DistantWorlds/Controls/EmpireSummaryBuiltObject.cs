@@ -40,7 +40,7 @@ namespace DistantWorlds.Controls
 
         public EmpireSummaryBuiltObject():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             int_0 = 15;
             int_1 = 10;
             int_2 = 10;

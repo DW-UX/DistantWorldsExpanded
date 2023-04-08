@@ -44,7 +44,7 @@ namespace DistantWorlds.Controls
 
         public EmpireSummaryBonuses():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             int_0 = 15;
             int_1 = 10;
             int_2 = 10;
@@ -258,7 +258,7 @@ namespace DistantWorlds.Controls
 
         internal Bitmap method_2(Bitmap bitmap_0, int int_3, int int_4, float float_0)
         {
-            Bitmap bitmap = null;
+            //Bitmap bitmap = null;
             double val = (double)int_3 / (double)bitmap_0.Width;
             double val2 = (double)int_4 / (double)bitmap_0.Height;
             double num = Math.Min(val, val2);

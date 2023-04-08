@@ -172,12 +172,12 @@ namespace DistantWorlds
         public Animation(Bitmap[] images, DateTime startTime, int framesPerSecond, double x, double y, int width, int height) : 
             this(images, startTime, framesPerSecond, x, y, width, height, 0.0, Color.Empty)
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
 
         public Animation(Bitmap[] images, DateTime startTime, int framesPerSecond, double x, double y, int width, int height, double rotationAngle, Color tintColor)
         {
-            Class7.VEFSJNszvZKMZ();
+            
             DisposeTexturesWhenComplete = true;
             bitmap_0 = images;
             dateTime_0 = startTime;
@@ -192,12 +192,12 @@ namespace DistantWorlds
 
         public Animation(Texture2D[] textures, DateTime startTime, int framesPerSecond, double x, double y, int width, int height) : this(textures, startTime, framesPerSecond, x, y, width, height, 0.0, Color.Empty)
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
 
         public Animation(Texture2D[] textures, DateTime startTime, int framesPerSecond, double x, double y, int width, int height, double rotationAngle, Color tintColor)
         {
-            Class7.VEFSJNszvZKMZ();
+            
             DisposeTexturesWhenComplete = true;
             texture2D_0 = textures;
             dateTime_0 = startTime;

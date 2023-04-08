@@ -126,7 +126,7 @@ namespace DistantWorlds
 
         public LightningGenerator():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             random_0 = new Random((int)DateTime.Now.Ticks);
             double_0 = 8.0;
             double_1 = 40.0;

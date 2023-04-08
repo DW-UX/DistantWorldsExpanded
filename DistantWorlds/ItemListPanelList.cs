@@ -36,7 +36,7 @@ namespace DistantWorlds
 
         public ItemListPanelList() : base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
     }
 }
