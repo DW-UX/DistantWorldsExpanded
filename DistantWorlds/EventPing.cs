@@ -42,7 +42,7 @@ namespace DistantWorlds
 
         public EventPing(int x, int y, object data):base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             point_0 = new Point(x, y);
             object_0 = data;
         }

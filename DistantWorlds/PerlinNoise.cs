@@ -21,7 +21,7 @@ namespace DistantWorlds
 
         public PerlinNoise(int randomSeed):base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             fastPerlinNoise_0 = new FastPerlinNoise();
             Random random = new Random(randomSeed);
             int_0 = random.Next(1000, 10000);

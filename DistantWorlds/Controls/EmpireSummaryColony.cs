@@ -24,7 +24,7 @@ namespace DistantWorlds.Controls
 
         private int int_1;
 
-        private int int_2;
+        //private int int_2;
 
         private int int_3;
 
@@ -42,10 +42,10 @@ namespace DistantWorlds.Controls
 
         public EmpireSummaryColony() : base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             int_0 = -1;
             int_1 = 15;
-            int_2 = 10;
+            //int_2 = 10;
             int_3 = 10;
             solidBrush_0 = new SolidBrush(Color.FromArgb(170, 170, 170));
             solidBrush_1 = new SolidBrush(Color.Black);

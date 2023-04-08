@@ -21,7 +21,7 @@ namespace DistantWorlds
 
     public AnimationSystem(MainView parent):base()
     {
-      Class7.VEFSJNszvZKMZ();
+      
       // ISSUE: explicit constructor call
       this.mainView_0 = parent;
       this.animationList_0 = new AnimationList();

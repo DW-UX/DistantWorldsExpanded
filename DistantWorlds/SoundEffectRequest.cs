@@ -69,7 +69,7 @@ namespace DistantWorlds
 
         public SoundEffectRequest():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
     }
 }

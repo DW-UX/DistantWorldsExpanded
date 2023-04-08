@@ -25,7 +25,7 @@ namespace DistantWorlds
 
             public MessageClickedEventArgs(EmpireMessage message, ConversationOption conversationOption):base()
             {
-                Class7.VEFSJNszvZKMZ();
+                
                 Message = message;
                 ConversationOption = conversationOption;
             }
@@ -109,9 +109,9 @@ namespace DistantWorlds
 
         protected IFontCache _FontCache;
 
-        private float float_0;
+        //private float float_0;
 
-        private bool bool_0;
+        //private bool bool_0;
 
         private Bitmap bitmap_13;
 
@@ -1061,7 +1061,7 @@ namespace DistantWorlds
 
         public DiplomaticMessageQueue():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             Visible = true;
             LastRefresh = DateTime.MinValue;
             object_0 = new object();

@@ -22,7 +22,7 @@ namespace DistantWorlds
 
         private Start start_0;
 
-        private bool bool_0;
+        //private bool bool_0;
 
         private EncyclopediaItemList encyclopediaItemList_0;
 
@@ -77,7 +77,7 @@ namespace DistantWorlds
             method_1();
             ahfGeFqstf = parentForm;
             start_0 = null;
-            bool_0 = true;
+            //bool_0 = true;
             ClearItems();
         }
 
@@ -86,13 +86,13 @@ namespace DistantWorlds
             method_1();
             start_0 = parentForm;
             ahfGeFqstf = null;
-            bool_0 = true;
+            //bool_0 = true;
             ClearItems();
         }
 
         public RelatedEncyclopediaItemsBox():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             list_0 = new List<LinkLabel>();
             font_0 = new Font("Verdana", 9f, FontStyle.Regular);
             font_1 = new Font("Verdana", 10f, FontStyle.Bold);

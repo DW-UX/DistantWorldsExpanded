@@ -14,7 +14,7 @@ namespace DistantWorlds
   {
     public SoundEffectRequestList():base()
     {
-      Class7.VEFSJNszvZKMZ();
+      
       // ISSUE: explicit constructor call
     }
   }

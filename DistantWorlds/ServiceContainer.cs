@@ -26,7 +26,7 @@ namespace DistantWorlds
 
         public ServiceContainer():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             dictionary_0 = new Dictionary<Type, object>();
         }
     }

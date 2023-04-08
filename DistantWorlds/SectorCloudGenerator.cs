@@ -14,17 +14,17 @@ namespace DistantWorlds
 {
     public class SectorCloudGenerator
     {
-        private int int_0;
+        //private int int_0;
 
         private Random random_0;
 
-        private int DilRgjtCoOD;
+        //private int DilRgjtCoOD;
 
         private FbmNoise fbmNoise_0;
 
         private byte[][] byte_0;
 
-        private int int_1;
+        //private int int_1;
 
         private FbmNoise.CFractal cfractal_0;
 
@@ -48,16 +48,17 @@ namespace DistantWorlds
 
         public SectorCloudGenerator(int randomSeed, int cloudSize):base()
         {
-            Class7.VEFSJNszvZKMZ();
-            DilRgjtCoOD = 96;
-            int_0 = randomSeed;
-            random_0 = new Random(int_0);
-            int_1 = cloudSize;
+            
+            //DilRgjtCoOD = 96;
+            //int_0 = randomSeed;
+            //random_0 = new Random(int_0);
+            random_0 = new Random(randomSeed);
+            //int_1 = cloudSize;
             fbmNoise_0 = new FbmNoise(random_0.Next(0, 1000000));
-            cfractal_0 = new FbmNoise.CFractal(int_0, 0.35f, 2.6f);
-            byte_0 = fbmNoise_0.MakeNoise(int_1, 0.35, 2.6);
-            perlinNoise_0 = new PerlinNoise(int_0);
-            bitmap_0 = new Bitmap(int_1, int_1, PixelFormat.Format32bppPArgb);
+            cfractal_0 = new FbmNoise.CFractal(randomSeed, 0.35f, 2.6f);
+            byte_0 = fbmNoise_0.MakeNoise(cloudSize, 0.35, 2.6);
+            perlinNoise_0 = new PerlinNoise(randomSeed);
+            bitmap_0 = new Bitmap(cloudSize, cloudSize, PixelFormat.Format32bppPArgb);
         }
 
         public void ApplyNoiseToImage(Bitmap image, Rectangle imageRectangle, byte[][] noise)

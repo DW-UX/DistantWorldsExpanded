@@ -12,7 +12,7 @@ namespace DistantWorlds
   {
     public StarFieldItemList():base()
     {
-      Class7.VEFSJNszvZKMZ();
+      
       // ISSUE: explicit constructor call
     }
   }

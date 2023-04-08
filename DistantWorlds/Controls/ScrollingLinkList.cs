@@ -28,7 +28,7 @@ namespace DistantWorlds.Controls
 
         private List<double> list_1;
 
-        private int int_0;
+        //private int int_0;
 
         private double double_0;
 
@@ -292,10 +292,10 @@ namespace DistantWorlds.Controls
 
         public ScrollingLinkList() : base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             list_0 = new List<LinkLabel>();
             list_1 = new List<double>();
-            int_0 = 4;
+            //int_0 = 4;
             double_0 = 20.0;
             object_0 = new object();
             object_1 = new object();

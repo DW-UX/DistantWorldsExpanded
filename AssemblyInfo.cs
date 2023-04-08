@@ -15,4 +15,4 @@ using System.Security.Permissions;
 [assembly: AssemblyKeyName("")]
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyVersion("1.9.5.12")]
-[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+//[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]

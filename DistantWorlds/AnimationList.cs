@@ -14,7 +14,7 @@ namespace DistantWorlds
   {
     public AnimationList():base()
     {
-      Class7.VEFSJNszvZKMZ();
+      
       // ISSUE: explicit constructor call
     }
   }

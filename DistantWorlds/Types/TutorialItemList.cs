@@ -27,7 +27,7 @@ namespace DistantWorlds.Types
 
     public TutorialItemList():base()
     {
-      Class7.VEFSJNszvZKMZ();
+      
       // ISSUE: explicit constructor call
     }
   }

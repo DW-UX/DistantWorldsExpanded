@@ -116,7 +116,7 @@ namespace DistantWorlds.Types
 
         public Tutorial():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             tutorialItemList_0 = new TutorialItemList();
         }
     }

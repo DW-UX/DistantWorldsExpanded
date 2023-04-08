@@ -29,7 +29,7 @@ namespace DistantWorlds.Controls
 
         private List<double> list_1;
 
-        private int int_0;
+        //private int int_0;
 
         private Font font_0;
 
@@ -37,7 +37,7 @@ namespace DistantWorlds.Controls
 
         private int int_2;
 
-        private double double_0;
+        //private double double_0;
 
         private DateTime dateTime_0;
 
@@ -69,10 +69,10 @@ namespace DistantWorlds.Controls
 
         public HyperlinkOptionsBox() : base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             list_0 = new List<LinkLabel>();
             list_1 = new List<double>();
-            int_0 = 5;
+            //int_0 = 5;
             font_0 = new Font("Verdana", 9f, FontStyle.Regular);
             int_2 = 12;
             dateTime_0 = DateTime.Now.ToUniversalTime();

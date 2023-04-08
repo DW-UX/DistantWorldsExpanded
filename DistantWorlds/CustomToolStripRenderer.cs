@@ -16,7 +16,7 @@ namespace DistantWorlds
 
         public CustomToolStripRenderer(Font font):base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             font_0 = font;
         }
 

@@ -20,12 +20,12 @@ namespace DistantWorlds.Properties
 
         public Settings():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
 
         static Settings()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             defaultInstance = (DistantWorlds.Properties.Settings)SettingsBase.Synchronized(new DistantWorlds.Properties.Settings());
         }
     }

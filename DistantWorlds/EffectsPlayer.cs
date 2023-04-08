@@ -48,7 +48,7 @@ namespace DistantWorlds
 
         public EffectsPlayer(Main parent, string applicationStartupPath, string customizationSetName, Device soundDevice):base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             object_0 = new object();
             list_0 = new List<SecondaryBuffer>();
             hashtable_0 = new Hashtable();
@@ -308,7 +308,7 @@ namespace DistantWorlds
             string filename = string.Empty;
             double num = double_0 * 0.7;
             nextEffectOffset = 4000;
-            int num2 = 0;
+            //int num2 = 0;
             switch (soundScheme)
             {
                 case 0:

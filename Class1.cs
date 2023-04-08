@@ -14,16 +14,15 @@ internal class Class1 : IGraphicsDeviceService
     private static int int_0;
     private GraphicsDevice graphicsDevice_0;
     private PresentationParameters presentationParameters_0;
-    private EventHandler<EventArgs> eventHandler_0;
+    //private EventHandler<EventArgs> eventHandler_0;
     // .field private class [mscorlib]System.EventHandler`1<class [mscorlib]System.EventArgs> eventHandler_1
-    private EventHandler<EventArgs> eventHandler_1;
+    //private EventHandler<EventArgs> eventHandler_1;
     // .field private class [mscorlib]System.EventHandler`1<class [mscorlib]System.EventArgs> eventHandler_2
-    private EventHandler<EventArgs> eventHandler_2;
+    //private EventHandler<EventArgs> eventHandler_2;
     // .field private class [mscorlib]System.EventHandler`1<class [mscorlib]System.EventArgs> eventHandler_3
-    private EventHandler<EventArgs> eventHandler_3;
+    //private EventHandler<EventArgs> eventHandler_3;
     private Class1(IntPtr intptr_0, int int_1, int int_2) : base()
     {
-        Class7.VEFSJNszvZKMZ();
         this.presentationParameters_0 = new PresentationParameters();
         this.presentationParameters_0.BackBufferWidth = Math.Max(int_1, 1);
         this.presentationParameters_0.BackBufferHeight = Math.Max(int_2, 1);
@@ -49,8 +48,8 @@ internal class Class1 : IGraphicsDeviceService
             return;
         if (bool_0)
         {
-            if (this.eventHandler_1 != null)
-                this.eventHandler_1((object)this, EventArgs.Empty);
+            //if (this.eventHandler_1 != null)
+            //    this.eventHandler_1((object)this, EventArgs.Empty);
             this.graphicsDevice_0.Dispose();
         }
         this.graphicsDevice_0 = (GraphicsDevice)null;
@@ -58,16 +57,16 @@ internal class Class1 : IGraphicsDeviceService
 
     public void method_1(int int_1, int int_2)
     {
-        if (this.eventHandler_3 != null)
-            this.eventHandler_3((object)this, EventArgs.Empty);
+        //if (this.eventHandler_3 != null)
+        //    this.eventHandler_3((object)this, EventArgs.Empty);
         this.presentationParameters_0.BackBufferWidth = Math.Max(this.presentationParameters_0.BackBufferWidth, int_1);
         this.presentationParameters_0.BackBufferHeight = Math.Max(this.presentationParameters_0.BackBufferHeight, int_2);
         Thread.Sleep(100);
         if (this.graphicsDevice_0 != null)
             this.graphicsDevice_0.Reset(this.presentationParameters_0);
-        if (this.eventHandler_2 == null)
+        //if (this.eventHandler_2 == null)
             return;
-        this.eventHandler_2((object)this, EventArgs.Empty);
+        //this.eventHandler_2((object)this, EventArgs.Empty);
     }
 
     public GraphicsDevice GraphicsDevice => this.graphicsDevice_0;

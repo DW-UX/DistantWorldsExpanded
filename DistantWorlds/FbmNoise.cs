@@ -185,12 +185,12 @@ namespace DistantWorlds
 
             public Class2() : base()
             {
-                Class7.VEFSJNszvZKMZ();
+                
             }
 
             static Class2()
             {
-                Class7.VEFSJNszvZKMZ();
+                
                 float_0 = (float)Math.PI;
                 float_1 = (float)Math.PI / 2f;
                 float_2 = (float)Math.PI * 2f;
@@ -208,13 +208,13 @@ namespace DistantWorlds
 
             public Class3():base()
             {
-                Class7.VEFSJNszvZKMZ();
+                
                 random_0 = new Random();
             }
 
             public Class3(int int_0) : base()
             {
-                Class7.VEFSJNszvZKMZ();
+                
                 method_0(int_0);
             }
 
@@ -245,21 +245,21 @@ namespace DistantWorlds
 
         public abstract class CNoise
         {
-            private float float_0;
+            //private float float_0;
 
-            private float float_1;
+            //private float float_1;
 
-            private float float_2;
+            //private float float_2;
 
-            private float float_3;
+            //private float float_3;
 
-            private float float_4;
+            //private float float_4;
 
-            private float float_5;
+            //private float float_5;
 
-            private int int_0;
+            //private int int_0;
 
-            private int int_1;
+            //private int int_1;
 
             protected int m_nDimensions;
 
@@ -310,30 +310,30 @@ namespace DistantWorlds
 
             public CNoise():base()
             {
-                Class7.VEFSJNszvZKMZ();
-                float_0 = (float)Math.PI;
-                float_1 = (float)Math.PI / 2f;
-                float_2 = (float)Math.PI * 2f;
-                float_3 = -0.6931472f;
-                float_4 = -1.442695f;
-                float_5 = 1E-06f;
-                int_0 = 4;
-                int_1 = 128;
+                
+                //float_0 = (float)Math.PI;
+                //float_1 = (float)Math.PI / 2f;
+                //float_2 = (float)Math.PI * 2f;
+                //float_3 = -0.6931472f;
+                //float_4 = -1.442695f;
+                //float_5 = 1E-06f;
+                //int_0 = 4;
+                //int_1 = 128;
                 m_nMap = new byte[256];
                 m_nBuffer = new float[256][];
             }
 
             public CNoise(int nSeed):base()
             {
-                Class7.VEFSJNszvZKMZ();
-                float_0 = (float)Math.PI;
-                float_1 = (float)Math.PI / 2f;
-                float_2 = (float)Math.PI * 2f;
-                float_3 = -0.6931472f;
-                float_4 = -1.442695f;
-                float_5 = 1E-06f;
-                int_0 = 4;
-                int_1 = 128;
+                
+                //float_0 = (float)Math.PI;
+                //float_1 = (float)Math.PI / 2f;
+                //float_2 = (float)Math.PI * 2f;
+                //float_3 = -0.6931472f;
+                //float_4 = -1.442695f;
+                //float_5 = 1E-06f;
+                //int_0 = 4;
+                //int_1 = 128;
                 m_nMap = new byte[256];
                 m_nBuffer = new float[256][];
                 Init(nSeed);
@@ -376,21 +376,21 @@ namespace DistantWorlds
 
         public class CFractal : CNoise
         {
-            private float float_6;
+            //private float float_6;
 
-            private float float_7;
+            //private float float_7;
 
-            private float float_8;
+            //private float float_8;
 
-            private float float_9;
+            //private float float_9;
 
-            private float float_10;
+            //private float float_10;
 
-            private float float_11;
+            //private float float_11;
 
             private int int_2;
 
-            private int int_3;
+            //private int int_3;
 
             protected float m_fH;
 
@@ -400,29 +400,29 @@ namespace DistantWorlds
 
             public CFractal() : base()
             {
-                Class7.VEFSJNszvZKMZ();
-                float_6 = (float)Math.PI;
-                float_7 = (float)Math.PI / 2f;
-                float_8 = (float)Math.PI * 2f;
-                float_9 = -0.6931472f;
-                float_10 = -1.442695f;
-                float_11 = 1E-06f;
+                
+                //float_6 = (float)Math.PI;
+                //float_7 = (float)Math.PI / 2f;
+                //float_8 = (float)Math.PI * 2f;
+                //float_9 = -0.6931472f;
+                //float_10 = -1.442695f;
+                //float_11 = 1E-06f;
                 int_2 = 128;
-                int_3 = 4;
+                //int_3 = 4;
                 m_fExponent = new float[128];
             }
 
             public CFractal(int nSeed, float fH, float fLacunarity) :base()
             {
-                Class7.VEFSJNszvZKMZ();
-                float_6 = (float)Math.PI;
-                float_7 = (float)Math.PI / 2f;
-                float_8 = (float)Math.PI * 2f;
-                float_9 = -0.6931472f;
-                float_10 = -1.442695f;
-                float_11 = 1E-06f;
-                int_2 = 128;
-                int_3 = 4;
+                
+                //float_6 = (float)Math.PI;
+                //float_7 = (float)Math.PI / 2f;
+                //float_8 = (float)Math.PI * 2f;
+                //float_9 = -0.6931472f;
+                //float_10 = -1.442695f;
+                //float_11 = 1E-06f;
+                //int_2 = 128;
+                //int_3 = 4;
                 m_fExponent = new float[128];
                 Init(nSeed, fH, fLacunarity);
             }
@@ -505,33 +505,33 @@ namespace DistantWorlds
 
         private int int_0;
 
-        private float float_0;
+        //private float float_0;
 
-        private float float_1;
+        //private float float_1;
 
-        private float float_2;
+        //private float float_2;
 
-        private float float_3;
+        //private float float_3;
 
-        private float float_4;
+        //private float float_4;
 
-        private float float_5;
+        //private float float_5;
 
-        private int int_1;
+        //private int int_1;
 
-        private int int_2;
+        //private int int_2;
 
         public FbmNoise(int seed):base()
         {
-            Class7.VEFSJNszvZKMZ();
-            float_0 = (float)Math.PI;
-            float_1 = (float)Math.PI / 2f;
-            float_2 = (float)Math.PI * 2f;
-            float_3 = -0.6931472f;
-            float_4 = -1.442695f;
-            float_5 = 1E-06f;
-            int_1 = 4;
-            int_2 = 128;
+            
+            //float_0 = (float)Math.PI;
+            //float_1 = (float)Math.PI / 2f;
+            //float_2 = (float)Math.PI * 2f;
+            //float_3 = -0.6931472f;
+            //float_4 = -1.442695f;
+            //float_5 = 1E-06f;
+            //int_1 = 4;
+            //int_2 = 128;
             int_0 = seed;
         }
 

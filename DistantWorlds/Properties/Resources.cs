@@ -46,7 +46,7 @@ namespace DistantWorlds.Properties
 
         internal Resources():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
 
         [SpecialName]

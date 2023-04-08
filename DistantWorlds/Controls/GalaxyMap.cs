@@ -700,7 +700,7 @@ namespace DistantWorlds.Controls
 
         public GalaxyMap():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             list_0 = new List<Point>();
             bool_0 = true;
             font_0 = new Font("Verdana", 7f);

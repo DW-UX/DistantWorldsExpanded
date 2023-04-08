@@ -916,7 +916,7 @@ namespace DistantWorlds
 
     static XnaDrawingHelper()
     {
-      Class7.VEFSJNszvZKMZ();
+      
       XnaDrawingHelper.uint_0 = new uint[4000000];
       XnaDrawingHelper.uint_1 = new uint[4000000];
       XnaDrawingHelper.uint_2 = new uint[40000];

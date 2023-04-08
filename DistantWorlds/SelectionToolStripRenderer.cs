@@ -14,7 +14,7 @@ namespace DistantWorlds
     {
         public SelectionToolStripRenderer():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
 
         protected override void Initialize(ToolStrip toolStrip)

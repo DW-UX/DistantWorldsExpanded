@@ -26,7 +26,7 @@ namespace DistantWorlds
 
         static FastPerlinNoise()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             int_0 = new int[12][]
             {
             new int[3] { 1, 1, 0 },
@@ -323,7 +323,7 @@ namespace DistantWorlds
 
         public FastPerlinNoise():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
     }
 

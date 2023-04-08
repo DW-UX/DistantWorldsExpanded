@@ -243,7 +243,7 @@ namespace DistantWorlds
 
         private Rectangle method_8(Bitmap bitmap_0, int int_1, Color color_0, int int_2, int int_3)
         {
-            Rectangle rectangle = default(Rectangle);
+            //Rectangle rectangle = default(Rectangle);
             FastBitmap fastBitmap = new FastBitmap(bitmap_0);
             int num = 0;
             int num2 = 0;
@@ -363,7 +363,7 @@ namespace DistantWorlds
 
         public PlanetaryRingsGenerator():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
         }
     }
 }

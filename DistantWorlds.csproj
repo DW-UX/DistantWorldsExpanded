@@ -79,12 +79,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class0.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Class5.cs" />
-    <Compile Include="Class6.cs" />
-    <Compile Include="Class7.cs" />
-    <Compile Include="Class8.cs" />
     <Compile Include="DistantWorlds\Controls\EmpireSummaryBonuses.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -127,7 +123,6 @@
     <Compile Include="DistantWorlds\Types\Tutorial.cs" />
     <Compile Include="DistantWorlds\Types\TutorialItem.cs" />
     <Compile Include="DistantWorlds\Types\TutorialItemList.cs" />
-    <Compile Include="Mods\ModArgs.cs" />
     <Compile Include="_003CPrivateImplementationDetails_003E{7266CDA7-01.cs" />
     <Compile Include="DistantWorlds\MusicFadeFinishAction.cs" />
     <Compile Include="DistantWorlds\Animation.cs" />
@@ -160,7 +155,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DistantWorlds\PlanetaryRingsGenerator.cs" />
-    <Compile Include="DistantWorlds\Particle.cs" />
     <Compile Include="DistantWorlds\EffectsPlayer.cs" />
     <Compile Include="DistantWorlds\PerlinNoise.cs" />
     <Compile Include="DistantWorlds\AnimationSystem.cs" />
@@ -205,6 +199,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Mods\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

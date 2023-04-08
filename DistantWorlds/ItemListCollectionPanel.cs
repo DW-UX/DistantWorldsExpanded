@@ -31,7 +31,7 @@ namespace DistantWorlds
 
             public ItemClickedEventArgs(object item, MouseButtons buttonClicked, bool isDoubleClick, bool bidButtonClicked) : base()
             {
-                Class7.VEFSJNszvZKMZ();
+                
                 Item = item;
                 ButtonClicked = buttonClicked;
                 IsDoubleClick = isDoubleClick;
@@ -45,7 +45,7 @@ namespace DistantWorlds
 
             public BindItemPanelEventArgs(ItemListPanel panel):base()
             {
-                Class7.VEFSJNszvZKMZ();
+                
                 Panel = panel;
             }
         }
@@ -154,9 +154,9 @@ namespace DistantWorlds
 
         protected IFontCache _FontCache;
 
-        private float float_1;
+        //private float float_1;
 
-        private bool bool_0;
+        //private bool bool_0;
 
         public float SizeFactor => float_0;
 
@@ -457,7 +457,7 @@ namespace DistantWorlds
 
         public Bitmap ScaleLimitImage(Bitmap image, int maxWidth, int maxHeight, float alpha)
         {
-            Bitmap bitmap = null;
+            //Bitmap bitmap = null;
             double val = (double)maxWidth / (double)image.Width;
             double val2 = (double)maxHeight / (double)image.Height;
             double num = Math.Min(val, val2);
@@ -851,7 +851,7 @@ namespace DistantWorlds
 
         public ItemListCollectionPanel():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             Visible = true;
             Panels = new ItemListPanelList();
             float_0 = 1f;

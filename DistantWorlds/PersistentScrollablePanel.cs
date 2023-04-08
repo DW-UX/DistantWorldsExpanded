@@ -27,7 +27,7 @@ namespace DistantWorlds
 
             public Class4():base()
             {
-                Class7.VEFSJNszvZKMZ();
+                
                 SetStyle(ControlStyles.AllPaintingInWmPaint, value: true);
                 SetStyle(ControlStyles.UserPaint, value: true);
                 SetStyle(ControlStyles.SupportsTransparentBackColor, value: true);
@@ -37,7 +37,7 @@ namespace DistantWorlds
             }
         }
 
-        private IContainer icontainer_0;
+        //private IContainer icontainer_0;
 
         private Class4 _InternalPanel;
 
@@ -159,10 +159,10 @@ namespace DistantWorlds
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && icontainer_0 != null)
-            {
-                icontainer_0.Dispose();
-            }
+            //if (disposing && icontainer_0 != null)
+            //{
+            //    icontainer_0.Dispose();
+            //}
             base.Dispose(disposing);
         }
 
@@ -179,7 +179,7 @@ namespace DistantWorlds
 
         public PersistentScrollablePanel():base()
         {
-            Class7.VEFSJNszvZKMZ();
+            
             _InternalPanel = new Class4();
             method_0();
             Graphics graphics = _InternalPanel.CreateGraphics();
@@ -275,7 +275,7 @@ namespace DistantWorlds
             graphics2.CompositingQuality = CompositingQuality.HighQuality;
             if (image_0 != null)
             {
-                Rectangle rectangle = default(Rectangle);
+                //Rectangle rectangle = default(Rectangle);
                 int num = _InternalPanel.ClientRectangle.Width - 6;
                 int num2 = _InternalPanel.ClientRectangle.Height - 6;
                 double num3 = (double)image_0.Width / (double)image_0.Height;

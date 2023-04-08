@@ -26,7 +26,7 @@ namespace DistantWorlds
 
     public Particle():base()
     {
-      Class7.VEFSJNszvZKMZ();
+      
       this.int_0 = -1;
       this.int_1 = -1;
       // ISSUE: explicit constructor call

@@ -24,7 +24,7 @@ namespace DistantWorlds
 
     public CompactSerializer(Type type, List<Type> knownTypes) : base()
     {
-      Class7.VEFSJNszvZKMZ();
+      
       this.netDataContractSerializer_0 = new NetDataContractSerializer();
       // ISSUE: explicit constructor call
       this.netDataContractSerializer_0 = new NetDataContractSerializer();
