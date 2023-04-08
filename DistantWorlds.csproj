@@ -119,6 +119,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DistantWorlds\Controls\TargetAssignmentList.cs" />
+    <Compile Include="DistantWorlds\HotKeyMapping\FileKeyParser.cs" />
+    <Compile Include="DistantWorlds\HotKeyMapping\MappingJsonFileModel.cs" />
     <Compile Include="DistantWorlds\ItemListCollectionPanel.cs" />
     <Compile Include="DistantWorlds\ItemListPanel.cs" />
     <Compile Include="DistantWorlds\ItemListPanelList.cs" />
@@ -126,7 +128,6 @@
     <Compile Include="DistantWorlds\Types\TutorialItem.cs" />
     <Compile Include="DistantWorlds\Types\TutorialItemList.cs" />
     <Compile Include="Mods\ModArgs.cs" />
-    <Compile Include="privatDFB67E2D.cs" />
     <Compile Include="_003CPrivateImplementationDetails_003E{7266CDA7-01.cs" />
     <Compile Include="DistantWorlds\MusicFadeFinishAction.cs" />
     <Compile Include="DistantWorlds\Animation.cs" />
@@ -205,6 +206,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
