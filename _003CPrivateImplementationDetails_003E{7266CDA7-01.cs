@@ -4,10 +4,25 @@
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
+using DistantWorlds;
 using System;
 
 internal class main
 {
-  [STAThread]
-  public static void Main() => Class5.smethod_0();
+    [STAThread]
+    public static void Main(string[] args)
+    {
+        if (args.Length == 0)
+        {
+
+            Class5.smethod_0();
+        }
+        else
+        {
+            if (args[0] == "GenerateMapFile")
+            {
+                KeyMapper.GenerateEmpyFile(Start._MappingFilePath);
+            }
+        }
+    }
 }

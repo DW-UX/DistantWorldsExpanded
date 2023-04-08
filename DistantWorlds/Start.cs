@@ -52,6 +52,8 @@ namespace DistantWorlds
 
         public delegate void RecoverFromLoadErrorDelegate();
 
+        internal const string _MappingFilePath = "MappingFile.json";
+
         public struct SIZE
         {
             public int cx;
@@ -7555,6 +7557,11 @@ namespace DistantWorlds
             //IL_1be0: Expected O, but got Unknown
             try
             {
+                KeyMapper keyMapper = new KeyMapper(_MappingFilePath);
+                if (!keyMapper.MapKeys())
+                {
+                    throw new ApplicationException("Failed to map keys, check {_MappingFilePath} file");
+                }
                 SetControlLocalizedLabels();
                 font_0 = ((IFontCache)this).GenerateFont(15.33f, isBold: false);
                 font_1 = ((IFontCache)this).GenerateFont(20.77f, isBold: false);
@@ -7635,7 +7642,7 @@ namespace DistantWorlds
                     num2 = size.Height;
                     flag = false;
                 }
-                main_0 = new Main(num, num2, flag, splash);
+                main_0 = new Main(num, num2, flag, splash, keyMapper);
                 bool flag2 = true;
                 if (dictionary.ContainsKey("playmovie") && (int)dictionary["playmovie"] == 0)
                 {
