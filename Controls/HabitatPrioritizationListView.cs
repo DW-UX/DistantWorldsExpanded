@@ -145,18 +145,16 @@ namespace DistantWorlds.Controls
             gridViewImageColumn5.FillWeight = 50f;
             gridViewImageColumn5.DefaultCellStyle.NullValue = (object)null;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn5);
-            DataGridViewImageColumn gridViewImageColumn6 = (DataGridViewImageColumn)new HabitatPrioritizationListView.SortableImageColumn();
-            gridViewImageColumn6.Description = "ResourceRarity";
-            gridViewImageColumn6.HeaderText = "";
-            gridViewImageColumn6.Name = "ResourceRarity";
-            gridViewImageColumn6.ReadOnly = true;
-            gridViewImageColumn6.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            gridViewImageColumn6.SortMode = DataGridViewColumnSortMode.Automatic;
-            gridViewImageColumn6.ValueType = typeof(string);
-            gridViewImageColumn6.Width = 50;
-            gridViewImageColumn6.FillWeight = 50f;
-            gridViewImageColumn6.DefaultCellStyle.NullValue = (object)null;
-            this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn6);
+            DataGridViewTextBoxColumn viewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            viewTextBoxColumn7.HeaderText = "";
+            viewTextBoxColumn7.Name = "ResourceRarity";
+            viewTextBoxColumn7.ReadOnly = true;
+            viewTextBoxColumn7.SortMode = DataGridViewColumnSortMode.Automatic;
+            viewTextBoxColumn7.ValueType = typeof(string);
+            viewTextBoxColumn7.Width = 50;
+            viewTextBoxColumn7.FillWeight = 50f;
+            viewTextBoxColumn7.DefaultCellStyle.NullValue = (object)null;
+            this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn7);
         }
 
         public HabitatPrioritization SelectedHabitatPrioritization
