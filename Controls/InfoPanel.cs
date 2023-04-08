@@ -4,7 +4,6 @@
 // MVID: C078528F-27D0-4E24-8047-8F4F72265A90
 // Assembly location: H:\7\DistantWorlds.Controls.dll
 
-//using BaconDistantWorlds;
 using DistantWorlds.Types;
 using DistantWorlds.Controls.Mods;
 using System;
@@ -16,236 +15,357 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Globalization;
 using System.Windows.Forms;
+using BaconDistantWorlds;
 
 namespace DistantWorlds.Controls
 {
     public class InfoPanel : Panel
     {
         private bool _ContentSizeIsLarge;
+
         private Font _NormalFontNormalSize;
+
         private Font _NormalBoldFontNormalSize;
+
         private Font _TitleFontNormalSize;
+
         private Font _TinyFontNormalSize;
+
         private Font _NormalFontLargeSize;
+
         private Font _NormalBoldFontLargeSize;
+
         private Font _TitleFontLargeSize;
+
         private Font _TinyFontLargeSize;
+
         private Font _TinyFont;
+
         public Font _NormalFont;
+
         public Font _NormalFontBold;
+
         public Font _TitleFont;
+
         private int _ImageSize = 14;
+
         private int _ImageScaleSize = 24;
+
         private int _HabitatImageSize = 26;
+
         public int _RowHeight = 15;
+
         public Size _FlagSizeSmall = new Size(30, 18);
+
         private Size _FlagSizeSystem = new Size(20, 12);
+
         private int _MinPictureSize = 60;
+
         private int _MaxPictureSize = 200;
+
         private int _RuinImageHeight = 18;
+
         public int _MaxGraphTextWidth = 200;
+
         private int _PopulationTextWidth = 75;
+
         private int _PopulationAmountWidth = 48;
+
         private int _LabelWidth = 65;
+
         private int _LabelWidthHabitat = 70;
+
         public int _Height2 = 2;
+
         public int _Height3 = 3;
+
         public int _Height4 = 4;
+
         public int _Height5 = 5;
+
         private int _Height6 = 6;
+
         private int _Height8 = 8;
+
         private int _Height10 = 10;
+
         private int _ColonySummaryDetailWidth = 20;
+
         private Bitmap _Picture;
+
         private Bitmap _MaskImage;
+
         private int _PictureSize;
+
         private double _PictureAngle;
+
         public Bitmap _EmpirePicture;
+
         private Color _BackColour1 = Color.FromArgb(39, 40, 44);
+
         private Color _BackColour2 = Color.FromArgb(22, 21, 26);
+
         private Color _BackColour3 = Color.FromArgb(51, 54, 61);
-        private LinearGradientMode _GradientMode = LinearGradientMode.Vertical;
+
+        private DistantWorlds.Controls.LinearGradientMode _GradientMode = DistantWorlds.Controls.LinearGradientMode.Vertical;
+
         private BorderStyle _BorderStyle;
+
         private Color _BorderColour = Color.FromArgb(67, 67, 77);
+
         private int _BorderWidth = 1;
+
         private int _Curvature;
+
         private CornerCurveMode _CurveMode = CornerCurveMode.All;
+
         public Game _Game;
+
         public Galaxy _Galaxy;
+
         public BuiltObject _BuiltObject;
+
         private Fighter _Fighter;
+
         private Habitat _Habitat;
+
         private Creature _Creature;
+
         private BuiltObjectList _BuiltObjects;
+
         private ShipGroup _ShipGroup;
+
         private SystemInfo _SystemInfo;
+
         public EmpireActivity _SmugglingMission;
+
         public static CharacterImageCache _CharacterImageCache;
+
         public bool _BuiltObjectIsScanned;
+
         public DateTime _LastBuiltObjectScanTime = DateTime.MinValue;
+
         public Empire _ActualEmpire;
+
         private HotspotList _Hotspots = new HotspotList();
+
         private bool _AddHotspots;
+
         private Pen _HotspotPen = new Pen(Color.FromArgb(170, 170, 170), 1f);
+
         public bool _ShowExtendedInfo;
+
         public Color _EmpireColor = Color.Empty;
+
         private Color _WhiteColor = Color.FromArgb(200, 200, 200);
+
         public SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(200, 200, 200));
+
         public SolidBrush _BlackBrush = new SolidBrush(Color.Black);
+
         public SolidBrush _RedBrush = new SolidBrush(Color.Red);
-        public SolidBrush _LabelAreaBrush = new SolidBrush(Color.FromArgb(63, (int)sbyte.MaxValue, 32, 32));
+
+        public SolidBrush _LabelAreaBrush = new SolidBrush(Color.FromArgb(63, 127, 32, 32));
+
         private Pen _BlackPen = new Pen(Color.Black);
+
         private SolidBrush _SemiSubtleBrush = new SolidBrush(Color.FromArgb(48, 48, 96));
-        private SolidBrush _BrightBrush = new SolidBrush(Color.FromArgb(96, 96, (int)byte.MaxValue));
+
+        private SolidBrush _BrightBrush = new SolidBrush(Color.FromArgb(96, 96, 255));
+
         public Color _UnknownColor = Color.FromArgb(96, 96, 96);
+
         private Color _PirateColor = Color.FromArgb(80, 80, 80);
+
         private Color _IndependentColor = Color.FromArgb(160, 160, 160);
+
         private Bitmap[] _TroopImagesInfantry;
+
         private Bitmap[] _TroopImagesFadedInfantry;
+
         private Bitmap[] _TroopImagesArmored;
+
         private Bitmap[] _TroopImagesFadedArmored;
+
         private Bitmap[] _TroopImagesArtillery;
+
         private Bitmap[] _TroopImagesFadedArtillery;
+
         private Bitmap[] _TroopImagesSpecialForces;
+
         private Bitmap[] _TroopImagesFadedSpecialForces;
+
         private Bitmap[] _TroopImagesPirateRaider;
+
         private Bitmap[] _TroopImagesFadedPirateRaider;
+
         private Bitmap[] _ResourceImages;
+
         private Bitmap[] _RaceImages;
+
         public Bitmap[] _BuiltObjectImages;
+
         private Bitmap[] _FighterImages;
+
         private Bitmap[] _FighterImagesFaded;
+
         private Bitmap[] _RuinImages;
+
         private Bitmap[] _FacilityImages;
+
         private Bitmap[] _FacilityImagesFaded;
+
         private Bitmap[] _HabitatImages;
+
         private Bitmap[] _PlagueImages;
+
         public static Bitmap[] _MessageImages;
+
         private static Bitmap[] TroopImagesInfantry;
+
         private static Bitmap[] TroopImagesFadedInfantry;
+
         private static Bitmap[] TroopImagesArmored;
+
         private static Bitmap[] TroopImagesFadedArmored;
+
         private static Bitmap[] TroopImagesArtillery;
+
         private static Bitmap[] TroopImagesFadedArtillery;
+
         private static Bitmap[] TroopImagesSpecialForces;
+
         private static Bitmap[] TroopImagesFadedSpecialForces;
+
         private static Bitmap[] TroopImagesPirateRaider;
+
         private static Bitmap[] TroopImagesFadedPirateRaider;
+
         private static Bitmap[] ResourceImages;
+
         private static Bitmap[] RaceImages;
+
         private static Bitmap[] BuiltObjectImages;
+
         private static Bitmap[] FighterImages;
+
         private static Bitmap[] FighterImagesFaded;
+
         private static Bitmap[] RuinImages;
+
         private static Bitmap[] FacilityImages;
+
         private static Bitmap[] FacilityImagesFaded;
+
         private static Bitmap[] HabitatImages;
+
         private static Bitmap[] PlagueImages;
+
         private static Bitmap[] TroopImagesInfantryLarge;
+
         private static Bitmap[] TroopImagesFadedInfantryLarge;
+
         private static Bitmap[] TroopImagesArmoredLarge;
+
         private static Bitmap[] TroopImagesFadedArmoredLarge;
+
         private static Bitmap[] TroopImagesArtilleryLarge;
+
         private static Bitmap[] TroopImagesFadedArtilleryLarge;
+
         private static Bitmap[] TroopImagesSpecialForcesLarge;
+
         private static Bitmap[] TroopImagesFadedSpecialForcesLarge;
+
         private static Bitmap[] TroopImagesPirateRaiderLarge;
+
         private static Bitmap[] TroopImagesFadedPirateRaiderLarge;
+
         private static Bitmap[] ResourceImagesLarge;
+
         private static Bitmap[] RaceImagesLarge;
+
         private static Bitmap[] BuiltObjectImagesLarge;
+
         private static Bitmap[] FighterImagesLarge;
+
         private static Bitmap[] FighterImagesFadedLarge;
+
         private static Bitmap[] RuinImagesLarge;
+
         private static Bitmap[] FacilityImagesLarge;
+
         private static Bitmap[] FacilityImagesFadedLarge;
+
         private static Bitmap[] HabitatImagesLarge;
+
         private static Bitmap[] PlagueImagesLarge;
+
         private static Bitmap _ApprovalSmileImage;
+
         private static Bitmap _ApprovalNeutralImage;
+
         private static Bitmap _ApprovalSadImage;
+
         private static Bitmap _ApprovalAngryImage;
+
         private static Bitmap _DevelopmentImage;
+
         private static Bitmap _ColonyImage;
+
         private static Bitmap _FirepowerImage;
+
         public static Bitmap _ShipGroupLeadShipImage;
+
         private static Bitmap _CapitalColonyImage;
+
         private static Bitmap _RegionalCapitalColonyImage;
+
         public static Bitmap _AutomateImage;
+
         public static Bitmap _BlockadeImage;
+
         private bool _EmpireCanColonize;
+
         private string _ColonizeExplanation = string.Empty;
+
         public string _CharacterBonuses = string.Empty;
+
         protected IFontCache _FontCache;
+
         private float _FontSize = 15.33f;
+
         private bool _FontIsBold;
 
-        public static event EventHandler<FormatForLargeNumbersModsArgs> FormatForLargeNumbersMods;
-        public static event EventHandler<DrawBuiltObjectModsArgs> DrawBuiltObjectMods;
-        public static event EventHandler<DrawStringRedWithDropShadowtModsArgs> DrawStringRedWithDropShadowtMods;
-        public static event EventHandler<DrawStringWithDropShadowModsArgs> DrawStringWithDropShadowMods;
-        public static event EventHandler<DrawStringColorWithDropShadowModsArgs> DrawStringColorWithDropShadowMods;
-        public static event EventHandler<DrawStringWithDropShadowBoundedModsArgs> DrawStringWithDropShadowBoundedMods;
-        public static event EventHandler<DrawShipGroupModsArgs> DrawShipGroupMods;
-        public static event EventHandler<DrawStringWithDropShadowModsArgs2> DrawStringWithDropShadowMods2;
-
-
-        public bool ContentSizeIsLarge => this._ContentSizeIsLarge;
+        public bool ContentSizeIsLarge => _ContentSizeIsLarge;
 
         public bool AddHotspots
         {
-            get => this._AddHotspots;
-            set => this._AddHotspots = value;
+            get
+            {
+                return _AddHotspots;
+            }
+            set
+            {
+                _AddHotspots = value;
+            }
         }
 
-        public virtual void SetFontCache(IFontCache fontCache)
-        {
-            this._FontCache = fontCache;
-            if ((double)this._FontSize <= 0.0)
-                return;
-            this.Font = this._FontCache.GenerateFont(this._FontSize, this._FontIsBold);
-        }
-
-        public void SetFont(float pixelSize) => this.SetFont(pixelSize, false);
-
-        public void SetFont(float pixelSize, bool isBold)
-        {
-            this._FontSize = pixelSize;
-            this._FontIsBold = isBold;
-            if (this._FontCache == null)
-                return;
-            Font font = this.Font;
-            this.Font = this._FontCache.GenerateFont(this._FontSize, this._FontIsBold);
-        }
-
-        public HotspotList Hotspots => this._Hotspots;
-
-        public void AddHotspot(Rectangle region, object relatedObject) => this.AddHotspot(region, relatedObject, string.Empty);
-
-        public void AddHotspot(Rectangle region, object relatedObject, string message)
-        {
-            if (!this._AddHotspots)
-                return;
-            this._Hotspots.Add(new Hotspot(region, relatedObject, message));
-        }
-
-        private void DesignModeInvalidate()
-        {
-            if (!this.DesignMode)
-                return;
-            this.Invalidate();
-        }
+        public HotspotList Hotspots => _Hotspots;
 
         [Description("The primary background color used to display text and graphics in the control.")]
         [DefaultValue(typeof(Color), "Window")]
         [Category("Appearance")]
         public new Color BackColor
         {
-            get => this._BackColour1;
+            get
+            {
+                return _BackColour1;
+            }
             set
             {
-                this._BackColour1 = value;
-                this.DesignModeInvalidate();
+                _BackColour1 = value;
+                DesignModeInvalidate();
             }
         }
 
@@ -254,11 +374,14 @@ namespace DistantWorlds.Controls
         [Description("The secondary background color used to paint the control.")]
         public Color BackColor2
         {
-            get => this._BackColour2;
+            get
+            {
+                return _BackColour2;
+            }
             set
             {
-                this._BackColour2 = value;
-                this.DesignModeInvalidate();
+                _BackColour2 = value;
+                DesignModeInvalidate();
             }
         }
 
@@ -267,24 +390,30 @@ namespace DistantWorlds.Controls
         [Description("The third background color used to paint the control.")]
         public Color BackColor3
         {
-            get => this._BackColour3;
+            get
+            {
+                return _BackColour3;
+            }
             set
             {
-                this._BackColour3 = value;
-                this.DesignModeInvalidate();
+                _BackColour3 = value;
+                DesignModeInvalidate();
             }
         }
 
         [Category("Appearance")]
-        [DefaultValue(typeof(LinearGradientMode), "None")]
+        [DefaultValue(typeof(DistantWorlds.Controls.LinearGradientMode), "None")]
         [Description("The gradient direction used to paint the control.")]
-        public LinearGradientMode GradientMode
+        public DistantWorlds.Controls.LinearGradientMode GradientMode
         {
-            get => this._GradientMode;
+            get
+            {
+                return _GradientMode;
+            }
             set
             {
-                this._GradientMode = value;
-                this.DesignModeInvalidate();
+                _GradientMode = value;
+                DesignModeInvalidate();
             }
         }
 
@@ -293,11 +422,14 @@ namespace DistantWorlds.Controls
         [DefaultValue(typeof(BorderStyle), "None")]
         public new BorderStyle BorderStyle
         {
-            get => this._BorderStyle;
+            get
+            {
+                return _BorderStyle;
+            }
             set
             {
-                this._BorderStyle = value;
-                this.DesignModeInvalidate();
+                _BorderStyle = value;
+                DesignModeInvalidate();
             }
         }
 
@@ -306,11 +438,14 @@ namespace DistantWorlds.Controls
         [DefaultValue(typeof(Color), "WindowFrame")]
         public Color BorderColor
         {
-            get => this._BorderColour;
+            get
+            {
+                return _BorderColour;
+            }
             set
             {
-                this._BorderColour = value;
-                this.DesignModeInvalidate();
+                _BorderColour = value;
+                DesignModeInvalidate();
             }
         }
 
@@ -319,11 +454,14 @@ namespace DistantWorlds.Controls
         [DefaultValue(typeof(int), "1")]
         public int BorderWidth
         {
-            get => this._BorderWidth;
+            get
+            {
+                return _BorderWidth;
+            }
             set
             {
-                this._BorderWidth = value;
-                this.DesignModeInvalidate();
+                _BorderWidth = value;
+                DesignModeInvalidate();
             }
         }
 
@@ -332,11 +470,14 @@ namespace DistantWorlds.Controls
         [DefaultValue(typeof(int), "0")]
         public int Curvature
         {
-            get => this._Curvature;
+            get
+            {
+                return _Curvature;
+            }
             set
             {
-                this._Curvature = value;
-                this.DesignModeInvalidate();
+                _Curvature = value;
+                DesignModeInvalidate();
             }
         }
 
@@ -345,11 +486,14 @@ namespace DistantWorlds.Controls
         [DefaultValue(typeof(CornerCurveMode), "All")]
         public CornerCurveMode CurveMode
         {
-            get => this._CurveMode;
+            get
+            {
+                return _CurveMode;
+            }
             set
             {
-                this._CurveMode = value;
-                this.DesignModeInvalidate();
+                _CurveMode = value;
+                DesignModeInvalidate();
             }
         }
 
@@ -357,83 +501,158 @@ namespace DistantWorlds.Controls
         {
             get
             {
-                int adjustedCurve = 0;
-                if (this._CurveMode != CornerCurveMode.None)
+                int num = 0;
+                if (_CurveMode != 0)
                 {
-                    adjustedCurve = this._Curvature <= this.ClientRectangle.Width / 2 ? this._Curvature : InfoPanel.DoubleToInt((double)(this.ClientRectangle.Width / 2));
-                    if (adjustedCurve > this.ClientRectangle.Height / 2)
-                        adjustedCurve = InfoPanel.DoubleToInt((double)(this.ClientRectangle.Height / 2));
+                    num = ((_Curvature <= base.ClientRectangle.Width / 2) ? _Curvature : DoubleToInt(base.ClientRectangle.Width / 2));
+                    if (num > base.ClientRectangle.Height / 2)
+                    {
+                        num = DoubleToInt(base.ClientRectangle.Height / 2);
+                    }
                 }
-                return adjustedCurve;
+                return num;
             }
         }
 
         public bool ShowExtendedInfo
         {
-            get => this._ShowExtendedInfo;
-            set => this._ShowExtendedInfo = value;
+            get
+            {
+                return _ShowExtendedInfo;
+            }
+            set
+            {
+                _ShowExtendedInfo = value;
+            }
+        }
+
+        public Bitmap Picture
+        {
+            get
+            {
+                return _Picture;
+            }
+            set
+            {
+                _Picture = value;
+                if (_Picture != null)
+                {
+                    _PictureSize = _Picture.Width;
+                }
+                else
+                {
+                    _PictureSize = 0;
+                }
+            }
+        }
+
+        public virtual void SetFontCache(IFontCache fontCache)
+        {
+            _FontCache = fontCache;
+            if (_FontSize > 0f)
+            {
+                Font = _FontCache.GenerateFont(_FontSize, _FontIsBold);
+            }
+        }
+
+        public void SetFont(float pixelSize)
+        {
+            SetFont(pixelSize, isBold: false);
+        }
+
+        public void SetFont(float pixelSize, bool isBold)
+        {
+            _FontSize = pixelSize;
+            _FontIsBold = isBold;
+            if (_FontCache != null)
+            {
+                Font font = Font;
+                Font = _FontCache.GenerateFont(_FontSize, _FontIsBold);
+            }
+        }
+
+        public void AddHotspot(Rectangle region, object relatedObject)
+        {
+            AddHotspot(region, relatedObject, string.Empty);
+        }
+
+        public void AddHotspot(Rectangle region, object relatedObject, string message)
+        {
+            if (_AddHotspots)
+            {
+                _Hotspots.Add(new Hotspot(region, relatedObject, message));
+            }
+        }
+
+        private void DesignModeInvalidate()
+        {
+            if (base.DesignMode)
+            {
+                Invalidate();
+            }
         }
 
         private void SetDefaultControlStyles()
         {
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-            this.SetStyle(ControlStyles.UserMouse, true);
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            this.SetStyle(ControlStyles.ContainerControl, false);
-            this.UpdateStyles();
+            SetStyle(ControlStyles.ResizeRedraw, value: true);
+            SetStyle(ControlStyles.UserMouse, value: true);
+            SetStyle(ControlStyles.SupportsTransparentBackColor, value: true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, value: true);
+            SetStyle(ControlStyles.UserPaint, value: true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, value: true);
+            SetStyle(ControlStyles.ContainerControl, value: false);
+            UpdateStyles();
         }
 
         private void CustomInitialisation()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             base.BackColor = Color.Transparent;
-            this.BorderStyle = BorderStyle.None;
-            this.ResumeLayout(false);
+            BorderStyle = BorderStyle.None;
+            ResumeLayout(performLayout: false);
         }
 
         public void DrawBackground(Graphics graphics)
         {
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            GraphicsPath path = this.GetPath();
-            Rectangle clientRectangle = this.ClientRectangle;
-            if (this.ClientRectangle.Width == 0)
-                ++clientRectangle.Width;
-            if (this.ClientRectangle.Height == 0)
-                ++clientRectangle.Height;
-            LinearGradientBrush linearGradientBrush;
-            if (this._GradientMode == LinearGradientMode.None)
+            GraphicsPath path = GetPath();
+            Rectangle clientRectangle = base.ClientRectangle;
+            if (base.ClientRectangle.Width == 0)
             {
-                linearGradientBrush = new LinearGradientBrush(clientRectangle, this._BackColour1, this._BackColour1, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
+                clientRectangle.Width++;
+            }
+            if (base.ClientRectangle.Height == 0)
+            {
+                clientRectangle.Height++;
+            }
+            LinearGradientBrush linearGradientBrush;
+            if (_GradientMode == DistantWorlds.Controls.LinearGradientMode.None)
+            {
+                linearGradientBrush = new LinearGradientBrush(clientRectangle, _BackColour1, _BackColour1, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
             }
             else
             {
                 ColorBlend colorBlend = new ColorBlend(3);
-                Color[] colorArray = new Color[3]
-                {
-          this._BackColour1,
-          this._BackColour2,
-          this._BackColour3
-                };
-                float[] numArray = new float[3] { 0.0f, 0.5f, 1f };
-                colorBlend.Colors = colorArray;
-                colorBlend.Positions = numArray;
-                linearGradientBrush = new LinearGradientBrush(clientRectangle, this._BackColour1, this._BackColour2, (System.Drawing.Drawing2D.LinearGradientMode)this._GradientMode);
+                Color[] colors = new Color[3] { _BackColour1, _BackColour2, _BackColour3 };
+                float[] positions = new float[3] { 0f, 0.5f, 1f };
+                colorBlend.Colors = colors;
+                colorBlend.Positions = positions;
+                linearGradientBrush = new LinearGradientBrush(clientRectangle, _BackColour1, _BackColour2, (System.Drawing.Drawing2D.LinearGradientMode)_GradientMode);
                 linearGradientBrush.InterpolationColors = colorBlend;
             }
-            graphics.FillPath((Brush)linearGradientBrush, path);
+            graphics.FillPath(linearGradientBrush, path);
             linearGradientBrush.Dispose();
-            switch (this._BorderStyle)
+            switch (_BorderStyle)
             {
                 case BorderStyle.FixedSingle:
-                    Pen pen = new Pen(this._BorderColour, (float)this._BorderWidth);
-                    graphics.DrawPath(pen, path);
-                    pen.Dispose();
-                    break;
+                    {
+                        Pen pen = new Pen(_BorderColour, _BorderWidth);
+                        graphics.DrawPath(pen, path);
+                        pen.Dispose();
+                        break;
+                    }
                 case BorderStyle.Fixed3D:
-                    PersistentGradientPanel.DrawBorder3D(graphics, this.ClientRectangle);
+                    PersistentGradientPanel.DrawBorder3D(graphics, base.ClientRectangle);
                     break;
             }
             linearGradientBrush.Dispose();
@@ -443,59 +662,59 @@ namespace DistantWorlds.Controls
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             base.OnPaintBackground(e);
-            this.DrawBackground(e.Graphics);
+            DrawBackground(e.Graphics);
         }
 
         protected GraphicsPath GetPath()
         {
-            GraphicsPath path = new GraphicsPath();
-            if (this._BorderStyle == BorderStyle.Fixed3D)
+            GraphicsPath graphicsPath = new GraphicsPath();
+            if (_BorderStyle == BorderStyle.Fixed3D)
             {
-                path.AddRectangle(this.ClientRectangle);
+                graphicsPath.AddRectangle(base.ClientRectangle);
+                return graphicsPath;
             }
-            else
+            try
             {
-                try
+                int num = 0;
+                Rectangle clientRectangle = base.ClientRectangle;
+                int num2 = 0;
+                switch (_BorderStyle)
                 {
-                    int num1 = 0;
-                    Rectangle clientRectangle = this.ClientRectangle;
-                    int num2 = 0;
-                    switch (this._BorderStyle)
-                    {
-                        case BorderStyle.None:
-                            num1 = this.AdjustedCurve;
-                            break;
-                        case BorderStyle.FixedSingle:
-                            if (this._BorderWidth > 1)
-                                num2 = InfoPanel.DoubleToInt((double)(this.BorderWidth / 2));
-                            num1 = this.AdjustedCurve;
-                            break;
-                    }
-                    if (num1 == 0)
-                    {
-                        path.AddRectangle(clientRectangle);
-                    }
-                    else
-                    {
-                        int num3 = clientRectangle.Width - num2;
-                        int num4 = clientRectangle.Height - num2;
-                        int num5 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? 1 : num1 * 2;
-                        path.AddArc(num3 - num5, num2, num5, num5, 270f, 90f);
-                        int num6 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? 1 : num1 * 2;
-                        path.AddArc(num3 - num6, num4 - num6, num6, num6, 0.0f, 90f);
-                        int num7 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? 1 : num1 * 2;
-                        path.AddArc(num2, num4 - num7, num7, num7, 90f, 90f);
-                        int num8 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? 1 : num1 * 2;
-                        path.AddArc(num2, num2, num8, num8, 180f, 90f);
-                        path.CloseFigure();
-                    }
+                    case BorderStyle.FixedSingle:
+                        if (_BorderWidth > 1)
+                        {
+                            num2 = DoubleToInt(BorderWidth / 2);
+                        }
+                        num = AdjustedCurve;
+                        break;
+                    case BorderStyle.None:
+                        num = AdjustedCurve;
+                        break;
                 }
-                catch (Exception ex)
+                if (num == 0)
                 {
-                    path.AddRectangle(this.ClientRectangle);
+                    graphicsPath.AddRectangle(clientRectangle);
+                    return graphicsPath;
                 }
+                int num3 = clientRectangle.Width - num2;
+                int num4 = clientRectangle.Height - num2;
+                int num5 = 1;
+                num5 = (((_CurveMode & CornerCurveMode.TopRight) == 0) ? 1 : (num * 2));
+                graphicsPath.AddArc(num3 - num5, num2, num5, num5, 270f, 90f);
+                num5 = (((_CurveMode & CornerCurveMode.BottomRight) == 0) ? 1 : (num * 2));
+                graphicsPath.AddArc(num3 - num5, num4 - num5, num5, num5, 0f, 90f);
+                num5 = (((_CurveMode & CornerCurveMode.BottomLeft) == 0) ? 1 : (num * 2));
+                graphicsPath.AddArc(num2, num4 - num5, num5, num5, 90f, 90f);
+                num5 = (((_CurveMode & CornerCurveMode.TopLeft) == 0) ? 1 : (num * 2));
+                graphicsPath.AddArc(num2, num2, num5, num5, 180f, 90f);
+                graphicsPath.CloseFigure();
+                return graphicsPath;
             }
-            return path;
+            catch (Exception)
+            {
+                graphicsPath.AddRectangle(base.ClientRectangle);
+                return graphicsPath;
+            }
         }
 
         public static void DrawBorder3D(Graphics graphics, Rectangle rectangle)
@@ -511,268 +730,298 @@ namespace DistantWorlds.Controls
             graphics.DrawLine(SystemPens.ControlLightLight, rectangle.Width - 1, rectangle.Y, rectangle.Width - 1, rectangle.Height - 1);
         }
 
-        public static int DoubleToInt(double value) => Decimal.ToInt32(Decimal.Floor(Decimal.Parse(value.ToString(), (IFormatProvider)NumberFormatInfo.InvariantInfo)));
+        public static int DoubleToInt(double value)
+        {
+            return decimal.ToInt32(decimal.Floor(decimal.Parse(value.ToString(), NumberFormatInfo.InvariantInfo)));
+        }
 
         public InfoPanel()
         {
-            this.SetDefaultControlStyles();
-            this.CustomInitialisation();
-            this.AutoScroll = false;
-            this.AutoScrollMargin = new Size(0, 0);
-            this.Padding = new Padding(0);
-            this.Margin = new Padding(0);
-            this.SetFont(15.33f);
-            this._NormalFont = this.Font;
-            this._NormalFontBold = new Font(this.Font, FontStyle.Bold);
-            this._HotspotPen = new Pen(Color.FromArgb(170, 170, 170), 1f);
-            this._HotspotPen.DashStyle = DashStyle.Dot;
-            using (Graphics graphics = this.CreateGraphics())
-                this.DrawPanelWithBackground(graphics);
+            SetDefaultControlStyles();
+            CustomInitialisation();
+            AutoScroll = false;
+            base.AutoScrollMargin = new Size(0, 0);
+            base.Padding = new Padding(0);
+            base.Margin = new Padding(0);
+            SetFont(15.33f);
+            _NormalFont = Font;
+            _NormalFontBold = new Font(Font, FontStyle.Bold);
+            _HotspotPen = new Pen(Color.FromArgb(170, 170, 170), 1f);
+            _HotspotPen.DashStyle = DashStyle.Dot;
+            using Graphics graphics = CreateGraphics();
+            DrawPanelWithBackground(graphics);
         }
 
         public void Reset()
         {
-            this.RepointImageInstances();
-            using (Graphics graphics = this.CreateGraphics())
-            {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
-            }
+            RepointImageInstances();
+            using Graphics graphics = CreateGraphics();
+            ClearPanel(graphics);
+            DrawPanelWithBackground(graphics);
         }
 
-        private void ClearPanel(Graphics graphics) => graphics.Clear(Color.Transparent);
+        private void ClearPanel(Graphics graphics)
+        {
+            graphics.Clear(Color.Transparent);
+        }
 
         public void Clear()
         {
-            this._Picture = (Bitmap)null;
-            this._EmpireColor = this._WhiteColor;
-            this.Text = string.Empty;
+            _Picture = null;
+            _EmpireColor = _WhiteColor;
+            Text = string.Empty;
         }
 
         public void ReDraw()
         {
-            if (this._BuiltObject != null)
+            if (_BuiltObject != null)
             {
-                this._PictureAngle = (double)this._BuiltObject.Heading * -1.0;
-                if (this._BuiltObject.ActualEmpire != null)
-                    this._EmpirePicture = this.PrescaleImage(this._BuiltObject.ActualEmpire.LargeFlagPicture, this._FlagSizeSmall.Width, this._FlagSizeSmall.Height);
+                _PictureAngle = _BuiltObject.Heading * -1f;
+                if (_BuiltObject.ActualEmpire != null)
+                {
+                    _EmpirePicture = PrescaleImage(_BuiltObject.ActualEmpire.LargeFlagPicture, _FlagSizeSmall.Width, _FlagSizeSmall.Height);
+                }
             }
-            else if (this._Fighter != null)
+            else if (_Fighter != null)
             {
-                this._PictureAngle = (double)this._Fighter.Heading * -1.0;
-                if (this._Fighter.Empire != null)
-                    this._EmpirePicture = this.PrescaleImage(this._Fighter.Empire.LargeFlagPicture, this._FlagSizeSmall.Width, this._FlagSizeSmall.Height);
+                _PictureAngle = _Fighter.Heading * -1f;
+                if (_Fighter.Empire != null)
+                {
+                    _EmpirePicture = PrescaleImage(_Fighter.Empire.LargeFlagPicture, _FlagSizeSmall.Width, _FlagSizeSmall.Height);
+                }
             }
-            else if (this._Habitat != null)
+            else if (_Habitat != null)
             {
-                this._PictureAngle = 0.0;
-                if (this._Habitat.Empire != null && this._Habitat.Empire != this._Galaxy.IndependentEmpire)
-                    this._EmpirePicture = this.PrescaleImage(this._Habitat.Empire.LargeFlagPicture, this._FlagSizeSmall.Width, this._FlagSizeSmall.Height);
+                _PictureAngle = 0.0;
+                if (_Habitat.Empire != null && _Habitat.Empire != _Galaxy.IndependentEmpire)
+                {
+                    _EmpirePicture = PrescaleImage(_Habitat.Empire.LargeFlagPicture, _FlagSizeSmall.Width, _FlagSizeSmall.Height);
+                }
             }
-            this.Invalidate();
+            Invalidate();
         }
 
         public void ClearData()
         {
-            this._Hotspots.Clear();
-            this._Game = (Game)null;
-            this._Galaxy = (Galaxy)null;
-            this._BuiltObject = (BuiltObject)null;
-            this._Fighter = (Fighter)null;
-            this._Habitat = (Habitat)null;
-            this._Creature = (Creature)null;
-            this._BuiltObjects = (BuiltObjectList)null;
-            this._ShipGroup = (ShipGroup)null;
-            this._SystemInfo = (SystemInfo)null;
-            this._Picture = (Bitmap)null;
-            this._EmpirePicture = (Bitmap)null;
-            this._EmpireColor = this._WhiteColor;
-            this._ActualEmpire = (Empire)null;
-            this._SmugglingMission = (EmpireActivity)null;
-            this._PictureAngle = 0.0;
-            this._PictureSize = 0;
-            using (Graphics graphics = this.CreateGraphics())
+            _Hotspots.Clear();
+            _Game = null;
+            _Galaxy = null;
+            _BuiltObject = null;
+            _Fighter = null;
+            _Habitat = null;
+            _Creature = null;
+            _BuiltObjects = null;
+            _ShipGroup = null;
+            _SystemInfo = null;
+            _Picture = null;
+            _EmpirePicture = null;
+            _EmpireColor = _WhiteColor;
+            _ActualEmpire = null;
+            _SmugglingMission = null;
+            _PictureAngle = 0.0;
+            _PictureSize = 0;
+            using (Graphics graphics = CreateGraphics())
             {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
+                ClearPanel(graphics);
+                DrawPanelWithBackground(graphics);
             }
-            this.Invalidate();
+            Invalidate();
         }
 
         private void SetEmpirePictureAndColor(Empire empire)
         {
             if (empire != null)
             {
-                this._EmpirePicture = this.PrescaleImage(empire.LargeFlagPicture, this._FlagSizeSmall.Width, this._FlagSizeSmall.Height);
-                if (empire == this._Galaxy.IndependentEmpire)
-                    this._EmpireColor = this._IndependentColor;
+                _EmpirePicture = PrescaleImage(empire.LargeFlagPicture, _FlagSizeSmall.Width, _FlagSizeSmall.Height);
+                if (empire == _Galaxy.IndependentEmpire)
+                {
+                    _EmpireColor = _IndependentColor;
+                }
                 else if (empire.PirateEmpireBaseHabitat != null)
                 {
                     if (empire.MainColor == Color.FromArgb(1, 1, 1))
-                        this._EmpireColor = this._PirateColor;
+                    {
+                        _EmpireColor = _PirateColor;
+                    }
                     else
-                        this._EmpireColor = empire.MainColor;
+                    {
+                        _EmpireColor = empire.MainColor;
+                    }
                 }
                 else
-                    this._EmpireColor = empire.MainColor;
+                {
+                    _EmpireColor = empire.MainColor;
+                }
             }
             else
             {
-                this._EmpireColor = this._WhiteColor;
-                this._EmpirePicture = new Bitmap(1, 1, PixelFormat.Format32bppPArgb);
+                _EmpireColor = _WhiteColor;
+                _EmpirePicture = new Bitmap(1, 1, PixelFormat.Format32bppPArgb);
             }
         }
 
         private void SetFonts()
         {
-            this.SetFont(15.33f);
-            this._NormalFontNormalSize = this.CreateDisposeFont(this._NormalFontNormalSize, 15.33f, false);
-            this._NormalBoldFontNormalSize = this.CreateDisposeFont(this._NormalBoldFontNormalSize, 15.33f, true);
-            this._TitleFontNormalSize = this.CreateDisposeFont(this._TitleFontNormalSize, 17.33f, true);
-            this._TinyFontNormalSize = this.CreateDisposeFont(this._TinyFontNormalSize, 10.67f, false);
-            this._NormalFontLargeSize = this.CreateDisposeFont(this._NormalFontLargeSize, 21.4f, false);
-            this._NormalBoldFontLargeSize = this.CreateDisposeFont(this._NormalBoldFontLargeSize, 21.4f, true);
-            this._TitleFontLargeSize = this.CreateDisposeFont(this._TitleFontLargeSize, 23.4f, true);
-            this._TinyFontLargeSize = this.CreateDisposeFont(this._TinyFontLargeSize, 15.33f, false);
-            if (this._ContentSizeIsLarge)
+            SetFont(15.33f);
+            _NormalFontNormalSize = CreateDisposeFont(_NormalFontNormalSize, 15.33f, isBold: false);
+            _NormalBoldFontNormalSize = CreateDisposeFont(_NormalBoldFontNormalSize, 15.33f, isBold: true);
+            _TitleFontNormalSize = CreateDisposeFont(_TitleFontNormalSize, 17.33f, isBold: true);
+            _TinyFontNormalSize = CreateDisposeFont(_TinyFontNormalSize, 10.67f, isBold: false);
+            _NormalFontLargeSize = CreateDisposeFont(_NormalFontLargeSize, 21.4f, isBold: false);
+            _NormalBoldFontLargeSize = CreateDisposeFont(_NormalBoldFontLargeSize, 21.4f, isBold: true);
+            _TitleFontLargeSize = CreateDisposeFont(_TitleFontLargeSize, 23.4f, isBold: true);
+            _TinyFontLargeSize = CreateDisposeFont(_TinyFontLargeSize, 15.33f, isBold: false);
+            if (_ContentSizeIsLarge)
             {
-                this._NormalFont = this._NormalFontLargeSize;
-                this._NormalFontBold = this._NormalBoldFontLargeSize;
-                this._TitleFont = this._TitleFontLargeSize;
-                this._TinyFont = this._TinyFontLargeSize;
+                _NormalFont = _NormalFontLargeSize;
+                _NormalFontBold = _NormalBoldFontLargeSize;
+                _TitleFont = _TitleFontLargeSize;
+                _TinyFont = _TinyFontLargeSize;
             }
             else
             {
-                this._NormalFont = this._NormalFontNormalSize;
-                this._NormalFontBold = this._NormalBoldFontNormalSize;
-                this._TitleFont = this._TitleFontNormalSize;
-                this._TinyFont = this._TinyFontNormalSize;
+                _NormalFont = _NormalFontNormalSize;
+                _NormalFontBold = _NormalBoldFontNormalSize;
+                _TitleFont = _TitleFontNormalSize;
+                _TinyFont = _TinyFontNormalSize;
             }
         }
 
         private Font CreateDisposeFont(Font font, float size, bool isBold)
         {
-            Font font1 = font;
-            if ((double)size > 0.0)
-                font = this._FontCache.GenerateFont(size, isBold);
-            font1?.Dispose();
+            Font font2 = font;
+            if (size > 0f)
+            {
+                font = _FontCache.GenerateFont(size, isBold);
+            }
+            font2?.Dispose();
             return font;
         }
 
-        public void SetData(
-          Game game,
-          Galaxy galaxy,
-          Bitmap backgroundPicture,
-          Bitmap maskImage,
-          BuiltObject builtObject)
+        public void SetData(Game game, Galaxy galaxy, Bitmap backgroundPicture, Bitmap maskImage, BuiltObject builtObject)
         {
-            this.SetFonts();
-            this.RepointImageInstances();
-            this._Hotspots.Clear();
-            this._AddHotspots = true;
-            this._Game = game;
-            this._Galaxy = galaxy;
-            this._BuiltObjects = (BuiltObjectList)null;
-            this._BuiltObject = builtObject;
-            this._Fighter = (Fighter)null;
-            this._Habitat = (Habitat)null;
-            this._Creature = (Creature)null;
-            this._ShipGroup = (ShipGroup)null;
-            this._SystemInfo = (SystemInfo)null;
-            this._EmpireColor = this._WhiteColor;
-            this._SmugglingMission = (EmpireActivity)null;
-            if (this._Picture != null)
-                this._Picture.Dispose();
-            this._Picture = this.FadeImage(backgroundPicture, 0.33f);
-            if (this._MaskImage != null)
-                this._MaskImage.Dispose();
-            if (maskImage != null && maskImage.PixelFormat != PixelFormat.Undefined)
-                this._MaskImage = new Bitmap((Image)maskImage);
+            SetFonts();
+            RepointImageInstances();
+            _Hotspots.Clear();
+            _AddHotspots = true;
+            _Game = game;
+            _Galaxy = galaxy;
+            _BuiltObjects = null;
+            _BuiltObject = builtObject;
+            _Fighter = null;
+            _Habitat = null;
+            _Creature = null;
+            _ShipGroup = null;
+            _SystemInfo = null;
+            _EmpireColor = _WhiteColor;
+            _SmugglingMission = null;
+            if (_Picture != null)
+            {
+                _Picture.Dispose();
+            }
+            _Picture = FadeImage(backgroundPicture, 0.33f);
+            if (_MaskImage != null)
+            {
+                _MaskImage.Dispose();
+            }
+            if (maskImage != null && maskImage.PixelFormat != 0)
+            {
+                _MaskImage = new Bitmap(maskImage);
+            }
             Empire empire = builtObject.Empire;
             if (builtObject.ActualEmpire == game.PlayerEmpire || game.GodMode)
+            {
                 empire = builtObject.ActualEmpire;
-            this.SetEmpirePictureAndColor(empire);
-            this._ActualEmpire = empire;
+            }
+            SetEmpirePictureAndColor(empire);
+            _ActualEmpire = empire;
             if (builtObject.Role == BuiltObjectRole.Freight && builtObject.Mission != null && builtObject.Mission.Type == BuiltObjectMissionType.Transport && builtObject.Mission.SecondaryTargetHabitat != null)
             {
-                EmpireActivity firstByTargetAndType = this._ActualEmpire.PirateMissions.GetFirstByTargetAndType((StellarObject)builtObject.Mission.SecondaryTargetHabitat, EmpireActivityType.Smuggle);
-                if (firstByTargetAndType != null && firstByTargetAndType.RequestingEmpire != this._ActualEmpire)
-                    this._SmugglingMission = firstByTargetAndType;
+                EmpireActivity firstByTargetAndType = _ActualEmpire.PirateMissions.GetFirstByTargetAndType(builtObject.Mission.SecondaryTargetHabitat, EmpireActivityType.Smuggle);
+                if (firstByTargetAndType != null && firstByTargetAndType.RequestingEmpire != _ActualEmpire)
+                {
+                    _SmugglingMission = firstByTargetAndType;
+                }
             }
-            this._PictureAngle = (double)builtObject.Heading * -1.0;
-            this._PictureSize = (int)((double)builtObject.Size / 0.6);
-            if (this._PictureSize < this._MinPictureSize)
-                this._PictureSize = this._MinPictureSize;
-            if (this._PictureSize > this._MaxPictureSize)
-                this._PictureSize = this._MaxPictureSize;
-            this._CharacterBonuses = Galaxy.GenerateCharacterBonusDescription(builtObject);
-            this._BuiltObjectIsScanned = this._Galaxy.CheckBuiltObjectScanned(this._BuiltObject);
-            this._LastBuiltObjectScanTime = DateTime.Now;
-            using (Graphics graphics = this.CreateGraphics())
+            _PictureAngle = builtObject.Heading * -1f;
+            _PictureSize = (int)((double)builtObject.Size / 0.6);
+            if (_PictureSize < _MinPictureSize)
             {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
+                _PictureSize = _MinPictureSize;
             }
+            if (_PictureSize > _MaxPictureSize)
+            {
+                _PictureSize = _MaxPictureSize;
+            }
+            _CharacterBonuses = Galaxy.GenerateCharacterBonusDescription(builtObject);
+            _BuiltObjectIsScanned = _Galaxy.CheckBuiltObjectScanned(_BuiltObject);
+            _LastBuiltObjectScanTime = DateTime.Now;
+            using Graphics graphics = CreateGraphics();
+            ClearPanel(graphics);
+            DrawPanelWithBackground(graphics);
         }
 
-        public void SetData(
-          Game game,
-          Galaxy galaxy,
-          Bitmap backgroundPicture,
-          Bitmap maskImage,
-          Fighter fighter)
+        public void SetData(Game game, Galaxy galaxy, Bitmap backgroundPicture, Bitmap maskImage, Fighter fighter)
         {
-            this.SetFonts();
-            this.RepointImageInstances();
-            this._Hotspots.Clear();
-            this._AddHotspots = true;
-            this._Game = game;
-            this._Galaxy = galaxy;
-            this._BuiltObjects = (BuiltObjectList)null;
-            this._BuiltObject = (BuiltObject)null;
-            this._Fighter = fighter;
-            this._Habitat = (Habitat)null;
-            this._Creature = (Creature)null;
-            this._ShipGroup = (ShipGroup)null;
-            this._SystemInfo = (SystemInfo)null;
-            this._EmpireColor = this._WhiteColor;
-            this._SmugglingMission = (EmpireActivity)null;
-            if (this._Picture != null)
-                this._Picture.Dispose();
-            this._Picture = this.FadeImage(backgroundPicture, 0.33f);
-            this._CharacterBonuses = Galaxy.GenerateCharacterBonusDescription(fighter);
-            if (this._MaskImage != null)
-                this._MaskImage.Dispose();
-            if (maskImage != null && maskImage.PixelFormat != PixelFormat.Undefined)
-                this._MaskImage = new Bitmap((Image)maskImage);
-            this.SetEmpirePictureAndColor(fighter.Empire);
-            this._PictureAngle = (double)fighter.Heading * -1.0;
-            this._PictureSize = (int)((double)fighter.Size * 15.0);
-            if (this._PictureSize < this._MinPictureSize)
-                this._PictureSize = this._MinPictureSize;
-            if (this._PictureSize > this._MaxPictureSize)
-                this._PictureSize = this._MaxPictureSize;
-            using (Graphics graphics = this.CreateGraphics())
+            SetFonts();
+            RepointImageInstances();
+            _Hotspots.Clear();
+            _AddHotspots = true;
+            _Game = game;
+            _Galaxy = galaxy;
+            _BuiltObjects = null;
+            _BuiltObject = null;
+            _Fighter = fighter;
+            _Habitat = null;
+            _Creature = null;
+            _ShipGroup = null;
+            _SystemInfo = null;
+            _EmpireColor = _WhiteColor;
+            _SmugglingMission = null;
+            if (_Picture != null)
             {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
+                _Picture.Dispose();
             }
+            _Picture = FadeImage(backgroundPicture, 0.33f);
+            _CharacterBonuses = Galaxy.GenerateCharacterBonusDescription(fighter);
+            if (_MaskImage != null)
+            {
+                _MaskImage.Dispose();
+            }
+            if (maskImage != null && maskImage.PixelFormat != 0)
+            {
+                _MaskImage = new Bitmap(maskImage);
+            }
+            SetEmpirePictureAndColor(fighter.Empire);
+            _PictureAngle = fighter.Heading * -1f;
+            _PictureSize = (int)((double)fighter.Size * 15.0);
+            if (_PictureSize < _MinPictureSize)
+            {
+                _PictureSize = _MinPictureSize;
+            }
+            if (_PictureSize > _MaxPictureSize)
+            {
+                _PictureSize = _MaxPictureSize;
+            }
+            using Graphics graphics = CreateGraphics();
+            ClearPanel(graphics);
+            DrawPanelWithBackground(graphics);
         }
 
         private Bitmap PreProcessImage(Bitmap image, int pictureSize)
         {
-            image = this.FadeImage(image, 0.33f);
-            Rectangle rectangle1 = new Rectangle();
-            Rectangle rectangle2 = new Rectangle();
-            int num1 = this.ClientRectangle.Width - 6;
-            int num2 = this.ClientRectangle.Height - 6;
+            image = FadeImage(image, 0.33f);
+            Rectangle rectangle = default(Rectangle);
+            Rectangle rectangle2 = default(Rectangle);
+            int num = base.ClientRectangle.Width - 6;
+            int num2 = base.ClientRectangle.Height - 6;
             double num3 = (double)image.Width / (double)image.Height;
             int num4;
             int num5;
             if (image.Width > image.Height)
             {
                 num4 = (int)((double)pictureSize * num3);
-                num5 = this._PictureSize;
+                num5 = _PictureSize;
             }
             else
             {
@@ -783,111 +1032,123 @@ namespace DistantWorlds.Controls
             if (num5 > num2)
             {
                 num6 = (double)num2 / (double)num5;
-                if ((double)num4 * num6 > (double)num1)
-                    num6 *= (double)num1 / ((double)num4 * num6);
+                if ((double)num4 * num6 > (double)num)
+                {
+                    num6 *= (double)num / ((double)num4 * num6);
+                }
             }
-            else if (num4 > num1)
+            else if (num4 > num)
             {
-                num6 = (double)num1 / (double)num4;
+                num6 = (double)num / (double)num4;
                 if ((double)num5 * num6 > (double)num2)
+                {
                     num6 *= (double)num2 / ((double)num5 * num6);
+                }
             }
             else
-                num6 = 1.0;
-            rectangle1 = new Rectangle((num1 - (int)((double)num4 * num6)) / 2 + 3, (num2 - (int)((double)num5 * num6)) / 2 + 3, (int)((double)num4 * num6), (int)((double)num5 * num6));
-            Bitmap bitmap = new Bitmap(rectangle1.Width, rectangle1.Height, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
             {
-                Rectangle rect = new Rectangle(0, 0, rectangle1.Width, rectangle1.Height);
-                graphics.DrawImage((Image)image, rect);
+                num6 = 1.0;
             }
+            int num7 = (num - (int)((double)num4 * num6)) / 2;
+            int num8 = (num2 - (int)((double)num5 * num6)) / 2;
+            int num9 = (int)((double)num4 * num6);
+            rectangle = new Rectangle(num7 + 3, num8 + 3, num9, (int)((double)num5 * num6));
+            Bitmap bitmap = new Bitmap(rectangle.Width, rectangle.Height, PixelFormat.Format32bppPArgb);
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            rectangle2 = new Rectangle(0, 0, rectangle.Width, rectangle.Height);
+            graphics.DrawImage(image, rectangle2);
             return bitmap;
         }
 
         private Bitmap OverlayRuins(Bitmap image, Habitat habitat)
         {
-            Bitmap bitmap1 = new Bitmap((Image)image);
+            Bitmap bitmap = new Bitmap(image);
             if (habitat.Ruin != null)
             {
-                using (Graphics graphics = Graphics.FromImage((Image)bitmap1))
+                using (Graphics graphics = Graphics.FromImage(bitmap))
                 {
-                    Bitmap bitmap2 = this.FadeImage(new Bitmap((Image)this._RuinImages[habitat.Ruin.PictureRef]), 0.7f);
+                    Bitmap image2 = new Bitmap(_RuinImages[habitat.Ruin.PictureRef]);
+                    image2 = FadeImage(image2, 0.7f);
                     double num = (double)image.Width / (double)habitat.Diameter;
-                    int x = (int)(((double)((int)habitat.Diameter / 2) + habitat.Ruin.ParentX) * num - (double)(bitmap2.Width / 2));
-                    int y = (int)(((double)((int)habitat.Diameter / 2) + habitat.Ruin.ParentY) * num - (double)(bitmap2.Height / 2));
-                    graphics.DrawImage((Image)bitmap2, new Point(x, y));
+                    int num2 = (int)(((double)(habitat.Diameter / 2) + habitat.Ruin.ParentX) * num - (double)(image2.Width / 2));
+                    int num3 = (int)(((double)(habitat.Diameter / 2) + habitat.Ruin.ParentY) * num - (double)(image2.Height / 2));
+                    graphics.DrawImage(image2, new Point(num2, num3));
+                    return bitmap;
                 }
             }
-            return bitmap1;
+            return bitmap;
         }
 
         public void SetData(Game game, Galaxy galaxy, Bitmap backgroundPicture, Habitat habitat)
         {
-            this.SetFonts();
-            this.RepointImageInstances();
-            this._Hotspots.Clear();
-            this._AddHotspots = true;
-            this._Game = game;
-            this._Galaxy = galaxy;
-            this._BuiltObjects = (BuiltObjectList)null;
-            this._BuiltObject = (BuiltObject)null;
-            this._Fighter = (Fighter)null;
-            this._Habitat = habitat;
-            this._Creature = (Creature)null;
-            this._ShipGroup = (ShipGroup)null;
-            this._SystemInfo = (SystemInfo)null;
-            this._SmugglingMission = (EmpireActivity)null;
-            this.SetEmpirePictureAndColor(habitat.Empire);
-            this._EmpireCanColonize = this._Galaxy.PlayerEmpire.CanEmpireColonizeHabitat(habitat, out this._ColonizeExplanation);
-            this._CharacterBonuses = Galaxy.GenerateCharacterBonusDescription(habitat);
-            if (this._Picture != null)
-                this._Picture.Dispose();
-            this._Picture = backgroundPicture;
-            this._PictureAngle = 0.0;
-            this._PictureSize = (int)habitat.Diameter;
-            if (this._PictureSize < this._MinPictureSize)
-                this._PictureSize = this._MinPictureSize;
-            if (this._PictureSize > this._MaxPictureSize)
-                this._PictureSize = this._MaxPictureSize;
-            this._Picture = this.PreProcessImage(this._Picture, this._PictureSize);
-            using (Graphics graphics = this.CreateGraphics())
+            SetFonts();
+            RepointImageInstances();
+            _Hotspots.Clear();
+            _AddHotspots = true;
+            _Game = game;
+            _Galaxy = galaxy;
+            _BuiltObjects = null;
+            _BuiltObject = null;
+            _Fighter = null;
+            _Habitat = habitat;
+            _Creature = null;
+            _ShipGroup = null;
+            _SystemInfo = null;
+            _SmugglingMission = null;
+            SetEmpirePictureAndColor(habitat.Empire);
+            _EmpireCanColonize = _Galaxy.PlayerEmpire.CanEmpireColonizeHabitat(habitat, out _ColonizeExplanation);
+            _CharacterBonuses = Galaxy.GenerateCharacterBonusDescription(habitat);
+            if (_Picture != null)
             {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
+                _Picture.Dispose();
             }
+            _Picture = backgroundPicture;
+            _PictureAngle = 0.0;
+            _PictureSize = habitat.Diameter;
+            if (_PictureSize < _MinPictureSize)
+            {
+                _PictureSize = _MinPictureSize;
+            }
+            if (_PictureSize > _MaxPictureSize)
+            {
+                _PictureSize = _MaxPictureSize;
+            }
+            _Picture = PreProcessImage(_Picture, _PictureSize);
+            using Graphics graphics = CreateGraphics();
+            ClearPanel(graphics);
+            DrawPanelWithBackground(graphics);
         }
 
-        public Bitmap Picture
+        private void DrawPanel(object sender, PaintEventArgs pe)
         {
-            get => this._Picture;
-            set
-            {
-                this._Picture = value;
-                if (this._Picture != null)
-                    this._PictureSize = this._Picture.Width;
-                else
-                    this._PictureSize = 0;
-            }
+            DrawPanel(pe.Graphics);
         }
-
-        private void DrawPanel(object sender, PaintEventArgs pe) => this.DrawPanel(pe.Graphics);
 
         private void DrawPanelWithBackground(Graphics graphics)
         {
             try
             {
-                if (this._CurveMode != CornerCurveMode.None)
-                    base.OnPaintBackground(new PaintEventArgs(graphics, new Rectangle(0, 0, this.Width, this.Height)));
-                this.DrawBackground(graphics);
-                this.DrawPanel(graphics);
+                if (_CurveMode != 0)
+                {
+                    PaintEventArgs e = new PaintEventArgs(graphics, new Rectangle(0, 0, base.Width, base.Height));
+                    base.OnPaintBackground(e);
+                }
+                DrawBackground(graphics);
+                DrawPanel(graphics);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                this.ClearData();
+                ClearData();
             }
         }
 
-        private Color ResolveLightColor(Color color, int increaseAmount) => Color.FromArgb(Math.Max(0, Math.Min((int)byte.MaxValue, (int)color.R + increaseAmount)), Math.Max(0, Math.Min((int)byte.MaxValue, (int)color.G + increaseAmount)), Math.Max(0, Math.Min((int)byte.MaxValue, (int)color.B + increaseAmount)));
+        private Color ResolveLightColor(Color color, int increaseAmount)
+        {
+            int red = Math.Max(0, Math.Min(255, color.R + increaseAmount));
+            int green = Math.Max(0, Math.Min(255, color.G + increaseAmount));
+            int blue = Math.Max(0, Math.Min(255, color.B + increaseAmount));
+            return Color.FromArgb(red, green, blue);
+        }
 
         internal void DrawPanel(Graphics graphics)
         {
@@ -895,51 +1156,73 @@ namespace DistantWorlds.Controls
             graphics.InterpolationMode = InterpolationMode.High;
             graphics.CompositingQuality = CompositingQuality.HighQuality;
             graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            if (this._BuiltObject != null)
+            if (_BuiltObject != null)
             {
-                if (this._Game.GodMode || this._Game.PlayerEmpire.IsObjectVisibleToThisEmpire((StellarObject)this._BuiltObject))
-                    this.DrawBuiltObject(this._BuiltObject, graphics);
+                if (_Game.GodMode || _Game.PlayerEmpire.IsObjectVisibleToThisEmpire(_BuiltObject))
+                {
+                    DrawBuiltObject(_BuiltObject, graphics);
+                }
                 else
-                    this._Game.SelectedObject = (object)null;
+                {
+                    _Game.SelectedObject = null;
+                }
             }
-            else if (this._Fighter != null)
+            else if (_Fighter != null)
             {
-                if (this._Game.GodMode || this._Game.PlayerEmpire.IsObjectVisibleToThisEmpire((StellarObject)this._Fighter))
-                    this.DrawFighter(this._Fighter, graphics);
+                if (_Game.GodMode || _Game.PlayerEmpire.IsObjectVisibleToThisEmpire(_Fighter))
+                {
+                    DrawFighter(_Fighter, graphics);
+                }
                 else
-                    this._Game.SelectedObject = (object)null;
+                {
+                    _Game.SelectedObject = null;
+                }
             }
-            else if (this._Habitat != null)
-                this.DrawHabitat(this._Habitat, graphics);
-            else if (this._Creature != null)
+            else if (_Habitat != null)
             {
-                if (this._Game.GodMode || this._Game.PlayerEmpire.IsObjectVisibleToThisEmpire(this._Creature))
-                    this.DrawCreature(this._Creature, graphics);
-                else
-                    this._Game.SelectedObject = (object)null;
+                DrawHabitat(_Habitat, graphics);
             }
-            else if (this._BuiltObjects != null)
-                this.DrawBuiltObjectSelection(this._BuiltObjects, graphics);
-            else if (this._ShipGroup != null)
+            else if (_Creature != null)
             {
-                if (this._Game.GodMode || this._Game.PlayerEmpire.IsObjectVisibleToThisEmpire((StellarObject)this._ShipGroup.LeadShip))
-                    this.DrawShipGroup(this._ShipGroup, graphics);
+                if (_Game.GodMode || _Game.PlayerEmpire.IsObjectVisibleToThisEmpire(_Creature))
+                {
+                    DrawCreature(_Creature, graphics);
+                }
                 else
-                    this._Game.SelectedObject = (object)null;
+                {
+                    _Game.SelectedObject = null;
+                }
             }
-            else if (this._SystemInfo != null)
-                this.DrawSystemInfo(this._SystemInfo, graphics);
-            this.DrawHotspotHoverRegions(graphics);
-            this._AddHotspots = false;
+            else if (_BuiltObjects != null)
+            {
+                DrawBuiltObjectSelection(_BuiltObjects, graphics);
+            }
+            else if (_ShipGroup != null)
+            {
+                if (_Game.GodMode || _Game.PlayerEmpire.IsObjectVisibleToThisEmpire(_ShipGroup.LeadShip))
+                {
+                    DrawShipGroup(_ShipGroup, graphics);
+                }
+                else
+                {
+                    _Game.SelectedObject = null;
+                }
+            }
+            else if (_SystemInfo != null)
+            {
+                DrawSystemInfo(_SystemInfo, graphics);
+            }
+            DrawHotspotHoverRegions(graphics);
+            _AddHotspots = false;
         }
 
         private void DrawHotspotHoverRegions(Graphics graphics)
         {
-            foreach (Hotspot hotspot in (List<Hotspot>)this._Hotspots)
+            foreach (Hotspot hotspot in _Hotspots)
             {
                 if (hotspot.Hovered)
                 {
-                    graphics.DrawRectangle(this._HotspotPen, hotspot.Region);
+                    graphics.DrawRectangle(_HotspotPen, hotspot.Region);
                     hotspot.Hovered = false;
                 }
             }
@@ -947,132 +1230,139 @@ namespace DistantWorlds.Controls
 
         private Bitmap OverlayDamage(BuiltObject builtObject, Bitmap image, Bitmap maskingImage)
         {
-            if (builtObject.DamagedComponentCount <= 0)
-                return image;
-            double num = (double)builtObject.DamagedComponentCount / (double)builtObject.Components.Count;
-            int damagedPixelCount = (int)((double)(image.Width * image.Height) * 0.7 * num);
-            Random rnd = new Random(builtObject.BuiltObjectID);
-            using (HatchBrush damageBrush = new HatchBrush(HatchStyle.Cross, Color.FromArgb(160, 160, 160), Color.FromArgb(1, 1, 1)))
-                return this.OverlayDamage(image, maskingImage, (Brush)damageBrush, damagedPixelCount, rnd);
+            if (builtObject.DamagedComponentCount > 0)
+            {
+                double num = (double)builtObject.DamagedComponentCount / (double)builtObject.Components.Count;
+                int num2 = image.Width * image.Height;
+                int damagedPixelCount = (int)((double)num2 * 0.7 * num);
+                Random rnd = new Random(builtObject.BuiltObjectID);
+                using HatchBrush damageBrush = new HatchBrush(HatchStyle.Cross, Color.FromArgb(160, 160, 160), Color.FromArgb(1, 1, 1));
+                return OverlayDamage(image, maskingImage, damageBrush, damagedPixelCount, rnd);
+            }
+            return image;
         }
 
         private Bitmap OverlayDamage(Fighter fighter, Bitmap image, Bitmap maskingImage)
         {
-            if ((double)fighter.Health >= 1.0 || fighter.UnderConstruction)
-                return image;
-            double num = 1.0 - (double)fighter.Health;
-            int damagedPixelCount = (int)((double)(image.Width * image.Height) * 0.7 * num);
-            Random rnd = new Random(fighter.FighterID);
-            using (HatchBrush damageBrush = new HatchBrush(HatchStyle.Cross, Color.FromArgb(160, 160, 160), Color.FromArgb(1, 1, 1)))
-                return this.OverlayDamage(image, maskingImage, (Brush)damageBrush, damagedPixelCount, rnd);
+            if (fighter.Health < 1f && !fighter.UnderConstruction)
+            {
+                double num = 1f - fighter.Health;
+                int num2 = image.Width * image.Height;
+                int damagedPixelCount = (int)((double)num2 * 0.7 * num);
+                Random rnd = new Random(fighter.FighterID);
+                using HatchBrush damageBrush = new HatchBrush(HatchStyle.Cross, Color.FromArgb(160, 160, 160), Color.FromArgb(1, 1, 1));
+                return OverlayDamage(image, maskingImage, damageBrush, damagedPixelCount, rnd);
+            }
+            return image;
         }
 
         private Bitmap OverlayDamage(Creature creature, Bitmap image, Bitmap maskingImage)
         {
-            if (creature.Damage <= 0.0)
-                return image;
-            double num = creature.Damage / (double)creature.DamageKillThreshhold;
-            int damagedPixelCount = (int)((double)(image.Width * image.Height) * 0.3 * num);
-            Random rnd = new Random(creature.CreatureID);
-            Color color = Color.FromArgb(1, 1, 1);
-            switch (creature.Type)
+            if (creature.Damage > 0.0)
             {
-                case CreatureType.Kaltor:
-                    color = Color.FromArgb(96, 110, 32, 80);
-                    break;
-                case CreatureType.RockSpaceSlug:
-                    color = Color.FromArgb(96, 64, 32, 36);
-                    break;
-                case CreatureType.DesertSpaceSlug:
-                    color = Color.FromArgb(96, 160, 56, 0);
-                    break;
-                case CreatureType.Ardilus:
-                    color = Color.FromArgb(96, 48, 8, 20);
-                    break;
-                case CreatureType.SilverMist:
-                    float transparencyLevel = Math.Min(1f, Math.Max(0.0f, (float)(1.0 - 0.89999997615814209 * (creature.Damage / (double)creature.DamageKillThreshhold))));
-                    return this.FadeImage(image, transparencyLevel);
+                double num = creature.Damage / (double)creature.DamageKillThreshhold;
+                int num2 = image.Width * image.Height;
+                int damagedPixelCount = (int)((double)num2 * 0.3 * num);
+                Random rnd = new Random(creature.CreatureID);
+                Color color = Color.FromArgb(1, 1, 1);
+                switch (creature.Type)
+                {
+                    case CreatureType.SilverMist:
+                        {
+                            float val = 1f - 0.9f * ((float)creature.Damage / (float)creature.DamageKillThreshhold);
+                            val = Math.Min(1f, Math.Max(0f, val));
+                            return FadeImage(image, val);
+                        }
+                    case CreatureType.Ardilus:
+                        color = Color.FromArgb(96, 48, 8, 20);
+                        break;
+                    case CreatureType.DesertSpaceSlug:
+                        color = Color.FromArgb(96, 160, 56, 0);
+                        break;
+                    case CreatureType.Kaltor:
+                        color = Color.FromArgb(96, 110, 32, 80);
+                        break;
+                    case CreatureType.RockSpaceSlug:
+                        color = Color.FromArgb(96, 64, 32, 36);
+                        break;
+                }
+                using SolidBrush damageBrush = new SolidBrush(color);
+                return OverlayDamage(image, maskingImage, damageBrush, damagedPixelCount, rnd);
             }
-            using (SolidBrush damageBrush = new SolidBrush(color))
-                return this.OverlayDamage(image, maskingImage, (Brush)damageBrush, damagedPixelCount, rnd);
+            return image;
         }
 
-        private Bitmap OverlayDamage(
-          Bitmap image,
-          Bitmap maskingImage,
-          Brush damageBrush,
-          int damagedPixelCount,
-          Random rnd)
+        private Bitmap OverlayDamage(Bitmap image, Bitmap maskingImage, Brush damageBrush, int damagedPixelCount, Random rnd)
         {
-            int width1 = Math.Max(2, image.Width);
-            int height1 = Math.Max(2, image.Height);
-            int width2 = Math.Max(2, maskingImage.Width);
-            int height2 = Math.Max(2, maskingImage.Height);
-            Bitmap bitmap = new Bitmap(width1, height1, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
+            int num = Math.Max(2, image.Width);
+            int num2 = Math.Max(2, image.Height);
+            int num3 = Math.Max(2, maskingImage.Width);
+            int num4 = Math.Max(2, maskingImage.Height);
+            Bitmap bitmap = new Bitmap(num, num2, PixelFormat.Format32bppPArgb);
+            using (Graphics graphics = Graphics.FromImage(bitmap))
             {
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
                 graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 graphics.SmoothingMode = SmoothingMode.None;
-                graphics.DrawImageUnscaled((Image)image, 0, 0);
-                List<Rectangle> rectangleList = new List<Rectangle>();
-                List<Color> colorList = new List<Color>();
-                int num1;
-                for (; damagedPixelCount > 0; damagedPixelCount -= num1)
+                graphics.DrawImageUnscaled(image, 0, 0);
+                List<Rectangle> list = new List<Rectangle>();
+                new List<Color>();
+                while (damagedPixelCount > 0)
                 {
-                    num1 = 0;
-                    int num2 = rnd.Next(0, 6);
-                    int x = rnd.Next(0, bitmap.Width - 1);
-                    int y = rnd.Next(0, bitmap.Height - 1);
-                    switch (num2)
+                    int num5 = 0;
+                    int num6 = rnd.Next(0, 6);
+                    int num7 = rnd.Next(0, bitmap.Width - 1);
+                    int num8 = rnd.Next(0, bitmap.Height - 1);
+                    switch (num6)
                     {
                         case 0:
-                            rectangleList.Add(new Rectangle(x, y, 3, 3));
-                            rectangleList.Add(new Rectangle(x + 3, y, 1, 2));
-                            num1 = 11;
+                            list.Add(new Rectangle(num7, num8, 3, 3));
+                            list.Add(new Rectangle(num7 + 3, num8, 1, 2));
+                            num5 = 11;
                             break;
                         case 1:
-                            rectangleList.Add(new Rectangle(x, y, 2, 2));
-                            rectangleList.Add(new Rectangle(x + 1, y + 2, 2, 2));
-                            num1 = 8;
+                            list.Add(new Rectangle(num7, num8, 2, 2));
+                            list.Add(new Rectangle(num7 + 1, num8 + 2, 2, 2));
+                            num5 = 8;
                             break;
                         case 2:
-                            rectangleList.Add(new Rectangle(x, y, 3, 5));
-                            rectangleList.Add(new Rectangle(x - 1, y + 2, 2, 2));
-                            num1 = 19;
+                            list.Add(new Rectangle(num7, num8, 3, 5));
+                            list.Add(new Rectangle(num7 - 1, num8 + 2, 2, 2));
+                            num5 = 19;
                             break;
                         case 3:
-                            rectangleList.Add(new Rectangle(x, y, 2, 2));
-                            rectangleList.Add(new Rectangle(x - 1, y - 1, 2, 2));
-                            num1 = 7;
+                            list.Add(new Rectangle(num7, num8, 2, 2));
+                            list.Add(new Rectangle(num7 - 1, num8 - 1, 2, 2));
+                            num5 = 7;
                             break;
                         case 4:
-                            rectangleList.Add(new Rectangle(x, y, 2, 2));
-                            rectangleList.Add(new Rectangle(x - 1, y - 1, 1, 1));
-                            rectangleList.Add(new Rectangle(x + 1, y + 2, 1, 1));
-                            num1 = 6;
+                            list.Add(new Rectangle(num7, num8, 2, 2));
+                            list.Add(new Rectangle(num7 - 1, num8 - 1, 1, 1));
+                            list.Add(new Rectangle(num7 + 1, num8 + 2, 1, 1));
+                            num5 = 6;
                             break;
                         case 5:
-                            rectangleList.Add(new Rectangle(x, y, 3, 3));
-                            rectangleList.Add(new Rectangle(x - 2, y, 2, 2));
-                            num1 = 13;
+                            list.Add(new Rectangle(num7, num8, 3, 3));
+                            list.Add(new Rectangle(num7 - 2, num8, 2, 2));
+                            num5 = 13;
                             break;
                     }
+                    damagedPixelCount -= num5;
                 }
-                if (rectangleList.Count > 0)
-                    graphics.FillRectangles(damageBrush, rectangleList.ToArray());
-                this.SetGraphicsQualityToHigh(graphics);
-                Rectangle srcRect = new Rectangle(0, 0, width2, height2);
-                Rectangle destRect = new Rectangle(0, 0, width1, height1);
-                using (SolidBrush solidBrush = new SolidBrush(Color.Black))
+                if (list.Count > 0)
                 {
-                    int num3 = 1;
-                    graphics.FillRectangle((Brush)solidBrush, new Rectangle(0, 0, width1, num3));
-                    graphics.FillRectangle((Brush)solidBrush, new Rectangle(0, 0, num3, height1));
-                    graphics.FillRectangle((Brush)solidBrush, new Rectangle(width1 - num3, 0, num3, height1));
-                    graphics.FillRectangle((Brush)solidBrush, new Rectangle(0, height1 - num3, width1, num3));
-                    graphics.DrawImage((Image)maskingImage, destRect, srcRect, GraphicsUnit.Pixel);
+                    graphics.FillRectangles(damageBrush, list.ToArray());
                 }
+                SetGraphicsQualityToHigh(graphics);
+                Rectangle srcRect = new Rectangle(0, 0, num3, num4);
+                Rectangle destRect = new Rectangle(0, 0, num, num2);
+                using SolidBrush brush = new SolidBrush(Color.Black);
+                int num9 = 1;
+                graphics.FillRectangle(brush, new Rectangle(0, 0, num, num9));
+                graphics.FillRectangle(brush, new Rectangle(0, 0, num9, num2));
+                graphics.FillRectangle(brush, new Rectangle(num - num9, 0, num9, num2));
+                graphics.FillRectangle(brush, new Rectangle(0, num2 - num9, num, num9));
+                graphics.DrawImage(maskingImage, destRect, srcRect, GraphicsUnit.Pixel);
             }
             bitmap.MakeTransparent(Color.Black);
             return bitmap;
@@ -1081,36 +1371,39 @@ namespace DistantWorlds.Controls
         private Bitmap OverlayConstructionProgress(BuiltObject builtObject, Bitmap image)
         {
             if (builtObject.UnbuiltComponentCount <= 0)
-                return image;
-            Bitmap bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
             {
-                graphics.DrawImageUnscaled((Image)image, 0, 0);
-                double num1 = 1.0 - (double)builtObject.UnbuiltComponentCount / (double)builtObject.Components.Count;
-                int Seed = (int)((double)bitmap.Width * num1);
-                Random random = new Random(Seed);
-                int y = 0;
-                int maxValue1 = Math.Max(3, builtObject.Size / 200);
-                int num2 = bitmap.Width - Seed;
-                int height;
-                for (; y < bitmap.Height - 1; y += height)
+                return image;
+            }
+            Bitmap bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.DrawImageUnscaled(image, 0, 0);
+                double num = 1.0 - (double)builtObject.UnbuiltComponentCount / (double)builtObject.Components.Count;
+                int num2 = (int)((double)bitmap.Width * num);
+                Random random = new Random(num2);
+                int i = 0;
+                int num3 = Math.Max(3, builtObject.Size / 200);
+                int num4 = bitmap.Width - num2;
+                int num7;
+                for (; i < bitmap.Height - 1; i += num7)
                 {
-                    int num3 = random.Next(-maxValue1, maxValue1);
-                    int width = Math.Max(0, Math.Min(bitmap.Width - 1, num2 + num3));
-                    int num4 = random.Next(3, 6);
-                    height = Math.Min(y + num4, bitmap.Height - 1) - y;
-                    Rectangle rect = new Rectangle(0, y, width, height);
-                    graphics.FillRectangle((Brush)this._BlackBrush, rect);
+                    int num5 = random.Next(-num3, num3);
+                    int num6 = Math.Max(0, Math.Min(bitmap.Width - 1, num4 + num5));
+                    num7 = random.Next(3, 6);
+                    int val = i + num7;
+                    val = Math.Min(val, bitmap.Height - 1);
+                    num7 = val - i;
+                    graphics.FillRectangle(rect: new Rectangle(0, i, num6, num7), brush: _BlackBrush);
                 }
-                int num5 = 0;
-                int maxValue2 = Math.Max(8, builtObject.Size / 80);
-                List<Rectangle> rectangleList = new List<Rectangle>();
-                for (; num5 < bitmap.Height; num5 += random.Next(1, 3))
+                int j = 0;
+                int maxValue = Math.Max(8, builtObject.Size / 80);
+                List<Rectangle> list = new List<Rectangle>();
+                for (; j < bitmap.Height; j += random.Next(1, 3))
                 {
-                    int num6 = random.Next(2, maxValue2);
-                    graphics.DrawLine(this._BlackPen, 0, num5, bitmap.Width - Seed + num6, num5);
-                    Rectangle rectangle = new Rectangle(bitmap.Width - Seed, num5, bitmap.Width - Seed + num6 - (bitmap.Width - Seed), 1);
-                    rectangleList.Add(rectangle);
+                    int num8 = random.Next(2, maxValue);
+                    graphics.DrawLine(_BlackPen, 0, j, bitmap.Width - num2 + num8, j);
+                    Rectangle item = new Rectangle(bitmap.Width - num2, j, bitmap.Width - num2 + num8 - (bitmap.Width - num2), 1);
+                    list.Add(item);
                 }
             }
             bitmap.MakeTransparent(Color.Black);
@@ -1137,124 +1430,143 @@ namespace DistantWorlds.Controls
 
         public void DrawBackgroundPicture(Graphics graphics)
         {
-            if (this._Picture == null || this._Picture.PixelFormat == PixelFormat.Undefined)
+            if (_Picture == null || _Picture.PixelFormat == PixelFormat.Undefined)
+            {
                 return;
-            Rectangle rect = new Rectangle();
-            int num1 = this.ClientRectangle.Width - 6;
-            int num2 = this.ClientRectangle.Height - 6;
-            Bitmap bitmap1;
-            if (this._SystemInfo != null)
-            {
-                bitmap1 = this._Picture;
-                int x = (num1 - bitmap1.Width) / 2;
-                int y = (num2 - bitmap1.Height) / 2;
-                if (this._SystemInfo.SystemStar.Category == HabitatCategoryType.Star)
-                    x = (int)((double)bitmap1.Width * 0.55) * -1;
-                rect = new Rectangle(x, y, bitmap1.Width, bitmap1.Height);
             }
-            else if (this._Habitat != null)
+            Bitmap bitmap = null;
+            Rectangle rectangle = default(Rectangle);
+            int num = base.ClientRectangle.Width - 6;
+            int num2 = base.ClientRectangle.Height - 6;
+            if (_SystemInfo != null)
             {
-                bitmap1 = this._Picture;
-                int x = (num1 - bitmap1.Width) / 2;
-                int y = (num2 - bitmap1.Height) / 2;
-                if (this._Habitat.Category == HabitatCategoryType.Star)
-                    x = (int)((double)bitmap1.Width * 0.55) * -1;
-                rect = new Rectangle(x, y, bitmap1.Width, bitmap1.Height);
+                bitmap = _Picture;
+                int num3 = (num - bitmap.Width) / 2;
+                int num4 = (num2 - bitmap.Height) / 2;
+                if (_SystemInfo.SystemStar.Category == HabitatCategoryType.Star)
+                {
+                    num3 = (int)((double)bitmap.Width * 0.55) * -1;
+                }
+                rectangle = new Rectangle(num3, num4, bitmap.Width, bitmap.Height);
+            }
+            else if (_Habitat != null)
+            {
+                bitmap = _Picture;
+                int num5 = (num - bitmap.Width) / 2;
+                int num6 = (num2 - bitmap.Height) / 2;
+                if (_Habitat.Category == HabitatCategoryType.Star)
+                {
+                    num5 = (int)((double)bitmap.Width * 0.55) * -1;
+                }
+                rectangle = new Rectangle(num5, num6, bitmap.Width, bitmap.Height);
             }
             else
             {
-                int num3 = 0;
-                int num4 = 0;
-                if (this._BuiltObject != null)
+                int num7 = 0;
+                int num8 = 0;
+                if (_BuiltObject != null)
                 {
-                    Bitmap bitmap2 = this.OverlayConstructionProgress(this._BuiltObject, this.OverlayDamage(this._BuiltObject, this._Picture, this._MaskImage));
-                    double num5 = (double)this._PictureSize / (double)this._BuiltObjectImages[this._BuiltObject.PictureRef].Width;
-                    int width = (int)((double)this._BuiltObjectImages[this._BuiltObject.PictureRef].Width * num5);
-                    int height = (int)((double)this._BuiltObjectImages[this._BuiltObject.PictureRef].Height * num5);
-                    Bitmap bitmap3 = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
-                    using (Graphics graphics1 = Graphics.FromImage((Image)bitmap3))
-                    {
-                        graphics1.CompositingQuality = CompositingQuality.HighSpeed;
-                        graphics1.InterpolationMode = InterpolationMode.Bilinear;
-                        graphics1.SmoothingMode = SmoothingMode.None;
-                        graphics1.DrawImage((Image)bitmap2, new Rectangle(0, 0, width, height));
-                    }
-                    bitmap1 = this.RotateImage((Image)bitmap3, (float)this._PictureAngle);
-                    num3 = bitmap1.Width;
-                    num4 = bitmap1.Height;
-                }
-                else if (this._Fighter != null)
-                {
-                    Bitmap bitmap4 = this.OverlayDamage(this._Fighter, this._Picture, this._MaskImage);
-                    double num6 = (double)this._PictureSize / (double)this._FighterImages[(int)this._Fighter.PictureRef].Width;
-                    int width = (int)((double)this._FighterImages[(int)this._Fighter.PictureRef].Width * num6);
-                    int height = (int)((double)this._FighterImages[(int)this._Fighter.PictureRef].Height * num6);
-                    Bitmap bitmap5 = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
-                    using (Graphics graphics2 = Graphics.FromImage((Image)bitmap5))
+                    bitmap = OverlayDamage(_BuiltObject, _Picture, _MaskImage);
+                    bitmap = OverlayConstructionProgress(_BuiltObject, bitmap);
+                    double num9 = (double)_PictureSize / (double)_BuiltObjectImages[_BuiltObject.PictureRef].Width;
+                    num7 = (int)((double)_BuiltObjectImages[_BuiltObject.PictureRef].Width * num9);
+                    num8 = (int)((double)_BuiltObjectImages[_BuiltObject.PictureRef].Height * num9);
+                    Bitmap image = new Bitmap(num7, num8, PixelFormat.Format32bppPArgb);
+                    using (Graphics graphics2 = Graphics.FromImage(image))
                     {
                         graphics2.CompositingQuality = CompositingQuality.HighSpeed;
                         graphics2.InterpolationMode = InterpolationMode.Bilinear;
                         graphics2.SmoothingMode = SmoothingMode.None;
-                        graphics2.DrawImage((Image)bitmap4, new Rectangle(0, 0, width, height));
+                        graphics2.DrawImage(bitmap, new Rectangle(0, 0, num7, num8));
                     }
-                    bitmap1 = this.RotateImage((Image)bitmap5, (float)this._PictureAngle);
-                    num3 = bitmap1.Width;
-                    num4 = bitmap1.Height;
+                    bitmap = RotateImage(image, (float)_PictureAngle);
+                    num7 = bitmap.Width;
+                    num8 = bitmap.Height;
                 }
-                else if (this._Creature != null)
+                else if (_Fighter != null)
                 {
-                    double num7 = (double)this._PictureSize / (double)this._Picture.Width;
-                    int width = (int)((double)this._Picture.Width * num7);
-                    int height = (int)((double)this._Picture.Height * num7);
-                    Bitmap image = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
-                    using (Graphics graphics3 = Graphics.FromImage((Image)image))
+                    bitmap = OverlayDamage(_Fighter, _Picture, _MaskImage);
+                    double num10 = (double)_PictureSize / (double)_FighterImages[_Fighter.PictureRef].Width;
+                    num7 = (int)((double)_FighterImages[_Fighter.PictureRef].Width * num10);
+                    num8 = (int)((double)_FighterImages[_Fighter.PictureRef].Height * num10);
+                    Bitmap image2 = new Bitmap(num7, num8, PixelFormat.Format32bppPArgb);
+                    using (Graphics graphics3 = Graphics.FromImage(image2))
                     {
                         graphics3.CompositingQuality = CompositingQuality.HighSpeed;
                         graphics3.InterpolationMode = InterpolationMode.Bilinear;
                         graphics3.SmoothingMode = SmoothingMode.None;
-                        graphics3.DrawImage((Image)this._Picture, new Rectangle(0, 0, width, height));
+                        graphics3.DrawImage(bitmap, new Rectangle(0, 0, num7, num8));
                     }
-                    bitmap1 = this.RotateImage((Image)this.OverlayDamage(this._Creature, image, this._MaskImage), this._Creature.CurrentHeading * -1f);
-                    num3 = bitmap1.Width;
-                    num4 = bitmap1.Height;
+                    bitmap = RotateImage(image2, (float)_PictureAngle);
+                    num7 = bitmap.Width;
+                    num8 = bitmap.Height;
+                }
+                else if (_Creature != null)
+                {
+                    double num11 = (double)_PictureSize / (double)_Picture.Width;
+                    num7 = (int)((double)_Picture.Width * num11);
+                    num8 = (int)((double)_Picture.Height * num11);
+                    Bitmap image3 = new Bitmap(num7, num8, PixelFormat.Format32bppPArgb);
+                    using (Graphics graphics4 = Graphics.FromImage(image3))
+                    {
+                        graphics4.CompositingQuality = CompositingQuality.HighSpeed;
+                        graphics4.InterpolationMode = InterpolationMode.Bilinear;
+                        graphics4.SmoothingMode = SmoothingMode.None;
+                        graphics4.DrawImage(_Picture, new Rectangle(0, 0, num7, num8));
+                    }
+                    bitmap = OverlayDamage(_Creature, image3, _MaskImage);
+                    bitmap = RotateImage(bitmap, _Creature.CurrentHeading * -1f);
+                    num7 = bitmap.Width;
+                    num8 = bitmap.Height;
                 }
                 else
-                    bitmap1 = this.FadeImage(this._Picture, 0.6f);
-                double num8 = 1.0;
-                if (num3 <= 0)
                 {
-                    double num9 = (double)bitmap1.Width / (double)bitmap1.Height;
-                    if (bitmap1.Width > bitmap1.Height)
-                    {
-                        num3 = (int)((double)this._PictureSize * num9);
-                        num4 = this._PictureSize;
-                    }
-                    else
-                    {
-                        num3 = this._PictureSize;
-                        num4 = (int)((double)this._PictureSize / num9);
-                    }
-                    if (num4 > num2)
-                    {
-                        num8 = (double)num2 / (double)num4;
-                        if ((double)num3 * num8 > (double)num1)
-                            num8 *= (double)num1 / ((double)num3 * num8);
-                    }
-                    else if (num3 > num1)
-                    {
-                        num8 = (double)num1 / (double)num3;
-                        if ((double)num4 * num8 > (double)num2)
-                            num8 *= (double)num2 / ((double)num4 * num8);
-                    }
-                    else
-                        num8 = 1.0;
+                    bitmap = FadeImage(_Picture, 0.6f);
                 }
-                rect = new Rectangle((num1 - (int)((double)num3 * num8)) / 2 + 3, (num2 - (int)((double)num4 * num8)) / 2 + 3, (int)((double)num3 * num8), (int)((double)num4 * num8));
+                double num12 = 1.0;
+                if (num7 <= 0)
+                {
+                    double num13 = (double)bitmap.Width / (double)bitmap.Height;
+                    if (bitmap.Width > bitmap.Height)
+                    {
+                        num7 = (int)((double)_PictureSize * num13);
+                        num8 = _PictureSize;
+                    }
+                    else
+                    {
+                        num7 = _PictureSize;
+                        num8 = (int)((double)_PictureSize / num13);
+                    }
+                    if (num8 > num2)
+                    {
+                        num12 = (double)num2 / (double)num8;
+                        if ((double)num7 * num12 > (double)num)
+                        {
+                            num12 *= (double)num / ((double)num7 * num12);
+                        }
+                    }
+                    else if (num7 > num)
+                    {
+                        num12 = (double)num / (double)num7;
+                        if ((double)num8 * num12 > (double)num2)
+                        {
+                            num12 *= (double)num2 / ((double)num8 * num12);
+                        }
+                    }
+                    else
+                    {
+                        num12 = 1.0;
+                    }
+                }
+                int num14 = (num - (int)((double)num7 * num12)) / 2;
+                int num15 = (num2 - (int)((double)num8 * num12)) / 2;
+                int num16 = (int)((double)num7 * num12);
+                rectangle = new Rectangle(num14 + 3, num15 + 3, num16, (int)((double)num8 * num12));
             }
             graphics.CompositingQuality = CompositingQuality.HighSpeed;
             graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
             graphics.SmoothingMode = SmoothingMode.None;
-            graphics.DrawImage((Image)bitmap1, rect);
+            graphics.DrawImage(bitmap, rectangle);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -1262,224 +1574,195 @@ namespace DistantWorlds.Controls
             try
             {
                 base.OnPaint(e);
-                this.DrawPanel(e.Graphics);
+                DrawPanel(e.Graphics);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                this.ClearData();
+                ClearData();
             }
         }
 
         private static Bitmap CopyBitmap(Bitmap image)
         {
             Bitmap bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
-            {
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                graphics.DrawImageUnscaled((Image)image, 0, 0);
-            }
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            graphics.DrawImageUnscaled(image, 0, 0);
             return bitmap;
         }
 
         private Bitmap PrescaleImage(Bitmap originalBitmap, int width, int height)
         {
             Bitmap bitmap = new Bitmap(width + 1, height + 1, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
-            {
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                graphics.DrawImage((Image)originalBitmap, new Rectangle(0, 0, width, height));
-            }
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            graphics.DrawImage(originalBitmap, new Rectangle(0, 0, width, height));
             return bitmap;
         }
 
         private Bitmap FadeImage(Bitmap image, float transparencyLevel)
         {
             Bitmap bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            Rectangle destRect = new Rectangle(0, 0, image.Width, image.Height);
+            float[][] newColorMatrix = new float[5][]
             {
-                Rectangle destRect = new Rectangle(0, 0, image.Width, image.Height);
-                ColorMatrix newColorMatrix = new ColorMatrix(new float[5][]
-                {
-          new float[5]{ 1f, 0.0f, 0.0f, 0.0f, 0.0f },
-          new float[5]{ 0.0f, 1f, 0.0f, 0.0f, 0.0f },
-          new float[5]{ 0.0f, 0.0f, 1f, 0.0f, 0.0f },
-          new float[5]{ 0.0f, 0.0f, 0.0f, transparencyLevel, 0.0f },
-          new float[5]{ 0.0f, 0.0f, 0.0f, 0.0f, 1f }
-                });
-                ImageAttributes imageAttrs = new ImageAttributes();
-                imageAttrs.SetColorMatrix(newColorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-                graphics.DrawImage((Image)image, destRect, 0.0f, 0.0f, (float)image.Width, (float)image.Height, GraphicsUnit.Pixel, imageAttrs);
-            }
+            new float[5] { 1f, 0f, 0f, 0f, 0f },
+            new float[5] { 0f, 1f, 0f, 0f, 0f },
+            new float[5] { 0f, 0f, 1f, 0f, 0f },
+            new float[5] { 0f, 0f, 0f, transparencyLevel, 0f },
+            new float[5] { 0f, 0f, 0f, 0f, 1f }
+            };
+            ColorMatrix newColorMatrix2 = new ColorMatrix(newColorMatrix);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            imageAttributes.SetColorMatrix(newColorMatrix2, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            graphics.DrawImage(image, destRect, 0f, 0f, image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
             return bitmap;
         }
 
         private static Bitmap PrescaleImageStatic(Bitmap originalBitmap, int width, int height)
         {
             Bitmap bitmap = new Bitmap(width + 1, height + 1, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
-            {
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                graphics.DrawImage((Image)originalBitmap, new Rectangle(0, 0, width, height));
-            }
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            graphics.DrawImage(originalBitmap, new Rectangle(0, 0, width, height));
             return bitmap;
         }
 
         private static Bitmap FadeImageStatic(Bitmap image, float transparencyLevel)
         {
             Bitmap bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            Rectangle destRect = new Rectangle(0, 0, image.Width, image.Height);
+            float[][] newColorMatrix = new float[5][]
             {
-                Rectangle destRect = new Rectangle(0, 0, image.Width, image.Height);
-                ColorMatrix newColorMatrix = new ColorMatrix(new float[5][]
-                {
-          new float[5]{ 1f, 0.0f, 0.0f, 0.0f, 0.0f },
-          new float[5]{ 0.0f, 1f, 0.0f, 0.0f, 0.0f },
-          new float[5]{ 0.0f, 0.0f, 1f, 0.0f, 0.0f },
-          new float[5]{ 0.0f, 0.0f, 0.0f, transparencyLevel, 0.0f },
-          new float[5]{ 0.0f, 0.0f, 0.0f, 0.0f, 1f }
-                });
-                ImageAttributes imageAttrs = new ImageAttributes();
-                imageAttrs.SetColorMatrix(newColorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-                graphics.DrawImage((Image)image, destRect, 0.0f, 0.0f, (float)image.Width, (float)image.Height, GraphicsUnit.Pixel, imageAttrs);
-            }
+            new float[5] { 1f, 0f, 0f, 0f, 0f },
+            new float[5] { 0f, 1f, 0f, 0f, 0f },
+            new float[5] { 0f, 0f, 1f, 0f, 0f },
+            new float[5] { 0f, 0f, 0f, transparencyLevel, 0f },
+            new float[5] { 0f, 0f, 0f, 0f, 1f }
+            };
+            ColorMatrix newColorMatrix2 = new ColorMatrix(newColorMatrix);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            imageAttributes.SetColorMatrix(newColorMatrix2, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            graphics.DrawImage(image, destRect, 0f, 0f, image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
             return bitmap;
         }
 
         private static Bitmap MakeImageSquare(Bitmap image, int size)
         {
             Bitmap bitmap = new Bitmap(size, size, PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
-            {
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                Rectangle srcRect = new Rectangle(0, 0, image.Width, image.Height);
-                Rectangle destRect = new Rectangle((size - image.Width) / 2, (size - image.Height) / 2, image.Width, image.Height);
-                graphics.DrawImage((Image)image, destRect, srcRect, GraphicsUnit.Pixel);
-            }
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            Rectangle srcRect = new Rectangle(0, 0, image.Width, image.Height);
+            int num = (size - image.Width) / 2;
+            int num2 = (size - image.Height) / 2;
+            Rectangle destRect = new Rectangle(num, num2, image.Width, image.Height);
+            graphics.DrawImage(image, destRect, srcRect, GraphicsUnit.Pixel);
             return bitmap;
         }
 
         private static Size ResolveImageSize(Bitmap image, int maximumSize)
         {
-            int width;
-            int height;
+            int num = 0;
+            int num2 = 0;
             if (image.Width > image.Height)
             {
-                double num = (double)image.Height / (double)image.Width;
-                width = maximumSize;
-                height = (int)((double)maximumSize * num);
+                double num3 = (double)image.Height / (double)image.Width;
+                num = maximumSize;
+                num2 = (int)((double)maximumSize * num3);
             }
             else
             {
-                double num = (double)image.Width / (double)image.Height;
-                height = maximumSize;
-                width = (int)((double)maximumSize * num);
+                double num4 = (double)image.Width / (double)image.Height;
+                num2 = maximumSize;
+                num = (int)((double)maximumSize * num4);
             }
-            return new Size(width, height);
+            return new Size(num, num2);
         }
 
         private static void ClearImageArray(Bitmap[] imageArray)
         {
             if (imageArray == null)
-                return;
-            for (int index = 0; index < imageArray.Length; ++index)
             {
-                if (imageArray[index] != null)
+                return;
+            }
+            for (int i = 0; i < imageArray.Length; i++)
+            {
+                if (imageArray[i] != null)
                 {
-                    imageArray[index].Dispose();
-                    imageArray[index] = (Bitmap)null;
+                    imageArray[i].Dispose();
+                    imageArray[i] = null;
                 }
             }
         }
 
         private static void ClearImages()
         {
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesInfantry);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedInfantry);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesArmored);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedArmored);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesArtillery);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedArtillery);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesSpecialForces);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedSpecialForces);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesPirateRaider);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedPirateRaider);
-            InfoPanel.ClearImageArray(InfoPanel.ResourceImages);
-            InfoPanel.ClearImageArray(InfoPanel.RaceImages);
-            InfoPanel.ClearImageArray(InfoPanel.BuiltObjectImages);
-            InfoPanel.ClearImageArray(InfoPanel.FighterImages);
-            InfoPanel.ClearImageArray(InfoPanel.FighterImagesFaded);
-            InfoPanel.ClearImageArray(InfoPanel.RuinImages);
-            InfoPanel.ClearImageArray(InfoPanel.HabitatImages);
-            InfoPanel.ClearImageArray(InfoPanel.FacilityImages);
-            InfoPanel.ClearImageArray(InfoPanel.FacilityImagesFaded);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesInfantryLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedInfantryLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesArmoredLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedArmoredLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesArtilleryLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedArtilleryLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesSpecialForcesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedSpecialForcesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesPirateRaiderLarge);
-            InfoPanel.ClearImageArray(InfoPanel.TroopImagesFadedPirateRaiderLarge);
-            InfoPanel.ClearImageArray(InfoPanel.ResourceImagesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.RaceImagesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.BuiltObjectImagesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.FighterImagesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.FighterImagesFadedLarge);
-            InfoPanel.ClearImageArray(InfoPanel.RuinImagesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.HabitatImagesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.FacilityImagesLarge);
-            InfoPanel.ClearImageArray(InfoPanel.FacilityImagesFadedLarge);
+            ClearImageArray(TroopImagesInfantry);
+            ClearImageArray(TroopImagesFadedInfantry);
+            ClearImageArray(TroopImagesArmored);
+            ClearImageArray(TroopImagesFadedArmored);
+            ClearImageArray(TroopImagesArtillery);
+            ClearImageArray(TroopImagesFadedArtillery);
+            ClearImageArray(TroopImagesSpecialForces);
+            ClearImageArray(TroopImagesFadedSpecialForces);
+            ClearImageArray(TroopImagesPirateRaider);
+            ClearImageArray(TroopImagesFadedPirateRaider);
+            ClearImageArray(ResourceImages);
+            ClearImageArray(RaceImages);
+            ClearImageArray(BuiltObjectImages);
+            ClearImageArray(FighterImages);
+            ClearImageArray(FighterImagesFaded);
+            ClearImageArray(RuinImages);
+            ClearImageArray(HabitatImages);
+            ClearImageArray(FacilityImages);
+            ClearImageArray(FacilityImagesFaded);
+            ClearImageArray(TroopImagesInfantryLarge);
+            ClearImageArray(TroopImagesFadedInfantryLarge);
+            ClearImageArray(TroopImagesArmoredLarge);
+            ClearImageArray(TroopImagesFadedArmoredLarge);
+            ClearImageArray(TroopImagesArtilleryLarge);
+            ClearImageArray(TroopImagesFadedArtilleryLarge);
+            ClearImageArray(TroopImagesSpecialForcesLarge);
+            ClearImageArray(TroopImagesFadedSpecialForcesLarge);
+            ClearImageArray(TroopImagesPirateRaiderLarge);
+            ClearImageArray(TroopImagesFadedPirateRaiderLarge);
+            ClearImageArray(ResourceImagesLarge);
+            ClearImageArray(RaceImagesLarge);
+            ClearImageArray(BuiltObjectImagesLarge);
+            ClearImageArray(FighterImagesLarge);
+            ClearImageArray(FighterImagesFadedLarge);
+            ClearImageArray(RuinImagesLarge);
+            ClearImageArray(HabitatImagesLarge);
+            ClearImageArray(FacilityImagesLarge);
+            ClearImageArray(FacilityImagesFadedLarge);
         }
 
         public void Kickstart(bool isLargeSize)
         {
-            this._ContentSizeIsLarge = isLargeSize;
+            _ContentSizeIsLarge = isLargeSize;
             if (isLargeSize)
-                this.SetContentSizeLarge();
+            {
+                SetContentSizeLarge();
+            }
             else
-                this.SetContentSizeNormal();
+            {
+                SetContentSizeNormal();
+            }
         }
 
-        public static void InitializeImages(
-          CharacterImageCache characterImageCache,
-          Bitmap[] troopImagesInfantry,
-          Bitmap[] troopImagesArmored,
-          Bitmap[] troopImagesArtillery,
-          Bitmap[] troopImagesSpecialForces,
-          Bitmap[] troopImagesPirateRaider,
-          Bitmap[] resourceImages,
-          RaceImageCache raceImageCache,
-          Bitmap[] builtObjectImages,
-          Bitmap[] fighterImages,
-          Bitmap[] ruinImages,
-          Bitmap[] habitatImages,
-          Bitmap[] facilityImages,
-          Bitmap approvalSmileImage,
-          Bitmap approvalNeutralImage,
-          Bitmap approvalSadImage,
-          Bitmap approvalAngryImage,
-          Bitmap developmentImage,
-          Bitmap colonyImage,
-          Bitmap firepowerImage,
-          Bitmap shipGroupLeadShipImage,
-          Bitmap capitalColonyImage,
-          Bitmap regionalCapitalColonyImage,
-          Bitmap automateImage,
-          Bitmap blockadeImage,
-          Bitmap[] messageImages,
-          Bitmap[] plagueImages)
+        public static void InitializeImages(CharacterImageCache characterImageCache, Bitmap[] troopImagesInfantry, Bitmap[] troopImagesArmored, Bitmap[] troopImagesArtillery, Bitmap[] troopImagesSpecialForces, Bitmap[] troopImagesPirateRaider, Bitmap[] resourceImages, RaceImageCache raceImageCache, Bitmap[] builtObjectImages, Bitmap[] fighterImages, Bitmap[] ruinImages, Bitmap[] habitatImages, Bitmap[] facilityImages, Bitmap approvalSmileImage, Bitmap approvalNeutralImage, Bitmap approvalSadImage, Bitmap approvalAngryImage, Bitmap developmentImage, Bitmap colonyImage, Bitmap firepowerImage, Bitmap shipGroupLeadShipImage, Bitmap capitalColonyImage, Bitmap regionalCapitalColonyImage, Bitmap automateImage, Bitmap blockadeImage, Bitmap[] messageImages, Bitmap[] plagueImages)
         {
-            int num1 = 14;
+            int num = 14;
             int num2 = 24;
             int num3 = 18;
             int num4 = 26;
@@ -1487,1603 +1770,1584 @@ namespace DistantWorlds.Controls
             int num6 = 34;
             int num7 = 25;
             int num8 = 36;
-            InfoPanel.ClearImages();
-            InfoPanel._CharacterImageCache = characterImageCache;
-            InfoPanel._ApprovalSmileImage = approvalSmileImage;
-            InfoPanel._ApprovalNeutralImage = approvalNeutralImage;
-            InfoPanel._ApprovalSadImage = approvalSadImage;
-            InfoPanel._ApprovalAngryImage = approvalAngryImage;
-            InfoPanel._DevelopmentImage = developmentImage;
-            InfoPanel._ColonyImage = colonyImage;
-            InfoPanel._FirepowerImage = firepowerImage;
-            InfoPanel._ShipGroupLeadShipImage = shipGroupLeadShipImage;
-            InfoPanel._CapitalColonyImage = capitalColonyImage;
-            InfoPanel._RegionalCapitalColonyImage = regionalCapitalColonyImage;
-            InfoPanel._AutomateImage = automateImage;
-            InfoPanel._BlockadeImage = blockadeImage;
-            InfoPanel._MessageImages = messageImages;
+            ClearImages();
+            _CharacterImageCache = characterImageCache;
+            _ApprovalSmileImage = approvalSmileImage;
+            _ApprovalNeutralImage = approvalNeutralImage;
+            _ApprovalSadImage = approvalSadImage;
+            _ApprovalAngryImage = approvalAngryImage;
+            _DevelopmentImage = developmentImage;
+            _ColonyImage = colonyImage;
+            _FirepowerImage = firepowerImage;
+            _ShipGroupLeadShipImage = shipGroupLeadShipImage;
+            _CapitalColonyImage = capitalColonyImage;
+            _RegionalCapitalColonyImage = regionalCapitalColonyImage;
+            _AutomateImage = automateImage;
+            _BlockadeImage = blockadeImage;
+            _MessageImages = messageImages;
             if (ruinImages != null)
             {
-                if (InfoPanel.RuinImages != null)
+                if (RuinImages != null)
                 {
-                    for (int index = 0; index < InfoPanel.RuinImages.Length; ++index)
+                    for (int i = 0; i < RuinImages.Length; i++)
                     {
-                        if (InfoPanel.RuinImages[index] != null)
+                        if (RuinImages[i] != null)
                         {
-                            InfoPanel.RuinImages[index].Dispose();
-                            InfoPanel.RuinImages[index] = (Bitmap)null;
+                            RuinImages[i].Dispose();
+                            RuinImages[i] = null;
                         }
                     }
                 }
-                InfoPanel.RuinImages = new Bitmap[ruinImages.Length];
-                int height1 = num3;
-                for (int index = 0; index < ruinImages.Length; ++index)
+                RuinImages = new Bitmap[ruinImages.Length];
+                int num9 = num3;
+                for (int j = 0; j < ruinImages.Length; j++)
                 {
-                    double num9 = (double)ruinImages[index].Width / (double)ruinImages[index].Height;
-                    int width = (int)((double)height1 * num9);
-                    InfoPanel.RuinImages[index] = InfoPanel.PrescaleImageStatic(ruinImages[index], width, height1);
+                    double num10 = (double)ruinImages[j].Width / (double)ruinImages[j].Height;
+                    int num11 = (int)((double)num9 * num10);
+                    RuinImages[j] = PrescaleImageStatic(ruinImages[j], num11, num9);
                 }
-                if (InfoPanel.RuinImagesLarge != null)
+                if (RuinImagesLarge != null)
                 {
-                    for (int index = 0; index < InfoPanel.RuinImagesLarge.Length; ++index)
+                    for (int k = 0; k < RuinImagesLarge.Length; k++)
                     {
-                        if (InfoPanel.RuinImagesLarge[index] != null)
+                        if (RuinImagesLarge[k] != null)
                         {
-                            InfoPanel.RuinImagesLarge[index].Dispose();
-                            InfoPanel.RuinImagesLarge[index] = (Bitmap)null;
+                            RuinImagesLarge[k].Dispose();
+                            RuinImagesLarge[k] = null;
                         }
                     }
                 }
-                InfoPanel.RuinImagesLarge = new Bitmap[ruinImages.Length];
-                int height2 = num7;
-                for (int index = 0; index < ruinImages.Length; ++index)
+                RuinImagesLarge = new Bitmap[ruinImages.Length];
+                num9 = num7;
+                for (int l = 0; l < ruinImages.Length; l++)
                 {
-                    double num10 = (double)ruinImages[index].Width / (double)ruinImages[index].Height;
-                    int width = (int)((double)height2 * num10);
-                    InfoPanel.RuinImagesLarge[index] = InfoPanel.PrescaleImageStatic(ruinImages[index], width, height2);
+                    double num12 = (double)ruinImages[l].Width / (double)ruinImages[l].Height;
+                    int num13 = (int)((double)num9 * num12);
+                    RuinImagesLarge[l] = PrescaleImageStatic(ruinImages[l], num13, num9);
                 }
             }
             if (facilityImages != null)
             {
-                if (InfoPanel.FacilityImages != null)
+                if (FacilityImages != null)
                 {
-                    for (int index = 0; index < InfoPanel.FacilityImages.Length; ++index)
+                    for (int m = 0; m < FacilityImages.Length; m++)
                     {
-                        if (InfoPanel.FacilityImages[index] != null)
+                        if (FacilityImages[m] != null)
                         {
-                            InfoPanel.FacilityImages[index].Dispose();
-                            InfoPanel.FacilityImages[index] = (Bitmap)null;
+                            FacilityImages[m].Dispose();
+                            FacilityImages[m] = null;
                         }
                     }
                 }
-                if (InfoPanel.FacilityImagesFaded != null)
+                if (FacilityImagesFaded != null)
                 {
-                    for (int index = 0; index < InfoPanel.FacilityImagesFaded.Length; ++index)
+                    for (int n = 0; n < FacilityImagesFaded.Length; n++)
                     {
-                        if (InfoPanel.FacilityImagesFaded[index] != null)
+                        if (FacilityImagesFaded[n] != null)
                         {
-                            InfoPanel.FacilityImagesFaded[index].Dispose();
-                            InfoPanel.FacilityImagesFaded[index] = (Bitmap)null;
+                            FacilityImagesFaded[n].Dispose();
+                            FacilityImagesFaded[n] = null;
                         }
                     }
                 }
-                InfoPanel.FacilityImages = new Bitmap[facilityImages.Length];
-                InfoPanel.FacilityImagesFaded = new Bitmap[facilityImages.Length];
-                int height3 = num1;
-                for (int index = 0; index < facilityImages.Length; ++index)
+                FacilityImages = new Bitmap[facilityImages.Length];
+                FacilityImagesFaded = new Bitmap[facilityImages.Length];
+                int num14 = num;
+                for (int num15 = 0; num15 < facilityImages.Length; num15++)
                 {
-                    double num11 = (double)facilityImages[index].Width / (double)facilityImages[index].Height;
-                    int width = (int)((double)height3 * num11);
-                    InfoPanel.FacilityImages[index] = InfoPanel.PrescaleImageStatic(facilityImages[index], width, height3);
+                    double num16 = (double)facilityImages[num15].Width / (double)facilityImages[num15].Height;
+                    int num17 = (int)((double)num14 * num16);
+                    FacilityImages[num15] = PrescaleImageStatic(facilityImages[num15], num17, num14);
                 }
-                for (int index = 0; index < facilityImages.Length; ++index)
+                for (int num18 = 0; num18 < facilityImages.Length; num18++)
                 {
-                    double num12 = (double)facilityImages[index].Width / (double)facilityImages[index].Height;
-                    int width = (int)((double)height3 * num12);
-                    InfoPanel.FacilityImagesFaded[index] = InfoPanel.FadeImageStatic(InfoPanel.PrescaleImageStatic(facilityImages[index], width, height3), 0.4f);
+                    double num19 = (double)facilityImages[num18].Width / (double)facilityImages[num18].Height;
+                    int num20 = (int)((double)num14 * num19);
+                    FacilityImagesFaded[num18] = FadeImageStatic(PrescaleImageStatic(facilityImages[num18], num20, num14), 0.4f);
                 }
-                if (InfoPanel.FacilityImagesLarge != null)
+                if (FacilityImagesLarge != null)
                 {
-                    for (int index = 0; index < InfoPanel.FacilityImagesLarge.Length; ++index)
+                    for (int num21 = 0; num21 < FacilityImagesLarge.Length; num21++)
                     {
-                        if (InfoPanel.FacilityImagesLarge[index] != null)
+                        if (FacilityImagesLarge[num21] != null)
                         {
-                            InfoPanel.FacilityImagesLarge[index].Dispose();
-                            InfoPanel.FacilityImagesLarge[index] = (Bitmap)null;
+                            FacilityImagesLarge[num21].Dispose();
+                            FacilityImagesLarge[num21] = null;
                         }
                     }
                 }
-                if (InfoPanel.FacilityImagesFadedLarge != null)
+                if (FacilityImagesFadedLarge != null)
                 {
-                    for (int index = 0; index < InfoPanel.FacilityImagesFadedLarge.Length; ++index)
+                    for (int num22 = 0; num22 < FacilityImagesFadedLarge.Length; num22++)
                     {
-                        if (InfoPanel.FacilityImagesFadedLarge[index] != null)
+                        if (FacilityImagesFadedLarge[num22] != null)
                         {
-                            InfoPanel.FacilityImagesFadedLarge[index].Dispose();
-                            InfoPanel.FacilityImagesFadedLarge[index] = (Bitmap)null;
+                            FacilityImagesFadedLarge[num22].Dispose();
+                            FacilityImagesFadedLarge[num22] = null;
                         }
                     }
                 }
-                InfoPanel.FacilityImagesLarge = new Bitmap[facilityImages.Length];
-                InfoPanel.FacilityImagesFadedLarge = new Bitmap[facilityImages.Length];
-                int height4 = num5;
-                for (int index = 0; index < facilityImages.Length; ++index)
+                FacilityImagesLarge = new Bitmap[facilityImages.Length];
+                FacilityImagesFadedLarge = new Bitmap[facilityImages.Length];
+                num14 = num5;
+                for (int num23 = 0; num23 < facilityImages.Length; num23++)
                 {
-                    double num13 = (double)facilityImages[index].Width / (double)facilityImages[index].Height;
-                    int width = (int)((double)height4 * num13);
-                    InfoPanel.FacilityImagesLarge[index] = InfoPanel.PrescaleImageStatic(facilityImages[index], width, height4);
+                    double num24 = (double)facilityImages[num23].Width / (double)facilityImages[num23].Height;
+                    int num25 = (int)((double)num14 * num24);
+                    FacilityImagesLarge[num23] = PrescaleImageStatic(facilityImages[num23], num25, num14);
                 }
-                for (int index = 0; index < facilityImages.Length; ++index)
+                for (int num26 = 0; num26 < facilityImages.Length; num26++)
                 {
-                    double num14 = (double)facilityImages[index].Width / (double)facilityImages[index].Height;
-                    int width = (int)((double)height4 * num14);
-                    InfoPanel.FacilityImagesFadedLarge[index] = InfoPanel.FadeImageStatic(InfoPanel.PrescaleImageStatic(facilityImages[index], width, height4), 0.4f);
+                    double num27 = (double)facilityImages[num26].Width / (double)facilityImages[num26].Height;
+                    int num28 = (int)((double)num14 * num27);
+                    FacilityImagesFadedLarge[num26] = FadeImageStatic(PrescaleImageStatic(facilityImages[num26], num28, num14), 0.4f);
                 }
             }
             if (troopImagesInfantry != null)
             {
-                InfoPanel.InitializeTroopImageArray(troopImagesInfantry, ref InfoPanel.TroopImagesInfantry, ref InfoPanel.TroopImagesFadedInfantry, num1);
-                InfoPanel.InitializeTroopImageArray(troopImagesInfantry, ref InfoPanel.TroopImagesInfantryLarge, ref InfoPanel.TroopImagesFadedInfantryLarge, num5);
+                InitializeTroopImageArray(troopImagesInfantry, ref TroopImagesInfantry, ref TroopImagesFadedInfantry, num);
+                InitializeTroopImageArray(troopImagesInfantry, ref TroopImagesInfantryLarge, ref TroopImagesFadedInfantryLarge, num5);
             }
             if (troopImagesArmored != null)
             {
-                InfoPanel.InitializeTroopImageArray(troopImagesArmored, ref InfoPanel.TroopImagesArmored, ref InfoPanel.TroopImagesFadedArmored, num1);
-                InfoPanel.InitializeTroopImageArray(troopImagesArmored, ref InfoPanel.TroopImagesArmoredLarge, ref InfoPanel.TroopImagesFadedArmoredLarge, num5);
+                InitializeTroopImageArray(troopImagesArmored, ref TroopImagesArmored, ref TroopImagesFadedArmored, num);
+                InitializeTroopImageArray(troopImagesArmored, ref TroopImagesArmoredLarge, ref TroopImagesFadedArmoredLarge, num5);
             }
             if (troopImagesArtillery != null)
             {
-                InfoPanel.InitializeTroopImageArray(troopImagesArtillery, ref InfoPanel.TroopImagesArtillery, ref InfoPanel.TroopImagesFadedArtillery, num1);
-                InfoPanel.InitializeTroopImageArray(troopImagesArtillery, ref InfoPanel.TroopImagesArtilleryLarge, ref InfoPanel.TroopImagesFadedArtilleryLarge, num5);
+                InitializeTroopImageArray(troopImagesArtillery, ref TroopImagesArtillery, ref TroopImagesFadedArtillery, num);
+                InitializeTroopImageArray(troopImagesArtillery, ref TroopImagesArtilleryLarge, ref TroopImagesFadedArtilleryLarge, num5);
             }
             if (troopImagesSpecialForces != null)
             {
-                InfoPanel.InitializeTroopImageArray(troopImagesSpecialForces, ref InfoPanel.TroopImagesSpecialForces, ref InfoPanel.TroopImagesFadedSpecialForces, num1);
-                InfoPanel.InitializeTroopImageArray(troopImagesSpecialForces, ref InfoPanel.TroopImagesSpecialForcesLarge, ref InfoPanel.TroopImagesFadedSpecialForcesLarge, num5);
+                InitializeTroopImageArray(troopImagesSpecialForces, ref TroopImagesSpecialForces, ref TroopImagesFadedSpecialForces, num);
+                InitializeTroopImageArray(troopImagesSpecialForces, ref TroopImagesSpecialForcesLarge, ref TroopImagesFadedSpecialForcesLarge, num5);
             }
             if (troopImagesPirateRaider != null)
             {
-                InfoPanel.InitializeTroopImageArray(troopImagesPirateRaider, ref InfoPanel.TroopImagesPirateRaider, ref InfoPanel.TroopImagesFadedPirateRaider, num1);
-                InfoPanel.InitializeTroopImageArray(troopImagesPirateRaider, ref InfoPanel.TroopImagesPirateRaiderLarge, ref InfoPanel.TroopImagesFadedPirateRaiderLarge, num5);
+                InitializeTroopImageArray(troopImagesPirateRaider, ref TroopImagesPirateRaider, ref TroopImagesFadedPirateRaider, num);
+                InitializeTroopImageArray(troopImagesPirateRaider, ref TroopImagesPirateRaiderLarge, ref TroopImagesFadedPirateRaiderLarge, num5);
             }
             if (resourceImages != null)
             {
-                if (InfoPanel.ResourceImages != null)
+                if (ResourceImages != null)
                 {
-                    for (int index = 0; index < InfoPanel.ResourceImages.Length; ++index)
+                    for (int num29 = 0; num29 < ResourceImages.Length; num29++)
                     {
-                        if (InfoPanel.ResourceImages[index] != null)
+                        if (ResourceImages[num29] != null)
                         {
-                            InfoPanel.ResourceImages[index].Dispose();
-                            InfoPanel.ResourceImages[index] = (Bitmap)null;
+                            ResourceImages[num29].Dispose();
+                            ResourceImages[num29] = null;
                         }
                     }
                 }
-                InfoPanel.ResourceImages = new Bitmap[resourceImages.Length];
-                int num15 = (int)((double)num1 * 1.0);
-                for (int index = 0; index < resourceImages.Length; ++index)
+                ResourceImages = new Bitmap[resourceImages.Length];
+                int num30 = (int)((double)num * 1.0);
+                for (int num31 = 0; num31 < resourceImages.Length; num31++)
                 {
-                    int height = num1;
-                    int width = (int)((double)num1 / (double)resourceImages[index].Height * (double)resourceImages[index].Width);
-                    if (width > num15)
+                    int num32 = num;
+                    int num33 = (int)((double)num / (double)resourceImages[num31].Height * (double)resourceImages[num31].Width);
+                    if (num33 > num30)
                     {
-                        double num16 = (double)num15 / (double)width;
-                        width = (int)((double)width * num16);
-                        height = (int)((double)height * num16);
+                        double num34 = (double)num30 / (double)num33;
+                        num33 = (int)((double)num33 * num34);
+                        num32 = (int)((double)num32 * num34);
                     }
-                    InfoPanel.ResourceImages[index] = InfoPanel.PrescaleImageStatic(resourceImages[index], width, height);
+                    ResourceImages[num31] = PrescaleImageStatic(resourceImages[num31], num33, num32);
                 }
-                if (InfoPanel.ResourceImagesLarge != null)
+                if (ResourceImagesLarge != null)
                 {
-                    for (int index = 0; index < InfoPanel.ResourceImagesLarge.Length; ++index)
+                    for (int num35 = 0; num35 < ResourceImagesLarge.Length; num35++)
                     {
-                        if (InfoPanel.ResourceImagesLarge[index] != null)
+                        if (ResourceImagesLarge[num35] != null)
                         {
-                            InfoPanel.ResourceImagesLarge[index].Dispose();
-                            InfoPanel.ResourceImagesLarge[index] = (Bitmap)null;
+                            ResourceImagesLarge[num35].Dispose();
+                            ResourceImagesLarge[num35] = null;
                         }
                     }
                 }
-                InfoPanel.ResourceImagesLarge = new Bitmap[resourceImages.Length];
-                int num17 = (int)((double)num5 * 1.0);
-                for (int index = 0; index < resourceImages.Length; ++index)
+                ResourceImagesLarge = new Bitmap[resourceImages.Length];
+                num30 = (int)((double)num5 * 1.0);
+                for (int num36 = 0; num36 < resourceImages.Length; num36++)
                 {
-                    int height = num5;
-                    int width = (int)((double)num5 / (double)resourceImages[index].Height * (double)resourceImages[index].Width);
-                    if (width > num17)
+                    int num37 = num5;
+                    int num38 = (int)((double)num5 / (double)resourceImages[num36].Height * (double)resourceImages[num36].Width);
+                    if (num38 > num30)
                     {
-                        double num18 = (double)num17 / (double)width;
-                        width = (int)((double)width * num18);
-                        height = (int)((double)height * num18);
+                        double num39 = (double)num30 / (double)num38;
+                        num38 = (int)((double)num38 * num39);
+                        num37 = (int)((double)num37 * num39);
                     }
-                    InfoPanel.ResourceImagesLarge[index] = InfoPanel.PrescaleImageStatic(resourceImages[index], width, height);
+                    ResourceImagesLarge[num36] = PrescaleImageStatic(resourceImages[num36], num38, num37);
                 }
             }
             if (plagueImages != null)
             {
-                if (InfoPanel.PlagueImages != null)
+                if (PlagueImages != null)
                 {
-                    for (int index = 0; index < InfoPanel.PlagueImages.Length; ++index)
+                    for (int num40 = 0; num40 < PlagueImages.Length; num40++)
                     {
-                        if (InfoPanel.PlagueImages[index] != null)
+                        if (PlagueImages[num40] != null)
                         {
-                            InfoPanel.PlagueImages[index].Dispose();
-                            InfoPanel.PlagueImages[index] = (Bitmap)null;
+                            PlagueImages[num40].Dispose();
+                            PlagueImages[num40] = null;
                         }
                     }
                 }
-                InfoPanel.PlagueImages = new Bitmap[plagueImages.Length];
-                int num19 = (int)((double)num1 * 1.0);
-                for (int index = 0; index < plagueImages.Length; ++index)
+                PlagueImages = new Bitmap[plagueImages.Length];
+                int num41 = (int)((double)num * 1.0);
+                for (int num42 = 0; num42 < plagueImages.Length; num42++)
                 {
-                    int height = num1;
-                    int width = (int)((double)num1 / (double)plagueImages[index].Height * (double)plagueImages[index].Width);
-                    if (width > num19)
+                    int num43 = num;
+                    int num44 = (int)((double)num / (double)plagueImages[num42].Height * (double)plagueImages[num42].Width);
+                    if (num44 > num41)
                     {
-                        double num20 = (double)num19 / (double)width;
-                        width = (int)((double)width * num20);
-                        height = (int)((double)height * num20);
+                        double num45 = (double)num41 / (double)num44;
+                        num44 = (int)((double)num44 * num45);
+                        num43 = (int)((double)num43 * num45);
                     }
-                    InfoPanel.PlagueImages[index] = InfoPanel.PrescaleImageStatic(plagueImages[index], width, height);
+                    PlagueImages[num42] = PrescaleImageStatic(plagueImages[num42], num44, num43);
                 }
-                if (InfoPanel.PlagueImagesLarge != null)
+                if (PlagueImagesLarge != null)
                 {
-                    for (int index = 0; index < InfoPanel.PlagueImagesLarge.Length; ++index)
+                    for (int num46 = 0; num46 < PlagueImagesLarge.Length; num46++)
                     {
-                        if (InfoPanel.PlagueImagesLarge[index] != null)
+                        if (PlagueImagesLarge[num46] != null)
                         {
-                            InfoPanel.PlagueImagesLarge[index].Dispose();
-                            InfoPanel.PlagueImagesLarge[index] = (Bitmap)null;
+                            PlagueImagesLarge[num46].Dispose();
+                            PlagueImagesLarge[num46] = null;
                         }
                     }
                 }
-                InfoPanel.PlagueImagesLarge = new Bitmap[plagueImages.Length];
-                int num21 = (int)((double)num5 * 1.0);
-                for (int index = 0; index < plagueImages.Length; ++index)
+                PlagueImagesLarge = new Bitmap[plagueImages.Length];
+                num41 = (int)((double)num5 * 1.0);
+                for (int num47 = 0; num47 < plagueImages.Length; num47++)
                 {
-                    int height = num5;
-                    int width = (int)((double)num5 / (double)plagueImages[index].Height * (double)plagueImages[index].Width);
-                    if (width > num21)
+                    int num48 = num5;
+                    int num49 = (int)((double)num5 / (double)plagueImages[num47].Height * (double)plagueImages[num47].Width);
+                    if (num49 > num41)
                     {
-                        double num22 = (double)num21 / (double)width;
-                        width = (int)((double)width * num22);
-                        height = (int)((double)height * num22);
+                        double num50 = (double)num41 / (double)num49;
+                        num49 = (int)((double)num49 * num50);
+                        num48 = (int)((double)num48 * num50);
                     }
-                    InfoPanel.PlagueImagesLarge[index] = InfoPanel.PrescaleImageStatic(plagueImages[index], width, height);
+                    PlagueImagesLarge[num47] = PrescaleImageStatic(plagueImages[num47], num49, num48);
                 }
             }
             if (raceImageCache != null)
             {
-                if (InfoPanel.RaceImages != null)
+                if (RaceImages != null)
                 {
-                    for (int index = 0; index < InfoPanel.RaceImages.Length; ++index)
+                    for (int num51 = 0; num51 < RaceImages.Length; num51++)
                     {
-                        if (InfoPanel.RaceImages[index] != null)
+                        if (RaceImages[num51] != null)
                         {
-                            InfoPanel.RaceImages[index].Dispose();
-                            InfoPanel.RaceImages[index] = (Bitmap)null;
+                            RaceImages[num51].Dispose();
+                            RaceImages[num51] = null;
                         }
                     }
                 }
-                InfoPanel.RaceImages = new Bitmap[raceImageCache.RaceImagesLength];
-                for (int racePictureRef = 0; racePictureRef < InfoPanel.RaceImages.Length; ++racePictureRef)
-                    InfoPanel.RaceImages[racePictureRef] = InfoPanel.PrescaleImageStatic(raceImageCache.GetRaceImage(racePictureRef), num1, num1);
-                if (InfoPanel.RaceImagesLarge != null)
+                RaceImages = new Bitmap[raceImageCache.RaceImagesLength];
+                for (int num52 = 0; num52 < RaceImages.Length; num52++)
                 {
-                    for (int index = 0; index < InfoPanel.RaceImagesLarge.Length; ++index)
+                    RaceImages[num52] = PrescaleImageStatic(raceImageCache.GetRaceImage(num52), num, num);
+                }
+                if (RaceImagesLarge != null)
+                {
+                    for (int num53 = 0; num53 < RaceImagesLarge.Length; num53++)
                     {
-                        if (InfoPanel.RaceImagesLarge[index] != null)
+                        if (RaceImagesLarge[num53] != null)
                         {
-                            InfoPanel.RaceImagesLarge[index].Dispose();
-                            InfoPanel.RaceImagesLarge[index] = (Bitmap)null;
+                            RaceImagesLarge[num53].Dispose();
+                            RaceImagesLarge[num53] = null;
                         }
                     }
                 }
-                InfoPanel.RaceImagesLarge = new Bitmap[raceImageCache.RaceImagesLength];
-                for (int racePictureRef = 0; racePictureRef < InfoPanel.RaceImagesLarge.Length; ++racePictureRef)
-                    InfoPanel.RaceImagesLarge[racePictureRef] = InfoPanel.PrescaleImageStatic(raceImageCache.GetRaceImage(racePictureRef), num5, num5);
+                RaceImagesLarge = new Bitmap[raceImageCache.RaceImagesLength];
+                for (int num54 = 0; num54 < RaceImagesLarge.Length; num54++)
+                {
+                    RaceImagesLarge[num54] = PrescaleImageStatic(raceImageCache.GetRaceImage(num54), num5, num5);
+                }
             }
             if (builtObjectImages != null)
             {
-                if (InfoPanel.BuiltObjectImages != null)
+                if (BuiltObjectImages != null)
                 {
-                    for (int index = 0; index < InfoPanel.BuiltObjectImages.Length; ++index)
+                    for (int num55 = 0; num55 < BuiltObjectImages.Length; num55++)
                     {
-                        if (InfoPanel.BuiltObjectImages[index] != null)
+                        if (BuiltObjectImages[num55] != null)
                         {
-                            InfoPanel.BuiltObjectImages[index].Dispose();
-                            InfoPanel.BuiltObjectImages[index] = (Bitmap)null;
+                            BuiltObjectImages[num55].Dispose();
+                            BuiltObjectImages[num55] = null;
                         }
                     }
                 }
-                InfoPanel.BuiltObjectImages = new Bitmap[builtObjectImages.Length];
-                for (int index = 0; index < builtObjectImages.Length; ++index)
+                BuiltObjectImages = new Bitmap[builtObjectImages.Length];
+                for (int num56 = 0; num56 < builtObjectImages.Length; num56++)
                 {
-                    Bitmap originalBitmap = InfoPanel.CopyBitmap(builtObjectImages[index]);
-                    originalBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    originalBitmap.MakeTransparent(Color.Black);
-                    InfoPanel.BuiltObjectImages[index] = InfoPanel.PrescaleImageStatic(originalBitmap, num2, num2);
-                    originalBitmap.Dispose();
+                    Bitmap bitmap = CopyBitmap(builtObjectImages[num56]);
+                    bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    bitmap.MakeTransparent(Color.Black);
+                    BuiltObjectImages[num56] = PrescaleImageStatic(bitmap, num2, num2);
+                    bitmap.Dispose();
                 }
-                if (InfoPanel.BuiltObjectImagesLarge != null)
+                if (BuiltObjectImagesLarge != null)
                 {
-                    for (int index = 0; index < InfoPanel.BuiltObjectImagesLarge.Length; ++index)
+                    for (int num57 = 0; num57 < BuiltObjectImagesLarge.Length; num57++)
                     {
-                        if (InfoPanel.BuiltObjectImagesLarge[index] != null)
+                        if (BuiltObjectImagesLarge[num57] != null)
                         {
-                            InfoPanel.BuiltObjectImagesLarge[index].Dispose();
-                            InfoPanel.BuiltObjectImagesLarge[index] = (Bitmap)null;
+                            BuiltObjectImagesLarge[num57].Dispose();
+                            BuiltObjectImagesLarge[num57] = null;
                         }
                     }
                 }
-                InfoPanel.BuiltObjectImagesLarge = new Bitmap[builtObjectImages.Length];
-                for (int index = 0; index < builtObjectImages.Length; ++index)
+                BuiltObjectImagesLarge = new Bitmap[builtObjectImages.Length];
+                for (int num58 = 0; num58 < builtObjectImages.Length; num58++)
                 {
-                    Bitmap originalBitmap = InfoPanel.CopyBitmap(builtObjectImages[index]);
-                    originalBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    originalBitmap.MakeTransparent(Color.Black);
-                    InfoPanel.BuiltObjectImagesLarge[index] = InfoPanel.PrescaleImageStatic(originalBitmap, num6, num6);
-                    originalBitmap.Dispose();
+                    Bitmap bitmap2 = CopyBitmap(builtObjectImages[num58]);
+                    bitmap2.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    bitmap2.MakeTransparent(Color.Black);
+                    BuiltObjectImagesLarge[num58] = PrescaleImageStatic(bitmap2, num6, num6);
+                    bitmap2.Dispose();
                 }
             }
             if (fighterImages != null)
             {
-                if (InfoPanel.FighterImages != null)
+                if (FighterImages != null)
                 {
-                    for (int index = 0; index < InfoPanel.FighterImages.Length; ++index)
+                    for (int num59 = 0; num59 < FighterImages.Length; num59++)
                     {
-                        if (InfoPanel.FighterImages[index] != null)
+                        if (FighterImages[num59] != null)
                         {
-                            InfoPanel.FighterImages[index].Dispose();
-                            InfoPanel.FighterImages[index] = (Bitmap)null;
+                            FighterImages[num59].Dispose();
+                            FighterImages[num59] = null;
                         }
                     }
                 }
-                if (InfoPanel.FighterImagesFaded != null)
+                if (FighterImagesFaded != null)
                 {
-                    for (int index = 0; index < InfoPanel.FighterImagesFaded.Length; ++index)
+                    for (int num60 = 0; num60 < FighterImagesFaded.Length; num60++)
                     {
-                        if (InfoPanel.FighterImagesFaded[index] != null)
+                        if (FighterImagesFaded[num60] != null)
                         {
-                            InfoPanel.FighterImagesFaded[index].Dispose();
-                            InfoPanel.FighterImagesFaded[index] = (Bitmap)null;
+                            FighterImagesFaded[num60].Dispose();
+                            FighterImagesFaded[num60] = null;
                         }
                     }
                 }
-                InfoPanel.FighterImages = new Bitmap[fighterImages.Length];
-                InfoPanel.FighterImagesFaded = new Bitmap[fighterImages.Length];
-                for (int index = 0; index < fighterImages.Length; ++index)
+                FighterImages = new Bitmap[fighterImages.Length];
+                FighterImagesFaded = new Bitmap[fighterImages.Length];
+                for (int num61 = 0; num61 < fighterImages.Length; num61++)
                 {
-                    Bitmap originalBitmap = InfoPanel.CopyBitmap(fighterImages[index]);
-                    originalBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    originalBitmap.MakeTransparent(Color.Black);
-                    InfoPanel.FighterImages[index] = InfoPanel.PrescaleImageStatic(originalBitmap, num1, num1);
-                    InfoPanel.FighterImagesFaded[index] = InfoPanel.FadeImageStatic(InfoPanel.FighterImages[index], 0.4f);
-                    originalBitmap.Dispose();
+                    Bitmap bitmap3 = CopyBitmap(fighterImages[num61]);
+                    bitmap3.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    bitmap3.MakeTransparent(Color.Black);
+                    FighterImages[num61] = PrescaleImageStatic(bitmap3, num, num);
+                    FighterImagesFaded[num61] = FadeImageStatic(FighterImages[num61], 0.4f);
+                    bitmap3.Dispose();
                 }
-                if (InfoPanel.FighterImagesLarge != null)
+                if (FighterImagesLarge != null)
                 {
-                    for (int index = 0; index < InfoPanel.FighterImagesLarge.Length; ++index)
+                    for (int num62 = 0; num62 < FighterImagesLarge.Length; num62++)
                     {
-                        if (InfoPanel.FighterImagesLarge[index] != null)
+                        if (FighterImagesLarge[num62] != null)
                         {
-                            InfoPanel.FighterImagesLarge[index].Dispose();
-                            InfoPanel.FighterImagesLarge[index] = (Bitmap)null;
+                            FighterImagesLarge[num62].Dispose();
+                            FighterImagesLarge[num62] = null;
                         }
                     }
                 }
-                if (InfoPanel.FighterImagesFadedLarge != null)
+                if (FighterImagesFadedLarge != null)
                 {
-                    for (int index = 0; index < InfoPanel.FighterImagesFadedLarge.Length; ++index)
+                    for (int num63 = 0; num63 < FighterImagesFadedLarge.Length; num63++)
                     {
-                        if (InfoPanel.FighterImagesFadedLarge[index] != null)
+                        if (FighterImagesFadedLarge[num63] != null)
                         {
-                            InfoPanel.FighterImagesFadedLarge[index].Dispose();
-                            InfoPanel.FighterImagesFadedLarge[index] = (Bitmap)null;
+                            FighterImagesFadedLarge[num63].Dispose();
+                            FighterImagesFadedLarge[num63] = null;
                         }
                     }
                 }
-                InfoPanel.FighterImagesLarge = new Bitmap[fighterImages.Length];
-                InfoPanel.FighterImagesFadedLarge = new Bitmap[fighterImages.Length];
-                for (int index = 0; index < fighterImages.Length; ++index)
+                FighterImagesLarge = new Bitmap[fighterImages.Length];
+                FighterImagesFadedLarge = new Bitmap[fighterImages.Length];
+                for (int num64 = 0; num64 < fighterImages.Length; num64++)
                 {
-                    Bitmap originalBitmap = InfoPanel.CopyBitmap(fighterImages[index]);
-                    originalBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    originalBitmap.MakeTransparent(Color.Black);
-                    InfoPanel.FighterImagesLarge[index] = InfoPanel.PrescaleImageStatic(originalBitmap, num5, num5);
-                    InfoPanel.FighterImagesFadedLarge[index] = InfoPanel.FadeImageStatic(InfoPanel.FighterImagesLarge[index], 0.4f);
-                    originalBitmap.Dispose();
+                    Bitmap bitmap4 = CopyBitmap(fighterImages[num64]);
+                    bitmap4.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    bitmap4.MakeTransparent(Color.Black);
+                    FighterImagesLarge[num64] = PrescaleImageStatic(bitmap4, num5, num5);
+                    FighterImagesFadedLarge[num64] = FadeImageStatic(FighterImagesLarge[num64], 0.4f);
+                    bitmap4.Dispose();
                 }
             }
             if (habitatImages == null)
+            {
                 return;
-            if (InfoPanel.HabitatImages != null)
+            }
+            if (HabitatImages != null)
             {
-                for (int index = 0; index < InfoPanel.HabitatImages.Length; ++index)
+                for (int num65 = 0; num65 < HabitatImages.Length; num65++)
                 {
-                    if (InfoPanel.HabitatImages[index] != null)
+                    if (HabitatImages[num65] != null)
                     {
-                        InfoPanel.HabitatImages[index].Dispose();
-                        InfoPanel.HabitatImages[index] = (Bitmap)null;
+                        HabitatImages[num65].Dispose();
+                        HabitatImages[num65] = null;
                     }
                 }
             }
-            InfoPanel.HabitatImages = new Bitmap[habitatImages.Length];
-            for (int index = 0; index < habitatImages.Length; ++index)
-                InfoPanel.HabitatImages[index] = InfoPanel.PrescaleImageStatic(habitatImages[index], num4, num4);
-            if (InfoPanel.HabitatImagesLarge != null)
+            HabitatImages = new Bitmap[habitatImages.Length];
+            for (int num66 = 0; num66 < habitatImages.Length; num66++)
             {
-                for (int index = 0; index < InfoPanel.HabitatImagesLarge.Length; ++index)
+                HabitatImages[num66] = PrescaleImageStatic(habitatImages[num66], num4, num4);
+            }
+            if (HabitatImagesLarge != null)
+            {
+                for (int num67 = 0; num67 < HabitatImagesLarge.Length; num67++)
                 {
-                    if (InfoPanel.HabitatImagesLarge[index] != null)
+                    if (HabitatImagesLarge[num67] != null)
                     {
-                        InfoPanel.HabitatImagesLarge[index].Dispose();
-                        InfoPanel.HabitatImagesLarge[index] = (Bitmap)null;
+                        HabitatImagesLarge[num67].Dispose();
+                        HabitatImagesLarge[num67] = null;
                     }
                 }
             }
-            InfoPanel.HabitatImagesLarge = new Bitmap[habitatImages.Length];
-            for (int index = 0; index < habitatImages.Length; ++index)
-                InfoPanel.HabitatImagesLarge[index] = InfoPanel.PrescaleImageStatic(habitatImages[index], num8, num8);
+            HabitatImagesLarge = new Bitmap[habitatImages.Length];
+            for (int num68 = 0; num68 < habitatImages.Length; num68++)
+            {
+                HabitatImagesLarge[num68] = PrescaleImageStatic(habitatImages[num68], num8, num8);
+            }
         }
 
-        private static void InitializeTroopImageArray(
-          Bitmap[] sourceImages,
-          ref Bitmap[] troopImages,
-          ref Bitmap[] troopImagesFaded,
-          int troopMaximumSize)
+        private static void InitializeTroopImageArray(Bitmap[] sourceImages, ref Bitmap[] troopImages, ref Bitmap[] troopImagesFaded, int troopMaximumSize)
         {
             if (troopImages != null)
             {
-                for (int index = 0; index < troopImages.Length; ++index)
+                for (int i = 0; i < troopImages.Length; i++)
                 {
-                    if (troopImages[index] != null)
+                    if (troopImages[i] != null)
                     {
-                        troopImages[index].Dispose();
-                        troopImages[index] = (Bitmap)null;
+                        troopImages[i].Dispose();
+                        troopImages[i] = null;
                     }
                 }
             }
             if (troopImagesFaded != null)
             {
-                for (int index = 0; index < troopImagesFaded.Length; ++index)
+                for (int j = 0; j < troopImagesFaded.Length; j++)
                 {
-                    if (troopImagesFaded[index] != null)
+                    if (troopImagesFaded[j] != null)
                     {
-                        troopImagesFaded[index].Dispose();
-                        troopImagesFaded[index] = (Bitmap)null;
+                        troopImagesFaded[j].Dispose();
+                        troopImagesFaded[j] = null;
                     }
                 }
             }
             troopImages = new Bitmap[sourceImages.Length];
             troopImagesFaded = new Bitmap[troopImages.Length];
-            for (int index = 0; index < troopImages.Length; ++index)
+            for (int k = 0; k < troopImages.Length; k++)
             {
-                Size size = InfoPanel.ResolveImageSize(sourceImages[index], troopMaximumSize);
-                Bitmap image = InfoPanel.PrescaleImageStatic(sourceImages[index], size.Width, size.Height);
-                Bitmap bitmap1 = image;
-                Bitmap bitmap2 = InfoPanel.MakeImageSquare(image, troopMaximumSize);
-                bitmap1.Dispose();
-                troopImages[index] = bitmap2;
+                Size size = ResolveImageSize(sourceImages[k], troopMaximumSize);
+                Bitmap bitmap = PrescaleImageStatic(sourceImages[k], size.Width, size.Height);
+                Bitmap bitmap2 = bitmap;
+                bitmap = MakeImageSquare(bitmap, troopMaximumSize);
+                bitmap2.Dispose();
+                troopImages[k] = bitmap;
             }
-            for (int index = 0; index < troopImagesFaded.Length; ++index)
+            for (int l = 0; l < troopImagesFaded.Length; l++)
             {
-                Size size = InfoPanel.ResolveImageSize(sourceImages[index], troopMaximumSize);
-                Bitmap image1 = InfoPanel.PrescaleImageStatic(sourceImages[index], size.Width, size.Height);
-                Bitmap bitmap3 = image1;
-                Bitmap image2 = InfoPanel.MakeImageSquare(image1, troopMaximumSize);
-                bitmap3.Dispose();
-                Bitmap bitmap4 = image2;
-                Bitmap bitmap5 = InfoPanel.FadeImageStatic(image2, 0.4f);
+                Size size2 = ResolveImageSize(sourceImages[l], troopMaximumSize);
+                Bitmap bitmap3 = PrescaleImageStatic(sourceImages[l], size2.Width, size2.Height);
+                Bitmap bitmap4 = bitmap3;
+                bitmap3 = MakeImageSquare(bitmap3, troopMaximumSize);
                 bitmap4.Dispose();
-                troopImagesFaded[index] = bitmap5;
+                bitmap4 = bitmap3;
+                bitmap3 = FadeImageStatic(bitmap3, 0.4f);
+                bitmap4.Dispose();
+                troopImagesFaded[l] = bitmap3;
             }
         }
 
         public void RepointImageInstances()
         {
-            if (this._ContentSizeIsLarge)
+            if (_ContentSizeIsLarge)
             {
-                this._TroopImagesInfantry = InfoPanel.TroopImagesInfantryLarge;
-                this._TroopImagesFadedInfantry = InfoPanel.TroopImagesFadedInfantryLarge;
-                this._TroopImagesArmored = InfoPanel.TroopImagesArmoredLarge;
-                this._TroopImagesFadedArmored = InfoPanel.TroopImagesFadedArmoredLarge;
-                this._TroopImagesArtillery = InfoPanel.TroopImagesArtilleryLarge;
-                this._TroopImagesFadedArtillery = InfoPanel.TroopImagesFadedArtilleryLarge;
-                this._TroopImagesSpecialForces = InfoPanel.TroopImagesSpecialForcesLarge;
-                this._TroopImagesFadedSpecialForces = InfoPanel.TroopImagesFadedSpecialForcesLarge;
-                this._TroopImagesPirateRaider = InfoPanel.TroopImagesPirateRaiderLarge;
-                this._TroopImagesFadedPirateRaider = InfoPanel.TroopImagesFadedPirateRaiderLarge;
-                this._ResourceImages = InfoPanel.ResourceImagesLarge;
-                this._RaceImages = InfoPanel.RaceImagesLarge;
-                this._BuiltObjectImages = InfoPanel.BuiltObjectImagesLarge;
-                this._FighterImages = InfoPanel.FighterImagesLarge;
-                this._FighterImagesFaded = InfoPanel.FighterImagesFadedLarge;
-                this._RuinImages = InfoPanel.RuinImagesLarge;
-                this._FacilityImages = InfoPanel.FacilityImagesLarge;
-                this._FacilityImagesFaded = InfoPanel.FacilityImagesFadedLarge;
-                this._HabitatImages = InfoPanel.HabitatImagesLarge;
-                this._PlagueImages = InfoPanel.PlagueImagesLarge;
+                _TroopImagesInfantry = TroopImagesInfantryLarge;
+                _TroopImagesFadedInfantry = TroopImagesFadedInfantryLarge;
+                _TroopImagesArmored = TroopImagesArmoredLarge;
+                _TroopImagesFadedArmored = TroopImagesFadedArmoredLarge;
+                _TroopImagesArtillery = TroopImagesArtilleryLarge;
+                _TroopImagesFadedArtillery = TroopImagesFadedArtilleryLarge;
+                _TroopImagesSpecialForces = TroopImagesSpecialForcesLarge;
+                _TroopImagesFadedSpecialForces = TroopImagesFadedSpecialForcesLarge;
+                _TroopImagesPirateRaider = TroopImagesPirateRaiderLarge;
+                _TroopImagesFadedPirateRaider = TroopImagesFadedPirateRaiderLarge;
+                _ResourceImages = ResourceImagesLarge;
+                _RaceImages = RaceImagesLarge;
+                _BuiltObjectImages = BuiltObjectImagesLarge;
+                _FighterImages = FighterImagesLarge;
+                _FighterImagesFaded = FighterImagesFadedLarge;
+                _RuinImages = RuinImagesLarge;
+                _FacilityImages = FacilityImagesLarge;
+                _FacilityImagesFaded = FacilityImagesFadedLarge;
+                _HabitatImages = HabitatImagesLarge;
+                _PlagueImages = PlagueImagesLarge;
             }
             else
             {
-                this._TroopImagesInfantry = InfoPanel.TroopImagesInfantry;
-                this._TroopImagesFadedInfantry = InfoPanel.TroopImagesFadedInfantry;
-                this._TroopImagesArmored = InfoPanel.TroopImagesArmored;
-                this._TroopImagesFadedArmored = InfoPanel.TroopImagesFadedArmored;
-                this._TroopImagesArtillery = InfoPanel.TroopImagesArtillery;
-                this._TroopImagesFadedArtillery = InfoPanel.TroopImagesFadedArtillery;
-                this._TroopImagesSpecialForces = InfoPanel.TroopImagesSpecialForces;
-                this._TroopImagesFadedSpecialForces = InfoPanel.TroopImagesFadedSpecialForces;
-                this._TroopImagesPirateRaider = InfoPanel.TroopImagesPirateRaider;
-                this._TroopImagesFadedPirateRaider = InfoPanel.TroopImagesFadedPirateRaider;
-                this._ResourceImages = InfoPanel.ResourceImages;
-                this._RaceImages = InfoPanel.RaceImages;
-                this._BuiltObjectImages = InfoPanel.BuiltObjectImages;
-                this._FighterImages = InfoPanel.FighterImages;
-                this._FighterImagesFaded = InfoPanel.FighterImagesFaded;
-                this._RuinImages = InfoPanel.RuinImages;
-                this._FacilityImages = InfoPanel.FacilityImages;
-                this._FacilityImagesFaded = InfoPanel.FacilityImagesFaded;
-                this._HabitatImages = InfoPanel.HabitatImages;
-                this._PlagueImages = InfoPanel.PlagueImages;
+                _TroopImagesInfantry = TroopImagesInfantry;
+                _TroopImagesFadedInfantry = TroopImagesFadedInfantry;
+                _TroopImagesArmored = TroopImagesArmored;
+                _TroopImagesFadedArmored = TroopImagesFadedArmored;
+                _TroopImagesArtillery = TroopImagesArtillery;
+                _TroopImagesFadedArtillery = TroopImagesFadedArtillery;
+                _TroopImagesSpecialForces = TroopImagesSpecialForces;
+                _TroopImagesFadedSpecialForces = TroopImagesFadedSpecialForces;
+                _TroopImagesPirateRaider = TroopImagesPirateRaider;
+                _TroopImagesFadedPirateRaider = TroopImagesFadedPirateRaider;
+                _ResourceImages = ResourceImages;
+                _RaceImages = RaceImages;
+                _BuiltObjectImages = BuiltObjectImages;
+                _FighterImages = FighterImages;
+                _FighterImagesFaded = FighterImagesFaded;
+                _RuinImages = RuinImages;
+                _FacilityImages = FacilityImages;
+                _FacilityImagesFaded = FacilityImagesFaded;
+                _HabitatImages = HabitatImages;
+                _PlagueImages = PlagueImages;
             }
         }
 
         public void SetContentSizeNormal()
         {
-            this._ImageSize = 14;
-            this._ImageScaleSize = 24;
-            this._HabitatImageSize = 26;
-            this._TinyFont = this._TinyFontNormalSize;
-            this._NormalFont = this._NormalFontNormalSize;
-            this._NormalFontBold = this._NormalBoldFontNormalSize;
-            this._TitleFont = this._TinyFontNormalSize;
-            this._RowHeight = 15;
-            this._FlagSizeSmall = new Size(30, 18);
-            this._FlagSizeSystem = new Size(20, 12);
-            this._MinPictureSize = 60;
-            this._MaxPictureSize = 200;
-            this._RuinImageHeight = 18;
-            this._MaxGraphTextWidth = 200;
-            this._PopulationTextWidth = 75;
-            this._PopulationAmountWidth = 48;
-            this._LabelWidth = 65;
-            this._LabelWidthHabitat = 70;
-            this._Height2 = 2;
-            this._Height3 = 3;
-            this._Height4 = 4;
-            this._Height5 = 5;
-            this._Height6 = 6;
-            this._Height8 = 8;
-            this._Height10 = 10;
-            this._ColonySummaryDetailWidth = 20;
-            this.RepointImageInstances();
+            _ImageSize = 14;
+            _ImageScaleSize = 24;
+            _HabitatImageSize = 26;
+            _TinyFont = _TinyFontNormalSize;
+            _NormalFont = _NormalFontNormalSize;
+            _NormalFontBold = _NormalBoldFontNormalSize;
+            _TitleFont = _TinyFontNormalSize;
+            _RowHeight = 15;
+            _FlagSizeSmall = new Size(30, 18);
+            _FlagSizeSystem = new Size(20, 12);
+            _MinPictureSize = 60;
+            _MaxPictureSize = 200;
+            _RuinImageHeight = 18;
+            _MaxGraphTextWidth = 200;
+            _PopulationTextWidth = 75;
+            _PopulationAmountWidth = 48;
+            _LabelWidth = 65;
+            _LabelWidthHabitat = 70;
+            _Height2 = 2;
+            _Height3 = 3;
+            _Height4 = 4;
+            _Height5 = 5;
+            _Height6 = 6;
+            _Height8 = 8;
+            _Height10 = 10;
+            _ColonySummaryDetailWidth = 20;
+            RepointImageInstances();
         }
 
         public void SetContentSizeLarge()
         {
-            this._ImageSize = 20;
-            this._ImageScaleSize = 34;
-            this._HabitatImageSize = 36;
-            this._TinyFont = this._TinyFontLargeSize;
-            this._NormalFont = this._NormalFontLargeSize;
-            this._NormalFontBold = this._NormalBoldFontLargeSize;
-            this._TitleFont = this._TinyFontLargeSize;
-            this._RowHeight = 21;
-            this._FlagSizeSmall = new Size(42, 25);
-            this._FlagSizeSystem = new Size(28, 17);
-            this._MinPictureSize = 84;
-            this._MaxPictureSize = 280;
-            this._RuinImageHeight = 25;
-            this._MaxGraphTextWidth = 280;
-            this._PopulationTextWidth = 105;
-            this._PopulationAmountWidth = 67;
-            this._LabelWidth = 91;
-            this._LabelWidthHabitat = 98;
-            this._Height2 = 3;
-            this._Height3 = 4;
-            this._Height4 = 6;
-            this._Height5 = 7;
-            this._Height6 = 8;
-            this._Height8 = 11;
-            this._Height10 = 14;
-            this._ColonySummaryDetailWidth = 28;
-            this.RepointImageInstances();
+            _ImageSize = 20;
+            _ImageScaleSize = 34;
+            _HabitatImageSize = 36;
+            _TinyFont = _TinyFontLargeSize;
+            _NormalFont = _NormalFontLargeSize;
+            _NormalFontBold = _NormalBoldFontLargeSize;
+            _TitleFont = _TinyFontLargeSize;
+            _RowHeight = 21;
+            _FlagSizeSmall = new Size(42, 25);
+            _FlagSizeSystem = new Size(28, 17);
+            _MinPictureSize = 84;
+            _MaxPictureSize = 280;
+            _RuinImageHeight = 25;
+            _MaxGraphTextWidth = 280;
+            _PopulationTextWidth = 105;
+            _PopulationAmountWidth = 67;
+            _LabelWidth = 91;
+            _LabelWidthHabitat = 98;
+            _Height2 = 3;
+            _Height3 = 4;
+            _Height4 = 6;
+            _Height5 = 7;
+            _Height6 = 8;
+            _Height8 = 11;
+            _Height10 = 14;
+            _ColonySummaryDetailWidth = 28;
+            RepointImageInstances();
         }
 
-        public void DrawBarGraph(
-          string description,
-          int descriptionWidth,
-          int maximumValue,
-          int currentValue,
-          int height,
-          int overallWidth,
-          Color fillColorStart,
-          Color fillColorEnd,
-          Color backgroundColor,
-          Graphics graphics,
-          Point location)
+        public void DrawBarGraph(string description, int descriptionWidth, int maximumValue, int currentValue, int height, int overallWidth, Color fillColorStart, Color fillColorEnd, Color backgroundColor, Graphics graphics, Point location)
         {
-            this.DrawBarGraph(description, descriptionWidth, maximumValue, currentValue, height, overallWidth, fillColorStart, fillColorEnd, Color.Empty, Color.Empty, backgroundColor, graphics, location, string.Empty);
+            DrawBarGraph(description, descriptionWidth, maximumValue, currentValue, height, overallWidth, fillColorStart, fillColorEnd, Color.Empty, Color.Empty, backgroundColor, graphics, location, string.Empty);
         }
 
-        public void DrawBarGraph(
-          string description,
-          int descriptionWidth,
-          int maximumValue,
-          int currentValue,
-          int height,
-          int overallWidth,
-          Color fillColorStart,
-          Color fillColorEnd,
-          Color backgroundColor,
-          Graphics graphics,
-          Point location,
-          string suffixData)
+        public void DrawBarGraph(string description, int descriptionWidth, int maximumValue, int currentValue, int height, int overallWidth, Color fillColorStart, Color fillColorEnd, Color backgroundColor, Graphics graphics, Point location, string suffixData)
         {
-            this.DrawBarGraph(description, descriptionWidth, maximumValue, currentValue, height, overallWidth, fillColorStart, fillColorEnd, Color.Empty, Color.Empty, backgroundColor, graphics, location, suffixData);
+            DrawBarGraph(description, descriptionWidth, maximumValue, currentValue, height, overallWidth, fillColorStart, fillColorEnd, Color.Empty, Color.Empty, backgroundColor, graphics, location, suffixData);
         }
 
-        public void DrawBarGraph(
-          string description,
-          int descriptionWidth,
-          int maximumValue,
-          int currentValue,
-          int height,
-          int overallWidth,
-          Color fillColorStart,
-          Color fillColorEnd,
-          Color alternateFillColorStart,
-          Color alternateFillColorEnd,
-          Color backgroundColor,
-          Graphics graphics,
-          Point location)
+        public void DrawBarGraph(string description, int descriptionWidth, int maximumValue, int currentValue, int height, int overallWidth, Color fillColorStart, Color fillColorEnd, Color alternateFillColorStart, Color alternateFillColorEnd, Color backgroundColor, Graphics graphics, Point location)
         {
-            this.DrawBarGraph(description, descriptionWidth, maximumValue, currentValue, height, overallWidth, fillColorStart, fillColorEnd, backgroundColor, graphics, location, string.Empty);
+            DrawBarGraph(description, descriptionWidth, maximumValue, currentValue, height, overallWidth, fillColorStart, fillColorEnd, backgroundColor, graphics, location, string.Empty);
         }
 
-        public void DrawBarGraph(
-          string description,
-          int descriptionWidth,
-          int maximumValue,
-          int currentValue,
-          int height,
-          int overallWidth,
-          Color fillColorStart,
-          Color fillColorEnd,
-          Color alternateFillColorStart,
-          Color alternateFillColorEnd,
-          Color backgroundColor,
-          Graphics graphics,
-          Point location,
-          string suffixData)
+        public void DrawBarGraph(string description, int descriptionWidth, int maximumValue, int currentValue, int height, int overallWidth, Color fillColorStart, Color fillColorEnd, Color alternateFillColorStart, Color alternateFillColorEnd, Color backgroundColor, Graphics graphics, Point location, string suffixData)
         {
-            Color color1 = fillColorStart;
+            Color color = fillColorStart;
             Color color2 = fillColorEnd;
             if (alternateFillColorStart != Color.Empty)
-                color1 = this.UpdateColor(fillColorStart, alternateFillColorStart);
+            {
+                color = UpdateColor(fillColorStart, alternateFillColorStart);
+            }
             if (alternateFillColorEnd != Color.Empty)
-                color2 = this.UpdateColor(fillColorEnd, alternateFillColorEnd);
-            int num = (int)graphics.MeasureString("99999", this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width + 5;
-            int width1 = (int)graphics.MeasureString(description, this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (descriptionWidth - width1), location.Y - 2);
+            {
+                color2 = UpdateColor(fillColorEnd, alternateFillColorEnd);
+            }
+            int num = (int)graphics.MeasureString("99999", _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            num += 5;
+            int num2 = (int)graphics.MeasureString(description, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            Point location2 = new Point(location.X + (descriptionWidth - num2), location.Y - 2);
             descriptionWidth += 10;
-            Point point1 = new Point(location.X + descriptionWidth, location.Y);
-            int width2 = overallWidth - (descriptionWidth + num);
-            int width3 = (int)((double)currentValue / (double)maximumValue * (double)width2);
-            if (width3 > width2)
-                width3 = width2;
-            string str = currentValue.ToString() + suffixData;
+            Point point = new Point(location.X + descriptionWidth, location.Y);
+            int num3 = overallWidth - (descriptionWidth + num);
+            int num4 = (int)((double)currentValue / (double)maximumValue * (double)num3);
+            if (num4 > num3)
+            {
+                num4 = num3;
+            }
+            string s = currentValue + suffixData;
             string text = maximumValue.ToString();
             if (description == TextResolver.GetText("Super Laser") || description == TextResolver.GetText("Status"))
             {
                 text = text + " " + TextResolver.GetText("seconds abbreviation");
-                str = suffixData;
+                s = suffixData;
             }
-            int width4 = (int)graphics.MeasureString(str, this._NormalFont).Width;
-            Point point2 = new Point(point1.X + (width2 - width4) / 2, point1.Y);
-            Point location2 = new Point(point1.X + width2 + 5, point1.Y);
-            Rectangle rect1 = new Rectangle(point1.X, point1.Y, width2, height);
-            Rectangle rect2 = new Rectangle(point1.X, point1.Y, width3, height);
-            Rectangle rect3 = new Rectangle(point1.X - 1, point1.Y, width3 + 2, height);
-            LinearGradientBrush linearGradientBrush = (LinearGradientBrush)null;
+            int num5 = (int)graphics.MeasureString(s, _NormalFont).Width;
+            Point point2 = new Point(point.X + (num3 - num5) / 2, point.Y);
+            Point location3 = new Point(point.X + num3 + 5, point.Y);
+            Rectangle rect = new Rectangle(point.X, point.Y, num3, height);
+            Rectangle rect2 = new Rectangle(point.X, point.Y, num4, height);
+            Rectangle rect3 = new Rectangle(point.X - 1, point.Y, num4 + 2, height);
+            LinearGradientBrush linearGradientBrush = null;
             if (rect2.Width > 0)
-                linearGradientBrush = new LinearGradientBrush(rect3, color1, color2, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+            {
+                linearGradientBrush = new LinearGradientBrush(rect3, color, color2, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+            }
             SolidBrush solidBrush = new SolidBrush(backgroundColor);
-            this.DrawStringWithDropShadow(graphics, description, this._NormalFontBold, location1);
-            graphics.FillRectangle((Brush)solidBrush, rect1);
+            DrawStringWithDropShadow(graphics, description, _NormalFontBold, location2);
+            graphics.FillRectangle(solidBrush, rect);
             if (rect2.Width > 0)
-                graphics.FillRectangle((Brush)linearGradientBrush, rect2);
-            graphics.DrawString(str, this._NormalFont, (Brush)this._WhiteBrush, new PointF((float)point2.X, (float)point2.Y));
-            this.DrawStringWithDropShadow(graphics, text, this._NormalFont, location2);
+            {
+                graphics.FillRectangle(linearGradientBrush, rect2);
+            }
+            graphics.DrawString(s, _NormalFont, _WhiteBrush, new PointF(point2.X, point2.Y));
+            DrawStringWithDropShadow(graphics, text, _NormalFont, location3);
             linearGradientBrush?.Dispose();
             solidBrush.Dispose();
         }
 
-        private void DrawFacilities(
-          int labelWidth,
-          Habitat habitat,
-          PlanetaryFacilityList facilities,
-          Graphics graphics,
-          Point location,
-          int overallWidth)
+        private void DrawFacilities(int labelWidth, Habitat habitat, PlanetaryFacilityList facilities, Graphics graphics, Point location, int overallWidth)
         {
-            int width = (int)graphics.MeasureString(TextResolver.GetText("Facilities"), this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (labelWidth - width), location.Y - 2);
+            int num = (int)graphics.MeasureString(TextResolver.GetText("Facilities"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
             labelWidth += 10;
-            this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Facilities"), this._NormalFontBold, location1);
-            int num = labelWidth;
-            SolidBrush solidBrush = new SolidBrush(Color.FromArgb(190, 24, 24, 32));
-            Rectangle rect = new Rectangle(location.X + labelWidth, location.Y, overallWidth - labelWidth, this._ImageSize);
-            graphics.FillRectangle((Brush)solidBrush, rect);
+            DrawStringWithDropShadow(graphics, TextResolver.GetText("Facilities"), _NormalFontBold, location2);
+            int num2 = labelWidth;
+            Color color = Color.FromArgb(190, 24, 24, 32);
+            SolidBrush brush = new SolidBrush(color);
+            Rectangle rect = new Rectangle(location.X + labelWidth, location.Y, overallWidth - labelWidth, _ImageSize);
+            graphics.FillRectangle(brush, rect);
             if (facilities == null || facilities.Count == 0)
             {
-                this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", this._NormalFont, new Point(location.X + labelWidth, location.Y));
+                DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, new Point(location.X + labelWidth, location.Y));
+                return;
             }
-            else
+            for (int i = 0; i < facilities.Count; i++)
             {
-                for (int index = 0; index < facilities.Count; ++index)
+                PlanetaryFacility planetaryFacility = facilities[i];
+                if (planetaryFacility == null)
                 {
-                    PlanetaryFacility facility = facilities[index];
-                    if (facility != null)
-                    {
-                        Point point = new Point(location.X + num, location.Y);
-                        Bitmap facilityImage = this._FacilityImages[(int)facility.PictureRef];
-                        string str = facility.Name;
-                        if ((double)facility.ConstructionProgress < 1.0)
-                        {
-                            facilityImage = this._FacilityImagesFaded[(int)facility.PictureRef];
-                            str = str + " (" + facility.ConstructionProgress.ToString("0%") + " " + TextResolver.GetText("Complete").ToLower(CultureInfo.InvariantCulture) + ")";
-                        }
-                        switch (facility.Type)
-                        {
-                            case PlanetaryFacilityType.PirateBase:
-                            case PlanetaryFacilityType.PirateFortress:
-                            case PlanetaryFacilityType.PirateCriminalNetwork:
-                                PirateColonyControl byFacilityControl = habitat.GetPirateControl().GetByFacilityControl();
-                                if (byFacilityControl != null && byFacilityControl.HasFacilityControl)
-                                {
-                                    Empire empireById = this._Galaxy.GetEmpireById((int)byFacilityControl.EmpireId);
-                                    if (empireById != null)
-                                    {
-                                        str = str + " (" + empireById.Name + ")";
-                                        break;
-                                    }
-                                    break;
-                                }
-                                break;
-                        }
-                        string message = str + " (" + TextResolver.GetText("click for details") + ")";
-                        graphics.DrawImageUnscaled((Image)facilityImage, point);
-                        this.AddHotspot(new Rectangle(point.X, point.Y, facilityImage.Width, facilityImage.Height), (object)facility, message);
-                        num += facilityImage.Width + 2;
-                    }
+                    continue;
                 }
+                Point point = new Point(location.X + num2, location.Y);
+                Bitmap bitmap = _FacilityImages[planetaryFacility.PictureRef];
+                string text = planetaryFacility.Name;
+                if (planetaryFacility.ConstructionProgress < 1f)
+                {
+                    bitmap = _FacilityImagesFaded[planetaryFacility.PictureRef];
+                    string text2 = text;
+                    text = text2 + " (" + planetaryFacility.ConstructionProgress.ToString("0%") + " " + TextResolver.GetText("Complete").ToLower(CultureInfo.InvariantCulture) + ")";
+                }
+                switch (planetaryFacility.Type)
+                {
+                    case PlanetaryFacilityType.PirateBase:
+                    case PlanetaryFacilityType.PirateFortress:
+                    case PlanetaryFacilityType.PirateCriminalNetwork:
+                        {
+                            PirateColonyControl byFacilityControl = habitat.GetPirateControl().GetByFacilityControl();
+                            if (byFacilityControl != null && byFacilityControl.HasFacilityControl)
+                            {
+                                Empire empireById = _Galaxy.GetEmpireById(byFacilityControl.EmpireId);
+                                if (empireById != null)
+                                {
+                                    text = text + " (" + empireById.Name + ")";
+                                }
+                            }
+                            break;
+                        }
+                }
+                text = text + " (" + TextResolver.GetText("click for details") + ")";
+                graphics.DrawImageUnscaled(bitmap, point);
+                AddHotspot(new Rectangle(point.X, point.Y, bitmap.Width, bitmap.Height), planetaryFacility, text);
+                num2 += bitmap.Width + 2;
             }
         }
 
-        private void DrawTroopsAgents(
-          int labelWidth,
-          TroopList troops,
-          TroopList troopsRecruiting,
-          TroopList troopsInvading,
-          CharacterList characters,
-          CharacterList invadingCharacters,
-          Graphics graphics,
-          Point location,
-          int overallWidth,
-          int offsetX)
+        private void DrawTroopsAgents(int labelWidth, TroopList troops, TroopList troopsRecruiting, TroopList troopsInvading, CharacterList characters, CharacterList invadingCharacters, Graphics graphics, Point location, int overallWidth, int offsetX)
         {
-            this.DrawTroopsAgents(labelWidth, troops, troopsRecruiting, troopsInvading, characters, invadingCharacters, graphics, location, overallWidth, offsetX, string.Empty);
+            DrawTroopsAgents(labelWidth, troops, troopsRecruiting, troopsInvading, characters, invadingCharacters, graphics, location, overallWidth, offsetX, string.Empty);
         }
 
-        public void DrawTroopsAgents(
-          int labelWidth,
-          TroopList troops,
-          TroopList troopsRecruiting,
-          TroopList troopsInvading,
-          CharacterList characters,
-          CharacterList invadingCharacters,
-          Graphics graphics,
-          Point location,
-          int overallWidth,
-          int offsetX,
-          string prefix)
+        public void DrawTroopsAgents(int labelWidth, TroopList troops, TroopList troopsRecruiting, TroopList troopsInvading, CharacterList characters, CharacterList invadingCharacters, Graphics graphics, Point location, int overallWidth, int offsetX, string prefix)
         {
-            int width1 = (int)graphics.MeasureString(TextResolver.GetText("Troops"), this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (labelWidth - width1), location.Y - 2);
+            int num = (int)graphics.MeasureString(TextResolver.GetText("Troops"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
             labelWidth += 10;
-            int num1 = 0;
+            int num2 = 0;
             if (!string.IsNullOrEmpty(prefix))
             {
-                num1 = 2 + (int)graphics.MeasureString(prefix, this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                Point location2 = new Point(location.X + labelWidth, location.Y);
-                this.DrawStringWithDropShadow(graphics, prefix, this._NormalFont, location2);
+                num2 = 2 + (int)graphics.MeasureString(prefix, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                DrawStringWithDropShadow(location: new Point(location.X + labelWidth, location.Y), graphics: graphics, text: prefix, font: _NormalFont);
             }
-            labelWidth += num1;
-            int num2 = overallWidth - labelWidth;
+            labelWidth += num2;
+            int num3 = overallWidth - labelWidth;
             if (troops == null)
-                troops = new TroopList();
-            if (troopsRecruiting == null)
-                troopsRecruiting = new TroopList();
-            if (troopsInvading == null)
-                troopsInvading = new TroopList();
-            if (characters == null)
-                characters = new CharacterList();
-            if (invadingCharacters == null)
-                invadingCharacters = new CharacterList();
-            int num3 = troops.Count * this._ImageSize;
-            int num4 = troopsRecruiting.Count * this._ImageSize;
-            int num5 = troopsInvading.Count * this._ImageSize;
-            int num6 = characters.Count * this._ImageSize;
-            int num7 = invadingCharacters.Count * this._ImageSize;
-            int num8 = this._ImageSize / 2;
-            int num9 = num6 + num8 + num4 + num8 + num3 + num8 + num5 + num8 + num7;
-            int width2 = this._ImageSize;
-            if (num9 > num2)
             {
-                int num10 = num9 - num8 * 3;
-                width2 = (int)(((double)num2 - (double)num8 * 3.0) / (double)num10 * (double)this._ImageSize);
-                if (width2 > this._ImageSize)
-                    width2 = this._ImageSize;
-                if (width2 <= 0)
-                    width2 = 1;
+                troops = new TroopList();
             }
-            this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Troops"), this._NormalFontBold, location1);
-            int num11 = labelWidth + offsetX;
-            SolidBrush solidBrush1 = new SolidBrush(Color.FromArgb(190, 24, 24, 32));
-            Rectangle rect1 = new Rectangle(location.X + labelWidth + offsetX, location.Y, overallWidth - labelWidth, this._ImageSize);
-            graphics.FillRectangle((Brush)solidBrush1, rect1);
+            if (troopsRecruiting == null)
+            {
+                troopsRecruiting = new TroopList();
+            }
+            if (troopsInvading == null)
+            {
+                troopsInvading = new TroopList();
+            }
+            if (characters == null)
+            {
+                characters = new CharacterList();
+            }
+            if (invadingCharacters == null)
+            {
+                invadingCharacters = new CharacterList();
+            }
+            int num4 = troops.Count * _ImageSize;
+            int num5 = troopsRecruiting.Count * _ImageSize;
+            int num6 = troopsInvading.Count * _ImageSize;
+            int num7 = characters.Count * _ImageSize;
+            int num8 = invadingCharacters.Count * _ImageSize;
+            int num9 = _ImageSize / 2;
+            int num10 = num7 + num9 + num5 + num9 + num4 + num9 + num6 + num9 + num8;
+            int num11 = _ImageSize;
+            if (num10 > num3)
+            {
+                int num12 = num10 - num9 * 3;
+                num11 = (int)(((double)num3 - (double)num9 * 3.0) / (double)num12 * (double)_ImageSize);
+                if (num11 > _ImageSize)
+                {
+                    num11 = _ImageSize;
+                }
+                if (num11 <= 0)
+                {
+                    num11 = 1;
+                }
+            }
+            DrawStringWithDropShadow(graphics, TextResolver.GetText("Troops"), _NormalFontBold, location2);
+            int num13 = labelWidth + offsetX;
+            Color color = Color.FromArgb(190, 24, 24, 32);
+            SolidBrush solidBrush = new SolidBrush(color);
+            Rectangle rect = new Rectangle(location.X + labelWidth + offsetX, location.Y, overallWidth - labelWidth, _ImageSize);
+            graphics.FillRectangle(solidBrush, rect);
             if (troopsInvading.Count == 0 && troops.Count == 0 && troopsRecruiting.Count == 0 && characters.Count == 0 && invadingCharacters.Count == 0)
-                this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", this._NormalFont, new Point(location.X + labelWidth, location.Y));
+            {
+                DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, new Point(location.X + labelWidth, location.Y));
+            }
             if (characters.Count > 0)
             {
-                for (int index = 0; index < characters.Count; ++index)
+                for (int i = 0; i < characters.Count; i++)
                 {
-                    Character character = characters[index];
-                    if (character != null)
+                    Character character = characters[i];
+                    if (character == null)
                     {
-                        Point point = new Point(location.X + num11, location.Y);
-                        Bitmap characterImageVerySmall = InfoPanel._CharacterImageCache.ObtainCharacterImageVerySmall(character);
-                        if (characterImageVerySmall != null && characterImageVerySmall.PixelFormat != PixelFormat.Undefined)
-                        {
-                            graphics.DrawImageUnscaled((Image)characterImageVerySmall, point);
-                            if (character.Empire == this._Galaxy.PlayerEmpire)
-                            {
-                                string message = characters[index].Name + " (" + Galaxy.ResolveDescription(character.Role) + ", " + character.Empire.Name + ")" + "   (" + TextResolver.GetText("click for details") + ")";
-                                this.AddHotspot(new Rectangle(point.X, point.Y, width2, characterImageVerySmall.Height), (object)character, message);
-                            }
-                            else if (character.Empire != null)
-                                this.AddHotspot(new Rectangle(point.X, point.Y, width2, characterImageVerySmall.Height), (object)character, character.Name + " (" + Galaxy.ResolveDescription(character.Role) + ", " + character.Empire.Name + ")");
-                            else
-                                this.AddHotspot(new Rectangle(point.X, point.Y, width2, characterImageVerySmall.Height), (object)null, character.Name + " (" + Galaxy.ResolveDescription(character.Role) + ", " + TextResolver.GetText("No Empire") + ")");
-                            num11 += width2;
-                        }
+                        continue;
                     }
-                }
-                num11 += num8;
-            }
-            if (troopsRecruiting.Count > 0)
-            {
-                int num12 = num11;
-                for (int index = 0; index < troopsRecruiting.Count; ++index)
-                {
-                    Troop troop = troopsRecruiting[index];
-                    if (troop != null && troop.Garrisoned)
+                    Point point = new Point(location.X + num13, location.Y);
+                    Bitmap bitmap = _CharacterImageCache.ObtainCharacterImageVerySmall(character);
+                    if (bitmap != null && bitmap.PixelFormat != 0)
                     {
-                        Point point = new Point(location.X + num11, location.Y);
-                        Bitmap imagesSpecialForce = this._TroopImagesInfantry[troop.PictureRef];
-                        switch (troop.Type)
+                        graphics.DrawImageUnscaled(bitmap, point);
+                        if (character.Empire == _Galaxy.PlayerEmpire)
                         {
-                            case TroopType.Infantry:
-                                imagesSpecialForce = this._TroopImagesInfantry[troop.PictureRef];
-                                break;
-                            case TroopType.Armored:
-                                imagesSpecialForce = this._TroopImagesArmored[troop.PictureRef];
-                                break;
-                            case TroopType.Artillery:
-                                imagesSpecialForce = this._TroopImagesArtillery[troop.PictureRef];
-                                break;
-                            case TroopType.SpecialForces:
-                                imagesSpecialForce = this._TroopImagesSpecialForces[troop.PictureRef];
-                                break;
-                            case TroopType.PirateRaider:
-                                imagesSpecialForce = this._TroopImagesPirateRaider[troop.PictureRef];
-                                break;
+                            string text = characters[i].Name + " (" + Galaxy.ResolveDescription(character.Role) + ", " + character.Empire.Name + ")";
+                            text = text + "   (" + TextResolver.GetText("click for details") + ")";
+                            AddHotspot(new Rectangle(point.X, point.Y, num11, bitmap.Height), character, text);
                         }
-                        using (SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(0, 128, 0)))
-                            graphics.FillRectangle((Brush)solidBrush2, point.X, point.Y, imagesSpecialForce.Width, imagesSpecialForce.Height);
-                    }
-                    num11 += width2;
-                }
-                num11 = num12;
-            }
-            if (troopsRecruiting.Count > 0)
-            {
-                for (int index = 0; index < troopsRecruiting.Count; ++index)
-                {
-                    Troop troop = troopsRecruiting[index];
-                    if (troop != null)
-                    {
-                        Point point = new Point(location.X + num11, location.Y);
-                        Bitmap fadedSpecialForce = this._TroopImagesFadedInfantry[troop.PictureRef];
-                        switch (troop.Type)
+                        else if (character.Empire != null)
                         {
-                            case TroopType.Infantry:
-                                fadedSpecialForce = this._TroopImagesFadedInfantry[troop.PictureRef];
-                                break;
-                            case TroopType.Armored:
-                                fadedSpecialForce = this._TroopImagesFadedArmored[troop.PictureRef];
-                                break;
-                            case TroopType.Artillery:
-                                fadedSpecialForce = this._TroopImagesFadedArtillery[troop.PictureRef];
-                                break;
-                            case TroopType.SpecialForces:
-                                fadedSpecialForce = this._TroopImagesFadedSpecialForces[troop.PictureRef];
-                                break;
-                            case TroopType.PirateRaider:
-                                fadedSpecialForce = this._TroopImagesFadedPirateRaider[troop.PictureRef];
-                                break;
-                        }
-                        graphics.DrawImageUnscaled((Image)fadedSpecialForce, point);
-                        if (troop.Empire == this._Galaxy.PlayerEmpire)
-                        {
-                            string str = TextResolver.GetText("Recruiting") + " " + troop.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop) + ", " + troop.Empire.Name;
-                            if (troop.Garrisoned)
-                                str = str + ", " + TextResolver.GetText("Garrisoned");
-                            string message = str + ")";
-                            this.AddHotspot(new Rectangle(point.X, point.Y, width2, fadedSpecialForce.Height), (object)troop, message);
+                            AddHotspot(new Rectangle(point.X, point.Y, num11, bitmap.Height), character, character.Name + " (" + Galaxy.ResolveDescription(character.Role) + ", " + character.Empire.Name + ")");
                         }
                         else
-                            this.AddHotspot(new Rectangle(point.X, point.Y, width2, fadedSpecialForce.Height), (object)null, TextResolver.GetText("Recruiting") + " " + troop.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop) + ", " + troop.Empire.Name + ")");
-                        num11 += width2;
+                        {
+                            AddHotspot(new Rectangle(point.X, point.Y, num11, bitmap.Height), null, character.Name + " (" + Galaxy.ResolveDescription(character.Role) + ", " + TextResolver.GetText("No Empire") + ")");
+                        }
+                        num13 += num11;
                     }
+                }
+                num13 += num9;
+            }
+            if (troopsRecruiting.Count > 0)
+            {
+                int num14 = num13;
+                for (int j = 0; j < troopsRecruiting.Count; j++)
+                {
+                    Troop troop = troopsRecruiting[j];
+                    if (troop != null && troop.Garrisoned)
+                    {
+                        Point point2 = new Point(location.X + num13, location.Y);
+                        Bitmap bitmap2 = _TroopImagesInfantry[troop.PictureRef];
+                        switch (troop.Type)
+                        {
+                            case TroopType.Infantry:
+                                bitmap2 = _TroopImagesInfantry[troop.PictureRef];
+                                break;
+                            case TroopType.Armored:
+                                bitmap2 = _TroopImagesArmored[troop.PictureRef];
+                                break;
+                            case TroopType.Artillery:
+                                bitmap2 = _TroopImagesArtillery[troop.PictureRef];
+                                break;
+                            case TroopType.SpecialForces:
+                                bitmap2 = _TroopImagesSpecialForces[troop.PictureRef];
+                                break;
+                            case TroopType.PirateRaider:
+                                bitmap2 = _TroopImagesPirateRaider[troop.PictureRef];
+                                break;
+                        }
+                        using SolidBrush brush = new SolidBrush(Color.FromArgb(0, 128, 0));
+                        graphics.FillRectangle(brush, point2.X, point2.Y, bitmap2.Width, bitmap2.Height);
+                    }
+                    num13 += num11;
+                }
+                num13 = num14;
+            }
+            if (troopsRecruiting.Count > 0)
+            {
+                for (int k = 0; k < troopsRecruiting.Count; k++)
+                {
+                    Troop troop2 = troopsRecruiting[k];
+                    if (troop2 == null)
+                    {
+                        continue;
+                    }
+                    Point point3 = new Point(location.X + num13, location.Y);
+                    Bitmap bitmap3 = _TroopImagesFadedInfantry[troop2.PictureRef];
+                    switch (troop2.Type)
+                    {
+                        case TroopType.Infantry:
+                            bitmap3 = _TroopImagesFadedInfantry[troop2.PictureRef];
+                            break;
+                        case TroopType.Armored:
+                            bitmap3 = _TroopImagesFadedArmored[troop2.PictureRef];
+                            break;
+                        case TroopType.Artillery:
+                            bitmap3 = _TroopImagesFadedArtillery[troop2.PictureRef];
+                            break;
+                        case TroopType.SpecialForces:
+                            bitmap3 = _TroopImagesFadedSpecialForces[troop2.PictureRef];
+                            break;
+                        case TroopType.PirateRaider:
+                            bitmap3 = _TroopImagesFadedPirateRaider[troop2.PictureRef];
+                            break;
+                    }
+                    graphics.DrawImageUnscaled(bitmap3, point3);
+                    if (troop2.Empire == _Galaxy.PlayerEmpire)
+                    {
+                        string text2 = TextResolver.GetText("Recruiting") + " " + troop2.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop2);
+                        text2 = text2 + ", " + troop2.Empire.Name;
+                        if (troop2.Garrisoned)
+                        {
+                            text2 = text2 + ", " + TextResolver.GetText("Garrisoned");
+                        }
+                        text2 += ")";
+                        AddHotspot(new Rectangle(point3.X, point3.Y, num11, bitmap3.Height), troop2, text2);
+                    }
+                    else
+                    {
+                        AddHotspot(new Rectangle(point3.X, point3.Y, num11, bitmap3.Height), null, TextResolver.GetText("Recruiting") + " " + troop2.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop2) + ", " + troop2.Empire.Name + ")");
+                    }
+                    num13 += num11;
                 }
             }
             if (troops.Count > 0)
             {
-                int num13 = num11;
-                for (int index = 0; index < troops.Count; ++index)
+                int num15 = num13;
+                for (int l = 0; l < troops.Count; l++)
                 {
-                    Troop troop = troops[index];
-                    if (troop != null && troop.Garrisoned)
+                    Troop troop3 = troops[l];
+                    if (troop3 != null && troop3.Garrisoned)
                     {
-                        Point point = new Point(location.X + num11, location.Y);
-                        Bitmap imagesSpecialForce = this._TroopImagesInfantry[troop.PictureRef];
-                        switch (troop.Type)
+                        Point point4 = new Point(location.X + num13, location.Y);
+                        Bitmap bitmap4 = _TroopImagesInfantry[troop3.PictureRef];
+                        switch (troop3.Type)
                         {
                             case TroopType.Infantry:
-                                imagesSpecialForce = this._TroopImagesInfantry[troop.PictureRef];
+                                bitmap4 = _TroopImagesInfantry[troop3.PictureRef];
                                 break;
                             case TroopType.Armored:
-                                imagesSpecialForce = this._TroopImagesArmored[troop.PictureRef];
+                                bitmap4 = _TroopImagesArmored[troop3.PictureRef];
                                 break;
                             case TroopType.Artillery:
-                                imagesSpecialForce = this._TroopImagesArtillery[troop.PictureRef];
+                                bitmap4 = _TroopImagesArtillery[troop3.PictureRef];
                                 break;
                             case TroopType.SpecialForces:
-                                imagesSpecialForce = this._TroopImagesSpecialForces[troop.PictureRef];
+                                bitmap4 = _TroopImagesSpecialForces[troop3.PictureRef];
                                 break;
                             case TroopType.PirateRaider:
-                                imagesSpecialForce = this._TroopImagesPirateRaider[troop.PictureRef];
+                                bitmap4 = _TroopImagesPirateRaider[troop3.PictureRef];
                                 break;
                         }
-                        using (SolidBrush solidBrush3 = new SolidBrush(Color.FromArgb(0, 128, 0)))
-                            graphics.FillRectangle((Brush)solidBrush3, point.X, point.Y, imagesSpecialForce.Width, imagesSpecialForce.Height);
+                        using SolidBrush brush2 = new SolidBrush(Color.FromArgb(0, 128, 0));
+                        graphics.FillRectangle(brush2, point4.X, point4.Y, bitmap4.Width, bitmap4.Height);
                     }
-                    num11 += width2;
+                    num13 += num11;
                 }
-                num11 = num13;
+                num13 = num15;
             }
             if (troops.Count > 0)
             {
-                for (int index = 0; index < troops.Count; ++index)
+                for (int m = 0; m < troops.Count; m++)
                 {
-                    Troop troop = troops[index];
-                    if (troop != null)
+                    Troop troop4 = troops[m];
+                    if (troop4 == null)
                     {
-                        Point point = new Point(location.X + num11, location.Y);
-                        Bitmap imagesSpecialForce = this._TroopImagesInfantry[troop.PictureRef];
-                        switch (troop.Type)
-                        {
-                            case TroopType.Infantry:
-                                imagesSpecialForce = this._TroopImagesInfantry[troop.PictureRef];
-                                break;
-                            case TroopType.Armored:
-                                imagesSpecialForce = this._TroopImagesArmored[troop.PictureRef];
-                                break;
-                            case TroopType.Artillery:
-                                imagesSpecialForce = this._TroopImagesArtillery[troop.PictureRef];
-                                break;
-                            case TroopType.SpecialForces:
-                                imagesSpecialForce = this._TroopImagesSpecialForces[troop.PictureRef];
-                                break;
-                            case TroopType.PirateRaider:
-                                imagesSpecialForce = this._TroopImagesPirateRaider[troop.PictureRef];
-                                break;
-                        }
-                        graphics.DrawImageUnscaled((Image)imagesSpecialForce, point);
-                        if (troop.Empire == this._Galaxy.PlayerEmpire)
-                        {
-                            string str = troop.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop) + ", " + troop.Empire.Name;
-                            if (troop.Garrisoned)
-                                str = str + ", " + TextResolver.GetText("Garrisoned");
-                            string message = str + ")";
-                            this.AddHotspot(new Rectangle(point.X, point.Y, width2, imagesSpecialForce.Height), (object)troop, message);
-                        }
-                        else if (troop.Empire != null)
-                            this.AddHotspot(new Rectangle(point.X, point.Y, width2, imagesSpecialForce.Height), (object)null, troop.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop) + ", " + troop.Empire.Name + ")");
-                        else
-                            this.AddHotspot(new Rectangle(point.X, point.Y, width2, imagesSpecialForce.Height), (object)null, troop.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop) + ", " + TextResolver.GetText("No Empire") + ")");
-                        num11 += width2;
+                        continue;
                     }
+                    Point point5 = new Point(location.X + num13, location.Y);
+                    Bitmap bitmap5 = _TroopImagesInfantry[troop4.PictureRef];
+                    switch (troop4.Type)
+                    {
+                        case TroopType.Infantry:
+                            bitmap5 = _TroopImagesInfantry[troop4.PictureRef];
+                            break;
+                        case TroopType.Armored:
+                            bitmap5 = _TroopImagesArmored[troop4.PictureRef];
+                            break;
+                        case TroopType.Artillery:
+                            bitmap5 = _TroopImagesArtillery[troop4.PictureRef];
+                            break;
+                        case TroopType.SpecialForces:
+                            bitmap5 = _TroopImagesSpecialForces[troop4.PictureRef];
+                            break;
+                        case TroopType.PirateRaider:
+                            bitmap5 = _TroopImagesPirateRaider[troop4.PictureRef];
+                            break;
+                    }
+                    graphics.DrawImageUnscaled(bitmap5, point5);
+                    if (troop4.Empire == _Galaxy.PlayerEmpire)
+                    {
+                        string text3 = troop4.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop4);
+                        text3 = text3 + ", " + troop4.Empire.Name;
+                        if (troop4.Garrisoned)
+                        {
+                            text3 = text3 + ", " + TextResolver.GetText("Garrisoned");
+                        }
+                        text3 += ")";
+                        AddHotspot(new Rectangle(point5.X, point5.Y, num11, bitmap5.Height), troop4, text3);
+                    }
+                    else if (troop4.Empire != null)
+                    {
+                        AddHotspot(new Rectangle(point5.X, point5.Y, num11, bitmap5.Height), null, troop4.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop4) + ", " + troop4.Empire.Name + ")");
+                    }
+                    else
+                    {
+                        AddHotspot(new Rectangle(point5.X, point5.Y, num11, bitmap5.Height), null, troop4.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop4) + ", " + TextResolver.GetText("No Empire") + ")");
+                    }
+                    num13 += num11;
                 }
-                num11 += num8;
+                num13 += num9;
             }
             if (troopsInvading.Count > 0 || invadingCharacters.Count > 0)
             {
-                using (SolidBrush solidBrush4 = new SolidBrush(Color.Red))
+                using SolidBrush brush3 = new SolidBrush(Color.Red);
+                int num16 = invadingCharacters.Count * num11 + troopsInvading.Count * num11 + 6;
+                if (troopsInvading.Count > 0 && invadingCharacters.Count > 0)
                 {
-                    int width3 = invadingCharacters.Count * width2 + troopsInvading.Count * width2 + 6;
-                    if (troopsInvading.Count > 0 && invadingCharacters.Count > 0)
-                        width3 += num8;
-                    Rectangle rect2 = new Rectangle(location.X + num11, location.Y, width3, this._ImageSize);
-                    graphics.FillRectangle((Brush)solidBrush4, rect2);
+                    num16 += num9;
                 }
+                Rectangle rect2 = new Rectangle(location.X + num13, location.Y, num16, _ImageSize);
+                graphics.FillRectangle(brush3, rect2);
             }
             if (troopsInvading.Count > 0)
             {
-                for (int index = 0; index < troopsInvading.Count; ++index)
+                for (int n = 0; n < troopsInvading.Count; n++)
                 {
-                    Troop troop = troopsInvading[index];
-                    if (troop != null)
+                    Troop troop5 = troopsInvading[n];
+                    if (troop5 == null)
                     {
-                        Point point = new Point(location.X + num11, location.Y);
-                        Bitmap imagesSpecialForce = this._TroopImagesInfantry[troop.PictureRef];
-                        switch (troop.Type)
-                        {
-                            case TroopType.Infantry:
-                                imagesSpecialForce = this._TroopImagesInfantry[troop.PictureRef];
-                                break;
-                            case TroopType.Armored:
-                                imagesSpecialForce = this._TroopImagesArmored[troop.PictureRef];
-                                break;
-                            case TroopType.Artillery:
-                                imagesSpecialForce = this._TroopImagesArtillery[troop.PictureRef];
-                                break;
-                            case TroopType.SpecialForces:
-                                imagesSpecialForce = this._TroopImagesSpecialForces[troop.PictureRef];
-                                break;
-                            case TroopType.PirateRaider:
-                                imagesSpecialForce = this._TroopImagesPirateRaider[troop.PictureRef];
-                                break;
-                        }
-                        graphics.DrawImageUnscaled((Image)imagesSpecialForce, point);
-                        if (troop.Empire == this._Galaxy.PlayerEmpire)
-                        {
-                            string message = TextResolver.GetText("Invading").ToUpper(CultureInfo.InvariantCulture) + " " + troop.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop) + ", " + troop.Empire.Name + ")";
-                            this.AddHotspot(new Rectangle(point.X, point.Y, width2, imagesSpecialForce.Height), (object)troop, message);
-                        }
-                        else
-                        {
-                            string str = TextResolver.GetText("Invading").ToUpper(CultureInfo.InvariantCulture) + " " + troop.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop);
-                            if (troop.Empire != null)
-                                str = str + ", " + troop.Empire.Name;
-                            string message = str + ")";
-                            this.AddHotspot(new Rectangle(point.X, point.Y, width2, imagesSpecialForce.Height), (object)null, message);
-                        }
-                        num11 += width2;
+                        continue;
                     }
+                    Point point6 = new Point(location.X + num13, location.Y);
+                    Bitmap bitmap6 = _TroopImagesInfantry[troop5.PictureRef];
+                    switch (troop5.Type)
+                    {
+                        case TroopType.Infantry:
+                            bitmap6 = _TroopImagesInfantry[troop5.PictureRef];
+                            break;
+                        case TroopType.Armored:
+                            bitmap6 = _TroopImagesArmored[troop5.PictureRef];
+                            break;
+                        case TroopType.Artillery:
+                            bitmap6 = _TroopImagesArtillery[troop5.PictureRef];
+                            break;
+                        case TroopType.SpecialForces:
+                            bitmap6 = _TroopImagesSpecialForces[troop5.PictureRef];
+                            break;
+                        case TroopType.PirateRaider:
+                            bitmap6 = _TroopImagesPirateRaider[troop5.PictureRef];
+                            break;
+                    }
+                    graphics.DrawImageUnscaled(bitmap6, point6);
+                    if (troop5.Empire == _Galaxy.PlayerEmpire)
+                    {
+                        string text4 = TextResolver.GetText("Invading").ToUpper(CultureInfo.InvariantCulture) + " " + troop5.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop5);
+                        text4 = text4 + ", " + troop5.Empire.Name + ")";
+                        AddHotspot(new Rectangle(point6.X, point6.Y, num11, bitmap6.Height), troop5, text4);
+                    }
+                    else
+                    {
+                        string text5 = TextResolver.GetText("Invading").ToUpper(CultureInfo.InvariantCulture) + " " + troop5.Name + " (" + Galaxy.ResolveTroopStrengthDescription(troop5);
+                        if (troop5.Empire != null)
+                        {
+                            text5 = text5 + ", " + troop5.Empire.Name;
+                        }
+                        text5 += ")";
+                        AddHotspot(new Rectangle(point6.X, point6.Y, num11, bitmap6.Height), null, text5);
+                    }
+                    num13 += num11;
                 }
-                num11 += num8;
+                num13 += num9;
             }
             if (invadingCharacters.Count > 0)
             {
-                for (int index = 0; index < invadingCharacters.Count; ++index)
+                for (int num17 = 0; num17 < invadingCharacters.Count; num17++)
                 {
-                    Character invadingCharacter = invadingCharacters[index];
-                    if (invadingCharacter != null)
+                    Character character2 = invadingCharacters[num17];
+                    if (character2 == null)
                     {
-                        Point point = new Point(location.X + num11, location.Y);
-                        Bitmap characterImageVerySmall = InfoPanel._CharacterImageCache.ObtainCharacterImageVerySmall(invadingCharacter);
-                        if (characterImageVerySmall != null && characterImageVerySmall.PixelFormat != PixelFormat.Undefined)
-                        {
-                            graphics.DrawImageUnscaled((Image)characterImageVerySmall, point);
-                            if (invadingCharacter.Empire == this._Galaxy.PlayerEmpire)
-                            {
-                                this.AddHotspot(new Rectangle(point.X, point.Y, width2, characterImageVerySmall.Height), (object)invadingCharacter, TextResolver.GetText("Invading").ToUpper(CultureInfo.InvariantCulture) + " " + invadingCharacter.Name + " (" + invadingCharacter.Empire.Name + ")");
-                            }
-                            else
-                            {
-                                string str = string.Empty;
-                                if (invadingCharacter.Empire != null)
-                                    str = invadingCharacter.Empire.Name;
-                                this.AddHotspot(new Rectangle(point.X, point.Y, width2, characterImageVerySmall.Height), (object)null, TextResolver.GetText("Invading").ToUpper(CultureInfo.InvariantCulture) + " " + invadingCharacter.Name + " (" + str + ")");
-                            }
-                            num11 += width2;
-                        }
+                        continue;
                     }
+                    Point point7 = new Point(location.X + num13, location.Y);
+                    Bitmap bitmap7 = _CharacterImageCache.ObtainCharacterImageVerySmall(character2);
+                    if (bitmap7 == null || bitmap7.PixelFormat == PixelFormat.Undefined)
+                    {
+                        continue;
+                    }
+                    graphics.DrawImageUnscaled(bitmap7, point7);
+                    if (character2.Empire == _Galaxy.PlayerEmpire)
+                    {
+                        AddHotspot(new Rectangle(point7.X, point7.Y, num11, bitmap7.Height), character2, TextResolver.GetText("Invading").ToUpper(CultureInfo.InvariantCulture) + " " + character2.Name + " (" + character2.Empire.Name + ")");
+                    }
+                    else
+                    {
+                        string text6 = string.Empty;
+                        if (character2.Empire != null)
+                        {
+                            text6 = character2.Empire.Name;
+                        }
+                        AddHotspot(new Rectangle(point7.X, point7.Y, num11, bitmap7.Height), null, TextResolver.GetText("Invading").ToUpper(CultureInfo.InvariantCulture) + " " + character2.Name + " (" + text6 + ")");
+                    }
+                    num13 += num11;
                 }
-                int num14 = num11 + num8;
+                num13 += num9;
             }
-            solidBrush1.Dispose();
+            solidBrush.Dispose();
         }
 
-        public void DrawFighters(
-          int labelWidth,
-          FighterList fighters,
-          Graphics graphics,
-          Point location,
-          int overallWidth)
+        public void DrawFighters(int labelWidth, FighterList fighters, Graphics graphics, Point location, int overallWidth)
         {
-            int width1 = (int)graphics.MeasureString(TextResolver.GetText("Fighters"), this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (labelWidth - width1), location.Y - 2);
+            int num = (int)graphics.MeasureString(TextResolver.GetText("Fighters"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
             labelWidth += 10;
-            int num1 = overallWidth - labelWidth;
+            int num2 = overallWidth - labelWidth;
             if (fighters == null)
-                fighters = new FighterList();
-            int num2 = fighters.Count * this._ImageSize;
-            int num3 = this._ImageSize / 2;
-            int num4 = num2;
-            int width2 = this._ImageSize;
-            if (num4 > num1)
             {
-                int num5 = num4 - num3 * 3;
-                int val2 = (int)(((double)num1 - (double)num3 * 3.0) / (double)num5 * (double)this._ImageSize);
-                if (val2 > this._ImageSize)
-                    val2 = this._ImageSize;
-                width2 = Math.Max(1, val2);
+                fighters = new FighterList();
             }
-            this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Fighters"), this._NormalFontBold, location1);
-            int num6 = labelWidth;
-            SolidBrush solidBrush1 = new SolidBrush(Color.FromArgb(190, 24, 24, 32));
-            Rectangle rect1 = new Rectangle(location.X + labelWidth, location.Y, overallWidth - labelWidth, this._ImageSize);
-            graphics.FillRectangle((Brush)solidBrush1, rect1);
+            int num3 = fighters.Count * _ImageSize;
+            int num4 = _ImageSize / 2;
+            int num5 = num3;
+            int num6 = _ImageSize;
+            if (num5 > num2)
+            {
+                int num7 = num5 - num4 * 3;
+                num6 = (int)(((double)num2 - (double)num4 * 3.0) / (double)num7 * (double)_ImageSize);
+                if (num6 > _ImageSize)
+                {
+                    num6 = _ImageSize;
+                }
+                num6 = Math.Max(1, num6);
+            }
+            DrawStringWithDropShadow(graphics, TextResolver.GetText("Fighters"), _NormalFontBold, location2);
+            int num8 = labelWidth;
+            Color color = Color.FromArgb(190, 24, 24, 32);
+            SolidBrush solidBrush = new SolidBrush(color);
+            Rectangle rect = new Rectangle(location.X + labelWidth, location.Y, overallWidth - labelWidth, _ImageSize);
+            graphics.FillRectangle(solidBrush, rect);
             if (fighters.Count == 0)
             {
-                this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", this._NormalFont, new Point(location.X + labelWidth, location.Y));
+                DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, new Point(location.X + labelWidth, location.Y));
             }
             else
             {
-                FighterList fighterList1 = new FighterList();
+                FighterList fighterList = new FighterList();
                 FighterList fighterList2 = new FighterList();
                 FighterList fighterList3 = new FighterList();
-                for (int index = 0; index < fighters.Count; ++index)
+                for (int i = 0; i < fighters.Count; i++)
                 {
-                    if (fighters[index].OnboardCarrier)
+                    if (fighters[i].OnboardCarrier)
                     {
-                        if (fighters[index].UnderConstruction)
-                            fighterList1.Add(fighters[index]);
+                        if (fighters[i].UnderConstruction)
+                        {
+                            fighterList.Add(fighters[i]);
+                        }
                         else
-                            fighterList2.Add(fighters[index]);
+                        {
+                            fighterList2.Add(fighters[i]);
+                        }
                     }
                     else
-                        fighterList3.Add(fighters[index]);
-                }
-                for (int index = 0; index < fighterList3.Count; ++index)
-                {
-                    if ((double)fighterList3[index].Health < 1.0)
                     {
-                        using (SolidBrush solidBrush2 = new SolidBrush(Color.Red))
-                        {
-                            Rectangle rect2 = new Rectangle(location.X + num6, location.Y, this._ImageSize, this._ImageSize);
-                            graphics.FillRectangle((Brush)solidBrush2, rect2);
-                        }
+                        fighterList3.Add(fighters[i]);
                     }
-                    Point point = new Point(location.X + num6, location.Y);
-                    graphics.DrawImageUnscaled((Image)this._FighterImages[(int)fighterList3[index].PictureRef], point);
-                    this.AddHotspot(new Rectangle(point.X, point.Y, width2, this._FighterImages[(int)fighterList3[index].PictureRef].Height), (object)fighterList3[index], fighterList3[index].Name + " (" + Galaxy.ResolveMissionDescription(fighterList3[index]) + ")");
-                    num6 += width2;
                 }
-                int num7 = num6 + num3;
-                for (int index = 0; index < fighterList2.Count; ++index)
+                for (int j = 0; j < fighterList3.Count; j++)
                 {
-                    if ((double)fighterList2[index].Health < 1.0 && !fighterList2[index].UnderConstruction)
+                    if (fighterList3[j].Health < 1f)
                     {
-                        using (SolidBrush solidBrush3 = new SolidBrush(Color.Red))
-                        {
-                            Rectangle rect3 = new Rectangle(location.X + num7, location.Y, this._ImageSize, this._ImageSize);
-                            graphics.FillRectangle((Brush)solidBrush3, rect3);
-                        }
+                        using SolidBrush brush = new SolidBrush(Color.Red);
+                        Rectangle rect2 = new Rectangle(location.X + num8, location.Y, _ImageSize, _ImageSize);
+                        graphics.FillRectangle(brush, rect2);
                     }
-                    Point point = new Point(location.X + num7, location.Y);
-                    graphics.DrawImageUnscaled((Image)this._FighterImages[(int)fighterList2[index].PictureRef], point);
-                    string str = string.Empty;
-                    if (fighterList2[index].ParentBuiltObject != null)
-                        str = " (" + TextResolver.GetText("Onboard") + " " + fighterList2[index].ParentBuiltObject.Name + ")";
-                    this.AddHotspot(new Rectangle(point.X, point.Y, width2, this._FighterImages[(int)fighterList2[index].PictureRef].Height), (object)fighterList2[index], fighterList2[index].Name + str);
-                    num7 += width2;
-                }
-                int num8 = num7 + num3;
-                for (int index = 0; index < fighterList1.Count; ++index)
-                {
                     Point point = new Point(location.X + num8, location.Y);
-                    graphics.DrawImageUnscaled((Image)this._FighterImagesFaded[(int)fighterList1[index].PictureRef], point);
-                    this.AddHotspot(new Rectangle(point.X, point.Y, width2, this._FighterImagesFaded[(int)fighterList1[index].PictureRef].Height), (object)fighterList1[index], fighterList1[index].Name + " (" + TextResolver.GetText("Building") + ")");
-                    num8 += width2;
+                    graphics.DrawImageUnscaled(_FighterImages[fighterList3[j].PictureRef], point);
+                    AddHotspot(new Rectangle(point.X, point.Y, num6, _FighterImages[fighterList3[j].PictureRef].Height), fighterList3[j], fighterList3[j].Name + " (" + Galaxy.ResolveMissionDescription(fighterList3[j]) + ")");
+                    num8 += num6;
+                }
+                num8 += num4;
+                for (int k = 0; k < fighterList2.Count; k++)
+                {
+                    if (fighterList2[k].Health < 1f && !fighterList2[k].UnderConstruction)
+                    {
+                        using SolidBrush brush2 = new SolidBrush(Color.Red);
+                        Rectangle rect3 = new Rectangle(location.X + num8, location.Y, _ImageSize, _ImageSize);
+                        graphics.FillRectangle(brush2, rect3);
+                    }
+                    Point point2 = new Point(location.X + num8, location.Y);
+                    graphics.DrawImageUnscaled(_FighterImages[fighterList2[k].PictureRef], point2);
+                    string text = string.Empty;
+                    if (fighterList2[k].ParentBuiltObject != null)
+                    {
+                        text = " (" + TextResolver.GetText("Onboard") + " " + fighterList2[k].ParentBuiltObject.Name + ")";
+                    }
+                    AddHotspot(new Rectangle(point2.X, point2.Y, num6, _FighterImages[fighterList2[k].PictureRef].Height), fighterList2[k], fighterList2[k].Name + text);
+                    num8 += num6;
+                }
+                num8 += num4;
+                for (int l = 0; l < fighterList.Count; l++)
+                {
+                    Point point3 = new Point(location.X + num8, location.Y);
+                    graphics.DrawImageUnscaled(_FighterImagesFaded[fighterList[l].PictureRef], point3);
+                    AddHotspot(new Rectangle(point3.X, point3.Y, num6, _FighterImagesFaded[fighterList[l].PictureRef].Height), fighterList[l], fighterList[l].Name + " (" + TextResolver.GetText("Building") + ")");
+                    num8 += num6;
                 }
             }
-            solidBrush1.Dispose();
+            solidBrush.Dispose();
         }
 
-        private int DrawPopulation(
-          int labelWidth,
-          Habitat habitat,
-          PopulationList populations,
-          Graphics graphics,
-          Point location,
-          int overallWidth,
-          int rowHeight)
+        private int DrawPopulation(int labelWidth, Habitat habitat, PopulationList populations, Graphics graphics, Point location, int overallWidth, int rowHeight)
         {
-            using (SolidBrush textBrush = new SolidBrush(this._WhiteColor))
-                return this.DrawPopulation(labelWidth, habitat, populations, graphics, location, overallWidth, rowHeight, textBrush);
+            using SolidBrush textBrush = new SolidBrush(_WhiteColor);
+            return DrawPopulation(labelWidth, habitat, populations, graphics, location, overallWidth, rowHeight, textBrush);
         }
 
-        private int DrawPopulation(
-          int labelWidth,
-          Habitat habitat,
-          PopulationList populations,
-          Graphics graphics,
-          Point location,
-          int overallWidth,
-          int rowHeight,
-          SolidBrush textBrush)
+        private int DrawPopulation(int labelWidth, Habitat habitat, PopulationList populations, Graphics graphics, Point location, int overallWidth, int rowHeight, SolidBrush textBrush)
         {
             if (populations != null)
             {
                 populations.Sort();
                 populations.Reverse();
             }
-            int width = (int)graphics.MeasureString(TextResolver.GetText("Populace"), this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (labelWidth - width), location.Y - 2);
-            this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Populace"), this._NormalFontBold, location1);
+            int num = (int)graphics.MeasureString(TextResolver.GetText("Populace"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            DrawStringWithDropShadow(location: new Point(location.X + (labelWidth - num), location.Y - 2), graphics: graphics, text: TextResolver.GetText("Populace"), font: _NormalFontBold);
             labelWidth += 10;
-            int num1 = 0;
-            for (int index1 = 0; index1 < populations.Count; ++index1)
+            int num2 = 0;
+            for (int i = 0; i < populations.Count; i++)
             {
-                Population population = populations[index1];
-                int num2 = labelWidth;
-                SolidBrush solidBrush = new SolidBrush(Color.FromArgb(190, 24, 24, 32));
-                Rectangle rect = new Rectangle(location.X + num2, location.Y + num1, overallWidth - num2 + 4, this._ImageSize);
-                graphics.FillRectangle((Brush)solidBrush, rect);
-                Bitmap bitmap = this._RaceImages[population.Race.PictureRef];
-                string s = population.Race.Name;
-                //string text1 = BaconInfoPanel.FormatForLargeNumbers(population.Amount);
-                string text1 = InfoPanel.OnFormatForLargeNumbersMods(population.Amount);
-                string text2 = ((double)population.GrowthRate - 1.0).ToString("+#0%;-#0%;0%");
+                Population population = populations[i];
+                int num3 = labelWidth;
+                Color color = Color.FromArgb(190, 24, 24, 32);
+                SolidBrush solidBrush = new SolidBrush(color);
+                Rectangle rect = new Rectangle(location.X + num3, location.Y + num2, overallWidth - num3 + 4, _ImageSize);
+                graphics.FillRectangle(solidBrush, rect);
+                Bitmap bitmap = _RaceImages[population.Race.PictureRef];
+                string name = population.Race.Name;
+                string text = BaconInfoPanel.FormatForLargeNumbers(population.Amount);
+                string text2 = ((double)(population.GrowthRate - 1f)).ToString("+#0%;-#0%;0%");
                 bool flag = false;
                 if (populations.TotalAmount >= habitat.MaximumPopulation)
                 {
                     flag = true;
                     text2 = TextResolver.GetText("Maximum Abbreviation");
                 }
-                if (index1 == 1 && populations.Count > 2)
+                if (i == 1 && populations.Count > 2)
                 {
-                    bitmap = (Bitmap)null;
-                    s = TextResolver.GetText("Others");
-                    long num3 = 0;
-                    for (int index2 = 1; index2 < populations.Count; ++index2)
-                        num3 += Math.Max(0L, populations[index2].Amount);
-                    //text1 = BaconInfoPanel.FormatForLargeNumbers(num3);
-                    text1 = InfoPanel.OnFormatForLargeNumbersMods(num3);
+                    bitmap = null;
+                    name = TextResolver.GetText("Others");
+                    long num4 = 0L;
+                    for (int j = 1; j < populations.Count; j++)
+                    {
+                        num4 += Math.Max(0L, populations[j].Amount);
+                    }
+                    text = BaconInfoPanel.FormatForLargeNumbers(num4);
                     text2 = string.Empty;
                 }
-                else if (index1 > 1)
+                else if (i > 1)
+                {
                     break;
-                Point point = new Point(location.X + num2, location.Y + num1);
+                }
+                Point point = new Point(location.X + num3, location.Y + num2);
                 if (bitmap != null)
                 {
-                    graphics.DrawImageUnscaled((Image)bitmap, point);
-                    if (s != TextResolver.GetText("Others"))
-                        this.AddHotspot(new Rectangle(point, bitmap.Size), (object)population.Race, s + " (" + TextResolver.GetText("click for details") + ")");
+                    graphics.DrawImageUnscaled(bitmap, point);
+                    if (name != TextResolver.GetText("Others"))
+                    {
+                        AddHotspot(new Rectangle(point, bitmap.Size), population.Race, name + " (" + TextResolver.GetText("click for details") + ")");
+                    }
                 }
-                int num4 = num2 + this._ImageSize;
-                point = new Point(location.X + num4, location.Y + num1);
-                Rectangle rectangle = new Rectangle(point.X, point.Y + 1, this._PopulationTextWidth, this._ImageSize);
-                StringFormat format = new StringFormat();
-                format.Trimming = StringTrimming.EllipsisCharacter;
-                graphics.DrawString(s, this._NormalFont, (Brush)this._BlackBrush, (RectangleF)rectangle, format);
-                rectangle = new Rectangle(point.X - 1, point.Y, this._PopulationTextWidth, this._ImageSize);
-                graphics.DrawString(s, this._NormalFont, (Brush)textBrush, (RectangleF)rectangle, format);
-                if (s != TextResolver.GetText("Others"))
-                    this.AddHotspot(rectangle, (object)population.Race, s + " (" + TextResolver.GetText("click for details") + ")");
-                int num5 = num4 + this._PopulationTextWidth;
-                point = new Point(location.X + num5, location.Y + num1);
-                this.DrawStringWithDropShadow(graphics, text1, this._NormalFont, point, textBrush);
-                int num6 = num5 + this._PopulationAmountWidth;
-                point = new Point(location.X + num6, location.Y + num1);
+                num3 += _ImageSize;
+                point = new Point(location.X + num3, location.Y + num2);
+                Rectangle rectangle = new Rectangle(point.X, point.Y + 1, _PopulationTextWidth, _ImageSize);
+                StringFormat stringFormat = new StringFormat();
+                stringFormat.Trimming = StringTrimming.EllipsisCharacter;
+                graphics.DrawString(name, _NormalFont, _BlackBrush, rectangle, stringFormat);
+                rectangle = new Rectangle(point.X - 1, point.Y, _PopulationTextWidth, _ImageSize);
+                graphics.DrawString(name, _NormalFont, textBrush, rectangle, stringFormat);
+                if (name != TextResolver.GetText("Others"))
+                {
+                    AddHotspot(rectangle, population.Race, name + " (" + TextResolver.GetText("click for details") + ")");
+                }
+                num3 += _PopulationTextWidth;
+                DrawStringWithDropShadow(location: new Point(location.X + num3, location.Y + num2), graphics: graphics, text: text, font: _NormalFont, brush: textBrush);
+                num3 += _PopulationAmountWidth;
+                point = new Point(location.X + num3, location.Y + num2);
                 if (flag)
-                    this.DrawStringRedWithDropShadow(graphics, text2, this._NormalFont, point);
+                {
+                    DrawStringRedWithDropShadow(graphics, text2, _NormalFont, point);
+                }
                 else
-                    this.DrawStringWithDropShadow(graphics, text2, this._NormalFont, point, textBrush);
+                {
+                    DrawStringWithDropShadow(graphics, text2, _NormalFont, point, textBrush);
+                }
                 solidBrush.Dispose();
-                num1 += rowHeight;
+                num2 += rowHeight;
             }
             if (populations.Count > 1)
             {
-                int num7 = labelWidth + this._ImageSize;
-                Point location2 = new Point(location.X + num7, location.Y + num1);
-                this.DrawStringWithDropShadow(graphics, TextResolver.GetText("TOTAL") + ":", this._NormalFont, location2, textBrush);
-                int num8 = num7 + this._PopulationTextWidth;
-                location2 = new Point(location.X + num8, location.Y + num1);
-                this.DrawStringWithDropShadow(graphics, populations.TotalAmount.ToString("0,,") + "M", this._NormalFont, location2, textBrush);
-                int num9 = num8 + this._PopulationAmountWidth;
-                location2 = new Point(location.X + num9, location.Y + num1);
+                int num5 = labelWidth + _ImageSize;
+                DrawStringWithDropShadow(location: new Point(location.X + num5, location.Y + num2), graphics: graphics, text: TextResolver.GetText("TOTAL") + ":", font: _NormalFont, brush: textBrush);
+                num5 += _PopulationTextWidth;
+                DrawStringWithDropShadow(location: new Point(location.X + num5, location.Y + num2), graphics: graphics, text: populations.TotalAmount.ToString("0,,") + "M", font: _NormalFont, brush: textBrush);
+                num5 += _PopulationAmountWidth;
+                Point location6 = new Point(location.X + num5, location.Y + num2);
                 if (populations.TotalAmount >= habitat.MaximumPopulation)
                 {
-                    this.DrawStringRedWithDropShadow(graphics, TextResolver.GetText("Maximum Abbreviation"), this._NormalFont, location2);
+                    DrawStringRedWithDropShadow(graphics, TextResolver.GetText("Maximum Abbreviation"), _NormalFont, location6);
                 }
                 else
                 {
-                    double num10 = populations.OverallGrowthRate - 1.0;
-                    this.DrawStringWithDropShadow(graphics, num10.ToString("+#0%;-#0%;0%"), this._NormalFont, location2, textBrush);
+                    DrawStringWithDropShadow(graphics, (populations.OverallGrowthRate - 1.0).ToString("+#0%;-#0%;0%"), _NormalFont, location6, textBrush);
                 }
-                num1 += rowHeight;
+                num2 += rowHeight;
             }
-            if (num1 == 0)
-                num1 = rowHeight;
-            return num1;
+            if (num2 == 0)
+            {
+                num2 = rowHeight;
+            }
+            return num2;
         }
 
-        private void DrawResources(
-          int labelWidth,
-          HabitatResourceList resources,
-          Graphics graphics,
-          Point location,
-          int overallWidth)
+        private void DrawResources(int labelWidth, HabitatResourceList resources, Graphics graphics, Point location, int overallWidth)
         {
-            using (SolidBrush textBrush = new SolidBrush(this._WhiteColor))
-                this.DrawResources(labelWidth, resources, graphics, location, overallWidth, textBrush);
+            using SolidBrush textBrush = new SolidBrush(_WhiteColor);
+            DrawResources(labelWidth, resources, graphics, location, overallWidth, textBrush);
         }
 
-        private void DrawResources(
-          int labelWidth,
-          HabitatResourceList resources,
-          Graphics graphics,
-          Point location,
-          int overallWidth,
-          SolidBrush textBrush)
+        private void DrawResources(int labelWidth, HabitatResourceList resources, Graphics graphics, Point location, int overallWidth, SolidBrush textBrush)
         {
-            int width1 = (int)graphics.MeasureString(TextResolver.GetText("Resource"), this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (labelWidth - width1), location.Y - 2);
-            this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Resource"), this._NormalFontBold, location1);
+            int num = (int)graphics.MeasureString(TextResolver.GetText("Resource"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            DrawStringWithDropShadow(location: new Point(location.X + (labelWidth - num), location.Y - 2), graphics: graphics, text: TextResolver.GetText("Resource"), font: _NormalFontBold);
             labelWidth += 10;
             overallWidth += 5;
-            SolidBrush solidBrush = new SolidBrush(Color.FromArgb(190, 24, 24, 32));
-            Rectangle rect = new Rectangle(location.X + labelWidth, location.Y, overallWidth - labelWidth, this._ImageSize);
-            graphics.FillRectangle((Brush)solidBrush, rect);
-            int num1 = labelWidth;
-            Point location2 = new Point(location.X + num1, location.Y);
+            Color color = Color.FromArgb(190, 24, 24, 32);
+            SolidBrush solidBrush = new SolidBrush(color);
+            Rectangle rect = new Rectangle(location.X + labelWidth, location.Y, overallWidth - labelWidth, _ImageSize);
+            graphics.FillRectangle(solidBrush, rect);
+            int num2 = labelWidth;
+            Point location3 = new Point(location.X + num2, location.Y);
             if (resources == null || resources.Count == 0)
             {
-                this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", this._NormalFont, location2, textBrush);
+                DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, location3, textBrush);
+                return;
             }
-            else
+            int num3 = 3;
+            HabitatResourceList habitatResourceList = resources.Clone();
+            for (int i = 0; i < habitatResourceList.Count; i++)
             {
-                int num2 = 3;
-                HabitatResourceList habitatResourceList = resources.Clone();
-                for (int index = 0; index < habitatResourceList.Count; ++index)
-                {
-                    int width2 = this._ResourceImages[habitatResourceList[index].PictureRef].Width;
-                    string text = ((double)habitatResourceList[index].Abundance / 1000.0).ToString("0%");
-                    int width3 = (int)graphics.MeasureString(text, this._TinyFont).Width;
-                    location2 = new Point(location.X + num1, location.Y);
-                    int num3 = Math.Max(0, (this._ImageSize - this._ResourceImages[habitatResourceList[index].PictureRef].Height) / 2);
-                    Point point = new Point(location2.X, location2.Y + num3);
-                    graphics.DrawImageUnscaled((Image)this._ResourceImages[habitatResourceList[index].PictureRef], point);
-                    this.AddHotspot(new Rectangle(point, this._ResourceImages[habitatResourceList[index].PictureRef].Size), (object)resources[index], habitatResourceList[index].Name + " (" + TextResolver.GetText("click for details") + ")");
-                    int num4 = num1 + (width2 - 2);
-                    location2 = new Point(location.X + num4, location.Y + 1);
-                    this.DrawStringWithDropShadow(graphics, text, this._TinyFont, location2, textBrush);
-                    num1 = num4 + width3 + num2;
-                }
-                solidBrush.Dispose();
+                int num4 = _ResourceImages[habitatResourceList[i].PictureRef].Width;
+                string text = ((double)habitatResourceList[i].Abundance / 1000.0).ToString("0%");
+                int num5 = (int)graphics.MeasureString(text, _TinyFont).Width;
+                location3 = new Point(location.X + num2, location.Y);
+                int num6 = Math.Max(0, (_ImageSize - _ResourceImages[habitatResourceList[i].PictureRef].Height) / 2);
+                Point point = new Point(location3.X, location3.Y + num6);
+                graphics.DrawImageUnscaled(_ResourceImages[habitatResourceList[i].PictureRef], point);
+                AddHotspot(new Rectangle(point, _ResourceImages[habitatResourceList[i].PictureRef].Size), resources[i], habitatResourceList[i].Name + " (" + TextResolver.GetText("click for details") + ")");
+                num2 += num4 - 2;
+                DrawStringWithDropShadow(location: new Point(location.X + num2, location.Y + 1), graphics: graphics, text: text, font: _TinyFont, brush: textBrush);
+                num2 += num5;
+                num2 += num3;
             }
+            solidBrush.Dispose();
         }
 
-        public void DrawBuiltObjectList(
-          int labelWidth,
-          string label,
-          BuiltObjectList builtObjects,
-          int waitingCount,
-          Graphics graphics,
-          Point location,
-          int overallWidth)
+        public void DrawBuiltObjectList(int labelWidth, string label, BuiltObjectList builtObjects, int waitingCount, Graphics graphics, Point location, int overallWidth)
         {
-            this.DrawBuiltObjectList(labelWidth, label, builtObjects, waitingCount, graphics, location, overallWidth, string.Empty);
+            DrawBuiltObjectList(labelWidth, label, builtObjects, waitingCount, graphics, location, overallWidth, string.Empty);
         }
 
-        public void DrawBuiltObjectList(
-          int labelWidth,
-          string label,
-          BuiltObjectList builtObjects,
-          int waitingCount,
-          Graphics graphics,
-          Point location,
-          int overallWidth,
-          string suffix)
+        public void DrawBuiltObjectList(int labelWidth, string label, BuiltObjectList builtObjects, int waitingCount, Graphics graphics, Point location, int overallWidth, string suffix)
         {
             graphics.InterpolationMode = InterpolationMode.Bilinear;
-            int width1 = (int)graphics.MeasureString(label, this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (labelWidth - width1), location.Y - 2);
+            int num = (int)graphics.MeasureString(label, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
             labelWidth += 10;
-            int num1 = overallWidth - labelWidth;
+            int num2 = overallWidth - labelWidth;
             if (builtObjects == null)
-                builtObjects = new BuiltObjectList();
-            int num2 = builtObjects.Count * this._ImageSize;
-            int num3 = this._ImageSize / 2;
-            string text = waitingCount.ToString() + " " + TextResolver.GetText("waiting");
-            int width2 = (int)graphics.MeasureString(text, this._NormalFont).Width;
-            int num4 = num2 + num3 + width2;
-            int num5 = this._ImageSize;
-            if (num4 > num1)
             {
-                int num6 = num4 - (num3 + width2);
-                num5 = (int)(((double)num1 - ((double)num3 + (double)width2)) / (double)num6 * (double)this._ImageSize);
-                if (num5 > this._ImageSize)
-                    num5 = this._ImageSize;
+                builtObjects = new BuiltObjectList();
             }
-            this.DrawStringWithDropShadow(graphics, label, this._NormalFontBold, location1);
-            int num7 = labelWidth;
-            Point location2 = new Point(location.X + num7, location.Y);
+            int num3 = builtObjects.Count * _ImageSize;
+            int num4 = _ImageSize / 2;
+            string text = waitingCount + " " + TextResolver.GetText("waiting");
+            int num5 = (int)graphics.MeasureString(text, _NormalFont).Width;
+            int num6 = num3 + num4 + num5;
+            int num7 = _ImageSize;
+            if (num6 > num2)
+            {
+                int num8 = num6 - (num4 + num5);
+                num7 = (int)(((double)num2 - ((double)num4 + (double)num5)) / (double)num8 * (double)_ImageSize);
+                if (num7 > _ImageSize)
+                {
+                    num7 = _ImageSize;
+                }
+            }
+            DrawStringWithDropShadow(graphics, label, _NormalFontBold, location2);
+            int num9 = labelWidth;
+            Point location3 = new Point(location.X + num9, location.Y);
             if (builtObjects.Count == 0)
             {
-                int width3 = (int)graphics.MeasureString("(" + TextResolver.GetText("None") + ")", this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", this._NormalFont, location2);
-                num7 += width3 + num3;
+                int num10 = (int)graphics.MeasureString("(" + TextResolver.GetText("None") + ")", _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, location3);
+                num9 += num10 + num4;
             }
             else
             {
                 graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                for (int index = 0; index < builtObjects.Count; ++index)
+                for (int i = 0; i < builtObjects.Count; i++)
                 {
-                    location2 = new Point(location.X + num7, location.Y);
-                    BuiltObject builtObject = builtObjects[index];
-                    if (builtObject != null)
+                    location3 = new Point(location.X + num9, location.Y);
+                    BuiltObject builtObject = builtObjects[i];
+                    if (builtObject == null)
                     {
-                        Bitmap bitmap = (Bitmap)null;
-                        if (this._BuiltObjectImages.Length > builtObject.PictureRef)
-                            bitmap = this._BuiltObjectImages[builtObject.PictureRef];
-                        string str = string.Empty;
-                        Rectangle rectangle = new Rectangle(location.X + num7, location.Y, this._ImageSize, this._ImageSize);
-                        if (bitmap != null && bitmap.PixelFormat != PixelFormat.Undefined)
-                        {
-                            Rectangle srcRect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-                            if (builtObject.DamagedComponentCount > 0)
-                            {
-                                if (builtObject.ActualEmpire == this._Game.PlayerEmpire || this._Game.GodMode)
-                                    graphics.FillRectangle((Brush)new SolidBrush(Color.FromArgb(64, (int)byte.MaxValue, 0, 64)), rectangle);
-                            }
-                            else if (builtObject.UnbuiltComponentCount > 0 && (builtObject.ActualEmpire == this._Game.PlayerEmpire || this._Game.GodMode))
-                            {
-                                graphics.FillRectangle((Brush)new SolidBrush(Color.FromArgb(64, (int)byte.MaxValue, 128, 0)), rectangle);
-                                str = TextResolver.GetText("Under construction");
-                            }
-                            graphics.DrawImage((Image)bitmap, rectangle, srcRect, GraphicsUnit.Pixel);
-                        }
-                        if (!string.IsNullOrEmpty(str))
-                            this.AddHotspot(rectangle, (object)builtObject, builtObject.Name + " (" + str + " - " + TextResolver.GetText("click to select") + ")");
-                        else
-                            this.AddHotspot(rectangle, (object)builtObject, builtObject.Name + " (" + TextResolver.GetText("click to select") + ")");
-                        num7 += num5;
+                        continue;
                     }
+                    Bitmap bitmap = null;
+                    if (_BuiltObjectImages.Length > builtObject.PictureRef)
+                    {
+                        bitmap = _BuiltObjectImages[builtObject.PictureRef];
+                    }
+                    string empty = string.Empty;
+                    Rectangle rectangle = new Rectangle(location.X + num9, location.Y, _ImageSize, _ImageSize);
+                    if (bitmap != null && bitmap.PixelFormat != 0)
+                    {
+                        Rectangle srcRect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+                        if (builtObject.DamagedComponentCount > 0)
+                        {
+                            if (builtObject.ActualEmpire == _Game.PlayerEmpire || _Game.GodMode)
+                            {
+                                graphics.FillRectangle(new SolidBrush(Color.FromArgb(64, 255, 0, 64)), rectangle);
+                            }
+                        }
+                        else if (builtObject.UnbuiltComponentCount > 0 && (builtObject.ActualEmpire == _Game.PlayerEmpire || _Game.GodMode))
+                        {
+                            graphics.FillRectangle(new SolidBrush(Color.FromArgb(64, 255, 128, 0)), rectangle);
+                            empty = TextResolver.GetText("Under construction");
+                        }
+                        graphics.DrawImage(bitmap, rectangle, srcRect, GraphicsUnit.Pixel);
+                    }
+                    if (!string.IsNullOrEmpty(empty))
+                    {
+                        AddHotspot(rectangle, builtObject, builtObject.Name + " (" + empty + " - " + TextResolver.GetText("click to select") + ")");
+                    }
+                    else
+                    {
+                        AddHotspot(rectangle, builtObject, builtObject.Name + " (" + TextResolver.GetText("click to select") + ")");
+                    }
+                    num9 += num7;
                 }
             }
             if (builtObjects.Count > 0)
-                num7 += num3;
-            location2 = new Point(location.X + num7, location.Y);
+            {
+                num9 += num4;
+            }
+            location3 = new Point(location.X + num9, location.Y);
             if (waitingCount > 0)
-                this.DrawStringWithDropShadow(graphics, text, this._NormalFont, location2);
-            if (string.IsNullOrEmpty(suffix))
-                return;
-            int num8 = 0;
-            if (waitingCount > 0)
-                num8 = (int)graphics.MeasureString(text, this._NormalFont, this.Width, StringFormat.GenericDefault).Width + 10;
-            location2 = new Point(location.X + num7 + num8, location.Y);
-            this.DrawStringWithDropShadow(graphics, suffix, this._NormalFont, location2);
+            {
+                DrawStringWithDropShadow(graphics, text, _NormalFont, location3);
+            }
+            if (!string.IsNullOrEmpty(suffix))
+            {
+                int num11 = 0;
+                if (waitingCount > 0)
+                {
+                    num11 = (int)graphics.MeasureString(text, _NormalFont, base.Width, StringFormat.GenericDefault).Width;
+                    num11 += 10;
+                }
+                DrawStringWithDropShadow(location: new Point(location.X + num9 + num11, location.Y), graphics: graphics, text: suffix, font: _NormalFont);
+            }
         }
 
         private Bitmap RotateImage(Image image, float angle)
         {
-            float num = image != null ? (float)image.Width : throw new ArgumentNullException(nameof(image));
-            float height1 = (float)image.Height;
+            if (image == null)
+            {
+                throw new ArgumentNullException("image");
+            }
+            float num = image.Width;
+            float num2 = image.Height;
             angle *= -1f;
             angle *= 57.29578f;
             angle %= 360f;
             if ((double)angle < 0.0)
+            {
                 angle += 360f;
-            PointF[] pts = new PointF[4];
-            pts[1].X = num;
-            pts[2].X = num;
-            pts[2].Y = height1;
-            pts[3].Y = height1;
+            }
+            PointF[] array = new PointF[4];
+            array[1].X = num;
+            array[2].X = num;
+            array[2].Y = num2;
+            array[3].Y = num2;
             Matrix matrix = new Matrix();
             matrix.Rotate(angle);
-            matrix.TransformPoints(pts);
-            double val1_1 = double.MinValue;
-            double val1_2 = double.MinValue;
-            double val1_3 = double.MaxValue;
-            double val1_4 = double.MaxValue;
-            foreach (PointF pointF in pts)
+            matrix.TransformPoints(array);
+            double num3 = double.MinValue;
+            double num4 = double.MinValue;
+            double num5 = double.MaxValue;
+            double num6 = double.MaxValue;
+            PointF[] array2 = array;
+            for (int i = 0; i < array2.Length; i++)
             {
-                val1_1 = Math.Max(val1_1, (double)pointF.X);
-                val1_3 = Math.Min(val1_3, (double)pointF.X);
-                val1_2 = Math.Max(val1_2, (double)pointF.Y);
-                val1_4 = Math.Min(val1_4, (double)pointF.Y);
+                PointF pointF = array2[i];
+                num3 = Math.Max(num3, pointF.X);
+                num5 = Math.Min(num5, pointF.X);
+                num4 = Math.Max(num4, pointF.Y);
+                num6 = Math.Min(num6, pointF.Y);
             }
-            double width = Math.Ceiling(val1_1 - val1_3);
-            double height2 = Math.Ceiling(val1_2 - val1_4);
-            Bitmap bitmap = new Bitmap((int)width, (int)height2);
+            double num7 = Math.Ceiling(num3 - num5);
+            double num8 = Math.Ceiling(num4 - num6);
+            Bitmap bitmap = new Bitmap((int)num7, (int)num8);
             bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
-            {
-                graphics.CompositingQuality = CompositingQuality.HighSpeed;
-                graphics.InterpolationMode = InterpolationMode.Bilinear;
-                graphics.SmoothingMode = SmoothingMode.None;
-                PointF point1 = new PointF((float)(width / 2.0), (float)(height2 / 2.0));
-                PointF point2 = new PointF(point1.X - num / 2f, point1.Y - num / 2f);
-                matrix.Reset();
-                matrix.RotateAt(angle, point1);
-                graphics.Transform = matrix;
-                graphics.DrawImage(image, point2);
-            }
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            graphics.CompositingQuality = CompositingQuality.HighSpeed;
+            graphics.InterpolationMode = InterpolationMode.Bilinear;
+            graphics.SmoothingMode = SmoothingMode.None;
+            PointF point = new PointF((float)(num7 / 2.0), (float)(num8 / 2.0));
+            PointF point2 = new PointF(point.X - num / 2f, point.Y - num / 2f);
+            matrix.Reset();
+            matrix.RotateAt(angle, point);
+            graphics.Transform = matrix;
+            graphics.DrawImage(image, point2);
             return bitmap;
         }
 
         private Bitmap RotateBitmap(Bitmap InputImage, double angle)
         {
-            double width = (double)InputImage.Width;
-            double height = (double)InputImage.Height;
-            Point[] pointArray = new Point[4]
+            double num = InputImage.Width;
+            double num2 = InputImage.Height;
+            Point[] array = new Point[4]
             {
-        new Point(0, 0),
-        new Point((int) width, 0),
-        new Point(0, (int) height),
-        new Point((int) width, (int) height)
+            new Point(0, 0),
+            new Point((int)num, 0),
+            new Point(0, (int)num2),
+            new Point((int)num, (int)num2)
             };
-            double num1 = width / 2.0;
-            double num2 = height / 2.0;
-            for (int index = 0; index <= 3; ++index)
+            double num3 = num / 2.0;
+            double num4 = num2 / 2.0;
+            for (int i = 0; i <= 3; i++)
             {
-                pointArray[index].X -= (int)num1;
-                pointArray[index].Y -= (int)num2;
+                array[i].X -= (int)num3;
+                array[i].Y -= (int)num4;
             }
-            double num3 = angle;
-            double num4 = Math.Sin(num3);
-            double num5 = Math.Cos(num3);
-            for (int index = 0; index <= 3; ++index)
+            double num5 = Math.Sin(angle);
+            double num6 = Math.Cos(angle);
+            for (int j = 0; j <= 3; j++)
             {
-                double x = (double)pointArray[index].X;
-                double y = (double)pointArray[index].Y;
-                pointArray[index].X = (int)(x * num5 + y * num4);
-                pointArray[index].Y = (int)(-x * num4 + y * num5);
+                double num7 = array[j].X;
+                double num8 = array[j].Y;
+                array[j].X = (int)(num7 * num6 + num8 * num5);
+                array[j].Y = (int)((0.0 - num7) * num5 + num8 * num6);
             }
-            double x1 = (double)pointArray[0].X;
-            double y1 = (double)pointArray[0].Y;
-            for (int index = 1; index <= 3; ++index)
+            double num9 = array[0].X;
+            double num10 = array[0].Y;
+            for (int k = 1; k <= 3; k++)
             {
-                if (x1 > (double)pointArray[index].X)
-                    x1 = (double)pointArray[index].X;
-                if (y1 > (double)pointArray[index].Y)
-                    y1 = (double)pointArray[index].Y;
-            }
-            for (int index = 0; index <= 3; ++index)
-            {
-                pointArray[index].X -= (int)x1;
-                pointArray[index].Y -= (int)y1;
-            }
-            Bitmap bitmap = new Bitmap((int)(-2.0 * x1), (int)(-2.0 * y1), PixelFormat.Format32bppPArgb);
-            using (Graphics graphics = Graphics.FromImage((Image)bitmap))
-            {
-                Point[] destPoints = new Point[3]
+                if (num9 > (double)array[k].X)
                 {
-          pointArray[0],
-          pointArray[1],
-          pointArray[2]
-                };
-                graphics.DrawImage((Image)InputImage, destPoints);
+                    num9 = array[k].X;
+                }
+                if (num10 > (double)array[k].Y)
+                {
+                    num10 = array[k].Y;
+                }
             }
+            for (int l = 0; l <= 3; l++)
+            {
+                array[l].X -= (int)num9;
+                array[l].Y -= (int)num10;
+            }
+            Bitmap bitmap = new Bitmap((int)(-2.0 * num9), (int)(-2.0 * num10), PixelFormat.Format32bppPArgb);
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            Point[] destPoints = new Point[3]
+            {
+            array[0],
+            array[1],
+            array[2]
+            };
+            graphics.DrawImage(InputImage, destPoints);
             return bitmap;
         }
 
@@ -3091,385 +3355,433 @@ namespace DistantWorlds.Controls
         {
             if (creature.HasBeenDestroyed)
             {
-                this._Game.SelectedObject = (object)null;
-                this.ClearData();
+                _Game.SelectedObject = null;
+                ClearData();
+                return;
             }
-            else
-            {
-                graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.Bilinear;
-                int y1 = 6;
-                int rowHeight = this._RowHeight;
-                int x = 5;
-                int overallWidth = this.ClientRectangle.Width - 10;
-                int labelWidth = this._LabelWidth;
-                Color backgroundColor = Color.FromArgb((int)sbyte.MaxValue, 8, 8, 48);
-                Font titleFont = this._TitleFont;
-                this.DrawBackgroundPicture(graphics);
-                StringFormat genericTypographic = StringFormat.GenericTypographic;
-                SizeF sizeF = graphics.MeasureString(creature.Name, titleFont, this.Width - 20, genericTypographic);
-                RectangleF layoutRectangle = new RectangleF((float)x, (float)y1, sizeF.Width, sizeF.Height + 2f);
-                graphics.DrawString(creature.Name, titleFont, (Brush)this._WhiteBrush, layoutRectangle, genericTypographic);
-                Point location = new Point();
-                int y2 = y1 + (int)sizeF.Height + this._Height8;
-                location = new Point(x, y2);
-                string text = TextResolver.GetText("Size") + ": " + creature.Size.ToString() + ", " + TextResolver.GetText("Attack Strength") + ": " + creature.AttackStrength.ToString();
-                this.DrawStringWithDropShadow(graphics, text, this._NormalFont, location);
-                int y3 = y2 + rowHeight + this._Height10;
-                int y4 = rowHeight + (int)sizeF.Height + 5 + rowHeight;
-                Rectangle rect = new Rectangle(x - 2, y4, x + labelWidth - 1, this.ClientRectangle.Height - (y4 + 2));
-                graphics.FillRectangle((Brush)this._LabelAreaBrush, rect);
-                int descriptionWidth = labelWidth - 5;
-                location = new Point(x, y3);
-                this.DrawBarGraph(TextResolver.GetText("Health"), descriptionWidth, creature.DamageKillThreshhold, (int)((double)creature.DamageKillThreshhold - creature.Damage), rowHeight - 2, overallWidth, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, (int)byte.MaxValue), backgroundColor, graphics, location);
-                int y5 = y3 + rowHeight + this._Height5;
-                location = new Point(x, y5);
-                this.DrawBarGraph(TextResolver.GetText("Speed Abbreviation"), descriptionWidth, creature.MovementSpeed, (int)creature.CurrentSpeed, rowHeight - 2, overallWidth, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, (int)byte.MaxValue), backgroundColor, graphics, location);
-                int num = y5 + rowHeight;
-            }
+            graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            graphics.InterpolationMode = InterpolationMode.Bilinear;
+            int num = 6;
+            int rowHeight = _RowHeight;
+            int num2 = 5;
+            int overallWidth = base.ClientRectangle.Width - 10;
+            int labelWidth = _LabelWidth;
+            Color backgroundColor = Color.FromArgb(127, 8, 8, 48);
+            Font titleFont = _TitleFont;
+            DrawBackgroundPicture(graphics);
+            StringFormat genericTypographic = StringFormat.GenericTypographic;
+            SizeF sizeF = graphics.MeasureString(creature.Name, titleFont, base.Width - 20, genericTypographic);
+            graphics.DrawString(layoutRectangle: new RectangleF(num2, num, sizeF.Width, sizeF.Height + 2f), s: creature.Name, font: titleFont, brush: _WhiteBrush, format: genericTypographic);
+            Point point = default(Point);
+            num += (int)sizeF.Height;
+            num += _Height8;
+            point = new Point(num2, num);
+            string text = TextResolver.GetText("Size") + ": " + creature.Size + ", " + TextResolver.GetText("Attack Strength") + ": " + creature.AttackStrength;
+            DrawStringWithDropShadow(graphics, text, _NormalFont, point);
+            num += rowHeight;
+            num += _Height10;
+            int num3 = rowHeight + (int)sizeF.Height + 5;
+            num3 += rowHeight;
+            Rectangle rect = new Rectangle(num2 - 2, num3, num2 + labelWidth - 1, base.ClientRectangle.Height - (num3 + 2));
+            graphics.FillRectangle(_LabelAreaBrush, rect);
+            labelWidth -= 5;
+            DrawBarGraph(location: new Point(num2, num), description: TextResolver.GetText("Health"), descriptionWidth: labelWidth, maximumValue: creature.DamageKillThreshhold, currentValue: (int)((double)creature.DamageKillThreshhold - creature.Damage), height: rowHeight - 2, overallWidth: overallWidth, fillColorStart: Color.FromArgb(150, 48, 0, 96), fillColorEnd: Color.FromArgb(150, 128, 0, 255), backgroundColor: backgroundColor, graphics: graphics);
+            num += rowHeight;
+            num += _Height5;
+            DrawBarGraph(location: new Point(num2, num), description: TextResolver.GetText("Speed Abbreviation"), descriptionWidth: labelWidth, maximumValue: creature.MovementSpeed, currentValue: (int)creature.CurrentSpeed, height: rowHeight - 2, overallWidth: overallWidth, fillColorStart: Color.FromArgb(150, 48, 0, 96), fillColorEnd: Color.FromArgb(150, 128, 0, 255), backgroundColor: backgroundColor, graphics: graphics);
+            num += rowHeight;
         }
 
         private void DrawFighter(Fighter fighter, Graphics graphics)
         {
             if (fighter.HasBeenDestroyed)
             {
-                this._Game.SelectedObject = (object)null;
-                this.ClearData();
+                _Game.SelectedObject = null;
+                ClearData();
+                return;
+            }
+            graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            graphics.InterpolationMode = InterpolationMode.Bilinear;
+            SolidBrush solidBrush = new SolidBrush(_UnknownColor);
+            bool flag = false;
+            if (fighter.Empire != _Game.PlayerEmpire && _Game.PlayerEmpire.EmpiresViewable.Contains(fighter.Empire))
+            {
+                flag = true;
+            }
+            int num = 6;
+            int rowHeight = _RowHeight;
+            int num2 = 5;
+            int num3 = base.ClientRectangle.Width - 10;
+            int num4 = (int)graphics.MeasureString(TextResolver.GetText("Weapons"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            Color backgroundColor = Color.FromArgb(127, 8, 8, 48);
+            Font titleFont = _TitleFont;
+            DrawBackgroundPicture(graphics);
+            Point point = new Point(num3 - (_FlagSizeSmall.Width - 2), 6);
+            if (_Fighter.Empire == _Galaxy.IndependentEmpire)
+            {
+                int num5 = (int)graphics.MeasureString(fighter.Empire.Name, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                graphics.DrawString(point: new PointF((float)num3 - (float)num5, 6f), s: fighter.Empire.Name, font: _NormalFont, brush: _WhiteBrush);
             }
             else
             {
-                graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.Bilinear;
-                SolidBrush solidBrush = new SolidBrush(this._UnknownColor);
-                bool flag = false;
-                if (fighter.Empire != this._Game.PlayerEmpire && this._Game.PlayerEmpire.EmpiresViewable.Contains(fighter.Empire))
-                    flag = true;
-                int y1 = 6;
-                int rowHeight = this._RowHeight;
-                int x = 5;
-                int overallWidth = this.ClientRectangle.Width - 10;
-                int width1 = (int)graphics.MeasureString(TextResolver.GetText("Weapons"), this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                Color backgroundColor = Color.FromArgb((int)sbyte.MaxValue, 8, 8, 48);
-                Font titleFont = this._TitleFont;
-                this.DrawBackgroundPicture(graphics);
-                Point point1 = new Point(overallWidth - (this._FlagSizeSmall.Width - 2), 6);
-                if (this._Fighter.Empire == this._Galaxy.IndependentEmpire)
+                graphics.DrawImageUnscaled(_EmpirePicture, point);
+                if (_Fighter.Empire != null)
                 {
-                    int width2 = (int)graphics.MeasureString(fighter.Empire.Name, this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                    PointF point2 = new PointF((float)overallWidth - (float)width2, 6f);
-                    graphics.DrawString(fighter.Empire.Name, this._NormalFont, (Brush)this._WhiteBrush, point2);
+                    AddHotspot(new Rectangle(point, _EmpirePicture.Size), _Fighter.Empire, _Fighter.Empire.Name + " (" + TextResolver.GetText("click for details") + ")");
                 }
-                else
-                {
-                    graphics.DrawImageUnscaled((Image)this._EmpirePicture, point1);
-                    if (this._Fighter.Empire != null)
-                        this.AddHotspot(new Rectangle(point1, this._EmpirePicture.Size), (object)this._Fighter.Empire, this._Fighter.Empire.Name + " (" + TextResolver.GetText("click for details") + ")");
-                }
-                Point location = new Point(x, y1);
-                this.DrawStringWithDropShadow(graphics, fighter.Name, titleFont, location, new SolidBrush(this._EmpireColor));
-                int y2 = y1 + titleFont.Height + 8;
-                location = new Point(x, y2);
-                string text1 = "(" + TextResolver.GetText("Unknown mission") + ")";
-                int num1;
-                if (fighter.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag)
-                {
-                    if (fighter.Empire == null)
-                    {
-                        Empire independentEmpire = this._Galaxy.IndependentEmpire;
-                    }
-                    string text2 = Galaxy.ResolveMissionDescription(fighter);
-                    this.DrawStringWithDropShadow(graphics, text2, this._NormalFont, location);
-                    num1 = y2 + rowHeight;
-                }
-                else
-                {
-                    this.DrawStringWithDropShadow(graphics, text1, this._NormalFont, location, solidBrush);
-                    num1 = y2 + rowHeight;
-                }
-                int y3 = num1 + this._Height5;
-                int num2 = width1 + 5;
-                int y4 = y3;
-                Rectangle rect = new Rectangle(x - 2, y4, x + num2 - 1, this.ClientRectangle.Height - (y4 + 2));
-                graphics.FillRectangle((Brush)this._LabelAreaBrush, rect);
-                int num3 = num2 - 5;
-                location = new Point(x, y3);
-                string description1 = "(" + TextResolver.GetText("Abandoned") + ")";
-                if (fighter.Empire != null)
-                    description1 = fighter.Empire.Name;
-                if (fighter.Empire == this._Galaxy.IndependentEmpire)
-                    description1 = "(" + TextResolver.GetText("Independent") + ")";
-                this.DrawLabelledDescription(graphics, TextResolver.GetText("Empire"), num3, description1, location);
-                int y5 = y3 + rowHeight + this._Height5;
-                location = new Point(x, y5);
-                if (fighter.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag)
-                {
-                    string suffixData = string.Empty;
-                    if (fighter.UnderConstruction)
-                        suffixData = " (" + TextResolver.GetText("Under construction").ToLower(CultureInfo.InvariantCulture) + ")";
-                    Math.Max(0, (int)fighter.CurrentEnergy);
-                    this.DrawBarGraph(TextResolver.GetText("Health"), num3, 100, (int)((double)fighter.Health * 100.0), rowHeight - 2, overallWidth, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, (int)byte.MaxValue), backgroundColor, graphics, location, suffixData);
-                }
-                else
-                    this.DrawLabelledDescription(graphics, TextResolver.GetText("Health"), num3, "(" + TextResolver.GetText("Unknown") + ")", location, solidBrush);
-                int y6 = y5 + rowHeight;
-                location = new Point(x, y6);
-                if (fighter.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag)
-                {
-                    int currentValue = Math.Max(0, (int)fighter.CurrentEnergy);
-                    this.DrawBarGraph(TextResolver.GetText("Energy"), num3, (int)fighter.Specification.EnergyCapacity, currentValue, rowHeight - 2, overallWidth, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, (int)byte.MaxValue), backgroundColor, graphics, location);
-                }
-                else
-                    this.DrawLabelledDescription(graphics, TextResolver.GetText("Energy"), num3, "(" + TextResolver.GetText("Unknown") + ")", location, solidBrush);
-                int y7 = y6 + rowHeight;
-                location = new Point(x, y7);
-                string suffixData1 = string.Empty;
-                if (fighter.ShieldsReducedLocation)
-                    suffixData1 = " (" + TextResolver.GetText("reducing") + ")";
-                this.DrawBarGraph(TextResolver.GetText("Shields"), num3, (int)fighter.Specification.ShieldsCapacity, (int)fighter.CurrentShields, rowHeight - 2, overallWidth, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, (int)byte.MaxValue), backgroundColor, graphics, location, suffixData1);
-                int y8 = y7 + rowHeight;
-                location = new Point(x, y8);
-                string suffixData2 = string.Empty;
-                if (fighter.MovementSlowedLocation)
-                    suffixData2 = suffixData2 + " (" + TextResolver.GetText("slowed") + ")";
-                this.DrawBarGraph(TextResolver.GetText("Speed"), num3, (int)fighter.TopSpeed, (int)fighter.CurrentSpeed, rowHeight - 2, overallWidth, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, (int)byte.MaxValue), backgroundColor, graphics, location, suffixData2);
-                int y9 = y8 + rowHeight + this._Height5;
-                location = new Point(x, y9);
-                string description2 = TextResolver.GetText("Firepower") + ": " + fighter.FirepowerRaw.ToString() + ", " + TextResolver.GetText("Range") + ": " + fighter.Specification.WeaponRange.ToString();
-                if (fighter.FirepowerRaw == 0)
-                    description2 = "(" + TextResolver.GetText("None") + ")";
-                this.DrawLabelledDescription(graphics, TextResolver.GetText("Weapons"), num3, description2, location);
-                int y10 = y9 + rowHeight;
-                if (!string.IsNullOrEmpty(this._CharacterBonuses))
-                {
-                    location = new Point(x, y10);
-                    this.DrawLabel(graphics, TextResolver.GetText("Bonuses"), num3, location);
-                    int width3 = overallWidth - num3;
-                    SizeF size = graphics.MeasureString(this._CharacterBonuses, this._NormalFont, width3, StringFormat.GenericDefault);
-                    location = new Point(x + num3 + 10, y10 + 1);
-                    this.DrawStringWithDropShadowBounded(graphics, this._CharacterBonuses, this._NormalFont, location, size);
-                    int num4 = y10 + (int)size.Height;
-                }
-                solidBrush.Dispose();
             }
+            DrawStringWithDropShadow(location: new Point(num2, num), graphics: graphics, text: fighter.Name, font: titleFont, brush: new SolidBrush(_EmpireColor));
+            num += titleFont.Height;
+            num += 8;
+            Point location2 = new Point(num2, num);
+            string text = "(" + TextResolver.GetText("Unknown mission") + ")";
+            if (fighter.Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
+            {
+                Empire empire = fighter.Empire;
+                if (empire == null)
+                {
+                    empire = _Galaxy.IndependentEmpire;
+                }
+                text = Galaxy.ResolveMissionDescription(fighter);
+                DrawStringWithDropShadow(graphics, text, _NormalFont, location2);
+                num += rowHeight;
+            }
+            else
+            {
+                DrawStringWithDropShadow(graphics, text, _NormalFont, location2, solidBrush);
+                num += rowHeight;
+            }
+            num += _Height5;
+            num4 += 5;
+            int num6 = num;
+            Rectangle rect = new Rectangle(num2 - 2, num6, num2 + num4 - 1, base.ClientRectangle.Height - (num6 + 2));
+            graphics.FillRectangle(_LabelAreaBrush, rect);
+            num4 -= 5;
+            location2 = new Point(num2, num);
+            string description = "(" + TextResolver.GetText("Abandoned") + ")";
+            if (fighter.Empire != null)
+            {
+                description = fighter.Empire.Name;
+            }
+            if (fighter.Empire == _Galaxy.IndependentEmpire)
+            {
+                description = "(" + TextResolver.GetText("Independent") + ")";
+            }
+            DrawLabelledDescription(graphics, TextResolver.GetText("Empire"), num4, description, location2);
+            num += rowHeight;
+            num += _Height5;
+            location2 = new Point(num2, num);
+            if (fighter.Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
+            {
+                string suffixData = string.Empty;
+                if (fighter.UnderConstruction)
+                {
+                    suffixData = " (" + TextResolver.GetText("Under construction").ToLower(CultureInfo.InvariantCulture) + ")";
+                }
+                Math.Max(0, (int)fighter.CurrentEnergy);
+                DrawBarGraph(TextResolver.GetText("Health"), num4, 100, (int)(fighter.Health * 100f), rowHeight - 2, num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, suffixData);
+            }
+            else
+            {
+                DrawLabelledDescription(graphics, TextResolver.GetText("Health"), num4, "(" + TextResolver.GetText("Unknown") + ")", location2, solidBrush);
+            }
+            num += rowHeight;
+            location2 = new Point(num2, num);
+            if (fighter.Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
+            {
+                int currentValue = Math.Max(0, (int)fighter.CurrentEnergy);
+                DrawBarGraph(TextResolver.GetText("Energy"), num4, fighter.Specification.EnergyCapacity, currentValue, rowHeight - 2, num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2);
+            }
+            else
+            {
+                DrawLabelledDescription(graphics, TextResolver.GetText("Energy"), num4, "(" + TextResolver.GetText("Unknown") + ")", location2, solidBrush);
+            }
+            num += rowHeight;
+            location2 = new Point(num2, num);
+            string suffixData2 = string.Empty;
+            if (fighter.ShieldsReducedLocation)
+            {
+                suffixData2 = " (" + TextResolver.GetText("reducing") + ")";
+            }
+            DrawBarGraph(TextResolver.GetText("Shields"), num4, fighter.Specification.ShieldsCapacity, (int)fighter.CurrentShields, rowHeight - 2, num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, suffixData2);
+            num += rowHeight;
+            location2 = new Point(num2, num);
+            string text2 = string.Empty;
+            if (fighter.MovementSlowedLocation)
+            {
+                text2 = text2 + " (" + TextResolver.GetText("slowed") + ")";
+            }
+            DrawBarGraph(TextResolver.GetText("Speed"), num4, fighter.TopSpeed, (int)fighter.CurrentSpeed, rowHeight - 2, num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, text2);
+            num += rowHeight;
+            num += _Height5;
+            location2 = new Point(num2, num);
+            string description2 = TextResolver.GetText("Firepower") + ": " + fighter.FirepowerRaw + ", " + TextResolver.GetText("Range") + ": " + fighter.Specification.WeaponRange;
+            if (fighter.FirepowerRaw == 0)
+            {
+                description2 = "(" + TextResolver.GetText("None") + ")";
+            }
+            DrawLabelledDescription(graphics, TextResolver.GetText("Weapons"), num4, description2, location2);
+            num += rowHeight;
+            if (!string.IsNullOrEmpty(_CharacterBonuses))
+            {
+                DrawLabel(location: new Point(num2, num), graphics: graphics, label: TextResolver.GetText("Bonuses"), labelWidth: num4);
+                int num7 = num3 - num4;
+                SizeF size = graphics.MeasureString(_CharacterBonuses, _NormalFont, num7, StringFormat.GenericDefault);
+                DrawStringWithDropShadowBounded(location: new Point(num2 + num4 + 10, num + 1), graphics: graphics, text: _CharacterBonuses, font: _NormalFont, size: size);
+                num += (int)size.Height;
+            }
+            solidBrush.Dispose();
         }
 
         private void DrawBuiltObject(BuiltObject builtObject, Graphics graphics)
         {
-            //BaconInfoPanel.DrawBuiltObject(this, builtObject, graphics);
-            InfoPanel.OnDrawBuiltObjectMods(this, builtObject, graphics);
+            BaconInfoPanel.DrawBuiltObject(this, builtObject, graphics);
         }
 
-        private void DrawSystemColoniesSummary(
-          Habitat systemStar,
-          Graphics graphics,
-          int startY,
-          int labelWidth)
+        private void DrawSystemColoniesSummary(Habitat systemStar, Graphics graphics, int startY, int labelWidth)
         {
-            int habitatImageSize = this._HabitatImageSize;
-            int rowPadding = 3;
+            int habitatImageSize = _HabitatImageSize;
+            int num = 6;
+            int num2 = 3;
             HabitatList habitatList = new HabitatList();
-            for (int index = 0; index < this._Galaxy.Systems[systemStar.SystemIndex].Habitats.Count; ++index)
+            for (int i = 0; i < _Galaxy.Systems[systemStar.SystemIndex].Habitats.Count; i++)
             {
-                Habitat habitat = this._Galaxy.Systems[systemStar.SystemIndex].Habitats[index];
+                Habitat habitat = _Galaxy.Systems[systemStar.SystemIndex].Habitats[i];
                 if (habitat.Empire != null && habitat.Population != null && habitat.Population.DominantRace != null && !habitatList.Contains(habitat))
+                {
                     habitatList.Add(habitat);
+                }
             }
-            for (int index = 0; index < this._Galaxy.Systems[systemStar.SystemIndex].Habitats.Count; ++index)
+            for (int j = 0; j < _Galaxy.Systems[systemStar.SystemIndex].Habitats.Count; j++)
             {
-                Habitat habitat = this._Galaxy.Systems[systemStar.SystemIndex].Habitats[index];
-                if (habitat.BasesAtHabitat.Count > 0 && (habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.MiningStation || habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.GasMiningStation || habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.ResortBase || habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.EnergyResearchStation || habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.WeaponsResearchStation || habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.HighTechResearchStation || habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.DefensiveBase || habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.MonitoringStation || habitat.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.GenericBase) && !habitatList.Contains(habitat))
-                    habitatList.Add(habitat);
+                Habitat habitat2 = _Galaxy.Systems[systemStar.SystemIndex].Habitats[j];
+                if (habitat2.BasesAtHabitat.Count > 0 && (habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.MiningStation || habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.GasMiningStation || habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.ResortBase || habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.EnergyResearchStation || habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.WeaponsResearchStation || habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.HighTechResearchStation || habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.DefensiveBase || habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.MonitoringStation || habitat2.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.GenericBase) && !habitatList.Contains(habitat2))
+                {
+                    habitatList.Add(habitat2);
+                }
             }
-            int num1 = this.Width - labelWidth - 10;
-            int val2 = num1 / habitatImageSize;
-            int num2 = Math.Max(1, (num1 - habitatImageSize * habitatList.Count) / (habitatList.Count + 1));
-            int x = labelWidth + num2;
+            int num3 = base.Width - labelWidth - 10;
+            int num4 = num3 / habitatImageSize;
+            num = (num3 - habitatImageSize * habitatList.Count) / (habitatList.Count + 1);
+            num = Math.Max(1, num);
+            int num5 = labelWidth + num;
             if (habitatList.Count > 0)
             {
-                using (Pen pen = new Pen(Color.FromArgb(170, 170, 170), 1f))
-                {
-                    pen.DashPattern = new float[2] { 1f, 2f };
-                    int num3 = startY + this._HabitatImageSize + rowPadding + 13;
-                    int x1 = x - 5;
-                    int x2 = x1 + 10 + (Math.Min(habitatList.Count, val2) * (habitatImageSize + num2) - num2);
-                    graphics.DrawLine(pen, x1, num3, x2, num3);
-                }
+                using Pen pen = new Pen(Color.FromArgb(170, 170, 170), 1f);
+                pen.DashPattern = new float[2] { 1f, 2f };
+                int num6 = startY + _HabitatImageSize + num2 + 13;
+                int num7 = num5 - 5;
+                int x = num7 + 10 + (Math.Min(habitatList.Count, num4) * (habitatImageSize + num) - num);
+                graphics.DrawLine(pen, num7, num6, x, num6);
             }
-            for (int index = 0; index < habitatList.Count; ++index)
+            for (int k = 0; k < habitatList.Count; k++)
             {
-                if (index >= val2)
+                if (k >= num4)
                 {
-                    this.DrawStringWithDropShadow(graphics, "...", this._NormalFont, new Point(x, startY + 5));
+                    DrawStringWithDropShadow(graphics, "...", _NormalFont, new Point(num5, startY + 5));
                     break;
                 }
-                this.DrawSingleColonySummary(habitatList[index], graphics, x, startY, rowPadding);
-                x += habitatImageSize + num2;
+                DrawSingleColonySummary(habitatList[k], graphics, num5, startY, num2);
+                num5 += habitatImageSize + num;
             }
         }
 
-        private void DrawSingleColonySummary(
-          Habitat colony,
-          Graphics graphics,
-          int x,
-          int y,
-          int rowPadding)
+        private void DrawSingleColonySummary(Habitat colony, Graphics graphics, int x, int y, int rowPadding)
         {
-            Rectangle srcRect = Rectangle.Empty;
-            Rectangle rectangle = Rectangle.Empty;
-            bool flag1 = false;
+            Rectangle empty = Rectangle.Empty;
+            Rectangle empty2 = Rectangle.Empty;
+            bool flag = false;
             bool flag2 = false;
-            if (colony.BasesAtHabitat != null && colony.BasesAtHabitat.Count > 0 && colony.BasesAtHabitat[0].Empire != null && colony.BasesAtHabitat[0].Empire != this._Galaxy.IndependentEmpire && (colony.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.MiningStation || colony.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.GasMiningStation || colony.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.ResortBase))
+            if (colony.BasesAtHabitat != null && colony.BasesAtHabitat.Count > 0 && colony.BasesAtHabitat[0].Empire != null && colony.BasesAtHabitat[0].Empire != _Galaxy.IndependentEmpire && (colony.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.MiningStation || colony.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.GasMiningStation || colony.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.ResortBase))
             {
-                flag1 = true;
+                flag = true;
                 if (colony.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.MiningStation || colony.BasesAtHabitat[0].SubRole == BuiltObjectSubRole.GasMiningStation)
+                {
                     flag2 = true;
+                }
             }
-            this.AddHotspot(new Rectangle(x, y, this._HabitatImages[(int)colony.PictureRef].Width, this._HabitatImages[(int)colony.PictureRef].Height), (object)colony, colony.Name + " (" + TextResolver.GetText("click to select") + ")");
-            graphics.DrawImage((Image)this._HabitatImages[(int)colony.PictureRef], x, y);
-            y += this._HabitatImageSize + rowPadding / 2;
-            int summaryDetailWidth = this._ColonySummaryDetailWidth;
-            int num1 = (this._HabitatImageSize - summaryDetailWidth) / 2;
-            x += num1;
-            this.SetGraphicsQualityToHigh(graphics);
-            string text = string.Empty;
+            AddHotspot(new Rectangle(x, y, _HabitatImages[colony.PictureRef].Width, _HabitatImages[colony.PictureRef].Height), colony, colony.Name + " (" + TextResolver.GetText("click to select") + ")");
+            graphics.DrawImage(_HabitatImages[colony.PictureRef], x, y);
+            y += _HabitatImageSize + rowPadding / 2;
+            int colonySummaryDetailWidth = _ColonySummaryDetailWidth;
+            int num = (_HabitatImageSize - colonySummaryDetailWidth) / 2;
+            x += num;
+            SetGraphicsQualityToHigh(graphics);
+            string empty3 = string.Empty;
             switch (colony.Type)
             {
-                case HabitatType.Volcanic:
-                    text = TextResolver.GetText("PlanetType Abbreviation Volcanic");
-                    break;
-                case HabitatType.Desert:
-                    text = TextResolver.GetText("PlanetType Abbreviation Desert");
-                    break;
-                case HabitatType.MarshySwamp:
-                    text = TextResolver.GetText("PlanetType Abbreviation Marshy Swamp");
+                case HabitatType.BarrenRock:
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Rock");
                     break;
                 case HabitatType.Continental:
-                    text = TextResolver.GetText("PlanetType Abbreviation Continental");
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Continental");
                     break;
-                case HabitatType.Ocean:
-                    text = TextResolver.GetText("PlanetType Abbreviation Ocean");
-                    break;
-                case HabitatType.BarrenRock:
-                    text = TextResolver.GetText("PlanetType Abbreviation Rock");
+                case HabitatType.Desert:
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Desert");
                     break;
                 case HabitatType.Ice:
-                    text = TextResolver.GetText("PlanetType Abbreviation Ice");
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Ice");
                     break;
-                case HabitatType.GasGiant:
-                    text = TextResolver.GetText("PlanetType Abbreviation Gas Giant");
+                case HabitatType.MarshySwamp:
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Marshy Swamp");
+                    break;
+                case HabitatType.Ocean:
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Ocean");
+                    break;
+                case HabitatType.Volcanic:
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Volcanic");
                     break;
                 case HabitatType.FrozenGasGiant:
-                    text = TextResolver.GetText("PlanetType Abbreviation Frozen Gas Giant");
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Frozen Gas Giant");
+                    break;
+                case HabitatType.GasGiant:
+                    empty3 = TextResolver.GetText("PlanetType Abbreviation Gas Giant");
                     break;
             }
             if (colony.Category == HabitatCategoryType.Asteroid)
-                text = TextResolver.GetText("PlanetType Abbreviation Asteroid");
-            else if (colony.Category == HabitatCategoryType.GasCloud)
-                text = TextResolver.GetText("PlanetType Abbreviation Gas Cloud");
-            int width = (int)graphics.MeasureString(text, this._TinyFont, this._MaxGraphTextWidth, StringFormat.GenericDefault).Width;
-            int x1 = x + (summaryDetailWidth - width) / 2;
-            this.DrawStringWithDropShadow(graphics, text, this._TinyFont, new Point(x1, y));
-            y += 15 + rowPadding + rowPadding;
-            int height = (int)((double)summaryDetailWidth * 0.6);
-            if (!flag1 && colony.Empire != null && colony.Empire != this._Galaxy.IndependentEmpire)
             {
-                srcRect = new Rectangle(0, 0, colony.Empire.LargeFlagPicture.Width, colony.Empire.LargeFlagPicture.Height);
-                rectangle = new Rectangle(x, y, summaryDetailWidth, height);
-                graphics.DrawImage((Image)colony.Empire.LargeFlagPicture, rectangle, srcRect, GraphicsUnit.Pixel);
-                this.AddHotspot(rectangle, (object)colony.Empire, colony.Empire.Name + " (" + TextResolver.GetText("click for details") + ")");
+                empty3 = TextResolver.GetText("PlanetType Abbreviation Asteroid");
+            }
+            else if (colony.Category == HabitatCategoryType.GasCloud)
+            {
+                empty3 = TextResolver.GetText("PlanetType Abbreviation Gas Cloud");
+            }
+            int num2 = (int)graphics.MeasureString(empty3, _TinyFont, _MaxGraphTextWidth, StringFormat.GenericDefault).Width;
+            int num3 = x + (colonySummaryDetailWidth - num2) / 2;
+            DrawStringWithDropShadow(graphics, empty3, _TinyFont, new Point(num3, y));
+            y += 15 + rowPadding + rowPadding;
+            int num4 = (int)((double)colonySummaryDetailWidth * 0.6);
+            if (!flag && colony.Empire != null && colony.Empire != _Galaxy.IndependentEmpire)
+            {
+                empty = new Rectangle(0, 0, colony.Empire.LargeFlagPicture.Width, colony.Empire.LargeFlagPicture.Height);
+                empty2 = new Rectangle(x, y, colonySummaryDetailWidth, num4);
+                graphics.DrawImage(colony.Empire.LargeFlagPicture, empty2, empty, GraphicsUnit.Pixel);
+                AddHotspot(empty2, colony.Empire, colony.Empire.Name + " (" + TextResolver.GetText("click for details") + ")");
             }
             else if (colony.BasesAtHabitat.Count > 0)
             {
                 Empire empire = colony.BasesAtHabitat[0].Empire;
                 if (empire != null)
                 {
-                    srcRect = new Rectangle(0, 0, empire.LargeFlagPicture.Width, empire.LargeFlagPicture.Height);
-                    rectangle = new Rectangle(x, y, summaryDetailWidth, height);
-                    graphics.DrawImage((Image)empire.LargeFlagPicture, rectangle, srcRect, GraphicsUnit.Pixel);
-                    this.AddHotspot(rectangle, (object)empire, empire.Name + " (" + TextResolver.GetText("click for details") + ")");
+                    empty = new Rectangle(0, 0, empire.LargeFlagPicture.Width, empire.LargeFlagPicture.Height);
+                    empty2 = new Rectangle(x, y, colonySummaryDetailWidth, num4);
+                    graphics.DrawImage(empire.LargeFlagPicture, empty2, empty, GraphicsUnit.Pixel);
+                    AddHotspot(empty2, empire, empire.Name + " (" + TextResolver.GetText("click for details") + ")");
                 }
             }
-            y += height + rowPadding;
-            this.SetGraphicsQualityToLow(graphics);
-            if (!flag1 && colony.Population != null && colony.Population.DominantRace != null)
+            y += num4 + rowPadding;
+            SetGraphicsQualityToLow(graphics);
+            int num5 = 0;
+            if (!flag && colony.Population != null && colony.Population.DominantRace != null)
             {
-                int num2 = (summaryDetailWidth - this._RaceImages[colony.Population.DominantRace.PictureRef].Width) / 2;
-                Bitmap raceImage = this._RaceImages[colony.Population.DominantRace.PictureRef];
-                graphics.DrawImage((Image)raceImage, x + num2, y);
-                this.AddHotspot(new Rectangle(x + num2, y, raceImage.Width, raceImage.Height), (object)colony.Population.DominantRace, colony.Population.DominantRace.Name + " (" + TextResolver.GetText("click for details") + ")");
-                y += this._RaceImages[0].Height + rowPadding;
-                this.DrawPopulationIndicator(colony, graphics, x, y);
+                num5 = (colonySummaryDetailWidth - _RaceImages[colony.Population.DominantRace.PictureRef].Width) / 2;
+                Bitmap bitmap = _RaceImages[colony.Population.DominantRace.PictureRef];
+                graphics.DrawImage(bitmap, x + num5, y);
+                AddHotspot(new Rectangle(x + num5, y, bitmap.Width, bitmap.Height), colony.Population.DominantRace, colony.Population.DominantRace.Name + " (" + TextResolver.GetText("click for details") + ")");
+                y += _RaceImages[0].Height + rowPadding;
+                DrawPopulationIndicator(colony, graphics, x, y);
             }
             else
             {
                 if (colony.BasesAtHabitat.Count <= 0)
-                    return;
-                this.SetGraphicsQualityToHigh(graphics);
-                srcRect = new Rectangle(0, 0, this._BuiltObjectImages[colony.BasesAtHabitat[0].PictureRef].Width, this._BuiltObjectImages[colony.BasesAtHabitat[0].PictureRef].Height);
-                rectangle = new Rectangle(x + 1, y, summaryDetailWidth - 2, summaryDetailWidth - 2);
-                if (this._Game.PlayerEmpire.IsObjectVisibleToThisEmpire((StellarObject)colony.BasesAtHabitat[0]))
-                    this.AddHotspot(rectangle, (object)colony.BasesAtHabitat[0], colony.BasesAtHabitat[0].Name + " (" + TextResolver.GetText("click to select") + ")");
-                graphics.DrawImage((Image)this._BuiltObjectImages[colony.BasesAtHabitat[0].PictureRef], rectangle, srcRect, GraphicsUnit.Pixel);
-                y += rectangle.Height + rowPadding;
-                if (!flag2)
-                    return;
-                if (this._Galaxy.PlayerEmpire.ResourceMap != null && this._Galaxy.PlayerEmpire.ResourceMap.CheckResourcesKnown(colony))
                 {
-                    this.SetGraphicsQualityToLow(graphics);
+                    return;
+                }
+                SetGraphicsQualityToHigh(graphics);
+                empty = new Rectangle(0, 0, _BuiltObjectImages[colony.BasesAtHabitat[0].PictureRef].Width, _BuiltObjectImages[colony.BasesAtHabitat[0].PictureRef].Height);
+                empty2 = new Rectangle(x + 1, y, colonySummaryDetailWidth - 2, colonySummaryDetailWidth - 2);
+                if (_Game.PlayerEmpire.IsObjectVisibleToThisEmpire(colony.BasesAtHabitat[0]))
+                {
+                    AddHotspot(empty2, colony.BasesAtHabitat[0], colony.BasesAtHabitat[0].Name + " (" + TextResolver.GetText("click to select") + ")");
+                }
+                graphics.DrawImage(_BuiltObjectImages[colony.BasesAtHabitat[0].PictureRef], empty2, empty, GraphicsUnit.Pixel);
+                y += empty2.Height + rowPadding;
+                if (!flag2)
+                {
+                    return;
+                }
+                if (_Galaxy.PlayerEmpire.ResourceMap != null && _Galaxy.PlayerEmpire.ResourceMap.CheckResourcesKnown(colony))
+                {
+                    SetGraphicsQualityToLow(graphics);
                     HabitatResourceList habitatResourceList = colony.Resources.Clone();
-                    if (habitatResourceList.Count <= 0)
-                        return;
-                    int num3 = (summaryDetailWidth - this._ResourceImages[habitatResourceList[0].PictureRef].Width) / 2;
-                    this.AddHotspot(new Rectangle(x + num3, y, this._ResourceImages[habitatResourceList[0].PictureRef].Width, this._ResourceImages[habitatResourceList[0].PictureRef].Height), (object)habitatResourceList[0], habitatResourceList[0].Name + " (" + TextResolver.GetText("click for details") + ")");
-                    graphics.DrawImage((Image)this._ResourceImages[habitatResourceList[0].PictureRef], x + num3, y);
+                    if (habitatResourceList.Count > 0)
+                    {
+                        num5 = (colonySummaryDetailWidth - _ResourceImages[habitatResourceList[0].PictureRef].Width) / 2;
+                        AddHotspot(new Rectangle(x + num5, y, _ResourceImages[habitatResourceList[0].PictureRef].Width, _ResourceImages[habitatResourceList[0].PictureRef].Height), habitatResourceList[0], habitatResourceList[0].Name + " (" + TextResolver.GetText("click for details") + ")");
+                        graphics.DrawImage(_ResourceImages[habitatResourceList[0].PictureRef], x + num5, y);
+                    }
                 }
                 else
                 {
-                    int num4 = 6;
-                    this.DrawStringWithDropShadow(graphics, "?", this._TinyFont, new Point(x + num4, y));
+                    num5 = 6;
+                    DrawStringWithDropShadow(graphics, "?", _TinyFont, new Point(x + num5, y));
                 }
             }
         }
 
         private void DrawPopulationIndicator(Habitat habitat, Graphics graphics, int x, int y)
         {
-            int num1 = 20;
+            int num = 20;
             int num2 = 15;
-            int num3 = num1 / 5;
+            int num3 = num / 5;
             int num4 = num2 / 5;
-            for (int index1 = 0; index1 < 5; ++index1)
+            for (int i = 0; i < 5; i++)
             {
-                for (int index2 = 0; index2 < 5; ++index2)
-                    graphics.FillRectangle((Brush)this._SemiSubtleBrush, x + index1 * num3, y + (4 - index2) * num4, num3 - 1, num4 - 1);
+                for (int j = 0; j < 5; j++)
+                {
+                    graphics.FillRectangle(_SemiSubtleBrush, x + i * num3, y + (4 - j) * num4, num3 - 1, num4 - 1);
+                }
             }
             int num5 = 0;
             int num6 = 0;
-            if (habitat.Population.TotalAmount > 2500000000L)
-                num5 = 5;
-            else if (habitat.Population.TotalAmount > 500000000L)
-                num5 = 4;
-            else if (habitat.Population.TotalAmount > 100000000L)
-                num5 = 3;
-            else if (habitat.Population.TotalAmount > 20000000L)
-                num5 = 2;
-            else if (habitat.Population.TotalAmount > 0L)
-                num5 = 1;
-            if (habitat.DevelopmentLevel > 80)
-                num6 = 5;
-            else if (habitat.DevelopmentLevel > 60)
-                num6 = 4;
-            else if (habitat.DevelopmentLevel > 40)
-                num6 = 3;
-            else if (habitat.DevelopmentLevel > 20)
-                num6 = 2;
-            else if (habitat.DevelopmentLevel > 0)
-                num6 = 1;
-            for (int index3 = 0; index3 < num5; ++index3)
+            if (habitat.Population.TotalAmount > 2500000000u)
             {
-                for (int index4 = 0; index4 < num6; ++index4)
-                    graphics.FillRectangle((Brush)this._BrightBrush, x + index3 * num3, y + (4 - index4) * num4, num3 - 1, num4 - 1);
+                num5 = 5;
+            }
+            else if (habitat.Population.TotalAmount > 500000000)
+            {
+                num5 = 4;
+            }
+            else if (habitat.Population.TotalAmount > 100000000)
+            {
+                num5 = 3;
+            }
+            else if (habitat.Population.TotalAmount > 20000000)
+            {
+                num5 = 2;
+            }
+            else if (habitat.Population.TotalAmount > 0)
+            {
+                num5 = 1;
+            }
+            if (habitat.DevelopmentLevel > 80)
+            {
+                num6 = 5;
+            }
+            else if (habitat.DevelopmentLevel > 60)
+            {
+                num6 = 4;
+            }
+            else if (habitat.DevelopmentLevel > 40)
+            {
+                num6 = 3;
+            }
+            else if (habitat.DevelopmentLevel > 20)
+            {
+                num6 = 2;
+            }
+            else if (habitat.DevelopmentLevel > 0)
+            {
+                num6 = 1;
+            }
+            for (int k = 0; k < num5; k++)
+            {
+                for (int l = 0; l < num6; l++)
+                {
+                    graphics.FillRectangle(_BrightBrush, x + k * num3, y + (4 - l) * num4, num3 - 1, num4 - 1);
+                }
             }
         }
 
@@ -3477,1312 +3789,1273 @@ namespace DistantWorlds.Controls
         {
             if (habitat.HasBeenDestroyed)
             {
-                this._Game.SelectedObject = (object)null;
-                this.ClearData();
+                _Game.SelectedObject = null;
+                ClearData();
+                return;
+            }
+            graphics.InterpolationMode = InterpolationMode.Bilinear;
+            bool flag = false;
+            if (habitat.Empire != _Game.PlayerEmpire)
+            {
+                if (_Game.PlayerEmpire.EmpiresViewable.Contains(habitat.Empire))
+                {
+                    flag = true;
+                }
+                else
+                {
+                    PirateColonyControl byFaction = habitat.GetPirateControl().GetByFaction(_Game.PlayerEmpire);
+                    if (byFaction != null)
+                    {
+                        flag = true;
+                    }
+                }
+            }
+            SystemVisibilityStatus systemVisibilityStatus = SystemVisibilityStatus.Unexplored;
+            if (_Game.PlayerEmpire.CheckSystemExplored(habitat.SystemIndex))
+            {
+                systemVisibilityStatus = SystemVisibilityStatus.Explored;
+            }
+            if (_Game.PlayerEmpire.CheckSystemVisible(habitat.SystemIndex))
+            {
+                systemVisibilityStatus = SystemVisibilityStatus.Visible;
+            }
+            if (_Game.GodMode)
+            {
+                systemVisibilityStatus = SystemVisibilityStatus.Visible;
+            }
+            Color color = _WhiteColor;
+            Color color2 = _WhiteColor;
+            if (systemVisibilityStatus == SystemVisibilityStatus.Unexplored)
+            {
+                color = _UnknownColor;
+            }
+            if (_Game.PlayerEmpire.ResourceMap == null || !_Game.PlayerEmpire.ResourceMap.CheckResourcesKnown(habitat))
+            {
+                color2 = _UnknownColor;
+            }
+            SolidBrush solidBrush = new SolidBrush(color);
+            SolidBrush solidBrush2 = new SolidBrush(color2);
+            int num = 3;
+            int rowHeight = _RowHeight;
+            int num2 = 5;
+            int num3 = base.ClientRectangle.Width - 10;
+            Color.FromArgb(127, 8, 8, 48);
+            Font titleFont = _TitleFont;
+            DrawBackgroundPicture(graphics);
+            string description = string.Empty;
+            Habitat habitat2 = Galaxy.DetermineHabitatSystemStar(habitat);
+            if (habitat2 != null)
+            {
+                description = habitat2.Name;
+            }
+            int labelWidthHabitat = _LabelWidthHabitat;
+            int num4 = num + titleFont.Height + 3;
+            num4 += rowHeight + 3;
+            if (habitat2 == habitat && habitat.Category != HabitatCategoryType.GasCloud)
+            {
+                labelWidthHabitat = _LabelWidthHabitat;
+            }
+            if (habitat.IsBlockaded)
+            {
+                num4 += rowHeight;
+            }
+            if (habitat.PlagueId >= 0)
+            {
+                num4 += rowHeight;
+            }
+            Rectangle rect = new Rectangle(num2 - 2, num4, num2 + labelWidthHabitat - 1, base.ClientRectangle.Height - (num4 + 2));
+            if (habitat.Category != 0)
+            {
+                graphics.FillRectangle(_LabelAreaBrush, rect);
+            }
+            labelWidthHabitat -= 5;
+            Point point = new Point(num3 - (_FlagSizeSmall.Width - 5), 3);
+            if (habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire)
+            {
+                if (_EmpirePicture != null)
+                {
+                    graphics.DrawImageUnscaled(_EmpirePicture, point);
+                    if (habitat.Empire != null)
+                    {
+                        AddHotspot(new Rectangle(point, _EmpirePicture.Size), habitat.Empire, habitat.Empire.Name + " (" + TextResolver.GetText("click for details") + ")");
+                    }
+                }
+            }
+            else if (habitat.Population.TotalAmount > 0)
+            {
+                int num5 = (int)graphics.MeasureString(TextResolver.GetText("Independent"), _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                graphics.DrawString(point: new PointF((float)num3 - (float)num5, 6f), s: TextResolver.GetText("Independent"), font: _NormalFont, brush: solidBrush);
+            }
+            Point point3 = new Point(num2, num + 2);
+            if (habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire)
+            {
+                if (habitat.Empire.Capital == habitat)
+                {
+                    graphics.DrawImageUnscaled(_CapitalColonyImage, point3);
+                    point3 = new Point(num2 + (_CapitalColonyImage.Width + 2), num);
+                }
+                else if (habitat.Empire.Capitals.Contains(habitat))
+                {
+                    graphics.DrawImageUnscaled(_RegionalCapitalColonyImage, point3);
+                    point3 = new Point(num2 + (_RegionalCapitalColonyImage.Width + 2), num);
+                }
+            }
+            if (systemVisibilityStatus == SystemVisibilityStatus.Explored || systemVisibilityStatus == SystemVisibilityStatus.Visible)
+            {
+                if (habitat.Empire != null && habitat.Empire.MainColor.ToArgb() != _EmpireColor.ToArgb())
+                {
+                    _EmpireColor = habitat.Empire.MainColor;
+                }
+                using SolidBrush brush = new SolidBrush(_EmpireColor);
+                DrawStringWithDropShadow(graphics, habitat.Name, titleFont, point3, brush);
+                if (habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire)
+                {
+                    int num6 = (int)graphics.MeasureString(habitat.Name, titleFont, 300, StringFormat.GenericTypographic).Width;
+                    DrawStringWithDropShadow(location: new Point(point3.X + num6 + 7, point3.Y + 3), graphics: graphics, text: "(" + habitat.Empire.Name + ")", font: _NormalFont, brush: brush);
+                }
             }
             else
             {
-                graphics.InterpolationMode = InterpolationMode.Bilinear;
-                bool flag1 = false;
-                if (habitat.Empire != this._Game.PlayerEmpire)
+                string text = Galaxy.ResolveDescription(habitat.Category);
+                DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + " " + text + ")", titleFont, point3, new SolidBrush(_UnknownColor));
+            }
+            num += titleFont.Height + 3;
+            point3 = new Point(num2, num);
+            double num7 = (double)habitat.Diameter / 10.0;
+            string text2 = Galaxy.ResolveDescription(habitat.Type);
+            if (habitat.Type != HabitatType.BlackHole)
+            {
+                text2 = text2 + " " + Galaxy.ResolveDescription(habitat.Category);
+            }
+            text2 = text2 + ", " + num7.ToString("##0.0K");
+            if (habitat.Category == HabitatCategoryType.Planet || habitat.Category == HabitatCategoryType.Moon)
+            {
+                double num8 = (double)habitat.Quality * 100.0;
+                string text3 = text2;
+                text2 = text3 + ",   " + TextResolver.GetText("Quality") + ": " + num8.ToString("0") + "%";
+                if (habitat.BaseQuality != habitat.Quality)
                 {
-                    if (this._Game.PlayerEmpire.EmpiresViewable.Contains(habitat.Empire))
-                        flag1 = true;
-                    else if (habitat.GetPirateControl().GetByFaction(this._Game.PlayerEmpire) != null)
-                        flag1 = true;
+                    double num9 = (double)habitat.BaseQuality * 100.0;
+                    text3 = text2;
+                    text2 = text3 + " (" + TextResolver.GetText("Maximum Abbreviation") + " " + num9.ToString("0") + "%)";
                 }
-                SystemVisibilityStatus visibilityStatus = SystemVisibilityStatus.Unexplored;
-                if (this._Game.PlayerEmpire.CheckSystemExplored(habitat.SystemIndex))
-                    visibilityStatus = SystemVisibilityStatus.Explored;
-                if (this._Game.PlayerEmpire.CheckSystemVisible(habitat.SystemIndex))
-                    visibilityStatus = SystemVisibilityStatus.Visible;
-                if (this._Game.GodMode)
-                    visibilityStatus = SystemVisibilityStatus.Visible;
-                Color color1 = this._WhiteColor;
-                Color color2 = this._WhiteColor;
-                if (visibilityStatus == SystemVisibilityStatus.Unexplored)
-                    color1 = this._UnknownColor;
-                if (this._Game.PlayerEmpire.ResourceMap == null || !this._Game.PlayerEmpire.ResourceMap.CheckResourcesKnown(habitat))
-                    color2 = this._UnknownColor;
-                SolidBrush solidBrush1 = new SolidBrush(color1);
-                SolidBrush textBrush1 = new SolidBrush(color2);
-                int y1 = 3;
-                int rowHeight = this._RowHeight;
-                int x1 = 5;
-                int overallWidth1 = this.ClientRectangle.Width - 10;
-                Color.FromArgb((int)sbyte.MaxValue, 8, 8, 48);
-                Font titleFont = this._TitleFont;
-                this.DrawBackgroundPicture(graphics);
-                string description1 = string.Empty;
-                Habitat habitatSystemStar = Galaxy.DetermineHabitatSystemStar(habitat);
-                if (habitatSystemStar != null)
-                    description1 = habitatSystemStar.Name;
-                int labelWidthHabitat = this._LabelWidthHabitat;
-                int y2 = y1 + titleFont.Height + 3 + (rowHeight + 3);
-                if (habitatSystemStar == habitat && habitat.Category != HabitatCategoryType.GasCloud)
-                    labelWidthHabitat = this._LabelWidthHabitat;
-                if (habitat.IsBlockaded)
-                    y2 += rowHeight;
-                if (habitat.PlagueId >= (short)0)
-                    y2 += rowHeight;
-                Rectangle rect1 = new Rectangle(x1 - 2, y2, x1 + labelWidthHabitat - 1, this.ClientRectangle.Height - (y2 + 2));
-                if (habitat.Category != HabitatCategoryType.Star)
-                    graphics.FillRectangle((Brush)this._LabelAreaBrush, rect1);
-                int labelWidth = labelWidthHabitat - 5;
-                Point point1 = new Point(overallWidth1 - (this._FlagSizeSmall.Width - 5), 3);
-                if (habitat.Empire != null && habitat.Empire != this._Galaxy.IndependentEmpire)
+            }
+            DrawStringWithDropShadow(graphics, text2, _NormalFont, point3, solidBrush);
+            if ((_Galaxy.PlayerEmpire.PirateEmpireBaseHabitat != null || _Game.GodMode) && habitat.GetPirateControl().Count > 0)
+            {
+                num += rowHeight;
+                point3 = new Point(num2, num);
+                Empire empire = null;
+                PirateColonyControl pirateColonyControl = null;
+                string text4 = string.Empty;
+                for (int i = 0; i < habitat.GetPirateControl().Count; i++)
                 {
-                    if (this._EmpirePicture != null)
+                    PirateColonyControl pirateColonyControl2 = habitat.GetPirateControl()[i];
+                    if (pirateColonyControl2 == null)
                     {
-                        graphics.DrawImageUnscaled((Image)this._EmpirePicture, point1);
-                        if (habitat.Empire != null)
-                            this.AddHotspot(new Rectangle(point1, this._EmpirePicture.Size), (object)habitat.Empire, habitat.Empire.Name + " (" + TextResolver.GetText("click for details") + ")");
+                        continue;
                     }
-                }
-                else if (habitat.Population.TotalAmount > 0L)
-                {
-                    int width = (int)graphics.MeasureString(TextResolver.GetText("Independent"), this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                    PointF point2 = new PointF((float)overallWidth1 - (float)width, 6f);
-                    graphics.DrawString(TextResolver.GetText("Independent"), this._NormalFont, (Brush)solidBrush1, point2);
-                }
-                Point point3 = new Point(x1, y1 + 2);
-                if (habitat.Empire != null && habitat.Empire != this._Galaxy.IndependentEmpire)
-                {
-                    if (habitat.Empire.Capital == habitat)
+                    Empire byEmpireId = _Galaxy.PirateEmpires.GetByEmpireId(pirateColonyControl2.EmpireId);
+                    if (byEmpireId != null)
                     {
-                        graphics.DrawImageUnscaled((Image)InfoPanel._CapitalColonyImage, point3);
-                        point3 = new Point(x1 + (InfoPanel._CapitalColonyImage.Width + 2), y1);
-                    }
-                    else if (habitat.Empire.Capitals.Contains(habitat))
-                    {
-                        graphics.DrawImageUnscaled((Image)InfoPanel._RegionalCapitalColonyImage, point3);
-                        point3 = new Point(x1 + (InfoPanel._RegionalCapitalColonyImage.Width + 2), y1);
-                    }
-                }
-                if (visibilityStatus == SystemVisibilityStatus.Explored || visibilityStatus == SystemVisibilityStatus.Visible)
-                {
-                    if (habitat.Empire != null && habitat.Empire.MainColor.ToArgb() != this._EmpireColor.ToArgb())
-                        this._EmpireColor = habitat.Empire.MainColor;
-                    using (SolidBrush brush = new SolidBrush(this._EmpireColor))
-                    {
-                        this.DrawStringWithDropShadow(graphics, habitat.Name, titleFont, point3, brush);
-                        if (habitat.Empire != null)
+                        if (empire == null)
                         {
-                            if (habitat.Empire != this._Galaxy.IndependentEmpire)
+                            empire = byEmpireId;
+                            pirateColonyControl = pirateColonyControl2;
+                        }
+                        if (text4.Length > 0)
+                        {
+                            text4 += ", ";
+                        }
+                        string text3 = text4;
+                        text4 = text3 + byEmpireId.Name + " (" + pirateColonyControl2.ControlLevel.ToString("0%") + ")";
+                    }
+                }
+                if (empire != null && empire.Active && pirateColonyControl != null)
+                {
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    int num10 = (int)((double)_FlagSizeSmall.Width * 0.734);
+                    int num11 = (int)((double)num10 * 0.6);
+                    graphics.DrawImage(rect: new Rectangle(num2 + 2, num, num10, num11), image: empire.LargeFlagPicture);
+                    graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+                    point3 = new Point(num2 + num10 + 5, num);
+                    string empty = string.Empty;
+                    empty = ((habitat.GetPirateControl().Count <= 1) ? string.Format(TextResolver.GetText("Pirate Control Description Sole"), empire.Name, pirateColonyControl.ControlLevel.ToString("0%")) : string.Format(TextResolver.GetText("Pirate Control Description Multiple"), empire.Name, pirateColonyControl.ControlLevel.ToString("0%"), (habitat.GetPirateControl().Count - 1).ToString("0")));
+                    DrawStringWithDropShadow(graphics, empty, _NormalFont, point3);
+                    AddHotspot(new Rectangle(5, point3.Y, base.Width - 10, rowHeight), null, text4);
+                }
+            }
+            if (systemVisibilityStatus == SystemVisibilityStatus.Explored || systemVisibilityStatus == SystemVisibilityStatus.Visible)
+            {
+                if (habitat.Ruin != null)
+                {
+                    point3 = new Point(base.ClientRectangle.Width - (_RuinImages[habitat.Ruin.PictureRef].Width + 8), num);
+                    graphics.DrawImageUnscaled(_RuinImages[habitat.Ruin.PictureRef], point3);
+                    AddHotspot(new Rectangle(point3, _RuinImages[habitat.Ruin.PictureRef].Size), habitat.Ruin, habitat.Ruin.Name + " (" + TextResolver.GetText("click for details") + ")");
+                }
+                num += rowHeight;
+                if (habitat.PlagueId >= 0)
+                {
+                    Plague plague = _Galaxy.Plagues[habitat.PlagueId];
+                    if (plague != null)
+                    {
+                        int num12 = num2;
+                        Bitmap bitmap = null;
+                        if (plague.PictureRef >= 0 && plague.PictureRef < _PlagueImages.Length)
+                        {
+                            bitmap = _PlagueImages[plague.PictureRef];
+                        }
+                        if (bitmap != null)
+                        {
+                            graphics.DrawImage(bitmap, new Point(num2, num));
+                            num12 += bitmap.Width + 3;
+                        }
+                        string text5 = string.Format(TextResolver.GetText("Plague Colony Infection"), plague.Name).ToUpper(CultureInfo.InvariantCulture) + "!";
+                        DrawStringWithDropShadow(location: new Point(num12, num), graphics: graphics, text: text5, font: _NormalFont, brush: _RedBrush);
+                        num += rowHeight;
+                    }
+                }
+                if (habitat.IsBlockaded)
+                {
+                    Blockade blockade = _Galaxy.Blockades[habitat];
+                    if (blockade != null)
+                    {
+                        point3 = new Point(num2, num);
+                        double num13 = (double)rowHeight / (double)_BlockadeImage.Height;
+                        int num14 = (int)((double)_BlockadeImage.Width * num13);
+                        graphics.DrawImage(rect: new Rectangle(num2, num, num14, rowHeight), image: _BlockadeImage);
+                        graphics.DrawImage(point: new Point(num2 + num14 + 2, num + 3), image: blockade.Initiator.SmallFlagPicture);
+                        string text6 = string.Format(TextResolver.GetText("Blockaded by EMPIRE"), blockade.Initiator.Name);
+                        DrawStringWithDropShadow(location: new Point(num2 + num14 + blockade.Initiator.SmallFlagPicture.Width + 4, num), graphics: graphics, text: text6, font: _NormalFont, brush: solidBrush);
+                        num += rowHeight;
+                    }
+                }
+                if (habitat.RaidCountdown > 0)
+                {
+                    point3 = new Point(num2, num);
+                    using (SolidBrush brush2 = new SolidBrush(Color.Yellow))
+                    {
+                        DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("This colony was recently Raided") + ")", _NormalFont, point3, brush2);
+                    }
+                    num += rowHeight;
+                }
+                if ((flag || habitat.Empire == _Game.PlayerEmpire || _Game.GodMode) && habitat.ManufacturingQueue != null && habitat.ManufacturingQueue.DeficientResources != null && habitat.ManufacturingQueue.DeficientResources.Count > 0)
+                {
+                    ResourceDatePair[] array = habitat.ManufacturingQueue.DeficientResources.ToArray();
+                    string text7 = string.Empty;
+                    for (int j = 0; j < array.Length; j++)
+                    {
+                        if (j > 0)
+                        {
+                            text7 += ", ";
+                        }
+                        text7 += new Resource(array[j].ResourceId).Name;
+                    }
+                    Bitmap bitmap2 = _MessageImages[30];
+                    Rectangle srcRect = new Rectangle(0, 0, bitmap2.Width, bitmap2.Height);
+                    Rectangle destRect = new Rectangle(num2 + 3, num, rowHeight, rowHeight);
+                    SetGraphicsQualityToHigh(graphics);
+                    graphics.DrawImage(bitmap2, destRect, srcRect, GraphicsUnit.Pixel);
+                    point3 = new Point(destRect.Right + 2, num);
+                    string text8 = string.Format(TextResolver.GetText("Construction Resource Shortage Message Short"), text7);
+                    SizeF size = graphics.MeasureString(text8, _NormalFont, base.ClientSize.Width - (point3.X + 5));
+                    using (SolidBrush brush3 = new SolidBrush(Color.FromArgb(255, 128, 0)))
+                    {
+                        size = new SizeF(size.Width, Math.Min((float)rowHeight * 2f + 1f, size.Height));
+                        DrawStringWithDropShadowBounded(graphics, text8, _NormalFont, point3, size, brush3);
+                    }
+                    num += (int)size.Height;
+                }
+                num += _Height5;
+                if (habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire && (habitat.Empire == _Game.PlayerEmpire || _Game.GodMode || flag))
+                {
+                    CharacterList characterList = new CharacterList();
+                    if (habitat.Characters != null)
+                    {
+                        characterList = habitat.Characters.GetCharactersByRole(CharacterRole.ColonyGovernor);
+                    }
+                    if (characterList.Count > 0)
+                    {
+                        int num15 = num3 - 35;
+                        for (int k = 0; k < characterList.Count; k++)
+                        {
+                            point3 = new Point(num15, num - 20);
+                            Bitmap bitmap3 = _CharacterImageCache.ObtainCharacterImageSmall(characterList[k]);
+                            if (bitmap3 != null && bitmap3.PixelFormat != 0)
                             {
-                                int width = (int)graphics.MeasureString(habitat.Name, titleFont, 300, StringFormat.GenericTypographic).Width;
-                                Point location = new Point(point3.X + width + 7, point3.Y + 3);
-                                this.DrawStringWithDropShadow(graphics, "(" + habitat.Empire.Name + ")", this._NormalFont, location, brush);
+                                graphics.DrawImageUnscaled(bitmap3, point3);
+                                string text9 = characterList[k].Name + " (" + Galaxy.ResolveDescription(characterList[k].Role) + ")";
+                                text9 = text9 + "   (" + TextResolver.GetText("click for details") + ")";
+                                AddHotspot(new Rectangle(point3.X, point3.Y, bitmap3.Width, bitmap3.Height), characterList[k], text9);
+                                num15 -= 38;
                             }
                         }
+                    }
+                }
+                point3 = new Point(num2, num);
+                if (habitat2 == habitat && habitat.Category != HabitatCategoryType.GasCloud)
+                {
+                    string text10 = TextResolver.GetText("Solar") + " " + habitat.SolarRadiation;
+                    string text3 = text10;
+                    text10 = text3 + ", " + TextResolver.GetText("Microwave") + " " + habitat.MicrowaveRadiation;
+                    text3 = text10;
+                    text10 = text3 + ", " + TextResolver.GetText("X-ray") + " " + habitat.XrayRadiation;
+                    DrawLabelledDescription(graphics, TextResolver.GetText("Energy").ToUpper(CultureInfo.InvariantCulture), labelWidthHabitat, text10, point3, solidBrush);
+                    num += rowHeight;
+                    if (habitat.ResearchBonus > 0)
+                    {
+                        point3 = new Point(num2, num);
+                        string description2 = string.Format(arg0: ((float)(int)habitat.ResearchBonus / 100f).ToString("+0%"), format: TextResolver.GetText("X research bonus to AREA"), arg1: Galaxy.ResolveDescription(habitat.ResearchBonusIndustry));
+                        DrawLabelledDescription(graphics, TextResolver.GetText("Research"), labelWidthHabitat, description2, point3, solidBrush);
+                        num += rowHeight;
+                    }
+                    if (habitat.ScenicFactor > 0f)
+                    {
+                        point3 = new Point(num2, num);
+                        string description3 = habitat.ScenicFactor.ToString("+0%");
+                        DrawLabelledDescription(graphics, TextResolver.GetText("Scenery"), labelWidthHabitat, description3, point3, solidBrush);
+                        num += rowHeight;
+                    }
+                    int maxWidth = num3 - (num2 + labelWidthHabitat + 10);
+                    DesignList designList = _Galaxy.PlayerEmpire.CheckBasesToBeBuiltAtHabitat(habitat);
+                    if (designList.Count > 0)
+                    {
+                        num += 4;
+                        point3 = new Point(num2 + labelWidthHabitat + 10, num);
+                        string text11 = string.Format(TextResolver.GetText("Construction ship queued to build X here"), Galaxy.ResolveDescription(designList[0].SubRole));
+                        SizeF sizeF = graphics.MeasureString(text11, _NormalFont, maxWidth, StringFormat.GenericTypographic);
+                        DrawStringWithDropShadow(graphics, text11, _NormalFont, point3, _WhiteBrush, maxWidth);
+                        num += (int)sizeF.Height;
+                    }
+                    num += rowHeight;
+                    if (systemVisibilityStatus == SystemVisibilityStatus.Visible || systemVisibilityStatus == SystemVisibilityStatus.Explored)
+                    {
+                        DrawSystemColoniesSummary(habitat, graphics, num, labelWidthHabitat);
                     }
                 }
                 else
                 {
-                    string str = Galaxy.ResolveDescription(habitat.Category);
-                    this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + " " + str + ")", titleFont, point3, new SolidBrush(this._UnknownColor));
-                }
-                int y3 = y1 + (titleFont.Height + 3);
-                point3 = new Point(x1, y3);
-                double num1 = (double)habitat.Diameter / 10.0;
-                string str1 = Galaxy.ResolveDescription(habitat.Type);
-                if (habitat.Type != HabitatType.BlackHole)
-                    str1 = str1 + " " + Galaxy.ResolveDescription(habitat.Category);
-                string text1 = str1 + ", " + num1.ToString("##0.0K");
-                if (habitat.Category == HabitatCategoryType.Planet || habitat.Category == HabitatCategoryType.Moon)
-                {
-                    double num2 = (double)habitat.Quality * 100.0;
-                    text1 = text1 + ",   " + TextResolver.GetText("Quality") + ": " + num2.ToString("0") + "%";
-                    if ((double)habitat.BaseQuality != (double)habitat.Quality)
+                    DrawLabelledDescription(graphics, TextResolver.GetText("System"), labelWidthHabitat, description, point3, solidBrush);
+                    num += rowHeight;
+                    if (habitat.ResearchBonus > 0)
                     {
-                        double num3 = (double)habitat.BaseQuality * 100.0;
-                        text1 = text1 + " (" + TextResolver.GetText("Maximum Abbreviation") + " " + num3.ToString("0") + "%)";
+                        point3 = new Point(num2, num);
+                        string description4 = string.Format(arg0: ((float)(int)habitat.ResearchBonus / 100f).ToString("+0%"), format: TextResolver.GetText("X research bonus to AREA"), arg1: Galaxy.ResolveDescription(habitat.ResearchBonusIndustry));
+                        DrawLabelledDescription(graphics, TextResolver.GetText("Research"), labelWidthHabitat, description4, point3, solidBrush);
+                        num += rowHeight;
                     }
-                }
-                this.DrawStringWithDropShadow(graphics, text1, this._NormalFont, point3, solidBrush1);
-                int num4;
-                if ((this._Galaxy.PlayerEmpire.PirateEmpireBaseHabitat != null || this._Game.GodMode) && habitat.GetPirateControl().Count > 0)
-                {
-                    y3 += rowHeight;
-                    point3 = new Point(x1, y3);
-                    Empire empire = (Empire)null;
-                    PirateColonyControl pirateColonyControl1 = (PirateColonyControl)null;
-                    string message = string.Empty;
-                    for (int index = 0; index < habitat.GetPirateControl().Count; ++index)
+                    if (habitat.ScenicFactor > 0f)
                     {
-                        PirateColonyControl pirateColonyControl2 = habitat.GetPirateControl()[index];
-                        if (pirateColonyControl2 != null)
+                        point3 = new Point(num2, num);
+                        string description5 = habitat.ScenicFactor.ToString("+0%");
+                        if (!string.IsNullOrEmpty(habitat.ScenicFeature))
                         {
-                            Empire byEmpireId = this._Galaxy.PirateEmpires.GetByEmpireId((int)pirateColonyControl2.EmpireId);
-                            if (byEmpireId != null)
-                            {
-                                if (empire == null)
-                                {
-                                    empire = byEmpireId;
-                                    pirateColonyControl1 = pirateColonyControl2;
-                                }
-                                if (message.Length > 0)
-                                    message += ", ";
-                                message = message + byEmpireId.Name + " (" + pirateColonyControl2.ControlLevel.ToString("0%") + ")";
-                            }
+                            description5 = string.Format(TextResolver.GetText("BONUSAMOUNT from FEATURE"), habitat.ScenicFactor.ToString("+0%"), habitat.ScenicFeature);
                         }
+                        DrawLabelledDescription(graphics, TextResolver.GetText("Scenery"), labelWidthHabitat, description5, point3, solidBrush);
+                        num += rowHeight;
                     }
-                    if (empire != null && empire.Active && pirateColonyControl1 != null)
-                    {
-                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        int width = (int)((double)this._FlagSizeSmall.Width * 0.734);
-                        int height = (int)((double)width * 0.6);
-                        Rectangle rect2 = new Rectangle(x1 + 2, y3, width, height);
-                        graphics.DrawImage((Image)empire.LargeFlagPicture, rect2);
-                        graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
-                        point3 = new Point(x1 + width + 5, y3);
-                        string empty = string.Empty;
-                        string text2;
-                        if (habitat.GetPirateControl().Count > 1)
-                        {
-                            string text3 = TextResolver.GetText("Pirate Control Description Multiple");
-                            string name = empire.Name;
-                            string str2 = pirateColonyControl1.ControlLevel.ToString("0%");
-                            num4 = habitat.GetPirateControl().Count - 1;
-                            string str3 = num4.ToString("0");
-                            text2 = string.Format(text3, (object)name, (object)str2, (object)str3);
-                        }
-                        else
-                            text2 = string.Format(TextResolver.GetText("Pirate Control Description Sole"), (object)empire.Name, (object)pirateColonyControl1.ControlLevel.ToString("0%"));
-                        this.DrawStringWithDropShadow(graphics, text2, this._NormalFont, point3);
-                        this.AddHotspot(new Rectangle(5, point3.Y, this.Width - 10, rowHeight), (object)null, message);
-                    }
-                }
-                if (visibilityStatus == SystemVisibilityStatus.Explored || visibilityStatus == SystemVisibilityStatus.Visible)
-                {
                     if (habitat.Ruin != null)
                     {
-                        point3 = new Point(this.ClientRectangle.Width - (this._RuinImages[habitat.Ruin.PictureRef].Width + 8), y3);
-                        graphics.DrawImageUnscaled((Image)this._RuinImages[habitat.Ruin.PictureRef], point3);
-                        this.AddHotspot(new Rectangle(point3, this._RuinImages[habitat.Ruin.PictureRef].Size), (object)habitat.Ruin, habitat.Ruin.Name + " (" + TextResolver.GetText("click for details") + ")");
+                        point3 = new Point(num2, num);
+                        SizeF sizeF2 = graphics.MeasureString(habitat.Ruin.Name, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic);
+                        DrawLabelledDescription(graphics, TextResolver.GetText("Ruins"), labelWidthHabitat, habitat.Ruin.Name, point3, solidBrush);
+                        Rectangle region = new Rectangle(num2 + labelWidthHabitat + 10, num, (int)sizeF2.Width + 1, rowHeight);
+                        AddHotspot(region, habitat.Ruin, habitat.Ruin.Name + " (" + TextResolver.GetText("click for details") + ")");
+                        num += rowHeight;
                     }
-                    int y4 = y3 + rowHeight;
-                    if (habitat.PlagueId >= (short)0)
+                    num += _Height4;
+                    if (habitat.Population.TotalAmount > 0)
                     {
-                        Plague plague = this._Galaxy.Plagues[(int)habitat.PlagueId];
-                        if (plague != null)
-                        {
-                            int x2 = x1;
-                            Bitmap bitmap = (Bitmap)null;
-                            if (plague.PictureRef >= 0 && plague.PictureRef < this._PlagueImages.Length)
-                                bitmap = this._PlagueImages[plague.PictureRef];
-                            if (bitmap != null)
-                            {
-                                graphics.DrawImage((Image)bitmap, new Point(x1, y4));
-                                x2 += bitmap.Width + 3;
-                            }
-                            string text4 = string.Format(TextResolver.GetText("Plague Colony Infection"), (object)plague.Name).ToUpper(CultureInfo.InvariantCulture) + "!";
-                            point3 = new Point(x2, y4);
-                            this.DrawStringWithDropShadow(graphics, text4, this._NormalFont, point3, this._RedBrush);
-                            y4 += rowHeight;
-                        }
+                        num += DrawPopulation(location: new Point(num2, num), labelWidth: labelWidthHabitat, habitat: habitat, populations: habitat.Population, graphics: graphics, overallWidth: num3, rowHeight: rowHeight, textBrush: solidBrush);
                     }
-                    if (habitat.IsBlockaded)
+                    if (habitat.Empire == _Galaxy.IndependentEmpire || habitat.Empire == null)
                     {
-                        Blockade blockade = this._Galaxy.Blockades[habitat];
-                        if (blockade != null)
+                        point3 = new Point(num2, num);
+                        int num16 = _Galaxy.CheckColonizationLikeliness(habitat, _Game.PlayerEmpire.DominantRace);
+                        SolidBrush solidBrush3 = null;
+                        solidBrush3 = ((_EmpireCanColonize && num16 > -5 && !(habitat.Quality < 0.5f)) ? new SolidBrush(solidBrush.Color) : new SolidBrush(Color.Red));
+                        if (_EmpireCanColonize && habitat.Quality < 0.5f)
                         {
-                            point3 = new Point(x1, y4);
-                            double num5 = (double)rowHeight / (double)InfoPanel._BlockadeImage.Height;
-                            int width = (int)((double)InfoPanel._BlockadeImage.Width * num5);
-                            Rectangle rect3 = new Rectangle(x1, y4, width, rowHeight);
-                            graphics.DrawImage((Image)InfoPanel._BlockadeImage, rect3);
-                            point3 = new Point(x1 + width + 2, y4 + 3);
-                            graphics.DrawImage((Image)blockade.Initiator.SmallFlagPicture, point3);
-                            string text5 = string.Format(TextResolver.GetText("Blockaded by EMPIRE"), (object)blockade.Initiator.Name);
-                            point3 = new Point(x1 + width + blockade.Initiator.SmallFlagPicture.Width + 4, y4);
-                            this.DrawStringWithDropShadow(graphics, text5, this._NormalFont, point3, solidBrush1);
-                            y4 += rowHeight;
+                            DrawLabelledDescription(graphics, TextResolver.GetText("Colonize"), labelWidthHabitat, TextResolver.GetText("Yes, but low quality is undesirable"), point3, solidBrush3);
                         }
+                        else
+                        {
+                            DrawLabelledDescription(graphics, TextResolver.GetText("Colonize"), labelWidthHabitat, _ColonizeExplanation, point3, solidBrush3);
+                        }
+                        solidBrush3.Dispose();
+                        num += rowHeight;
                     }
-                    if (habitat.RaidCountdown > (byte)0)
+                    point3 = new Point(num2, num);
+                    bool flag2 = false;
+                    if (_Game.PlayerEmpire.ResourceMap != null)
                     {
-                        point3 = new Point(x1, y4);
-                        using (SolidBrush brush = new SolidBrush(Color.Yellow))
-                            this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("This colony was recently Raided") + ")", this._NormalFont, point3, brush);
-                        y4 += rowHeight;
+                        flag2 = _Game.PlayerEmpire.ResourceMap.CheckResourcesKnown(habitat);
                     }
-                    if ((flag1 || habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode) && habitat.ManufacturingQueue != null && habitat.ManufacturingQueue.DeficientResources != null && habitat.ManufacturingQueue.DeficientResources.Count > 0)
+                    if (habitat.Empire == _Game.PlayerEmpire || _Game.GodMode || flag2)
                     {
-                        ResourceDatePair[] array = habitat.ManufacturingQueue.DeficientResources.ToArray();
-                        string empty = string.Empty;
-                        for (int index = 0; index < array.Length; ++index)
-                        {
-                            if (index > 0)
-                                empty += ", ";
-                            empty += new Resource(array[index].ResourceId).Name;
-                        }
-                        Bitmap messageImage = InfoPanel._MessageImages[30];
-                        Rectangle srcRect = new Rectangle(0, 0, messageImage.Width, messageImage.Height);
-                        Rectangle destRect = new Rectangle(x1 + 3, y4, rowHeight, rowHeight);
-                        this.SetGraphicsQualityToHigh(graphics);
-                        graphics.DrawImage((Image)messageImage, destRect, srcRect, GraphicsUnit.Pixel);
-                        point3 = new Point(destRect.Right + 2, y4);
-                        string text6 = string.Format(TextResolver.GetText("Construction Resource Shortage Message Short"), (object)empty);
-                        SizeF size = graphics.MeasureString(text6, this._NormalFont, this.ClientSize.Width - (point3.X + 5));
-                        using (SolidBrush brush = new SolidBrush(Color.FromArgb((int)byte.MaxValue, 128, 0)))
-                        {
-                            size = new SizeF(size.Width, Math.Min((float)((double)rowHeight * 2.0 + 1.0), size.Height));
-                            this.DrawStringWithDropShadowBounded(graphics, text6, this._NormalFont, point3, size, brush);
-                        }
-                        y4 += (int)size.Height;
-                    }
-                    int y5 = y4 + this._Height5;
-                    if (habitat.Empire != null && habitat.Empire != this._Galaxy.IndependentEmpire && (habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag1))
-                    {
-                        CharacterList characterList = new CharacterList();
-                        if (habitat.Characters != null)
-                            characterList = habitat.Characters.GetCharactersByRole(CharacterRole.ColonyGovernor);
-                        if (characterList.Count > 0)
-                        {
-                            int x3 = overallWidth1 - 35;
-                            for (int index = 0; index < characterList.Count; ++index)
-                            {
-                                point3 = new Point(x3, y5 - 20);
-                                Bitmap characterImageSmall = InfoPanel._CharacterImageCache.ObtainCharacterImageSmall(characterList[index]);
-                                if (characterImageSmall != null && characterImageSmall.PixelFormat != PixelFormat.Undefined)
-                                {
-                                    graphics.DrawImageUnscaled((Image)characterImageSmall, point3);
-                                    string message = characterList[index].Name + " (" + Galaxy.ResolveDescription(characterList[index].Role) + ")" + "   (" + TextResolver.GetText("click for details") + ")";
-                                    this.AddHotspot(new Rectangle(point3.X, point3.Y, characterImageSmall.Width, characterImageSmall.Height), (object)characterList[index], message);
-                                    x3 -= 38;
-                                }
-                            }
-                        }
-                    }
-                    point3 = new Point(x1, y5);
-                    int num6;
-                    if (habitatSystemStar == habitat && habitat.Category != HabitatCategoryType.GasCloud)
-                    {
-                        string text7 = TextResolver.GetText("Solar");
-                        byte num7 = habitat.SolarRadiation;
-                        string str4 = num7.ToString();
-                        string[] strArray1 = new string[5]
-                        {
-              text7 + " " + str4,
-              ", ",
-              TextResolver.GetText("Microwave"),
-              " ",
-              null
-                        };
-                        string[] strArray2 = strArray1;
-                        num7 = habitat.MicrowaveRadiation;
-                        string str5 = num7.ToString();
-                        strArray2[4] = str5;
-                        string[] strArray3 = new string[5]
-                        {
-              string.Concat(strArray1),
-              ", ",
-              TextResolver.GetText("X-ray"),
-              " ",
-              null
-                        };
-                        string[] strArray4 = strArray3;
-                        num7 = habitat.XrayRadiation;
-                        string str6 = num7.ToString();
-                        strArray4[4] = str6;
-                        string description2 = string.Concat(strArray3);
-                        this.DrawLabelledDescription(graphics, TextResolver.GetText("Energy").ToUpper(CultureInfo.InvariantCulture), labelWidth, description2, point3, solidBrush1);
-                        int y6 = y5 + rowHeight;
-                        if (habitat.ResearchBonus > (byte)0)
-                        {
-                            point3 = new Point(x1, y6);
-                            float num8 = (float)habitat.ResearchBonus / 100f;
-                            string description3 = string.Format(TextResolver.GetText("X research bonus to AREA"), (object)num8.ToString("+0%"), (object)Galaxy.ResolveDescription(habitat.ResearchBonusIndustry));
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("Research"), labelWidth, description3, point3, solidBrush1);
-                            y6 += rowHeight;
-                        }
-                        if ((double)habitat.ScenicFactor > 0.0)
-                        {
-                            point3 = new Point(x1, y6);
-                            string description4 = habitat.ScenicFactor.ToString("+0%");
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("Scenery"), labelWidth, description4, point3, solidBrush1);
-                            y6 += rowHeight;
-                        }
-                        int num9 = overallWidth1 - (x1 + labelWidth + 10);
-                        DesignList beBuiltAtHabitat = this._Galaxy.PlayerEmpire.CheckBasesToBeBuiltAtHabitat(habitat);
-                        if (beBuiltAtHabitat.Count > 0)
-                        {
-                            int y7 = y6 + 4;
-                            point3 = new Point(x1 + labelWidth + 10, y7);
-                            string text8 = string.Format(TextResolver.GetText("Construction ship queued to build X here"), (object)Galaxy.ResolveDescription(beBuiltAtHabitat[0].SubRole));
-                            SizeF sizeF = graphics.MeasureString(text8, this._NormalFont, num9, StringFormat.GenericTypographic);
-                            this.DrawStringWithDropShadow(graphics, text8, this._NormalFont, point3, this._WhiteBrush, num9);
-                            y6 = y7 + (int)sizeF.Height;
-                        }
-                        num6 = y6 + rowHeight;
-                        if (visibilityStatus == SystemVisibilityStatus.Visible || visibilityStatus == SystemVisibilityStatus.Explored)
-                            this.DrawSystemColoniesSummary(habitat, graphics, num6, labelWidth);
+                        DrawResources(labelWidthHabitat, habitat.Resources, graphics, point3, num3, solidBrush2);
                     }
                     else
                     {
-                        this.DrawLabelledDescription(graphics, TextResolver.GetText("System"), labelWidth, description1, point3, solidBrush1);
-                        int y8 = y5 + rowHeight;
-                        if (habitat.ResearchBonus > (byte)0)
+                        DrawLabelledDescription(graphics, TextResolver.GetText("Resource"), labelWidthHabitat, "(" + TextResolver.GetText("Unknown") + ")", point3, solidBrush2);
+                    }
+                    num += rowHeight;
+                    num += _Height4;
+                    if (habitat.Population.TotalAmount > 0 && habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire)
+                    {
+                        int num17 = num2;
+                        point3 = new Point(num17, num);
+                        string description6 = habitat.StrategicValue.ToString("0,K");
+                        int num18 = (int)graphics.MeasureString(description6, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                        string text12 = habitat.DevelopmentLevel.ToString("##0") + "%";
+                        if (habitat.Ruin != null || habitat.WonderForDevelopment != null)
                         {
-                            point3 = new Point(x1, y8);
-                            float num10 = (float)habitat.ResearchBonus / 100f;
-                            string description5 = string.Format(TextResolver.GetText("X research bonus to AREA"), (object)num10.ToString("+0%"), (object)Galaxy.ResolveDescription(habitat.ResearchBonusIndustry));
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("Research"), labelWidth, description5, point3, solidBrush1);
-                            y8 += rowHeight;
+                            int val = 0;
+                            if (habitat.WonderForDevelopment != null)
+                            {
+                                val = habitat.WonderForDevelopment.Value1;
+                            }
+                            else if (habitat.Ruin != null)
+                            {
+                                val = Math.Max(val, (int)(habitat.Ruin.DevelopmentBonus * 100.0));
+                            }
+                            text12 += "(";
+                            text12 = text12 + val.ToString("+##0;-##0;0") + "%)";
                         }
-                        if ((double)habitat.ScenicFactor > 0.0)
+                        int num19 = (int)graphics.MeasureString(text12, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                        string value = string.Empty;
+                        if (habitat.Empire == _Game.PlayerEmpire || _Game.GodMode || flag || systemVisibilityStatus == SystemVisibilityStatus.Visible)
                         {
-                            point3 = new Point(x1, y8);
-                            string description6 = habitat.ScenicFactor.ToString("+0%");
-                            if (!string.IsNullOrEmpty(habitat.ScenicFeature))
-                                description6 = string.Format(TextResolver.GetText("BONUSAMOUNT from FEATURE"), (object)habitat.ScenicFactor.ToString("+0%"), (object)habitat.ScenicFeature);
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("Scenery"), labelWidth, description6, point3, solidBrush1);
-                            y8 += rowHeight;
+                            value = habitat.EmpireApprovalRating.ToString("+###;-###;0");
                         }
-                        if (habitat.Ruin != null)
+                        _ = graphics.MeasureString(value, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                        DrawLabelledDescription(graphics, TextResolver.GetText("Value"), labelWidthHabitat, description6, point3, solidBrush);
+                        num17 += labelWidthHabitat + 10 + num18 + (int)((double)_ImageSize * 0.75);
+                        graphics.DrawImageUnscaled(point: new Point(num17, num), image: _DevelopmentImage);
+                        num17 += _ImageSize;
+                        DrawStringWithDropShadow(location: new Point(num17, num), graphics: graphics, text: text12, font: _NormalFont, brush: solidBrush);
+                        num17 += num19;
+                        num17 += (int)((double)_ImageSize * 0.75);
+                        point3 = new Point(num17, num);
+                        Bitmap bitmap4 = null;
+                        if (!string.IsNullOrEmpty(value))
                         {
-                            point3 = new Point(x1, y8);
-                            SizeF sizeF = graphics.MeasureString(habitat.Ruin.Name, this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic);
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("Ruins"), labelWidth, habitat.Ruin.Name, point3, solidBrush1);
-                            this.AddHotspot(new Rectangle(x1 + labelWidth + 10, y8, (int)sizeF.Width + 1, rowHeight), (object)habitat.Ruin, habitat.Ruin.Name + " (" + TextResolver.GetText("click for details") + ")");
-                            y8 += rowHeight;
+                            bitmap4 = ((habitat.EmpireApprovalRating > 15.0) ? _ApprovalSmileImage : ((habitat.EmpireApprovalRating > 0.0) ? _ApprovalNeutralImage : ((!(habitat.EmpireApprovalRating > -15.0)) ? _ApprovalAngryImage : _ApprovalSadImage)));
+                            if (habitat.Rebelling)
+                            {
+                                bitmap4 = _ApprovalAngryImage;
+                            }
+                            graphics.DrawImageUnscaled(bitmap4, point3);
+                            num17 += _ImageSize;
+                            DrawStringWithDropShadow(location: new Point(num17, num), graphics: graphics, text: value, font: _NormalFont, brush: solidBrush);
                         }
-                        int y9 = y8 + this._Height4;
-                        if (habitat.Population.TotalAmount > 0L)
+                        num += rowHeight;
+                        point3 = new Point(num2, num);
+                        double num20 = 0.0;
+                        if (habitat.Empire != null)
                         {
-                            point3 = new Point(x1, y9);
-                            y9 += this.DrawPopulation(labelWidth, habitat, habitat.Population, graphics, point3, overallWidth1, rowHeight, solidBrush1);
+                            num20 = ((habitat.Empire.PirateEmpireBaseHabitat == null) ? (habitat.AnnualRevenue / habitat.Empire.PrivateAnnualRevenue) : (habitat.AnnualRevenue / habitat.Empire.CalculateAccurateAnnualIncome()));
+                            num20 = Math.Max(0.0, num20);
                         }
-                        if (habitat.Empire == this._Galaxy.IndependentEmpire || habitat.Empire == null)
+                        string empty2 = string.Empty;
+                        double annualRevenue = habitat.AnnualRevenue;
+                        if (habitat.Empire != _Game.PlayerEmpire && !_Game.GodMode && !flag)
                         {
-                            point3 = new Point(x1, y9);
-                            int num11 = this._Galaxy.CheckColonizationLikeliness(habitat, this._Game.PlayerEmpire.DominantRace);
-                            SolidBrush textBrush2 = !this._EmpireCanColonize || num11 <= -5 || (double)habitat.Quality < 0.5 ? new SolidBrush(Color.Red) : new SolidBrush(solidBrush1.Color);
-                            if (this._EmpireCanColonize && (double)habitat.Quality < 0.5)
-                                this.DrawLabelledDescription(graphics, TextResolver.GetText("Colonize"), labelWidth, TextResolver.GetText("Yes, but low quality is undesirable"), point3, textBrush2);
-                            else
-                                this.DrawLabelledDescription(graphics, TextResolver.GetText("Colonize"), labelWidth, this._ColonizeExplanation, point3, textBrush2);
-                            textBrush2.Dispose();
-                            y9 += rowHeight;
+                            empty2 = ((!(annualRevenue < 1000.0)) ? annualRevenue.ToString("0,K") : (annualRevenue / 1000.0).ToString("0.00K"));
                         }
-                        point3 = new Point(x1, y9);
-                        bool flag2 = false;
-                        if (this._Game.PlayerEmpire.ResourceMap != null)
-                            flag2 = this._Game.PlayerEmpire.ResourceMap.CheckResourcesKnown(habitat);
-                        if (habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag2)
-                            this.DrawResources(labelWidth, habitat.Resources, graphics, point3, overallWidth1, textBrush1);
                         else
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("Resource"), labelWidth, "(" + TextResolver.GetText("Unknown") + ")", point3, textBrush1);
-                        int y10 = y9 + rowHeight + this._Height4;
-                        if (habitat.Population.TotalAmount > 0L && habitat.Empire != null && habitat.Empire != this._Galaxy.IndependentEmpire)
                         {
-                            int x4 = x1;
-                            point3 = new Point(x4, y10);
-                            num4 = habitat.StrategicValue;
-                            string str7 = num4.ToString("0,K");
-                            int width1 = (int)graphics.MeasureString(str7, this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                            num4 = habitat.DevelopmentLevel;
-                            string text9 = num4.ToString("##0") + "%";
-                            if (habitat.Ruin != null || habitat.WonderForDevelopment != null)
-                            {
-                                int val1 = 0;
-                                if (habitat.WonderForDevelopment != null)
-                                    val1 = habitat.WonderForDevelopment.Value1;
-                                else if (habitat.Ruin != null)
-                                    val1 = Math.Max(val1, (int)(habitat.Ruin.DevelopmentBonus * 100.0));
-                                text9 = text9 + "(" + val1.ToString("+##0;-##0;0") + "%)";
-                            }
-                            SizeF sizeF = graphics.MeasureString(text9, this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic);
-                            int width2 = (int)sizeF.Width;
-                            string empty1 = string.Empty;
-                            if (habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag1 || visibilityStatus == SystemVisibilityStatus.Visible)
-                                empty1 = habitat.EmpireApprovalRating.ToString("+###;-###;0");
-                            sizeF = graphics.MeasureString(empty1, this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic);
-                            double width3 = (double)sizeF.Width;
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("Value"), labelWidth, str7, point3, solidBrush1);
-                            int x5 = x4 + (labelWidth + 10 + width1 + (int)((double)this._ImageSize * 0.75));
-                            point3 = new Point(x5, y10);
-                            graphics.DrawImageUnscaled((Image)InfoPanel._DevelopmentImage, point3);
-                            int x6 = x5 + this._ImageSize;
-                            point3 = new Point(x6, y10);
-                            this.DrawStringWithDropShadow(graphics, text9, this._NormalFont, point3, solidBrush1);
-                            int x7 = x6 + width2 + (int)((double)this._ImageSize * 0.75);
-                            point3 = new Point(x7, y10);
-                            if (!string.IsNullOrEmpty(empty1))
-                            {
-                                Bitmap bitmap = habitat.EmpireApprovalRating <= 15.0 ? (habitat.EmpireApprovalRating <= 0.0 ? (habitat.EmpireApprovalRating <= -15.0 ? InfoPanel._ApprovalAngryImage : InfoPanel._ApprovalSadImage) : InfoPanel._ApprovalNeutralImage) : InfoPanel._ApprovalSmileImage;
-                                if (habitat.Rebelling)
-                                    bitmap = InfoPanel._ApprovalAngryImage;
-                                graphics.DrawImageUnscaled((Image)bitmap, point3);
-                                point3 = new Point(x7 + this._ImageSize, y10);
-                                this.DrawStringWithDropShadow(graphics, empty1, this._NormalFont, point3, solidBrush1);
-                            }
-                            int y11 = y10 + rowHeight;
-                            point3 = new Point(x1, y11);
-                            double num12 = 0.0;
-                            if (habitat.Empire != null)
-                                num12 = Math.Max(0.0, habitat.Empire.PirateEmpireBaseHabitat == null ? habitat.AnnualRevenue / habitat.Empire.PrivateAnnualRevenue : habitat.AnnualRevenue / habitat.Empire.CalculateAccurateAnnualIncome());
-                            string empty2 = string.Empty;
-                            double annualRevenue = habitat.AnnualRevenue;
-                            double num13;
-                            string description7;
-                            if (habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag1)
-                            {
-                                string str8;
-                                if (annualRevenue < 0.0)
-                                {
-                                    string text10 = TextResolver.GetText("Colony Revenue and GDP portion");
-                                    num13 = annualRevenue / 1000.0;
-                                    string str9 = num13.ToString("0K");
-                                    string str10 = num12.ToString("##0%");
-                                    str8 = string.Format(text10, (object)str9, (object)str10);
-                                }
-                                else if (annualRevenue < 1000.0)
-                                {
-                                    string text11 = TextResolver.GetText("Colony Revenue and GDP portion");
-                                    num13 = annualRevenue / 1000.0;
-                                    string str11 = num13.ToString("0.00K");
-                                    string str12 = num12.ToString("##0.00%");
-                                    str8 = string.Format(text11, (object)str11, (object)str12);
-                                }
-                                else
-                                    str8 = string.Format(TextResolver.GetText("Colony Revenue and GDP portion"), (object)annualRevenue.ToString("0,K"), (object)num12.ToString("##0%"));
-                                double corruption = habitat.Corruption;
-                                description7 = str8 + " (" + corruption.ToString("##0%") + " " + TextResolver.GetText("Corruption").ToLower(CultureInfo.InvariantCulture) + ")";
-                            }
-                            else
-                                description7 = annualRevenue >= 1000.0 ? annualRevenue.ToString("0,K") : (annualRevenue / 1000.0).ToString("0.00K");
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("GDP"), labelWidth, description7, point3, solidBrush1);
-                            int y12 = y11 + rowHeight;
-                            point3 = new Point(x1, y12);
-                            string empty3 = string.Empty;
-                            double annualTaxRevenue = habitat.AnnualTaxRevenue;
-                            double taxComplianceRate = habitat.TaxComplianceRate;
-                            string description8;
-                            if (habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag1)
-                            {
-                                string str13 = habitat.TaxRate.ToString("#0%;-#0%;0%");
-                                if (habitat.Rebelling)
-                                {
-                                    description8 = str13 + " " + TextResolver.GetText("NO TAX PAID (Rebelling)");
-                                }
-                                else
-                                {
-                                    if (annualTaxRevenue < 1000.0)
-                                    {
-                                        string str14 = str13;
-                                        num13 = annualTaxRevenue / 1000.0;
-                                        string str15 = num13.ToString("0.00K");
-                                        description8 = str14 + " (" + str15 + ")";
-                                    }
-                                    else
-                                        description8 = str13 + " (" + annualTaxRevenue.ToString("0,K") + ")";
-                                    if ((double)habitat.TaxRate > 0.0)
-                                        description8 = description8 + " = " + taxComplianceRate.ToString("0%") + " " + TextResolver.GetText("compliance");
-                                }
-                            }
-                            else
-                            {
-                                string str16 = habitat.TaxRate.ToString("#0%;-#0%;0%");
-                                num13 = habitat.AnnualTaxRevenue;
-                                string str17 = num13.ToString("0,K");
-                                description8 = str16 + " (" + str17 + ")";
-                            }
-                            this.DrawLabelledDescription(graphics, TextResolver.GetText("Tax"), labelWidth, description8, point3, solidBrush1);
-                            y10 = y12 + rowHeight + this._Height4;
+                            empty2 = ((annualRevenue < 0.0) ? string.Format(TextResolver.GetText("Colony Revenue and GDP portion"), (annualRevenue / 1000.0).ToString("0K"), num20.ToString("##0%")) : ((!(annualRevenue < 1000.0)) ? string.Format(TextResolver.GetText("Colony Revenue and GDP portion"), annualRevenue.ToString("0,K"), num20.ToString("##0%")) : string.Format(TextResolver.GetText("Colony Revenue and GDP portion"), (annualRevenue / 1000.0).ToString("0.00K"), num20.ToString("##0.00%"))));
+                            double corruption = habitat.Corruption;
+                            string text3 = empty2;
+                            empty2 = text3 + " (" + corruption.ToString("##0%") + " " + TextResolver.GetText("Corruption").ToLower(CultureInfo.InvariantCulture) + ")";
                         }
-                        int offsetX = 0;
-                        int overallWidth2 = overallWidth1;
-                        point3 = new Point(x1, y10);
-                        this.DrawFacilities(labelWidth, habitat, habitat.Facilities, graphics, point3, overallWidth1);
-                        num6 = y10 + rowHeight;
-                        if (habitat.Population.TotalAmount > 0L && habitat.Empire != null || habitat.Troops != null && habitat.Troops.Count > 0 || habitat.InvadingTroops != null && habitat.InvadingTroops.Count > 0 || habitat.TroopsToRecruit != null && habitat.TroopsToRecruit.Count > 0 || habitat.Characters != null && habitat.Characters.Count > 0 || habitat.InvadingCharacters != null && habitat.InvadingCharacters.Count > 0)
+                        DrawLabelledDescription(graphics, TextResolver.GetText("GDP"), labelWidthHabitat, empty2, point3, solidBrush);
+                        num += rowHeight;
+                        point3 = new Point(num2, num);
+                        string empty3 = string.Empty;
+                        double annualTaxRevenue = habitat.AnnualTaxRevenue;
+                        double taxComplianceRate = habitat.TaxComplianceRate;
+                        if (habitat.Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
                         {
-                            point3 = new Point(x1, num6);
-                            bool flag3 = false;
-                            if (habitat.Characters != null && habitat.Characters.CheckCharactersOfEmpirePresent(this._Game.PlayerEmpire) || habitat.InvadingCharacters != null && habitat.InvadingCharacters.CheckCharactersOfEmpirePresent(this._Game.PlayerEmpire) || habitat.Troops != null && habitat.Troops.CheckTroopsOfEmpirePresent(this._Game.PlayerEmpire) || habitat.InvadingTroops != null && habitat.InvadingTroops.CheckTroopsOfEmpirePresent(this._Game.PlayerEmpire))
-                                flag3 = true;
-                            if (habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag1 || flag3 || visibilityStatus == SystemVisibilityStatus.Visible)
+                            empty3 = habitat.TaxRate.ToString("#0%;-#0%;0%");
+                            if (habitat.Rebelling)
                             {
-                                this.DrawTroopsAgents(labelWidth, habitat.Troops, habitat.TroopsToRecruit, habitat.InvadingTroops, habitat.Characters, habitat.InvadingCharacters, graphics, point3, overallWidth2, offsetX);
-                                string str18 = string.Format(TextResolver.GetText("Show Colony Ground Report"), (object)habitat.Name);
-                                if (habitat.InvadingTroops != null && habitat.InvadingTroops.Count > 0)
-                                {
-                                    str18 = string.Format(TextResolver.GetText("Show Colony Battle Report"), (object)habitat.Name);
-                                    using (SolidBrush solidBrush2 = new SolidBrush(GraphicsHelper.OscillateColor(Color.FromArgb(0, (int)byte.MaxValue, 0, 0), Color.FromArgb(160, (int)byte.MaxValue, 0, 0), DateTime.Now)))
-                                        graphics.FillRectangle((Brush)solidBrush2, new Rectangle(5, point3.Y, this.Width - 10, rowHeight));
-                                }
-                                Empire invader = (Empire)null;
-                                Empire defender = (Empire)null;
-                                habitat.ResolveInvasionEmpires(out defender, out invader);
-                                if (defender == null)
-                                    defender = habitat.Empire;
-                                int defendingStrength = 0;
-                                int attackingStrength = 0;
-                                double totalDefendModifier = 0.0;
-                                double totalAttackModifier = 0.0;
-                                habitat.CalculateForceStrengths(defender, invader, habitat.Troops, habitat.Characters, habitat.InvadingTroops, habitat.InvadingCharacters, out defendingStrength, out attackingStrength, out totalDefendModifier, out totalAttackModifier, out List<double> _, out List<string> _, out List<double> _, out List<string> _);
-                                int infantryCount;
-                                int artilleryCount;
-                                int armorCount;
-                                int specialForcesCount;
-                                habitat.Troops.GetTroopCountsByType(out infantryCount, out artilleryCount, out armorCount, out specialForcesCount);
-                                string str19 = " (" + Galaxy.ResolveTroopCompositionDescription(infantryCount, artilleryCount, armorCount, specialForcesCount) + ")";
-                                bool isDefending = false;
-                                int populationStrength = habitat.CalculatePopulationStrength(out isDefending, invader, defender);
-                                if (isDefending)
-                                    defendingStrength += populationStrength;
-                                else
-                                    attackingStrength += populationStrength;
-                                string message;
-                                if (invader != null)
-                                {
-                                    string str20 = string.Format(TextResolver.GetText("Battle Strength Description"), (object)(defendingStrength.ToString("0,K") + str19), (object)attackingStrength.ToString("0,K"));
-                                    message = str18 + "  (" + TextResolver.GetText("Strength") + ": " + str20 + ")";
-                                }
-                                else
-                                    message = str18 + "  (" + TextResolver.GetText("Strength") + ": " + defendingStrength.ToString("0,K") + str19 + ")";
-                                this.AddHotspot(new Rectangle(5, point3.Y, this.Width - 10, rowHeight), (object)new object[1]
-                                {
-                  (object) habitat
-                                }, message);
+                                empty3 = empty3 + " " + TextResolver.GetText("NO TAX PAID (Rebelling)");
                             }
                             else
-                                this.DrawLabelledDescription(graphics, TextResolver.GetText("Troops"), labelWidth, "(" + TextResolver.GetText("Unknown") + ")", point3, solidBrush1);
-                            num6 += rowHeight;
-                            if (habitat.InvadingTroops != null && habitat.InvadingTroops.Count > 0 && (habitat.Empire == this._Galaxy.PlayerEmpire || habitat.InvadingTroops[0].Empire == this._Galaxy.PlayerEmpire))
                             {
-                                Empire defender;
-                                Empire invader;
-                                habitat.ResolveInvasionEmpires(out defender, out invader);
-                                int attackingStrength = 0;
-                                int defendingStrength = 0;
-                                habitat.CalculateForceStrengths(defender, invader, habitat.Troops, habitat.Characters, habitat.InvadingTroops, habitat.InvadingCharacters, out defendingStrength, out attackingStrength);
-                                bool isDefending = true;
-                                int populationStrength = habitat.CalculatePopulationStrength(out isDefending, invader, defender);
-                                string str21 = attackingStrength.ToString("0,K");
-                                string str22 = defendingStrength.ToString("0,K");
-                                if (isDefending)
+                                empty3 = ((!(annualTaxRevenue < 1000.0)) ? (empty3 + " (" + annualTaxRevenue.ToString("0,K") + ")") : (empty3 + " (" + (annualTaxRevenue / 1000.0).ToString("0.00K") + ")"));
+                                if (habitat.TaxRate > 0f)
                                 {
-                                    num4 = defendingStrength + populationStrength;
-                                    str22 = num4.ToString("0,K") + " (" + string.Format(TextResolver.GetText("X from population"), (object)populationStrength.ToString("0,K")) + ")";
+                                    string text3 = empty3;
+                                    empty3 = text3 + " = " + taxComplianceRate.ToString("0%") + " " + TextResolver.GetText("compliance");
                                 }
-                                else
-                                {
-                                    num4 = attackingStrength + populationStrength;
-                                    str21 = num4.ToString("0,K") + " (" + string.Format(TextResolver.GetText("X from population"), (object)populationStrength.ToString("0,K")) + ")";
-                                }
-                                string description9 = "  " + str22 + "   vs   " + str21;
-                                point3 = new Point(x1, num6);
-                                using (SolidBrush solidBrush3 = new SolidBrush(GraphicsHelper.OscillateColor(Color.FromArgb(0, (int)byte.MaxValue, 0, 0), Color.FromArgb(160, (int)byte.MaxValue, 0, 0), DateTime.Now)))
-                                    graphics.FillRectangle((Brush)solidBrush3, new Rectangle(5, point3.Y, this.Width - 10, rowHeight));
-                                this.DrawLabelledDescription(graphics, "", labelWidth, description9, point3);
-                                string message = string.Format(TextResolver.GetText("Show Colony Battle Report"), (object)habitat.Name);
-                                this.AddHotspot(new Rectangle(5, point3.Y, this.Width - 10, rowHeight), (object)new object[1]
-                                {
-                  (object) habitat
-                                }, message);
-                                num6 += rowHeight;
                             }
                         }
-                        if (habitat.Population.TotalAmount > 0L && habitat.Empire != null && habitat.Empire != this._Galaxy.IndependentEmpire && habitat.ConstructionQueue != null && habitat.ConstructionQueue.ConstructionYards.Count > 0)
+                        else
                         {
-                            point3 = new Point(x1, num6);
-                            if (habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag1 || visibilityStatus == SystemVisibilityStatus.Visible)
+                            empty3 = habitat.TaxRate.ToString("#0%;-#0%;0%") + " (" + habitat.AnnualTaxRevenue.ToString("0,K") + ")";
+                        }
+                        DrawLabelledDescription(graphics, TextResolver.GetText("Tax"), labelWidthHabitat, empty3, point3, solidBrush);
+                        num += rowHeight;
+                        num += _Height4;
+                    }
+                    int offsetX = 0;
+                    int overallWidth = num3;
+                    DrawFacilities(location: new Point(num2, num), labelWidth: labelWidthHabitat, habitat: habitat, facilities: habitat.Facilities, graphics: graphics, overallWidth: num3);
+                    num += rowHeight;
+                    if ((habitat.Population.TotalAmount > 0 && habitat.Empire != null) || (habitat.Troops != null && habitat.Troops.Count > 0) || (habitat.InvadingTroops != null && habitat.InvadingTroops.Count > 0) || (habitat.TroopsToRecruit != null && habitat.TroopsToRecruit.Count > 0) || (habitat.Characters != null && habitat.Characters.Count > 0) || (habitat.InvadingCharacters != null && habitat.InvadingCharacters.Count > 0))
+                    {
+                        point3 = new Point(num2, num);
+                        bool flag3 = false;
+                        if ((habitat.Characters != null && habitat.Characters.CheckCharactersOfEmpirePresent(_Game.PlayerEmpire)) || (habitat.InvadingCharacters != null && habitat.InvadingCharacters.CheckCharactersOfEmpirePresent(_Game.PlayerEmpire)) || (habitat.Troops != null && habitat.Troops.CheckTroopsOfEmpirePresent(_Game.PlayerEmpire)) || (habitat.InvadingTroops != null && habitat.InvadingTroops.CheckTroopsOfEmpirePresent(_Game.PlayerEmpire)))
+                        {
+                            flag3 = true;
+                        }
+                        if (habitat.Empire == _Game.PlayerEmpire || _Game.GodMode || flag || flag3 || systemVisibilityStatus == SystemVisibilityStatus.Visible)
+                        {
+                            DrawTroopsAgents(labelWidthHabitat, habitat.Troops, habitat.TroopsToRecruit, habitat.InvadingTroops, habitat.Characters, habitat.InvadingCharacters, graphics, point3, overallWidth, offsetX);
+                            string text13 = string.Format(TextResolver.GetText("Show Colony Ground Report"), habitat.Name);
+                            if (habitat.InvadingTroops != null && habitat.InvadingTroops.Count > 0)
                             {
-                                BuiltObjectList builtObjects = new BuiltObjectList();
-                                for (int index = 0; index < habitat.ConstructionQueue.ConstructionYards.Count; ++index)
-                                {
-                                    ConstructionYard constructionYard = habitat.ConstructionQueue.ConstructionYards[index];
-                                    if (constructionYard.ShipUnderConstruction != null)
-                                        builtObjects.Add(constructionYard.ShipUnderConstruction);
-                                }
-                                this.DrawBuiltObjectList(labelWidth, TextResolver.GetText("Building"), builtObjects, habitat.ConstructionQueue.ConstructionWaitQueue.Count, graphics, point3, overallWidth1);
+                                text13 = string.Format(TextResolver.GetText("Show Colony Battle Report"), habitat.Name);
+                                Color color3 = GraphicsHelper.OscillateColor(Color.FromArgb(0, 255, 0, 0), Color.FromArgb(160, 255, 0, 0), DateTime.Now);
+                                using SolidBrush brush4 = new SolidBrush(color3);
+                                graphics.FillRectangle(brush4, new Rectangle(5, point3.Y, base.Width - 10, rowHeight));
+                            }
+                            Empire invader = null;
+                            Empire defender = null;
+                            habitat.ResolveInvasionEmpires(out defender, out invader);
+                            if (defender == null)
+                            {
+                                defender = habitat.Empire;
+                            }
+                            int defendingStrength = 0;
+                            int attackingStrength = 0;
+                            double totalDefendModifier = 0.0;
+                            double totalAttackModifier = 0.0;
+                            habitat.CalculateForceStrengths(defender, invader, habitat.Troops, habitat.Characters, habitat.InvadingTroops, habitat.InvadingCharacters, out defendingStrength, out attackingStrength, out totalDefendModifier, out totalAttackModifier, out var _, out var _, out var _, out var _);
+                            habitat.Troops.GetTroopCountsByType(out var infantryCount, out var artilleryCount, out var armorCount, out var specialForcesCount);
+                            string text14 = " (" + Galaxy.ResolveTroopCompositionDescription(infantryCount, artilleryCount, armorCount, specialForcesCount) + ")";
+                            bool isDefending = false;
+                            int num21 = habitat.CalculatePopulationStrength(out isDefending, invader, defender);
+                            if (isDefending)
+                            {
+                                defendingStrength += num21;
                             }
                             else
-                                this.DrawLabelledDescription(graphics, TextResolver.GetText("Building"), labelWidth, "(" + TextResolver.GetText("Unknown") + ")", point3, solidBrush1);
-                            num6 += rowHeight;
-                        }
-                        if (habitat.Population.TotalAmount > 0L && habitat.Empire != null && habitat.DockingBays != null && habitat.DockingBays.Count > 0)
-                        {
-                            point3 = new Point(x1, num6);
-                            if (habitat.Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag1 || visibilityStatus == SystemVisibilityStatus.Visible)
                             {
-                                BuiltObjectList builtObjects = new BuiltObjectList();
-                                for (int index = 0; index < habitat.DockingBays.Count; ++index)
-                                {
-                                    DockingBay dockingBay = habitat.DockingBays[index];
-                                    if (dockingBay.DockedShip != null)
-                                        builtObjects.Add(dockingBay.DockedShip);
-                                }
-                                if (habitat.DockingBayWaitQueue != null)
-                                    this.DrawBuiltObjectList(labelWidth, TextResolver.GetText("Docked"), builtObjects, habitat.DockingBayWaitQueue.Count, graphics, point3, overallWidth1);
-                                else
-                                    this.DrawBuiltObjectList(labelWidth, TextResolver.GetText("Docked"), builtObjects, 0, graphics, point3, overallWidth1);
+                                attackingStrength += num21;
+                            }
+                            if (invader != null)
+                            {
+                                string text15 = string.Format(TextResolver.GetText("Battle Strength Description"), defendingStrength.ToString("0,K") + text14, attackingStrength.ToString("0,K"));
+                                string text3 = text13;
+                                text13 = text3 + "  (" + TextResolver.GetText("Strength") + ": " + text15 + ")";
                             }
                             else
-                                this.DrawLabelledDescription(graphics, TextResolver.GetText("Docked"), labelWidth, "(" + TextResolver.GetText("Unknown") + ")", point3, solidBrush1);
-                            num6 += rowHeight;
+                            {
+                                string text3 = text13;
+                                text13 = text3 + "  (" + TextResolver.GetText("Strength") + ": " + defendingStrength.ToString("0,K") + text14 + ")";
+                            }
+                            AddHotspot(new Rectangle(5, point3.Y, base.Width - 10, rowHeight), new object[1] { habitat }, text13);
                         }
-                        if (habitat.Empire == this._Galaxy.IndependentEmpire || habitat.Empire == null)
+                        else
                         {
-                            int num14 = overallWidth1 - (x1 + labelWidth + 10);
-                            BuiltObject builtObject = this._Galaxy.PlayerEmpire.CheckColonizingHabitat(habitat);
-                            if (builtObject != null)
+                            DrawLabelledDescription(graphics, TextResolver.GetText("Troops"), labelWidthHabitat, "(" + TextResolver.GetText("Unknown") + ")", point3, solidBrush);
+                        }
+                        num += rowHeight;
+                        if (habitat.InvadingTroops != null && habitat.InvadingTroops.Count > 0 && (habitat.Empire == _Galaxy.PlayerEmpire || habitat.InvadingTroops[0].Empire == _Galaxy.PlayerEmpire))
+                        {
+                            habitat.ResolveInvasionEmpires(out var defender2, out var invader2);
+                            int attackingStrength2 = 0;
+                            int defendingStrength2 = 0;
+                            habitat.CalculateForceStrengths(defender2, invader2, habitat.Troops, habitat.Characters, habitat.InvadingTroops, habitat.InvadingCharacters, out defendingStrength2, out attackingStrength2);
+                            bool isDefending2 = true;
+                            int num22 = habitat.CalculatePopulationStrength(out isDefending2, invader2, defender2);
+                            string text16 = attackingStrength2.ToString("0,K");
+                            string text17 = defendingStrength2.ToString("0,K");
+                            if (isDefending2)
                             {
-                                int y13 = num6 + this._Height4;
-                                point3 = new Point(x1 + labelWidth + 10, y13);
-                                string text12 = string.Format(TextResolver.GetText("COLONYSHIP colonizing here"), (object)builtObject.Name);
-                                SizeF sizeF = graphics.MeasureString(text12, this._NormalFont, num14, StringFormat.GenericTypographic);
-                                this.DrawStringWithDropShadow(graphics, text12, this._NormalFont, point3, this._WhiteBrush, num14);
-                                num6 = y13 + (int)sizeF.Height;
+                                text17 = (defendingStrength2 + num22).ToString("0,K");
+                                text17 = text17 + " (" + string.Format(TextResolver.GetText("X from population"), num22.ToString("0,K")) + ")";
                             }
-                            DesignList beBuiltAtHabitat = this._Galaxy.PlayerEmpire.CheckBasesToBeBuiltAtHabitat(habitat);
-                            if (beBuiltAtHabitat.Count > 0)
+                            else
                             {
-                                int y14 = num6 + 4;
-                                point3 = new Point(x1 + labelWidth + 10, y14);
-                                string text13 = string.Format(TextResolver.GetText("Construction ship queued to build X here"), (object)Galaxy.ResolveDescription(beBuiltAtHabitat[0].SubRole));
-                                SizeF sizeF = graphics.MeasureString(text13, this._NormalFont, num14, StringFormat.GenericTypographic);
-                                this.DrawStringWithDropShadow(graphics, text13, this._NormalFont, point3, this._WhiteBrush, num14);
-                                num6 = y14 + (int)sizeF.Height;
+                                text16 = (attackingStrength2 + num22).ToString("0,K");
+                                text16 = text16 + " (" + string.Format(TextResolver.GetText("X from population"), num22.ToString("0,K")) + ")";
                             }
+                            string description7 = "  " + text17 + "   vs   " + text16;
+                            point3 = new Point(num2, num);
+                            Color color4 = GraphicsHelper.OscillateColor(Color.FromArgb(0, 255, 0, 0), Color.FromArgb(160, 255, 0, 0), DateTime.Now);
+                            using (SolidBrush brush5 = new SolidBrush(color4))
+                            {
+                                graphics.FillRectangle(brush5, new Rectangle(5, point3.Y, base.Width - 10, rowHeight));
+                            }
+                            DrawLabelledDescription(graphics, "", labelWidthHabitat, description7, point3);
+                            string message = string.Format(TextResolver.GetText("Show Colony Battle Report"), habitat.Name);
+                            AddHotspot(new Rectangle(5, point3.Y, base.Width - 10, rowHeight), new object[1] { habitat }, message);
+                            num += rowHeight;
                         }
                     }
-                    if (this._ShowExtendedInfo && !string.IsNullOrEmpty(this._CharacterBonuses))
+                    if (habitat.Population.TotalAmount > 0 && habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire && habitat.ConstructionQueue != null && habitat.ConstructionQueue.ConstructionYards.Count > 0)
                     {
-                        point3 = new Point(x1, num6);
-                        this.DrawLabel(graphics, TextResolver.GetText("Bonuses"), labelWidth, point3);
-                        int width = overallWidth1 - labelWidth;
-                        SizeF size = graphics.MeasureString(this._CharacterBonuses, this._NormalFont, width, StringFormat.GenericDefault);
-                        point3 = new Point(x1 + labelWidth + 10, num6 + 1);
-                        this.DrawStringWithDropShadowBounded(graphics, this._CharacterBonuses, this._NormalFont, point3, size);
-                        int num15 = num6 + (int)size.Height;
+                        point3 = new Point(num2, num);
+                        if (habitat.Empire == _Game.PlayerEmpire || _Game.GodMode || flag || systemVisibilityStatus == SystemVisibilityStatus.Visible)
+                        {
+                            BuiltObjectList builtObjectList = new BuiltObjectList();
+                            for (int l = 0; l < habitat.ConstructionQueue.ConstructionYards.Count; l++)
+                            {
+                                ConstructionYard constructionYard = habitat.ConstructionQueue.ConstructionYards[l];
+                                if (constructionYard.ShipUnderConstruction != null)
+                                {
+                                    builtObjectList.Add(constructionYard.ShipUnderConstruction);
+                                }
+                            }
+                            DrawBuiltObjectList(labelWidthHabitat, TextResolver.GetText("Building"), builtObjectList, habitat.ConstructionQueue.ConstructionWaitQueue.Count, graphics, point3, num3);
+                        }
+                        else
+                        {
+                            DrawLabelledDescription(graphics, TextResolver.GetText("Building"), labelWidthHabitat, "(" + TextResolver.GetText("Unknown") + ")", point3, solidBrush);
+                        }
+                        num += rowHeight;
+                    }
+                    if (habitat.Population.TotalAmount > 0 && habitat.Empire != null && habitat.DockingBays != null && habitat.DockingBays.Count > 0)
+                    {
+                        point3 = new Point(num2, num);
+                        if (habitat.Empire == _Game.PlayerEmpire || _Game.GodMode || flag || systemVisibilityStatus == SystemVisibilityStatus.Visible)
+                        {
+                            BuiltObjectList builtObjectList2 = new BuiltObjectList();
+                            for (int m = 0; m < habitat.DockingBays.Count; m++)
+                            {
+                                DockingBay dockingBay = habitat.DockingBays[m];
+                                if (dockingBay.DockedShip != null)
+                                {
+                                    builtObjectList2.Add(dockingBay.DockedShip);
+                                }
+                            }
+                            if (habitat.DockingBayWaitQueue != null)
+                            {
+                                DrawBuiltObjectList(labelWidthHabitat, TextResolver.GetText("Docked"), builtObjectList2, habitat.DockingBayWaitQueue.Count, graphics, point3, num3);
+                            }
+                            else
+                            {
+                                DrawBuiltObjectList(labelWidthHabitat, TextResolver.GetText("Docked"), builtObjectList2, 0, graphics, point3, num3);
+                            }
+                        }
+                        else
+                        {
+                            DrawLabelledDescription(graphics, TextResolver.GetText("Docked"), labelWidthHabitat, "(" + TextResolver.GetText("Unknown") + ")", point3, solidBrush);
+                        }
+                        num += rowHeight;
+                    }
+                    if (habitat.Empire == _Galaxy.IndependentEmpire || habitat.Empire == null)
+                    {
+                        int maxWidth2 = num3 - (num2 + labelWidthHabitat + 10);
+                        BuiltObject builtObject = _Galaxy.PlayerEmpire.CheckColonizingHabitat(habitat);
+                        if (builtObject != null)
+                        {
+                            num += _Height4;
+                            point3 = new Point(num2 + labelWidthHabitat + 10, num);
+                            string text18 = string.Format(TextResolver.GetText("COLONYSHIP colonizing here"), builtObject.Name);
+                            SizeF sizeF3 = graphics.MeasureString(text18, _NormalFont, maxWidth2, StringFormat.GenericTypographic);
+                            DrawStringWithDropShadow(graphics, text18, _NormalFont, point3, _WhiteBrush, maxWidth2);
+                            num += (int)sizeF3.Height;
+                        }
+                        DesignList designList2 = _Galaxy.PlayerEmpire.CheckBasesToBeBuiltAtHabitat(habitat);
+                        if (designList2.Count > 0)
+                        {
+                            num += 4;
+                            point3 = new Point(num2 + labelWidthHabitat + 10, num);
+                            string text19 = string.Format(TextResolver.GetText("Construction ship queued to build X here"), Galaxy.ResolveDescription(designList2[0].SubRole));
+                            SizeF sizeF4 = graphics.MeasureString(text19, _NormalFont, maxWidth2, StringFormat.GenericTypographic);
+                            DrawStringWithDropShadow(graphics, text19, _NormalFont, point3, _WhiteBrush, maxWidth2);
+                            num += (int)sizeF4.Height;
+                        }
                     }
                 }
-                solidBrush1.Dispose();
-                textBrush1.Dispose();
+                if (_ShowExtendedInfo && !string.IsNullOrEmpty(_CharacterBonuses))
+                {
+                    DrawLabel(location: new Point(num2, num), graphics: graphics, label: TextResolver.GetText("Bonuses"), labelWidth: labelWidthHabitat);
+                    int num23 = num3 - labelWidthHabitat;
+                    SizeF size2 = graphics.MeasureString(_CharacterBonuses, _NormalFont, num23, StringFormat.GenericDefault);
+                    DrawStringWithDropShadowBounded(location: new Point(num2 + labelWidthHabitat + 10, num + 1), graphics: graphics, text: _CharacterBonuses, font: _NormalFont, size: size2);
+                    num += (int)size2.Height;
+                }
             }
+            solidBrush.Dispose();
+            solidBrush2.Dispose();
         }
 
         public void DrawLabel(Graphics graphics, string label, int labelWidth, Point location)
         {
-            int width = (int)graphics.MeasureString(label, this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (labelWidth - width), location.Y);
-            this.DrawStringWithDropShadow(graphics, label, this._NormalFontBold, location1);
+            int num = (int)graphics.MeasureString(label, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            DrawStringWithDropShadow(location: new Point(location.X + (labelWidth - num), location.Y), graphics: graphics, text: label, font: _NormalFontBold);
         }
 
-        public void DrawLabelledDescription(
-          Graphics graphics,
-          string label,
-          int labelWidth,
-          string description,
-          Point location)
+        public void DrawLabelledDescription(Graphics graphics, string label, int labelWidth, string description, Point location)
         {
-            using (SolidBrush textBrush = new SolidBrush(this._WhiteColor))
-                this.DrawLabelledDescription(graphics, label, labelWidth, description, location, textBrush);
+            using SolidBrush textBrush = new SolidBrush(_WhiteColor);
+            DrawLabelledDescription(graphics, label, labelWidth, description, location, textBrush);
         }
 
-        public void DrawLabelledDescription(
-          Graphics graphics,
-          string label,
-          int labelWidth,
-          string description,
-          Point location,
-          SolidBrush textBrush)
+        public void DrawLabelledDescription(Graphics graphics, string label, int labelWidth, string description, Point location, SolidBrush textBrush)
         {
-            int width = (int)graphics.MeasureString(label, this._NormalFontBold, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location1 = new Point(location.X + (labelWidth - width), location.Y - 2);
+            int num = (int)graphics.MeasureString(label, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
             labelWidth += 10;
-            Point location2 = new Point(location.X + labelWidth, location.Y);
-            this.DrawStringWithDropShadow(graphics, label, this._NormalFontBold, location1);
-            this.DrawStringWithDropShadow(graphics, description, this._NormalFont, location2, textBrush);
+            Point location3 = new Point(location.X + labelWidth, location.Y);
+            DrawStringWithDropShadow(graphics, label, _NormalFontBold, location2);
+            DrawStringWithDropShadow(graphics, description, _NormalFont, location3, textBrush);
         }
 
-        private void DrawStringRedWithDropShadow(
-          Graphics graphics,
-          string text,
-          Font font,
-          Point location)
+        private void DrawStringRedWithDropShadow(Graphics graphics, string text, Font font, Point location)
         {
-            //BaconInfoPanel.DrawStringRedWithDropShadow(this, graphics, text, font, location);
-            InfoPanel.OnDrawStringRedWithDropShadowMods(this, graphics, text, font, location);
+            BaconInfoPanel.DrawStringRedWithDropShadow(this, graphics, text, font, location);
         }
 
-        private void DrawStringColorWithDropShadow(
-          Graphics graphics,
-          string text,
-          Font font,
-          Point location,
-          Color color)
+        private void DrawStringColorWithDropShadow(Graphics graphics, string text, Font font, Point location, Color color)
         {
-            //BaconInfoPanel.DrawStringColorWithDropShadow(this, graphics, text, font, location, color);
-            InfoPanel.OnDrawStringColorWithDropShadowMods(this, graphics, text, font, location, color);
+            BaconInfoPanel.DrawStringColorWithDropShadow(this, graphics, text, font, location, color);
         }
 
-        private void DrawStringWithDropShadow(
-          Graphics graphics,
-          string text,
-          Font font,
-          Point location)
+        private void DrawStringWithDropShadow(Graphics graphics, string text, Font font, Point location)
         {
-            this.DrawStringWithDropShadow(graphics, text, font, location, this._WhiteBrush);
+            DrawStringWithDropShadow(graphics, text, font, location, _WhiteBrush);
         }
 
-        private void DrawStringWithDropShadow(
-          Graphics graphics,
-          string text,
-          Font font,
-          Point location,
-          SolidBrush brush)
+        private void DrawStringWithDropShadow(Graphics graphics, string text, Font font, Point location, SolidBrush brush)
         {
-            //BaconInfoPanel.DrawStringWithDropShadow(this, graphics, text, font, location, brush);
-            InfoPanel.OnDrawStringWithDropShadowMods(this, graphics, text, font, location, brush);
+            BaconInfoPanel.DrawStringWithDropShadow(this, graphics, text, font, location, brush);
         }
 
-        private void DrawStringWithDropShadow(
-          Graphics graphics,
-          string text,
-          Font font,
-          Point location,
-          SolidBrush brush,
-          int maxWidth)
+        private void DrawStringWithDropShadow(Graphics graphics, string text, Font font, Point location, SolidBrush brush, int maxWidth)
         {
-            //BaconInfoPanel.DrawStringWithDropShadow(this, graphics, text, font, location, brush, maxWidth);
-            InfoPanel.OnDrawStringWithDropShadowMods(this, graphics, text, font, location, brush, maxWidth);
+            BaconInfoPanel.DrawStringWithDropShadow(this, graphics, text, font, location, brush, maxWidth);
         }
 
         public Color CheckDropshadowColor(Color mainColor)
         {
             Color black = Color.Black;
-            if (mainColor.ToArgb() == this._PirateColor.ToArgb() || mainColor.ToArgb() == this._UnknownColor.ToArgb())
-                return black;
-            if ((int)mainColor.R + (int)mainColor.G + (int)mainColor.B <= 176)
+            if (mainColor.ToArgb() == _PirateColor.ToArgb() || mainColor.ToArgb() == _UnknownColor.ToArgb())
             {
-                Color color = this._WhiteBrush.Color;
+                return black;
+            }
+            int num = mainColor.R + mainColor.G + mainColor.B;
+            if (num <= 176)
+            {
+                black = _WhiteBrush.Color;
             }
             return Galaxy.DetermineContrastDropShadowColor(mainColor);
         }
 
-        public void DrawStringWithDropShadowBounded(
-          Graphics graphics,
-          string text,
-          Font font,
-          Point location,
-          SizeF size)
+        public void DrawStringWithDropShadowBounded(Graphics graphics, string text, Font font, Point location, SizeF size)
         {
-            this.DrawStringWithDropShadowBounded(graphics, text, font, location, size, this._WhiteBrush);
+            DrawStringWithDropShadowBounded(graphics, text, font, location, size, _WhiteBrush);
         }
 
-        public void DrawStringWithDropShadowBounded(
-          Graphics graphics,
-          string text,
-          Font font,
-          Point location,
-          SizeF size,
-          SolidBrush brush)
+        public void DrawStringWithDropShadowBounded(Graphics graphics, string text, Font font, Point location, SizeF size, SolidBrush brush)
         {
-            //BaconInfoPanel.DrawStringWithDropShadowBounded(this, graphics, text, font, location, size, brush);
-            InfoPanel.OnDrawStringWithDropShadowBoundedMods(this, graphics, text, font, location, size, brush);
+            BaconInfoPanel.DrawStringWithDropShadowBounded(this, graphics, text, font, location, size, brush);
         }
 
         public void SetData(Game game, Galaxy galaxy, BuiltObjectList builtObjects)
         {
-            this.SetFonts();
-            this.RepointImageInstances();
-            this._Hotspots.Clear();
-            this._AddHotspots = true;
-            this._Game = game;
-            this._Galaxy = galaxy;
-            this._BuiltObjects = builtObjects;
-            this._BuiltObject = (BuiltObject)null;
-            this._Fighter = (Fighter)null;
-            this._Habitat = (Habitat)null;
-            this._Creature = (Creature)null;
-            this._ShipGroup = (ShipGroup)null;
-            this._SystemInfo = (SystemInfo)null;
-            this._Picture = (Bitmap)null;
-            this._SmugglingMission = (EmpireActivity)null;
+            SetFonts();
+            RepointImageInstances();
+            _Hotspots.Clear();
+            _AddHotspots = true;
+            _Game = game;
+            _Galaxy = galaxy;
+            _BuiltObjects = builtObjects;
+            _BuiltObject = null;
+            _Fighter = null;
+            _Habitat = null;
+            _Creature = null;
+            _ShipGroup = null;
+            _SystemInfo = null;
+            _Picture = null;
+            _SmugglingMission = null;
             if (builtObjects != null && builtObjects.Count > 0)
-                this.SetEmpirePictureAndColor(builtObjects[0].Empire);
-            else
-                this.SetEmpirePictureAndColor((Empire)null);
-            this._CharacterBonuses = string.Empty;
-            this._PictureAngle = 0.0;
-            this._PictureSize = 0;
-            using (Graphics graphics = this.CreateGraphics())
             {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
+                SetEmpirePictureAndColor(builtObjects[0].Empire);
             }
+            else
+            {
+                SetEmpirePictureAndColor(null);
+            }
+            _CharacterBonuses = string.Empty;
+            _PictureAngle = 0.0;
+            _PictureSize = 0;
+            using Graphics graphics = CreateGraphics();
+            ClearPanel(graphics);
+            DrawPanelWithBackground(graphics);
         }
 
         public void SetData(Game game, Galaxy galaxy, Bitmap backgroundPicture, SystemInfo systemInfo)
         {
-            this.SetFonts();
-            this.RepointImageInstances();
-            this._Hotspots.Clear();
-            this._AddHotspots = true;
-            this._Game = game;
-            this._Galaxy = galaxy;
-            this._BuiltObjects = (BuiltObjectList)null;
-            this._BuiltObject = (BuiltObject)null;
-            this._Fighter = (Fighter)null;
-            this._Habitat = (Habitat)null;
-            this._Creature = (Creature)null;
-            this._ShipGroup = (ShipGroup)null;
-            this._SystemInfo = systemInfo;
-            this._Picture = (Bitmap)null;
-            this._SmugglingMission = (EmpireActivity)null;
-            this.SetEmpirePictureAndColor((Empire)null);
-            this._EmpireColor = this._UnknownColor;
-            this._CharacterBonuses = string.Empty;
-            this._Picture = backgroundPicture;
-            this._PictureAngle = 0.0;
-            this._PictureSize = (int)systemInfo.SystemStar.Diameter;
-            if (this._PictureSize < this._MinPictureSize)
-                this._PictureSize = this._MinPictureSize;
-            if (this._PictureSize > this._MaxPictureSize)
-                this._PictureSize = this._MaxPictureSize;
-            this._Picture = this.PreProcessImage(this._Picture, this._PictureSize);
-            Empire empire = this._Galaxy.CheckSystemOwnership(systemInfo.SystemStar);
-            this._EmpireColor = this._Game.PlayerEmpire.CheckSystemExplored(systemInfo.SystemStar.SystemIndex) ? (empire == null ? this._WhiteColor : empire.MainColor) : this._UnknownColor;
-            using (Graphics graphics = this.CreateGraphics())
+            SetFonts();
+            RepointImageInstances();
+            _Hotspots.Clear();
+            _AddHotspots = true;
+            _Game = game;
+            _Galaxy = galaxy;
+            _BuiltObjects = null;
+            _BuiltObject = null;
+            _Fighter = null;
+            _Habitat = null;
+            _Creature = null;
+            _ShipGroup = null;
+            _SystemInfo = systemInfo;
+            _Picture = null;
+            _SmugglingMission = null;
+            SetEmpirePictureAndColor(null);
+            _EmpireColor = _UnknownColor;
+            _CharacterBonuses = string.Empty;
+            _Picture = backgroundPicture;
+            _PictureAngle = 0.0;
+            _PictureSize = systemInfo.SystemStar.Diameter;
+            if (_PictureSize < _MinPictureSize)
             {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
+                _PictureSize = _MinPictureSize;
             }
+            if (_PictureSize > _MaxPictureSize)
+            {
+                _PictureSize = _MaxPictureSize;
+            }
+            _Picture = PreProcessImage(_Picture, _PictureSize);
+            Empire empire = _Galaxy.CheckSystemOwnership(systemInfo.SystemStar);
+            if (!_Game.PlayerEmpire.CheckSystemExplored(systemInfo.SystemStar.SystemIndex))
+            {
+                _EmpireColor = _UnknownColor;
+            }
+            else if (empire != null)
+            {
+                _EmpireColor = empire.MainColor;
+            }
+            else
+            {
+                _EmpireColor = _WhiteColor;
+            }
+            using Graphics graphics = CreateGraphics();
+            ClearPanel(graphics);
+            DrawPanelWithBackground(graphics);
         }
 
         public void SetData(Game game, Galaxy galaxy, ShipGroup shipGroup)
         {
-            this.SetFonts();
-            this.RepointImageInstances();
-            this._Hotspots.Clear();
-            this._AddHotspots = true;
-            this._Game = game;
-            this._Galaxy = galaxy;
-            this._BuiltObjects = (BuiltObjectList)null;
-            this._BuiltObject = (BuiltObject)null;
-            this._Fighter = (Fighter)null;
-            this._Habitat = (Habitat)null;
-            this._Creature = (Creature)null;
-            this._ShipGroup = shipGroup;
-            this._SystemInfo = (SystemInfo)null;
-            this._Picture = (Bitmap)null;
-            this._SmugglingMission = (EmpireActivity)null;
-            this.SetEmpirePictureAndColor(shipGroup.Empire);
-            this._PictureAngle = 0.0;
-            this._PictureSize = 0;
-            this._CharacterBonuses = Galaxy.GenerateCharacterBonusDescription(shipGroup);
-            using (Graphics graphics = this.CreateGraphics())
-            {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
-            }
+            SetFonts();
+            RepointImageInstances();
+            _Hotspots.Clear();
+            _AddHotspots = true;
+            _Game = game;
+            _Galaxy = galaxy;
+            _BuiltObjects = null;
+            _BuiltObject = null;
+            _Fighter = null;
+            _Habitat = null;
+            _Creature = null;
+            _ShipGroup = shipGroup;
+            _SystemInfo = null;
+            _Picture = null;
+            _SmugglingMission = null;
+            SetEmpirePictureAndColor(shipGroup.Empire);
+            _PictureAngle = 0.0;
+            _PictureSize = 0;
+            _CharacterBonuses = Galaxy.GenerateCharacterBonusDescription(shipGroup);
+            using Graphics graphics = CreateGraphics();
+            ClearPanel(graphics);
+            DrawPanelWithBackground(graphics);
         }
 
-        public void SetData(
-          Game game,
-          Galaxy galaxy,
-          Bitmap backgroundPicture,
-          Bitmap maskImage,
-          Creature creature)
+        public void SetData(Game game, Galaxy galaxy, Bitmap backgroundPicture, Bitmap maskImage, Creature creature)
         {
-            this.SetFonts();
-            this.RepointImageInstances();
-            this._Hotspots.Clear();
-            this._AddHotspots = true;
-            this._Game = game;
-            this._Galaxy = galaxy;
-            this._BuiltObjects = (BuiltObjectList)null;
-            this._BuiltObject = (BuiltObject)null;
-            this._Fighter = (Fighter)null;
-            this._Habitat = (Habitat)null;
-            this._Creature = creature;
-            this._ShipGroup = (ShipGroup)null;
-            this._SystemInfo = (SystemInfo)null;
-            this._SmugglingMission = (EmpireActivity)null;
-            if (this._Picture != null)
-                this._Picture.Dispose();
-            this._Picture = this.FadeImage(backgroundPicture, 0.33f);
-            if (this._MaskImage != null)
-                this._MaskImage.Dispose();
-            if (maskImage != null && maskImage.PixelFormat != PixelFormat.Undefined)
-                this._MaskImage = new Bitmap((Image)maskImage);
-            this.SetEmpirePictureAndColor((Empire)null);
-            this._CharacterBonuses = string.Empty;
-            this._EmpirePicture = (Bitmap)null;
-            this._PictureAngle = (double)creature.CurrentHeading * -1.0;
-            this._PictureSize = (int)((double)creature.Size / 0.6);
-            if (this._PictureSize < this._MinPictureSize)
-                this._PictureSize = this._MinPictureSize;
-            if (this._PictureSize > this._MaxPictureSize)
-                this._PictureSize = this._MaxPictureSize;
-            using (Graphics graphics = this.CreateGraphics())
+            SetFonts();
+            RepointImageInstances();
+            _Hotspots.Clear();
+            _AddHotspots = true;
+            _Game = game;
+            _Galaxy = galaxy;
+            _BuiltObjects = null;
+            _BuiltObject = null;
+            _Fighter = null;
+            _Habitat = null;
+            _Creature = creature;
+            _ShipGroup = null;
+            _SystemInfo = null;
+            _SmugglingMission = null;
+            if (_Picture != null)
             {
-                this.ClearPanel(graphics);
-                this.DrawPanelWithBackground(graphics);
+                _Picture.Dispose();
             }
+            _Picture = FadeImage(backgroundPicture, 0.33f);
+            if (_MaskImage != null)
+            {
+                _MaskImage.Dispose();
+            }
+            if (maskImage != null && maskImage.PixelFormat != 0)
+            {
+                _MaskImage = new Bitmap(maskImage);
+            }
+            SetEmpirePictureAndColor(null);
+            _CharacterBonuses = string.Empty;
+            _EmpirePicture = null;
+            _PictureAngle = creature.CurrentHeading * -1f;
+            _PictureSize = (int)((double)creature.Size / 0.6);
+            if (_PictureSize < _MinPictureSize)
+            {
+                _PictureSize = _MinPictureSize;
+            }
+            if (_PictureSize > _MaxPictureSize)
+            {
+                _PictureSize = _MaxPictureSize;
+            }
+            using Graphics graphics = CreateGraphics();
+            ClearPanel(graphics);
+            DrawPanelWithBackground(graphics);
         }
 
         private void DrawSystemInfo(SystemInfo systemInfo, Graphics graphics)
         {
             graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             graphics.CompositingQuality = CompositingQuality.HighQuality;
-            SystemVisibilityStatus visibilityStatus = this._Game.PlayerEmpire.CheckSystemVisibilityStatus(systemInfo.SystemStar.SystemIndex);
-            if (this._Game.GodMode)
-                visibilityStatus = SystemVisibilityStatus.Visible;
-            Color color = this._WhiteColor;
-            if (visibilityStatus == SystemVisibilityStatus.Unexplored)
-                color = this._UnknownColor;
-            SolidBrush solidBrush = new SolidBrush(color);
-            int y1 = 6;
-            int rowHeight = this._RowHeight;
-            int x1 = 5;
-            int num1 = this.ClientRectangle.Width - 10;
-            Font titleFont = this._TitleFont;
-            Empire relatedObject = this._Galaxy.CheckSystemOwnership(systemInfo.SystemStar);
-            string text1 = systemInfo.SystemStar.Name;
-            string str1 = string.Empty;
-            if (systemInfo.SystemStar.Category == HabitatCategoryType.Star && systemInfo.SystemStar.Type != HabitatType.BlackHole)
-                str1 = TextResolver.GetText("System");
-            else if (systemInfo.SystemStar.Category == HabitatCategoryType.GasCloud)
-                str1 = TextResolver.GetText("HabitatCategoryType GasCloud");
-            else if (systemInfo.SystemStar.Type == HabitatType.BlackHole)
-                str1 = TextResolver.GetText("HabitatType BlackHole");
-            if (systemInfo.SystemStar.Type != HabitatType.BlackHole)
-                text1 = text1 + " " + str1;
-            this.DrawBackgroundPicture(graphics);
-            int labelWidth1 = this._LabelWidth;
-            int y2 = y1 + titleFont.Height + 5 + (rowHeight + 3);
-            Rectangle rectangle1 = new Rectangle(x1 - 2, y2, x1 + labelWidth1 - 1, this.ClientRectangle.Height - (y2 + 2));
-            int labelWidth2 = labelWidth1 - 5;
-            Point point = new Point(x1, y1);
-            if (visibilityStatus == SystemVisibilityStatus.Explored || visibilityStatus == SystemVisibilityStatus.Visible)
-                this.DrawStringWithDropShadow(graphics, text1, titleFont, point, new SolidBrush(this._EmpireColor));
-            else
-                this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + " " + str1 + ")", titleFont, point, new SolidBrush(this._UnknownColor));
-            int y3 = y1 + (titleFont.Height + 5);
-            point = new Point(x1, y3);
-            string str2 = string.Empty;
-            if (systemInfo.SystemStar != null)
-                str2 = systemInfo.SystemStar.Type != HabitatType.BlackHole ? Galaxy.ResolveDescription(systemInfo.SystemStar.Type) + " " + Galaxy.ResolveDescription(systemInfo.SystemStar.Category) : TextResolver.GetText("HabitatType BlackHole");
-            string empty1 = string.Empty;
-            bool flag = false;
-            if (systemInfo.DominantEmpire != null && this._Game.PlayerEmpire.EmpiresViewable.Contains(systemInfo.DominantEmpire.Empire))
-                flag = true;
-            string text2 = visibilityStatus == SystemVisibilityStatus.Visible || visibilityStatus == SystemVisibilityStatus.Explored || this._Game.GodMode || flag ? (systemInfo.SystemStar.Category != HabitatCategoryType.GasCloud ? str2 + ", " + string.Format(TextResolver.GetText("X planets, Y moons"), (object)systemInfo.PlanetCount.ToString(), (object)systemInfo.MoonCount.ToString()) : str2) : str2;
-            this.DrawStringWithDropShadow(graphics, text2, this._NormalFont, point, solidBrush);
-            int num2 = y3 + rowHeight;
-            if (visibilityStatus == SystemVisibilityStatus.Explored || visibilityStatus == SystemVisibilityStatus.Visible)
+            SystemVisibilityStatus systemVisibilityStatus = _Game.PlayerEmpire.CheckSystemVisibilityStatus(systemInfo.SystemStar.SystemIndex);
+            if (_Game.GodMode)
             {
-                if (systemInfo.SystemStar.ResearchBonus > (byte)0)
+                systemVisibilityStatus = SystemVisibilityStatus.Visible;
+            }
+            Color color = _WhiteColor;
+            if (systemVisibilityStatus == SystemVisibilityStatus.Unexplored)
+            {
+                color = _UnknownColor;
+            }
+            SolidBrush solidBrush = new SolidBrush(color);
+            int num = 6;
+            int rowHeight = _RowHeight;
+            int num2 = 5;
+            int num3 = base.ClientRectangle.Width - 10;
+            Font titleFont = _TitleFont;
+            Empire empire = _Galaxy.CheckSystemOwnership(systemInfo.SystemStar);
+            string text = systemInfo.SystemStar.Name;
+            string empty = string.Empty;
+            if (systemInfo.SystemStar.Category == HabitatCategoryType.Star && systemInfo.SystemStar.Type != HabitatType.BlackHole)
+            {
+                empty = TextResolver.GetText("System");
+            }
+            else if (systemInfo.SystemStar.Category == HabitatCategoryType.GasCloud)
+            {
+                empty = TextResolver.GetText("HabitatCategoryType GasCloud");
+            }
+            else if (systemInfo.SystemStar.Type == HabitatType.BlackHole)
+            {
+                empty = TextResolver.GetText("HabitatType BlackHole");
+            }
+            if (systemInfo.SystemStar.Type != HabitatType.BlackHole)
+            {
+                text = text + " " + empty;
+            }
+            DrawBackgroundPicture(graphics);
+            int labelWidth = _LabelWidth;
+            int num4 = num + titleFont.Height + 5;
+            num4 += rowHeight + 3;
+            new Rectangle(num2 - 2, num4, num2 + labelWidth - 1, base.ClientRectangle.Height - (num4 + 2));
+            labelWidth -= 5;
+            Point location = new Point(num2, num);
+            if (systemVisibilityStatus == SystemVisibilityStatus.Explored || systemVisibilityStatus == SystemVisibilityStatus.Visible)
+            {
+                DrawStringWithDropShadow(graphics, text, titleFont, location, new SolidBrush(_EmpireColor));
+            }
+            else
+            {
+                DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + " " + empty + ")", titleFont, location, new SolidBrush(_UnknownColor));
+            }
+            num += titleFont.Height + 5;
+            location = new Point(num2, num);
+            string text2 = string.Empty;
+            if (systemInfo.SystemStar != null)
+            {
+                text2 = ((systemInfo.SystemStar.Type != HabitatType.BlackHole) ? (Galaxy.ResolveDescription(systemInfo.SystemStar.Type) + " " + Galaxy.ResolveDescription(systemInfo.SystemStar.Category)) : TextResolver.GetText("HabitatType BlackHole"));
+            }
+            string empty2 = string.Empty;
+            bool flag = false;
+            if (systemInfo.DominantEmpire != null && _Game.PlayerEmpire.EmpiresViewable.Contains(systemInfo.DominantEmpire.Empire))
+            {
+                flag = true;
+            }
+            empty2 = ((systemVisibilityStatus != SystemVisibilityStatus.Visible && systemVisibilityStatus != SystemVisibilityStatus.Explored && !_Game.GodMode && !flag) ? text2 : ((systemInfo.SystemStar.Category != HabitatCategoryType.GasCloud) ? (text2 + ", " + string.Format(TextResolver.GetText("X planets, Y moons"), systemInfo.PlanetCount.ToString(), systemInfo.MoonCount.ToString())) : text2));
+            DrawStringWithDropShadow(graphics, empty2, _NormalFont, location, solidBrush);
+            num += rowHeight;
+            if (systemVisibilityStatus == SystemVisibilityStatus.Explored || systemVisibilityStatus == SystemVisibilityStatus.Visible)
+            {
+                if (systemInfo.SystemStar.ResearchBonus > 0)
                 {
-                    int y4 = num2 + this._Height5;
-                    point = new Point(x1, y4);
-                    float num3 = (float)systemInfo.SystemStar.ResearchBonus / 100f;
-                    string description = string.Format(TextResolver.GetText("X research bonus to AREA"), (object)num3.ToString("+0%"), (object)Galaxy.ResolveDescription(systemInfo.SystemStar.ResearchBonusIndustry));
-                    this.DrawLabelledDescription(graphics, TextResolver.GetText("Research"), labelWidth2, description, point, solidBrush);
-                    num2 = y4 + rowHeight;
+                    num += _Height5;
+                    location = new Point(num2, num);
+                    string description = string.Format(arg0: ((float)(int)systemInfo.SystemStar.ResearchBonus / 100f).ToString("+0%"), format: TextResolver.GetText("X research bonus to AREA"), arg1: Galaxy.ResolveDescription(systemInfo.SystemStar.ResearchBonusIndustry));
+                    DrawLabelledDescription(graphics, TextResolver.GetText("Research"), labelWidth, description, location, solidBrush);
+                    num += rowHeight;
                 }
-                if ((double)systemInfo.SystemStar.ScenicFactor > 0.0)
+                if (systemInfo.SystemStar.ScenicFactor > 0f)
                 {
-                    int y5 = num2 + this._Height5;
-                    point = new Point(x1, y5);
-                    string description = systemInfo.SystemStar.ScenicFactor.ToString("+0%");
-                    this.DrawLabelledDescription(graphics, TextResolver.GetText("Scenery"), labelWidth2, description, point, solidBrush);
-                    num2 = y5 + rowHeight;
+                    num += _Height5;
+                    location = new Point(num2, num);
+                    string description2 = systemInfo.SystemStar.ScenicFactor.ToString("+0%");
+                    DrawLabelledDescription(graphics, TextResolver.GetText("Scenery"), labelWidth, description2, location, solidBrush);
+                    num += rowHeight;
                 }
             }
-            int y6 = num2 + this._Height5;
-            Point location = new Point(x1, y6 - 2);
-            this.DrawLabel(graphics, TextResolver.GetText("Owner"), labelWidth2, location);
-            Size flagSizeSystem = this._FlagSizeSystem;
-            Rectangle srcRect = Rectangle.Empty;
-            Rectangle rectangle2 = Rectangle.Empty;
-            this.SetGraphicsQualityToHigh(graphics);
-            if (relatedObject != null)
+            num += _Height5;
+            DrawLabel(location: new Point(num2, num - 2), graphics: graphics, label: TextResolver.GetText("Owner"), labelWidth: labelWidth);
+            Size flagSizeSystem = _FlagSizeSystem;
+            Rectangle empty3 = Rectangle.Empty;
+            Rectangle empty4 = Rectangle.Empty;
+            SetGraphicsQualityToHigh(graphics);
+            if (empire != null)
             {
-                int x2 = x1 + labelWidth2 + 10;
-                string empty2 = string.Empty;
-                if (visibilityStatus == SystemVisibilityStatus.Visible || visibilityStatus == SystemVisibilityStatus.Explored || this._Game.GodMode || flag)
+                int num5 = num2 + labelWidth + 10;
+                string empty5 = string.Empty;
+                if (systemVisibilityStatus == SystemVisibilityStatus.Visible || systemVisibilityStatus == SystemVisibilityStatus.Explored || _Game.GodMode || flag)
                 {
-                    point = new Point(x2, y6);
-                    srcRect = new Rectangle(0, 0, relatedObject.LargeFlagPicture.Width, relatedObject.LargeFlagPicture.Height);
-                    rectangle2 = new Rectangle(point, flagSizeSystem);
-                    graphics.DrawImage((Image)relatedObject.LargeFlagPicture, rectangle2, srcRect, GraphicsUnit.Pixel);
-                    if (relatedObject != null)
-                        this.AddHotspot(rectangle2, (object)relatedObject, relatedObject.Name + " (" + TextResolver.GetText("click for details") + ")");
-                    int x3 = x2 + (flagSizeSystem.Width + 2);
-                    point = new Point(x3, y6);
-                    string name = relatedObject.Name;
-                    this.DrawStringWithDropShadow(graphics, name, this._NormalFont, point, solidBrush);
-                    int x4 = x3 + (int)graphics.MeasureString(name, this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width + 10;
-                    point = new Point(x4, y6);
+                    location = new Point(num5, num);
+                    empty3 = new Rectangle(0, 0, empire.LargeFlagPicture.Width, empire.LargeFlagPicture.Height);
+                    empty4 = new Rectangle(location, flagSizeSystem);
+                    graphics.DrawImage(empire.LargeFlagPicture, empty4, empty3, GraphicsUnit.Pixel);
+                    if (empire != null)
+                    {
+                        AddHotspot(empty4, empire, empire.Name + " (" + TextResolver.GetText("click for details") + ")");
+                    }
+                    num5 += flagSizeSystem.Width + 2;
+                    location = new Point(num5, num);
+                    empty5 = empire.Name;
+                    DrawStringWithDropShadow(graphics, empty5, _NormalFont, location, solidBrush);
+                    num5 += (int)graphics.MeasureString(empty5, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                    num5 += 10;
+                    location = new Point(num5, num);
                     if (systemInfo.DominantEmpire != null)
                     {
-                        graphics.DrawImageUnscaled((Image)InfoPanel._ColonyImage, point);
-                        point = new Point(x4 + InfoPanel._ColonyImage.Width, y6);
+                        graphics.DrawImageUnscaled(_ColonyImage, location);
+                        num5 += _ColonyImage.Width;
+                        location = new Point(num5, num);
                         string text3 = systemInfo.DominantEmpire.ColonyCount.ToString();
-                        double width = (double)graphics.MeasureString(text3, this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                        this.DrawStringWithDropShadow(graphics, text3, this._NormalFont, point, solidBrush);
+                        _ = graphics.MeasureString(text3, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                        DrawStringWithDropShadow(graphics, text3, _NormalFont, location, solidBrush);
                     }
                 }
                 else
                 {
-                    point = new Point(x2, y6);
-                    string text4 = "(" + TextResolver.GetText("Unknown") + ")";
-                    this.DrawStringWithDropShadow(graphics, text4, this._NormalFont, point, solidBrush);
-                    int num4 = x2 + (int)graphics.MeasureString(text4, this._NormalFont, this._MaxGraphTextWidth, StringFormat.GenericTypographic).Width + 10;
+                    location = new Point(num5, num);
+                    empty5 = "(" + TextResolver.GetText("Unknown") + ")";
+                    DrawStringWithDropShadow(graphics, empty5, _NormalFont, location, solidBrush);
+                    num5 += (int)graphics.MeasureString(empty5, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                    num5 += 10;
                 }
             }
             else
             {
-                point = new Point(x1 + 10 + labelWidth2, y6);
-                if (visibilityStatus == SystemVisibilityStatus.Visible || visibilityStatus == SystemVisibilityStatus.Explored || this._Game.GodMode)
-                    this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", this._NormalFont, point, solidBrush);
+                location = new Point(num2 + 10 + labelWidth, num);
+                if (systemVisibilityStatus == SystemVisibilityStatus.Visible || systemVisibilityStatus == SystemVisibilityStatus.Explored || _Game.GodMode)
+                {
+                    DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, location, solidBrush);
+                }
                 else
-                    this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + ")", this._NormalFont, point, solidBrush);
+                {
+                    DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + ")", _NormalFont, location, solidBrush);
+                }
             }
-            int y7 = y6 + (rowHeight + this._Height6);
-            location = new Point(x1, y7 - 2);
-            this.DrawLabel(graphics, TextResolver.GetText("Resource"), labelWidth2, location);
-            point = new Point(x1 + 10 + labelWidth2, y7);
-            if (visibilityStatus == SystemVisibilityStatus.Explored || visibilityStatus == SystemVisibilityStatus.Visible)
+            num += rowHeight + _Height6;
+            DrawLabel(location: new Point(num2, num - 2), graphics: graphics, label: TextResolver.GetText("Resource"), labelWidth: labelWidth);
+            location = new Point(num2 + 10 + labelWidth, num);
+            if (systemVisibilityStatus == SystemVisibilityStatus.Explored || systemVisibilityStatus == SystemVisibilityStatus.Visible)
             {
-                HabitatResourceList habitatResourceList1 = new HabitatResourceList();
+                HabitatResourceList habitatResourceList = new HabitatResourceList();
                 if (systemInfo.SystemStar.Resources != null && systemInfo.SystemStar.Resources.Count > 0)
                 {
                     HabitatResourceList habitatResourceList2 = systemInfo.SystemStar.Resources.Clone();
-                    for (int index = 0; index < habitatResourceList2.Count; ++index)
+                    for (int i = 0; i < habitatResourceList2.Count; i++)
                     {
-                        if (!habitatResourceList1.Contains(habitatResourceList2[index]))
-                            habitatResourceList1.Add(habitatResourceList2[index]);
+                        if (!habitatResourceList.Contains(habitatResourceList2[i]))
+                        {
+                            habitatResourceList.Add(habitatResourceList2[i]);
+                        }
                     }
                 }
                 if (systemInfo.Habitats != null)
                 {
-                    for (int index1 = 0; index1 < systemInfo.Habitats.Count; ++index1)
+                    for (int j = 0; j < systemInfo.Habitats.Count; j++)
                     {
-                        if (this._Game.PlayerEmpire.ResourceMap != null && this._Game.PlayerEmpire.ResourceMap.CheckResourcesKnown(systemInfo.Habitats[index1]))
+                        if (_Game.PlayerEmpire.ResourceMap == null || !_Game.PlayerEmpire.ResourceMap.CheckResourcesKnown(systemInfo.Habitats[j]))
                         {
-                            HabitatResourceList habitatResourceList3 = systemInfo.Habitats[index1].Resources.Clone();
-                            for (int index2 = 0; index2 < habitatResourceList3.Count; ++index2)
+                            continue;
+                        }
+                        HabitatResourceList habitatResourceList3 = systemInfo.Habitats[j].Resources.Clone();
+                        for (int k = 0; k < habitatResourceList3.Count; k++)
+                        {
+                            if (!habitatResourceList.Contains(habitatResourceList3[k]))
                             {
-                                if (!habitatResourceList1.Contains(habitatResourceList3[index2]))
-                                    habitatResourceList1.Add(habitatResourceList3[index2]);
+                                habitatResourceList.Add(habitatResourceList3[k]);
                             }
                         }
                     }
                 }
-                int num5 = 2;
-                int x5 = labelWidth2 + 10 + x1;
-                if (habitatResourceList1.Count > 0)
+                int num6 = 2;
+                int num7 = labelWidth + 10 + num2;
+                if (habitatResourceList.Count > 0)
                 {
-                    for (int index = 0; index < habitatResourceList1.Count; ++index)
+                    for (int l = 0; l < habitatResourceList.Count; l++)
                     {
-                        int width = this._ResourceImages[habitatResourceList1[index].PictureRef].Width;
-                        if (x5 + width + num5 > num1)
+                        int num8 = _ResourceImages[habitatResourceList[l].PictureRef].Width;
+                        if (num7 + num8 + num6 > num3)
                         {
-                            y7 += rowHeight + this._Height2;
-                            x5 = labelWidth2 + 10 + x1 - num5;
+                            num += rowHeight + _Height2;
+                            num7 = labelWidth + 10 + num2 - num6;
                         }
-                        point = new Point(x5, y7);
-                        graphics.DrawImageUnscaled((Image)this._ResourceImages[habitatResourceList1[index].PictureRef], point);
-                        this.AddHotspot(new Rectangle(point, this._ResourceImages[habitatResourceList1[index].PictureRef].Size), (object)habitatResourceList1[index], habitatResourceList1[index].Name + " (" + TextResolver.GetText("click for details") + ")");
-                        x5 = x5 + width + num5;
+                        location = new Point(num7, num);
+                        graphics.DrawImageUnscaled(_ResourceImages[habitatResourceList[l].PictureRef], location);
+                        AddHotspot(new Rectangle(location, _ResourceImages[habitatResourceList[l].PictureRef].Size), habitatResourceList[l], habitatResourceList[l].Name + " (" + TextResolver.GetText("click for details") + ")");
+                        num7 += num8;
+                        num7 += num6;
                     }
                 }
                 else
-                    this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", this._NormalFont, point, solidBrush);
+                {
+                    DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, location, solidBrush);
+                }
             }
             else
-                this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + ")", this._NormalFont, point, solidBrush);
-            int startY = y7 + (rowHeight + rowHeight);
-            if (visibilityStatus == SystemVisibilityStatus.Visible || visibilityStatus == SystemVisibilityStatus.Explored)
-                this.DrawSystemColoniesSummary(systemInfo.SystemStar, graphics, startY, labelWidth2);
+            {
+                DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + ")", _NormalFont, location, solidBrush);
+            }
+            num += rowHeight + rowHeight;
+            if (systemVisibilityStatus == SystemVisibilityStatus.Visible || systemVisibilityStatus == SystemVisibilityStatus.Explored)
+            {
+                DrawSystemColoniesSummary(systemInfo.SystemStar, graphics, num, labelWidth);
+            }
             solidBrush.Dispose();
         }
 
         private void DrawShipGroup(ShipGroup shipGroup, Graphics graphics)
         {
-            //BaconInfoPanel.DrawShipGroup(this, shipGroup, graphics);
-            InfoPanel.OnDrawShipGroupMods(this, shipGroup, graphics);
+            BaconInfoPanel.DrawShipGroup(this, shipGroup, graphics);
         }
 
         private Color UpdateColor(Color normalColor, Color alternateColor)
         {
+            double num = 0.0;
             int second = DateTime.Now.ToUniversalTime().Second;
-            int millisecond = DateTime.Now.ToUniversalTime().Millisecond;
+            int num2 = DateTime.Now.ToUniversalTime().Millisecond;
             if (second % 2 == 1)
-                millisecond += 1000;
-            double num = millisecond <= 1000 ? (double)Math.Abs(1000 - millisecond) / 1000.0 : (double)(millisecond - 1000) / 1000.0;
-            return Color.FromArgb((int)(byte)((uint)normalColor.A - (uint)(byte)((double)((int)normalColor.A - (int)alternateColor.A) * num)), (int)(byte)((uint)normalColor.R - (uint)(byte)((double)((int)normalColor.R - (int)alternateColor.R) * num)), (int)(byte)((uint)normalColor.G - (uint)(byte)((double)((int)normalColor.G - (int)alternateColor.G) * num)), (int)(byte)((uint)normalColor.B - (uint)(byte)((double)((int)normalColor.B - (int)alternateColor.B) * num)));
+            {
+                num2 += 1000;
+            }
+            num = ((num2 <= 1000) ? ((double)Math.Abs(1000 - num2) / 1000.0) : ((double)(num2 - 1000) / 1000.0));
+            byte alpha = (byte)(normalColor.A - (byte)((double)(normalColor.A - alternateColor.A) * num));
+            byte red = (byte)(normalColor.R - (byte)((double)(normalColor.R - alternateColor.R) * num));
+            byte green = (byte)(normalColor.G - (byte)((double)(normalColor.G - alternateColor.G) * num));
+            byte blue = (byte)(normalColor.B - (byte)((double)(normalColor.B - alternateColor.B) * num));
+            return Color.FromArgb(alpha, red, green, blue);
         }
 
         private void DrawBuiltObjectSelection(BuiltObjectList builtObjects, Graphics graphics)
         {
             if (builtObjects.Count <= 0)
+            {
                 return;
-            SolidBrush solidBrush = new SolidBrush(this._UnknownColor);
+            }
+            SolidBrush solidBrush = new SolidBrush(_UnknownColor);
             graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             graphics.CompositingQuality = CompositingQuality.HighQuality;
             bool flag = false;
-            if (builtObjects[0].Empire != this._Game.PlayerEmpire && this._Game.PlayerEmpire.EmpiresViewable.Contains(builtObjects[0].Empire))
-                flag = true;
-            int y1 = 6;
-            int rowHeight = this._RowHeight;
-            int x = 5;
-            int num1 = this.ClientRectangle.Width - 10;
-            Point point = new Point(num1 - (this._FlagSizeSmall.Width - 2), 6);
-            if (this._EmpirePicture != null)
-                graphics.DrawImageUnscaled((Image)this._EmpirePicture, point);
-            Font titleFont = this._TitleFont;
-            Point location = new Point(x, y1);
-            this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Multiple Ships") + ")", titleFont, location, new SolidBrush(this._EmpireColor));
-            int y2 = y1 + (titleFont.Height + this._Height5);
-            string empty = string.Empty;
-            string text;
-            if (builtObjects[0].Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag)
+            if (builtObjects[0].Empire != _Game.PlayerEmpire && _Game.PlayerEmpire.EmpiresViewable.Contains(builtObjects[0].Empire))
             {
-                int num2 = 0;
-                int num3 = 0;
+                flag = true;
+            }
+            int num = 6;
+            int rowHeight = _RowHeight;
+            int num2 = 5;
+            int num3 = base.ClientRectangle.Width - 10;
+            Point point = new Point(num3 - (_FlagSizeSmall.Width - 2), 6);
+            if (_EmpirePicture != null)
+            {
+                graphics.DrawImageUnscaled(_EmpirePicture, point);
+            }
+            Font titleFont = _TitleFont;
+            DrawStringWithDropShadow(location: new Point(num2, num), graphics: graphics, text: "(" + TextResolver.GetText("Multiple Ships") + ")", font: titleFont, brush: new SolidBrush(_EmpireColor));
+            num += titleFont.Height + _Height5;
+            string empty = string.Empty;
+            if (builtObjects[0].Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
+            {
                 int num4 = 0;
                 int num5 = 0;
-                for (int index = 0; index < builtObjects.Count; ++index)
+                int num6 = 0;
+                int num7 = 0;
+                for (int i = 0; i < builtObjects.Count; i++)
                 {
-                    BuiltObject builtObject = builtObjects[index];
-                    num2 += builtObject.FirepowerRaw;
-                    num3 += builtObject.CalculateAvailableAssaultPodAttackStrength(this._Galaxy.CurrentDateTime);
+                    BuiltObject builtObject = builtObjects[i];
+                    num4 += builtObject.FirepowerRaw;
+                    num5 += builtObject.CalculateAvailableAssaultPodAttackStrength(_Galaxy.CurrentDateTime);
                     if (builtObject.Troops != null)
                     {
-                        num4 += builtObject.Troops.Count;
-                        num5 += builtObject.Troops.TotalAttackStrength;
+                        num6 += builtObject.Troops.Count;
+                        num7 += builtObject.Troops.TotalAttackStrength;
                     }
                 }
-                text = builtObjects.Count.ToString() + " " + TextResolver.GetText("Ships").ToLower(CultureInfo.InvariantCulture) + ", " + num2.ToString() + " " + TextResolver.GetText("Firepower").ToLower(CultureInfo.InvariantCulture) + ", " + num3.ToString("0") + " " + TextResolver.GetText("Boarding Strength").ToLower(CultureInfo.InvariantCulture) + ", " + string.Format(TextResolver.GetText("X troops (Y strength)"), (object)num4.ToString(), (object)num5.ToString());
+                empty = builtObjects.Count + " " + TextResolver.GetText("Ships").ToLower(CultureInfo.InvariantCulture) + ", " + num4 + " " + TextResolver.GetText("Firepower").ToLower(CultureInfo.InvariantCulture);
+                string text = empty;
+                empty = text + ", " + num5.ToString("0") + " " + TextResolver.GetText("Boarding Strength").ToLower(CultureInfo.InvariantCulture);
+                empty = empty + ", " + string.Format(TextResolver.GetText("X troops (Y strength)"), num6.ToString(), num7.ToString());
             }
             else
-                text = builtObjects.Count.ToString() + " " + TextResolver.GetText("Ships").ToLower(CultureInfo.InvariantCulture);
-            SizeF size = graphics.MeasureString(text, this._NormalFont, this.ClientSize.Width - (x + 10));
-            size = new SizeF(size.Width + 2f, size.Height + 2f);
-            location = new Point(x, y2);
-            this.DrawStringWithDropShadowBounded(graphics, text, this._NormalFont, location, size);
-            int num6 = y2 + (int)size.Height + rowHeight / 4;
-            int index1 = 0;
-            int num7 = -2;
-            int num8 = 0;
-            int num9 = 27;
-            int num10 = num9;
-            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            while (index1 < builtObjects.Count)
             {
-                Image builtObjectImage = (Image)this._BuiltObjectImages[builtObjects[index1].PictureRef];
-                location = new Point(x + num7, num6 + num8);
-                int num11 = Math.Min((int)(Math.Sqrt((double)builtObjects[index1].Size) * 1.25), num9);
-                int num12 = (num9 - num11) / 2;
-                Rectangle srcRect = new Rectangle(0, 0, builtObjectImage.Width, builtObjectImage.Height);
-                Rectangle destRect = new Rectangle(x + num7 + num12, num6 + num8 + num12, num11, num11);
-                Rectangle rectangle = new Rectangle(x + num7, num6 + num8, num9, num9);
-                if (builtObjects[index1].DamagedComponentCount > 0 && (builtObjects[0].Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag))
-                    graphics.FillRectangle((Brush)new SolidBrush(Color.FromArgb(64, (int)byte.MaxValue, 0, 64)), rectangle);
-                graphics.DrawImage(builtObjectImage, destRect, srcRect, GraphicsUnit.Pixel);
-                this.AddHotspot(rectangle, (object)builtObjects[index1], builtObjects[index1].Name + " (" + TextResolver.GetText("click to select") + ")");
-                if (builtObjects[0].Empire == this._Game.PlayerEmpire || this._Game.GodMode || flag)
+                empty = builtObjects.Count + " " + TextResolver.GetText("Ships").ToLower(CultureInfo.InvariantCulture);
+            }
+            SizeF sizeF = graphics.MeasureString(empty, _NormalFont, base.ClientSize.Width - (num2 + 10));
+            sizeF = new SizeF(sizeF.Width + 2f, sizeF.Height + 2f);
+            DrawStringWithDropShadowBounded(location: new Point(num2, num), graphics: graphics, text: empty, font: _NormalFont, size: sizeF);
+            num += (int)sizeF.Height;
+            num += rowHeight / 4;
+            int num8 = 0;
+            int num9 = -2;
+            int num10 = 0;
+            int num11 = 27;
+            int num12 = num11;
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            while (num8 < builtObjects.Count)
+            {
+                Image image = _BuiltObjectImages[builtObjects[num8].PictureRef];
+                Point point2 = new Point(num2 + num9, num + num10);
+                int val = (int)(Math.Sqrt(builtObjects[num8].Size) * 1.25);
+                val = Math.Min(val, num11);
+                int num13 = (num11 - val) / 2;
+                Rectangle srcRect = new Rectangle(0, 0, image.Width, image.Height);
+                Rectangle destRect = new Rectangle(num2 + num9 + num13, num + num10 + num13, val, val);
+                Rectangle rectangle = new Rectangle(num2 + num9, num + num10, num11, num11);
+                if (builtObjects[num8].DamagedComponentCount > 0 && (builtObjects[0].Empire == _Game.PlayerEmpire || _Game.GodMode || flag))
                 {
-                    int height = (int)(builtObjects[index1].CurrentFuel / (double)builtObjects[index1].FuelCapacity * (double)(num9 - 4));
-                    Rectangle rect = new Rectangle(x + num7 + num9 - 4, num6 + num8 + (num9 - 2 - height), 2, height);
-                    graphics.FillRectangle((Brush)new SolidBrush(Color.Green), rect);
+                    graphics.FillRectangle(new SolidBrush(Color.FromArgb(64, 255, 0, 64)), rectangle);
                 }
-                ++index1;
-                if (num9 > num10)
-                    num10 = num9;
-                num7 += num9;
-                if (num7 > num1 - num9)
+                graphics.DrawImage(image, destRect, srcRect, GraphicsUnit.Pixel);
+                AddHotspot(rectangle, builtObjects[num8], builtObjects[num8].Name + " (" + TextResolver.GetText("click to select") + ")");
+                if (builtObjects[0].Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
                 {
-                    num8 += num10;
-                    num7 = -2;
+                    double num14 = builtObjects[num8].CurrentFuel / (double)builtObjects[num8].FuelCapacity;
+                    int num15 = (int)(num14 * (double)(num11 - 4));
+                    graphics.FillRectangle(rect: new Rectangle(num2 + num9 + num11 - 4, num + num10 + (num11 - 2 - num15), 2, num15), brush: new SolidBrush(Color.Green));
+                }
+                num8++;
+                if (num11 > num12)
+                {
+                    num12 = num11;
+                }
+                num9 += num11;
+                if (num9 > num3 - num11)
+                {
+                    num10 += num12;
+                    num9 = -2;
                 }
             }
             solidBrush.Dispose();
-        }
-
-        private static string OnFormatForLargeNumbersMods(long value)
-        {
-            var tmp = InfoPanel.FormatForLargeNumbersMods;
-            string res = value.ToString();
-            if (tmp != null)
-            {
-                var args = new FormatForLargeNumbersModsArgs(value);
-                tmp(null, args);
-                res = args.Result;
-            }
-            return res;
-        }
-        private static void OnDrawBuiltObjectMods(InfoPanel infoPanel, BuiltObject builtObject, Graphics graphics)
-        {
-            var tmp = InfoPanel.DrawBuiltObjectMods;
-            if (tmp != null)
-            {
-                var args = new DrawBuiltObjectModsArgs(infoPanel, builtObject, graphics);
-                tmp(null, args);
-            }
-        }
-        private static void OnDrawStringRedWithDropShadowMods(InfoPanel panel, Graphics graphics, string text, Font font, Point location)
-        {
-            var tmp = InfoPanel.DrawStringRedWithDropShadowtMods;
-            if (tmp != null)
-            {
-                var args = new DrawStringRedWithDropShadowtModsArgs(panel, graphics, text, font, location);
-                tmp(null, args);
-            }
-        }
-        private static void OnDrawStringWithDropShadowMods(InfoPanel panel, Graphics graphics, string text, Font font, Point location, SolidBrush brush)
-        {
-            var tmp = InfoPanel.DrawStringWithDropShadowMods;
-            if (tmp != null)
-            {
-                var args = new DrawStringWithDropShadowModsArgs(panel, graphics, text, font, location, brush);
-                tmp(null, args);
-            }
-        }
-        private static void OnDrawStringColorWithDropShadowMods(InfoPanel panel, Graphics graphics, string text, Font font, Point location, Color color)
-        {
-            var tmp = InfoPanel.DrawStringColorWithDropShadowMods;
-            if (tmp != null)
-            {
-                var args = new DrawStringColorWithDropShadowModsArgs(panel, graphics, text, font, location, color);
-                tmp(null, args);
-            }
-        }
-        private static void OnDrawStringWithDropShadowBoundedMods(InfoPanel panel, Graphics graphics, string text, Font font, Point location, SizeF size, SolidBrush brush)
-        {
-            var tmp = InfoPanel.DrawStringWithDropShadowBoundedMods;
-            if (tmp != null)
-            {
-                var args = new DrawStringWithDropShadowBoundedModsArgs(panel, graphics, text, font, location, size, brush);
-                tmp(null, args);
-            }
-        }
-        private static void OnDrawShipGroupMods(InfoPanel panel, ShipGroup shipGroup, Graphics graphics)
-        {
-            var tmp = InfoPanel.DrawShipGroupMods;
-            if (tmp != null)
-            {
-                var args = new DrawShipGroupModsArgs(panel, shipGroup, graphics);
-                tmp(null, args);
-            }
-        }
-        private static void OnDrawStringWithDropShadowMods(InfoPanel panel, Graphics graphics, string text, Font font, Point location, SolidBrush brush, int maxWidth)
-        {
-            var tmp = InfoPanel.DrawStringWithDropShadowMods2;
-            if (tmp != null)
-            {
-                var args = new DrawStringWithDropShadowModsArgs2(panel, graphics, text, font, location, brush, maxWidth);
-                tmp(null, args);
-            }
         }
     }
 }

@@ -4,7 +4,7 @@
 // MVID: C078528F-27D0-4E24-8047-8F4F72265A90
 // Assembly location: H:\7\DistantWorlds.Controls.dll
 
-//using BaconDistantWorlds;
+using BaconDistantWorlds;
 using DistantWorlds.Types;
 using System;
 using System.Collections.Generic;
@@ -19,645 +19,761 @@ namespace DistantWorlds.Controls
     public class DiplomacyTradeTree : UserControl
     {
         private Galaxy _Galaxy;
+
         public Empire _Empire;
+
         public Empire _OtherEmpire;
+
         public TradeableItemList _TradeableItems = new TradeableItemList();
+
         public TradeableItemList _SelectedItems = new TradeableItemList();
+
         public TradeableItemList _RequiredItems = new TradeableItemList();
+
         private TradeableItemList _ExcludedItems = new TradeableItemList();
+
         private bool _AllowDiplomaticThreats;
+
         private bool _RefactorValuesForEmpire;
+
         private bool _MoneyToggled;
+
         private bool _ColoniesToggled;
+
         private bool _BasesToggled;
+
         private bool _ResearchToggled;
+
         private bool _GovernmentStylesToggled;
+
         private bool _DeclareWarToggled;
+
         private bool _EndWarToggled;
+
         private bool _TradeSanctionsToggled;
+
         private bool _LiftTradeSanctionsToggled;
+
         private bool _EmpireContactsToggled;
+
         private bool _SecretLocationsToggled;
+
         private bool _IndependentColoniesToggled;
+
         public bool AcceptingMouseMoveEvents = true;
+
         protected IFontCache _FontCache;
+
         private float _FontSize = 15.33f;
+
         private bool _FontIsBold;
+
         private IContainer components;
+
         private TreeView TradeableItems;
+
         public ListBox SelectedItems;
+
         private Label lblTitle;
+
         private Label lblSelected;
+
         private GlassButton btnClearSelectedItems;
+
         private PictureBox picFlag;
+
         private Panel pnlTitleHeaderArea;
+
         private Panel pnlSelectedHeaderArea;
+
+        public Empire Empire => _Empire;
+
+        public TradeableItemList SelectedTradeItems => _SelectedItems;
+
+        public TradeableItemList RequiredItems => _RequiredItems;
+
+        public TradeableItemList ExcludedItems => _ExcludedItems;
 
         public event EventHandler<ResearchProjectHoveredEventArgs> ResearchProjectHovered;
 
         public virtual void SetFontCache(IFontCache fontCache)
         {
-            this._FontCache = fontCache;
-            if ((double)this._FontSize <= 0.0)
-                return;
-            this.Font = this._FontCache.GenerateFont(this._FontSize, this._FontIsBold);
+            _FontCache = fontCache;
+            if (_FontSize > 0f)
+            {
+                Font = _FontCache.GenerateFont(_FontSize, _FontIsBold);
+            }
         }
 
-        public void SetFont(float pointSize) => this.SetFont(pointSize, false);
+        public void SetFont(float pointSize)
+        {
+            SetFont(pointSize, isBold: false);
+        }
 
         public void SetFont(float pointSize, bool isBold)
         {
-            this._FontSize = pointSize;
-            this._FontIsBold = isBold;
-            if (this._FontCache == null)
-                return;
-            this.Font = this._FontCache.GenerateFont(this._FontSize, this._FontIsBold);
+            _FontSize = pointSize;
+            _FontIsBold = isBold;
+            if (_FontCache != null)
+            {
+                Font = _FontCache.GenerateFont(_FontSize, _FontIsBold);
+            }
         }
 
         public DiplomacyTradeTree()
         {
-            this.InitializeComponent();
-            this.TradeableItems.ShowPlusMinus = true;
-            this.TradeableItems.ShowLines = false;
-            this.TradeableItems.LineColor = Color.FromArgb(24, 24, 80);
+            InitializeComponent();
+            TradeableItems.ShowPlusMinus = true;
+            TradeableItems.ShowLines = false;
+            TradeableItems.LineColor = Color.FromArgb(24, 24, 80);
         }
 
-        public Empire Empire => this._Empire;
-
-        public TradeableItemList SelectedTradeItems => this._SelectedItems;
-
-        public TradeableItemList RequiredItems => this._RequiredItems;
-
-        public TradeableItemList ExcludedItems => this._ExcludedItems;
-
-        public void DoBind(
-          Galaxy galaxy,
-          Empire empire,
-          Empire otherEmpire,
-          bool allowDiplomaticThreats,
-          bool refactorValuesForEmpire)
+        public void DoBind(Galaxy galaxy, Empire empire, Empire otherEmpire, bool allowDiplomaticThreats, bool refactorValuesForEmpire)
         {
-            this.DoLayout();
-            this._Galaxy = galaxy;
-            this._Empire = empire;
-            this._OtherEmpire = otherEmpire;
-            this._AllowDiplomaticThreats = allowDiplomaticThreats;
-            this._RefactorValuesForEmpire = refactorValuesForEmpire;
-            this.lblTitle.Text = empire.Name;
-            this.picFlag.Image = (Image)this.PrecacheScaledBitmap(empire.LargeFlagPicture, this.picFlag.Width, this.picFlag.Height, InterpolationMode.HighQualityBicubic, CompositingQuality.HighQuality, SmoothingMode.AntiAlias);
+            DoLayout();
+            _Galaxy = galaxy;
+            _Empire = empire;
+            _OtherEmpire = otherEmpire;
+            _AllowDiplomaticThreats = allowDiplomaticThreats;
+            _RefactorValuesForEmpire = refactorValuesForEmpire;
+            lblTitle.Text = empire.Name;
+            picFlag.Image = PrecacheScaledBitmap(empire.LargeFlagPicture, picFlag.Width, picFlag.Height, InterpolationMode.HighQualityBicubic, CompositingQuality.HighQuality, SmoothingMode.AntiAlias);
         }
 
-        private void LocalizeControlText() => this.btnClearSelectedItems.Text = TextResolver.GetText("Clear Offered Items");
-
-        public void SetSelectedItems(TradeableItemList selectedItems) => this.SetSelectedItems(selectedItems, new TradeableItemList(), new TradeableItemList());
-
-        public void SetSelectedItems(
-          TradeableItemList selectedItems,
-          TradeableItemList requiredItems,
-          TradeableItemList excludedItems)
+        private void LocalizeControlText()
         {
-            this._RequiredItems = requiredItems;
-            this._ExcludedItems = excludedItems;
-            this.SelectedItems.Items.Clear();
-            this._SelectedItems.Clear();
-            if (this._RequiredItems != null)
-                this._SelectedItems.AddRange((IEnumerable<TradeableItem>)this._RequiredItems);
-            if (selectedItems != null)
-                this._SelectedItems.AddRange((IEnumerable<TradeableItem>)selectedItems);
-            if (this._SelectedItems != null)
+            btnClearSelectedItems.Text = TextResolver.GetText("Clear Offered Items");
+        }
+
+        public void SetSelectedItems(TradeableItemList selectedItems)
+        {
+            SetSelectedItems(selectedItems, new TradeableItemList(), new TradeableItemList());
+        }
+
+        public void SetSelectedItems(TradeableItemList selectedItems, TradeableItemList requiredItems, TradeableItemList excludedItems)
+        {
+            _RequiredItems = requiredItems;
+            _ExcludedItems = excludedItems;
+            SelectedItems.Items.Clear();
+            _SelectedItems.Clear();
+            if (_RequiredItems != null)
             {
-                foreach (object selectedItem in (SyncList<TradeableItem>)this._SelectedItems)
-                    this.SelectedItems.Items.Add(selectedItem);
+                _SelectedItems.AddRange(_RequiredItems);
             }
-            this.PopulateTradeableItems(this.FilterOutSelectedAndExcludedItems(this._TradeableItems));
-            this.UpdateOfferedItemsHeading();
+            if (selectedItems != null)
+            {
+                _SelectedItems.AddRange(selectedItems);
+            }
+            if (_SelectedItems != null)
+            {
+                foreach (TradeableItem selectedItem in _SelectedItems)
+                {
+                    SelectedItems.Items.Add(selectedItem);
+                }
+            }
+            TradeableItemList tradeableItems = FilterOutSelectedAndExcludedItems(_TradeableItems);
+            PopulateTradeableItems(tradeableItems);
+            UpdateOfferedItemsHeading();
         }
 
         private void SetSelectedItemsInControl()
         {
-            this.SelectedItems.Items.Clear();
-            if (this._SelectedItems == null)
-                return;
-            foreach (TradeableItem selectedItem in (SyncList<TradeableItem>)this._SelectedItems)
+            SelectedItems.Items.Clear();
+            if (_SelectedItems == null)
             {
-                selectedItem.ShowSecretLocationNames = this._Empire == this._Galaxy.PlayerEmpire;
-                this.SelectedItems.Items.Add((object)selectedItem);
+                return;
+            }
+            foreach (TradeableItem selectedItem in _SelectedItems)
+            {
+                if (_Empire != _Galaxy.PlayerEmpire)
+                {
+                    selectedItem.ShowSecretLocationNames = false;
+                }
+                else
+                {
+                    selectedItem.ShowSecretLocationNames = true;
+                }
+                SelectedItems.Items.Add(selectedItem);
             }
         }
 
-        private Bitmap PrecacheScaledBitmap(
-          Bitmap unscaledBitmap,
-          int width,
-          int height,
-          InterpolationMode interpolation,
-          CompositingQuality compositing,
-          SmoothingMode smoothing)
+        private Bitmap PrecacheScaledBitmap(Bitmap unscaledBitmap, int width, int height, InterpolationMode interpolation, CompositingQuality compositing, SmoothingMode smoothing)
         {
             if (width < 1)
+            {
                 width = 1;
+            }
             if (height < 1)
+            {
                 height = 1;
+            }
             Bitmap bitmap = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
-            Graphics graphics = Graphics.FromImage((Image)bitmap);
+            Graphics graphics = Graphics.FromImage(bitmap);
             graphics.InterpolationMode = interpolation;
             graphics.CompositingQuality = compositing;
             graphics.SmoothingMode = smoothing;
-            graphics.DrawImage((Image)unscaledBitmap, new Rectangle(0, 0, width, height));
+            graphics.DrawImage(unscaledBitmap, new Rectangle(0, 0, width, height));
             graphics.Dispose();
             return bitmap;
         }
 
         public void Reset()
         {
-            this._MoneyToggled = true;
-            this._ColoniesToggled = true;
-            this._BasesToggled = true;
-            this._ResearchToggled = true;
-            this._GovernmentStylesToggled = true;
-            this._DeclareWarToggled = true;
-            this._EndWarToggled = true;
-            this._TradeSanctionsToggled = true;
-            this._LiftTradeSanctionsToggled = true;
-            this._EmpireContactsToggled = true;
-            this._IndependentColoniesToggled = true;
-            this._SecretLocationsToggled = true;
+            _MoneyToggled = true;
+            _ColoniesToggled = true;
+            _BasesToggled = true;
+            _ResearchToggled = true;
+            _GovernmentStylesToggled = true;
+            _DeclareWarToggled = true;
+            _EndWarToggled = true;
+            _TradeSanctionsToggled = true;
+            _LiftTradeSanctionsToggled = true;
+            _EmpireContactsToggled = true;
+            _IndependentColoniesToggled = true;
+            _SecretLocationsToggled = true;
             bool includeAllItems = false;
-            if (this._Empire == this._Galaxy.PlayerEmpire)
+            if (_Empire == _Galaxy.PlayerEmpire)
+            {
                 includeAllItems = true;
-            this._TradeableItems = this._Galaxy.ResolveTradeableItems(this._Empire, this._OtherEmpire, false, this._RefactorValuesForEmpire, includeAllItems);
-            if (this._RequiredItems != null)
-                this._RequiredItems.Clear();
-            this._SelectedItems = new TradeableItemList();
-            this.SelectedItems.Items.Clear();
-            this.PopulateTradeableItems(this._TradeableItems);
-            this.UpdateOfferedItemsHeading();
+            }
+            _TradeableItems = _Galaxy.ResolveTradeableItems(_Empire, _OtherEmpire, includeNearestColony: false, _RefactorValuesForEmpire, includeAllItems);
+            if (_RequiredItems != null)
+            {
+                _RequiredItems.Clear();
+            }
+            _SelectedItems = new TradeableItemList();
+            SelectedItems.Items.Clear();
+            PopulateTradeableItems(_TradeableItems);
+            UpdateOfferedItemsHeading();
         }
 
-        public void UpdateOfferedItemsHeading() => this.lblSelected.Text = TextResolver.GetText("Offered Items") + " (" + this._SelectedItems.TotalValue.ToString("###,###,###,##0") + ")";
+        public void UpdateOfferedItemsHeading()
+        {
+            lblSelected.Text = TextResolver.GetText("Offered Items") + " (" + _SelectedItems.TotalValue.ToString("###,###,###,##0") + ")";
+        }
 
         public void PopulateTradeableItems(TradeableItemList tradeableItems)
         {
-            this.TradeableItems.Nodes.Clear();
-            if (this._ExcludedItems != null && this._ExcludedItems.Count > 0)
+            TradeableItems.Nodes.Clear();
+            if (_ExcludedItems != null && _ExcludedItems.Count > 0)
             {
                 TradeableItemList tradeableItemList = new TradeableItemList();
-                foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+                foreach (TradeableItem tradeableItem in tradeableItems)
                 {
-                    if (this._ExcludedItems.IndexOf(tradeableItem) >= 0)
-                        tradeableItemList.Add(tradeableItem);
-                }
-                foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItemList)
-                    tradeableItems.Remove(tradeableItem);
-            }
-            if (this._SelectedItems != null && this._SelectedItems.Count > 0)
-            {
-                if (this._SelectedItems.ContainsType(TradeableItemType.TerritoryMap))
-                {
-                    int index = tradeableItems.IndexOf(new TradeableItem(TradeableItemType.GalaxyMap, (object)null, 0));
-                    if (index >= 0)
-                        tradeableItems.RemoveAt(index);
-                }
-                else if (this._SelectedItems.ContainsType(TradeableItemType.GalaxyMap))
-                {
-                    int index = tradeableItems.IndexOf(new TradeableItem(TradeableItemType.TerritoryMap, (object)null, 0));
-                    if (index >= 0)
-                        tradeableItems.RemoveAt(index);
-                }
-                if (this._SelectedItems.ContainsType(TradeableItemType.ThreatenTradeSanctions))
-                {
-                    int index = tradeableItems.IndexOf(new TradeableItem(TradeableItemType.ThreatenWar, (object)null, 0));
-                    if (index >= 0)
-                        tradeableItems.RemoveAt(index);
-                }
-                else if (this._SelectedItems.ContainsType(TradeableItemType.ThreatenWar))
-                {
-                    int index = tradeableItems.IndexOf(new TradeableItem(TradeableItemType.ThreatenTradeSanctions, (object)null, 0));
-                    if (index >= 0)
-                        tradeableItems.RemoveAt(index);
-                }
-            }
-            double num1 = Math.Max(10000.0, this._Empire.StateMoney * 0.1);
-            if (this._Empire == this._Galaxy.PlayerEmpire)
-                num1 = 0.0;
-            TreeNode node1 = new TreeNode(TextResolver.GetText("Money"));
-            node1.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
-            {
-                if (tradeableItem.Type == TradeableItemType.Money && tradeableItem.Item != null)
-                {
-                    double num2 = (double)tradeableItem.Item;
-                    if (num2 <= this._Empire.StateMoney - num1)
-                        node1.Nodes.Add(new TreeNode(string.Format(TextResolver.GetText("X credits"), (object)num2.ToString("#,###,###,##0")))
-                        {
-                            NodeFont = this.Font,
-                            Tag = (object)tradeableItem
-                        });
-                }
-            }
-            if (this._MoneyToggled)
-                node1.Toggle();
-            this.TradeableItems.Nodes.Add(node1);
-            bool flag1 = false;
-            TreeNode node2 = new TreeNode(TextResolver.GetText("Disputed Colonies"));
-            node2.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
-            {
-                if (tradeableItem.Type == TradeableItemType.Colony)
-                {
-                    flag1 = true;
-                    Habitat habitat = (Habitat)tradeableItem.Item;
-                    Habitat habitatSystemStar = Galaxy.DetermineHabitatSystemStar(habitat);
-                    node2.Nodes.Add(new TreeNode(string.Format(TextResolver.GetText("Trade Description Colony NAME PLANETTYPE SYSTEMNAME"), (object)habitat.Name, (object)Galaxy.ResolveDescription(habitat.Type), (object)habitatSystemStar.Name) + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
+                    int num = _ExcludedItems.IndexOf(tradeableItem);
+                    if (num >= 0)
                     {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                        tradeableItemList.Add(tradeableItem);
+                    }
+                }
+                foreach (TradeableItem item in tradeableItemList)
+                {
+                    tradeableItems.Remove(item);
                 }
             }
-            if (flag1)
+            if (_SelectedItems != null && _SelectedItems.Count > 0)
             {
-                if (this._ColoniesToggled)
-                    node2.Toggle();
-                this.TradeableItems.Nodes.Add(node2);
+                if (_SelectedItems.ContainsType(TradeableItemType.TerritoryMap))
+                {
+                    int num2 = tradeableItems.IndexOf(new TradeableItem(TradeableItemType.GalaxyMap, null, 0));
+                    if (num2 >= 0)
+                    {
+                        tradeableItems.RemoveAt(num2);
+                    }
+                }
+                else if (_SelectedItems.ContainsType(TradeableItemType.GalaxyMap))
+                {
+                    int num3 = tradeableItems.IndexOf(new TradeableItem(TradeableItemType.TerritoryMap, null, 0));
+                    if (num3 >= 0)
+                    {
+                        tradeableItems.RemoveAt(num3);
+                    }
+                }
+                if (_SelectedItems.ContainsType(TradeableItemType.ThreatenTradeSanctions))
+                {
+                    int num4 = tradeableItems.IndexOf(new TradeableItem(TradeableItemType.ThreatenWar, null, 0));
+                    if (num4 >= 0)
+                    {
+                        tradeableItems.RemoveAt(num4);
+                    }
+                }
+                else if (_SelectedItems.ContainsType(TradeableItemType.ThreatenWar))
+                {
+                    int num5 = tradeableItems.IndexOf(new TradeableItem(TradeableItemType.ThreatenTradeSanctions, null, 0));
+                    if (num5 >= 0)
+                    {
+                        tradeableItems.RemoveAt(num5);
+                    }
+                }
+            }
+            double num6 = Math.Max(10000.0, _Empire.StateMoney * 0.1);
+            if (_Empire == _Galaxy.PlayerEmpire)
+            {
+                num6 = 0.0;
+            }
+            TreeNode treeNode = new TreeNode(TextResolver.GetText("Money"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem2 in tradeableItems)
+            {
+                if (tradeableItem2.Type == TradeableItemType.Money && tradeableItem2.Item != null)
+                {
+                    double num7 = (double)tradeableItem2.Item;
+                    if (num7 <= _Empire.StateMoney - num6)
+                    {
+                        TreeNode treeNode2 = new TreeNode(string.Format(TextResolver.GetText("X credits"), num7.ToString("#,###,###,##0")));
+                        treeNode2.NodeFont = Font;
+                        treeNode2.Tag = tradeableItem2;
+                        treeNode.Nodes.Add(treeNode2);
+                    }
+                }
+            }
+            if (_MoneyToggled)
+            {
+                treeNode.Toggle();
+            }
+            TradeableItems.Nodes.Add(treeNode);
+            bool flag = false;
+            treeNode = new TreeNode(TextResolver.GetText("Disputed Colonies"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem3 in tradeableItems)
+            {
+                if (tradeableItem3.Type == TradeableItemType.Colony)
+                {
+                    flag = true;
+                    Habitat habitat = (Habitat)tradeableItem3.Item;
+                    Habitat habitat2 = Galaxy.DetermineHabitatSystemStar(habitat);
+                    string text = string.Format(TextResolver.GetText("Trade Description Colony NAME PLANETTYPE SYSTEMNAME"), habitat.Name, Galaxy.ResolveDescription(habitat.Type), habitat2.Name);
+                    text = text + " (" + tradeableItem3.Value.ToString("###,###,###,##0") + ")";
+                    TreeNode treeNode3 = new TreeNode(text);
+                    treeNode3.NodeFont = Font;
+                    treeNode3.Tag = tradeableItem3;
+                    treeNode.Nodes.Add(treeNode3);
+                }
+            }
+            if (flag)
+            {
+                if (_ColoniesToggled)
+                {
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
             }
             bool flag2 = false;
-            TreeNode node3 = new TreeNode(TextResolver.GetText("Disputed Bases"));
-            node3.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("Disputed Bases"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem4 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.Base)
+                if (tradeableItem4.Type == TradeableItemType.Base)
                 {
                     flag2 = true;
-                    BuiltObject builtObject = (BuiltObject)tradeableItem.Item;
-                    string str = string.Empty;
+                    BuiltObject builtObject = (BuiltObject)tradeableItem4.Item;
+                    string arg = string.Empty;
                     if (builtObject.NearestSystemStar != null)
-                        str = builtObject.NearestSystemStar.Name;
-                    node3.Nodes.Add(new TreeNode(string.Format(TextResolver.GetText("Trade Description Base"), (object)builtObject.Name, (object)str) + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
                     {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                        arg = builtObject.NearestSystemStar.Name;
+                    }
+                    string text2 = string.Format(TextResolver.GetText("Trade Description Base"), builtObject.Name, arg);
+                    text2 = text2 + " (" + tradeableItem4.Value.ToString("###,###,###,##0") + ")";
+                    TreeNode treeNode4 = new TreeNode(text2);
+                    treeNode4.NodeFont = Font;
+                    treeNode4.Tag = tradeableItem4;
+                    treeNode.Nodes.Add(treeNode4);
                 }
             }
             if (flag2)
             {
-                if (this._BasesToggled)
-                    node3.Toggle();
-                this.TradeableItems.Nodes.Add(node3);
-            }
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
-            {
-                if (tradeableItem.Type == TradeableItemType.TerritoryMap)
+                if (_BasesToggled)
                 {
-                    this.TradeableItems.Nodes.Add(new TreeNode(TextResolver.GetText("Trade Description Territory Map") + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
+            }
+            foreach (TradeableItem tradeableItem5 in tradeableItems)
+            {
+                if (tradeableItem5.Type == TradeableItemType.TerritoryMap)
+                {
+                    treeNode = new TreeNode(TextResolver.GetText("Trade Description Territory Map") + " (" + tradeableItem5.Value.ToString("###,###,###,##0") + ")");
+                    treeNode.NodeFont = Font;
+                    treeNode.Tag = tradeableItem5;
+                    TradeableItems.Nodes.Add(treeNode);
                     break;
                 }
             }
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            foreach (TradeableItem tradeableItem6 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.GalaxyMap)
+                if (tradeableItem6.Type == TradeableItemType.GalaxyMap)
                 {
-                    this.TradeableItems.Nodes.Add(new TreeNode(TextResolver.GetText("Trade Description Galaxy Map") + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    treeNode = new TreeNode(TextResolver.GetText("Trade Description Galaxy Map") + " (" + tradeableItem6.Value.ToString("###,###,###,##0") + ")");
+                    treeNode.NodeFont = Font;
+                    treeNode.Tag = tradeableItem6;
+                    TradeableItems.Nodes.Add(treeNode);
                     break;
                 }
             }
             bool flag3 = false;
-            TreeNode node4 = new TreeNode(TextResolver.GetText("Communications with Unknown Empires"));
-            node4.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("Communications with Unknown Empires"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem7 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.ContactEmpire)
+                if (tradeableItem7.Type == TradeableItemType.ContactEmpire)
                 {
                     flag3 = true;
-                    node4.Nodes.Add(new TreeNode(((Empire)tradeableItem.Item).Name + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    Empire empire = (Empire)tradeableItem7.Item;
+                    string name = empire.Name;
+                    name = name + " (" + tradeableItem7.Value.ToString("###,###,###,##0") + ")";
+                    TreeNode treeNode5 = new TreeNode(name);
+                    treeNode5.NodeFont = Font;
+                    treeNode5.Tag = tradeableItem7;
+                    treeNode.Nodes.Add(treeNode5);
                 }
             }
             if (flag3)
             {
-                if (this._EmpireContactsToggled)
-                    node4.Toggle();
-                this.TradeableItems.Nodes.Add(node4);
-            }
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
-            {
-                if (tradeableItem.Type == TradeableItemType.SystemMap && tradeableItem.Item != null && tradeableItem.Item is Habitat)
+                if (_EmpireContactsToggled)
                 {
-                    Habitat habitat = (Habitat)tradeableItem.Item;
-                    this.TradeableItems.Nodes.Add(new TreeNode(string.Format(TextResolver.GetText("Trade Description System Map"), (object)habitat.Name) + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
+            }
+            foreach (TradeableItem tradeableItem8 in tradeableItems)
+            {
+                if (tradeableItem8.Type == TradeableItemType.SystemMap && tradeableItem8.Item != null && tradeableItem8.Item is Habitat)
+                {
+                    Habitat habitat3 = (Habitat)tradeableItem8.Item;
+                    treeNode = new TreeNode(string.Format(TextResolver.GetText("Trade Description System Map"), habitat3.Name) + " (" + tradeableItem8.Value.ToString("###,###,###,##0") + ")");
+                    treeNode.NodeFont = Font;
+                    treeNode.Tag = tradeableItem8;
+                    TradeableItems.Nodes.Add(treeNode);
                     break;
                 }
             }
             bool flag4 = false;
-            TreeNode node5 = new TreeNode(TextResolver.GetText("Locations of Independent Colonies"));
-            node5.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("Locations of Independent Colonies"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem9 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.IndependentColonyLocation)
+                if (tradeableItem9.Type == TradeableItemType.IndependentColonyLocation)
                 {
                     flag4 = true;
-                    node5.Nodes.Add(new TreeNode(((StellarObject)tradeableItem.Item).Name + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    Habitat habitat4 = (Habitat)tradeableItem9.Item;
+                    string name2 = habitat4.Name;
+                    name2 = name2 + " (" + tradeableItem9.Value.ToString("###,###,###,##0") + ")";
+                    TreeNode treeNode6 = new TreeNode(name2);
+                    treeNode6.NodeFont = Font;
+                    treeNode6.Tag = tradeableItem9;
+                    treeNode.Nodes.Add(treeNode6);
                 }
             }
             if (flag4)
             {
-                if (this._IndependentColoniesToggled)
-                    node5.Toggle();
-                this.TradeableItems.Nodes.Add(node5);
+                if (_IndependentColoniesToggled)
+                {
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
             }
             bool flag5 = false;
-            TreeNode node6 = new TreeNode(TextResolver.GetText("Secret Locations"));
-            node6.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("Secret Locations"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem10 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.SecretLocation)
+                if (tradeableItem10.Type == TradeableItemType.SecretLocation)
                 {
                     flag5 = true;
-                    string str = string.Empty;
-                    if (tradeableItem.Item is GalaxyLocation)
-                        str = ((GalaxyLocation)tradeableItem.Item).Name;
-                    else if (tradeableItem.Item is Habitat)
-                        str = ((StellarObject)tradeableItem.Item).Name;
-                    if (this._OtherEmpire == this._Galaxy.PlayerEmpire)
-                        str = TextResolver.GetText("Secret Location");
-                    node6.Nodes.Add(new TreeNode(str + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
+                    string text3 = string.Empty;
+                    if (tradeableItem10.Item is GalaxyLocation)
                     {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                        GalaxyLocation galaxyLocation = (GalaxyLocation)tradeableItem10.Item;
+                        text3 = galaxyLocation.Name;
+                    }
+                    else if (tradeableItem10.Item is Habitat)
+                    {
+                        Habitat habitat5 = (Habitat)tradeableItem10.Item;
+                        text3 = habitat5.Name;
+                    }
+                    if (_OtherEmpire == _Galaxy.PlayerEmpire)
+                    {
+                        text3 = TextResolver.GetText("Secret Location");
+                    }
+                    text3 = text3 + " (" + tradeableItem10.Value.ToString("###,###,###,##0") + ")";
+                    TreeNode treeNode7 = new TreeNode(text3);
+                    treeNode7.NodeFont = Font;
+                    treeNode7.Tag = tradeableItem10;
+                    treeNode.Nodes.Add(treeNode7);
                 }
             }
             if (flag5)
             {
-                if (this._SecretLocationsToggled)
-                    node6.Toggle();
-                this.TradeableItems.Nodes.Add(node6);
+                if (_SecretLocationsToggled)
+                {
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
             }
             bool flag6 = false;
-            TreeNode node7 = new TreeNode(TextResolver.GetText("Research"));
-            node7.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("Research"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem11 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.ResearchProject)
+                if (tradeableItem11.Type == TradeableItemType.ResearchProject)
                 {
                     flag6 = true;
-                    node7.Nodes.Add(new TreeNode(((ResearchNode)tradeableItem.Item).Name + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    ResearchNode researchNode = (ResearchNode)tradeableItem11.Item;
+                    TreeNode treeNode8 = new TreeNode(researchNode.Name + " (" + tradeableItem11.Value.ToString("###,###,###,##0") + ")");
+                    treeNode8.NodeFont = Font;
+                    treeNode8.Tag = tradeableItem11;
+                    treeNode.Nodes.Add(treeNode8);
                 }
             }
             if (flag6)
             {
-                if (this._ResearchToggled)
-                    node7.Toggle();
-                this.TradeableItems.Nodes.Add(node7);
+                if (_ResearchToggled)
+                {
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
             }
             bool flag7 = false;
-            TreeNode node8 = new TreeNode(TextResolver.GetText("Declare War on..."));
-            node8.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("Declare War on..."));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem12 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.DeclareWarOther)
+                if (tradeableItem12.Type == TradeableItemType.DeclareWarOther)
                 {
                     flag7 = true;
-                    node8.Nodes.Add(new TreeNode(((Empire)tradeableItem.Item).Name + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    Empire empire2 = (Empire)tradeableItem12.Item;
+                    TreeNode treeNode9 = new TreeNode(empire2.Name + " (" + tradeableItem12.Value.ToString("###,###,###,##0") + ")");
+                    treeNode9.NodeFont = Font;
+                    treeNode9.Tag = tradeableItem12;
+                    treeNode.Nodes.Add(treeNode9);
                 }
             }
             if (flag7)
             {
-                if (this._DeclareWarToggled)
-                    node8.Toggle();
-                this.TradeableItems.Nodes.Add(node8);
+                if (_DeclareWarToggled)
+                {
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
             }
             bool flag8 = false;
-            TreeNode node9 = new TreeNode(TextResolver.GetText("Initiate Trade Sanctions against..."));
-            node9.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("Initiate Trade Sanctions against..."));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem13 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.InitiateTradeSanctionsOther)
+                if (tradeableItem13.Type == TradeableItemType.InitiateTradeSanctionsOther)
                 {
                     flag8 = true;
-                    node9.Nodes.Add(new TreeNode(((Empire)tradeableItem.Item).Name + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    Empire empire3 = (Empire)tradeableItem13.Item;
+                    TreeNode treeNode10 = new TreeNode(empire3.Name + " (" + tradeableItem13.Value.ToString("###,###,###,##0") + ")");
+                    treeNode10.NodeFont = Font;
+                    treeNode10.Tag = tradeableItem13;
+                    treeNode.Nodes.Add(treeNode10);
                 }
             }
             if (flag8)
             {
-                if (this._TradeSanctionsToggled)
-                    node9.Toggle();
-                this.TradeableItems.Nodes.Add(node9);
+                if (_TradeSanctionsToggled)
+                {
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
             }
             bool flag9 = false;
-            TreeNode node10 = new TreeNode(TextResolver.GetText("End War with..."));
-            node10.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("End War with..."));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem14 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.EndWarOther)
+                if (tradeableItem14.Type == TradeableItemType.EndWarOther)
                 {
                     flag9 = true;
-                    node10.Nodes.Add(new TreeNode(((Empire)tradeableItem.Item).Name + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    Empire empire4 = (Empire)tradeableItem14.Item;
+                    TreeNode treeNode11 = new TreeNode(empire4.Name + " (" + tradeableItem14.Value.ToString("###,###,###,##0") + ")");
+                    treeNode11.NodeFont = Font;
+                    treeNode11.Tag = tradeableItem14;
+                    treeNode.Nodes.Add(treeNode11);
                 }
             }
             if (flag9)
             {
-                if (this._EndWarToggled)
-                    node10.Toggle();
-                this.TradeableItems.Nodes.Add(node10);
+                if (_EndWarToggled)
+                {
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
             }
             bool flag10 = false;
-            TreeNode node11 = new TreeNode(TextResolver.GetText("Lift Trade Sanctions against..."));
-            node11.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("Lift Trade Sanctions against..."));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem15 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.LiftTradeSanctionsOther)
+                if (tradeableItem15.Type == TradeableItemType.LiftTradeSanctionsOther)
                 {
                     flag10 = true;
-                    node11.Nodes.Add(new TreeNode(((Empire)tradeableItem.Item).Name + " (" + tradeableItem.Value.ToString("###,###,###,##0") + ")")
-                    {
-                        NodeFont = this.Font,
-                        Tag = (object)tradeableItem
-                    });
+                    Empire empire5 = (Empire)tradeableItem15.Item;
+                    TreeNode treeNode12 = new TreeNode(empire5.Name + " (" + tradeableItem15.Value.ToString("###,###,###,##0") + ")");
+                    treeNode12.NodeFont = Font;
+                    treeNode12.Tag = tradeableItem15;
+                    treeNode.Nodes.Add(treeNode12);
                 }
             }
             if (flag10)
             {
-                if (this._LiftTradeSanctionsToggled)
-                    node11.Toggle();
-                this.TradeableItems.Nodes.Add(node11);
-            }
-            TreeNode node12 = new TreeNode(TextResolver.GetText("Lift Trade Sanctions against Your Empire"));
-            node12.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
-            {
-                if (tradeableItem.Type == TradeableItemType.LiftTradeSanctions)
+                if (_LiftTradeSanctionsToggled)
                 {
-                    Empire empire = (Empire)tradeableItem.Item;
-                    node12.NodeFont = this.Font;
-                    node12.Tag = (object)tradeableItem;
-                    this.TradeableItems.Nodes.Add(node12);
+                    treeNode.Toggle();
+                }
+                TradeableItems.Nodes.Add(treeNode);
+            }
+            treeNode = new TreeNode(TextResolver.GetText("Lift Trade Sanctions against Your Empire"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem16 in tradeableItems)
+            {
+                if (tradeableItem16.Type == TradeableItemType.LiftTradeSanctions)
+                {
+                    _ = (Empire)tradeableItem16.Item;
+                    treeNode.NodeFont = Font;
+                    treeNode.Tag = tradeableItem16;
+                    TradeableItems.Nodes.Add(treeNode);
                 }
             }
-            TreeNode node13 = new TreeNode(TextResolver.GetText("End War with Your Empire"));
-            node13.NodeFont = this.Font;
-            foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+            treeNode = new TreeNode(TextResolver.GetText("End War with Your Empire"));
+            treeNode.NodeFont = Font;
+            foreach (TradeableItem tradeableItem17 in tradeableItems)
             {
-                if (tradeableItem.Type == TradeableItemType.EndWar)
+                if (tradeableItem17.Type == TradeableItemType.EndWar)
                 {
-                    Empire empire = (Empire)tradeableItem.Item;
-                    node13.NodeFont = this.Font;
-                    node13.Tag = (object)tradeableItem;
-                    this.TradeableItems.Nodes.Add(node13);
+                    _ = (Empire)tradeableItem17.Item;
+                    treeNode.NodeFont = Font;
+                    treeNode.Tag = tradeableItem17;
+                    TradeableItems.Nodes.Add(treeNode);
                 }
             }
-            if (this._AllowDiplomaticThreats)
+            if (_AllowDiplomaticThreats)
             {
-                TreeNode node14 = new TreeNode(TextResolver.GetText("Threaten Trade Sanctions unless you agree"));
-                node14.NodeFont = this.Font;
-                foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+                treeNode = new TreeNode(TextResolver.GetText("Threaten Trade Sanctions unless you agree"));
+                treeNode.NodeFont = Font;
+                foreach (TradeableItem tradeableItem18 in tradeableItems)
                 {
-                    if (tradeableItem.Type == TradeableItemType.ThreatenTradeSanctions)
+                    if (tradeableItem18.Type == TradeableItemType.ThreatenTradeSanctions)
                     {
-                        Empire empire = (Empire)tradeableItem.Item;
-                        node14.NodeFont = this.Font;
-                        node14.Tag = (object)tradeableItem;
-                        this.TradeableItems.Nodes.Add(node14);
+                        _ = (Empire)tradeableItem18.Item;
+                        treeNode.NodeFont = Font;
+                        treeNode.Tag = tradeableItem18;
+                        TradeableItems.Nodes.Add(treeNode);
                     }
                 }
-                TreeNode node15 = new TreeNode(TextResolver.GetText("Threaten War unless you agree"));
-                node15.NodeFont = this.Font;
-                foreach (TradeableItem tradeableItem in (SyncList<TradeableItem>)tradeableItems)
+                treeNode = new TreeNode(TextResolver.GetText("Threaten War unless you agree"));
+                treeNode.NodeFont = Font;
+                foreach (TradeableItem tradeableItem19 in tradeableItems)
                 {
-                    if (tradeableItem.Type == TradeableItemType.ThreatenWar)
+                    if (tradeableItem19.Type == TradeableItemType.ThreatenWar)
                     {
-                        Empire empire = (Empire)tradeableItem.Item;
-                        node15.NodeFont = this.Font;
-                        node15.Tag = (object)tradeableItem;
-                        this.TradeableItems.Nodes.Add(node15);
+                        _ = (Empire)tradeableItem19.Item;
+                        treeNode.NodeFont = Font;
+                        treeNode.Tag = tradeableItem19;
+                        TradeableItems.Nodes.Add(treeNode);
                     }
                 }
             }
-            foreach (TreeNode node16 in this.TradeableItems.Nodes)
+            foreach (TreeNode node in TradeableItems.Nodes)
             {
-                node16.Text = node16.Text;
-                foreach (TreeNode node17 in node16.Nodes)
-                    node17.Text = node17.Text;
+                node.Text = node.Text;
+                foreach (TreeNode node2 in node.Nodes)
+                {
+                    node2.Text = node2.Text;
+                }
             }
         }
 
         private void DoLayout()
         {
-            int width = this.Width;
-            int height = 100;
-            int num = 34;
-            this.LocalizeControlText();
-            this.pnlTitleHeaderArea.Size = new Size(width, num);
-            this.pnlTitleHeaderArea.Location = new Point(0, 0);
-            this.pnlTitleHeaderArea.BringToFront();
-            this.picFlag.Size = new Size(40, 24);
-            this.picFlag.Location = new Point(2, 4);
-            this.picFlag.SizeMode = PictureBoxSizeMode.Zoom;
-            this.picFlag.BringToFront();
-            this.lblTitle.Size = new Size(width - 47, num);
-            this.lblTitle.Font = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
-            this.lblTitle.TextAlign = ContentAlignment.MiddleLeft;
-            this.lblTitle.Location = new Point(47, 2);
-            this.lblTitle.BringToFront();
-            this.TradeableItems.Scrollable = true;
-            this.TradeableItems.Size = new Size(width, this.Height - (num + num + height + 25));
-            this.TradeableItems.Location = new Point(0, num);
-            this.pnlSelectedHeaderArea.Size = new Size(width, num);
-            this.pnlSelectedHeaderArea.Location = new Point(0, num + this.TradeableItems.Height);
-            this.pnlSelectedHeaderArea.BringToFront();
-            this.lblSelected.Size = new Size(width, num);
-            this.lblSelected.Font = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
-            this.lblSelected.Location = new Point(0, num + this.TradeableItems.Height + 3);
-            this.lblSelected.TextAlign = ContentAlignment.MiddleCenter;
-            this.lblSelected.BringToFront();
-            this.SelectedItems.Font = this.Font;
-            this.SelectedItems.Size = new Size(width, height);
-            this.SelectedItems.Location = new Point(0, num + this.TradeableItems.Height + num);
-            this.btnClearSelectedItems.Size = new Size(150, 25);
-            this.btnClearSelectedItems.Location = new Point((width - 150) / 2, this.Height - 25);
-            this.btnClearSelectedItems.BringToFront();
-            this.btnClearSelectedItems.Visible = true;
+            int num = base.Width;
+            int num2 = 100;
+            int num3 = 34;
+            LocalizeControlText();
+            pnlTitleHeaderArea.Size = new Size(num, num3);
+            pnlTitleHeaderArea.Location = new Point(0, 0);
+            pnlTitleHeaderArea.BringToFront();
+            picFlag.Size = new Size(40, 24);
+            picFlag.Location = new Point(2, 4);
+            picFlag.SizeMode = PictureBoxSizeMode.Zoom;
+            picFlag.BringToFront();
+            lblTitle.Size = new Size(num - 47, num3);
+            lblTitle.Font = new Font(Font.FontFamily, Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+            lblTitle.TextAlign = ContentAlignment.MiddleLeft;
+            lblTitle.Location = new Point(47, 2);
+            lblTitle.BringToFront();
+            TradeableItems.Scrollable = true;
+            TradeableItems.Size = new Size(num, base.Height - (num3 + num3 + num2 + 25));
+            TradeableItems.Location = new Point(0, num3);
+            pnlSelectedHeaderArea.Size = new Size(num, num3);
+            pnlSelectedHeaderArea.Location = new Point(0, num3 + TradeableItems.Height);
+            pnlSelectedHeaderArea.BringToFront();
+            lblSelected.Size = new Size(num, num3);
+            lblSelected.Font = new Font(Font.FontFamily, Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+            lblSelected.Location = new Point(0, num3 + TradeableItems.Height + 3);
+            lblSelected.TextAlign = ContentAlignment.MiddleCenter;
+            lblSelected.BringToFront();
+            SelectedItems.Font = Font;
+            SelectedItems.Size = new Size(num, num2);
+            SelectedItems.Location = new Point(0, num3 + TradeableItems.Height + num3);
+            btnClearSelectedItems.Size = new Size(150, 25);
+            btnClearSelectedItems.Location = new Point((num - 150) / 2, base.Height - 25);
+            btnClearSelectedItems.BringToFront();
+            btnClearSelectedItems.Visible = true;
         }
 
         public TradeableItemList FilterOutSelectedAndExcludedItems(TradeableItemList tradeableItems)
         {
             TradeableItemList tradeableItemList = tradeableItems.Clone();
-            List<int> intList = new List<int>();
-            foreach (TradeableItem selectedItem in (SyncList<TradeableItem>)this._SelectedItems)
+            List<int> list = new List<int>();
+            foreach (TradeableItem selectedItem in _SelectedItems)
             {
                 if (selectedItem.Type != TradeableItemType.Money)
                 {
                     int num = tradeableItems.IndexOf(selectedItem);
                     if (num >= 0)
-                        intList.Add(num);
-                }
-            }
-            if (this._ExcludedItems != null)
-            {
-                foreach (TradeableItem excludedItem in (SyncList<TradeableItem>)this._ExcludedItems)
-                {
-                    if (excludedItem.Type != TradeableItemType.Money)
                     {
-                        int num = tradeableItems.IndexOf(excludedItem);
-                        if (num >= 0)
-                            intList.Add(num);
+                        list.Add(num);
                     }
                 }
             }
-            intList.Sort();
-            intList.Reverse();
-            foreach (int index in intList)
-                tradeableItemList.RemoveAt(index);
+            if (_ExcludedItems != null)
+            {
+                foreach (TradeableItem excludedItem in _ExcludedItems)
+                {
+                    if (excludedItem.Type != TradeableItemType.Money)
+                    {
+                        int num2 = tradeableItems.IndexOf(excludedItem);
+                        if (num2 >= 0)
+                        {
+                            list.Add(num2);
+                        }
+                    }
+                }
+            }
+            list.Sort();
+            list.Reverse();
+            foreach (int item in list)
+            {
+                tradeableItemList.RemoveAt(item);
+            }
             return tradeableItemList;
         }
 
         private int ResolveHoveredItemIndex(int x, int y, out Rectangle bounds)
         {
             bounds = Rectangle.Empty;
-            if (this.SelectedItems.Items != null)
+            if (SelectedItems.Items != null)
             {
-                for (int index = 0; index < this.SelectedItems.Items.Count; ++index)
+                for (int i = 0; i < SelectedItems.Items.Count; i++)
                 {
-                    Rectangle itemRectangle = this.SelectedItems.GetItemRectangle(index);
+                    Rectangle itemRectangle = SelectedItems.GetItemRectangle(i);
                     if (itemRectangle.Contains(new Point(x, y)))
                     {
                         bounds = itemRectangle;
-                        return index;
+                        return i;
                     }
                 }
             }
@@ -666,13 +782,17 @@ namespace DistantWorlds.Controls
 
         private void SelectedItems_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!this.AcceptingMouseMoveEvents)
+            if (!AcceptingMouseMoveEvents)
+            {
                 return;
-            TradeableItem tradeableItem = (TradeableItem)null;
+            }
+            TradeableItem tradeableItem = null;
             Rectangle bounds = Rectangle.Empty;
-            int index = this.ResolveHoveredItemIndex(e.X, e.Y, out bounds);
-            if (index >= 0)
-                tradeableItem = this._SelectedItems[index];
+            int num = ResolveHoveredItemIndex(e.X, e.Y, out bounds);
+            if (num >= 0)
+            {
+                tradeableItem = _SelectedItems[num];
+            }
             if (tradeableItem != null)
             {
                 if (tradeableItem.Type == TradeableItemType.ResearchProject && tradeableItem.Item is ResearchNode)
@@ -680,52 +800,52 @@ namespace DistantWorlds.Controls
                     ResearchNode researchProject = (ResearchNode)tradeableItem.Item;
                     if (bounds.Contains(e.X, e.Y))
                     {
-                        int width = Math.Min(bounds.Width, this.SelectedItems.Width);
-                        Rectangle relativeRectangle = new Rectangle(this.SelectedItems.Location.X + bounds.X, this.SelectedItems.Location.Y + bounds.Y, width, bounds.Height);
-                        ResearchProjectHoveredEventArgs e1 = new ResearchProjectHoveredEventArgs(researchProject, relativeRectangle);
-                        if (this.ResearchProjectHovered == null)
-                            return;
-                        this.ResearchProjectHovered((object)this, e1);
+                        int num2 = Math.Min(bounds.Width, SelectedItems.Width);
+                        Rectangle relativeRectangle = new Rectangle(SelectedItems.Location.X + bounds.X, SelectedItems.Location.Y + bounds.Y, num2, bounds.Height);
+                        ResearchProjectHoveredEventArgs e2 = new ResearchProjectHoveredEventArgs(researchProject, relativeRectangle);
+                        if (this.ResearchProjectHovered != null)
+                        {
+                            this.ResearchProjectHovered(this, e2);
+                        }
                     }
-                    else
+                    else if (this.ResearchProjectHovered != null)
                     {
-                        if (this.ResearchProjectHovered == null)
-                            return;
-                        this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+                        this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
                     }
                 }
-                else
+                else if (this.ResearchProjectHovered != null)
                 {
-                    if (this.ResearchProjectHovered == null)
-                        return;
-                    this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+                    this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
                 }
             }
-            else
+            else if (this.ResearchProjectHovered != null)
             {
-                if (this.ResearchProjectHovered == null)
-                    return;
-                this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+                this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
             }
         }
 
         private void SelectedItems_MouseLeave(object sender, EventArgs e)
         {
-            if (this.ResearchProjectHovered == null)
-                return;
-            this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+            if (this.ResearchProjectHovered != null)
+            {
+                this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
+            }
         }
 
         private void TradeableItems_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!this.AcceptingMouseMoveEvents)
+            if (!AcceptingMouseMoveEvents)
+            {
                 return;
-            TreeNode nodeAt = this.TradeableItems.GetNodeAt(e.X, e.Y);
-            TradeableItem tradeableItem = (TradeableItem)null;
+            }
+            TreeNode nodeAt = TradeableItems.GetNodeAt(e.X, e.Y);
+            TradeableItem tradeableItem = null;
             if (nodeAt != null)
             {
                 if (nodeAt.Tag is TradeableItem)
+                {
                     tradeableItem = (TradeableItem)nodeAt.Tag;
+                }
                 if (tradeableItem != null)
                 {
                     if (tradeableItem.Type == TradeableItemType.ResearchProject && tradeableItem.Item is ResearchNode)
@@ -733,349 +853,426 @@ namespace DistantWorlds.Controls
                         ResearchNode researchProject = (ResearchNode)tradeableItem.Item;
                         if (nodeAt.Bounds.Contains(e.X, e.Y))
                         {
-                            int width = Math.Min(nodeAt.Bounds.Width, this.TradeableItems.Width);
-                            Rectangle relativeRectangle = new Rectangle(this.TradeableItems.Location.X + nodeAt.Bounds.X, this.TradeableItems.Location.Y + nodeAt.Bounds.Y, width, nodeAt.Bounds.Height);
-                            ResearchProjectHoveredEventArgs e1 = new ResearchProjectHoveredEventArgs(researchProject, relativeRectangle);
-                            if (this.ResearchProjectHovered == null)
-                                return;
-                            this.ResearchProjectHovered((object)this, e1);
+                            int num = Math.Min(nodeAt.Bounds.Width, TradeableItems.Width);
+                            Rectangle relativeRectangle = new Rectangle(TradeableItems.Location.X + nodeAt.Bounds.X, TradeableItems.Location.Y + nodeAt.Bounds.Y, num, nodeAt.Bounds.Height);
+                            ResearchProjectHoveredEventArgs e2 = new ResearchProjectHoveredEventArgs(researchProject, relativeRectangle);
+                            if (this.ResearchProjectHovered != null)
+                            {
+                                this.ResearchProjectHovered(this, e2);
+                            }
                         }
-                        else
+                        else if (this.ResearchProjectHovered != null)
                         {
-                            if (this.ResearchProjectHovered == null)
-                                return;
-                            this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+                            this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
                         }
                     }
-                    else
+                    else if (this.ResearchProjectHovered != null)
                     {
-                        if (this.ResearchProjectHovered == null)
-                            return;
-                        this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+                        this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
                     }
                 }
-                else
+                else if (this.ResearchProjectHovered != null)
                 {
-                    if (this.ResearchProjectHovered == null)
-                        return;
-                    this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+                    this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
                 }
             }
-            else
+            else if (this.ResearchProjectHovered != null)
             {
-                if (this.ResearchProjectHovered == null)
-                    return;
-                this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+                this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
             }
         }
 
         private void TradeableItems_MouseLeave(object sender, EventArgs e)
         {
-            if (this.ResearchProjectHovered == null)
-                return;
-            this.ResearchProjectHovered((object)this, new ResearchProjectHoveredEventArgs((ResearchNode)null, Rectangle.Empty));
+            if (this.ResearchProjectHovered != null)
+            {
+                this.ResearchProjectHovered(this, new ResearchProjectHoveredEventArgs(null, Rectangle.Empty));
+            }
         }
 
         private void TradeableItems_MouseClick(object sender, MouseEventArgs e)
         {
-            TreeNode nodeAt = this.TradeableItems.GetNodeAt(e.X, e.Y);
-            TradeableItem tradeableItem = (TradeableItem)null;
+            TreeNode nodeAt = TradeableItems.GetNodeAt(e.X, e.Y);
+            TradeableItem tradeableItem = null;
             if (nodeAt.Tag is TradeableItem)
+            {
                 tradeableItem = (TradeableItem)nodeAt.Tag;
+            }
             if (tradeableItem != null && e.X >= 25)
             {
-                int index = this._SelectedItems.IndexOf(tradeableItem);
+                int num = _SelectedItems.IndexOf(tradeableItem);
                 if (tradeableItem.Type == TradeableItemType.AdoptGovernmentStyle)
-                    index = this._SelectedItems.FindAnyGovernmentStyle();
-                double num1 = Math.Max(20000.0, this._Empire.StateMoney * 0.3);
-                if (this._Empire == this._Galaxy.PlayerEmpire)
-                    num1 = 0.0;
-                if (index < 0)
+                {
+                    num = _SelectedItems.FindAnyGovernmentStyle();
+                }
+                double num2 = Math.Max(20000.0, _Empire.StateMoney * 0.3);
+                if (_Empire == _Galaxy.PlayerEmpire)
+                {
+                    num2 = 0.0;
+                }
+                if (num < 0)
                 {
                     if (tradeableItem.Type == TradeableItemType.Money && tradeableItem.Item is double)
                     {
-                        if (this._Empire.StateMoney - num1 >= (double)tradeableItem.Item)
-                            this._SelectedItems.Add(tradeableItem);
-                        else if (this._Empire.StateMoney - num1 > 0.0)
+                        if (_Empire.StateMoney - num2 >= (double)tradeableItem.Item)
                         {
-                            double moneyAmount = (double)(int)(this._Empire.StateMoney - num1);
-                            int num2 = this._Galaxy.ValueMoney(moneyAmount);
-                            this._SelectedItems.Add(new TradeableItem(TradeableItemType.Money, (object)moneyAmount, num2));
+                            _SelectedItems.Add(tradeableItem);
+                        }
+                        else if (_Empire.StateMoney - num2 > 0.0)
+                        {
+                            double num3 = (int)(_Empire.StateMoney - num2);
+                            int value = _Galaxy.ValueMoney(num3);
+                            _SelectedItems.Add(new TradeableItem(TradeableItemType.Money, num3, value));
                         }
                     }
                     else
-                        this._SelectedItems.Add(tradeableItem);
-                    this.PopulateTradeableItems(this.FilterOutSelectedAndExcludedItems(this._TradeableItems));
+                    {
+                        _SelectedItems.Add(tradeableItem);
+                    }
+                    TradeableItemList tradeableItems = FilterOutSelectedAndExcludedItems(_TradeableItems);
+                    PopulateTradeableItems(tradeableItems);
                 }
                 else if (tradeableItem.Type == TradeableItemType.AdoptGovernmentStyle)
                 {
-                    if (this._SelectedItems[index].Item is GovernmentAttributes)
+                    if (_SelectedItems[num].Item is GovernmentAttributes)
                     {
-                        this._SelectedItems[index] = tradeableItem;
-                        this.PopulateTradeableItems(this.FilterOutSelectedAndExcludedItems(this._TradeableItems));
+                        _SelectedItems[num] = tradeableItem;
+                        TradeableItemList tradeableItems2 = FilterOutSelectedAndExcludedItems(_TradeableItems);
+                        PopulateTradeableItems(tradeableItems2);
                     }
                 }
-                else if (tradeableItem.Type == TradeableItemType.Money && this._SelectedItems[index].Item is double)
+                else if (tradeableItem.Type == TradeableItemType.Money && _SelectedItems[num].Item is double)
                 {
-                    double moneyAmount = (double)this._SelectedItems[index].Item + (double)tradeableItem.Item;
-                    if (moneyAmount > this._Empire.StateMoney - num1)
-                        moneyAmount = (double)(int)(this._Empire.StateMoney - num1);
-                    int num3 = this._Galaxy.ValueMoney(moneyAmount);
-                    this._SelectedItems[index] = new TradeableItem(TradeableItemType.Money, (object)moneyAmount, num3);
+                    double num4 = (double)_SelectedItems[num].Item;
+                    num4 += (double)tradeableItem.Item;
+                    if (num4 > _Empire.StateMoney - num2)
+                    {
+                        num4 = (int)(_Empire.StateMoney - num2);
+                    }
+                    int value2 = _Galaxy.ValueMoney(num4);
+                    _SelectedItems[num] = new TradeableItem(TradeableItemType.Money, num4, value2);
                 }
-                this.UpdateOfferedItemsHeading();
-                this.SetSelectedItemsInControl();
+                UpdateOfferedItemsHeading();
+                SetSelectedItemsInControl();
             }
-            else
+            else if (nodeAt.Nodes != null && nodeAt.Nodes.Count > 0)
             {
-                if (nodeAt.Nodes == null || nodeAt.Nodes.Count <= 0)
-                    return;
                 if (nodeAt.Text == TextResolver.GetText("Money"))
-                    this._MoneyToggled = !this._MoneyToggled;
+                {
+                    _MoneyToggled = !_MoneyToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Disputed Colonies"))
-                    this._ColoniesToggled = !this._ColoniesToggled;
+                {
+                    _ColoniesToggled = !_ColoniesToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Disputed Bases"))
-                    this._BasesToggled = !this._BasesToggled;
+                {
+                    _BasesToggled = !_BasesToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Communications with Unknown Empires"))
-                    this._EmpireContactsToggled = !this._EmpireContactsToggled;
+                {
+                    _EmpireContactsToggled = !_EmpireContactsToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Locations of Independent Colonies"))
-                    this._IndependentColoniesToggled = !this._IndependentColoniesToggled;
+                {
+                    _IndependentColoniesToggled = !_IndependentColoniesToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Secret Locations"))
-                    this._SecretLocationsToggled = !this._SecretLocationsToggled;
+                {
+                    _SecretLocationsToggled = !_SecretLocationsToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Component Tech"))
-                    this._ResearchToggled = !this._ResearchToggled;
+                {
+                    _ResearchToggled = !_ResearchToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Adopt Government Style"))
-                    this._GovernmentStylesToggled = !this._GovernmentStylesToggled;
+                {
+                    _GovernmentStylesToggled = !_GovernmentStylesToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Declare War on..."))
-                    this._DeclareWarToggled = !this._DeclareWarToggled;
+                {
+                    _DeclareWarToggled = !_DeclareWarToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Initiate Trade Sanctions against..."))
-                    this._TradeSanctionsToggled = !this._TradeSanctionsToggled;
+                {
+                    _TradeSanctionsToggled = !_TradeSanctionsToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("End War with..."))
-                    this._EndWarToggled = !this._EndWarToggled;
+                {
+                    _EndWarToggled = !_EndWarToggled;
+                }
                 else if (nodeAt.Text == TextResolver.GetText("Lift Trade Sanctions against..."))
-                    this._LiftTradeSanctionsToggled = !this._LiftTradeSanctionsToggled;
-                if (e.X < 25)
-                    return;
-                nodeAt.Toggle();
+                {
+                    _LiftTradeSanctionsToggled = !_LiftTradeSanctionsToggled;
+                }
+                if (e.X >= 25)
+                {
+                    nodeAt.Toggle();
+                }
             }
         }
 
         private void SelectedItems_MouseClick(object sender, MouseEventArgs e)
         {
-            int selectedIndex = this.SelectedItems.SelectedIndex;
-            if (selectedIndex < 0 || this._RequiredItems != null && this._RequiredItems.Contains(this._SelectedItems[selectedIndex]))
-                return;
-            this.SelectedItems.Items.RemoveAt(selectedIndex);
-            this._SelectedItems.RemoveAt(selectedIndex);
-            this.PopulateTradeableItems(this.FilterOutSelectedAndExcludedItems(this._TradeableItems));
-            this.UpdateOfferedItemsHeading();
+            int selectedIndex = SelectedItems.SelectedIndex;
+            if (selectedIndex >= 0 && (_RequiredItems == null || !_RequiredItems.Contains(_SelectedItems[selectedIndex])))
+            {
+                SelectedItems.Items.RemoveAt(selectedIndex);
+                _SelectedItems.RemoveAt(selectedIndex);
+                TradeableItemList tradeableItems = FilterOutSelectedAndExcludedItems(_TradeableItems);
+                PopulateTradeableItems(tradeableItems);
+                UpdateOfferedItemsHeading();
+            }
         }
 
         private void btnClearSelectedItems_Click(object sender, EventArgs e)
         {
-            //BaconDiplomacyTradeTree.AdjustItemCosts(this);
-            this.SelectedItems.Items.Clear();
-            this._SelectedItems.Clear();
-            if (this._RequiredItems != null && this._RequiredItems.Count > 0)
-                this._SelectedItems.AddRange((IEnumerable<TradeableItem>)this._RequiredItems);
-            if (this._SelectedItems != null)
+            BaconDiplomacyTradeTree.AdjustItemCosts(this);
+            SelectedItems.Items.Clear();
+            _SelectedItems.Clear();
+            if (_RequiredItems != null && _RequiredItems.Count > 0)
             {
-                foreach (TradeableItem selectedItem in (SyncList<TradeableItem>)this._SelectedItems)
+                _SelectedItems.AddRange(_RequiredItems);
+            }
+            if (_SelectedItems != null)
+            {
+                foreach (TradeableItem selectedItem in _SelectedItems)
                 {
                     if (selectedItem != null)
-                        this.SelectedItems.Items.Add((object)selectedItem);
+                    {
+                        SelectedItems.Items.Add(selectedItem);
+                    }
                 }
             }
-            this.PopulateTradeableItems(this.FilterOutSelectedAndExcludedItems(this._TradeableItems));
-            this.UpdateOfferedItemsHeading();
+            TradeableItemList tradeableItems = FilterOutSelectedAndExcludedItems(_TradeableItems);
+            PopulateTradeableItems(tradeableItems);
+            UpdateOfferedItemsHeading();
         }
 
         private void TradeableItems_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            if (e == null || e.Node == null)
-                return;
-            if (e.Node.Text == TextResolver.GetText("Money"))
-                this._MoneyToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Disputed Colonies"))
-                this._ColoniesToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Disputed Bases"))
-                this._BasesToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Communications with Unknown Empires"))
-                this._EmpireContactsToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Locations of Independent Colonies"))
-                this._IndependentColoniesToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Secret Locations"))
-                this._SecretLocationsToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Component Tech"))
-                this._ResearchToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Adopt Government Style"))
-                this._GovernmentStylesToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Declare War on..."))
-                this._DeclareWarToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("Initiate Trade Sanctions against..."))
-                this._TradeSanctionsToggled = true;
-            else if (e.Node.Text == TextResolver.GetText("End War with..."))
+            if (e != null && e.Node != null)
             {
-                this._EndWarToggled = true;
-            }
-            else
-            {
-                if (!(e.Node.Text == TextResolver.GetText("Lift Trade Sanctions against...")))
-                    return;
-                this._LiftTradeSanctionsToggled = true;
+                if (e.Node.Text == TextResolver.GetText("Money"))
+                {
+                    _MoneyToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Disputed Colonies"))
+                {
+                    _ColoniesToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Disputed Bases"))
+                {
+                    _BasesToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Communications with Unknown Empires"))
+                {
+                    _EmpireContactsToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Locations of Independent Colonies"))
+                {
+                    _IndependentColoniesToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Secret Locations"))
+                {
+                    _SecretLocationsToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Component Tech"))
+                {
+                    _ResearchToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Adopt Government Style"))
+                {
+                    _GovernmentStylesToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Declare War on..."))
+                {
+                    _DeclareWarToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Initiate Trade Sanctions against..."))
+                {
+                    _TradeSanctionsToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("End War with..."))
+                {
+                    _EndWarToggled = true;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Lift Trade Sanctions against..."))
+                {
+                    _LiftTradeSanctionsToggled = true;
+                }
             }
         }
 
         private void TradeableItems_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
-            if (e == null || e.Node == null)
-                return;
-            if (e.Node.Text == TextResolver.GetText("Money"))
-                this._MoneyToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Disputed Colonies"))
-                this._ColoniesToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Disputed Bases"))
-                this._BasesToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Communications with Unknown Empires"))
-                this._EmpireContactsToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Locations of Independent Colonies"))
-                this._IndependentColoniesToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Secret Locations"))
-                this._SecretLocationsToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Component Tech"))
-                this._ResearchToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Adopt Government Style"))
-                this._GovernmentStylesToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Declare War on..."))
-                this._DeclareWarToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("Initiate Trade Sanctions against..."))
-                this._TradeSanctionsToggled = false;
-            else if (e.Node.Text == TextResolver.GetText("End War with..."))
+            if (e != null && e.Node != null)
             {
-                this._EndWarToggled = false;
-            }
-            else
-            {
-                if (!(e.Node.Text == TextResolver.GetText("Lift Trade Sanctions against...")))
-                    return;
-                this._LiftTradeSanctionsToggled = false;
+                if (e.Node.Text == TextResolver.GetText("Money"))
+                {
+                    _MoneyToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Disputed Colonies"))
+                {
+                    _ColoniesToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Disputed Bases"))
+                {
+                    _BasesToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Communications with Unknown Empires"))
+                {
+                    _EmpireContactsToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Locations of Independent Colonies"))
+                {
+                    _IndependentColoniesToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Secret Locations"))
+                {
+                    _SecretLocationsToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Component Tech"))
+                {
+                    _ResearchToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Adopt Government Style"))
+                {
+                    _GovernmentStylesToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Declare War on..."))
+                {
+                    _DeclareWarToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Initiate Trade Sanctions against..."))
+                {
+                    _TradeSanctionsToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("End War with..."))
+                {
+                    _EndWarToggled = false;
+                }
+                else if (e.Node.Text == TextResolver.GetText("Lift Trade Sanctions against..."))
+                {
+                    _LiftTradeSanctionsToggled = false;
+                }
             }
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && this.components != null)
-                this.components.Dispose();
+            if (disposing && components != null)
+            {
+                components.Dispose();
+            }
             base.Dispose(disposing);
         }
 
         private void InitializeComponent()
         {
-            this.TradeableItems = new TreeView();
-            this.SelectedItems = new ListBox();
-            this.lblTitle = new Label();
-            this.lblSelected = new Label();
-            this.picFlag = new PictureBox();
-            this.pnlTitleHeaderArea = new Panel();
-            this.pnlSelectedHeaderArea = new Panel();
-            this.btnClearSelectedItems = new GlassButton();
-            ((ISupportInitialize)this.picFlag).BeginInit();
-            this.SuspendLayout();
-            this.TradeableItems.BackColor = Color.FromArgb(48, 48, 64);
-            this.TradeableItems.BorderStyle = BorderStyle.None;
-            this.TradeableItems.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte)0);
-            this.TradeableItems.ForeColor = Color.White;
-            this.TradeableItems.Location = new Point(5, 40);
+            this.TradeableItems = new System.Windows.Forms.TreeView();
+            this.SelectedItems = new System.Windows.Forms.ListBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblSelected = new System.Windows.Forms.Label();
+            this.picFlag = new System.Windows.Forms.PictureBox();
+            this.pnlTitleHeaderArea = new System.Windows.Forms.Panel();
+            this.pnlSelectedHeaderArea = new System.Windows.Forms.Panel();
+            this.btnClearSelectedItems = new DistantWorlds.Controls.GlassButton();
+            ((System.ComponentModel.ISupportInitialize)this.picFlag).BeginInit();
+            base.SuspendLayout();
+            this.TradeableItems.BackColor = System.Drawing.Color.FromArgb(48, 48, 64);
+            this.TradeableItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TradeableItems.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.TradeableItems.ForeColor = System.Drawing.Color.White;
+            this.TradeableItems.Location = new System.Drawing.Point(5, 40);
             this.TradeableItems.Name = "TradeableItems";
-            this.TradeableItems.Size = new Size(121, 97);
+            this.TradeableItems.Size = new System.Drawing.Size(121, 97);
             this.TradeableItems.TabIndex = 0;
-            this.TradeableItems.MouseClick += new MouseEventHandler(this.TradeableItems_MouseClick);
-            this.TradeableItems.BeforeExpand += new TreeViewCancelEventHandler(this.TradeableItems_BeforeExpand);
-            this.TradeableItems.BeforeCollapse += new TreeViewCancelEventHandler(this.TradeableItems_BeforeCollapse);
-            this.TradeableItems.MouseMove += new MouseEventHandler(this.TradeableItems_MouseMove);
-            this.TradeableItems.MouseLeave += new EventHandler(this.TradeableItems_MouseLeave);
-            this.SelectedItems.BackColor = Color.FromArgb(48, 48, 64);
-            this.SelectedItems.BorderStyle = BorderStyle.None;
-            this.SelectedItems.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte)0);
-            this.SelectedItems.ForeColor = Color.White;
+            this.TradeableItems.MouseClick += new System.Windows.Forms.MouseEventHandler(TradeableItems_MouseClick);
+            this.TradeableItems.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(TradeableItems_BeforeExpand);
+            this.TradeableItems.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(TradeableItems_BeforeCollapse);
+            this.TradeableItems.MouseMove += new System.Windows.Forms.MouseEventHandler(TradeableItems_MouseMove);
+            this.TradeableItems.MouseLeave += new System.EventHandler(TradeableItems_MouseLeave);
+            this.SelectedItems.BackColor = System.Drawing.Color.FromArgb(48, 48, 64);
+            this.SelectedItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.SelectedItems.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.SelectedItems.ForeColor = System.Drawing.Color.White;
             this.SelectedItems.FormattingEnabled = true;
-            this.SelectedItems.Location = new Point(5, 174);
+            this.SelectedItems.Location = new System.Drawing.Point(5, 174);
             this.SelectedItems.Name = "SelectedItems";
-            this.SelectedItems.Size = new Size(120, 91);
+            this.SelectedItems.Size = new System.Drawing.Size(120, 91);
             this.SelectedItems.TabIndex = 1;
-            this.SelectedItems.MouseClick += new MouseEventHandler(this.SelectedItems_MouseClick);
-            this.SelectedItems.MouseMove += new MouseEventHandler(this.SelectedItems_MouseMove);
-            this.SelectedItems.MouseLeave += new EventHandler(this.SelectedItems_MouseLeave);
+            this.SelectedItems.MouseClick += new System.Windows.Forms.MouseEventHandler(SelectedItems_MouseClick);
+            this.SelectedItems.MouseMove += new System.Windows.Forms.MouseEventHandler(SelectedItems_MouseMove);
+            this.SelectedItems.MouseLeave += new System.EventHandler(SelectedItems_MouseLeave);
             this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = Color.FromArgb(80, 80, 112);
-            this.lblTitle.Font = new Font("Verdana", 9.75f, FontStyle.Bold, GraphicsUnit.Point, (byte)0);
-            this.lblTitle.ForeColor = Color.White;
-            this.lblTitle.Location = new Point(48, 4);
+            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(80, 80, 112);
+            this.lblTitle.Font = new System.Drawing.Font("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(48, 4);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new Size(39, 16);
+            this.lblTitle.Size = new System.Drawing.Size(39, 16);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Title";
             this.lblSelected.AutoSize = true;
-            this.lblSelected.BackColor = Color.FromArgb(80, 80, 112);
-            this.lblSelected.Font = new Font("Verdana", 9f, FontStyle.Bold, GraphicsUnit.Point, (byte)0);
-            this.lblSelected.ForeColor = Color.White;
-            this.lblSelected.Location = new Point(17, 144);
+            this.lblSelected.BackColor = System.Drawing.Color.FromArgb(80, 80, 112);
+            this.lblSelected.Font = new System.Drawing.Font("Verdana", 9f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblSelected.ForeColor = System.Drawing.Color.White;
+            this.lblSelected.Location = new System.Drawing.Point(17, 144);
             this.lblSelected.Name = "lblSelected";
-            this.lblSelected.Size = new Size(100, 14);
+            this.lblSelected.Size = new System.Drawing.Size(100, 14);
             this.lblSelected.TabIndex = 3;
             this.lblSelected.Text = "Offered Items";
-            this.picFlag.BackColor = Color.Transparent;
-            this.picFlag.Location = new Point(4, 3);
+            this.picFlag.BackColor = System.Drawing.Color.Transparent;
+            this.picFlag.Location = new System.Drawing.Point(4, 3);
             this.picFlag.Name = "picFlag";
-            this.picFlag.Size = new Size(33, 26);
+            this.picFlag.Size = new System.Drawing.Size(33, 26);
             this.picFlag.TabIndex = 5;
             this.picFlag.TabStop = false;
-            this.pnlTitleHeaderArea.BackColor = Color.FromArgb(80, 80, 112);
-            this.pnlTitleHeaderArea.Location = new Point(102, 4);
+            this.pnlTitleHeaderArea.BackColor = System.Drawing.Color.FromArgb(80, 80, 112);
+            this.pnlTitleHeaderArea.Location = new System.Drawing.Point(102, 4);
             this.pnlTitleHeaderArea.Name = "pnlTitleHeaderArea";
-            this.pnlTitleHeaderArea.Size = new Size(79, 30);
+            this.pnlTitleHeaderArea.Size = new System.Drawing.Size(79, 30);
             this.pnlTitleHeaderArea.TabIndex = 6;
-            this.pnlSelectedHeaderArea.BackColor = Color.FromArgb(80, 80, 112);
-            this.pnlSelectedHeaderArea.Location = new Point(105, 143);
+            this.pnlSelectedHeaderArea.BackColor = System.Drawing.Color.FromArgb(80, 80, 112);
+            this.pnlSelectedHeaderArea.Location = new System.Drawing.Point(105, 143);
             this.pnlSelectedHeaderArea.Name = "pnlSelectedHeaderArea";
-            this.pnlSelectedHeaderArea.Size = new Size(79, 30);
+            this.pnlSelectedHeaderArea.Size = new System.Drawing.Size(79, 30);
             this.pnlSelectedHeaderArea.TabIndex = 7;
-            this.btnClearSelectedItems.BackColor = Color.FromArgb(0, 0, 0);
+            this.btnClearSelectedItems.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
             this.btnClearSelectedItems.ClipBackground = false;
             this.btnClearSelectedItems.DelayFrameRefresh = false;
-            this.btnClearSelectedItems.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
-            this.btnClearSelectedItems.ForeColor = Color.FromArgb(150, 150, 150);
-            this.btnClearSelectedItems.GlowColor = Color.FromArgb(48, 48, 128);
-            this.btnClearSelectedItems.InnerBorderColor = Color.FromArgb(67, 67, 77);
+            this.btnClearSelectedItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnClearSelectedItems.ForeColor = System.Drawing.Color.FromArgb(150, 150, 150);
+            this.btnClearSelectedItems.GlowColor = System.Drawing.Color.FromArgb(48, 48, 128);
+            this.btnClearSelectedItems.InnerBorderColor = System.Drawing.Color.FromArgb(67, 67, 77);
             this.btnClearSelectedItems.IntensifyColors = false;
-            this.btnClearSelectedItems.Location = new Point(5, 271);
+            this.btnClearSelectedItems.Location = new System.Drawing.Point(5, 271);
             this.btnClearSelectedItems.Name = "btnClearSelectedItems";
-            this.btnClearSelectedItems.OuterBorderColor = Color.FromArgb(0, 0, 16);
-            this.btnClearSelectedItems.ShineColor = Color.FromArgb(112, 112, 128);
-            this.btnClearSelectedItems.Size = new Size(141, 23);
+            this.btnClearSelectedItems.OuterBorderColor = System.Drawing.Color.FromArgb(0, 0, 16);
+            this.btnClearSelectedItems.ShineColor = System.Drawing.Color.FromArgb(112, 112, 128);
+            this.btnClearSelectedItems.Size = new System.Drawing.Size(141, 23);
             this.btnClearSelectedItems.TabIndex = 4;
             this.btnClearSelectedItems.Text = "Clear Offered Items";
-            this.btnClearSelectedItems.TextColor = Color.FromArgb(120, 120, 120);
-            this.btnClearSelectedItems.TextColor2 = Color.FromArgb((int)byte.MaxValue, (int)byte.MaxValue, (int)byte.MaxValue);
-            this.btnClearSelectedItems.Click += new EventHandler(this.btnClearSelectedItems_Click);
-            this.AutoScaleDimensions = new SizeF(6f, 13f);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = Color.FromArgb(48, 48, 64);
-            this.Controls.Add((Control)this.pnlSelectedHeaderArea);
-            this.Controls.Add((Control)this.pnlTitleHeaderArea);
-            this.Controls.Add((Control)this.picFlag);
-            this.Controls.Add((Control)this.btnClearSelectedItems);
-            this.Controls.Add((Control)this.lblSelected);
-            this.Controls.Add((Control)this.lblTitle);
-            this.Controls.Add((Control)this.SelectedItems);
-            this.Controls.Add((Control)this.TradeableItems);
-            this.Name = nameof(DiplomacyTradeTree);
-            this.Size = new Size(184, 339);
-            ((ISupportInitialize)this.picFlag).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.btnClearSelectedItems.TextColor = System.Drawing.Color.FromArgb(120, 120, 120);
+            this.btnClearSelectedItems.TextColor2 = System.Drawing.Color.FromArgb(255, 255, 255);
+            this.btnClearSelectedItems.Click += new System.EventHandler(btnClearSelectedItems_Click);
+            base.AutoScaleDimensions = new System.Drawing.SizeF(6f, 13f);
+            base.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(48, 48, 64);
+            base.Controls.Add(this.pnlSelectedHeaderArea);
+            base.Controls.Add(this.pnlTitleHeaderArea);
+            base.Controls.Add(this.picFlag);
+            base.Controls.Add(this.btnClearSelectedItems);
+            base.Controls.Add(this.lblSelected);
+            base.Controls.Add(this.lblTitle);
+            base.Controls.Add(this.SelectedItems);
+            base.Controls.Add(this.TradeableItems);
+            base.Name = "DiplomacyTradeTree";
+            base.Size = new System.Drawing.Size(184, 339);
+            ((System.ComponentModel.ISupportInitialize)this.picFlag).EndInit();
+            base.ResumeLayout(false);
+            base.PerformLayout();
         }
     }
-
-
 }
