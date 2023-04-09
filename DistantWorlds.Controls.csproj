@@ -50,6 +50,12 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\NumericUpDownNoArrows.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NumericUpDownNoArrows.Designer.cs">
+      <DependentUpon>NumericUpDownNoArrows.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gdi32.cs" />
     <Compile Include="Mods\ModArgs.cs" />
     <Compile Include="User32.cs" />
