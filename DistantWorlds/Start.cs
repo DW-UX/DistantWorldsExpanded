@@ -7967,6 +7967,7 @@ namespace DistantWorlds
                 {
                     method_143();
                 }
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {
@@ -8047,15 +8048,15 @@ namespace DistantWorlds
             Galaxy.FlagShapes = Galaxy.LoadFlagShapes(Application.StartupPath, string_2);
             Galaxy.FlagShapesPirates = Galaxy.LoadFlagShapesPirates(Application.StartupPath, string_2);
             Parallel.Invoke(() => main_0.method_39(string_3, string_4, 0.5),
-            () => main_0.method_44(string_3, string_4, string_2),
-            () => main_0.method_43(string_3, string_4, string_2),
-            () => main_0.method_45(string_3, string_4),
-            () => main_0.SrhwdZrGbo(string_3, string_4),
-            () => main_0.method_57(string_3, string_2),
-           () => main_0.method_59(string_3, string_4),
-           () => main_0.method_46(string_3, string_4),
-           () => main_0.method_33(string_3, string_4),
-            () => main_0.method_34(string_3, string_4));
+                () => main_0.method_44(string_3, string_4, string_2),
+                () => main_0.method_43(string_3, string_4, string_2),
+                () => main_0.method_45(string_3, string_4),
+                () => main_0.SrhwdZrGbo(string_3, string_4),
+                () => main_0.method_57(string_3, string_2),
+                () => main_0.method_59(string_3, string_4),
+                () => main_0.method_46(string_3, string_4),
+                () => main_0.method_33(string_3, string_4),
+                () => main_0.method_34(string_3, string_4));
             main_0.string_27 = string.Empty;
             bool bool_7 = false;
             if (string.IsNullOrEmpty(string_2))
