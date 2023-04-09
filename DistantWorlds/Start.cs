@@ -7429,9 +7429,9 @@ namespace DistantWorlds
         [DllImport("kernel32.dll")]
         private static extern ErrorModes GetErrorMode();
 
-        public Start():base()
+        public Start() : base()
         {
-            
+
             bool_0 = true;
             color_0 = Color.FromArgb(96, 255, 64, 64);
             oyxRtRyAwjg = new BackgroundWorker();
@@ -8046,16 +8046,16 @@ namespace DistantWorlds
             main_0.builtObjectImageCache_0.Initialize(Application.StartupPath, string_2);
             Galaxy.FlagShapes = Galaxy.LoadFlagShapes(Application.StartupPath, string_2);
             Galaxy.FlagShapesPirates = Galaxy.LoadFlagShapesPirates(Application.StartupPath, string_2);
-            Task.WhenAll( main_0.method_39(string_3, string_4, 0.5),
-            main_0.method_44(string_3, string_4, string_2),
-            main_0.method_43(string_3, string_4, string_2),
-            main_0.method_45(string_3, string_4),
-            main_0.SrhwdZrGbo(string_3, string_4),
-            main_0.method_57(string_3, string_2),
-            main_0.method_59(string_3, string_4),
-            main_0.method_46(string_3, string_4),
-            main_0.method_33(string_3, string_4),
-            main_0.method_34(string_3, string_4));
+            Parallel.Invoke(() => main_0.method_39(string_3, string_4, 0.5),
+            () => main_0.method_44(string_3, string_4, string_2),
+            () => main_0.method_43(string_3, string_4, string_2),
+            () => main_0.method_45(string_3, string_4),
+            () => main_0.SrhwdZrGbo(string_3, string_4),
+            () => main_0.method_57(string_3, string_2),
+           () => main_0.method_59(string_3, string_4),
+           () => main_0.method_46(string_3, string_4),
+           () => main_0.method_33(string_3, string_4),
+            () => main_0.method_34(string_3, string_4));
             main_0.string_27 = string.Empty;
             bool bool_7 = false;
             if (string.IsNullOrEmpty(string_2))
@@ -8063,18 +8063,18 @@ namespace DistantWorlds
                 bool_7 = true;
             }
             double double_ = 0.5;
-            Task.WhenAll(main_0.method_26(string_3, string_4, double_, bool_7),
-            main_0.method_28(string_3, string_4, double_),
-            main_0.method_29(string_3, string_4, double_),
-            main_0.method_30(string_3, string_4),
-            main_0.method_47(string_3, string_4, double_, bool_7),
-            main_0.method_48(string_3, string_4),
-            main_0.method_49(string_3, string_4),
-            main_0.method_32(string_3, string_4),
-            main_0.method_50(string_3, string_4),
-            main_0.method_52(string_3, string_4),
-            main_0.method_51(string_3, string_4),
-            main_0.method_60(string_3, string_4));
+            Parallel.Invoke(() => main_0.method_26(string_3, string_4, double_, bool_7),
+            () => main_0.method_28(string_3, string_4, double_),
+            () => main_0.method_29(string_3, string_4, double_),
+            () => main_0.method_30(string_3, string_4),
+            () => main_0.method_47(string_3, string_4, double_, bool_7),
+           () => main_0.method_48(string_3, string_4),
+            () => main_0.method_49(string_3, string_4),
+            () => main_0.method_32(string_3, string_4),
+           () => main_0.method_50(string_3, string_4),
+         () => main_0.method_52(string_3, string_4),
+         () => main_0.method_51(string_3, string_4),
+        () => main_0.method_60(string_3, string_4));
             main_0.cxjxlkqlKe.ResetRendering();
             encyclopediaItemList_0 = main_0.method_465(null, Application.StartupPath, string_2);
             encyclopediaItemList_1 = new EncyclopediaItemList();
@@ -8367,7 +8367,7 @@ namespace DistantWorlds
             ICryptoTransform transform = method_7(Main.byte_0, Main.byte_1);
             CryptoStream cryptoStream = new CryptoStream(stream_0, transform, CryptoStreamMode.Read);
             DeflateStream val = new DeflateStream((Stream)(object)cryptoStream, (CompressionMode)1, (CompressionLevel)1, true);
-            val.BufferSize =4194304;
+            val.BufferSize = 4194304;
             XmlDictionaryReaderQuotas max = XmlDictionaryReaderQuotas.Max;
             XmlDictionaryReader xmlDictionaryReader = XmlDictionaryReader.CreateBinaryReader((Stream)(object)val, max);
             Game item = (Game)compactSerializer.ReadObject(xmlDictionaryReader);
@@ -17390,7 +17390,7 @@ namespace DistantWorlds
         {
             if (mediaPlayer.settings != null)
             {
-                mediaPlayer.settings.autoStart =false;
+                mediaPlayer.settings.autoStart = false;
             }
             ((Control)(object)mediaPlayer).Location = new Point(0, 0);
             ((Control)(object)mediaPlayer).Size = base.Size;
@@ -17403,11 +17403,11 @@ namespace DistantWorlds
                 }
             }
             SetErrorMode(ErrorModes.SEM_FAILCRITICALERRORS);
-            mediaPlayer.currentPlaylist =val;
+            mediaPlayer.currentPlaylist = val;
             mediaPlayer.uiMode = "none";
             ((Control)(object)mediaPlayer).Visible = true;
             ((Control)(object)mediaPlayer).BringToFront();
-            mediaPlayer.stretchToFit =true;
+            mediaPlayer.stretchToFit = true;
             mediaPlayer.settings.volume = 100;
             mediaPlayer.Ctlcontrols.currentPosition = 0.0;
             if (mediaPlayer.Ctlcontrols != null)
