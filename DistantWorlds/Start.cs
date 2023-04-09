@@ -28,6 +28,7 @@ using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
@@ -8043,37 +8044,37 @@ namespace DistantWorlds
             main_0.bitmap_27 = new Bitmap[20];
             main_0.habitatImageCache_0.Initialize(Application.StartupPath, string_2, initialLoad: false);
             main_0.builtObjectImageCache_0.Initialize(Application.StartupPath, string_2);
-            main_0.method_39(string_3, string_4, 0.5);
-            main_0.method_44(string_3, string_4, string_2);
-            main_0.method_43(string_3, string_4, string_2);
             Galaxy.FlagShapes = Galaxy.LoadFlagShapes(Application.StartupPath, string_2);
             Galaxy.FlagShapesPirates = Galaxy.LoadFlagShapesPirates(Application.StartupPath, string_2);
-            main_0.method_45(string_3, string_4);
-            main_0.SrhwdZrGbo(string_3, string_4);
+            Task.WhenAll( main_0.method_39(string_3, string_4, 0.5),
+            main_0.method_44(string_3, string_4, string_2),
+            main_0.method_43(string_3, string_4, string_2),
+            main_0.method_45(string_3, string_4),
+            main_0.SrhwdZrGbo(string_3, string_4),
+            main_0.method_57(string_3, string_2),
+            main_0.method_59(string_3, string_4),
+            main_0.method_46(string_3, string_4),
+            main_0.method_33(string_3, string_4),
+            main_0.method_34(string_3, string_4));
             main_0.string_27 = string.Empty;
-            main_0.method_57(string_3, string_2);
-            main_0.method_59(string_3, string_4);
-            main_0.method_46(string_3, string_4);
-            main_0.method_33(string_3, string_4);
-            main_0.method_34(string_3, string_4);
             bool bool_7 = false;
             if (string.IsNullOrEmpty(string_2))
             {
                 bool_7 = true;
             }
             double double_ = 0.5;
-            main_0.method_26(string_3, string_4, double_, bool_7);
-            main_0.method_28(string_3, string_4, double_);
-            main_0.method_29(string_3, string_4, double_);
-            main_0.method_30(string_3, string_4);
-            main_0.method_47(string_3, string_4, double_, bool_7);
-            main_0.method_48(string_3, string_4);
-            main_0.method_49(string_3, string_4);
-            main_0.method_32(string_3, string_4);
-            main_0.method_50(string_3, string_4);
-            main_0.method_52(string_3, string_4);
-            main_0.method_51(string_3, string_4);
-            main_0.method_60(string_3, string_4);
+            Task.WhenAll(main_0.method_26(string_3, string_4, double_, bool_7),
+            main_0.method_28(string_3, string_4, double_),
+            main_0.method_29(string_3, string_4, double_),
+            main_0.method_30(string_3, string_4),
+            main_0.method_47(string_3, string_4, double_, bool_7),
+            main_0.method_48(string_3, string_4),
+            main_0.method_49(string_3, string_4),
+            main_0.method_32(string_3, string_4),
+            main_0.method_50(string_3, string_4),
+            main_0.method_52(string_3, string_4),
+            main_0.method_51(string_3, string_4),
+            main_0.method_60(string_3, string_4));
             main_0.cxjxlkqlKe.ResetRendering();
             encyclopediaItemList_0 = main_0.method_465(null, Application.StartupPath, string_2);
             encyclopediaItemList_1 = new EncyclopediaItemList();
