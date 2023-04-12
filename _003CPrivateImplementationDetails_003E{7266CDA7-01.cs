@@ -6,6 +6,7 @@
 
 using DistantWorlds;
 using System;
+using System.Diagnostics;
 
 internal class main
 {
@@ -14,7 +15,6 @@ internal class main
     {
         if (args.Length == 0)
         {
-
             Class5.smethod_0();
         }
         else
