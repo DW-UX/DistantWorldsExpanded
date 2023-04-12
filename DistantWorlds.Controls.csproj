@@ -27,7 +27,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,15 +36,33 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <Choose>
+    <When Condition="'$(Configuration)' == 'Debug'">
+      <ItemGroup>
+        <Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\BaconDistantWorlds\bin\Debug\BaconDistantWorlds.dll</HintPath>
+        </Reference>
+        <Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\DistantWorlds.Types.dll</HintPath>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\BaconDistantWorlds\bin\Release\BaconDistantWorlds.dll</HintPath>
+        </Reference>
+        <Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Release\DistantWorlds.Types.dll</HintPath>
+        </Reference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
   <ItemGroup>
-    <Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\BaconDistantWorlds\bin\Debug\BaconDistantWorlds.dll</HintPath>
-    </Reference>
-    <Reference Include="DistantWorlds.Types, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\BaconDistantWorlds\bin\Debug\DistantWorlds.Types.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
