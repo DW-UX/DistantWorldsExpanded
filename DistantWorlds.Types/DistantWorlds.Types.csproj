@@ -28,9 +28,9 @@
 		</Otherwise>
 	</Choose>
 	<ItemGroup>
-	  <Compile Remove="Mods\**" />
-	  <EmbeddedResource Remove="Mods\**" />
-	  <None Remove="Mods\**" />
+		<Compile Remove="Mods\**" />
+		<EmbeddedResource Remove="Mods\**" />
+		<None Remove="Mods\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -42,8 +42,8 @@
 		<Compile Remove="AssemblyInfo.cs" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Reference Include="DW_Steam">
-	    <HintPath>..\deps\DW_Steam.dll</HintPath>
-	  </Reference>
+		<Reference Include="DW_Steam">
+			<HintPath>..\deps\DW_Steam.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 </Project>
