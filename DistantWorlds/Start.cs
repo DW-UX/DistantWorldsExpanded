@@ -52,7 +52,7 @@ namespace DistantWorlds
 
         public delegate void RecoverFromLoadErrorDelegate();
 
-        internal const string _MappingFilePath = "MappingFile.json";
+        internal const string _MappingFilePath = "HotKeysMappingFile.json";
 
         public struct SIZE
         {
