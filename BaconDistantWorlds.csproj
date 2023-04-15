@@ -1,138 +1,71 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<!--Project was exported from assembly: H:\7\BaconDistantWorlds.dll-->
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<ProjectGuid>{21EB1D9E-88CD-4618-BA64-63BC2E358F4D}</ProjectGuid>
-		<OutputType>Library</OutputType>
-		<AssemblyName>BaconDistantWorlds</AssemblyName>
-		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-		<ApplicationVersion>1.0.0.0</ApplicationVersion>
-		<FileAlignment>512</FileAlignment>
-		<RootNamespace>BaconDistantWorlds</RootNamespace>
-		<TargetFrameworkProfile />
-		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		<PlatformTarget>x86</PlatformTarget>
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>full</DebugType>
-		<Optimize>false</Optimize>
-		<OutputPath>bin\Debug\</OutputPath>
-		<DefineConstants>DEBUG;TRACE</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-		<PlatformTarget>x86</PlatformTarget>
-		<DebugType>pdbonly</DebugType>
-		<Optimize>true</Optimize>
-		<OutputPath>bin\Release\</OutputPath>
-		<DefineConstants>TRACE</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-	</PropertyGroup>
-	<Choose>
-		<When Condition="'$(Configuration)' == 'Debug'">
-			<ItemGroup>
-				<Reference Include="DistantWorlds, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
-					<SpecificVersion>False</SpecificVersion>
-					<HintPath>..\DistantWorlds\bin\Debug\DistantWorlds.exe</HintPath>
-				</Reference>
-				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
-					<SpecificVersion>False</SpecificVersion>
-					<HintPath>..\DistantWorlds.Controls\bin\Debug\DistantWorlds.Controls.dll</HintPath>
-				</Reference>
-				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-					<SpecificVersion>False</SpecificVersion>
-					<HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\DistantWorlds.Types.dll</HintPath>
-				</Reference>
-			</ItemGroup>
-		</When>
-		<Otherwise>
-			<ItemGroup>
-				<Reference Include="DistantWorlds, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
-					<SpecificVersion>False</SpecificVersion>
-					<HintPath>..\DistantWorlds\bin\Release\DistantWorlds.exe</HintPath>
-				</Reference>
-				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
-					<SpecificVersion>False</SpecificVersion>
-					<HintPath>..\DistantWorlds.Controls\bin\Release\DistantWorlds.Controls.dll</HintPath>
-				</Reference>
-				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-					<SpecificVersion>False</SpecificVersion>
-					<HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Release\DistantWorlds.Types.dll</HintPath>
-				</Reference>
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
-	<ItemGroup>
-		<Reference Include="Microsoft.CSharp" />
-		<Reference Include="Microsoft.VisualBasic" />
-		<Reference Include="Microsoft.Xna.Framework.Graphics" />
-		<Reference Include="System" />
-		<Reference Include="System.ComponentModel.DataAnnotations" />
-		<Reference Include="System.Core" />
-		<Reference Include="System.Drawing" />
-		<Reference Include="System.Windows.Forms" />
-		<Reference Include="System.Xml" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="BaconBuiltObject.cs" />
-		<Compile Include="BaconBuiltObjectImageCache.cs" />
-		<Compile Include="BaconBuiltObjectList.cs" />
-		<Compile Include="BaconBuiltObjectListView.cs" />
-		<Compile Include="BaconBuiltObjectMission.cs" />
-		<Compile Include="BaconCharacter.cs" />
-		<Compile Include="BaconConstructionQueue.cs" />
-		<Compile Include="BaconDesign.cs" />
-		<Compile Include="BaconDiplomacyTradeTree.cs" />
-		<Compile Include="BaconEmpire.cs" />
-		<Compile Include="BaconEmpireMessageListView.cs" />
-		<Compile Include="BaconFighter.cs" />
-		<Compile Include="BaconGalaxy.cs" />
-		<Compile Include="BaconHabitat.cs" />
-		<Compile Include="BaconInfoPanel.cs" />
-		<Compile Include="BaconMain.cs" />
-		<Compile Include="BaconMainView.cs" />
-		<Compile Include="BaconManufacturingQueue.cs" />
-		<Compile Include="BaconRace.cs" />
-		<Compile Include="BaconResearchSystem.cs" />
-		<Compile Include="BaconShipImageHelper.cs" />
-		<Compile Include="BaconSpaceBattleStats.cs" />
-		<Compile Include="BaconStart.cs" />
-		<Compile Include="BaconTroop.cs" />
-		<Compile Include="planetCargoDataForm.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="CustomBomberForm.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="CustomizeShipForm.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="InvasionCommandForm.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="TacticType.cs" />
-		<Compile Include="prisonForm.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Include="Properties\Resources.cs" />
-		<Compile Include="AssemblyInfo.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="CustomBomberForm.resx" />
-		<EmbeddedResource Include="CustomizeShipForm.resx" />
-		<EmbeddedResource Include="InvasionCommandForm.resx" />
-		<EmbeddedResource Include="planetCargoDataForm.resx" />
-		<EmbeddedResource Include="prisonForm.resx" />
-		<EmbeddedResource Include="Properties\Resources.resx" />
-	</ItemGroup>
-	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-	<PropertyGroup>
-		<PostBuildEvent>
-		</PostBuildEvent>
-	</PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(Configuration)' == 'Debug'">
+      <ItemGroup>
+        <Reference Include="DistantWorlds, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds\bin\Debug\net48\DistantWorlds.exe</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds.Controls\bin\Debug\net48\DistantWorlds.Controls.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\net48\DistantWorlds.Types.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="DistantWorlds, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds\bin\Release\net48\DistantWorlds.exe</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>..\DistantWorlds.Controls\bin\Release\net48\DistantWorlds.Controls.dll</HintPath>
+			<Private>False</Private>
+        </Reference>
+        <Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Release\net48\DistantWorlds.Types.dll</HintPath>
+			<Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Remove="lib\**" />
+    <EmbeddedResource Remove="lib\**" />
+    <None Remove="lib\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework.Graphics">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Graphics\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Graphics.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <PropertyGroup />
 </Project>
