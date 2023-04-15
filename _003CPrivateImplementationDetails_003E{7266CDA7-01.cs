@@ -19,7 +19,7 @@ internal class main
         }
         else
         {
-            if (args[0] == "GenerateMapFile")
+            if (args[0].ToUpperInvariant() == "/GenerateHotkeysMapFile".ToUpperInvariant())
             {
                 KeyMapper.GenerateEmpyFile(Start._MappingFilePath);
             }

@@ -91,8 +91,8 @@ namespace DistantWorlds
                 using StreamReader sR = new StreamReader(fileInfo.OpenRead());
                 var mappingModel = JsonConvert.DeserializeObject<MappingJsonFileModel>(sR.ReadToEnd());
                 SetMappingKeys(mappingModel);
-                if (ValidateNoDuplicates(mappingModel))
-                {
+                if (ValidateNoDuplicates() & ValidateEscapeKeyNoMapped())
+                {                
                     res = true;
                 }
             }
@@ -144,12 +144,15 @@ namespace DistantWorlds
             }
             return res;
         }
-        private bool ValidateNoDuplicates(MappingJsonFileModel model)
+        private bool ValidateNoDuplicates()
         {
             var keyList = _mapping.Values.SelectMany(y => y);
             return keyList.Count() == keyList.Distinct().Count();
         }
-
+        private bool ValidateEscapeKeyNoMapped()
+        {
+            return _mapping.Count(x => x.Value.Contains(Keys.Escape)) == 1;
+        }
         private List<Keys> ConvertTextValueToKey(string values)
         {
             List<Keys> res = new List<Keys>();
@@ -175,7 +178,6 @@ namespace DistantWorlds
         private void SetMappingKeys(MappingJsonFileModel mappingModel)
         {
             AddDefaultMapping();
-            //записать в словарь значения по таргету
             _mapping[KeyMappingTarget.ControlGroup0] = ConvertTextValueToKey(mappingModel.ControlGroup0);
             _mapping[KeyMappingTarget.ControlGroup1] = ConvertTextValueToKey(mappingModel.ControlGroup1);
             _mapping[KeyMappingTarget.ControlGroup2] = ConvertTextValueToKey(mappingModel.ControlGroup2);

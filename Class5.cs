@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 internal static class Class5
@@ -25,7 +26,7 @@ internal static class Class5
     //private static int FsaRtXdSbuq;
     //private static int int_8;
     //private static int int_9;
-
+    internal static Splash _Splash;
     internal static void smethod_0()
     {
         try
@@ -34,15 +35,26 @@ internal static class Class5
             Size size = Screen.GetBounds(new Point(0, 0)).Size;
             if ((size.Width < 1024 || size.Height < 768) && MessageBox.Show("Distant Worlds requires a screen resolution of at least 1024 x 768.\n\nYou should change the resolution of your Windows desktop and restart.\n\nYou may choose to continue, but some aspects of Distant Worlds may not work properly.\n\nDo you wish to continue loading Distant Worlds with a low screen resolution?", "Screen resolution", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                 Environment.Exit(-1);
-            Application.Run((Form)new Start());
+            Task tr = Task.Factory.StartNew(() =>
+            {
+                _Splash = new Splash();
+                //_Splash.SetInitialText();
+                Application.Run(_Splash);
+            });         
+            Application.Run(new Start());
         }
         catch (Exception ex)
         {
             Main.CrashDump(ex);
+            if (_Splash != null)
+            {
+                _Splash.Stop();
+                _Splash = null;
+            }
             throw;
         }
     }
-
+    
     private static void smethod_1()
     {
         string str = "DistWorldrez.exe";

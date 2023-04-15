@@ -3,28 +3,33 @@
 // Assembly: DistantWorlds, Version=1.9.5.12, Culture=neutral, PublicKeyToken=null
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
-
 using DistantWorlds.Types;
-using Microsoft.DirectX.DirectSound;
+using Microsoft.VisualBasic;
+//using Microsoft.DirectX.DirectSound;
+using SlimDX.Direct3D11;
+using SlimDX.DirectSound;
+using SlimDX.Multimedia;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Documents;
 using System.Windows.Forms;
+using static DistantWorlds.PersistentScrollablePanel;
 
 namespace DistantWorlds
 {
-    public class EffectsPlayer
+    public class EffectsPlayer : IDisposable
     {
-        private object object_0;
+        private object _lockObj;
 
         private Main main_0;
 
-        private Device device_0;
+        private DirectSound device_0;
 
-        private List<SecondaryBuffer> list_0;
+        private List<SecondarySoundBuffer> _bufferList;
 
-        private Hashtable hashtable_0;
+        private Dictionary<string, SecondarySoundBuffer> _bufferDict;
 
         private double double_0;
 
@@ -33,6 +38,7 @@ namespace DistantWorlds
         private string string_1;
 
         private Random random_0;
+        private bool disposedValue;
 
         public double Volume
         {
@@ -46,18 +52,17 @@ namespace DistantWorlds
             }
         }
 
-        public EffectsPlayer(Main parent, string applicationStartupPath, string customizationSetName, Device soundDevice):base()
+        public EffectsPlayer(Main parent, string applicationStartupPath, string customizationSetName, DirectSound soundDevice) : base()
         {
-            
-            object_0 = new object();
-            list_0 = new List<SecondaryBuffer>();
-            hashtable_0 = new Hashtable();
+            _lockObj = new object();
+            _bufferList = new List<SecondarySoundBuffer>();
+            _bufferDict = new Dictionary<string, SecondarySoundBuffer>();
             double_0 = 0.7;
-            lock (object_0)
+            lock (_lockObj)
             {
                 main_0 = parent;
                 device_0 = soundDevice;
-                list_0 = new List<SecondaryBuffer>();
+                _bufferList = new List<SecondarySoundBuffer>();
                 Initialize(applicationStartupPath, customizationSetName);
                 random_0 = new Random((int)DateTime.Now.Ticks);
             }
@@ -73,26 +78,26 @@ namespace DistantWorlds
 
         public void Clear()
         {
-            lock (object_0)
+            lock (_lockObj)
             {
-                foreach (DictionaryEntry item in hashtable_0)
+                foreach (var item in _bufferDict)
                 {
-                    if (item.Value is SecondaryBuffer)
+                    if (item.Value is SecondarySoundBuffer)
                     {
-                        SecondaryBuffer secondaryBuffer = (SecondaryBuffer)item.Value;
-                        if (secondaryBuffer != null && !secondaryBuffer.Disposed && !secondaryBuffer.Status.Playing && !secondaryBuffer.Status.Looping)
+                        SecondarySoundBuffer SecondarySoundBuffer = item.Value;
+                        if (SecondarySoundBuffer != null && !SecondarySoundBuffer.Disposed && SecondarySoundBuffer.Status != BufferStatus.Playing && SecondarySoundBuffer.Status != BufferStatus.Looping)
                         {
-                            secondaryBuffer.Dispose();
+                            SecondarySoundBuffer.Dispose();
                         }
                     }
                 }
-                hashtable_0.Clear();
+                _bufferDict.Clear();
             }
         }
 
         private void method_0(string string_2, string string_3)
         {
-            lock (object_0)
+            lock (_lockObj)
             {
                 string text = string_2 + "\\sounds\\effects\\";
                 string text2 = string.Empty;
@@ -129,10 +134,10 @@ namespace DistantWorlds
                 }
                 for (int j = 0; j < list2.Count; j++)
                 {
-                    if (!hashtable_0.ContainsKey(list3[j]))
+                    if (!_bufferDict.ContainsKey(list3[j]))
                     {
-                        SecondaryBuffer value = method_2(list2[j], device_0);
-                        hashtable_0.Add(list3[j], value);
+                        SecondarySoundBuffer value = method_2(list2[j], device_0);
+                        _bufferDict.Add(list3[j], value);
                     }
                 }
                 for (int k = 0; k < list2.Count; k++)
@@ -173,79 +178,181 @@ namespace DistantWorlds
             return null;
         }
 
-        private SecondaryBuffer method_2(Stream stream_0, Device device_1)
+        private SecondarySoundBuffer method_2(Stream stream_0, DirectSound device_1)
         {
-            BufferDescription bufferDescription = new BufferDescription();
-            bufferDescription.ControlPan = true;
-            bufferDescription.ControlVolume = true;
-            bufferDescription.ControlEffects = false;
-            if (stream_0.Length < 20000L)
+            if (!disposedValue)
             {
-                bufferDescription.ControlEffects = false;
+                //WaveFormat format = new WaveFormat();
+                //format.BitsPerSample = 16;
+                //format.BlockAlignment = 4;
+                //format.Channels = 2;
+                //format.FormatTag = WaveFormatTag.Pcm;
+                //format.SamplesPerSecond = 44100;
+                //format.AverageBytesPerSecond = format.SamplesPerSecond * format.BlockAlignment;
+
+                //SoundBufferDescription bufferDescription = new SoundBufferDescription();
+                //bufferDescription.Format = format;
+                //bufferDescription.Flags = BufferFlags.Defer | BufferFlags.ControlPan | BufferFlags.ControlVolume;
+                //bufferDescription.SizeInBytes = 8 * format.AverageBytesPerSecond;
+                //if (stream_0.Length < 20000L)
+                //{
+                //    bufferDescription.Flags |= BufferFlags.ControlEffects;
+                //}
+                //bufferDescription.ControlPan = true;
+                //bufferDescription.ControlVolume = true;
+                //bufferDescription.ControlEffects = false;
+                //if (stream_0.Length < 20000L)
+                //{
+                //    bufferDescription.ControlEffects = false;
+                //}
+                //bufferDescription.ControlFrequency = false;
+                //bufferDescription.Control3D = false;
+                //bufferDescription.DeferLocation = true;
+
+
+
+                stream_0.Position = 0L;
+                //SecondarySoundBuffer SecondarySoundBuffer = new SecondarySoundBuffer(device_1, bufferDescription);
+                //byte[] buffer = new byte[stream_0.Length];
+                //stream_0.Read(buffer, 0, buffer.Length);
+                //SecondarySoundBuffer.Write(buffer, 0, LockFlags.None);
+                //_bufferList.Add(SecondarySoundBuffer);
+                //return SecondarySoundBuffer;
+
+                using (WaveStream waveFile = new WaveStream(stream_0))
+                {
+
+                    SoundBufferDescription desc = new SoundBufferDescription();
+                    desc.SizeInBytes = (int)waveFile.Length;
+                    desc.Flags = BufferFlags.Defer | BufferFlags.ControlPan | BufferFlags.ControlVolume;
+                    desc.Format = waveFile.Format;
+                    if (stream_0.Length < 20000L)
+                    {
+                        desc.Flags |= BufferFlags.ControlEffects;
+                    }
+                    SecondarySoundBuffer m_DSoundBuffer = new SecondarySoundBuffer(device_1, desc);
+                    byte[] data = new byte[desc.SizeInBytes];
+                    waveFile.Read(data, 0, (int)waveFile.Length);
+                    m_DSoundBuffer.Write(data, 0, LockFlags.None);
+                    return m_DSoundBuffer;
+                }
             }
-            bufferDescription.ControlFrequency = false;
-            bufferDescription.Control3D = false;
-            bufferDescription.DeferLocation = true;
-            stream_0.Position = 0L;
-            return new SecondaryBuffer(stream_0, bufferDescription, device_1);
+            else
+            { return null; }
         }
 
-        private SecondaryBuffer method_3(string string_2, Device device_1)
+        private SecondarySoundBuffer method_3(string string_2, DirectSound device_1)
         {
-            BufferDescription bufferDescription = new BufferDescription();
-            bufferDescription.ControlPan = true;
-            bufferDescription.ControlVolume = true;
-            bufferDescription.ControlEffects = false;
-            bufferDescription.ControlFrequency = false;
-            bufferDescription.Control3D = false;
-            bufferDescription.DeferLocation = true;
-            return new SecondaryBuffer(string_2, bufferDescription, device_1);
+            //WaveFormat format = new WaveFormat();
+            //format.BitsPerSample = 16;
+            //format.BlockAlignment = 4;
+            //format.Channels = 2;
+            //format.FormatTag = WaveFormatTag.Pcm;
+            //format.SamplesPerSecond = 44100;
+            //format.AverageBytesPerSecond = format.SamplesPerSecond * format.BlockAlignment;
+
+            //SoundBufferDescription bufferDescription = new SoundBufferDescription();
+            //bufferDescription.Format = format;
+            //bufferDescription.Flags = BufferFlags.Defer | BufferFlags.ControlPan | BufferFlags.ControlVolume;
+            //bufferDescription.SizeInBytes = 8 * format.AverageBytesPerSecond;
+
+            //return new SecondarySoundBuffer(device_1, bufferDescription);
+            using (WaveStream waveFile = new WaveStream(string_2))
+            {
+
+                SoundBufferDescription desc = new SoundBufferDescription();
+                desc.SizeInBytes = (int)waveFile.Length;
+                desc.Flags = BufferFlags.Defer | BufferFlags.ControlPan | BufferFlags.ControlVolume;
+                desc.Format = waveFile.Format;
+
+                SecondarySoundBuffer m_DSoundBuffer = new SecondarySoundBuffer(device_1, desc);
+                byte[] data = new byte[desc.SizeInBytes];
+                waveFile.Read(data, 0, (int)waveFile.Length);
+                m_DSoundBuffer.Write(data, 0, LockFlags.None);
+                return m_DSoundBuffer;
+            }
         }
 
         public void ClearFinishedBuffers()
         {
-            lock (object_0)
+            if (!disposedValue)
             {
-                List<SecondaryBuffer> list = new List<SecondaryBuffer>();
-                for (int i = 0; i < list_0.Count; i++)
+                lock (_lockObj)
                 {
-                    SecondaryBuffer secondaryBuffer = list_0[i];
-                    try
+                    List<SecondarySoundBuffer> list = new List<SecondarySoundBuffer>();
+                    for (int i = 0; i < _bufferList.Count; i++)
                     {
-                        if (secondaryBuffer != null && !secondaryBuffer.Disposed)
+                        SecondarySoundBuffer SecondarySoundBuffer = _bufferList[i];
+                        try
                         {
-                            BufferStatus status = secondaryBuffer.Status;
-                            if (!status.Playing && !status.Looping)
+                            if (SecondarySoundBuffer != null && !SecondarySoundBuffer.Disposed)
                             {
-                                secondaryBuffer.Dispose();
-                                list.Add(secondaryBuffer);
+                                BufferStatus status = SecondarySoundBuffer.Status;
+                                if (status != BufferStatus.Playing && status != BufferStatus.Looping)
+                                {
+                                    SecondarySoundBuffer.Dispose();
+                                    list.Add(SecondarySoundBuffer);
+                                }
                             }
                         }
+                        catch (Exception)
+                        {
+                            list.Add(SecondarySoundBuffer);
+                        }
                     }
-                    catch (Exception)
+                    foreach (SecondarySoundBuffer item in list)
                     {
-                        list.Add(secondaryBuffer);
+                        _bufferList.Remove(item);
                     }
-                }
-                foreach (SecondaryBuffer item in list)
-                {
-                    list_0.Remove(item);
                 }
             }
         }
 
-        private SecondaryBuffer method_4(string string_2)
+        private SecondarySoundBuffer method_4(string string_2)
         {
-            BufferDescription bufferDescription = new BufferDescription();
-            bufferDescription.ControlPan = true;
-            bufferDescription.ControlVolume = true;
-            bufferDescription.ControlEffects = false;
-            bufferDescription.ControlFrequency = false;
-            bufferDescription.Control3D = false;
-            bufferDescription.DeferLocation = true;
-            SecondaryBuffer secondaryBuffer = new SecondaryBuffer(string_2, bufferDescription, device_0);
-            list_0.Add(secondaryBuffer);
-            return secondaryBuffer;
+            if (!disposedValue)
+            {
+                //WaveFormat format = new WaveFormat();
+                //format.BitsPerSample = 16;
+                //format.BlockAlignment = 4;
+                //format.Channels = 2;
+                //format.FormatTag = WaveFormatTag.;
+                //format.SamplesPerSecond = 44100;
+                //format.AverageBytesPerSecond = format.SamplesPerSecond * format.BlockAlignment;
+
+                //SoundBufferDescription bufferDescription = new SoundBufferDescription();
+                //bufferDescription.Format = format;
+                //bufferDescription.Flags = BufferFlags.Defer | BufferFlags.ControlPan | BufferFlags.ControlVolume;
+                //bufferDescription.SizeInBytes = 8 * format.AverageBytesPerSecond;
+                //bufferDescription.ControlPan = true;
+                //bufferDescription.ControlVolume = true;
+                //bufferDescription.ControlEffects = false;
+                //bufferDescription.ControlFrequency = false;
+                //bufferDescription.Control3D = false;
+                //bufferDescription.DeferLocation = true;
+                //using (FileStream fS = new FileStream(string_2, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (WaveStream waveFile = new WaveStream(string_2))
+                {
+                    //SecondarySoundBuffer SecondarySoundBuffer = new SecondarySoundBuffer(device_0, bufferDescription);
+                    //byte[] buffer = new byte[fS.Length];
+                    //fS.Read(buffer, 0, buffer.Length);
+                    //SecondarySoundBuffer.Write(buffer, 0, LockFlags.None);
+                    //_bufferList.Add(SecondarySoundBuffer);
+
+                    SoundBufferDescription desc = new SoundBufferDescription();
+                    desc.SizeInBytes = (int)waveFile.Length;
+                    desc.Flags = BufferFlags.Defer | BufferFlags.ControlPan | BufferFlags.ControlVolume;
+                    desc.Format = waveFile.Format;
+
+                    SecondarySoundBuffer m_DSoundBuffer = new SecondarySoundBuffer(device_0, desc);
+                    byte[] data = new byte[desc.SizeInBytes];
+                    waveFile.Read(data, 0, (int)waveFile.Length);
+                    m_DSoundBuffer.Write(data, 0, LockFlags.None);
+                    return m_DSoundBuffer;
+                }
+            }
+            else
+            { return null; }
         }
 
         public SoundEffectRequest ResolveIonStrike(double balance, double distance)
@@ -308,7 +415,7 @@ namespace DistantWorlds
             string filename = string.Empty;
             double num = double_0 * 0.7;
             nextEffectOffset = 4000;
-            //int num2 = 0;
+            int num2 = 0;
             switch (soundScheme)
             {
                 case 0:
@@ -784,61 +891,112 @@ namespace DistantWorlds
 
         public void PlayEffect(string filename, double balance, double volume, int frequency)
         {
-            try
+            if (!disposedValue)
             {
-                SecondaryBuffer secondaryBuffer = null;
-                object obj = hashtable_0[filename];
-                if (obj != null && obj is SecondaryBuffer)
+                try
                 {
-                    lock (object_0)
+                    SecondarySoundBuffer secondarySoundBuffer = null;
+                    SecondarySoundBuffer obj;
+                    _bufferDict.TryGetValue(filename, out obj);
+                    if (obj != null)
                     {
-                        secondaryBuffer = ((SecondaryBuffer)obj).Clone(device_0);
-                        list_0.Add(secondaryBuffer);
-                    }
-                }
-                else
-                {
-                    string empty = string.Empty;
-                    if (!string.IsNullOrEmpty(string_1))
-                    {
-                        empty = string_0 + "\\Customization\\" + string_1 + "\\sounds\\effects\\" + filename;
-                        if (!File.Exists(empty))
+                        lock (_lockObj)
                         {
-                            empty = string_0 + "\\sounds\\effects\\" + filename;
+
+                            //SecondarySoundBuffer  = ((SecondarySoundBuffer )obj).Clone(device_0);
+
+
+                            //secondarySoundBuffer = SecondarySoundBuffer.FromPointer(((SecondarySoundBuffer)obj).ComPointer);
+
+                            //list_0.Add(secondarySoundBuffer);(SecondarySoundBuffer)obj
+                            _bufferList.Add(obj);
                         }
                     }
                     else
                     {
-                        empty = string_0 + "\\sounds\\effects\\" + filename;
-                        if (!File.Exists(empty))
+                        string empty = string.Empty;
+                        if (!string.IsNullOrEmpty(string_1))
                         {
-                            empty = string.Empty;
+                            empty = string_0 + "\\Customization\\" + string_1 + "\\sounds\\effects\\" + filename;
+                            if (!File.Exists(empty))
+                            {
+                                empty = string_0 + "\\sounds\\effects\\" + filename;
+                            }
+                        }
+                        else
+                        {
+                            empty = string_0 + "\\sounds\\effects\\" + filename;
+                            if (!File.Exists(empty))
+                            {
+                                empty = string.Empty;
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(empty))
+                        {
+                            secondarySoundBuffer = method_4(empty);
                         }
                     }
-                    if (!string.IsNullOrEmpty(empty))
+                    if (secondarySoundBuffer != null && !secondarySoundBuffer.Disposed)
                     {
-                        secondaryBuffer = method_4(empty);
+                        int val = (int)(balance * 3000.0);
+                        volume += 0.05;
+                        volume = Math.Min(1.0, volume);
+                        int val2 = (int)Math.Pow(10.0, (1.0 - volume) / 0.25) * -1;
+                        val2 = Math.Min(0, Math.Max(val2, -10000));
+                        val = (secondarySoundBuffer.Pan = Math.Max(0, Math.Min(val, 10000)));
+                        secondarySoundBuffer.Volume = val2;
+                        if (frequency > 0)
+                        {
+                            secondarySoundBuffer.Frequency = frequency;
+                        }
+                        secondarySoundBuffer.Play(int.MaxValue, PlayFlags.Software);
                     }
                 }
-                if (secondaryBuffer != null && !secondaryBuffer.Disposed)
+                catch (Exception)
                 {
-                    int val = (int)(balance * 3000.0);
-                    volume += 0.05;
-                    volume = Math.Min(1.0, volume);
-                    int val2 = (int)Math.Pow(10.0, (1.0 - volume) / 0.25) * -1;
-                    val2 = Math.Min(0, Math.Max(val2, -10000));
-                    val = (secondaryBuffer.Pan = Math.Max(0, Math.Min(val, 10000)));
-                    secondaryBuffer.Volume = val2;
-                    if (frequency > 0)
-                    {
-                        secondaryBuffer.Frequency = frequency;
-                    }
-                    secondaryBuffer.Play(int.MaxValue, BufferPlayFlags.LocateInSoftware);
                 }
             }
-            catch (Exception)
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
             {
+                if (disposing)
+                {
+
+                }
+                foreach (var item in _bufferList)
+                {
+                    item.Dispose();
+                }
+                _bufferList = null;
+                foreach (var item in _bufferDict)
+                {
+                    item.Value.Dispose();
+                }
+                _bufferDict = null;
+                // TODO: dispose managed state (managed objects)
+                device_0.Dispose();
+                device_0 = null;
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
             }
+        }
+
+        // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        ~EffectsPlayer()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: false);
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

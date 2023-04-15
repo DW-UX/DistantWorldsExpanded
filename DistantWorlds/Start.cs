@@ -7579,9 +7579,13 @@ namespace DistantWorlds
                 method_152(font_0, this, typeof(BorderPanel));
                 method_152(((IFontCache)this).GenerateFont(15.83f, isBold: true), this, typeof(GlassButton));
                 Font = font;
-                Splash splash = new Splash();
-                method_151(font_7, splash.lblMessage);
-                splash.Show();
+                //Splash splash = new Splash();
+                //method_151(font_7, splash.lblMessage);
+                //splash.Show();
+                //method_151(font_7, Class5._Splash.lblMessage);
+                Class5._Splash.SetFont(font_7);
+                //Class5._Splash.Show();
+                Class5._Splash.Start();
                 pnlAbout.SetFontCache(this);
                 pnlEncyclopedia.SetFontCache(this);
                 pnlNewGame.SetFontCache(this);
@@ -7642,7 +7646,7 @@ namespace DistantWorlds
                     num2 = size.Height;
                     flag = false;
                 }
-                main_0 = new Main(num, num2, flag, splash, keyMapper);
+                main_0 = new Main(num, num2, flag, keyMapper);
                 bool flag2 = true;
                 if (dictionary.ContainsKey("playmovie") && (int)dictionary["playmovie"] == 0)
                 {
@@ -7913,7 +7917,9 @@ namespace DistantWorlds
                 }
                 cmbFlagShape.Items.AddRange(list2.ToArray());
                 ResumeLayout();
-                splash.Close();
+                //splash.Close();
+                //Class5._Splash.Close();
+                Class5._Splash.Stop();
                 method_142(bool_5: false);
                 base.Visible = true;
                 method_1(text4);
@@ -7967,7 +7973,6 @@ namespace DistantWorlds
                 {
                     method_143();
                 }
-                //Environment.Exit(0);
             }
             catch (Exception ex)
             {
