@@ -2,13 +2,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistantWorlds", "DistantWorlds.csproj", "{7C998AB2-0292-4701-A009-2F6D0962AC21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistantWorlds", "DistantWorlds.csproj", "{7C998AB2-0292-4701-A009-2F6D0962AC21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistantWorlds.Controls", "..\DistantWorlds.Controls\DistantWorlds.Controls.csproj", "{66BF916C-C205-43A4-840D-C207E73A2A22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistantWorlds.Controls", "..\DistantWorlds.Controls\DistantWorlds.Controls.csproj", "{66BF916C-C205-43A4-840D-C207E73A2A22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistantWorlds.Types", "..\DistantWorlds.Types\DistantWorlds.Types\DistantWorlds.Types.csproj", "{61610AA1-00EE-4FB7-BCC9-58FC5E115BEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistantWorlds.Types", "..\DistantWorlds.Types\DistantWorlds.Types\DistantWorlds.Types.csproj", "{61610AA1-00EE-4FB7-BCC9-58FC5E115BEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaconDistantWorlds", "..\BaconDistantWorlds\BaconDistantWorlds.csproj", "{21EB1D9E-88CD-4618-BA64-63BC2E358F4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaconDistantWorlds", "..\BaconDistantWorlds\BaconDistantWorlds.csproj", "{21EB1D9E-88CD-4618-BA64-63BC2E358F4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

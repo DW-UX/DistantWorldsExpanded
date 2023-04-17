@@ -1277,8 +1277,9 @@ namespace DistantWorlds.Controls
         {
             try
             {
-                Microsoft.Xna.Framework.Rectangle value = new Microsoft.Xna.Framework.Rectangle(0, 0, base.ClientSize.Width, base.ClientSize.Height);
-                GraphicsDevice.Present(value, null, base.Handle);
+                //Microsoft.Xna.Framework.Rectangle value = new Microsoft.Xna.Framework.Rectangle(0, 0, base.ClientSize.Width, base.ClientSize.Height);
+                //GraphicsDevice.Present(value, null, base.Handle);
+                GraphicsDevice.Present();
             }
             catch
             {

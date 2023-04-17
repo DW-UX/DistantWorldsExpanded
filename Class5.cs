@@ -5,11 +5,14 @@
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
 using DistantWorlds;
+using DistantWorlds.Types;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -38,10 +41,10 @@ internal static class Class5
             Task tr = Task.Factory.StartNew(() =>
             {
                 _Splash = new Splash();
-                //_Splash.SetInitialText();
                 Application.Run(_Splash);
-            });         
+            });   
             Application.Run(new Start());
+
         }
         catch (Exception ex)
         {
@@ -54,7 +57,6 @@ internal static class Class5
             throw;
         }
     }
-    
     private static void smethod_1()
     {
         string str = "DistWorldrez.exe";

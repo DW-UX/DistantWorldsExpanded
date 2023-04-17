@@ -1,8 +1,7 @@
 {
   "profiles": {
     "DistantWorlds": {
-      "commandName": "Project",
-      "commandLineArgs": "GenerateHotkeysMapFile"
+      "commandName": "Project"
     }
   }
 }

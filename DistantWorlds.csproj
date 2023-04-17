@@ -17,14 +17,17 @@
 				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\BaconDistantWorlds\bin\Debug\net48\BaconDistantWorlds.dll</HintPath>
+					<Private>True</Private>
 				</Reference>
 				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\net48\DistantWorlds.Types.dll</HintPath>
+					<Private>True</Private>
 				</Reference>
 				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\DistantWorlds.Controls\bin\Debug\net48\DistantWorlds.Controls.dll</HintPath>
+					<Private>True</Private>
 				</Reference>
 			</ItemGroup>
 		</When>
@@ -55,16 +58,9 @@
 		<Reference Include="Ionic.Zip">
 			<HintPath>lib\Ionic.Zip.dll</HintPath>
 		</Reference>
-		<Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-			<SpecificVersion>False</SpecificVersion>
-			<HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.dll</HintPath>
-		</Reference>
-		<Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-			<SpecificVersion>False</SpecificVersion>
-			<HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Graphics\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Graphics.dll</HintPath>
-		</Reference>
 		<Reference Include="SlimDX">
 			<HintPath>..\..\slimdx-master\publish\Bin\net40\x86\SlimDX.dll</HintPath>
+			<Private>False</Private>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
@@ -126,6 +122,10 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+		<PackageReference Include="Microsoft.Windows.CsWin32" Version="0.2.206-beta">
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
 		<PackageReference Include="Newtonsoft.Json">
 			<Version>13.0.3</Version>
 		</PackageReference>
@@ -181,7 +181,8 @@
 			call "$(DevEnvDir)..\Tools\VsDevCmd.bat"
 			editbin /largeaddressaware $(TargetPath)
 		</PostBuildEvent>
-		<PlatformTarget>x86</PlatformTarget>
+		<PlatformTarget>AnyCPU</PlatformTarget>
 		<StartupObject>main</StartupObject>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
 </Project>

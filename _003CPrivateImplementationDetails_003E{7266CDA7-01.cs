@@ -5,8 +5,13 @@
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
 using DistantWorlds;
+//using DistantWorlds.Types;
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
+//using System.Windows.Forms;
 
 internal class main
 {
@@ -15,6 +20,8 @@ internal class main
     {
         if (args.Length == 0)
         {
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+
             Class5.smethod_0();
         }
         else
@@ -23,6 +30,61 @@ internal class main
             {
                 KeyMapper.GenerateEmpyFile(Start._MappingFilePath);
             }
+        }
+    }
+
+
+    private static System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+    {
+        if (args.Name.ToUpperInvariant().Contains("SlimDX".ToUpperInvariant()))
+        {            
+            if (Environment.Is64BitProcess)
+            {
+                string path = @"x64\SlimDX.dll";
+                if (File.Exists(path))
+                {
+                    return Assembly.LoadFile(Path.GetFullPath(path));
+                }
+                else
+                { return null; }
+            }
+            else
+            {
+                string path = @"x86\SlimDX.dll";
+                if (File.Exists(path))
+                {
+                    return Assembly.LoadFile(Path.GetFullPath(path));
+                }
+                else
+                { return null; }
+            }
+        }
+        else if (args.Name.ToUpperInvariant().Contains("Facepunch.Steamworks".ToUpperInvariant()))
+        {
+            if (Environment.Is64BitProcess)
+            {
+                string path = @"x64\Facepunch.Steamworks.Win64.dll";
+                if (File.Exists(path))
+                {
+                    return Assembly.LoadFile(Path.GetFullPath(path));
+                }
+                else
+                { return null; }
+            }
+            else
+            {
+                string path = @"x86\Facepunch.Steamworks.Win32.dll";
+                if (File.Exists(path))
+                {
+                    return Assembly.LoadFile(Path.GetFullPath(path));
+                }
+                else
+                { return null; }
+            }
+        }
+        else
+        {
+            return null;
         }
     }
 }
