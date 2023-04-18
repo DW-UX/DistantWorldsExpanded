@@ -96,8 +96,8 @@ namespace DistantWorlds.Types
         public BuiltObjectImageData ObtainImageData(int pictureRef)
         {
             //BuiltObjectImageData builtObjectImageData = null;
-            BuiltObjectImageData builtObjectImageData = _ImageData[pictureRef];
-            if (builtObjectImageData != null)
+            BuiltObjectImageData builtObjectImageData;            
+            if (_ImageData.TryGetValue(pictureRef, out builtObjectImageData) && builtObjectImageData != null)
             {
                 //if (obj is BuiltObjectImageData)
                 //{

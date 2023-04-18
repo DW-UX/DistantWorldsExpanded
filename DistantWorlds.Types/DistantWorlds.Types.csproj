@@ -10,7 +10,7 @@
 	<Choose>
 		<When Condition="'$(Configuration)' == 'Debug'">
 			<ItemGroup>
-				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\..\BaconDistantWorlds\bin\Debug\net48\BaconDistantWorlds.dll</HintPath>
 					<Private>False</Private>
@@ -19,7 +19,7 @@
 		</When>
 		<Otherwise>
 			<ItemGroup>
-				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\..\BaconDistantWorlds\bin\Release\net48\BaconDistantWorlds.dll</HintPath>
 					<Private>False</Private>
