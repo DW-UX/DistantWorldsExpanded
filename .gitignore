@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /.vshistory
 /DistantWorlds/.vshistory/Main.cs
+/DistantWorlds/Controls/.vshistory/MainView.cs
