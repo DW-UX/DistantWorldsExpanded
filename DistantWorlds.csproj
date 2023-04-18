@@ -10,21 +10,27 @@
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<EmbeddedResourceUseDependentUponConvention>true</EmbeddedResourceUseDependentUponConvention>
+		<PostBuildEvent>
+			call "$(DevEnvDir)..\Tools\VsDevCmd.bat"
+			editbin /largeaddressaware $(TargetPath)
+		</PostBuildEvent>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<StartupObject>main</StartupObject>
 	</PropertyGroup>
 	<Choose>
 		<When Condition="'$(Configuration)' == 'Debug'">
 			<ItemGroup>
-				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\BaconDistantWorlds\bin\Debug\net48\BaconDistantWorlds.dll</HintPath>
 					<Private>True</Private>
 				</Reference>
-				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\net48\DistantWorlds.Types.dll</HintPath>
 					<Private>True</Private>
 				</Reference>
-				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
+				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\DistantWorlds.Controls\bin\Debug\net48\DistantWorlds.Controls.dll</HintPath>
 					<Private>True</Private>
@@ -33,15 +39,15 @@
 		</When>
 		<Otherwise>
 			<ItemGroup>
-				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\BaconDistantWorlds\bin\Release\net48\BaconDistantWorlds.dll</HintPath>
 				</Reference>
-				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Release\net48\DistantWorlds.Types.dll</HintPath>
 				</Reference>
-				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=x86">
+				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\DistantWorlds.Controls\bin\Release\net48\DistantWorlds.Controls.dll</HintPath>
 				</Reference>
@@ -59,8 +65,8 @@
 			<HintPath>lib\Ionic.Zip.dll</HintPath>
 		</Reference>
 		<Reference Include="SlimDX">
-			<HintPath>..\..\slimdx-master\publish\Bin\net40\x86\SlimDX.dll</HintPath>
-			<Private>False</Private>
+		  <HintPath>x64\SlimDX.dll</HintPath>
+		  <Private>False</Private>
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
@@ -175,14 +181,17 @@
 		<None Update="app.config">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="x64\Facepunch.Steamworks.Win64.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="x64\SlimDX.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="x86\Facepunch.Steamworks.Win32.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="x86\SlimDX.dll">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
-	<PropertyGroup>
-		<PostBuildEvent>
-			call "$(DevEnvDir)..\Tools\VsDevCmd.bat"
-			editbin /largeaddressaware $(TargetPath)
-		</PostBuildEvent>
-		<PlatformTarget>AnyCPU</PlatformTarget>
-		<StartupObject>main</StartupObject>
-		<ApplicationManifest>app.manifest</ApplicationManifest>
-	</PropertyGroup>
 </Project>
