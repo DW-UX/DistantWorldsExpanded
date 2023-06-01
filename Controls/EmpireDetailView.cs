@@ -4,9 +4,9 @@
 // MVID: C078528F-27D0-4E24-8047-8F4F72265A90
 // Assembly location: H:\7\DistantWorlds.Controls.dll
 
-//using BaconDistantWorlds;
+using BaconDistantWorlds;
 using DistantWorlds.Types;
-using DistantWorlds.Controls.Mods;
+//using DistantWorlds.Controls.Mods;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -52,7 +52,7 @@ namespace DistantWorlds.Controls
         private bool _LargeSize;
 
         public event EmpireDetailView.TreatyAcceptedEventHandler _TreatyAccepted;
-        public static event EventHandler<SetColorForDiplomacyBackgroundModsArgs> SetColorForDiplomacyBackgroundMods;
+        //public static event EventHandler<SetColorForDiplomacyBackgroundModsArgs> SetColorForDiplomacyBackgroundMods;
 
         public override void SetFontCache(IFontCache fontCache)
         {
@@ -162,8 +162,8 @@ namespace DistantWorlds.Controls
             this._DominantRaceCharacteristics = Galaxy.ResolveRaceCharacteristics(this._Empire.DominantRace);
             if (this._Empire != null)
             {
-                //Color color = BaconMain.SetColorForDiplomacyBackground(this._Empire);
-                Color color = EmpireDetailView.OnSetColorForDiplomacyBackgroundMods(this._Empire);
+                Color color = BaconMain.SetColorForDiplomacyBackground(this._Empire);
+                //Color color = EmpireDetailView.OnSetColorForDiplomacyBackgroundMods(this._Empire);
                 this.BackColor = Color.FromArgb(39, 40, 44);
                 this.BackColor2 = color;
             }
@@ -846,17 +846,17 @@ namespace DistantWorlds.Controls
 
         public delegate void TreatyAcceptedEventHandler(object sender, EventArgs e);
 
-        private static Color OnSetColorForDiplomacyBackgroundMods(Empire empire)
-        {
-            var tmp = EmpireDetailView.SetColorForDiplomacyBackgroundMods;
-            Color res = empire.MainColor;
-            if (tmp != null)
-            {
-                var args = new SetColorForDiplomacyBackgroundModsArgs(empire);
-                tmp(null, args);
-                res = args.Result;
-            }
-            return res;
-        }
+        //private static Color OnSetColorForDiplomacyBackgroundMods(Empire empire)
+        //{
+        //    var tmp = EmpireDetailView.SetColorForDiplomacyBackgroundMods;
+        //    Color res = empire.MainColor;
+        //    if (tmp != null)
+        //    {
+        //        var args = new SetColorForDiplomacyBackgroundModsArgs(empire);
+        //        tmp(null, args);
+        //        res = args.Result;
+        //    }
+        //    return res;
+        //}
     }
 }

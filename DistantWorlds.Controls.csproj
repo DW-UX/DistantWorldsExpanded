@@ -42,8 +42,11 @@
   </Choose>
   <ItemGroup>
     <Compile Remove="lib\**" />
+    <Compile Remove="Mods\**" />
     <EmbeddedResource Remove="lib\**" />
+    <EmbeddedResource Remove="Mods\**" />
     <None Remove="lib\**" />
+    <None Remove="Mods\**" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\Properties\DistantWorlds.Controls.BuiltObjectDropDown.resources" />

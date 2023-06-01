@@ -4,9 +4,9 @@
 // MVID: C078528F-27D0-4E24-8047-8F4F72265A90
 // Assembly location: H:\7\DistantWorlds.Controls.dll
 
-//using BaconDistantWorlds;
+using BaconDistantWorlds;
 using DistantWorlds.Types;
-using DistantWorlds.Controls.Mods;
+//using DistantWorlds.Controls.Mods;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -20,7 +20,7 @@ namespace DistantWorlds.Controls
         private EmpireMessageList _EmpireMessages;
         public Bitmap[] _MessageImages;
 
-        public static event EventHandler<BindDataMessageImagesModsArgs> BindDataMessageImagesMods;
+        //public static event EventHandler<BindDataMessageImagesModsArgs> BindDataMessageImagesMods;
 
         protected override void Dispose(bool disposing)
         {
@@ -330,8 +330,8 @@ namespace DistantWorlds.Controls
                             original = this._MessageImages[27];
                             break;
                     }
-                    //row.Cells[0].Value = (object)BaconEmpireMessageListView.BindDataMessageImages(this, empireMessages, index, original);
-                    row.Cells[0].Value = (object)EmpireMessageListView.OnBindDataMessageImagesMods(this, empireMessages, index, original);
+                    row.Cells[0].Value = (object)BaconEmpireMessageListView.BindDataMessageImages(this, empireMessages, index, original);
+                    //row.Cells[0].Value = (object)EmpireMessageListView.OnBindDataMessageImagesMods(this, empireMessages, index, original);
                     row.Cells[1].Value = (object)empireMessages[index].Title;
                     row.Cells[1].Tag = (object)index;
                     row.Cells[2].Value = (object)Galaxy.ResolveStarDateDescription(empireMessages[index].StarDate);
@@ -375,17 +375,17 @@ namespace DistantWorlds.Controls
             public override object DefaultNewRowValue => (object)string.Empty;
         }
 
-        private static Bitmap OnBindDataMessageImagesMods(EmpireMessageListView emlv, EmpireMessageList empireMessages, int indexer, Bitmap original)
-        {
-            var tmp = EmpireMessageListView.BindDataMessageImagesMods;
-            Bitmap res = null;
-            if (tmp != null)
-            {
-                var args = new BindDataMessageImagesModsArgs(emlv, empireMessages, indexer, original);
-                tmp(null, args);
-                res = args.Result;
-            }
-            return res;
-        }
+        //private static Bitmap OnBindDataMessageImagesMods(EmpireMessageListView emlv, EmpireMessageList empireMessages, int indexer, Bitmap original)
+        //{
+        //    var tmp = EmpireMessageListView.BindDataMessageImagesMods;
+        //    Bitmap res = null;
+        //    if (tmp != null)
+        //    {
+        //        var args = new BindDataMessageImagesModsArgs(emlv, empireMessages, indexer, original);
+        //        tmp(null, args);
+        //        res = args.Result;
+        //    }
+        //    return res;
+        //}
     }
 }

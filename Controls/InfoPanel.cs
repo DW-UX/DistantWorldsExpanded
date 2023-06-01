@@ -5,7 +5,7 @@
 // Assembly location: H:\7\DistantWorlds.Controls.dll
 
 using DistantWorlds.Types;
-using DistantWorlds.Controls.Mods;
+//using DistantWorlds.Controls.Mods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
