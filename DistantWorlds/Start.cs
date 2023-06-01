@@ -7,7 +7,6 @@
 using AxWMPLib;
 using BaconDistantWorlds;
 using DistantWorlds.Controls;
-using DistantWorlds.Controls.Mods;
 using DistantWorlds.Types;
 using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
@@ -51,8 +50,6 @@ namespace DistantWorlds
         private delegate void Delegate10(string message);
 
         public delegate void RecoverFromLoadErrorDelegate();
-
-        internal const string _MappingFilePath = "HotKeysMappingFile.json";
 
         public struct SIZE
         {
@@ -7283,7 +7280,7 @@ namespace DistantWorlds
             base.Name = "Start";
             this.Text = "Distant Worlds";
             base.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Start_FormClosed);
-            base.Load += new System.EventHandler(cMuXzKteVu);
+            base.Load += new System.EventHandler(Start_Load);
             base.KeyDown += new System.Windows.Forms.KeyEventHandler(Start_KeyDown);
             base.MouseMove += new System.Windows.Forms.MouseEventHandler(Start_MouseMove);
             ((System.ComponentModel.ISupportInitialize)this.picTitle).EndInit();
@@ -7521,7 +7518,7 @@ namespace DistantWorlds
                                 string text4 = text2.Substring(num2, text2.Length - num2);
                                 text4 = text4.Trim();
                                 double result = -1.0;
-                                if (!double.TryParse(text4, out result))
+                                if (!double.TryParse(text4, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
                                 {
                                     throw new ApplicationException(string.Format(TextResolver.GetText("Error reading value in file Startup.ini at line X"), num.ToString()));
                                 }
@@ -7547,7 +7544,7 @@ namespace DistantWorlds
             }
         }
 
-        private void cMuXzKteVu(object sender, EventArgs e)
+        private void Start_Load(object sender, EventArgs e)
         {
             //IL_1ba8: Unknown result type (might be due to invalid IL or missing references)
             //IL_1bb2: Expected O, but got Unknown
@@ -7557,11 +7554,6 @@ namespace DistantWorlds
             //IL_1be0: Expected O, but got Unknown
             try
             {
-                KeyMapper keyMapper = new KeyMapper(_MappingFilePath);
-                if (!keyMapper.MapKeys())
-                {
-                    throw new ApplicationException("Failed to map keys, check {_MappingFilePath} file");
-                }
                 SetControlLocalizedLabels();
                 font_0 = ((IFontCache)this).GenerateFont(15.33f, isBold: false);
                 font_1 = ((IFontCache)this).GenerateFont(20.77f, isBold: false);
@@ -7646,7 +7638,7 @@ namespace DistantWorlds
                     num2 = size.Height;
                     flag = false;
                 }
-                main_0 = new Main(num, num2, flag, keyMapper);
+                main_0 = new Main(num, num2, flag);
                 bool flag2 = true;
                 if (dictionary.ContainsKey("playmovie") && (int)dictionary["playmovie"] == 0)
                 {
@@ -8007,8 +7999,8 @@ namespace DistantWorlds
             {
                 return;
             }
-            bool flag = main_0.cxjxlkqlKe.bool_0;
-            main_0.cxjxlkqlKe.bool_0 = false;
+            bool flag = main_0.mainView.bool_0;
+            main_0.mainView.bool_0 = false;
             if (bool_5)
             {
                 if (string_2 == "(Default)")
@@ -8081,7 +8073,7 @@ namespace DistantWorlds
          () => main_0.method_52(string_3, string_4),
          () => main_0.method_51(string_3, string_4),
         () => main_0.method_60(string_3, string_4));
-            main_0.cxjxlkqlKe.ResetRendering();
+            main_0.mainView.ResetRendering();
             encyclopediaItemList_0 = main_0.method_465(null, Application.StartupPath, string_2);
             encyclopediaItemList_1 = new EncyclopediaItemList();
             int_0 = 0;
@@ -8113,7 +8105,7 @@ namespace DistantWorlds
             method_5(text3, text4);
             Invoke(delegate9_0, string_2, bool_6);
             main_0.method_65(200);
-            main_0.cxjxlkqlKe.bool_0 = flag;
+            main_0.mainView.bool_0 = flag;
         }
 
         private void method_3(string string_2)
@@ -8511,7 +8503,7 @@ namespace DistantWorlds
             base.Enabled = true;
             main_0.Visible = true;
             main_0.ProcessMain(game.Galaxy.CurrentDateTime, game.Galaxy.CurrentStarDate, null);
-            main_0.cxjxlkqlKe.Refresh();
+            main_0.mainView.Refresh();
             Hide();
             main_0.Launch(launchFromLoad: true);
             Galaxy.SetResearchRaceSpecialProjects(raceList_1);
@@ -8957,7 +8949,7 @@ namespace DistantWorlds
                 main_0.Ignite();
                 main_0.Visible = true;
                 main_0.ProcessMain(main_0._Game.Galaxy.CurrentDateTime, main_0._Game.Galaxy.CurrentStarDate, null);
-                main_0.cxjxlkqlKe.Refresh();
+                main_0.mainView.Refresh();
                 method_9();
                 base.Enabled = true;
                 Hide();
@@ -11354,7 +11346,7 @@ namespace DistantWorlds
             main_0.Location = base.Location;
             main_0.Visible = true;
             main_0.ProcessMain(game_1.Galaxy.CurrentDateTime, game_1.Galaxy.CurrentStarDate, null);
-            main_0.cxjxlkqlKe.Refresh();
+            main_0.mainView.Refresh();
             base.Enabled = true;
             Hide();
             if (!main_0.bool_7)
@@ -18506,9 +18498,9 @@ namespace DistantWorlds
             if (main_0.gameOptions_0.StarFieldSize != sldOptionsMainViewStarFieldSize.Value)
             {
                 main_0.gameOptions_0.StarFieldSize = sldOptionsMainViewStarFieldSize.Value;
-                if (main_0.cxjxlkqlKe.main_0 != null)
+                if (main_0.mainView.main_0 != null)
                 {
-                    main_0.cxjxlkqlKe.method_14(main_0.gameOptions_0.StarFieldSize);
+                    main_0.mainView.method_14(main_0.gameOptions_0.StarFieldSize);
                 }
             }
             main_0.gameOptions_0.ShowSystemNebulae = chkOptionsShowSystemNebulae.Checked;

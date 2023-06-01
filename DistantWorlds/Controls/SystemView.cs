@@ -487,8 +487,8 @@ namespace DistantWorlds.Controls
                             {
                                 int num11 = base.ClientRectangle.Width / 2;
                                 int num12 = base.ClientRectangle.Height / 2;
-                                int num13 = (int)((double)main_0.cxjxlkqlKe.ClientRectangle.Width / (num / main_0.double_0));
-                                int num14 = (int)((double)main_0.cxjxlkqlKe.ClientRectangle.Height / (num / main_0.double_0));
+                                int num13 = (int)((double)main_0.mainView.ClientRectangle.Width / (num / main_0.double_0));
+                                int num14 = (int)((double)main_0.mainView.ClientRectangle.Height / (num / main_0.double_0));
                                 graphics_0.SmoothingMode = SmoothingMode.None;
                                 Rectangle rect = new Rectangle(num11 - num13 / 2, num12 - num14 / 2, num13, num14);
                                 graphics_0.FillRectangle(new SolidBrush(Color.FromArgb(48, main_0.color_7)), rect);
@@ -717,9 +717,9 @@ namespace DistantWorlds.Controls
                     {
                         float num11 = (float)((builtObject.Xpos - (double)num5) / double_3);
                         float num12 = (float)((builtObject.Ypos - (double)num7) / double_3);
-                        Color color = main_0.cxjxlkqlKe.ResolveShipSymbolColor(builtObject);
+                        Color color = main_0.mainView.ResolveShipSymbolColor(builtObject);
                         color = Color.FromArgb(Math.Min(255, color.A + 48), color.R, color.G, color.B);
-                        main_0.cxjxlkqlKe.DrawShipSymbol(graphics_0, builtObject, color, num11, num12, num9, num10, num9, num10, fillInterior: true, double_3);
+                        main_0.mainView.DrawShipSymbol(graphics_0, builtObject, color, num11, num12, num9, num10, num9, num10, fillInterior: true, double_3);
                     }
                 }
             }
@@ -909,8 +909,8 @@ namespace DistantWorlds.Controls
             }
             int num16 = int_5 / 2;
             int num17 = int_6 / 2;
-            int num18 = (int)((double)main_0.cxjxlkqlKe.ClientRectangle.Width / (num / main_0.double_0));
-            int num19 = (int)((double)main_0.cxjxlkqlKe.ClientRectangle.Height / (num / main_0.double_0));
+            int num18 = (int)((double)main_0.mainView.ClientRectangle.Width / (num / main_0.double_0));
+            int num19 = (int)((double)main_0.mainView.ClientRectangle.Height / (num / main_0.double_0));
             Rectangle rect2 = new Rectangle(num16 - num18 / 2, num17 - num19 / 2, num18, num19);
             using (SolidBrush brush = new SolidBrush(Color.FromArgb(24, main_0.color_7)))
             {

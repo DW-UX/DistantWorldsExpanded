@@ -1152,6 +1152,13 @@ namespace DistantWorlds.Controls
             }
         }
 
+        private void DrawUPS(SpriteBatch spriteBatch, int currentUps)
+        {
+            int num2 = base.Size.Width - 250;
+            XnaDrawingHelper.DrawString(spriteBatch, "UPS", spriteFont_3, System.Drawing.Color.FromArgb(144, 144, 144), num2 - 40, 7);
+            XnaDrawingHelper.DrawStringDropShadow(spriteBatch, currentUps.ToString(), spriteFont_2, solidBrush_0.Color, num2, 4);
+        }
+
         private void method_19(Graphics graphics_0)
         {
             if (main_0 == null || !main_0.pnlSystemMap.Visible)
@@ -1335,7 +1342,7 @@ namespace DistantWorlds.Controls
 
         public MainView() : base()
         {
-            
+
             solidBrush_0 = new SolidBrush(System.Drawing.Color.White);
             solidBrush_1 = new SolidBrush(System.Drawing.Color.Yellow);
             solidBrush_2 = new SolidBrush(System.Drawing.Color.Black);
@@ -1471,7 +1478,7 @@ namespace DistantWorlds.Controls
             serviceContainer_0 = new ServiceContainer();
         }
 
-        public void DrawMainViewXna()
+        public void DrawMainViewXna(int upsCounter)
         {
             DateTime now = DateTime.Now;
             bool_11 = true;
@@ -1630,6 +1637,7 @@ namespace DistantWorlds.Controls
                         XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point((base.Width - (int)vector4.X) / 2, 260), spriteBatch: spriteBatch_0, text: main_0.string_20, font: spriteFont_4, foreColor: solidBrush_1.Color);
                     }
                     method_18(spriteBatch_0);
+                    DrawUPS(spriteBatch_0, upsCounter);
                     method_32(spriteBatch_0);
                 }
                 spriteBatch_0.End();

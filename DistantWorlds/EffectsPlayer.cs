@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using System.Windows.Markup;
 using static DistantWorlds.PersistentScrollablePanel;
 
 namespace DistantWorlds
@@ -29,7 +30,7 @@ namespace DistantWorlds
 
         private List<SecondarySoundBuffer> _bufferList;
 
-        private Dictionary<string, SecondarySoundBuffer> _bufferDict;
+        private Dictionary<string, BufferCopyDTO> _bufferDict;
 
         private double double_0;
 
@@ -56,7 +57,7 @@ namespace DistantWorlds
         {
             _lockObj = new object();
             _bufferList = new List<SecondarySoundBuffer>();
-            _bufferDict = new Dictionary<string, SecondarySoundBuffer>();
+            _bufferDict = new Dictionary<string, BufferCopyDTO>();
             double_0 = 0.7;
             lock (_lockObj)
             {
@@ -82,13 +83,10 @@ namespace DistantWorlds
             {
                 foreach (var item in _bufferDict)
                 {
-                    if (item.Value is SecondarySoundBuffer)
+                    SecondarySoundBuffer SecondarySoundBuffer = item.Value.Buffer;
+                    if (SecondarySoundBuffer != null && !SecondarySoundBuffer.Disposed && SecondarySoundBuffer.Status != BufferStatus.Playing && SecondarySoundBuffer.Status != BufferStatus.Looping)
                     {
-                        SecondarySoundBuffer SecondarySoundBuffer = item.Value;
-                        if (SecondarySoundBuffer != null && !SecondarySoundBuffer.Disposed && SecondarySoundBuffer.Status != BufferStatus.Playing && SecondarySoundBuffer.Status != BufferStatus.Looping)
-                        {
-                            SecondarySoundBuffer.Dispose();
-                        }
+                        SecondarySoundBuffer.Dispose();
                     }
                 }
                 _bufferDict.Clear();
@@ -136,8 +134,14 @@ namespace DistantWorlds
                 {
                     if (!_bufferDict.ContainsKey(list3[j]))
                     {
-                        SecondarySoundBuffer value = method_2(list2[j], device_0);
-                        _bufferDict.Add(list3[j], value);
+                        BufferCopyDTO dto = new BufferCopyDTO();
+                        byte[] data;
+                        SecondarySoundBuffer value = method_2(list2[j], device_0, out data);
+                        dto.Buffer = value;
+                        dto.WaveFormat = value.Format.Clone();
+                        dto.Data = data;
+                        dto.WaveFormatTag = value.Format.FormatTag;
+                        _bufferDict.Add(list3[j], dto);
                     }
                 }
                 for (int k = 0; k < list2.Count; k++)
@@ -178,8 +182,9 @@ namespace DistantWorlds
             return null;
         }
 
-        private SecondarySoundBuffer method_2(Stream stream_0, DirectSound device_1)
+        private SecondarySoundBuffer method_2(Stream stream_0, DirectSound device_1, out byte[] data)
         {
+            data = null;
             if (!disposedValue)
             {
                 //WaveFormat format = new WaveFormat();
@@ -231,7 +236,7 @@ namespace DistantWorlds
                         desc.Flags |= BufferFlags.ControlEffects;
                     }
                     SecondarySoundBuffer m_DSoundBuffer = new SecondarySoundBuffer(device_1, desc);
-                    byte[] data = new byte[desc.SizeInBytes];
+                    data = new byte[desc.SizeInBytes];
                     waveFile.Read(data, 0, (int)waveFile.Length);
                     m_DSoundBuffer.Write(data, 0, LockFlags.None);
                     return m_DSoundBuffer;
@@ -271,6 +276,26 @@ namespace DistantWorlds
                 m_DSoundBuffer.Write(data, 0, LockFlags.None);
                 return m_DSoundBuffer;
             }
+        }
+
+        private SecondarySoundBuffer CopyBuffer(BufferCopyDTO dto)
+        {
+            SecondarySoundBuffer res = null;
+            if (!disposedValue)
+            {
+                SoundBufferDescription desc = new SoundBufferDescription();
+                desc.SizeInBytes = (int)dto.Data.Length;
+                desc.Flags = BufferFlags.Defer | BufferFlags.ControlPan | BufferFlags.ControlVolume;
+                desc.Format = dto.WaveFormat;
+                desc.Format.FormatTag = dto.WaveFormatTag;
+                if (dto.Data.Length < 20000L)
+                {
+                    desc.Flags |= BufferFlags.ControlEffects;
+                }
+                res = new SecondarySoundBuffer(device_0, desc);
+                res.Write(dto.Data, 0, LockFlags.None);
+            }
+            return res;
         }
 
         public void ClearFinishedBuffers()
@@ -896,9 +921,9 @@ namespace DistantWorlds
                 try
                 {
                     SecondarySoundBuffer secondarySoundBuffer = null;
-                    SecondarySoundBuffer obj;
+                    BufferCopyDTO obj;
                     _bufferDict.TryGetValue(filename, out obj);
-                    if (obj != null)
+                    if (obj?.Buffer != null)
                     {
                         lock (_lockObj)
                         {
@@ -909,7 +934,7 @@ namespace DistantWorlds
                             //secondarySoundBuffer = SecondarySoundBuffer.FromPointer(((SecondarySoundBuffer)obj).ComPointer);
 
                             //list_0.Add(secondarySoundBuffer);(SecondarySoundBuffer)obj
-                            _bufferList.Add(obj);
+                            _bufferList.Add(CopyBuffer(obj));
                         }
                     }
                     else
@@ -973,7 +998,7 @@ namespace DistantWorlds
                 _bufferList = null;
                 foreach (var item in _bufferDict)
                 {
-                    item.Value.Dispose();
+                    item.Value.Buffer.Dispose();                    
                 }
                 _bufferDict = null;
                 // TODO: dispose managed state (managed objects)
@@ -997,6 +1022,14 @@ namespace DistantWorlds
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
+        }
+
+        private class BufferCopyDTO
+        {
+            public WaveFormat WaveFormat { get; set; }
+            public byte[] Data { get; set; }
+            public SecondarySoundBuffer Buffer { get; set; }
+            public WaveFormatTag WaveFormatTag { get; set; }
         }
     }
 }

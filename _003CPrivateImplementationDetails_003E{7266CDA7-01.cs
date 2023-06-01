@@ -4,9 +4,14 @@
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
+using BaconDistantWorlds.HotKeys;
 using DistantWorlds;
+using ExpansionMod;
+using ExpansionMod.ExternalMods;
+using Newtonsoft.Json;
 //using DistantWorlds.Types;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -28,7 +33,11 @@ internal class main
         {
             if (args[0].ToUpperInvariant() == "/GenerateHotkeysMapFile".ToUpperInvariant())
             {
-                KeyMapper.GenerateEmpyFile(Start._MappingFilePath);
+                ExpansionModMain.GenerateDefaultFiles();
+                string _ModRootFolder = "AdvMods\\BaconMod";
+                string _HotKeyFileName = "BaconModHotKeysMappingFile.json";
+                BaconKeyMapper baconKeyMapper = new BaconKeyMapper(_HotKeyFileName);
+                baconKeyMapper.GenerateDefaultFile(_ModRootFolder);
             }
         }
     }
@@ -37,13 +46,13 @@ internal class main
     private static System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
         if (args.Name.ToUpperInvariant().Contains("SlimDX".ToUpperInvariant()))
-        {            
+        {
             if (Environment.Is64BitProcess)
             {
                 string path = @"x64\SlimDX.dll";
                 if (File.Exists(path))
                 {
-                    return Assembly.LoadFile(Path.GetFullPath(path));
+                    return Assembly.LoadFrom(Path.GetFullPath(path));
                 }
                 else
                 { return null; }
@@ -53,7 +62,7 @@ internal class main
                 string path = @"x86\SlimDX.dll";
                 if (File.Exists(path))
                 {
-                    return Assembly.LoadFile(Path.GetFullPath(path));
+                    return Assembly.LoadFrom(Path.GetFullPath(path));
                 }
                 else
                 { return null; }
@@ -66,7 +75,7 @@ internal class main
                 string path = @"x64\Facepunch.Steamworks.Win64.dll";
                 if (File.Exists(path))
                 {
-                    return Assembly.LoadFile(Path.GetFullPath(path));
+                    return Assembly.LoadFrom(Path.GetFullPath(path));
                 }
                 else
                 { return null; }
@@ -76,7 +85,7 @@ internal class main
                 string path = @"x86\Facepunch.Steamworks.Win32.dll";
                 if (File.Exists(path))
                 {
-                    return Assembly.LoadFile(Path.GetFullPath(path));
+                    return Assembly.LoadFrom(Path.GetFullPath(path));
                 }
                 else
                 { return null; }

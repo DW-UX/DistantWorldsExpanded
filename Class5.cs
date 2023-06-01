@@ -42,8 +42,9 @@ internal static class Class5
             {
                 _Splash = new Splash();
                 Application.Run(_Splash);
-            });   
-            Application.Run(new Start());
+            });
+            var start = new Start();
+            Application.Run(start);
 
         }
         catch (Exception ex)

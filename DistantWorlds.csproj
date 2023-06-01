@@ -35,6 +35,21 @@
 					<HintPath>..\DistantWorlds.Controls\bin\Debug\net48\DistantWorlds.Controls.dll</HintPath>
 					<Private>True</Private>
 				</Reference>
+				<Reference Include="ExpansionMod, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod\ExpansionMod\bin\Debug\net48\ExpansionMod.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+				<Reference Include="ExpansionMod.Objects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod.Objects\ExpansionMod.Objects\bin\Debug\net48\ExpansionMod.Objects.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+				<Reference Include="ExpansionMod.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod.Controls\ExpansionMod.Controls\bin\Debug\net48\ExpansionMod.Controls.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
 			</ItemGroup>
 		</When>
 		<Otherwise>
@@ -50,6 +65,21 @@
 				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\DistantWorlds.Controls\bin\Release\net48\DistantWorlds.Controls.dll</HintPath>
+				</Reference>
+				<Reference Include="ExpansionMod, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod\ExpansionMod\bin\Release\net48\ExpansionMod.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+				<Reference Include="ExpansionMod.Objects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod.Objects\ExpansionMod.Objects\bin\Release\net48\ExpansionMod.Objects.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+				<Reference Include="ExpansionMod.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod.Controls\ExpansionMod.Controls\bin\Release\net48\ExpansionMod.Controls.dll</HintPath>
+					<Private>True</Private>
 				</Reference>
 			</ItemGroup>
 		</Otherwise>
