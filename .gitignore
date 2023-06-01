@@ -362,3 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /.vshistory/BaconDistantWorlds.csproj
+/.vshistory/BaconBuiltObject.cs
+/.vshistory/BaconStart.cs
+/.vshistory
+/HotKeys/.vshistory
