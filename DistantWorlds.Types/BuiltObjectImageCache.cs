@@ -96,13 +96,13 @@ namespace DistantWorlds.Types
         public BuiltObjectImageData ObtainImageData(int pictureRef)
         {
             //BuiltObjectImageData builtObjectImageData = null;
-            BuiltObjectImageData builtObjectImageData;            
+            BuiltObjectImageData builtObjectImageData;
             if (_ImageData.TryGetValue(pictureRef, out builtObjectImageData) && builtObjectImageData != null)
             {
                 //if (obj is BuiltObjectImageData)
                 //{
-                    //builtObjectImageData = (BuiltObjectImageData)obj;
-                    _LastUsage[pictureRef] = DateTime.Now;
+                //builtObjectImageData = (BuiltObjectImageData)obj;
+                _LastUsage[pictureRef] = DateTime.Now;
                 //}
                 //else
                 //{
@@ -124,13 +124,14 @@ namespace DistantWorlds.Types
             _LastUsage[pictureRef] = DateTime.Now;
             BuiltObjectImageData obj;
             if (_ImageData.TryGetValue(pictureRef, out obj))
-            { 
+            {
                 result = obj;
             }
             else
             {
-                obj = _ImageDataSmall[pictureRef];
-                if (obj != null)
+                //obj = _ImageDataSmall[pictureRef];
+                //if (obj != null)
+                if (_ImageDataSmall.TryGetValue(pictureRef, out obj))
                 {
                     result = obj;
                 }
@@ -173,7 +174,7 @@ namespace DistantWorlds.Types
                         continue;
                     }
                     BuiltObjectImageData builtObjectImageData;
-                    if ( _ImageData.TryGetValue(key, out builtObjectImageData))
+                    if (_ImageData.TryGetValue(key, out builtObjectImageData))
                     {
                         //if (obj is Bitmap)
                         //{
@@ -181,22 +182,22 @@ namespace DistantWorlds.Types
                         //}
                         //else if (obj is BuiltObjectImageData)
                         //{
-                            //BuiltObjectImageData builtObjectImageData = (BuiltObjectImageData)obj;
-                            if (builtObjectImageData != null)
+                        //BuiltObjectImageData builtObjectImageData = (BuiltObjectImageData)obj;
+                        if (builtObjectImageData != null)
+                        {
+                            if (builtObjectImageData.Image != null && builtObjectImageData.Image.PixelFormat != 0)
                             {
-                                if (builtObjectImageData.Image != null && builtObjectImageData.Image.PixelFormat != 0)
-                                {
-                                    builtObjectImageData.Image.Dispose();
-                                }
-                                if (builtObjectImageData.MaskImage != null && builtObjectImageData.MaskImage.PixelFormat != 0)
-                                {
-                                    builtObjectImageData.MaskImage.Dispose();
-                                }
-                                builtObjectImageData.Image = null;
-                                builtObjectImageData.MaskImage = null;
-                                builtObjectImageData.ThrusterLocations = null;
-                                builtObjectImageData.LightPoints = null;
+                                builtObjectImageData.Image.Dispose();
                             }
+                            if (builtObjectImageData.MaskImage != null && builtObjectImageData.MaskImage.PixelFormat != 0)
+                            {
+                                builtObjectImageData.MaskImage.Dispose();
+                            }
+                            builtObjectImageData.Image = null;
+                            builtObjectImageData.MaskImage = null;
+                            builtObjectImageData.ThrusterLocations = null;
+                            builtObjectImageData.LightPoints = null;
+                        }
                         //}
                     }
                     list.Add(key);
@@ -241,16 +242,16 @@ namespace DistantWorlds.Types
         {
             //Bitmap bitmap = null;
             BuiltObjectImageData builtObjectImageData;
-            if ( _ImageDataSmall.TryGetValue(pictureRef, out builtObjectImageData))
+            if (_ImageDataSmall.TryGetValue(pictureRef, out builtObjectImageData))
             {
                 //if (obj is BuiltObjectImageData)
                 //{
-                    //BuiltObjectImageData builtObjectImageData = (BuiltObjectImageData)obj;
-                    if (builtObjectImageData != null)
-                    {
-                        return builtObjectImageData.Image;
-                    }
-                    return CacheImageSmall(pictureRef);
+                //BuiltObjectImageData builtObjectImageData = (BuiltObjectImageData)obj;
+                if (builtObjectImageData != null)
+                {
+                    return builtObjectImageData.Image;
+                }
+                return CacheImageSmall(pictureRef);
                 //}
                 //return CacheImageSmall(pictureRef);
             }
@@ -271,27 +272,27 @@ namespace DistantWorlds.Types
         {
             Bitmap bitmap = null;
             BuiltObjectImageData builtObjectImageData;
-            if ( _ImageData.TryGetValue(pictureRef, out builtObjectImageData))
+            if (_ImageData.TryGetValue(pictureRef, out builtObjectImageData))
             {
                 //if (obj is BuiltObjectImageData)
                 //{
-                    //BuiltObjectImageData builtObjectImageData = (BuiltObjectImageData)obj;
-                    if (builtObjectImageData != null)
-                    {
-                        bitmap = builtObjectImageData.Image;
-                        if (bitmap.PixelFormat == PixelFormat.Undefined)
-                        {
-                            bitmap = CacheImage(pictureRef);
-                        }
-                        else
-                        {
-                            _LastUsage[pictureRef] = DateTime.Now;
-                        }
-                    }
-                    else
+                //BuiltObjectImageData builtObjectImageData = (BuiltObjectImageData)obj;
+                if (builtObjectImageData != null)
+                {
+                    bitmap = builtObjectImageData.Image;
+                    if (bitmap.PixelFormat == PixelFormat.Undefined)
                     {
                         bitmap = CacheImage(pictureRef);
                     }
+                    else
+                    {
+                        _LastUsage[pictureRef] = DateTime.Now;
+                    }
+                }
+                else
+                {
+                    bitmap = CacheImage(pictureRef);
+                }
                 //}
                 //else
                 //{

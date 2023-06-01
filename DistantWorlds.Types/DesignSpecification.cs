@@ -325,7 +325,7 @@ namespace DistantWorlds.Types
                       if (s.ToLower(CultureInfo.InvariantCulture).StartsWith(str5))
                       {
                         imageScalingMode = DesignImageScalingMode.Absolute;
-                        if (!float.TryParse(s.Substring(str5.Length, s.Length - str5.Length).Trim(), out result))
+                        if (!float.TryParse(s.Substring(str5.Length, s.Length - str5.Length).Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out result))
                           throw new ApplicationException("Error reading Image Scaling Factor in line " + num.ToString() + " of file " + path4);
                         if ((double) result < 10.0 || (double) result > 1000.0)
                           throw new ApplicationException("Invalid Image Scaling Factor (when mode is Absolute should be between 10 and 1000) in line " + num.ToString() + " of file " + path4);
@@ -335,7 +335,7 @@ namespace DistantWorlds.Types
                         if (!s.ToLower(CultureInfo.InvariantCulture).StartsWith(str6))
                           throw new ApplicationException("Invalid Image Scaling Mode (should be Absolute or Scaled) in line " + num.ToString() + " of file " + path4);
                         imageScalingMode = DesignImageScalingMode.Scaled;
-                        if (!float.TryParse(s.Substring(str5.Length, s.Length - str5.Length).Trim(), out result))
+                        if (!float.TryParse(s.Substring(str6.Length, s.Length - str6.Length).Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out result))
                           throw new ApplicationException("Error reading Image Scaling Factor in line " + num.ToString() + " of file " + path4);
                         if ((double) result < 0.05000000074505806 || (double) result > 10.0)
                           throw new ApplicationException("Invalid Image Scaling Factor (when mode is Scaled should be between 0.05 and 10.0) in line " + num.ToString() + " of file " + path4);
