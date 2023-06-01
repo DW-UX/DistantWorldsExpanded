@@ -154,6 +154,8 @@ namespace BaconDistantWorlds
         "Repeating Mission"
         };
 
+        public static BaconEntryPoint EntryPointClass = null;
+
         public static void HandleToolstripClick(ShipAction action)
         {
             if (BaconBuiltObject.myMain == null)
@@ -632,19 +634,19 @@ namespace BaconDistantWorlds
             {
                 BaconGalaxy.priceReductionFactor = result;
             }
-            if (dictionary.TryGetValue("sublightFuelBurnDivisor", out value) && float.TryParse(value, out var result4))
+            if (dictionary.TryGetValue("sublightFuelBurnDivisor", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var result4))
             {
                 BaconBuiltObject.sublightFuelBurnDivisor = result4;
             }
-            if (dictionary.TryGetValue("fighterRangeMultiple", out value) && double.TryParse(value, out var result5))
+            if (dictionary.TryGetValue("fighterRangeMultiple", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var result5))
             {
                 BaconFighter.fighterRangeMultiple = result5;
             }
-            if (dictionary.TryGetValue("ammoExhaustChanceMissile", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("ammoExhaustChanceMissile", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconFighter.ammoExhaustChanceMissile = result4;
             }
-            if (dictionary.TryGetValue("ammoExhaustChanceTorpedo", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("ammoExhaustChanceTorpedo", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconFighter.ammoExhaustChanceTorpedo = result4;
             }
@@ -652,7 +654,7 @@ namespace BaconDistantWorlds
             {
                 BaconFighter.fighterBuildCost = result;
             }
-            if (dictionary.TryGetValue("fighterBuildSpeedDivisor", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("fighterBuildSpeedDivisor", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconFighter.fighterBuildSpeedDivisor = result4;
             }
@@ -712,11 +714,11 @@ namespace BaconDistantWorlds
                     main._Game.Galaxy.DelayedActions.Add(eventActionExecutionPackage2);
                 }
             }
-            if (dictionary.TryGetValue("fighterOnBomberViolence", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("fighterOnBomberViolence", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconFighter.fighterOnBomberDamageMultiplier = result4;
             }
-            if (dictionary.TryGetValue("backgroundStarsAtZoomLevel", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("backgroundStarsAtZoomLevel", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 backgroundStarsAtZoomLevel = result5;
             }
@@ -760,23 +762,23 @@ namespace BaconDistantWorlds
                     BaconGalaxy.tradeEverything = result11;
                 }
             }
-            if (dictionary.TryGetValue("shipMaintenanceCostPerSizeUnit", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("shipMaintenanceCostPerSizeUnit", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 Galaxy.ShipMaintenanceCostPerSizeUnit = result4;
             }
-            if (dictionary.TryGetValue("shipMarkupFactor", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("shipMarkupFactor", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 Galaxy.ShipMarkupFactor = result4;
             }
-            if (dictionary.TryGetValue("shipMarkupFactorPirates", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("shipMarkupFactorPirates", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 Galaxy.ShipMarkupFactorPirates = result4;
             }
-            if (dictionary.TryGetValue("warWearinessMax", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("warWearinessMax", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 Galaxy.WarWearinessMaximum = result4;
             }
-            if (dictionary.TryGetValue("asteroidColonyPrevalenceDivisor", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("asteroidColonyPrevalenceDivisor", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconHabitat.asteroidColonyPrevalenceDivisor = result4;
             }
@@ -788,15 +790,15 @@ namespace BaconDistantWorlds
             {
                 BaconEmpire.warWearinessReduction = result;
             }
-            if (dictionary.TryGetValue("spyCaptureChance", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("spyCaptureChance", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconCharacter.spyCaptureChance = result4;
             }
-            if (dictionary.TryGetValue("capturedSpyEscapeChance", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("capturedSpyEscapeChance", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconCharacter.spyBaseEscapeChance = result4;
             }
-            if (dictionary.TryGetValue("capturedSpyDefectChance", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("capturedSpyDefectChance", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconCharacter.spyBaseDefectChance = result4;
             }
@@ -804,16 +806,16 @@ namespace BaconDistantWorlds
             {
                 BaconCharacter.spyBaseValue = result;
             }
-            if (dictionary.TryGetValue("tradeTax", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("tradeTax", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 tradeTax = result5;
             }
-            if (dictionary.TryGetValue("SubjugationTributePercentage", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("SubjugationTributePercentage", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 BaconEmpire.SubjugationTributePercentage = result5;
                 Galaxy.SubjugationTributePercentage = result5;
             }
-            if (dictionary.TryGetValue("weaponRangeMultiplierForBases", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("weaponRangeMultiplierForBases", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 BaconBuiltObject.weaponRangeMultiplierForBases = result4;
             }
@@ -841,11 +843,11 @@ namespace BaconDistantWorlds
                 }
                 BaconHabitat.maxInfrastructureInvestmentAllowed = result;
             }
-            if (dictionary.TryGetValue("infrastuctureDurability", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("infrastuctureDurability", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 result4 = (BaconHabitat.infrasetuctureDurability = Math.Min(Math.Max(result4, 0.1f), 1f));
             }
-            if (dictionary.TryGetValue("marketPriceUpdateChance", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("marketPriceUpdateChance", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 BaconHabitat.marketPriceUpdateChance = result5;
             }
@@ -869,7 +871,7 @@ namespace BaconDistantWorlds
             {
                 result4 = (BaconBuiltObject.noFuelHyperSpeedMultiplier = Math.Min(Math.Max(result4, 0.1f), 1f));
             }
-            if (dictionary.TryGetValue("pirateControlLevelToBuildShipsAtIndependentPlanets", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("pirateControlLevelToBuildShipsAtIndependentPlanets", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 result4 = (BaconHabitat.pirateControlLevelToBuildShipsAtIndependentPlanets = Math.Min(Math.Max(result4, 0.1f), 1f));
             }
@@ -917,7 +919,7 @@ namespace BaconDistantWorlds
             {
                 BaconBuiltObject.orbitalAsteroidCost = result;
             }
-            if (dictionary.TryGetValue("privateBuildCostToStateMoney", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("privateBuildCostToStateMoney", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (BaconBuiltObject.privateBuildCostToStateMoney = Math.Max(0.0, Math.Min(1.0, result5)));
             }
@@ -941,11 +943,11 @@ namespace BaconDistantWorlds
             {
                 componentEquipCost = result;
             }
-            if (dictionary.TryGetValue("invasionStrategyResult", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("invasionStrategyResult", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 invasionStrategyResult = result4;
             }
-            if (dictionary.TryGetValue("invasionStrategyRemainingGuesses", out value) && float.TryParse(value, out result4))
+            if (dictionary.TryGetValue("invasionStrategyRemainingGuesses", out value) && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result4))
             {
                 invasionStrategyRemainingGuesses = Math.Max(0f, result4);
             }
@@ -1014,39 +1016,39 @@ namespace BaconDistantWorlds
             {
                 BaconHabitat.pirateMaxPopulationInfluence = result19;
             }
-            if (dictionary.TryGetValue("customDifficultyColonyCorruptionFactor", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyColonyCorruptionFactor", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyColonyCorruptionFactor = Math.Max(0.01, Math.Min(10.0, result5)));
             }
-            if (dictionary.TryGetValue("customDifficultyWarWearinessFactor", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyWarWearinessFactor", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyWarWearinessFactor = Math.Max(0.01, Math.Min(10.0, result5)));
             }
-            if (dictionary.TryGetValue("customDifficultyResearchRate", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyResearchRate", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyResearchRate = Math.Max(0.01, Math.Min(10.0, result5)));
             }
-            if (dictionary.TryGetValue("customDifficultyPopulationGrowthRate", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyPopulationGrowthRate", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyPopulationGrowthRate = Math.Max(0.01, Math.Min(10.0, result5)));
             }
-            if (dictionary.TryGetValue("customDifficultyMiningRate", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyMiningRate", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyMiningRate = Math.Max(0.01, Math.Min(10.0, result5)));
             }
-            if (dictionary.TryGetValue("customDifficultyTargettingFactor", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyTargettingFactor", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyTargettingFactor = Math.Max(0.01, Math.Min(10.0, result5)));
             }
-            if (dictionary.TryGetValue("customDifficultyCountermeasuresFactor", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyCountermeasuresFactor", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyCountermeasuresFactor = Math.Max(0.01, Math.Min(10.0, result5)));
             }
-            if (dictionary.TryGetValue("customDifficultyColonyShipBuildSpeedRate", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyColonyShipBuildSpeedRate", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyColonyShipBuildSpeedRate = Math.Max(0.01, Math.Min(10.0, result5)));
             }
-            if (dictionary.TryGetValue("customDifficultyColonyIncomeFactor", out value) && double.TryParse(value, out result5))
+            if (dictionary.TryGetValue("customDifficultyColonyIncomeFactor", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
                 result5 = (customDifficultyColonyIncomeFactor = Math.Max(0.01, Math.Min(10.0, result5)));
             }

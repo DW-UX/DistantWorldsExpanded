@@ -9,6 +9,7 @@ using DistantWorlds.Types;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -62,11 +63,11 @@ namespace BaconDistantWorlds
       string str = (string) null;
       if (BaconBuiltObject.myMain == null || BaconBuiltObject.myMain._Game == null || design.Empire == BaconBuiltObject.myMain._Game.PlayerEmpire)
       {
-        str = source.FirstOrDefault<string>((Func<string, bool>) (path2 => path2.Contains(subRoleAsString)));
+        str = source.FirstOrDefault<string>((Func<string, bool>) (path2 => Path.GetFileNameWithoutExtension(path2) == subRoleAsString));
       }
       else
       {
-        List<string> list = source.Where<string>((Func<string, bool>) (path2 => path2.Contains(subRoleAsString))).ToList<string>();
+        List<string> list = source.Where<string>((Func<string, bool>) (path2 => Path.GetFileNameWithoutExtension(path2) == subRoleAsString)).ToList<string>();
         if (list.Count < 1)
         {
           int num3 = (int) MessageBox.Show("No image for " + subRoleAsString + " for " + family, "Missing image in mod");

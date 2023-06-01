@@ -22,6 +22,8 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using ExpansionMod.Objects;
+using BaconDistantWorlds.HotKeys;
 
 namespace BaconDistantWorlds
 {
@@ -126,266 +128,385 @@ namespace BaconDistantWorlds
             return messageBox;
         }
 
-        public static KeyEventArgs BaconKeyboardInput(Main main, KeyEventArgs e)
+        public static void BaconKeyboardInput(KeyEventArgs e, List<Keys> keys)
         {
-            Keys keyCode = e.KeyCode;
-            BaconBuiltObject.myMain = main;
-            if (!BaconMain.settingsInitialized)
-                BaconMain.BaconInitialize(main);
-            switch (keyCode)
+            if (BaconMain.settingsInitialized)
             {
-                case Keys.Return:
-                    if (e.Control)
+                var hotKeyManager = BaconMain.EntryPointClass.GetHotKeyManager() as HotKeyManager;
+                //hotKeyManager.GetMappedTargetByKeyCode(e.KeyCode, out KeyMappingTarget target);
+
+                MappedHotKey target;
+                if (hotKeyManager.GetMappedTarget(keys, out target))
+                {
+                    //switch (keyCode)
+                    //{
+                    //case Keys.Return:
+                    int targetId;
+                    if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowDetailedInfo, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.ShowDetailedInformation(main);
-                        e.Handled = true;
-                    }
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.ShowMissionCommands(main);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.D1:
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.AssignGlobalCargoMissionSource(main);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.D2:
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.AssignGlobalCargoMissionDestination(main);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.D3:
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.AssignCargoMission(main, (object)null, e.Shift);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.D4:
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.fighterTarget = main._Game.SelectedObject as StellarObject;
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.D5:
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.OrderBombersToAttack(main, main._Game.SelectedObject, true);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.D6:
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.OrderBombersToAttack(main, main._Game.SelectedObject, false);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.D7:
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.TransferFighter(main, main._Game.SelectedObject);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.A:
-                    if (e.Alt)
-                    {
-                        BaconBuiltObject.ToggleAutomateCarrierOps(main, main._Game.SelectedObject);
-                        e.Handled = true;
-                        break;
-                    }
-                    if (main._Game.SelectedObject is BuiltObject && (main._Game.SelectedObject as BuiltObject).Empire == main._Game.PlayerEmpire && (main._Game.SelectedObject as BuiltObject).IsAutoControlled)
-                    {
-                        (main._Game.SelectedObject as BuiltObject).IsAutoControlled = false;
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.B:
-                    if (e.Control)
-                    {
-                        if (!BaconMain.customBomberFormOpen)
+
+                        //if (e.Control)
                         {
-                            BaconMain.customBomberFormOpen = true;
-                            BaconEmpire.ShowCustomBomberForm(main);
+                            BaconBuiltObject.ShowDetailedInformation(BaconBuiltObject.myMain);
+                            e.Handled = true;
                         }
-                        e.Handled = true;
-                        break;
                     }
-                    break;
-                case Keys.C:
-                    if (e.Control)
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowMissionCommand, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.D:
-                    if (e.Control)
-                    {
-                        BaconBuiltObject.CalculateDistance(main);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.E:
-                    if (e.Control)
-                    {
-                        BaconBuiltObject.ShipFinder(main);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.F:
-                    if (e.Control)
-                    {
-                        if (main._Game.SelectedObject is BuiltObject selectedObject)
+                        //if (e.Alt)
                         {
-                            BaconBuiltObject.IsOutsideStarGravityWell(selectedObject);
-                            if (selectedObject.NearestSystemStar != null)
+                            BaconBuiltObject.ShowMissionCommands(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
+                    }
+                    //break;
+                    //case Keys.D1:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignGlobalCargoMissionSource, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.AssignGlobalCargoMissionSource(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.D2:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignGlobalCargoMissionDestination, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.AssignGlobalCargoMissionDestination(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.D3:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignCargoMission, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.AssignCargoMission(BaconBuiltObject.myMain, (object)null, e.Shift);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.D4:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.SetFighterTarget, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.fighterTarget = BaconBuiltObject.myMain._Game.SelectedObject as StellarObject;
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.D5:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttackAll, out targetId) &&
+                    targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.OrderBombersToAttack(BaconBuiltObject.myMain, BaconBuiltObject.myMain._Game.SelectedObject, true);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.D6:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
+                targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.OrderBombersToAttack(BaconBuiltObject.myMain, BaconBuiltObject.myMain._Game.SelectedObject, false);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.D7:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
+            targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.TransferFighter(BaconBuiltObject.myMain, BaconBuiltObject.myMain._Game.SelectedObject);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.A:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ToggleAutomateCarrierOps, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.ToggleAutomateCarrierOps(BaconBuiltObject.myMain, BaconBuiltObject.myMain._Game.SelectedObject);
+                            e.Handled = true;
+                            //break;
+                        }
+                        if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).Empire == BaconBuiltObject.myMain._Game.PlayerEmpire && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).IsAutoControlled)
+                        {
+                            (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).IsAutoControlled = false;
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.B:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowCustomBomberForm, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Control)
+                        {
+                            if (!BaconMain.customBomberFormOpen)
                             {
-                                main._Game.PlayerEmpire.SendMessageToEmpire(main._Game.PlayerEmpire, EmpireMessageType.Undefined, (object)null, selectedObject.Name + " is in system " + selectedObject.NearestSystemStar.Name);
-                                selectedObject.ActualEmpire.ResolveSystemVisibility(selectedObject, false);
+                                BaconMain.customBomberFormOpen = true;
+                                BaconEmpire.ShowCustomBomberForm(BaconBuiltObject.myMain);
                             }
-                            else
-                                main._Game.PlayerEmpire.SendMessageToEmpire(main._Game.PlayerEmpire, EmpireMessageType.Undefined, (object)null, selectedObject.Name + " is not in a system.");
+                            e.Handled = true;
+                            //break;
                         }
-                        e.Handled = true;
-                        break;
+                        //break;
                     }
-                    break;
-                case Keys.M:
-                    if (e.Alt)
+                    //case Keys.C:
+                    //            else if (hotKeyManager.ResolveTargetFriendlyName(, out targetId) &&
+                    //targetId == target.Parent.TargetMethodId)
+                    //            {
+                    //                if (e.Control)
+                    //                {
+                    //                    e.Handled = true;
+                    //                    //break;
+                    //                }
+                    //                //break;
+                    //            }
+                    //case Keys.D:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CalculateDistance, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        bool deliverToSpecificDestination = false;
-                        if (e.Shift)
-                            deliverToSpecificDestination = true;
-                        BaconBuiltObject.AssignMiningShipToTarget(main, deliverToSpecificDestination);
-                        e.Handled = true;
-                        break;
-                    }
-                    break;
-                case Keys.P:
-                    if (e.Control)
-                    {
-                        if (!BaconMain.prisonFormOpen)
+                        //if (e.Control)
                         {
-                            BaconMain.prisonFormOpen = true;
-                            BaconEmpire.ShowPrisonForm(main);
+                            BaconBuiltObject.CalculateDistance(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
                         }
-                        else if (BaconMain.prisonForm != null)
-                            BaconMain.prisonForm.BringToFront();
-                        e.Handled = true;
-                        break;
+                        //break;
                     }
-                    break;
-                case Keys.Q:
-                    if (e.Control)
+                    //case Keys.E:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShipFinder, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.IncreaseDockingBayCapacity(main);
-                        break;
+                        //if (e.Control)
+                        {
+                            BaconBuiltObject.ShipFinder(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
                     }
-                    break;
-                case Keys.R:
-                    if (e.Control)
+                    //case Keys.F:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.FixExplorerCurrentSystem, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.ShowDamagedComponents(main);
-                        e.Handled = true;
-                        break;
+                        //if (e.Control)
+                        {
+                            if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject selectedObject)
+                            {
+                                BaconBuiltObject.IsOutsideStarGravityWell(selectedObject);
+                                if (selectedObject.NearestSystemStar != null)
+                                {
+                                    BaconBuiltObject.myMain._Game.PlayerEmpire.SendMessageToEmpire(BaconBuiltObject.myMain._Game.PlayerEmpire, EmpireMessageType.Undefined, (object)null, selectedObject.Name + " is in system " + selectedObject.NearestSystemStar.Name);
+                                    selectedObject.ActualEmpire.ResolveSystemVisibility(selectedObject, false);
+                                }
+                                else
+                                    BaconBuiltObject.myMain._Game.PlayerEmpire.SendMessageToEmpire(BaconBuiltObject.myMain._Game.PlayerEmpire, EmpireMessageType.Undefined, (object)null, selectedObject.Name + " is not in a system.");
+                            }
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
                     }
-                    if (e.Alt)
+                    //case Keys.M:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignMiningShipToTarget, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.RevealIfPirate(main);
-                        e.Handled = true;
-                        break;
+                        //if (e.Alt)
+                        {
+                            bool deliverToSpecificDestination = false;
+                            if (e.Shift)
+                                deliverToSpecificDestination = true;
+                            BaconBuiltObject.AssignMiningShipToTarget(BaconBuiltObject.myMain, deliverToSpecificDestination);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
                     }
-                    if (e.Shift)
+                    //case Keys.P:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowPrisonForm, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.RushStateShips(main);
-                        e.Handled = true;
-                        break;
+                        //if (e.Control)
+                        {
+                            if (!BaconMain.prisonFormOpen)
+                            {
+                                BaconMain.prisonFormOpen = true;
+                                BaconEmpire.ShowPrisonForm(BaconBuiltObject.myMain);
+                            }
+                            else if (BaconMain.prisonForm != null)
+                                BaconMain.prisonForm.BringToFront();
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
                     }
-                    break;
-                case Keys.S:
-                    if (e.Control)
+                    //case Keys.Q:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.IncreaseDockingBayCapacity, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.ShowStats(main);
-                        e.Handled = true;
-                        break;
+                        //if (e.Control)
+                        {
+                            BaconBuiltObject.IncreaseDockingBayCapacity(BaconBuiltObject.myMain);
+                            //break;
+                        }
+                        //break;
                     }
-                    break;
-                case Keys.T:
-                    if (e.Control)
+                    //case Keys.R:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowDamagedComponents, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.AddShipToTradeList(main);
-                        e.Handled = true;
-                        break;
+                        //if (e.Control)
+                        {
+                            BaconBuiltObject.ShowDamagedComponents(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
                     }
-                    break;
-                case Keys.U:
-                    if (e.Alt)
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.RevealIfPirate, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.ForceUnloadAtDestination(main, main._Game.SelectedObject as BuiltObject);
-                        e.Handled = true;
-                        break;
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.RevealIfPirate(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
                     }
-                    break;
-                case Keys.W:
-                    if (e.Control)
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.RushStateShips, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.OrderPassengershipMission(main, (object)null, e.Shift);
-                        break;
+                        //if (e.Shift)
+                        {
+                            BaconBuiltObject.RushStateShips(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
                     }
-                    break;
-                case Keys.OemSemicolon:
-                    if (e.Alt)
+                    //case Keys.S:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowStats, out targetId) &&
+                    targetId == target.Parent.TargetMethodId)
                     {
-                        if (main._Game.SelectedObject is BuiltObject && (main._Game.SelectedObject as BuiltObject).ActualEmpire == main._Game.PlayerEmpire)
-                            BaconBuiltObject.CycleShipSelected(main, "backward");
-                        else if (main._Game.SelectedObject is Fighter && (main._Game.SelectedObject as Fighter).ParentBuiltObject.ActualEmpire == main._Game.PlayerEmpire)
-                            BaconBuiltObject.CycleFighterSelected(main, "backward");
-                        else if (main._Game.SelectedObject is ShipGroup && (main._Game.SelectedObject as ShipGroup).Empire == main._Game.PlayerEmpire)
-                            BaconBuiltObject.CycleFleetSelected(main, "backward");
-                        break;
+                        //if (e.Control)
+                        {
+                            BaconBuiltObject.ShowStats(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
                     }
-                    break;
-                case Keys.OemQuestion:
-                    if (e.Alt)
+                    //case Keys.T:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AddShipToTradeList, out targetId) &&
+                targetId == target.Parent.TargetMethodId)
                     {
-                        BaconBuiltObject.GetParentCarrier(main);
-                        break;
+                        //if (e.Control)
+                        {
+                            BaconBuiltObject.AddShipToTradeList(BaconBuiltObject.myMain);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
                     }
-                    break;
-                case Keys.OemQuotes:
-                    if (e.Alt)
+                    //case Keys.U:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ForceUnloadAtDestination, out targetId) &&
+           targetId == target.Parent.TargetMethodId)
                     {
-                        if (main._Game.SelectedObject is BuiltObject && (main._Game.SelectedObject as BuiltObject).ActualEmpire == main._Game.PlayerEmpire)
-                            BaconBuiltObject.CycleShipSelected(main, "forward");
-                        else if (main._Game.SelectedObject is Fighter && (main._Game.SelectedObject as Fighter).ParentBuiltObject.ActualEmpire == main._Game.PlayerEmpire)
-                            BaconBuiltObject.CycleFighterSelected(main, "forward");
-                        else if (main._Game.SelectedObject is ShipGroup && (main._Game.SelectedObject as ShipGroup).Empire == main._Game.PlayerEmpire)
-                            BaconBuiltObject.CycleFleetSelected(main, "forward");
-                        break;
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.ForceUnloadAtDestination(BaconBuiltObject.myMain, BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject);
+                            e.Handled = true;
+                            //break;
+                        }
+                        //break;
                     }
-                    break;
+                    //case Keys.W:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderPassengershipMission, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Control)
+                        {
+                            BaconBuiltObject.OrderPassengershipMission(BaconBuiltObject.myMain, (object)null, e.Shift);
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.OemSemicolon:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CycleSelectedByRoleBackward, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).ActualEmpire == BaconBuiltObject.myMain._Game.PlayerEmpire)
+                                BaconBuiltObject.CycleShipSelected(BaconBuiltObject.myMain, "backward");
+                            else if (BaconBuiltObject.myMain._Game.SelectedObject is Fighter && (BaconBuiltObject.myMain._Game.SelectedObject as Fighter).ParentBuiltObject.ActualEmpire == BaconBuiltObject.myMain._Game.PlayerEmpire)
+                                BaconBuiltObject.CycleFighterSelected(BaconBuiltObject.myMain, "backward");
+                            else if (BaconBuiltObject.myMain._Game.SelectedObject is ShipGroup && (BaconBuiltObject.myMain._Game.SelectedObject as ShipGroup).Empire == BaconBuiltObject.myMain._Game.PlayerEmpire)
+                                BaconBuiltObject.CycleFleetSelected(BaconBuiltObject.myMain, "backward");
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.OemQuestion:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.GetParentCarrier, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            BaconBuiltObject.GetParentCarrier(BaconBuiltObject.myMain);
+                            //break;
+                        }
+                        //break;
+                    }
+                    //case Keys.OemQuotes:
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CycleSelectedByRoleForward, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        //if (e.Alt)
+                        {
+                            if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).ActualEmpire == BaconBuiltObject.myMain._Game.PlayerEmpire)
+                                BaconBuiltObject.CycleShipSelected(BaconBuiltObject.myMain, "forward");
+                            else if (BaconBuiltObject.myMain._Game.SelectedObject is Fighter && (BaconBuiltObject.myMain._Game.SelectedObject as Fighter).ParentBuiltObject.ActualEmpire == BaconBuiltObject.myMain._Game.PlayerEmpire)
+                                BaconBuiltObject.CycleFighterSelected(BaconBuiltObject.myMain, "forward");
+                            else if (BaconBuiltObject.myMain._Game.SelectedObject is ShipGroup && (BaconBuiltObject.myMain._Game.SelectedObject as ShipGroup).Empire == BaconBuiltObject.myMain._Game.PlayerEmpire)
+                                BaconBuiltObject.CycleFleetSelected(BaconBuiltObject.myMain, "forward");
+                            //break;
+                        }
+                    }
+                }
+                //break;
+                //}
             }
-            return e;
         }
 
         public static void IncreaseDockingBayCapacity(Main main)
@@ -4397,11 +4518,11 @@ namespace BaconDistantWorlds
           int framesPersecond = 30)
         {
             int num = (int)Math.Sqrt((double)(ship.Size * 30));
-            DistantWorlds.Animation animation = new DistantWorlds.Animation(main.cxjxlkqlKe.list_26[0], main._Game.Galaxy.CurrentDateTime, framesPersecond, ship.Xpos, ship.Ypos, num * sizeMultiplier, num * sizeMultiplier, (double)ship.TargetHeading * -1.0, Color.Empty)
+            DistantWorlds.Animation animation = new DistantWorlds.Animation(main.mainView.list_26[0], main._Game.Galaxy.CurrentDateTime, framesPersecond, ship.Xpos, ship.Ypos, num * sizeMultiplier, num * sizeMultiplier, (double)ship.TargetHeading * -1.0, Color.Empty)
             {
                 DisposeTexturesWhenComplete = false
             };
-            main.cxjxlkqlKe.animationSystem_0.AddAnimation(animation);
+            main.mainView.animationSystem_0.AddAnimation(animation);
         }
 
         public static int CheckForNegativeRefueling(BuiltObject ship, int refuelAmount)
@@ -4825,11 +4946,11 @@ namespace BaconDistantWorlds
                                             weapon2.Fire(ship._Galaxy, (StellarObject)ship, weapon1, (double)weapon1.DistanceFromTarget, time, willHit, hitRangeChance);
                                             if (weapon1 != null && !flag && BaconBuiltObject.myMain != null)
                                             {
-                                                DistantWorlds.Animation animation = new DistantWorlds.Animation(BaconBuiltObject.myMain.cxjxlkqlKe.list_26[0], BaconBuiltObject.myMain._Game.Galaxy.CurrentDateTime, 60, weapon1.X, weapon1.Y, 24, 24, -1.0, Color.Empty)
+                                                DistantWorlds.Animation animation = new DistantWorlds.Animation(BaconBuiltObject.myMain.mainView.list_26[0], BaconBuiltObject.myMain._Game.Galaxy.CurrentDateTime, 60, weapon1.X, weapon1.Y, 24, 24, -1.0, Color.Empty)
                                                 {
                                                     DisposeTexturesWhenComplete = false
                                                 };
-                                                BaconBuiltObject.myMain.cxjxlkqlKe.animationSystem_0.AddAnimation(animation);
+                                                BaconBuiltObject.myMain.mainView.animationSystem_0.AddAnimation(animation);
                                             }
                                             weapon1.Reset();
                                             break;
