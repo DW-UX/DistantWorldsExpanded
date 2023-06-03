@@ -13,6 +13,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Markup;
@@ -110,6 +111,7 @@ namespace DistantWorlds
                 list.Add("Explosion_Small.wav");
                 list.Add("Explosion_Small2.wav");
                 list.Add("Explosion_Small3.wav");
+                list = list.Distinct().ToList();
                 List<MemoryStream> list2 = new List<MemoryStream>();
                 List<string> list3 = new List<string>();
                 for (int i = 0; i < list.Count; i++)
@@ -313,7 +315,8 @@ namespace DistantWorlds
                             if (SecondarySoundBuffer != null && !SecondarySoundBuffer.Disposed)
                             {
                                 BufferStatus status = SecondarySoundBuffer.Status;
-                                if (status != BufferStatus.Playing && status != BufferStatus.Looping)
+                                if (status != BufferStatus.Playing && status != BufferStatus.Looping && status != (BufferStatus.Playing | BufferStatus.Software) &&
+                                     status != (BufferStatus.Looping | BufferStatus.Software))
                                 {
                                     SecondarySoundBuffer.Dispose();
                                     list.Add(SecondarySoundBuffer);
@@ -934,7 +937,8 @@ namespace DistantWorlds
                             //secondarySoundBuffer = SecondarySoundBuffer.FromPointer(((SecondarySoundBuffer)obj).ComPointer);
 
                             //list_0.Add(secondarySoundBuffer);(SecondarySoundBuffer)obj
-                            _bufferList.Add(CopyBuffer(obj));
+                            secondarySoundBuffer = CopyBuffer(obj);
+                            _bufferList.Add(secondarySoundBuffer);
                         }
                     }
                     else
@@ -998,7 +1002,7 @@ namespace DistantWorlds
                 _bufferList = null;
                 foreach (var item in _bufferDict)
                 {
-                    item.Value.Buffer.Dispose();                    
+                    item.Value.Buffer.Dispose();
                 }
                 _bufferDict = null;
                 // TODO: dispose managed state (managed objects)
