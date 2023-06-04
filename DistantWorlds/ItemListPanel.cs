@@ -1734,7 +1734,7 @@ namespace DistantWorlds
                 if (empireActivity_0.ResourceId != byte.MaxValue)
                 {
                     Resource resource = new Resource(empireActivity_0.ResourceId);
-                    Bitmap bitmap3 = Container.Parent.esJqlOpLpG[resource.PictureRef];
+                    Bitmap bitmap3 = Container.Parent._uiResourcesBitmaps[resource.PictureRef];
                     float num20 = (float)bitmap3.Width / (float)bitmap3.Height;
                     int num21 = num7;
                     num19 = (int)((float)num21 * num20);

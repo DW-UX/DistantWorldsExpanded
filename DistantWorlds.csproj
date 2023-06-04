@@ -211,6 +211,7 @@
 		<None Update="app.config">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="Report20230602-2033.diagsession" Link="Report20230602-2033.diagsession" />
 		<None Update="x64\Facepunch.Steamworks.Win64.dll">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

@@ -8044,16 +8044,16 @@ namespace DistantWorlds
             main_0.builtObjectImageCache_0.Initialize(Application.StartupPath, string_2);
             Galaxy.FlagShapes = Galaxy.LoadFlagShapes(Application.StartupPath, string_2);
             Galaxy.FlagShapesPirates = Galaxy.LoadFlagShapesPirates(Application.StartupPath, string_2);
-            Parallel.Invoke(() => main_0.method_39(string_3, string_4, 0.5),
-                () => main_0.method_44(string_3, string_4, string_2),
-                () => main_0.method_43(string_3, string_4, string_2),
-                () => main_0.method_45(string_3, string_4),
-                () => main_0.SrhwdZrGbo(string_3, string_4),
-                () => main_0.method_57(string_3, string_2),
-                () => main_0.method_59(string_3, string_4),
-                () => main_0.method_46(string_3, string_4),
-                () => main_0.method_33(string_3, string_4),
-                () => main_0.method_34(string_3, string_4));
+            Parallel.Invoke(() => main_0.LoadFighters(string_3, string_4, 0.5),
+                () => main_0.LoadRacesImg(string_3, string_4, string_2),
+                () => main_0.LoadTroops(string_3, string_4, string_2),
+                () => main_0.LoadUiResources(string_3, string_4),
+                () => main_0.LoadUiComponents(string_3, string_4),
+                () => main_0.LoadUiChrome(string_3, string_2),
+                () => main_0.LoadUiCursors(string_3, string_4),
+                () => main_0.LoadEffectsWeapons(string_3, string_4),
+                () => main_0.LoadPlanetaryFacilities(string_3, string_4),
+                () => main_0.LoadRuins(string_3, string_4));
             main_0.string_27 = string.Empty;
             bool bool_7 = false;
             if (string.IsNullOrEmpty(string_2))
@@ -8061,18 +8061,18 @@ namespace DistantWorlds
                 bool_7 = true;
             }
             double double_ = 0.5;
-            Parallel.Invoke(() => main_0.method_26(string_3, string_4, double_, bool_7),
-            () => main_0.method_28(string_3, string_4, double_),
-            () => main_0.method_29(string_3, string_4, double_),
-            () => main_0.method_30(string_3, string_4),
-            () => main_0.method_47(string_3, string_4, double_, bool_7),
-           () => main_0.method_48(string_3, string_4),
-            () => main_0.method_49(string_3, string_4),
-            () => main_0.method_32(string_3, string_4),
-           () => main_0.method_50(string_3, string_4),
-         () => main_0.method_52(string_3, string_4),
-         () => main_0.method_51(string_3, string_4),
-        () => main_0.method_60(string_3, string_4));
+            Parallel.Invoke(() => main_0.LoadStars(string_3, string_4, double_, bool_7),
+            () => main_0.LoadHyperEffects(string_3, string_4, double_),
+            () => main_0.LoadEffects(string_3, string_4, double_),
+            () => main_0.LoadEnvironmentOverlays(string_3, string_4),
+            () => main_0.LoadEffectsExplosion(string_3, string_4, double_, bool_7),
+           () => main_0.LoadUiMessages(string_3, string_4),
+            () => main_0.LoadUiEvents(string_3, string_4),
+            () => main_0.LoadUiPlagues(string_3, string_4),
+           () => main_0.LoadEnvLandscapes(string_3, string_4),
+         () => main_0.LoadUiAchievements(string_3, string_4),
+         () => main_0.LoadUiShipsymbols(string_3, string_4),
+        () => main_0.LoadEnvGalaxybackdrops(string_3, string_4));
             main_0.mainView.ResetRendering();
             encyclopediaItemList_0 = main_0.method_465(null, Application.StartupPath, string_2);
             encyclopediaItemList_1 = new EncyclopediaItemList();

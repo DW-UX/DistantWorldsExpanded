@@ -1080,10 +1080,10 @@ namespace DistantWorlds.Controls
 
         private void method_17()
         {
-            bitmap_6 = new Bitmap[main_0.esJqlOpLpG.Length];
-            for (int i = 0; i < main_0.esJqlOpLpG.Length; i++)
+            bitmap_6 = new Bitmap[main_0._uiResourcesBitmaps.Length];
+            for (int i = 0; i < main_0._uiResourcesBitmaps.Length; i++)
             {
-                Bitmap bitmap = main_0.esJqlOpLpG[i];
+                Bitmap bitmap = main_0._uiResourcesBitmaps[i];
                 Bitmap bitmap2 = new Bitmap(16, 16, PixelFormat.Format32bppPArgb);
                 double val = (double)bitmap.Width / 16.0;
                 double val2 = (double)bitmap.Height / 16.0;
@@ -7613,7 +7613,7 @@ namespace DistantWorlds.Controls
             HabitatResourceList habitatResourceList = habitat_1.Resources.Clone();
             for (int i = 0; i < habitatResourceList.Count; i++)
             {
-                Bitmap bitmap = main_0.esJqlOpLpG[habitatResourceList[i].PictureRef];
+                Bitmap bitmap = main_0._uiResourcesBitmaps[habitatResourceList[i].PictureRef];
                 double num19 = (double)bitmap.Width / (double)bitmap.Height;
                 int num20 = 0;
                 int num21 = 0;
@@ -7782,7 +7782,7 @@ namespace DistantWorlds.Controls
                     HabitatResourceList habitatResourceList = habitat_1.Resources.Clone();
                     for (int i = 0; i < habitatResourceList.Count; i++)
                     {
-                        Bitmap bitmap2 = main_0.esJqlOpLpG[habitatResourceList[i].PictureRef];
+                        Bitmap bitmap2 = main_0._uiResourcesBitmaps[habitatResourceList[i].PictureRef];
                         double num20 = (double)bitmap2.Width / (double)bitmap2.Height;
                         int num21 = 0;
                         int num22 = 0;
