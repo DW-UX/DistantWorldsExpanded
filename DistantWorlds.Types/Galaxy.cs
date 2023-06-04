@@ -17,6 +17,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace DistantWorlds.Types
 {
@@ -23780,6 +23781,7 @@ namespace DistantWorlds.Types
         public static RaceList LoadRaces(string applicationStartupPath, string customizationSetName)
         {
             RaceList raceList = new RaceList();
+            List<Task<Race>> taskList = new List<Task<Race>>();
             string text = string.Empty;
             string path = applicationStartupPath + "\\races\\";
             if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
@@ -23798,9 +23800,17 @@ namespace DistantWorlds.Types
                     text = files[i];
                     if (File.Exists(text))
                     {
-                        Race item = Race.LoadFromFile(text);
-                        raceList.Add(item);
+                        string localText = text;
+                        //Race item = Race.LoadFromFile(text);
+                        //raceList.Add(item);
+                        taskList.Add(Task.Run(() => Race.LoadFromFile(localText)));
                     }
+                }
+                Task.WaitAll(taskList.ToArray());
+                foreach (var item in taskList)
+                {
+                    if (item.Result != null)
+                    { raceList.Add(item.Result); }
                 }
             }
             catch (ApplicationException)
@@ -23809,7 +23819,7 @@ namespace DistantWorlds.Types
             }
             catch (Exception)
             {
-                throw new ApplicationException("Error reading file " + text);
+                throw new ApplicationException("Error reading txt file of some race");
             }
             LoadRaceBiases(applicationStartupPath, customizationSetName, raceList);
             return raceList;
@@ -51692,4 +51702,4 @@ namespace DistantWorlds.Types
             SteamAPI.Shutdown();
         }
     }
-    }
+}

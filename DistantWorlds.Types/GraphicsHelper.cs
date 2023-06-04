@@ -11,6 +11,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
+using System.Linq;
 
 namespace DistantWorlds.Types
 {
@@ -247,23 +248,19 @@ namespace DistantWorlds.Types
             MemoryStream memoryStream = new MemoryStream();
             try
             {
-                bitmap1 = new Bitmap(imagePath);
-                float horizontalResolution = bitmap1.HorizontalResolution;
-                float verticalResolution = bitmap1.VerticalResolution;
-                if (bitmap1.RawFormat != System.Drawing.Imaging.ImageFormat.Png)
+                Bitmap bitmap2 = new Bitmap(imagePath);
+                float horizontalResolution = bitmap2.HorizontalResolution;
+                float verticalResolution = bitmap2.VerticalResolution;
+                try
                 {
-                    Bitmap bitmap2 = new Bitmap(bitmap1);
-                    try
-                    {
-                        bitmap2.Save((Stream)memoryStream, ImageFormat.Png);
-                    }
-                    finally
-                    {
-                        bitmap2.Dispose();
-                    }
-                    bitmap1 = new Bitmap(Image.FromStream((Stream)memoryStream));
-                    memoryStream.Close();
+                    bitmap2.Save((Stream)memoryStream, ImageFormat.Png);
                 }
+                finally
+                {
+                    bitmap2.Dispose();
+                }
+                bitmap1 = new Bitmap(Image.FromStream((Stream)memoryStream));
+                memoryStream.Close();
                 bitmap1.SetResolution(horizontalResolution, verticalResolution);
             }
             finally
@@ -271,6 +268,40 @@ namespace DistantWorlds.Types
                 memoryStream.Dispose();
             }
             return bitmap1;
+
+            //Bitmap bitmap1 = (Bitmap)null;
+            //MemoryStream memoryStream = new MemoryStream();
+            //try
+            //{
+            //    bitmap1 = new Bitmap(imagePath);
+
+            //    float horizontalResolution = bitmap1.HorizontalResolution;
+            //    float verticalResolution = bitmap1.VerticalResolution;
+            //    if (bitmap1.RawFormat.Guid != System.Drawing.Imaging.ImageFormat.Png.Guid)
+            //    {
+            //        Bitmap bitmap2 = new Bitmap(bitmap1);
+            //        try
+            //        {
+            //            bitmap2.Save((Stream)memoryStream, ImageFormat.Png);
+            //        }
+            //        finally
+            //        {
+            //            bitmap2.Dispose();
+            //        }
+            //        bitmap1 = new Bitmap(Image.FromStream((Stream)memoryStream));
+            //        memoryStream.Close();
+            //    }
+            //    else
+            //    {
+            //        bitmap1.MakeTransparent(Color.Transparent);
+            //    }
+            //    bitmap1.SetResolution(horizontalResolution, verticalResolution);
+            //}
+            //finally
+            //{
+            //    memoryStream.Dispose();
+            //}
+            //return bitmap1;
         }
 
         public static Point MeasureCenterForImage(Bitmap image, int width, int height)

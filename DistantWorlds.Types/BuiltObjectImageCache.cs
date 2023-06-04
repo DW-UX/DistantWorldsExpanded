@@ -8,6 +8,7 @@ using BaconDistantWorlds;
 
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -28,7 +29,7 @@ namespace DistantWorlds.Types
 
         private Dictionary<int, DateTime> _LastUsage = new Dictionary<int, DateTime>();
 
-        private Dictionary<int, BuiltObjectImageData> _ImageDataSmall = new Dictionary<int, BuiltObjectImageData>();
+        private ConcurrentDictionary<int, BuiltObjectImageData> _ImageDataSmall = new ConcurrentDictionary<int, BuiltObjectImageData>();
 
         private int _ImageSmallSize = 30;
 
@@ -488,7 +489,7 @@ namespace DistantWorlds.Types
             return null;
         }
 
-        public string CheckLoadSmallImage(ref int index, string fullPathWithoutSuffix, string fullPathWithoutSuffixCustom)
+        public string CheckLoadSmallImage(int index, string fullPathWithoutSuffix, string fullPathWithoutSuffixCustom)
         {
             Bitmap bitmap = null;
             string empty = string.Empty;
@@ -530,8 +531,9 @@ namespace DistantWorlds.Types
             }
             num = DetermineImageContentSize(bitmap4);
             BuiltObjectImageData value = new BuiltObjectImageData(bitmap4, bitmap2, num, list, list2, BuiltObjectImageSize.Small);
-            _ImageDataSmall[index] = value;
-            index++;
+            //_ImageDataSmall[index] = value;
+            _ImageDataSmall.AddOrUpdate(index, value, (key, oldValue) => throw new ApplicationException("Key duplicate on shipset dictionary, shoud not be posible"));
+            //index++;
             if (bitmap != null && bitmap.PixelFormat != 0)
             {
                 bitmap.Dispose();
@@ -944,18 +946,24 @@ namespace DistantWorlds.Types
 
         private void GenerateBuiltObjectImageFilepaths()
         {
+            List<Task<string>> taskList = new List<Task<string>>();
             _Filepaths.Clear();
             string text = _ApplicationStartupPath + "\\images\\units\\ships\\";
             string text2 = _ApplicationStartupPath + "\\customization\\" + _CustomizationSetName + "\\images\\units\\ships\\";
             int index = 0;
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text + "other\\planetdestroyer", text2 + "other\\planetdestroyer"));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(0, text + "other\\planetdestroyer", text2 + "other\\planetdestroyer")));
+            index++;
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text + "other\\planetdestroyer", text2 + "other\\planetdestroyer"));
             string text3 = text + "other\\";
             string text4 = text2 + "other\\";
             string text5 = text3 + "minorsets\\bases\\";
             string text6 = text4 + "minorsets\\bases\\";
             for (int i = 0; i < 2; i++)
             {
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text5 + "base_" + i, text6 + "base_" + i));
+                int localIndex = index++;
+                int localI = i;
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text5 + "base_" + i, text6 + "base_" + i));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex, text5 + "base_" + localI, text6 + "base_" + localI)));
             }
             string text7 = text3 + "minorsets\\";
             string text8 = text4 + "minorsets\\";
@@ -963,10 +971,18 @@ namespace DistantWorlds.Types
             {
                 string text9 = text7 + "family" + j + "\\";
                 string text10 = text8 + "family" + j + "\\";
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text9 + "military_small", text10 + "military_small"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text9 + "military_medium", text10 + "military_medium"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text9 + "military_large", text10 + "military_large"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text9 + "colonyship", text10 + "colonyship"));
+                int localIndex1 = index++;
+                int localIndex2 = index++;
+                int localIndex3 = index++;
+                int localIndex4 = index++;
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text9 + "military_small", text10 + "military_small"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text9 + "military_medium", text10 + "military_medium"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text9 + "military_large", text10 + "military_large"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text9 + "colonyship", text10 + "colonyship"));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex1, text9 + "military_small", text10 + "military_small")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex2, text9 + "military_medium", text10 + "military_medium")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex3, text9 + "military_large", text10 + "military_large")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex4, text9 + "colonyship", text10 + "colonyship")));
             }
             string text11 = text3 + "majorsets\\";
             string text12 = text4 + "majorsets\\";
@@ -993,34 +1009,84 @@ namespace DistantWorlds.Types
                         text14 += "FreedomAlliance\\";
                         break;
                 }
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "frigate", text14 + "frigate"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "destroyer", text14 + "destroyer"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "cruiser", text14 + "cruiser"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "capitalship", text14 + "capitalship"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "trooptransport", text14 + "trooptransport"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "base_0", text14 + "base_0"));
-                _Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "base_1", text14 + "base_1"));
+                int localIndex1 = index++;
+                int localIndex2 = index++;
+                int localIndex3 = index++;
+                int localIndex4 = index++;
+                int localIndex5 = index++;
+                int localIndex6 = index++;
+                int localIndex7 = index++;
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "frigate", text14 + "frigate"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "destroyer", text14 + "destroyer"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "cruiser", text14 + "cruiser"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "capitalship", text14 + "capitalship"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "trooptransport", text14 + "trooptransport"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "base_0", text14 + "base_0"));
+                //_Filepaths.Add(CheckLoadSmallImage(ref index, text13 + "base_1", text14 + "base_1"));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex1, text13 + "frigate", text14 + "frigate")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex2, text13 + "destroyer", text14 + "destroyer")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex3, text13 + "cruiser", text14 + "cruiser")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex4, text13 + "capitalship", text14 + "capitalship")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex5, text13 + "trooptransport", text14 + "trooptransport")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex6, text13 + "base_0", text14 + "base_0")));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex7, text13 + "base_1", text14 + "base_1")));
                 if (k == ShipImageHelper.FreedomAllianceFamily)
                 {
                     string text15 = text13 + "aged\\";
                     string text16 = text14 + "aged\\";
-                    _Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "frigate", text16 + "frigate"));
-                    _Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "destroyer", text16 + "destroyer"));
-                    _Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "cruiser", text16 + "cruiser"));
-                    _Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "capitalship", text16 + "capitalship"));
-                    _Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "trooptransport", text16 + "trooptransport"));
+                    //_Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "frigate", text16 + "frigate"));
+                    //_Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "destroyer", text16 + "destroyer"));
+                    //_Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "cruiser", text16 + "cruiser"));
+                    //_Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "capitalship", text16 + "capitalship"));
+                    //_Filepaths.Add(CheckLoadSmallImage(ref index, text15 + "trooptransport", text16 + "trooptransport"));
+                    int localIndex8 = index++;
+                    int localIndex9 = index++;
+                    int localIndex10 = index++;
+                    int localIndex11 = index++;
+                    int localIndex12 = index++;
+                    taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex8, text15 + "frigate", text16 + "frigate")));
+                    taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex9, text15 + "destroyer", text16 + "destroyer")));
+                    taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex10, text15 + "cruiser", text16 + "cruiser")));
+                    taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex11, text15 + "capitalship", text16 + "capitalship")));
+                    taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex12, text15 + "trooptransport", text16 + "trooptransport")));
                 }
             }
             string text17 = text3 + "majorsets\\PhantomPirates\\";
             string text18 = text4 + "majorsets\\PhantomPirates\\";
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "escort", text18 + "escort"));
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "frigate", text18 + "frigate"));
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "destroyer", text18 + "destroyer"));
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "cruiser", text18 + "cruiser"));
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "capitalship", text18 + "capitalship"));
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "carrier", text18 + "carrier"));
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "defensivebase", text18 + "defensivebase"));
-            _Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "homebase", text18 + "homebase"));
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "escort", text18 + "escort"));
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "frigate", text18 + "frigate"));
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "destroyer", text18 + "destroyer"));
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "cruiser", text18 + "cruiser"));
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "capitalship", text18 + "capitalship"));
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "carrier", text18 + "carrier"));
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "defensivebase", text18 + "defensivebase"));
+            //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "homebase", text18 + "homebase"));
+            int localIndex13 = index++;
+            int localIndex14 = index++;
+            int localIndex15 = index++;
+            int localIndex16 = index++;
+            int localIndex17 = index++;
+            int localIndex18 = index++;
+            int localIndex19 = index++;
+            int localIndex20 = index++;
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex13, text17 + "escort", text18 + "escort")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex14, text17 + "frigate", text18 + "frigate")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex15, text17 + "destroyer", text18 + "destroyer")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex16, text17 + "cruiser", text18 + "cruiser")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex17, text17 + "capitalship", text18 + "capitalship")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex18, text17 + "carrier", text18 + "carrier")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex19, text17 + "defensivebase", text18 + "defensivebase")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex20, text17 + "homebase", text18 + "homebase")));
+
+            Task.WaitAll(taskList.ToArray());
+            foreach (var item in taskList)
+            {
+                if (item.IsFaulted)
+                { throw item.Exception; }
+                else
+                { _Filepaths.Add(item.Result); }
+            }
+
             int num = 0;
             int num2 = 50;
             while (true)
@@ -1046,6 +1112,36 @@ namespace DistantWorlds.Types
             }
         }
 
+        private void ClearImageCache(ConcurrentDictionary<int, BuiltObjectImageData> images)
+        {
+            lock (_LockObject)
+            {
+                foreach (var item in images)
+                {
+                    if (item.Value == null)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        if (item.Value.Image != null && item.Value.Image.PixelFormat != 0)
+                        {
+                            item.Value.Image.Dispose();
+                        }
+                        if (item.Value.MaskImage != null && item.Value.MaskImage.PixelFormat != 0)
+                        {
+                            item.Value.MaskImage.Dispose();
+                        }
+                        item.Value.Image = null;
+                        item.Value.MaskImage = null;
+                        item.Value.ThrusterLocations = null;
+                        item.Value.LightPoints = null;
+                    }
+                    //}
+                }
+                images.Clear();
+            }
+        }
         private void ClearImageCache(Dictionary<int, BuiltObjectImageData> images)
         {
             lock (_LockObject)
