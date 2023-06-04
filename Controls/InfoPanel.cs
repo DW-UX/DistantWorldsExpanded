@@ -16,6 +16,7 @@ using System.Drawing.Text;
 using System.Globalization;
 using System.Windows.Forms;
 using BaconDistantWorlds;
+using System.Threading.Tasks;
 
 namespace DistantWorlds.Controls
 {
@@ -1760,7 +1761,12 @@ namespace DistantWorlds.Controls
             }
         }
 
-        public static void InitializeImages(CharacterImageCache characterImageCache, Bitmap[] troopImagesInfantry, Bitmap[] troopImagesArmored, Bitmap[] troopImagesArtillery, Bitmap[] troopImagesSpecialForces, Bitmap[] troopImagesPirateRaider, Bitmap[] resourceImages, RaceImageCache raceImageCache, Bitmap[] builtObjectImages, Bitmap[] fighterImages, Bitmap[] ruinImages, Bitmap[] habitatImages, Bitmap[] facilityImages, Bitmap approvalSmileImage, Bitmap approvalNeutralImage, Bitmap approvalSadImage, Bitmap approvalAngryImage, Bitmap developmentImage, Bitmap colonyImage, Bitmap firepowerImage, Bitmap shipGroupLeadShipImage, Bitmap capitalColonyImage, Bitmap regionalCapitalColonyImage, Bitmap automateImage, Bitmap blockadeImage, Bitmap[] messageImages, Bitmap[] plagueImages)
+        public static void InitializeImages(CharacterImageCache characterImageCache, Bitmap[] troopImagesInfantry, Bitmap[] troopImagesArmored, 
+            Bitmap[] troopImagesArtillery, Bitmap[] troopImagesSpecialForces, Bitmap[] troopImagesPirateRaider, Bitmap[] resourceImages, 
+            RaceImageCache raceImageCache, Bitmap[] builtObjectImages, Bitmap[] fighterImages, Bitmap[] ruinImages, Bitmap[] habitatImages,
+            Bitmap[] facilityImages, Bitmap approvalSmileImage, Bitmap approvalNeutralImage, Bitmap approvalSadImage, Bitmap approvalAngryImage, 
+            Bitmap developmentImage, Bitmap colonyImage, Bitmap firepowerImage, Bitmap shipGroupLeadShipImage, Bitmap capitalColonyImage, 
+            Bitmap regionalCapitalColonyImage, Bitmap automateImage, Bitmap blockadeImage, Bitmap[] messageImages, Bitmap[] plagueImages)
         {
             int num = 14;
             int num2 = 24;
@@ -1785,6 +1791,7 @@ namespace DistantWorlds.Controls
             _AutomateImage = automateImage;
             _BlockadeImage = blockadeImage;
             _MessageImages = messageImages;
+            List<Task> taskList = new List<Task>();
             if (ruinImages != null)
             {
                 if (RuinImages != null)
@@ -1804,8 +1811,12 @@ namespace DistantWorlds.Controls
                 {
                     double num10 = (double)ruinImages[j].Width / (double)ruinImages[j].Height;
                     int num11 = (int)((double)num9 * num10);
-                    RuinImages[j] = PrescaleImageStatic(ruinImages[j], num11, num9);
+                    //RuinImages[j] = PrescaleImageStatic(ruinImages[j], num11, num9);
+                    int localJ = j;
+                    taskList.Add(Task.Run(() => RuinImages[localJ] =PrescaleImageStatic(ruinImages[localJ], num11, num9)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 if (RuinImagesLarge != null)
                 {
                     for (int k = 0; k < RuinImagesLarge.Length; k++)
@@ -1823,8 +1834,12 @@ namespace DistantWorlds.Controls
                 {
                     double num12 = (double)ruinImages[l].Width / (double)ruinImages[l].Height;
                     int num13 = (int)((double)num9 * num12);
-                    RuinImagesLarge[l] = PrescaleImageStatic(ruinImages[l], num13, num9);
+                    //RuinImagesLarge[l] = PrescaleImageStatic(ruinImages[l], num13, num9);
+                    int localL = l;
+                    taskList.Add(Task.Run(() => RuinImagesLarge[localL] = PrescaleImageStatic(ruinImages[localL], num13, num9)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
             }
             if (facilityImages != null)
             {
@@ -1857,14 +1872,22 @@ namespace DistantWorlds.Controls
                 {
                     double num16 = (double)facilityImages[num15].Width / (double)facilityImages[num15].Height;
                     int num17 = (int)((double)num14 * num16);
-                    FacilityImages[num15] = PrescaleImageStatic(facilityImages[num15], num17, num14);
+                    //FacilityImages[num15] = PrescaleImageStatic(facilityImages[num15], num17, num14);
+                    int localNum17 = num15;
+                    taskList.Add(Task.Run(() => FacilityImages[localNum17] = PrescaleImageStatic(facilityImages[localNum17], num17, num14)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 for (int num18 = 0; num18 < facilityImages.Length; num18++)
                 {
                     double num19 = (double)facilityImages[num18].Width / (double)facilityImages[num18].Height;
                     int num20 = (int)((double)num14 * num19);
-                    FacilityImagesFaded[num18] = FadeImageStatic(PrescaleImageStatic(facilityImages[num18], num20, num14), 0.4f);
+                    //FacilityImagesFaded[num18] = FadeImageStatic(PrescaleImageStatic(facilityImages[num18], num20, num14), 0.4f);
+                    int localNum18 = num18;
+                    taskList.Add(Task.Run(() => FacilityImagesFaded[localNum18] = FadeImageStatic(PrescaleImageStatic(facilityImages[localNum18], num20, num14), 0.4f)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 if (FacilityImagesLarge != null)
                 {
                     for (int num21 = 0; num21 < FacilityImagesLarge.Length; num21++)
@@ -1894,14 +1917,22 @@ namespace DistantWorlds.Controls
                 {
                     double num24 = (double)facilityImages[num23].Width / (double)facilityImages[num23].Height;
                     int num25 = (int)((double)num14 * num24);
-                    FacilityImagesLarge[num23] = PrescaleImageStatic(facilityImages[num23], num25, num14);
+                    //FacilityImagesLarge[num23] = PrescaleImageStatic(facilityImages[num23], num25, num14);
+                    int localNum23 = num23;
+                    taskList.Add(Task.Run(() => FacilityImagesLarge[localNum23] = PrescaleImageStatic(facilityImages[localNum23], num25, num14)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 for (int num26 = 0; num26 < facilityImages.Length; num26++)
                 {
                     double num27 = (double)facilityImages[num26].Width / (double)facilityImages[num26].Height;
                     int num28 = (int)((double)num14 * num27);
-                    FacilityImagesFadedLarge[num26] = FadeImageStatic(PrescaleImageStatic(facilityImages[num26], num28, num14), 0.4f);
+                    //FacilityImagesFadedLarge[num26] = FadeImageStatic(PrescaleImageStatic(facilityImages[num26], num28, num14), 0.4f);
+                    int localNum26 = num26;
+                    taskList.Add(Task.Run(() => FacilityImagesFadedLarge[localNum26] = FadeImageStatic(PrescaleImageStatic(facilityImages[localNum26], num28, num14), 0.4f)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
             }
             if (troopImagesInfantry != null)
             {
@@ -1953,8 +1984,11 @@ namespace DistantWorlds.Controls
                         num33 = (int)((double)num33 * num34);
                         num32 = (int)((double)num32 * num34);
                     }
-                    ResourceImages[num31] = PrescaleImageStatic(resourceImages[num31], num33, num32);
+                    int localNum31 = num31;
+                    taskList.Add(Task.Run(() => ResourceImages[localNum31] = PrescaleImageStatic(resourceImages[localNum31], num33, num32)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 if (ResourceImagesLarge != null)
                 {
                     for (int num35 = 0; num35 < ResourceImagesLarge.Length; num35++)
@@ -1978,8 +2012,11 @@ namespace DistantWorlds.Controls
                         num38 = (int)((double)num38 * num39);
                         num37 = (int)((double)num37 * num39);
                     }
-                    ResourceImagesLarge[num36] = PrescaleImageStatic(resourceImages[num36], num38, num37);
+                    int localNum36 = num36;
+                    taskList.Add(Task.Run(() => ResourceImagesLarge[localNum36] = PrescaleImageStatic(resourceImages[localNum36], num38, num37)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
             }
             if (plagueImages != null)
             {
@@ -2006,8 +2043,11 @@ namespace DistantWorlds.Controls
                         num44 = (int)((double)num44 * num45);
                         num43 = (int)((double)num43 * num45);
                     }
-                    PlagueImages[num42] = PrescaleImageStatic(plagueImages[num42], num44, num43);
+                    int localNum42 = num42;
+                    taskList.Add(Task.Run(() => PlagueImages[localNum42] = PrescaleImageStatic(plagueImages[localNum42], num44, num43)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 if (PlagueImagesLarge != null)
                 {
                     for (int num46 = 0; num46 < PlagueImagesLarge.Length; num46++)
@@ -2031,8 +2071,11 @@ namespace DistantWorlds.Controls
                         num49 = (int)((double)num49 * num50);
                         num48 = (int)((double)num48 * num50);
                     }
-                    PlagueImagesLarge[num47] = PrescaleImageStatic(plagueImages[num47], num49, num48);
+                    int localNum47 = num47;
+                    taskList.Add(Task.Run(() => PlagueImagesLarge[localNum47] = PrescaleImageStatic(plagueImages[localNum47], num49, num48)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
             }
             if (raceImageCache != null)
             {
@@ -2050,8 +2093,11 @@ namespace DistantWorlds.Controls
                 RaceImages = new Bitmap[raceImageCache.RaceImagesLength];
                 for (int num52 = 0; num52 < RaceImages.Length; num52++)
                 {
-                    RaceImages[num52] = PrescaleImageStatic(raceImageCache.GetRaceImage(num52), num, num);
+                    int localNum52= num52;
+                    taskList.Add(Task.Run(() => RaceImages[localNum52] = PrescaleImageStatic(raceImageCache.GetRaceImage(localNum52), num, num)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 if (RaceImagesLarge != null)
                 {
                     for (int num53 = 0; num53 < RaceImagesLarge.Length; num53++)
@@ -2066,8 +2112,11 @@ namespace DistantWorlds.Controls
                 RaceImagesLarge = new Bitmap[raceImageCache.RaceImagesLength];
                 for (int num54 = 0; num54 < RaceImagesLarge.Length; num54++)
                 {
-                    RaceImagesLarge[num54] = PrescaleImageStatic(raceImageCache.GetRaceImage(num54), num5, num5);
+                    int localNum54 = num54;
+                    taskList.Add(Task.Run(() => RaceImagesLarge[localNum54] = PrescaleImageStatic(raceImageCache.GetRaceImage(localNum54), num5, num5)));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
             }
             if (builtObjectImages != null)
             {
@@ -2085,12 +2134,18 @@ namespace DistantWorlds.Controls
                 BuiltObjectImages = new Bitmap[builtObjectImages.Length];
                 for (int num56 = 0; num56 < builtObjectImages.Length; num56++)
                 {
-                    Bitmap bitmap = CopyBitmap(builtObjectImages[num56]);
-                    bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    bitmap.MakeTransparent(Color.Black);
-                    BuiltObjectImages[num56] = PrescaleImageStatic(bitmap, num2, num2);
-                    bitmap.Dispose();
+                    int localNum56 = num56;
+                    taskList.Add(Task.Run(() =>
+                    {
+                        Bitmap bitmap = CopyBitmap(builtObjectImages[localNum56]);
+                        bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        bitmap.MakeTransparent(Color.Black);
+                        BuiltObjectImages[localNum56] = PrescaleImageStatic(bitmap, num2, num2);
+                        bitmap.Dispose();
+                    }));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 if (BuiltObjectImagesLarge != null)
                 {
                     for (int num57 = 0; num57 < BuiltObjectImagesLarge.Length; num57++)
@@ -2105,12 +2160,18 @@ namespace DistantWorlds.Controls
                 BuiltObjectImagesLarge = new Bitmap[builtObjectImages.Length];
                 for (int num58 = 0; num58 < builtObjectImages.Length; num58++)
                 {
-                    Bitmap bitmap2 = CopyBitmap(builtObjectImages[num58]);
-                    bitmap2.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    bitmap2.MakeTransparent(Color.Black);
-                    BuiltObjectImagesLarge[num58] = PrescaleImageStatic(bitmap2, num6, num6);
-                    bitmap2.Dispose();
+                    int localNum58 = num58;
+                    taskList.Add(Task.Run(() =>
+                    {
+                        Bitmap bitmap2 = CopyBitmap(builtObjectImages[localNum58]);
+                        bitmap2.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        bitmap2.MakeTransparent(Color.Black);
+                        BuiltObjectImagesLarge[localNum58] = PrescaleImageStatic(bitmap2, num6, num6);
+                        bitmap2.Dispose();
+                    }));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
             }
             if (fighterImages != null)
             {
@@ -2140,13 +2201,19 @@ namespace DistantWorlds.Controls
                 FighterImagesFaded = new Bitmap[fighterImages.Length];
                 for (int num61 = 0; num61 < fighterImages.Length; num61++)
                 {
-                    Bitmap bitmap3 = CopyBitmap(fighterImages[num61]);
-                    bitmap3.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    bitmap3.MakeTransparent(Color.Black);
-                    FighterImages[num61] = PrescaleImageStatic(bitmap3, num, num);
-                    FighterImagesFaded[num61] = FadeImageStatic(FighterImages[num61], 0.4f);
-                    bitmap3.Dispose();
+                    int localNum61 = num61;
+                    taskList.Add(Task.Run(() =>
+                    {
+                        Bitmap bitmap3 = CopyBitmap(fighterImages[localNum61]);
+                        bitmap3.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        bitmap3.MakeTransparent(Color.Black);
+                        FighterImages[localNum61] = PrescaleImageStatic(bitmap3, num, num);
+                        FighterImagesFaded[localNum61] = FadeImageStatic(FighterImages[localNum61], 0.4f);
+                        bitmap3.Dispose();
+                    }));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
                 if (FighterImagesLarge != null)
                 {
                     for (int num62 = 0; num62 < FighterImagesLarge.Length; num62++)
@@ -2173,13 +2240,19 @@ namespace DistantWorlds.Controls
                 FighterImagesFadedLarge = new Bitmap[fighterImages.Length];
                 for (int num64 = 0; num64 < fighterImages.Length; num64++)
                 {
-                    Bitmap bitmap4 = CopyBitmap(fighterImages[num64]);
-                    bitmap4.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    bitmap4.MakeTransparent(Color.Black);
-                    FighterImagesLarge[num64] = PrescaleImageStatic(bitmap4, num5, num5);
-                    FighterImagesFadedLarge[num64] = FadeImageStatic(FighterImagesLarge[num64], 0.4f);
-                    bitmap4.Dispose();
+                    int localNum64 = num64;
+                    taskList.Add(Task.Run(() =>
+                    {
+                        Bitmap bitmap4 = CopyBitmap(fighterImages[localNum64]);
+                        bitmap4.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        bitmap4.MakeTransparent(Color.Black);
+                        FighterImagesLarge[localNum64] = PrescaleImageStatic(bitmap4, num5, num5);
+                        FighterImagesFadedLarge[localNum64] = FadeImageStatic(FighterImagesLarge[localNum64], 0.4f);
+                        bitmap4.Dispose();
+                    }));
                 }
+                Task.WaitAll(taskList.ToArray());
+                taskList.Clear();
             }
             if (habitatImages == null)
             {
@@ -2199,8 +2272,11 @@ namespace DistantWorlds.Controls
             HabitatImages = new Bitmap[habitatImages.Length];
             for (int num66 = 0; num66 < habitatImages.Length; num66++)
             {
-                HabitatImages[num66] = PrescaleImageStatic(habitatImages[num66], num4, num4);
+                int localNum66 = num66;
+                taskList.Add(Task.Run(() => HabitatImages[localNum66] = PrescaleImageStatic(habitatImages[localNum66], num4, num4)));
             }
+            Task.WaitAll(taskList.ToArray());
+            taskList.Clear();
             if (HabitatImagesLarge != null)
             {
                 for (int num67 = 0; num67 < HabitatImagesLarge.Length; num67++)
@@ -2215,8 +2291,11 @@ namespace DistantWorlds.Controls
             HabitatImagesLarge = new Bitmap[habitatImages.Length];
             for (int num68 = 0; num68 < habitatImages.Length; num68++)
             {
-                HabitatImagesLarge[num68] = PrescaleImageStatic(habitatImages[num68], num8, num8);
+                int localNum68 = num68;
+                taskList.Add(Task.Run(() => HabitatImagesLarge[localNum68] = PrescaleImageStatic(habitatImages[localNum68], num8, num8)));
             }
+            Task.WaitAll(taskList.ToArray());
+            taskList.Clear();
         }
 
         private static void InitializeTroopImageArray(Bitmap[] sourceImages, ref Bitmap[] troopImages, ref Bitmap[] troopImagesFaded, int troopMaximumSize)
@@ -2243,28 +2322,48 @@ namespace DistantWorlds.Controls
                     }
                 }
             }
+            List<Task<Bitmap>> taskList = new List<Task<Bitmap>>();
             troopImages = new Bitmap[sourceImages.Length];
             troopImagesFaded = new Bitmap[troopImages.Length];
             for (int k = 0; k < troopImages.Length; k++)
             {
-                Size size = ResolveImageSize(sourceImages[k], troopMaximumSize);
-                Bitmap bitmap = PrescaleImageStatic(sourceImages[k], size.Width, size.Height);
-                Bitmap bitmap2 = bitmap;
-                bitmap = MakeImageSquare(bitmap, troopMaximumSize);
-                bitmap2.Dispose();
-                troopImages[k] = bitmap;
+                int localK = k;
+                taskList.Add(Task.Run(() =>
+                {
+                    Size size = ResolveImageSize(sourceImages[localK], troopMaximumSize);
+                    Bitmap bitmap = PrescaleImageStatic(sourceImages[localK], size.Width, size.Height);
+                    Bitmap bitmap2 = bitmap;
+                    bitmap = MakeImageSquare(bitmap, troopMaximumSize);
+                    bitmap2.Dispose();
+                    return bitmap;
+                }));
             }
+            Task.WaitAll(taskList.ToArray());
+            for(int i = 0; i < taskList.Count; i++)
+            {
+                troopImages[i] = taskList[i].Result; 
+            }
+            taskList.Clear();
             for (int l = 0; l < troopImagesFaded.Length; l++)
             {
-                Size size2 = ResolveImageSize(sourceImages[l], troopMaximumSize);
-                Bitmap bitmap3 = PrescaleImageStatic(sourceImages[l], size2.Width, size2.Height);
-                Bitmap bitmap4 = bitmap3;
-                bitmap3 = MakeImageSquare(bitmap3, troopMaximumSize);
-                bitmap4.Dispose();
-                bitmap4 = bitmap3;
-                bitmap3 = FadeImageStatic(bitmap3, 0.4f);
-                bitmap4.Dispose();
-                troopImagesFaded[l] = bitmap3;
+                int localL = l;
+                taskList.Add(Task.Run(() =>
+                {
+                    Size size2 = ResolveImageSize(sourceImages[localL], troopMaximumSize);
+                    Bitmap bitmap3 = PrescaleImageStatic(sourceImages[localL], size2.Width, size2.Height);
+                    Bitmap bitmap4 = bitmap3;
+                    bitmap3 = MakeImageSquare(bitmap3, troopMaximumSize);
+                    bitmap4.Dispose();
+                    bitmap4 = bitmap3;
+                    bitmap3 = FadeImageStatic(bitmap3, 0.4f);
+                    bitmap4.Dispose();
+                    return bitmap3;
+                }));
+            }
+            Task.WaitAll(taskList.ToArray());
+            for (int i = 0; i < taskList.Count; i++)
+            {
+                troopImagesFaded[i] = taskList[i].Result;
             }
         }
 
