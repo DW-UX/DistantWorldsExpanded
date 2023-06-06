@@ -23,7 +23,7 @@ namespace ExpansionMod.HotKeyMapping
 
         public bool CanHandleKeysFromOverseer { get => _canHandleKeysFromOverseer; }
 
-        public HotKeyManager(ExpansionModMain expMod , KeyMapper hotKeyParser, string folder, bool mainGame)
+        public HotKeyManager(ExpansionModMain expMod, KeyMapper hotKeyParser, string folder, bool mainGame)
         {
             this.expMod = expMod;
             _hotKeyParser = hotKeyParser;
@@ -87,7 +87,7 @@ namespace ExpansionMod.HotKeyMapping
         {
             return _hotKeyParser.MapKeys(filePath);
         }
-        
+
         public bool GetMappedTarget(List<Keys> key, out MappedHotKey target)
         {
             return _hotKeyParser.GetMappedTarget(key, out target);
@@ -103,13 +103,18 @@ namespace ExpansionMod.HotKeyMapping
             if (expMod.GameMain != null)
             {
                 if (expMod.GameMain._Game.SelectedObject != null && expMod.GameMain._Game.SelectedObject is BuiltObject constrShip &&
-                    constrShip.SubRole == BuiltObjectSubRole.ConstructionShip)
+                    constrShip.SubRole == BuiltObjectSubRole.ConstructionShip && _fEditor == null)
                 {
-                    _fEditor = new MissionQueueEditor(constrShip);
+                    _fEditor = new MissionQueueEditor(constrShip, expMod.GameMain);
                     _fEditor.Show(expMod.GameMain);
+                    _fEditor.FormClosed += _fEditor_FormClosed;
                 }
             }
         }
 
+        private void _fEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _fEditor = null;
+        }
     }
 }

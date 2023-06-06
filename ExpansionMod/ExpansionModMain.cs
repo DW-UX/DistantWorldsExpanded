@@ -12,6 +12,7 @@ using ExpansionMod.Objects;
 using System.IO;
 using ExpansionMod.Objects.HotKeyMapping;
 using ExpansionMod.ExternalMods;
+using System.Drawing;
 
 namespace ExpansionMod
 {
@@ -106,9 +107,18 @@ namespace ExpansionMod
             return _ModKey;
         }
 
+        #region Internal
+
+        //internal Font GetButtonFont()
+        //{ }
+        //internal Font GetTextFont()
+        //{ }
+
+        #endregion
+
         #region Private
 
-        
+
         private void HotKeysInitImpl(bool generateDefaultKeys)
         {
             KeyMapper gameKeyMapper = new KeyMapper(_MainGameMappingFileName);

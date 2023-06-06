@@ -18,9 +18,11 @@ namespace ExpansionMod
         private BuiltObjectMission _currentMission;
         private List<ListMissionObject> _queuedMissions = new List<ListMissionObject>();
 
-        public MissionQueueEditor(BuiltObject targetShip)
+        public MissionQueueEditor(BuiltObject targetShip, Control parent)
         {
             InitializeComponent();
+            this.Parent = parent;
+            this.CenterToParent();
             _targetShip = targetShip;
             Restore();
         }
