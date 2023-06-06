@@ -8062,17 +8062,18 @@ namespace DistantWorlds
             }
             double double_ = 0.5;
             Parallel.Invoke(() => main_0.LoadStars(string_3, string_4, double_, bool_7),
-            () => main_0.LoadHyperEffects(string_3, string_4, double_),
-            () => main_0.LoadEffects(string_3, string_4, double_),
-            () => main_0.LoadEnvironmentOverlays(string_3, string_4),
-            () => main_0.LoadEffectsExplosion(string_3, string_4, double_, bool_7),
-           () => main_0.LoadUiMessages(string_3, string_4),
-            () => main_0.LoadUiEvents(string_3, string_4),
-            () => main_0.LoadUiPlagues(string_3, string_4),
-           () => main_0.LoadEnvLandscapes(string_3, string_4),
-         () => main_0.LoadUiAchievements(string_3, string_4),
-         () => main_0.LoadUiShipsymbols(string_3, string_4),
-        () => main_0.LoadEnvGalaxybackdrops(string_3, string_4));
+                () => main_0.LoadHyperEffects(string_3, string_4, double_),
+                () => main_0.LoadEffects(string_3, string_4, double_),
+                () => main_0.LoadEnvironmentOverlays(string_3, string_4),
+                () => main_0.LoadEffectsExplosion(string_3, string_4, double_, bool_7),
+                () => main_0.LoadUiMessages(string_3, string_4),
+                () => main_0.LoadUiEvents(string_3, string_4),
+                () => main_0.LoadUiPlagues(string_3, string_4),
+                () => main_0.LoadEnvLandscapes(string_3, string_4),
+                () => main_0.LoadUiAchievements(string_3, string_4),
+                () => main_0.LoadUiShipsymbols(string_3, string_4),
+                () => main_0.LoadEnvGalaxybackdrops(string_3, string_4)
+            );
             main_0.mainView.ResetRendering();
             encyclopediaItemList_0 = main_0.method_465(null, Application.StartupPath, string_2);
             encyclopediaItemList_1 = new EncyclopediaItemList();
@@ -8426,7 +8427,7 @@ namespace DistantWorlds
             main_0._Game = game;
             main_0.string_2 = string_;
             main_0._Game.Galaxy.ApplicationStartupPath = Application.StartupPath;
-            main_0._Game.Galaxy.CustomizationSetPath = main_0.method_62();
+            main_0._Game.Galaxy.CustomizationSetPath = main_0.GetCustomizationPath();
         }
 
         private void method_15(object sender, RunWorkerCompletedEventArgs e)
