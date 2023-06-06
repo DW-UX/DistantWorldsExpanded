@@ -8,6 +8,7 @@ using DistantWorlds.Types;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace BaconDistantWorlds
 {
@@ -23,32 +24,35 @@ namespace BaconDistantWorlds
           string modPath)
         {
             List<string> stringList = new List<string>()
-      {
-        "Escort",
-        "Frigate",
-        "Destroyer",
-        "Cruiser",
-        "CapitalShip",
-        "TroopTransport",
-        "Carrier",
-        "ResupplyShip",
-        "ExplorationShip",
-        "SmallFreighter",
-        "MediumFreighter",
-        "LargeFreighter",
-        "ColonyShip",
-        "PassengerShip",
-        "ConstructionShip",
-        "GasMiningShip",
-        "MiningShip",
-        "GasMiningStation",
-        "MiningStation",
-        "SmallSpacePort",
-        "MediumSpacePort",
-        "LargeSpacePort",
-        "ResortBase",
-        "GenericBase"
-      };
+              {
+                "Escort",
+                "Frigate",
+                "Destroyer",
+                "Cruiser",
+                "CapitalShip",
+                "TroopTransport",
+                "Carrier",
+                "ResupplyShip",
+                "ExplorationShip",
+                "SmallFreighter",
+                "MediumFreighter",
+                "LargeFreighter",
+                "ColonyShip",
+                "PassengerShip",
+                "ConstructionShip",
+                "GasMiningShip",
+                "MiningShip",
+                "GasMiningStation",
+                "MiningStation",
+                "SmallSpacePort",
+                "MediumSpacePort",
+                "LargeSpacePort",
+                "ResortBase",
+                "GenericBase"
+              };
+
+            List<Task<string>> taskList = new List<Task<string>>();
+
             if (BaconBuiltObjectImageCache.overallIndex == -1)
                 BaconBuiltObjectImageCache.overallIndex = index;
             foreach (string str1 in stringList)
@@ -60,9 +64,11 @@ namespace BaconDistantWorlds
                     {
                         if (File.Exists(regularPath + str1 + str2 + ".png") || File.Exists(modPath + str1 + str2 + ".png") || File.Exists(regularPath + str1 + str2 + ".bmp") || File.Exists(modPath + str1 + str2 + ".bmp"))
                         {
-                            string str3 = imageCache.CheckLoadSmallImage(ref BaconBuiltObjectImageCache.overallIndex, regularPath + str1 + str2, modPath + str1 + str2);
-                            if (str3 != null)
-                                imageCache._Filepaths.Add(str3);
+                            int localIndex = BaconBuiltObjectImageCache.overallIndex++;
+                            //string str3 = imageCache.CheckLoadSmallImage(BaconBuiltObjectImageCache.overallIndex, regularPath + str1 + str2, modPath + str1 + str2);
+                            //if (str3 != null)
+                            //    imageCache._Filepaths.Add(str3);
+                            taskList.Add(Task.Run(() => imageCache.CheckLoadSmallImage(localIndex, regularPath + str1 + str2, modPath + str1 + str2)));
                         }
                     }
                     catch (Exception ex)
@@ -70,6 +76,13 @@ namespace BaconDistantWorlds
                         break;
                     }
                 }
+            }
+
+            Task.WaitAll(taskList.ToArray());
+            foreach (var item in taskList)
+            {
+                if (item.Result != null)
+                { imageCache._Filepaths.Add(item.Result); }
             }
             BaconBuiltObjectImageCache.shipPictures = imageCache._Filepaths;
         }

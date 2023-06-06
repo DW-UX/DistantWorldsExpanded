@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -2153,81 +2154,86 @@ namespace BaconDistantWorlds
             }
         }
 
-        public static void method_48(Main main, string string_30, string string_31)
+        public static void LoadUiMessages(Main main, string string_30, string string_31)
         {
             try
             {
                 string text = string_30 + "ui\\messages\\";
                 string text2 = string_31 + "ui\\messages\\";
-                main.bitmap_28[0] = main.method_10(text2, text, "underAttack.png", true);
-                main.bitmap_28[1] = main.method_10(text2, text, "colonygain.png", true);
-                main.bitmap_28[2] = main.method_10(text2, text, "colonyloss.png", true);
-                main.bitmap_28[3] = main.method_10(text2, text, "declarewar.png", true);
-                main.bitmap_28[4] = main.method_10(text2, text, "endwar.png", true);
-                main.bitmap_28[5] = main.method_10(text2, text, "freetradeagreement.png", true);
-                main.bitmap_28[6] = main.method_10(text2, text, "mutualdefensepact.png", true);
-                main.bitmap_28[7] = main.method_10(text2, text, "protectorate.png", true);
-                main.bitmap_28[8] = main.method_10(text2, text, "researchbreakthrough.png", true);
-                main.bitmap_28[9] = main.method_10(text2, text, "resumetrade.png", true);
-                main.bitmap_28[10] = main.method_10(text2, text, "subjugateddominion.png", true);
-                main.bitmap_28[11] = main.method_10(text2, text, "tradesanctions.png", true);
-                main.bitmap_28[12] = main.method_10(text2, text, "canceltreaty.png", true);
-                main.bitmap_28[13] = main.method_10(text2, text, "treatyrefused.png", true);
-                main.bitmap_28[14] = main.method_10(text2, text, "money.png", true);
-                main.bitmap_28[15] = main.method_10(text2, text, "warning.png", true);
-                main.bitmap_28[16] = main.method_10(text2, text, "construction.png", true);
-                main.bitmap_28[17] = main.method_10(text2, text, "request.png", true);
-                main.bitmap_28[18] = main.method_10(text2, text, "agentsuccess.png", true);
-                main.bitmap_28[19] = main.method_10(text2, text, "agentfailure.png", true);
-                main.bitmap_28[20] = main.method_10(text2, text, "blockade.png", true);
-                main.bitmap_28[21] = main.method_10(text2, text, "blockadecancelled.png", true);
-                main.bitmap_28[22] = main.method_10(text2, text, "restrictedArea.png", true);
-                main.bitmap_28[23] = main.method_10(text2, text, "agentalert.png", true);
-                main.bitmap_28[24] = main.method_10(text2, text, "explorationDiscovery.png", true);
-                main.bitmap_28[25] = main.method_10(text2, text, "galacticHistory.png", true);
-                main.bitmap_28[26] = main.method_10(text2, text, "information.png", true);
-                main.bitmap_28[27] = main.method_10(text2, text, "pirateMessage.png", true);
-                main.bitmap_28[28] = main.method_10(text2, text, "planetdestroy.png", true);
-                main.bitmap_28[29] = main.method_10(text2, text, "galacticnewsnet.png", true);
-                main.bitmap_28[30] = main.method_10(text2, text, "construction_stalled.png", true);
-                main.bitmap_28[31] = main.method_10(text2, text, "ransom.png", false);
-                main.bitmap_28[32] = main.method_10(text2, text, "distance.png", false);
-                main.bitmap_28[33] = main.method_10(text2, text, "scienceResearchComplete.png", false);
-                main.bitmap_28[34] = main.method_10(text2, text, "prisonbreak.png", false);
-                main.bitmap_28[35] = main.method_10(text2, text, "loanPayment.png", false);
-                main.bitmap_28[36] = main.method_10(text2, text, "exploreRuins.png", false);
-                main.bitmap_28[37] = main.method_10(text2, text, "fighterRepaired.png", false);
-                main.bitmap_28[38] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[39] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[40] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[41] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[42] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[43] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[44] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[45] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[46] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[47] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[48] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[49] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[50] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[51] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[52] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[53] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[54] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[55] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[56] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[57] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[58] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[59] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[60] = main.method_10(text2, text, "construction_stalled.png", false);
-                main.bitmap_28[61] = main.method_10(text2, text, "construction_stalled.png", false);
+                Parallel.Invoke(
+                    () => main.bitmap_28[0] = main.method_10(text2, text, "underAttack.png", true),
+                    () => main.bitmap_28[1] = main.method_10(text2, text, "colonygain.png", true),
+                    () => main.bitmap_28[2] = main.method_10(text2, text, "colonyloss.png", true),
+                    () => main.bitmap_28[3] = main.method_10(text2, text, "declarewar.png", true),
+                    () => main.bitmap_28[4] = main.method_10(text2, text, "endwar.png", true),
+                    () => main.bitmap_28[5] = main.method_10(text2, text, "freetradeagreement.png", true),
+                    () => main.bitmap_28[6] = main.method_10(text2, text, "mutualdefensepact.png", true),
+                    () => main.bitmap_28[7] = main.method_10(text2, text, "protectorate.png", true),
+                    () => main.bitmap_28[8] = main.method_10(text2, text, "researchbreakthrough.png", true),
+                    () => main.bitmap_28[9] = main.method_10(text2, text, "resumetrade.png", true),
+                    () => main.bitmap_28[10] = main.method_10(text2, text, "subjugateddominion.png", true),
+                    () => main.bitmap_28[11] = main.method_10(text2, text, "tradesanctions.png", true),
+                    () => main.bitmap_28[12] = main.method_10(text2, text, "canceltreaty.png", true),
+                    () => main.bitmap_28[13] = main.method_10(text2, text, "treatyrefused.png", true),
+                    () => main.bitmap_28[14] = main.method_10(text2, text, "money.png", true),
+                    () => main.bitmap_28[15] = main.method_10(text2, text, "warning.png", true),
+                    () => main.bitmap_28[16] = main.method_10(text2, text, "construction.png", true),
+                    () => main.bitmap_28[17] = main.method_10(text2, text, "request.png", true),
+                    () => main.bitmap_28[18] = main.method_10(text2, text, "agentsuccess.png", true),
+                    () => main.bitmap_28[19] = main.method_10(text2, text, "agentfailure.png", true),
+                    () => main.bitmap_28[20] = main.method_10(text2, text, "blockade.png", true),
+                    () => main.bitmap_28[21] = main.method_10(text2, text, "blockadecancelled.png", true),
+                    () => main.bitmap_28[22] = main.method_10(text2, text, "restrictedArea.png", true),
+                    () => main.bitmap_28[23] = main.method_10(text2, text, "agentalert.png", true),
+                    () => main.bitmap_28[24] = main.method_10(text2, text, "explorationDiscovery.png", true),
+                    () => main.bitmap_28[25] = main.method_10(text2, text, "galacticHistory.png", true),
+                    () => main.bitmap_28[26] = main.method_10(text2, text, "information.png", true),
+                    () => main.bitmap_28[27] = main.method_10(text2, text, "pirateMessage.png", true),
+                    () => main.bitmap_28[28] = main.method_10(text2, text, "planetdestroy.png", true),
+                    () => main.bitmap_28[29] = main.method_10(text2, text, "galacticnewsnet.png", true),
+                    () => main.bitmap_28[30] = main.method_10(text2, text, "construction_stalled.png", true),
+                    () => main.bitmap_28[31] = main.method_10(text2, text, "ransom.png", false),
+                    () => main.bitmap_28[32] = main.method_10(text2, text, "distance.png", false),
+                    () => main.bitmap_28[33] = main.method_10(text2, text, "scienceResearchComplete.png", false),
+                    () => main.bitmap_28[34] = main.method_10(text2, text, "prisonbreak.png", false),
+                    () => main.bitmap_28[35] = main.method_10(text2, text, "loanPayment.png", false),
+                    () => main.bitmap_28[36] = main.method_10(text2, text, "exploreRuins.png", false),
+                    () => main.bitmap_28[37] = main.method_10(text2, text, "fighterRepaired.png", false),
+                    () => main.bitmap_28[38] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[39] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[40] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[41] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[42] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[43] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[44] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[45] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[46] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[47] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[48] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[49] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[50] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[51] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[52] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[53] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[54] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[55] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[56] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[57] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[58] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[59] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[60] = main.method_10(text2, text, "construction_stalled.png", false),
+                    () => main.bitmap_28[61] = main.method_10(text2, text, "construction_stalled.png", false)
+                );
+                List<Task> taskList = new List<Task>();
                 for (int i = 0; i < 62; i++)
                 {
                     if (main.bitmap_28[i] == null)
                     {
-                        main.bitmap_28[i] = main.method_10(text2, text, "construction_stalled.png", false);
+                        int localI = i;
+                        taskList.Add(Task.Run(() => main.bitmap_28[localI] = main.method_10(text2, text, "construction_stalled.png", false)));
                     }
                 }
+                Task.WaitAll(taskList.ToArray());
             }
             catch (Exception ex)
             {
