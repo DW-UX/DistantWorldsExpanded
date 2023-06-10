@@ -105,7 +105,9 @@ namespace ExpansionMod.Objects.HotKeyMapping
         public bool GetTargetMethodIdByFriendlyName(string name, out int id)
         {
             id = -1;
-            id = _keyMapping.FirstOrDefault(x => x.Parent.FriendlyName == name).Parent.TargetMethodId;
+            var res = _keyMapping.FirstOrDefault(x => x.Parent.FriendlyName == name)?.Parent.TargetMethodId;
+            if (res.HasValue)
+            { id = res.Value; }
             return id != 0;
         }
         public void RestoreDefaults()
@@ -159,7 +161,17 @@ namespace ExpansionMod.Objects.HotKeyMapping
         }
         protected virtual void FillTarget(MappingJsonFileModel mappingModel)
         {
-            _keyMapping = mappingModel.HotKeys.SelectMany(x => x.MappedHotKeys).ToList();
+            //_keyMapping = mappingModel.HotKeys.SelectMany(x => x.MappedHotKeys).ToList();
+            _keyMapping.Clear();
+            foreach (var item in mappingModel.HotKeys)
+            {
+                if (item.MappedHotKeys.Count != 0)
+                { _keyMapping.AddRange(item.MappedHotKeys); }
+                else
+                {
+                    _keyMapping.Add(new MappedHotKey(item));
+                }
+            }
         }
         protected virtual void RemoveKeysFromOlderVersions(MappingJsonFileModel mappingModel)
         {

@@ -141,7 +141,7 @@ namespace ExpansionMod.Objects
     }
     public class MappedHotKey : IComparable<MappedHotKey>
     {
-        public List<Keys> KeyCode { get; set; }
+        public List<Keys> KeyCode { get; set; } = new List<Keys>();
         [JsonIgnore]
         public KeyMappingTarget Parent { get; set; }
 
