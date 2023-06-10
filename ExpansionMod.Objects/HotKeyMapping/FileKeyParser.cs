@@ -16,10 +16,12 @@ namespace ExpansionMod.Objects.HotKeyMapping
     public class KeyMapper : IHotKeyParser
     {
         public const int _CurrentCodeFormatVersion = 2;
+        private const int _TargetCollectionVersion = 1;
 
         protected string _mappingFileName;
         protected List<MappedHotKey> _keyMapping = new List<MappedHotKey>();
         protected MappedHotKey _notFound;
+        protected bool _reSaveNeeded = false;
 
         public KeyMapper(string mappingFileName)
         {
@@ -28,14 +30,21 @@ namespace ExpansionMod.Objects.HotKeyMapping
             _notFound = new MappedHotKey(notFoundTarget);
         }
 
-        public bool MapKeys(string hotkeysDir)
+        public virtual bool MapKeys(string hotkeysDir)
         {
             bool res = false;
             FileInfo fileInfo = new FileInfo(Path.Combine(hotkeysDir, _mappingFileName));
             if (fileInfo.Exists)
             {
-                using StreamReader sR = new StreamReader(fileInfo.OpenRead());
-                var mappingModel = JsonConvert.DeserializeObject<MappingJsonFileModel>(sR.ReadToEnd());
+                MappingJsonFileModel mappingModel;
+                using (StreamReader sR = new StreamReader(fileInfo.OpenRead()))
+                { mappingModel = GetModelFromFile(sR); }
+                RemoveKeysFromOlderVersions(mappingModel);
+                RemapAndRenameOlderVersions(mappingModel);
+                if (_reSaveNeeded)
+                {
+                    Save(hotkeysDir, mappingModel);
+                }
                 if (ValidateNoDuplicates(mappingModel) & ValidateEscapeKeyMapped(mappingModel))
                 {
                     res = true;
@@ -45,17 +54,21 @@ namespace ExpansionMod.Objects.HotKeyMapping
             }
             return res;
         }
-        public void Save(string hotkeysDir, MappingJsonFileModel newModel)
+        public virtual void Save(string hotkeysDir, MappingJsonFileModel newModel)
         {
             if (!ValidateNoDuplicates(newModel) || !ValidateEscapeKeyMapped(newModel))
             { throw new ApplicationException($"{nameof(KeyMapper)}{nameof(Save)}:HotKeys validation error"); }
-            
+
             SetParrents(newModel);
             FillTarget(newModel);
-            FileInfo fileInfo = new FileInfo(Path.Combine(hotkeysDir, _mappingFileName));
-            using StreamWriter sW = new StreamWriter(fileInfo.OpenWrite());
-            sW.Write(JsonConvert.SerializeObject(newModel, Formatting.Indented));
-            sW.Flush();
+            using (FileStream fs = new FileStream(Path.Combine(hotkeysDir, _mappingFileName), FileMode.Truncate, FileAccess.Write, FileShare.None))
+            {
+                using (StreamWriter sW = new StreamWriter(fs))
+                {
+                    sW.Write(JsonConvert.SerializeObject(newModel, Formatting.Indented));
+                    sW.Flush();
+                }
+            }
         }
         public void GenerateDefaultFile(string hotkeysDir)
         {
@@ -99,6 +112,10 @@ namespace ExpansionMod.Objects.HotKeyMapping
         {
             FillTarget(GetDefaultModel());
         }
+        protected virtual MappingJsonFileModel GetModelFromFile(StreamReader sR)
+        {
+            return JsonConvert.DeserializeObject<MappingJsonFileModel>(sR.ReadToEnd());
+        }
         protected virtual MappedHotKey FindTarget(List<Keys> keys)
         {
             MappedHotKey res = _notFound;
@@ -107,7 +124,7 @@ namespace ExpansionMod.Objects.HotKeyMapping
                 if (item.KeyCode.SequenceEqual(keys))
                 {
                     res = item;
-                    break;                    
+                    break;
                 }
             }
             return res;
@@ -144,11 +161,22 @@ namespace ExpansionMod.Objects.HotKeyMapping
         {
             _keyMapping = mappingModel.HotKeys.SelectMany(x => x.MappedHotKeys).ToList();
         }
+        protected virtual void RemoveKeysFromOlderVersions(MappingJsonFileModel mappingModel)
+        {
+            var defaultModel = GetDefaultModel();
+            if (mappingModel.HotKeys.RemoveAll(x => !defaultModel.HotKeys.Any(y => y.TargetMethodId == x.TargetMethodId)) > 0)
+            { _reSaveNeeded = true; }
+        }
+        protected virtual void RemapAndRenameOlderVersions(MappingJsonFileModel mappingModel)
+        {
+            
+        }
         protected virtual MappingJsonFileModel GetDefaultModel()
         {
             var res = new MappingJsonFileModel()
             {
                 FormatVersion = _CurrentCodeFormatVersion,
+                TargetCollectionVersion = _TargetCollectionVersion,
             };
             var item = new KeyMappingTarget() { FriendlyName = KeyMappingFriendlyNames.SelectControlGroup0.ToString(), TargetMethodId = 1 };
             item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.D0 } });

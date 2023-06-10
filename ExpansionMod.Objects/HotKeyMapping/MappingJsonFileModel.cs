@@ -10,6 +10,7 @@ namespace ExpansionMod.Objects.HotKeyMapping
     public class MappingJsonFileModel
     {
         public int FormatVersion { get; set; }
+        public int TargetCollectionVersion { get; set; }
         public List<KeyMappingTarget> HotKeys { get; set; } = new List<KeyMappingTarget>();
         ///// <summary>
         ///// backspace
