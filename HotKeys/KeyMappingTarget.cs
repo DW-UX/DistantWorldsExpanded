@@ -10,8 +10,6 @@ namespace BaconDistantWorlds.HotKeys
     {
         ShowDetailedInfo = 1,
         ShowMissionCommand,
-        AssignGlobalCargoMissionSource,
-        AssignGlobalCargoMissionDestination,
         AssignCargoMission,
         SetFighterTarget,
         OrderBombersToAttack,
@@ -32,7 +30,7 @@ namespace BaconDistantWorlds.HotKeys
         ShowStats,
         AddShipToTradeList,
         ForceUnloadAtDestination,
-        OrderPassengershipMission,
+        AssignPassengershipMission,
         CycleSelectedByRoleBackward,
         GetParentCarrier,
         CycleSelectedByRoleForward,

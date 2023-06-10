@@ -441,7 +441,7 @@ namespace BaconDistantWorlds
           }
           else if (builtObject.ActualEmpire != null && builtObject.ActualEmpire == infoPanel._Game.PlayerEmpire && (double) builtObject.CurrentSpeed >= (double) Math.Max(builtObject.CruiseSpeed, (short) 1))
           {
-            infoPanel.DrawLabel(graphics, "WPT ETA", num5, point4);
+            infoPanel.DrawLabel(graphics, "WPT ETA", num5 - 12, point4);
             int num7 = 10 + num5 + 2;
             string text = Math.Truncate(Math.Sqrt(BaconBuiltObject.FindRangeSquaredToTarget(builtObject)) / (double) builtObject.CurrentSpeed).ToString();
             graphics.MeasureString(text, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, StringFormat.GenericTypographic);

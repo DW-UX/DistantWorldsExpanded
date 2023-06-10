@@ -1053,6 +1053,14 @@ namespace BaconDistantWorlds
             {
                 result5 = (customDifficultyColonyIncomeFactor = Math.Max(0.01, Math.Min(10.0, result5)));
             }
+            if (dictionary.TryGetValue("AllowPrivateShipAssigment", out value) && (value.Trim() == "true" || value == "false"))
+            {
+                bool result2 = false;
+                if (bool.TryParse(value, out result2))
+                {
+                    BaconBuiltObject.AllowPrivateShipAssigment = result2;
+                }
+            }
             main.cmbBuiltObjectFilter.Items.Clear();
             ComboBox.ObjectCollection items = main.cmbBuiltObjectFilter.Items;
             object[] items2 = cmbBuiltObjectFilterStrings;

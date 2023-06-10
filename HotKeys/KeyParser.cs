@@ -14,24 +14,40 @@ namespace BaconDistantWorlds.HotKeys
         public BaconKeyMapper(string mappingFileName) : base(mappingFileName)
         {
         }
+        protected override void RemoveKeysFromOlderVersions(MappingJsonFileModel mappingModel)
+        {
+            mappingModel.HotKeys.RemoveAll(x => x.TargetMethodId == 3 || x.TargetMethodId == 4);
+        }
+        protected override void RemapAndRenameOlderVersions(MappingJsonFileModel mappingModel)
+        {
+            var defaultModel = GetDefaultModel();
+            Dictionary<int, string> oldNames = new Dictionary<int, string>();
+            oldNames[24] = "OrderPassengershipMission";
 
+            foreach (var item in oldNames)
+            {
+                var temp = mappingModel.HotKeys.FirstOrDefault(x => x.TargetMethodId == item.Key);
+                if (temp != null)
+                {
+                    var defaultItem = defaultModel.HotKeys.FirstOrDefault(x => x.TargetMethodId == item.Key);
+                    if (defaultItem != null)
+                    { temp.FriendlyName = defaultItem.FriendlyName; }
+                }
+            }
+            _reSaveNeeded = true;
+        }
         protected override MappingJsonFileModel GetDefaultModel()
         {
             var res = new MappingJsonFileModel()
             {
                 FormatVersion = _CurrentCodeFormatVersion,
+                TargetCollectionVersion = _CurrentCodeFormatVersion,
             };
             var item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.ShowDetailedInfo.ToString(), TargetMethodId = 1 };
             item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.Return } });
             res.HotKeys.Add(item);
             item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.ShowMissionCommand.ToString(), TargetMethodId = 2 };
             item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.Menu, Keys.Return } });
-            res.HotKeys.Add(item);
-            item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.AssignGlobalCargoMissionSource.ToString(), TargetMethodId = 3 };
-            item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.Menu, Keys.D1 } });
-            res.HotKeys.Add(item);
-            item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.AssignGlobalCargoMissionDestination.ToString(), TargetMethodId = 4 };
-            item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.Menu, Keys.D2 } });
             res.HotKeys.Add(item);
             item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.AssignCargoMission.ToString(), TargetMethodId = 5 };
             item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.Menu, Keys.D3 } });
@@ -90,7 +106,7 @@ namespace BaconDistantWorlds.HotKeys
             item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.ForceUnloadAtDestination.ToString(), TargetMethodId = 23 };
             item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.Menu, Keys.U } });
             res.HotKeys.Add(item);
-            item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.OrderPassengershipMission.ToString(), TargetMethodId = 24 };
+            item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.AssignPassengershipMission.ToString(), TargetMethodId = 24 };
             item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.ControlKey, Keys.W } });
             res.HotKeys.Add(item);
             item = new KeyMappingTarget() { FriendlyName = BaconKeyMappingFriendlyNames.CycleSelectedByRoleBackward.ToString(), TargetMethodId = 25 };

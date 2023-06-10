@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ExpansionMod.Objects;
 using BaconDistantWorlds.HotKeys;
+using BaconDistantWorlds.Forms;
 
 namespace BaconDistantWorlds
 {
@@ -77,9 +78,10 @@ namespace BaconDistantWorlds
         public static Dictionary<string, CargoList> shipsToBeDestroyed = new Dictionary<string, CargoList>();
         public static string tailGunnerResearch = "Point Defense Weapons";
         public static BuiltObject theShip;
-        public static object globalCargoMissionSource = (object)null;
-        public static object globalCargoMissionDestination = (object)null;
+        //public static object globalCargoMissionSource = (object)null;
+        //public static object globalCargoMissionDestination = (object)null;
         public static StellarObject fighterTarget = (StellarObject)null;
+        public static bool AllowPrivateShipAssigment = false;
 
         public static bool IsMyShip(BuiltObject ship) => ship != null && ship.Empire != null && ship.Empire.Name.Contains("Romulan") || ship != null && ship.ActualEmpire != null && ship.ActualEmpire.Name.Contains("Romulan") || ship != null && ship.Owner != null && ship.Owner.Name.Contains("Romulan");
 
@@ -162,38 +164,13 @@ namespace BaconDistantWorlds
                             //break;
                         }
                     }
-                    //break;
-                    //case Keys.D1:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignGlobalCargoMissionSource, out targetId) &&
-        targetId == target.Parent.TargetMethodId)
-                    {
-                        //if (e.Alt)
-                        {
-                            BaconBuiltObject.AssignGlobalCargoMissionSource(BaconBuiltObject.myMain);
-                            e.Handled = true;
-                            //break;
-                        }
-                        //break;
-                    }
-                    //case Keys.D2:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignGlobalCargoMissionDestination, out targetId) &&
-        targetId == target.Parent.TargetMethodId)
-                    {
-                        //if (e.Alt)
-                        {
-                            BaconBuiltObject.AssignGlobalCargoMissionDestination(BaconBuiltObject.myMain);
-                            e.Handled = true;
-                            //break;
-                        }
-                        //break;
-                    }
                     //case Keys.D3:
                     else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignCargoMission, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
                         {
-                            BaconBuiltObject.AssignCargoMission(BaconBuiltObject.myMain, (object)null, e.Shift);
+                            BaconBuiltObject.AssignCargoMission(BaconBuiltObject.myMain, null, false);
                             e.Handled = true;
                             //break;
                         }
@@ -257,6 +234,11 @@ namespace BaconDistantWorlds
                             e.Handled = true;
                             //break;
                         }
+                        //break;
+                    }
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ToggleShipAutoBaconImpl, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
                         if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).Empire == BaconBuiltObject.myMain._Game.PlayerEmpire && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).IsAutoControlled)
                         {
                             (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).IsAutoControlled = false;
@@ -344,10 +326,7 @@ namespace BaconDistantWorlds
                     {
                         //if (e.Alt)
                         {
-                            bool deliverToSpecificDestination = false;
-                            if (e.Shift)
-                                deliverToSpecificDestination = true;
-                            BaconBuiltObject.AssignMiningShipToTarget(BaconBuiltObject.myMain, deliverToSpecificDestination);
+                            BaconBuiltObject.AssignMiningShipToTarget(BaconBuiltObject.myMain);
                             e.Handled = true;
                             //break;
                         }
@@ -451,12 +430,12 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.W:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderPassengershipMission, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignPassengershipMission, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
                         {
-                            BaconBuiltObject.OrderPassengershipMission(BaconBuiltObject.myMain, (object)null, e.Shift);
+                            BaconBuiltObject.AssignPassengershipMission(BaconBuiltObject.myMain, (object)null, false);
                             //break;
                         }
                         //break;
@@ -1148,10 +1127,20 @@ namespace BaconDistantWorlds
             main._Game.Galaxy.Resume();
         }
 
-        public static void OrderPassengershipMission(Main main, object ship, bool repeat)
+        public static void AssignPassengershipMission(Main main, object ship, bool repeat)
         {
             if (main == null)
                 return;
+
+            if (ship == null)
+            {
+                if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) ||
+                        (BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)))
+                {
+                    return;
+                }
+            }
+
             BuiltObject builtObject;
             if (ship == null && main._Game.SelectedObject is BuiltObject)
             {
@@ -1163,49 +1152,67 @@ namespace BaconDistantWorlds
                     return;
                 builtObject = (BuiltObject)ship;
             }
-            if (builtObject.Role != BuiltObjectRole.Passenger)
-                return;
-            Empire empire = builtObject.Empire;
-            if (empire == null)
-                return;
-            string source = "";
-            string destination = "";
-            Habitat target;
-            Habitat target2;
-            Race dominantRace;
-            if (repeat && builtObject.BaconValues != null && builtObject.BaconValues.ContainsKey("RepeatingMission"))
+            if (builtObject.Role == BuiltObjectRole.Passenger)
             {
-                BuiltObjectMission baconValue = (BuiltObjectMission)builtObject.BaconValues["RepeatingMission"];
-                target = baconValue.TargetHabitat;
-                target2 = baconValue.SecondaryTargetHabitat;
-                dominantRace = target.Population.DominantRace;
-            }
-            else
-            {
-                List<string> source1 = BaconBuiltObject.ReadPassengerShipSettings();
-                if (source1.Count != 2)
+                Empire empire = builtObject.Empire;
+                if (empire == null)
                     return;
-                source = source1.First<string>();
-                destination = source1.Last<string>();
-                target = empire.Colonies.First<Habitat>((Func<Habitat, bool>)(x => x.Name == source));
-                target2 = empire.Colonies.First<Habitat>((Func<Habitat, bool>)(x => x.Name == destination));
-                dominantRace = target.Population.DominantRace;
-            }
-            if (target == null || target2 == null || dominantRace == null)
-                return;
-            long amount = Math.Min((long)builtObject.PopulationCapacity, target.Population[dominantRace].Amount / 50L);
-            builtObject.AssignMission(BuiltObjectMissionType.Transport, (object)target, (object)target2, new PopulationList()
-      {
-        new Population(dominantRace, amount)
-      }, BuiltObjectMissionPriority.Normal);
-            if (!repeat || !main._Game.PlayerEmpire.BuiltObjects.Contains(builtObject))
-                return;
-            if (builtObject.BaconValues == null)
-                builtObject.BaconValues = new Dictionary<string, object>();
-            if (!builtObject.BaconValues.ContainsKey("RepeatingMission"))
-            {
-                BuiltObjectMission builtObjectMission = builtObject.Mission.Clone();
-                builtObject.BaconValues.Add("RepeatingMission", (object)builtObjectMission);
+                //string source = "";
+                //string destination = "";
+                Habitat sourceHab = null;
+                Habitat targetHab = null;
+                Race dominantRace = null;
+                if (repeat && builtObject.BaconValues != null && builtObject.BaconValues.ContainsKey("RepeatingMission"))
+                {
+                    BuiltObjectMission baconValue = (BuiltObjectMission)builtObject.BaconValues["RepeatingMission"];
+                    sourceHab = baconValue.TargetHabitat;
+                    targetHab = baconValue.SecondaryTargetHabitat;
+                    dominantRace = sourceHab.Population.DominantRace;
+                }
+                else
+                {
+                    //List<string> source1 = BaconBuiltObject.ReadPassengerShipSettings();
+                    //if (source1.Count != 2)
+                    //    return;
+                    //source = source1.First<string>();
+                    //destination = source1.Last<string>();
+                    //target = empire.Colonies.First<Habitat>((Func<Habitat, bool>)(x => x.Name == source));
+                    //target2 = empire.Colonies.First<Habitat>((Func<Habitat, bool>)(x => x.Name == destination));
+                    bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                    if (!flag)
+                    { main._Game.Galaxy.Pause(); }
+                    using SelectPassengerMissionTargets selectForm = new SelectPassengerMissionTargets(main);
+                    if (selectForm.ShowDialog(main) == DialogResult.OK)
+                    {
+                        sourceHab = selectForm.SelectedSource;
+                        targetHab = selectForm.SelectedTarget;
+                        dominantRace = sourceHab.Population.DominantRace;
+                        repeat = selectForm.Repeatable;
+                    }
+                    if (!flag)
+                    { main._Game.Galaxy.Resume(); }
+                    if (selectForm.DialogResult != DialogResult.OK)
+                    { return; }
+                }
+                if (sourceHab == null || targetHab == null || dominantRace == null)
+                    return;
+                long amount = Math.Min((long)builtObject.PopulationCapacity, sourceHab.Population[dominantRace].Amount / 50L);
+                builtObject.AssignMission(
+                    BuiltObjectMissionType.Transport,
+                    (object)sourceHab,
+                    (object)targetHab,
+                    new PopulationList() { new Population(dominantRace, amount) },
+                    BuiltObjectMissionPriority.Normal);
+
+                if (!repeat)
+                    return;
+                if (builtObject.BaconValues == null)
+                    builtObject.BaconValues = new Dictionary<string, object>();
+                if (!builtObject.BaconValues.ContainsKey("RepeatingMission"))
+                {
+                    BuiltObjectMission builtObjectMission = builtObject.Mission.Clone();
+                    builtObject.BaconValues.Add("RepeatingMission", (object)builtObjectMission);
+                }
             }
         }
 
@@ -1222,20 +1229,20 @@ namespace BaconDistantWorlds
                 }
                 else
                 {
-                    main._Game.SelectedObject = (object)main._Game.PlayerEmpire.BuiltObjects.FirstOrDefault<BuiltObject>((Func<BuiltObject, bool>)(x => x.Name.ToLower().StartsWith(input.ToLower())));
+                    main._Game.SelectedObject = (object)main._Game.PlayerEmpire.BuiltObjects.FirstOrDefault<BuiltObject>((Func<BuiltObject, bool>)(x => x.Name.StartsWith(input, StringComparison.InvariantCultureIgnoreCase)));
                     if (main._Game.SelectedObject == null)
-                        main._Game.SelectedObject = (object)main._Game.PlayerEmpire.PrivateBuiltObjects.FirstOrDefault<BuiltObject>((Func<BuiltObject, bool>)(x => x.Name.ToLower().StartsWith(input.ToLower())));
+                        main._Game.SelectedObject = (object)main._Game.PlayerEmpire.PrivateBuiltObjects.FirstOrDefault<BuiltObject>((Func<BuiltObject, bool>)(x => x.Name.StartsWith(input, StringComparison.InvariantCultureIgnoreCase)));
                     if (main._Game.SelectedObject == null)
-                        main._Game.SelectedObject = (object)main._Game.Galaxy.Habitats.FirstOrDefault<Habitat>((Func<Habitat, bool>)(x => x.Name.ToLower().StartsWith(input.ToLower())));
+                        main._Game.SelectedObject = (object)main._Game.Galaxy.Habitats.FirstOrDefault<Habitat>((Func<Habitat, bool>)(x => x.Name.StartsWith(input, StringComparison.InvariantCultureIgnoreCase)));
                     if (main._Game.SelectedObject == null)
                     {
                         foreach (BuiltObject builtObject in (SyncList<BuiltObject>)main._Game.Galaxy.BuiltObjects)
                         {
                             if (builtObject != null && builtObject.Name != null)
                             {
-                                if (builtObject.Name.ToLower().StartsWith(input.ToLower()))
-                                    main._Game.SelectedObject = (object)builtObject;
-                                if (builtObject.Name.ToLower() == input.ToLower())
+                                if (builtObject.Name.StartsWith(input, StringComparison.InvariantCultureIgnoreCase))
+                                { main._Game.SelectedObject = (object)builtObject; }
+                                if (String.Equals(builtObject.Name, input, StringComparison.InvariantCultureIgnoreCase))
                                 {
                                     main._Game.SelectedObject = (object)builtObject;
                                     break;
@@ -2142,51 +2149,76 @@ namespace BaconDistantWorlds
             return num >= 100 ? (num >= 3999 ? (num >= 8999 ? (num >= 15999 ? (num >= 24999 ? "legendary" : "elite") : "veteran") : "experienced") : "average") : "green";
         }
 
-        public static void AssignGlobalCargoMissionSource(Main main)
-        {
-            if (main._Game.SelectedObject is Habitat && (main._Game.SelectedObject as Habitat).Owner == main._Game.PlayerEmpire)
-                BaconBuiltObject.globalCargoMissionSource = main._Game.SelectedObject;
-            else if (main._Game.SelectedObject is BuiltObject && (main._Game.SelectedObject as BuiltObject).ActualEmpire == main._Game.PlayerEmpire)
-            {
-                BaconBuiltObject.globalCargoMissionSource = main._Game.SelectedObject;
-            }
-            else
-            {
-                string caption = "Source selection error.";
-                BaconBuiltObject.ShowMessageBox(main, "You must select bases or planets which your empire owns.", caption);
-            }
-        }
+        //public static void AssignGlobalCargoMissionSource(Main main)
+        //{
+        //    if (main._Game.SelectedObject is Habitat && (main._Game.SelectedObject as Habitat).Owner == main._Game.PlayerEmpire)
+        //        BaconBuiltObject.globalCargoMissionSource = main._Game.SelectedObject;
+        //    else if (main._Game.SelectedObject is BuiltObject && (main._Game.SelectedObject as BuiltObject).ActualEmpire == main._Game.PlayerEmpire)
+        //    {
+        //        BaconBuiltObject.globalCargoMissionSource = main._Game.SelectedObject;
+        //    }
+        //    else
+        //    {
+        //        string caption = "Source selection error.";
+        //        BaconBuiltObject.ShowMessageBox(main, "You must select bases or planets which your empire owns.", caption);
+        //    }
+        //}
 
-        public static void AssignGlobalCargoMissionDestination(Main main)
-        {
-            if (main._Game.SelectedObject is Habitat && (main._Game.SelectedObject as Habitat).Owner == main._Game.PlayerEmpire)
-                BaconBuiltObject.globalCargoMissionDestination = main._Game.SelectedObject;
-            else if (main._Game.SelectedObject is BuiltObject && (main._Game.SelectedObject as BuiltObject).ActualEmpire == main._Game.PlayerEmpire)
-            {
-                BaconBuiltObject.globalCargoMissionDestination = main._Game.SelectedObject;
-            }
-            else
-            {
-                string caption = "Destination selection error.";
-                BaconBuiltObject.ShowMessageBox(main, "You must select bases or planets which your empire owns.", caption);
-            }
-        }
+        //public static void AssignGlobalCargoMissionDestination(Main main)
+        //{
+        //    if (main._Game.SelectedObject is Habitat && (main._Game.SelectedObject as Habitat).Owner == main._Game.PlayerEmpire)
+        //        BaconBuiltObject.globalCargoMissionDestination = main._Game.SelectedObject;
+        //    else if (main._Game.SelectedObject is BuiltObject && (main._Game.SelectedObject as BuiltObject).ActualEmpire == main._Game.PlayerEmpire)
+        //    {
+        //        BaconBuiltObject.globalCargoMissionDestination = main._Game.SelectedObject;
+        //    }
+        //    else
+        //    {
+        //        string caption = "Destination selection error.";
+        //        BaconBuiltObject.ShowMessageBox(main, "You must select bases or planets which your empire owns.", caption);
+        //    }
+        //}
 
-        public static void AssignCargoMission(Main main, object ship, bool repeat)
+        public static void AssignCargoMission(Main main, BuiltObject ship, bool repeat)
         {
             BuiltObject freighter = (BuiltObject)null;
-            object target = (object)null;
-            object target2 = (object)null;
+            object sourceObj = (object)null;
+            object targetObj = (object)null;
             bool flag1 = false;
-            if (main == null)
-                return;
+            if (main == null )
+            { return; }
+
             if (ship == null && main._Game.SelectedObject is BuiltObject)
             {
-                if (BaconBuiltObject.globalCargoMissionDestination == null || BaconBuiltObject.globalCargoMissionSource == null || main._Game.SelectedObject == null)
-                    return;
                 freighter = (BuiltObject)main._Game.SelectedObject;
-                target = BaconBuiltObject.globalCargoMissionSource;
-                target2 = BaconBuiltObject.globalCargoMissionDestination;
+                if (freighter != null && freighter.Role == BuiltObjectRole.Freight)
+                {
+                    if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) ||
+                        (BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)))
+                    {
+                        return;
+                    }
+
+                    //sourceHab = BaconBuiltObject.globalCargoMissionSource;
+                    //targetHab = BaconBuiltObject.globalCargoMissionDestination;
+
+                    bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                    if (!flag)
+                    { main._Game.Galaxy.Pause(); }
+                    using SelectCargoMissionTargets selectForm = new SelectCargoMissionTargets(main);
+                    if (selectForm.ShowDialog(main) == DialogResult.OK)
+                    {
+                        sourceObj = selectForm.SelectedSource;
+                        targetObj = selectForm.SelectedTarget;
+                        repeat = selectForm.Repeatable;
+                    }
+                    if (!flag)
+                    { main._Game.Galaxy.Resume(); }
+                    if (selectForm.DialogResult != DialogResult.OK)
+                    { return; }
+                }
+                else 
+                { return; }                
             }
             else
             {
@@ -2196,33 +2228,33 @@ namespace BaconDistantWorlds
                 if (repeat && freighter.BaconValues != null && freighter.BaconValues.ContainsKey("RepeatingMission"))
                 {
                     BuiltObjectMission baconValue = (BuiltObjectMission)freighter.BaconValues["RepeatingMission"];
-                    target = baconValue.Target;
-                    target2 = baconValue.SecondaryTarget;
+                    sourceObj = baconValue.Target;
+                    targetObj = baconValue.SecondaryTarget;
                     flag1 = true;
                 }
             }
-            if (!flag1 && ((main._Game.SelectedObject as BuiltObject).CargoCapacity <= 0 || (main._Game.SelectedObject as BuiltObject).Empire != main._Game.PlayerEmpire && (main._Game.SelectedObject as BuiltObject).ActualEmpire != main._Game.PlayerEmpire || target2 == null || target == null))
+            if (!flag1 && ((main._Game.SelectedObject as BuiltObject).CargoCapacity <= 0 || (main._Game.SelectedObject as BuiltObject).Empire != main._Game.PlayerEmpire && (main._Game.SelectedObject as BuiltObject).ActualEmpire != main._Game.PlayerEmpire || targetObj == null || sourceObj == null))
                 return;
             CargoList cargo1 = new CargoList();
             IEnumerable<Cargo> source = (IEnumerable<Cargo>)new List<Cargo>();
             int cargoQuantityDivisor = 2;
             bool flag2 = false;
-            if (BaconBuiltObject.globalCargoMissionDestination is BuiltObject && ((BuiltObject)BaconBuiltObject.globalCargoMissionDestination).SubRole == BuiltObjectSubRole.ConstructionShip)
+            if (targetObj is BuiltObject && ((BuiltObject)targetObj).SubRole == BuiltObjectSubRole.ConstructionShip)
             {
                 cargoQuantityDivisor = 1000;
                 flag2 = true;
             }
             for (; !source.Any<Cargo>() && cargoQuantityDivisor < 51 | flag2 && cargoQuantityDivisor < 1001; ++cargoQuantityDivisor)
             {
-                if (target is BuiltObject && (target as BuiltObject).Cargo != null)
+                if (sourceObj is BuiltObject && (sourceObj as BuiltObject).Cargo != null)
                 {
-                    source = (target as BuiltObject).Cargo.Where<Cargo>((Func<Cargo, bool>)(x => x.Amount >= freighter.CargoCapacity / cargoQuantityDivisor && x.EmpireId == main._Game.PlayerEmpire.EmpireId));
+                    source = (sourceObj as BuiltObject).Cargo.Where<Cargo>((Func<Cargo, bool>)(x => x.Amount >= freighter.CargoCapacity / cargoQuantityDivisor && x.EmpireId == main._Game.PlayerEmpire.EmpireId));
                 }
                 else
                 {
-                    if (!(target is Habitat) || (target as Habitat).Cargo == null)
+                    if (!(sourceObj is Habitat) || (sourceObj as Habitat).Cargo == null)
                         return;
-                    source = (target as Habitat).Cargo.Where<Cargo>((Func<Cargo, bool>)(x => x.Amount >= freighter.CargoCapacity / cargoQuantityDivisor && x.EmpireId == main._Game.PlayerEmpire.EmpireId));
+                    source = (sourceObj as Habitat).Cargo.Where<Cargo>((Func<Cargo, bool>)(x => x.Amount >= freighter.CargoCapacity / cargoQuantityDivisor && x.EmpireId == main._Game.PlayerEmpire.EmpireId));
                 }
             }
             if (flag2)
@@ -2247,7 +2279,7 @@ namespace BaconDistantWorlds
                 if (flag2)
                 {
                     int num2 = 0;
-                    Cargo cargo3 = (BaconBuiltObject.globalCargoMissionDestination as BuiltObject).Cargo.FirstOrDefault<Cargo>((Func<Cargo, bool>)(x => x.CommodityIsResource && (int)x.CommodityResource.ResourceID == (int)cargo.CommodityResource.ResourceID));
+                    Cargo cargo3 = (targetObj as BuiltObject).Cargo.FirstOrDefault<Cargo>((Func<Cargo, bool>)(x => x.CommodityIsResource && (int)x.CommodityResource.ResourceID == (int)cargo.CommodityResource.ResourceID));
                     if (cargo3 != null)
                         num2 = cargo3.Amount;
                     amount -= num2;
@@ -2255,10 +2287,10 @@ namespace BaconDistantWorlds
                 if (amount > 0)
                     cargo1.Add(new Cargo(cargo.Resource, amount, freighter.ActualEmpire));
             }
-            freighter.AssignMission(BuiltObjectMissionType.Transport, target, target2, cargo1, BuiltObjectMissionPriority.High);
+            freighter.AssignMission(BuiltObjectMissionType.Transport, sourceObj, targetObj, cargo1, BuiltObjectMissionPriority.High);
             if (flag2)
                 BaconBuiltObject.RemoveAllCommandsOfTypeFromQueue(freighter, CommandAction.Refuel);
-            if (!repeat || !main._Game.PlayerEmpire.BuiltObjects.Contains(freighter))
+            if (!repeat)
                 return;
             if (freighter.BaconValues == null)
                 freighter.BaconValues = new Dictionary<string, object>();
@@ -2267,6 +2299,7 @@ namespace BaconDistantWorlds
                 BuiltObjectMission builtObjectMission = freighter.Mission.Clone();
                 freighter.BaconValues.Add("RepeatingMission", (object)builtObjectMission);
             }
+
         }
 
         public static List<Cargo> ReplaceMissionCargoWithCustomCargo(Main main, BuiltObject freighter)
@@ -3528,85 +3561,104 @@ namespace BaconDistantWorlds
             ship.BaconValues["cash"] = (object)num;
         }
 
-        public static void AssignMiningShipToTarget(
-          Main main,
-          bool deliverToSpecificDestination,
-          bool repeating = false)
+        public static void AssignMiningShipToTarget(Main main)
         {
             Habitat planet = main._Game.SelectedObject as Habitat;
-            BuiltObjectSubRole shipTypeToSelect = BuiltObjectSubRole.MiningShip;
             if (planet == null)
-                return;
-            if (planet.Type == HabitatType.GasGiant || planet.Type == HabitatType.FrozenGasGiant)
-                shipTypeToSelect = BuiltObjectSubRole.GasMiningShip;
-            List<BuiltObject> source = new List<BuiltObject>();
-            List<BuiltObject> list1 = main._Game.Galaxy.PlayerEmpire.PrivateBuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
-            {
-                if (x.SubRole != shipTypeToSelect)
-                    return false;
-                return x.Mission == null || x.Mission.Type == BuiltObjectMissionType.Undefined;
-            })).ToList<BuiltObject>();
-            List<BuiltObject> list2 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
-            {
-                if (x.SubRole != shipTypeToSelect)
-                    return false;
-                return x.Mission == null || x.Mission.Type == BuiltObjectMissionType.Undefined;
-            })).ToList<BuiltObject>();
-            if (list1.Any<BuiltObject>())
-                source.AddRange((IEnumerable<BuiltObject>)list1);
-            if (list2.Any<BuiltObject>())
-                source.AddRange((IEnumerable<BuiltObject>)list2);
-            if (source.Count == 0)
-                return;
-            BuiltObject builtObject1 = source.OrderBy<BuiltObject, double>((Func<BuiltObject, double>)(x => Galaxy.CalculateDistanceSquaredStatic(x.Xpos, x.Ypos, planet.Xpos, planet.Ypos))).ToList<BuiltObject>().FirstOrDefault<BuiltObject>();
-            if (builtObject1 == null)
-                return;
-            BuiltObject builtObject2 = (BuiltObject)null;
-            if (deliverToSpecificDestination && BaconBuiltObject.globalCargoMissionDestination != null && BaconBuiltObject.globalCargoMissionDestination is BuiltObject)
-            {
-                builtObject2 = BaconBuiltObject.globalCargoMissionDestination as BuiltObject;
-            }
+            { return; }
             else
             {
-                List<BuiltObject> list3 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
+                BuiltObjectSubRole shipTypeToSelect = BuiltObjectSubRole.MiningShip;
+                if (planet.Type == HabitatType.GasGiant || planet.Type == HabitatType.FrozenGasGiant)
+                    shipTypeToSelect = BuiltObjectSubRole.GasMiningShip;
+                List<BuiltObject> source = new List<BuiltObject>();
+                List<BuiltObject> list1 = new List<BuiltObject>();
+                if (BaconBuiltObject.AllowPrivateShipAssigment)
                 {
-                    if (x.Role != BuiltObjectRole.Base)
+                    list1 = main._Game.Galaxy.PlayerEmpire.PrivateBuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
+                {
+                    if (x.SubRole != shipTypeToSelect)
                         return false;
-                    return x.SubRole == BuiltObjectSubRole.LargeSpacePort || x.SubRole == BuiltObjectSubRole.MediumSpacePort || x.SubRole == BuiltObjectSubRole.SmallSpacePort || x.SubRole == BuiltObjectSubRole.GenericBase;
+                    return x.Mission == null || x.Mission.Type == BuiltObjectMissionType.Undefined;
                 })).ToList<BuiltObject>();
-                if (list3.Any<BuiltObject>())
-                {
-                    List<BuiltObject> list4 = list3.OrderBy<BuiltObject, double>((Func<BuiltObject, double>)(x => Galaxy.CalculateDistanceSquaredStatic(x.Xpos, x.Ypos, planet.Xpos, planet.Ypos))).ToList<BuiltObject>();
-                    if (list4.Any<BuiltObject>())
-                        builtObject2 = list4.FirstOrDefault<BuiltObject>();
                 }
+                List<BuiltObject> list2 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
+                {
+                    if (x.SubRole != shipTypeToSelect)
+                        return false;
+                    return x.Mission == null || x.Mission.Type == BuiltObjectMissionType.Undefined;
+                })).ToList<BuiltObject>();
+                if (list1.Any<BuiltObject>())
+                    source.AddRange((IEnumerable<BuiltObject>)list1);
+                if (list2.Any<BuiltObject>())
+                    source.AddRange((IEnumerable<BuiltObject>)list2);
+                if (source.Count == 0)
+                    return;
+                BuiltObject builtObject1 = source.OrderBy<BuiltObject, double>((Func<BuiltObject, double>)(x => Galaxy.CalculateDistanceSquaredStatic(x.Xpos, x.Ypos, planet.Xpos, planet.Ypos))).ToList<BuiltObject>().FirstOrDefault<BuiltObject>();
+                if (builtObject1 == null)
+                    return;
+                BuiltObject builtObject2 = (BuiltObject)null;
+                bool deliverToSpecificDestination = false;
+                bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                { main._Game.Galaxy.Pause(); }
+
+                using SelectMiningDeliveryTarget selectForm = new SelectMiningDeliveryTarget(main);
+                if (selectForm.ShowDialog(main) == DialogResult.OK)
+                {
+                    deliverToSpecificDestination = selectForm.DeliverToSpecificDestination;
+                }
+                if (!flag)
+                { main._Game.Galaxy.Resume(); }
+                if (selectForm.DialogResult != DialogResult.OK)
+                { return; }
+
+                if (deliverToSpecificDestination)
+                {
+                    builtObject2 = selectForm.SelectedTarget;
+                }
+                else
+                {
+                    List<BuiltObject> list3 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
+                    {
+                        if (x.Role != BuiltObjectRole.Base)
+                            return false;
+                        return x.SubRole == BuiltObjectSubRole.LargeSpacePort || x.SubRole == BuiltObjectSubRole.MediumSpacePort || x.SubRole == BuiltObjectSubRole.SmallSpacePort || x.SubRole == BuiltObjectSubRole.GenericBase;
+                    })).ToList<BuiltObject>();
+                    if (list3.Any<BuiltObject>())
+                    {
+                        List<BuiltObject> list4 = list3.OrderBy<BuiltObject, double>((Func<BuiltObject, double>)(x => Galaxy.CalculateDistanceSquaredStatic(x.Xpos, x.Ypos, planet.Xpos, planet.Ypos))).ToList<BuiltObject>();
+                        if (list4.Any<BuiltObject>())
+                            builtObject2 = list4.FirstOrDefault<BuiltObject>();
+                    }
+                }
+                if (builtObject2 != null)
+                {
+                    builtObject1.AssignMission(BuiltObjectMissionType.ExtractResources, (object)planet, (object)builtObject2, BuiltObjectMissionPriority.Normal);
+                    CommandQueue commands = new CommandQueue();
+                    commands.Enqueue(new Command(CommandAction.ClearParent));
+                    commands.Enqueue(new Command(CommandAction.ConditionalHyperTo, builtObject1.Mission.TargetHabitat));
+                    commands.Enqueue(new Command(CommandAction.SetParent, builtObject1.Mission.TargetHabitat));
+                    commands.Enqueue(new Command(CommandAction.MoveTo, builtObject1.Mission.TargetHabitat));
+                    commands.Enqueue(new Command(CommandAction.ImpulseTo, builtObject1.Mission.TargetHabitat));
+                    commands.Enqueue(new Command(CommandAction.ExtractResources, builtObject1.Mission.TargetHabitat));
+                    commands.Enqueue(new Command(CommandAction.ClearParent));
+                    commands.Enqueue(new Command(CommandAction.ConditionalHyperTo, builtObject2));
+                    commands.Enqueue(new Command(CommandAction.SetParent, builtObject2));
+                    commands.Enqueue(new Command(CommandAction.MoveTo, builtObject2));
+                    commands.Enqueue(new Command(CommandAction.Dock, builtObject2));
+                    commands.Enqueue(new Command(CommandAction.Unload));
+                    commands.Enqueue(new Command(CommandAction.Refuel));
+                    commands.Enqueue(new Command(CommandAction.Undock, builtObject2));
+                    commands.Enqueue(new Command(CommandAction.SetParent, builtObject2));
+                    commands.Enqueue(builtObject1.Mission.GenerateParkCommand());
+                    builtObject1.Mission.ReplaceCommandStack(commands);
+                }
+                main._Game.SelectedObject = (object)builtObject1;
+                if (main._Game.SelectedObject == null)
+                    return;
+                main.method_208(main._Game.SelectedObject);
             }
-            if (builtObject2 != null)
-            {
-                builtObject1.AssignMission(BuiltObjectMissionType.ExtractResources, (object)planet, (object)builtObject2, BuiltObjectMissionPriority.Normal);
-                CommandQueue commands = new CommandQueue();
-                commands.Enqueue(new Command(CommandAction.ClearParent));
-                commands.Enqueue(new Command(CommandAction.ConditionalHyperTo, builtObject1.Mission.TargetHabitat));
-                commands.Enqueue(new Command(CommandAction.SetParent, builtObject1.Mission.TargetHabitat));
-                commands.Enqueue(new Command(CommandAction.MoveTo, builtObject1.Mission.TargetHabitat));
-                commands.Enqueue(new Command(CommandAction.ImpulseTo, builtObject1.Mission.TargetHabitat));
-                commands.Enqueue(new Command(CommandAction.ExtractResources, builtObject1.Mission.TargetHabitat));
-                commands.Enqueue(new Command(CommandAction.ClearParent));
-                commands.Enqueue(new Command(CommandAction.ConditionalHyperTo, builtObject2));
-                commands.Enqueue(new Command(CommandAction.SetParent, builtObject2));
-                commands.Enqueue(new Command(CommandAction.MoveTo, builtObject2));
-                commands.Enqueue(new Command(CommandAction.Dock, builtObject2));
-                commands.Enqueue(new Command(CommandAction.Unload));
-                commands.Enqueue(new Command(CommandAction.Refuel));
-                commands.Enqueue(new Command(CommandAction.Undock, builtObject2));
-                commands.Enqueue(new Command(CommandAction.SetParent, builtObject2));
-                commands.Enqueue(builtObject1.Mission.GenerateParkCommand());
-                builtObject1.Mission.ReplaceCommandStack(commands);
-            }
-            main._Game.SelectedObject = (object)builtObject1;
-            if (main._Game.SelectedObject == null)
-                return;
-            main.method_208(main._Game.SelectedObject);
         }
 
         public static double GetGravityWellReductionForSmallShip(BuiltObject ship)
@@ -3902,9 +3954,9 @@ namespace BaconDistantWorlds
                 BuiltObjectMission baconValue = (BuiltObjectMission)ship.BaconValues["RepeatingMission"];
                 CargoList cargo = baconValue.Cargo;
                 if (baconValue.Population != null)
-                    BaconBuiltObject.OrderPassengershipMission(BaconBuiltObject.myMain, (object)ship, true);
+                    BaconBuiltObject.AssignPassengershipMission(BaconBuiltObject.myMain, (object)ship, true);
                 else if (cargo != null)
-                    BaconBuiltObject.AssignCargoMission(BaconBuiltObject.myMain, (object)ship, true);
+                    BaconBuiltObject.AssignCargoMission(BaconBuiltObject.myMain, ship, true);
                 flag = true;
             }
             if (ship.BaconValues.Count == 0)
