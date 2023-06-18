@@ -69,7 +69,7 @@
             this.btnRemoveHotkey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRemoveHotkey.ClipBackground = false;
             this.btnRemoveHotkey.DelayFrameRefresh = false;
-            this.btnRemoveHotkey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnRemoveHotkey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnRemoveHotkey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnRemoveHotkey.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnRemoveHotkey.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -91,7 +91,7 @@
             this.btnAddHotkey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnAddHotkey.ClipBackground = false;
             this.btnAddHotkey.DelayFrameRefresh = false;
-            this.btnAddHotkey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnAddHotkey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnAddHotkey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnAddHotkey.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnAddHotkey.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -111,10 +111,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
             this.label2.Location = new System.Drawing.Point(393, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.Size = new System.Drawing.Size(57, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "Hotkeys";
             // 
@@ -123,10 +124,12 @@
             this.lstbHotkeys.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
             this.lstbHotkeys.DataSource = this.mappedHotKeysBindingSource;
             this.lstbHotkeys.DisplayMember = "ViewName";
+            this.lstbHotkeys.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lstbHotkeys.FormattingEnabled = true;
+            this.lstbHotkeys.ItemHeight = 16;
             this.lstbHotkeys.Location = new System.Drawing.Point(295, 33);
             this.lstbHotkeys.Name = "lstbHotkeys";
-            this.lstbHotkeys.Size = new System.Drawing.Size(245, 173);
+            this.lstbHotkeys.Size = new System.Drawing.Size(245, 164);
             this.lstbHotkeys.TabIndex = 2;
             // 
             // mappedHotKeysBindingSource
@@ -142,10 +145,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
             this.label1.Location = new System.Drawing.Point(133, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(47, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Target";
             // 
@@ -154,11 +158,13 @@
             this.lstbTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
             this.lstbTarget.DataSource = this.targetBindingSource;
             this.lstbTarget.DisplayMember = "ViewName";
+            this.lstbTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lstbTarget.FormattingEnabled = true;
             this.lstbTarget.HorizontalScrollbar = true;
+            this.lstbTarget.ItemHeight = 16;
             this.lstbTarget.Location = new System.Drawing.Point(15, 33);
             this.lstbTarget.Name = "lstbTarget";
-            this.lstbTarget.Size = new System.Drawing.Size(260, 173);
+            this.lstbTarget.Size = new System.Drawing.Size(260, 164);
             this.lstbTarget.TabIndex = 0;
             // 
             // HotKeyModEditorControl
