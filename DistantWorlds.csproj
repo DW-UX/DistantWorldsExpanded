@@ -85,6 +85,12 @@
 		</Otherwise>
 	</Choose>
 	<ItemGroup>
+	  <Compile Remove="Mods\**" />
+	  <EmbeddedResource Remove="Mods\**" />
+	  <None Remove="Mods\**" />
+	  <Page Remove="Mods\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<Reference Include="AxInterop.WMPLib">
 			<HintPath>lib\AxInterop.WMPLib.dll</HintPath>
 		</Reference>
@@ -153,7 +159,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="aR3nbf8dQp2feLmk31\" />
-		<Folder Include="Mods\" />
 		<Folder Include="Properties\" />
 	</ItemGroup>
 	<ItemGroup>
@@ -178,7 +183,6 @@
 		<Compile Remove="DistantWorlds\Gdi32.cs" />
 		<Compile Remove="DistantWorlds\Particle.cs" />
 		<Compile Remove="DistantWorlds\User32.cs" />
-		<Compile Remove="Mods\ModArgs.cs" />
 		<Compile Remove="privatDFB67E2D.cs" />
 		<Compile Remove="test.cs" />
 		<Compile Remove="test.Designer.cs" />
