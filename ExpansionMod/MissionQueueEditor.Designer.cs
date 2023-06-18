@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.currentMissionText = new System.Windows.Forms.Label();
+            this.lblCurrentMission = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.missionList = new System.Windows.Forms.ListBox();
             this.bindingSourceQueuedMissions = new System.Windows.Forms.BindingSource(this.components);
@@ -44,48 +44,49 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQueuedMissions)).BeginInit();
             this.SuspendLayout();
             // 
-            // currentMissionText
+            // lblCurrentMission
             // 
-            this.currentMissionText.AutoSize = true;
-            this.currentMissionText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
-            this.currentMissionText.Location = new System.Drawing.Point(257, 29);
-            this.currentMissionText.Name = "currentMissionText";
-            this.currentMissionText.Size = new System.Drawing.Size(78, 13);
-            this.currentMissionText.TabIndex = 0;
-            this.currentMissionText.Text = "Current mission";
+            this.lblCurrentMission.AutoSize = true;
+            this.lblCurrentMission.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblCurrentMission.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
+            this.lblCurrentMission.Location = new System.Drawing.Point(257, 39);
+            this.lblCurrentMission.Name = "lblCurrentMission";
+            this.lblCurrentMission.Size = new System.Drawing.Size(98, 16);
+            this.lblCurrentMission.TabIndex = 0;
+            this.lblCurrentMission.Text = "Current mission";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
-            this.label2.Location = new System.Drawing.Point(257, 52);
+            this.label2.Location = new System.Drawing.Point(300, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(98, 16);
             this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.label2.Text = "Current mission";
             // 
             // missionList
             // 
             this.missionList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
             this.missionList.DataSource = this.bindingSourceQueuedMissions;
             this.missionList.DisplayMember = "Name";
+            this.missionList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.missionList.FormattingEnabled = true;
-            this.missionList.Location = new System.Drawing.Point(12, 29);
+            this.missionList.ItemHeight = 16;
+            this.missionList.Location = new System.Drawing.Point(12, 33);
             this.missionList.Name = "missionList";
-            this.missionList.Size = new System.Drawing.Size(239, 225);
+            this.missionList.Size = new System.Drawing.Size(239, 212);
             this.missionList.TabIndex = 3;
-            // 
-            // bindingSourceQueuedMissions
-            // 
-            this.bindingSourceQueuedMissions.DataSource = typeof(ExpansionMod.ListMissionObject);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
             this.label1.Location = new System.Drawing.Point(76, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 13);
+            this.label1.Size = new System.Drawing.Size(119, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Quequed missions";
             // 
@@ -94,7 +95,7 @@
             this.btnSwap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSwap.ClipBackground = false;
             this.btnSwap.DelayFrameRefresh = false;
-            this.btnSwap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnSwap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnSwap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnSwap.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnSwap.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -116,7 +117,7 @@
             this.btnMoveUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnMoveUp.ClipBackground = false;
             this.btnMoveUp.DelayFrameRefresh = false;
-            this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnMoveUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnMoveUp.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnMoveUp.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -138,7 +139,7 @@
             this.btnMoveDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnMoveDown.ClipBackground = false;
             this.btnMoveDown.DelayFrameRefresh = false;
-            this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnMoveDown.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnMoveDown.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnMoveDown.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -160,7 +161,7 @@
             this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSave.ClipBackground = false;
             this.btnSave.DelayFrameRefresh = false;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnSave.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnSave.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -182,7 +183,7 @@
             this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnCancel.ClipBackground = false;
             this.btnCancel.DelayFrameRefresh = false;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnCancel.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnCancel.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -204,7 +205,7 @@
             this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRemove.ClipBackground = false;
             this.btnRemove.DelayFrameRefresh = false;
-            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnRemove.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnRemove.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnRemove.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -226,7 +227,7 @@
             this.btnRestoreMissions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnRestoreMissions.ClipBackground = false;
             this.btnRestoreMissions.DelayFrameRefresh = false;
-            this.btnRestoreMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnRestoreMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnRestoreMissions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnRestoreMissions.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnRestoreMissions.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -247,6 +248,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(40)))), ((int)(((byte)(44)))));
             this.ClientSize = new System.Drawing.Size(465, 263);
             this.Controls.Add(this.btnRestoreMissions);
@@ -259,7 +261,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.missionList);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.currentMissionText);
+            this.Controls.Add(this.lblCurrentMission);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MissionQueueEditor";
             this.ShowInTaskbar = false;
@@ -273,7 +275,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label currentMissionText;
+        private System.Windows.Forms.Label lblCurrentMission;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox missionList;
         private System.Windows.Forms.BindingSource bindingSourceQueuedMissions;

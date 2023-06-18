@@ -1,4 +1,5 @@
-﻿using DistantWorlds.Types;
+﻿using DistantWorlds;
+using DistantWorlds.Types;
 using ExpansionMod.Controls;
 using ExpansionMod.Objects;
 using ExpansionMod.Objects.HotKeyMapping;
@@ -15,7 +16,7 @@ namespace ExpansionMod.HotKeyMapping
     {
         private MissionQueueEditor _fEditor;
         private HotKeyModEditorControl _hotKeyControl;
-        private readonly ExpansionModMain expMod;
+        private readonly ExpansionModMain _expMod;
         private readonly KeyMapper _hotKeyParser;
         private readonly string _folder;
         private readonly string _tabName;
@@ -25,7 +26,7 @@ namespace ExpansionMod.HotKeyMapping
 
         public HotKeyManager(ExpansionModMain expMod, KeyMapper hotKeyParser, string folder, bool mainGame)
         {
-            this.expMod = expMod;
+            this._expMod = expMod;
             _hotKeyParser = hotKeyParser;
             _folder = folder;
             _tabName = mainGame ? "DistantWorlds" : "Expansion mod hotkeys";
@@ -100,14 +101,19 @@ namespace ExpansionMod.HotKeyMapping
         }
         private void OpenCounstrucionQueueEditor()
         {
-            if (expMod.GameMain != null)
+            if (_expMod.GameMain != null)
             {
-                if (expMod.GameMain._Game.SelectedObject != null && expMod.GameMain._Game.SelectedObject is BuiltObject constrShip &&
+                if (_expMod.GameMain._Game.SelectedObject != null && _expMod.GameMain._Game.SelectedObject is BuiltObject constrShip &&
                     constrShip.SubRole == BuiltObjectSubRole.ConstructionShip && _fEditor == null)
                 {
-                    _fEditor = new MissionQueueEditor(constrShip, expMod.GameMain);
-                    _fEditor.Show(expMod.GameMain);
+                    bool flag = _expMod.GameMain._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                    if (!flag)
+                    { _expMod.GameMain._Game.Galaxy.Pause(); }
+                    _fEditor = new MissionQueueEditor(constrShip, _expMod.GameMain);
                     _fEditor.FormClosed += _fEditor_FormClosed;
+                    _fEditor.ShowDialog(_expMod.GameMain);
+                    if (!flag)
+                    { _expMod.GameMain._Game.Galaxy.Resume(); }
                 }
             }
         }

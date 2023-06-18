@@ -21,9 +21,9 @@ namespace ExpansionMod
         public MissionQueueEditor(BuiltObject targetShip, Control parent)
         {
             InitializeComponent();
-            this.Parent = parent;
-            this.CenterToParent();
             _targetShip = targetShip;
+
+            bindingSourceQueuedMissions.DataSource = typeof(ExpansionMod.ListMissionObject);
             Restore();
         }
 
@@ -35,7 +35,7 @@ namespace ExpansionMod
                 ListMissionObject currentMissionObj = new ListMissionObject(_targetShip, _currentMission);
                 bindingSourceQueuedMissions[bindingSourceQueuedMissions.Position] = currentMissionObj;
                 _currentMission = queuedTarget.Mission;
-                currentMissionText.Text = Galaxy.ResolveDescription(_targetShip.Empire, _currentMission);
+                lblCurrentMission.Text = Galaxy.ResolveDescription(_targetShip.Empire, _currentMission);
                 bindingSourceQueuedMissions.ResetCurrentItem();
             }
         }
@@ -123,7 +123,7 @@ namespace ExpansionMod
         {
             _queuedMissions.Clear();
             _currentMission = _targetShip.Mission;
-            currentMissionText.Text = Galaxy.ResolveDescription(_targetShip.Empire, _currentMission);
+            lblCurrentMission.Text = Galaxy.ResolveDescription(_targetShip.Empire, _currentMission);
             foreach (var item in _targetShip.SubsequentMissions)
             {
                 _queuedMissions.Add(new ListMissionObject(_targetShip, item));
