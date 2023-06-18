@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gradientPanel1 = new DistantWorlds.Controls.GradientPanel();
+            this.btnSetAutoTarget = new DistantWorlds.Controls.GlassButton();
             this.cmbTarget = new System.Windows.Forms.ComboBox();
             this.btnCancel = new DistantWorlds.Controls.GlassButton();
             this.btnSelectTargets = new DistantWorlds.Controls.GlassButton();
             this.label1 = new System.Windows.Forms.Label();
             this.bindingTarget = new System.Windows.Forms.BindingSource(this.components);
-            this.btnSetAutoTarget = new DistantWorlds.Controls.GlassButton();
             this.gradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingTarget)).BeginInit();
             this.SuspendLayout();
@@ -60,15 +60,38 @@
             this.gradientPanel1.Size = new System.Drawing.Size(199, 128);
             this.gradientPanel1.TabIndex = 2;
             // 
+            // btnSetAutoTarget
+            // 
+            this.btnSetAutoTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnSetAutoTarget.ClipBackground = false;
+            this.btnSetAutoTarget.DelayFrameRefresh = false;
+            this.btnSetAutoTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSetAutoTarget.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.btnSetAutoTarget.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
+            this.btnSetAutoTarget.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
+            this.btnSetAutoTarget.IntensifyColors = false;
+            this.btnSetAutoTarget.Location = new System.Drawing.Point(10, 93);
+            this.btnSetAutoTarget.Name = "btnSetAutoTarget";
+            this.btnSetAutoTarget.OuterBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(16)))));
+            this.btnSetAutoTarget.ShineColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(128)))));
+            this.btnSetAutoTarget.Size = new System.Drawing.Size(179, 23);
+            this.btnSetAutoTarget.TabIndex = 8;
+            this.btnSetAutoTarget.Text = "Set auto target";
+            this.btnSetAutoTarget.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
+            this.btnSetAutoTarget.TextColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnSetAutoTarget.ToggledOn = false;
+            this.btnSetAutoTarget.Click += new System.EventHandler(this.btnSetAutoTarget_Click);
+            // 
             // cmbTarget
             // 
             this.cmbTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
             this.cmbTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbTarget.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmbTarget.FormattingEnabled = true;
             this.cmbTarget.Location = new System.Drawing.Point(10, 34);
             this.cmbTarget.Name = "cmbTarget";
-            this.cmbTarget.Size = new System.Drawing.Size(179, 21);
+            this.cmbTarget.Size = new System.Drawing.Size(179, 24);
             this.cmbTarget.TabIndex = 7;
             // 
             // btnCancel
@@ -77,7 +100,7 @@
             this.btnCancel.ClipBackground = false;
             this.btnCancel.DelayFrameRefresh = false;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnCancel.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnCancel.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -99,7 +122,7 @@
             this.btnSelectTargets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnSelectTargets.ClipBackground = false;
             this.btnSelectTargets.DelayFrameRefresh = false;
-            this.btnSelectTargets.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnSelectTargets.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnSelectTargets.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.btnSelectTargets.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
             this.btnSelectTargets.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
@@ -119,34 +142,13 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
             this.label1.Location = new System.Drawing.Point(77, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(47, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Target";
-            // 
-            // btnSetAutoTarget
-            // 
-            this.btnSetAutoTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnSetAutoTarget.ClipBackground = false;
-            this.btnSetAutoTarget.DelayFrameRefresh = false;
-            this.btnSetAutoTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.btnSetAutoTarget.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.btnSetAutoTarget.GlowColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(128)))));
-            this.btnSetAutoTarget.InnerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(77)))));
-            this.btnSetAutoTarget.IntensifyColors = false;
-            this.btnSetAutoTarget.Location = new System.Drawing.Point(12, 93);
-            this.btnSetAutoTarget.Name = "btnSetAutoTarget";
-            this.btnSetAutoTarget.OuterBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(16)))));
-            this.btnSetAutoTarget.ShineColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(128)))));
-            this.btnSetAutoTarget.Size = new System.Drawing.Size(175, 23);
-            this.btnSetAutoTarget.TabIndex = 8;
-            this.btnSetAutoTarget.Text = "Set auto target";
-            this.btnSetAutoTarget.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
-            this.btnSetAutoTarget.TextColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnSetAutoTarget.ToggledOn = false;
-            this.btnSetAutoTarget.Click += new System.EventHandler(this.btnSetAutoTarget_Click);
             // 
             // SelectMiningDeliveryTarget
             // 

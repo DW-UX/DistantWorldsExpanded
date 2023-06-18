@@ -1134,8 +1134,8 @@ namespace BaconDistantWorlds
 
             if (ship == null)
             {
-                if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) ||
-                        (BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)))
+                if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) &&
+                        !(BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)))
                 {
                     return;
                 }
@@ -2193,8 +2193,8 @@ namespace BaconDistantWorlds
                 freighter = (BuiltObject)main._Game.SelectedObject;
                 if (freighter != null && freighter.Role == BuiltObjectRole.Freight)
                 {
-                    if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) ||
-                        (BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)))
+                    if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) &&
+                        !(BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)))
                     {
                         return;
                     }

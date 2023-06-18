@@ -64,6 +64,7 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DistantWorlds.Controls\DistantWorlds.Controls.csproj" />
     <ProjectReference Include="..\ExpansionMod.Controls\ExpansionMod.Controls\ExpansionMod.Controls.csproj" />
     <ProjectReference Include="..\ExpansionMod.Objects\ExpansionMod.Objects\ExpansionMod.Objects.csproj" />
   </ItemGroup>
