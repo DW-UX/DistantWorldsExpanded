@@ -428,7 +428,7 @@ namespace DistantWorlds.Controls
 
         private SectorCloudGenerator sectorCloudGenerator_1;
 
-        private PlanetaryRingsGenerator planetaryRingsGenerator_0;
+        //private PlanetaryRingsGenerator planetaryRingsGenerator_0;
 
         //private GalaxyNebulaeGenerator galaxyNebulaeGenerator_0;
 
@@ -1445,7 +1445,7 @@ namespace DistantWorlds.Controls
             nebulaCloudGenerator_0 = new NebulaCloudGenerator(1);
             nebulaCloudGenerator_1 = new NebulaCloudGenerator(2);
             double_3 = 1.0;
-            planetaryRingsGenerator_0 = new PlanetaryRingsGenerator();
+            //planetaryRingsGenerator_0 = new PlanetaryRingsGenerator();
             lightningGenerator_0 = new LightningGenerator();
             color_15 = System.Drawing.Color.Empty;
             dateTime_1 = DateTime.MinValue;
@@ -1772,13 +1772,13 @@ namespace DistantWorlds.Controls
                         e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                     }
                 }
-                switch (main_0.zEsBtZgRxo)
+                switch (main_0.ZoomStatus)
                 {
                     case ZoomStatus.Zooming:
-                        main_0.zEsBtZgRxo = ZoomStatus.Stabilizing;
+                        main_0.ZoomStatus = ZoomStatus.Stabilizing;
                         break;
                     case ZoomStatus.Stabilizing:
-                        main_0.zEsBtZgRxo = ZoomStatus.Stable;
+                        main_0.ZoomStatus = ZoomStatus.Stable;
                         main_0.method_5();
                         bool_0 = true;
                         break;
@@ -2272,7 +2272,7 @@ namespace DistantWorlds.Controls
             int seed = (int)object_1;
             nebulaCloudGenerator_0.TransparencyLevel = 114 + (int)(64.0 / double_2);
             bool useLowQuality = false;
-            if (main_0.zEsBtZgRxo == ZoomStatus.Zooming)
+            if (main_0.ZoomStatus == ZoomStatus.Zooming)
             {
                 useLowQuality = true;
             }
@@ -2529,7 +2529,7 @@ namespace DistantWorlds.Controls
                 if (bitmap != null)
                 {
                     Bitmap bitmap2 = null;
-                    bitmap2 = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(bitmap, num, num3, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(bitmap, num, num3));
+                    bitmap2 = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(bitmap, num, num3, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(bitmap, num, num3));
                     bitmap2.SetResolution(bitmap_7.HorizontalResolution, bitmap_7.VerticalResolution);
                     Bitmap bitmap3 = bitmap2;
                     bitmap2 = method_224(bitmap2, System.Drawing.Color.FromArgb(255, 64, 0), bool_13: true);
@@ -2537,7 +2537,7 @@ namespace DistantWorlds.Controls
                     bitmap2.SetResolution(bitmap_7.HorizontalResolution, bitmap_7.VerticalResolution);
                     using (Graphics graphics = Graphics.FromImage(bitmap_7))
                     {
-                        if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                        if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                         {
                             method_176(graphics);
                         }
@@ -2597,12 +2597,12 @@ namespace DistantWorlds.Controls
                         case HabitatType.Continental:
                         case HabitatType.Ocean:
                             num = random.Next(0, 5);
-                            bitmap = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.bitmap_192[num], num2, num4, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.bitmap_192[num], num2, num4));
+                            bitmap = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.bitmap_192[num], num2, num4, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.bitmap_192[num], num2, num4));
                             break;
                         case HabitatType.Desert:
                         case HabitatType.Ice:
                             num = random.Next(0, 2);
-                            bitmap = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.bitmap_193[num], num2, num4, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.bitmap_193[num], num2, num4));
+                            bitmap = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.bitmap_193[num], num2, num4, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.bitmap_193[num], num2, num4));
                             break;
                     }
                     int num6 = 0;
@@ -2677,7 +2677,7 @@ namespace DistantWorlds.Controls
                     num5 -= (bitmap.Height - num8) / 2;
                     using (Graphics graphics = Graphics.FromImage(bitmap_7))
                     {
-                        if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                        if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                         {
                             method_176(graphics);
                         }
@@ -2726,7 +2726,7 @@ namespace DistantWorlds.Controls
                 int val = (int)((double)habitat_1.Damage * 8.0);
                 val = Math.Min(7, Math.Max(val, 0));
                 Bitmap bitmap = null;
-                bitmap = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.bitmap_194[val], num, num2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.bitmap_194[val], num, num2));
+                bitmap = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.bitmap_194[val], num, num2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.bitmap_194[val], num, num2));
                 switch (habitat_1.HabitatIndex % 4)
                 {
                     case 0:
@@ -2745,7 +2745,7 @@ namespace DistantWorlds.Controls
                 bitmap.SetResolution(bitmap_7.HorizontalResolution, bitmap_7.VerticalResolution);
                 using (Graphics graphics = Graphics.FromImage(bitmap_7))
                 {
-                    if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                    if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                     {
                         method_176(graphics);
                     }
@@ -2762,14 +2762,14 @@ namespace DistantWorlds.Controls
             return bitmap_7;
         }
 
-        private Bitmap method_53(Habitat habitat_1, Bitmap bitmap_7)
+        private Bitmap GetPlanetShadow(Habitat habitat_1, Bitmap bitmap_7)
         {
             int num = 0;
             num = (int)((double)bitmap_7.Width / 150.0);
             int num2 = bitmap_7.Width - num;
             int num3 = bitmap_7.Height - num;
             Bitmap bitmap = null;
-            bitmap = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.bitmap_191, num2, num3, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.bitmap_191, num2, num3, InterpolationMode.Low, CompositingQuality.HighSpeed, SmoothingMode.None));
+            bitmap = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.bitmap_191, num2, num3, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.bitmap_191, num2, num3, InterpolationMode.Low, CompositingQuality.HighSpeed, SmoothingMode.None));
             Habitat systemStar = galaxy_0.Systems[habitat_1.SystemIndex].SystemStar;
             float num4 = (float)Galaxy.DetermineAngle(habitat_1.Xpos, habitat_1.Ypos, systemStar.Xpos, systemStar.Ypos);
             num4 *= -1f;
@@ -2778,7 +2778,7 @@ namespace DistantWorlds.Controls
             bitmap2.Dispose();
             using (Graphics graphics = Graphics.FromImage(bitmap_7))
             {
-                if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                 {
                     method_176(graphics);
                 }
@@ -2809,7 +2809,7 @@ namespace DistantWorlds.Controls
             {
                 if (habitat_1.HasRings)
                 {
-                    bitmap_ = method_55(habitat_1, int_11);
+                    bitmap_ = GetRescaledGasGiantRigns(habitat_1, int_11);
                 }
                 Bitmap bitmap = null;
                 if (habitat_1.Type == HabitatType.SuperNova && main_0 != null && main_0.bitmap_206 != null)
@@ -2841,7 +2841,7 @@ namespace DistantWorlds.Controls
                     }
                     bitmap3 = method_51(habitat_1, bitmap2);
                     bitmap3 = method_50(habitat_1, bitmap3);
-                    Bitmap result = method_56(habitat_1, bitmap3, bitmap_);
+                    Bitmap result = CombinePlaneWithRings(habitat_1, bitmap3, bitmap_);
                     bitmap3.Dispose();
                     return result;
                 }
@@ -2849,7 +2849,7 @@ namespace DistantWorlds.Controls
             return new Bitmap(1, 1, PixelFormat.Format32bppPArgb);
         }
 
-        internal Bitmap method_55(Habitat habitat_1, int int_11)
+        internal Bitmap GetRescaledGasGiantRigns(Habitat habitat_1, int int_11)
         {
             if (habitat_1 != null && main_0 != null && main_0.bitmap_1 != null)
             {
@@ -2858,18 +2858,18 @@ namespace DistantWorlds.Controls
                 double num2 = (double)int_11 / (double)habitat_1.Diameter;
                 double num3 = (double)habitat_1.Diameter / 500.00000000000006;
                 num2 *= num3;
-                int num4 = (int)((double)bitmap.Width * num2);
-                int num5 = (int)((double)bitmap.Height * num2);
-                if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                int resultWidth = (int)((double)bitmap.Width * num2);
+                int resultHeight = (int)((double)bitmap.Height * num2);
+                if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                 {
-                    return main_0.PrecacheScaledBitmap(bitmap, num4, num5, InterpolationMode.HighQualityBilinear, CompositingQuality.HighSpeed, SmoothingMode.HighSpeed);
+                    return main_0.PrecacheScaledBitmap(bitmap, resultWidth, resultHeight, InterpolationMode.HighQualityBilinear, CompositingQuality.HighSpeed, SmoothingMode.HighSpeed);
                 }
-                return main_0.PrecacheScaledBitmap(bitmap, num4, num5, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None);
+                return main_0.PrecacheScaledBitmap(bitmap, resultWidth, resultHeight, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None);
             }
             return null;
         }
 
-        internal Bitmap method_56(Habitat habitat_1, Bitmap bitmap_7, Bitmap bitmap_8)
+        internal Bitmap CombinePlaneWithRings(Habitat habitat_1, Bitmap bitmap_7, Bitmap bitmap_8)
         {
             if (bitmap_7 != null && bitmap_7.PixelFormat != 0)
             {
@@ -2889,7 +2889,7 @@ namespace DistantWorlds.Controls
                 Bitmap bitmap = new Bitmap(val, val2, PixelFormat.Format32bppPArgb);
                 bitmap.SetResolution(bitmap_7.HorizontalResolution, bitmap_7.VerticalResolution);
                 using Graphics graphics = Graphics.FromImage(bitmap);
-                if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                 {
                     graphics.CompositingQuality = CompositingQuality.HighQuality;
                     graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
@@ -3762,7 +3762,7 @@ namespace DistantWorlds.Controls
                                         {
                                             if (habitat2.Category == HabitatCategoryType.Asteroid)
                                             {
-                                                bitmap2 = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.HighQualityBilinear, CompositingQuality.HighSpeed, SmoothingMode.None));
+                                                bitmap2 = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.HighQualityBilinear, CompositingQuality.HighSpeed, SmoothingMode.None));
                                             }
                                             else if (habitat2.Type == HabitatType.SuperNova)
                                             {
@@ -3770,7 +3770,7 @@ namespace DistantWorlds.Controls
                                             }
                                             else if (habitat2.Category != 0)
                                             {
-                                                bitmap2 = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2));
+                                                bitmap2 = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2));
                                             }
                                             else if (habitat2.Type != HabitatType.BlackHole)
                                             {
@@ -3780,7 +3780,7 @@ namespace DistantWorlds.Controls
                                         Bitmap item = null;
                                         if (habitat2.HasRings)
                                         {
-                                            item = method_55(habitat2, int_);
+                                            item = GetRescaledGasGiantRigns(habitat2, int_);
                                         }
                                         if (habitat2.Category != HabitatCategoryType.Planet && habitat2.Category != HabitatCategoryType.Moon)
                                         {
@@ -3796,14 +3796,14 @@ namespace DistantWorlds.Controls
                                                 bitmap3.Dispose();
                                             }
                                             bitmap_ = method_51(habitat2, bitmap_);
-                                            bitmap_ = method_53(habitat2, bitmap_);
+                                            bitmap_ = GetPlanetShadow(habitat2, bitmap_);
                                             bitmap_ = method_50(habitat2, bitmap_);
                                             list_5.Add(bitmap_);
                                         }
                                         list_8.Add(item);
                                         if (habitat2.Category != HabitatCategoryType.GasCloud && habitat2.Category != HabitatCategoryType.Asteroid && habitat2.Type != HabitatType.BlackHole && habitat2.Type != HabitatType.SuperNova)
                                         {
-                                            list_5[list_5.Count - 1] = method_56(habitat2, list_5[list_5.Count - 1], list_8[list_8.Count - 1]);
+                                            list_5[list_5.Count - 1] = CombinePlaneWithRings(habitat2, list_5[list_5.Count - 1], list_8[list_8.Count - 1]);
                                         }
                                         list_7.Add(currentDateTime);
                                     }
@@ -3818,7 +3818,7 @@ namespace DistantWorlds.Controls
                                         {
                                             if (habitat2.Category == HabitatCategoryType.Asteroid)
                                             {
-                                                bitmap4 = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.HighQualityBilinear, CompositingQuality.HighSpeed, SmoothingMode.None));
+                                                bitmap4 = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.HighQualityBilinear, CompositingQuality.HighSpeed, SmoothingMode.None));
                                             }
                                             else if (habitat2.Type == HabitatType.SuperNova)
                                             {
@@ -3826,7 +3826,7 @@ namespace DistantWorlds.Controls
                                             }
                                             else if (habitat2.Category != 0)
                                             {
-                                                bitmap4 = ((main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2));
+                                                bitmap4 = ((main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing) ? main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2, InterpolationMode.NearestNeighbor, CompositingQuality.HighSpeed, SmoothingMode.None) : main_0.PrecacheScaledBitmap(main_0.habitatImageCache_0.ObtainImage(habitat2), int_, int_2));
                                             }
                                             else if (habitat2.Type != HabitatType.BlackHole)
                                             {
@@ -3836,7 +3836,7 @@ namespace DistantWorlds.Controls
                                         Bitmap value2 = null;
                                         if (habitat2.HasRings)
                                         {
-                                            value2 = method_55(habitat2, int_);
+                                            value2 = GetRescaledGasGiantRigns(habitat2, int_);
                                         }
                                         if (list_5[num34 - main_0.int_28] != null)
                                         {
@@ -3861,14 +3861,14 @@ namespace DistantWorlds.Controls
                                                 bitmap5.Dispose();
                                             }
                                             bitmap_2 = method_51(habitat2, bitmap_2);
-                                            bitmap_2 = method_53(habitat2, bitmap_2);
+                                            bitmap_2 = GetPlanetShadow(habitat2, bitmap_2);
                                             bitmap_2 = method_50(habitat2, bitmap_2);
                                             list_5[num34 - main_0.int_28] = bitmap_2;
                                             list_8[num34 - main_0.int_28] = value2;
                                         }
                                         if (habitat2.Category != HabitatCategoryType.GasCloud && habitat2.Category != HabitatCategoryType.Asteroid && habitat2.Type != HabitatType.BlackHole && habitat2.Type != HabitatType.SuperNova)
                                         {
-                                            list_5[num34 - main_0.int_28] = method_56(habitat2, list_5[num34 - main_0.int_28], list_8[num34 - main_0.int_28]);
+                                            list_5[num34 - main_0.int_28] = CombinePlaneWithRings(habitat2, list_5[num34 - main_0.int_28], list_8[num34 - main_0.int_28]);
                                         }
                                         list_7[num34 - main_0.int_28] = currentDateTime;
                                     }
@@ -4007,7 +4007,7 @@ namespace DistantWorlds.Controls
                                         double totalSeconds2 = currentDateTime.Subtract(dateTime_2).TotalSeconds;
                                         this.double_4 += totalSeconds2 * 0.03;
                                         method_119(graphics_, int_7, int_8, int_3, int_4, bitmap_5[0], currentDateTime, 0.0, System.Drawing.Color.Empty);
-                                        if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                                        if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                                         {
                                             method_176(graphics_);
                                         }
@@ -4018,7 +4018,7 @@ namespace DistantWorlds.Controls
                                         double_5 -= totalSeconds2 * 0.02;
                                         method_119(graphics_, int_9, int_10, int_5, int_6, bitmap_5[1], currentDateTime, double_5, System.Drawing.Color.Empty);
                                     }
-                                    if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                                    if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                                     {
                                         method_176(graphics_0);
                                     }
@@ -4030,7 +4030,7 @@ namespace DistantWorlds.Controls
                                 }
                                 else
                                 {
-                                    if (main_0.zEsBtZgRxo != ZoomStatus.Zooming && main_0.zEsBtZgRxo != ZoomStatus.Stabilizing)
+                                    if (main_0.ZoomStatus != ZoomStatus.Zooming && main_0.ZoomStatus != ZoomStatus.Stabilizing)
                                     {
                                         method_176(graphics_0);
                                     }
@@ -7038,7 +7038,7 @@ namespace DistantWorlds.Controls
                     Bitmap bitmap_8 = null;
                     if (habitat_1.HasRings)
                     {
-                        bitmap_8 = method_55(habitat_1, bitmap.Width);
+                        bitmap_8 = GetRescaledGasGiantRigns(habitat_1, bitmap.Width);
                     }
                     if (habitat_1.Category != HabitatCategoryType.Planet && habitat_1.Category != HabitatCategoryType.Moon)
                     {
@@ -7056,9 +7056,9 @@ namespace DistantWorlds.Controls
                             bitmap3.Dispose();
                         }
                         bitmap2 = method_51(habitat_1, bitmap2);
-                        bitmap2 = method_53(habitat_1, bitmap2);
+                        bitmap2 = GetPlanetShadow(habitat_1, bitmap2);
                         bitmap2 = method_50(habitat_1, bitmap2);
-                        bitmap_7 = method_56(habitat_1, bitmap2, bitmap_8);
+                        bitmap_7 = CombinePlaneWithRings(habitat_1, bitmap2, bitmap_8);
                         bitmap2.Dispose();
                     }
                     return XnaDrawingHelper.FastBitmapToTexture(GraphicsDevice, bitmap_7);
@@ -9024,7 +9024,7 @@ namespace DistantWorlds.Controls
                     Bitmap bitmap = new Bitmap((int)num2, (int)num3, PixelFormat.Format32bppPArgb);
                     using (Graphics graphics = Graphics.FromImage(bitmap))
                     {
-                        if (main_0.zEsBtZgRxo != ZoomStatus.Stabilizing && main_0.zEsBtZgRxo != 0)
+                        if (main_0.ZoomStatus != ZoomStatus.Stabilizing && main_0.ZoomStatus != 0)
                         {
                             graphics.CompositingQuality = CompositingQuality.HighSpeed;
                             graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
@@ -9037,7 +9037,7 @@ namespace DistantWorlds.Controls
                             graphics.SmoothingMode = SmoothingMode.None;
                         }
                         graphics.DrawImage(main_0.bitmap_178, destRect, srcRect, GraphicsUnit.Pixel);
-                        if (main_0.zEsBtZgRxo == ZoomStatus.Stabilizing || main_0.zEsBtZgRxo == ZoomStatus.Stable || (bool_11 && !main_0.gameOptions_0.CleanGalaxyView))
+                        if (main_0.ZoomStatus == ZoomStatus.Stabilizing || main_0.ZoomStatus == ZoomStatus.Stable || (bool_11 && !main_0.gameOptions_0.CleanGalaxyView))
                         {
                             using ImageAttributes imageAttr = method_236(0.25);
                             RectangleF rectangleF_3 = method_125();
@@ -9446,7 +9446,7 @@ namespace DistantWorlds.Controls
                     }
                     return;
                 }
-                if (main_0.zEsBtZgRxo != ZoomStatus.Stabilizing && main_0.zEsBtZgRxo != 0)
+                if (main_0.ZoomStatus != ZoomStatus.Stabilizing && main_0.ZoomStatus != 0)
                 {
                     method_175(graphics_0);
                 }
@@ -9939,7 +9939,7 @@ namespace DistantWorlds.Controls
             Bitmap bitmap = new Bitmap(num9, num10, PixelFormat.Format32bppPArgb);
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                if (main_0.zEsBtZgRxo != ZoomStatus.Stabilizing && main_0.zEsBtZgRxo != 0)
+                if (main_0.ZoomStatus != ZoomStatus.Stabilizing && main_0.ZoomStatus != 0)
                 {
                     method_175(graphics);
                 }
@@ -9980,7 +9980,7 @@ namespace DistantWorlds.Controls
                     Bitmap bitmap3 = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format32bppPArgb);
                     using (Graphics graphics3 = Graphics.FromImage(bitmap3))
                     {
-                        if (main_0.zEsBtZgRxo != ZoomStatus.Stabilizing && main_0.zEsBtZgRxo != 0)
+                        if (main_0.ZoomStatus != ZoomStatus.Stabilizing && main_0.ZoomStatus != 0)
                         {
                             method_175(graphics3);
                         }
@@ -9995,7 +9995,7 @@ namespace DistantWorlds.Controls
                     graphics2.DrawImageUnscaled(bitmap3, new System.Drawing.Point(0, 0));
                     method_21(bitmap3);
                 }
-                if (main_0.zEsBtZgRxo != ZoomStatus.Stabilizing && main_0.zEsBtZgRxo != 0)
+                if (main_0.ZoomStatus != ZoomStatus.Stabilizing && main_0.ZoomStatus != 0)
                 {
                     method_175(graphics2);
                 }
@@ -10006,7 +10006,7 @@ namespace DistantWorlds.Controls
                 Bitmap bitmap4 = method_150(rectangleF, rectangleF_, (float)num4, num2);
                 graphics2.DrawImage(bitmap4, 0, 0);
                 method_21(bitmap4);
-                if (main_0.zEsBtZgRxo == ZoomStatus.Stabilizing || main_0.zEsBtZgRxo == ZoomStatus.Stable || (bool_11 && !main_0.gameOptions_0.CleanGalaxyView))
+                if (main_0.ZoomStatus == ZoomStatus.Stabilizing || main_0.ZoomStatus == ZoomStatus.Stable || (bool_11 && !main_0.gameOptions_0.CleanGalaxyView))
                 {
                     using ImageAttributes imageAttr = method_236(0.25);
                     RectangleF rectangleF2 = method_123(method_125(), 2f);
@@ -10207,7 +10207,7 @@ namespace DistantWorlds.Controls
             Bitmap bitmap = new Bitmap(num, num2, PixelFormat.Format32bppPArgb);
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                if (main_0.zEsBtZgRxo != ZoomStatus.Stabilizing && main_0.zEsBtZgRxo != 0)
+                if (main_0.ZoomStatus != ZoomStatus.Stabilizing && main_0.ZoomStatus != 0)
                 {
                     method_175(graphics);
                 }
@@ -13138,7 +13138,7 @@ namespace DistantWorlds.Controls
             bitmap.SetResolution(bitmap_7.HorizontalResolution, bitmap_7.VerticalResolution);
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                if (main_0.zEsBtZgRxo == ZoomStatus.Zooming || main_0.zEsBtZgRxo == ZoomStatus.Stabilizing)
+                if (main_0.ZoomStatus == ZoomStatus.Zooming || main_0.ZoomStatus == ZoomStatus.Stabilizing)
                 {
                     method_175(graphics);
                 }
