@@ -288,73 +288,73 @@ namespace DistantWorlds.Types
 
         private void GenerateHabitatImageFilepaths(bool initialLoad, out bool hasCustom)
         {
-            string str1 = this._ApplicationStartupPath + "\\images\\";
-            string str2 = str1 + "environment\\planets";
-            string str3 = str1 + "environment\\asteroids";
-            string path1 = string.Empty;
-            string path2 = string.Empty;
+            string originalImagePath = this._ApplicationStartupPath + "\\images\\";
+            string originalPlanetsPath = originalImagePath + "environment\\planets";
+            string originalAsteroidsPath = originalImagePath + "environment\\asteroids";
+            string customPlanetsPath = string.Empty;
+            string customAsteroidsPath = string.Empty;
             if (!string.IsNullOrEmpty(this._CustomizationSetName))
             {
-                path1 = this._ApplicationStartupPath + "\\customization\\" + this._CustomizationSetName + "\\images\\environment\\planets";
-                if (!Directory.Exists(path1))
-                    path1 = string.Empty;
-                path2 = this._ApplicationStartupPath + "\\customization\\" + this._CustomizationSetName + "\\images\\environment\\asteroids";
-                if (!Directory.Exists(path2))
-                    path2 = string.Empty;
+                customPlanetsPath = this._ApplicationStartupPath + "\\customization\\" + this._CustomizationSetName + "\\images\\environment\\planets";
+                if (!Directory.Exists(customPlanetsPath))
+                    customPlanetsPath = string.Empty;
+                customAsteroidsPath = this._ApplicationStartupPath + "\\customization\\" + this._CustomizationSetName + "\\images\\environment\\asteroids";
+                if (!Directory.Exists(customAsteroidsPath))
+                    customAsteroidsPath = string.Empty;
             }
             hasCustom = false;
             this._Filepaths.Clear();
             for (int index = 0; index < GalaxyImages.HabitatImageCountBarrenRock; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("Barren-" + (index + 1).ToString("0000") + ".png", str2 + "\\barrenrock\\", path1 + "\\barrenrock\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("Barren-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\barrenrock\\", customPlanetsPath + "\\barrenrock\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountContinental; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("Continental-" + (index + 1).ToString("0000") + ".png", str2 + "\\continental\\", path1 + "\\continental\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("Continental-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\continental\\", customPlanetsPath + "\\continental\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountForest; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("Forest-" + (index + 1).ToString("0000") + ".png", str2 + "\\forest\\", path1 + "\\forest\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("Forest-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\forest\\", customPlanetsPath + "\\forest\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountFrozenGasGiantArgon; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasAr-" + (index + 1).ToString("0000") + ".png", str2 + "\\frozengasgiant\\", path1 + "\\frozengasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasAr-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\frozengasgiant\\", customPlanetsPath + "\\frozengasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountFrozenGasGiantHelium; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasHe-" + (index + 1).ToString("0000") + ".png", str2 + "\\frozengasgiant\\", path1 + "\\frozengasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasHe-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\frozengasgiant\\", customPlanetsPath + "\\frozengasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountFrozenGasGiantKrypton; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasKr-" + (index + 1).ToString("0000") + ".png", str2 + "\\frozengasgiant\\", path1 + "\\frozengasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasKr-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\frozengasgiant\\", customPlanetsPath + "\\frozengasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountFrozenGasGiantTyderios; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasTy-" + (index + 1).ToString("0000") + ".png", str2 + "\\frozengasgiant\\", path1 + "\\frozengasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasTy-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\frozengasgiant\\", customPlanetsPath + "\\frozengasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountFrozenGasGiantAny; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasOt-" + (index + 1).ToString("0000") + ".png", str2 + "\\frozengasgiant\\", path1 + "\\frozengasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("FrozenGasOt-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\frozengasgiant\\", customPlanetsPath + "\\frozengasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountGasGiantArgon; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("GasGiantAr-" + (index + 1).ToString("0000") + ".png", str2 + "\\gasgiant\\", path1 + "\\gasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("GasGiantAr-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\gasgiant\\", customPlanetsPath + "\\gasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountGasGiantCaslon; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("GasGiantCa-" + (index + 1).ToString("0000") + ".png", str2 + "\\gasgiant\\", path1 + "\\gasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("GasGiantCa-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\gasgiant\\", customPlanetsPath + "\\gasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountGasGiantHelium; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("GasGiantHe-" + (index + 1).ToString("0000") + ".png", str2 + "\\gasgiant\\", path1 + "\\gasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("GasGiantHe-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\gasgiant\\", customPlanetsPath + "\\gasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountGasGiantHydrogen; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("GasGiantHy-" + (index + 1).ToString("0000") + ".png", str2 + "\\gasgiant\\", path1 + "\\gasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("GasGiantHy-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\gasgiant\\", customPlanetsPath + "\\gasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountGasGiantKrypton; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("GasGiantKr-" + (index + 1).ToString("0000") + ".png", str2 + "\\gasgiant\\", path1 + "\\gasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("GasGiantKr-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\gasgiant\\", customPlanetsPath + "\\gasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountGasGiantAny; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("GasGiantOt-" + (index + 1).ToString("0000") + ".png", str2 + "\\gasgiant\\", path1 + "\\gasgiant\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("GasGiantOt-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\gasgiant\\", customPlanetsPath + "\\gasgiant\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountIce; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("Glacial-" + (index + 1).ToString("0000") + ".png", str2 + "\\iceglacial\\", path1 + "\\iceglacial\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("Glacial-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\iceglacial\\", customPlanetsPath + "\\iceglacial\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountMarshySwamp; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("Marsh-" + (index + 1).ToString("0000") + ".png", str2 + "\\marshyswamp\\", path1 + "\\marshyswamp\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("Marsh-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\marshyswamp\\", customPlanetsPath + "\\marshyswamp\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountOcean; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("Ocean-" + (index + 1).ToString("0000") + ".png", str2 + "\\ocean\\", path1 + "\\ocean\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("Ocean-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\ocean\\", customPlanetsPath + "\\ocean\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountDesert; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("Desert-" + (index + 1).ToString("0000") + ".png", str2 + "\\sandydesert\\", path1 + "\\sandydesert\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("Desert-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\sandydesert\\", customPlanetsPath + "\\sandydesert\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountVolcanic; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("Volcanic-" + (index + 1).ToString("0000") + ".png", str2 + "\\volcanic\\", path1 + "\\volcanic\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("Volcanic-" + (index + 1).ToString("0000") + ".png", originalPlanetsPath + "\\volcanic\\", customPlanetsPath + "\\volcanic\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountAsteroidsNormal; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("AstRck-" + (index + 1).ToString("0000") + ".png", str3 + "\\rocky\\", path2 + "\\rocky\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("AstRck-" + (index + 1).ToString("0000") + ".png", originalAsteroidsPath + "\\rocky\\", customAsteroidsPath + "\\rocky\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountAsteroidsIce; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("AstIce-" + (index + 1).ToString("0000") + ".png", str3 + "\\ice\\", path2 + "\\ice\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("AstIce-" + (index + 1).ToString("0000") + ".png", originalAsteroidsPath + "\\ice\\", customAsteroidsPath + "\\ice\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountAsteroidsMetal; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("AstMtl-" + (index + 1).ToString("0000") + ".png", str3 + "\\metal\\", path2 + "\\metal\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("AstMtl-" + (index + 1).ToString("0000") + ".png", originalAsteroidsPath + "\\metal\\", customAsteroidsPath + "\\metal\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountAsteroidsGold; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("AstGold-" + (index + 1).ToString("0000") + ".png", str3 + "\\metal\\", path2 + "\\metal\\", ref hasCustom));
+                this._Filepaths.Add(this.GetFilePathForImage("AstGold-" + (index + 1).ToString("0000") + ".png", originalAsteroidsPath + "\\metal\\", customAsteroidsPath + "\\metal\\", ref hasCustom));
             for (int index = 0; index < GalaxyImages.HabitatImageCountAsteroidsCrystal; ++index)
-                this._Filepaths.Add(this.GetFilePathForImage("AstCryst-" + (index + 1).ToString("0000") + ".png", str3 + "\\metal\\", path2 + "\\metal\\", ref hasCustom));
-            if (Directory.Exists(path1 + "\\other\\"))
+                this._Filepaths.Add(this.GetFilePathForImage("AstCryst-" + (index + 1).ToString("0000") + ".png", originalAsteroidsPath + "\\metal\\", customAsteroidsPath + "\\metal\\", ref hasCustom));
+            if (Directory.Exists(customPlanetsPath + "\\other\\"))
             {
-                string[] files = Directory.GetFiles(path1 + "\\other\\", "*.png");
+                string[] files = Directory.GetFiles(customPlanetsPath + "\\other\\", "*.png");
                 if (files.Length > 0)
                 {
                     for (int index = 0; index < files.Length; ++index)
