@@ -948,25 +948,25 @@ namespace DistantWorlds.Types
         {
             List<Task<string>> taskList = new List<Task<string>>();
             _Filepaths.Clear();
-            string text = _ApplicationStartupPath + "\\images\\units\\ships\\";
-            string text2 = _ApplicationStartupPath + "\\customization\\" + _CustomizationSetName + "\\images\\units\\ships\\";
+            string origShipsFolder = _ApplicationStartupPath + "\\images\\units\\ships\\";
+            string customShipsFolder = _ApplicationStartupPath + "\\customization\\" + _CustomizationSetName + "\\images\\units\\ships\\";
             int index = 0;
-            taskList.Add(Task.Run(() => CheckLoadSmallImage(0, text + "other\\planetdestroyer", text2 + "other\\planetdestroyer")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(0, origShipsFolder + "other\\planetdestroyer", customShipsFolder + "other\\planetdestroyer")));
             index++;
             //_Filepaths.Add(CheckLoadSmallImage(ref index, text + "other\\planetdestroyer", text2 + "other\\planetdestroyer"));
-            string text3 = text + "other\\";
-            string text4 = text2 + "other\\";
-            string text5 = text3 + "minorsets\\bases\\";
-            string text6 = text4 + "minorsets\\bases\\";
+            string otherShipsFolder = origShipsFolder + "other\\";
+            string customOtherShipsFolder = customShipsFolder + "other\\";
+            string origMinorBases = otherShipsFolder + "minorsets\\bases\\";
+            string customMinorBases = customOtherShipsFolder + "minorsets\\bases\\";
             for (int i = 0; i < 2; i++)
             {
                 int localIndex = index++;
                 int localI = i;
                 //_Filepaths.Add(CheckLoadSmallImage(ref index, text5 + "base_" + i, text6 + "base_" + i));
-                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex, text5 + "base_" + localI, text6 + "base_" + localI)));
+                taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex, origMinorBases + "base_" + localI, customMinorBases + "base_" + localI)));
             }
-            string text7 = text3 + "minorsets\\";
-            string text8 = text4 + "minorsets\\";
+            string text7 = otherShipsFolder + "minorsets\\";
+            string text8 = customOtherShipsFolder + "minorsets\\";
             for (int j = 0; j < 7; j++)
             {
                 string text9 = text7 + "family" + j + "\\";
@@ -984,8 +984,8 @@ namespace DistantWorlds.Types
                 taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex3, text9 + "military_large", text10 + "military_large")));
                 taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex4, text9 + "colonyship", text10 + "colonyship")));
             }
-            string text11 = text3 + "majorsets\\";
-            string text12 = text4 + "majorsets\\";
+            string text11 = otherShipsFolder + "majorsets\\";
+            string text12 = customOtherShipsFolder + "majorsets\\";
             for (int k = 0; k < 4; k++)
             {
                 string text13 = text11;
@@ -1051,8 +1051,8 @@ namespace DistantWorlds.Types
                     taskList.Add(Task.Run(() => CheckLoadSmallImage(localIndex12, text15 + "trooptransport", text16 + "trooptransport")));
                 }
             }
-            string text17 = text3 + "majorsets\\PhantomPirates\\";
-            string text18 = text4 + "majorsets\\PhantomPirates\\";
+            string text17 = otherShipsFolder + "majorsets\\PhantomPirates\\";
+            string text18 = customOtherShipsFolder + "majorsets\\PhantomPirates\\";
             //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "escort", text18 + "escort"));
             //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "frigate", text18 + "frigate"));
             //_Filepaths.Add(CheckLoadSmallImage(ref index, text17 + "destroyer", text18 + "destroyer"));
@@ -1091,8 +1091,8 @@ namespace DistantWorlds.Types
             int num2 = 50;
             while (true)
             {
-                string text19 = text + "family" + num + "\\";
-                string text20 = text2 + "family" + num + "\\";
+                string text19 = origShipsFolder + "family" + num + "\\";
+                string text20 = customShipsFolder + "family" + num + "\\";
                 if (num < num2 && (Directory.Exists(text19) || Directory.Exists(text20)))
                 {
                     switch (num)
