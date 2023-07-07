@@ -1864,6 +1864,7 @@ namespace BaconDistantWorlds
             {
                 list.Add(BuiltObjectSubRole.ResortBase);
                 builtObjectList = playerEmpire.BuiltObjects.GetBuiltObjectsBySubRole(list);
+                builtObjectList.AddRange(playerEmpire.PrivateBuiltObjects.GetBuiltObjectsBySubRole(list));
             }
             else if (text == TextResolver.GetText("Resupply Ships"))
             {
