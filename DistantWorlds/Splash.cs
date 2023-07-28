@@ -160,11 +160,11 @@ namespace DistantWorlds
         {
             if (!this.InvokeRequired)
             {
-                MessageBox.Show(message, caption, btn, icon);
+                MessageBox.Show(this, message, caption, btn, icon);
             }
             else
             {
-                this.Invoke(() => MessageBox.Show(message, caption, btn, icon));
+                this.Invoke(() => MessageBox.Show(this, message, caption, btn, icon));
             }
         }
         private void SetSubControlFonts(Font font, Control control)

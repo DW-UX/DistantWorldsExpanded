@@ -17,6 +17,14 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<StartupObject>main</StartupObject>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DebugType>portable</DebugType>
+	  <WarningLevel>7</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>portable</DebugType>
+	  <WarningLevel>7</WarningLevel>
+	</PropertyGroup>
 	<Choose>
 		<When Condition="'$(Configuration)' == 'Debug'">
 			<ItemGroup>
@@ -199,6 +207,7 @@
 	  <None Remove="DistantWorlds\Resources\DistantWorlds.ResearchLevels.resources" />
 	  <None Remove="DistantWorlds\Resources\DistantWorlds.Splash.resources" />
 	  <None Remove="DistantWorlds\Resources\DistantWorlds.Start.resources" />
+	  <None Remove="lib\DistantWorlds - Copy-Unpacked.exe" />
 	</ItemGroup>
 	<!--<ItemGroup>
     <None Remove="DistantWorlds\Resources\DistantWorlds.Controls.EmpireSummaryBuiltObject.resources" />

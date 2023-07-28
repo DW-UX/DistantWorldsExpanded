@@ -8,6 +8,7 @@ using AxWMPLib;
 using BaconDistantWorlds;
 using DistantWorlds.Controls;
 using DistantWorlds.Types;
+using ExpansionMod;
 using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
 using System;
@@ -7461,6 +7462,7 @@ namespace DistantWorlds
                 Galaxy.InitializeData(Application.StartupPath, customizationSetName, out resourceSystem_0);
                 InitializeComponent();
                 BaconStart.InitializeMore(this, gameOptions);
+                Main._ExpModMain.ModStartup(this);
                 intptr_0 = method_150("DistantWorlds.Resources.Forgotte.ttf");
                 intptr_1 = method_150("DistantWorlds.Resources.Forgottb.ttf");
                 SetStyle(ControlStyles.OptimizedDoubleBuffer, value: true);
@@ -7948,7 +7950,7 @@ namespace DistantWorlds
                     this.mediaPlayer.MediaError += new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.mediaPlayer_MediaError);
                     this.mediaPlayer.MouseDownEvent += new AxWMPLib._WMPOCXEvents_MouseDownEventHandler(this.mediaPlayer_MouseDownEvent);
                 }
-                oyxRtRyAwjg.DoWork += oyxRtRyAwjg_DoWork;
+                oyxRtRyAwjg.DoWork += gameStartBackgroundWorker_DoWork;
                 oyxRtRyAwjg.RunWorkerCompleted += oyxRtRyAwjg_RunWorkerCompleted;
                 main_0.SendToBack();
                 main_0.Visible = true;
@@ -8283,7 +8285,7 @@ namespace DistantWorlds
                     }
                 }
                 List<object> list2 = new List<object>();
-                list2 = miPvjdenXp(string_, stream_, bool_5: true);
+                list2 = LoadFromFile(string_, stream_, bool_5: true);
                 method_14(list2);
             }
             catch (SerializationException)
@@ -8331,12 +8333,12 @@ namespace DistantWorlds
             bool_1 = true;
         }
 
-        private List<object> miPvjdenXp(string string_2, Stream stream_0, bool bool_5)
+        private List<object> LoadFromFile(string filePath, Stream fileStream, bool bool_5)
         {
             //IL_015e: Unknown result type (might be due to invalid IL or missing references)
             //IL_0165: Expected O, but got Unknown
             List<object> list = new List<object>();
-            GalaxySummary galaxySummary = GalaxySummary.ReadGalaxySummary(stream_0);
+            GalaxySummary galaxySummary = GalaxySummary.ReadGalaxySummary(fileStream);
             string text = galaxySummary.ThemeName;
             string text2 = main_0.string_3;
             if (string.IsNullOrEmpty(text))
@@ -8364,17 +8366,18 @@ namespace DistantWorlds
             }
             CompactSerializer compactSerializer = new CompactSerializer(typeof(Game), main_0.method_358());
             ICryptoTransform transform = method_7(Main.byte_0, Main.byte_1);
-            CryptoStream cryptoStream = new CryptoStream(stream_0, transform, CryptoStreamMode.Read);
-            DeflateStream val = new DeflateStream((Stream)(object)cryptoStream, (CompressionMode)1, (CompressionLevel)1, true);
+            CryptoStream cryptoStream = new CryptoStream(fileStream, transform, CryptoStreamMode.Read);
+            DeflateStream val = new DeflateStream(cryptoStream, (CompressionMode)1, (CompressionLevel)1, true);
             val.BufferSize = 4194304;
             XmlDictionaryReaderQuotas max = XmlDictionaryReaderQuotas.Max;
-            XmlDictionaryReader xmlDictionaryReader = XmlDictionaryReader.CreateBinaryReader((Stream)(object)val, max);
+            XmlDictionaryReader xmlDictionaryReader = XmlDictionaryReader.CreateBinaryReader(val, max);
             Game item = (Game)compactSerializer.ReadObject(xmlDictionaryReader);
+            Main._ExpModMain.FixDesignRepairTemplates(item);
             xmlDictionaryReader.Close();
-            ((Stream)(object)val).Close();
+            val.Close();
             cryptoStream.Close();
-            stream_0.Close();
-            list.Add(string_2);
+            fileStream.Close();
+            list.Add(filePath);
             list.Add(item);
             return list;
         }
@@ -8515,7 +8518,7 @@ namespace DistantWorlds
             game_0 = null;
         }
 
-        private void oyxRtRyAwjg_DoWork(object sender, DoWorkEventArgs e)
+        private void gameStartBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker backgroundWorker_ = sender as BackgroundWorker;
             GalaxyShape galaxyShape_ = GalaxyShape.Elliptical;
@@ -8629,17 +8632,18 @@ namespace DistantWorlds
                 gameStartResets_ = (GameStartResets)list[20];
             }
             List<object> list2 = new List<object>();
-            list2 = (List<object>)(e.Result = method_16(backgroundWorker_, galaxyShape_, int_, int_2, bool_, double_, int_3, double_2, double_3, int_4, double_4, double_5, int_5, double_6, empireStart_, empireStartList_, victoryConditions_, empireVictoryConditions_, empireVictoryConditions_2, bool_2, bool_3, gameStartResets_));
+            list2 = (List<object>)(e.Result = GetGame(backgroundWorker_, galaxyShape_, int_, int_2, bool_, double_, int_3, double_2, double_3, int_4, double_4, double_5, int_5, double_6, empireStart_, empireStartList_, victoryConditions_, empireVictoryConditions_, empireVictoryConditions_2, bool_2, bool_3, gameStartResets_));
         }
 
-        private List<object> method_16(BackgroundWorker backgroundWorker_0, GalaxyShape galaxyShape_0, int int_1, int int_2, bool bool_5, double double_1, int int_3, double double_2, double double_3, int int_4, double double_4, double double_5, int int_5, double double_6, EmpireStart empireStart_0, EmpireStartList empireStartList_0, VictoryConditions victoryConditions_0, EmpireVictoryConditions empireVictoryConditions_0, EmpireVictoryConditions empireVictoryConditions_1, bool bool_6, bool bool_7, GameStartResets gameStartResets_0)
+        private List<object> GetGame(BackgroundWorker backgroundWorker_0, GalaxyShape galaxyShape_0, int int_1, int int_2, bool bool_5, double double_1, int int_3, double double_2, double double_3, int int_4, double double_4, double double_5, int int_5, double double_6, EmpireStart empireStart_0, EmpireStartList empireStartList_0, VictoryConditions victoryConditions_0, EmpireVictoryConditions empireVictoryConditions_0, EmpireVictoryConditions empireVictoryConditions_1, bool bool_6, bool bool_7, GameStartResets gameStartResets_0)
         {
             if (!backgroundWorker_0.CancellationPending)
             {
                 List<object> list = new List<object>();
                 Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
-                Game game = method_82(galaxyShape_0, int_1, int_2, bool_5, double_1, int_3, double_2, double_3, int_4, double_4, double_5, int_5, double_6, empireStart_0, empireStartList_0, victoryConditions_0, empireVictoryConditions_0, empireVictoryConditions_1, bool_6, bool_7, gameStartResets_0);
+                Game game = CreateGameFromSettings(galaxyShape_0, int_1, int_2, bool_5, double_1, int_3, double_2, double_3, int_4, double_4, double_5, int_5, double_6, empireStart_0, empireStartList_0, victoryConditions_0, empireVictoryConditions_0, empireVictoryConditions_1, bool_6, bool_7, gameStartResets_0);
                 list.Add(BaconMain.OverrideGalaxySetup(this, game));
+                Main._ExpModMain.FixDesignRepairTemplates(game);
                 return list;
             }
             return null;
@@ -11675,7 +11679,7 @@ namespace DistantWorlds
                     List<object> list = new List<object>();
                     using (FileStream stream_ = new FileStream(string_2, FileMode.Open, FileAccess.Read))
                     {
-                        list = miPvjdenXp(string_2, stream_, bool_5);
+                        list = LoadFromFile(string_2, stream_, bool_5);
                     }
                     if (list != null)
                     {
@@ -11725,7 +11729,7 @@ namespace DistantWorlds
             }
         }
 
-        private Game method_82(GalaxyShape galaxyShape_0, int int_1, int int_2, bool bool_5, double double_1, int int_3, double double_2, double double_3, int int_4, double double_4, double double_5, int int_5, double double_6, EmpireStart empireStart_0, EmpireStartList empireStartList_0, VictoryConditions victoryConditions_0, EmpireVictoryConditions empireVictoryConditions_0, EmpireVictoryConditions empireVictoryConditions_1, bool bool_6, bool bool_7, GameStartResets gameStartResets_0)
+        private Game CreateGameFromSettings(GalaxyShape galaxyShape_0, int int_1, int int_2, bool bool_5, double double_1, int int_3, double double_2, double double_3, int int_4, double double_4, double double_5, int int_5, double double_6, EmpireStart empireStart_0, EmpireStartList empireStartList_0, VictoryConditions victoryConditions_0, EmpireVictoryConditions empireVictoryConditions_0, EmpireVictoryConditions empireVictoryConditions_1, bool bool_6, bool bool_7, GameStartResets gameStartResets_0)
         {
             try
             {
@@ -11976,10 +11980,6 @@ namespace DistantWorlds
                         {
                             num4 = 0;
                             double num7 = 3000000.0;
-                            if (0.0 > 1000.0)
-                            {
-                                num7 = 5000000.0;
-                            }
                             num5 = num7 - Galaxy.Rnd.NextDouble() * num7 * 2.0;
                             num6 = num7 - Galaxy.Rnd.NextDouble() * num7 * 2.0;
                         }
