@@ -7,6 +7,12 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
 	<Choose>
 		<When Condition="'$(Configuration)' == 'Debug'">
 			<ItemGroup>
@@ -14,6 +20,11 @@
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\..\BaconDistantWorlds\bin\Debug\net48\BaconDistantWorlds.dll</HintPath>
 					<Private>False</Private>
+				</Reference>
+				<Reference Include="ExpansionMod, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\ExpansionMod\ExpansionMod\bin\Debug\net48\ExpansionMod.dll</HintPath>
+					<Private>True</Private>
 				</Reference>
 			</ItemGroup>
 		</When>
@@ -23,6 +34,11 @@
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\..\BaconDistantWorlds\bin\Release\net48\BaconDistantWorlds.dll</HintPath>
 					<Private>False</Private>
+				</Reference>
+				<Reference Include="ExpansionMod, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\ExpansionMod\ExpansionMod\bin\Release\net48\ExpansionMod.dll</HintPath>
+					<Private>True</Private>
 				</Reference>
 			</ItemGroup>
 		</Otherwise>

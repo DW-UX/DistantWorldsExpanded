@@ -7402,7 +7402,7 @@ namespace DistantWorlds.Types
         public double ReducedRange(double fuelReservePortion)
         {
             double num = FuelUnitPerEnergyUnit();
-            double num2 = 0.0;
+            //double num2 = 0.0;
             if (WarpSpeed > 0)
             {
                 return Math.Max(0.0, CurrentFuel - (double)FuelCapacity * fuelReservePortion) / (((double)WarpSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)WarpSpeedWithBonuses;
@@ -7438,7 +7438,7 @@ namespace DistantWorlds.Types
             double currentFuel = CurrentFuel;
             currentFuel -= (double)FuelCapacity * fuelPortionMargin;
             currentFuel = Math.Max(0.0, currentFuel);
-            double num2 = 0.0;
+            //double num2 = 0.0;
             if (WarpSpeed > 0)
             {
                 return currentFuel / (((double)WarpSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)WarpSpeedWithBonuses;
@@ -7449,7 +7449,7 @@ namespace DistantWorlds.Types
         public double MaximumFuelRange()
         {
             double num = FuelUnitPerEnergyUnit();
-            double num2 = 0.0;
+            //double num2 = 0.0;
             if (WarpSpeed > 0)
             {
                 return (double)FuelCapacity / (((double)WarpSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)WarpSpeedWithBonuses;
@@ -9132,7 +9132,7 @@ namespace DistantWorlds.Types
                             if (weapon.DistanceTravelled <= 1f)
                             {
                                 flag2 = true;
-                                float num8 = 2f;
+                                //float num8 = 2f;
                                 if (!weapon.WillHitTarget && !weapon.HasMissed && weapon.Target != null)
                                 {
                                     double num29 = galaxy.CalculateDistance(Xpos, Ypos, num2, num3);

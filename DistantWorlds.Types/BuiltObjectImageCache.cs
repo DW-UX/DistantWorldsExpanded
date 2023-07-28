@@ -10,10 +10,12 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -949,13 +951,13 @@ namespace DistantWorlds.Types
             List<Task<string>> taskList = new List<Task<string>>();
             _Filepaths.Clear();
             string origShipsFolder = _ApplicationStartupPath + "\\images\\units\\ships\\";
-            string customShipsFolder = _ApplicationStartupPath + "\\customization\\" + _CustomizationSetName + "\\images\\units\\ships\\";
+            string modShipsFolder = _ApplicationStartupPath + "\\customization\\" + _CustomizationSetName + "\\images\\units\\ships\\";
             int index = 0;
-            taskList.Add(Task.Run(() => CheckLoadSmallImage(0, origShipsFolder + "other\\planetdestroyer", customShipsFolder + "other\\planetdestroyer")));
+            taskList.Add(Task.Run(() => CheckLoadSmallImage(0, origShipsFolder + "other\\planetdestroyer", modShipsFolder + "other\\planetdestroyer")));
             index++;
             //_Filepaths.Add(CheckLoadSmallImage(ref index, text + "other\\planetdestroyer", text2 + "other\\planetdestroyer"));
             string otherShipsFolder = origShipsFolder + "other\\";
-            string customOtherShipsFolder = customShipsFolder + "other\\";
+            string customOtherShipsFolder = modShipsFolder + "other\\";
             string origMinorBases = otherShipsFolder + "minorsets\\bases\\";
             string customMinorBases = customOtherShipsFolder + "minorsets\\bases\\";
             for (int i = 0; i < 2; i++)
@@ -1087,15 +1089,45 @@ namespace DistantWorlds.Types
                 { _Filepaths.Add(item.Result); }
             }
 
-            int num = 0;
-            int num2 = 50;
-            while (true)
+            //int num = 0;
+            //int num2 = 500;
+            //while (true)
+            //{
+            //    string text19 = origShipsFolder + "family" + num + "\\";
+            //    string text20 = customShipsFolder + "family" + num + "\\";
+            //    if (num < num2 && (Directory.Exists(text19) || Directory.Exists(text20)))
+            //    {
+            //        switch (num)
+            //        {
+            //            case 3:
+            //            case 8:
+            //            case 13:
+            //            case 18:
+            //                DoLoadProgress();
+            //                break;
+            //        }
+            //        BaconBuiltObjectImageCache.AddMoreImages(this, index, text19, text20);
+            //        num++;
+            //        continue;
+            //    }
+            //    break;
+            //}
+            List<DirectoryInfo> origDir = new DirectoryInfo(origShipsFolder).EnumerateDirectories("family*").ToList();
+            List<DirectoryInfo> modDir = new DirectoryInfo(modShipsFolder).EnumerateDirectories("family*").ToList();
+            List<int> familyNumbers = origDir.Union(modDir).Select(x =>
+            {
+                int.TryParse(x.Name.Substring(6), out int res);
+                return res;
+            }).Distinct().ToList();
+            familyNumbers.Sort();
+            int idx = 0;
+            foreach(var num in familyNumbers)
             {
                 string text19 = origShipsFolder + "family" + num + "\\";
-                string text20 = customShipsFolder + "family" + num + "\\";
-                if (num < num2 && (Directory.Exists(text19) || Directory.Exists(text20)))
+                string text20 = modShipsFolder + "family" + num + "\\";
+                if (Directory.Exists(text19) || Directory.Exists(text20))
                 {
-                    switch (num)
+                    switch (idx)
                     {
                         case 3:
                         case 8:
@@ -1105,10 +1137,8 @@ namespace DistantWorlds.Types
                             break;
                     }
                     BaconBuiltObjectImageCache.AddMoreImages(this, index, text19, text20);
-                    num++;
-                    continue;
+                    idx++;
                 }
-                break;
             }
         }
 

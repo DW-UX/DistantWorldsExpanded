@@ -7285,7 +7285,7 @@ namespace DistantWorlds.Types
             {
                 if (RaceEventType == RaceEventType.PredictiveHistory || (DominantRace.RaceEvents.ContainsEventType(RaceEventType.LuckyAvertColonyDisaster) && Galaxy.Rnd.Next(0, 2) == 1))
                 {
-                    DisasterEventType disasterEventType = DisasterEventType.Undefined;
+                    //DisasterEventType disasterEventType = DisasterEventType.Undefined;
                     Habitat habitat2 = Galaxy.DetermineHabitatSystemStar(habitat);
                     string arg = Galaxy.ResolveDescription(habitat.Type switch
                     {
@@ -13057,7 +13057,7 @@ namespace DistantWorlds.Types
 
         public double CalculatePirateSmugglePricePerUnit(Habitat colony, byte resourceId)
         {
-            double num = 0.0;
+            //double num = 0.0;
             double num2 = _Galaxy.ResourceCurrentPrices[resourceId];
             return Math.Min(5.0, Math.Max(0.1, num2 * 0.5));
         }
@@ -18454,7 +18454,7 @@ namespace DistantWorlds.Types
 
         private int ResolveEmpireRaceTendency(Race race)
         {
-            int num = 0;
+            //int num = 0;
             if (race.AggressionLevel > race.CautionLevel && race.AggressionLevel > race.IntelligenceLevel)
             {
                 return 3;
@@ -19375,7 +19375,7 @@ namespace DistantWorlds.Types
 
         private DiplomaticRelationType UpgradeDesiredDiplomaticRelationTypeIfAtWar(Empire offeringEmpire, int ourMilitaryPotency, double galaxyIntoleranceLevel, double diplomacyFactor)
         {
-            DiplomaticRelationType diplomaticRelationType = DiplomaticRelationType.None;
+            //DiplomaticRelationType diplomaticRelationType = DiplomaticRelationType.None;
             int militaryStrength = 0;
             DetermineEmpiresAtWarWith(out militaryStrength);
             double num = (double)ourMilitaryPotency / (double)militaryStrength;
@@ -20852,7 +20852,7 @@ namespace DistantWorlds.Types
 
         private int CalculateMinimumOrderFulfillmentThreshhold(Order order)
         {
-            int num = 0;
+            //int num = 0;
             int num2 = 1000;
             int amountOutstandingToContract = order.AmountOutstandingToContract;
             if (amountOutstandingToContract > num2)
@@ -21422,7 +21422,7 @@ namespace DistantWorlds.Types
                         continue;
                     }
                     Habitat habitat = (Habitat)empireActivity.Target;
-                    bool flag = false;
+                    //bool flag = false;
                     if (!((PirateEmpireBaseHabitat == null) ? _Galaxy.IsStellarObjectDockable(habitat, this) : _Galaxy.IsStellarObjectDockable(habitat, _Galaxy.IndependentEmpire)))
                     {
                         continue;
@@ -25069,7 +25069,7 @@ namespace DistantWorlds.Types
 
         public double DetermineProximityFromCapital(Habitat habitat)
         {
-            double num = 0.0;
+            //double num = 0.0;
             if (PirateEmpireBaseHabitat == null)
             {
                 return 1.0 + Math.Sqrt(Math.Sqrt(1.0 + _Galaxy.CalculateDistance(Capital.Xpos, Capital.Ypos, habitat.Xpos, habitat.Ypos)) / 100.0);

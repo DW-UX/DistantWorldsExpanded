@@ -1228,13 +1228,13 @@ namespace DistantWorlds.Types
                         race.LoyaltyLevel = Math.Max(50, Math.Min(ParseIntValue(value), 150));
                         break;
                     case "DesignsPictureFamilyIndex":
-                        race.DesignPictureFamilyIndex = Math.Max(0, Math.Min(ParseIntValue(value), 50));
+                        race.DesignPictureFamilyIndex = ParseIntValue(value);
                         break;
                     case "DesignsPictureFamilyIndexPirates":
-                        race.DesignPictureFamilyIndexPirates = Math.Max(-1, Math.Min(ParseIntValue(value), 50));
+                        race.DesignPictureFamilyIndexPirates = ParseIntValue(value, out int intRes) ? intRes : -1;
                         break;
                     case "DesignNamesIndex":
-                        race.DesignNameIndex = Math.Max(0, Math.Min(ParseIntValue(value), 50));
+                        race.DesignNameIndex = ParseIntValue(value);
                         break;
                     case "ShipMaintenanceSavings":
                         race.ShipMaintenanceSavings = Math.Max(0, Math.Min(ParseIntValue(value), 100));
@@ -1634,6 +1634,10 @@ namespace DistantWorlds.Types
             int result = 0;
             int.TryParse(value, out result);
             return result;
+        }
+        private static bool ParseIntValue(string value, out int result)
+        {
+            return int.TryParse(value, out result);
         }
 
         private static float ParseFloatValue(string value)

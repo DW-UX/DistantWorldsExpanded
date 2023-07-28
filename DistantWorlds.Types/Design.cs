@@ -5,7 +5,7 @@
 // Assembly location: H:\7\DistantWorlds.Types.dll
 
 using BaconDistantWorlds;
-
+using ExpansionMod;
 using System;
 using System.IO;
 using System.Runtime.Serialization;
@@ -226,6 +226,9 @@ namespace DistantWorlds.Types
         private WeaponList _Weapons = new WeaponList();
 
         public ComponentList Components;
+
+        [OptionalField]
+        public string RepaitPriorityTemplateName;
 
         public bool IsPlanetDestroyer
         {
@@ -730,9 +733,21 @@ namespace DistantWorlds.Types
                 ImageScalingType = (DesignImageScalingMode)binaryReader.ReadByte();
                 binaryReader.Close();
             }
-            _Empire = (Empire)info.GetValue("Em", typeof(Empire));
-            _Weapons = (WeaponList)info.GetValue("Wps", typeof(WeaponList));
-            Components = (ComponentList)info.GetValue("Cmps", typeof(ComponentList));
+            foreach (var item in info)
+            {
+                if (item.Name == "Em")
+                { _Empire = (Empire)item.Value; }
+                else if (item.Name == "Wps")
+                { _Weapons = (WeaponList)item.Value; }
+                else if (item.Name == "Cmps")
+                { Components = (ComponentList)item.Value; }
+                else if (item.Name == "RprTName")
+                { RepaitPriorityTemplateName = (string)item.Value; }
+            }
+            //_Empire = (Empire)info.GetValue("Em", typeof(Empire));
+            //_Weapons = (WeaponList)info.GetValue("Wps", typeof(WeaponList));
+            //Components = (ComponentList)info.GetValue("Cmps", typeof(ComponentList));
+            //RepaitPriorityTemplateName = info.GetString("RprTName");
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -857,6 +872,7 @@ namespace DistantWorlds.Types
             info.AddValue("Em", _Empire);
             info.AddValue("Wps", _Weapons);
             info.AddValue("Cmps", Components);
+            info.AddValue("RprTName", RepaitPriorityTemplateName);
         }
 
         public bool IsEquivalent(Design designToCompare)
@@ -975,7 +991,7 @@ namespace DistantWorlds.Types
 
         public static double DetermineComponentEnergyRequirements(ComponentImprovement component)
         {
-            double num = 0.0;
+            //double num = 0.0;
             switch (component.ImprovedComponent.Type)
             {
                 case ComponentType.WeaponBeam:
@@ -1154,7 +1170,7 @@ namespace DistantWorlds.Types
         public double MaximumRange()
         {
             double num = FuelUnitPerEnergyUnit();
-            double num2 = 0.0;
+            //double num2 = 0.0;
             if (WarpSpeed > 0)
             {
                 return (double)FuelCapacity / (((double)WarpSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)WarpSpeed;
@@ -1987,6 +2003,7 @@ namespace DistantWorlds.Types
             design.IsObsolete = IsObsolete;
             design.IsManuallyCreated = IsManuallyCreated;
             design.AllowAutoRetrofit = AllowAutoRetrofit;
+            design.RepaitPriorityTemplateName = RepaitPriorityTemplateName;
             design.ReDefine();
             return design;
         }
