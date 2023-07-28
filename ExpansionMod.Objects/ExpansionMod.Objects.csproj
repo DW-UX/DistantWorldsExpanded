@@ -17,6 +17,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="DistantWorlds.Types">
+      <HintPath>..\..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\net48\DistantWorlds.Types.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
 </Project>
