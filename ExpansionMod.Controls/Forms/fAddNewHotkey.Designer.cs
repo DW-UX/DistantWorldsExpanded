@@ -49,6 +49,7 @@
             // 
             this.cmbHotKeyNames.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
             this.cmbHotKeyNames.DataSource = this.bindingSourceHotKeyList;
+            this.cmbHotKeyNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHotKeyNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbHotKeyNames.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
             this.cmbHotKeyNames.FormattingEnabled = true;
