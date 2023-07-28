@@ -16,7 +16,7 @@ namespace ExpansionMod.HotKeyMapping
     {
         private MissionQueueEditor _fEditor;
         private HotKeyModEditorControl _hotKeyControl;
-        private readonly ExpansionModMain _expMod;
+        private Main _main;
         private readonly KeyMapper _hotKeyParser;
         private readonly string _folder;
         private readonly string _tabName;
@@ -24,13 +24,17 @@ namespace ExpansionMod.HotKeyMapping
 
         public bool CanHandleKeysFromOverseer { get => _canHandleKeysFromOverseer; }
 
-        public HotKeyManager(ExpansionModMain expMod, KeyMapper hotKeyParser, string folder, bool mainGame)
+        public HotKeyManager(KeyMapper hotKeyParser, string folder, bool mainGame)
         {
-            this._expMod = expMod;
             _hotKeyParser = hotKeyParser;
             _folder = folder;
             _tabName = mainGame ? "DistantWorlds" : "Expansion mod hotkeys";
             _canHandleKeysFromOverseer = !mainGame;
+        }
+
+        public void InitMain(Main gameMain)
+        {
+            this._main = gameMain;
         }
 
         public void SaveChanges()
@@ -101,19 +105,19 @@ namespace ExpansionMod.HotKeyMapping
         }
         private void OpenCounstrucionQueueEditor()
         {
-            if (_expMod.GameMain != null)
+            if (_main != null)
             {
-                if (_expMod.GameMain._Game.SelectedObject != null && _expMod.GameMain._Game.SelectedObject is BuiltObject constrShip &&
+                if (_main._Game.SelectedObject != null && _main._Game.SelectedObject is BuiltObject constrShip &&
                     constrShip.SubRole == BuiltObjectSubRole.ConstructionShip && _fEditor == null)
                 {
-                    bool flag = _expMod.GameMain._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                    bool flag = _main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
                     if (!flag)
-                    { _expMod.GameMain._Game.Galaxy.Pause(); }
-                    _fEditor = new MissionQueueEditor(constrShip, _expMod.GameMain);
+                    { _main._Game.Galaxy.Pause(); }
+                    _fEditor = new MissionQueueEditor(constrShip, _main);
                     _fEditor.FormClosed += _fEditor_FormClosed;
-                    _fEditor.ShowDialog(_expMod.GameMain);
+                    _fEditor.ShowDialog(_main);
                     if (!flag)
-                    { _expMod.GameMain._Game.Galaxy.Resume(); }
+                    { _main._Game.Galaxy.Resume(); }
                 }
             }
         }
