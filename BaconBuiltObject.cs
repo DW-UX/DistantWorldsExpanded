@@ -1135,8 +1135,15 @@ namespace BaconDistantWorlds
             if (ship == null)
             {
                 if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) &&
-                        !(BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)))
+                        !(BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.PrivateBuiltObjects.Contains(main._Game.SelectedObject)))
                 {
+                    MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, BaconBuiltObject.myMain.font_3);
+                    messageBoxEx.Text = "Wrong target";
+                    messageBoxEx.Caption = "Warning";
+                    messageBoxEx.AddButton(MessageBoxExButtons.Ok);
+                    messageBoxEx.Icon = MessageBoxExIcon.Warning;
+                    messageBoxEx.Show(BaconBuiltObject.myMain);
+
                     return;
                 }
             }
@@ -2185,7 +2192,7 @@ namespace BaconDistantWorlds
             object sourceObj = (object)null;
             object targetObj = (object)null;
             bool flag1 = false;
-            if (main == null )
+            if (main == null)
             { return; }
 
             if (ship == null && main._Game.SelectedObject is BuiltObject)
@@ -2194,8 +2201,15 @@ namespace BaconDistantWorlds
                 if (freighter != null && freighter.Role == BuiltObjectRole.Freight)
                 {
                     if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) &&
-                        !(BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)))
+                        !(BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.PrivateBuiltObjects.Contains(main._Game.SelectedObject)))
                     {
+                        MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, BaconBuiltObject.myMain.font_3);
+                        messageBoxEx.Text = "Wrong target";
+                        messageBoxEx.Caption = "Warning";
+                        messageBoxEx.AddButton(MessageBoxExButtons.Ok);
+                        messageBoxEx.Icon = MessageBoxExIcon.Warning;
+                        messageBoxEx.Show(BaconBuiltObject.myMain);
+
                         return;
                     }
 
@@ -2217,8 +2231,8 @@ namespace BaconDistantWorlds
                     if (selectForm.DialogResult != DialogResult.OK)
                     { return; }
                 }
-                else 
-                { return; }                
+                else
+                { return; }
             }
             else
             {
@@ -3593,7 +3607,15 @@ namespace BaconDistantWorlds
                 if (list2.Any<BuiltObject>())
                     source.AddRange((IEnumerable<BuiltObject>)list2);
                 if (source.Count == 0)
+                {
+                    MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, BaconBuiltObject.myMain.font_3);
+                    messageBoxEx.Text = "No idle ships found";
+                    messageBoxEx.Caption = "Warning";
+                    messageBoxEx.AddButton(MessageBoxExButtons.Ok);
+                    messageBoxEx.Icon = MessageBoxExIcon.Warning;
+                    messageBoxEx.Show(BaconBuiltObject.myMain);
                     return;
+                }
                 BuiltObject builtObject1 = source.OrderBy<BuiltObject, double>((Func<BuiltObject, double>)(x => Galaxy.CalculateDistanceSquaredStatic(x.Xpos, x.Ypos, planet.Xpos, planet.Ypos))).ToList<BuiltObject>().FirstOrDefault<BuiltObject>();
                 if (builtObject1 == null)
                     return;
@@ -4747,7 +4769,7 @@ namespace BaconDistantWorlds
             if (num2 != 0 && (num2 < num1 || num1 == 0))
                 num1 = num2;
             if (ship.Empire != null && num1 > 0 && ship.DamagedComponentCount > 0)
-            {
+             {
                 double num3 = (double)num1;
                 if (ship.ShipGroup != null)
                     num3 /= ship.ShipGroup.RepairBonus;
@@ -4759,28 +4781,56 @@ namespace BaconDistantWorlds
                     if (new Random().NextDouble() < num6)
                         num5 = 1;
                 }
-                int num7 = num5;
-                if (num7 > 0)
+                int componentToRepairCount = num5;
+                if (componentToRepairCount > 0)
                 {
-                    int num8 = Galaxy.Rnd.Next(0, ship.Components.Count<BuiltObjectComponent>());
-                    for (int index = num8; index < ship.Components.Count<BuiltObjectComponent>() && num7 > 0; ++index)
+                    List<ComponentCategoryType> repairTemplate;
+                    if (ship.Design.RepaitPriorityTemplateName != null &&
+                       (repairTemplate = Main._ExpModMain.GetRepairPriorityList(ship.Design.RepaitPriorityTemplateName)) != null)
                     {
-                        if (ship.Components[index].Status == ComponentStatus.Damaged)
+                        foreach (var item in ship.Components.GroupBy(x => x.Category).OrderBy(x=> repairTemplate.IndexOf(x.Key)))
                         {
-                            ship.Components[index].Status = ComponentStatus.Normal;
-                            --num7;
+                            foreach (var component in item)
+                            {
+
+                                if (component.Status == ComponentStatus.Damaged)
+                                {
+                                    component.Status = ComponentStatus.Normal;
+                                    --componentToRepairCount;
+                                }
+                                if (componentToRepairCount==0)
+                                {
+                                    break;
+                                }
+                            }
+                            if (componentToRepairCount == 0)
+                            {
+                                break;
+                            }
                         }
                     }
-                    for (int index = 0; index < num8 && num7 > 0; ++index)
+                    else
                     {
-                        if (ship.Components[index].Status == ComponentStatus.Damaged)
+                        int num8 = Galaxy.Rnd.Next(0, ship.Components.Count<BuiltObjectComponent>());
+                        for (int index = num8; index < ship.Components.Count<BuiltObjectComponent>() && componentToRepairCount > 0; ++index)
                         {
-                            ship.Components[index].Status = ComponentStatus.Normal;
-                            --num7;
+                            if (ship.Components[index].Status == ComponentStatus.Damaged)
+                            {
+                                ship.Components[index].Status = ComponentStatus.Normal;
+                                --componentToRepairCount;
+                            }
+                        }
+                        for (int index = 0; index < num8 && componentToRepairCount > 0; ++index)
+                        {
+                            if (ship.Components[index].Status == ComponentStatus.Damaged)
+                            {
+                                ship.Components[index].Status = ComponentStatus.Normal;
+                                --componentToRepairCount;
+                            }
                         }
                     }
                     ship.ReDefine();
-                    int repairAmount = Math.Max(0, num5 - num7);
+                    int repairAmount = Math.Max(0, num5 - componentToRepairCount);
                     if (ship.BattleStats != null)
                         ship.BattleStats.DamageRepairedUs(repairAmount);
                     if (ship.ShipGroup != null && ship.ShipGroup.BattleStats != null)
