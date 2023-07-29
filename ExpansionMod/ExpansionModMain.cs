@@ -16,6 +16,7 @@ using System.Drawing;
 using DistantWorlds.Controls;
 using System.Xml.Linq;
 using ExpansionMod.ModSettings;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace ExpansionMod
 {
@@ -131,10 +132,19 @@ namespace ExpansionMod
         {
             return _repairPriorityManager.GetDefaultAITemplateName();
         }
-        public void FixDesignRepairTemplates(Game game) 
+
+        public void FixAllDesignRepairTemplates(Game game, bool reset)
+        {
+            FixPlayerDesignRepairTemplates(game, reset);
+            FixAIDesignRepairTemplates(game, reset);
+        }
+        public void FixPlayerDesignRepairTemplates(Game game, bool reset)
         {
             if (game != null && game.Galaxy != null && game.Galaxy.Empires != null)
             {
+                bool flag = game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                { game.Galaxy.Pause(); }
                 foreach (var empire in game.Galaxy.Empires)
                 {
                     if (empire == game.PlayerEmpire)
@@ -143,7 +153,7 @@ namespace ExpansionMod
                         {
                             foreach (var design in empire.Designs)
                             {
-                                if (design != null && string.IsNullOrWhiteSpace(design.RepaitPriorityTemplateName))
+                                if (design != null && (reset || string.IsNullOrWhiteSpace(design.RepaitPriorityTemplateName)))
                                 {
                                     design.RepaitPriorityTemplateName = _repairPriorityManager.GetDefaultPlayerTemplateName();
                                 }
@@ -153,20 +163,34 @@ namespace ExpansionMod
                         {
                             foreach (var design in empire.LatestDesigns)
                             {
-                                if (design != null && string.IsNullOrWhiteSpace(design.RepaitPriorityTemplateName))
+                                if (design != null && (reset || string.IsNullOrWhiteSpace(design.RepaitPriorityTemplateName)))
                                 {
                                     design.RepaitPriorityTemplateName = _repairPriorityManager.GetDefaultPlayerTemplateName();
                                 }
                             }
                         }
                     }
-                    else
+                }
+                if (!flag)
+                { game.Galaxy.Resume(); }
+            }
+        }
+        public void FixAIDesignRepairTemplates(Game game, bool reset)
+        {
+            if (game != null && game.Galaxy != null && game.Galaxy.Empires != null)
+            {
+                bool flag = game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                { game.Galaxy.Pause(); }
+                foreach (var empire in game.Galaxy.Empires)
+                {
+                    if (empire != game.PlayerEmpire)
                     {
                         if (empire.Designs != null)
                         {
                             foreach (var design in empire.Designs)
                             {
-                                if (design != null && string.IsNullOrWhiteSpace(design.RepaitPriorityTemplateName))
+                                if (design != null && (reset || string.IsNullOrWhiteSpace(design.RepaitPriorityTemplateName)))
                                 {
                                     design.RepaitPriorityTemplateName = _repairPriorityManager.GetDefaultAITemplateName();
                                 }
@@ -176,15 +200,16 @@ namespace ExpansionMod
                         {
                             foreach (var design in empire.LatestDesigns)
                             {
-                                if (design != null && string.IsNullOrWhiteSpace(design.RepaitPriorityTemplateName))
+                                if (design != null && (reset || string.IsNullOrWhiteSpace(design.RepaitPriorityTemplateName)))
                                 {
                                     design.RepaitPriorityTemplateName = _repairPriorityManager.GetDefaultAITemplateName();
                                 }
                             }
                         }
-
                     }
                 }
+                if (!flag)
+                { game.Galaxy.Resume(); }
             }
         }
 
