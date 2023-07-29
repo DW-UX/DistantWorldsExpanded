@@ -8372,7 +8372,7 @@ namespace DistantWorlds
             XmlDictionaryReaderQuotas max = XmlDictionaryReaderQuotas.Max;
             XmlDictionaryReader xmlDictionaryReader = XmlDictionaryReader.CreateBinaryReader(val, max);
             Game item = (Game)compactSerializer.ReadObject(xmlDictionaryReader);
-            Main._ExpModMain.FixDesignRepairTemplates(item);
+            Main._ExpModMain.FixAllDesignRepairTemplates(item, false);
             xmlDictionaryReader.Close();
             val.Close();
             cryptoStream.Close();
@@ -8643,7 +8643,7 @@ namespace DistantWorlds
                 Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
                 Game game = CreateGameFromSettings(galaxyShape_0, int_1, int_2, bool_5, double_1, int_3, double_2, double_3, int_4, double_4, double_5, int_5, double_6, empireStart_0, empireStartList_0, victoryConditions_0, empireVictoryConditions_0, empireVictoryConditions_1, bool_6, bool_7, gameStartResets_0);
                 list.Add(BaconMain.OverrideGalaxySetup(this, game));
-                Main._ExpModMain.FixDesignRepairTemplates(game);
+                Main._ExpModMain.FixAllDesignRepairTemplates(game, false);
                 return list;
             }
             return null;
