@@ -14,7 +14,14 @@
 				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\..\DistantWorlds.Controls\bin\Debug\net48\DistantWorlds.Controls.dll</HintPath>
-					<Private>False</Private>
+				</Reference>
+				<Reference Include="BaconDistantWorlds">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\BaconDistantWorlds\bin\Debug\net48\BaconDistantWorlds.dll</HintPath>
+				</Reference>
+				<Reference Include="DistantWorlds.Types">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\net48\DistantWorlds.Types.dll</HintPath>
 				</Reference>
 			</ItemGroup>
 		</When>
@@ -23,7 +30,14 @@
 				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
 					<SpecificVersion>False</SpecificVersion>
 					<HintPath>..\..\DistantWorlds.Controls\bin\Release\net48\DistantWorlds.Controls.dll</HintPath>
-					<Private>False</Private>
+				</Reference>
+				<Reference Include="BaconDistantWorlds">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\BaconDistantWorlds\bin\Release\net48\BaconDistantWorlds.dll</HintPath>
+				</Reference>
+				<Reference Include="DistantWorlds.Types">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\DistantWorlds.Types\DistantWorlds.Types\bin\Release\net48\DistantWorlds.Types.dll</HintPath>
 				</Reference>
 			</ItemGroup>
 		</Otherwise>
@@ -37,13 +51,5 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\ExpansionMod.Objects\ExpansionMod.Objects\ExpansionMod.Objects.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Include="BaconDistantWorlds">
-			<HintPath>..\..\BaconDistantWorlds\bin\Debug\net48\BaconDistantWorlds.dll</HintPath>
-		</Reference>
-		<Reference Include="DistantWorlds.Types">
-			<HintPath>..\..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\net48\DistantWorlds.Types.dll</HintPath>
-		</Reference>
 	</ItemGroup>
 </Project>

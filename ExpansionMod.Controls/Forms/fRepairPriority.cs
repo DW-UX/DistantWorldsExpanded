@@ -54,7 +54,12 @@ namespace ExpansionMod.Controls.Forms
 
         private void btnAddNewTemplate_Click(object sender, EventArgs e)
         {
-            bindingSourceRepairPriorityTemplates.Add(new RepairPriority() { TemplateName = "New template", Priority = _defaultTemplate.Priority.ToList() });
+            bindingSourceRepairPriorityTemplates.Add(new RepairPriority()
+            {
+                TemplateName = "New template",
+                Priority = _defaultTemplate.Priority.ToList(),
+                UserGenerated = true,
+            });
             bindingSourceRepairPriorityTemplates.Position = bindingSourceRepairPriorityTemplates.Count - 1;
         }
 

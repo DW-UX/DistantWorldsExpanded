@@ -31,19 +31,19 @@
             this.components = new System.ComponentModel.Container();
             this.btnSaveSelect = new DistantWorlds.Controls.GlassButton();
             this.btnMoveDown = new DistantWorlds.Controls.GlassButton();
+            this.bindingSourceRepairPriorityTemplates = new System.Windows.Forms.BindingSource(this.components);
             this.btnMoveUp = new DistantWorlds.Controls.GlassButton();
             this.label1 = new System.Windows.Forms.Label();
             this.lstbRepairPriority = new System.Windows.Forms.ListBox();
             this.bindingSourceRepairPriority = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSourceRepairPriorityTemplates = new System.Windows.Forms.BindingSource(this.components);
             this.btnCancel = new DistantWorlds.Controls.GlassButton();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbTempalteList = new System.Windows.Forms.ComboBox();
             this.btnRemoveTemplate = new DistantWorlds.Controls.GlassButton();
             this.btnAddNewTemplate = new DistantWorlds.Controls.GlassButton();
             this.btnRename = new DistantWorlds.Controls.GlassButton();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRepairPriority)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRepairPriorityTemplates)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRepairPriority)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSaveSelect
@@ -72,6 +72,7 @@
             // 
             this.btnMoveDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnMoveDown.ClipBackground = false;
+            this.btnMoveDown.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", this.bindingSourceRepairPriorityTemplates, "UserGenerated", true));
             this.btnMoveDown.DelayFrameRefresh = false;
             this.btnMoveDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnMoveDown.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
@@ -90,10 +91,15 @@
             this.btnMoveDown.ToggledOn = false;
             this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
             // 
+            // bindingSourceRepairPriorityTemplates
+            // 
+            this.bindingSourceRepairPriorityTemplates.DataSource = typeof(ExpansionMod.Objects.RepairPriority);
+            // 
             // btnMoveUp
             // 
             this.btnMoveUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnMoveUp.ClipBackground = false;
+            this.btnMoveUp.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", this.bindingSourceRepairPriorityTemplates, "UserGenerated", true));
             this.btnMoveUp.DelayFrameRefresh = false;
             this.btnMoveUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnMoveUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
@@ -139,10 +145,6 @@
             // 
             this.bindingSourceRepairPriority.DataMember = "Priority";
             this.bindingSourceRepairPriority.DataSource = this.bindingSourceRepairPriorityTemplates;
-            // 
-            // bindingSourceRepairPriorityTemplates
-            // 
-            this.bindingSourceRepairPriorityTemplates.DataSource = typeof(ExpansionMod.Objects.RepairPriority);
             // 
             // btnCancel
             // 
@@ -281,8 +283,8 @@
             this.ShowInTaskbar = false;
             this.Text = "fRepairPriority";
             this.Load += new System.EventHandler(this.fRepairPriority_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRepairPriority)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRepairPriorityTemplates)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRepairPriority)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
