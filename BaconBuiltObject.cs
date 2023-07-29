@@ -1268,17 +1268,17 @@ namespace BaconDistantWorlds
 
         public static void GenericCommands(Main main, string input)
         {
-            if (input.StartsWith("!nukem"))
+            if (input.StartsWith("!nukem", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.DestroyAllShips(main);
-            else if (input.StartsWith("!bringonthebugs"))
+            else if (input.StartsWith("!bringonthebugs", StringComparison.InvariantCultureIgnoreCase))
                 BaconGalaxy.SetShakturiBeacon(main);
-            else if (input.StartsWith("!gogobugs"))
+            else if (input.StartsWith("!gogobugs", StringComparison.InvariantCultureIgnoreCase))
                 BaconGalaxy.SpawnShakturi(main);
-            else if (input.StartsWith("!placebugs"))
+            else if (input.StartsWith("!placebugs", StringComparison.InvariantCultureIgnoreCase))
                 BaconGalaxy.SpawnShakturiHere(main);
-            else if (input.StartsWith("!clear"))
+            else if (input.StartsWith("!clear", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.ClearOrdersForShip(main);
-            else if (input.StartsWith("!spy"))
+            else if (input.StartsWith("!spy", StringComparison.InvariantCultureIgnoreCase))
             {
                 int result = 1;
                 bool flag = false;
@@ -1291,7 +1291,7 @@ namespace BaconDistantWorlds
                     return;
                 BaconBuiltObject.AssignSpiesToMission(main, result);
             }
-            else if (input.StartsWith("!troops"))
+            else if (input.StartsWith("!troops", StringComparison.InvariantCultureIgnoreCase))
             {
                 int result = 1;
                 bool flag = false;
@@ -1302,18 +1302,18 @@ namespace BaconDistantWorlds
                     return;
                 BaconBuiltObject.AddTroopsToColony(main, result);
             }
-            else if (input.StartsWith("!note"))
+            else if (input.StartsWith("!note", StringComparison.InvariantCultureIgnoreCase))
             {
                 string message = input.Substring(5);
                 BaconBuiltObject.AddReminderNote(main._Game.SelectedObject, message);
             }
-            else if (input.StartsWith("!braveships"))
+            else if (input.StartsWith("!braveships", StringComparison.InvariantCultureIgnoreCase))
                 BaconEmpire.SetRetreatWhenAttacked();
-            else if (input.StartsWith("!cheat2112"))
+            else if (input.StartsWith("!cheat2112", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.ApplyStartingCheatSettings(main);
-            else if (input.StartsWith("!cheatgoldmine"))
+            else if (input.StartsWith("!cheatgoldmine", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.GiveAllResourcesToPlanet(main, 2700);
-            else if (input.StartsWith("!loadshiptemplates"))
+            else if (input.StartsWith("!loadshiptemplates", StringComparison.InvariantCultureIgnoreCase))
             {
                 bool flag = false;
                 bool result = true;
@@ -1325,7 +1325,7 @@ namespace BaconDistantWorlds
                 else
                     BaconMain.RegenerateShipDesigns(main);
             }
-            else if (input.StartsWith("!rangecircles"))
+            else if (input.StartsWith("!rangecircles", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (BaconMain.drawWeaponRangeCircles)
                 {
@@ -1338,31 +1338,31 @@ namespace BaconDistantWorlds
                     BaconMain.minZoomLevelForWeaponsCircles = 0.9;
                 }
             }
-            else if (input.StartsWith("!freetrader"))
+            else if (input.StartsWith("!freetrader", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.MakeShipFreeTrader(main, input);
-            else if (input.StartsWith("!loan"))
+            else if (input.StartsWith("!loan", StringComparison.InvariantCultureIgnoreCase))
                 BaconEmpire.Loan(main, input);
-            else if (input.StartsWith("!stockpilebooty"))
+            else if (input.StartsWith("!stockpilebooty", StringComparison.InvariantCultureIgnoreCase))
                 BaconEmpire.SetResourcesForAllCapitals(main, input, true);
-            else if (input.StartsWith("!stockpile"))
+            else if (input.StartsWith("!stockpile", StringComparison.InvariantCultureIgnoreCase))
                 BaconEmpire.SetResourcesForAllCapitals(main, input);
-            else if (input.StartsWith("!infrastructure"))
+            else if (input.StartsWith("!infrastructure", StringComparison.InvariantCultureIgnoreCase))
                 BaconHabitat.InvestInInfastructure(main, input);
-            else if (input.StartsWith("!filterresource") || input == "!fr")
+            else if (input.StartsWith("!filterresource", StringComparison.InvariantCultureIgnoreCase) || string.Equals(input, "!fr", StringComparison.InvariantCultureIgnoreCase))
                 BaconMain.SetResourceFilter(main, input);
-            else if (input.StartsWith("!godmode"))
+            else if (input.StartsWith("!godmode", StringComparison.InvariantCultureIgnoreCase))
                 main._Game.GodMode = !main._Game.GodMode;
-            else if (input.StartsWith("!golegit"))
+            else if (input.StartsWith("!golegit", StringComparison.InvariantCultureIgnoreCase))
                 BaconEmpire.ChangePirateEmpireToRegularEmpire(main, main._Game.PlayerEmpire);
-            else if (input.StartsWith("!notarget"))
+            else if (input.StartsWith("!notarget", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.SetTargetRestriction(main, input);
-            else if (input.StartsWith("!yourock"))
+            else if (input.StartsWith("!yourock", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.AddAsteroidInOrbit(main, input);
-            else if (input.StartsWith("!overtime"))
+            else if (input.StartsWith("!overtime", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.AddYearsToVictoryStartDate(main, input);
-            else if (input.StartsWith("!piraterespawn"))
+            else if (input.StartsWith("!piraterespawn", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.ToddlePirateRespawnSetting(main);
-            else if (input.StartsWith("!respawnpiratesnow"))
+            else if (input.StartsWith("!respawnpiratesnow", StringComparison.InvariantCultureIgnoreCase))
             {
                 object galaxy = (object)main._Game.Galaxy;
                 string str = "GenerateNewPirateEmpires";
@@ -1383,7 +1383,7 @@ namespace BaconDistantWorlds
                 // ISSUE: reference to a compiler-generated field
                 BaconBuiltObject.class69.callSite69.Target((CallSite)BaconBuiltObject.class69.callSite69, typeof(BaconBuiltObject), galaxy, str, objArray);
             }
-            else if (input.StartsWith("!splitoff"))
+            else if (input.StartsWith("!splitoff", StringComparison.InvariantCultureIgnoreCase))
             {
                 bool flag = false;
                 bool result = true;
@@ -1394,25 +1394,35 @@ namespace BaconDistantWorlds
                     return;
                 BaconHabitat.LeaveEmpire(main, result);
             }
-            else if (input.StartsWith("!cargos"))
+            else if (input.StartsWith("!cargos", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.ParseAndStoreCustomCargoRequest(main, input);
-            else if (input.StartsWith("!price"))
+            else if (input.StartsWith("!price", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.DisplayCommodityPrices(main, input);
-            else if (input.StartsWith("!science"))
+            else if (input.StartsWith("!science", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.ConvertAllExplorersToScience(main, input);
-            else if (input.StartsWith("!growclones"))
+            else if (input.StartsWith("!growclones", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.CreateTroopsOnShip(main, input);
-            else if (input.StartsWith("!bomber"))
+            else if (input.StartsWith("!bomber", StringComparison.InvariantCultureIgnoreCase))
                 BaconBuiltObject.AssignCustomBomberNameForCarrier(main, input);
-            else if (input.StartsWith("!piratebase"))
+            else if (input.StartsWith("!piratebase", StringComparison.InvariantCultureIgnoreCase))
             {
                 BaconHabitat.AddFundsToPirateBase(main, input);
             }
-            else
+            else if (input.StartsWith("!setdifficulty", StringComparison.InvariantCultureIgnoreCase))
             {
-                if (!input.StartsWith("!setdifficulty"))
-                    return;
                 BaconBuiltObject.SetCustomDifficulty(main);
+            }
+            else if (input.StartsWith("!ResetAllRepairTemplates", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Main._ExpModMain.FixAllDesignRepairTemplates(main._Game, true);
+            }
+            else if (input.StartsWith("!ResetAiRepairTemplates", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Main._ExpModMain.FixAIDesignRepairTemplates(main._Game, true);
+            }
+            else if (input.StartsWith("!ResetPlayerRepairTemplates", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Main._ExpModMain.FixPlayerDesignRepairTemplates(main._Game, true);
             }
         }
 
@@ -4769,7 +4779,7 @@ namespace BaconDistantWorlds
             if (num2 != 0 && (num2 < num1 || num1 == 0))
                 num1 = num2;
             if (ship.Empire != null && num1 > 0 && ship.DamagedComponentCount > 0)
-             {
+            {
                 double num3 = (double)num1;
                 if (ship.ShipGroup != null)
                     num3 /= ship.ShipGroup.RepairBonus;
@@ -4788,7 +4798,7 @@ namespace BaconDistantWorlds
                     if (ship.Design.RepaitPriorityTemplateName != null &&
                        (repairTemplate = Main._ExpModMain.GetRepairPriorityList(ship.Design.RepaitPriorityTemplateName)) != null)
                     {
-                        foreach (var item in ship.Components.GroupBy(x => x.Category).OrderBy(x=> repairTemplate.IndexOf(x.Key)))
+                        foreach (var item in ship.Components.GroupBy(x => x.Category).OrderBy(x => repairTemplate.IndexOf(x.Key)))
                         {
                             foreach (var component in item)
                             {
@@ -4798,7 +4808,7 @@ namespace BaconDistantWorlds
                                     component.Status = ComponentStatus.Normal;
                                     --componentToRepairCount;
                                 }
-                                if (componentToRepairCount==0)
+                                if (componentToRepairCount == 0)
                                 {
                                     break;
                                 }
