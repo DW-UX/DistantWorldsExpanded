@@ -77,11 +77,11 @@
             this.btnSave.ToggledOn = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // textBox1
+            // txtNewName
             // 
-            this.txtNewName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
+            this.txtNewName.BackColor = System.Drawing.Color.White;
             this.txtNewName.Location = new System.Drawing.Point(12, 12);
-            this.txtNewName.Name = "textBox1";
+            this.txtNewName.Name = "txtNewName";
             this.txtNewName.Size = new System.Drawing.Size(266, 20);
             this.txtNewName.TabIndex = 26;
             // 

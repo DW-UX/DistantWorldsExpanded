@@ -182,12 +182,13 @@
             // 
             // cmbTempalteList
             // 
-            this.cmbTempalteList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
+            this.cmbTempalteList.BackColor = System.Drawing.Color.White;
             this.cmbTempalteList.DataSource = this.bindingSourceRepairPriorityTemplates;
             this.cmbTempalteList.DisplayMember = "TemplateName";
             this.cmbTempalteList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTempalteList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTempalteList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmbTempalteList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.cmbTempalteList.ForeColor = System.Drawing.Color.Black;
             this.cmbTempalteList.FormattingEnabled = true;
             this.cmbTempalteList.Location = new System.Drawing.Point(263, 28);
             this.cmbTempalteList.Name = "cmbTempalteList";

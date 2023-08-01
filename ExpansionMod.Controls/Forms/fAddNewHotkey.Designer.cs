@@ -28,15 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.cmbHotKeyNames = new System.Windows.Forms.ComboBox();
-            this.bindingSourceHotKeyList = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceHotKeyList = new System.Windows.Forms.BindingSource();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCancel = new DistantWorlds.Controls.GlassButton();
             this.btnAddHotkey = new DistantWorlds.Controls.GlassButton();
             this.label1 = new System.Windows.Forms.Label();
             this.lstbHotkeys = new System.Windows.Forms.ListBox();
-            this.bindingSourceSelectedHotKeys = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceSelectedHotKeys = new System.Windows.Forms.BindingSource();
             this.btnRemoveHotKey = new DistantWorlds.Controls.GlassButton();
             this.btnMoveUp = new DistantWorlds.Controls.GlassButton();
             this.btnMoveDown = new DistantWorlds.Controls.GlassButton();
@@ -47,11 +46,12 @@
             // 
             // cmbHotKeyNames
             // 
-            this.cmbHotKeyNames.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
+            this.cmbHotKeyNames.BackColor = System.Drawing.Color.White;
             this.cmbHotKeyNames.DataSource = this.bindingSourceHotKeyList;
             this.cmbHotKeyNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHotKeyNames.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbHotKeyNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cmbHotKeyNames.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.cmbHotKeyNames.ForeColor = System.Drawing.Color.Black;
             this.cmbHotKeyNames.FormattingEnabled = true;
             this.cmbHotKeyNames.Location = new System.Drawing.Point(263, 27);
             this.cmbHotKeyNames.Name = "cmbHotKeyNames";
