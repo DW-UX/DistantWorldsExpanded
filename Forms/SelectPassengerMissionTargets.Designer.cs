@@ -80,8 +80,9 @@
             // 
             // cmbTarget
             // 
-            this.cmbTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
+            this.cmbTarget.BackColor = System.Drawing.Color.White;
             this.cmbTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTarget.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbTarget.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmbTarget.FormattingEnabled = true;
@@ -92,9 +93,10 @@
             // 
             // cmbSource
             // 
-            this.cmbSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
+            this.cmbSource.BackColor = System.Drawing.Color.White;
             this.cmbSource.DataSource = this.bindingSource;
             this.cmbSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSource.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cmbSource.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmbSource.FormattingEnabled = true;

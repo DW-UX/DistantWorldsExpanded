@@ -1132,22 +1132,6 @@ namespace BaconDistantWorlds
             if (main == null)
                 return;
 
-            if (ship == null)
-            {
-                if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) &&
-                        !(BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.PrivateBuiltObjects.Contains(main._Game.SelectedObject)))
-                {
-                    MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, BaconBuiltObject.myMain.font_3);
-                    messageBoxEx.Text = "Wrong target";
-                    messageBoxEx.Caption = "Warning";
-                    messageBoxEx.AddButton(MessageBoxExButtons.Ok);
-                    messageBoxEx.Icon = MessageBoxExIcon.Warning;
-                    messageBoxEx.Show(BaconBuiltObject.myMain);
-
-                    return;
-                }
-            }
-
             BuiltObject builtObject;
             if (ship == null && main._Game.SelectedObject is BuiltObject)
             {
@@ -1159,11 +1143,11 @@ namespace BaconDistantWorlds
                     return;
                 builtObject = (BuiltObject)ship;
             }
-            if (builtObject.Role == BuiltObjectRole.Passenger)
+            if (builtObject.Role == BuiltObjectRole.Passenger &&
+                (main._Game.PlayerEmpire.BuiltObjects.Contains(builtObject)
+                || (BaconBuiltObject.AllowPrivateShipAssigment && main._Game.PlayerEmpire.PrivateBuiltObjects.Contains(builtObject)))
+                && builtObject.Empire != null)
             {
-                Empire empire = builtObject.Empire;
-                if (empire == null)
-                    return;
                 //string source = "";
                 //string destination = "";
                 Habitat sourceHab = null;
@@ -1220,6 +1204,15 @@ namespace BaconDistantWorlds
                     BuiltObjectMission builtObjectMission = builtObject.Mission.Clone();
                     builtObject.BaconValues.Add("RepeatingMission", (object)builtObjectMission);
                 }
+            }
+            else
+            {
+                MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, BaconBuiltObject.myMain.font_3);
+                messageBoxEx.Text = "Wrong target";
+                messageBoxEx.Caption = "Warning";
+                messageBoxEx.AddButton(MessageBoxExButtons.Ok);
+                messageBoxEx.Icon = MessageBoxExIcon.Warning;
+                messageBoxEx.Show(BaconBuiltObject.myMain);
             }
         }
 
@@ -2208,21 +2201,10 @@ namespace BaconDistantWorlds
             if (ship == null && main._Game.SelectedObject is BuiltObject)
             {
                 freighter = (BuiltObject)main._Game.SelectedObject;
-                if (freighter != null && freighter.Role == BuiltObjectRole.Freight)
+                if (freighter != null && freighter.Role == BuiltObjectRole.Freight
+                       && (main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)
+                       || (BaconBuiltObject.AllowPrivateShipAssigment && main._Game.PlayerEmpire.PrivateBuiltObjects.Contains(main._Game.SelectedObject))))
                 {
-                    if (!main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject) &&
-                        !(BaconBuiltObject.AllowPrivateShipAssigment && !main._Game.PlayerEmpire.PrivateBuiltObjects.Contains(main._Game.SelectedObject)))
-                    {
-                        MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, BaconBuiltObject.myMain.font_3);
-                        messageBoxEx.Text = "Wrong target";
-                        messageBoxEx.Caption = "Warning";
-                        messageBoxEx.AddButton(MessageBoxExButtons.Ok);
-                        messageBoxEx.Icon = MessageBoxExIcon.Warning;
-                        messageBoxEx.Show(BaconBuiltObject.myMain);
-
-                        return;
-                    }
-
                     //sourceHab = BaconBuiltObject.globalCargoMissionSource;
                     //targetHab = BaconBuiltObject.globalCargoMissionDestination;
 
@@ -2240,9 +2222,17 @@ namespace BaconDistantWorlds
                     { main._Game.Galaxy.Resume(); }
                     if (selectForm.DialogResult != DialogResult.OK)
                     { return; }
+
                 }
                 else
-                { return; }
+                {
+                    MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, BaconBuiltObject.myMain.font_3);
+                    messageBoxEx.Text = "Wrong target";
+                    messageBoxEx.Caption = "Warning";
+                    messageBoxEx.AddButton(MessageBoxExButtons.Ok);
+                    messageBoxEx.Icon = MessageBoxExIcon.Warning;
+                    messageBoxEx.Show(BaconBuiltObject.myMain);
+                }
             }
             else
             {

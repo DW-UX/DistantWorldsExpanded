@@ -80,8 +80,9 @@
             // 
             // cmbTarget
             // 
-            this.cmbTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
+            this.cmbTarget.BackColor = System.Drawing.Color.White;
             this.cmbTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTarget.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTarget.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmbTarget.FormattingEnabled = true;
             this.cmbTarget.Location = new System.Drawing.Point(6, 90);
@@ -91,8 +92,9 @@
             // 
             // cmbSource
             // 
-            this.cmbSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(64)))));
+            this.cmbSource.BackColor = System.Drawing.Color.White;
             this.cmbSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSource.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbSource.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmbSource.FormattingEnabled = true;
             this.cmbSource.Location = new System.Drawing.Point(6, 34);

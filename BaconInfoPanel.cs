@@ -272,7 +272,7 @@ namespace BaconDistantWorlds
         {
           point4 = new Point(x1, y3);
           using (SolidBrush brush = new SolidBrush(Color.Yellow))
-            BaconInfoPanel.DrawStringWithDropShadow(infoPanel, graphics, "(" + TextResolver.GetText("infoPanel base was recently Raided") + ")", infoPanel._NormalFont, point4, brush);
+            BaconInfoPanel.DrawStringWithDropShadow(infoPanel, graphics, "(" + TextResolver.GetText("This base was recently Raided") + ")", infoPanel._NormalFont, point4, brush);
           y3 += rowHeight;
         }
         if (flag1 || infoPanel._ActualEmpire == infoPanel._Game.PlayerEmpire || infoPanel._Game.GodMode)

@@ -1112,7 +1112,7 @@ namespace BaconDistantWorlds
                     {
                         string[] array = text.Split('=');
                         string key = array[0];
-                        string value = array[array.Length - 1];
+                        string value = array[array.Length - 1].Replace(',', '.');
                         dictionary.Add(key, value);
                     }
                 }
