@@ -1113,15 +1113,27 @@ namespace DistantWorlds.Types
             //    break;
             //}
             List<DirectoryInfo> origDir = new DirectoryInfo(origShipsFolder).EnumerateDirectories("family*").ToList();
-            List<DirectoryInfo> modDir = new DirectoryInfo(modShipsFolder).EnumerateDirectories("family*").ToList();
-            List<int> familyNumbers = origDir.Union(modDir).Select(x =>
+            List<int> familyNumbers = null;
+            if (!string.IsNullOrEmpty(_CustomizationSetName))
             {
-                int.TryParse(x.Name.Substring(6), out int res);
-                return res;
-            }).Distinct().ToList();
+                List<DirectoryInfo> modDir = new DirectoryInfo(modShipsFolder).EnumerateDirectories("family*").ToList();
+                familyNumbers = origDir.Union(modDir).Select(x =>
+                {
+                    int.TryParse(x.Name.Substring(6), out int res);
+                    return res;
+                }).Distinct().ToList();
+            }
+            else
+            {
+                familyNumbers = origDir.Select(x =>
+                {
+                    int.TryParse(x.Name.Substring(6), out int res);
+                    return res;
+                }).Distinct().ToList();
+            }
             familyNumbers.Sort();
             int idx = 0;
-            foreach(var num in familyNumbers)
+            foreach (var num in familyNumbers)
             {
                 string text19 = origShipsFolder + "family" + num + "\\";
                 string text20 = modShipsFolder + "family" + num + "\\";
