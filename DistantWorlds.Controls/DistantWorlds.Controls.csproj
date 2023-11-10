@@ -1,0 +1,507 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <ApplicationVersion>1.9.5.12</ApplicationVersion>
+    <RootNamespace>DistantWorlds</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(Configuration)' == 'Debug'">
+      <ItemGroup>
+        <Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\BaconDistantWorlds\bin\Debug\net48\BaconDistantWorlds.dll</HintPath>
+			<Private>False</Private>
+        </Reference>
+        <Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\net48\DistantWorlds.Types.dll</HintPath>
+			<Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\BaconDistantWorlds\bin\Release\net48\BaconDistantWorlds.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Release\net48\DistantWorlds.Types.dll</HintPath>
+			<Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Remove="lib\**" />
+    <Compile Remove="Mods\**" />
+    <EmbeddedResource Remove="lib\**" />
+    <EmbeddedResource Remove="Mods\**" />
+    <None Remove="lib\**" />
+    <None Remove="Mods\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controls\Properties\DistantWorlds.Controls.BuiltObjectDropDown.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.BuiltObjectListView.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.BuiltObjectMissionView.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.CharacterMission.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.CharacterSkillTraitEditPanel.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.CharacterSummary.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.CollapsingHabitatTypeSelector.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.ColorSlider.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.ComponentListView.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.ConstructionYardPurchaser.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.DiplomacyTradeTree.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.DiplomaticRelationListView.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.EmpireDetailView.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.EncyclopediaItemChangedEventArgs.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.EventActionPanel.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.ExtendedPanel.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.GameEventPanel.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.GlassButton.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.HeaderPanel.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.MessageBoxExForm.resources" />
+    <None Remove="Controls\Properties\DistantWorlds.Controls.Properties.Resources.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Controls\NumericUpDownNoArrows.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ListViewBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\TroopListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ShipGroupListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ResourceDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\InfoPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DesignListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ConstructionYardListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\GradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ComponentDetail.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CollapsingHabitatTypeSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\LabelledTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DropLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\TopColonies.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\SystemDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\SpecialRuin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\MessagePopup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\HabitatListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\GenericIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireMessageListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\DesignDefense.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CommandListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterMission.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\BuiltObjectMissionView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ResearchNodeDefinitionDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GameSummaryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\TroopDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\StartingEmpiresListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\RaceDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DiplomacyEmpireSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ColorDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\SmoothLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GalaxySummaryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\FleetHabitatDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireSummaryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterSkillTraitEditPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\PopulationListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ManufacturerListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\HabitatDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DockingBayListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\DiplomaticRelationTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ResearchTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\EventActionListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ResearchProgress.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\FleetDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DiplomacyTradeTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\DesignMovement.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ColorSlider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterTroopListIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GalaxySummaryListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\DesignImageScalingModeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterTraitTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ComponentCategoryDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GlassButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EncyclopediaTopicTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ListBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DesignWarnings.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ComponentResourceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ComponentListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\BufferPaintingCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CornerCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ExtendedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CaptionCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\PiratePlaystyleDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\HoverDetail.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterEventListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ScrollingLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\RuinPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\HabitatResourceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireListViewBasic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\DesignIndustry.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DesignEnergy.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CargoListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\PirateColonyControlListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\MultipleEventActionTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EventActionTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GovernmentStyleDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DiplomaticRelationColorKey.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CreatureTypeIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\PlanetaryFacilityDefinitionDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GameEventListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\EventTriggerTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ColonyPopulationPolicyDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ColonyInvasionPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\WeaponListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\TransparentButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\HabitatTypeIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\BorderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ScreenPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\FlagShapeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DiplomaticRelationListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ConstructionYardPurchaser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\RaceVictoryConditionsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DiplomaticRelationTypeActualDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterSkillTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\HoverButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EnhancedTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\BuiltObjectListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\HoverMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireComparison.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GameEventPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\EventActionPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireSummaryListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\CharacterSkillsTraitsProgress.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EnabledLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ResearchSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ResearchFacilities.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\MapKey.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\HabitatPrioritizationListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\BuiltObjectDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\BuiltObjectComponentListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ScrollingCreditsPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CreatureTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DataGridViewNumericUpDownEditingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DirectionCtrl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\PlanetaryFacilityListIconView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\LabelDropshadow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\HeaderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\HabitatAttitudeSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\DesignDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\BuiltObjectSubRoleDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireRelationList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\TradeRestrictedResourcesPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ResearchButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GalaxyLocationDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EventActionExecutionTypeDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\ResourceListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\PersistentGradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\GameVictoryConditions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\RaceSummaryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\HoverMenuGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\FleetBuiltObjectHabitatDropdown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\MessagePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\EmpireDetailView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\CloseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\RoundRectanglePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

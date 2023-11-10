@@ -361,5 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.vshistory/DistantWorlds.Controls.csproj
+/Controls/.vshistory
 /DistantWorlds.Types/.vshistory
 /DistantWorlds.Types/EM interface/.vshistory/Interface.cs
