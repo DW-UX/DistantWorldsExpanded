@@ -16,6 +16,20 @@
         <DefineConstants Condition="'$(RuntimeIdentifier)'==''">$(DefineConstants);ANY_PLATFORM</DefineConstants>
     </PropertyGroup>
     <ItemGroup>
+      <Compile Remove="DistantWorlds.Controls\Mods\**" />
+      <Compile Remove="DistantWorlds.Types\EM interface\**" />
+      <Compile Remove="DistantWorlds.Types\Mods\**" />
+      <Compile Remove="DistantWorlds\Mods\**" />
+      <EmbeddedResource Remove="DistantWorlds.Controls\Mods\**" />
+      <EmbeddedResource Remove="DistantWorlds.Types\EM interface\**" />
+      <EmbeddedResource Remove="DistantWorlds.Types\Mods\**" />
+      <EmbeddedResource Remove="DistantWorlds\Mods\**" />
+      <None Remove="DistantWorlds.Controls\Mods\**" />
+      <None Remove="DistantWorlds.Types\EM interface\**" />
+      <None Remove="DistantWorlds.Types\Mods\**" />
+      <None Remove="DistantWorlds\Mods\**" />
+    </ItemGroup>
+    <ItemGroup>
         <PackageReference Include="DotNetZip" Version="1.16.0" />
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
@@ -56,7 +70,14 @@
         </When>
     </Choose>
     <ItemGroup>
+      <Compile Remove="DistantWorlds\Class0.cs" />
+      <Compile Remove="DistantWorlds\Class6.cs" />
+      <Compile Remove="DistantWorlds\Class7.cs" />
+      <Compile Remove="DistantWorlds\Class8.cs" />
       <Compile Remove="DistantWorlds\EffectsPlayer.DX.cs" />
+      <Compile Remove="DistantWorlds\privatDFB67E2D.cs" />
+      <Compile Remove="DistantWorlds\test.cs" />
+      <Compile Remove="DistantWorlds\test.Designer.cs" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="ExpansionMod.Objects\Properties\" />
