@@ -66,57 +66,13 @@ internal static class Program
     }
 
     private static System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-    {/*
-        if (args.Name.ToUpperInvariant().Contains("SlimDX".ToUpperInvariant()))
-        {
-            if (Environment.Is64BitProcess)
-            {
-                string path = @"x64\SlimDX.dll";
-                if (File.Exists(path))
-                {
-                    return Assembly.LoadFrom(Path.GetFullPath(path));
-                }
-                else
-                { return null; }
-            }
-            else
-            {
-                string path = @"x86\SlimDX.dll";
-                if (File.Exists(path))
-                {
-                    return Assembly.LoadFrom(Path.GetFullPath(path));
-                }
-                else
-                { return null; }
-            }
+    {
+        var assemblyName = new AssemblyName(args.Name);
+        switch (assemblyName.Name) {
+            case "DistantWorlds.Types":
+            case "DistantWorlds.Controls":
+                return typeof(Program).Assembly;
         }
-        else if (args.Name.ToUpperInvariant().Contains("Facepunch.Steamworks".ToUpperInvariant()))
-        {
-            if (Environment.Is64BitProcess)
-            {
-                string path = @"x64\Facepunch.Steamworks.Win64.dll";
-                if (File.Exists(path))
-                {
-                    return Assembly.LoadFrom(Path.GetFullPath(path));
-                }
-                else
-                { return null; }
-            }
-            else
-            {
-                string path = @"x86\Facepunch.Steamworks.Win32.dll";
-                if (File.Exists(path))
-                {
-                    return Assembly.LoadFrom(Path.GetFullPath(path));
-                }
-                else
-                { return null; }
-            }
-        }
-        else
-        {
-            return null;
-        }*/
         return null;
     }
 }

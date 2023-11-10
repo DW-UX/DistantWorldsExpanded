@@ -1627,6 +1627,7 @@ namespace DistantWorlds
                     /*this.mediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
                     this.mediaPlayer.MediaError += new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.mediaPlayer_MediaError);
                     this.mediaPlayer.MouseDownEvent += new AxWMPLib._WMPOCXEvents_MouseDownEventHandler(this.mediaPlayer_MouseDownEvent);*/
+                    Cursor.Show();
                 }
                 oyxRtRyAwjg.DoWork += gameStartBackgroundWorker_DoWork;
                 oyxRtRyAwjg.RunWorkerCompleted += oyxRtRyAwjg_RunWorkerCompleted;
@@ -2610,7 +2611,7 @@ namespace DistantWorlds
             list.Add(string_2);
             list.Add(stream_0);
             bool_0 = false;
-            thread_0 = new Thread(method_11, 8400000);
+            thread_0 = new Thread(method_11, int.MaxValue);
             thread_0.Start(list);
             method_10();
             Application.UseWaitCursor = false;

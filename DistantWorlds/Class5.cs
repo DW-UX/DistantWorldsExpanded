@@ -34,6 +34,7 @@ internal static class Class5
     {
         try
         {
+            Application.SetCompatibleTextRenderingDefault(false);
             Application.EnableVisualStyles();
             Size size = Screen.GetBounds(new Point(0, 0)).Size;
             if ((size.Width < 1024 || size.Height < 768) && MessageBox.Show("Distant Worlds requires a screen resolution of at least 1024 x 768.\n\nYou should change the resolution of your Windows desktop and restart.\n\nYou may choose to continue, but some aspects of Distant Worlds may not work properly.\n\nDo you wish to continue loading Distant Worlds with a low screen resolution?", "Screen resolution", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)

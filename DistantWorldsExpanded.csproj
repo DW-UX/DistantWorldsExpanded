@@ -9,6 +9,7 @@
 		<DistantWorldsVersion>$(DistantWorldsVersion)</DistantWorldsVersion>
 		<InformationalVersion>$(DistantWorldsVersion)-DWUX-$(ExpansionModVersion)</InformationalVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<ApplicationIcon>DistantWorlds.ico</ApplicationIcon>
 		<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x86'">$(DefineConstants);WIN_32</DefineConstants>
@@ -152,8 +153,8 @@
 		<EmbeddedResource Update="ExpansionMod.Controls\Forms\*.resx">
 			<LogicalName>ExpansionMod.Controls.Forms.%(Filename).resources</LogicalName>
 		</EmbeddedResource>
-		<EmbeddedResource Update="NetDataContractSerializer\Resources\*.resx">
-			<LogicalName>NetDataContractSerializer.%(Filename).resources</LogicalName>
+		<EmbeddedResource Update="NetDataContractSerializer\Resources\SR.resx">
+			<LogicalName>Resources.SR.resources</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
 
