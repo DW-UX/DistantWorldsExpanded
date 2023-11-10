@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<OutputType>Library</OutputType>
+		<LangVersion>latest</LangVersion>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
+	<Choose>
+		<When Condition="'$(Configuration)' == 'Debug'">
+			<ItemGroup>
+				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\BaconDistantWorlds\bin\Debug\net48\BaconDistantWorlds.dll</HintPath>
+					<Private>False</Private>
+				</Reference>
+				<Reference Include="ExpansionMod, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\ExpansionMod\ExpansionMod\bin\Debug\net48\ExpansionMod.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<Reference Include="BaconDistantWorlds, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\BaconDistantWorlds\bin\Release\net48\BaconDistantWorlds.dll</HintPath>
+					<Private>False</Private>
+				</Reference>
+				<Reference Include="ExpansionMod, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\..\ExpansionMod\ExpansionMod\bin\Release\net48\ExpansionMod.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+	<ItemGroup>
+		<Compile Remove="Mods\**" />
+		<EmbeddedResource Remove="Mods\**" />
+		<None Remove="Mods\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="AssemblyInfo.cs" />
+		<Compile Remove="SteamApiWrapper.cs" />
+		<Compile Remove="SteamWrapperSelector.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="Facepunch.Steamworks.Win64">
+	    <HintPath>..\deps\Facepunch.Steamworks.Win64.dll</HintPath>
+	    <Private>False</Private>
+	  </Reference>
+	</ItemGroup>
+</Project>
