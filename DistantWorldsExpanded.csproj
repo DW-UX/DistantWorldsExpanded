@@ -11,6 +11,9 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <ApplicationIcon>DistantWorlds.ico</ApplicationIcon>
         <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+        <DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x86'">$(DefineConstants);WIN_32</DefineConstants>
+        <DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x64'">$(DefineConstants);WIN_64</DefineConstants>
+        <DefineConstants Condition="'$(RuntimeIdentifier)'==''">$(DefineConstants);ANY_PLATFORM</DefineConstants>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="DotNetZip" Version="1.16.0" />
@@ -20,17 +23,38 @@
         <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
         <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
         <PackageReference Include="$(XnaFrameworkPackage)" Version="$(XnaFrameworkVersion)" />
+        <!--<PackageReference Include="System.Management" Version="7.0.2" />-->
     </ItemGroup>
-    <ItemGroup>
-        <Reference Include="Facepunch.Steamworks.Win32">
-            <HintPath>deps/Facepunch.Steamworks.Win32.dll</HintPath>
-            <Aliases>w32</Aliases>
-        </Reference>
-        <Reference Include="Facepunch.Steamworks.Win64">
-            <HintPath>deps/Facepunch.Steamworks.Win64.dll</HintPath>
-            <Aliases>w64</Aliases>
-        </Reference>
-    </ItemGroup>
+    <Choose>
+        <When Condition="'$(RuntimeIdentifier)'==''">
+            <ItemGroup>
+                <Reference Include="Facepunch.Steamworks.Win32">
+                    <HintPath>deps/Facepunch.Steamworks.Win32.dll</HintPath>
+                    <Aliases>w32</Aliases>
+                </Reference>
+                <Reference Include="Facepunch.Steamworks.Win64">
+                    <HintPath>deps/Facepunch.Steamworks.Win64.dll</HintPath>
+                    <Aliases>w64</Aliases>
+                </Reference>
+            </ItemGroup>
+        </When>
+        <When Condition="'$(RuntimeIdentifier)'=='win-x64'">
+            <ItemGroup>
+                <Reference Include="Facepunch.Steamworks.Win64">
+                    <HintPath>deps/Facepunch.Steamworks.Win64.dll</HintPath>
+                    <Aliases>w64</Aliases>
+                </Reference>
+            </ItemGroup>
+        </When>
+        <When Condition="'$(RuntimeIdentifier)'=='win-x86'">
+            <ItemGroup>
+                <Reference Include="Facepunch.Steamworks.Win32">
+                    <HintPath>deps/Facepunch.Steamworks.Win32.dll</HintPath>
+                    <Aliases>w32</Aliases>
+                </Reference>
+            </ItemGroup>
+        </When>
+    </Choose>
     <ItemGroup>
       <Compile Remove="DistantWorlds\EffectsPlayer.DX.cs" />
     </ItemGroup>
@@ -88,6 +112,9 @@
         <EmbeddedResource Update="ExpansionMod.Controls\Forms\*.resx">
             <LogicalName>ExpansionMod.Controls.Forms.%(Filename).resources</LogicalName>
         </EmbeddedResource>
+        <EmbeddedResource Update="NetDataContractSerializer\Resources\*.resx">
+            <LogicalName>NetDataContractSerializer.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
     </ItemGroup>
     
     <!-- fonts -->
@@ -98,6 +125,16 @@
         <EmbeddedResource Include="DistantWorlds\Resources\Forgotte.ttf">
             <LogicalName>DistantWorlds.Resources.Forgotte.ttf</LogicalName>
         </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="deps\Facepunch.Steamworks.Win32.dll" />
+      <Content Include="deps\Facepunch.Steamworks.Win32.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="deps\Facepunch.Steamworks.Win64.dll" />
+      <Content Include="deps\Facepunch.Steamworks.Win64.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
     <!--for auditing logical names of embedded resources-->
     <!--<Target Name="AuditResx" BeforeTargets="Build">

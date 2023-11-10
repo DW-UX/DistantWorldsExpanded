@@ -20,12 +20,16 @@ using System.Windows.Forms;
 
 internal static class Program
 {
+
+    private static readonly string ThisAsmName = typeof(Program).Assembly.FullName;
+
     [STAThread]
     public static void Main(string[] args)
     {
         if (args.Length == 0)
         {
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            AppDomain.CurrentDomain.TypeResolve += CurrentDomain_TypeResolve;
 
             Class5.smethod_0();
         }
@@ -42,6 +46,24 @@ internal static class Program
         }
     }
 
+    private static Assembly CurrentDomain_TypeResolve(object sender, ResolveEventArgs args) {
+        // redirect DistantWorlds.Types and DistantWorlds.Controls to DistantWorlds
+        var fullyQualifiedTypeName = args.Name;
+
+        var fqtnParts = fullyQualifiedTypeName.Split(new[]{','}, 2);
+        var typeName = fqtnParts[0];
+        var assemblyNameStr = fqtnParts[1].Trim();
+        var assemblyName = new AssemblyName(assemblyNameStr);
+
+        switch (assemblyName.Name) {
+            case "DistantWorlds.Types":
+            case "DistantWorlds.Controls":
+                var type = Type.GetType($"{typeName}, {ThisAsmName}", false);
+                return type?.Assembly;
+        }
+        
+        return null;
+    }
 
     private static System.Reflection.Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {/*
