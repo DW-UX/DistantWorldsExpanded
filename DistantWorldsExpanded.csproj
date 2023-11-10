@@ -57,6 +57,9 @@
     </Choose>
     <ItemGroup>
       <Compile Remove="DistantWorlds\EffectsPlayer.DX.cs" />
+      <Compile Update="DistantWorlds\Main.*.cs">
+        <DependentUpon>Main.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
     <ItemGroup>
       <Folder Include="ExpansionMod.Objects\Properties\" />
@@ -125,16 +128,6 @@
         <EmbeddedResource Include="DistantWorlds\Resources\Forgotte.ttf">
             <LogicalName>DistantWorlds.Resources.Forgotte.ttf</LogicalName>
         </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-      <None Remove="deps\Facepunch.Steamworks.Win32.dll" />
-      <Content Include="deps\Facepunch.Steamworks.Win32.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <None Remove="deps\Facepunch.Steamworks.Win64.dll" />
-      <Content Include="deps\Facepunch.Steamworks.Win64.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
     </ItemGroup>
     <!--for auditing logical names of embedded resources-->
     <!--<Target Name="AuditResx" BeforeTargets="Build">
