@@ -75,6 +75,7 @@
 		<Compile Remove="DistantWorlds\Class7.cs" />
 		<Compile Remove="DistantWorlds\Class8.cs" />
 		<Compile Remove="DistantWorlds\EffectsPlayer.DX.cs" />
+		<Compile Remove="DistantWorlds\Particle.cs" />
 		<Compile Update="DistantWorlds\Main.*.cs">
 			<DependentUpon>Main.cs</DependentUpon>
 		</Compile>
@@ -83,6 +84,12 @@
 		</Compile>
 		<Compile Update="DistantWorlds\Controls\MainView.*.cs">
 			<DependentUpon>MainView.cs</DependentUpon>
+		</Compile>
+		<Compile Update="DistantWorlds.Types\Empire.*.cs">
+			<DependentUpon>Empire.cs</DependentUpon>
+		</Compile>
+		<Compile Update="DistantWorlds.Types\BuiltObject.*.cs">
+			<DependentUpon>BuiltObject.cs</DependentUpon>
 		</Compile>
 		<Compile Remove="DistantWorlds\privatDFB67E2D.cs" />
 		<Compile Remove="DistantWorlds\test.cs" />
