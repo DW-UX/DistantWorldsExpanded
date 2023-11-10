@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<OutputType>Library</OutputType>
+		<ApplicationVersion>1.0.0.0</ApplicationVersion>
+		<LangVersion>latest</LangVersion>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+	<Choose>
+		<When Condition="'$(Configuration)' == 'Debug'">
+			<ItemGroup>
+				<Reference Include="DistantWorlds, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\DistantWorlds\bin\Debug\net48\DistantWorlds.exe</HintPath>
+					<Private>False</Private>
+				</Reference>
+				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\DistantWorlds.Controls\bin\Debug\net48\DistantWorlds.Controls.dll</HintPath>
+					<Private>False</Private>
+				</Reference>
+				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Debug\net48\DistantWorlds.Types.dll</HintPath>
+					<Private>False</Private>
+				</Reference>
+				<Reference Include="ExpansionMod, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod\ExpansionMod\bin\Debug\net48\ExpansionMod.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+				<Reference Include="ExpansionMod.Objects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod.Objects\ExpansionMod.Objects\bin\Debug\net48\ExpansionMod.Objects.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<Reference Include="DistantWorlds, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\DistantWorlds\bin\Release\net48\DistantWorlds.exe</HintPath>
+					<Private>False</Private>
+				</Reference>
+				<Reference Include="DistantWorlds.Controls, Version=1.9.5.12, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\DistantWorlds.Controls\bin\Release\net48\DistantWorlds.Controls.dll</HintPath>
+					<Private>False</Private>
+				</Reference>
+				<Reference Include="DistantWorlds.Types, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\DistantWorlds.Types\DistantWorlds.Types\bin\Release\net48\DistantWorlds.Types.dll</HintPath>
+					<Private>False</Private>
+				</Reference>
+				<Reference Include="ExpansionMod, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod\ExpansionMod\bin\Release\net48\ExpansionMod.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+				<Reference Include="ExpansionMod.Objects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+					<SpecificVersion>False</SpecificVersion>
+					<HintPath>..\ExpansionMod.Objects\ExpansionMod.Objects\bin\Release\net48\ExpansionMod.Objects.dll</HintPath>
+					<Private>True</Private>
+				</Reference>
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+	<ItemGroup>
+		<Compile Remove="lib\**" />
+		<EmbeddedResource Remove="lib\**" />
+		<None Remove="lib\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.0.1641" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DistantWorlds.Controls\DistantWorlds.Controls.csproj" />
+		<ProjectReference Include="..\ExpansionMod.Controls\ExpansionMod.Controls\ExpansionMod.Controls.csproj" />
+		<ProjectReference Include="..\ExpansionMod.Objects\ExpansionMod.Objects\ExpansionMod.Objects.csproj" />
+	</ItemGroup>
+	<PropertyGroup />
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
+</Project>
