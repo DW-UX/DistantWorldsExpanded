@@ -81,6 +81,9 @@
 		<Compile Update="DistantWorlds\Start.*.cs">
 			<DependentUpon>Start.cs</DependentUpon>
 		</Compile>
+		<Compile Update="DistantWorlds\Controls\MainView.*.cs">
+			<DependentUpon>MainView.cs</DependentUpon>
+		</Compile>
 		<Compile Remove="DistantWorlds\privatDFB67E2D.cs" />
 		<Compile Remove="DistantWorlds\test.cs" />
 		<Compile Remove="DistantWorlds\test.Designer.cs" />
