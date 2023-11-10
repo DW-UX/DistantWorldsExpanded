@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistantWorldsExpanded", "DistantWorldsExpanded.csproj", "{06F0D8C5-0834-492C-9C27-40BEF6D0C65B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06F0D8C5-0834-492C-9C27-40BEF6D0C65B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F0D8C5-0834-492C-9C27-40BEF6D0C65B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F0D8C5-0834-492C-9C27-40BEF6D0C65B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F0D8C5-0834-492C-9C27-40BEF6D0C65B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

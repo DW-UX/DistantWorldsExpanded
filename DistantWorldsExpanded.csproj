@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <RootNamespace>DistantWorlds</RootNamespace>
+        <AssemblyName>DistantWorlds</AssemblyName>
+        <TargetFramework>net48</TargetFramework>
+        <UseWindowsForms>True</UseWindowsForms>
+        <DistantWorldsVersion>$(DistantWorldsVersion)</DistantWorldsVersion>
+        <InformationalVersion>$(DistantWorldsVersion)-DWUX-$(ExpansionModVersion)</InformationalVersion>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ApplicationIcon>DistantWorlds.ico</ApplicationIcon>
+        <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="DotNetZip" Version="1.16.0" />
+        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+        <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+        <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+        <PackageReference Include="$(XnaFrameworkPackage)" Version="$(XnaFrameworkVersion)" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="Facepunch.Steamworks.Win32">
+            <HintPath>deps/Facepunch.Steamworks.Win32.dll</HintPath>
+            <Aliases>w32</Aliases>
+        </Reference>
+        <Reference Include="Facepunch.Steamworks.Win64">
+            <HintPath>deps/Facepunch.Steamworks.Win64.dll</HintPath>
+            <Aliases>w64</Aliases>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="DistantWorlds\EffectsPlayer.DX.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="ExpansionMod.Objects\Properties\" />
+    </ItemGroup>
+    
+    <!-- resx redirects -->
+    <ItemGroup>
+        <EmbeddedResource Update="DistantWorlds\*.resx">
+            <LogicalName>DistantWorlds.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="DistantWorlds\Controls\*.resx">
+            <LogicalName>DistantWorlds.Controls.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="DistantWorlds\Resources\*.resx">
+            <LogicalName>DistantWorlds.Resources.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="DistantWorlds\Properties\*.resx">
+            <LogicalName>DistantWorlds.Properties.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="DistantWorlds.Controls\*.resx">
+            <LogicalName>DistantWorlds.Controls.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="DistantWorlds.Controls\Controls\*.resx">
+            <LogicalName>DistantWorlds.Controls.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="DistantWorlds.Controls\Controls\Properties\*.resx">
+            <LogicalName>DistantWorlds.Controls.Controls.Properties.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="DistantWorlds.Types\*.resx">
+            <LogicalName>DistantWorlds.Types.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="DistantWorlds.Types\Properties\*.resx">
+            <LogicalName>DistantWorlds.Types.Properties.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="BaconDistantWorlds\*.resx">
+            <LogicalName>BaconDistantWorlds.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="BaconDistantWorlds\Properties\*.resx">
+            <LogicalName>BaconDistantWorlds.Properties.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="BaconDistantWorlds\Forms\*.resx">
+            <LogicalName>BaconDistantWorlds.Forms.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="ExpansionMod\*.resx">
+            <LogicalName>ExpansionMod.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="ExpansionMod.Controls\*.resx">
+            <LogicalName>ExpansionMod.Controls.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="ExpansionMod.Controls\Controls\*.resx">
+            <LogicalName>ExpansionMod.Controls.Controls.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Update="ExpansionMod.Controls\Forms\*.resx">
+            <LogicalName>ExpansionMod.Controls.Forms.%(Filename).resources</LogicalName>
+        </EmbeddedResource>
+    </ItemGroup>
+    
+    <!-- fonts -->
+    <ItemGroup>
+        <EmbeddedResource Include="DistantWorlds\Resources\Forgottb.ttf">
+            <LogicalName>DistantWorlds.Resources.Forgottb.ttf</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Include="DistantWorlds\Resources\Forgotte.ttf">
+            <LogicalName>DistantWorlds.Resources.Forgotte.ttf</LogicalName>
+        </EmbeddedResource>
+    </ItemGroup>
+    <!--for auditing logical names of embedded resources-->
+    <!--<Target Name="AuditResx" BeforeTargets="Build">
+        <Message Importance="high" Text="Auditing Resx files" />
+        <Error Text="@(EmbeddedResource->'%(Identity):%(LogicalName)')" />
+    </Target>-->
+</Project>

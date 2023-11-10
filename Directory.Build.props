@@ -1,0 +1,19 @@
+<Project>
+    <PropertyGroup>
+        <DistantWorldsVersion>1.9.5.12</DistantWorldsVersion>
+        <ExpansionModVersion>1.09.05</ExpansionModVersion>
+        <Company>CodeForce Limited</Company>
+        <Copyright>Copyright © CodeForce 2014</Copyright>
+        <LangVersion>11</LangVersion>
+    </PropertyGroup>
+
+    <!-- hacks -->
+    <PropertyGroup>
+        <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+        <XnaFormsPackage>MonoGame.Forms.DX</XnaFormsPackage>
+        <XnaFormsVersion>3.2.0</XnaFormsVersion>
+        <XnaFrameworkPackage>MonoGame.Framework.WindowsDX.9000</XnaFrameworkPackage>
+        <!--<XnaFrameworkVersion>3.8.1.303</XnaFrameworkVersion>-->
+        <XnaFrameworkVersion>3.9.9001</XnaFrameworkVersion>
+    </PropertyGroup>
+</Project>

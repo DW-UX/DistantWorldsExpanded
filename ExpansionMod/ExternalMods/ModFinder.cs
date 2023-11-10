@@ -29,8 +29,10 @@ namespace ExpansionMod.ExternalMods
                         res.Add(myMod);
                         continue;
                     }
-                    else
-                    { modAs = AppDomain.CurrentDomain.GetAssemblies().First(x => x.GetName().Name == "BaconDistantWorlds"); }
+                    else {
+                        //modAs = AppDomain.CurrentDomain.GetAssemblies().First(x => x.GetName().Name == "BaconDistantWorlds");
+                        modAs = typeof(BaconDistantWorlds.BaconMain).Assembly;
+                    }
                 }
                 else 
                 {
