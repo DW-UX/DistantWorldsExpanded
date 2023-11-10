@@ -7868,7 +7868,7 @@ namespace DistantWorlds.Controls
             {
                 main_0.musicPlayer_0.FadePause();
             }
-            else if (main_0._Game.Galaxy.TimeState == GalaxyTimeState.Running && (!flag || main_0.double_0 >= 100.0) && (!main_0.musicPlayer_0.IsPlaying || main_0.musicPlayer_0.mediaPlayer_0.Volume <= 0.0) && !main_0.musicPlayer_1.IsPlaying && !main_0.musicPlayer_0.IsInitiatingFade)
+            else if (main_0._Game.Galaxy.TimeState == GalaxyTimeState.Running && (!flag || main_0.double_0 >= 100.0) && (!main_0.musicPlayer_0.IsPlaying || main_0.musicPlayer_0.ActualVolume <= 0.0) && !main_0.musicPlayer_1.IsPlaying && !main_0.musicPlayer_0.IsInitiatingFade)
             {
                 main_0.musicPlayer_0.FadeResume();
             }

@@ -8,7 +8,7 @@ using DistantWorlds.Types;
 using System;
 using System.IO;
 using System.Timers;
-using System.Windows.Media;
+using Microsoft.Xna.Framework.Media;
 
 namespace DistantWorlds
 {
@@ -29,8 +29,6 @@ namespace DistantWorlds
         public delegate void SetFadeVolumeDelegate(double volume);
 
         public delegate void StartThemeDelegate();
-
-        internal MediaPlayer mediaPlayer_0;
 
         public SetVolumeDelegate VolumeDelegate;
 
@@ -80,7 +78,7 @@ namespace DistantWorlds
         {
             get
             {
-                if (mediaPlayer_0.Position.TotalSeconds > 0.0)
+                if (MediaPlayer.PlayPosition.TotalSeconds > 0.0)
                 {
                     return true;
                 }
@@ -91,6 +89,7 @@ namespace DistantWorlds
         public bool IsInitiatingFade => bool_0;
 
         public double Volume => double_2;
+        public double ActualVolume => MediaPlayer.Volume;
 
         ~MusicPlayer()
         {
@@ -117,7 +116,6 @@ namespace DistantWorlds
                 timer_0.Interval = 50.0;
                 timer_0.Elapsed += timer_0_Elapsed;
                 timer_0.Stop();
-                mediaPlayer_0 = new MediaPlayer();
                 StartThemeMethodDelegate = StartThemeInternal;
                 VolumeDelegate = SetVolume;
                 StopMethodDelegate = Stop;
@@ -133,22 +131,20 @@ namespace DistantWorlds
 
         public void Start()
         {
-            mediaPlayer_0.MediaEnded += mediaPlayer_0_MediaEnded;
+            MediaPlayer.MediaStateChanged += mediaPlayer_0_MediaEnded;
             string_0 = EbsZqjqvhZ();
             method_1();
         }
 
         public void Stop()
         {
-            mediaPlayer_0.MediaEnded -= mediaPlayer_0_MediaEnded;
-            mediaPlayer_0.Stop();
-            mediaPlayer_0.Position = new TimeSpan(0L);
-            timer_0.Stop();
+            MediaPlayer.MediaStateChanged -= mediaPlayer_0_MediaEnded;
+            MediaPlayer.Stop();
         }
 
         public void Pause()
         {
-            mediaPlayer_0.Pause();
+            MediaPlayer.Pause();
         }
 
         public void StartTheme()
@@ -158,7 +154,7 @@ namespace DistantWorlds
 
         public void StartThemeInternal()
         {
-            mediaPlayer_0.MediaEnded += mediaPlayer_0_MediaEnded;
+            MediaPlayer.MediaStateChanged += mediaPlayer_0_MediaEnded;
             string_0 = string_2 + string_1;
             method_1();
         }
@@ -167,7 +163,7 @@ namespace DistantWorlds
         {
             if (volume >= 0.0 && volume <= 1.0)
             {
-                mediaPlayer_0.Volume = volume * 0.6;
+                MediaPlayer.Volume = (float)(volume * 0.6);
             }
         }
 
@@ -176,7 +172,7 @@ namespace DistantWorlds
             if (volume >= 0.0 && volume <= 1.0)
             {
                 double_2 = volume;
-                mediaPlayer_0.Volume = double_2 * 0.6;
+                MediaPlayer.Volume = (float)(double_2 * 0.6);
             }
         }
 
@@ -206,8 +202,10 @@ namespace DistantWorlds
             main_0.Invoke(VolumeDelegate, double_2);
         }
 
-        private void mediaPlayer_0_MediaEnded(object sender, EventArgs e)
-        {
+        private void mediaPlayer_0_MediaEnded(object sender, EventArgs e) {
+            if (MediaPlayer.State != MediaState.Stopped)
+                return;
+
             string_0 = EbsZqjqvhZ();
             method_1();
         }
@@ -215,15 +213,22 @@ namespace DistantWorlds
         public void ResumeMusic()
         {
             bool_0 = false;
-            mediaPlayer_0.Play();
+            MediaPlayer.Resume();
         }
 
         private void method_0(string string_4)
         {
             bool_0 = false;
-            mediaPlayer_0.Open(new Uri(string_4));
+            var songName = "<unknown>";
+            try {
+                songName = Path.GetFileNameWithoutExtension(string_4);
+            }
+            catch {
+                // oh well
+            }
+            MediaPlayer.Play(Song.FromUri(songName, new Uri(string_4)));
             SetVolume(double_2);
-            mediaPlayer_0.Play();
+            //MediaPlayer.Play();
         }
 
         private void method_1()
@@ -239,8 +244,8 @@ namespace DistantWorlds
             double_3 = 0.0;
             double_0 = 1.0;
             musicFadeFinishAction_0 = MusicFadeFinishAction.Resume;
-            mediaPlayer_0.Volume = double_3;
-            mediaPlayer_0.Play();
+            MediaPlayer.Volume = 0.0f;
+            MediaPlayer.Resume();
             timer_0.Start();
         }
 

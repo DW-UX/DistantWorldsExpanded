@@ -4,7 +4,7 @@
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
-using AxWMPLib;
+//using AxWMPLib;
 using BaconDistantWorlds;
 using DistantWorlds.Controls;
 using DistantWorlds.Types;
@@ -33,7 +33,7 @@ using System.Timers;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
 using System.Xml;
-using WMPLib;
+//using WMPLib;
 using static System.Windows.Forms.AxHost;
 using EmpireList = DistantWorlds.Types.EmpireList;
 using LinearGradientMode = DistantWorlds.Controls.LinearGradientMode;
@@ -207,7 +207,7 @@ namespace DistantWorlds
 
         private PictureBox picAbout;
 
-        internal AxWindowsMediaPlayer mediaPlayer;
+        //internal AxWindowsMediaPlayer mediaPlayer;
 
         private Label lblMenuHints;
 
@@ -1118,7 +1118,7 @@ namespace DistantWorlds
             this.lblVersion = new System.Windows.Forms.Label();
             this.picTitle = new System.Windows.Forms.PictureBox();
             this.lnkCopyright = new System.Windows.Forms.LinkLabel();
-            this.mediaPlayer = new AxWindowsMediaPlayer();
+            //this.mediaPlayer = new AxWindowsMediaPlayer();
             this.lblMenuHints = new System.Windows.Forms.Label();
             this.pnlGameOptions = new DistantWorlds.Controls.ScreenPanel();
             this.btnGameOptionsShowMessages = new DistantWorlds.Controls.GlassButton();
@@ -1559,7 +1559,7 @@ namespace DistantWorlds
             this.pnlTopLeftCorner = new System.Windows.Forms.Panel();
             this.pnlBottomLeftCorner = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)this.picTitle).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.mediaPlayer).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)this.mediaPlayer).BeginInit();
             this.pnlGameOptions.SuspendLayout();
             this.grpOptionsAutoSave.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.numOptionsAutoSaveMinutes).BeginInit();
@@ -1684,7 +1684,7 @@ namespace DistantWorlds
             this.lnkCopyright.TabStop = true;
             this.lnkCopyright.Text = "Copyright link";
             this.lnkCopyright.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkCopyright_LinkClicked);
-            ((System.Windows.Forms.AxHost)(object)this.mediaPlayer).Enabled = true;
+            /*((System.Windows.Forms.AxHost)(object)this.mediaPlayer).Enabled = true;
             ((System.Windows.Forms.Control)(object)this.mediaPlayer).Location = new System.Drawing.Point(1131, 632);
             ((System.Windows.Forms.Control)(object)this.mediaPlayer).Name = "mediaPlayer";
             ((System.Windows.Forms.AxHost)(object)this.mediaPlayer).OcxState = (System.Windows.Forms.AxHost.State)resources.GetObject("mediaPlayer.OcxState");
@@ -1696,7 +1696,7 @@ namespace DistantWorlds
             this.mediaPlayer.ClickEvent += new AxWMPLib._WMPOCXEvents_ClickEventHandler(this.mediaPlayer_ClickEvent);
             this.mediaPlayer.KeyDownEvent += new AxWMPLib._WMPOCXEvents_KeyDownEventHandler(this.mediaPlayer_KeyDownEvent);
             this.mediaPlayer.KeyPressEvent += new AxWMPLib._WMPOCXEvents_KeyPressEventHandler(this.mediaPlayer_KeyPressEvent);
-            this.mediaPlayer.MouseUpEvent += new AxWMPLib._WMPOCXEvents_MouseUpEventHandler(this.mediaPlayer_MouseUpEvent);
+            this.mediaPlayer.MouseUpEvent += new AxWMPLib._WMPOCXEvents_MouseUpEventHandler(this.mediaPlayer_MouseUpEvent);*/
             this.lblMenuHints.AutoSize = true;
             this.lblMenuHints.BackColor = System.Drawing.Color.FromArgb(96, 192, 160, 255);
             this.lblMenuHints.Font = new System.Drawing.Font("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
@@ -7263,7 +7263,7 @@ namespace DistantWorlds
             base.Controls.Add(this.lblActiveTheme);
             base.Controls.Add(this.pnlNewGame);
             base.Controls.Add(this.lblMenuHints);
-            base.Controls.Add((System.Windows.Forms.Control)(object)this.mediaPlayer);
+            //base.Controls.Add((System.Windows.Forms.Control)(object)this.mediaPlayer);
             base.Controls.Add(this.pnlAbout);
             base.Controls.Add(this.lnkCopyright);
             base.Controls.Add(this.pnlSaveLoadProgress);
@@ -7285,7 +7285,7 @@ namespace DistantWorlds
             base.KeyDown += new System.Windows.Forms.KeyEventHandler(Start_KeyDown);
             base.MouseMove += new System.Windows.Forms.MouseEventHandler(Start_MouseMove);
             ((System.ComponentModel.ISupportInitialize)this.picTitle).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.mediaPlayer).EndInit();
+            //((System.ComponentModel.ISupportInitialize)this.mediaPlayer).EndInit();
             this.pnlGameOptions.ResumeLayout(false);
             this.pnlGameOptions.PerformLayout();
             this.grpOptionsAutoSave.ResumeLayout(false);
@@ -7946,9 +7946,9 @@ namespace DistantWorlds
                     Application.StartupPath + "\\movies\\distantworldsintro.wmv"
                     };
                     method_141(string_0);
-                    this.mediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
+                    /*this.mediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
                     this.mediaPlayer.MediaError += new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.mediaPlayer_MediaError);
-                    this.mediaPlayer.MouseDownEvent += new AxWMPLib._WMPOCXEvents_MouseDownEventHandler(this.mediaPlayer_MouseDownEvent);
+                    this.mediaPlayer.MouseDownEvent += new AxWMPLib._WMPOCXEvents_MouseDownEventHandler(this.mediaPlayer_MouseDownEvent);*/
                 }
                 oyxRtRyAwjg.DoWork += gameStartBackgroundWorker_DoWork;
                 oyxRtRyAwjg.RunWorkerCompleted += oyxRtRyAwjg_RunWorkerCompleted;
@@ -7961,7 +7961,7 @@ namespace DistantWorlds
                 }
                 if (flag2)
                 {
-                    ((Control)(object)mediaPlayer).BringToFront();
+                    //((Control)(object)mediaPlayer).BringToFront();
                 }
                 else
                 {
@@ -17071,10 +17071,10 @@ namespace DistantWorlds
 
         private void Start_KeyDown(object sender, KeyEventArgs e)
         {
-            if (((Control)(object)mediaPlayer).Visible)
+            /*if (((Control)(object)mediaPlayer).Visible)
             {
                 return;
-            }
+            }*/
             if (pnlEncyclopedia.Visible && e.KeyCode != Keys.F1)
             {
                 e.Handled = false;
@@ -17387,7 +17387,7 @@ namespace DistantWorlds
 
         private void method_141(string[] string_2)
         {
-            if (mediaPlayer.settings != null)
+            /*if (mediaPlayer.settings != null)
             {
                 mediaPlayer.settings.autoStart = false;
             }
@@ -17416,13 +17416,13 @@ namespace DistantWorlds
                     Thread.Sleep(200);
                 }
                 mediaPlayer.Ctlcontrols.play();
-            }
+            }*/
         }
 
-        private void mediaPlayer_MediaError(object object_0, _WMPOCXEvents_MediaErrorEvent _WMPOCXEvents_MediaErrorEvent_0)
+        /*private void mediaPlayer_MediaError(object object_0, _WMPOCXEvents_MediaErrorEvent _WMPOCXEvents_MediaErrorEvent_0)
         {
             method_143();
-        }
+        }*/
 
         private void method_142(bool bool_5)
         {
@@ -17446,20 +17446,20 @@ namespace DistantWorlds
             //IL_0029: Unknown result type (might be due to invalid IL or missing references)
             //IL_0033: Expected O, but got Unknown
             Cursor.Show();
-            this.mediaPlayer.PlayStateChange -= new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
-            this.mediaPlayer.MediaError -= new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.mediaPlayer_MediaError);
-            mediaPlayer.Ctlcontrols.stop();
-            ((Control)(object)mediaPlayer).Visible = false;
-            ((Control)(object)mediaPlayer).SendToBack();
+            //this.mediaPlayer.PlayStateChange -= new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
+            //this.mediaPlayer.MediaError -= new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.mediaPlayer_MediaError);
+            //mediaPlayer.Ctlcontrols.stop();
+            /*((Control)(object)mediaPlayer).Visible = false;
+            ((Control)(object)mediaPlayer).SendToBack();*/
             SetErrorMode(ErrorModes.SYSTEM_DEFAULT);
             main_0.method_262(main_0.gameOptions_0);
             main_0.MusicPlayer.StartTheme();
-            ((Control)(object)mediaPlayer).SendToBack();
+            //((Control)(object)mediaPlayer).SendToBack();
             BringToFront();
             method_142(bool_5: true);
         }
 
-        private void mediaPlayer_PlayStateChange(object object_0, _WMPOCXEvents_PlayStateChangeEvent _WMPOCXEvents_PlayStateChangeEvent_0)
+        /*private void mediaPlayer_PlayStateChange(object object_0, _WMPOCXEvents_PlayStateChangeEvent _WMPOCXEvents_PlayStateChangeEvent_0)
         {
             switch (_WMPOCXEvents_PlayStateChangeEvent_0.newState)
             {
@@ -17483,18 +17483,18 @@ namespace DistantWorlds
                 case 12:
                     break;
             }
-        }
+        }*/
 
-        private void mediaPlayer_ClickEvent(object object_0, _WMPOCXEvents_ClickEvent _WMPOCXEvents_ClickEvent_0)
+        /*private void mediaPlayer_ClickEvent(object object_0, _WMPOCXEvents_ClickEvent _WMPOCXEvents_ClickEvent_0)
         {
         }
 
         private void mediaPlayer_MouseDownEvent(object object_0, _WMPOCXEvents_MouseDownEvent _WMPOCXEvents_MouseDownEvent_0)
         {
             method_143();
-        }
+        }*/
 
-        private void method_144()
+        /*private void method_144()
         {
             //IL_000d: Unknown result type (might be due to invalid IL or missing references)
             //IL_0017: Expected O, but got Unknown
@@ -17543,7 +17543,7 @@ namespace DistantWorlds
 
         private void mediaPlayer_MouseUpEvent(object object_0, _WMPOCXEvents_MouseUpEvent _WMPOCXEvents_MouseUpEvent_0)
         {
-        }
+        }*/
 
         private void method_145(object sender, EventArgs e)
         {

@@ -3,10 +3,11 @@
 // Assembly: DistantWorlds.Types, Version=1.9.5.12, Culture=neutral, PublicKeyToken=null
 // MVID: C87DBA0E-BD3A-46BA-A8F0-EE9F5E5721E2
 // Assembly location: H:\7\DistantWorlds.Types.dll
-
-using Steamworks;
+extern alias w64;
+extern alias w32;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -22,6 +23,26 @@ namespace DistantWorlds.Types
         private static uint _SteamAppId;
         private static readonly SteamAPI.Finalizer _Finalizer = new SteamAPI.Finalizer();
 
+        private static readonly bool Is64Bit = Environment.Is64BitProcess;
+        
+        private static readonly Action<uint, bool> _SteamClientInit
+            = Is64Bit
+                ? w64.Steamworks.SteamClient.Init
+                : w32.Steamworks.SteamClient.Init;
+        private static readonly Func<bool, bool> _SteamUserStatsResetAll
+            = Is64Bit
+                ? w64.Steamworks.SteamUserStats.ResetAll
+                : w32.Steamworks.SteamUserStats.ResetAll;
+        
+        private static readonly Func<bool> _SteamUserStatsRequestCurrentStats
+            = Is64Bit
+                ? w64.Steamworks.SteamUserStats.RequestCurrentStats
+                : w32.Steamworks.SteamUserStats.RequestCurrentStats;
+        private static bool IsLoggedOn
+            =>  Is64Bit
+            ? w64.Steamworks.SteamClient.IsLoggedOn
+            : w32.Steamworks.SteamClient.IsLoggedOn;
+        
         //static SteamAPI() => SteamAPI._DWSteamAPI = new DWSteamAPI();
 
         public static void Initialize(string crashLogPath)
@@ -30,13 +51,13 @@ namespace DistantWorlds.Types
             SteamAPI._CrashLogPath = crashLogPath;
             try
             {
-                SteamClient.Init(261470);
+                _SteamClientInit(261470, true);
                 //SteamAPI._SteamAppId = SteamAPI._DWSteamAPI.GetAppID();
                 //SteamClient.GetPlayerSteamLevel();
 
-                if (!SteamClient.IsLoggedOn)
+                if (!IsLoggedOn)
                     return;
-                SteamUserStats.RequestCurrentStats();
+                _SteamUserStatsRequestCurrentStats();
                 //SteamAPI._DWSteamAPI.RequestCurrentStats();
                 SteamAPI._Initialized = true;
             }
@@ -55,7 +76,7 @@ namespace DistantWorlds.Types
             { return; }
             try
             {
-                var ach = SteamUserStats.Achievements.FirstOrDefault(x => x.Name == achievementName);
+                var ach = Achievements.FirstOrDefault(x => x.Name == achievementName);
                 if (!string.IsNullOrEmpty(ach.Name))
                 {
                     ach.Trigger(true);
@@ -66,6 +87,11 @@ namespace DistantWorlds.Types
                 SteamAPI.WriteSteamError(nameof(SetAchievementIfNecessary), ex.ToString(), SteamAPI._CrashLogPath);
             }
         }
+
+        private static IEnumerable<dynamic> Achievements
+            => Is64Bit
+                ? (dynamic)w64.Steamworks.SteamUserStats.Achievements
+                : (dynamic)w32.Steamworks.SteamUserStats.Achievements;
 
         public static string ResolveAchievementName(Achievement achievement)
         {
@@ -79,9 +105,8 @@ namespace DistantWorlds.Types
         {
             if (!SteamAPI._Initialized)
                 return;
-            try
-            {
-                SteamUserStats.ResetAll(true);
+            try {
+                _SteamUserStatsResetAll(true);
             }
             catch (Exception ex)
             {
@@ -93,7 +118,10 @@ namespace DistantWorlds.Types
         {
             try
             {
-                SteamClient.Shutdown();
+                if (Is64Bit)
+                    w64.Steamworks.SteamClient.Shutdown();
+                else
+                    w32.Steamworks.SteamClient.Shutdown();
                 //SteamAPI._DWSteamAPI.Dispose();
                 //SteamAPI._DWSteamAPI = (DWSteamAPI)null;
             }
