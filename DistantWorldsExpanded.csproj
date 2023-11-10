@@ -86,6 +86,9 @@
 		<Compile Remove="DistantWorlds\test.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Remove="DistantWorlds.Controls\lib\Ionic.Zip.dll" />
+	</ItemGroup>
+	<ItemGroup>
 		<Folder Include="ExpansionMod.Objects\Properties\" />
 	</ItemGroup>
 
