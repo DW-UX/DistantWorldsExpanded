@@ -92,6 +92,9 @@
 		<Compile Update="DistantWorlds.Types\BuiltObject.*.cs">
 			<DependentUpon>BuiltObject.cs</DependentUpon>
 		</Compile>
+		<Compile Update="DistantWorlds.Types\Galaxy.*.cs">
+			<DependentUpon>Galaxy.cs</DependentUpon>
+		</Compile>
 		<Compile Remove="DistantWorlds\privatDFB67E2D.cs" />
 		<Compile Remove="DistantWorlds\test.cs" />
 		<Compile Remove="DistantWorlds\test.Designer.cs" />
