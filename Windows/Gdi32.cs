@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace DistantWorlds
 {
-  public class Gdi32
+  public static class Gdi32
   {
     public const int SRCCOPY = 13369376;
 

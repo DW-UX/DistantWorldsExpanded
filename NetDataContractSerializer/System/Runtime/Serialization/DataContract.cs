@@ -1,7 +1,9 @@
 ﻿using System;
 using System.CodeDom;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -1884,20 +1886,31 @@ namespace System.Runtime.Serialization
             return !type.IsGenericTypeDefinition && type.ContainsGenericParameters ? string.Format(CultureInfo.InvariantCulture, "{0}.{1}", type.Namespace, type.Name) : type.FullName;
         }
 
+        private static readonly ConcurrentDictionary<
+                Type,
+                (bool HasTypeForwardedFrom, string AssemblyName)
+            > GetClrAssemblyNameCache = new();
+        
+        public static Func<Type, string>? ClrAssemblyNameOverride = null; 
+        
         internal static string GetClrAssemblyName(Type type, out bool hasTypeForwardedFrom)
         {
-            hasTypeForwardedFrom = false;
-            object[] typeAttributes = type.GetCustomAttributes(typeof(TypeForwardedFromAttribute), false);
-            if (typeAttributes != null && typeAttributes.Length > 0)
-            {
-                TypeForwardedFromAttribute typeForwardedFromAttribute = (TypeForwardedFromAttribute)typeAttributes[0];
-                hasTypeForwardedFrom = true;
-                return typeForwardedFromAttribute.AssemblyFullName;
-            }
-            else
-            {
-                return type.Assembly.FullName;
-            }
+            var result = GetClrAssemblyNameCache.GetOrAdd(type,
+                static type => {
+                var result = ClrAssemblyNameOverride?.Invoke(type);
+                if (result != null)
+                    return (false, result);
+
+                var typeAttribute
+                    = type.GetCustomAttribute<TypeForwardedFromAttribute>(false);
+
+                return typeAttribute != null
+                    ? (true, typeAttribute.AssemblyFullName)
+                    : (false, type.Assembly.FullName);
+            });
+            
+            hasTypeForwardedFrom = result.HasTypeForwardedFrom;
+            return result.AssemblyName;
         }
 
         internal static string GetClrTypeFullNameUsingTypeForwardedFromAttribute(Type type)

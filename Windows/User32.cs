@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace DistantWorlds
 {
-  public class User32
+  public static class User32
   {
     public const int SM_CXSCREEN = 0;
     public const int SM_CYSCREEN = 1;
