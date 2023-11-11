@@ -1627,7 +1627,7 @@ namespace DistantWorlds
                     /*this.mediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
                     this.mediaPlayer.MediaError += new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.mediaPlayer_MediaError);
                     this.mediaPlayer.MouseDownEvent += new AxWMPLib._WMPOCXEvents_MouseDownEventHandler(this.mediaPlayer_MouseDownEvent);*/
-                    Cursor.Show();
+                    method_143();
                 }
                 oyxRtRyAwjg.DoWork += gameStartBackgroundWorker_DoWork;
                 oyxRtRyAwjg.RunWorkerCompleted += oyxRtRyAwjg_RunWorkerCompleted;
