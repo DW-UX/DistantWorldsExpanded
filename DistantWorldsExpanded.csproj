@@ -4,7 +4,8 @@
 		<OutputType>Exe</OutputType>
 		<RootNamespace>DistantWorlds</RootNamespace>
 		<AssemblyName>DistantWorlds</AssemblyName>
-		<TargetFramework>net48</TargetFramework>
+		<!--<TargetFramework>net48</TargetFramework>-->
+		<TargetFramework>net7.0-windows</TargetFramework>
 		<UseWindowsForms>True</UseWindowsForms>
 		<DistantWorldsVersion>$(DistantWorldsVersion)</DistantWorldsVersion>
 		<InformationalVersion>$(DistantWorldsVersion)-DWUX-$(ExpansionModVersion)</InformationalVersion>
@@ -16,6 +17,34 @@
 		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x64'">$(DefineConstants);WIN_64</DefineConstants>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'==''">$(DefineConstants);ANY_PLATFORM</DefineConstants>
 	</PropertyGroup>
+	<PropertyGroup>
+		<UseSystemResourceKeys Condition="'$(Configuration)'=='Debug'">false</UseSystemResourceKeys>
+		<ServerGarbageCollection>true</ServerGarbageCollection>
+		<!--<InvariantGlobalization>true</InvariantGlobalization>-->
+		<!--<PredefinedCulturesOnly>true</PredefinedCulturesOnly>-->
+		<ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+		<RetainVMGarbageCollection>false</RetainVMGarbageCollection>
+		<TieredCompilation>true</TieredCompilation>
+		<TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+		<TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
+		<TieredPGO>true</TieredPGO>
+	</PropertyGroup>
+	<ItemGroup>
+		<RuntimeHostConfigurationOption Include="System.GC.LOHThreshold" Value="2097152" />
+		<RuntimeHostConfigurationOption Include="System.GC.ConserveMemory" Value="0" />
+		<RuntimeHostConfigurationOption Include="System.GC.HighMemoryPercent" Value="82" />
+		<RuntimeHostConfigurationOption Include="System.GC.HeapHardLimitPercent" Value="95" />
+		<RuntimeHostConfigurationOption Include="System.Diagnostics.Debugger.IsSupported" Value="true" />
+		<RuntimeHostConfigurationOption Include="System.GC.HeapAffinitizeMask" Value="FFFC" />
+		<RuntimeHostConfigurationOption Include="System.GC.HeapCount" Value="4" />
+		<RuntimeHostConfigurationOption Include="System.GC.DynamicAdaptationMode" Value="1" />
+	</ItemGroup>
+	<ItemGroup>
+		<!-- for targeting windows when building on non-windows -->
+		<KnownFrameworkReference Update="Microsoft.WindowsDesktop.App" IsWindowsOnly="false" />
+		<KnownFrameworkReference Update="Microsoft.WindowsDesktop.App.WPF" IsWindowsOnly="false" />
+		<KnownFrameworkReference Update="Microsoft.WindowsDesktop.App.WindowsForms" IsWindowsOnly="false" />
+	</ItemGroup>
 	<ItemGroup>
 		<Compile Remove="DistantWorlds.Controls\Mods\**" />
 		<Compile Remove="DistantWorlds.Types\EM interface\**" />
@@ -29,11 +58,19 @@
 		<None Remove="DistantWorlds.Types\EM interface\**" />
 		<None Remove="DistantWorlds.Types\Mods\**" />
 		<None Remove="DistantWorlds\Mods\**" />
+		<Compile Update="DistantWorlds.Controls\Controls\CheckBox.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="DistantWorlds.Controls\Controls\Form.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="DotNetZip" Version="1.16.0" />
+		<PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+		<PackageReference Include="MimeKitLite" Version="4.2.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />

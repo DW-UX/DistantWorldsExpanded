@@ -151,7 +151,7 @@ namespace DistantWorlds.Controls
     private bool CanInitialize()
     {
       bool flag = false;
-      Form form = this.FindForm();
+      var form = this.FindForm();
       if (form != null)
       {
         Control[] controlArray = form.Controls.Find("pnlEncyclopedia", true);

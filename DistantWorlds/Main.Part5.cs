@@ -513,7 +513,7 @@ namespace DistantWorlds {
         private EncyclopediaItem method_459(EncyclopediaItem encyclopediaItem_0)
         {
             webEncyclopediaContent.AllowWebBrowserDrop = false;
-            webEncyclopediaContent.ContextMenu = null;
+            //webEncyclopediaContent.ContextMenu = null;
             webEncyclopediaContent.ContextMenuStrip = null;
             webEncyclopediaContent.IsWebBrowserContextMenuEnabled = false;
             webEncyclopediaContent.IsWebBrowserContextMenuEnabled = true;
@@ -569,7 +569,7 @@ namespace DistantWorlds {
                         string text5 = "Nav.mht";
                         File.WriteAllText(Application.UserAppDataPath + "\\" + text5, text4, Encoding.Default);
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
-                        webEncyclopediaContent.Navigate(Application.UserAppDataPath + "\\" + text5);
+                        webEncyclopediaContent.Navigate2(Application.UserAppDataPath + "\\" + text5);
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
                         webEncyclopediaContent.Document.Encoding = "utf-8";
                     }
@@ -601,13 +601,13 @@ namespace DistantWorlds {
                         string text10 = "Nav.mht";
                         File.WriteAllText(Application.UserAppDataPath + text10, text8, Encoding.Default);
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
-                        webEncyclopediaContent.Navigate(Application.UserAppDataPath + text10);
+                        webEncyclopediaContent.Navigate2(Application.UserAppDataPath + text10);
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
                         webEncyclopediaContent.Document.Encoding = "utf-8";
                     }
                     else
                     {
-                        webEncyclopediaContent.Navigate(text3);
+                        webEncyclopediaContent.Navigate2(text3);
                     }
                 }
                 else
@@ -625,7 +625,7 @@ namespace DistantWorlds {
                             }
                         }
                     }
-                    webEncyclopediaContent.Navigate(text11);
+                    webEncyclopediaContent.Navigate2(text11);
                 }
             }
             else
@@ -656,7 +656,7 @@ namespace DistantWorlds {
                             }
                         }
                     }
-                    webEncyclopediaContent.Navigate(text12);
+                    webEncyclopediaContent.Navigate2(text12);
                     pnlEncyclopedia.HeaderTitle = TextResolver.GetText("Galactopedia") + ": " + TextResolver.GetText("Introduction");
                 }
             }

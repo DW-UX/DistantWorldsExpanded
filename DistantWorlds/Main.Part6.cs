@@ -1778,6 +1778,8 @@ namespace DistantWorlds {
             sldOptionsMainViewScrollSpeed.Location = new Point(130, 26);
             sldOptionsMainViewZoomSpeed.Location = new Point(130, 51);
             sldOptionsMainViewStarFieldSize.Location = new Point(130, 76);
+            sldOptionsMainViewGuiScale.Location = new Point(130, 76);
+            sldOptionsMainViewGuiScale.Size = new Size(515, 16);
             sldOptionsMainViewScrollSpeed.Size = new Size(515, 16);
             sldOptionsMainViewZoomSpeed.Minimum = 1;
             sldOptionsMainViewZoomSpeed.Size = new Size(515, 16);

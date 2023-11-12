@@ -1106,6 +1106,10 @@ namespace DistantWorlds
 
         private ColorSlider sldOptionsMainViewStarFieldSize;
 
+        private Label lblOptionsMainViewGuiScale;
+
+        private ColorSlider sldOptionsMainViewGuiScale;
+
         private Label lblOptionsMainViewScrollSpeed;
 
         private ColorSlider sldOptionsMainViewScrollSpeed;

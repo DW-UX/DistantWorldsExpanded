@@ -505,7 +505,7 @@ namespace DistantWorlds
         private EncyclopediaItem method_130(EncyclopediaItem encyclopediaItem_0)
         {
             webEncyclopediaContent.AllowWebBrowserDrop = false;
-            webEncyclopediaContent.ContextMenu = null;
+            //webEncyclopediaContent.ContextMenu = null;
             webEncyclopediaContent.ContextMenuStrip = null;
             webEncyclopediaContent.IsWebBrowserContextMenuEnabled = false;
             webEncyclopediaContent.WebBrowserShortcutsEnabled = false;
@@ -560,7 +560,7 @@ namespace DistantWorlds
                         string text5 = "Nav.mht";
                         File.WriteAllText(Application.UserAppDataPath + "\\" + text5, text4, Encoding.Default);
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
-                        webEncyclopediaContent.Navigate(Application.UserAppDataPath + "\\" + text5);
+                        webEncyclopediaContent.Navigate2(Application.UserAppDataPath + "\\" + text5);
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
                         webEncyclopediaContent.Document.Encoding = "utf-8";
                     }
@@ -592,13 +592,13 @@ namespace DistantWorlds
                         string text10 = "Nav.mht";
                         File.WriteAllText(Application.UserAppDataPath + text10, text8, Encoding.Default);
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
-                        webEncyclopediaContent.Navigate(Application.UserAppDataPath + text10);
+                        webEncyclopediaContent.Navigate2(Application.UserAppDataPath + text10);
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
                         webEncyclopediaContent.Document.Encoding = "utf-8";
                     }
-                    else
-                    {
-                        webEncyclopediaContent.Navigate(text3);
+                    else {
+                        webEncyclopediaContent.Navigate2(text3);
+                        //webEncyclopediaContent.Navigate(text3);
                     }
                 }
                 else
@@ -616,7 +616,7 @@ namespace DistantWorlds
                             }
                         }
                     }
-                    webEncyclopediaContent.Navigate(text11);
+                    webEncyclopediaContent.Navigate2(text11);
                 }
             }
             else
@@ -647,7 +647,7 @@ namespace DistantWorlds
                             }
                         }
                     }
-                    webEncyclopediaContent.Navigate(text12);
+                    webEncyclopediaContent.Navigate2(text12);
                     pnlEncyclopedia.HeaderTitle = TextResolver.GetText("Galactopedia") + ": " + TextResolver.GetText("Introduction");
                 }
             }
@@ -1527,7 +1527,7 @@ namespace DistantWorlds
 
         private void method_153()
         {
-            method_172();
+            PopulateOptionsValues();
             pnlGameOptions.Size = new Size(700, 696);
             pnlGameOptions.Location = new Point((base.Width - pnlGameOptions.Width) / 2, (base.Height - pnlGameOptions.Height) / 2);
             pnlGameOptions.DoLayout();
@@ -1535,18 +1535,45 @@ namespace DistantWorlds
             lblOptionsMainViewZoomSpeed.Font = font_1;
             lblOptionsMainViewStarFieldSize.Font = font_1;
             lblOptionsMainViewStarFieldSize.BringToFront();
-            lblOptionsMainViewScrollSpeed.Location = new Point(lblOptionsMainViewScrollSpeed.Location.X, 24);
-            lblOptionsMainViewZoomSpeed.Location = new Point(lblOptionsMainViewZoomSpeed.Location.X, 49);
-            lblOptionsMainViewStarFieldSize.Location = new Point(lblOptionsMainViewStarFieldSize.Location.X, 74);
-            sldOptionsMainViewScrollSpeed.Location = new Point(130, 26);
-            sldOptionsMainViewZoomSpeed.Location = new Point(130, 51);
-            sldOptionsMainViewStarFieldSize.Location = new Point(130, 76);
-            sldOptionsMainViewScrollSpeed.Size = new Size(515, 16);
+            
+            var sliderLabelX = lblOptionsMainViewScrollSpeed.Location.X;
+            var sliderLabelY = 24;
+            var sliderLineHeight = 16;
+            var sliderYGap = 10;
+            var sliderWidth = 515;
+            var sliderX = 130;
+            var sliderY = 26;
+            
+            lblOptionsMainViewScrollSpeed.Location = new Point(sliderLabelX, sliderLabelY);
+            sliderLabelY += 16 + sliderYGap;
+            lblOptionsMainViewZoomSpeed.Location = new Point(sliderLabelX, sliderLabelY);
+            sliderLabelY += 16 + sliderYGap;
+            lblOptionsMainViewStarFieldSize.Location = new Point(sliderLabelX, sliderLabelY);
+            sliderLabelY += 16 + sliderYGap;
+            lblOptionsMainViewGuiScale.Location = new Point(sliderLabelX, sliderLabelY);
+
+            sldOptionsMainViewScrollSpeed.Location = new Point(sliderX, sliderY);
+            sldOptionsMainViewScrollSpeed.Size = new Size(sliderWidth, sliderLineHeight);
+
+            sliderY += 16 + sliderYGap;
             sldOptionsMainViewZoomSpeed.Minimum = 1;
-            sldOptionsMainViewZoomSpeed.Size = new Size(515, 16);
-            sldOptionsMainViewStarFieldSize.Size = new Size(515, 16);
-            btnGameOptionsAdvancedDisplaySettings.Location = new Point(395, 100);
+            sldOptionsMainViewZoomSpeed.Location = new Point(sliderX, sliderY);
+            sldOptionsMainViewZoomSpeed.Size = new Size(sliderWidth, sliderLineHeight);
+            
+            sliderY += 16 + sliderYGap;
+            sldOptionsMainViewStarFieldSize.Location = new Point(sliderX, sliderY);
+            sldOptionsMainViewStarFieldSize.Size = new Size(sliderWidth, sliderLineHeight);
+            
+            sliderY += 16 + sliderYGap;
+            sldOptionsMainViewGuiScale.Location = new Point(sliderX, sliderY);
+            sldOptionsMainViewGuiScale.Size = new Size(sliderWidth, sliderLineHeight);
+            
+            sliderY += 16 + sliderYGap;
+                
+            // maybe move to straddling the group panel border?
+            btnGameOptionsAdvancedDisplaySettings.Location = new Point(395, sliderY);
             btnGameOptionsAdvancedDisplaySettings.Size = new Size(250, 26);
+            
             grpOptionsControl.Font = font_7;
             grpOptionsDisplaySettings.Font = font_7;
             grpOptionsPopupMessages.Font = font_7;
@@ -2110,7 +2137,7 @@ namespace DistantWorlds
 
         private void method_164()
         {
-            method_169();
+            ApplyOptionsValues();
             if (pnlGameOptionsAdvancedDisplaySettings.Visible)
             {
                 method_185();
@@ -2246,55 +2273,61 @@ namespace DistantWorlds
             chkOptionsPopupMessageUnderAttackColoniesSpaceports.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackColoniesSpaceportsDefensiveBases;
         }
 
-        private void method_169()
+        private void ApplyOptionsValues()
         {
-            main_0.gameOptions_0.AutoPauseWhenInPopupWindow = chkOptionsAutoPauseInPopup.Checked;
-            main_0.gameOptions_0.MainViewScrollSpeed = sldOptionsMainViewScrollSpeed.Value;
-            main_0.gameOptions_0.MainViewZoomSpeed = sldOptionsMainViewZoomSpeed.Value;
-            if (main_0.gameOptions_0.StarFieldSize != sldOptionsMainViewStarFieldSize.Value)
+            var options = main_0.gameOptions_0;
+            options.AutoPauseWhenInPopupWindow = chkOptionsAutoPauseInPopup.Checked;
+            options.MainViewScrollSpeed = sldOptionsMainViewScrollSpeed.Value;
+            options.MainViewZoomSpeed = sldOptionsMainViewZoomSpeed.Value;
+            if (options.StarFieldSize != sldOptionsMainViewStarFieldSize.Value)
             {
-                main_0.gameOptions_0.StarFieldSize = sldOptionsMainViewStarFieldSize.Value;
+                options.StarFieldSize = sldOptionsMainViewStarFieldSize.Value;
                 if (main_0.mainView.main_0 != null)
                 {
-                    main_0.mainView.method_14(main_0.gameOptions_0.StarFieldSize);
+                    main_0.mainView.method_14(options.StarFieldSize);
                 }
             }
-            main_0.gameOptions_0.ShowSystemNebulae = chkOptionsShowSystemNebulae.Checked;
-            main_0.gameOptions_0.MusicVolume = (double)sldOptionsMusicVolume.Value / 100.0;
-            main_0.gameOptions_0.SoundEffectsVolume = (double)sldOptionsSoundEffectsVolume.Value / 100.0;
-            main_0.MusicPlayer.SetVolume(main_0.gameOptions_0.MusicVolume);
-            main_0.EffectsPlayer.Volume = main_0.gameOptions_0.SoundEffectsVolume;
-            GlassButton.Volume = main_0.gameOptions_0.SoundEffectsVolume;
-            CloseButton.Volume = main_0.gameOptions_0.SoundEffectsVolume;
-            ListViewBase.Volume = main_0.gameOptions_0.SoundEffectsVolume;
-            HoverButton.Volume = main_0.gameOptions_0.SoundEffectsVolume;
-            HoverMenuItem.Volume = main_0.gameOptions_0.SoundEffectsVolume;
-            main_0.gameOptions_0.MouseScrollWheelBehaviour = method_165();
-            main_0.gameOptions_0.LoadedGamesPaused = chkOptionsLoadedGamesPaused.Checked;
+
+            options.GuiScale = sldOptionsMainViewGuiScale.Value / 1000.0;
+            var guiScale = (float)options.GuiScale;
+            main_0.Scale(new SizeF(guiScale, guiScale));
+            
+            options.ShowSystemNebulae = chkOptionsShowSystemNebulae.Checked;
+            options.MusicVolume = (double)sldOptionsMusicVolume.Value / 100.0;
+            options.SoundEffectsVolume = (double)sldOptionsSoundEffectsVolume.Value / 100.0;
+            main_0.MusicPlayer.SetVolume(options.MusicVolume);
+            main_0.EffectsPlayer.Volume = options.SoundEffectsVolume;
+            GlassButton.Volume = options.SoundEffectsVolume;
+            CloseButton.Volume = options.SoundEffectsVolume;
+            ListViewBase.Volume = options.SoundEffectsVolume;
+            HoverButton.Volume = options.SoundEffectsVolume;
+            HoverMenuItem.Volume = options.SoundEffectsVolume;
+            options.MouseScrollWheelBehaviour = method_165();
+            options.LoadedGamesPaused = chkOptionsLoadedGamesPaused.Checked;
             if (chkOptionsAutoSave.Checked)
             {
-                main_0.gameOptions_0.AutoSaveInterval = (int)numOptionsAutoSaveMinutes.Value;
+                options.AutoSaveInterval = (int)numOptionsAutoSaveMinutes.Value;
             }
             else
             {
-                main_0.gameOptions_0.AutoSaveInterval = 0;
+                options.AutoSaveInterval = 0;
             }
-            main_0.gameOptions_0.ControlAttacksOnEnemiesDefault = method_170(cmbOptionsControlAttacks.SelectedIndex);
-            main_0.gameOptions_0.ControlColonizationDefault = method_170(cmbOptionsControlColonization.SelectedIndex);
-            main_0.gameOptions_0.ControlColonyTaxRatesDefault = chkOptionsControlColonyTaxRates.Checked;
-            main_0.gameOptions_0.ControlShipBuildingDefault = method_170(cmbOptionsControlConstruction.SelectedIndex);
-            main_0.gameOptions_0.ControlShipDesignDefault = chkOptionsControlDesigns.Checked;
-            main_0.gameOptions_0.ControlDiplomaticGiftsDefault = method_170(cmbOptionsControlDiplomacyGifts.SelectedIndex);
-            main_0.gameOptions_0.ControlWarTradeSanctionsDefault = method_170(cmbOptionsControlDiplomacyOffense.SelectedIndex);
-            main_0.gameOptions_0.ControlTreatyNegotiationDefault = method_170(cmbOptionsControlDiplomacyTreaties.SelectedIndex);
-            main_0.gameOptions_0.ControlFleetFormationDefault = chkOptionsControlFleets.Checked;
-            main_0.gameOptions_0.ControlTroopRecruitmentDefault = chkOptionsControlTroops.Checked;
-            main_0.gameOptions_0.ControlAgentAssignmentDefault = method_170(cmbOptionsControlAgentMissions.SelectedIndex);
-            main_0.gameOptions_0.ControlResearchDefault = chkOptionsControlResearch.Checked;
-            main_0.gameOptions_0.ControlColonyFacilitiesDefault = method_170(cmbOptionsControlColonyFacilities.SelectedIndex);
-            main_0.gameOptions_0.ControlPopulationPolicyDefault = chkOptionsControlPopulationPolicy.Checked;
-            main_0.gameOptions_0.ControlCharacterLocationsDefault = chkOptionsControlCharacterLocations.Checked;
-            main_0.gameOptions_0.ControlOfferPirateMissionsDefault = method_170(cmbOptionsControlOfferPirateMissions.SelectedIndex);
+            options.ControlAttacksOnEnemiesDefault = method_170(cmbOptionsControlAttacks.SelectedIndex);
+            options.ControlColonizationDefault = method_170(cmbOptionsControlColonization.SelectedIndex);
+            options.ControlColonyTaxRatesDefault = chkOptionsControlColonyTaxRates.Checked;
+            options.ControlShipBuildingDefault = method_170(cmbOptionsControlConstruction.SelectedIndex);
+            options.ControlShipDesignDefault = chkOptionsControlDesigns.Checked;
+            options.ControlDiplomaticGiftsDefault = method_170(cmbOptionsControlDiplomacyGifts.SelectedIndex);
+            options.ControlWarTradeSanctionsDefault = method_170(cmbOptionsControlDiplomacyOffense.SelectedIndex);
+            options.ControlTreatyNegotiationDefault = method_170(cmbOptionsControlDiplomacyTreaties.SelectedIndex);
+            options.ControlFleetFormationDefault = chkOptionsControlFleets.Checked;
+            options.ControlTroopRecruitmentDefault = chkOptionsControlTroops.Checked;
+            options.ControlAgentAssignmentDefault = method_170(cmbOptionsControlAgentMissions.SelectedIndex);
+            options.ControlResearchDefault = chkOptionsControlResearch.Checked;
+            options.ControlColonyFacilitiesDefault = method_170(cmbOptionsControlColonyFacilities.SelectedIndex);
+            options.ControlPopulationPolicyDefault = chkOptionsControlPopulationPolicy.Checked;
+            options.ControlCharacterLocationsDefault = chkOptionsControlCharacterLocations.Checked;
+            options.ControlOfferPirateMissionsDefault = method_170(cmbOptionsControlOfferPirateMissions.SelectedIndex);
             main_0.YxwyUefOyQ();
             main_0.method_257();
         }
@@ -2335,13 +2368,14 @@ namespace DistantWorlds
             return result;
         }
 
-        private void method_172()
+        private void PopulateOptionsValues()
         {
             sldOptionsMainViewZoomSpeed.Minimum = 1;
             chkOptionsAutoPauseInPopup.Checked = main_0.gameOptions_0.AutoPauseWhenInPopupWindow;
             sldOptionsMainViewScrollSpeed.Value = main_0.gameOptions_0.MainViewScrollSpeed;
             sldOptionsMainViewStarFieldSize.Value = main_0.gameOptions_0.StarFieldSize;
             sldOptionsMainViewZoomSpeed.Value = main_0.gameOptions_0.MainViewZoomSpeed;
+            sldOptionsMainViewGuiScale.Value = (int)(main_0.gameOptions_0.GuiScale * 1000.0);
             chkOptionsShowSystemNebulae.Checked = main_0.gameOptions_0.ShowSystemNebulae;
             sldOptionsMusicVolume.Value = (int)(main_0.gameOptions_0.MusicVolume * 100.0);
             sldOptionsSoundEffectsVolume.Value = (int)(main_0.gameOptions_0.SoundEffectsVolume * 100.0);

@@ -59,7 +59,12 @@ namespace DistantWorlds.Controls
     {
       this._EncyclopediaItems = encyclopediaItems;
       this.LayoutControls();
-      this.BindItemsToTreeView(this._EncyclopediaItems);
+      try {
+        this.BindItemsToTreeView(this._EncyclopediaItems);
+      }
+      catch {
+        // skip
+      }
     }
 
     public void SetSelectedItem(EncyclopediaItem encyclopediaItem)

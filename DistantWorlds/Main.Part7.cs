@@ -3850,7 +3850,7 @@ namespace DistantWorlds {
             GalaxySummary.WriteGalaxySummary(stream_0, summary, string_30);
             CompactSerializer compactSerializer = new CompactSerializer(typeof(Game), method_358());
             compactSerializer.AssemblyFormat = FormatterAssemblyStyle.Simple;
-            ICryptoTransform transform = method_369(byte_0, byte_1);
+            ICryptoTransform transform = CreateEncryptor(byte_0, byte_1);
             CryptoStream cryptoStream = new CryptoStream(stream_0, transform, CryptoStreamMode.Write);
             ParallelDeflateOutputStream val = new ParallelDeflateOutputStream((Stream)(object)cryptoStream, (CompressionLevel)1, (CompressionStrategy)0, true);
             XmlDictionaryWriter xmlDictionaryWriter = XmlDictionaryWriter.CreateBinaryWriter((Stream)(object)val, null, null, ownsStream: false);
@@ -3960,7 +3960,7 @@ namespace DistantWorlds {
                 Application.DoEvents();
             }
             CompactSerializer compactSerializer = new CompactSerializer(typeof(Game), method_358());
-            ICryptoTransform transform = method_368(byte_0, byte_1);
+            ICryptoTransform transform = CreateDecryptor(byte_0, byte_1);
             CryptoStream cryptoStream = new CryptoStream(stream_0, transform, CryptoStreamMode.Read);
             DeflateStream val = new DeflateStream((Stream)(object)cryptoStream, (CompressionMode)1, (CompressionLevel)1, true);
             val.BufferSize = 4194304;
@@ -4346,22 +4346,22 @@ namespace DistantWorlds {
             }
         }
 
-        private ICryptoTransform method_368(byte[] byte_2, byte[] byte_3)
-        {
-            Rijndael rijndael = new RijndaelManaged();
+        private ICryptoTransform CreateDecryptor(byte[] key, byte[] iv) {
+            var rijndael = Aes.Create();
             rijndael.KeySize = 128;
+            rijndael.BlockSize = 128;
             rijndael.Padding = PaddingMode.Zeros;
             rijndael.Mode = CipherMode.CBC;
-            return rijndael.CreateDecryptor(byte_2, byte_3);
+            return rijndael.CreateDecryptor(key, iv);
         }
 
-        private ICryptoTransform method_369(byte[] byte_2, byte[] byte_3)
-        {
-            Rijndael rijndael = new RijndaelManaged();
+        private ICryptoTransform CreateEncryptor(byte[] key, byte[] iv) {
+            var rijndael = Aes.Create();
             rijndael.KeySize = 128;
+            rijndael.BlockSize = 128;
             rijndael.Padding = PaddingMode.Zeros;
             rijndael.Mode = CipherMode.CBC;
-            return rijndael.CreateEncryptor(byte_2, byte_3);
+            return rijndael.CreateEncryptor(key, iv);
         }
 
         private void btnGameMenuSaveAs_Click(object sender, EventArgs e)

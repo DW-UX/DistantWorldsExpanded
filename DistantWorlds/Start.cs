@@ -233,6 +233,10 @@ namespace DistantWorlds
 
         private ColorSlider sldOptionsMainViewStarFieldSize;
 
+        private Label lblOptionsMainViewGuiScale;
+
+        private ColorSlider sldOptionsMainViewGuiScale;
+
         private Label lblOptionsMainViewScrollSpeed;
 
         private ColorSlider sldOptionsMainViewScrollSpeed;
@@ -1891,13 +1895,13 @@ namespace DistantWorlds
             method_31("");
         }
 
-        private ICryptoTransform method_7(byte[] byte_0, byte[] byte_1)
-        {
-            Rijndael rijndael = new RijndaelManaged();
+        private ICryptoTransform CreateDecryptor(byte[] key, byte[] iv) {
+            var rijndael = Aes.Create();
             rijndael.KeySize = 128;
+            rijndael.BlockSize = 128;
             rijndael.Padding = PaddingMode.Zeros;
             rijndael.Mode = CipherMode.CBC;
-            return rijndael.CreateDecryptor(byte_0, byte_1);
+            return rijndael.CreateDecryptor(key, iv);
         }
 
         private void method_8(string string_2)
@@ -2044,7 +2048,7 @@ namespace DistantWorlds
                 Application.DoEvents();
             }
             CompactSerializer compactSerializer = new CompactSerializer(typeof(Game), main_0.method_358());
-            ICryptoTransform transform = method_7(Main.byte_0, Main.byte_1);
+            ICryptoTransform transform = CreateDecryptor(Main.byte_0, Main.byte_1);
             CryptoStream cryptoStream = new CryptoStream(fileStream, transform, CryptoStreamMode.Read);
             DeflateStream val = new DeflateStream(cryptoStream, (CompressionMode)1, (CompressionLevel)1, true);
             val.BufferSize = 4194304;

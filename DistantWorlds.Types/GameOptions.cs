@@ -5,6 +5,7 @@
 // Assembly location: H:\7\DistantWorlds.Types.dll
 
 using System;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace DistantWorlds.Types
@@ -227,6 +228,8 @@ namespace DistantWorlds.Types
     public int SelectionPanelSize;
     [OptionalField]
     public int EmpireNavigationToolSize;
+    [OptionalField, DefaultValue(1.0)]
+    private double _GuiScale = 1.0;
 
     public string SaveGamePath
     {
@@ -540,6 +543,12 @@ namespace DistantWorlds.Types
     {
       get => this._StarFieldSize;
       set => this._StarFieldSize = value;
+    }
+
+    public double GuiScale
+    {
+      get => _GuiScale == 0 ? 1 : Math.Clamp(_GuiScale, 0.5, 4.0);
+      set => this._GuiScale = value;
     }
 
     public double SoundEffectsVolume
