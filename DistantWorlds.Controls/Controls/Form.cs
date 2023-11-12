@@ -7,7 +7,7 @@ using DistantWorlds.Types;
 
 namespace DistantWorlds.Controls;
 
-public abstract partial class Form : System.Windows.Forms.Form {
+public partial class Form : System.Windows.Forms.Form {
 
   public static Main? Main
     => Application.OpenForms.OfType<Main>().FirstOrDefault();

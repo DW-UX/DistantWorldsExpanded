@@ -995,7 +995,7 @@ namespace DistantWorlds {
             this.btnEditGameEventsEdit = new DistantWorlds.Controls.GlassButton();
             this.EfcOvcsSlw = new DistantWorlds.Controls.SmoothLabel();
             this.ctlGameEvents = new DistantWorlds.Controls.GameEventListView();
-            this.pnlGameOptionsMessages = new DistantWorlds.Controls.ScreenPanel();
+            this.pnlGameOptionsMessages = new GameOptionsMessagesScreenPanel();
             this.grpOptionsPopupMessages = new System.Windows.Forms.GroupBox();
             this.chkOptionsPopupMessageConstructionResourceShortage = new();
             this.gcbeGaamXG = new();

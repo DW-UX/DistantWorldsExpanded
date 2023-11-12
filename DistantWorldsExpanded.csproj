@@ -65,6 +65,15 @@
 		<Compile Update="DistantWorlds.Controls\Controls\Form.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
+		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsScreenPanel.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsAdvancedDisplaySettingsScreenPanel.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsMessagesScreenPanel.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="DotNetZip" Version="1.16.0" />

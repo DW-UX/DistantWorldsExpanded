@@ -83,8 +83,9 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
     };
     
     var width = stringRect.Width + 1;
-    while (g.MeasureString(Text, Font).Width > width)
+    while (g.MeasureString(Text, Font).Width > width) {
       Font = new(Font.FontFamily, Font.Size - step, Font.Style, Font.Unit);
+    }
   }
 
 }

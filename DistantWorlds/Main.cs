@@ -1946,7 +1946,7 @@ namespace DistantWorlds
 
         private GlassButton btnGameOptionsShowMessages;
 
-        private ScreenPanel pnlGameOptionsMessages;
+        private GameOptionsMessagesScreenPanel pnlGameOptionsMessages;
 
         private GroupBox grpOptionsPopupMessages;
 

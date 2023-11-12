@@ -219,153 +219,13 @@ namespace DistantWorlds
 
         private ScrollingCreditsPanel pnlAboutCredits;
 
-        private ScreenPanel pnlGameOptions;
+        private GameOptionsScreenPanel pnlGameOptions;
 
-        private GroupBox grpOptionsDisplaySettings;
-
-        private CheckBox chkOptionsShowSystemNebulae;
-
-        private Label lblOptionsMainViewZoomSpeed;
-
-        private ColorSlider sldOptionsMainViewZoomSpeed;
-
-        private Label lblOptionsMainViewStarFieldSize;
-
-        private ColorSlider sldOptionsMainViewStarFieldSize;
-
-        private Label lblOptionsMainViewGuiScale;
-
-        private ColorSlider sldOptionsMainViewGuiScale;
-
-        private Label lblOptionsMainViewScrollSpeed;
-
-        private ColorSlider sldOptionsMainViewScrollSpeed;
-
-        private GroupBox grpOptionsScrollingMessages;
-
-        private CheckBox chkOptionsScrollingMessageExploration;
-
-        private CheckBox chkOptionsScrollingMessageIntelligenceMissions;
-
-        private CheckBox chkOptionsScrollingMessageRequestWarning;
-
-        private CheckBox chkOptionsScrollingMessageColonyGainLoss;
-
-        private CheckBox chkOptionsScrollingMessageDiplomacyTreaties;
-
-        private CheckBox chkOptionsScrollingMessageWarTradeSanctions;
-
-        private CheckBox chkOptionsScrollingMessageUnderAttackCivilianShips;
-
-        private CheckBox chkOptionsScrollingMessageEmpireMetDestroyed;
-
-        private CheckBox chkOptionsScrollingMessageResearchBreakthrough;
-
-        private CheckBox chkOptionsScrollingMessageNewShipBuilt;
-
-        private GroupBox grpOptionsPopupMessages;
-
-        private CheckBox chkOptionsPopupMessageExploration;
-
-        private CheckBox chkOptionsPopupMessageIntelligenceMissions;
-
-        private CheckBox chkOptionsPopupMessageRequestWarning;
-
-        private CheckBox chkOptionsPopupMessageColonyGainLoss;
-
-        private CheckBox chkOptionsPopupMessageDiplomacyTreaties;
-
-        private CheckBox chkOptionsPopupMessageDiplomacyWarTradeSanctions;
-
-        private CheckBox chkOptionsPopupMessageEmpireMetDestroyed;
-
-        private CheckBox chkOptionsPopupMessageResearchBreakthrough;
-
-        private CheckBox chkOptionsPopupMessageShipBuilt;
-
-        private CheckBox chkOptionsAutoPauseInPopup;
-
-        private GroupBox grpOptionsVolume;
-
-        private Label lblOptionsSoundEffectsVolume;
-
-        private Label lblOptionsMusicVolume;
-
-        private ColorSlider sldOptionsSoundEffectsVolume;
-
-        private ColorSlider sldOptionsMusicVolume;
-
-        private GroupBox grpOptionsControl;
-
-        private ComboBox cmbOptionsAutomationMode;
-
-        private Label lblOptionsControlColonization;
-
-        private Label lblOptionsControlDiplomacyTreaties;
-
-        private ComboBox cmbOptionsControlColonization;
-
-        private Label lblOptionsControlAttacks;
-
-        private Label lblOptionsControlConstruction;
-
-        private ComboBox cmbOptionsControlDiplomacyTreaties;
-
-        private ComboBox cmbOptionsControlConstruction;
-
-        private ComboBox cmbOptionsControlAttacks;
-
-        private Label lblOptionsControlAgentMissions;
-
-        private Label lblOptionsControlDiplomacyGifts;
-
-        private GlassButton btnGameOptionsResetAutomationMessages;
-
-        private Label lblOptionsControlDiplomacyOffense;
-
-        private ComboBox cmbOptionsControlAgentMissions;
-
-        private ComboBox cmbOptionsControlDiplomacyOffense;
-
-        private ComboBox cmbOptionsControlDiplomacyGifts;
-
-        private CheckBox chkOptionsControlTroops;
-
-        private CheckBox chkOptionsControlColonyTaxRates;
-
-        private CheckBox chkOptionsControlFleets;
-
-        private CheckBox chkOptionsControlDesigns;
-
-        private Panel pnlOptionsAutomationMode;
-
-        private Label lblOptionsAutomationMode;
+        private GameOptionsMessagesScreenPanel pnlGameOptionsMessages;
 
         private LinkLabel lnkOptions;
 
-        private CheckBox chkOptionsScrollingMessageShipNeedsRefuelling;
-
-        private CheckBox chkOptionsScrollingMessageShipMissionComplete;
-
-        private CheckBox chkOptionsPopupMessageShipNeedsRefuelling;
-
-        private CheckBox chkOptionsPopupMessageShipMissionComplete;
-
-        private Label lblOptionsMouseScrollMode;
-
-        private ComboBox cmbOptionsMouseScrollWheelBehaviour;
-
-        private ScreenPanel pnlGameOptionsAdvancedDisplaySettings;
-
-        private GroupBox grpGameOptionsAdvancedDisplaySettingsMaximumFramerate;
-
-        private NumericUpDown numGameOptionsAdvancedDisplaySettingsMaximumFramerate;
-
-        private CheckBox chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited;
-
-        private Label lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS;
-
-        private GlassButton btnGameOptionsAdvancedDisplaySettings;
+        private GameOptionsAdvancedDisplaySettingsScreenPanel pnlGameOptionsAdvancedDisplaySettings;
 
         private Panel pnlStartNewGameVictoryConditions;
 
@@ -479,8 +339,6 @@ namespace DistantWorlds
 
         private PictureBox picStartNewGameYourEmpireImage;
 
-        private LabelledTrackBar tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail;
-
         private PictureBox picStartNewGameVictoryConditionsImage;
 
         private SmoothLabel lblVictorySandbox;
@@ -502,39 +360,7 @@ namespace DistantWorlds
         private Label lblCurrentTheme;
 
         private PictureBox picThemeImage;
-
-        private GroupBox grpOptionsAutoSave;
-
-        private NumericUpDown numOptionsAutoSaveMinutes;
-
-        private CheckBox chkOptionsAutoSave;
-
-        private GroupBox grpGameOptionsAdvancedDisplaySettingsGalaxyIcons;
-
-        private CheckBox chkGameOptionsGalaxyDisplayAlwaysPirates;
-
-        private CheckBox chkGameOptionsGalaxyDisplayColonyShips;
-
-        private CheckBox chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips;
-
-        private CheckBox chkGameOptionsGalaxyDisplayAlwaysEnemyFleets;
-
-        private CheckBox chkGameOptionsGalaxyDisplayConstructionShips;
-
-        private CheckBox chkGameOptionsGalaxyDisplaySpacePorts;
-
-        private CheckBox chkGameOptionsGalaxyDisplayExplorationShips;
-
-        private CheckBox chkGameOptionsGalaxyDisplayResupplyShips;
-
-        private CheckBox chkGameOptionsGalaxyDisplayOtherBases;
-
-        private CheckBox chkGameOptionsGalaxyDisplayCivilianShips;
-
-        private CheckBox chkGameOptionsGalaxyDisplayFleets;
-
-        private CheckBox chkGameOptionsGalaxyDisplayMilitaryShips;
-
+        
         private LabelledTrackBar tbarStartNewGameYourEmpireCorruption;
 
         private ScreenPanel pnlGameOptionsEmpireSettings;
@@ -557,8 +383,6 @@ namespace DistantWorlds
 
         private CheckBox chkOptionsAllowSameSystemAsOtherEmpires;
 
-        private GlassButton btnGameOptionsEmpireSettings;
-
         private ComboBox cmbGameOptionsEngagementStanceAttack;
 
         private Label lblGameOptionsEngagementStanceAttack;
@@ -573,12 +397,6 @@ namespace DistantWorlds
 
         private Label lblGameOptionsFleetAttackRefuel;
 
-        private CheckBox chkOptionsControlResearch;
-
-        private Label lblOptionsControlColonyFacilities;
-
-        private ComboBox cmbOptionsControlColonyFacilities;
-
         private RadioButton radStartNewGameGalaxyShapeClustersVaried;
 
         private RadioButton radStartNewGameGalaxyShapeClustersEven;
@@ -590,8 +408,6 @@ namespace DistantWorlds
         private ComboBox cmbStartNewGameTheGalaxyPirateProximity;
 
         private SmoothLabel lblStartNewGameTheGalaxyPirateProximityLabel;
-
-        private CheckBox chkOptionsLoadedGamesPaused;
 
         private GroupBox grpGameOptionsDiscoveries;
 
@@ -655,10 +471,6 @@ namespace DistantWorlds
 
         private PictureBox picStartNewGameYourRaceImage;
 
-        private CheckBox chkOptionsControlPopulationPolicy;
-
-        private CheckBox chkOptionsControlCharacterLocations;
-
         private Panel pnlStartNewGameColonizationTerritory;
 
         private LabelledTrackBar tbarStartNewGameTheGalaxyColonyPrevalence;
@@ -702,11 +514,7 @@ namespace DistantWorlds
         private GlassButton btnStartNewGameYourEmpireTypePirateClassic;
 
         private GlassButton btnStartNewGameTheGalaxyPrevious;
-
-        private Label lblOptionsControlOfferPirateMissions;
-
-        private ComboBox cmbOptionsControlOfferPirateMissions;
-
+        
         private CheckBox chkStoryShadows;
 
         private SmoothLabel lblVictoryPiratePlaystyle;
@@ -789,41 +597,7 @@ namespace DistantWorlds
 
         private SmoothLabel lblThemeGalaxyMaps;
 
-        private CheckBox chkOptionsScrollingMessageUnderAttackCivilianBases;
-
-        private CheckBox chkOptionsScrollingMessageUnderAttackMilitaryShips;
-
-        private CheckBox chkOptionsScrollingMessageUnderAttackExplorationShips;
-
-        private CheckBox chkOptionsScrollingMessageUnderAttackOtherStateBases;
-
-        private CheckBox chkOptionsScrollingMessageUnderAttackColonyConstructionShips;
-
-        private CheckBox chkOptionsScrollingMessageUnderAttackColoniesSpaceports;
-
-        private ScreenPanel pnlGameOptionsMessages;
-
-        private CheckBox chkOptionsPopupMessageUnderAttackCivilianBases;
-
-        private CheckBox chkOptionsPopupMessageUnderAttackMilitaryShips;
-
-        private CheckBox chkOptionsPopupMessageUnderAttackExplorationShips;
-
-        private CheckBox chkOptionsPopupMessageUnderAttackOtherStateBases;
-
-        private CheckBox chkOptionsPopupMessageUnderAttackColonyConstructionShips;
-
-        private CheckBox chkOptionsPopupMessageUnderAttackColoniesSpaceports;
-
-        private CheckBox chkOptionsPopupMessageUnderAttackCivilianShips;
-
-        private GlassButton btnGameOptionsShowMessages;
-
         private CheckBox chkStartNewGameEnableGiantKaltors;
-
-        private CheckBox chkOptionsPopupMessageConstructionResourceShortage;
-
-        private CheckBox chkOptionsScrollingMessageConstructionResourceShortage;
 
         private Panel pnlStartNewGameJumpStart;
 
@@ -910,8 +684,6 @@ namespace DistantWorlds
         public ToolTip toolTip;
 
         private Panel pnlJumpStartPiratePlaystyleDescriptionContainer;
-
-        private CheckBox chkGameOptionsGalaxyDisplayCleanGalaxyView;
 
         private SmoothLabel lblActiveTheme;
 

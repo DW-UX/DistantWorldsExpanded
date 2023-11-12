@@ -1531,12 +1531,12 @@ namespace DistantWorlds
             pnlGameOptions.Size = new Size(700, 696);
             pnlGameOptions.Location = new Point((base.Width - pnlGameOptions.Width) / 2, (base.Height - pnlGameOptions.Height) / 2);
             pnlGameOptions.DoLayout();
-            lblOptionsMainViewScrollSpeed.Font = font_1;
-            lblOptionsMainViewZoomSpeed.Font = font_1;
-            lblOptionsMainViewStarFieldSize.Font = font_1;
-            lblOptionsMainViewStarFieldSize.BringToFront();
+            pnlGameOptions.lblOptionsMainViewScrollSpeed.Font = font_1;
+            pnlGameOptions.lblOptionsMainViewZoomSpeed.Font = font_1;
+            pnlGameOptions.lblOptionsMainViewStarFieldSize.Font = font_1;
+            pnlGameOptions.lblOptionsMainViewStarFieldSize.BringToFront();
             
-            var sliderLabelX = lblOptionsMainViewScrollSpeed.Location.X;
+            var sliderLabelX = pnlGameOptions.lblOptionsMainViewScrollSpeed.Location.X;
             var sliderLabelY = 24;
             var sliderLineHeight = 16;
             var sliderYGap = 6;
@@ -1544,182 +1544,182 @@ namespace DistantWorlds
             var sliderX = 130;
             var sliderY = 26;
             
-            lblOptionsMainViewScrollSpeed.Location = new Point(sliderLabelX, sliderLabelY);
+            pnlGameOptions.lblOptionsMainViewScrollSpeed.Location = new Point(sliderLabelX, sliderLabelY);
             sliderLabelY += 16 + sliderYGap;
-            lblOptionsMainViewZoomSpeed.Location = new Point(sliderLabelX, sliderLabelY);
+            pnlGameOptions.lblOptionsMainViewZoomSpeed.Location = new Point(sliderLabelX, sliderLabelY);
             sliderLabelY += 16 + sliderYGap;
-            lblOptionsMainViewStarFieldSize.Location = new Point(sliderLabelX, sliderLabelY);
+            pnlGameOptions.lblOptionsMainViewStarFieldSize.Location = new Point(sliderLabelX, sliderLabelY);
             sliderLabelY += 16 + sliderYGap;
-            lblOptionsMainViewGuiScale.Location = new Point(sliderLabelX, sliderLabelY);
+            pnlGameOptions.lblOptionsMainViewGuiScale.Location = new Point(sliderLabelX, sliderLabelY);
 
-            sldOptionsMainViewScrollSpeed.Location = new Point(sliderX, sliderY);
-            sldOptionsMainViewScrollSpeed.Size = new Size(sliderWidth, sliderLineHeight);
+            pnlGameOptions.sldOptionsMainViewScrollSpeed.Location = new Point(sliderX, sliderY);
+            pnlGameOptions.sldOptionsMainViewScrollSpeed.Size = new Size(sliderWidth, sliderLineHeight);
 
             sliderY += 16 + sliderYGap;
-            sldOptionsMainViewZoomSpeed.Minimum = 1;
-            sldOptionsMainViewZoomSpeed.Location = new Point(sliderX, sliderY);
-            sldOptionsMainViewZoomSpeed.Size = new Size(sliderWidth, sliderLineHeight);
+            pnlGameOptions.sldOptionsMainViewZoomSpeed.Minimum = 1;
+            pnlGameOptions.sldOptionsMainViewZoomSpeed.Location = new Point(sliderX, sliderY);
+            pnlGameOptions.sldOptionsMainViewZoomSpeed.Size = new Size(sliderWidth, sliderLineHeight);
             
             sliderY += 16 + sliderYGap;
-            sldOptionsMainViewStarFieldSize.Location = new Point(sliderX, sliderY);
-            sldOptionsMainViewStarFieldSize.Size = new Size(sliderWidth, sliderLineHeight);
+            pnlGameOptions.sldOptionsMainViewStarFieldSize.Location = new Point(sliderX, sliderY);
+            pnlGameOptions.sldOptionsMainViewStarFieldSize.Size = new Size(sliderWidth, sliderLineHeight);
             
             sliderY += 16 + sliderYGap;
-            sldOptionsMainViewGuiScale.Location = new Point(sliderX, sliderY);
-            sldOptionsMainViewGuiScale.Size = new Size(sliderWidth, sliderLineHeight);
+            pnlGameOptions.sldOptionsMainViewGuiScale.Location = new Point(sliderX, sliderY);
+            pnlGameOptions.sldOptionsMainViewGuiScale.Size = new Size(sliderWidth, sliderLineHeight);
             
             sliderY += 16 + sliderYGap;
                 
             // maybe move to straddling the group panel border?
-            btnGameOptionsAdvancedDisplaySettings.Location = new Point(395, sliderY);
-            btnGameOptionsAdvancedDisplaySettings.Size = new Size(250, 26);
+            pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Location = new Point(395, sliderY);
+            pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Size = new Size(250, 26);
             
-            grpOptionsControl.Font = font_7;
-            grpOptionsDisplaySettings.Font = font_7;
-            grpOptionsPopupMessages.Font = font_7;
-            grpOptionsScrollingMessages.Font = font_7;
-            grpOptionsVolume.Font = font_7;
-            grpOptionsControl.Size = new Size(659, 291);
-            grpOptionsDisplaySettings.Size = new Size(659, 134);
-            grpOptionsVolume.Size = new Size(659, 74);
-            grpOptionsScrollingMessages.Size = new Size(285, 230);
-            grpOptionsPopupMessages.Size = new Size(285, 230);
-            grpOptionsScrollingMessages.Location = new Point(12, 492);
-            grpOptionsPopupMessages.Location = new Point(307, 492);
-            grpOptionsDisplaySettings.Location = new Point(12, 7);
-            grpOptionsVolume.Location = new Point(12, 147);
-            grpOptionsControl.Location = new Point(12, 288);
-            lblOptionsMusicVolume.Font = font_1;
-            lblOptionsSoundEffectsVolume.Font = font_1;
-            lblOptionsMusicVolume.Location = new Point(17, 22);
-            lblOptionsSoundEffectsVolume.Location = new Point(17, 47);
-            sldOptionsMusicVolume.Location = new Point(81, 24);
-            sldOptionsMusicVolume.Size = new Size(568, 16);
-            sldOptionsSoundEffectsVolume.Location = new Point(81, 49);
-            sldOptionsSoundEffectsVolume.Size = new Size(568, 16);
-            lblOptionsMouseScrollMode.Font = font_1;
-            chkOptionsLoadedGamesPaused.Font = font_1;
-            cmbOptionsMouseScrollWheelBehaviour.Font = font_1;
-            chkOptionsAutoSave.Font = font_1;
-            lblOptionsMouseScrollMode.Location = new Point(195, 246);
-            cmbOptionsMouseScrollWheelBehaviour.Size = new Size(250, 21);
-            cmbOptionsMouseScrollWheelBehaviour.Location = new Point(341, 242);
-            grpOptionsAutoSave.Location = new Point(12, 228);
-            grpOptionsAutoSave.Font = font_7;
-            grpOptionsAutoSave.Size = new Size(180, 54);
-            chkOptionsAutoSave.Text = string.Format(TextResolver.GetText("Every X minutes"), "              ");
-            chkOptionsAutoSave.Location = new Point(7, 19);
-            numOptionsAutoSaveMinutes.Location = new Point(72, 20);
-            chkOptionsLoadedGamesPaused.Location = new Point(352, 228);
-            chkOptionsLoadedGamesPaused.CheckAlign = ContentAlignment.MiddleRight;
-            chkOptionsLoadedGamesPaused.TextAlign = ContentAlignment.MiddleRight;
-            chkOptionsLoadedGamesPaused.Location = new Point(pnlGameOptions.Width - (chkOptionsLoadedGamesPaused.Width + 30), 228);
-            lblOptionsMouseScrollMode.Location = new Point(223, 258);
-            cmbOptionsMouseScrollWheelBehaviour.Size = new Size(240, 21);
-            cmbOptionsMouseScrollWheelBehaviour.Location = new Point(chkOptionsLoadedGamesPaused.Location.X + chkOptionsLoadedGamesPaused.Width - cmbOptionsMouseScrollWheelBehaviour.Width, 254);
-            cmbOptionsMouseScrollWheelBehaviour.BringToFront();
-            lblOptionsAutomationMode.Font = font_1;
-            lblOptionsControlAgentMissions.Font = font_1;
-            lblOptionsControlAttacks.Font = font_1;
-            lblOptionsControlColonization.Font = font_1;
-            lblOptionsControlColonyFacilities.Font = font_1;
-            lblOptionsControlConstruction.Font = font_1;
-            lblOptionsControlDiplomacyGifts.Font = font_1;
-            lblOptionsControlDiplomacyOffense.Font = font_1;
-            lblOptionsControlDiplomacyTreaties.Font = font_1;
-            lblOptionsControlOfferPirateMissions.Font = font_1;
-            cmbOptionsControlAgentMissions.Font = font_1;
-            cmbOptionsControlAttacks.Font = font_1;
-            cmbOptionsControlColonization.Font = font_1;
-            cmbOptionsControlColonyFacilities.Font = font_1;
-            cmbOptionsControlConstruction.Font = font_1;
-            cmbOptionsControlDiplomacyGifts.Font = font_1;
-            cmbOptionsControlDiplomacyOffense.Font = font_1;
-            cmbOptionsControlDiplomacyTreaties.Font = font_1;
-            cmbOptionsControlOfferPirateMissions.Font = font_1;
-            chkOptionsControlCharacterLocations.Font = font_1;
-            chkOptionsControlColonyTaxRates.Font = font_1;
-            chkOptionsControlDesigns.Font = font_1;
-            chkOptionsControlFleets.Font = font_1;
-            chkOptionsControlPopulationPolicy.Font = font_1;
-            chkOptionsControlResearch.Font = font_1;
-            chkOptionsControlTroops.Font = font_1;
-            cmbOptionsAutomationMode.Font = font_1;
-            pnlOptionsAutomationMode.Size = new Size(217, 41);
-            pnlOptionsAutomationMode.Location = new Point(10, 21);
-            pnlOptionsAutomationMode.BackColor = Color.FromArgb(128, 192, 0, 128);
-            lblOptionsAutomationMode.Font = main_0.font_7;
-            lblOptionsAutomationMode.Location = new Point(5, 9);
-            cmbOptionsAutomationMode.Size = new Size(162, 24);
-            cmbOptionsAutomationMode.Location = new Point(58, 25);
-            lblOptionsControlColonization.Location = new Point(260, 23);
-            lblOptionsControlConstruction.Location = new Point(259, 52);
-            lblOptionsControlAgentMissions.Location = new Point(247, 81);
-            lblOptionsControlAttacks.Location = new Point(202, 110);
-            lblOptionsControlDiplomacyGifts.Location = new Point(207, 139);
-            lblOptionsControlDiplomacyTreaties.Location = new Point(279, 168);
-            lblOptionsControlDiplomacyOffense.Location = new Point(210, 197);
-            lblOptionsControlColonyFacilities.Location = new Point(215, 226);
-            lblOptionsControlOfferPirateMissions.Location = new Point(215, 255);
+            pnlGameOptions.grpOptionsControl.Font = font_7;
+            pnlGameOptions.grpOptionsDisplaySettings.Font = font_7;
+            pnlGameOptions.grpOptionsPopupMessages.Font = font_7;
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Font = font_7;
+            pnlGameOptions.grpOptionsVolume.Font = font_7;
+            pnlGameOptions.grpOptionsControl.Size = new Size(659, 291);
+            pnlGameOptions.grpOptionsDisplaySettings.Size = new Size(659, 134);
+            pnlGameOptions.grpOptionsVolume.Size = new Size(659, 74);
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Size = new Size(285, 230);
+            pnlGameOptions.grpOptionsPopupMessages.Size = new Size(285, 230);
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Location = new Point(12, 492);
+            pnlGameOptions.grpOptionsPopupMessages.Location = new Point(307, 492);
+            pnlGameOptions.grpOptionsDisplaySettings.Location = new Point(12, 7);
+            pnlGameOptions.grpOptionsVolume.Location = new Point(12, 147);
+            pnlGameOptions.grpOptionsControl.Location = new Point(12, 288);
+            pnlGameOptions.lblOptionsMusicVolume.Font = font_1;
+            pnlGameOptions.lblOptionsSoundEffectsVolume.Font = font_1;
+            pnlGameOptions.lblOptionsMusicVolume.Location = new Point(17, 22);
+            pnlGameOptions.lblOptionsSoundEffectsVolume.Location = new Point(17, 47);
+            pnlGameOptions.sldOptionsMusicVolume.Location = new Point(81, 24);
+            pnlGameOptions.sldOptionsMusicVolume.Size = new Size(568, 16);
+            pnlGameOptions.sldOptionsSoundEffectsVolume.Location = new Point(81, 49);
+            pnlGameOptions.sldOptionsSoundEffectsVolume.Size = new Size(568, 16);
+            pnlGameOptions.lblOptionsMouseScrollMode.Font = font_1;
+            pnlGameOptions.chkOptionsLoadedGamesPaused.Font = font_1;
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Font = font_1;
+            pnlGameOptions.chkOptionsAutoSave.Font = font_1;
+            pnlGameOptions.lblOptionsMouseScrollMode.Location = new Point(195, 246);
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Size = new Size(250, 21);
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Location = new Point(341, 242);
+            pnlGameOptions.grpOptionsAutoSave.Location = new Point(12, 228);
+            pnlGameOptions.grpOptionsAutoSave.Font = font_7;
+            pnlGameOptions.grpOptionsAutoSave.Size = new Size(180, 54);
+            pnlGameOptions.chkOptionsAutoSave.Text = string.Format(TextResolver.GetText("Every X minutes"), "              ");
+            pnlGameOptions.chkOptionsAutoSave.Location = new Point(7, 19);
+            pnlGameOptions.numOptionsAutoSaveMinutes.Location = new Point(72, 20);
+            pnlGameOptions.chkOptionsLoadedGamesPaused.Location = new Point(352, 228);
+            pnlGameOptions.chkOptionsLoadedGamesPaused.CheckAlign = ContentAlignment.MiddleRight;
+            pnlGameOptions.chkOptionsLoadedGamesPaused.TextAlign = ContentAlignment.MiddleRight;
+            pnlGameOptions.chkOptionsLoadedGamesPaused.Location = new Point(pnlGameOptions.Width - (pnlGameOptions.chkOptionsLoadedGamesPaused.Width + 30), 228);
+            pnlGameOptions.lblOptionsMouseScrollMode.Location = new Point(223, 258);
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Size = new Size(240, 21);
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Location = new Point(pnlGameOptions.chkOptionsLoadedGamesPaused.Location.X + pnlGameOptions.chkOptionsLoadedGamesPaused.Width - pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Width, 254);
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.BringToFront();
+            pnlGameOptions.lblOptionsAutomationMode.Font = font_1;
+            pnlGameOptions.lblOptionsControlAgentMissions.Font = font_1;
+            pnlGameOptions.lblOptionsControlAttacks.Font = font_1;
+            pnlGameOptions.lblOptionsControlColonization.Font = font_1;
+            pnlGameOptions.lblOptionsControlColonyFacilities.Font = font_1;
+            pnlGameOptions.lblOptionsControlConstruction.Font = font_1;
+            pnlGameOptions.lblOptionsControlDiplomacyGifts.Font = font_1;
+            pnlGameOptions.lblOptionsControlDiplomacyOffense.Font = font_1;
+            pnlGameOptions.lblOptionsControlDiplomacyTreaties.Font = font_1;
+            pnlGameOptions.lblOptionsControlOfferPirateMissions.Font = font_1;
+            pnlGameOptions.cmbOptionsControlAgentMissions.Font = font_1;
+            pnlGameOptions.cmbOptionsControlAttacks.Font = font_1;
+            pnlGameOptions.cmbOptionsControlColonization.Font = font_1;
+            pnlGameOptions.cmbOptionsControlColonyFacilities.Font = font_1;
+            pnlGameOptions.cmbOptionsControlConstruction.Font = font_1;
+            pnlGameOptions.cmbOptionsControlDiplomacyGifts.Font = font_1;
+            pnlGameOptions.cmbOptionsControlDiplomacyOffense.Font = font_1;
+            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.Font = font_1;
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Font = font_1;
+            pnlGameOptions.chkOptionsControlCharacterLocations.Font = font_1;
+            pnlGameOptions.chkOptionsControlColonyTaxRates.Font = font_1;
+            pnlGameOptions.chkOptionsControlDesigns.Font = font_1;
+            pnlGameOptions.chkOptionsControlFleets.Font = font_1;
+            pnlGameOptions.chkOptionsControlPopulationPolicy.Font = font_1;
+            pnlGameOptions.chkOptionsControlResearch.Font = font_1;
+            pnlGameOptions.chkOptionsControlTroops.Font = font_1;
+            pnlGameOptions.cmbOptionsAutomationMode.Font = font_1;
+            pnlGameOptions.pnlOptionsAutomationMode.Size = new Size(217, 41);
+            pnlGameOptions.pnlOptionsAutomationMode.Location = new Point(10, 21);
+            pnlGameOptions.pnlOptionsAutomationMode.BackColor = Color.FromArgb(128, 192, 0, 128);
+            pnlGameOptions.lblOptionsAutomationMode.Font = main_0.font_7;
+            pnlGameOptions.lblOptionsAutomationMode.Location = new Point(5, 9);
+            pnlGameOptions.cmbOptionsAutomationMode.Size = new Size(162, 24);
+            pnlGameOptions.cmbOptionsAutomationMode.Location = new Point(58, 25);
+            pnlGameOptions.lblOptionsControlColonization.Location = new Point(260, 23);
+            pnlGameOptions.lblOptionsControlConstruction.Location = new Point(259, 52);
+            pnlGameOptions.lblOptionsControlAgentMissions.Location = new Point(247, 81);
+            pnlGameOptions.lblOptionsControlAttacks.Location = new Point(202, 110);
+            pnlGameOptions.lblOptionsControlDiplomacyGifts.Location = new Point(207, 139);
+            pnlGameOptions.lblOptionsControlDiplomacyTreaties.Location = new Point(279, 168);
+            pnlGameOptions.lblOptionsControlDiplomacyOffense.Location = new Point(210, 197);
+            pnlGameOptions.lblOptionsControlColonyFacilities.Location = new Point(215, 226);
+            pnlGameOptions.lblOptionsControlOfferPirateMissions.Location = new Point(215, 255);
             Size size_ = new Size(236, 21);
-            method_154(lblOptionsControlColonization, 191, size_);
-            method_154(lblOptionsControlConstruction, 191, size_);
-            method_154(lblOptionsControlAgentMissions, 186, new Size(241, 21));
-            method_154(lblOptionsControlAttacks, 191, size_);
-            method_154(lblOptionsControlDiplomacyGifts, 191, size_);
-            method_154(lblOptionsControlDiplomacyTreaties, 191, size_);
-            method_154(lblOptionsControlDiplomacyOffense, 191, size_);
-            method_154(lblOptionsControlColonyFacilities, 191, size_);
-            method_154(lblOptionsControlOfferPirateMissions, 191, size_);
-            cmbOptionsControlColonization.Location = new Point(429, 19);
-            cmbOptionsControlConstruction.Location = new Point(429, 48);
-            cmbOptionsControlAgentMissions.Location = new Point(429, 77);
-            cmbOptionsControlAttacks.Location = new Point(429, 106);
-            cmbOptionsControlDiplomacyGifts.Location = new Point(429, 135);
-            cmbOptionsControlDiplomacyTreaties.Location = new Point(429, 164);
-            cmbOptionsControlDiplomacyOffense.Location = new Point(429, 193);
-            cmbOptionsControlColonyFacilities.Location = new Point(429, 222);
-            cmbOptionsControlOfferPirateMissions.Location = new Point(429, 251);
-            cmbOptionsControlAgentMissions.Size = new Size(220, 24);
-            cmbOptionsControlAttacks.Size = new Size(220, 24);
-            cmbOptionsControlColonization.Size = new Size(220, 24);
-            cmbOptionsControlConstruction.Size = new Size(220, 24);
-            cmbOptionsControlDiplomacyGifts.Size = new Size(220, 24);
-            cmbOptionsControlDiplomacyOffense.Size = new Size(220, 24);
-            cmbOptionsControlDiplomacyTreaties.Size = new Size(220, 24);
-            cmbOptionsControlColonyFacilities.Size = new Size(220, 24);
-            cmbOptionsControlOfferPirateMissions.Size = new Size(220, 24);
-            lblOptionsControlColonization.SendToBack();
-            lblOptionsControlConstruction.SendToBack();
-            lblOptionsControlAgentMissions.SendToBack();
-            lblOptionsControlAttacks.SendToBack();
-            lblOptionsControlDiplomacyGifts.SendToBack();
-            lblOptionsControlDiplomacyTreaties.SendToBack();
-            lblOptionsControlDiplomacyOffense.SendToBack();
-            lblOptionsControlColonyFacilities.SendToBack();
-            lblOptionsControlOfferPirateMissions.SendToBack();
-            chkOptionsControlColonyTaxRates.Location = new Point(9, 73);
-            chkOptionsControlColonyTaxRates.BringToFront();
-            chkOptionsControlPopulationPolicy.Location = new Point(9, 96);
-            chkOptionsControlPopulationPolicy.BringToFront();
-            chkOptionsControlDesigns.Location = new Point(9, 119);
-            chkOptionsControlDesigns.BringToFront();
-            chkOptionsControlTroops.Location = new Point(9, 142);
-            chkOptionsControlTroops.BringToFront();
-            chkOptionsControlFleets.Location = new Point(9, 165);
-            chkOptionsControlFleets.BringToFront();
-            chkOptionsControlResearch.Location = new Point(9, 188);
-            chkOptionsControlResearch.BringToFront();
-            chkOptionsControlCharacterLocations.Location = new Point(9, 211);
-            chkOptionsControlCharacterLocations.BringToFront();
-            btnGameOptionsResetAutomationMessages.Text = TextResolver.GetText("Reset Warnings");
-            btnGameOptionsResetAutomationMessages.Size = new Size(73, 40);
-            btnGameOptionsResetAutomationMessages.Location = new Point(228, 20);
-            btnGameOptionsEmpireSettings.Text = TextResolver.GetText("Empire Settings");
-            btnGameOptionsEmpireSettings.Size = new Size(179, 35);
-            btnGameOptionsEmpireSettings.Location = new Point(7, 250);
-            btnGameOptionsShowMessages.Size = new Size(660, 35);
-            btnGameOptionsShowMessages.Location = new Point(12, 589);
+            method_154(pnlGameOptions.lblOptionsControlColonization, 191, size_);
+            method_154(pnlGameOptions.lblOptionsControlConstruction, 191, size_);
+            method_154(pnlGameOptions.lblOptionsControlAgentMissions, 186, new Size(241, 21));
+            method_154(pnlGameOptions.lblOptionsControlAttacks, 191, size_);
+            method_154(pnlGameOptions.lblOptionsControlDiplomacyGifts, 191, size_);
+            method_154(pnlGameOptions.lblOptionsControlDiplomacyTreaties, 191, size_);
+            method_154(pnlGameOptions.lblOptionsControlDiplomacyOffense, 191, size_);
+            method_154(pnlGameOptions.lblOptionsControlColonyFacilities, 191, size_);
+            method_154(pnlGameOptions.lblOptionsControlOfferPirateMissions, 191, size_);
+            pnlGameOptions.cmbOptionsControlColonization.Location = new Point(429, 19);
+            pnlGameOptions.cmbOptionsControlConstruction.Location = new Point(429, 48);
+            pnlGameOptions.cmbOptionsControlAgentMissions.Location = new Point(429, 77);
+            pnlGameOptions.cmbOptionsControlAttacks.Location = new Point(429, 106);
+            pnlGameOptions.cmbOptionsControlDiplomacyGifts.Location = new Point(429, 135);
+            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.Location = new Point(429, 164);
+            pnlGameOptions.cmbOptionsControlDiplomacyOffense.Location = new Point(429, 193);
+            pnlGameOptions.cmbOptionsControlColonyFacilities.Location = new Point(429, 222);
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Location = new Point(429, 251);
+            pnlGameOptions.cmbOptionsControlAgentMissions.Size = new Size(220, 24);
+            pnlGameOptions.cmbOptionsControlAttacks.Size = new Size(220, 24);
+            pnlGameOptions.cmbOptionsControlColonization.Size = new Size(220, 24);
+            pnlGameOptions.cmbOptionsControlConstruction.Size = new Size(220, 24);
+            pnlGameOptions.cmbOptionsControlDiplomacyGifts.Size = new Size(220, 24);
+            pnlGameOptions.cmbOptionsControlDiplomacyOffense.Size = new Size(220, 24);
+            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.Size = new Size(220, 24);
+            pnlGameOptions.cmbOptionsControlColonyFacilities.Size = new Size(220, 24);
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Size = new Size(220, 24);
+            pnlGameOptions.lblOptionsControlColonization.SendToBack();
+            pnlGameOptions.lblOptionsControlConstruction.SendToBack();
+            pnlGameOptions.lblOptionsControlAgentMissions.SendToBack();
+            pnlGameOptions.lblOptionsControlAttacks.SendToBack();
+            pnlGameOptions.lblOptionsControlDiplomacyGifts.SendToBack();
+            pnlGameOptions.lblOptionsControlDiplomacyTreaties.SendToBack();
+            pnlGameOptions.lblOptionsControlDiplomacyOffense.SendToBack();
+            pnlGameOptions.lblOptionsControlColonyFacilities.SendToBack();
+            pnlGameOptions.lblOptionsControlOfferPirateMissions.SendToBack();
+            pnlGameOptions.chkOptionsControlColonyTaxRates.Location = new Point(9, 73);
+            pnlGameOptions.chkOptionsControlColonyTaxRates.BringToFront();
+            pnlGameOptions.chkOptionsControlPopulationPolicy.Location = new Point(9, 96);
+            pnlGameOptions.chkOptionsControlPopulationPolicy.BringToFront();
+            pnlGameOptions.chkOptionsControlDesigns.Location = new Point(9, 119);
+            pnlGameOptions.chkOptionsControlDesigns.BringToFront();
+            pnlGameOptions.chkOptionsControlTroops.Location = new Point(9, 142);
+            pnlGameOptions.chkOptionsControlTroops.BringToFront();
+            pnlGameOptions.chkOptionsControlFleets.Location = new Point(9, 165);
+            pnlGameOptions.chkOptionsControlFleets.BringToFront();
+            pnlGameOptions.chkOptionsControlResearch.Location = new Point(9, 188);
+            pnlGameOptions.chkOptionsControlResearch.BringToFront();
+            pnlGameOptions.chkOptionsControlCharacterLocations.Location = new Point(9, 211);
+            pnlGameOptions.chkOptionsControlCharacterLocations.BringToFront();
+            pnlGameOptions.btnGameOptionsResetAutomationMessages.Text = TextResolver.GetText("Reset Warnings");
+            pnlGameOptions.btnGameOptionsResetAutomationMessages.Size = new Size(73, 40);
+            pnlGameOptions.btnGameOptionsResetAutomationMessages.Location = new Point(228, 20);
+            pnlGameOptions.btnGameOptionsEmpireSettings.Text = TextResolver.GetText("Empire Settings");
+            pnlGameOptions.btnGameOptionsEmpireSettings.Size = new Size(179, 35);
+            pnlGameOptions.btnGameOptionsEmpireSettings.Location = new Point(7, 250);
+            pnlGameOptions.btnGameOptionsShowMessages.Size = new Size(660, 35);
+            pnlGameOptions.btnGameOptionsShowMessages.Location = new Point(12, 589);
             pnlGameOptions.Visible = true;
             pnlGameOptions.BringToFront();
         }
@@ -1735,7 +1735,7 @@ namespace DistantWorlds
 
         private void cmbOptionsAutomationMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string text = cmbOptionsAutomationMode.Text;
+            string text = pnlGameOptions.cmbOptionsAutomationMode.Text;
             GameOptions gameOptions = null;
             if (text == TextResolver.GetText("Default"))
             {
@@ -1810,9 +1810,9 @@ namespace DistantWorlds
             {
                 selectedIndex = 7;
             }
-            cmbOptionsAutomationMode.SelectedIndexChanged -= cmbOptionsAutomationMode_SelectedIndexChanged;
-            cmbOptionsAutomationMode.SelectedIndex = selectedIndex;
-            cmbOptionsAutomationMode.SelectedIndexChanged += cmbOptionsAutomationMode_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsAutomationMode.SelectedIndexChanged -= cmbOptionsAutomationMode_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsAutomationMode.SelectedIndex = selectedIndex;
+            pnlGameOptions.cmbOptionsAutomationMode.SelectedIndexChanged += cmbOptionsAutomationMode_SelectedIndexChanged;
         }
 
         private void chkOptionsControlColonyTaxRates_CheckedChanged(object sender, EventArgs e)
@@ -1909,54 +1909,54 @@ namespace DistantWorlds
 
         private void method_155(GameOptions gameOptions_0)
         {
-            cmbOptionsControlAttacks.SelectedIndexChanged -= cmbOptionsControlAttacks_SelectedIndexChanged;
-            cmbOptionsControlColonization.SelectedIndexChanged -= cmbOptionsControlColonization_SelectedIndexChanged;
-            chkOptionsControlColonyTaxRates.CheckedChanged -= chkOptionsControlColonyTaxRates_CheckedChanged;
-            cmbOptionsControlConstruction.SelectedIndexChanged -= cmbOptionsControlConstruction_SelectedIndexChanged;
-            chkOptionsControlDesigns.CheckedChanged -= chkOptionsControlDesigns_CheckedChanged;
-            cmbOptionsControlDiplomacyGifts.SelectedIndexChanged -= cmbOptionsControlDiplomacyGifts_SelectedIndexChanged;
-            cmbOptionsControlDiplomacyOffense.SelectedIndexChanged -= cmbOptionsControlDiplomacyOffense_SelectedIndexChanged;
-            cmbOptionsControlDiplomacyTreaties.SelectedIndexChanged -= cmbOptionsControlDiplomacyTreaties_SelectedIndexChanged;
-            chkOptionsControlFleets.CheckedChanged -= sOmbQcqjdd;
-            chkOptionsControlTroops.CheckedChanged -= chkOptionsControlTroops_CheckedChanged;
-            cmbOptionsControlAgentMissions.SelectedIndexChanged -= cmbOptionsControlAgentMissions_SelectedIndexChanged;
-            chkOptionsControlResearch.CheckedChanged -= chkOptionsControlResearch_CheckedChanged;
-            cmbOptionsControlColonyFacilities.SelectedIndexChanged -= cmbOptionsControlColonyFacilities_SelectedIndexChanged;
-            chkOptionsControlPopulationPolicy.CheckedChanged -= chkOptionsControlPopulationPolicy_CheckedChanged;
-            chkOptionsControlCharacterLocations.CheckedChanged -= chkOptionsControlCharacterLocations_CheckedChanged;
-            cmbOptionsControlOfferPirateMissions.SelectedIndexChanged -= cmbOptionsControlOfferPirateMissions_SelectedIndexChanged;
-            cmbOptionsControlAttacks.SelectedIndex = method_171(gameOptions_0.ControlAttacksOnEnemiesDefault);
-            cmbOptionsControlColonization.SelectedIndex = method_171(gameOptions_0.ControlColonizationDefault);
-            chkOptionsControlColonyTaxRates.Checked = gameOptions_0.ControlColonyTaxRatesDefault;
-            cmbOptionsControlConstruction.SelectedIndex = method_171(gameOptions_0.ControlShipBuildingDefault);
-            chkOptionsControlDesigns.Checked = gameOptions_0.ControlShipDesignDefault;
-            cmbOptionsControlDiplomacyGifts.SelectedIndex = method_171(gameOptions_0.ControlDiplomaticGiftsDefault);
-            cmbOptionsControlDiplomacyOffense.SelectedIndex = method_171(gameOptions_0.ControlWarTradeSanctionsDefault);
-            cmbOptionsControlDiplomacyTreaties.SelectedIndex = method_171(gameOptions_0.ControlTreatyNegotiationDefault);
-            chkOptionsControlFleets.Checked = gameOptions_0.ControlFleetFormationDefault;
-            chkOptionsControlTroops.Checked = gameOptions_0.ControlTroopRecruitmentDefault;
-            chkOptionsControlCharacterLocations.Checked = gameOptions_0.ControlCharacterLocationsDefault;
-            cmbOptionsControlAgentMissions.SelectedIndex = method_171(gameOptions_0.ControlAgentAssignmentDefault);
-            chkOptionsControlResearch.Checked = gameOptions_0.ControlResearchDefault;
-            cmbOptionsControlColonyFacilities.SelectedIndex = method_171(gameOptions_0.ControlColonyFacilitiesDefault);
-            chkOptionsControlPopulationPolicy.Checked = gameOptions_0.ControlPopulationPolicyDefault;
-            cmbOptionsControlOfferPirateMissions.SelectedIndex = method_171(gameOptions_0.ControlOfferPirateMissionsDefault);
-            cmbOptionsControlAttacks.SelectedIndexChanged += cmbOptionsControlAttacks_SelectedIndexChanged;
-            cmbOptionsControlColonization.SelectedIndexChanged += cmbOptionsControlColonization_SelectedIndexChanged;
-            chkOptionsControlColonyTaxRates.CheckedChanged += chkOptionsControlColonyTaxRates_CheckedChanged;
-            cmbOptionsControlConstruction.SelectedIndexChanged += cmbOptionsControlConstruction_SelectedIndexChanged;
-            chkOptionsControlDesigns.CheckedChanged += chkOptionsControlDesigns_CheckedChanged;
-            cmbOptionsControlDiplomacyGifts.SelectedIndexChanged += cmbOptionsControlDiplomacyGifts_SelectedIndexChanged;
-            cmbOptionsControlDiplomacyOffense.SelectedIndexChanged += cmbOptionsControlDiplomacyOffense_SelectedIndexChanged;
-            cmbOptionsControlDiplomacyTreaties.SelectedIndexChanged += cmbOptionsControlDiplomacyTreaties_SelectedIndexChanged;
-            chkOptionsControlFleets.CheckedChanged += sOmbQcqjdd;
-            chkOptionsControlTroops.CheckedChanged += chkOptionsControlTroops_CheckedChanged;
-            cmbOptionsControlAgentMissions.SelectedIndexChanged += cmbOptionsControlAgentMissions_SelectedIndexChanged;
-            chkOptionsControlResearch.CheckedChanged += chkOptionsControlResearch_CheckedChanged;
-            cmbOptionsControlColonyFacilities.SelectedIndexChanged += cmbOptionsControlColonyFacilities_SelectedIndexChanged;
-            chkOptionsControlPopulationPolicy.CheckedChanged += chkOptionsControlPopulationPolicy_CheckedChanged;
-            chkOptionsControlCharacterLocations.CheckedChanged += chkOptionsControlCharacterLocations_CheckedChanged;
-            cmbOptionsControlOfferPirateMissions.SelectedIndexChanged += cmbOptionsControlOfferPirateMissions_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsControlAttacks.SelectedIndexChanged -= cmbOptionsControlAttacks_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsControlColonization.SelectedIndexChanged -= cmbOptionsControlColonization_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlColonyTaxRates.CheckedChanged -= chkOptionsControlColonyTaxRates_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlConstruction.SelectedIndexChanged -= cmbOptionsControlConstruction_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlDesigns.CheckedChanged -= chkOptionsControlDesigns_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlDiplomacyGifts.SelectedIndexChanged -= cmbOptionsControlDiplomacyGifts_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsControlDiplomacyOffense.SelectedIndexChanged -= cmbOptionsControlDiplomacyOffense_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.SelectedIndexChanged -= cmbOptionsControlDiplomacyTreaties_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlFleets.CheckedChanged -= sOmbQcqjdd;
+            pnlGameOptions.chkOptionsControlTroops.CheckedChanged -= chkOptionsControlTroops_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlAgentMissions.SelectedIndexChanged -= cmbOptionsControlAgentMissions_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlResearch.CheckedChanged -= chkOptionsControlResearch_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlColonyFacilities.SelectedIndexChanged -= cmbOptionsControlColonyFacilities_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlPopulationPolicy.CheckedChanged -= chkOptionsControlPopulationPolicy_CheckedChanged;
+            pnlGameOptions.chkOptionsControlCharacterLocations.CheckedChanged -= chkOptionsControlCharacterLocations_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.SelectedIndexChanged -= cmbOptionsControlOfferPirateMissions_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsControlAttacks.SelectedIndex = method_171(gameOptions_0.ControlAttacksOnEnemiesDefault);
+            pnlGameOptions.cmbOptionsControlColonization.SelectedIndex = method_171(gameOptions_0.ControlColonizationDefault);
+            pnlGameOptions.chkOptionsControlColonyTaxRates.Checked = gameOptions_0.ControlColonyTaxRatesDefault;
+            pnlGameOptions.cmbOptionsControlConstruction.SelectedIndex = method_171(gameOptions_0.ControlShipBuildingDefault);
+            pnlGameOptions.chkOptionsControlDesigns.Checked = gameOptions_0.ControlShipDesignDefault;
+            pnlGameOptions.cmbOptionsControlDiplomacyGifts.SelectedIndex = method_171(gameOptions_0.ControlDiplomaticGiftsDefault);
+            pnlGameOptions.cmbOptionsControlDiplomacyOffense.SelectedIndex = method_171(gameOptions_0.ControlWarTradeSanctionsDefault);
+            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.SelectedIndex = method_171(gameOptions_0.ControlTreatyNegotiationDefault);
+            pnlGameOptions.chkOptionsControlFleets.Checked = gameOptions_0.ControlFleetFormationDefault;
+            pnlGameOptions.chkOptionsControlTroops.Checked = gameOptions_0.ControlTroopRecruitmentDefault;
+            pnlGameOptions.chkOptionsControlCharacterLocations.Checked = gameOptions_0.ControlCharacterLocationsDefault;
+            pnlGameOptions.cmbOptionsControlAgentMissions.SelectedIndex = method_171(gameOptions_0.ControlAgentAssignmentDefault);
+            pnlGameOptions.chkOptionsControlResearch.Checked = gameOptions_0.ControlResearchDefault;
+            pnlGameOptions.cmbOptionsControlColonyFacilities.SelectedIndex = method_171(gameOptions_0.ControlColonyFacilitiesDefault);
+            pnlGameOptions.chkOptionsControlPopulationPolicy.Checked = gameOptions_0.ControlPopulationPolicyDefault;
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.SelectedIndex = method_171(gameOptions_0.ControlOfferPirateMissionsDefault);
+            pnlGameOptions.cmbOptionsControlAttacks.SelectedIndexChanged += cmbOptionsControlAttacks_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsControlColonization.SelectedIndexChanged += cmbOptionsControlColonization_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlColonyTaxRates.CheckedChanged += chkOptionsControlColonyTaxRates_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlConstruction.SelectedIndexChanged += cmbOptionsControlConstruction_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlDesigns.CheckedChanged += chkOptionsControlDesigns_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlDiplomacyGifts.SelectedIndexChanged += cmbOptionsControlDiplomacyGifts_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsControlDiplomacyOffense.SelectedIndexChanged += cmbOptionsControlDiplomacyOffense_SelectedIndexChanged;
+            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.SelectedIndexChanged += cmbOptionsControlDiplomacyTreaties_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlFleets.CheckedChanged += sOmbQcqjdd;
+            pnlGameOptions.chkOptionsControlTroops.CheckedChanged += chkOptionsControlTroops_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlAgentMissions.SelectedIndexChanged += cmbOptionsControlAgentMissions_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlResearch.CheckedChanged += chkOptionsControlResearch_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlColonyFacilities.SelectedIndexChanged += cmbOptionsControlColonyFacilities_SelectedIndexChanged;
+            pnlGameOptions.chkOptionsControlPopulationPolicy.CheckedChanged += chkOptionsControlPopulationPolicy_CheckedChanged;
+            pnlGameOptions.chkOptionsControlCharacterLocations.CheckedChanged += chkOptionsControlCharacterLocations_CheckedChanged;
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.SelectedIndexChanged += cmbOptionsControlOfferPirateMissions_SelectedIndexChanged;
         }
 
         private GameOptions method_156()
@@ -2116,22 +2116,22 @@ namespace DistantWorlds
         private GameOptions method_163()
         {
             GameOptions gameOptions = new GameOptions();
-            gameOptions.ControlAttacksOnEnemiesDefault = method_170(cmbOptionsControlAttacks.SelectedIndex);
-            gameOptions.ControlColonizationDefault = method_170(cmbOptionsControlColonization.SelectedIndex);
-            gameOptions.ControlColonyTaxRatesDefault = chkOptionsControlColonyTaxRates.Checked;
-            gameOptions.ControlShipBuildingDefault = method_170(cmbOptionsControlConstruction.SelectedIndex);
-            gameOptions.ControlShipDesignDefault = chkOptionsControlDesigns.Checked;
-            gameOptions.ControlDiplomaticGiftsDefault = method_170(cmbOptionsControlDiplomacyGifts.SelectedIndex);
-            gameOptions.ControlWarTradeSanctionsDefault = method_170(cmbOptionsControlDiplomacyOffense.SelectedIndex);
-            gameOptions.ControlTreatyNegotiationDefault = method_170(cmbOptionsControlDiplomacyTreaties.SelectedIndex);
-            gameOptions.ControlFleetFormationDefault = chkOptionsControlFleets.Checked;
-            gameOptions.ControlTroopRecruitmentDefault = chkOptionsControlTroops.Checked;
-            gameOptions.ControlAgentAssignmentDefault = method_170(cmbOptionsControlAgentMissions.SelectedIndex);
-            gameOptions.ControlResearchDefault = chkOptionsControlResearch.Checked;
-            gameOptions.ControlColonyFacilitiesDefault = method_170(cmbOptionsControlColonyFacilities.SelectedIndex);
-            gameOptions.ControlPopulationPolicyDefault = chkOptionsControlPopulationPolicy.Checked;
-            gameOptions.ControlCharacterLocationsDefault = chkOptionsControlCharacterLocations.Checked;
-            gameOptions.ControlOfferPirateMissionsDefault = method_170(cmbOptionsControlOfferPirateMissions.SelectedIndex);
+            gameOptions.ControlAttacksOnEnemiesDefault = method_170(pnlGameOptions.cmbOptionsControlAttacks.SelectedIndex);
+            gameOptions.ControlColonizationDefault = method_170(pnlGameOptions.cmbOptionsControlColonization.SelectedIndex);
+            gameOptions.ControlColonyTaxRatesDefault = pnlGameOptions.chkOptionsControlColonyTaxRates.Checked;
+            gameOptions.ControlShipBuildingDefault = method_170(pnlGameOptions.cmbOptionsControlConstruction.SelectedIndex);
+            gameOptions.ControlShipDesignDefault = pnlGameOptions.chkOptionsControlDesigns.Checked;
+            gameOptions.ControlDiplomaticGiftsDefault = method_170(pnlGameOptions.cmbOptionsControlDiplomacyGifts.SelectedIndex);
+            gameOptions.ControlWarTradeSanctionsDefault = method_170(pnlGameOptions.cmbOptionsControlDiplomacyOffense.SelectedIndex);
+            gameOptions.ControlTreatyNegotiationDefault = method_170(pnlGameOptions.cmbOptionsControlDiplomacyTreaties.SelectedIndex);
+            gameOptions.ControlFleetFormationDefault = pnlGameOptions.chkOptionsControlFleets.Checked;
+            gameOptions.ControlTroopRecruitmentDefault = pnlGameOptions.chkOptionsControlTroops.Checked;
+            gameOptions.ControlAgentAssignmentDefault = method_170(pnlGameOptions.cmbOptionsControlAgentMissions.SelectedIndex);
+            gameOptions.ControlResearchDefault = pnlGameOptions.chkOptionsControlResearch.Checked;
+            gameOptions.ControlColonyFacilitiesDefault = method_170(pnlGameOptions.cmbOptionsControlColonyFacilities.SelectedIndex);
+            gameOptions.ControlPopulationPolicyDefault = pnlGameOptions.chkOptionsControlPopulationPolicy.Checked;
+            gameOptions.ControlCharacterLocationsDefault = pnlGameOptions.chkOptionsControlCharacterLocations.Checked;
+            gameOptions.ControlOfferPirateMissionsDefault = method_170(pnlGameOptions.cmbOptionsControlOfferPirateMissions.SelectedIndex);
             return gameOptions;
         }
 
@@ -2156,7 +2156,7 @@ namespace DistantWorlds
 
         private int method_165()
         {
-            return cmbOptionsMouseScrollWheelBehaviour.SelectedIndex switch
+            return pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.SelectedIndex switch
             {
                 -1 => 2,
                 0 => 0,
@@ -2171,130 +2171,130 @@ namespace DistantWorlds
             switch (int_1)
             {
                 default:
-                    cmbOptionsMouseScrollWheelBehaviour.SelectedIndex = 2;
+                    pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.SelectedIndex = 2;
                     break;
                 case 0:
-                    cmbOptionsMouseScrollWheelBehaviour.SelectedIndex = 0;
+                    pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.SelectedIndex = 0;
                     break;
                 case 1:
-                    cmbOptionsMouseScrollWheelBehaviour.SelectedIndex = 1;
+                    pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.SelectedIndex = 1;
                     break;
                 case 2:
-                    cmbOptionsMouseScrollWheelBehaviour.SelectedIndex = 2;
+                    pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.SelectedIndex = 2;
                     break;
             }
         }
 
         private void method_167()
         {
-            main_0.gameOptions_0.DisplayMessageUnderAttackCivilianShips = chkOptionsScrollingMessageUnderAttackCivilianShips.Checked;
-            main_0.gameOptions_0.DisplayMessageUnderAttackCivilianBases = chkOptionsScrollingMessageUnderAttackCivilianBases.Checked;
-            main_0.gameOptions_0.DisplayMessageUnderAttackExplorationShips = chkOptionsScrollingMessageUnderAttackExplorationShips.Checked;
-            main_0.gameOptions_0.DisplayMessageUnderAttackColonyConstructionShips = chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Checked;
-            main_0.gameOptions_0.DisplayMessageUnderAttackMilitaryShips = chkOptionsScrollingMessageUnderAttackMilitaryShips.Checked;
-            main_0.gameOptions_0.DisplayMessageUnderAttackOtherStateBases = chkOptionsScrollingMessageUnderAttackOtherStateBases.Checked;
-            main_0.gameOptions_0.DisplayMessageUnderAttackColoniesSpaceportsDefensiveBases = chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Checked;
-            main_0.gameOptions_0.DisplayMessageBuiltObjectBuilt = chkOptionsScrollingMessageNewShipBuilt.Checked;
-            main_0.gameOptions_0.DisplayMessageColonyInvaded = chkOptionsScrollingMessageColonyGainLoss.Checked;
-            main_0.gameOptions_0.DisplayMessageDiplomacyEmpireMetDestroyed = chkOptionsScrollingMessageEmpireMetDestroyed.Checked;
-            main_0.gameOptions_0.DisplayMessageDiplomacyGift = chkOptionsScrollingMessageRequestWarning.Checked;
-            main_0.gameOptions_0.DisplayMessageDiplomacyRequestWarning = chkOptionsScrollingMessageRequestWarning.Checked;
-            main_0.gameOptions_0.DisplayMessageDiplomacyTreaty = chkOptionsScrollingMessageDiplomacyTreaties.Checked;
-            main_0.gameOptions_0.DisplayMessageDiplomacyWarTradeSanctions = chkOptionsScrollingMessageWarTradeSanctions.Checked;
-            main_0.gameOptions_0.DisplayMessageNewColony = chkOptionsScrollingMessageColonyGainLoss.Checked;
-            main_0.gameOptions_0.DisplayMessageResearchNewComponent = chkOptionsScrollingMessageResearchBreakthrough.Checked;
-            main_0.gameOptions_0.DisplayMessageIntelligenceMissions = chkOptionsScrollingMessageIntelligenceMissions.Checked;
-            main_0.gameOptions_0.DisplayMessageExploration = chkOptionsScrollingMessageExploration.Checked;
-            main_0.gameOptions_0.DisplayMessageShipMissionComplete = chkOptionsScrollingMessageShipMissionComplete.Checked;
-            main_0.gameOptions_0.DisplayMessageShipNeedsRefuelling = chkOptionsScrollingMessageShipNeedsRefuelling.Checked;
-            main_0.gameOptions_0.DisplayMessageConstructionResourceShortage = chkOptionsScrollingMessageConstructionResourceShortage.Checked;
-            main_0.gameOptions_0.DisplayPopupUnderAttackCivilianShips = chkOptionsPopupMessageUnderAttackCivilianShips.Checked;
-            main_0.gameOptions_0.DisplayPopupUnderAttackCivilianBases = chkOptionsPopupMessageUnderAttackCivilianBases.Checked;
-            main_0.gameOptions_0.DisplayPopupUnderAttackExplorationShips = chkOptionsPopupMessageUnderAttackExplorationShips.Checked;
-            main_0.gameOptions_0.DisplayPopupUnderAttackColonyConstructionShips = chkOptionsPopupMessageUnderAttackColonyConstructionShips.Checked;
-            main_0.gameOptions_0.DisplayPopupUnderAttackMilitaryShips = chkOptionsPopupMessageUnderAttackMilitaryShips.Checked;
-            main_0.gameOptions_0.DisplayPopupUnderAttackOtherStateBases = chkOptionsPopupMessageUnderAttackOtherStateBases.Checked;
-            main_0.gameOptions_0.DisplayPopupUnderAttackColoniesSpaceportsDefensiveBases = chkOptionsPopupMessageUnderAttackColoniesSpaceports.Checked;
-            main_0.gameOptions_0.DisplayPopupBuiltObjectBuilt = chkOptionsPopupMessageShipBuilt.Checked;
-            main_0.gameOptions_0.DisplayPopupColonyInvaded = chkOptionsPopupMessageColonyGainLoss.Checked;
-            main_0.gameOptions_0.DisplayPopupDiplomacyEmpireMetDestroyed = chkOptionsPopupMessageEmpireMetDestroyed.Checked;
-            main_0.gameOptions_0.DisplayPopupDiplomacyGift = chkOptionsPopupMessageRequestWarning.Checked;
-            main_0.gameOptions_0.DisplayPopupDiplomacyRequestWarning = chkOptionsPopupMessageRequestWarning.Checked;
-            main_0.gameOptions_0.DisplayPopupDiplomacyTreaty = chkOptionsPopupMessageDiplomacyTreaties.Checked;
-            main_0.gameOptions_0.DisplayPopupDiplomacyWarTradeSanctions = chkOptionsPopupMessageDiplomacyWarTradeSanctions.Checked;
-            main_0.gameOptions_0.DisplayPopupNewColony = chkOptionsPopupMessageColonyGainLoss.Checked;
-            main_0.gameOptions_0.DisplayPopupResearchNewComponent = chkOptionsPopupMessageResearchBreakthrough.Checked;
-            main_0.gameOptions_0.DisplayPopupIntelligenceMissions = chkOptionsPopupMessageIntelligenceMissions.Checked;
-            main_0.gameOptions_0.DisplayPopupExploration = chkOptionsPopupMessageExploration.Checked;
-            main_0.gameOptions_0.DisplayPopupShipMissionComplete = chkOptionsPopupMessageShipMissionComplete.Checked;
-            main_0.gameOptions_0.DisplayPopupShipNeedsRefuelling = chkOptionsPopupMessageShipNeedsRefuelling.Checked;
-            main_0.gameOptions_0.DisplayPopupConstructionResourceShortage = chkOptionsPopupMessageConstructionResourceShortage.Checked;
+            main_0.gameOptions_0.DisplayMessageUnderAttackCivilianShips = pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianShips.Checked;
+            main_0.gameOptions_0.DisplayMessageUnderAttackCivilianBases = pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianBases.Checked;
+            main_0.gameOptions_0.DisplayMessageUnderAttackExplorationShips = pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackExplorationShips.Checked;
+            main_0.gameOptions_0.DisplayMessageUnderAttackColonyConstructionShips = pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Checked;
+            main_0.gameOptions_0.DisplayMessageUnderAttackMilitaryShips = pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackMilitaryShips.Checked;
+            main_0.gameOptions_0.DisplayMessageUnderAttackOtherStateBases = pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackOtherStateBases.Checked;
+            main_0.gameOptions_0.DisplayMessageUnderAttackColoniesSpaceportsDefensiveBases = pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Checked;
+            main_0.gameOptions_0.DisplayMessageBuiltObjectBuilt = pnlGameOptionsMessages.chkOptionsScrollingMessageNewShipBuilt.Checked;
+            main_0.gameOptions_0.DisplayMessageColonyInvaded = pnlGameOptionsMessages.chkOptionsScrollingMessageColonyGainLoss.Checked;
+            main_0.gameOptions_0.DisplayMessageDiplomacyEmpireMetDestroyed = pnlGameOptionsMessages.chkOptionsScrollingMessageEmpireMetDestroyed.Checked;
+            main_0.gameOptions_0.DisplayMessageDiplomacyGift = pnlGameOptionsMessages.chkOptionsScrollingMessageRequestWarning.Checked;
+            main_0.gameOptions_0.DisplayMessageDiplomacyRequestWarning = pnlGameOptionsMessages.chkOptionsScrollingMessageRequestWarning.Checked;
+            main_0.gameOptions_0.DisplayMessageDiplomacyTreaty = pnlGameOptionsMessages.chkOptionsScrollingMessageDiplomacyTreaties.Checked;
+            main_0.gameOptions_0.DisplayMessageDiplomacyWarTradeSanctions = pnlGameOptionsMessages.chkOptionsScrollingMessageWarTradeSanctions.Checked;
+            main_0.gameOptions_0.DisplayMessageNewColony = pnlGameOptionsMessages.chkOptionsScrollingMessageColonyGainLoss.Checked;
+            main_0.gameOptions_0.DisplayMessageResearchNewComponent = pnlGameOptionsMessages.chkOptionsScrollingMessageResearchBreakthrough.Checked;
+            main_0.gameOptions_0.DisplayMessageIntelligenceMissions = pnlGameOptionsMessages.chkOptionsScrollingMessageIntelligenceMissions.Checked;
+            main_0.gameOptions_0.DisplayMessageExploration = pnlGameOptionsMessages.chkOptionsScrollingMessageExploration.Checked;
+            main_0.gameOptions_0.DisplayMessageShipMissionComplete = pnlGameOptionsMessages.chkOptionsScrollingMessageShipMissionComplete.Checked;
+            main_0.gameOptions_0.DisplayMessageShipNeedsRefuelling = pnlGameOptionsMessages.chkOptionsScrollingMessageShipNeedsRefuelling.Checked;
+            main_0.gameOptions_0.DisplayMessageConstructionResourceShortage = pnlGameOptionsMessages.chkOptionsScrollingMessageConstructionResourceShortage.Checked;
+            main_0.gameOptions_0.DisplayPopupUnderAttackCivilianShips = pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianShips.Checked;
+            main_0.gameOptions_0.DisplayPopupUnderAttackCivilianBases = pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianBases.Checked;
+            main_0.gameOptions_0.DisplayPopupUnderAttackExplorationShips = pnlGameOptions.chkOptionsPopupMessageUnderAttackExplorationShips.Checked;
+            main_0.gameOptions_0.DisplayPopupUnderAttackColonyConstructionShips = pnlGameOptions.chkOptionsPopupMessageUnderAttackColonyConstructionShips.Checked;
+            main_0.gameOptions_0.DisplayPopupUnderAttackMilitaryShips = pnlGameOptions.chkOptionsPopupMessageUnderAttackMilitaryShips.Checked;
+            main_0.gameOptions_0.DisplayPopupUnderAttackOtherStateBases = pnlGameOptions.chkOptionsPopupMessageUnderAttackOtherStateBases.Checked;
+            main_0.gameOptions_0.DisplayPopupUnderAttackColoniesSpaceportsDefensiveBases = pnlGameOptions.chkOptionsPopupMessageUnderAttackColoniesSpaceports.Checked;
+            main_0.gameOptions_0.DisplayPopupBuiltObjectBuilt = pnlGameOptions.chkOptionsPopupMessageShipBuilt.Checked;
+            main_0.gameOptions_0.DisplayPopupColonyInvaded = pnlGameOptions.chkOptionsPopupMessageColonyGainLoss.Checked;
+            main_0.gameOptions_0.DisplayPopupDiplomacyEmpireMetDestroyed = pnlGameOptions.chkOptionsPopupMessageEmpireMetDestroyed.Checked;
+            main_0.gameOptions_0.DisplayPopupDiplomacyGift = pnlGameOptions.chkOptionsPopupMessageRequestWarning.Checked;
+            main_0.gameOptions_0.DisplayPopupDiplomacyRequestWarning = pnlGameOptions.chkOptionsPopupMessageRequestWarning.Checked;
+            main_0.gameOptions_0.DisplayPopupDiplomacyTreaty = pnlGameOptions.chkOptionsPopupMessageDiplomacyTreaties.Checked;
+            main_0.gameOptions_0.DisplayPopupDiplomacyWarTradeSanctions = pnlGameOptions.chkOptionsPopupMessageDiplomacyWarTradeSanctions.Checked;
+            main_0.gameOptions_0.DisplayPopupNewColony = pnlGameOptions.chkOptionsPopupMessageColonyGainLoss.Checked;
+            main_0.gameOptions_0.DisplayPopupResearchNewComponent = pnlGameOptions.chkOptionsPopupMessageResearchBreakthrough.Checked;
+            main_0.gameOptions_0.DisplayPopupIntelligenceMissions = pnlGameOptions.chkOptionsPopupMessageIntelligenceMissions.Checked;
+            main_0.gameOptions_0.DisplayPopupExploration = pnlGameOptions.chkOptionsPopupMessageExploration.Checked;
+            main_0.gameOptions_0.DisplayPopupShipMissionComplete = pnlGameOptions.chkOptionsPopupMessageShipMissionComplete.Checked;
+            main_0.gameOptions_0.DisplayPopupShipNeedsRefuelling = pnlGameOptions.chkOptionsPopupMessageShipNeedsRefuelling.Checked;
+            main_0.gameOptions_0.DisplayPopupConstructionResourceShortage = pnlGameOptions.chkOptionsPopupMessageConstructionResourceShortage.Checked;
         }
 
         private void method_168()
         {
-            chkOptionsScrollingMessageUnderAttackCivilianShips.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackCivilianShips;
-            chkOptionsScrollingMessageUnderAttackCivilianBases.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackCivilianBases;
-            chkOptionsScrollingMessageUnderAttackExplorationShips.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackExplorationShips;
-            chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackColonyConstructionShips;
-            chkOptionsScrollingMessageUnderAttackMilitaryShips.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackMilitaryShips;
-            chkOptionsScrollingMessageUnderAttackOtherStateBases.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackOtherStateBases;
-            chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackColoniesSpaceportsDefensiveBases;
-            chkOptionsScrollingMessageNewShipBuilt.Checked = main_0.gameOptions_0.DisplayMessageBuiltObjectBuilt;
-            chkOptionsScrollingMessageColonyGainLoss.Checked = main_0.gameOptions_0.DisplayMessageColonyInvaded;
-            chkOptionsScrollingMessageEmpireMetDestroyed.Checked = main_0.gameOptions_0.DisplayMessageDiplomacyEmpireMetDestroyed;
-            chkOptionsScrollingMessageRequestWarning.Checked = main_0.gameOptions_0.DisplayMessageDiplomacyRequestWarning;
-            chkOptionsScrollingMessageDiplomacyTreaties.Checked = main_0.gameOptions_0.DisplayMessageDiplomacyTreaty;
-            chkOptionsScrollingMessageWarTradeSanctions.Checked = main_0.gameOptions_0.DisplayMessageDiplomacyWarTradeSanctions;
-            chkOptionsScrollingMessageResearchBreakthrough.Checked = main_0.gameOptions_0.DisplayMessageResearchNewComponent;
-            chkOptionsScrollingMessageIntelligenceMissions.Checked = main_0.gameOptions_0.DisplayMessageIntelligenceMissions;
-            chkOptionsScrollingMessageExploration.Checked = main_0.gameOptions_0.DisplayMessageExploration;
-            chkOptionsScrollingMessageShipMissionComplete.Checked = main_0.gameOptions_0.DisplayMessageShipMissionComplete;
-            chkOptionsScrollingMessageShipNeedsRefuelling.Checked = main_0.gameOptions_0.DisplayMessageShipNeedsRefuelling;
-            chkOptionsScrollingMessageConstructionResourceShortage.Checked = main_0.gameOptions_0.DisplayMessageConstructionResourceShortage;
-            chkOptionsPopupMessageShipBuilt.Checked = main_0.gameOptions_0.DisplayPopupBuiltObjectBuilt;
-            chkOptionsPopupMessageColonyGainLoss.Checked = main_0.gameOptions_0.DisplayPopupColonyInvaded;
-            chkOptionsPopupMessageEmpireMetDestroyed.Checked = main_0.gameOptions_0.DisplayPopupDiplomacyEmpireMetDestroyed;
-            chkOptionsPopupMessageRequestWarning.Checked = main_0.gameOptions_0.DisplayPopupDiplomacyRequestWarning;
-            chkOptionsPopupMessageDiplomacyTreaties.Checked = main_0.gameOptions_0.DisplayPopupDiplomacyTreaty;
-            chkOptionsPopupMessageDiplomacyWarTradeSanctions.Checked = main_0.gameOptions_0.DisplayPopupDiplomacyWarTradeSanctions;
-            chkOptionsPopupMessageResearchBreakthrough.Checked = main_0.gameOptions_0.DisplayPopupResearchNewComponent;
-            chkOptionsPopupMessageIntelligenceMissions.Checked = main_0.gameOptions_0.DisplayPopupIntelligenceMissions;
-            chkOptionsPopupMessageExploration.Checked = main_0.gameOptions_0.DisplayPopupExploration;
-            chkOptionsPopupMessageShipMissionComplete.Checked = main_0.gameOptions_0.DisplayPopupShipMissionComplete;
-            chkOptionsPopupMessageShipNeedsRefuelling.Checked = main_0.gameOptions_0.DisplayPopupShipNeedsRefuelling;
-            chkOptionsPopupMessageConstructionResourceShortage.Checked = main_0.gameOptions_0.DisplayPopupConstructionResourceShortage;
-            chkOptionsPopupMessageUnderAttackCivilianShips.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackCivilianShips;
-            chkOptionsPopupMessageUnderAttackCivilianBases.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackCivilianBases;
-            chkOptionsPopupMessageUnderAttackExplorationShips.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackExplorationShips;
-            chkOptionsPopupMessageUnderAttackColonyConstructionShips.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackColonyConstructionShips;
-            chkOptionsPopupMessageUnderAttackMilitaryShips.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackMilitaryShips;
-            chkOptionsPopupMessageUnderAttackOtherStateBases.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackOtherStateBases;
-            chkOptionsPopupMessageUnderAttackColoniesSpaceports.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackColoniesSpaceportsDefensiveBases;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianShips.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackCivilianShips;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianBases.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackCivilianBases;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackExplorationShips.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackExplorationShips;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackColonyConstructionShips;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackMilitaryShips.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackMilitaryShips;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackOtherStateBases.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackOtherStateBases;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Checked = main_0.gameOptions_0.DisplayMessageUnderAttackColoniesSpaceportsDefensiveBases;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageNewShipBuilt.Checked = main_0.gameOptions_0.DisplayMessageBuiltObjectBuilt;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageColonyGainLoss.Checked = main_0.gameOptions_0.DisplayMessageColonyInvaded;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageEmpireMetDestroyed.Checked = main_0.gameOptions_0.DisplayMessageDiplomacyEmpireMetDestroyed;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageRequestWarning.Checked = main_0.gameOptions_0.DisplayMessageDiplomacyRequestWarning;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageDiplomacyTreaties.Checked = main_0.gameOptions_0.DisplayMessageDiplomacyTreaty;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageWarTradeSanctions.Checked = main_0.gameOptions_0.DisplayMessageDiplomacyWarTradeSanctions;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageResearchBreakthrough.Checked = main_0.gameOptions_0.DisplayMessageResearchNewComponent;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageIntelligenceMissions.Checked = main_0.gameOptions_0.DisplayMessageIntelligenceMissions;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageExploration.Checked = main_0.gameOptions_0.DisplayMessageExploration;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageShipMissionComplete.Checked = main_0.gameOptions_0.DisplayMessageShipMissionComplete;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageShipNeedsRefuelling.Checked = main_0.gameOptions_0.DisplayMessageShipNeedsRefuelling;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageConstructionResourceShortage.Checked = main_0.gameOptions_0.DisplayMessageConstructionResourceShortage;
+            pnlGameOptions.chkOptionsPopupMessageShipBuilt.Checked = main_0.gameOptions_0.DisplayPopupBuiltObjectBuilt;
+            pnlGameOptions.chkOptionsPopupMessageColonyGainLoss.Checked = main_0.gameOptions_0.DisplayPopupColonyInvaded;
+            pnlGameOptions.chkOptionsPopupMessageEmpireMetDestroyed.Checked = main_0.gameOptions_0.DisplayPopupDiplomacyEmpireMetDestroyed;
+            pnlGameOptions.chkOptionsPopupMessageRequestWarning.Checked = main_0.gameOptions_0.DisplayPopupDiplomacyRequestWarning;
+            pnlGameOptions.chkOptionsPopupMessageDiplomacyTreaties.Checked = main_0.gameOptions_0.DisplayPopupDiplomacyTreaty;
+            pnlGameOptions.chkOptionsPopupMessageDiplomacyWarTradeSanctions.Checked = main_0.gameOptions_0.DisplayPopupDiplomacyWarTradeSanctions;
+            pnlGameOptions.chkOptionsPopupMessageResearchBreakthrough.Checked = main_0.gameOptions_0.DisplayPopupResearchNewComponent;
+            pnlGameOptions.chkOptionsPopupMessageIntelligenceMissions.Checked = main_0.gameOptions_0.DisplayPopupIntelligenceMissions;
+            pnlGameOptions.chkOptionsPopupMessageExploration.Checked = main_0.gameOptions_0.DisplayPopupExploration;
+            pnlGameOptions.chkOptionsPopupMessageShipMissionComplete.Checked = main_0.gameOptions_0.DisplayPopupShipMissionComplete;
+            pnlGameOptions.chkOptionsPopupMessageShipNeedsRefuelling.Checked = main_0.gameOptions_0.DisplayPopupShipNeedsRefuelling;
+            pnlGameOptions.chkOptionsPopupMessageConstructionResourceShortage.Checked = main_0.gameOptions_0.DisplayPopupConstructionResourceShortage;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianShips.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackCivilianShips;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianBases.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackCivilianBases;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackExplorationShips.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackExplorationShips;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColonyConstructionShips.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackColonyConstructionShips;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackMilitaryShips.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackMilitaryShips;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackOtherStateBases.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackOtherStateBases;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColoniesSpaceports.Checked = main_0.gameOptions_0.DisplayPopupUnderAttackColoniesSpaceportsDefensiveBases;
         }
 
         private void ApplyOptionsValues()
         {
             var options = main_0.gameOptions_0;
-            options.AutoPauseWhenInPopupWindow = chkOptionsAutoPauseInPopup.Checked;
-            options.MainViewScrollSpeed = sldOptionsMainViewScrollSpeed.Value;
-            options.MainViewZoomSpeed = sldOptionsMainViewZoomSpeed.Value;
-            if (options.StarFieldSize != sldOptionsMainViewStarFieldSize.Value)
+            options.AutoPauseWhenInPopupWindow = pnlGameOptions.chkOptionsAutoPauseInPopup.Checked;
+            options.MainViewScrollSpeed = pnlGameOptions.sldOptionsMainViewScrollSpeed.Value;
+            options.MainViewZoomSpeed = pnlGameOptions.sldOptionsMainViewZoomSpeed.Value;
+            if (options.StarFieldSize != pnlGameOptions.sldOptionsMainViewStarFieldSize.Value)
             {
-                options.StarFieldSize = sldOptionsMainViewStarFieldSize.Value;
+                options.StarFieldSize = pnlGameOptions.sldOptionsMainViewStarFieldSize.Value;
                 if (main_0.mainView.main_0 != null)
                 {
                     main_0.mainView.method_14(options.StarFieldSize);
                 }
             }
 
-            options.GuiScale = sldOptionsMainViewGuiScale.Value / 1000.0;
+            options.GuiScale = pnlGameOptions.sldOptionsMainViewGuiScale.Value / 1000.0;
             //var guiScale = (float)options.GuiScale;
             //main_0.Scale(new SizeF(guiScale, guiScale));
             
-            options.ShowSystemNebulae = chkOptionsShowSystemNebulae.Checked;
-            options.MusicVolume = (double)sldOptionsMusicVolume.Value / 100.0;
-            options.SoundEffectsVolume = (double)sldOptionsSoundEffectsVolume.Value / 100.0;
+            options.ShowSystemNebulae = pnlGameOptionsAdvancedDisplaySettings.chkOptionsShowSystemNebulae.Checked;
+            options.MusicVolume = (double)pnlGameOptions.sldOptionsMusicVolume.Value / 100.0;
+            options.SoundEffectsVolume = (double)pnlGameOptions.sldOptionsSoundEffectsVolume.Value / 100.0;
             main_0.MusicPlayer.SetVolume(options.MusicVolume);
             main_0.EffectsPlayer.Volume = options.SoundEffectsVolume;
             GlassButton.Volume = options.SoundEffectsVolume;
@@ -2303,31 +2303,31 @@ namespace DistantWorlds
             HoverButton.Volume = options.SoundEffectsVolume;
             HoverMenuItem.Volume = options.SoundEffectsVolume;
             options.MouseScrollWheelBehaviour = method_165();
-            options.LoadedGamesPaused = chkOptionsLoadedGamesPaused.Checked;
-            if (chkOptionsAutoSave.Checked)
+            options.LoadedGamesPaused = pnlGameOptions.chkOptionsLoadedGamesPaused.Checked;
+            if (pnlGameOptions.chkOptionsAutoSave.Checked)
             {
-                options.AutoSaveInterval = (int)numOptionsAutoSaveMinutes.Value;
+                options.AutoSaveInterval = (int)pnlGameOptions.numOptionsAutoSaveMinutes.Value;
             }
             else
             {
                 options.AutoSaveInterval = 0;
             }
-            options.ControlAttacksOnEnemiesDefault = method_170(cmbOptionsControlAttacks.SelectedIndex);
-            options.ControlColonizationDefault = method_170(cmbOptionsControlColonization.SelectedIndex);
-            options.ControlColonyTaxRatesDefault = chkOptionsControlColonyTaxRates.Checked;
-            options.ControlShipBuildingDefault = method_170(cmbOptionsControlConstruction.SelectedIndex);
-            options.ControlShipDesignDefault = chkOptionsControlDesigns.Checked;
-            options.ControlDiplomaticGiftsDefault = method_170(cmbOptionsControlDiplomacyGifts.SelectedIndex);
-            options.ControlWarTradeSanctionsDefault = method_170(cmbOptionsControlDiplomacyOffense.SelectedIndex);
-            options.ControlTreatyNegotiationDefault = method_170(cmbOptionsControlDiplomacyTreaties.SelectedIndex);
-            options.ControlFleetFormationDefault = chkOptionsControlFleets.Checked;
-            options.ControlTroopRecruitmentDefault = chkOptionsControlTroops.Checked;
-            options.ControlAgentAssignmentDefault = method_170(cmbOptionsControlAgentMissions.SelectedIndex);
-            options.ControlResearchDefault = chkOptionsControlResearch.Checked;
-            options.ControlColonyFacilitiesDefault = method_170(cmbOptionsControlColonyFacilities.SelectedIndex);
-            options.ControlPopulationPolicyDefault = chkOptionsControlPopulationPolicy.Checked;
-            options.ControlCharacterLocationsDefault = chkOptionsControlCharacterLocations.Checked;
-            options.ControlOfferPirateMissionsDefault = method_170(cmbOptionsControlOfferPirateMissions.SelectedIndex);
+            options.ControlAttacksOnEnemiesDefault = method_170(pnlGameOptions.cmbOptionsControlAttacks.SelectedIndex);
+            options.ControlColonizationDefault = method_170(pnlGameOptions.cmbOptionsControlColonization.SelectedIndex);
+            options.ControlColonyTaxRatesDefault = pnlGameOptions.chkOptionsControlColonyTaxRates.Checked;
+            options.ControlShipBuildingDefault = method_170(pnlGameOptions.cmbOptionsControlConstruction.SelectedIndex);
+            options.ControlShipDesignDefault = pnlGameOptions.chkOptionsControlDesigns.Checked;
+            options.ControlDiplomaticGiftsDefault = method_170(pnlGameOptions.cmbOptionsControlDiplomacyGifts.SelectedIndex);
+            options.ControlWarTradeSanctionsDefault = method_170(pnlGameOptions.cmbOptionsControlDiplomacyOffense.SelectedIndex);
+            options.ControlTreatyNegotiationDefault = method_170(pnlGameOptions.cmbOptionsControlDiplomacyTreaties.SelectedIndex);
+            options.ControlFleetFormationDefault = pnlGameOptions.chkOptionsControlFleets.Checked;
+            options.ControlTroopRecruitmentDefault = pnlGameOptions.chkOptionsControlTroops.Checked;
+            options.ControlAgentAssignmentDefault = method_170(pnlGameOptions.cmbOptionsControlAgentMissions.SelectedIndex);
+            options.ControlResearchDefault = pnlGameOptions.chkOptionsControlResearch.Checked;
+            options.ControlColonyFacilitiesDefault = method_170(pnlGameOptions.cmbOptionsControlColonyFacilities.SelectedIndex);
+            options.ControlPopulationPolicyDefault = pnlGameOptions.chkOptionsControlPopulationPolicy.Checked;
+            options.ControlCharacterLocationsDefault = pnlGameOptions.chkOptionsControlCharacterLocations.Checked;
+            options.ControlOfferPirateMissionsDefault = method_170(pnlGameOptions.cmbOptionsControlOfferPirateMissions.SelectedIndex);
             main_0.YxwyUefOyQ();
             main_0.method_257();
         }
@@ -2370,55 +2370,55 @@ namespace DistantWorlds
 
         private void PopulateOptionsValues()
         {
-            sldOptionsMainViewZoomSpeed.Minimum = 1;
-            chkOptionsAutoPauseInPopup.Checked = main_0.gameOptions_0.AutoPauseWhenInPopupWindow;
-            sldOptionsMainViewScrollSpeed.Value = main_0.gameOptions_0.MainViewScrollSpeed;
-            sldOptionsMainViewStarFieldSize.Value = main_0.gameOptions_0.StarFieldSize;
-            sldOptionsMainViewZoomSpeed.Value = main_0.gameOptions_0.MainViewZoomSpeed;
-            sldOptionsMainViewGuiScale.Value = (int)(main_0.gameOptions_0.GuiScale * 1000.0);
-            chkOptionsShowSystemNebulae.Checked = main_0.gameOptions_0.ShowSystemNebulae;
-            sldOptionsMusicVolume.Value = (int)(main_0.gameOptions_0.MusicVolume * 100.0);
-            sldOptionsSoundEffectsVolume.Value = (int)(main_0.gameOptions_0.SoundEffectsVolume * 100.0);
+            pnlGameOptions.sldOptionsMainViewZoomSpeed.Minimum = 1;
+            pnlGameOptions.chkOptionsAutoPauseInPopup.Checked = main_0.gameOptions_0.AutoPauseWhenInPopupWindow;
+            pnlGameOptions.sldOptionsMainViewScrollSpeed.Value = main_0.gameOptions_0.MainViewScrollSpeed;
+            pnlGameOptions.sldOptionsMainViewStarFieldSize.Value = main_0.gameOptions_0.StarFieldSize;
+            pnlGameOptions.sldOptionsMainViewZoomSpeed.Value = main_0.gameOptions_0.MainViewZoomSpeed;
+            pnlGameOptions.sldOptionsMainViewGuiScale.Value = (int)(main_0.gameOptions_0.GuiScale * 1000.0);
+            pnlGameOptionsAdvancedDisplaySettings.chkOptionsShowSystemNebulae.Checked = main_0.gameOptions_0.ShowSystemNebulae;
+            pnlGameOptions.sldOptionsMusicVolume.Value = (int)(main_0.gameOptions_0.MusicVolume * 100.0);
+            pnlGameOptions.sldOptionsSoundEffectsVolume.Value = (int)(main_0.gameOptions_0.SoundEffectsVolume * 100.0);
             method_166(main_0.gameOptions_0.MouseScrollWheelBehaviour);
-            chkOptionsLoadedGamesPaused.Checked = main_0.gameOptions_0.LoadedGamesPaused;
+            pnlGameOptions.chkOptionsLoadedGamesPaused.Checked = main_0.gameOptions_0.LoadedGamesPaused;
             if (main_0.gameOptions_0.AutoSaveInterval > 0)
             {
-                chkOptionsAutoSave.Checked = true;
-                numOptionsAutoSaveMinutes.Value = Math.Max(10, main_0.gameOptions_0.AutoSaveInterval);
-                numOptionsAutoSaveMinutes.Enabled = true;
+                pnlGameOptions.chkOptionsAutoSave.Checked = true;
+                pnlGameOptions.numOptionsAutoSaveMinutes.Value = Math.Max(10, main_0.gameOptions_0.AutoSaveInterval);
+                pnlGameOptions.numOptionsAutoSaveMinutes.Enabled = true;
             }
             else
             {
-                chkOptionsAutoSave.Checked = false;
-                numOptionsAutoSaveMinutes.Enabled = false;
+                pnlGameOptions.chkOptionsAutoSave.Checked = false;
+                pnlGameOptions.numOptionsAutoSaveMinutes.Enabled = false;
             }
-            cmbOptionsControlAttacks.SelectedIndex = method_171(main_0.gameOptions_0.ControlAttacksOnEnemiesDefault);
-            cmbOptionsControlColonization.SelectedIndex = method_171(main_0.gameOptions_0.ControlColonizationDefault);
-            chkOptionsControlColonyTaxRates.Checked = main_0.gameOptions_0.ControlColonyTaxRatesDefault;
-            cmbOptionsControlConstruction.SelectedIndex = method_171(main_0.gameOptions_0.ControlShipBuildingDefault);
-            chkOptionsControlDesigns.Checked = main_0.gameOptions_0.ControlShipDesignDefault;
-            cmbOptionsControlDiplomacyGifts.SelectedIndex = method_171(main_0.gameOptions_0.ControlDiplomaticGiftsDefault);
-            cmbOptionsControlDiplomacyOffense.SelectedIndex = method_171(main_0.gameOptions_0.ControlWarTradeSanctionsDefault);
-            cmbOptionsControlDiplomacyTreaties.SelectedIndex = method_171(main_0.gameOptions_0.ControlTreatyNegotiationDefault);
-            chkOptionsControlFleets.Checked = main_0.gameOptions_0.ControlFleetFormationDefault;
-            chkOptionsControlTroops.Checked = main_0.gameOptions_0.ControlTroopRecruitmentDefault;
-            cmbOptionsControlAgentMissions.SelectedIndex = method_171(main_0.gameOptions_0.ControlAgentAssignmentDefault);
-            chkOptionsControlResearch.Checked = main_0.gameOptions_0.ControlResearchDefault;
-            cmbOptionsControlColonyFacilities.SelectedIndex = method_171(main_0.gameOptions_0.ControlColonyFacilitiesDefault);
-            chkOptionsControlPopulationPolicy.Checked = main_0.gameOptions_0.ControlPopulationPolicyDefault;
-            chkOptionsControlCharacterLocations.Checked = main_0.gameOptions_0.ControlCharacterLocationsDefault;
-            cmbOptionsControlOfferPirateMissions.SelectedIndex = method_171(main_0.gameOptions_0.ControlOfferPirateMissionsDefault);
+            pnlGameOptions.cmbOptionsControlAttacks.SelectedIndex = method_171(main_0.gameOptions_0.ControlAttacksOnEnemiesDefault);
+            pnlGameOptions.cmbOptionsControlColonization.SelectedIndex = method_171(main_0.gameOptions_0.ControlColonizationDefault);
+            pnlGameOptions.chkOptionsControlColonyTaxRates.Checked = main_0.gameOptions_0.ControlColonyTaxRatesDefault;
+            pnlGameOptions.cmbOptionsControlConstruction.SelectedIndex = method_171(main_0.gameOptions_0.ControlShipBuildingDefault);
+            pnlGameOptions.chkOptionsControlDesigns.Checked = main_0.gameOptions_0.ControlShipDesignDefault;
+            pnlGameOptions.cmbOptionsControlDiplomacyGifts.SelectedIndex = method_171(main_0.gameOptions_0.ControlDiplomaticGiftsDefault);
+            pnlGameOptions.cmbOptionsControlDiplomacyOffense.SelectedIndex = method_171(main_0.gameOptions_0.ControlWarTradeSanctionsDefault);
+            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.SelectedIndex = method_171(main_0.gameOptions_0.ControlTreatyNegotiationDefault);
+            pnlGameOptions.chkOptionsControlFleets.Checked = main_0.gameOptions_0.ControlFleetFormationDefault;
+            pnlGameOptions.chkOptionsControlTroops.Checked = main_0.gameOptions_0.ControlTroopRecruitmentDefault;
+            pnlGameOptions.cmbOptionsControlAgentMissions.SelectedIndex = method_171(main_0.gameOptions_0.ControlAgentAssignmentDefault);
+            pnlGameOptions.chkOptionsControlResearch.Checked = main_0.gameOptions_0.ControlResearchDefault;
+            pnlGameOptions.cmbOptionsControlColonyFacilities.SelectedIndex = method_171(main_0.gameOptions_0.ControlColonyFacilitiesDefault);
+            pnlGameOptions.chkOptionsControlPopulationPolicy.Checked = main_0.gameOptions_0.ControlPopulationPolicyDefault;
+            pnlGameOptions.chkOptionsControlCharacterLocations.Checked = main_0.gameOptions_0.ControlCharacterLocationsDefault;
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.SelectedIndex = method_171(main_0.gameOptions_0.ControlOfferPirateMissionsDefault);
         }
 
         private void sldOptionsMusicVolume_Scroll(object sender, ScrollEventArgs e)
         {
-            main_0.gameOptions_0.MusicVolume = (double)sldOptionsMusicVolume.Value / 100.0;
+            main_0.gameOptions_0.MusicVolume = (double)pnlGameOptions.sldOptionsMusicVolume.Value / 100.0;
             main_0.MusicPlayer.SetVolume(main_0.gameOptions_0.MusicVolume);
         }
 
         private void sldOptionsSoundEffectsVolume_Scroll(object sender, ScrollEventArgs e)
         {
-            main_0.gameOptions_0.SoundEffectsVolume = (double)sldOptionsSoundEffectsVolume.Value / 100.0;
+            main_0.gameOptions_0.SoundEffectsVolume = (double)pnlGameOptions.sldOptionsSoundEffectsVolume.Value / 100.0;
             main_0.EffectsPlayer.Volume = main_0.gameOptions_0.SoundEffectsVolume;
         }
 
@@ -2749,108 +2749,108 @@ namespace DistantWorlds
             pnlGameOptionsMessages.Size = new Size(735, 502);
             pnlGameOptionsMessages.Location = new Point((base.Width - pnlGameOptionsMessages.Width) / 2, (base.Height - pnlGameOptionsMessages.Height) / 2);
             pnlGameOptionsMessages.DoLayout();
-            grpOptionsPopupMessages.Visible = true;
-            grpOptionsScrollingMessages.Visible = true;
-            grpOptionsPopupMessages.Font = font_7;
-            grpOptionsScrollingMessages.Font = font_7;
-            grpOptionsPopupMessages.BringToFront();
-            grpOptionsScrollingMessages.BringToFront();
-            grpOptionsScrollingMessages.Location = new Point(12, 10);
-            grpOptionsPopupMessages.Location = new Point(367, 10);
-            grpOptionsScrollingMessages.Size = new Size(340, 412);
-            grpOptionsPopupMessages.Size = new Size(340, 412);
-            chkOptionsScrollingMessageNewShipBuilt.Font = font_1;
-            chkOptionsScrollingMessageRequestWarning.Font = font_1;
-            chkOptionsScrollingMessageDiplomacyTreaties.Font = font_1;
-            chkOptionsScrollingMessageWarTradeSanctions.Font = font_1;
-            chkOptionsScrollingMessageColonyGainLoss.Font = font_1;
-            chkOptionsScrollingMessageEmpireMetDestroyed.Font = font_1;
-            chkOptionsScrollingMessageResearchBreakthrough.Font = font_1;
-            chkOptionsScrollingMessageIntelligenceMissions.Font = font_1;
-            chkOptionsScrollingMessageExploration.Font = font_1;
-            chkOptionsScrollingMessageShipMissionComplete.Font = font_1;
-            chkOptionsScrollingMessageShipNeedsRefuelling.Font = font_1;
-            chkOptionsScrollingMessageUnderAttackCivilianShips.Font = font_1;
-            chkOptionsScrollingMessageUnderAttackCivilianBases.Font = font_1;
-            chkOptionsScrollingMessageUnderAttackExplorationShips.Font = font_1;
-            chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Font = font_1;
-            chkOptionsScrollingMessageUnderAttackMilitaryShips.Font = font_1;
-            chkOptionsScrollingMessageUnderAttackOtherStateBases.Font = font_1;
-            chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Font = font_1;
-            chkOptionsScrollingMessageConstructionResourceShortage.Font = font_1;
-            chkOptionsScrollingMessageNewShipBuilt.Location = new Point(7, 22);
-            chkOptionsScrollingMessageRequestWarning.Location = new Point(7, 42);
-            chkOptionsScrollingMessageDiplomacyTreaties.Location = new Point(7, 62);
-            chkOptionsScrollingMessageWarTradeSanctions.Location = new Point(7, 82);
-            chkOptionsScrollingMessageColonyGainLoss.Location = new Point(7, 102);
-            chkOptionsScrollingMessageEmpireMetDestroyed.Location = new Point(7, 122);
-            chkOptionsScrollingMessageResearchBreakthrough.Location = new Point(7, 142);
-            chkOptionsScrollingMessageIntelligenceMissions.Location = new Point(7, 162);
-            chkOptionsScrollingMessageExploration.Location = new Point(7, 182);
-            chkOptionsScrollingMessageShipMissionComplete.Location = new Point(7, 202);
-            chkOptionsScrollingMessageShipNeedsRefuelling.Location = new Point(7, 222);
-            chkOptionsScrollingMessageUnderAttackCivilianShips.Location = new Point(7, 242);
-            chkOptionsScrollingMessageUnderAttackCivilianBases.Location = new Point(7, 262);
-            chkOptionsScrollingMessageUnderAttackExplorationShips.Location = new Point(7, 282);
-            chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Location = new Point(7, 302);
-            chkOptionsScrollingMessageUnderAttackMilitaryShips.Location = new Point(7, 322);
-            chkOptionsScrollingMessageUnderAttackOtherStateBases.Location = new Point(7, 342);
-            chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Location = new Point(7, 362);
-            chkOptionsScrollingMessageConstructionResourceShortage.Location = new Point(7, 382);
-            chkOptionsPopupMessageShipBuilt.Font = font_1;
-            chkOptionsPopupMessageRequestWarning.Font = font_1;
-            chkOptionsPopupMessageDiplomacyTreaties.Font = font_1;
-            chkOptionsPopupMessageDiplomacyWarTradeSanctions.Font = font_1;
-            chkOptionsPopupMessageColonyGainLoss.Font = font_1;
-            chkOptionsPopupMessageEmpireMetDestroyed.Font = font_1;
-            chkOptionsPopupMessageResearchBreakthrough.Font = font_1;
-            chkOptionsPopupMessageIntelligenceMissions.Font = font_1;
-            chkOptionsPopupMessageExploration.Font = font_1;
-            chkOptionsPopupMessageShipMissionComplete.Font = font_1;
-            chkOptionsPopupMessageShipNeedsRefuelling.Font = font_1;
-            chkOptionsPopupMessageUnderAttackCivilianShips.Font = font_1;
-            chkOptionsPopupMessageUnderAttackCivilianBases.Font = font_1;
-            chkOptionsPopupMessageUnderAttackExplorationShips.Font = font_1;
-            chkOptionsPopupMessageUnderAttackColonyConstructionShips.Font = font_1;
-            chkOptionsPopupMessageUnderAttackMilitaryShips.Font = font_1;
-            chkOptionsPopupMessageUnderAttackOtherStateBases.Font = font_1;
-            chkOptionsPopupMessageUnderAttackColoniesSpaceports.Font = font_1;
-            chkOptionsPopupMessageConstructionResourceShortage.Font = font_1;
-            chkOptionsPopupMessageShipBuilt.Location = new Point(7, 22);
-            chkOptionsPopupMessageRequestWarning.Location = new Point(7, 42);
-            chkOptionsPopupMessageDiplomacyTreaties.Location = new Point(7, 62);
-            chkOptionsPopupMessageDiplomacyWarTradeSanctions.Location = new Point(7, 82);
-            chkOptionsPopupMessageColonyGainLoss.Location = new Point(7, 102);
-            chkOptionsPopupMessageEmpireMetDestroyed.Location = new Point(7, 122);
-            chkOptionsPopupMessageResearchBreakthrough.Location = new Point(7, 142);
-            chkOptionsPopupMessageIntelligenceMissions.Location = new Point(7, 162);
-            chkOptionsPopupMessageExploration.Location = new Point(7, 182);
-            chkOptionsPopupMessageShipMissionComplete.Location = new Point(7, 202);
-            chkOptionsPopupMessageShipNeedsRefuelling.Location = new Point(7, 222);
-            chkOptionsPopupMessageUnderAttackCivilianShips.Location = new Point(7, 242);
-            chkOptionsPopupMessageUnderAttackCivilianBases.Location = new Point(7, 262);
-            chkOptionsPopupMessageUnderAttackExplorationShips.Location = new Point(7, 282);
-            chkOptionsPopupMessageUnderAttackColonyConstructionShips.Location = new Point(7, 302);
-            chkOptionsPopupMessageUnderAttackMilitaryShips.Location = new Point(7, 322);
-            chkOptionsPopupMessageUnderAttackOtherStateBases.Location = new Point(7, 342);
-            chkOptionsPopupMessageUnderAttackColoniesSpaceports.Location = new Point(7, 362);
-            chkOptionsPopupMessageConstructionResourceShortage.Location = new Point(7, 382);
-            chkOptionsPopupMessageUnderAttackCivilianShips.BringToFront();
-            chkOptionsPopupMessageUnderAttackCivilianBases.BringToFront();
-            chkOptionsPopupMessageUnderAttackExplorationShips.BringToFront();
-            chkOptionsPopupMessageUnderAttackColonyConstructionShips.BringToFront();
-            chkOptionsPopupMessageUnderAttackMilitaryShips.BringToFront();
-            chkOptionsPopupMessageUnderAttackOtherStateBases.BringToFront();
-            chkOptionsPopupMessageUnderAttackColoniesSpaceports.BringToFront();
-            chkOptionsPopupMessageConstructionResourceShortage.BringToFront();
-            chkOptionsScrollingMessageUnderAttackCivilianShips.BringToFront();
-            chkOptionsScrollingMessageUnderAttackCivilianBases.BringToFront();
-            chkOptionsScrollingMessageUnderAttackExplorationShips.BringToFront();
-            chkOptionsScrollingMessageUnderAttackColonyConstructionShips.BringToFront();
-            chkOptionsScrollingMessageUnderAttackMilitaryShips.BringToFront();
-            chkOptionsScrollingMessageUnderAttackOtherStateBases.BringToFront();
-            chkOptionsScrollingMessageUnderAttackColoniesSpaceports.BringToFront();
-            chkOptionsScrollingMessageConstructionResourceShortage.BringToFront();
+            pnlGameOptions.grpOptionsPopupMessages.Visible = true;
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Visible = true;
+            pnlGameOptions.grpOptionsPopupMessages.Font = font_7;
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Font = font_7;
+            pnlGameOptions.grpOptionsPopupMessages.BringToFront();
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.BringToFront();
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Location = new Point(12, 10);
+            pnlGameOptions.grpOptionsPopupMessages.Location = new Point(367, 10);
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Size = new Size(340, 412);
+            pnlGameOptions.grpOptionsPopupMessages.Size = new Size(340, 412);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageNewShipBuilt.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageRequestWarning.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageDiplomacyTreaties.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageWarTradeSanctions.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageColonyGainLoss.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageEmpireMetDestroyed.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageResearchBreakthrough.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageIntelligenceMissions.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageExploration.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageShipMissionComplete.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageShipNeedsRefuelling.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianShips.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianBases.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackExplorationShips.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackMilitaryShips.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackOtherStateBases.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageConstructionResourceShortage.Font = font_1;
+            pnlGameOptionsMessages.chkOptionsScrollingMessageNewShipBuilt.Location = new Point(7, 22);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageRequestWarning.Location = new Point(7, 42);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageDiplomacyTreaties.Location = new Point(7, 62);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageWarTradeSanctions.Location = new Point(7, 82);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageColonyGainLoss.Location = new Point(7, 102);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageEmpireMetDestroyed.Location = new Point(7, 122);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageResearchBreakthrough.Location = new Point(7, 142);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageIntelligenceMissions.Location = new Point(7, 162);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageExploration.Location = new Point(7, 182);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageShipMissionComplete.Location = new Point(7, 202);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageShipNeedsRefuelling.Location = new Point(7, 222);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianShips.Location = new Point(7, 242);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianBases.Location = new Point(7, 262);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackExplorationShips.Location = new Point(7, 282);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Location = new Point(7, 302);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackMilitaryShips.Location = new Point(7, 322);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackOtherStateBases.Location = new Point(7, 342);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Location = new Point(7, 362);
+            pnlGameOptionsMessages.chkOptionsScrollingMessageConstructionResourceShortage.Location = new Point(7, 382);
+            pnlGameOptions.chkOptionsPopupMessageShipBuilt.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageRequestWarning.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageDiplomacyTreaties.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageDiplomacyWarTradeSanctions.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageColonyGainLoss.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageEmpireMetDestroyed.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageResearchBreakthrough.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageIntelligenceMissions.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageExploration.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageShipMissionComplete.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageShipNeedsRefuelling.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianShips.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianBases.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackExplorationShips.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColonyConstructionShips.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackMilitaryShips.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackOtherStateBases.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColoniesSpaceports.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageConstructionResourceShortage.Font = font_1;
+            pnlGameOptions.chkOptionsPopupMessageShipBuilt.Location = new Point(7, 22);
+            pnlGameOptions.chkOptionsPopupMessageRequestWarning.Location = new Point(7, 42);
+            pnlGameOptions.chkOptionsPopupMessageDiplomacyTreaties.Location = new Point(7, 62);
+            pnlGameOptions.chkOptionsPopupMessageDiplomacyWarTradeSanctions.Location = new Point(7, 82);
+            pnlGameOptions.chkOptionsPopupMessageColonyGainLoss.Location = new Point(7, 102);
+            pnlGameOptions.chkOptionsPopupMessageEmpireMetDestroyed.Location = new Point(7, 122);
+            pnlGameOptions.chkOptionsPopupMessageResearchBreakthrough.Location = new Point(7, 142);
+            pnlGameOptions.chkOptionsPopupMessageIntelligenceMissions.Location = new Point(7, 162);
+            pnlGameOptions.chkOptionsPopupMessageExploration.Location = new Point(7, 182);
+            pnlGameOptions.chkOptionsPopupMessageShipMissionComplete.Location = new Point(7, 202);
+            pnlGameOptions.chkOptionsPopupMessageShipNeedsRefuelling.Location = new Point(7, 222);
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianShips.Location = new Point(7, 242);
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianBases.Location = new Point(7, 262);
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackExplorationShips.Location = new Point(7, 282);
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColonyConstructionShips.Location = new Point(7, 302);
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackMilitaryShips.Location = new Point(7, 322);
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackOtherStateBases.Location = new Point(7, 342);
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColoniesSpaceports.Location = new Point(7, 362);
+            pnlGameOptions.chkOptionsPopupMessageConstructionResourceShortage.Location = new Point(7, 382);
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianShips.BringToFront();
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianBases.BringToFront();
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackExplorationShips.BringToFront();
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColonyConstructionShips.BringToFront();
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackMilitaryShips.BringToFront();
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackOtherStateBases.BringToFront();
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColoniesSpaceports.BringToFront();
+            pnlGameOptions.chkOptionsPopupMessageConstructionResourceShortage.BringToFront();
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianShips.BringToFront();
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianBases.BringToFront();
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackExplorationShips.BringToFront();
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColonyConstructionShips.BringToFront();
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackMilitaryShips.BringToFront();
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackOtherStateBases.BringToFront();
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColoniesSpaceports.BringToFront();
+            pnlGameOptionsMessages.chkOptionsScrollingMessageConstructionResourceShortage.BringToFront();
             method_168();
             pnlGameOptionsMessages.Visible = true;
             pnlGameOptionsMessages.BringToFront();
@@ -2870,102 +2870,102 @@ namespace DistantWorlds
                 (base.Width - pnlGameOptionsAdvancedDisplaySettings.Width) / 2,
                 (base.Height - pnlGameOptionsAdvancedDisplaySettings.Height) / 2);
             pnlGameOptionsAdvancedDisplaySettings.DoLayout();
-            grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Size = new Size(400, 60);
-            grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Font = font_7;
-            lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Location = new Point(177, 22);
-            numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Location = new Point(127, 23);
-            lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Font = font_1;
-            chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Font = font_1;
-            chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Location = new Point(8, 22);
-            chkOptionsShowSystemNebulae.Location = new Point(15, 87);
-            chkOptionsShowSystemNebulae.Font = font_1;
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Font = font_1;
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Size = new Size(400, 52);
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Location = new Point(12, 115);
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.LabelWidth = 160;
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Setup();
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.LinkWidth = 0;
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.LinkText = string.Empty;
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.SetLabels(new string[3]
+            pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Size = new Size(400, 60);
+            pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Font = font_7;
+            pnlGameOptionsAdvancedDisplaySettings.lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Location = new Point(177, 22);
+            pnlGameOptionsAdvancedDisplaySettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Location = new Point(127, 23);
+            pnlGameOptionsAdvancedDisplaySettings.lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Location = new Point(8, 22);
+            pnlGameOptionsAdvancedDisplaySettings.chkOptionsShowSystemNebulae.Location = new Point(15, 87);
+            pnlGameOptionsAdvancedDisplaySettings.chkOptionsShowSystemNebulae.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Size = new Size(400, 52);
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Location = new Point(12, 115);
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.LabelWidth = 160;
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Setup();
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.LinkWidth = 0;
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.LinkText = string.Empty;
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.SetLabels(new string[3]
             {
             TextResolver.GetText("Low"),
             TextResolver.GetText("Medium"),
             TextResolver.GetText("High")
             });
-            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Location = new Point(12, 184);
-            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Width = 400;
-            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Height = 231;
-            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Font = font_7;
-            chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Font = font_1;
-            chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Font = font_1;
-            chkGameOptionsGalaxyDisplayAlwaysPirates.Font = font_1;
-            chkGameOptionsGalaxyDisplayCivilianShips.Font = font_1;
-            chkGameOptionsGalaxyDisplayColonyShips.Font = font_1;
-            chkGameOptionsGalaxyDisplayConstructionShips.Font = font_1;
-            chkGameOptionsGalaxyDisplayExplorationShips.Font = font_1;
-            chkGameOptionsGalaxyDisplayFleets.Font = font_1;
-            chkGameOptionsGalaxyDisplayMilitaryShips.Font = font_1;
-            chkGameOptionsGalaxyDisplayOtherBases.Font = font_1;
-            chkGameOptionsGalaxyDisplayResupplyShips.Font = font_1;
-            chkGameOptionsGalaxyDisplaySpacePorts.Font = font_1;
-            chkGameOptionsGalaxyDisplayFleets.Location = new Point(10, 22);
-            chkGameOptionsGalaxyDisplayFleets.BringToFront();
-            chkGameOptionsGalaxyDisplayResupplyShips.Location = new Point(10, 44);
-            chkGameOptionsGalaxyDisplayResupplyShips.BringToFront();
-            chkGameOptionsGalaxyDisplayMilitaryShips.Location = new Point(10, 66);
-            chkGameOptionsGalaxyDisplayMilitaryShips.BringToFront();
-            chkGameOptionsGalaxyDisplaySpacePorts.Location = new Point(10, 88);
-            chkGameOptionsGalaxyDisplaySpacePorts.BringToFront();
-            chkGameOptionsGalaxyDisplayOtherBases.Location = new Point(10, 110);
-            chkGameOptionsGalaxyDisplayOtherBases.BringToFront();
-            chkGameOptionsGalaxyDisplayExplorationShips.Location = new Point(180, 22);
-            chkGameOptionsGalaxyDisplayExplorationShips.BringToFront();
-            chkGameOptionsGalaxyDisplayColonyShips.Location = new Point(180, 44);
-            chkGameOptionsGalaxyDisplayColonyShips.BringToFront();
-            chkGameOptionsGalaxyDisplayConstructionShips.Location = new Point(180, 66);
-            chkGameOptionsGalaxyDisplayConstructionShips.BringToFront();
-            chkGameOptionsGalaxyDisplayCivilianShips.Location = new Point(180, 88);
-            chkGameOptionsGalaxyDisplayCivilianShips.BringToFront();
-            chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Location = new Point(10, 154);
-            chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.BringToFront();
-            chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Location = new Point(10, 176);
-            chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.BringToFront();
-            chkGameOptionsGalaxyDisplayAlwaysPirates.Location = new Point(10, 198);
-            chkGameOptionsGalaxyDisplayAlwaysPirates.BringToFront();
-            chkGameOptionsGalaxyDisplayCleanGalaxyView.Location = new Point(12, 425);
-            chkGameOptionsGalaxyDisplayCleanGalaxyView.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Location = new Point(12, 184);
+            pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Width = 400;
+            pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Height = 231;
+            pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Font = font_7;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysPirates.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCivilianShips.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayColonyShips.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayConstructionShips.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayExplorationShips.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayFleets.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayMilitaryShips.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayOtherBases.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayResupplyShips.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplaySpacePorts.Font = font_1;
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayFleets.Location = new Point(10, 22);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayFleets.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayResupplyShips.Location = new Point(10, 44);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayResupplyShips.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayMilitaryShips.Location = new Point(10, 66);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayMilitaryShips.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplaySpacePorts.Location = new Point(10, 88);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplaySpacePorts.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayOtherBases.Location = new Point(10, 110);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayOtherBases.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayExplorationShips.Location = new Point(180, 22);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayExplorationShips.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayColonyShips.Location = new Point(180, 44);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayColonyShips.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayConstructionShips.Location = new Point(180, 66);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayConstructionShips.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCivilianShips.Location = new Point(180, 88);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCivilianShips.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Location = new Point(10, 154);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Location = new Point(10, 176);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysPirates.Location = new Point(10, 198);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysPirates.BringToFront();
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCleanGalaxyView.Location = new Point(12, 425);
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCleanGalaxyView.Font = font_1;
             if (main_0.gameOptions_0 != null)
             {
-                chkOptionsShowSystemNebulae.Checked = main_0.gameOptions_0.ShowSystemNebulae;
+                pnlGameOptionsAdvancedDisplaySettings.chkOptionsShowSystemNebulae.Checked = main_0.gameOptions_0.ShowSystemNebulae;
                 int systemNebulaeDetail = main_0.gameOptions_0.SystemNebulaeDetail;
                 systemNebulaeDetail = Math.Max(0, Math.Min(2, systemNebulaeDetail));
-                tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Value = systemNebulaeDetail;
+                pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Value = systemNebulaeDetail;
                 if (main_0.gameOptions_0.MaximumFramerate <= 0)
                 {
-                    chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Checked = true;
-                    numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Enabled = false;
+                    pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Checked = true;
+                    pnlGameOptionsAdvancedDisplaySettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Enabled = false;
                 }
                 else
                 {
-                    chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Checked = false;
+                    pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Checked = false;
                     int maximumFramerate = main_0.gameOptions_0.MaximumFramerate;
-                    maximumFramerate = Math.Max((int)numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Minimum, maximumFramerate);
-                    maximumFramerate = Math.Min((int)numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Maximum, maximumFramerate);
-                    numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Value = maximumFramerate;
+                    maximumFramerate = Math.Max((int)pnlGameOptionsAdvancedDisplaySettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Minimum, maximumFramerate);
+                    maximumFramerate = Math.Min((int)pnlGameOptionsAdvancedDisplaySettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Maximum, maximumFramerate);
+                    pnlGameOptionsAdvancedDisplaySettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Value = maximumFramerate;
                 }
-                chkGameOptionsGalaxyDisplayFleets.Checked = main_0.gameOptions_0.GalaxyViewDisplayFleets;
-                chkGameOptionsGalaxyDisplayResupplyShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayResupplyShips;
-                chkGameOptionsGalaxyDisplayMilitaryShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayMilitaryShips;
-                chkGameOptionsGalaxyDisplaySpacePorts.Checked = main_0.gameOptions_0.GalaxyViewDisplaySpacePorts;
-                chkGameOptionsGalaxyDisplayOtherBases.Checked = main_0.gameOptions_0.GalaxyViewDisplayOtherBases;
-                chkGameOptionsGalaxyDisplayExplorationShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayExplorationShips;
-                chkGameOptionsGalaxyDisplayColonyShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayColonyShips;
-                chkGameOptionsGalaxyDisplayConstructionShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayConstructionShips;
-                chkGameOptionsGalaxyDisplayCivilianShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayCivilianShips;
-                chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Checked = main_0.gameOptions_0.GalaxyViewDisplayAlwaysEnemyFleets;
-                chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayAlwaysEnemyMilitaryShips;
-                chkGameOptionsGalaxyDisplayAlwaysPirates.Checked = main_0.gameOptions_0.GalaxyViewDisplayAlwaysPirates;
-                chkGameOptionsGalaxyDisplayCleanGalaxyView.Checked = main_0.gameOptions_0.CleanGalaxyView;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayFleets.Checked = main_0.gameOptions_0.GalaxyViewDisplayFleets;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayResupplyShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayResupplyShips;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayMilitaryShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayMilitaryShips;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplaySpacePorts.Checked = main_0.gameOptions_0.GalaxyViewDisplaySpacePorts;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayOtherBases.Checked = main_0.gameOptions_0.GalaxyViewDisplayOtherBases;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayExplorationShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayExplorationShips;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayColonyShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayColonyShips;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayConstructionShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayConstructionShips;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCivilianShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayCivilianShips;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Checked = main_0.gameOptions_0.GalaxyViewDisplayAlwaysEnemyFleets;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Checked = main_0.gameOptions_0.GalaxyViewDisplayAlwaysEnemyMilitaryShips;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysPirates.Checked = main_0.gameOptions_0.GalaxyViewDisplayAlwaysPirates;
+                pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCleanGalaxyView.Checked = main_0.gameOptions_0.CleanGalaxyView;
             }
             pnlGameOptionsAdvancedDisplaySettings.Visible = true;
             pnlGameOptionsAdvancedDisplaySettings.BringToFront();
@@ -2975,30 +2975,30 @@ namespace DistantWorlds
         {
             if (main_0.gameOptions_0 != null)
             {
-                main_0.gameOptions_0.ShowSystemNebulae = chkOptionsShowSystemNebulae.Checked;
-                main_0.gameOptions_0.SystemNebulaeDetail = tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Value;
+                main_0.gameOptions_0.ShowSystemNebulae = pnlGameOptionsAdvancedDisplaySettings.chkOptionsShowSystemNebulae.Checked;
+                main_0.gameOptions_0.SystemNebulaeDetail = pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.Value;
                 main_0.SastWuBaXc(main_0.gameOptions_0);
-                if (chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Checked)
+                if (pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Checked)
                 {
                     main_0.gameOptions_0.MaximumFramerate = -1;
                 }
                 else
                 {
-                    main_0.gameOptions_0.MaximumFramerate = (int)numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Value;
+                    main_0.gameOptions_0.MaximumFramerate = (int)pnlGameOptionsAdvancedDisplaySettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Value;
                 }
-                main_0.gameOptions_0.GalaxyViewDisplayFleets = chkGameOptionsGalaxyDisplayFleets.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayResupplyShips = chkGameOptionsGalaxyDisplayResupplyShips.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayMilitaryShips = chkGameOptionsGalaxyDisplayMilitaryShips.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplaySpacePorts = chkGameOptionsGalaxyDisplaySpacePorts.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayOtherBases = chkGameOptionsGalaxyDisplayOtherBases.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayExplorationShips = chkGameOptionsGalaxyDisplayExplorationShips.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayColonyShips = chkGameOptionsGalaxyDisplayColonyShips.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayConstructionShips = chkGameOptionsGalaxyDisplayConstructionShips.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayCivilianShips = chkGameOptionsGalaxyDisplayCivilianShips.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayAlwaysEnemyFleets = chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayAlwaysEnemyMilitaryShips = chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Checked;
-                main_0.gameOptions_0.GalaxyViewDisplayAlwaysPirates = chkGameOptionsGalaxyDisplayAlwaysPirates.Checked;
-                main_0.gameOptions_0.CleanGalaxyView = chkGameOptionsGalaxyDisplayCleanGalaxyView.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayFleets = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayFleets.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayResupplyShips = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayResupplyShips.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayMilitaryShips = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayMilitaryShips.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplaySpacePorts = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplaySpacePorts.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayOtherBases = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayOtherBases.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayExplorationShips = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayExplorationShips.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayColonyShips = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayColonyShips.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayConstructionShips = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayConstructionShips.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayCivilianShips = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCivilianShips.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayAlwaysEnemyFleets = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayAlwaysEnemyMilitaryShips = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Checked;
+                main_0.gameOptions_0.GalaxyViewDisplayAlwaysPirates = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysPirates.Checked;
+                main_0.gameOptions_0.CleanGalaxyView = pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCleanGalaxyView.Checked;
             }
             pnlGameOptionsAdvancedDisplaySettings.SendToBack();
             pnlGameOptionsAdvancedDisplaySettings.Visible = false;
@@ -3014,20 +3014,22 @@ namespace DistantWorlds
             method_185();
         }
 
-        private void chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited_CheckedChanged(object sender, EventArgs e)
-        {
-            if (main_0.gameOptions_0 != null)
+        private void chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited_CheckedChanged(object sender, EventArgs e) {
+            var gameOptions = main_0.gameOptions_0;
+            var pnlAdvSettings = pnlGameOptionsAdvancedDisplaySettings;
+
+            if (gameOptions == null)
+                return;
+
+            if (pnlAdvSettings.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Checked)
             {
-                if (chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Checked)
-                {
-                    main_0.gameOptions_0.MaximumFramerate = -1;
-                    numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Enabled = false;
-                }
-                else
-                {
-                    main_0.gameOptions_0.MaximumFramerate = (int)numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Value;
-                    numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Enabled = true;
-                }
+                gameOptions.MaximumFramerate = -1;
+                pnlAdvSettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Enabled = false;
+            }
+            else
+            {
+                gameOptions.MaximumFramerate = (int)pnlAdvSettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Value;
+                pnlAdvSettings.numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Enabled = true;
             }
         }
 
@@ -4707,13 +4709,13 @@ namespace DistantWorlds
 
         private void chkOptionsAutoSave_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkOptionsAutoSave.Checked)
+            if (pnlGameOptions.chkOptionsAutoSave.Checked)
             {
-                numOptionsAutoSaveMinutes.Enabled = true;
+                pnlGameOptions.numOptionsAutoSaveMinutes.Enabled = true;
             }
             else
             {
-                numOptionsAutoSaveMinutes.Enabled = false;
+                pnlGameOptions.numOptionsAutoSaveMinutes.Enabled = false;
             }
         }
 
@@ -4752,18 +4754,18 @@ namespace DistantWorlds
             radStartNewGameGalaxyShapeSpiral.Text = TextResolver.GetText("Spiral");
             radStartNewGameGalaxyShapeClustersEven.Text = TextResolver.GetText("Even Clusters");
             radStartNewGameGalaxyShapeClustersVaried.Text = TextResolver.GetText("Varied Clusters");
-            chkOptionsControlResearch.Text = TextResolver.GetText("Research");
-            lblOptionsControlColonyFacilities.Text = TextResolver.GetText("Colony Facility Building");
-            cmbOptionsControlColonyFacilities.Items.Clear();
-            cmbOptionsControlColonyFacilities.Items.AddRange(new string[3]
+            pnlGameOptions.chkOptionsControlResearch.Text = TextResolver.GetText("Research");
+            pnlGameOptions.lblOptionsControlColonyFacilities.Text = TextResolver.GetText("Colony Facility Building");
+            pnlGameOptions.cmbOptionsControlColonyFacilities.Items.Clear();
+            pnlGameOptions.cmbOptionsControlColonyFacilities.Items.AddRange(new string[3]
             {
             TextResolver.GetText("Control manually"),
             TextResolver.GetText("Suggest new colony facilities"),
             TextResolver.GetText("Fully automate")
             });
-            lblOptionsControlOfferPirateMissions.Text = TextResolver.GetText("Offer Pirate Missions");
-            cmbOptionsControlOfferPirateMissions.Items.Clear();
-            cmbOptionsControlOfferPirateMissions.Items.AddRange(new string[3]
+            pnlGameOptions.lblOptionsControlOfferPirateMissions.Text = TextResolver.GetText("Offer Pirate Missions");
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Items.Clear();
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Items.AddRange(new string[3]
             {
             TextResolver.GetText("Control manually"),
             TextResolver.GetText("Suggest pirate missions"),
@@ -4776,7 +4778,7 @@ namespace DistantWorlds
             TextResolver.GetText("Distant")
             });
             lblStartNewGameTheGalaxyPirateProximityLabel.Text = TextResolver.GetText("Pirate Proximity");
-            chkOptionsLoadedGamesPaused.Text = TextResolver.GetText("Loaded games are paused");
+            pnlGameOptions.chkOptionsLoadedGamesPaused.Text = TextResolver.GetText("Loaded games are paused");
             grpGameOptionsDiscoveries.Text = TextResolver.GetText("Discoveries");
             cmbGameOptionsEncounterAbandonedShipOrBase.Items.Clear();
             cmbGameOptionsEncounterAbandonedShipOrBase.Items.AddRange(new string[3]
@@ -4824,7 +4826,7 @@ namespace DistantWorlds
             tbarStartNewGameYourEmpireHomeSystem.LabelText = TextResolver.GetText("Home System");
             tbarStartNewGameYourEmpireSize.LabelText = TextResolver.GetText("Size");
             tbarStartNewGameYourEmpireTechLevel.LabelText = TextResolver.GetText("Tech Level");
-            tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.LabelText = TextResolver.GetText("System Nebulae Detail");
+            pnlGameOptionsAdvancedDisplaySettings.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail.LabelText = TextResolver.GetText("System Nebulae Detail");
             method_219(cmbGameOptionsEngagementStanceAttack);
             method_219(cmbGameOptionsEngagementStanceEscort);
             method_219(cmbGameOptionsEngagementStanceOther);
@@ -4833,8 +4835,8 @@ namespace DistantWorlds
             method_219(cmbGameOptionsEngagementStanceEscortManual);
             method_219(cmbGameOptionsEngagementStanceOtherManual);
             method_219(cmbGameOptionsEngagementStancePatrolManual);
-            cmbOptionsAutomationMode.Items.Clear();
-            cmbOptionsAutomationMode.Items.AddRange(new string[8]
+            pnlGameOptions.cmbOptionsAutomationMode.Items.Clear();
+            pnlGameOptions.cmbOptionsAutomationMode.Items.AddRange(new string[8]
             {
             "(" + TextResolver.GetText("Custom") + ")",
             TextResolver.GetText("Default"),
@@ -4845,42 +4847,42 @@ namespace DistantWorlds
             TextResolver.GetText("Diplomacy"),
             TextResolver.GetText("Spy Master")
             });
-            method_220(cmbOptionsControlAgentMissions, "Suggest offensive missions");
-            method_220(cmbOptionsControlAttacks, "Suggest attack targets");
-            method_220(cmbOptionsControlColonization, "Suggest new colonies");
-            method_220(cmbOptionsControlConstruction, "Suggest new ships and bases");
-            method_220(cmbOptionsControlDiplomacyGifts, "Suggest gifts to empires");
-            method_220(cmbOptionsControlDiplomacyOffense, "Suggest war and trade sanctions");
-            method_220(cmbOptionsControlDiplomacyTreaties, "Suggest new treaties");
-            cmbOptionsMouseScrollWheelBehaviour.Items.Clear();
-            cmbOptionsMouseScrollWheelBehaviour.Items.AddRange(new string[3]
+            method_220(pnlGameOptions.cmbOptionsControlAgentMissions, "Suggest offensive missions");
+            method_220(pnlGameOptions.cmbOptionsControlAttacks, "Suggest attack targets");
+            method_220(pnlGameOptions.cmbOptionsControlColonization, "Suggest new colonies");
+            method_220(pnlGameOptions.cmbOptionsControlConstruction, "Suggest new ships and bases");
+            method_220(pnlGameOptions.cmbOptionsControlDiplomacyGifts, "Suggest gifts to empires");
+            method_220(pnlGameOptions.cmbOptionsControlDiplomacyOffense, "Suggest war and trade sanctions");
+            method_220(pnlGameOptions.cmbOptionsControlDiplomacyTreaties, "Suggest new treaties");
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Items.Clear();
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Items.AddRange(new string[3]
             {
             TextResolver.GetText("No movement"),
             TextResolver.GetText("Move to selected item"),
             TextResolver.GetText("Move to mouse cursor location")
             });
             lblCopyright.Text = TextResolver.GetText("Copyright");
-            lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Text = TextResolver.GetText("fps");
+            pnlGameOptionsAdvancedDisplaySettings.lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Text = TextResolver.GetText("fps");
             lblGameOptionsEngagementStanceAttack.Text = TextResolver.GetText("Attack/Bombard");
             lblGameOptionsEngagementStanceEscort.Text = TextResolver.GetText("Mission Escort");
             lblGameOptionsEngagementStanceOther.Text = TextResolver.GetText("Other");
             lblGameOptionsEngagementStancePatrol.Text = TextResolver.GetText("Mission Patrol");
             lblGameOptionsFleetAttackGather.Text = TextResolver.GetText("First assemble when this percentage of fleet dispersed");
             lblGameOptionsFleetAttackRefuel.Text = TextResolver.GetText("First assemble when this percentage of fleet need fuel");
-            lblOptionsAutomationMode.Text = TextResolver.GetText("Mode");
-            lblOptionsControlAgentMissions.Text = TextResolver.GetText("Intelligence Missions");
-            lblOptionsControlAttacks.Text = TextResolver.GetText("Attacks Against Enemies");
-            lblOptionsControlColonization.Text = TextResolver.GetText("Colonization");
-            lblOptionsControlConstruction.Text = TextResolver.GetText("Ship Building");
-            lblOptionsControlDiplomacyGifts.Text = TextResolver.GetText("Sending Diplomatic Gifts");
-            lblOptionsControlDiplomacyOffense.Text = TextResolver.GetText("War and Trade Sanctions");
-            lblOptionsControlDiplomacyTreaties.Text = TextResolver.GetText("Treaties");
-            lblOptionsMainViewScrollSpeed.Text = TextResolver.GetText("Scroll Speed");
-            lblOptionsMainViewStarFieldSize.Text = TextResolver.GetText("Star Density");
-            lblOptionsMainViewZoomSpeed.Text = TextResolver.GetText("Zoom Speed");
-            lblOptionsMouseScrollMode.Text = TextResolver.GetText("Mouse scroll-wheel behavior");
-            lblOptionsMusicVolume.Text = TextResolver.GetText("Music");
-            lblOptionsSoundEffectsVolume.Text = TextResolver.GetText("Effects");
+            pnlGameOptions.lblOptionsAutomationMode.Text = TextResolver.GetText("Mode");
+            pnlGameOptions.lblOptionsControlAgentMissions.Text = TextResolver.GetText("Intelligence Missions");
+            pnlGameOptions.lblOptionsControlAttacks.Text = TextResolver.GetText("Attacks Against Enemies");
+            pnlGameOptions.lblOptionsControlColonization.Text = TextResolver.GetText("Colonization");
+            pnlGameOptions.lblOptionsControlConstruction.Text = TextResolver.GetText("Ship Building");
+            pnlGameOptions.lblOptionsControlDiplomacyGifts.Text = TextResolver.GetText("Sending Diplomatic Gifts");
+            pnlGameOptions.lblOptionsControlDiplomacyOffense.Text = TextResolver.GetText("War and Trade Sanctions");
+            pnlGameOptions.lblOptionsControlDiplomacyTreaties.Text = TextResolver.GetText("Treaties");
+            pnlGameOptions.lblOptionsMainViewScrollSpeed.Text = TextResolver.GetText("Scroll Speed");
+            pnlGameOptions.lblOptionsMainViewStarFieldSize.Text = TextResolver.GetText("Star Density");
+            pnlGameOptions.lblOptionsMainViewZoomSpeed.Text = TextResolver.GetText("Zoom Speed");
+            pnlGameOptions.lblOptionsMouseScrollMode.Text = TextResolver.GetText("Mouse scroll-wheel behavior");
+            pnlGameOptions.lblOptionsMusicVolume.Text = TextResolver.GetText("Music");
+            pnlGameOptions.lblOptionsSoundEffectsVolume.Text = TextResolver.GetText("Effects");
             lblQuickStartRace.Text = TextResolver.GetText("Race");
             lblStartNewGameOtherEmpiresAutoGenNumberDescrip1.Text = TextResolver.GetText("Generate");
             lblStartNewGameOtherEmpiresAutoGenNumberDescrip2.Text = TextResolver.GetText("starting empires");
@@ -4894,9 +4896,9 @@ namespace DistantWorlds
             lblVictorySandbox.Text = TextResolver.GetText("Victory Conditions Explanation");
             btnAboutClose.Text = TextResolver.GetText("Close Credits");
             btnAddNewEmpire.Text = TextResolver.GetText("Add New Empire");
-            btnGameOptionsAdvancedDisplaySettings.Text = TextResolver.GetText("Advanced Settings...");
-            btnGameOptionsEmpireSettings.Text = TextResolver.GetText("Empire Settings");
-            btnGameOptionsResetAutomationMessages.Text = TextResolver.GetText("Reset Warnings");
+            pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Text = TextResolver.GetText("Advanced Settings...");
+            pnlGameOptions.btnGameOptionsEmpireSettings.Text = TextResolver.GetText("Empire Settings");
+            pnlGameOptions.btnGameOptionsResetAutomationMessages.Text = TextResolver.GetText("Reset Warnings");
             btnQuickStart.Text = TextResolver.GetText("Start Game");
             btnQuickStartCancel.Text = TextResolver.GetText("Cancel");
             btnStartNewGameOtherEmpiresNext.Text = TextResolver.GetText("Next: Victory Conditions") + " >>";
@@ -4914,71 +4916,71 @@ namespace DistantWorlds
             btnTutorialStartCancel.Text = TextResolver.GetText("Cancel");
             chkEncyclopediaShowAtStart.Text = TextResolver.GetText("Show this screen at startup");
             chkGalaxyNewEmpiresDuringGame.Text = TextResolver.GetText("Allow new Empires to appear during the game");
-            chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Text = TextResolver.GetText("Unlimited");
-            chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Text = TextResolver.GetText("Always show enemy Fleets");
-            chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Text = TextResolver.GetText("Always show enemy Military ships");
-            chkGameOptionsGalaxyDisplayAlwaysPirates.Text = TextResolver.GetText("Always show Pirates");
-            chkGameOptionsGalaxyDisplayCivilianShips.Text = TextResolver.GetText("Civilian ships");
-            chkGameOptionsGalaxyDisplayColonyShips.Text = TextResolver.GetText("Colony Ships");
-            chkGameOptionsGalaxyDisplayConstructionShips.Text = TextResolver.GetText("Construction Ships");
-            chkGameOptionsGalaxyDisplayExplorationShips.Text = TextResolver.GetText("Exploration Ships");
-            chkGameOptionsGalaxyDisplayFleets.Text = TextResolver.GetText("Fleets");
-            chkGameOptionsGalaxyDisplayMilitaryShips.Text = TextResolver.GetText("Military Ships");
-            chkGameOptionsGalaxyDisplayOtherBases.Text = TextResolver.GetText("Other Bases");
-            chkGameOptionsGalaxyDisplayResupplyShips.Text = TextResolver.GetText("Resupply Ships");
-            chkGameOptionsGalaxyDisplaySpacePorts.Text = TextResolver.GetText("Space Ports");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Text = TextResolver.GetText("Unlimited");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Text = TextResolver.GetText("Always show enemy Fleets");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Text = TextResolver.GetText("Always show enemy Military ships");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayAlwaysPirates.Text = TextResolver.GetText("Always show Pirates");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayCivilianShips.Text = TextResolver.GetText("Civilian ships");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayColonyShips.Text = TextResolver.GetText("Colony Ships");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayConstructionShips.Text = TextResolver.GetText("Construction Ships");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayExplorationShips.Text = TextResolver.GetText("Exploration Ships");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayFleets.Text = TextResolver.GetText("Fleets");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayMilitaryShips.Text = TextResolver.GetText("Military Ships");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayOtherBases.Text = TextResolver.GetText("Other Bases");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplayResupplyShips.Text = TextResolver.GetText("Resupply Ships");
+            pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplaySpacePorts.Text = TextResolver.GetText("Space Ports");
             chkOptionsAllowSameSystemAsOtherEmpires.Text = TextResolver.GetText("Allow colonization and mining stations in other empires systems");
-            chkOptionsAutoPauseInPopup.Text = TextResolver.GetText("Auto Pause in Game Screens");
-            chkOptionsAutoSave.Text = TextResolver.GetText("Every (SPACER) minutes");
-            chkOptionsControlColonyTaxRates.Text = TextResolver.GetText("Colony Tax Rates");
-            chkOptionsControlCharacterLocations.Text = TextResolver.GetText("Character Locations");
-            chkOptionsControlDesigns.Text = TextResolver.GetText("Ship Design");
-            chkOptionsControlFleets.Text = TextResolver.GetText("Fleet Formation");
-            chkOptionsControlTroops.Text = TextResolver.GetText("Troop Recruitment");
-            chkOptionsControlPopulationPolicy.Text = TextResolver.GetText("Colony Population Policies");
-            chkOptionsPopupMessageColonyGainLoss.Text = TextResolver.GetText("Colony Gain or Loss");
-            chkOptionsPopupMessageDiplomacyTreaties.Text = TextResolver.GetText("Treaty offers");
-            chkOptionsPopupMessageDiplomacyWarTradeSanctions.Text = TextResolver.GetText("War and Trade Sanctions");
-            chkOptionsPopupMessageEmpireMetDestroyed.Text = TextResolver.GetText("Empire Discovery");
-            chkOptionsPopupMessageExploration.Text = TextResolver.GetText("Exploration discoveries");
-            chkOptionsPopupMessageIntelligenceMissions.Text = TextResolver.GetText("Intelligence Missions");
-            chkOptionsPopupMessageRequestWarning.Text = TextResolver.GetText("Requests, Warnings and Gifts");
-            chkOptionsPopupMessageResearchBreakthrough.Text = TextResolver.GetText("Research Breakthrough");
-            chkOptionsPopupMessageShipBuilt.Text = TextResolver.GetText("New Ship Built");
-            chkOptionsPopupMessageShipMissionComplete.Text = TextResolver.GetText("Ship Mission Complete");
-            chkOptionsPopupMessageShipNeedsRefuelling.Text = TextResolver.GetText("Ship Needs Refuelling or Repair");
-            chkOptionsPopupMessageConstructionResourceShortage.Text = TextResolver.GetText("Construction Resource Shortage");
-            chkOptionsScrollingMessageColonyGainLoss.Text = TextResolver.GetText("Colony Gain or Loss");
-            chkOptionsScrollingMessageDiplomacyTreaties.Text = TextResolver.GetText("Treaty offers");
-            chkOptionsScrollingMessageEmpireMetDestroyed.Text = TextResolver.GetText("Empire Discovery");
-            chkOptionsScrollingMessageExploration.Text = TextResolver.GetText("Exploration discoveries");
-            chkOptionsScrollingMessageIntelligenceMissions.Text = TextResolver.GetText("Intelligence Missions");
-            chkOptionsScrollingMessageNewShipBuilt.Text = TextResolver.GetText("New Ship Built");
-            chkOptionsScrollingMessageRequestWarning.Text = TextResolver.GetText("Requests, Warnings and Gifts");
-            chkOptionsScrollingMessageResearchBreakthrough.Text = TextResolver.GetText("Research Breakthrough");
-            chkOptionsScrollingMessageShipMissionComplete.Text = TextResolver.GetText("Ship Mission Complete");
-            chkOptionsScrollingMessageShipNeedsRefuelling.Text = TextResolver.GetText("Ship Needs Refuelling or Repair");
-            chkOptionsScrollingMessageUnderAttackCivilianShips.Text = TextResolver.GetText("Under Attack");
-            chkOptionsScrollingMessageWarTradeSanctions.Text = TextResolver.GetText("War and Trade Sanctions");
-            chkOptionsScrollingMessageConstructionResourceShortage.Text = TextResolver.GetText("Construction Resource Shortage");
-            chkOptionsShowSystemNebulae.Text = TextResolver.GetText("Display nebulae clouds in systems");
+            pnlGameOptions.chkOptionsAutoPauseInPopup.Text = TextResolver.GetText("Auto Pause in Game Screens");
+            pnlGameOptions.chkOptionsAutoSave.Text = TextResolver.GetText("Every (SPACER) minutes");
+            pnlGameOptions.chkOptionsControlColonyTaxRates.Text = TextResolver.GetText("Colony Tax Rates");
+            pnlGameOptions.chkOptionsControlCharacterLocations.Text = TextResolver.GetText("Character Locations");
+            pnlGameOptions.chkOptionsControlDesigns.Text = TextResolver.GetText("Ship Design");
+            pnlGameOptions.chkOptionsControlFleets.Text = TextResolver.GetText("Fleet Formation");
+            pnlGameOptions.chkOptionsControlTroops.Text = TextResolver.GetText("Troop Recruitment");
+            pnlGameOptions.chkOptionsControlPopulationPolicy.Text = TextResolver.GetText("Colony Population Policies");
+            pnlGameOptions.chkOptionsPopupMessageColonyGainLoss.Text = TextResolver.GetText("Colony Gain or Loss");
+            pnlGameOptions.chkOptionsPopupMessageDiplomacyTreaties.Text = TextResolver.GetText("Treaty offers");
+            pnlGameOptions.chkOptionsPopupMessageDiplomacyWarTradeSanctions.Text = TextResolver.GetText("War and Trade Sanctions");
+            pnlGameOptions.chkOptionsPopupMessageEmpireMetDestroyed.Text = TextResolver.GetText("Empire Discovery");
+            pnlGameOptions.chkOptionsPopupMessageExploration.Text = TextResolver.GetText("Exploration discoveries");
+            pnlGameOptions.chkOptionsPopupMessageIntelligenceMissions.Text = TextResolver.GetText("Intelligence Missions");
+            pnlGameOptions.chkOptionsPopupMessageRequestWarning.Text = TextResolver.GetText("Requests, Warnings and Gifts");
+            pnlGameOptions.chkOptionsPopupMessageResearchBreakthrough.Text = TextResolver.GetText("Research Breakthrough");
+            pnlGameOptions.chkOptionsPopupMessageShipBuilt.Text = TextResolver.GetText("New Ship Built");
+            pnlGameOptions.chkOptionsPopupMessageShipMissionComplete.Text = TextResolver.GetText("Ship Mission Complete");
+            pnlGameOptions.chkOptionsPopupMessageShipNeedsRefuelling.Text = TextResolver.GetText("Ship Needs Refuelling or Repair");
+            pnlGameOptions.chkOptionsPopupMessageConstructionResourceShortage.Text = TextResolver.GetText("Construction Resource Shortage");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageColonyGainLoss.Text = TextResolver.GetText("Colony Gain or Loss");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageDiplomacyTreaties.Text = TextResolver.GetText("Treaty offers");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageEmpireMetDestroyed.Text = TextResolver.GetText("Empire Discovery");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageExploration.Text = TextResolver.GetText("Exploration discoveries");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageIntelligenceMissions.Text = TextResolver.GetText("Intelligence Missions");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageNewShipBuilt.Text = TextResolver.GetText("New Ship Built");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageRequestWarning.Text = TextResolver.GetText("Requests, Warnings and Gifts");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageResearchBreakthrough.Text = TextResolver.GetText("Research Breakthrough");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageShipMissionComplete.Text = TextResolver.GetText("Ship Mission Complete");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageShipNeedsRefuelling.Text = TextResolver.GetText("Ship Needs Refuelling or Repair");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianShips.Text = TextResolver.GetText("Under Attack");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageWarTradeSanctions.Text = TextResolver.GetText("War and Trade Sanctions");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageConstructionResourceShortage.Text = TextResolver.GetText("Construction Resource Shortage");
+            pnlGameOptionsAdvancedDisplaySettings.chkOptionsShowSystemNebulae.Text = TextResolver.GetText("Display nebulae clouds in systems");
             chkOtherEmpiresAutogenerate.Text = TextResolver.GetText("Auto-Generate Starting Empires");
-            chkOptionsPopupMessageUnderAttackCivilianBases.Text = TextResolver.GetText("Under Attack - Civilian Bases");
-            chkOptionsPopupMessageUnderAttackCivilianShips.Text = TextResolver.GetText("Under Attack - Civilian Ships");
-            chkOptionsPopupMessageUnderAttackColoniesSpaceports.Text = TextResolver.GetText("Under Attack - Colonies && Spaceports");
-            chkOptionsPopupMessageUnderAttackColonyConstructionShips.Text = TextResolver.GetText("Under Attack - Colony && Construction Ships");
-            chkOptionsPopupMessageUnderAttackExplorationShips.Text = TextResolver.GetText("Under Attack - Exploration Ships");
-            chkOptionsPopupMessageUnderAttackMilitaryShips.Text = TextResolver.GetText("Under Attack - Military Ships");
-            chkOptionsPopupMessageUnderAttackOtherStateBases.Text = TextResolver.GetText("Under Attack - Research, Monitoring, Resorts");
-            chkOptionsScrollingMessageUnderAttackCivilianBases.Text = TextResolver.GetText("Under Attack - Civilian Bases");
-            chkOptionsScrollingMessageUnderAttackCivilianShips.Text = TextResolver.GetText("Under Attack - Civilian Ships");
-            chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Text = TextResolver.GetText("Under Attack - Colonies && Spaceports");
-            chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Text = TextResolver.GetText("Under Attack - Colony && Construction Ships");
-            chkOptionsScrollingMessageUnderAttackExplorationShips.Text = TextResolver.GetText("Under Attack - Exploration Ships");
-            chkOptionsScrollingMessageUnderAttackMilitaryShips.Text = TextResolver.GetText("Under Attack - Military Ships");
-            chkOptionsScrollingMessageUnderAttackOtherStateBases.Text = TextResolver.GetText("Under Attack - Research, Monitoring, Resorts");
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianBases.Text = TextResolver.GetText("Under Attack - Civilian Bases");
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackCivilianShips.Text = TextResolver.GetText("Under Attack - Civilian Ships");
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColoniesSpaceports.Text = TextResolver.GetText("Under Attack - Colonies && Spaceports");
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackColonyConstructionShips.Text = TextResolver.GetText("Under Attack - Colony && Construction Ships");
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackExplorationShips.Text = TextResolver.GetText("Under Attack - Exploration Ships");
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackMilitaryShips.Text = TextResolver.GetText("Under Attack - Military Ships");
+            pnlGameOptions.chkOptionsPopupMessageUnderAttackOtherStateBases.Text = TextResolver.GetText("Under Attack - Research, Monitoring, Resorts");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianBases.Text = TextResolver.GetText("Under Attack - Civilian Bases");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackCivilianShips.Text = TextResolver.GetText("Under Attack - Civilian Ships");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Text = TextResolver.GetText("Under Attack - Colonies && Spaceports");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Text = TextResolver.GetText("Under Attack - Colony && Construction Ships");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackExplorationShips.Text = TextResolver.GetText("Under Attack - Exploration Ships");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackMilitaryShips.Text = TextResolver.GetText("Under Attack - Military Ships");
+            pnlGameOptionsMessages.chkOptionsScrollingMessageUnderAttackOtherStateBases.Text = TextResolver.GetText("Under Attack - Research, Monitoring, Resorts");
             pnlGameOptionsMessages.HeaderTitle = TextResolver.GetText("Message Settings");
-            btnGameOptionsShowMessages.Text = TextResolver.GetText("Show Message Settings");
+            pnlGameOptions.btnGameOptionsShowMessages.Text = TextResolver.GetText("Show Message Settings");
             pnlGameOptions.HeaderTitle = TextResolver.GetText("Options");
             pnlGameOptionsAdvancedDisplaySettings.HeaderTitle = TextResolver.GetText("Advanced Display Settings");
             pnlGameOptionsEmpireSettings.HeaderTitle = TextResolver.GetText("Other Empire Settings");
@@ -4986,17 +4988,17 @@ namespace DistantWorlds
             pnlQuickStart.HeaderTitle = TextResolver.GetText("Quick Start");
             pnlThemes.HeaderTitle = TextResolver.GetText("Change Theme");
             FtIzCrmve5.HeaderTitle = TextResolver.GetText("Tutorials");
-            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Text = TextResolver.GetText("Galaxy View - Ship Display");
-            grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Text = TextResolver.GetText("Maximum Framerate");
+            pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Text = TextResolver.GetText("Galaxy View - Ship Display");
+            pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Text = TextResolver.GetText("Maximum Framerate");
             grpGameOptionsDefaultEngagementStances.Text = TextResolver.GetText("Default Engagement Stances - Auto");
             grpGameOptionsDefaultEngagementStancesManual.Text = TextResolver.GetText("Default Engagement Stances - Manual");
             grpGameOptionsFleetAttackSettings.Text = TextResolver.GetText("Fleet Attack Settings");
-            grpOptionsAutoSave.Text = TextResolver.GetText("Auto Save");
-            grpOptionsControl.Text = TextResolver.GetText("Automation");
-            grpOptionsDisplaySettings.Text = TextResolver.GetText("Display Settings");
-            grpOptionsPopupMessages.Text = TextResolver.GetText("Popup Messages");
-            grpOptionsScrollingMessages.Text = TextResolver.GetText("Scrolling Messages");
-            grpOptionsVolume.Text = TextResolver.GetText("Sound Volume");
+            pnlGameOptions.grpOptionsAutoSave.Text = TextResolver.GetText("Auto Save");
+            pnlGameOptions.grpOptionsControl.Text = TextResolver.GetText("Automation");
+            pnlGameOptions.grpOptionsDisplaySettings.Text = TextResolver.GetText("Display Settings");
+            pnlGameOptions.grpOptionsPopupMessages.Text = TextResolver.GetText("Popup Messages");
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Text = TextResolver.GetText("Scrolling Messages");
+            pnlGameOptions.grpOptionsVolume.Text = TextResolver.GetText("Sound Volume");
         }
 
         private void method_219(ComboBox comboBox_0)
