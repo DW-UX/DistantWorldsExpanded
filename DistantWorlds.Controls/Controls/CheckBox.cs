@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 
@@ -24,7 +25,11 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
   protected override void OnPaint(PaintEventArgs e) {
     base.OnPaintBackground(e);
     var g = e.Graphics;
-    g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+    g.CompositingQuality = CompositingQuality.HighQuality;
+    g.SmoothingMode = SmoothingMode.HighQuality;
+    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
     var side = Math.Min(ClientSize.Width, ClientSize.Height);
     var state = Checked ? ButtonState.Checked : ButtonState.Normal;
 
@@ -42,7 +47,7 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
           Padding.Top,
           ClientSize.Width - side - Padding.Left,
           side);
-        FitTextAndFontToRect(g, stringRect);
+        FitTextAndFontToRect(g, stringRect, DeviceDpi);
         g.DrawString(Text, Font, _foreBrush, stringRect);
         break;
       }
@@ -56,7 +61,7 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
           x - Padding.Left,
           side
         );
-        FitTextAndFontToRect(g, stringRect);
+        FitTextAndFontToRect(g, stringRect, DeviceDpi);
         g.DrawString(Text, Font, _foreBrush, stringRect);
         break;
       }
@@ -65,16 +70,21 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
     }
   }
 
-  private void FitTextAndFontToRect(Graphics g, in RectangleF stringRect) {
+  private void FitTextAndFontToRect(Graphics g, in RectangleF stringRect, int deviceDpi) {
     // measure string and update font to fit the box
-    while (g.MeasureString(Text, Font).Width
-           > stringRect.Width) {
-      var step = 0.1f;
-      var newFont = Font;
-      while (MathF.Abs(newFont.Size - Font.Size) < 0.001f)
-        newFont = new(Font.FontFamily, Font.Size - step, Font.Style);
-      Font = newFont;
-    }
+    var step = Font.Unit switch {
+      GraphicsUnit.Pixel => 1f,
+      GraphicsUnit.Inch => 1f / deviceDpi,
+      GraphicsUnit.Display => 1f / (deviceDpi / 75f),
+      GraphicsUnit.Document => 1f / (deviceDpi / 300f),
+      GraphicsUnit.Millimeter => 1f / (deviceDpi / 25.4f),
+      GraphicsUnit.Point => 1f / (deviceDpi / 72f),
+      _ => throw new NotImplementedException()
+    };
+    
+    var width = stringRect.Width + 1;
+    while (g.MeasureString(Text, Font).Width > width)
+      Font = new(Font.FontFamily, Font.Size - step, Font.Style, Font.Unit);
   }
 
 }

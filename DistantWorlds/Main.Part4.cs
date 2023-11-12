@@ -4585,7 +4585,9 @@ namespace DistantWorlds {
                 method_154();
             }
             pnlGameOptionsAdvancedDisplaySettings.Size = new Size(440, 500);
-            pnlGameOptionsAdvancedDisplaySettings.Location = new Point((base.Width - pnlGameOptionsAdvancedDisplaySettings.Width) / 2, (base.Height - pnlGameOptionsAdvancedDisplaySettings.Height) / 2);
+            pnlGameOptionsAdvancedDisplaySettings.Location = new Point(
+                (base.Width - pnlGameOptionsAdvancedDisplaySettings.Width) / 2,
+                (base.Height - pnlGameOptionsAdvancedDisplaySettings.Height) / 2);
             pnlGameOptionsAdvancedDisplaySettings.DoLayout();
             grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Size = new Size(400, 60);
             grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Font = font_2;

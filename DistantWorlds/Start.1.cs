@@ -1539,7 +1539,7 @@ namespace DistantWorlds
             var sliderLabelX = lblOptionsMainViewScrollSpeed.Location.X;
             var sliderLabelY = 24;
             var sliderLineHeight = 16;
-            var sliderYGap = 10;
+            var sliderYGap = 6;
             var sliderWidth = 515;
             var sliderX = 130;
             var sliderY = 26;
@@ -2289,8 +2289,8 @@ namespace DistantWorlds
             }
 
             options.GuiScale = sldOptionsMainViewGuiScale.Value / 1000.0;
-            var guiScale = (float)options.GuiScale;
-            main_0.Scale(new SizeF(guiScale, guiScale));
+            //var guiScale = (float)options.GuiScale;
+            //main_0.Scale(new SizeF(guiScale, guiScale));
             
             options.ShowSystemNebulae = chkOptionsShowSystemNebulae.Checked;
             options.MusicVolume = (double)sldOptionsMusicVolume.Value / 100.0;
@@ -2866,7 +2866,9 @@ namespace DistantWorlds
         private void method_184()
         {
             pnlGameOptionsAdvancedDisplaySettings.Size = new Size(440, 520);
-            pnlGameOptionsAdvancedDisplaySettings.Location = new Point((base.Width - pnlGameOptionsAdvancedDisplaySettings.Width) / 2, (base.Height - pnlGameOptionsAdvancedDisplaySettings.Height) / 2);
+            pnlGameOptionsAdvancedDisplaySettings.Location = new Point(
+                (base.Width - pnlGameOptionsAdvancedDisplaySettings.Width) / 2,
+                (base.Height - pnlGameOptionsAdvancedDisplaySettings.Height) / 2);
             pnlGameOptionsAdvancedDisplaySettings.DoLayout();
             grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Size = new Size(400, 60);
             grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Font = font_7;

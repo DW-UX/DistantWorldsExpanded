@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,20 +31,40 @@ internal static class Class5
     //private static int int_8;
     //private static int int_9;
     internal static Splash _Splash;
+    
+    static bool _isExiting = false;
     internal static void smethod_0()
     {
-        try
-        {
+        var gcThread = new Thread(static () => {
+            for (;;) {
+                if (_isExiting) return;
+                GC.Collect(0, GCCollectionMode.Forced, false, false);
+                if (_isExiting) return;
+                try {
+                    Thread.Sleep(1000 / 30);
+                }
+                catch (ThreadInterruptedException) {
+                    if (_isExiting) return;
+                }
+            }
+        }) { IsBackground = true, Name = "GC Watcher Thread"};
+        try {
+            GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
+            gcThread.Start();
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetCompatibleTextRenderingDefault(true);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
                 //UxTheme.SetThemeAppProperties(default); // disable visual styles?
+                Application.SetHighDpiMode(HighDpiMode.DpiUnawareGdiScaled);
             }
+
             Size size = Screen.GetBounds(new Point(0, 0)).Size;
-            if ((size.Width < 1024 || size.Height < 768) && MessageBox.Show("Distant Worlds requires a screen resolution of at least 1024 x 768.\n\nYou should change the resolution of your Windows desktop and restart.\n\nYou may choose to continue, but some aspects of Distant Worlds may not work properly.\n\nDo you wish to continue loading Distant Worlds with a low screen resolution?", "Screen resolution", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            if ((size.Width < 1024 || size.Height < 768)
+                && MessageBox.Show(
+                    "Distant Worlds requires a screen resolution of at least 1024 x 768.\n\nYou should change the resolution of your Windows desktop and restart.\n\nYou may choose to continue, but some aspects of Distant Worlds may not work properly.\n\nDo you wish to continue loading Distant Worlds with a low screen resolution?",
+                    "Screen resolution", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                 Environment.Exit(-1);
-            Task tr = Task.Factory.StartNew(() =>
-            {
+            Task tr = Task.Factory.StartNew(() => {
                 _Splash = new Splash();
                 Application.Run(_Splash);
             });
@@ -51,15 +72,18 @@ internal static class Class5
             Application.Run(start);
 
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             Main.CrashDump(ex);
-            if (_Splash != null)
-            {
+            if (_Splash != null) {
                 _Splash.Stop();
                 _Splash = null;
             }
+
             throw;
+        }
+        finally {
+            _isExiting = true;
+            gcThread.Interrupt();   
         }
     }
     private static void smethod_1()

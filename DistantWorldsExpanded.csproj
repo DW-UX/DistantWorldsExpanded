@@ -13,11 +13,12 @@
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<ApplicationIcon>DistantWorlds.ico</ApplicationIcon>
 		<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
-		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x86'">$(DefineConstants);WIN_32</DefineConstants>
-		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x64'">$(DefineConstants);WIN_64</DefineConstants>
+		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x86'">$(DefineConstants);WIN32</DefineConstants>
+		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x64'">$(DefineConstants);WIN64</DefineConstants>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'==''">$(DefineConstants);ANY_PLATFORM</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup>
+		<DebuggerSupport>true</DebuggerSupport>
 		<UseSystemResourceKeys Condition="'$(Configuration)'=='Debug'">false</UseSystemResourceKeys>
 		<ServerGarbageCollection>true</ServerGarbageCollection>
 		<!--<InvariantGlobalization>true</InvariantGlobalization>-->
