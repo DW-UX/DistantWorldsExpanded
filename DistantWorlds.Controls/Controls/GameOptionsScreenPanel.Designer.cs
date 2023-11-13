@@ -34,7 +34,7 @@ partial class GameOptionsScreenPanel {
     
     // child control constructors
     this.btnGameOptionsShowMessages = new DistantWorlds.Controls.GlassButton();
-    this.chkOptionsLoadedGamesPaused = new();
+    this.chkOptionsLoadedGamesPaused = new DistantWorlds.Controls.CheckBox();
     this.grpOptionsAutoSave = new System.Windows.Forms.GroupBox();
 
     this.lblOptionsMouseScrollMode = new System.Windows.Forms.Label();
@@ -42,9 +42,9 @@ partial class GameOptionsScreenPanel {
     this.grpOptionsDisplaySettings = new System.Windows.Forms.GroupBox();
 
     this.numOptionsAutoSaveMinutes = new System.Windows.Forms.NumericUpDown();
-    this.chkOptionsAutoSave = new();
+    this.chkOptionsAutoSave = new DistantWorlds.Controls.CheckBox();
 
-    this.chkOptionsAutoPauseInPopup = new();
+    this.chkOptionsAutoPauseInPopup = new DistantWorlds.Controls.CheckBox();
     this.grpOptionsVolume = new System.Windows.Forms.GroupBox();
 
     this.grpOptionsControl = new System.Windows.Forms.GroupBox();
@@ -66,26 +66,26 @@ partial class GameOptionsScreenPanel {
 
     this.grpOptionsPopupMessages = new System.Windows.Forms.GroupBox();
     
-    this.chkOptionsPopupMessageExploration = new();
-    this.chkOptionsPopupMessageIntelligenceMissions = new();
-    this.chkOptionsPopupMessageResearchBreakthrough = new();
-    this.chkOptionsPopupMessageEmpireMetDestroyed = new();
-    this.chkOptionsPopupMessageColonyGainLoss = new();
-    this.chkOptionsPopupMessageDiplomacyWarTradeSanctions = new();
-    this.chkOptionsPopupMessageDiplomacyTreaties = new();
-    this.chkOptionsPopupMessageRequestWarning = new();
-    this.chkOptionsPopupMessageShipBuilt = new();
+    this.chkOptionsPopupMessageExploration =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageIntelligenceMissions =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageResearchBreakthrough =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageEmpireMetDestroyed =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageColonyGainLoss =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageDiplomacyWarTradeSanctions =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageDiplomacyTreaties =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageRequestWarning =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageShipBuilt =new  DistantWorlds.Controls.CheckBox();
 
     this.pnlOptionsAutomationMode = new System.Windows.Forms.Panel();
     this.lblOptionsAutomationMode = new System.Windows.Forms.Label();
 
     this.lblOptionsControlOfferPirateMissions = new System.Windows.Forms.Label();
     this.cmbOptionsControlOfferPirateMissions = new System.Windows.Forms.ComboBox();
-    this.chkOptionsControlCharacterLocations = new();
-    this.chkOptionsControlPopulationPolicy = new();
+    this.chkOptionsControlCharacterLocations =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsControlPopulationPolicy =new  DistantWorlds.Controls.CheckBox();
     this.lblOptionsControlColonyFacilities = new System.Windows.Forms.Label();
     this.cmbOptionsControlColonyFacilities = new System.Windows.Forms.ComboBox();
-    this.chkOptionsControlResearch = new();
+    this.chkOptionsControlResearch =new  DistantWorlds.Controls.CheckBox();
     this.btnGameOptionsEmpireSettings = new DistantWorlds.Controls.GlassButton();
     this.lblOptionsControlColonization = new System.Windows.Forms.Label();
     this.lblOptionsControlDiplomacyTreaties = new System.Windows.Forms.Label();
@@ -102,20 +102,20 @@ partial class GameOptionsScreenPanel {
     this.cmbOptionsControlAgentMissions = new System.Windows.Forms.ComboBox();
     this.cmbOptionsControlDiplomacyOffense = new System.Windows.Forms.ComboBox();
     this.cmbOptionsControlDiplomacyGifts = new System.Windows.Forms.ComboBox();
-    this.chkOptionsControlTroops = new();
-    this.chkOptionsControlColonyTaxRates = new();
-    this.chkOptionsControlFleets = new();
-    this.chkOptionsControlDesigns = new();
-    this.chkOptionsPopupMessageConstructionResourceShortage = new();
-    this.chkOptionsPopupMessageUnderAttackCivilianBases = new();
-    this.chkOptionsPopupMessageUnderAttackMilitaryShips = new();
-    this.chkOptionsPopupMessageUnderAttackExplorationShips = new();
-    this.chkOptionsPopupMessageUnderAttackOtherStateBases = new();
-    this.chkOptionsPopupMessageUnderAttackColonyConstructionShips = new();
-    this.chkOptionsPopupMessageUnderAttackColoniesSpaceports = new();
-    this.chkOptionsPopupMessageUnderAttackCivilianShips = new();
-    this.chkOptionsPopupMessageShipNeedsRefuelling = new();
-    this.chkOptionsPopupMessageShipMissionComplete = new();
+    this.chkOptionsControlTroops =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsControlColonyTaxRates =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsControlFleets =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsControlDesigns =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageConstructionResourceShortage =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageUnderAttackCivilianBases =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageUnderAttackMilitaryShips =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageUnderAttackExplorationShips =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageUnderAttackOtherStateBases =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageUnderAttackColonyConstructionShips =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageUnderAttackColoniesSpaceports =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageUnderAttackCivilianShips =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageShipNeedsRefuelling =new  DistantWorlds.Controls.CheckBox();
+    this.chkOptionsPopupMessageShipMissionComplete =new  DistantWorlds.Controls.CheckBox();
 
     // suspend layouts
     this.grpOptionsAutoSave.SuspendLayout();

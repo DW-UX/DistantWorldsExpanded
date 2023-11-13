@@ -4696,7 +4696,7 @@ namespace DistantWorlds
         {
             Application.UseWaitCursor = true;
             Cursor.Current = Cursors.WaitCursor;
-            method_2(lblThemeTitle.Text, bool_5: true, bool_6: true);
+            method_2(pnlThemes.lblThemeTitle.Text, bool_5: true, bool_6: true);
             Application.UseWaitCursor = false;
             Cursor.Current = Cursors.Default;
             method_27();
@@ -4911,8 +4911,6 @@ namespace DistantWorlds
             btnStartNewGameYourEmpirePrevious.Text = "<< " + TextResolver.GetText("Previous: Your Race");
             btnStartNewGameYourRaceNext.Text = TextResolver.GetText("Next: Your Empire") + " >>";
             btnStartNewGameYourRacePrevious.Text = "<< " + TextResolver.GetText("Previous: Colonization and Territory");
-            btnThemeCancel.Text = TextResolver.GetText("Cancel");
-            btnThemeSwitch.Text = TextResolver.GetText("Switch Theme");
             btnTutorialStartCancel.Text = TextResolver.GetText("Cancel");
             chkEncyclopediaShowAtStart.Text = TextResolver.GetText("Show this screen at startup");
             chkGalaxyNewEmpiresDuringGame.Text = TextResolver.GetText("Allow new Empires to appear during the game");
@@ -4986,7 +4984,6 @@ namespace DistantWorlds
             pnlGameOptionsEmpireSettings.HeaderTitle = TextResolver.GetText("Other Empire Settings");
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game");
             pnlQuickStart.HeaderTitle = TextResolver.GetText("Quick Start");
-            pnlThemes.HeaderTitle = TextResolver.GetText("Change Theme");
             FtIzCrmve5.HeaderTitle = TextResolver.GetText("Tutorials");
             pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Text = TextResolver.GetText("Galaxy View - Ship Display");
             pnlGameOptionsAdvancedDisplaySettings.grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Text = TextResolver.GetText("Maximum Framerate");

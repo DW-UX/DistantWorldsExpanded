@@ -12,8 +12,8 @@ using System.Windows.Forms;
 
 namespace DistantWorlds.Controls
 {
-  [Serializable]
-  public class BorderPanel : Panel
+    [Serializable]
+    public class BorderPanel : Panel
   {
     private int _BorderSize = 3;
     private Color _BorderColor1 = Color.FromArgb(96, 200, 200, 200);

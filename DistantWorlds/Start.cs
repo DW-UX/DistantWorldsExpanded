@@ -345,21 +345,8 @@ namespace DistantWorlds
 
         private LinkLabel lnkThemes;
 
-        private ScreenPanel pnlThemes;
+        private ThemesScreenPanel pnlThemes;
 
-        private GradientPanel pnlThemeDetail;
-
-        private SmoothLabel lblThemeDescription;
-
-        private SmoothLabel lblThemeTitle;
-
-        private GlassButton btnThemeSwitch;
-
-        private GlassButton btnThemeCancel;
-
-        private Label lblCurrentTheme;
-
-        private PictureBox picThemeImage;
         
         private LabelledTrackBar tbarStartNewGameYourEmpireCorruption;
 
@@ -595,7 +582,6 @@ namespace DistantWorlds
 
         private CheckBox chkStartNewGameTheGalaxyLoadExistingResources;
 
-        private SmoothLabel lblThemeGalaxyMaps;
 
         private CheckBox chkStartNewGameEnableGiantKaltors;
 
@@ -1054,7 +1040,7 @@ namespace DistantWorlds
                 pnlStartNewGameYourEmpireRace.SetFontCache(this);
                 pnlQuickStartDescription.SetFontCache(this);
                 ctlStartingEmpiresList.SetFontCache(this);
-                pnlThemeDetail.SetFontCache(this);
+                pnlThemes.pnlThemeDetail.SetFontCache(this);
                 ctlStartNewGameGalaxyMapsGalaxies.SetFontCache(this);
                 ctlStartNewGameGalaxyMapsEmpires.SetFontCache(this);
                 Size size = Screen.GetBounds(this).Size;
@@ -2546,35 +2532,20 @@ namespace DistantWorlds
             pnlThemes.Size = new Size(827, 681);
             pnlThemes.Location = new Point((base.Width - pnlThemes.Width) / 2, (base.Height - pnlThemes.Height) / 2);
             pnlThemes.DoLayout();
-            lblCurrentTheme.Font = font_7;
-            lblCurrentTheme.Location = new Point(10, 10);
-            pnlThemeDetail.Size = new Size(550, 530);
-            pnlThemeDetail.Location = new Point(250, 40);
-            lblThemeTitle.Font = font_9;
-            lblThemeTitle.ForeColor = Color.White;
-            lblThemeTitle.Location = new Point(10, 10);
-            lblThemeDescription.Font = font_5;
-            lblThemeDescription.Location = new Point(10, 45);
-            lblThemeDescription.MaximumSize = new Size(320, 480);
-            picThemeImage.Size = new Size(200, 200);
-            picThemeImage.Location = new Point(338, 45);
-            lblThemeGalaxyMaps.Location = new Point(338, 255);
-            lblThemeGalaxyMaps.Font = font_7;
-            lblThemeGalaxyMaps.MaximumSize = new Size(200, 100);
+            pnlThemes.lblThemeTitle.Font = font_9;
+            pnlThemes.lblThemeDescription.Font = font_5;
+            pnlThemes.lblThemeGalaxyMaps.Font = font_7;
             string text = main_0.gameOptions_0.CustomizationSetName;
             if (string.IsNullOrEmpty(text))
             {
                 text = "(Default)";
             }
-            lblCurrentTheme.Text = TextResolver.GetText("Current Theme") + ": " + text;
+            pnlThemes.lblCurrentTheme.Font = font_7;
+            pnlThemes.lblCurrentTheme.Text = TextResolver.GetText("Current Theme") + ": " + text;
             method_28(text);
             pnlThemes.DoLayout();
-            btnThemeSwitch.Font = font_7;
-            btnThemeCancel.Font = font_7;
-            btnThemeCancel.Size = new Size(200, 30);
-            btnThemeCancel.Location = new Point(250, 580);
-            btnThemeSwitch.Size = new Size(340, 30);
-            btnThemeSwitch.Location = new Point(460, 580);
+            pnlThemes.btnThemeSwitch.Font = font_7;
+            pnlThemes.btnThemeCancel.Font = font_7;            
             pnlThemes.Visible = true;
             pnlThemes.BringToFront();
         }
@@ -2656,11 +2627,11 @@ namespace DistantWorlds
                 GalaxySummaryList galaxySummaryList = method_30(string.Empty);
                 if (galaxySummaryList.Count > 0)
                 {
-                    lblThemeGalaxyMaps.Text = string.Format(TextResolver.GetText("This theme has X galaxy maps available to play"), galaxySummaryList.Count.ToString("0"));
+                    pnlThemes.lblThemeGalaxyMaps.Text = string.Format(TextResolver.GetText("This theme has X galaxy maps available to play"), galaxySummaryList.Count.ToString("0"));
                 }
                 else
                 {
-                    lblThemeGalaxyMaps.Text = string.Empty;
+                    pnlThemes.lblThemeGalaxyMaps.Text = string.Empty;
                 }
                 if (string.IsNullOrEmpty(main_0.gameOptions_0.CustomizationSetName))
                 {
@@ -2681,21 +2652,21 @@ namespace DistantWorlds
                 GalaxySummaryList galaxySummaryList2 = method_30(text);
                 if (galaxySummaryList2.Count > 0)
                 {
-                    lblThemeGalaxyMaps.Text = string.Format(TextResolver.GetText("This theme has X galaxy maps available to play"), galaxySummaryList2.Count.ToString("0"));
+                    pnlThemes.lblThemeGalaxyMaps.Text = string.Format(TextResolver.GetText("This theme has X galaxy maps available to play"), galaxySummaryList2.Count.ToString("0"));
                 }
                 else
                 {
-                    lblThemeGalaxyMaps.Text = string.Empty;
+                    pnlThemes.lblThemeGalaxyMaps.Text = string.Empty;
                 }
                 if (text == main_0.gameOptions_0.CustomizationSetName)
                 {
                     enabled = false;
                 }
             }
-            btnThemeSwitch.Enabled = enabled;
-            lblThemeTitle.Text = text;
-            lblThemeDescription.Text = text2;
-            picThemeImage.Image = image;
+            pnlThemes.btnThemeSwitch.Enabled = enabled;
+            pnlThemes.lblThemeTitle.Text = text;
+            pnlThemes.lblThemeDescription.Text = text2;
+            pnlThemes.picThemeImage.Image = image;
         }
 
         private GalaxySummaryList method_30(string string_2)
