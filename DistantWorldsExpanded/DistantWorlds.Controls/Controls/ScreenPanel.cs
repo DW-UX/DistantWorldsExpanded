@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,6 +15,9 @@ using System.Windows.Forms.Layout;
 
 namespace DistantWorlds.Controls
 {
+  [Designer("DistantWorlds.Controls.Design.ScreenPanelDocumentDesigner, DwUxDesignHelper", typeof(IRootDesigner))]
+  [Designer("System.Windows.Forms.Design.ControlDesigner, System.Drawing.Design")]
+  [DesignerCategory("UserControl")]
   public class ScreenPanel : BorderPanel
   {
     private IContainer components;

@@ -13,6 +13,7 @@
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<ApplicationIcon>DistantWorlds.ico</ApplicationIcon>
 		<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x86'">$(DefineConstants);WIN32</DefineConstants>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x64'">$(DefineConstants);WIN64</DefineConstants>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'==''">$(DefineConstants);ANY_PLATFORM</DefineConstants>
@@ -91,11 +92,11 @@
 		<When Condition="'$(RuntimeIdentifier)'==''">
 			<ItemGroup>
 				<Reference Include="Facepunch.Steamworks.Win32">
-					<HintPath>deps/Facepunch.Steamworks.Win32.dll</HintPath>
+					<HintPath>../deps/Facepunch.Steamworks.Win32.dll</HintPath>
 					<Aliases>w32</Aliases>
 				</Reference>
 				<Reference Include="Facepunch.Steamworks.Win64">
-					<HintPath>deps/Facepunch.Steamworks.Win64.dll</HintPath>
+					<HintPath>../deps/Facepunch.Steamworks.Win64.dll</HintPath>
 					<Aliases>w64</Aliases>
 				</Reference>
 			</ItemGroup>
@@ -103,7 +104,7 @@
 		<When Condition="'$(RuntimeIdentifier)'=='win-x64'">
 			<ItemGroup>
 				<Reference Include="Facepunch.Steamworks.Win64">
-					<HintPath>deps/Facepunch.Steamworks.Win64.dll</HintPath>
+					<HintPath>../deps/Facepunch.Steamworks.Win64.dll</HintPath>
 					<Aliases>w64</Aliases>
 				</Reference>
 			</ItemGroup>
@@ -111,7 +112,7 @@
 		<When Condition="'$(RuntimeIdentifier)'=='win-x86'">
 			<ItemGroup>
 				<Reference Include="Facepunch.Steamworks.Win32">
-					<HintPath>deps/Facepunch.Steamworks.Win32.dll</HintPath>
+					<HintPath>../deps/Facepunch.Steamworks.Win32.dll</HintPath>
 					<Aliases>w32</Aliases>
 				</Reference>
 			</ItemGroup>
@@ -216,6 +217,12 @@
 		<EmbeddedResource Include="DistantWorlds\Resources\Forgotte.ttf">
 			<LogicalName>DistantWorlds.Resources.Forgotte.ttf</LogicalName>
 		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\DwUxDesignHelper\DwUxDesignHelper.csproj">
+		  <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		  <PrivateAssets>all</PrivateAssets>
+	  </ProjectReference>
 	</ItemGroup>
 	<!--for auditing logical names of embedded resources-->
 	<!--<Target Name="AuditResx" BeforeTargets="Build">
