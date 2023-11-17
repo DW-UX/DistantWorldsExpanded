@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gradientPanel1 = new DistantWorlds.Controls.GradientPanel();
-            this.chkRepeat = new();
+            this.chkRepeat = new CheckBox();
             this.cmbTarget = new System.Windows.Forms.ComboBox();
             this.cmbSource = new System.Windows.Forms.ComboBox();
             this.btnCancel = new DistantWorlds.Controls.GlassButton();
