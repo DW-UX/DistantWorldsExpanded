@@ -6,9 +6,9 @@
 
 namespace DistantWorlds.Controls
 {
-  public enum BrushType
-  {
-    Solid,
-    Gradient,
-  }
+    public enum BrushType
+    {
+        Solid,
+        Gradient,
+    }
 }

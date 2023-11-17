@@ -48,20 +48,20 @@
 		<KnownFrameworkReference Update="Microsoft.WindowsDesktop.App.WindowsForms" IsWindowsOnly="false" />
 	</ItemGroup>
 	<ItemGroup>
-		<FormCandidate Include="**/Forms/*.cs"/>
+		<FormCandidate Include="**/Forms/*.cs" />
 		<Compile Remove="@(FormCandidate)" />
 		<Compile Include="@(FormCandidate)" Exclude="**/Forms/*.Designer.cs">
 			<SubType>Form</SubType>
 		</Compile>
-		<Compile Include="**/Forms/*.Designer.cs"/>
+		<Compile Include="**/Forms/*.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<ControlCandidate Include="**/Controls/*.cs"/>
+		<ControlCandidate Include="**/Controls/*.cs" />
 		<Compile Remove="@(ControlCandidate)" />
 		<Compile Include="@(ControlCandidate)" Exclude="**/Controls/*.Designer.cs">
 			<SubType>UserControl</SubType>
 		</Compile>
-		<Compile Include="**/Controls/*.Designer.cs"/>
+		<Compile Include="**/Controls/*.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Remove="DistantWorlds.Controls\Mods\**" />
