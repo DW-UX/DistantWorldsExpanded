@@ -56,6 +56,14 @@
 		<Compile Include="**/Forms/*.Designer.cs"/>
 	</ItemGroup>
 	<ItemGroup>
+		<ControlCandidate Include="**/Controls/*.cs"/>
+		<Compile Remove="@(ControlCandidate)" />
+		<Compile Include="@(ControlCandidate)" Exclude="**/Forms/*.Designer.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Include="**/Controls/*.Designer.cs"/>
+	</ItemGroup>
+	<ItemGroup>
 		<Compile Remove="DistantWorlds.Controls\Mods\**" />
 		<Compile Remove="DistantWorlds.Types\EM interface\**" />
 		<Compile Remove="DistantWorlds.Types\Mods\**" />
@@ -68,84 +76,6 @@
 		<None Remove="DistantWorlds.Types\EM interface\**" />
 		<None Remove="DistantWorlds.Types\Mods\**" />
 		<None Remove="DistantWorlds\Mods\**" />
-		<Compile Update="DistantWorlds.Controls\Controls\CheckBox.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds.Controls\Controls\Form.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsScreenPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsAdvancedDisplaySettingsScreenPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsMessagesScreenPanel.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<!--<Compile Update="ExpansionMod.Controls/Forms/fAddNewHotkey.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Update="ExpansionMod.Controls/Forms/fHotKeysMain.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Update="ExpansionMod.Controls/Forms/fRepairPriority.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Update="ExpansionMod.Controls/Forms/fRepairPriorityRename.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\EmpireSummaryBonuses.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\EmpireSummaryBonusesTitle.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\EmpireSummaryBuiltObject.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\EmpireSummaryColony.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\EmpireSummaryEconomy.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\GalaxyMap.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\HyperlinkOptionsBox.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\MainView.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\ResearchLevelSlider.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\ScrollingLinkList.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\Controls\SystemView.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\ResearchLevels.cs">
-			<SubType>UserControl</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\RelatedEncyclopediaItemsBox.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="DistantWorlds\PersistentScrollablePanel.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="BaconDistantWorlds/Forms/SelectCargoMissionTargets.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Update="BaconDistantWorlds/Forms/SelectMiningDeliveryTarget.cs">
-			<SubType>Form</SubType>
-		</Compile>
-		<Compile Update="BaconDistantWorlds/Forms/SelectPassengerMissionTargets.cs">
-			<SubType>Form</SubType>
-		</Compile>-->
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="DotNetZip" Version="1.16.0" />
