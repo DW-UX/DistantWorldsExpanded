@@ -9,8 +9,9 @@
 
     <!-- hacks -->
     <PropertyGroup>
+        <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+        <OutDir>$(MSBuildThisFileDirectory)bin</OutDir>
         <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-        <OutDir>bin</OutDir>
         <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
         <XnaFormsPackage>MonoGame.Forms.DX</XnaFormsPackage>
         <XnaFormsVersion>3.2.0</XnaFormsVersion>
