@@ -6,6 +6,7 @@
 
 using System;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -14,6 +15,9 @@ using System.Windows.Forms;
 
 namespace DistantWorlds.Controls
 {
+  [Designer("DistantWorlds.Controls.Design.GenericControlDocumentDesigner, DwUxDesignHelper", typeof(IRootDesigner))]
+  //[Designer("System.Windows.Forms.Design.ControlDesigner, System.Drawing.Design")]
+  [DesignerCategory("UserControl")]
   public class ListViewBase : UserControl
   {
     private IFontCache _FontCache;

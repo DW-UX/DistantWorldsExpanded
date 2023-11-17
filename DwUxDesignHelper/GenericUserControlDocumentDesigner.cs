@@ -5,10 +5,10 @@ using System.Windows.Forms.Design;
 
 namespace DistantWorlds.Controls.Design;
 
-[ToolboxItemFilter("DistantWorlds.Controls.ScreenPanel", ToolboxItemFilterType.Custom)]
-internal class ScreenPanelDocumentDesigner : DocumentDesigner {
+[ToolboxItemFilter("System.Windows.Forms.Control", ToolboxItemFilterType.Allow)]
+internal class GenericControlDocumentDesigner : DocumentDesigner {
 
-  public ScreenPanelDocumentDesigner()
+  public GenericControlDocumentDesigner()
     => AutoResizeHandles = true;
 
   private Size Size {
@@ -27,7 +27,7 @@ internal class ScreenPanelDocumentDesigner : DocumentDesigner {
     for (var i = 0; i < shadowProps.Length; i++) {
       if (properties[shadowProps[i]] is PropertyDescriptor prop)
         properties[shadowProps[i]] = TypeDescriptor.CreateProperty
-          (typeof(ScreenPanelDocumentDesigner), prop, empty);
+          (typeof(GenericControlDocumentDesigner), prop, empty);
     }
   }
 
