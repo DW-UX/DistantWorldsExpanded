@@ -4602,7 +4602,7 @@ namespace DistantWorlds {
             return bitmap;
         }
 
-        private void method_377(Panel panel_1)
+        private void method_377(System.Windows.Forms.Panel panel_1)
         {
             if (Environment.ProcessorCount > 1)
             {

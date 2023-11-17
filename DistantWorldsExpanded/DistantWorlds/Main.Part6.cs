@@ -4109,7 +4109,7 @@ namespace DistantWorlds {
             method_442(null);
         }
 
-        private void method_442(Panel panel_1)
+        private void method_442(System.Windows.Forms.Panel panel_1)
         {
             if (panel_1 != pnlBuiltObjectInfo)
             {
@@ -4219,7 +4219,7 @@ namespace DistantWorlds {
             method_439(rectangle_);
         }
 
-        private void method_444(Panel panel_1)
+        private void method_444(System.Windows.Forms.Panel panel_1)
         {
             if (panel_1 == pnlBuiltObjectInfo)
             {

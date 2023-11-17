@@ -59,7 +59,7 @@ namespace DistantWorlds.Controls
     private Timer timerTimeout;
     private int _timeout;
     private TimeoutResult _timeoutResult;
-    private Panel panelIcon;
+    private System.Windows.Forms.Panel panelIcon;
     private TextBox rtbMessage;
     private Hashtable _buttonControlsTable = new Hashtable();
 

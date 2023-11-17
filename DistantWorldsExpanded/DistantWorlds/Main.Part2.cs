@@ -48,7 +48,7 @@ namespace DistantWorlds {
             int_64 += 25;
         }
 
-        private void method_611(Panel panel_1, string string_30, Font font_9, ref int int_64)
+        private void method_611(System.Windows.Forms.Panel panel_1, string string_30, Font font_9, ref int int_64)
         {
             Panel panel = new Panel();
             panel.BackColor = Color.FromArgb(96, 32, 64);
@@ -68,7 +68,7 @@ namespace DistantWorlds {
             int_64 += 35;
         }
 
-        private void method_612(Panel panel_1, string string_30, Font font_9, ref int int_64)
+        private void method_612(System.Windows.Forms.Panel panel_1, string string_30, Font font_9, ref int int_64)
         {
             SizeF sizeF = SizeF.Empty;
             using (Graphics graphics = panel_1.CreateGraphics())
@@ -88,7 +88,7 @@ namespace DistantWorlds {
             int_64 += (int)sizeF.Height + 2;
         }
 
-        private void method_613(Panel panel_1, int int_64, string string_30, string string_31, string string_32, Resource resource_0, ref int int_65)
+        private void method_613(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, Resource resource_0, ref int int_65)
         {
             ResourceDropDown resourceDropDown = new ResourceDropDown();
             resourceDropDown.BindData(font_3, _Game.Galaxy.ResourceSystem.Resources, _uiResourcesBitmaps, allowNullResource: true, allowCriticalResources: false);
@@ -101,7 +101,7 @@ namespace DistantWorlds {
             int_65 += 25;
         }
 
-        private void method_614(Panel panel_1, int int_64, string string_30, string string_31, string string_32, ColonyPopulationPolicy colonyPopulationPolicy_0, ref int int_65)
+        private void method_614(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, ColonyPopulationPolicy colonyPopulationPolicy_0, ref int int_65)
         {
             ColonyPopulationPolicyDropDown colonyPopulationPolicyDropDown = new ColonyPopulationPolicyDropDown();
             colonyPopulationPolicyDropDown.BindData();
@@ -114,7 +114,7 @@ namespace DistantWorlds {
             int_65 += 25;
         }
 
-        private void method_615(Panel panel_1, int int_64, string string_30, string string_31, string string_32, DesignList designList_0, Design design_3, ref int int_65)
+        private void method_615(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, DesignList designList_0, Design design_3, ref int int_65)
         {
             DesignDropDown designDropDown = new DesignDropDown();
             designDropDown.BindData(designList_0, builtObjectImageCache_0.GetImagesSmall(), _Game.Galaxy.IndependentEmpire, allowNullDesign: true);
@@ -127,7 +127,7 @@ namespace DistantWorlds {
             int_65 += 25;
         }
 
-        private void method_616(Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, BuiltObjectFleeWhen builtObjectFleeWhen_0, ref int int_65)
+        private void method_616(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, BuiltObjectFleeWhen builtObjectFleeWhen_0, ref int int_65)
         {
             ComboBox comboBox = new ComboBox();
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -155,7 +155,7 @@ namespace DistantWorlds {
             int_65 += 25;
         }
 
-        private void method_617(Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, double double_7, ref int int_65)
+        private void method_617(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, double double_7, ref int int_65)
         {
             ComboBox comboBox = new ComboBox();
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -172,7 +172,7 @@ namespace DistantWorlds {
             int_65 += 25;
         }
 
-        private void method_618(Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, double double_7, ref int int_65)
+        private void method_618(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, double double_7, ref int int_65)
         {
             ComboBox comboBox = new ComboBox();
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -189,7 +189,7 @@ namespace DistantWorlds {
             int_65 += 25;
         }
 
-        private void method_619(Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, int int_65, ref int int_66)
+        private void method_619(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, int int_65, ref int int_66)
         {
             ComboBox comboBox = new ComboBox();
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -206,12 +206,12 @@ namespace DistantWorlds {
             int_66 += 25;
         }
 
-        private void method_620(Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, int int_65, ref int int_66)
+        private void method_620(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, int int_65, ref int int_66)
         {
             method_621(panel_1, int_64, string_30, string_31, string_32, string_33, int_65, 250, ref int_66);
         }
 
-        private void method_621(Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, int int_65, int int_66, ref int int_67)
+        private void method_621(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, string[] string_33, int int_65, int int_66, ref int int_67)
         {
             ComboBox comboBox = new ComboBox();
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -226,7 +226,7 @@ namespace DistantWorlds {
             int_67 += 25;
         }
 
-        private void method_622(Panel panel_1, string string_30, string[] string_31, int int_64, int int_65, int int_66)
+        private void method_622(System.Windows.Forms.Panel panel_1, string string_30, string[] string_31, int int_64, int int_65, int int_66)
         {
             int num = 190;
             ComboBox comboBox = new ComboBox();
@@ -248,7 +248,7 @@ namespace DistantWorlds {
             comboBox.BringToFront();
         }
 
-        private void method_623(Panel panel_1, string string_30, string string_31, int int_64, bool bool_28, int int_65, int int_66)
+        private void method_623(System.Windows.Forms.Panel panel_1, string string_30, string string_31, int int_64, bool bool_28, int int_65, int int_66)
         {
             CheckBox checkBox = new CheckBox();
             checkBox.Name = string_30;
@@ -270,7 +270,7 @@ namespace DistantWorlds {
             label.BringToFront();
         }
 
-        private void method_624(Panel panel_1, int int_64, string string_30, string string_31, string string_32, bool bool_28, ref int int_65)
+        private void method_624(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, bool bool_28, ref int int_65)
         {
             CheckBox checkBox = new CheckBox();
             checkBox.Checked = bool_28;
@@ -278,7 +278,7 @@ namespace DistantWorlds {
             int_65 += 25;
         }
 
-        private void method_625(Panel panel_1, int int_64, string string_30, string string_31, string string_32, float float_2, float float_3, float float_4, ref int int_65)
+        private void method_625(System.Windows.Forms.Panel panel_1, int int_64, string string_30, string string_31, string string_32, float float_2, float float_3, float float_4, ref int int_65)
         {
             NumericUpDown numericUpDown = new NumericUpDown();
             numericUpDown.Minimum = (decimal)float_2;
@@ -289,7 +289,7 @@ namespace DistantWorlds {
             int_65 += 25;
         }
 
-        private void method_626(Panel panel_1, Control control_1, int int_64, int int_65, string string_30, string string_31, string string_32, ref int int_66)
+        private void method_626(System.Windows.Forms.Panel panel_1, Control control_1, int int_64, int int_65, string string_30, string string_31, string string_32, ref int int_66)
         {
             control_1.Name = string_30;
             control_1.Parent = panel_1;

@@ -66,15 +66,25 @@
 		<Compile Update="DistantWorlds.Controls\Controls\Form.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
-		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsScreenPanel.cs">
-		  <SubType>UserControl</SubType>
+		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsScreenPanel.cs" />
+		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsAdvancedDisplaySettingsScreenPanel.cs" />
+		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsMessagesScreenPanel.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<FormCandidate Include="**/Forms/*.cs" />
+		<Compile Remove="@(FormCandidate)" />
+		<Compile Include="@(FormCandidate)" Exclude="**/Forms/*.Designer.cs">
+			<SubType>Form</SubType>
 		</Compile>
-		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsAdvancedDisplaySettingsScreenPanel.cs">
-		  <SubType>UserControl</SubType>
+		<Compile Include="**/Forms/*.Designer.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<ControlCandidate Include="**/Controls/*.cs" />
+		<Compile Remove="@(ControlCandidate)" />
+		<Compile Include="@(ControlCandidate)" Exclude="**/Controls/*.Designer.cs">
+			<SubType>UserControl</SubType>
 		</Compile>
-		<Compile Update="DistantWorlds.Controls\Controls\GameOptionsMessagesScreenPanel.cs">
-		  <SubType>UserControl</SubType>
-		</Compile>
+		<Compile Include="**/Controls/*.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="DotNetZip" Version="1.16.0" />
@@ -220,8 +230,8 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\DwUxDesignHelper\DwUxDesignHelper.csproj">
-		  <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
 		  <PrivateAssets>all</PrivateAssets>
+		  <Aliases>design</Aliases>
 	  </ProjectReference>
 	</ItemGroup>
 	<!--for auditing logical names of embedded resources-->

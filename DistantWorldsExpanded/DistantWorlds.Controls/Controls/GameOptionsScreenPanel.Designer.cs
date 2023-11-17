@@ -1138,7 +1138,7 @@ this.chkOptionsControlResearch.AutoSize = true;
         internal Label lblOptionsAutomationMode;
 
 
-        internal Panel pnlOptionsAutomationMode;
+        internal System.Windows.Forms.Panel pnlOptionsAutomationMode;
         internal Label lblOptionsControlOfferPirateMissions;
 
         internal ComboBox cmbOptionsControlOfferPirateMissions;

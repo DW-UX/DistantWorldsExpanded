@@ -488,7 +488,7 @@ namespace DistantWorlds
 
         private Label lblDesignWeaponRangeMaximum;
 
-        private Panel pnlDesignComponentsHighlight;
+        private System.Windows.Forms.Panel pnlDesignComponentsHighlight;
 
         private BorderPanel pnlDiplomacyTalk;
 
@@ -1088,7 +1088,7 @@ namespace DistantWorlds
 
         private Label lblGameEndComment;
 
-        private Panel pnlEventMessageContainer;
+        private System.Windows.Forms.Panel pnlEventMessageContainer;
 
         private Label lblEventMessageText;
 
@@ -1124,7 +1124,7 @@ namespace DistantWorlds
 
         private ComboBox cmbOptionsAutomationMode;
 
-        private Panel pnlOptionsAutomationMode;
+        private System.Windows.Forms.Panel pnlOptionsAutomationMode;
 
         private Label lblOptionsAutomationMode;
 
@@ -1312,7 +1312,7 @@ namespace DistantWorlds
 
         private LinkLabel lnkDiplomacyPirates;
 
-        private Panel pnlStoryEvent;
+        private System.Windows.Forms.Panel pnlStoryEvent;
 
         private LabelDropshadow lblStoryEventText;
 
@@ -1452,7 +1452,7 @@ namespace DistantWorlds
 
         private ResearchTree pnlResearchTree;
 
-        private Panel WdosRcovZt;
+        private System.Windows.Forms.Panel WdosRcovZt;
 
         private GlassButton btnResearchFacilities;
 
@@ -1530,9 +1530,9 @@ namespace DistantWorlds
 
         private GlassButton WqesexberY;
 
-        private Panel pnlEmpirePolicyContainer;
+        private System.Windows.Forms.Panel pnlEmpirePolicyContainer;
 
-        private Panel nDrsqatloR;
+        private System.Windows.Forms.Panel nDrsqatloR;
 
         private GlassButton btnEmpireSummaryShowEmpirePolicy;
 
@@ -1552,15 +1552,15 @@ namespace DistantWorlds
 
         private Label lblBuildOrderDesign;
 
-        private Panel pnlBuildOrderCostColumn;
+        private System.Windows.Forms.Panel pnlBuildOrderCostColumn;
 
-        private Panel pnlBuildOrderPurchaseAmountColumn;
+        private System.Windows.Forms.Panel pnlBuildOrderPurchaseAmountColumn;
 
         private Label lblBuildOrderPurchaseAmount;
 
-        private Panel pnlBuildOrderCurrentAmountColumn;
+        private System.Windows.Forms.Panel pnlBuildOrderCurrentAmountColumn;
 
-        private Panel pnlBuildOrderContainer;
+        private System.Windows.Forms.Panel pnlBuildOrderContainer;
 
         private Label lblBuildOrderTotalMaintenance;
 
@@ -1648,7 +1648,7 @@ namespace DistantWorlds
 
         private PictureBox picAdvisorSuggestionImage;
 
-        private Panel pnlAdvisorSuggestionDescriptionContainer;
+        private System.Windows.Forms.Panel pnlAdvisorSuggestionDescriptionContainer;
 
         private Label lblAdvisorSuggestionTitle;
 
@@ -1662,9 +1662,9 @@ namespace DistantWorlds
 
         private GradientPanel pnlColonyPopulationAttitudeSummaryBackground;
 
-        private Panel pnlColonyPopulationAttitudeSummaryContainer;
+        private System.Windows.Forms.Panel pnlColonyPopulationAttitudeSummaryContainer;
 
-        private Panel pnlGameRaceVictoryConditionsContainer;
+        private System.Windows.Forms.Panel pnlGameRaceVictoryConditionsContainer;
 
         private ScreenPanel pnlCharacterEventHistory;
 
@@ -1786,7 +1786,7 @@ namespace DistantWorlds
 
         private Label lblIntroductionWhatToDoPoints;
 
-        private Panel picIntroductionPlaystyle;
+        private System.Windows.Forms.Panel picIntroductionPlaystyle;
 
         private Label lblIntroductionPlaystyleIntro;
 
@@ -1820,7 +1820,7 @@ namespace DistantWorlds
 
         private GradientPanel pnlDesignWarningsBackground;
 
-        private Panel pnlDesignWarningsContainer;
+        private System.Windows.Forms.Panel pnlDesignWarningsContainer;
 
         private GroupBox grpGameOptionsDefaultEngagementStancesManual;
 
@@ -2128,7 +2128,7 @@ namespace DistantWorlds
 
         private System.Timers.Timer timer_0;
 
-        private Panel panel_0;
+        private System.Windows.Forms.Panel panel_0;
 
         private Size size_0;
 

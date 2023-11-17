@@ -33,7 +33,7 @@ namespace DistantWorlds.Controls
     private Font _TinyFont;
     private IContainer components;
     private EmpireListView _EmpireListView;
-    private Panel _Relations;
+    private System.Windows.Forms.Panel _Relations;
 
     public event DiplomaticRelationListView.RelationDoubleClickedEventHandler _RelationDoubleClicked;
 

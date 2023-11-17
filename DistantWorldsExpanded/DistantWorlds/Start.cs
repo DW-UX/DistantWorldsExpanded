@@ -227,11 +227,11 @@ namespace DistantWorlds
 
         private GameOptionsAdvancedDisplaySettingsScreenPanel pnlGameOptionsAdvancedDisplaySettings;
 
-        private Panel pnlStartNewGameVictoryConditions;
+        private System.Windows.Forms.Panel pnlStartNewGameVictoryConditions;
 
-        private Panel pnlStartNewGameYourEmpire;
+        private System.Windows.Forms.Panel pnlStartNewGameYourEmpire;
 
-        private Panel pnlStartNewGameOtherEmpires;
+        private System.Windows.Forms.Panel pnlStartNewGameOtherEmpires;
 
         private GlassButton btnStartNewGameYourEmpirePrevious;
 
@@ -283,7 +283,7 @@ namespace DistantWorlds
 
         private CheckBox chkGalaxyNewEmpiresDuringGame;
 
-        private Panel pnlStartNewGameTheGalaxy;
+        private System.Windows.Forms.Panel pnlStartNewGameTheGalaxy;
 
         private LabelledTrackBar tbarStartNewGameTheGalaxyPirates;
 
@@ -432,11 +432,11 @@ namespace DistantWorlds
 
         private ComboBox cmbVictoryThresholdPercentage;
 
-        private Panel pnlStartNewGameYourRace;
+        private System.Windows.Forms.Panel pnlStartNewGameYourRace;
 
         private GradientPanel pnlStartNewGameYourEmpireRace;
 
-        private Panel pnlStartNewGameYourEmpireRaceAttributesContainer;
+        private System.Windows.Forms.Panel pnlStartNewGameYourEmpireRaceAttributesContainer;
 
         private SmoothLabel lblStartNewGameYourEmpireRaceName;
 
@@ -454,11 +454,11 @@ namespace DistantWorlds
 
         private RaceSummaryPanel pnlStartNewGameYourEmpireRaceAttributes;
 
-        private Panel pnlStartNewGameVictoryConditionsGroup;
+        private System.Windows.Forms.Panel pnlStartNewGameVictoryConditionsGroup;
 
         private PictureBox picStartNewGameYourRaceImage;
 
-        private Panel pnlStartNewGameColonizationTerritory;
+        private System.Windows.Forms.Panel pnlStartNewGameColonizationTerritory;
 
         private LabelledTrackBar tbarStartNewGameTheGalaxyColonyPrevalence;
 
@@ -488,7 +488,7 @@ namespace DistantWorlds
 
         private Label lblStartNewGameColonizationTerritoryColonyInfluenceRangeSuggestion;
 
-        private Panel pnlStartNewGameYourEmpireType;
+        private System.Windows.Forms.Panel pnlStartNewGameYourEmpireType;
 
         private GlassButton btnStartNewGameYourEmpireTypeNormalShadows;
 
@@ -542,7 +542,7 @@ namespace DistantWorlds
 
         private GovernmentStyleDropDown cmbStartNewGameYourEmpireGovernment;
 
-        private Panel pnlStartNewGameGalaxyMaps;
+        private System.Windows.Forms.Panel pnlStartNewGameGalaxyMaps;
 
         private GlassButton btnStartNewGameGalaxyMapsStart;
 
@@ -585,7 +585,7 @@ namespace DistantWorlds
 
         private CheckBox chkStartNewGameEnableGiantKaltors;
 
-        private Panel pnlStartNewGameJumpStart;
+        private System.Windows.Forms.Panel pnlStartNewGameJumpStart;
 
         private GlassButton btnJumpStartTheGalaxyNext;
 
@@ -631,7 +631,7 @@ namespace DistantWorlds
 
         private GradientPanel pnlJumpStartYourEmpireRace;
 
-        private Panel pnlJumpStartYourEmpireRaceAttributesContainer;
+        private System.Windows.Forms.Panel pnlJumpStartYourEmpireRaceAttributesContainer;
 
         private RaceSummaryPanel pnlJumpStartYourEmpireRaceAttributes;
 
@@ -669,7 +669,7 @@ namespace DistantWorlds
 
         public ToolTip toolTip;
 
-        private Panel pnlJumpStartPiratePlaystyleDescriptionContainer;
+        private System.Windows.Forms.Panel pnlJumpStartPiratePlaystyleDescriptionContainer;
 
         private SmoothLabel lblActiveTheme;
 
@@ -695,9 +695,9 @@ namespace DistantWorlds
 
         private HoverMenuItem menuCredits;
 
-        private Panel pnlTopLeftCorner;
+        private System.Windows.Forms.Panel pnlTopLeftCorner;
 
-        private Panel pnlBottomLeftCorner;
+        private System.Windows.Forms.Panel pnlBottomLeftCorner;
 
         private LinkLabel lnkTutorialDealingWithPirates;
 
@@ -773,7 +773,7 @@ namespace DistantWorlds
 
         private System.Timers.Timer timer_0;
 
-        private Panel panel_0;
+        private System.Windows.Forms.Panel panel_0;
 
         private Size size_0;
 
@@ -2090,7 +2090,7 @@ namespace DistantWorlds
             return null;
         }
 
-        private void method_17(Panel panel_1)
+        private void method_17(System.Windows.Forms.Panel panel_1)
         {
             if (Environment.ProcessorCount > 1)
             {

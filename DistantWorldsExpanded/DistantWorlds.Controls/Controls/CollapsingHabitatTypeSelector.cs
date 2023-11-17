@@ -17,7 +17,7 @@ namespace DistantWorlds.Controls
   public class CollapsingHabitatTypeSelector : UserControl
   {
     private IContainer components;
-    private Panel MainPanel;
+    private System.Windows.Forms.Panel MainPanel;
     private ExtendedPanel cpnStar;
     private ExtendedPanel cpnGasCloud;
     private ExtendedPanel cpnPlanet;

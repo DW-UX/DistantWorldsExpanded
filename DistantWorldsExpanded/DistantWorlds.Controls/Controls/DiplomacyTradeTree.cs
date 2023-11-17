@@ -82,9 +82,9 @@ namespace DistantWorlds.Controls
 
         private PictureBox picFlag;
 
-        private Panel pnlTitleHeaderArea;
+        private System.Windows.Forms.Panel pnlTitleHeaderArea;
 
-        private Panel pnlSelectedHeaderArea;
+        private System.Windows.Forms.Panel pnlSelectedHeaderArea;
 
         public Empire Empire => _Empire;
 

@@ -3968,7 +3968,7 @@ namespace DistantWorlds {
             SetMainFocus();
         }
 
-        private EmpirePolicy method_597(Panel panel_1, Empire empire_5)
+        private EmpirePolicy method_597(System.Windows.Forms.Panel panel_1, Empire empire_5)
         {
             EmpirePolicy empirePolicy = new EmpirePolicy();
             if (_Game.PlayerEmpire.PirateEmpireBaseHabitat == null)
@@ -4200,7 +4200,7 @@ namespace DistantWorlds {
             return empirePolicy;
         }
 
-        private int method_598(Panel panel_1, string string_30)
+        private int method_598(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4221,7 +4221,7 @@ namespace DistantWorlds {
             return -1;
         }
 
-        private BuiltObjectFleeWhen method_599(Panel panel_1, string string_30)
+        private BuiltObjectFleeWhen method_599(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4242,7 +4242,7 @@ namespace DistantWorlds {
             return BuiltObjectFleeWhen.Shields20;
         }
 
-        private IndustryType method_600(Panel panel_1, string string_30)
+        private IndustryType method_600(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4265,7 +4265,7 @@ namespace DistantWorlds {
             return IndustryType.Undefined;
         }
 
-        private ColonyPopulationPolicy method_601(Panel panel_1, string string_30)
+        private ColonyPopulationPolicy method_601(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4278,7 +4278,7 @@ namespace DistantWorlds {
             return ColonyPopulationPolicy.Assimilate;
         }
 
-        private Design dFwNhteflw(Panel panel_1, string string_30)
+        private Design dFwNhteflw(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4291,7 +4291,7 @@ namespace DistantWorlds {
             return null;
         }
 
-        private Resource method_602(Panel panel_1, string string_30)
+        private Resource method_602(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4304,7 +4304,7 @@ namespace DistantWorlds {
             return null;
         }
 
-        private bool method_603(Panel panel_1, string string_30)
+        private bool method_603(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4317,7 +4317,7 @@ namespace DistantWorlds {
             return false;
         }
 
-        private float method_604(Panel panel_1, string string_30)
+        private float method_604(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4330,7 +4330,7 @@ namespace DistantWorlds {
             return 0f;
         }
 
-        private int method_605(Panel panel_1, string string_30)
+        private int method_605(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4343,7 +4343,7 @@ namespace DistantWorlds {
             return 0;
         }
 
-        private double method_606(Panel panel_1, string string_30)
+        private double method_606(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4391,7 +4391,7 @@ namespace DistantWorlds {
             return 1.0;
         }
 
-        private double method_607(Panel panel_1, string string_30)
+        private double method_607(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4426,7 +4426,7 @@ namespace DistantWorlds {
             return 1.0;
         }
 
-        private double method_608(Panel panel_1, string string_30)
+        private double method_608(System.Windows.Forms.Panel panel_1, string string_30)
         {
             if (panel_1 != null && panel_1.Controls != null && panel_1.Controls.Count > 0)
             {
@@ -4485,7 +4485,7 @@ namespace DistantWorlds {
             return 1.0;
         }
 
-        private void method_609(Panel panel_1, EmpirePolicy empirePolicy_0, Empire empire_5)
+        private void method_609(System.Windows.Forms.Panel panel_1, EmpirePolicy empirePolicy_0, Empire empire_5)
         {
             int num = 0;
             int int_ = 350;
