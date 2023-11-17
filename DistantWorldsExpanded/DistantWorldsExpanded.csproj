@@ -58,7 +58,7 @@
 	<ItemGroup>
 		<ControlCandidate Include="**/Controls/*.cs"/>
 		<Compile Remove="@(ControlCandidate)" />
-		<Compile Include="@(ControlCandidate)" Exclude="**/Forms/*.Designer.cs">
+		<Compile Include="@(ControlCandidate)" Exclude="**/Controls/*.Designer.cs">
 			<SubType>UserControl</SubType>
 		</Compile>
 		<Compile Include="**/Controls/*.Designer.cs"/>
