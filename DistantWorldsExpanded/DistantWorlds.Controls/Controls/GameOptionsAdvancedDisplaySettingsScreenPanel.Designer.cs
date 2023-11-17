@@ -35,24 +35,24 @@ partial class GameOptionsAdvancedDisplaySettingsScreenPanel {
     // child control constructors
             
     this.grpGameOptionsAdvancedDisplaySettingsGalaxyIcons = new System.Windows.Forms.GroupBox();
-    this.chkGameOptionsGalaxyDisplayAlwaysPirates = new();
-    this.chkGameOptionsGalaxyDisplayColonyShips = new();
-    this.chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips = new();
-    this.chkGameOptionsGalaxyDisplayAlwaysEnemyFleets = new();
-    this.chkGameOptionsGalaxyDisplayConstructionShips = new();
-    this.chkGameOptionsGalaxyDisplaySpacePorts = new();
-    this.chkGameOptionsGalaxyDisplayExplorationShips = new();
-    this.chkGameOptionsGalaxyDisplayResupplyShips = new();
-    this.chkGameOptionsGalaxyDisplayOtherBases = new();
-    this.chkGameOptionsGalaxyDisplayCivilianShips = new();
-    this.chkGameOptionsGalaxyDisplayFleets = new();
-    this.chkGameOptionsGalaxyDisplayMilitaryShips = new();
+    this.chkGameOptionsGalaxyDisplayAlwaysPirates = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayColonyShips = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayAlwaysEnemyFleets = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayConstructionShips = new CheckBox();
+    this.chkGameOptionsGalaxyDisplaySpacePorts = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayExplorationShips = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayResupplyShips = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayOtherBases = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayCivilianShips = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayFleets = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayMilitaryShips = new CheckBox();
     this.tbrGameOptionsAdvancedDisplaySettingsNebulaeDetail = new DistantWorlds.Controls.LabelledTrackBar();
-    this.chkOptionsShowSystemNebulae = new();
-    this.chkGameOptionsGalaxyDisplayCleanGalaxyView = new();
+    this.chkOptionsShowSystemNebulae = new CheckBox();
+    this.chkGameOptionsGalaxyDisplayCleanGalaxyView = new CheckBox();
     this.grpGameOptionsAdvancedDisplaySettingsMaximumFramerate = new System.Windows.Forms.GroupBox();
     this.numGameOptionsAdvancedDisplaySettingsMaximumFramerate = new System.Windows.Forms.NumericUpDown();
-    this.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited = new();
+    this.chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited = new CheckBox();
     this.lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS = new System.Windows.Forms.Label();
 
 
