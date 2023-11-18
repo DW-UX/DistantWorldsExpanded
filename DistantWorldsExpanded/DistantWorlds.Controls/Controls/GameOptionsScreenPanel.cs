@@ -1,11 +1,12 @@
 ﻿using System.Windows.Forms;
 
-namespace DistantWorlds.Controls; 
+namespace DistantWorlds.Controls;
 
-public partial class GameOptionsScreenPanel : ScreenPanel {
+public partial class GameOptionsScreenPanel : ScreenPanel
+{
 
-  public GameOptionsScreenPanel() {
-    InitializeComponent();
-  }
-
+    public GameOptionsScreenPanel()
+    {
+        InitializeComponent();
+    }
 }

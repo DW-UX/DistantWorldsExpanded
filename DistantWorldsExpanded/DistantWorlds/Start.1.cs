@@ -1527,16 +1527,56 @@ namespace DistantWorlds
 
         private void method_153()
         {
+            pnlGameOptions.SuspendLayout();
             PopulateOptionsValues();
-            pnlGameOptions.Size = new Size(700, 696);
-            pnlGameOptions.Location = new Point((base.Width - pnlGameOptions.Width) / 2, (base.Height - pnlGameOptions.Height) / 2);
-            pnlGameOptions.DoLayout();
-            pnlGameOptions.lblOptionsMainViewScrollSpeed.Font = font_1;
+            /*pnlGameOptions.lblOptionsMainViewScrollSpeed.Font = font_1;
             pnlGameOptions.lblOptionsMainViewZoomSpeed.Font = font_1;
             pnlGameOptions.lblOptionsMainViewStarFieldSize.Font = font_1;
-            pnlGameOptions.lblOptionsMainViewStarFieldSize.BringToFront();
+            pnlGameOptions.grpOptionsControl.Font = font_7;
+            pnlGameOptions.grpOptionsDisplaySettings.Font = font_7;
+            pnlGameOptions.grpOptionsPopupMessages.Font = font_7;
+            pnlGameOptionsMessages.grpOptionsScrollingMessages.Font = font_7;
+            pnlGameOptions.grpOptionsVolume.Font = font_7;
+            pnlGameOptions.lblOptionsMusicVolume.Font = font_1;
+            pnlGameOptions.lblOptionsSoundEffectsVolume.Font = font_1;
+            pnlGameOptions.lblOptionsMouseScrollMode.Font = font_1;
+            pnlGameOptions.chkOptionsLoadedGamesPaused.Font = font_1;
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Font = font_1;
+            pnlGameOptions.chkOptionsAutoSave.Font = font_1;
+            pnlGameOptions.grpOptionsAutoSave.Font = font_7;
+            pnlGameOptions.lblOptionsAutomationMode.Font = font_1;
+            pnlGameOptions.lblOptionsControlAgentMissions.Font = font_1;
+            pnlGameOptions.lblOptionsControlAttacks.Font = font_1;
+            pnlGameOptions.lblOptionsControlColonization.Font = font_1;
+            pnlGameOptions.lblOptionsControlColonyFacilities.Font = font_1;
+            pnlGameOptions.lblOptionsControlConstruction.Font = font_1;
+            pnlGameOptions.lblOptionsControlDiplomacyGifts.Font = font_1;
+            pnlGameOptions.lblOptionsControlDiplomacyOffense.Font = font_1;
+            pnlGameOptions.lblOptionsControlDiplomacyTreaties.Font = font_1;
+            pnlGameOptions.lblOptionsControlOfferPirateMissions.Font = font_1;
+            pnlGameOptions.cmbOptionsControlAgentMissions.Font = font_1;
+            pnlGameOptions.cmbOptionsControlAttacks.Font = font_1;
+            pnlGameOptions.cmbOptionsControlColonization.Font = font_1;
+            pnlGameOptions.cmbOptionsControlColonyFacilities.Font = font_1;
+            pnlGameOptions.cmbOptionsControlConstruction.Font = font_1;
+            pnlGameOptions.cmbOptionsControlDiplomacyGifts.Font = font_1;
+            pnlGameOptions.cmbOptionsControlDiplomacyOffense.Font = font_1;
+            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.Font = font_1;
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Font = font_1;
+            pnlGameOptions.chkOptionsControlCharacterLocations.Font = font_1;
+            pnlGameOptions.chkOptionsControlColonyTaxRates.Font = font_1;
+            pnlGameOptions.chkOptionsControlDesigns.Font = font_1;
+            pnlGameOptions.chkOptionsControlFleets.Font = font_1;
+            pnlGameOptions.chkOptionsControlPopulationPolicy.Font = font_1;
+            pnlGameOptions.chkOptionsControlResearch.Font = font_1;
+            pnlGameOptions.chkOptionsControlTroops.Font = font_1;
+            pnlGameOptions.cmbOptionsAutomationMode.Font = font_1;
+            pnlGameOptions.lblOptionsAutomationMode.Font = main_0.font_7;
+            */
             
-            var sliderLabelX = pnlGameOptions.lblOptionsMainViewScrollSpeed.Location.X;
+            //pnlGameOptions.lblOptionsMainViewStarFieldSize.BringToFront();
+            
+            /*var sliderLabelX = pnlGameOptions.lblOptionsMainViewScrollSpeed.Location.X;
             var sliderLabelY = 24;
             var sliderLineHeight = 16;
             var sliderYGap = 6;
@@ -1569,17 +1609,13 @@ namespace DistantWorlds
             pnlGameOptions.sldOptionsMainViewGuiScale.Size = new Size(sliderWidth, sliderLineHeight);
             
             sliderY += 16 + sliderYGap;
+            */
                 
             // maybe move to straddling the group panel border?
-            pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Location = new Point(395, sliderY);
-            pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Size = new Size(250, 26);
+            //pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Location = new Point(395, sliderY);
+            //pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Size = new Size(250, 26);
             
-            pnlGameOptions.grpOptionsControl.Font = font_7;
-            pnlGameOptions.grpOptionsDisplaySettings.Font = font_7;
-            pnlGameOptions.grpOptionsPopupMessages.Font = font_7;
-            pnlGameOptionsMessages.grpOptionsScrollingMessages.Font = font_7;
-            pnlGameOptions.grpOptionsVolume.Font = font_7;
-            pnlGameOptions.grpOptionsControl.Size = new Size(659, 291);
+            /*pnlGameOptions.grpOptionsControl.Size = new Size(659, 291);
             pnlGameOptions.grpOptionsDisplaySettings.Size = new Size(659, 134);
             pnlGameOptions.grpOptionsVolume.Size = new Size(659, 74);
             pnlGameOptionsMessages.grpOptionsScrollingMessages.Size = new Size(285, 230);
@@ -1588,25 +1624,18 @@ namespace DistantWorlds
             pnlGameOptions.grpOptionsPopupMessages.Location = new Point(307, 492);
             pnlGameOptions.grpOptionsDisplaySettings.Location = new Point(12, 7);
             pnlGameOptions.grpOptionsVolume.Location = new Point(12, 147);
-            pnlGameOptions.grpOptionsControl.Location = new Point(12, 288);
-            pnlGameOptions.lblOptionsMusicVolume.Font = font_1;
-            pnlGameOptions.lblOptionsSoundEffectsVolume.Font = font_1;
-            pnlGameOptions.lblOptionsMusicVolume.Location = new Point(17, 22);
+            pnlGameOptions.grpOptionsControl.Location = new Point(12, 288);*/
+            /*pnlGameOptions.lblOptionsMusicVolume.Location = new Point(17, 22);
             pnlGameOptions.lblOptionsSoundEffectsVolume.Location = new Point(17, 47);
             pnlGameOptions.sldOptionsMusicVolume.Location = new Point(81, 24);
             pnlGameOptions.sldOptionsMusicVolume.Size = new Size(568, 16);
             pnlGameOptions.sldOptionsSoundEffectsVolume.Location = new Point(81, 49);
-            pnlGameOptions.sldOptionsSoundEffectsVolume.Size = new Size(568, 16);
-            pnlGameOptions.lblOptionsMouseScrollMode.Font = font_1;
-            pnlGameOptions.chkOptionsLoadedGamesPaused.Font = font_1;
-            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Font = font_1;
-            pnlGameOptions.chkOptionsAutoSave.Font = font_1;
-            pnlGameOptions.lblOptionsMouseScrollMode.Location = new Point(195, 246);
+            pnlGameOptions.sldOptionsSoundEffectsVolume.Size = new Size(568, 16);*/
+            /*pnlGameOptions.lblOptionsMouseScrollMode.Location = new Point(195, 246);
             pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Size = new Size(250, 21);
             pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Location = new Point(341, 242);
-            pnlGameOptions.grpOptionsAutoSave.Location = new Point(12, 228);
-            pnlGameOptions.grpOptionsAutoSave.Font = font_7;
-            pnlGameOptions.grpOptionsAutoSave.Size = new Size(180, 54);
+            pnlGameOptions.grpOptionsAutoSave.Location = new Point(12, 228);*/
+            /*pnlGameOptions.grpOptionsAutoSave.Size = new Size(180, 54);
             pnlGameOptions.chkOptionsAutoSave.Text = string.Format(TextResolver.GetText("Every X minutes"), "              ");
             pnlGameOptions.chkOptionsAutoSave.Location = new Point(7, 19);
             pnlGameOptions.numOptionsAutoSaveMinutes.Location = new Point(72, 20);
@@ -1617,39 +1646,11 @@ namespace DistantWorlds
             pnlGameOptions.lblOptionsMouseScrollMode.Location = new Point(223, 258);
             pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Size = new Size(240, 21);
             pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Location = new Point(pnlGameOptions.chkOptionsLoadedGamesPaused.Location.X + pnlGameOptions.chkOptionsLoadedGamesPaused.Width - pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.Width, 254);
-            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.BringToFront();
-            pnlGameOptions.lblOptionsAutomationMode.Font = font_1;
-            pnlGameOptions.lblOptionsControlAgentMissions.Font = font_1;
-            pnlGameOptions.lblOptionsControlAttacks.Font = font_1;
-            pnlGameOptions.lblOptionsControlColonization.Font = font_1;
-            pnlGameOptions.lblOptionsControlColonyFacilities.Font = font_1;
-            pnlGameOptions.lblOptionsControlConstruction.Font = font_1;
-            pnlGameOptions.lblOptionsControlDiplomacyGifts.Font = font_1;
-            pnlGameOptions.lblOptionsControlDiplomacyOffense.Font = font_1;
-            pnlGameOptions.lblOptionsControlDiplomacyTreaties.Font = font_1;
-            pnlGameOptions.lblOptionsControlOfferPirateMissions.Font = font_1;
-            pnlGameOptions.cmbOptionsControlAgentMissions.Font = font_1;
-            pnlGameOptions.cmbOptionsControlAttacks.Font = font_1;
-            pnlGameOptions.cmbOptionsControlColonization.Font = font_1;
-            pnlGameOptions.cmbOptionsControlColonyFacilities.Font = font_1;
-            pnlGameOptions.cmbOptionsControlConstruction.Font = font_1;
-            pnlGameOptions.cmbOptionsControlDiplomacyGifts.Font = font_1;
-            pnlGameOptions.cmbOptionsControlDiplomacyOffense.Font = font_1;
-            pnlGameOptions.cmbOptionsControlDiplomacyTreaties.Font = font_1;
-            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Font = font_1;
-            pnlGameOptions.chkOptionsControlCharacterLocations.Font = font_1;
-            pnlGameOptions.chkOptionsControlColonyTaxRates.Font = font_1;
-            pnlGameOptions.chkOptionsControlDesigns.Font = font_1;
-            pnlGameOptions.chkOptionsControlFleets.Font = font_1;
-            pnlGameOptions.chkOptionsControlPopulationPolicy.Font = font_1;
-            pnlGameOptions.chkOptionsControlResearch.Font = font_1;
-            pnlGameOptions.chkOptionsControlTroops.Font = font_1;
-            pnlGameOptions.cmbOptionsAutomationMode.Font = font_1;
-            pnlGameOptions.pnlOptionsAutomationMode.Size = new Size(217, 41);
+            pnlGameOptions.cmbOptionsMouseScrollWheelBehaviour.BringToFront();*/
+            /*pnlGameOptions.pnlOptionsAutomationMode.Size = new Size(217, 41);
             pnlGameOptions.pnlOptionsAutomationMode.Location = new Point(10, 21);
-            pnlGameOptions.pnlOptionsAutomationMode.BackColor = Color.FromArgb(128, 192, 0, 128);
-            pnlGameOptions.lblOptionsAutomationMode.Font = main_0.font_7;
-            pnlGameOptions.lblOptionsAutomationMode.Location = new Point(5, 9);
+            pnlGameOptions.pnlOptionsAutomationMode.BackColor = Color.FromArgb(128, 192, 0, 128);*/
+            /*pnlGameOptions.lblOptionsAutomationMode.Location = new Point(5, 9);
             pnlGameOptions.cmbOptionsAutomationMode.Size = new Size(162, 24);
             pnlGameOptions.cmbOptionsAutomationMode.Location = new Point(58, 25);
             pnlGameOptions.lblOptionsControlColonization.Location = new Point(260, 23);
@@ -1660,8 +1661,8 @@ namespace DistantWorlds
             pnlGameOptions.lblOptionsControlDiplomacyTreaties.Location = new Point(279, 168);
             pnlGameOptions.lblOptionsControlDiplomacyOffense.Location = new Point(210, 197);
             pnlGameOptions.lblOptionsControlColonyFacilities.Location = new Point(215, 226);
-            pnlGameOptions.lblOptionsControlOfferPirateMissions.Location = new Point(215, 255);
-            Size size_ = new Size(236, 21);
+            pnlGameOptions.lblOptionsControlOfferPirateMissions.Location = new Point(215, 255);*/
+            /*Size size_ = new Size(236, 21);
             method_154(pnlGameOptions.lblOptionsControlColonization, 191, size_);
             method_154(pnlGameOptions.lblOptionsControlConstruction, 191, size_);
             method_154(pnlGameOptions.lblOptionsControlAgentMissions, 186, new Size(241, 21));
@@ -1688,8 +1689,8 @@ namespace DistantWorlds
             pnlGameOptions.cmbOptionsControlDiplomacyOffense.Size = new Size(220, 24);
             pnlGameOptions.cmbOptionsControlDiplomacyTreaties.Size = new Size(220, 24);
             pnlGameOptions.cmbOptionsControlColonyFacilities.Size = new Size(220, 24);
-            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Size = new Size(220, 24);
-            pnlGameOptions.lblOptionsControlColonization.SendToBack();
+            pnlGameOptions.cmbOptionsControlOfferPirateMissions.Size = new Size(220, 24);*/
+            /*pnlGameOptions.lblOptionsControlColonization.SendToBack();
             pnlGameOptions.lblOptionsControlConstruction.SendToBack();
             pnlGameOptions.lblOptionsControlAgentMissions.SendToBack();
             pnlGameOptions.lblOptionsControlAttacks.SendToBack();
@@ -1711,17 +1712,22 @@ namespace DistantWorlds
             pnlGameOptions.chkOptionsControlResearch.Location = new Point(9, 188);
             pnlGameOptions.chkOptionsControlResearch.BringToFront();
             pnlGameOptions.chkOptionsControlCharacterLocations.Location = new Point(9, 211);
-            pnlGameOptions.chkOptionsControlCharacterLocations.BringToFront();
+            pnlGameOptions.chkOptionsControlCharacterLocations.BringToFront();*/
             pnlGameOptions.btnGameOptionsResetAutomationMessages.Text = TextResolver.GetText("Reset Warnings");
-            pnlGameOptions.btnGameOptionsResetAutomationMessages.Size = new Size(73, 40);
-            pnlGameOptions.btnGameOptionsResetAutomationMessages.Location = new Point(228, 20);
+            /*pnlGameOptions.btnGameOptionsResetAutomationMessages.Size = new Size(73, 40);
+            pnlGameOptions.btnGameOptionsResetAutomationMessages.Location = new Point(228, 20);*/
             pnlGameOptions.btnGameOptionsEmpireSettings.Text = TextResolver.GetText("Empire Settings");
-            pnlGameOptions.btnGameOptionsEmpireSettings.Size = new Size(179, 35);
+            /*pnlGameOptions.btnGameOptionsEmpireSettings.Size = new Size(179, 35);
             pnlGameOptions.btnGameOptionsEmpireSettings.Location = new Point(7, 250);
             pnlGameOptions.btnGameOptionsShowMessages.Size = new Size(660, 35);
-            pnlGameOptions.btnGameOptionsShowMessages.Location = new Point(12, 589);
+            pnlGameOptions.btnGameOptionsShowMessages.Location = new Point(12, 589);*/
+            //pnlGameOptions.DoLayout();
+            pnlGameOptions.Location = new Point((base.Width - pnlGameOptions.Width) / 2, (base.Height - pnlGameOptions.Height) / 2);
             pnlGameOptions.Visible = true;
+            pnlGameOptions.DoLayout();
+            pnlGameOptions.ResumeLayout();
             pnlGameOptions.BringToFront();
+            
         }
 
         private void method_154(Label label_0, int int_1, Size size_1)
@@ -4929,7 +4935,11 @@ namespace DistantWorlds
             pnlGameOptionsAdvancedDisplaySettings.chkGameOptionsGalaxyDisplaySpacePorts.Text = TextResolver.GetText("Space Ports");
             chkOptionsAllowSameSystemAsOtherEmpires.Text = TextResolver.GetText("Allow colonization and mining stations in other empires systems");
             pnlGameOptions.chkOptionsAutoPauseInPopup.Text = TextResolver.GetText("Auto Pause in Game Screens");
-            pnlGameOptions.chkOptionsAutoSave.Text = TextResolver.GetText("Every (SPACER) minutes");
+            var everySpacerMinutes = TextResolver.GetText("Every (SPACER) minutes").Split(' ',2,StringSplitOptions.RemoveEmptyEntries);
+            var every = everySpacerMinutes[0];
+            var minutes = everySpacerMinutes[1];
+            pnlGameOptions.lblAutoSaveEvery.Text = every;
+            pnlGameOptions.lblAutoSaveMinutes.Text = minutes;
             pnlGameOptions.chkOptionsControlColonyTaxRates.Text = TextResolver.GetText("Colony Tax Rates");
             pnlGameOptions.chkOptionsControlCharacterLocations.Text = TextResolver.GetText("Character Locations");
             pnlGameOptions.chkOptionsControlDesigns.Text = TextResolver.GetText("Ship Design");
