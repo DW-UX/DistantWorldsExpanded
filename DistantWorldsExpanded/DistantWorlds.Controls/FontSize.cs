@@ -13,7 +13,10 @@ namespace DistantWorlds.Controls
     public const float Normal = 15.33f;
     public const float Large = 16.67f;
     public const float Heading = 18.67f;
+    public const float LargeHeading = 21.4f;
+    public const float SmallTitle = 17.33f;
     public const float Title = 22.67f;
+    public const float LargeTitle = 23.4f;
     public const float Huge = 25f;
     public const float Enormous = 32f;
   }

@@ -2848,7 +2848,7 @@ namespace DistantWorlds {
             lblGameEditorTitle.Text = TextResolver.GetText("Game Editor");
             lblGameEditorTitle.Location = new Point(40, 8);
             picGameEditor.Location = new Point(10, 4);
-            btnGameEditorExit.Font = new Font(font_3.FontFamily, 16.67f, FontStyle.Bold);
+            btnGameEditorExit.Font = new Font(font_3.FontFamily, FontSize.Large, FontStyle.Bold);
             btnGameEditorExit.Location = new Point(173, 8);
             btnGameEditorExit.Size = new Size(157, 25);
             gameEditorSelector.Size = new Size(320, 595);
@@ -4263,7 +4263,7 @@ namespace DistantWorlds {
             lblEditEmpireListTitle.Text = TextResolver.GetText("Edit Empires");
             lblEditEmpireListTitle.Location = new Point(42, 9);
             picEditEmpireList.Location = new Point(10, 4);
-            btnEditEmpireListClose.Font = new Font(font_3.FontFamily, 16.67f, FontStyle.Bold);
+            btnEditEmpireListClose.Font = new Font(font_3.FontFamily, FontSize.Large, FontStyle.Bold);
             btnEditEmpireListClose.Location = new Point(250, 8);
             btnEditEmpireListClose.Size = new Size(200, 25);
             ctlEditEmpireList.Size = new Size(440, 420);
@@ -4627,7 +4627,7 @@ namespace DistantWorlds {
             lblEditEmpireTitle.Location = new Point(42, 9);
             lblEditEmpireTitle.SendToBack();
             picEditEmpire.Location = new Point(10, 4);
-            btnEditEmpireClose.Font = new Font(font_3.FontFamily, 16.67f, FontStyle.Bold);
+            btnEditEmpireClose.Font = new Font(font_3.FontFamily, FontSize.Large, FontStyle.Bold);
             btnEditEmpireClose.Location = new Point(540, 8);
             btnEditEmpireClose.Size = new Size(150, 25);
             tabEditEmpire.Size = new Size(680, 710);

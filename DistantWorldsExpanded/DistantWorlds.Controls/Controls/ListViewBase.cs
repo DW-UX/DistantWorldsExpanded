@@ -21,7 +21,7 @@ namespace DistantWorlds.Controls
   public class ListViewBase : UserControl
   {
     private IFontCache _FontCache;
-    private float _FontSize = 15.33f;
+    private float _FontSize = FontSize.Normal;
     private bool _FontIsBold;
     private bool _SoundsEnabled;
     private static string _SoundLocation;

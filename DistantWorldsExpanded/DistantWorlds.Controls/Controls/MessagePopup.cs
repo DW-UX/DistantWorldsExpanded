@@ -46,7 +46,7 @@ namespace DistantWorlds.Controls
 
     public MessagePopup()
     {
-      this.SetFont(16.67f);
+      this.SetFont(FontSize.Large);
       this.BorderColor = Color.FromArgb(0, 0, (int) byte.MaxValue);
       this.BorderStyle = BorderStyle.FixedSingle;
       this.BorderWidth = 3;

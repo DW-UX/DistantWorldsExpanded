@@ -60,7 +60,7 @@ namespace DistantWorlds.Controls
             int_2 = 5;
             cursor_0 = defaultMouseCursor;
             Cursor = defaultMouseCursor;
-            font_0 = _FontCache.GenerateFont(18.67f, isBold: false);
+            font_0 = _FontCache.GenerateFont(FontSize.Heading, isBold: false);
             main_0 = parentForm;
             galaxy_0 = galaxy;
             bool_0 = true;
@@ -76,8 +76,8 @@ namespace DistantWorlds.Controls
             font_0 = new Font("Verdana", 9f, FontStyle.Regular);
             int_2 = 12;
             dateTime_0 = DateTime.Now.ToUniversalTime();
-            float_0 = 15.33f;
-            SetFont(16.67f);
+            float_0 = FontSize.Normal;
+            SetFont(FontSize.Large);
             base.BorderStyle = BorderStyle.None;
             BackColor = Color.FromArgb(64, 0, 0, 0);
         }

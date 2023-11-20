@@ -17,7 +17,7 @@ namespace DistantWorlds.Controls
     private Ruin _Ruin;
     private Bitmap[] _RuinImages;
     protected IFontCache _FontCache;
-    private float _FontSize = 15.33f;
+    private float _FontSize = FontSize.Normal;
     private bool _FontIsBold;
     private IContainer components;
     private Label lblTitle;
@@ -128,7 +128,7 @@ namespace DistantWorlds.Controls
         this.chkCreatureSwarm.Checked = false;
         this.chkPirateAmbush.Checked = false;
       }
-      this.lblTitle.Font = this._FontCache.GenerateFont(16.67f, true);
+      this.lblTitle.Font = this._FontCache.GenerateFont(FontSize.Large, true);
     }
 
     public Ruin GetRuin()

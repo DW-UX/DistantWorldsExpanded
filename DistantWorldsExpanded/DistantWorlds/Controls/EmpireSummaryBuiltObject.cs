@@ -49,7 +49,7 @@ namespace DistantWorlds.Controls
             solidBrush_2 = new SolidBrush(Color.Red);
             method_9();
             Font = new Font("Verdana", 8f);
-            SetFont(16.67f);
+            SetFont(FontSize.Large);
             font_0 = new Font(Font, FontStyle.Bold);
             font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
         }

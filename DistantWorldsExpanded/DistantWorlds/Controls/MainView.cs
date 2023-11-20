@@ -621,11 +621,11 @@ namespace DistantWorlds.Controls
             {
                 font_3.Dispose();
             }
-            font_0 = ((IFontCache)parentForm).GenerateFont(16.67f, isBold: false);
-            font_1 = ((IFontCache)parentForm).GenerateFont(18.67f, isBold: true);
-            font_2 = ((IFontCache)parentForm).GenerateFont(15.33f, isBold: false);
-            font_3 = ((IFontCache)parentForm).GenerateFont(10.67f, isBold: false);
-            Font = ((IFontCache)parentForm).GenerateFont(15.33f, isBold: false);
+            font_0 = ((IFontCache)parentForm).GenerateFont(FontSize.Large, isBold: false);
+            font_1 = ((IFontCache)parentForm).GenerateFont(FontSize.Heading, isBold: true);
+            font_2 = ((IFontCache)parentForm).GenerateFont(FontSize.Normal, isBold: false);
+            font_3 = ((IFontCache)parentForm).GenerateFont(FontSize.Tiny, isBold: false);
+            Font = ((IFontCache)parentForm).GenerateFont(FontSize.Normal, isBold: false);
             contentManager_0 = new ContentManager(serviceContainer_0);
             contentManager_0.RootDirectory = Application.StartupPath;
             spriteFont_0 = contentManager_0.Load<SpriteFont>("TinyFont");

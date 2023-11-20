@@ -14,6 +14,9 @@
 		<ApplicationIcon>DistantWorlds.ico</ApplicationIcon>
 		<RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<ForceDesignerDpiUnaware>false</ForceDesignerDpiUnaware>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x86'">$(DefineConstants);WIN32</DefineConstants>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x64'">$(DefineConstants);WIN64</DefineConstants>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'==''">$(DefineConstants);ANY_PLATFORM</DefineConstants>
@@ -78,6 +81,7 @@
 		<None Remove="DistantWorlds\Mods\**" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="Ben.Demystifier" Version="0.4.1" />
 		<PackageReference Include="DotNetZip" Version="1.16.0" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.54" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

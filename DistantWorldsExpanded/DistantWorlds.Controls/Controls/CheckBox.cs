@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -47,7 +48,9 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
           Padding.Top,
           ClientSize.Width - side - Padding.Left,
           side);
-        FitTextAndFontToRect(g, stringRect, DeviceDpi);
+        
+        if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            FitTextAndFontToRect(g, stringRect, DeviceDpi);
         g.DrawString(Text, Font, _foreBrush, stringRect);
         break;
       }
@@ -61,7 +64,10 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
           x - Padding.Left,
           side
         );
-        FitTextAndFontToRect(g, stringRect, DeviceDpi);
+
+        if (LicenseManager.UsageMode != LicenseUsageMode.Designtime)
+            FitTextAndFontToRect(g, stringRect, DeviceDpi);
+        
         g.DrawString(Text, Font, _foreBrush, stringRect);
         break;
       }
@@ -83,8 +89,11 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
     };
     
     var width = stringRect.Width + 1;
-    while (g.MeasureString(Text, Font).Width > width) {
-      Font = new(Font.FontFamily, Font.Size - step, Font.Style, Font.Unit);
+    while (g.MeasureString(Text, Font).Width > width)
+    {
+        var newFontSize = Font.Size - step;
+        if (newFontSize <= 0f) break;
+        Font = new(Font.FontFamily, newFontSize, Font.Style, Font.Unit);
     }
   }
 

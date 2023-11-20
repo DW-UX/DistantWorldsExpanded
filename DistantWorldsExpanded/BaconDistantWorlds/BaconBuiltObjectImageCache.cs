@@ -62,7 +62,10 @@ namespace BaconDistantWorlds
                     string str2 = index1 != 0 ? index1.ToString() : "";
                     try
                     {
-                        if (File.Exists(regularPath + str1 + str2 + ".png") || File.Exists(modPath + str1 + str2 + ".png") || File.Exists(regularPath + str1 + str2 + ".bmp") || File.Exists(modPath + str1 + str2 + ".bmp"))
+                        if (File.Exists(regularPath + str1 + str2 + ".png")
+                            || File.Exists(modPath + str1 + str2 + ".png")
+                            || File.Exists(regularPath + str1 + str2 + ".bmp")
+                            || File.Exists(modPath + str1 + str2 + ".bmp"))
                         {
                             int localIndex = BaconBuiltObjectImageCache.overallIndex++;
                             //string str3 = imageCache.CheckLoadSmallImage(BaconBuiltObjectImageCache.overallIndex, regularPath + str1 + str2, modPath + str1 + str2);

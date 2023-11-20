@@ -38,7 +38,7 @@ namespace DistantWorlds.Controls
     public ComponentDetail()
     {
       this.Font = new Font("Verdana", 8f);
-      this.SetFont(15.33f);
+      this.SetFont(FontSize.Normal);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
       this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
       this._SmallFont = new Font(this.Font.FontFamily, 14.67f, FontStyle.Regular, GraphicsUnit.Pixel);

@@ -25,7 +25,7 @@ namespace DistantWorlds.Controls
     private Color _HighlightColor1 = Color.FromArgb((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue, 0);
     private Color _HighlightColor2 = Color.FromArgb(128, (int) byte.MaxValue, 48, 96);
     protected IFontCache _FontCache;
-    private float _FontSize = 15.33f;
+    private float _FontSize = FontSize.Normal;
     private bool _FontIsBold;
 
     public virtual void SetFontCache(IFontCache fontCache)
@@ -115,10 +115,13 @@ namespace DistantWorlds.Controls
       this._HighlightColor = Color.FromArgb((int) (byte) ((uint) this._HighlightColor1.A - (uint) (byte) ((double) ((int) this._HighlightColor1.A - (int) this._HighlightColor2.A) * num)), (int) (byte) ((uint) this._HighlightColor1.R - (uint) (byte) ((double) ((int) this._HighlightColor1.R - (int) this._HighlightColor2.R) * num)), (int) (byte) ((uint) this._HighlightColor1.G - (uint) (byte) ((double) ((int) this._HighlightColor1.G - (int) this._HighlightColor2.G) * num)), (int) (byte) ((uint) this._HighlightColor1.B - (uint) (byte) ((double) ((int) this._HighlightColor1.B - (int) this._HighlightColor2.B) * num)));
     }
 
-    protected override void OnVisibleChanged(EventArgs e)
-    {
+    protected override void OnVisibleChanged(EventArgs e) {
       base.OnVisibleChanged(e);
-      this._HighlightControls = (List<Control>) null;
+      ClearHighlightControls();
+    }
+
+    protected void ClearHighlightControls() {
+      this._HighlightControls = (List<Control>)null;
     }
 
     protected override void OnPaint(PaintEventArgs e)

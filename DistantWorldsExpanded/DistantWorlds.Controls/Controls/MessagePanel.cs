@@ -15,12 +15,12 @@ namespace DistantWorlds.Controls
     private string _Message = string.Empty;
     private int _Padding = 12;
     protected IFontCache _FontCache;
-    private float _FontSize = 15.33f;
+    private float _FontSize = FontSize.Normal;
     private bool _FontIsBold;
 
     public MessagePanel()
     {
-      this.SetFont(18.67f);
+      this.SetFont(FontSize.Heading);
       this.BorderStyle = BorderStyle.None;
       this.BackColor = Color.FromArgb(64, 0, 0, 0);
       this.Padding = new Padding(12);

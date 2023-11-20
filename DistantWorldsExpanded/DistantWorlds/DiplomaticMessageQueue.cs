@@ -156,8 +156,8 @@ namespace DistantWorlds
         {
             if (_FontCache != null)
             {
-                font_0 = _FontCache.GenerateFont(16.67f, isBold: false);
-                font_1 = _FontCache.GenerateFont(16.67f, isBold: true);
+                font_0 = _FontCache.GenerateFont(FontSize.Large, isBold: false);
+                font_1 = _FontCache.GenerateFont(FontSize.Large, isBold: true);
             }
         }
 

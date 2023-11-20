@@ -814,8 +814,8 @@ namespace DistantWorlds.Controls
 
     private void SetFonts()
     {
-      Font font1 = new Font(this.Font.FontFamily, 15.33f, FontStyle.Regular, GraphicsUnit.Pixel);
-      Font font2 = new Font(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      Font font1 = new Font(this.Font.FontFamily, FontSize.Normal, FontStyle.Regular, GraphicsUnit.Pixel);
+      Font font2 = new Font(this.Font.FontFamily, FontSize.Large, FontStyle.Bold, GraphicsUnit.Pixel);
       this.vwAsteroids.Font = font1;
       this.vwClearItems.Font = font1;
       this.vwCreature.Font = font1;

@@ -478,7 +478,7 @@ namespace DistantWorlds.Types
               float x2 = x1 + (float) X * num2;
               for (int Y = num9; Y < num13; ++Y)
               {
-                color3 = fastBitmap.GetPixel(ref X, ref Y);
+                color3 = fastBitmap.GetPixel(X, Y);
                 if (color3.A == (byte) 0)
                 {
                   float y2 = y1 + (float) Y * num2;

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Collections;
-using System.Drawing;
-using System.Windows.Forms.Design;
+using Microsoft.DotNet.DesignTools.Designers;
 
 namespace DistantWorlds.Controls.Design;
 

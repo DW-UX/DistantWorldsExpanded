@@ -36,7 +36,7 @@ namespace DistantWorlds
             {
                 for (int j = rectangle.Left; j < rectangle.Right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0)
                     {
                         byte alpha = (byte)(PerlinNoise2d(j, i) * 255.0);
@@ -44,7 +44,7 @@ namespace DistantWorlds
                     }
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         public void ApplyNoiseToImageOpaque(Bitmap image, Rectangle rectangle, byte[][] noise, out int maxAlpha, out int int_3)
@@ -60,7 +60,7 @@ namespace DistantWorlds
             {
                 for (int j = left; j < right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0)
                     {
                         double num = (double)(int)noise[j][i] / 96.0;
@@ -78,7 +78,7 @@ namespace DistantWorlds
                     }
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         public void ApplyNoiseToImageTransparent(Bitmap image, Rectangle rectangle, byte[][] noise)
@@ -97,14 +97,14 @@ namespace DistantWorlds
             {
                 for (int j = left; j < right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     double num = (double)(int)noise[j][i] / alphaFactor;
                     int val = (int)((double)(int)pixel.A * num);
                     val = Math.Max(0, Math.Min(255, val));
                     fastBitmap.SetPixel(ref j, ref i, Color.FromArgb(val, pixel.R, pixel.G, pixel.B));
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         public void ApplyNoiseToImage(Bitmap image, Rectangle rectangle, byte[][] noise, out int maxAlpha, out int int_3)
@@ -125,7 +125,7 @@ namespace DistantWorlds
             {
                 for (int j = left; j < right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0)
                     {
                         double num = (double)(int)noise[j][i] / 255.0;
@@ -140,7 +140,7 @@ namespace DistantWorlds
                     }
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         public void IntensifyImageColor(Bitmap image, Rectangle rectangle, int maxAlpha, int alphaThreshhold, int maxColorSum, int colorThreshhold, double intensityFactor, double fadeFactor, int colorBoostAmount)
@@ -156,7 +156,7 @@ namespace DistantWorlds
             {
                 for (int j = left; j < right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0 && pixel.A > alphaThreshhold)
                     {
                         int alpha = method_2(pixel.A, alphaThreshhold, int_, int_2, intensityFactor, fadeFactor);
@@ -165,7 +165,7 @@ namespace DistantWorlds
                     }
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         private int method_0(int int_3, int int_4, int int_5)
@@ -288,7 +288,7 @@ namespace DistantWorlds
             {
                 for (int j = rectangle.Left; j < rectangle.Right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0)
                     {
                         byte alpha = (byte)(Turbulence(j, i, 7.0, 2.0956723, 0.5) * 255.0);
@@ -296,7 +296,7 @@ namespace DistantWorlds
                     }
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         public double Turbulence(double inputX, double inputY, double octaves, double lacunarity, double gain)

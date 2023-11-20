@@ -57,11 +57,11 @@ namespace DistantWorlds.Controls
         public override void SetFontCache(IFontCache fontCache)
         {
             this._FontCache = fontCache;
-            this._TitleFont = this._FontCache.GenerateFont(22.67f, true);
-            this._HeaderFont = this._FontCache.GenerateFont(18.67f, true);
-            this._NormalFont = this._FontCache.GenerateFont(15.33f, false);
-            this._NormalFontBold = this._FontCache.GenerateFont(15.33f, true);
-            this._LargeFont = this._FontCache.GenerateFont(16.67f, true);
+            this._TitleFont = this._FontCache.GenerateFont(FontSize.Title, true);
+            this._HeaderFont = this._FontCache.GenerateFont(FontSize.Heading, true);
+            this._NormalFont = this._FontCache.GenerateFont(FontSize.Normal, false);
+            this._NormalFontBold = this._FontCache.GenerateFont(FontSize.Normal, true);
+            this._LargeFont = this._FontCache.GenerateFont(FontSize.Large, true);
             this.btnEmpireDetailAcceptTreaty.Font = this._NormalFontBold;
         }
 
@@ -72,7 +72,7 @@ namespace DistantWorlds.Controls
             if (screenSize.Width >= 1180 && screenSize.Height >= 900)
             {
                 this._LargeSize = true;
-                this._TitleFont = this._FontCache.GenerateFont(22.67f, true);
+                this._TitleFont = this._FontCache.GenerateFont(FontSize.Title, true);
                 this._HeaderFont = this._FontCache.GenerateFont(20f, true);
                 this._NormalFont = this._FontCache.GenerateFont(18f, false);
                 this._NormalFontBold = this._FontCache.GenerateFont(18f, true);
@@ -82,10 +82,10 @@ namespace DistantWorlds.Controls
             else
             {
                 this._LargeSize = false;
-                this._TitleFont = this._FontCache.GenerateFont(22.67f, true);
-                this._HeaderFont = this._FontCache.GenerateFont(18.67f, true);
-                this._NormalFont = this._FontCache.GenerateFont(15.33f, false);
-                this._NormalFontBold = this._FontCache.GenerateFont(15.33f, true);
+                this._TitleFont = this._FontCache.GenerateFont(FontSize.Title, true);
+                this._HeaderFont = this._FontCache.GenerateFont(FontSize.Heading, true);
+                this._NormalFont = this._FontCache.GenerateFont(FontSize.Normal, false);
+                this._NormalFontBold = this._FontCache.GenerateFont(FontSize.Normal, true);
                 this.btnEmpireDetailAcceptTreaty.Font = this._NormalFontBold;
                 this.btnEmpireDetailAcceptTreaty.Location = new Point(230, 456);
             }
@@ -537,7 +537,7 @@ namespace DistantWorlds.Controls
                         GraphicsHelper.DrawStringWithDropShadow(graphics, TextResolver.GetText("Current Relationship With Us"), this._HeaderFont, new Point(20, rect5.Top + 5), brush2);
                         using (SolidBrush brush5 = new SolidBrush(color))
                         {
-                            using (Font font = this._FontCache.GenerateFont(16.67f, true))
+                            using (Font font = this._FontCache.GenerateFont(FontSize.Large, true))
                                 GraphicsHelper.DrawStringWithDropShadow(graphics, text7, font, new Point(25, rect5.Top + 28), brush5);
                         }
                         PirateRelation pirateRelation2 = empire.ObtainPirateRelation(this._Game.PlayerEmpire);

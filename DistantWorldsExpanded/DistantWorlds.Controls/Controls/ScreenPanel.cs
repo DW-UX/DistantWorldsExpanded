@@ -10,46 +10,61 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
 
-namespace DistantWorlds.Controls
-{
+namespace DistantWorlds.Controls {
+
   [Designer("DistantWorlds.Controls.Design.ScreenPanelDocumentDesigner, DwUxDesignHelper", typeof(IRootDesigner))]
   //[Designer("DistantWorlds.Controls.Design.GenericControlDocumentDesigner, DwUxDesignHelper", typeof(IRootDesigner))]
   [DesignerCategory("UserControl")]
-  public class ScreenPanel : BorderPanel
-  {
-    private IContainer components;
+  public partial class ScreenPanel : BorderPanel {
+
     public HeaderPanel pnlHeader;
+
     public GradientPanel pnlBody;
 
     private Point _headerDragAnchor;
 
     private bool _headerDragging;
 
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && components != null)
-        components.Dispose();
+    protected override void Dispose(bool disposing) {
       base.Dispose(disposing);
     }
 
-    private void InitializeComponent()
-    {
+    private HashSet<Control>? _headerAndBodyControls = null;
+
+    private HashSet<Control> HeaderAndBodyControls
+      => _headerAndBodyControls ??= new() { pnlHeader, pnlBody };
+
+    protected override ControlCollection CreateControlsInstance()
+      => new BodyControlCollection(this);
+
+    private void InitializeComponent() {
+      SuspendLayout();
+      DoubleBuffered = true;
       pnlHeader = new HeaderPanel();
       pnlBody = new GradientPanel();
-      SuspendLayout();
       pnlHeader.BackColor = Color.FromArgb(0, 0, 0);
       pnlHeader.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold);
       pnlHeader.ForeColor = Color.FromArgb(150, 150, 150);
       pnlHeader.Icon = null;
       pnlHeader.Location = new Point(0, 0);
       pnlHeader.Name = "pnlHeader";
-      pnlHeader.Size = new Size(200, 100);
+      pnlHeader.Size = new Size(200, 56);
       pnlHeader.TabIndex = 0;
       pnlHeader.TitleText = null;
-      pnlHeader.CloseButtonClicked += new EventHandler(pnlHeader_CloseButtonClicked);
+      pnlHeader.Dock = DockStyle.Top;
+      pnlHeader.CloseButtonClicked += OnHeaderCloseButtonClicked;
+      pnlHeader.MouseDown += OnHeaderDragStart;
+      pnlHeader.MouseMove += OnHeaderDragMove;
+      pnlHeader.MouseUp += OnHeaderDragEnd;
+      pnlHeader.MouseEnter += OnHeaderMouseEnter;
+      pnlHeader.MouseLeave += OnHeaderMouseLeave;
+      pnlBody.AutoSize = true;
+      pnlBody.MinimumSize = new Size(300, 200);
+      pnlBody.AutoSizeMode = AutoSizeMode.GrowAndShrink;
       pnlBody.BackColor = Color.FromArgb(39, 40, 44);
       pnlBody.BackColor2 = Color.FromArgb(22, 21, 26);
       pnlBody.BackColor3 = Color.FromArgb(51, 54, 61);
@@ -64,154 +79,178 @@ namespace DistantWorlds.Controls
       pnlBody.Name = "pnlBody";
       pnlBody.Size = new Size(200, 100);
       pnlBody.TabIndex = 0;
+      pnlBody.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      Controls.Add(pnlHeader);
+      Controls.Add(pnlBody);
       ResumeLayout(false);
     }
 
-    public ScreenPanel()
-    {
+    private void OnHeaderMouseEnter(object sender, EventArgs e) {
+      pnlHeader.Hovered = true;
+    }
+
+    private void OnHeaderMouseLeave(object sender, EventArgs e) {
+      pnlHeader.Hovered = false;
+    }
+
+    static ScreenPanel() {
+      //Debugger.Launch();
+    }
+
+    public ScreenPanel() {
       InitializeComponent();
-      DoubleBuffered = true;
-      
-      pnlHeader.MouseDown += (_, args) => HeaderDragStart(args);
-      pnlHeader.MouseMove += (_, args) => HeaderDragMove(args);
-      pnlHeader.MouseUp += (_, args) => HeaderDragEnd(args);
+      Visible = false;
     }
-
-    private void HeaderDragStart(MouseEventArgs args) {
-      if (_headerDragging) {
-        HeaderDragEnd(args);
-        return;
-      }
-
-      if (args.Button != MouseButtons.Left)
-        return; // didn't start
-      
-      _headerDragging = true;
-      _headerDragAnchor = new(args.X, args.Y);
-      pnlHeader.Capture = true;
-    }
-
-    private void HeaderDragEnd(MouseEventArgs args) {
-      if (!_headerDragging) return;
-
-      pnlHeader.Capture = false;
-      _headerDragging = false;
-    }
-
-    private void HeaderDragMove(MouseEventArgs args) {
-      if (!_headerDragging) return;
-
-      var scale = 96f / DeviceDpi;
-      
-      // move the panel with the delta
-      var delta = new Point(
-        args.Location.X - _headerDragAnchor.X,
-        args.Location.Y - _headerDragAnchor.Y
-      );
-      
-      Location = new(Location.X + delta.X, Location.Y + delta.Y);
-      
-      //_headerDragCursor = args.Location;
-    }
-
 
     public event EventHandler CloseButtonClicked;
 
-    public override void SetFontCache(IFontCache fontCache)
-    {
+    public override void SetFontCache(IFontCache fontCache) {
       base.SetFontCache(fontCache);
       pnlHeader.Font = Font;
       pnlHeader.SetFont();
       pnlBody.Font = Font;
     }
 
-    protected override void OnVisibleChanged(EventArgs e) => base.OnVisibleChanged(e);
-
-    protected override void OnSizeChanged(EventArgs e) => base.OnSizeChanged(e);
-
     [Category("Appearance")]
     [Description("The icon of the header.")]
-    public virtual Image HeaderIcon
-    {
+    public Image HeaderIcon {
       get => pnlHeader.Icon;
-      set => pnlHeader.Icon = value;
+      set {
+        pnlHeader.Icon = value;
+        UpdateHeader();
+      }
+    }
+
+    private void UpdateHeader() {
+      if (InvokeRequired) {
+        _dlgUpdateHeaderInternal
+          ??= UpdateHeaderInternal;
+        Invoke(_dlgUpdateHeaderInternal);
+      }
+      else
+        UpdateHeaderInternal();
+    }
+
+    private Action _dlgUpdateHeaderInternal;
+
+    protected override void InitLayout() {
+      base.InitLayout();
+
+      if (DesignMode)
+        Visible = true;
+
+      UpdateHeader();
+
+      AutoResize();
+    }
+
+    private bool _autoResizing;
+
+    private void AutoResize() {
+      _autoResizing = true;
+      var headerSize = pnlHeader.ClientSize;
+      var bodySize = pnlBody.ClientSize;
+      Size = new(
+        bodySize.Width,
+        bodySize.Height
+      );
+    }
+
+    protected override void OnSizeChanged(EventArgs e) {
+      base.OnSizeChanged(e);
+      if (!_autoResizing)
+        AutoResize();
+      else
+        _autoResizing = false;
+    }
+
+    protected override void OnLayout(LayoutEventArgs levent) {
+      base.OnLayout(levent);
+      //UpdateHeaderHeight();
+
+      AutoResize();
+    }
+
+    private void UpdateHeaderInternal() {
+      var headerFontHeight = pnlHeader.Font.Height;
+      var headerIconHeight = pnlHeader.Icon?.Height ?? 0;
+      var headerHeight = Math.Max(headerFontHeight, headerIconHeight);
+      var padding = (int)Math.Floor(headerHeight * 0.2);
+      var doublePadding = padding * 2;
+      pnlHeader.Height = headerHeight + padding;
+      pnlBody.Padding = new(padding, headerHeight + doublePadding, padding, padding);
+      pnlHeader.pbIcon.Size = new(headerHeight, headerHeight);
+      pnlHeader.btnClose.Size = new(headerHeight, headerHeight);
+      var squaredSidePadding = headerHeight + doublePadding;
+      pnlHeader.lblCaption.Padding = new(
+        squaredSidePadding,
+        padding,
+        squaredSidePadding,
+        doublePadding
+      );
+      pnlHeader.Invalidate();
+      //pnlHeader.btnClose.Invalidate();
+      pnlBody.Invalidate();
     }
 
     [Category("Appearance")]
     [Description("The title of the header.")]
-    public virtual string HeaderTitle
-    {
+    public string HeaderTitle {
       get => pnlHeader.TitleText;
-      set
-      {
+      set {
         pnlHeader.TitleText = value;
-        pnlHeader.Invalidate();
-        pnlHeader.btnClose.Invalidate();
+        UpdateHeader();
       }
     }
 
-    public void DoLayout()
-    {
-      pnlBody.Visible = true;
-      pnlBody.BringToFront();
-      pnlHeader.Visible = true;
-      pnlHeader.BringToFront();
-      SuspendLayout();
-      const int headerMarginX = 7;
-      const int headerHeight = 51; // header bottom is 51 + 8 = 59
-      const int headerMarginY = 8;
-      const int halfHeaderMarginY = headerMarginY / 2;
-      const int tripleHalfHeaderMarginY = halfHeaderMarginY * 3; 
-      
-      pnlHeader.Size = new Size(ClientRectangle.Width - headerMarginX*2, headerHeight);
-      pnlHeader.Location = new Point(headerMarginX, headerMarginY);
-      ReparentControl(this, pnlHeader);
-      const int bodyMarginX = 8;
-      pnlBody.Size = new Size(
-        ClientRectangle.Width - bodyMarginX*2,
-        ClientRectangle.Height - (pnlHeader.Height + tripleHalfHeaderMarginY));
-      pnlBody.Location = new Point(bodyMarginX, headerHeight + headerMarginY);
-      ReparentControl(this, pnlBody);
-      ReparentControls();
-      pnlHeader.DoLayout();
-      ResumeLayout();
-      Invalidate();
-      pnlHeader.BringToFront();
+    public void DoLayout() {
+      //pnlBody.AutoSize = false;
+      //pnlBody.AutoSize = true;
+      //pnlBody.PerformLayout();
     }
 
-    private void ReparentControl(Control parent, Control child)
-    {
-      if (!parent.Controls.Contains(child))
-        parent.Controls.Add(child);
-      child.Parent = parent;
-    }
+    private void OnHeaderCloseButtonClicked(object sender, EventArgs e)
+      => CloseButtonClicked?.Invoke(sender, e);
 
-    private void ReparentControls() {
-      for (;;) {
-        var reparented = 0;
-        List<Control> controlList = new List<Control>();
-        foreach (Control control in (ArrangedElementCollection)Controls) {
-          if (control != pnlHeader && control != pnlBody) {
-            ReparentControl(pnlBody, control);
-            controlList.Add(control);
-            reparented++;
-          }
-        }
-
-        foreach (Control control in controlList) {
-          if (Controls.Contains(control))
-            Controls.Remove(control);
-        }
-
-        if (reparented == 0) break;
-      }
-    }
-
-    private void pnlHeader_CloseButtonClicked(object sender, EventArgs e)
-    {
-      if (CloseButtonClicked == null)
+    private void OnHeaderDragStart(object sender, MouseEventArgs args) {
+      if (_headerDragging) {
+        OnHeaderDragEnd(sender, args);
         return;
-      CloseButtonClicked(sender, e);
+      }
+
+      if (args.Button != MouseButtons.Left)
+        return; // didn't start
+
+      _headerDragging = true;
+      _headerDragAnchor = new(args.X, args.Y);
+      pnlHeader.Capture = true;
+      pnlHeader.Pressed = true;
     }
+
+    private void OnHeaderDragEnd(object sender, MouseEventArgs args) {
+      if (!_headerDragging) return;
+
+      pnlHeader.Capture = false;
+      _headerDragging = false;
+      pnlHeader.Pressed = false;
+    }
+
+    private void OnHeaderDragMove(object sender, MouseEventArgs args) {
+      if (!_headerDragging) return;
+
+      var scale = 96f / DeviceDpi;
+
+      // move the panel with the delta
+      var delta = new Point(
+        args.Location.X - _headerDragAnchor.X,
+        args.Location.Y - _headerDragAnchor.Y
+      );
+
+      Location = new(Location.X + delta.X, Location.Y + delta.Y);
+
+      //_headerDragCursor = args.Location;
+    }
+
   }
+
 }

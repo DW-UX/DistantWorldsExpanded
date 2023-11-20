@@ -3210,14 +3210,14 @@ namespace DistantWorlds.Controls
                     int Y = (int)num8;
                     if (X >= 0 && X < num6 && Y >= 0 && Y < num4)
                     {
-                        fastBitmap2.SetPixel(ref j, ref i, fastBitmap.GetPixel(ref X, ref Y));
+                        fastBitmap2.SetPixel(ref j, ref i, fastBitmap.GetPixel(X, Y));
                     }
                     num7 += num2;
                     num8 -= num3;
                 }
             }
-            fastBitmap2.Release();
-            fastBitmap.Release();
+            fastBitmap2.Dispose();
+            fastBitmap.Dispose();
             return bitmap;
         }
 

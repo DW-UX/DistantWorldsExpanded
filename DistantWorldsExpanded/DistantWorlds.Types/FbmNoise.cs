@@ -42,7 +42,7 @@ namespace DistantWorlds.Types
       {
         for (int X = left; X < right; ++X)
         {
-          Color pixel = fastBitmap.GetPixel(ref X, ref Y);
+          Color pixel = fastBitmap.GetPixel(X, Y);
           if (pixel.A > (byte) 0)
           {
             int index1 = X % length1;

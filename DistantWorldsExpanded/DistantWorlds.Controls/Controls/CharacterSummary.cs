@@ -285,7 +285,7 @@ namespace DistantWorlds.Controls
     {
       this.InitializeComponent();
       this.Font = new Font("Verdana", 8f);
-      this.SetFont(15.33f);
+      this.SetFont(FontSize.Normal);
       this.InitializeFonts();
     }
 
@@ -309,10 +309,10 @@ namespace DistantWorlds.Controls
 
     private void InitializeFonts()
     {
-      this._LargeFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-      this._BoldFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._TitleFont = new Font(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._HugeFont = new Font(this.Font.FontFamily, 25f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._LargeFont = new Font(this.Font.FontFamily, FontSize.Large, FontStyle.Regular, GraphicsUnit.Pixel);
+      this._BoldFont = new Font(this.Font.FontFamily, FontSize.Large, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, FontSize.Title, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._HugeFont = new Font(this.Font.FontFamily, FontSize.Huge, FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void BindData(

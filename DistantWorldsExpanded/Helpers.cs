@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 
 internal static class Helpers {
-
   public static unsafe void WithMappedFileContentStream(this FileInfo file, Action<UnmanagedMemoryStream> action) {
     if (file is null) throw new ArgumentNullException(nameof(file));
     if (action is null) throw new ArgumentNullException(nameof(action));

@@ -17,7 +17,7 @@ namespace DistantWorlds.Controls
   {
     private EncyclopediaItemList _EncyclopediaItems = new EncyclopediaItemList();
     protected IFontCache _FontCache;
-    private float _FontSize = 18.67f;
+    private float _FontSize = FontSize.Heading;
     private bool _FontIsBold;
     private IContainer components;
     private TreeView Topics;

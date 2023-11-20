@@ -68,8 +68,8 @@ namespace DistantWorlds
 
         private void method_1()
         {
-            font_0 = new Font(Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-            font_1 = new Font(Font.FontFamily, 18.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_0 = new Font(Font.FontFamily, FontSize.Large, FontStyle.Regular, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, FontSize.Heading, FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         public void KickStart(Main parentForm)

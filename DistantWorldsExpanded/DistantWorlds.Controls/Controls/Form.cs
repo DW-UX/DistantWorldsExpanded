@@ -12,7 +12,7 @@ public partial class Form : System.Windows.Forms.Form {
   public static Main? Main
     => Application.OpenForms.OfType<Main>().FirstOrDefault();
 
-  private static double GuiScale
+  public static double GuiScale
     => Main?.gameOptions_0.GuiScale ?? 1.0;
 
 }

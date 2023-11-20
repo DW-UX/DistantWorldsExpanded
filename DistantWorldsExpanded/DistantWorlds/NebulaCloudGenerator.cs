@@ -716,7 +716,7 @@ namespace DistantWorlds
                 {
                     if (!color_0.IsEmpty)
                     {
-                        Color pixel = fastBitmap.GetPixel(ref i, ref j);
+                        Color pixel = fastBitmap.GetPixel(i, j);
                         if (pixel.R > color_0.R + int_6 || pixel.G > color_0.G + int_6 || pixel.B > color_0.B + int_6)
                         {
                             num2 = i;
@@ -724,7 +724,7 @@ namespace DistantWorlds
                             break;
                         }
                     }
-                    else if (fastBitmap.GetPixel(ref i, ref j).A > int_5)
+                    else if (fastBitmap.GetPixel(i, j).A > int_5)
                     {
                         num2 = i;
                         flag = true;
@@ -745,7 +745,7 @@ namespace DistantWorlds
                 {
                     if (!color_0.IsEmpty)
                     {
-                        Color pixel2 = fastBitmap.GetPixel(ref X, ref k);
+                        Color pixel2 = fastBitmap.GetPixel(X, k);
                         if (pixel2.R > color_0.R + int_6 || pixel2.G > color_0.G + int_6 || pixel2.B > color_0.B + int_6)
                         {
                             num3 = X;
@@ -753,7 +753,7 @@ namespace DistantWorlds
                             break;
                         }
                     }
-                    else if (fastBitmap.GetPixel(ref X, ref k).A > int_5)
+                    else if (fastBitmap.GetPixel(X, k).A > int_5)
                     {
                         num3 = X;
                         flag = true;
@@ -773,7 +773,7 @@ namespace DistantWorlds
                 {
                     if (!color_0.IsEmpty)
                     {
-                        Color pixel3 = fastBitmap.GetPixel(ref m, ref l);
+                        Color pixel3 = fastBitmap.GetPixel(m, l);
                         if (pixel3.R > color_0.R + int_6 || pixel3.G > color_0.G + int_6 || pixel3.B > color_0.B + int_6)
                         {
                             num4 = l;
@@ -781,7 +781,7 @@ namespace DistantWorlds
                             break;
                         }
                     }
-                    else if (fastBitmap.GetPixel(ref m, ref l).A > int_5)
+                    else if (fastBitmap.GetPixel(m, l).A > int_5)
                     {
                         num4 = l;
                         flag = true;
@@ -802,7 +802,7 @@ namespace DistantWorlds
                 {
                     if (!color_0.IsEmpty)
                     {
-                        Color pixel4 = fastBitmap.GetPixel(ref n, ref Y);
+                        Color pixel4 = fastBitmap.GetPixel(n, Y);
                         if (pixel4.R > color_0.R + int_6 || pixel4.G > color_0.G + int_6 || pixel4.B > color_0.B + int_6)
                         {
                             num5 = Y;
@@ -810,7 +810,7 @@ namespace DistantWorlds
                             break;
                         }
                     }
-                    else if (fastBitmap.GetPixel(ref n, ref Y).A > int_5)
+                    else if (fastBitmap.GetPixel(n, Y).A > int_5)
                     {
                         num5 = Y;
                         flag = true;
@@ -822,7 +822,7 @@ namespace DistantWorlds
                     break;
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
             return new Rectangle(num2, num4, num3 - num2, num5 - num4);
         }
 

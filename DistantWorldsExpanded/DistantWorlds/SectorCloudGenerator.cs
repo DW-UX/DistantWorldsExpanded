@@ -77,14 +77,14 @@ namespace DistantWorlds
             {
                 for (int j = left; j < right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0)
                     {
                         fastBitmap.SetPixel(ref j, ref i, Color.FromArgb(noise[j + noiseOffsetX][i + noiseOffsetY], pixel.R, pixel.G, pixel.B));
                     }
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         public void PerlinImageTransparent(Bitmap image, Rectangle imageRectangle, float skip, float startX, float startY)
@@ -102,7 +102,7 @@ namespace DistantWorlds
                 num = startX;
                 for (int j = left; j < right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0)
                     {
                         double num4 = perlinNoise_0.PerlinNoise2d(num, num2);
@@ -114,7 +114,7 @@ namespace DistantWorlds
                 }
                 num2 += num3;
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         public void FbmImageTransparent(Bitmap image, Rectangle imageRectangle, float skip, float startX, float startY)
@@ -131,7 +131,7 @@ namespace DistantWorlds
                 num = startX;
                 for (int j = left; j < right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0)
                     {
                         float num2 = cfractal_0.fBm(ref num, ref y, 6);
@@ -143,7 +143,7 @@ namespace DistantWorlds
                 }
                 y += skip;
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         public void FbmImage(Bitmap image, Rectangle imageRectangle, float skip, float startX, float startY)
@@ -160,7 +160,7 @@ namespace DistantWorlds
                 num = startX;
                 for (int j = left; j < right; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0)
                     {
                         float num2 = cfractal_0.fBm(ref num, ref y, 6);
@@ -171,7 +171,7 @@ namespace DistantWorlds
                 }
                 y += skip;
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
         }
 
         private Point[] method_0(int int_2, int int_3)
@@ -238,15 +238,15 @@ namespace DistantWorlds
 
         private Color method_4(FastBitmap fastBitmap_0, int int_2, int int_3, int int_4)
         {
-            Color pixel = fastBitmap_0.GetPixel(ref int_2, ref int_3);
+            Color pixel = fastBitmap_0.GetPixel(int_2, int_3);
             int X = int_2 + int_4;
-            Color pixel2 = fastBitmap_0.GetPixel(ref X, ref int_3);
+            Color pixel2 = fastBitmap_0.GetPixel(X, int_3);
             int Y = int_3 + int_4;
-            Color pixel3 = fastBitmap_0.GetPixel(ref X, ref Y);
-            Color pixel4 = fastBitmap_0.GetPixel(ref int_2, ref Y);
+            Color pixel3 = fastBitmap_0.GetPixel(X, Y);
+            Color pixel4 = fastBitmap_0.GetPixel(int_2, Y);
             X = int_2 + int_4 / 2;
             Y = int_3 + int_4 / 2;
-            Color pixel5 = fastBitmap_0.GetPixel(ref X, ref Y);
+            Color pixel5 = fastBitmap_0.GetPixel(X, Y);
             int num = (pixel.R + pixel2.R + pixel3.R + pixel4.R + pixel5.R) / 4;
             int num2 = (pixel.G + pixel2.G + pixel3.G + pixel4.G + pixel5.G) / 4;
             int num3 = (pixel.B + pixel2.B + pixel3.B + pixel4.B + pixel5.B) / 4;
@@ -296,7 +296,7 @@ namespace DistantWorlds
                     graphics.FillPath(brush, graphicsPath);
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
             ApplyNoiseToImage(bitmap_0, new Rectangle(0, 0, bitmap_0.Width, bitmap_0.Height), byte_0);
             return bitmap_0;
         }

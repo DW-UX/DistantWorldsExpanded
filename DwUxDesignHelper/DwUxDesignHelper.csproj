@@ -5,6 +5,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
+      <PackageReference Include="Microsoft.WinForms.Designer.SDK" Version="1.6.0" />
+    </ItemGroup>
+
 
 </Project>

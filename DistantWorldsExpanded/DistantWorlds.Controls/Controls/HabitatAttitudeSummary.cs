@@ -32,8 +32,8 @@ namespace DistantWorlds.Controls
     public override void SetFontCache(IFontCache fontCache)
     {
       this._FontCache = fontCache;
-      this._NormalFont = this._FontCache.GenerateFont(16.67f, false);
-      this._NormalFontBold = this._FontCache.GenerateFont(16.67f, true);
+      this._NormalFont = this._FontCache.GenerateFont(FontSize.Large, false);
+      this._NormalFontBold = this._FontCache.GenerateFont(FontSize.Large, true);
     }
 
     public void ClearData()

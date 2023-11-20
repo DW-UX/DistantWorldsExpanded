@@ -316,11 +316,11 @@ namespace DistantWorlds
         {
             if (_FontCache != null)
             {
-                TinyFont = _FontCache.GenerateFont(10.67f * float_0, isBold: false);
-                SmallFont = _FontCache.GenerateFont(12.67f * float_0, isBold: false);
-                Font = _FontCache.GenerateFont(16.67f * float_0, isBold: false);
-                BoldFont = _FontCache.GenerateFont(16.67f * float_0, isBold: true);
-                LargeBoldFont = _FontCache.GenerateFont(22.67f * float_0, isBold: true);
+                TinyFont = _FontCache.GenerateFont(FontSize.Tiny * float_0, isBold: false);
+                SmallFont = _FontCache.GenerateFont(FontSize.Small * float_0, isBold: false);
+                Font = _FontCache.GenerateFont(FontSize.Large * float_0, isBold: false);
+                BoldFont = _FontCache.GenerateFont(FontSize.Small * float_0, isBold: true);
+                LargeBoldFont = _FontCache.GenerateFont(FontSize.Title * float_0, isBold: true);
             }
         }
 

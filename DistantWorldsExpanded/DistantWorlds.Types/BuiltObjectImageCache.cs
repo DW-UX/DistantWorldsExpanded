@@ -626,7 +626,7 @@ namespace DistantWorlds.Types
             {
                 for (int j = 0; j < image.Height; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref i, ref j);
+                    Color pixel = fastBitmap.GetPixel(i, j);
                     if (pixel.A > 0 && pixel.ToArgb() != num2 && pixel.ToArgb() != num3 && pixel.ToArgb() != num4)
                     {
                         num++;
@@ -653,7 +653,7 @@ namespace DistantWorlds.Types
             {
                 for (int j = 0; j < height; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref i, ref j);
+                    Color pixel = fastBitmap.GetPixel(i, j);
                     if (pixel.A > 0 && pixel.ToArgb() != num5 && pixel.ToArgb() != num6 && pixel.ToArgb() != num7)
                     {
                         num = i;
@@ -666,7 +666,7 @@ namespace DistantWorlds.Types
             {
                 for (int k = 0; k < height; k++)
                 {
-                    Color pixel2 = fastBitmap.GetPixel(ref X, ref k);
+                    Color pixel2 = fastBitmap.GetPixel(X, k);
                     if (pixel2.A > 0 && pixel2.ToArgb() != num5 && pixel2.ToArgb() != num6 && pixel2.ToArgb() != num7)
                     {
                         num2 = X;
@@ -679,7 +679,7 @@ namespace DistantWorlds.Types
             {
                 for (int m = 0; m < width; m++)
                 {
-                    Color pixel3 = fastBitmap.GetPixel(ref m, ref l);
+                    Color pixel3 = fastBitmap.GetPixel(m, l);
                     if (pixel3.A > 0 && pixel3.ToArgb() != num5 && pixel3.ToArgb() != num6 && pixel3.ToArgb() != num7)
                     {
                         num3 = l;
@@ -692,7 +692,7 @@ namespace DistantWorlds.Types
             {
                 for (int n = 0; n < width; n++)
                 {
-                    Color pixel4 = fastBitmap.GetPixel(ref n, ref Y);
+                    Color pixel4 = fastBitmap.GetPixel(n, Y);
                     if (pixel4.A > 0 && pixel4.ToArgb() != num5 && pixel4.ToArgb() != num6 && pixel4.ToArgb() != num7)
                     {
                         num4 = Y;
@@ -749,8 +749,10 @@ namespace DistantWorlds.Types
             {
                 for (int j = 0; j < height; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref i, ref j);
-                    if (pixel.B != thrusterColor.B || pixel.R != thrusterColor.R || pixel.G != thrusterColor.G)
+                    Color pixel = fastBitmap.GetPixel(i, j);
+                    if (pixel.B != thrusterColor.B
+                        || pixel.R != thrusterColor.R
+                        || pixel.G != thrusterColor.G)
                     {
                         continue;
                     }
@@ -765,7 +767,7 @@ namespace DistantWorlds.Types
                         num2 = image.Height - 1;
                         for (; j < image.Height; j++)
                         {
-                            pixel = fastBitmap.GetPixel(ref i, ref j);
+                            pixel = fastBitmap.GetPixel(i, j);
                             if (pixel.R != thrusterColor.R || pixel.G != thrusterColor.G || pixel.B != thrusterColor.B)
                             {
                                 num2 = j - 1;
@@ -804,8 +806,8 @@ namespace DistantWorlds.Types
             {
                 X2 = image.Bitmap.Width - 2;
             }
-            Color pixel = image.GetPixel(ref X, ref y);
-            Color pixel2 = image.GetPixel(ref X2, ref y);
+            Color pixel = image.GetPixel(X, y);
+            Color pixel2 = image.GetPixel(X2, y);
             int alpha = (pixel.A + pixel2.A) / 2;
             int red = (pixel.R + pixel2.R) / 2;
             int green = (pixel.G + pixel2.G) / 2;
@@ -826,7 +828,7 @@ namespace DistantWorlds.Types
             {
                 for (int j = 0; j < width; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.R == scanColor.R && pixel.G == scanColor.G && pixel.B == scanColor.B)
                     {
                         list.Add(new Point(j, i));
@@ -891,7 +893,7 @@ namespace DistantWorlds.Types
             {
                 for (int j = num2; j < width; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.A > 0 && pixel.ToArgb() != num3 && pixel.ToArgb() != num4 && pixel.ToArgb() != num5)
                     {
                         opaqueCount++;
@@ -921,7 +923,7 @@ namespace DistantWorlds.Types
             {
                 for (int j = 0; j < image.Width; j++)
                 {
-                    if (fastBitmap.GetPixel(ref j, ref i).ToArgb() != num)
+                    if (fastBitmap.GetPixel(j, i).ToArgb() != num)
                     {
                         fastBitmap2.SetPixel(ref j, ref i, Color.Transparent);
                     }

@@ -1,126 +1,94 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: DistantWorlds.FastBitmap
-// Assembly: DistantWorlds, Version=1.9.5.12, Culture=neutral, PublicKeyToken=null
-// MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
-// Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
+// Type: DistantWorlds.Types.FastBitmap
+// Assembly: DistantWorlds.Types, Version=1.9.5.12, Culture=neutral, PublicKeyToken=null
+// MVID: C87DBA0E-BD3A-46BA-A8F0-EE9F5E5721E2
+// Assembly location: H:\7\DistantWorlds.Types.dll
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.CompilerServices;
 
-namespace DistantWorlds
-{
-    public class FastBitmap
-    {
-        public struct PixelData
-        {
-            public byte blue;
+namespace DistantWorlds {
 
-            public byte green;
+  public class FastBitmap : IDisposable {
 
-            public byte red;
+    private readonly Bitmap _Image;
 
-            public byte alpha;
-        }
+    private readonly int _ImageWidth;
 
-        private Bitmap bitmap_0;
+    private readonly BitmapData _BitmapData;
 
-        private int int_0;
+    private readonly unsafe byte* _BaseOffset;
 
-        private BitmapData bitmapData_0;
-
-        private unsafe byte* pByte_0;
-
-        public Bitmap Bitmap => bitmap_0;
-
-        public unsafe FastBitmap(Bitmap image):base()
-        {
-            
-            pByte_0 = null;
-            bitmap_0 = image;
-            try
-            {
-                method_0();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void Release()
-        {
-            try
-            {
-                method_2();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public unsafe void SetPixel(ref int X, ref int Y, Color Colour)
-        {
-            try
-            {
-                PixelData* ptr = method_1(X, Y);
-                ptr->red = Colour.R;
-                ptr->green = Colour.G;
-                ptr->blue = Colour.B;
-                ptr->alpha = Colour.A;
-            }
-            catch (AccessViolationException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public unsafe Color GetPixel(ref int X, ref int Y)
-        {
-            try
-            {
-                PixelData* ptr = method_1(X, Y);
-                return Color.FromArgb(ptr->alpha, ptr->red, ptr->green, ptr->blue);
-            }
-            catch (AccessViolationException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private unsafe void method_0()
-        {
-            GraphicsUnit pageUnit = GraphicsUnit.Pixel;
-            RectangleF bounds = bitmap_0.GetBounds(ref pageUnit);
-            Rectangle rect = new Rectangle((int)bounds.X, (int)bounds.Y, (int)bounds.Width, (int)bounds.Height);
-            int_0 = (int)bounds.Width * sizeof(PixelData);
-            if (int_0 % 4 != 0)
-            {
-                int_0 = 4 * (int_0 / 4 + 1);
-            }
-            bitmapData_0 = bitmap_0.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-            pByte_0 = (byte*)bitmapData_0.Scan0.ToPointer();
-        }
-
-        private unsafe PixelData* method_1(int int_1, int int_2)
-        {
-            return (PixelData*)(pByte_0 + (nint)int_2 * (nint)int_0 + (nint)int_1 * (nint)sizeof(PixelData));
-        }
-
-        private unsafe void method_2()
-        {
-            bitmap_0.UnlockBits(bitmapData_0);
-            bitmapData_0 = null;
-            pByte_0 = null;
-        }
+    [MethodImpl(MethodImplOptions.AggressiveInlining), SkipLocalsInit]
+    public unsafe FastBitmap(Bitmap image) {
+      _Image = image;
+      GraphicsUnit pageUnit = GraphicsUnit.Pixel;
+      RectangleF bounds = _Image.GetBounds(ref pageUnit);
+      Rectangle rect = new Rectangle(
+        (int)bounds.X,
+        (int)bounds.Y,
+        (int)bounds.Width,
+        (int)bounds.Height
+        );
+      Debug.Assert(rect.X == 0);
+      _ImageWidth = (int)bounds.Width * sizeof(PixelData);
+      if (_ImageWidth % 4 != 0)
+        _ImageWidth = 4 * (_ImageWidth / 4 + 1);
+      _BitmapData = _Image.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+      _BaseOffset = (byte*)_BitmapData.Scan0;
     }
+
+    public void Dispose() {
+      _Image.UnlockBits(_BitmapData);
+      GC.SuppressFinalize(this);
+    }
+
+    ~FastBitmap() => Dispose();
+
+    public Bitmap Bitmap => _Image;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining), SkipLocalsInit]
+    public unsafe void SetPixel(ref int x, ref int y, Color colour)
+      => *PixelAt(x, y) = new() {
+        alpha = colour.A,
+        blue = colour.B,
+        green = colour.G,
+        red = colour.R
+      };
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining), SkipLocalsInit]
+    public unsafe Color GetPixel(int x, int y) {
+      PixelData* pixelDataPtr = PixelAt(x, y);
+      return Color.FromArgb(
+        pixelDataPtr->alpha,
+        pixelDataPtr->red,
+        pixelDataPtr->green,
+        pixelDataPtr->blue
+      );
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining), SkipLocalsInit]
+    private unsafe PixelData* PixelAt(int x, int y)
+      => (PixelData*)(
+        _BaseOffset + y * (nint)_ImageWidth
+        + x * (nint)sizeof(PixelData)
+      );
+
+    public struct PixelData {
+
+      public byte blue;
+
+      public byte green;
+
+      public byte red;
+
+      public byte alpha;
+
+    }
+
+  }
+
 }

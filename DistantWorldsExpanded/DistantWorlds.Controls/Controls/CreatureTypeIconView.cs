@@ -21,7 +21,7 @@ namespace DistantWorlds.Controls
         private List<CreatureType> _CreatureTypes;
         private Bitmap[] _CreatureImages;
         protected IFontCache _FontCache;
-        private float _FontSize = 12.67f;
+        private float _FontSize = FontSize.Small;
         private bool _FontIsBold;
         private Control _MouseWheelRefocusControl;
 
@@ -70,7 +70,7 @@ namespace DistantWorlds.Controls
             this.View = View.LargeIcon;
             this.BackColor = Color.FromArgb(32, 32, 48);
             this.BorderStyle = BorderStyle.None;
-            this.SetFont(12.67f);
+            this.SetFont(FontSize.Small);
             this.ForeColor = Color.FromArgb(170, 170, 170);
             this.MultiSelect = false;
             this.Scrollable = false;

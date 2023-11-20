@@ -28,7 +28,7 @@ namespace DistantWorlds.Controls
     private Bitmap _MiningImage;
     private bool _RaiseEvents = true;
     private IFontCache _FontCache;
-    private float _FontSize = 15.33f;
+    private float _FontSize = FontSize.Normal;
     private bool _FontIsBold;
     private Font _TinyFont;
     private IContainer components;

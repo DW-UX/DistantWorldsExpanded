@@ -1518,15 +1518,15 @@ namespace DistantWorlds {
             UpdateStyles();
             intptr_0 = method_526("DistantWorlds.Resources.Forgotte.ttf");
             intptr_1 = method_526("DistantWorlds.Resources.Forgottb.ttf");
-            font_0 = ((IFontCache)this).GenerateFont(32f, isBold: true);
-            font_1 = ((IFontCache)this).GenerateFont(22.67f, isBold: true);
-            font_2 = ((IFontCache)this).GenerateFont(18.67f, isBold: true);
-            font_6 = ((IFontCache)this).GenerateFont(16.67f, isBold: false);
-            font_7 = ((IFontCache)this).GenerateFont(16.67f, isBold: true);
-            font_3 = ((IFontCache)this).GenerateFont(15.33f, isBold: false);
+            font_0 = ((IFontCache)this).GenerateFont(FontSize.Enormous, isBold: true);
+            font_1 = ((IFontCache)this).GenerateFont(FontSize.Title, isBold: true);
+            font_2 = ((IFontCache)this).GenerateFont(FontSize.Heading, isBold: true);
+            font_6 = ((IFontCache)this).GenerateFont(FontSize.Large, isBold: false);
+            font_7 = ((IFontCache)this).GenerateFont(FontSize.Large, isBold: true);
+            font_3 = ((IFontCache)this).GenerateFont(FontSize.Normal, isBold: false);
             font_4 = ((IFontCache)this).GenerateFont(20.77f, isBold: false);
-            font_5 = ((IFontCache)this).GenerateFont(15.33f, isBold: true);
-            font_8 = ((IFontCache)this).GenerateFont(18.67f, isBold: false);
+            font_5 = ((IFontCache)this).GenerateFont(FontSize.Normal, isBold: true);
+            font_8 = ((IFontCache)this).GenerateFont(FontSize.Heading, isBold: false);
             Font font = Font;
             method_69(font_3, this);
             method_70(font_3, this, typeof(BorderPanel));
@@ -3019,7 +3019,7 @@ namespace DistantWorlds {
             lblIntroductionPlaystyleIntro.Location = new Point(0, num);
             btnIntroductionStart.Size = new Size(240, 35);
             btnIntroductionStart.Location = new Point(280, 620);
-            btnIntroductionStart.Font = new Font(btnIntroductionStart.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+            btnIntroductionStart.Font = new Font(btnIntroductionStart.Font.FontFamily, FontSize.Title, FontStyle.Bold, GraphicsUnit.Pixel);
             btnIntroductionStart.Text = TextResolver.GetText("Start Playing");
             if (_Game != null && _Game.PlayerEmpire != null)
             {
@@ -3861,7 +3861,7 @@ namespace DistantWorlds {
             bool flag = false;
             for (int i = 0; i < int_0; i++)
             {
-                object[] array;
+                ReadOnlySpan<object> array;
                 lock (object_0[i])
                 {
                     array = ListHelper.ToArrayThreadSafe(list_0[i]);
@@ -3947,7 +3947,7 @@ namespace DistantWorlds {
                                 List<object> list = list_0[i];
                                 if (list != null)
                                 {
-                                    array2[i] = ListHelper.ToArrayThreadSafe(list);
+                                    array2[i] = ListHelper.ToArrayThreadSafe(list).ToArray();
                                 }
                             }
                             list_0[num].Clear();
@@ -4845,7 +4845,7 @@ namespace DistantWorlds {
             {
                 for (int j = 0; j < bitmap_225.Height; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref i, ref j);
+                    Color pixel = fastBitmap.GetPixel(i, j);
                     if (pixel.B != color_43.B || pixel.R != color_43.R || pixel.G != color_43.G)
                     {
                         continue;
@@ -4861,7 +4861,7 @@ namespace DistantWorlds {
                         num2 = bitmap_225.Height - 1;
                         for (; j < bitmap_225.Height; j++)
                         {
-                            pixel = fastBitmap.GetPixel(ref i, ref j);
+                            pixel = fastBitmap.GetPixel(i, j);
                             if (pixel.R == color_43.R && pixel.G == color_43.G && pixel.B == color_43.B)
                             {
                                 transparent = method_102(fastBitmap, i, j);
@@ -4876,12 +4876,12 @@ namespace DistantWorlds {
                     list.Add(new Rectangle(i, num, 0, num2 - num + 1));
                     if (list.Count >= int_64)
                     {
-                        fastBitmap.Release();
+                        fastBitmap.Dispose();
                         return list;
                     }
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
             for (int k = 0; k < list2.Count; k++)
             {
                 bitmap_225.SetPixel(list2[k].X, list2[k].Y, list3[k]);
@@ -4901,8 +4901,8 @@ namespace DistantWorlds {
             {
                 X2 = fastBitmap_0.Bitmap.Width - 2;
             }
-            Color pixel = fastBitmap_0.GetPixel(ref X, ref int_65);
-            Color pixel2 = fastBitmap_0.GetPixel(ref X2, ref int_65);
+            Color pixel = fastBitmap_0.GetPixel(X, int_65);
+            Color pixel2 = fastBitmap_0.GetPixel(X2, int_65);
             int alpha = (pixel.A + pixel2.A) / 2;
             int red = (pixel.R + pixel2.R) / 2;
             int green = (pixel.G + pixel2.G) / 2;
@@ -4921,7 +4921,7 @@ namespace DistantWorlds {
             {
                 for (int j = 0; j < bitmap_225.Width; j++)
                 {
-                    Color pixel = fastBitmap.GetPixel(ref j, ref i);
+                    Color pixel = fastBitmap.GetPixel(j, i);
                     if (pixel.R == color_43.R && pixel.G == color_43.G && pixel.B == color_43.B)
                     {
                         list.Add(new Point(j, i));
@@ -4930,13 +4930,13 @@ namespace DistantWorlds {
                         list2.Add(new Point(j, i));
                         if (list.Count >= int_64)
                         {
-                            fastBitmap.Release();
+                            fastBitmap.Dispose();
                             return list;
                         }
                     }
                 }
             }
-            fastBitmap.Release();
+            fastBitmap.Dispose();
             for (int k = 0; k < list2.Count; k++)
             {
                 bitmap_225.SetPixel(list2[k].X, list2[k].Y, list3[k]);
@@ -4955,7 +4955,7 @@ namespace DistantWorlds {
             {
                 for (int j = 0; j < num; j++)
                 {
-                    if (fastBitmap.GetPixel(ref j, ref i).A > 192)
+                    if (fastBitmap.GetPixel(j, i).A > 192)
                     {
                         fastBitmap2.SetPixel(ref j, ref i, Color.Transparent);
                     }
@@ -4965,8 +4965,8 @@ namespace DistantWorlds {
                     }
                 }
             }
-            fastBitmap2.Release();
-            fastBitmap.Release();
+            fastBitmap2.Dispose();
+            fastBitmap.Dispose();
             return bitmap;
         }
 
@@ -4980,7 +4980,7 @@ namespace DistantWorlds {
             {
                 for (int j = 0; j < bitmap_225.Width; j++)
                 {
-                    if (fastBitmap.GetPixel(ref j, ref i).ToArgb() != num)
+                    if (fastBitmap.GetPixel(j, i).ToArgb() != num)
                     {
                         fastBitmap2.SetPixel(ref j, ref i, Color.Transparent);
                     }
@@ -4990,8 +4990,8 @@ namespace DistantWorlds {
                     }
                 }
             }
-            fastBitmap2.Release();
-            fastBitmap.Release();
+            fastBitmap2.Dispose();
+            fastBitmap.Dispose();
             return bitmap;
         }
 

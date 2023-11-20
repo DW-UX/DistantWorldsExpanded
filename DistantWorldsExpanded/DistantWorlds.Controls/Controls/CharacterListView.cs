@@ -138,7 +138,7 @@ namespace DistantWorlds.Controls
           Bitmap blankImage)
         {
             this._BlankImage = blankImage;
-            this.SetFont(15.33f);
+            this.SetFont(FontSize.Normal);
             this._Galaxy = galaxy;
             this._Characters = characters;
             this._Grid.Rows.Clear();

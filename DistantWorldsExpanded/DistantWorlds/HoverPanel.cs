@@ -664,9 +664,9 @@ namespace DistantWorlds
             {
                 Font font = font_0;
                 Font font2 = font_2;
-                font_0 = _FontCache.GenerateFont(18.67f, isBold: false);
-                font_1 = _FontCache.GenerateFont(18.67f, isBold: true);
-                font_2 = _FontCache.GenerateFont(22.67f, isBold: true);
+                font_0 = _FontCache.GenerateFont(FontSize.Heading, isBold: false);
+                font_1 = _FontCache.GenerateFont(FontSize.Heading, isBold: true);
+                font_2 = _FontCache.GenerateFont(FontSize.Title, isBold: true);
                 int_3 = font_0.Height;
                 font?.Dispose();
                 font2?.Dispose();

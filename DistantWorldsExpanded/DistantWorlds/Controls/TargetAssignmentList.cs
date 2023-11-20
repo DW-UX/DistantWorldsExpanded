@@ -164,9 +164,9 @@ namespace DistantWorlds.Controls
         {
             if (_FontCache != null)
             {
-                font_0 = _FontCache.GenerateFont(16.67f, isBold: false);
-                font_1 = _FontCache.GenerateFont(16.67f, isBold: true);
-                font_2 = _FontCache.GenerateFont(22.67f, isBold: true);
+                font_0 = _FontCache.GenerateFont(FontSize.Large, isBold: false);
+                font_1 = _FontCache.GenerateFont(FontSize.Large, isBold: true);
+                font_2 = _FontCache.GenerateFont(FontSize.Title, isBold: true);
             }
         }
 

@@ -33,9 +33,9 @@ namespace DistantWorlds.Controls
 
     private void InitializeFonts()
     {
-      this._LargeFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-      this._LargeBoldFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._HugeFont = new Font(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._LargeFont = new Font(this.Font.FontFamily, FontSize.Large, FontStyle.Regular, GraphicsUnit.Pixel);
+      this._LargeBoldFont = new Font(this.Font.FontFamily, FontSize.Large, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._HugeFont = new Font(this.Font.FontFamily, FontSize.Title, FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void BindData(Character character)

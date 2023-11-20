@@ -975,17 +975,17 @@ namespace DistantWorlds
             try
             {
                 SetControlLocalizedLabels();
-                font_0 = ((IFontCache)this).GenerateFont(15.33f, isBold: false);
+                font_0 = ((IFontCache)this).GenerateFont(FontSize.Normal, isBold: false);
                 font_1 = ((IFontCache)this).GenerateFont(20.77f, isBold: false);
-                font_2 = ((IFontCache)this).GenerateFont(15.33f, isBold: false);
-                font_3 = ((IFontCache)this).GenerateFont(16.67f, isBold: false);
-                font_4 = ((IFontCache)this).GenerateFont(16.67f, isBold: true);
-                font_6 = ((IFontCache)this).GenerateFont(15.33f, isBold: true);
-                font_5 = ((IFontCache)this).GenerateFont(18.67f, isBold: false);
-                font_7 = ((IFontCache)this).GenerateFont(18.67f, isBold: true);
-                font_8 = ((IFontCache)this).GenerateFont(18.67f, isBold: true);
-                font_9 = ((IFontCache)this).GenerateFont(22.67f, isBold: true);
-                font_10 = ((IFontCache)this).GenerateFont(32f, isBold: true);
+                font_2 = ((IFontCache)this).GenerateFont(FontSize.Normal, isBold: false);
+                font_3 = ((IFontCache)this).GenerateFont(FontSize.Large, isBold: false);
+                font_4 = ((IFontCache)this).GenerateFont(FontSize.Large, isBold: true);
+                font_6 = ((IFontCache)this).GenerateFont(FontSize.Normal, isBold: true);
+                font_5 = ((IFontCache)this).GenerateFont(FontSize.Heading, isBold: false);
+                font_7 = ((IFontCache)this).GenerateFont(FontSize.Heading, isBold: true);
+                font_8 = ((IFontCache)this).GenerateFont(FontSize.Heading, isBold: true);
+                font_9 = ((IFontCache)this).GenerateFont(FontSize.Title, isBold: true);
+                font_10 = ((IFontCache)this).GenerateFont(FontSize.Enormous, isBold: true);
                 Font font = Font;
                 method_151(font_0, this);
                 method_152(font_0, this, typeof(BorderPanel));
@@ -1110,8 +1110,8 @@ namespace DistantWorlds
                     num6 = (int)((float)num6 * float_1);
                     num7 = (int)((float)num7 * float_1);
                     num8 = (int)((float)num8 * float_1);
-                    font_2 = ((IFontCache)this).GenerateFont(15.33f * float_1, isBold: false);
-                    font_8 = ((IFontCache)this).GenerateFont(18.67f * float_1, isBold: true);
+                    font_2 = ((IFontCache)this).GenerateFont(FontSize.Normal * float_1, isBold: false);
+                    font_8 = ((IFontCache)this).GenerateFont(FontSize.Heading * float_1, isBold: true);
                 }
                 pnlButtons.Size = new Size(num4, num5);
                 int num9 = (num2 - pnlButtons.Height) / 2;
@@ -1259,7 +1259,7 @@ namespace DistantWorlds
                 lnkCheckForUpdates.Location = new Point((pnlButtons.Width - lnkCheckForUpdates.Width) / 2, num10 + num8 * 7);
                 lnkAbout.Location = new Point((pnlButtons.Width - lnkAbout.Width) / 2, num10 + num8 * 8);
                 lnkExit.Location = new Point((pnlButtons.Width - lnkExit.Width) / 2, num10 + num8 * 9);
-                int num22 = (int)(25f * float_1);
+                int num22 = (int)(FontSize.Huge * float_1);
                 lblVersion.Location = new Point(num22, pnlBottomLeftCorner.Height - 30);
                 lblVersion.Text = TextResolver.GetText("Version") + " " + Application.ProductVersion;
                 lblVersion.MaximumSize = new Size(pnlBottomLeftCorner.Width, 30);

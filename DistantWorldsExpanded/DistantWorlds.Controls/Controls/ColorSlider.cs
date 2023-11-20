@@ -134,7 +134,7 @@ namespace DistantWorlds.Controls
       }
     }
 
-    [DefaultValue(typeof (Size), "8; 8")]
+    [DefaultValue(typeof (Size), "8, 8")]
     [Category("ColorSlider")]
     [Description("Set Slider's thumb round rect size")]
     public Size ThumbRoundRectSize
@@ -153,7 +153,7 @@ namespace DistantWorlds.Controls
       }
     }
 
-    [DefaultValue(typeof (Size), "8; 8")]
+    [DefaultValue(typeof (Size), "8, 8")]
     [Description("Set Slider's border round rect size")]
     [Category("ColorSlider")]
     public Size BorderRoundRectSize

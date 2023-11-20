@@ -334,7 +334,7 @@ namespace DistantWorlds.Controls
 
         protected IFontCache _FontCache;
 
-        private float _FontSize = 15.33f;
+        private float _FontSize = FontSize.Normal;
 
         private bool _FontIsBold;
 
@@ -744,7 +744,7 @@ namespace DistantWorlds.Controls
             base.AutoScrollMargin = new Size(0, 0);
             base.Padding = new Padding(0);
             base.Margin = new Padding(0);
-            SetFont(15.33f);
+            SetFont(FontSize.Normal);
             _NormalFont = Font;
             _NormalFontBold = new Font(Font, FontStyle.Bold);
             _HotspotPen = new Pen(Color.FromArgb(170, 170, 170), 1f);
@@ -863,15 +863,15 @@ namespace DistantWorlds.Controls
 
         private void SetFonts()
         {
-            SetFont(15.33f);
-            _NormalFontNormalSize = CreateDisposeFont(_NormalFontNormalSize, 15.33f, isBold: false);
-            _NormalBoldFontNormalSize = CreateDisposeFont(_NormalBoldFontNormalSize, 15.33f, isBold: true);
-            _TitleFontNormalSize = CreateDisposeFont(_TitleFontNormalSize, 17.33f, isBold: true);
-            _TinyFontNormalSize = CreateDisposeFont(_TinyFontNormalSize, 10.67f, isBold: false);
-            _NormalFontLargeSize = CreateDisposeFont(_NormalFontLargeSize, 21.4f, isBold: false);
-            _NormalBoldFontLargeSize = CreateDisposeFont(_NormalBoldFontLargeSize, 21.4f, isBold: true);
-            _TitleFontLargeSize = CreateDisposeFont(_TitleFontLargeSize, 23.4f, isBold: true);
-            _TinyFontLargeSize = CreateDisposeFont(_TinyFontLargeSize, 15.33f, isBold: false);
+            SetFont(FontSize.Normal);
+            _NormalFontNormalSize = CreateDisposeFont(_NormalFontNormalSize, FontSize.Normal, isBold: false);
+            _NormalBoldFontNormalSize = CreateDisposeFont(_NormalBoldFontNormalSize, FontSize.Normal, isBold: true);
+            _TitleFontNormalSize = CreateDisposeFont(_TitleFontNormalSize, FontSize.SmallTitle, isBold: true);
+            _TinyFontNormalSize = CreateDisposeFont(_TinyFontNormalSize, FontSize.Tiny, isBold: false);
+            _NormalFontLargeSize = CreateDisposeFont(_NormalFontLargeSize, FontSize.LargeHeading, isBold: false);
+            _NormalBoldFontLargeSize = CreateDisposeFont(_NormalBoldFontLargeSize, FontSize.LargeHeading, isBold: true);
+            _TitleFontLargeSize = CreateDisposeFont(_TitleFontLargeSize, FontSize.LargeTitle, isBold: true);
+            _TinyFontLargeSize = CreateDisposeFont(_TinyFontLargeSize, FontSize.Normal, isBold: false);
             if (_ContentSizeIsLarge)
             {
                 _NormalFont = _NormalFontLargeSize;
