@@ -120,6 +120,8 @@
 		</When>
 	</Choose>
 	<ItemGroup>
+		<Compile Remove="DistantWorlds.Controls\Controls\GameOptionsScreenPanel - Copy.cs" />
+		<Compile Remove="DistantWorlds.Controls\Controls\GameOptionsScreenPanel - Copy.Designer.cs" />
 		<Compile Remove="DistantWorlds\Class0.cs" />
 		<Compile Remove="DistantWorlds\Class6.cs" />
 		<Compile Remove="DistantWorlds\Class7.cs" />
@@ -147,6 +149,9 @@
 		<Compile Remove="DistantWorlds\privatDFB67E2D.cs" />
 		<Compile Remove="DistantWorlds\test.cs" />
 		<Compile Remove="DistantWorlds\test.Designer.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Remove="DistantWorlds.Controls\Controls\GameOptionsScreenPanel - Copy.resx" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Remove="DistantWorlds.Controls\lib\Ionic.Zip.dll" />

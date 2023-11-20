@@ -85,7 +85,6 @@ namespace DistantWorlds
 
         private ComboBox cmbYourEmpireStartLocation;
 
-        private SmoothLabel lblHelpDescription;
 
         private ComboBox cmbFlagShape;
 
@@ -103,7 +102,6 @@ namespace DistantWorlds
 
         private NumericUpDown numVictoryTimeLimitYears;
 
-        private SmoothLabel lblHelpTitle;
 
         private LinkLabel lnkCheckForUpdates;
 
@@ -488,17 +486,11 @@ namespace DistantWorlds
 
         private Label lblStartNewGameColonizationTerritoryColonyInfluenceRangeSuggestion;
 
-        private System.Windows.Forms.Panel pnlStartNewGameYourEmpireType;
+        private StartNewGameSelectGameTypeScreenPanel pnlStartNewGameYourEmpireType;
 
-        private GlassButton btnStartNewGameYourEmpireTypeNormalShadows;
-
-        private GlassButton btnStartNewGameYourEmpireTypePirateShadows;
 
         private CheckBox chkStartNewGameTheGalaxyDifficultyScaling;
 
-        private GlassButton btnStartNewGameYourEmpireTypeNormalClassic;
-
-        private GlassButton btnStartNewGameYourEmpireTypePirateClassic;
 
         private GlassButton btnStartNewGameTheGalaxyPrevious;
         
@@ -655,17 +647,6 @@ namespace DistantWorlds
 
         private ComboBox cmbJumpStartVictoryPiratePlayStyle;
 
-        private GlassButton btnStartNewGameYourEmpireTypeLegends;
-
-        private GlassButton btnStartNewGameYourEmpireTypeReturnOfTheShakturi;
-
-        private GlassButton btnStartNewGameYourEmpireTypeQuickStarts;
-
-        private GlassButton btnStartNewGameYourEmpireTypeClassicEra;
-
-        private GlassButton btnStartNewGameYourEmpireTypeTheAncientGalaxy;
-
-        private PictureBox picStartNewGameYourEmpireTypeTimeline;
 
         public ToolTip toolTip;
 
@@ -673,7 +654,6 @@ namespace DistantWorlds
 
         private SmoothLabel lblActiveTheme;
 
-        private SmoothLabel lblStartNewGameActiveTheme;
 
         private HoverMenuGroup menuGroup;
 
@@ -709,9 +689,7 @@ namespace DistantWorlds
 
         private LinkLabel lnkTutorialEmpireAndColonies;
 
-        private GlassButton btnStartNewGameIntroductory;
 
-        private RoundRectanglePanel pnlStartNewGameIntroductoryBorder;
 
         public Main main_0;
 
@@ -1118,8 +1096,7 @@ namespace DistantWorlds
                 int num3 = num / 2;
                 lblActiveTheme.Location = new Point(num3, 20);
                 lblActiveTheme.TextAlign = ContentAlignment.MiddleCenter;
-                lblStartNewGameActiveTheme.Font = font_6;
-                lblStartNewGameActiveTheme.TextAlign = ContentAlignment.MiddleCenter;
+                pnlStartNewGameYourEmpireType.lblStartNewGameActiveTheme.Font = font_6;
                 int num4 = 340;
                 int num5 = 500;
                 int num6 = 300;
@@ -1430,10 +1407,10 @@ namespace DistantWorlds
                 lblActiveTheme.Location = new Point(num, lblActiveTheme.Location.Y);
                 lblActiveTheme.Text = text;
             }
-            using Graphics graphics2 = lblStartNewGameActiveTheme.CreateGraphics();
-            int num2 = (900 - (int)graphics2.MeasureString(text, font_6).Width) / 2;
-            lblStartNewGameActiveTheme.Location = new Point(num2, 620);
-            lblStartNewGameActiveTheme.Text = text;
+            //using Graphics graphics2 = lblStartNewGameActiveTheme.CreateGraphics();
+            //int num2 = (900 - (int)graphics2.MeasureString(text, font_6).Width) / 2;
+            //lblStartNewGameActiveTheme.Location = new Point(num2, 620);
+            pnlStartNewGameYourEmpireType.lblStartNewGameActiveTheme.Text = text;
         }
 
         private void method_2(string string_2, bool bool_5, bool bool_6)
@@ -2689,12 +2666,8 @@ namespace DistantWorlds
             pnlNewGame.Location = new Point((base.Width - pnlNewGame.Width) / 2, (base.Height - pnlNewGame.Height) / 2);
             pnlNewGame.DoLayout();
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Playstyle");
-            lblHelpTitle.Location = new Point(10, 7);
-            lblHelpTitle.Font = font_6;
-            lblHelpDescription.Location = new Point(175, 8);
-            lblHelpDescription.TextAlign = ContentAlignment.TopLeft;
-            lblHelpDescription.Font = font_3;
-            lblHelpDescription.MaximumSize = new Size(720, 32);
+            pnlStartNewGameYourEmpireType.lblHelpTitle.Font = font_6;
+            pnlStartNewGameYourEmpireType.lblHelpDescription.Font = font_3;
             method_100("", "");
             Size size = new Size(900, 660);
             pnlStartNewGameGalaxyMaps.Size = size;
@@ -3499,71 +3472,27 @@ namespace DistantWorlds
             _ = (pnlStartNewGameYourEmpireType.Width - 876) / 2;
             int num = (pnlStartNewGameYourEmpireType.Height - 630) / 2;
             num -= 10;
-            pnlStartNewGameIntroductoryBorder.Size = new Size(434, 104);
-            pnlStartNewGameIntroductoryBorder.Location = new Point(233, 14);
-            pnlStartNewGameIntroductoryBorder.BorderStyle = BorderStyle.None;
-            pnlStartNewGameIntroductoryBorder.BorderWidth = 8;
-            pnlStartNewGameIntroductoryBorder.CornerCurveRadius = 10;
-            btnStartNewGameIntroductory.Size = new Size(420, 90);
-            btnStartNewGameIntroductory.Location = new Point(7, 7);
-            btnStartNewGameIntroductory.Font = font_9;
-            toolTip.SetToolTip(btnStartNewGameIntroductory, TextResolver.GetText("Start New Game Description - Introductory Game"));
+            pnlStartNewGameYourEmpireType.btnStartNewGameIntroductory.Font = font_9;
             Size size = new Size(140, 230);
             int num2 = 10;
-            btnStartNewGameYourEmpireTypeTheAncientGalaxy.Size = size;
-            btnStartNewGameYourEmpireTypeTheAncientGalaxy.Location = new Point(10, 140);
-            btnStartNewGameYourEmpireTypeTheAncientGalaxy.Text = TextResolver.GetText("Start New Game - Ancient Galaxy") + ">>";
-            btnStartNewGameYourEmpireTypeTheAncientGalaxy.Font = font_7;
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeTheAncientGalaxy.Font = font_7;
             num2 = 10 + (size.Width + 8);
-            btnStartNewGameYourEmpireTypePirateShadows.Size = size;
-            btnStartNewGameYourEmpireTypePirateShadows.Location = new Point(num2, 140);
-            btnStartNewGameYourEmpireTypePirateShadows.Text = TextResolver.GetText("Start New Game - Shadows Pirate") + ">>";
-            btnStartNewGameYourEmpireTypePirateShadows.Font = font_7;
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypePirateShadows.Font = font_7;
             num2 += size.Width + 8;
-            btnStartNewGameYourEmpireTypeNormalShadows.Size = size;
-            btnStartNewGameYourEmpireTypeNormalShadows.Location = new Point(num2, 140);
-            btnStartNewGameYourEmpireTypeNormalShadows.Text = TextResolver.GetText("Start New Game - Shadows Standard") + ">>";
-            btnStartNewGameYourEmpireTypeNormalShadows.Font = font_7;
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeNormalShadows.Font = font_7;
             num2 += size.Width + 8;
-            btnStartNewGameYourEmpireTypeClassicEra.Size = size;
-            btnStartNewGameYourEmpireTypeClassicEra.Location = new Point(num2, 140);
-            btnStartNewGameYourEmpireTypeClassicEra.Text = TextResolver.GetText("Start New Game - Classic Era") + ">>";
-            btnStartNewGameYourEmpireTypeClassicEra.Font = font_7;
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeClassicEra.Font = font_7;
             num2 += size.Width + 8;
-            btnStartNewGameYourEmpireTypeReturnOfTheShakturi.Size = size;
-            btnStartNewGameYourEmpireTypeReturnOfTheShakturi.Location = new Point(num2, 140);
-            btnStartNewGameYourEmpireTypeReturnOfTheShakturi.Text = TextResolver.GetText("Start New Game - Return of the Shakturi") + ">>";
-            btnStartNewGameYourEmpireTypeReturnOfTheShakturi.Font = font_7;
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeReturnOfTheShakturi.Font = font_7;
             num2 += size.Width + 8;
-            btnStartNewGameYourEmpireTypeLegends.Size = size;
-            btnStartNewGameYourEmpireTypeLegends.Location = new Point(num2, 140);
-            btnStartNewGameYourEmpireTypeLegends.Text = TextResolver.GetText("Start New Game - Legends") + ">>";
-            btnStartNewGameYourEmpireTypeLegends.Font = font_7;
-            toolTip.SetToolTip(btnStartNewGameYourEmpireTypeTheAncientGalaxy, TextResolver.GetText("Start New Game Description - Ancient Galaxy"));
-            toolTip.SetToolTip(btnStartNewGameYourEmpireTypePirateShadows, TextResolver.GetText("Start New Game Description - Shadows Pirate"));
-            toolTip.SetToolTip(btnStartNewGameYourEmpireTypeNormalShadows, TextResolver.GetText("Start New Game Description - Shadows Standard"));
-            toolTip.SetToolTip(btnStartNewGameYourEmpireTypeClassicEra, TextResolver.GetText("Start New Game Description - Classic Era"));
-            toolTip.SetToolTip(btnStartNewGameYourEmpireTypeReturnOfTheShakturi, TextResolver.GetText("Start New Game Description - Return of the Shakturi"));
-            toolTip.SetToolTip(btnStartNewGameYourEmpireTypeLegends, TextResolver.GetText("Start New Game Description - Legends"));
-            picStartNewGameYourEmpireTypeTimeline.Size = new Size(880, 150);
-            picStartNewGameYourEmpireTypeTimeline.Location = new Point(10, 370);
-            btnStartNewGameYourEmpireTypeNormalClassic.Size = new Size(340, 100);
-            btnStartNewGameYourEmpireTypeNormalClassic.Location = new Point(70, 540);
-            btnStartNewGameYourEmpireTypeNormalClassic.Text = TextResolver.GetText("Start New Game - Custom Standard") + ">>";
-            btnStartNewGameYourEmpireTypeNormalClassic.Font = font_7;
-            btnStartNewGameYourEmpireTypePirateClassic.Size = new Size(340, 100);
-            btnStartNewGameYourEmpireTypePirateClassic.Location = new Point(490, 540);
-            btnStartNewGameYourEmpireTypePirateClassic.Text = TextResolver.GetText("Start New Game - Custom Pirate") + ">>";
-            btnStartNewGameYourEmpireTypePirateClassic.Font = font_7;
-            lblStartNewGameActiveTheme.TextAlign = ContentAlignment.MiddleCenter;
-            using (Graphics graphics = lblStartNewGameActiveTheme.CreateGraphics())
-            {
-                int num3 = (900 - (int)graphics.MeasureString(lblStartNewGameActiveTheme.Text, font_6).Width) / 2;
-                lblStartNewGameActiveTheme.Location = new Point(num3, 640);
-            }
-            toolTip.SetToolTip(btnStartNewGameYourEmpireTypeNormalClassic, TextResolver.GetText("Start New Game Description - Custom Standard"));
-            toolTip.SetToolTip(btnStartNewGameYourEmpireTypePirateClassic, TextResolver.GetText("Start New Game Description - Custom Pirate"));
-            btnStartNewGameYourEmpireTypeQuickStarts.Visible = false;
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeLegends.Font = font_7;
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeNormalClassic.Font = font_7;
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypePirateClassic.Font = font_7;
+            //using (Graphics graphics = lblStartNewGameActiveTheme.CreateGraphics())
+            //{
+            //    int num3 = (900 - (int)graphics.MeasureString(lblStartNewGameActiveTheme.Text, font_6).Width) / 2;
+            //    lblStartNewGameActiveTheme.Location = new Point(num3, 640);
+            //}
             pnlStartNewGameYourEmpireType.ResumeLayout();
         }
 
@@ -4755,10 +4684,10 @@ namespace DistantWorlds
             pnlStartNewGameGalaxyMaps.SendToBack();
             pnlStartNewGameYourEmpireType.Visible = true;
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Playstyle");
-            btnStartNewGameYourEmpireTypeNormalShadows.Focus();
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeNormalShadows.Focus();
             pnlStartNewGameYourEmpireType.BringToFront();
-            lblHelpTitle.Text = string.Empty;
-            lblHelpDescription.Text = string.Empty;
+            pnlStartNewGameYourEmpireType.lblHelpTitle.Text = string.Empty;
+            pnlStartNewGameYourEmpireType.lblHelpDescription.Text = string.Empty;
         }
 
         private void method_221(GalaxySummary galaxySummary_0, EmpireSummary empireSummary_0)
@@ -5604,10 +5533,10 @@ namespace DistantWorlds
             pnlStartNewGameJumpStart.Visible = false;
             pnlStartNewGameYourEmpireType.Visible = true;
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Playstyle");
-            btnStartNewGameYourEmpireTypeNormalShadows.Focus();
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeNormalShadows.Focus();
             pnlStartNewGameYourEmpireType.BringToFront();
-            lblHelpTitle.Text = string.Empty;
-            lblHelpDescription.Text = string.Empty;
+            pnlStartNewGameYourEmpireType.lblHelpTitle.Text = string.Empty;
+            pnlStartNewGameYourEmpireType.lblHelpDescription.Text = string.Empty;
         }
 
         private void btnJumpStartTheGalaxyNext_Click(object sender, EventArgs e)

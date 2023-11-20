@@ -3050,10 +3050,8 @@ namespace DistantWorlds
 
         private void method_100(string string_2, string string_3)
         {
-            lblHelpTitle.Text = string_2;
-            lblHelpDescription.Text = string_3;
-            lblHelpDescription.Location = new Point(lblHelpTitle.Width + 15, 8);
-            lblHelpDescription.MaximumSize = new Size(900 - lblHelpDescription.Left, 32);
+            pnlStartNewGameYourEmpireType.lblHelpTitle.Text = string_2;
+            pnlStartNewGameYourEmpireType.lblHelpDescription.Text = string_3;
         }
 
         private void cmbYourEmpireStartLocation_Enter(object sender, EventArgs e)

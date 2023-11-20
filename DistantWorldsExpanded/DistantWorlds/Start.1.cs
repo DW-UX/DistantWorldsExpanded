@@ -3956,10 +3956,10 @@ namespace DistantWorlds
             pnlStartNewGameTheGalaxy.Visible = false;
             pnlStartNewGameYourEmpireType.Visible = true;
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Playstyle");
-            btnStartNewGameYourEmpireTypeNormalShadows.Focus();
+            pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeNormalShadows.Focus();
             pnlStartNewGameYourEmpireType.BringToFront();
-            lblHelpTitle.Text = string.Empty;
-            lblHelpDescription.Text = string.Empty;
+            pnlStartNewGameYourEmpireType.lblHelpTitle.Text = string.Empty;
+            pnlStartNewGameYourEmpireType.lblHelpDescription.Text = string.Empty;
         }
 
         private void btnStartNewGameYourEmpirePrevious_Click(object sender, EventArgs e)
