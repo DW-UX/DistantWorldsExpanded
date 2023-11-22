@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DistantWorlds.Controls
 {
-    public partial class StartNewGameSelectGameTypeScreenPanel : ScreenPanel
+    public partial class StartNewGameSelectGameTypeScreenPanel : Panel
     {
         public StartNewGameSelectGameTypeScreenPanel()
         {
@@ -36,6 +36,9 @@ namespace DistantWorlds.Controls
             btnStartNewGameYourEmpireTypeLegends.Text = TextResolver.GetText("Start New Game - Legends") + ">>";
             btnStartNewGameYourEmpireTypeNormalClassic.Text = TextResolver.GetText("Start New Game - Custom Standard") + ">>";
             btnStartNewGameYourEmpireTypePirateClassic.Text = TextResolver.GetText("Start New Game - Custom Pirate") + ">>";
+
+            lblHelpTitle.Text = TextResolver.GetText("Start New Game New Player Explanation Title UNIVERSE") + ":";
+            lblHelpDescription.Text = TextResolver.GetText("Start New Game New Player Explanation Text UNIVERSE");
         }
     }
 }

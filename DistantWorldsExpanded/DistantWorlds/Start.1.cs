@@ -3217,7 +3217,7 @@ namespace DistantWorlds
         private PiratePlayStyle method_192()
         {
             //PiratePlayStyle piratePlayStyle = PiratePlayStyle.Undefined;
-            return cmbJumpStartVictoryPiratePlayStyle.SelectedIndex switch
+            return pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.SelectedIndex switch
             {
                 0 => PiratePlayStyle.Balanced,
                 1 => PiratePlayStyle.Pirate,
@@ -3243,40 +3243,40 @@ namespace DistantWorlds
         private StartGameOptions method_194()
         {
             StartGameOptions startGameOptions = method_195();
-            startGameOptions.GalaxySize = tbarJumpStartTheGalaxyStarDensity.Value;
-            startGameOptions.GalaxyDimensions = tbarJumpStartTheGalaxyDimensions.Value;
-            startGameOptions.GalaxyDifficulty = tbarJumpStartTheGalaxyDifficulty.Value;
-            startGameOptions.GalaxyDifficultyScaling = chkJumpStartTheGalaxyDifficultyScaling.Checked;
-            startGameOptions.YourEmpireRace = cmbJumpStartYourEmpireRace.SelectedIndex;
+            startGameOptions.GalaxySize = pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.Value;
+            startGameOptions.GalaxyDimensions = pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDimensions.Value;
+            startGameOptions.GalaxyDifficulty = pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDifficulty.Value;
+            startGameOptions.GalaxyDifficultyScaling = pnlStartNewGameJumpStartPanel.chkJumpStartTheGalaxyDifficultyScaling.Checked;
+            startGameOptions.YourEmpireRace = pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedIndex;
             if (bool_2)
             {
                 startGameOptions.PiratePlayStyle = (int)(method_192() - 1);
             }
             else
             {
-                startGameOptions.YourEmpireGovernmentStyle = cmbJumpStartYourEmpireGovernment.SelectedGovernmentId;
+                startGameOptions.YourEmpireGovernmentStyle = pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SelectedGovernmentId;
             }
-            if (radJumpStartGalaxyShapeElliptical.Checked)
+            if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Checked)
             {
                 startGameOptions.GalaxyShape = GalaxyShape.Elliptical;
             }
-            else if (radJumpStartGalaxyShapeIrregular.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Checked)
             {
                 startGameOptions.GalaxyShape = GalaxyShape.Irregular;
             }
-            else if (radJumpStartGalaxyShapeRing.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Checked)
             {
                 startGameOptions.GalaxyShape = GalaxyShape.Ring;
             }
-            else if (radJumpStartGalaxyShapeSpiral.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Checked)
             {
                 startGameOptions.GalaxyShape = GalaxyShape.Spiral;
             }
-            else if (radJumpStartGalaxyShapeEvenClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Checked)
             {
                 startGameOptions.GalaxyShape = GalaxyShape.ClustersEven;
             }
-            else if (radJumpStartGalaxyShapeVariedClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Checked)
             {
                 startGameOptions.GalaxyShape = GalaxyShape.ClustersVaried;
             }
@@ -3389,16 +3389,16 @@ namespace DistantWorlds
         private void method_196(StartGameOptions startGameOptions_0)
         {
             //bool_4 = false;
-            tbarJumpStartTheGalaxyStarDensity.Value = startGameOptions_0.GalaxySize;
-            tbarJumpStartTheGalaxyDimensions.Value = startGameOptions_0.GalaxyDimensions;
-            tbarJumpStartTheGalaxyDifficulty.Value = startGameOptions_0.GalaxyDifficulty;
-            chkJumpStartTheGalaxyDifficultyScaling.Checked = startGameOptions_0.GalaxyDifficultyScaling;
-            if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < cmbJumpStartYourEmpireRace.Items.Count)
+            pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.Value = startGameOptions_0.GalaxySize;
+            pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDimensions.Value = startGameOptions_0.GalaxyDimensions;
+            pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDifficulty.Value = startGameOptions_0.GalaxyDifficulty;
+            pnlStartNewGameJumpStartPanel.chkJumpStartTheGalaxyDifficultyScaling.Checked = startGameOptions_0.GalaxyDifficultyScaling;
+            if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.Items.Count)
             {
-                cmbJumpStartYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
+                pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
             }
-            cmbJumpStartYourEmpireGovernment.SetSelectedGovernmentStyle(startGameOptions_0.YourEmpireGovernmentStyle);
-            cmbJumpStartVictoryPiratePlayStyle.SelectedIndex = startGameOptions_0.PiratePlayStyle;
+            pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SetSelectedGovernmentStyle(startGameOptions_0.YourEmpireGovernmentStyle);
+            pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.SelectedIndex = startGameOptions_0.PiratePlayStyle;
             tbarStartNewGameTheGalaxyAggression.Value = startGameOptions_0.GalaxyAggression;
             tbarStartNewGameTheGalaxyDifficulty.Value = startGameOptions_0.GalaxyDifficulty;
             chkStartNewGameTheGalaxyDifficultyScaling.Checked = startGameOptions_0.GalaxyDifficultyScaling;
@@ -3415,27 +3415,27 @@ namespace DistantWorlds
             {
                 case GalaxyShape.Spiral:
                     radStartNewGameGalaxyShapeSpiral.Checked = true;
-                    radJumpStartGalaxyShapeSpiral.Checked = true;
+                   pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeSpiral.Checked = true;
                     break;
                 case GalaxyShape.Elliptical:
                     radStartNewGameGalaxyShapeElliptical.Checked = true;
-                    radJumpStartGalaxyShapeElliptical.Checked = true;
+                   pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeElliptical.Checked = true;
                     break;
                 case GalaxyShape.Irregular:
                     radStartNewGameGalaxyShapeIrregular.Checked = true;
-                    radJumpStartGalaxyShapeIrregular.Checked = true;
+                    pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Checked = true;
                     break;
                 case GalaxyShape.Ring:
                     radStartNewGameGalaxyShapeRing.Checked = true;
-                    radJumpStartGalaxyShapeRing.Checked = true;
+                    pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Checked = true;
                     break;
                 case GalaxyShape.ClustersEven:
                     radStartNewGameGalaxyShapeClustersEven.Checked = true;
-                    radJumpStartGalaxyShapeEvenClusters.Checked = true;
+                    pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Checked = true;
                     break;
                 case GalaxyShape.ClustersVaried:
                     radStartNewGameGalaxyShapeClustersVaried.Checked = true;
-                    radJumpStartGalaxyShapeVariedClusters.Checked = true;
+                    pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Checked = true;
                     break;
             }
             tbarStartNewGameTheGalaxyDimensions.Value = startGameOptions_0.GalaxyDimensions;
@@ -4066,40 +4066,40 @@ namespace DistantWorlds
 
         private void method_206(string string_2)
         {
-            lblJumpStartGalaxyShapeTitle.Text = string.Format(TextResolver.GetText("SHAPE Galaxy"), string_2);
+            pnlStartNewGameJumpStartPanel.lblJumpStartGalaxyShapeTitle.Text = string.Format(TextResolver.GetText("SHAPE Galaxy"), string_2);
             string empty = string.Empty;
             if (string_2 == TextResolver.GetText("Elliptical"))
             {
-                picJumpStartTheGalaxyPreview.Image = bitmap_4;
+                pnlStartNewGameJumpStartPanel.picJumpStartTheGalaxyPreview.Image = bitmap_4;
                 empty = TextResolver.GetText("Elliptical galaxies have a classic spiral shape");
             }
             else if (string_2 == TextResolver.GetText("Spiral"))
             {
-                picJumpStartTheGalaxyPreview.Image = bitmap_5;
+                pnlStartNewGameJumpStartPanel.picJumpStartTheGalaxyPreview.Image = bitmap_5;
                 empty = TextResolver.GetText("Spiral galaxies have a distinctive shape");
             }
             else if (string_2 == TextResolver.GetText("Ring"))
             {
-                picJumpStartTheGalaxyPreview.Image = bitmap_6;
+               pnlStartNewGameJumpStartPanel. picJumpStartTheGalaxyPreview.Image = bitmap_6;
                 empty = TextResolver.GetText("Ring galaxies contain most of their stars");
             }
             else if (string_2 == TextResolver.GetText("Irregular"))
             {
-                picJumpStartTheGalaxyPreview.Image = bitmap_7;
+             pnlStartNewGameJumpStartPanel.   picJumpStartTheGalaxyPreview.Image = bitmap_7;
                 empty = TextResolver.GetText("Irregular galaxies have no fixed shape or structure");
             }
             else if (string_2 == TextResolver.GetText("Even Clusters"))
             {
-                picJumpStartTheGalaxyPreview.Image = bitmap_8;
+               pnlStartNewGameJumpStartPanel. picJumpStartTheGalaxyPreview.Image = bitmap_8;
                 empty = TextResolver.GetText("Cluster galaxies have groups of stars clustered together");
             }
             else if (string_2 == TextResolver.GetText("Varied Clusters"))
             {
-                picJumpStartTheGalaxyPreview.Image = bitmap_9;
+              pnlStartNewGameJumpStartPanel.  picJumpStartTheGalaxyPreview.Image = bitmap_9;
                 empty = TextResolver.GetText("Cluster galaxies have groups of stars clustered together Varied");
             }
-            lblJumpStartGalaxyShapeDescription.Text = empty;
-            bitmap_10 = (Bitmap)picJumpStartTheGalaxyPreview.Image;
+           pnlStartNewGameJumpStartPanel. lblJumpStartGalaxyShapeDescription.Text = empty;
+            bitmap_10 = (Bitmap)pnlStartNewGameJumpStartPanel.picJumpStartTheGalaxyPreview.Image;
         }
 
         private void tbarStartNewGameTheGalaxyAlienLife_LinkClicked(object sender, EventArgs e)
@@ -4216,7 +4216,7 @@ namespace DistantWorlds
             }
             if (bool_5)
             {
-                cmbJumpStartVictoryPiratePlayStyle.SelectedIndex = selectedIndex;
+                pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.SelectedIndex = selectedIndex;
             }
             else
             {
@@ -4229,7 +4229,7 @@ namespace DistantWorlds
             List<int> list = Empire.ResolveDefaultAllowableGovernmentTypes(race_0, forceIncludeSpecialTypesIfRaceAllows: true);
             if (bool_5)
             {
-                cmbJumpStartYourEmpireGovernment.Ignite(list);
+                pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.Ignite(list);
             }
             else
             {
@@ -4247,7 +4247,7 @@ namespace DistantWorlds
             }
             if (bool_5)
             {
-                cmbJumpStartYourEmpireGovernment.SetSelectedGovernmentStyle(selectedGovernmentStyle);
+                pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SetSelectedGovernmentStyle(selectedGovernmentStyle);
             }
             else
             {
@@ -4293,8 +4293,8 @@ namespace DistantWorlds
             }
             if (bool_5)
             {
-                lblJumpStartYourEmpireGovernmentTitle.Text = TextResolver.GetText("Your Government") + ": " + text;
-                lblJumpStartYourEmpireGovernmentAttributes.Text = text2;
+                pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireGovernmentTitle.Text = TextResolver.GetText("Your Government") + ": " + text;
+                pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireGovernmentAttributes.Text = text2;
             }
             else
             {
@@ -4812,7 +4812,7 @@ namespace DistantWorlds
             Galaxy.ResolveDescription(PiratePlayStyle.Mercenary),
             Galaxy.ResolveDescription(PiratePlayStyle.Smuggler)
             });
-            cmbJumpStartVictoryPiratePlayStyle.Items.AddRange(new string[4]
+            pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.Items.AddRange(new string[4]
             {
             Galaxy.ResolveDescription(PiratePlayStyle.Balanced),
             Galaxy.ResolveDescription(PiratePlayStyle.Pirate),

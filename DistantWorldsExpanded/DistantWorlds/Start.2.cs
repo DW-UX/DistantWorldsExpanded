@@ -2902,27 +2902,27 @@ namespace DistantWorlds
         private string method_97()
         {
             string result = TextResolver.GetText("Elliptical");
-            if (radJumpStartGalaxyShapeIrregular.Checked)
+            if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Checked)
             {
                 result = TextResolver.GetText("Irregular");
             }
-            else if (radJumpStartGalaxyShapeElliptical.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Checked)
             {
                 result = TextResolver.GetText("Elliptical");
             }
-            else if (radJumpStartGalaxyShapeRing.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Checked)
             {
                 result = TextResolver.GetText("Ring");
             }
-            else if (radJumpStartGalaxyShapeSpiral.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Checked)
             {
                 result = TextResolver.GetText("Spiral");
             }
-            else if (radJumpStartGalaxyShapeEvenClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Checked)
             {
                 result = TextResolver.GetText("Even Clusters");
             }
-            else if (radJumpStartGalaxyShapeVariedClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Checked)
             {
                 result = TextResolver.GetText("Varied Clusters");
             }
@@ -3177,7 +3177,7 @@ namespace DistantWorlds
             }
             if (bool_5)
             {
-                lblJumpStartPiratePlaystyleDescription.Text = text;
+                pnlStartNewGameJumpStartPanel.lblJumpStartPiratePlaystyleDescription.Text = text;
             }
             else
             {
@@ -3185,9 +3185,9 @@ namespace DistantWorlds
             }
             if (bool_5)
             {
-                Bitmap bitmap = (Bitmap)picJumpStartYourEmpirePiratePlaystyle.Image;
-                Bitmap image = main_0.method_119(null, cmbJumpStartYourEmpireRace.SelectedRace, picJumpStartYourEmpirePiratePlaystyle.Width, picJumpStartYourEmpirePiratePlaystyle.Height, main_0.bitmap_31, 6, bool_28: true, piratePlayStyle_0);
-                picJumpStartYourEmpirePiratePlaystyle.Image = image;
+                Bitmap bitmap = (Bitmap)pnlStartNewGameJumpStartPanel.picJumpStartYourEmpirePiratePlaystyle.Image;
+                Bitmap image = main_0.method_119(null, pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedRace, pnlStartNewGameJumpStartPanel.picJumpStartYourEmpirePiratePlaystyle.Width, pnlStartNewGameJumpStartPanel.picJumpStartYourEmpirePiratePlaystyle.Height, main_0.bitmap_31, 6, bool_28: true, piratePlayStyle_0);
+                pnlStartNewGameJumpStartPanel.picJumpStartYourEmpirePiratePlaystyle.Image = image;
                 if (bitmap != null && bitmap.PixelFormat != 0)
                 {
                     bitmap.Dispose();

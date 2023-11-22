@@ -487,7 +487,7 @@ namespace DistantWorlds
         private Label lblStartNewGameColonizationTerritoryColonyInfluenceRangeSuggestion;
 
         private StartNewGameSelectGameTypeScreenPanel pnlStartNewGameYourEmpireType;
-
+        private StartNewGameJumpStartPanel pnlStartNewGameJumpStartPanel;
 
         private CheckBox chkStartNewGameTheGalaxyDifficultyScaling;
 
@@ -577,80 +577,27 @@ namespace DistantWorlds
 
         private CheckBox chkStartNewGameEnableGiantKaltors;
 
-        private System.Windows.Forms.Panel pnlStartNewGameJumpStart;
 
-        private GlassButton btnJumpStartTheGalaxyNext;
 
-        private GlassButton btnJumpStartTheGalaxyPrevious;
 
-        private LabelledTrackBar tbarJumpStartTheGalaxyDifficulty;
 
-        private GradientPanel pnlJumpStartGalaxyShapeSize;
 
-        private LabelledTrackBar tbarJumpStartTheGalaxyDimensions;
 
-        private RadioButton radJumpStartGalaxyShapeVariedClusters;
 
-        private RadioButton radJumpStartGalaxyShapeEvenClusters;
 
-        private LabelledTrackBar tbarJumpStartTheGalaxyStarDensity;
 
-        private SmoothLabel lblJumpStartGalaxyShapeTitle;
 
-        private SmoothLabel lblJumpStartGalaxyShapeDescription;
 
-        private RadioButton radJumpStartGalaxyShapeSpiral;
 
-        private RadioButton radJumpStartGalaxyShapeRing;
 
-        private RadioButton radJumpStartGalaxyShapeIrregular;
 
-        private RadioButton radJumpStartGalaxyShapeElliptical;
+        
 
-        private PictureBox picJumpStartTheGalaxyPreview;
 
-        private GradientPanel pnlJumpStartYourEmpireGovernment;
-
-        private GovernmentStyleDropDown cmbJumpStartYourEmpireGovernment;
-
-        private SmoothLabel lblJumpStartYourEmpireGovernmentName;
-
-        private LinkLabel lnkJumpStartYourEmpireGovernment;
-
-        private SmoothLabel lblJumpStartYourEmpireGovernmentAttributes;
-
-        private SmoothLabel lblJumpStartYourEmpireGovernmentTitle;
-
-        private GradientPanel pnlJumpStartYourEmpireRace;
-
-        private System.Windows.Forms.Panel pnlJumpStartYourEmpireRaceAttributesContainer;
-
-        private RaceSummaryPanel pnlJumpStartYourEmpireRaceAttributes;
-
-        private SmoothLabel lblJumpStartYourEmpireRaceName;
-
-        private LinkLabel lnkJumpStartYourEmpireRace;
-
-        private PictureBox picJumpStartYourEmpireRace;
-
-        private RaceDropDown cmbJumpStartYourEmpireRace;
-
-        private SmoothLabel lblJumpStartYourEmpireRaceTitle;
-
-        private CheckBox chkJumpStartTheGalaxyDifficultyScaling;
-
-        private PictureBox picJumpStartYourEmpirePiratePlaystyle;
-
-        private SmoothLabel lblJumpStartPiratePlaystyleDescription;
-
-        private SmoothLabel lblJumpStartVictoryPiratePlaystyle;
-
-        private ComboBox cmbJumpStartVictoryPiratePlayStyle;
 
 
         public ToolTip toolTip;
 
-        private System.Windows.Forms.Panel pnlJumpStartPiratePlaystyleDescriptionContainer;
 
         private SmoothLabel lblActiveTheme;
 
@@ -1548,7 +1495,7 @@ namespace DistantWorlds
             if (bool_5)
             {
                 cmbStartNewGameYourEmpireRace.BindData(font_0, raceList_0, null, allowRandomRace: true);
-                cmbJumpStartYourEmpireRace.BindData(font_0, raceList_0, null, allowRandomRace: true);
+                pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.BindData(font_0, raceList_0, null, allowRandomRace: true);
                 raceList_0.Sort();
                 ctlStartingEmpiresList.SetRaces(string_2);
                 ctlStartingEmpiresList.SetProximityValues(10, 10);
@@ -2678,7 +2625,7 @@ namespace DistantWorlds
             pnlStartNewGameOtherEmpires.Size = size;
             pnlStartNewGameYourEmpire.Size = size;
             pnlStartNewGameYourRace.Size = size;
-            pnlStartNewGameJumpStart.Size = size;
+            pnlStartNewGameJumpStartPanel.Size = size;
             Point location = new Point(5, 40);
             pnlStartNewGameGalaxyMaps.Location = location;
             pnlStartNewGameYourEmpireType.Location = location;
@@ -2688,7 +2635,7 @@ namespace DistantWorlds
             pnlStartNewGameOtherEmpires.Location = location;
             pnlStartNewGameYourEmpire.Location = location;
             pnlStartNewGameYourRace.Location = location;
-            pnlStartNewGameJumpStart.Location = location;
+            pnlStartNewGameJumpStartPanel.Location = location;
             string string_3 = "(" + TextResolver.GetText("Default") + ")";
             if (!string.IsNullOrEmpty(main_0.string_3))
             {
@@ -2731,8 +2678,7 @@ namespace DistantWorlds
             else
             {
                 pnlStartNewGameYourEmpireType.Visible = true;
-                pnlStartNewGameYourEmpireType.BringToFront();
-                method_100(TextResolver.GetText("Start New Game New Player Explanation Title UNIVERSE") + ":", TextResolver.GetText("Start New Game New Player Explanation Text UNIVERSE"));
+                pnlStartNewGameYourEmpireType.BringToFront();                
             }
             pnlNewGame.pnlBody.ResumeLayout();
             pnlNewGame.ResumeLayout();
@@ -2878,158 +2824,51 @@ namespace DistantWorlds
         {
             if (bool_2)
             {
-                pnlJumpStartYourEmpireGovernment.Visible = false;
-                lblJumpStartVictoryPiratePlaystyle.Visible = true;
-                cmbJumpStartVictoryPiratePlayStyle.Visible = true;
-                pnlJumpStartPiratePlaystyleDescriptionContainer.Visible = true;
-                picJumpStartYourEmpirePiratePlaystyle.Visible = true;
+                pnlStartNewGameJumpStartPanel.pnlJumpStartYourEmpireGovernment.Visible = false;
+                pnlStartNewGameJumpStartPanel.lblJumpStartVictoryPiratePlaystyle.Visible = true;
+                pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.Visible = true;
+                pnlStartNewGameJumpStartPanel.pnlJumpStartPiratePlaystyleDescriptionContainer.Visible = true;
+                pnlStartNewGameJumpStartPanel.picJumpStartYourEmpirePiratePlaystyle.Visible = true;
             }
             else
             {
-                pnlJumpStartYourEmpireGovernment.Visible = true;
-                lblJumpStartVictoryPiratePlaystyle.Visible = false;
-                cmbJumpStartVictoryPiratePlayStyle.Visible = false;
-                pnlJumpStartPiratePlaystyleDescriptionContainer.Visible = false;
-                picJumpStartYourEmpirePiratePlaystyle.Visible = false;
+                pnlStartNewGameJumpStartPanel.pnlJumpStartYourEmpireGovernment.Visible = true;
+                pnlStartNewGameJumpStartPanel.lblJumpStartVictoryPiratePlaystyle.Visible = false;
+                pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.Visible = false;
+                pnlStartNewGameJumpStartPanel.pnlJumpStartPiratePlaystyleDescriptionContainer.Visible = false;
+                pnlStartNewGameJumpStartPanel.picJumpStartYourEmpirePiratePlaystyle.Visible = false;
             }
         }
 
         private void method_36()
         {
-            pnlJumpStartGalaxyShapeSize.Size = new Size(880, 275);
-            pnlJumpStartGalaxyShapeSize.Location = new Point(10, 10);
-            radJumpStartGalaxyShapeElliptical.Location = new Point(10, 10);
-            radJumpStartGalaxyShapeSpiral.Location = new Point(10, 30);
-            radJumpStartGalaxyShapeRing.Location = new Point(10, 50);
-            radJumpStartGalaxyShapeIrregular.Location = new Point(10, 70);
-            radJumpStartGalaxyShapeEvenClusters.Location = new Point(10, 90);
-            radJumpStartGalaxyShapeVariedClusters.Location = new Point(10, 110);
-            radJumpStartGalaxyShapeElliptical.Font = font_3;
-            radJumpStartGalaxyShapeSpiral.Font = font_3;
-            radJumpStartGalaxyShapeRing.Font = font_3;
-            radJumpStartGalaxyShapeIrregular.Font = font_3;
-            radJumpStartGalaxyShapeEvenClusters.Font = font_3;
-            radJumpStartGalaxyShapeVariedClusters.Font = font_3;
-            picJumpStartTheGalaxyPreview.Size = new Size(120, 120);
-            picJumpStartTheGalaxyPreview.Location = new Point(125, 10);
-            picJumpStartTheGalaxyPreview.SizeMode = PictureBoxSizeMode.Zoom;
-            lblJumpStartGalaxyShapeTitle.Font = font_7;
-            lblJumpStartGalaxyShapeTitle.Location = new Point(255, 7);
-            lblJumpStartGalaxyShapeDescription.Location = new Point(255, 32);
-            lblJumpStartGalaxyShapeDescription.MaximumSize = new Size(615, 168);
-            tbarJumpStartTheGalaxyStarDensity.Setup();
-            tbarJumpStartTheGalaxyStarDensity.LinkWidth = 0;
-            tbarJumpStartTheGalaxyStarDensity.Location = new Point(10, 145);
-            tbarJumpStartTheGalaxyStarDensity.Size = new Size(860, 55);
-            string text = TextResolver.GetText("stars");
-            tbarJumpStartTheGalaxyStarDensity.SetLabels(new string[6]
-            {
-            TextResolver.GetText("Dwarf") + "\n100 " + text,
-            TextResolver.GetText("Tiny") + "\n250 " + text,
-            TextResolver.GetText("Small") + "\n400 " + text,
-            TextResolver.GetText("Standard") + "\n700 " + text,
-            TextResolver.GetText("Large") + "\n1000 " + text,
-            TextResolver.GetText("Huge") + "\n1400 " + text
-            });
-            tbarJumpStartTheGalaxyStarDensity.LabelText = TextResolver.GetText("Star\\nAmount");
-            tbarJumpStartTheGalaxyDimensions.Setup();
-            tbarJumpStartTheGalaxyDimensions.LinkWidth = 0;
-            tbarJumpStartTheGalaxyDimensions.Location = new Point(10, 210);
-            tbarJumpStartTheGalaxyDimensions.Size = new Size(860, 55);
-            string text2 = TextResolver.GetText("sectors");
-            tbarJumpStartTheGalaxyDimensions.SetLabels(new string[5]
-            {
-            TextResolver.GetText("Tiny") + "\n4x4 " + text2,
-            TextResolver.GetText("Small") + "\n6x6 " + text2,
-            TextResolver.GetText("Medium") + "\n8x8 " + text2,
-            TextResolver.GetText("Large") + "\n10x10 " + text2,
-            TextResolver.GetText("Huge") + "\n15x15 " + text2
-            });
-            tbarJumpStartTheGalaxyDimensions.LabelText = TextResolver.GetText("Physical\\nSize");
-            pnlJumpStartYourEmpireRace.Size = new Size(480, 240);
-            pnlJumpStartYourEmpireRace.Location = new Point(10, 295);
-            lblJumpStartYourEmpireRaceTitle.Visible = false;
-            cmbJumpStartYourEmpireRace.Size = new Size(160, 26);
-            cmbJumpStartYourEmpireRace.ItemHeight = 26;
-            cmbJumpStartYourEmpireRace.Location = new Point(15, 15);
-            picJumpStartYourEmpireRace.Size = new Size(160, 160);
-            picJumpStartYourEmpireRace.Location = new Point(15, 52);
-            picJumpStartYourEmpireRace.SizeMode = PictureBoxSizeMode.Zoom;
-            picJumpStartYourEmpireRace.BorderStyle = BorderStyle.None;
-            lnkJumpStartYourEmpireRace.Location = new Point(15, 218);
-            lnkJumpStartYourEmpireRace.Font = font_3;
-            lblJumpStartYourEmpireRaceName.Location = new Point(185, 14);
-            lblJumpStartYourEmpireRaceName.Visible = true;
-            lblJumpStartYourEmpireRaceName.BringToFront();
-            pnlJumpStartYourEmpireRaceAttributesContainer.Location = new Point(190, 51);
-            pnlJumpStartYourEmpireRaceAttributesContainer.Size = new Size(280, 179);
-            pnlJumpStartYourEmpireRaceAttributesContainer.AutoScroll = true;
-            pnlJumpStartYourEmpireRaceAttributesContainer.SetAutoScrollMargin(0, 0);
-            pnlJumpStartYourEmpireRaceAttributesContainer.AutoScrollPosition = new Point(0, 0);
-            pnlJumpStartYourEmpireRaceAttributes.Location = new Point(0, 0);
-            pnlJumpStartYourEmpireRaceAttributes.Size = new Size(260, 0);
-            pnlJumpStartYourEmpireRaceAttributes.MaximumSize = new Size(260, 2000);
-            pnlJumpStartYourEmpireRaceAttributes.MinimumSize = new Size(260, 205);
-            pnlJumpStartYourEmpireRaceAttributes.AutoSize = true;
-            pnlJumpStartYourEmpireGovernment.Size = new Size(390, 240);
-            pnlJumpStartYourEmpireGovernment.Location = new Point(500, 295);
-            lblJumpStartYourEmpireGovernmentTitle.Font = font_7;
-            lblJumpStartYourEmpireRaceTitle.Font = font_7;
-            lblJumpStartYourEmpireGovernmentName.Visible = false;
-            lblJumpStartYourEmpireRaceName.Visible = false;
-            cmbJumpStartYourEmpireGovernment.Size = new Size(155, 21);
-            cmbJumpStartYourEmpireGovernment.Location = new Point(15, 35);
-            cmbJumpStartYourEmpireGovernment.AllowNullItem = true;
-            cmbJumpStartYourEmpireGovernment.NullItemText = "(" + TextResolver.GetText("Random") + ")";
-            cmbJumpStartYourEmpireGovernment.Font = font_3;
-            lblJumpStartYourEmpireGovernmentAttributes.Location = new Point(180, 37);
-            lblJumpStartYourEmpireGovernmentAttributes.Font = font_3;
-            lblJumpStartYourEmpireGovernmentAttributes.MaximumSize = new Size(200, 170);
-            lnkJumpStartYourEmpireGovernment.Size = new Size(200, 21);
-            lnkJumpStartYourEmpireGovernment.MaximumSize = new Size(200, 40);
-            lnkJumpStartYourEmpireGovernment.Location = new Point(180, 200);
-            lnkJumpStartYourEmpireGovernment.Font = font_3;
-            cmbJumpStartYourEmpireRace.BindData(font_3, raceList_0, main_0.raceImageCache_0.GetRaceImages(), allowRandomRace: true);
-            lblJumpStartVictoryPiratePlaystyle.Font = font_7;
-            lblJumpStartVictoryPiratePlaystyle.Text = TextResolver.GetText("Pirate Playstyle");
-            lblJumpStartVictoryPiratePlaystyle.Location = new Point(500, 298);
-            cmbJumpStartVictoryPiratePlayStyle.Font = font_3;
-            cmbJumpStartVictoryPiratePlayStyle.Size = new Size(160, 21);
-            cmbJumpStartVictoryPiratePlayStyle.Location = new Point(730, 295);
-            pnlJumpStartPiratePlaystyleDescriptionContainer.Size = new Size(220, 205);
-            pnlJumpStartPiratePlaystyleDescriptionContainer.Location = new Point(500, 331);
-            pnlJumpStartPiratePlaystyleDescriptionContainer.AutoScroll = true;
-            pnlJumpStartPiratePlaystyleDescriptionContainer.SetAutoScrollMargin(0, 0);
-            pnlJumpStartPiratePlaystyleDescriptionContainer.AutoScrollPosition = new Point(0, 0);
-            lblJumpStartPiratePlaystyleDescription.Font = font_3;
-            lblJumpStartPiratePlaystyleDescription.Location = new Point(0, 0);
-            lblJumpStartPiratePlaystyleDescription.MaximumSize = new Size(200, 500);
-            lblJumpStartPiratePlaystyleDescription.Size = new Size(200, 205);
-            picJumpStartYourEmpirePiratePlaystyle.Size = new Size(160, 160);
-            picJumpStartYourEmpirePiratePlaystyle.Location = new Point(730, 331);
+            pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Font = font_3;
+            pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Font = font_3;
+            pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Font = font_3;
+            pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Font = font_3;
+            pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Font = font_3;
+            pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Font = font_3;
+            pnlStartNewGameJumpStartPanel.lblJumpStartGalaxyShapeTitle.Font = font_7;
+
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceTitle.Visible = false;
+            pnlStartNewGameJumpStartPanel.lnkJumpStartYourEmpireRace.Font = font_3;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceName.Visible = true;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceName.BringToFront();
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireGovernmentTitle.Font = font_7;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceTitle.Font = font_7;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireGovernmentName.Visible = false;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceName.Visible = false;
+            pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.Font = font_3;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireGovernmentAttributes.Font = font_3;
+            pnlStartNewGameJumpStartPanel.lnkJumpStartYourEmpireGovernment.Font = font_3;
+            pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.BindData(font_3, raceList_0, main_0.raceImageCache_0.GetRaceImages(), allowRandomRace: true);
+
+            pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.Font = font_3;
+            pnlStartNewGameJumpStartPanel.lblJumpStartPiratePlaystyleDescription.Font = font_3;
             method_35();
-            tbarJumpStartTheGalaxyDifficulty.Setup();
-            tbarJumpStartTheGalaxyDifficulty.LabelWidth = 80;
-            tbarJumpStartTheGalaxyDifficulty.LinkWidth = 0;
-            tbarJumpStartTheGalaxyDifficulty.Location = new Point(10, 545);
-            tbarJumpStartTheGalaxyDifficulty.Size = new Size(630, 55);
-            tbarJumpStartTheGalaxyDifficulty.SetLabels(new string[5]
-            {
-            TextResolver.GetText("Easy"),
-            TextResolver.GetText("Normal"),
-            TextResolver.GetText("Hard"),
-            TextResolver.GetText("Very Hard"),
-            TextResolver.GetText("Extreme")
-            });
-            chkJumpStartTheGalaxyDifficultyScaling.Location = new Point(650, 560);
-            chkJumpStartTheGalaxyDifficultyScaling.Text = TextResolver.GetText("Difficulty scales as player nears victory");
-            tbarJumpStartTheGalaxyDifficulty.LabelText = TextResolver.GetText("Difficulty");
-            btnJumpStartTheGalaxyPrevious.Font = font_7;
-            btnJumpStartTheGalaxyNext.Font = font_7;
-            btnJumpStartTheGalaxyPrevious.Size = new Size(300, 40);
-            btnJumpStartTheGalaxyNext.Size = new Size(300, 40);
-            btnJumpStartTheGalaxyPrevious.Location = new Point(10, pnlStartNewGameJumpStart.Height - (btnJumpStartTheGalaxyPrevious.Height + 10));
-            btnJumpStartTheGalaxyNext.Location = new Point(pnlStartNewGameJumpStart.Width - (btnJumpStartTheGalaxyNext.Width + 10), pnlStartNewGameJumpStart.Height - (btnJumpStartTheGalaxyNext.Height + 10));
+
+            pnlStartNewGameJumpStartPanel.btnJumpStartTheGalaxyPrevious.Font = font_7;
+            pnlStartNewGameJumpStartPanel.btnJumpStartTheGalaxyNext.Font = font_7;            
         }
 
         private void method_37()
@@ -4577,7 +4416,7 @@ namespace DistantWorlds
         private string method_73()
         {
             string result = "(" + TextResolver.GetText("Random") + ")";
-            int selectedGovernmentId = cmbJumpStartYourEmpireGovernment.SelectedGovernmentId;
+            int selectedGovernmentId = pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SelectedGovernmentId;
             if (selectedGovernmentId >= 0 && selectedGovernmentId < Galaxy.GovernmentsStatic.Count)
             {
                 GovernmentAttributes governmentAttributes = Galaxy.GovernmentsStatic[selectedGovernmentId];
@@ -5005,7 +4844,7 @@ namespace DistantWorlds
 
         private void lnkJumpStartYourEmpireRace_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Race selectedRace = cmbJumpStartYourEmpireRace.SelectedRace;
+            Race selectedRace = pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedRace;
             if (selectedRace == null)
             {
                 method_127(TextResolver.GetText("Alien Races"));
@@ -5018,7 +4857,7 @@ namespace DistantWorlds
 
         private void cmbJumpStartYourEmpireGovernment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedGovernmentId = cmbJumpStartYourEmpireGovernment.SelectedGovernmentId;
+            int selectedGovernmentId = pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SelectedGovernmentId;
             method_208(selectedGovernmentId, bool_5: true);
         }
 
@@ -5029,7 +4868,7 @@ namespace DistantWorlds
 
         private void lnkJumpStartYourEmpireGovernment_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            int selectedGovernmentId = cmbJumpStartYourEmpireGovernment.SelectedGovernmentId;
+            int selectedGovernmentId = pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SelectedGovernmentId;
             GovernmentAttributes governmentAttributes = null;
             if (selectedGovernmentId >= 0 && selectedGovernmentId < Galaxy.GovernmentsStatic.Count)
             {
@@ -5048,19 +4887,19 @@ namespace DistantWorlds
         private void cmbJumpStartYourEmpireRace_SelectedIndexChanged(object sender, EventArgs e)
         {
             string empty = string.Empty;
-            Race selectedRace = cmbJumpStartYourEmpireRace.SelectedRace;
+            Race selectedRace = pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedRace;
             RaceSummary summary = null;
             if (selectedRace == null)
             {
                 empty = "(" + TextResolver.GetText("Random") + ")";
                 _ = "(" + TextResolver.GetText("Race randomly selected") + ")";
-                lnkJumpStartYourEmpireRace.Visible = false;
+                pnlStartNewGameJumpStartPanel.lnkJumpStartYourEmpireRace.Visible = false;
             }
             else
             {
                 empty = selectedRace.Name;
                 summary = Galaxy.GenerateRaceSummary(selectedRace);
-                lnkJumpStartYourEmpireRace.Visible = true;
+                pnlStartNewGameJumpStartPanel.lnkJumpStartYourEmpireRace.Visible = true;
             }
             IdyEbrKpy3(selectedRace, bool_5: true);
             if (selectedRace != null && selectedRace.DefaultPiratePlaystyle != 0)
@@ -5073,25 +4912,25 @@ namespace DistantWorlds
                 method_207(PiratePlayStyle.Balanced, bool_5: true);
                 method_101(PiratePlayStyle.Balanced, bool_5: true);
             }
-            lblJumpStartYourEmpireRaceTitle.Text = TextResolver.GetText("Your Race") + ": " + empty;
-            lblJumpStartYourEmpireRaceName.Visible = true;
-            lblJumpStartYourEmpireRaceName.Font = font_9;
-            lblJumpStartYourEmpireRaceName.Text = empty;
-            Bitmap bitmap = (Bitmap)picJumpStartYourEmpireRace.Image;
-            Bitmap image = main_0.method_118(null, selectedRace, picJumpStartYourEmpireRace.Width, picJumpStartYourEmpireRace.Height, main_0.bitmap_31, 6, bool_28: false);
-            picJumpStartYourEmpireRace.Image = image;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceTitle.Text = TextResolver.GetText("Your Race") + ": " + empty;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceName.Visible = true;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceName.Font = font_9;
+            pnlStartNewGameJumpStartPanel.lblJumpStartYourEmpireRaceName.Text = empty;
+            Bitmap bitmap = (Bitmap)pnlStartNewGameJumpStartPanel.picJumpStartYourEmpireRace.Image;
+            Bitmap image = main_0.method_118(null, selectedRace, pnlStartNewGameJumpStartPanel.picJumpStartYourEmpireRace.Width, pnlStartNewGameJumpStartPanel.picJumpStartYourEmpireRace.Height, main_0.bitmap_31, 6, bool_28: false);
+            pnlStartNewGameJumpStartPanel.picJumpStartYourEmpireRace.Image = image;
             if (bitmap != null && bitmap.PixelFormat != 0)
             {
                 bitmap.Dispose();
             }
-            pnlJumpStartYourEmpireRaceAttributes.BindData(summary, font_3, font_7);
-            pnlJumpStartYourEmpireRaceAttributesContainer.AutoScrollPosition = new Point(0, 0);
+            pnlStartNewGameJumpStartPanel.pnlJumpStartYourEmpireRaceAttributes.BindData(summary, font_3, font_7);
+            pnlStartNewGameJumpStartPanel.pnlJumpStartYourEmpireRaceAttributesContainer.AutoScrollPosition = new Point(0, 0);
         }
 
         private void cmbJumpStartVictoryPiratePlayStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
             PiratePlayStyle piratePlayStyle_ = PiratePlayStyle.Balanced;
-            switch (cmbJumpStartVictoryPiratePlayStyle.SelectedIndex)
+            switch (pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.SelectedIndex)
             {
                 case 0:
                     piratePlayStyle_ = PiratePlayStyle.Balanced;
@@ -5208,47 +5047,47 @@ namespace DistantWorlds
             method_204(bool_2);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
-            pnlStartNewGameJumpStart.Visible = true;
-            pnlStartNewGameJumpStart.BringToFront();
+            pnlStartNewGameJumpStartPanel.Visible = true;
+            pnlStartNewGameJumpStartPanel.BringToFront();
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Galaxy, Race, Government, Difficulty");
-            if (radJumpStartGalaxyShapeElliptical.Checked)
+            if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Checked)
             {
-                radJumpStartGalaxyShapeElliptical.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Focus();
             }
-            else if (radJumpStartGalaxyShapeSpiral.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Checked)
             {
-                radJumpStartGalaxyShapeSpiral.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Focus();
             }
-            else if (radJumpStartGalaxyShapeRing.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Checked)
             {
-                radJumpStartGalaxyShapeRing.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Focus();
             }
-            else if (radJumpStartGalaxyShapeIrregular.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Checked)
             {
-                radJumpStartGalaxyShapeIrregular.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Focus();
             }
-            else if (radJumpStartGalaxyShapeEvenClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Checked)
             {
-                radJumpStartGalaxyShapeEvenClusters.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Focus();
             }
-            else if (radJumpStartGalaxyShapeVariedClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Checked)
             {
-                radJumpStartGalaxyShapeVariedClusters.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Focus();
             }
         }
 
         private void method_222(StartGameOptions startGameOptions_0)
         {
-            tbarJumpStartTheGalaxyStarDensity.Value = startGameOptions_0.GalaxySize;
-            tbarJumpStartTheGalaxyDimensions.Value = startGameOptions_0.GalaxyDimensions;
-            tbarJumpStartTheGalaxyDifficulty.Value = startGameOptions_0.GalaxyDifficulty;
-            chkJumpStartTheGalaxyDifficultyScaling.Checked = startGameOptions_0.GalaxyDifficultyScaling;
-            if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < cmbJumpStartYourEmpireRace.Items.Count)
+            pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.Value = startGameOptions_0.GalaxySize;
+            pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDimensions.Value = startGameOptions_0.GalaxyDimensions;
+            pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDifficulty.Value = startGameOptions_0.GalaxyDifficulty;
+            pnlStartNewGameJumpStartPanel.chkJumpStartTheGalaxyDifficultyScaling.Checked = startGameOptions_0.GalaxyDifficultyScaling;
+            if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.Items.Count)
             {
-                cmbJumpStartYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
+                pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
             }
-            cmbJumpStartYourEmpireGovernment.SetSelectedGovernmentStyle(startGameOptions_0.YourEmpireGovernmentStyle);
-            cmbJumpStartVictoryPiratePlayStyle.SelectedIndex = startGameOptions_0.PiratePlayStyle;
+            pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SetSelectedGovernmentStyle(startGameOptions_0.YourEmpireGovernmentStyle);
+            pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.SelectedIndex = startGameOptions_0.PiratePlayStyle;
             tbarStartNewGameTheGalaxyStarDensity.Value = startGameOptions_0.GalaxySize;
             tbarStartNewGameTheGalaxyDimensions.Value = startGameOptions_0.GalaxyDimensions;
             tbarStartNewGameTheGalaxyDifficulty.Value = startGameOptions_0.GalaxyDifficulty;
@@ -5271,32 +5110,32 @@ namespace DistantWorlds
             method_204(bool_2);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
-            pnlStartNewGameJumpStart.Visible = true;
-            pnlStartNewGameJumpStart.BringToFront();
+            pnlStartNewGameJumpStartPanel.Visible = true;
+            pnlStartNewGameJumpStartPanel.BringToFront();
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Galaxy, Race, Government, Difficulty");
-            if (radJumpStartGalaxyShapeElliptical.Checked)
+            if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Checked)
             {
-                radJumpStartGalaxyShapeElliptical.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeElliptical.Focus();
             }
-            else if (radJumpStartGalaxyShapeSpiral.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Checked)
             {
-                radJumpStartGalaxyShapeSpiral.Focus();
+              pnlStartNewGameJumpStartPanel.  radJumpStartGalaxyShapeSpiral.Focus();
             }
-            else if (radJumpStartGalaxyShapeRing.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Checked)
             {
-                radJumpStartGalaxyShapeRing.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Focus();
             }
-            else if (radJumpStartGalaxyShapeIrregular.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Checked)
             {
-                radJumpStartGalaxyShapeIrregular.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeIrregular.Focus();
             }
-            else if (radJumpStartGalaxyShapeEvenClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Checked)
             {
-                radJumpStartGalaxyShapeEvenClusters.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeEvenClusters.Focus();
             }
-            else if (radJumpStartGalaxyShapeVariedClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Checked)
             {
-                radJumpStartGalaxyShapeVariedClusters.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Focus();
             }
         }
 
@@ -5385,32 +5224,32 @@ namespace DistantWorlds
             method_204(bool_2);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
-            pnlStartNewGameJumpStart.Visible = true;
-            pnlStartNewGameJumpStart.BringToFront();
+            pnlStartNewGameJumpStartPanel.Visible = true;
+            pnlStartNewGameJumpStartPanel.BringToFront();
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Galaxy, Race, Government, Difficulty");
-            if (radJumpStartGalaxyShapeElliptical.Checked)
+            if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Checked)
             {
-                radJumpStartGalaxyShapeElliptical.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeElliptical.Focus();
             }
-            else if (radJumpStartGalaxyShapeSpiral.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Checked)
             {
-                radJumpStartGalaxyShapeSpiral.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeSpiral.Focus();
             }
-            else if (radJumpStartGalaxyShapeRing.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Checked)
             {
-                radJumpStartGalaxyShapeRing.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeRing.Focus();
             }
-            else if (radJumpStartGalaxyShapeIrregular.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Checked)
             {
-                radJumpStartGalaxyShapeIrregular.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeIrregular.Focus();
             }
-            else if (radJumpStartGalaxyShapeEvenClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Checked)
             {
-                radJumpStartGalaxyShapeEvenClusters.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeEvenClusters.Focus();
             }
-            else if (radJumpStartGalaxyShapeVariedClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Checked)
             {
-                radJumpStartGalaxyShapeVariedClusters.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Focus();
             }
         }
 
@@ -5424,32 +5263,32 @@ namespace DistantWorlds
             method_204(bool_2);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
-            pnlStartNewGameJumpStart.Visible = true;
-            pnlStartNewGameJumpStart.BringToFront();
+            pnlStartNewGameJumpStartPanel.Visible = true;
+            pnlStartNewGameJumpStartPanel.BringToFront();
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Galaxy, Race, Government, Difficulty");
-            if (radJumpStartGalaxyShapeElliptical.Checked)
+            if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Checked)
             {
-                radJumpStartGalaxyShapeElliptical.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Focus();
             }
-            else if (radJumpStartGalaxyShapeSpiral.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Checked)
             {
-                radJumpStartGalaxyShapeSpiral.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeSpiral.Focus();
             }
-            else if (radJumpStartGalaxyShapeRing.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Checked)
             {
-                radJumpStartGalaxyShapeRing.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeRing.Focus();
             }
-            else if (radJumpStartGalaxyShapeIrregular.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Checked)
             {
-                radJumpStartGalaxyShapeIrregular.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeIrregular.Focus();
             }
-            else if (radJumpStartGalaxyShapeEvenClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Checked)
             {
-                radJumpStartGalaxyShapeEvenClusters.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeEvenClusters.Focus();
             }
-            else if (radJumpStartGalaxyShapeVariedClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Checked)
             {
-                radJumpStartGalaxyShapeVariedClusters.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Focus();
             }
         }
 
@@ -5463,32 +5302,32 @@ namespace DistantWorlds
             method_204(bool_2);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
-            pnlStartNewGameJumpStart.Visible = true;
-            pnlStartNewGameJumpStart.BringToFront();
+            pnlStartNewGameJumpStartPanel.Visible = true;
+            pnlStartNewGameJumpStartPanel.BringToFront();
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Galaxy, Race, Government, Difficulty");
-            if (radJumpStartGalaxyShapeElliptical.Checked)
+            if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Checked)
             {
-                radJumpStartGalaxyShapeElliptical.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeElliptical.Focus();
             }
-            else if (radJumpStartGalaxyShapeSpiral.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Checked)
             {
-                radJumpStartGalaxyShapeSpiral.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeSpiral.Focus();
             }
-            else if (radJumpStartGalaxyShapeRing.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Checked)
             {
-                radJumpStartGalaxyShapeRing.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeRing.Focus();
             }
-            else if (radJumpStartGalaxyShapeIrregular.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Checked)
             {
-                radJumpStartGalaxyShapeIrregular.Focus();
+               pnlStartNewGameJumpStartPanel. radJumpStartGalaxyShapeIrregular.Focus();
             }
-            else if (radJumpStartGalaxyShapeEvenClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Checked)
             {
-                radJumpStartGalaxyShapeEvenClusters.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Focus();
             }
-            else if (radJumpStartGalaxyShapeVariedClusters.Checked)
+            else if (pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Checked)
             {
-                radJumpStartGalaxyShapeVariedClusters.Focus();
+                pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Focus();
             }
         }
 
@@ -5530,7 +5369,7 @@ namespace DistantWorlds
 
         private void btnJumpStartTheGalaxyPrevious_Click(object sender, EventArgs e)
         {
-            pnlStartNewGameJumpStart.Visible = false;
+            pnlStartNewGameJumpStartPanel.Visible = false;
             pnlStartNewGameYourEmpireType.Visible = true;
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Playstyle");
             pnlStartNewGameYourEmpireType.btnStartNewGameYourEmpireTypeNormalShadows.Focus();
@@ -5547,8 +5386,8 @@ namespace DistantWorlds
             method_46();
             Random random_ = new Random((int)DateTime.Now.Ticks);
             GalaxyShape galaxyShape = method_59(method_97());
-            int num = method_60(tbarJumpStartTheGalaxyStarDensity.Value);
-            int num2 = method_61(tbarJumpStartTheGalaxyStarDensity.Value, raceList_0);
+            int num = method_60(pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.Value);
+            int num2 = method_61(pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.Value, raceList_0);
             bool flag = true;
             double num3 = method_64(2);
             int num4 = method_67(2);
@@ -5565,7 +5404,7 @@ namespace DistantWorlds
             string string_ = method_58(num10);
             EmpireStart empireStart = new EmpireStart();
             empireStart.Name = string.Empty;
-            Race selectedRace = cmbJumpStartYourEmpireRace.SelectedRace;
+            Race selectedRace = pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedRace;
             if (selectedRace != null)
             {
                 empireStart.Race = selectedRace.Name;
@@ -5599,10 +5438,10 @@ namespace DistantWorlds
             empireStart.PirateShipMaintenanceFactor = 0.4;
             empireStart.AllowTechTrading = true;
             empireStart.AllowGiantKaltorGeneration = true;
-            empireStart.DifficultyLevel = method_201(tbarJumpStartTheGalaxyDifficulty.Value);
-            empireStart.DifficultyScaling = chkJumpStartTheGalaxyDifficultyScaling.Checked;
+            empireStart.DifficultyLevel = method_201(pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDifficulty.Value);
+            empireStart.DifficultyScaling = pnlStartNewGameJumpStartPanel.chkJumpStartTheGalaxyDifficultyScaling.Checked;
             empireStart.DestroyedPiratesDoNotRespawn = false;
-            Size size = method_69(tbarJumpStartTheGalaxyDimensions.Value);
+            Size size = method_69(pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDimensions.Value);
             empireStart.GalaxySectorX = size.Width;
             empireStart.GalaxySectorY = size.Height;
             float num11 = (empireStart.EmpireTerritoryColonyInfluenceRangeFactor = (float)method_189(num, size.Width, size.Height));
@@ -5623,7 +5462,7 @@ namespace DistantWorlds
                 empireStart2.Race = "(" + TextResolver.GetText("Random") + ")";
                 empireStartList.Add(empireStart2);
             }
-            empireStartList = method_200(empireStartList, tbarJumpStartTheGalaxyDifficulty.Value, bool_5: false);
+            empireStartList = method_200(empireStartList, pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDifficulty.Value, bool_5: false);
             long startStarDate = Galaxy.StartStarDate;
             startStarDate += num10 * 30000000;
             VictoryConditions victoryConditions = new VictoryConditions();
