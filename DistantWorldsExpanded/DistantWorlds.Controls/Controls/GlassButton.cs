@@ -855,8 +855,8 @@ namespace DistantWorlds.Controls
       }
       this.imageButton.ImageAlign = this.ImageAlign;
       this.imageButton.ImageIndex = this.ImageIndex;
-      this.imageButton.ImageKey = this.ImageKey;
-      this.imageButton.ImageList = this.ImageList;
+      // this.imageButton.ImageKey = this.ImageKey;
+      // this.imageButton.ImageList = this.ImageList;
       this.imageButton.Padding = this.Padding;
       this.imageButton.Size = this.Size;
       if (!string.IsNullOrEmpty(this.MinorText))
