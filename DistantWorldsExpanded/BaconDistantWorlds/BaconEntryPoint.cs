@@ -12,7 +12,7 @@ namespace BaconDistantWorlds
 {
     public class BaconEntryPoint : IEntryPoint
     {
-        private const string _ModKey = "BaconMod";
+        public const string _ModKey = "BaconMod";
         private const string _ModRootFolder = "AdvMods\\BaconMod";
         private const string _HotKeyFileName = "BaconModHotKeysMappingFile.json";
         private IHotKeyManager _manager;
