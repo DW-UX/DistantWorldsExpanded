@@ -1,6 +1,8 @@
-﻿using ExpansionMod.Objects;
+﻿using BaconDistantWorlds;
+using ExpansionMod.Objects;
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -24,17 +26,25 @@ namespace ExpansionMod.ExternalMods
                 else if (item.LoadType == (int)ModEnitityLoadType.Inbuilt)
                 {
                     if (item.ModKey == ExpansionModMain._ModKey)
-                    { 
+                    {
                         //modAs = Assembly.GetAssembly(typeof(ExpansionModMain)); 
                         res.Add(myMod);
                         continue;
                     }
-                    else {
+                    else if (item.ModKey == BaconEntryPoint._ModKey)
+                    {
+                        //modAs = Assembly.GetAssembly(typeof(ExpansionModMain)); 
+                        res.Add(new ModEntity(Path.Combine(Helper._ModsRootFolder, item.ModKey), item.ModKey, GetInstance(typeof(BaconEntryPoint))));
+                        continue;
+                    }
+                    else
+                    {
                         //modAs = AppDomain.CurrentDomain.GetAssemblies().First(x => x.GetName().Name == "BaconDistantWorlds");
-                        modAs = typeof(BaconDistantWorlds.BaconMain).Assembly;
+                        //modAs = typeof(BaconDistantWorlds.BaconMain).Assembly;
+                        continue;
                     }
                 }
-                else 
+                else
                 {
                     continue;
                 }
@@ -45,8 +55,7 @@ namespace ExpansionMod.ExternalMods
                     if (asClass.IsClass && asClass.GetInterfaces().Contains(typeof(IEntryPoint)))
                     {
                         classFound = true;
-                        var instance = (IEntryPoint)Activator.CreateInstance(asClass);
-                        res.Add(new ModEntity(Path.Combine(Helper._ModsRootFolder, item.ModKey), item.ModKey, instance));
+                        res.Add(new ModEntity(Path.Combine(Helper._ModsRootFolder, item.ModKey), item.ModKey, GetInstance(asClass)));
                         break;
                     }
                 }
@@ -55,5 +64,8 @@ namespace ExpansionMod.ExternalMods
             }
             return res;
         }
+
+        private IEntryPoint GetInstance(Type type)
+        { return (IEntryPoint)Activator.CreateInstance(type); }
     }
 }
