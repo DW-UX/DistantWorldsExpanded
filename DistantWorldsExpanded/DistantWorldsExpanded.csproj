@@ -151,8 +151,12 @@
 		<Compile Remove="DistantWorlds\test.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ControlCandidate Remove="DistantWorlds.Controls\Controls\gameyourracetest.Designer.cs" />
 	  <ControlCandidate Remove="DistantWorlds.Controls\Controls\StartNewGameJumpStartPanel.cs" />
 	  <ControlCandidate Remove="DistantWorlds.Controls\Controls\StartNewGameJumpStartPanel.Designer.cs" />
+	  <ControlCandidate Remove="DistantWorlds.Controls\Controls\StartNewGameYourRacePanel.cs" />
+	  <ControlCandidate Remove="DistantWorlds.Controls\Controls\StartNewGameYourRacePanel.Designer.cs" />
+	  <ControlCandidate Remove="DistantWorlds.Controls\Controls\startnewgameyourracetest.cs" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Remove="DistantWorlds.Controls\Controls\GameOptionsScreenPanel - Copy.resx" />
@@ -162,6 +166,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="ExpansionMod.Objects\Properties\" />
+		<Folder Include="Resources\" />
 	</ItemGroup>
 
 	<!-- resx redirects -->

@@ -62,20 +62,11 @@ namespace DistantWorlds
             this.pnlThemes = new DistantWorlds.Controls.ThemesScreenPanel();
             this.pnlNewGame = new DistantWorlds.Controls.ScreenPanel();
             this.pnlStartNewGameYourEmpireType = new StartNewGameSelectGameTypeScreenPanel();
-           
-            
-            this.pnlStartNewGameYourRace = new System.Windows.Forms.Panel();
-            this.pnlStartNewGameYourEmpireRace = new DistantWorlds.Controls.GradientPanel();
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer = new System.Windows.Forms.Panel();
-            this.pnlStartNewGameYourEmpireRaceAttributes = new DistantWorlds.Controls.RaceSummaryPanel();
-            this.lblStartNewGameYourEmpireRaceName = new DistantWorlds.Controls.SmoothLabel();
-            this.lnkStartNewGameYourEmpireRace = new System.Windows.Forms.LinkLabel();
-            this.picStartNewGameYourEmpireRace = new System.Windows.Forms.PictureBox();
-            this.cmbStartNewGameYourEmpireRace = new DistantWorlds.Controls.RaceDropDown();
-            this.lblStartNewGameYourEmpireRaceTitle = new DistantWorlds.Controls.SmoothLabel();
-            this.picStartNewGameYourRaceImage = new System.Windows.Forms.PictureBox();
-            this.btnStartNewGameYourRacePrevious = new DistantWorlds.Controls.GlassButton();
-            this.btnStartNewGameYourRaceNext = new DistantWorlds.Controls.GlassButton();
+            this.pnlStartNewGameJumpStartPanel = new StartNewGameJumpStartPanel();
+            this.pnlStartNewGameYourRace = new StartNewGameYourRacePanel();
+
+
+
             this.pnlStartNewGameYourEmpire = new System.Windows.Forms.Panel();
             this.pnlStartNewGameYourEmpireGovernment = new DistantWorlds.Controls.GradientPanel();
             this.cmbStartNewGameYourEmpireGovernment = new DistantWorlds.Controls.GovernmentStyleDropDown();
@@ -332,20 +323,8 @@ namespace DistantWorlds
             this.pnlNewGame.SuspendLayout();
             this.pnlStartNewGameYourEmpireType.SuspendLayout();
 
-            this.pnlStartNewGameJumpStartPanel.lnkJumpStartYourEmpireRace.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkJumpStartYourEmpireRace_LinkClicked);
-            this.pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.SelectedIndexChanged += new System.EventHandler(cmbJumpStartVictoryPiratePlayStyle_SelectedIndexChanged);
-            this.pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.Enter += new System.EventHandler(cmbJumpStartVictoryPiratePlayStyle_Enter);
-            this.pnlStartNewGameJumpStartPanel.chkJumpStartTheGalaxyDifficultyScaling.Enter += new System.EventHandler(chkJumpStartTheGalaxyDifficultyScaling_Enter);
-            this.pnlStartNewGameJumpStartPanel.btnJumpStartTheGalaxyNext.Click += new System.EventHandler(btnJumpStartTheGalaxyNext_Click);
-            this.pnlStartNewGameJumpStartPanel.btnJumpStartTheGalaxyPrevious.Click += new System.EventHandler(btnJumpStartTheGalaxyPrevious_Click);
-            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDifficulty.Enter += new System.EventHandler(tbarJumpStartTheGalaxyDifficulty_Enter);
-
             
-            this.pnlStartNewGameYourRace.SuspendLayout();
-            this.pnlStartNewGameYourEmpireRace.SuspendLayout();
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.picStartNewGameYourEmpireRace).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.picStartNewGameYourRaceImage).BeginInit();
+           
             this.pnlStartNewGameYourEmpire.SuspendLayout();
             this.pnlStartNewGameYourEmpireGovernment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.picStartNewGameYourEmpirePiratePlaystyle).BeginInit();
@@ -398,6 +377,8 @@ namespace DistantWorlds
             base.SuspendLayout();
             this.pnlGameOptions
                 .btnGameOptionsShowMessages.Click += new System.EventHandler(btnGameOptionsShowMessages_Click);
+
+            this.pnlStartNewGameYourRace.Dock = DockStyle.Fill;
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
             this.lblCopyright.Font = new System.Drawing.Font("Verdana", 11.25f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
@@ -534,177 +515,6 @@ namespace DistantWorlds
             
            
             
-            
-            this.pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SelectedIndexChanged += new System.EventHandler(cmbJumpStartYourEmpireGovernment_SelectedIndexChanged);
-            this.pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.Enter += new System.EventHandler(cmbJumpStartYourEmpireGovernment_Enter);
-            
-           
-            this.pnlStartNewGameJumpStartPanel.lnkJumpStartYourEmpireGovernment.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkJumpStartYourEmpireGovernment_LinkClicked);
-            
-           
-          
-            this.pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedIndexChanged += new System.EventHandler(cmbJumpStartYourEmpireRace_SelectedIndexChanged);
-            this.pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.Enter += new System.EventHandler(cmbJumpStartYourEmpireRace_Enter);
-          
-            
-            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDimensions.ValueChanged += new System.EventHandler(tbarJumpStartTheGalaxyDimensions_ValueChanged);
-            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDimensions.Enter += new System.EventHandler(tbarJumpStartTheGalaxyDimensions_Enter);
-           
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeVariedClusters_CheckedChanged);
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Enter += new System.EventHandler(radJumpStartGalaxyShapeVariedClusters_Enter);
-            
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeEvenClusters_CheckedChanged);
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Enter += new System.EventHandler(radJumpStartGalaxyShapeEvenClusters_Enter);
-           
-            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.ValueChanged += new System.EventHandler(muloBoAqMA);
-            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.Enter += new System.EventHandler(tbarJumpStartTheGalaxyStarDensity_Enter);
-          
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeSpiral_CheckedChanged);
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Enter += new System.EventHandler(radJumpStartGalaxyShapeSpiral_Enter);
-
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeRing_CheckedChanged);
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Enter += new System.EventHandler(radJumpStartGalaxyShapeRing_Enter);
-           
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeIrregular_CheckedChanged);
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Enter += new System.EventHandler(radJumpStartGalaxyShapeIrregular_Enter);
-          
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeElliptical_CheckedChanged);
-            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Enter += new System.EventHandler(radJumpStartGalaxyShapeElliptical_Enter);
-           
-            this.pnlStartNewGameYourRace.BackColor = System.Drawing.Color.Transparent;
-            this.pnlStartNewGameYourRace.Controls.Add(this.pnlStartNewGameYourEmpireRace);
-            this.pnlStartNewGameYourRace.Controls.Add(this.picStartNewGameYourRaceImage);
-            this.pnlStartNewGameYourRace.Controls.Add(this.btnStartNewGameYourRacePrevious);
-            this.pnlStartNewGameYourRace.Controls.Add(this.btnStartNewGameYourRaceNext);
-            this.pnlStartNewGameYourRace.Location = new System.Drawing.Point(10, 200);
-            this.pnlStartNewGameYourRace.Name = "pnlStartNewGameYourRace";
-            this.pnlStartNewGameYourRace.Size = new System.Drawing.Size(532, 400);
-            this.pnlStartNewGameYourRace.TabIndex = 47;
-            this.pnlStartNewGameYourEmpireRace.BackColor = System.Drawing.Color.FromArgb(39, 40, 44);
-            this.pnlStartNewGameYourEmpireRace.BackColor2 = System.Drawing.Color.FromArgb(22, 21, 26);
-            this.pnlStartNewGameYourEmpireRace.BackColor3 = System.Drawing.Color.FromArgb(51, 54, 61);
-            this.pnlStartNewGameYourEmpireRace.BorderColor = System.Drawing.Color.FromArgb(67, 67, 77);
-            this.pnlStartNewGameYourEmpireRace.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlStartNewGameYourEmpireRace.BorderWidth = 2;
-            this.pnlStartNewGameYourEmpireRace.Controls.Add(this.pnlStartNewGameYourEmpireRaceAttributesContainer);
-            this.pnlStartNewGameYourEmpireRace.Controls.Add(this.lblStartNewGameYourEmpireRaceName);
-            this.pnlStartNewGameYourEmpireRace.Controls.Add(this.lnkStartNewGameYourEmpireRace);
-            this.pnlStartNewGameYourEmpireRace.Controls.Add(this.picStartNewGameYourEmpireRace);
-            this.pnlStartNewGameYourEmpireRace.Controls.Add(this.cmbStartNewGameYourEmpireRace);
-            this.pnlStartNewGameYourEmpireRace.Controls.Add(this.lblStartNewGameYourEmpireRaceTitle);
-            this.pnlStartNewGameYourEmpireRace.Curvature = 20;
-            this.pnlStartNewGameYourEmpireRace.GradientMode = DistantWorlds.Controls.LinearGradientMode.Vertical;
-            this.pnlStartNewGameYourEmpireRace.Location = new System.Drawing.Point(15, 33);
-            this.pnlStartNewGameYourEmpireRace.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlStartNewGameYourEmpireRace.Name = "pnlStartNewGameYourEmpireRace";
-            this.pnlStartNewGameYourEmpireRace.Size = new System.Drawing.Size(420, 285);
-            this.pnlStartNewGameYourEmpireRace.TabIndex = 238;
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer.AutoScroll = true;
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer.Controls.Add(this.pnlStartNewGameYourEmpireRaceAttributes);
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer.Location = new System.Drawing.Point(230, 88);
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer.Name = "pnlStartNewGameYourEmpireRaceAttributesContainer";
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer.Size = new System.Drawing.Size(169, 100);
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer.TabIndex = 238;
-            this.pnlStartNewGameYourEmpireRaceAttributes.Location = new System.Drawing.Point(10, 10);
-            this.pnlStartNewGameYourEmpireRaceAttributes.Name = "pnlStartNewGameYourEmpireRaceAttributes";
-            this.pnlStartNewGameYourEmpireRaceAttributes.Size = new System.Drawing.Size(200, 100);
-            this.pnlStartNewGameYourEmpireRaceAttributes.TabIndex = 211;
-            this.pnlStartNewGameYourEmpireRaceAttributes.Enter += new System.EventHandler(pnlStartNewGameYourEmpireRaceAttributes_Enter);
-            this.pnlStartNewGameYourEmpireRaceAttributes.MouseEnter += new System.EventHandler(pnlStartNewGameYourEmpireRaceAttributes_MouseEnter);
-            this.lblStartNewGameYourEmpireRaceName.AutoSize = true;
-            this.lblStartNewGameYourEmpireRaceName.Font = new System.Drawing.Font("Verdana", 9f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            this.lblStartNewGameYourEmpireRaceName.ForeColor = System.Drawing.Color.FromArgb(170, 170, 170);
-            this.lblStartNewGameYourEmpireRaceName.Location = new System.Drawing.Point(230, 67);
-            this.lblStartNewGameYourEmpireRaceName.Name = "lblStartNewGameYourEmpireRaceName";
-            this.lblStartNewGameYourEmpireRaceName.Size = new System.Drawing.Size(81, 14);
-            this.lblStartNewGameYourEmpireRaceName.TabIndex = 213;
-            this.lblStartNewGameYourEmpireRaceName.Text = "Race Name";
-            this.lnkStartNewGameYourEmpireRace.ActiveLinkColor = System.Drawing.Color.FromArgb(255, 128, 0);
-            this.lnkStartNewGameYourEmpireRace.AutoSize = true;
-            this.lnkStartNewGameYourEmpireRace.BackColor = System.Drawing.Color.Transparent;
-            this.lnkStartNewGameYourEmpireRace.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            this.lnkStartNewGameYourEmpireRace.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkStartNewGameYourEmpireRace.LinkColor = System.Drawing.Color.FromArgb(255, 192, 0);
-            this.lnkStartNewGameYourEmpireRace.Location = new System.Drawing.Point(230, 255);
-            this.lnkStartNewGameYourEmpireRace.Name = "lnkStartNewGameYourEmpireRace";
-            this.lnkStartNewGameYourEmpireRace.Size = new System.Drawing.Size(171, 13);
-            this.lnkStartNewGameYourEmpireRace.TabIndex = 212;
-            this.lnkStartNewGameYourEmpireRace.TabStop = true;
-            this.lnkStartNewGameYourEmpireRace.Text = "Read more about this race...";
-            this.lnkStartNewGameYourEmpireRace.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(cTwaUmbdtf);
-            this.picStartNewGameYourEmpireRace.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picStartNewGameYourEmpireRace.Location = new System.Drawing.Point(15, 68);
-            this.picStartNewGameYourEmpireRace.Name = "picStartNewGameYourEmpireRace";
-            this.picStartNewGameYourEmpireRace.Size = new System.Drawing.Size(200, 200);
-            this.picStartNewGameYourEmpireRace.TabIndex = 209;
-            this.picStartNewGameYourEmpireRace.TabStop = false;
-            this.cmbStartNewGameYourEmpireRace.BackColor = System.Drawing.Color.FromArgb(48, 48, 64);
-            this.cmbStartNewGameYourEmpireRace.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbStartNewGameYourEmpireRace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStartNewGameYourEmpireRace.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmbStartNewGameYourEmpireRace.Font = new System.Drawing.Font("Verdana", 9f);
-            this.cmbStartNewGameYourEmpireRace.ForeColor = System.Drawing.Color.FromArgb(170, 170, 170);
-            this.cmbStartNewGameYourEmpireRace.FormattingEnabled = true;
-            this.cmbStartNewGameYourEmpireRace.Location = new System.Drawing.Point(15, 35);
-            this.cmbStartNewGameYourEmpireRace.Name = "cmbStartNewGameYourEmpireRace";
-            this.cmbStartNewGameYourEmpireRace.Size = new System.Drawing.Size(200, 23);
-            this.cmbStartNewGameYourEmpireRace.TabIndex = 237;
-            this.cmbStartNewGameYourEmpireRace.SelectedIndexChanged += new System.EventHandler(cmbStartNewGameYourEmpireRace_SelectedIndexChanged);
-            this.cmbStartNewGameYourEmpireRace.Enter += new System.EventHandler(cmbStartNewGameYourEmpireRace_Enter);
-            this.lblStartNewGameYourEmpireRaceTitle.AutoSize = true;
-            this.lblStartNewGameYourEmpireRaceTitle.Font = new System.Drawing.Font("Verdana", 11.25f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            this.lblStartNewGameYourEmpireRaceTitle.ForeColor = System.Drawing.Color.FromArgb(170, 170, 170);
-            this.lblStartNewGameYourEmpireRaceTitle.Location = new System.Drawing.Point(10, 10);
-            this.lblStartNewGameYourEmpireRaceTitle.Name = "lblStartNewGameYourEmpireRaceTitle";
-            this.lblStartNewGameYourEmpireRaceTitle.Size = new System.Drawing.Size(91, 18);
-            this.lblStartNewGameYourEmpireRaceTitle.TabIndex = 207;
-            this.lblStartNewGameYourEmpireRaceTitle.Text = "Your Race";
-            this.picStartNewGameYourRaceImage.Image = (System.Drawing.Image)resources.GetObject("picStartNewGameYourRaceImage.Image");
-            this.picStartNewGameYourRaceImage.Location = new System.Drawing.Point(439, 37);
-            this.picStartNewGameYourRaceImage.Name = "picStartNewGameYourRaceImage";
-            this.picStartNewGameYourRaceImage.Size = new System.Drawing.Size(100, 50);
-            this.picStartNewGameYourRaceImage.TabIndex = 259;
-            this.picStartNewGameYourRaceImage.TabStop = false;
-            this.btnStartNewGameYourRacePrevious.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
-            this.btnStartNewGameYourRacePrevious.ClipBackground = false;
-            this.btnStartNewGameYourRacePrevious.DelayFrameRefresh = false;
-            this.btnStartNewGameYourRacePrevious.Font = new System.Drawing.Font("Verdana", 8f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.btnStartNewGameYourRacePrevious.ForeColor = System.Drawing.Color.FromArgb(150, 150, 150);
-            this.btnStartNewGameYourRacePrevious.GlowColor = System.Drawing.Color.FromArgb(48, 48, 128);
-            this.btnStartNewGameYourRacePrevious.InnerBorderColor = System.Drawing.Color.FromArgb(67, 67, 77);
-            this.btnStartNewGameYourRacePrevious.IntensifyColors = false;
-            this.btnStartNewGameYourRacePrevious.Location = new System.Drawing.Point(12, 347);
-            this.btnStartNewGameYourRacePrevious.Name = "btnStartNewGameYourRacePrevious";
-            this.btnStartNewGameYourRacePrevious.OuterBorderColor = System.Drawing.Color.FromArgb(0, 0, 16);
-            this.btnStartNewGameYourRacePrevious.ShineColor = System.Drawing.Color.FromArgb(112, 112, 128);
-            this.btnStartNewGameYourRacePrevious.Size = new System.Drawing.Size(197, 30);
-            this.btnStartNewGameYourRacePrevious.TabIndex = 258;
-            this.btnStartNewGameYourRacePrevious.TabStop = false;
-            this.btnStartNewGameYourRacePrevious.Text = "<< Previous: Colonization && Territory";
-            this.btnStartNewGameYourRacePrevious.TextColor = System.Drawing.Color.FromArgb(120, 120, 120);
-            this.btnStartNewGameYourRacePrevious.TextColor2 = System.Drawing.Color.FromArgb(255, 255, 255);
-            this.btnStartNewGameYourRacePrevious.ToggledOn = false;
-            this.btnStartNewGameYourRacePrevious.Click += new System.EventHandler(btnStartNewGameYourRacePrevious_Click);
-            this.btnStartNewGameYourRaceNext.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
-            this.btnStartNewGameYourRaceNext.ClipBackground = false;
-            this.btnStartNewGameYourRaceNext.DelayFrameRefresh = false;
-            this.btnStartNewGameYourRaceNext.Font = new System.Drawing.Font("Verdana", 8f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.btnStartNewGameYourRaceNext.ForeColor = System.Drawing.Color.FromArgb(150, 150, 150);
-            this.btnStartNewGameYourRaceNext.GlowColor = System.Drawing.Color.FromArgb(48, 48, 128);
-            this.btnStartNewGameYourRaceNext.InnerBorderColor = System.Drawing.Color.FromArgb(67, 67, 77);
-            this.btnStartNewGameYourRaceNext.IntensifyColors = false;
-            this.btnStartNewGameYourRaceNext.Location = new System.Drawing.Point(261, 348);
-            this.btnStartNewGameYourRaceNext.Name = "btnStartNewGameYourRaceNext";
-            this.btnStartNewGameYourRaceNext.OuterBorderColor = System.Drawing.Color.FromArgb(0, 0, 16);
-            this.btnStartNewGameYourRaceNext.ShineColor = System.Drawing.Color.FromArgb(112, 112, 128);
-            this.btnStartNewGameYourRaceNext.Size = new System.Drawing.Size(174, 30);
-            this.btnStartNewGameYourRaceNext.TabIndex = 240;
-            this.btnStartNewGameYourRaceNext.TabStop = false;
-            this.btnStartNewGameYourRaceNext.Text = "Next: Your Empire >>";
-            this.btnStartNewGameYourRaceNext.TextColor = System.Drawing.Color.FromArgb(120, 120, 120);
-            this.btnStartNewGameYourRaceNext.TextColor2 = System.Drawing.Color.FromArgb(255, 255, 255);
-            this.btnStartNewGameYourRaceNext.ToggledOn = false;
-            this.btnStartNewGameYourRaceNext.Click += new System.EventHandler(btnStartNewGameYourRaceNext_Click);
             this.pnlStartNewGameYourEmpire.BackColor = System.Drawing.Color.Transparent;
             this.pnlStartNewGameYourEmpire.Controls.Add(this.pnlStartNewGameYourEmpireGovernment);
             this.pnlStartNewGameYourEmpire.Controls.Add(this.picStartNewGameYourEmpirePiratePlaystyle);
@@ -3934,19 +3744,69 @@ namespace DistantWorlds
             this.pnlNewGame.PerformLayout();
             this.pnlStartNewGameYourEmpireType.ResumeLayout(false);
             this.pnlStartNewGameYourEmpireType.PerformLayout();
-           
-           
-           
-           
-           
-           
-            
-            this.pnlStartNewGameYourRace.ResumeLayout(false);
-            this.pnlStartNewGameYourEmpireRace.ResumeLayout(false);
-            this.pnlStartNewGameYourEmpireRace.PerformLayout();
-            this.pnlStartNewGameYourEmpireRaceAttributesContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)this.picStartNewGameYourEmpireRace).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.picStartNewGameYourRaceImage).EndInit();
+
+
+
+            this.pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.SelectedIndexChanged += new System.EventHandler(cmbJumpStartYourEmpireGovernment_SelectedIndexChanged);
+            this.pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireGovernment.Enter += new System.EventHandler(cmbJumpStartYourEmpireGovernment_Enter);
+
+
+            this.pnlStartNewGameJumpStartPanel.lnkJumpStartYourEmpireGovernment.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkJumpStartYourEmpireGovernment_LinkClicked);
+
+
+
+            this.pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.SelectedIndexChanged += new System.EventHandler(cmbJumpStartYourEmpireRace_SelectedIndexChanged);
+            this.pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.Enter += new System.EventHandler(cmbJumpStartYourEmpireRace_Enter);
+
+
+            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDimensions.ValueChanged += new System.EventHandler(tbarJumpStartTheGalaxyDimensions_ValueChanged);
+            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDimensions.Enter += new System.EventHandler(tbarJumpStartTheGalaxyDimensions_Enter);
+
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeVariedClusters_CheckedChanged);
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeVariedClusters.Enter += new System.EventHandler(radJumpStartGalaxyShapeVariedClusters_Enter);
+
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeEvenClusters_CheckedChanged);
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeEvenClusters.Enter += new System.EventHandler(radJumpStartGalaxyShapeEvenClusters_Enter);
+
+            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.ValueChanged += new System.EventHandler(muloBoAqMA);
+            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyStarDensity.Enter += new System.EventHandler(tbarJumpStartTheGalaxyStarDensity_Enter);
+
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeSpiral_CheckedChanged);
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeSpiral.Enter += new System.EventHandler(radJumpStartGalaxyShapeSpiral_Enter);
+
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeRing_CheckedChanged);
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeRing.Enter += new System.EventHandler(radJumpStartGalaxyShapeRing_Enter);
+
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeIrregular_CheckedChanged);
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeIrregular.Enter += new System.EventHandler(radJumpStartGalaxyShapeIrregular_Enter);
+
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.CheckedChanged += new System.EventHandler(radJumpStartGalaxyShapeElliptical_CheckedChanged);
+            this.pnlStartNewGameJumpStartPanel.radJumpStartGalaxyShapeElliptical.Enter += new System.EventHandler(radJumpStartGalaxyShapeElliptical_Enter);
+
+
+
+
+            this.pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedIndexChanged += new System.EventHandler(cmbStartNewGameYourEmpireRace_SelectedIndexChanged);
+            this.pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.Enter += new System.EventHandler(cmbStartNewGameYourEmpireRace_Enter);
+
+
+            this.pnlStartNewGameYourRace.btnStartNewGameYourRacePrevious.Click += new System.EventHandler(btnStartNewGameYourRacePrevious_Click);
+            this.pnlStartNewGameYourRace.btnStartNewGameYourRaceNext.Click += new System.EventHandler(btnStartNewGameYourRaceNext_Click);
+            this.pnlStartNewGameYourRace.lnkStartNewGameYourEmpireRace.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(cTwaUmbdtf);
+
+            this.pnlStartNewGameJumpStartPanel.lnkJumpStartYourEmpireRace.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkJumpStartYourEmpireRace_LinkClicked);
+            this.pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.SelectedIndexChanged += new System.EventHandler(cmbJumpStartVictoryPiratePlayStyle_SelectedIndexChanged);
+            this.pnlStartNewGameJumpStartPanel.cmbJumpStartVictoryPiratePlayStyle.Enter += new System.EventHandler(cmbJumpStartVictoryPiratePlayStyle_Enter);
+            this.pnlStartNewGameJumpStartPanel.chkJumpStartTheGalaxyDifficultyScaling.Enter += new System.EventHandler(chkJumpStartTheGalaxyDifficultyScaling_Enter);
+            this.pnlStartNewGameJumpStartPanel.btnJumpStartTheGalaxyNext.Click += new System.EventHandler(btnJumpStartTheGalaxyNext_Click);
+            this.pnlStartNewGameJumpStartPanel.btnJumpStartTheGalaxyPrevious.Click += new System.EventHandler(btnJumpStartTheGalaxyPrevious_Click);
+            this.pnlStartNewGameJumpStartPanel.tbarJumpStartTheGalaxyDifficulty.Enter += new System.EventHandler(tbarJumpStartTheGalaxyDifficulty_Enter);
+
+
+
+
+
+
             this.pnlStartNewGameYourEmpire.ResumeLayout(false);
             this.pnlStartNewGameYourEmpire.PerformLayout();
             this.pnlStartNewGameYourEmpireGovernment.ResumeLayout(false);

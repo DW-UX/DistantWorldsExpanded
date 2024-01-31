@@ -72,12 +72,13 @@ namespace DistantWorlds.Controls
             tbarJumpStartTheGalaxyStarDensity = new LabelledTrackBar();
             tbarJumpStartTheGalaxyDimensions = new LabelledTrackBar();
             tableLayoutPanel1 = new TableLayoutPanel();
-            tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel7 = new TableLayoutPanel();
             tableLayoutPanel9 = new TableLayoutPanel();
             tableLayoutPanel11 = new TableLayoutPanel();
             tableLayoutPanel10 = new TableLayoutPanel();
             chkJumpStartTheGalaxyDifficultyScaling = new CheckBox();
+            gradientPanel1 = new GradientPanel();
+            tableLayoutPanel12 = new TableLayoutPanel();
             pnlJumpStartPiratePlaystyleDescriptionContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picJumpStartYourEmpirePiratePlaystyle).BeginInit();
             pnlJumpStartYourEmpireGovernment.SuspendLayout();
@@ -96,13 +97,15 @@ namespace DistantWorlds.Controls
             tableLayoutPanel9.SuspendLayout();
             tableLayoutPanel11.SuspendLayout();
             tableLayoutPanel10.SuspendLayout();
+            gradientPanel1.SuspendLayout();
+            tableLayoutPanel12.SuspendLayout();
             SuspendLayout();
             // 
             // pnlJumpStartPiratePlaystyleDescriptionContainer
             // 
             pnlJumpStartPiratePlaystyleDescriptionContainer.AutoScroll = true;
             pnlJumpStartPiratePlaystyleDescriptionContainer.Controls.Add(lblJumpStartPiratePlaystyleDescription);
-            pnlJumpStartPiratePlaystyleDescriptionContainer.Location = new System.Drawing.Point(906, 529);
+            pnlJumpStartPiratePlaystyleDescriptionContainer.Location = new System.Drawing.Point(3, 30);
             pnlJumpStartPiratePlaystyleDescriptionContainer.Name = "pnlJumpStartPiratePlaystyleDescriptionContainer";
             pnlJumpStartPiratePlaystyleDescriptionContainer.Size = new System.Drawing.Size(220, 205);
             pnlJumpStartPiratePlaystyleDescriptionContainer.TabIndex = 279;
@@ -121,7 +124,8 @@ namespace DistantWorlds.Controls
             // 
             // picJumpStartYourEmpirePiratePlaystyle
             // 
-            picJumpStartYourEmpirePiratePlaystyle.Location = new System.Drawing.Point(922, 343);
+            picJumpStartYourEmpirePiratePlaystyle.Anchor = AnchorStyles.Top;
+            picJumpStartYourEmpirePiratePlaystyle.Location = new System.Drawing.Point(229, 30);
             picJumpStartYourEmpirePiratePlaystyle.Name = "picJumpStartYourEmpirePiratePlaystyle";
             picJumpStartYourEmpirePiratePlaystyle.Size = new System.Drawing.Size(160, 160);
             picJumpStartYourEmpirePiratePlaystyle.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -133,7 +137,7 @@ namespace DistantWorlds.Controls
             lblJumpStartVictoryPiratePlaystyle.AutoSize = true;
             lblJumpStartVictoryPiratePlaystyle.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lblJumpStartVictoryPiratePlaystyle.ForeColor = System.Drawing.Color.FromArgb(170, 170, 170);
-            lblJumpStartVictoryPiratePlaystyle.Location = new System.Drawing.Point(960, 160);
+            lblJumpStartVictoryPiratePlaystyle.Location = new System.Drawing.Point(3, 0);
             lblJumpStartVictoryPiratePlaystyle.Name = "lblJumpStartVictoryPiratePlaystyle";
             lblJumpStartVictoryPiratePlaystyle.Size = new System.Drawing.Size(95, 13);
             lblJumpStartVictoryPiratePlaystyle.TabIndex = 276;
@@ -147,7 +151,7 @@ namespace DistantWorlds.Controls
             cmbJumpStartVictoryPiratePlayStyle.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             cmbJumpStartVictoryPiratePlayStyle.ForeColor = System.Drawing.Color.FromArgb(170, 170, 170);
             cmbJumpStartVictoryPiratePlayStyle.FormattingEnabled = true;
-            cmbJumpStartVictoryPiratePlayStyle.Location = new System.Drawing.Point(960, 199);
+            cmbJumpStartVictoryPiratePlayStyle.Location = new System.Drawing.Point(229, 3);
             cmbJumpStartVictoryPiratePlayStyle.Name = "cmbJumpStartVictoryPiratePlayStyle";
             cmbJumpStartVictoryPiratePlayStyle.Size = new System.Drawing.Size(95, 21);
             cmbJumpStartVictoryPiratePlayStyle.TabIndex = 275;
@@ -438,6 +442,7 @@ namespace DistantWorlds.Controls
             // tbarJumpStartTheGalaxyDifficulty
             // 
             tbarJumpStartTheGalaxyDifficulty.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbarJumpStartTheGalaxyDifficulty.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tbarJumpStartTheGalaxyDifficulty.BackColor = System.Drawing.Color.FromArgb(39, 40, 44);
             tbarJumpStartTheGalaxyDifficulty.BackColor2 = System.Drawing.Color.FromArgb(22, 21, 26);
             tbarJumpStartTheGalaxyDifficulty.BackColor3 = System.Drawing.Color.FromArgb(51, 54, 61);
@@ -454,7 +459,7 @@ namespace DistantWorlds.Controls
             tbarJumpStartTheGalaxyDifficulty.Location = new System.Drawing.Point(0, 0);
             tbarJumpStartTheGalaxyDifficulty.Margin = new Padding(0);
             tbarJumpStartTheGalaxyDifficulty.Name = "tbarJumpStartTheGalaxyDifficulty";
-            tbarJumpStartTheGalaxyDifficulty.Size = new System.Drawing.Size(108, 14);
+            tbarJumpStartTheGalaxyDifficulty.Size = new System.Drawing.Size(523, 27);
             tbarJumpStartTheGalaxyDifficulty.SliderOffset = 25;
             tbarJumpStartTheGalaxyDifficulty.TabIndex = 249;
             tbarJumpStartTheGalaxyDifficulty.Value = 0;
@@ -474,7 +479,7 @@ namespace DistantWorlds.Controls
             pnlJumpStartGalaxyShapeSize.Location = new System.Drawing.Point(0, 0);
             pnlJumpStartGalaxyShapeSize.Margin = new Padding(0);
             pnlJumpStartGalaxyShapeSize.Name = "pnlJumpStartGalaxyShapeSize";
-            pnlJumpStartGalaxyShapeSize.Size = new System.Drawing.Size(558, 296);
+            pnlJumpStartGalaxyShapeSize.Size = new System.Drawing.Size(474, 296);
             pnlJumpStartGalaxyShapeSize.TabIndex = 211;
             // 
             // tableLayoutPanel4
@@ -494,7 +499,7 @@ namespace DistantWorlds.Controls
             tableLayoutPanel4.RowStyles.Add(new RowStyle());
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-            tableLayoutPanel4.Size = new System.Drawing.Size(552, 290);
+            tableLayoutPanel4.Size = new System.Drawing.Size(468, 290);
             tableLayoutPanel4.TabIndex = 282;
             // 
             // tableLayoutPanel5
@@ -704,11 +709,11 @@ namespace DistantWorlds.Controls
             tbarJumpStartTheGalaxyStarDensity.LabelWidth = 100;
             tbarJumpStartTheGalaxyStarDensity.LinkText = null;
             tbarJumpStartTheGalaxyStarDensity.LinkWidth = 0;
-            tbarJumpStartTheGalaxyStarDensity.Location = new System.Drawing.Point(0, 182);
+            tbarJumpStartTheGalaxyStarDensity.Location = new System.Drawing.Point(0, 186);
             tbarJumpStartTheGalaxyStarDensity.Margin = new Padding(0);
             tbarJumpStartTheGalaxyStarDensity.Name = "tbarJumpStartTheGalaxyStarDensity";
             tbarJumpStartTheGalaxyStarDensity.Padding = new Padding(10, 20, 0, 0);
-            tbarJumpStartTheGalaxyStarDensity.Size = new System.Drawing.Size(552, 36);
+            tbarJumpStartTheGalaxyStarDensity.Size = new System.Drawing.Size(468, 27);
             tbarJumpStartTheGalaxyStarDensity.SliderOffset = 25;
             tbarJumpStartTheGalaxyStarDensity.TabIndex = 214;
             tbarJumpStartTheGalaxyStarDensity.Value = 0;
@@ -731,11 +736,11 @@ namespace DistantWorlds.Controls
             tbarJumpStartTheGalaxyDimensions.LabelWidth = 100;
             tbarJumpStartTheGalaxyDimensions.LinkText = null;
             tbarJumpStartTheGalaxyDimensions.LinkWidth = 0;
-            tbarJumpStartTheGalaxyDimensions.Location = new System.Drawing.Point(0, 233);
+            tbarJumpStartTheGalaxyDimensions.Location = new System.Drawing.Point(0, 237);
             tbarJumpStartTheGalaxyDimensions.Margin = new Padding(0);
             tbarJumpStartTheGalaxyDimensions.Name = "tbarJumpStartTheGalaxyDimensions";
             tbarJumpStartTheGalaxyDimensions.Padding = new Padding(10, 10, 0, 0);
-            tbarJumpStartTheGalaxyDimensions.Size = new System.Drawing.Size(552, 54);
+            tbarJumpStartTheGalaxyDimensions.Size = new System.Drawing.Size(468, 45);
             tbarJumpStartTheGalaxyDimensions.SliderOffset = 25;
             tbarJumpStartTheGalaxyDimensions.TabIndex = 216;
             tbarJumpStartTheGalaxyDimensions.Value = 0;
@@ -752,20 +757,8 @@ namespace DistantWorlds.Controls
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(558, 296);
+            tableLayoutPanel1.Size = new System.Drawing.Size(474, 296);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.ColumnCount = 1;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Location = new System.Drawing.Point(888, 631);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(200, 100);
-            tableLayoutPanel2.TabIndex = 280;
             // 
             // tableLayoutPanel7
             // 
@@ -800,7 +793,7 @@ namespace DistantWorlds.Controls
             tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel9.RowStyles.Add(new RowStyle());
             tableLayoutPanel9.RowStyles.Add(new RowStyle());
-            tableLayoutPanel9.Size = new System.Drawing.Size(660, 656);
+            tableLayoutPanel9.Size = new System.Drawing.Size(660, 669);
             tableLayoutPanel9.TabIndex = 281;
             // 
             // tableLayoutPanel11
@@ -813,7 +806,7 @@ namespace DistantWorlds.Controls
             tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel11.Controls.Add(btnJumpStartTheGalaxyPrevious, 0, 0);
             tableLayoutPanel11.Controls.Add(btnJumpStartTheGalaxyNext, 1, 0);
-            tableLayoutPanel11.Location = new System.Drawing.Point(3, 627);
+            tableLayoutPanel11.Location = new System.Drawing.Point(3, 640);
             tableLayoutPanel11.Name = "tableLayoutPanel11";
             tableLayoutPanel11.RowCount = 1;
             tableLayoutPanel11.RowStyles.Add(new RowStyle());
@@ -822,6 +815,7 @@ namespace DistantWorlds.Controls
             // 
             // tableLayoutPanel10
             // 
+            tableLayoutPanel10.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel10.AutoSize = true;
             tableLayoutPanel10.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPanel10.ColumnCount = 2;
@@ -832,30 +826,65 @@ namespace DistantWorlds.Controls
             tableLayoutPanel10.Name = "tableLayoutPanel10";
             tableLayoutPanel10.RowCount = 1;
             tableLayoutPanel10.RowStyles.Add(new RowStyle());
-            tableLayoutPanel10.Size = new System.Drawing.Size(135, 14);
+            tableLayoutPanel10.Size = new System.Drawing.Size(654, 27);
             tableLayoutPanel10.TabIndex = 281;
             // 
             // chkJumpStartTheGalaxyDifficultyScaling
             // 
-            chkJumpStartTheGalaxyDifficultyScaling.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkJumpStartTheGalaxyDifficultyScaling.Font = new System.Drawing.Font("Verdana", 0.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             chkJumpStartTheGalaxyDifficultyScaling.ForeColor = System.Drawing.Color.FromArgb(170, 170, 170);
-            chkJumpStartTheGalaxyDifficultyScaling.Location = new System.Drawing.Point(705, 282);
+            chkJumpStartTheGalaxyDifficultyScaling.Location = new System.Drawing.Point(751, 218);
             chkJumpStartTheGalaxyDifficultyScaling.Name = "chkJumpStartTheGalaxyDifficultyScaling";
             chkJumpStartTheGalaxyDifficultyScaling.Size = new System.Drawing.Size(251, 17);
             chkJumpStartTheGalaxyDifficultyScaling.TabIndex = 260;
             chkJumpStartTheGalaxyDifficultyScaling.Text = "Difficulty scales as player nears victory";
             chkJumpStartTheGalaxyDifficultyScaling.UseVisualStyleBackColor = true;
             // 
+            // gradientPanel1
+            // 
+            gradientPanel1.AutoSize = true;
+            gradientPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            gradientPanel1.BackColor = System.Drawing.Color.FromArgb(39, 40, 44);
+            gradientPanel1.BackColor2 = System.Drawing.Color.FromArgb(22, 21, 26);
+            gradientPanel1.BackColor3 = System.Drawing.Color.FromArgb(51, 54, 61);
+            gradientPanel1.BorderColor = System.Drawing.Color.FromArgb(67, 67, 77);
+            gradientPanel1.BorderStyle = BorderStyle.FixedSingle;
+            gradientPanel1.BorderWidth = 2;
+            gradientPanel1.Controls.Add(tableLayoutPanel12);
+            gradientPanel1.Curvature = 20;
+            gradientPanel1.GradientMode = LinearGradientMode.Vertical;
+            gradientPanel1.Location = new System.Drawing.Point(684, 372);
+            gradientPanel1.Margin = new Padding(0);
+            gradientPanel1.Name = "gradientPanel1";
+            gradientPanel1.Size = new System.Drawing.Size(409, 252);
+            gradientPanel1.TabIndex = 282;
+            // 
+            // tableLayoutPanel12
+            // 
+            tableLayoutPanel12.AutoSize = true;
+            tableLayoutPanel12.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel12.ColumnCount = 2;
+            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel12.Controls.Add(cmbJumpStartVictoryPiratePlayStyle, 1, 0);
+            tableLayoutPanel12.Controls.Add(picJumpStartYourEmpirePiratePlaystyle, 1, 1);
+            tableLayoutPanel12.Controls.Add(pnlJumpStartPiratePlaystyleDescriptionContainer, 0, 1);
+            tableLayoutPanel12.Controls.Add(lblJumpStartVictoryPiratePlaystyle, 0, 0);
+            tableLayoutPanel12.Location = new System.Drawing.Point(14, 11);
+            tableLayoutPanel12.Name = "tableLayoutPanel12";
+            tableLayoutPanel12.RowCount = 3;
+            tableLayoutPanel12.RowStyles.Add(new RowStyle());
+            tableLayoutPanel12.RowStyles.Add(new RowStyle());
+            tableLayoutPanel12.RowStyles.Add(new RowStyle());
+            tableLayoutPanel12.Size = new System.Drawing.Size(392, 238);
+            tableLayoutPanel12.TabIndex = 281;
+            // 
             // StartNewGameJumpStartPanel
             // 
             AutoSize = true;
             BackColor = System.Drawing.Color.FromArgb(48, 48, 64);
+            Controls.Add(gradientPanel1);
             Controls.Add(chkJumpStartTheGalaxyDifficultyScaling);
-            Controls.Add(tableLayoutPanel2);
-            Controls.Add(pnlJumpStartPiratePlaystyleDescriptionContainer);
-            Controls.Add(picJumpStartYourEmpirePiratePlaystyle);
-            Controls.Add(lblJumpStartVictoryPiratePlaystyle);
-            Controls.Add(cmbJumpStartVictoryPiratePlayStyle);
             Controls.Add(tableLayoutPanel9);
             Location = new System.Drawing.Point(403, 18);
             Name = "StartNewGameJumpStartPanel";
@@ -892,6 +921,10 @@ namespace DistantWorlds.Controls
             tableLayoutPanel11.ResumeLayout(false);
             tableLayoutPanel11.PerformLayout();
             tableLayoutPanel10.ResumeLayout(false);
+            gradientPanel1.ResumeLayout(false);
+            gradientPanel1.PerformLayout();
+            tableLayoutPanel12.ResumeLayout(false);
+            tableLayoutPanel12.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -951,7 +984,6 @@ namespace DistantWorlds.Controls
         public SmoothLabel lblJumpStartPiratePlaystyleDescription;
 
         private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
         private TableLayoutPanel tableLayoutPanel3;
         private TableLayoutPanel tableLayoutPanel4;
         private TableLayoutPanel tableLayoutPanel5;
@@ -964,5 +996,7 @@ namespace DistantWorlds.Controls
         private TableLayoutPanel tableLayoutPanel10;
         private TableLayoutPanel tableLayoutPanel11;
         public CheckBox chkJumpStartTheGalaxyDifficultyScaling;
+        public GradientPanel gradientPanel1;
+        private TableLayoutPanel tableLayoutPanel12;
     }
 }

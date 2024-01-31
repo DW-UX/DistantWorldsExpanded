@@ -430,31 +430,16 @@ namespace DistantWorlds
 
         private ComboBox cmbVictoryThresholdPercentage;
 
-        private System.Windows.Forms.Panel pnlStartNewGameYourRace;
 
-        private GradientPanel pnlStartNewGameYourEmpireRace;
+        private StartNewGameYourRacePanel pnlStartNewGameYourRace;
 
-        private System.Windows.Forms.Panel pnlStartNewGameYourEmpireRaceAttributesContainer;
 
-        private SmoothLabel lblStartNewGameYourEmpireRaceName;
 
-        private LinkLabel lnkStartNewGameYourEmpireRace;
 
-        private PictureBox picStartNewGameYourEmpireRace;
 
-        private RaceDropDown cmbStartNewGameYourEmpireRace;
-
-        private SmoothLabel lblStartNewGameYourEmpireRaceTitle;
-
-        private GlassButton btnStartNewGameYourRacePrevious;
-
-        private GlassButton btnStartNewGameYourRaceNext;
-
-        private RaceSummaryPanel pnlStartNewGameYourEmpireRaceAttributes;
 
         private System.Windows.Forms.Panel pnlStartNewGameVictoryConditionsGroup;
 
-        private PictureBox picStartNewGameYourRaceImage;
 
         private System.Windows.Forms.Panel pnlStartNewGameColonizationTerritory;
 
@@ -962,7 +947,7 @@ namespace DistantWorlds
                 pnlStartNewGameYourEmpireDetails.SetFontCache(this);
                 pnlStartNewGameYourEmpireGalaxyLocation.SetFontCache(this);
                 pnlStartNewGameYourEmpireGovernment.SetFontCache(this);
-                pnlStartNewGameYourEmpireRace.SetFontCache(this);
+                pnlStartNewGameYourRace.pnlStartNewGameYourEmpireRace.SetFontCache(this);
                 pnlQuickStartDescription.SetFontCache(this);
                 ctlStartingEmpiresList.SetFontCache(this);
                 pnlThemes.pnlThemeDetail.SetFontCache(this);
@@ -1248,7 +1233,7 @@ namespace DistantWorlds
                     list.Add(item.Name);
                 }
                 list.Sort();
-                cmbStartNewGameYourEmpireRace.BindData(font_0, raceList_0, null, allowRandomRace: true);
+                pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.BindData(font_0, raceList_0, null, allowRandomRace: true);
                 raceList_0.Sort();
                 ctlStartingEmpiresList.SetRaces(text4);
                 ctlStartingEmpiresList.SetProximityValues(10, 10);
@@ -1490,11 +1475,11 @@ namespace DistantWorlds
         private void method_4(string string_2, bool bool_5)
         {
             lblStartNewGameGalaxyMapsAvailableGalaxies.Text = string.Format(TextResolver.GetText("StartNewGame GalaxyMaps AvailableGalaxies"), string_2);
-            pnlStartNewGameYourEmpireRaceAttributes.BindData(null, font_3, font_7);
-            picStartNewGameYourEmpireRace.Image = null;
+            pnlStartNewGameYourRace.pnlStartNewGameYourEmpireRaceAttributes.BindData(null, font_3, font_7);
+            pnlStartNewGameYourRace.picStartNewGameYourEmpireRace.Image = null;
             if (bool_5)
             {
-                cmbStartNewGameYourEmpireRace.BindData(font_0, raceList_0, null, allowRandomRace: true);
+                pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.BindData(font_0, raceList_0, null, allowRandomRace: true);
                 pnlStartNewGameJumpStartPanel.cmbJumpStartYourEmpireRace.BindData(font_0, raceList_0, null, allowRandomRace: true);
                 raceList_0.Sort();
                 ctlStartingEmpiresList.SetRaces(string_2);
@@ -2624,7 +2609,6 @@ namespace DistantWorlds
             pnlStartNewGameVictoryConditions.Size = size;
             pnlStartNewGameOtherEmpires.Size = size;
             pnlStartNewGameYourEmpire.Size = size;
-            pnlStartNewGameYourRace.Size = size;
             pnlStartNewGameJumpStartPanel.Size = size;
             Point location = new Point(5, 40);
             pnlStartNewGameGalaxyMaps.Location = location;
@@ -2634,7 +2618,6 @@ namespace DistantWorlds
             pnlStartNewGameVictoryConditions.Location = location;
             pnlStartNewGameOtherEmpires.Location = location;
             pnlStartNewGameYourEmpire.Location = location;
-            pnlStartNewGameYourRace.Location = location;
             pnlStartNewGameJumpStartPanel.Location = location;
             string string_3 = "(" + TextResolver.GetText("Default") + ")";
             if (!string.IsNullOrEmpty(main_0.string_3))
@@ -3176,9 +3159,7 @@ namespace DistantWorlds
             picStartNewGameYourEmpireGalaxyLocation.SizeMode = PictureBoxSizeMode.Zoom;
             pnlStartNewGameYourEmpireGovernment.Size = new Size(650, 285);
             lblStartNewGameYourEmpireGovernmentTitle.Font = font_7;
-            lblStartNewGameYourEmpireRaceTitle.Font = font_7;
             lblStartNewGameYourEmpireGovernmentName.Visible = false;
-            lblStartNewGameYourEmpireRaceName.Visible = false;
             cmbStartNewGameYourEmpireGovernment.Size = new Size(175, 21);
             cmbStartNewGameYourEmpireGovernment.Location = new Point(15, 35);
             cmbStartNewGameYourEmpireGovernment.AllowNullItem = true;
@@ -3193,7 +3174,7 @@ namespace DistantWorlds
             lnkStartNewGameYourEmpireGovernment.Font = font_3;
             if (bool_5)
             {
-                cmbStartNewGameYourEmpireRace.BindData(font_3, raceList_0, main_0.raceImageCache_0.GetRaceImages(), allowRandomRace: true);
+                pnlStartNewGameYourRace. cmbStartNewGameYourEmpireRace.BindData(font_3, raceList_0, main_0.raceImageCache_0.GetRaceImages(), allowRandomRace: true);
             }
             pnlStartNewGameYourEmpireGovernment.Location = new Point(10, 308);
             lblVictoryPiratePlaystyle.Font = font_7;
@@ -3338,46 +3319,13 @@ namespace DistantWorlds
         private void method_42()
         {
             pnlStartNewGameYourRace.SuspendLayout();
-            pnlStartNewGameYourEmpireRace.Location = new Point(5, 5);
-            pnlStartNewGameYourEmpireRace.Size = new Size(750, 595);
-            lblStartNewGameYourEmpireRaceTitle.Visible = false;
-            cmbStartNewGameYourEmpireRace.Size = new Size(300, 26);
-            cmbStartNewGameYourEmpireRace.ItemHeight = 26;
-            cmbStartNewGameYourEmpireRace.Location = new Point(15, 20);
-            picStartNewGameYourEmpireRace.Size = new Size(300, 300);
-            picStartNewGameYourEmpireRace.Location = new Point(15, 57);
-            picStartNewGameYourEmpireRace.SizeMode = PictureBoxSizeMode.Zoom;
-            picStartNewGameYourEmpireRace.BorderStyle = BorderStyle.None;
-            lnkStartNewGameYourEmpireRace.Location = new Point(15, 365);
-            lnkStartNewGameYourEmpireRace.Font = font_3;
-            lblStartNewGameYourEmpireRaceName.Location = new Point(325, 20);
-            lblStartNewGameYourEmpireRaceName.Visible = true;
-            lblStartNewGameYourEmpireRaceName.BringToFront();
-            pnlStartNewGameYourEmpireRaceAttributesContainer.Location = new Point(330, 57);
-            pnlStartNewGameYourEmpireRaceAttributesContainer.Size = new Size(410, 525);
-            pnlStartNewGameYourEmpireRaceAttributesContainer.AutoScroll = true;
-            pnlStartNewGameYourEmpireRaceAttributesContainer.SetAutoScrollMargin(0, 0);
-            pnlStartNewGameYourEmpireRaceAttributesContainer.AutoScrollPosition = new Point(0, 0);
-            pnlStartNewGameYourEmpireRaceAttributes.Location = new Point(0, 0);
-            pnlStartNewGameYourEmpireRaceAttributes.Size = new Size(390, 0);
-            pnlStartNewGameYourEmpireRaceAttributes.MaximumSize = new Size(390, 2000);
-            pnlStartNewGameYourEmpireRaceAttributes.MinimumSize = new Size(390, 205);
-            pnlStartNewGameYourEmpireRaceAttributes.AutoSize = true;
-            picStartNewGameYourRaceImage.Size = new Size(130, 595);
-            picStartNewGameYourRaceImage.Location = new Point(760, 5);
-            picStartNewGameYourRaceImage.SizeMode = PictureBoxSizeMode.Zoom;
-            cmbStartNewGameYourEmpireRace.BindData(font_3, raceList_0, main_0.raceImageCache_0.GetRaceImages(), allowRandomRace: true);
-            btnStartNewGameYourRacePrevious.Font = font_7;
-            btnStartNewGameYourRaceNext.Font = font_7;
-            btnStartNewGameYourRacePrevious.Size = new Size(300, 40);
-            btnStartNewGameYourRaceNext.Size = new Size(300, 40);
-            btnStartNewGameYourRacePrevious.Location = new Point(10, pnlStartNewGameYourRace.Height - (btnStartNewGameYourRacePrevious.Height + 10));
-            btnStartNewGameYourRaceNext.Location = new Point(pnlStartNewGameYourRace.Width - (btnStartNewGameYourRaceNext.Width + 10), pnlStartNewGameYourRace.Height - (btnStartNewGameYourRaceNext.Height + 10));
-            btnStartNewGameYourRaceNext.Visible = true;
-            btnStartNewGameYourRaceNext.BringToFront();
-            btnStartNewGameYourRacePrevious.Visible = true;
-            btnStartNewGameYourRacePrevious.BringToFront();
-            pnlStartNewGameYourRace.ResumeLayout();
+            pnlStartNewGameYourRace.lnkStartNewGameYourEmpireRace.Font = font_3;
+           pnlStartNewGameYourRace.  lblStartNewGameYourEmpireRaceName.BringToFront();
+            pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.BindData(font_3, raceList_0, main_0.raceImageCache_0.GetRaceImages(), allowRandomRace: true);
+          pnlStartNewGameYourRace.  btnStartNewGameYourRacePrevious.Font = font_7;
+           pnlStartNewGameYourRace. btnStartNewGameYourRaceNext.Font = font_7;
+          pnlStartNewGameYourRace.  btnStartNewGameYourRaceNext.BringToFront();
+          pnlStartNewGameYourRace.  btnStartNewGameYourRacePrevious.BringToFront();
         }
 
         private void method_43()
@@ -5092,9 +5040,9 @@ namespace DistantWorlds
             tbarStartNewGameTheGalaxyDimensions.Value = startGameOptions_0.GalaxyDimensions;
             tbarStartNewGameTheGalaxyDifficulty.Value = startGameOptions_0.GalaxyDifficulty;
             chkStartNewGameTheGalaxyDifficultyScaling.Checked = startGameOptions_0.GalaxyDifficultyScaling;
-            if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < cmbStartNewGameYourEmpireRace.Items.Count)
+            if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.Items.Count)
             {
-                cmbStartNewGameYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
+                pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
             }
             cmbStartNewGameYourEmpireGovernment.SetSelectedGovernmentStyle(startGameOptions_0.YourEmpireGovernmentStyle);
             cmbVictoryPiratePlayStyle.SelectedIndex = startGameOptions_0.PiratePlayStyle;

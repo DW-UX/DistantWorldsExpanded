@@ -3196,7 +3196,7 @@ namespace DistantWorlds
             else
             {
                 Bitmap bitmap2 = (Bitmap)picStartNewGameYourEmpirePiratePlaystyle.Image;
-                Bitmap image2 = main_0.method_119(null, cmbStartNewGameYourEmpireRace.SelectedRace, picStartNewGameYourEmpirePiratePlaystyle.Width, picStartNewGameYourEmpirePiratePlaystyle.Height, main_0.bitmap_31, 6, bool_28: true, piratePlayStyle_0);
+                Bitmap image2 = main_0.method_119(null, pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedRace, picStartNewGameYourEmpirePiratePlaystyle.Width, picStartNewGameYourEmpirePiratePlaystyle.Height, main_0.bitmap_31, 6, bool_28: true, piratePlayStyle_0);
                 picStartNewGameYourEmpirePiratePlaystyle.Image = image2;
                 if (bitmap2 != null && bitmap2.PixelFormat != 0)
                 {

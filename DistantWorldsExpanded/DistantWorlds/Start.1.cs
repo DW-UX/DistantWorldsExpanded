@@ -3038,7 +3038,7 @@ namespace DistantWorlds
             pnlStartNewGameColonizationTerritory.Visible = false;
             pnlStartNewGameYourRace.Visible = true;
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Your Race");
-            cmbStartNewGameYourEmpireRace.Focus();
+            pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.Focus();
             pnlStartNewGameYourRace.BringToFront();
         }
 
@@ -3088,7 +3088,7 @@ namespace DistantWorlds
         {
             if (bool_2)
             {
-                Race selectedRace = cmbStartNewGameYourEmpireRace.SelectedRace;
+                Race selectedRace = pnlStartNewGameYourRace. cmbStartNewGameYourEmpireRace.SelectedRace;
                 PiratePlayStyle piratePlayStyle = method_193(cmbVictoryPiratePlayStyle.SelectedIndex);
                 if (piratePlayStyle == PiratePlayStyle.Undefined && selectedRace != null)
                 {
@@ -3328,15 +3328,15 @@ namespace DistantWorlds
             startGameOptions.YourEmpireFlagShape = cmbFlagShape.SelectedIndex;
             startGameOptions.YourEmpireGalaxyStartLocation = cmbYourEmpireStartLocation.SelectedIndex;
             _ = raceList_0[0];
-            if (cmbStartNewGameYourEmpireRace.SelectedRace != null)
+            if (pnlStartNewGameYourRace. cmbStartNewGameYourEmpireRace.SelectedRace != null)
             {
-                _ = cmbStartNewGameYourEmpireRace.SelectedRace;
+                _ = pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedRace;
             }
             startGameOptions.YourEmpireGovernmentStyle = cmbStartNewGameYourEmpireGovernment.SelectedGovernmentId;
             startGameOptions.YourEmpireHomeSystem = tbarStartNewGameYourEmpireHomeSystem.Value;
             startGameOptions.YourEmpireMainColor = cmbPrimaryColor.SelectedIndex;
             startGameOptions.YourEmpireName = txtYourEmpireName.Text;
-            startGameOptions.YourEmpireRace = cmbStartNewGameYourEmpireRace.SelectedIndex;
+            startGameOptions.YourEmpireRace = pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedIndex;
             startGameOptions.YourEmpireSecondaryColor = cmbSecondaryColor.SelectedIndex;
             startGameOptions.YourEmpireTechLevel = tbarStartNewGameYourEmpireTechLevel.Value;
             startGameOptions.YourEmpireCorruption = tbarStartNewGameYourEmpireCorruption.Value;
@@ -3464,9 +3464,9 @@ namespace DistantWorlds
                 cmbPrimaryColor.SelectedIndex = startGameOptions_0.YourEmpireMainColor;
             }
             txtYourEmpireName.Text = startGameOptions_0.YourEmpireName;
-            if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < cmbStartNewGameYourEmpireRace.Items.Count)
+            if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.Items.Count)
             {
-                cmbStartNewGameYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
+                pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
             }
             if (startGameOptions_0.YourEmpireSecondaryColor >= 0 && startGameOptions_0.YourEmpireSecondaryColor < cmbSecondaryColor.Items.Count)
             {
@@ -3696,9 +3696,9 @@ namespace DistantWorlds
             string string_ = method_58(value);
             EmpireStart empireStart = new EmpireStart();
             empireStart.Name = txtYourEmpireName.Text;
-            if (cmbStartNewGameYourEmpireRace.SelectedRace != null)
+            if (pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedRace != null)
             {
-                empireStart.Race = cmbStartNewGameYourEmpireRace.SelectedRace.Name;
+                empireStart.Race = pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedRace.Name;
             }
             else
             {
@@ -3811,9 +3811,9 @@ namespace DistantWorlds
             RaceList raceList = Galaxy.LoadRaces(Application.StartupPath, customizationSetName);
             raceList = raceList.ResolvePlayableRaces();
             string string_4 = string.Empty;
-            if (cmbStartNewGameYourEmpireRace.SelectedRace != null)
+            if (pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedRace != null)
             {
-                string_4 = cmbStartNewGameYourEmpireRace.SelectedRace.Name;
+                string_4 = pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedRace.Name;
             }
             if (chkOtherEmpiresAutogenerate.Checked)
             {
@@ -3967,7 +3967,7 @@ namespace DistantWorlds
             pnlStartNewGameYourEmpireType.Visible = false;
             pnlStartNewGameYourRace.Visible = true;
             pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Your Race");
-            cmbStartNewGameYourEmpireRace.Focus();
+            pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.Focus();
             pnlStartNewGameYourRace.BringToFront();
         }
 
@@ -4155,19 +4155,19 @@ namespace DistantWorlds
         private void cmbStartNewGameYourEmpireRace_SelectedIndexChanged(object sender, EventArgs e)
         {
             string empty = string.Empty;
-            Race selectedRace = cmbStartNewGameYourEmpireRace.SelectedRace;
+            Race selectedRace = pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedRace;
             RaceSummary summary = null;
             if (selectedRace == null)
             {
                 empty = "(" + TextResolver.GetText("Random") + ")";
                 _ = "(" + TextResolver.GetText("Race randomly selected") + ")";
-                lnkStartNewGameYourEmpireRace.Visible = false;
+                pnlStartNewGameYourRace.lnkStartNewGameYourEmpireRace.Visible = false;
             }
             else
             {
                 empty = selectedRace.Name;
                 summary = Galaxy.GenerateRaceSummary(selectedRace);
-                lnkStartNewGameYourEmpireRace.Visible = true;
+                pnlStartNewGameYourRace.lnkStartNewGameYourEmpireRace.Visible = true;
             }
             IdyEbrKpy3(selectedRace, bool_5: false);
             if (bool_2)
@@ -4181,19 +4181,17 @@ namespace DistantWorlds
                     method_207(PiratePlayStyle.Balanced, bool_5: false);
                 }
             }
-            lblStartNewGameYourEmpireRaceTitle.Text = TextResolver.GetText("Your Race") + ": " + empty;
-            lblStartNewGameYourEmpireRaceName.Visible = true;
-            lblStartNewGameYourEmpireRaceName.Font = font_9;
-            lblStartNewGameYourEmpireRaceName.Text = empty;
-            Bitmap bitmap = (Bitmap)picStartNewGameYourEmpireRace.Image;
-            Bitmap image = main_0.method_118(null, selectedRace, picStartNewGameYourEmpireRace.Width, picStartNewGameYourEmpireRace.Height, main_0.bitmap_31, 6, bool_28: false);
-            picStartNewGameYourEmpireRace.Image = image;
+            pnlStartNewGameYourRace.lblStartNewGameYourEmpireRaceName.Visible = true;
+            pnlStartNewGameYourRace.lblStartNewGameYourEmpireRaceName.Font = font_9;
+            pnlStartNewGameYourRace.lblStartNewGameYourEmpireRaceName.Text = empty;
+            Bitmap bitmap = (Bitmap)pnlStartNewGameYourRace.picStartNewGameYourEmpireRace.Image;
+            Bitmap image = main_0.method_118(null, selectedRace, pnlStartNewGameYourRace.picStartNewGameYourEmpireRace.Width, pnlStartNewGameYourRace.picStartNewGameYourEmpireRace.Height, main_0.bitmap_31, 6, bool_28: false);
+            pnlStartNewGameYourRace.picStartNewGameYourEmpireRace.Image = image;
             if (bitmap != null && bitmap.PixelFormat != 0)
             {
                 bitmap.Dispose();
             }
-            pnlStartNewGameYourEmpireRaceAttributes.BindData(summary, font_3, font_7);
-            pnlStartNewGameYourEmpireRaceAttributesContainer.AutoScrollPosition = new Point(0, 0);
+            pnlStartNewGameYourRace.pnlStartNewGameYourEmpireRaceAttributes.BindData(summary, font_3, font_7);
         }
 
         private void method_207(PiratePlayStyle piratePlayStyle_0, bool bool_5)
@@ -4326,7 +4324,7 @@ namespace DistantWorlds
 
         private void cTwaUmbdtf(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Race selectedRace = cmbStartNewGameYourEmpireRace.SelectedRace;
+            Race selectedRace = pnlStartNewGameYourRace.cmbStartNewGameYourEmpireRace.SelectedRace;
             if (selectedRace == null)
             {
                 method_127(TextResolver.GetText("Alien Races"));
@@ -4731,7 +4729,7 @@ namespace DistantWorlds
             lnkPlayScenario.Text = TextResolver.GetText("Quick Start");
             lnkQuickStartRaceHelp.Text = TextResolver.GetText("About this Race") + "...";
             lnkStartNewGameYourEmpireGovernment.Text = TextResolver.GetText("Read more about this Government type") + "...";
-            lnkStartNewGameYourEmpireRace.Text = TextResolver.GetText("Read more about this race") + "...";
+            
             lnkThemes.Text = TextResolver.GetText("Change Theme");
             lnkTutorial.Text = TextResolver.GetText("Tutorials");
             radioRandom.Text = TextResolver.GetText("Random");
@@ -4909,8 +4907,7 @@ namespace DistantWorlds
             btnStartNewGameVictoryConditionsPrevious.Text = "<< " + TextResolver.GetText("Previous: Other Empires");
             btnStartNewGameYourEmpireNext.Text = TextResolver.GetText("Next: Other Empires") + " >>";
             btnStartNewGameYourEmpirePrevious.Text = "<< " + TextResolver.GetText("Previous: Your Race");
-            btnStartNewGameYourRaceNext.Text = TextResolver.GetText("Next: Your Empire") + " >>";
-            btnStartNewGameYourRacePrevious.Text = "<< " + TextResolver.GetText("Previous: Colonization and Territory");
+            
             btnTutorialStartCancel.Text = TextResolver.GetText("Cancel");
             chkEncyclopediaShowAtStart.Text = TextResolver.GetText("Show this screen at startup");
             chkGalaxyNewEmpiresDuringGame.Text = TextResolver.GetText("Allow new Empires to appear during the game");
@@ -5018,15 +5015,6 @@ namespace DistantWorlds
             comboBox_0.Items.Add(TextResolver.GetText("Fully automate"));
         }
 
-        private void pnlStartNewGameYourEmpireRaceAttributes_Enter(object sender, EventArgs e)
-        {
-            pnlStartNewGameYourEmpireRaceAttributesContainer.Focus();
-        }
-
-        private void pnlStartNewGameYourEmpireRaceAttributes_MouseEnter(object sender, EventArgs e)
-        {
-            pnlStartNewGameYourEmpireRaceAttributesContainer.Focus();
-        }
 
         private void sldStartNewGameColonizationTerritoryColonyInfluenceRange_Scroll(object sender, ScrollEventArgs e)
         {

@@ -1116,8 +1116,13 @@ namespace DistantWorlds.Types
             List<int> familyNumbers = null;
             if (!string.IsNullOrEmpty(_CustomizationSetName))
             {
-                List<DirectoryInfo> modDir = new DirectoryInfo(modShipsFolder).EnumerateDirectories("family*").ToList();
-                familyNumbers = origDir.Union(modDir).Select(x =>
+                DirectoryInfo modDir = new DirectoryInfo(modShipsFolder);
+                List<DirectoryInfo> modDirFamilyList = new List<DirectoryInfo>();
+                if (modDir.Exists)
+                {
+                    modDirFamilyList = modDir.EnumerateDirectories("family*").ToList();
+                }
+                familyNumbers = origDir.Union(modDirFamilyList).Select(x =>
                 {
                     int.TryParse(x.Name.Substring(6), out int res);
                     return res;
