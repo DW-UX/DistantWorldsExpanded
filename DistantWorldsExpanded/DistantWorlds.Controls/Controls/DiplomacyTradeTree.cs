@@ -254,6 +254,8 @@ namespace DistantWorlds.Controls
 
         public void PopulateTradeableItems(TradeableItemList tradeableItems)
         {
+            TradeableItems.SuspendLayout();
+            TradeableItems.BeginUpdate();
             TradeableItems.Nodes.Clear();
             if (_ExcludedItems != null && _ExcludedItems.Count > 0)
             {
@@ -684,6 +686,9 @@ namespace DistantWorlds.Controls
                     node2.Text = node2.Text;
                 }
             }
+            TradeableItems.EndUpdate();
+            TradeableItems.ResumeLayout();
+            TradeableItems.Invalidate();
         }
 
         private void DoLayout()

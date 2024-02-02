@@ -509,19 +509,22 @@ namespace BaconDistantWorlds
 
         public static void RushStateShips(Main main)
         {
-            if (!(main._Game.SelectedObject is BuiltObject selectedObject))
-                return;
-            List<BuiltObject> builtObjectList = new List<BuiltObject>();
-            for (int index = 1; index < selectedObject.ConstructionQueue.ConstructionWaitQueue.Count; ++index)
+            if (main._Game.SelectedObject is BuiltObject selectedObject
+                && selectedObject.ConstructionQueue != null
+                && selectedObject.ConstructionQueue.ConstructionWaitQueue != null)
             {
-                if (selectedObject.ConstructionQueue.ConstructionWaitQueue[index] != null && selectedObject.ActualEmpire.BuiltObjects.Contains(selectedObject.ConstructionQueue.ConstructionWaitQueue[index]))
-                    builtObjectList.Add(selectedObject.ConstructionQueue.ConstructionWaitQueue[index]);
+                List<BuiltObject> builtObjectList = new List<BuiltObject>();
+                for (int index = 1; index < selectedObject.ConstructionQueue.ConstructionWaitQueue.Count; ++index)
+                {
+                    if (selectedObject.ConstructionQueue.ConstructionWaitQueue[index] != null && selectedObject.ActualEmpire.BuiltObjects.Contains(selectedObject.ConstructionQueue.ConstructionWaitQueue[index]))
+                        builtObjectList.Add(selectedObject.ConstructionQueue.ConstructionWaitQueue[index]);
+                }
+                for (int index = 0; index < builtObjectList.Count; ++index)
+                    selectedObject.ConstructionQueue.ConstructionWaitQueue.Remove(builtObjectList[index]);
+                builtObjectList.Reverse();
+                for (int index = 0; index < builtObjectList.Count; ++index)
+                    selectedObject.ConstructionQueue.ConstructionWaitQueue.Insert(0, builtObjectList[index]);
             }
-            for (int index = 0; index < builtObjectList.Count; ++index)
-                selectedObject.ConstructionQueue.ConstructionWaitQueue.Remove(builtObjectList[index]);
-            builtObjectList.Reverse();
-            for (int index = 0; index < builtObjectList.Count; ++index)
-                selectedObject.ConstructionQueue.ConstructionWaitQueue.Insert(0, builtObjectList[index]);
         }
 
         public static void AddShipToTradeList(Main main)

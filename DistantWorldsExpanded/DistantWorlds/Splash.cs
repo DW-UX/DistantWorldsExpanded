@@ -31,7 +31,7 @@ namespace DistantWorlds
 
         private void Splash_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(!this.SplashClosing) { e.Cancel= true; return; }
+            if (!this.SplashClosing) { e.Cancel = true; return; }
         }
 
         //public void SetInitialText()
@@ -59,10 +59,12 @@ namespace DistantWorlds
         //}
         public void UpdateState(int idx)
         {
-            if (!this.InvokeRequired)
+            try
             {
-                string[] array = new string[14]
+                if (!this.InvokeRequired)
                 {
+                    string[] array = new string[14]
+                    {
                     TextResolver.GetText("Forming nebulae clouds..."),
                     TextResolver.GetText("Igniting stellar cores..."),
                     TextResolver.GetText("Emptying Black Holes..."),
@@ -77,37 +79,42 @@ namespace DistantWorlds
                     TextResolver.GetText("Starting the Game"),
                     "",
                     ""
-                };
-                if (idx < array.Length && this.Visible)
-                {
-                    string text = array[idx];
-                    idx++;
-                    idx = Math.Min(idx, array.Length - 1);
-                    this.SuspendLayout();
-                    this.lblMessage.MaximumSize = new Size(450, 30);
-                    this.lblMessage.Text = text;
-                    this.lblMessage.ForeColor = Color.FromArgb(255, 192, 0);
-                    SizeF sizeF = this.lblMessage.Size;
-                    Point point = new Point((this.Width - (int)sizeF.Width) / 2, 195);
-                    using (Graphics graphics = CreateGraphics())
+                    };
+                    if (idx < array.Length && this.Visible)
                     {
-                        sizeF = graphics.MeasureString(text, this.lblMessage.Font, 450);
-                        sizeF = new SizeF(sizeF.Width + 10f, sizeF.Height + 5f);
-                        this.lblMessage.Size = new Size((int)sizeF.Width + 1, (int)sizeF.Height + 1);
-                        this.lblMessage.MaximumSize = new Size((int)sizeF.Width + 1, (int)sizeF.Height + 1);
-                        this.lblMessage.MinimumSize = new Size((int)sizeF.Width + 1, (int)sizeF.Height + 1);
-                        point = new Point((this.Width - (int)sizeF.Width) / 2, 195);
-                        this.lblMessage.Location = point;
+                        string text = array[idx];
+                        idx++;
+                        idx = Math.Min(idx, array.Length - 1);
+                        this.SuspendLayout();
+                        this.lblMessage.MaximumSize = new Size(450, 30);
                         this.lblMessage.Text = text;
+                        this.lblMessage.ForeColor = Color.FromArgb(255, 192, 0);
+                        SizeF sizeF = this.lblMessage.Size;
+                        Point point = new Point((this.Width - (int)sizeF.Width) / 2, 195);
+                        using (Graphics graphics = CreateGraphics())
+                        {
+                            sizeF = graphics.MeasureString(text, this.lblMessage.Font, 450);
+                            sizeF = new SizeF(sizeF.Width + 10f, sizeF.Height + 5f);
+                            this.lblMessage.Size = new Size((int)sizeF.Width + 1, (int)sizeF.Height + 1);
+                            this.lblMessage.MaximumSize = new Size((int)sizeF.Width + 1, (int)sizeF.Height + 1);
+                            this.lblMessage.MinimumSize = new Size((int)sizeF.Width + 1, (int)sizeF.Height + 1);
+                            point = new Point((this.Width - (int)sizeF.Width) / 2, 195);
+                            this.lblMessage.Location = point;
+                            this.lblMessage.Text = text;
+                        }
+                        this.lblMessage.Update();
+                        this.ResumeLayout();
+                        //Application.DoEvents();
                     }
-                    this.lblMessage.Update();
-                    this.ResumeLayout();
-                    //Application.DoEvents();
+                }
+                else
+                {
+                    this.Invoke(UpdateState, idx);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                this.Invoke(UpdateState, idx);
+                throw;
             }
         }
         public void SetFont(Font font)
