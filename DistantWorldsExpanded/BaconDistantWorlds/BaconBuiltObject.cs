@@ -1439,15 +1439,19 @@ namespace BaconDistantWorlds
 
         public static void SetCustomDifficulty(Main main)
         {
-            main._Game.PlayerEmpire.ColonyCorruptionFactor = Galaxy.ColonyCorruptionFactorDefault * BaconMain.customDifficultyColonyCorruptionFactor;
-            main._Game.PlayerEmpire.WarWearinessFactor = Galaxy.WarWearinessFactorDefault * BaconMain.customDifficultyWarWearinessFactor;
-            main._Game.PlayerEmpire.ResearchRate = Galaxy.ResearchRateDefault / BaconMain.customDifficultyResearchRate;
-            main._Game.PlayerEmpire.PopulationGrowthRate = Galaxy.PopulationGrowthRateDefault / BaconMain.customDifficultyPopulationGrowthRate;
-            main._Game.PlayerEmpire.MiningRate = Galaxy.MiningRateDefault / BaconMain.customDifficultyMiningRate;
-            main._Game.PlayerEmpire.TargettingFactor = Galaxy.TargettingFactorDefault / Math.Sqrt(BaconMain.customDifficultyTargettingFactor);
-            main._Game.PlayerEmpire.CountermeasuresFactor = Galaxy.CountermeasuresFactorDefault / Math.Sqrt(BaconMain.customDifficultyCountermeasuresFactor);
-            main._Game.PlayerEmpire.ColonyShipBuildSpeedRate = Galaxy.ColonyShipBuildSpeedRateDefault / BaconMain.customDifficultyColonyShipBuildSpeedRate;
-            main._Game.PlayerEmpire.ColonyIncomeFactor = Galaxy.ColonyIncomeFactorDefault / BaconMain.customDifficultyColonyIncomeFactor;
+            // currently, !setdifficulty command do nothing; difficulty is done in the game loop: BaconGalaxy.SetEmpireDifficultyFactors
+            // it is called in Galaxy.ReviewEmpireDifficultyFactors and Galaxy.DoTasks
+            /*
+             * main._Game.PlayerEmpire.ColonyCorruptionFactor = Galaxy.ColonyCorruptionFactorDefault * BaconMain.customDifficultyColonyCorruptionFactor;
+             * main._Game.PlayerEmpire.WarWearinessFactor = Galaxy.WarWearinessFactorDefault * BaconMain.customDifficultyWarWearinessFactor;
+             * main._Game.PlayerEmpire.ResearchRate = Galaxy.ResearchRateDefault / BaconMain.customDifficultyResearchRate;
+             * main._Game.PlayerEmpire.PopulationGrowthRate = Galaxy.PopulationGrowthRateDefault / BaconMain.customDifficultyPopulationGrowthRate;
+             * main._Game.PlayerEmpire.MiningRate = Galaxy.MiningRateDefault / BaconMain.customDifficultyMiningRate;
+             * main._Game.PlayerEmpire.TargettingFactor = Galaxy.TargettingFactorDefault / Math.Sqrt(BaconMain.customDifficultyTargettingFactor);
+             * main._Game.PlayerEmpire.CountermeasuresFactor = Galaxy.CountermeasuresFactorDefault / Math.Sqrt(BaconMain.customDifficultyCountermeasuresFactor);
+             * main._Game.PlayerEmpire.ColonyShipBuildSpeedRate = Galaxy.ColonyShipBuildSpeedRateDefault / BaconMain.customDifficultyColonyShipBuildSpeedRate;
+             * main._Game.PlayerEmpire.ColonyIncomeFactor = Galaxy.ColonyIncomeFactorDefault / BaconMain.customDifficultyColonyIncomeFactor; 
+             */
         }
 
         public static void AssignCustomBomberNameForCarrier(Main main, string input)

@@ -1446,7 +1446,7 @@ namespace DistantWorlds.Types
                 empire.DifficultyLevel = 1.0 + (1.0 - Math.Sqrt(DifficultyLevel));
                 empire.DifficultyLevel += empire.DifficultyLevelModifier;
             }
-            BaconGalaxy.SetEmpireDifficultyFactors(empire);
+            BaconGalaxy.SetEmpireDifficultyFactors(empire, empire == PlayerEmpire);
         }
 
         public void ReviewEmpireDifficultyFactors()

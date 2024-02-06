@@ -126,10 +126,11 @@ namespace BaconDistantWorlds
       galaxy.AddAsteroidField(asteroidField, habitat);
     }
 
-    public static void SetEmpireDifficultyFactors(Empire empire)
+    public static void SetEmpireDifficultyFactors(Empire empire, bool isPlayerEmpire)
     {
-      if (empire.Name.Contains("Romulan"))
-      {
+      if (!isPlayerEmpire && empire.Name.Contains("Romulan"))
+      { 
+        // BaconMod custom difficulty settings for the Romulan empire (StarTrek Mod)
         empire.ColonyCorruptionFactor = Galaxy.ColonyCorruptionFactorDefault * empire.DifficultyLevel;
         empire.ResearchRate = Galaxy.ResearchRateDefault / empire.DifficultyLevel;
         empire.PopulationGrowthRate = Galaxy.PopulationGrowthRateDefault / empire.DifficultyLevel;
@@ -139,6 +140,19 @@ namespace BaconDistantWorlds
         empire.ColonyShipBuildSpeedRate = Galaxy.ColonyShipBuildSpeedRateDefault / empire.DifficultyLevel;
         empire.WarWearinessFactor = Galaxy.WarWearinessFactorDefault * empire.DifficultyLevel;
         empire.ColonyIncomeFactor = Galaxy.ColonyIncomeFactorDefault / empire.DifficultyLevel * 2.0;
+      }
+      else if (isPlayerEmpire && BaconMain.customDifficultyEnabled)
+      {
+        // apply custom difficulty settings for the player empire
+        empire.ColonyCorruptionFactor = Galaxy.ColonyCorruptionFactorDefault * BaconMain.customDifficultyColonyCorruptionFactor;
+        empire.WarWearinessFactor = Galaxy.WarWearinessFactorDefault * BaconMain.customDifficultyWarWearinessFactor;
+        empire.ResearchRate = Galaxy.ResearchRateDefault / BaconMain.customDifficultyResearchRate;
+        empire.PopulationGrowthRate = Galaxy.PopulationGrowthRateDefault / BaconMain.customDifficultyPopulationGrowthRate;
+        empire.MiningRate = Galaxy.MiningRateDefault / BaconMain.customDifficultyMiningRate;
+        empire.TargettingFactor = Galaxy.TargettingFactorDefault / Math.Sqrt(BaconMain.customDifficultyTargettingFactor);
+        empire.CountermeasuresFactor = Galaxy.CountermeasuresFactorDefault / Math.Sqrt(BaconMain.customDifficultyCountermeasuresFactor);
+        empire.ColonyShipBuildSpeedRate = Galaxy.ColonyShipBuildSpeedRateDefault / BaconMain.customDifficultyColonyShipBuildSpeedRate;
+        empire.ColonyIncomeFactor = Galaxy.ColonyIncomeFactorDefault / BaconMain.customDifficultyColonyIncomeFactor; 
       }
       else
       {
