@@ -101,6 +101,8 @@ namespace BaconDistantWorlds
 
         public static int quartersOfCashAvailable = 4;
 
+        public static bool customDifficultyEnabled = false;
+
         public static double customDifficultyColonyCorruptionFactor = 1.0;
 
         public static double customDifficultyWarWearinessFactor = 1.0;
@@ -1016,6 +1018,13 @@ namespace BaconDistantWorlds
             if (dictionary.TryGetValue("pirateMaxPopulationInfluence", out value) && long.TryParse(value, out var result19))
             {
                 BaconHabitat.pirateMaxPopulationInfluence = result19;
+            }
+            if (dictionary.TryGetValue("customDifficultyEnabled", out value) && (value.Trim() == "true" || value == "false"))
+            {
+                if (bool.TryParse(value, out bool parsed))
+                {
+                    customDifficultyEnabled = parsed;
+                }
             }
             if (dictionary.TryGetValue("customDifficultyColonyCorruptionFactor", out value) && double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result5))
             {
