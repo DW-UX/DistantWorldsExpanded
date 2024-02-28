@@ -91,6 +91,9 @@ namespace DistantWorlds
         public double Volume => double_2;
         public double ActualVolume => MediaPlayer.Volume;
 
+        private static readonly object _songLock = new object();
+        private static Song SongFactory(string songName, Uri uri) { lock (_songLock) { return Song.FromUri(songName, uri); } }
+
         ~MusicPlayer()
         {
             timer_0.Stop();
@@ -226,7 +229,9 @@ namespace DistantWorlds
             catch {
                 // oh well
             }
-            MediaPlayer.Play(Song.FromUri(songName, new Uri(string_4)));
+            //MediaPlayer.Play(Song.FromUri(songName, new Uri(string_4)));
+            MediaPlayer.Play(SongFactory(songName, new Uri(string_4)));
+            
             SetVolume(double_2);
             //MediaPlayer.Play();
         }
