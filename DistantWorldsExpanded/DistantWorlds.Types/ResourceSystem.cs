@@ -273,8 +273,8 @@ namespace DistantWorlds.Types
               string str = streamReader.ReadLine();
               if (!string.IsNullOrEmpty(str) && str.Trim() != string.Empty && str.Trim().Substring(0, 1) != "'")
               {
-                if (resourceDefinitionList.Count > 80)
-                  throw new ApplicationException("Exceeded maximum resource count in " + filePath + ". Cannot define more than 80 resources.");
+                //if (resourceDefinitionList.Count > 80)
+                //  throw new ApplicationException("Exceeded maximum resource count in " + filePath + ". Cannot define more than 80 resources.");
                 byte result1 = 0;
                 string empty = string.Empty;
                 int result2 = 0;

@@ -542,7 +542,7 @@ namespace DistantWorlds.Controls
       }
       catch (Exception ex)
       {
-        Console.WriteLine("DrawBackGround Error in " + this.Name + ":" + ex.Message);
+        Console.WriteLine("DrawBackGround Error in " + this.Name + ":" + ex.ToString());
       }
     }
 

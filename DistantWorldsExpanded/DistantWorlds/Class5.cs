@@ -176,10 +176,10 @@ internal static class Class5
         {
             Exception exceptionObject = (Exception)e.ExceptionObject;
             string str = "An error occurred: " + "\n\n" + exceptionObject.ToString();
-            if (exceptionObject is ApplicationException)
-                str = exceptionObject.Message;
-            if (exceptionObject.InnerException != null && exceptionObject.InnerException is ApplicationException)
-                str = exceptionObject.InnerException.Message;
+            //if (exceptionObject is ApplicationException)
+            //    str = exceptionObject.Message;
+            //if (exceptionObject.InnerException != null && exceptionObject.InnerException is ApplicationException)
+            //    str = exceptionObject.InnerException.Message;
             int num = (int)MessageBox.Show(str + "\n\nDistant Worlds will now exit.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             Class5.smethod_4(true);
         }

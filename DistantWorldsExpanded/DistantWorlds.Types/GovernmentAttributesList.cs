@@ -101,8 +101,8 @@ namespace DistantWorlds.Types
               string str1 = streamReader.ReadLine();
               if (!string.IsNullOrEmpty(str1) && str1.Trim() != string.Empty && str1.Trim().Substring(0, 1) != "'")
               {
-                if (governmentAttributesList.Count > 60)
-                  throw new ApplicationException("Exceeded maximum government count in " + filePath + ". Cannot define more than 60 governments.");
+                //if (governmentAttributesList.Count > 60)
+                //  throw new ApplicationException("Exceeded maximum government count in " + filePath + ". Cannot define more than 60 governments.");
                 double result1 = 1.0;
                 double result2 = 1.0;
                 double result3 = 1.0;

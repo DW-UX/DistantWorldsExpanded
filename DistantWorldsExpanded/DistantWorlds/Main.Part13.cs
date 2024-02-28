@@ -1933,17 +1933,44 @@ namespace DistantWorlds {
 
         internal void LoadFighters(string string_30, string string_31, double double_7)
         {
-            string text = string_30 + "units\\ships\\";
-            string text2 = string_31 + "units\\ships\\";
+            string origShipsFolder = string_30 + "units\\ships\\";
+            string modShipsFolder = string_31 + "units\\ships\\";
             double double_8 = double_7 * 1.0;
             int int_ = 0;
-            int num = 0;
-            int num2 = 50;
-            while (true)
+            //int num = 0;
+            //int num2 = 50;
+            //while (true)
+            List<DirectoryInfo> origDir = new DirectoryInfo(origShipsFolder).EnumerateDirectories("family*").ToList();
+            List<int> familyNumbers = null;
+            if (!string.IsNullOrEmpty(string_31))
             {
-                string text3 = text + "family" + num + "\\";
-                string text4 = text2 + "family" + num + "\\";
-                if (num < num2 && (Directory.Exists(text3) || Directory.Exists(text4)))
+                DirectoryInfo modDir = new DirectoryInfo(modShipsFolder);
+                List<DirectoryInfo> modDirFamilyList = new List<DirectoryInfo>();
+                if (modDir.Exists)
+                {
+                    modDirFamilyList = modDir.EnumerateDirectories("family*").ToList();
+                }
+                familyNumbers = origDir.Union(modDirFamilyList).Select(x =>
+                {
+                    int.TryParse(x.Name.Substring(6), out int res);
+                    return res;
+                }).Distinct().ToList();
+            }
+            else
+            {
+                familyNumbers = origDir.Select(x =>
+                {
+                    int.TryParse(x.Name.Substring(6), out int res);
+                    return res;
+                }).Distinct().ToList();
+            }
+            familyNumbers.Sort();
+            foreach (var item in familyNumbers)
+            {
+                string text3 = origShipsFolder + "family" + item + "\\";
+                string text4 = modShipsFolder + "family" + item + "\\";
+                //if (num < num2 && (Directory.Exists(text3) || Directory.Exists(text4)))
+                if (Directory.Exists(text3) || Directory.Exists(text4))
                 {
                     if (bitmap_6.Length <= int_)
                     {
@@ -1952,10 +1979,10 @@ namespace DistantWorlds {
                     int localI = int_;
                     LoadFighterBomboer(text3 + "Fighter", text4 + "Fighter", double_8, ref int_);
                     LoadFighterBomboer(text3 + "Bomber", text4 + "Bomber", double_8, ref int_);
-                    num++;
+                    //num++;
                     continue;
                 }
-                break;
+                //break;
             }
             UpdateSplashProgress();
         }

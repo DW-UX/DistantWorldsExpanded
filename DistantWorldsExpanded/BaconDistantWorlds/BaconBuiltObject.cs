@@ -1129,6 +1129,21 @@ namespace BaconDistantWorlds
                 return;
             main._Game.Galaxy.Resume();
         }
+        public static void ShowMessageBox(Main main, Exception ex, string caption)
+        {
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            messageBox.Text = ex.ToString();
+            messageBox.Caption = caption;
+            messageBox.AddButton(MessageBoxExButtons.Ok);
+            messageBox.Icon = MessageBoxExIcon.None;
+            bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+            if (!flag)
+                main._Game.Galaxy.Pause();
+            messageBox.Show();
+            if (flag)
+                return;
+            main._Game.Galaxy.Resume();
+        }
 
         public static void AssignPassengershipMission(Main main, object ship, bool repeat)
         {
@@ -2639,7 +2654,7 @@ namespace BaconDistantWorlds
                 if (ship.Mission != null && Galaxy.CalculateDistanceSquaredStatic(ship.Xpos, ship.Ypos, x2, y2) <= (double)(Galaxy.HyperJumpThreshhold * Galaxy.HyperJumpThreshhold))
                 {
                     ship.Mission.CompleteCommand();
-                    if (ship.Mission != null && ship.Mission.Target != null && ship.Mission.FastPeekCurrentCommand().Action == CommandAction.MoveTo && ship.Mission.ShowNextCommand().Action == CommandAction.ConditionalHyperTo)
+                    if (ship.Mission != null && ship.Mission.Target != null && ship.Mission.FastPeekCurrentCommand()?.Action == CommandAction.MoveTo && ship.Mission.ShowNextCommand()?.Action == CommandAction.ConditionalHyperTo)
                         ship.Mission.CompleteCommand();
                     if ((double)ship.CurrentSpeed > (double)ship.TopSpeed)
                         ship.CurrentSpeed = (float)ship.CruiseSpeed;

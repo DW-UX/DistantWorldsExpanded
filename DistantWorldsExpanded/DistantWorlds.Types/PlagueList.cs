@@ -67,8 +67,8 @@ namespace DistantWorlds.Types
               string str1 = streamReader.ReadLine();
               if (!string.IsNullOrEmpty(str1) && str1.Trim() != string.Empty && str1.Trim().Substring(0, 1) != "'")
               {
-                if (plagueList.Count > 50)
-                  throw new ApplicationException("Exceeded maximum plague count in " + filePath + ". Cannot define more than 50 plagues.");
+                //if (plagueList.Count > 50)
+                //  throw new ApplicationException("Exceeded maximum plague count in " + filePath + ". Cannot define more than 50 plagues.");
                 byte result1 = 0;
                 string empty1 = string.Empty;
                 int result2 = 0;

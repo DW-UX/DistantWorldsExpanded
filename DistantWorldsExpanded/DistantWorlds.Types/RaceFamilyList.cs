@@ -71,8 +71,8 @@ namespace DistantWorlds.Types
               string str = streamReader.ReadLine();
               if (!string.IsNullOrEmpty(str) && str.Trim() != string.Empty && str.Trim().Substring(0, 1) != "'")
               {
-                if (raceFamilyList.Count > 30)
-                  throw new ApplicationException("Exceeded maximum race family count in " + filePath + ". Cannot define more than 30 race families.");
+                //if (raceFamilyList.Count > 30)
+                //  throw new ApplicationException("Exceeded maximum race family count in " + filePath + ". Cannot define more than 30 race families.");
                 int result1 = 0;
                 int startIndex1 = 0;
                 byte result2;

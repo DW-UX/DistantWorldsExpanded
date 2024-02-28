@@ -355,7 +355,7 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.ToString(), ex);
                         }
                     }
                     return id.Value;
@@ -1041,7 +1041,7 @@ namespace System.Runtime.Serialization
                         {
                             throw;
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.ToString(), ex);
                     }
                     return key;
                 }
@@ -1065,7 +1065,7 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.ToString(), ex);
                         }
                     }
                     if (clrTypeStrings.TryGetValue(key, out XmlDictionaryString value))
@@ -1084,7 +1084,7 @@ namespace System.Runtime.Serialization
                         {
                             throw;
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.ToString(), ex);
                     }
                     return value;
                 }
@@ -1107,7 +1107,7 @@ namespace System.Runtime.Serialization
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.ToString(), ex);
                         }
                     }
                 }

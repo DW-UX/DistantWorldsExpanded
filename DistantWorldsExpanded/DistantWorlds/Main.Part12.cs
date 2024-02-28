@@ -4349,16 +4349,6 @@ namespace DistantWorlds {
                 text += "\n\n";
                 text = text + "Error Code: " + string_0;
                 text += "\n\n";
-                if (ex is ApplicationException)
-                {
-                    text += ex.Message;
-                    text += "\n\n";
-                }
-                if (ex.InnerException != null && ex.InnerException is ApplicationException)
-                {
-                    text += ex.InnerException.Message;
-                    text += "\n\n";
-                }
                 text += ex.ToString();
                 if (text.Length > 1800)
                 {

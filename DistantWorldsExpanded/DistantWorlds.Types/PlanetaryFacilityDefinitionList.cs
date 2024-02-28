@@ -47,8 +47,8 @@ namespace DistantWorlds.Types
               string str1 = streamReader.ReadLine();
               if (!string.IsNullOrEmpty(str1) && str1.Trim() != string.Empty && str1.Trim().Substring(0, 1) != "'")
               {
-                if (facilityDefinitionList.Count > 100)
-                  throw new ApplicationException("Exceeded maximum planetary facility count in " + filePath + ". Cannot define more than 100 facilities.");
+                //if (facilityDefinitionList.Count > 100)
+                //  throw new ApplicationException("Exceeded maximum planetary facility count in " + filePath + ". Cannot define more than 100 facilities.");
                 int result1 = 0;
                 string empty1 = string.Empty;
                 int result2 = 0;

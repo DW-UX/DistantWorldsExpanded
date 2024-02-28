@@ -1,13 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistantWorldsExpanded", "DistantWorldsExpanded\DistantWorldsExpanded.csproj", "{06F0D8C5-0834-492C-9C27-40BEF6D0C65B}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistantWorldsExpanded", "DistantWorldsExpanded\DistantWorldsExpanded.csproj", "{06F0D8C5-0834-492C-9C27-40BEF6D0C65B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{533D567B-84FE-4199-B989-5576F9395CF3}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DwUxDesignHelper", "DwUxDesignHelper\DwUxDesignHelper.csproj", "{6686D0AD-E913-412B-B2C4-4D0AE9B5D75A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DwUxDesignHelper", "DwUxDesignHelper\DwUxDesignHelper.csproj", "{6686D0AD-E913-412B-B2C4-4D0AE9B5D75A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,5 +26,11 @@ Global
 		{6686D0AD-E913-412B-B2C4-4D0AE9B5D75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6686D0AD-E913-412B-B2C4-4D0AE9B5D75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6686D0AD-E913-412B-B2C4-4D0AE9B5D75A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B25658D-FAD0-4612-B5E1-5678F64D4233}
 	EndGlobalSection
 EndGlobal

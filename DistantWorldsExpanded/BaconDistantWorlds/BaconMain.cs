@@ -2246,7 +2246,7 @@ namespace BaconDistantWorlds
             }
             catch (Exception ex)
             {
-                BaconBuiltObject.ShowMessageBox(main, ex.Message, "Exception");
+                BaconBuiltObject.ShowMessageBox(main, ex, "Exception");
             }
         }
 

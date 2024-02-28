@@ -452,7 +452,7 @@ namespace DistantWorlds {
         private void ArhCaEfBkk()
         {
             musicPlayer_0.FadePause();
-            string filePath = Application.StartupPath + "\\sounds\\effects\\discovery.mp3";
+            string filePath =  Application.StartupPath + "sounds\\effects\\discovery.mp3";
             if (!string.IsNullOrEmpty(string_3))
             {
                 string text = Application.StartupPath + "\\Customization\\" + string_3 + "\\sounds\\effects\\discovery.mp3";

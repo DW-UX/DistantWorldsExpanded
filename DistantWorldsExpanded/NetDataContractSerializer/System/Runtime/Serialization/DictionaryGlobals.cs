@@ -170,7 +170,7 @@ namespace System.Runtime.Serialization
                 {
                     throw;
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.ToString(), ex);
             }
         }
 
