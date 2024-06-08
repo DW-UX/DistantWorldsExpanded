@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
+		<OutputType>Exe</OutputType>
 		<RootNamespace>DistantWorlds</RootNamespace>
 		<AssemblyName>DistantWorlds</AssemblyName>
 		<!--<TargetFramework>net48</TargetFramework>-->
@@ -85,6 +85,7 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
 		<PackageReference Include="MimeKitLite" Version="4.2.0" />
+		<PackageReference Include="NAudio" Version="2.2.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
@@ -229,7 +230,7 @@
 		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Update="MonoGame.Framework.WindowsDX.9000" Version="3.10.9001" />
+	  <PackageReference Update="MonoGame.Framework.WindowsDX.9000" Version="3.12.9001" />
 	</ItemGroup>
 	<!--for auditing logical names of embedded resources-->
 	<!--<Target Name="AuditResx" BeforeTargets="Build">

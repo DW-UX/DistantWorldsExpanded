@@ -8,7 +8,8 @@ using DistantWorlds.Types;
 using System;
 using System.IO;
 using System.Timers;
-using Microsoft.Xna.Framework.Media;
+// using Microsoft.Xna.Framework.Media;
+using NAudio.Wave;
 
 namespace DistantWorlds
 {
@@ -48,7 +49,7 @@ namespace DistantWorlds
 
         private Main _mainForm;
 
-        private string _themeMusicFile;
+        private string _currentMusicFile;
 
         private string _themeMusic;
 
@@ -72,27 +73,26 @@ namespace DistantWorlds
 
         private bool _IsInitiatingFade;
 
+        private bool _IsPlaying;
+
         private Random _random;
+
+        // naudio
+        private WaveOutEvent outputDevice;
+        private AudioFileReader audioFile;
 
         public bool IsPlaying
         {
             get
             {
-                if (MediaPlayer.PlayPosition.TotalSeconds > 0.0)
-                {
-                    return true;
-                }
-                return false;
+                return _IsPlaying;
             }
         }
 
         public bool IsInitiatingFade => _IsInitiatingFade;
 
         public double Volume => _Volume;
-        public double ActualVolume => MediaPlayer.Volume;
-
-        private static readonly object _songLock = new object();
-        private static Song SongFactory(string songName, Uri uri) { lock (_songLock) { return Song.FromUri(songName, uri); } }
+        public double ActualVolume { get { return outputDevice.Volume; } }
 
         ~MusicPlayer()
         {
@@ -101,7 +101,9 @@ namespace DistantWorlds
 
         public MusicPlayer(Main mainForm, string folder, string themeMusic):base()
         {
-            
+            outputDevice = new WaveOutEvent();
+
+            _IsPlaying = false;
             _fadeMode = -1.0;
             _fadeRatio = 0.02;
             _mainForm = mainForm;
@@ -123,7 +125,7 @@ namespace DistantWorlds
                 VolumeDelegate = SetVolume;
                 StopMethodDelegate = Stop;
                 PauseMethodDelegate = Pause;
-                ResumeMethodDelegate = ResumeMusic;
+                ResumeMethodDelegate = Resume;
                 PlayMusicMethodDelegate = PlayMusic;
                 PlayMusicFileMethodDelegate = PlayMusicFile;
                 FadeVolumeDelegate = SetFadeVolume;
@@ -134,20 +136,21 @@ namespace DistantWorlds
 
         public void Start()
         {
-            MediaPlayer.MediaStateChanged += mediaPlayer_MediaEnded;
-            _themeMusicFile = PickNewSong();
+            outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
+            _currentMusicFile = PickNewSong();
             PlayMusic();
         }
 
         public void Stop()
         {
-            MediaPlayer.MediaStateChanged -= mediaPlayer_MediaEnded;
-            MediaPlayer.Stop();
+            outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
+            outputDevice.Stop();
+            _IsPlaying = false;
         }
 
         public void Pause()
         {
-            MediaPlayer.Pause();
+            outputDevice.Pause();
         }
 
         public void StartTheme()
@@ -157,8 +160,8 @@ namespace DistantWorlds
 
         public void StartThemeInternal()
         {
-            MediaPlayer.MediaStateChanged += mediaPlayer_MediaEnded;
-            _themeMusicFile = _folder + _themeMusic;
+            outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
+            _currentMusicFile = _folder + _themeMusic;
             PlayMusic();
         }
 
@@ -166,7 +169,7 @@ namespace DistantWorlds
         {
             if (volume >= 0.0 && volume <= 1.0)
             {
-                MediaPlayer.Volume = (float)(volume * 0.6);
+                outputDevice.Volume = (float)(volume * 0.6);
             }
         }
 
@@ -175,7 +178,7 @@ namespace DistantWorlds
             if (volume >= 0.0 && volume <= 1.0)
             {
                 _Volume = volume;
-                MediaPlayer.Volume = (float)(_Volume * 0.6);
+                outputDevice.Volume = (float)(_Volume * 0.6);
             }
         }
 
@@ -206,19 +209,16 @@ namespace DistantWorlds
         }
 
         private void mediaPlayer_MediaEnded(object sender, EventArgs e) {
-            Console.WriteLine($"state: {MediaPlayer.State}");
-
-            if (MediaPlayer.State != MediaState.Stopped)
-                return;
-
-            _themeMusicFile = PickNewSong();
-            PlayMusic();
+            if (outputDevice.PlaybackState == PlaybackState.Stopped) {
+                _currentMusicFile = PickNewSong();
+                PlayMusic();
+            }
         }
 
-        public void ResumeMusic()
+        public void Resume()
         {
             _IsInitiatingFade = false;
-            MediaPlayer.Resume();
+            outputDevice.Play();
         }
 
         private void PlayMusicFile(string file)
@@ -231,8 +231,9 @@ namespace DistantWorlds
             catch {
                 // oh well
             }
-            //MediaPlayer.Play(Song.FromUri(songName, new Uri(string_4)));
-            MediaPlayer.Play(SongFactory(songName, new Uri(file)));
+            audioFile = new AudioFileReader(file);
+            outputDevice.Init(audioFile);
+            _IsPlaying = true;
             
             SetVolume(_Volume);
             //MediaPlayer.Play();
@@ -241,7 +242,7 @@ namespace DistantWorlds
         private void PlayMusic()
         {
             _IsInitiatingFade = false;
-            string themeFile = _themeMusicFile;
+            string themeFile = _currentMusicFile;
             PlayMusicFile(themeFile);
         }
 
@@ -251,8 +252,8 @@ namespace DistantWorlds
             _FadeVolume = 0.0;
             _fadeMode = 1.0;
             _musicFadeFinishAction = MusicFadeFinishAction.Resume;
-            MediaPlayer.Volume = 0.0f;
-            MediaPlayer.Resume();
+            outputDevice.Volume = 0.0f;
+            outputDevice.Play();
             _timer.Start();
         }
 
@@ -314,7 +315,7 @@ namespace DistantWorlds
                     switch (_musicFadeFinishAction)
                     {
                         case MusicFadeFinishAction.StartNewMusic:
-                            _themeMusicFile = PickNewSong();
+                            _currentMusicFile = PickNewSong();
                             _mainForm.Invoke(PlayMusicMethodDelegate);
                             _mainForm.Invoke(VolumeDelegate, _Volume);
                             break;
@@ -336,8 +337,8 @@ namespace DistantWorlds
 
         private string PickNewSong()
         {
-            string text = _themeMusicFile;
-            while (string.IsNullOrEmpty(text) || (_songFiles.Length > 1 && text == _themeMusicFile))
+            string text = _currentMusicFile;
+            while (string.IsNullOrEmpty(text) || (_songFiles.Length > 1 && text == _currentMusicFile))
             {
                 int num = _random.Next(0, _songFiles.Length);
                 text = _songFiles[num];
