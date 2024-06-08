@@ -78,7 +78,7 @@ namespace DistantWorlds
         private Random _random;
 
         // naudio
-        private WaveOutEvent outputDevice;
+        private WaveOut outputDevice;
         private AudioFileReader audioFile;
 
         public bool IsPlaying
@@ -231,6 +231,16 @@ namespace DistantWorlds
             catch {
                 // oh well
             }
+            if (outputDevice != null)
+            {
+                outputDevice.Dispose();
+            }
+            if (audioFile != null)
+            {
+                audioFile.Dispose();
+            }
+
+            outputDevice = new WaveOutEvent();
             audioFile = new AudioFileReader(file);
             outputDevice.Init(audioFile);
             _IsPlaying = true;
@@ -264,6 +274,7 @@ namespace DistantWorlds
             _fadeMode = -1.0;
             _musicFadeFinishAction = MusicFadeFinishAction.Pause;
             _timer.Start();
+            outputDevice.Pause(); // debug
         }
 
         public void FadeStop()
@@ -273,6 +284,7 @@ namespace DistantWorlds
             _fadeMode = -1.0;
             _musicFadeFinishAction = MusicFadeFinishAction.Stop;
             _timer.Start();
+            outputDevice.Stop(); // debug
         }
 
         public void ForceSwitch()
