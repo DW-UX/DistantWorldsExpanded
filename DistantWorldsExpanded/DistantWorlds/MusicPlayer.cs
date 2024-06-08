@@ -143,7 +143,7 @@ namespace DistantWorlds
 
         public void Stop()
         {
-            outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
+            outputDevice.PlaybackStopped -= mediaPlayer_MediaEnded;
             outputDevice.Stop();
             _IsPlaying = false;
         }
@@ -236,7 +236,7 @@ namespace DistantWorlds
             _IsPlaying = true;
             
             SetVolume(_Volume);
-            //MediaPlayer.Play();
+            outputDevice.Play();
         }
 
         private void PlayMusic()

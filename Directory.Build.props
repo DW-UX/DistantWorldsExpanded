@@ -17,6 +17,6 @@
         <!--<XnaFormsVersion>3.2.0</XnaFormsVersion>-->
         <XnaFrameworkPackage>MonoGame.Framework.WindowsDX.9000</XnaFrameworkPackage>
         <!--<XnaFrameworkVersion>3.8.1.303</XnaFrameworkVersion>-->
-        <XnaFrameworkVersion>3.10.9001</XnaFrameworkVersion>
+        <XnaFrameworkVersion>3.12.9001</XnaFrameworkVersion>
     </PropertyGroup>
 </Project>
