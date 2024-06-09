@@ -97,6 +97,14 @@ namespace DistantWorlds
         ~MusicPlayer()
         {
             _timer.Stop();
+            if (outputDevice != null)
+            {
+                outputDevice.Dispose();
+            }
+            if (audioFile != null)
+            {
+                audioFile.Dispose();
+            }
         }
 
         private bool _dummy = false;
@@ -140,7 +148,7 @@ namespace DistantWorlds
 
         public void Start()
         {
-            outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
+            // outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
             _currentMusicFile = PickNewSong();
             PlayMusic();
         }
@@ -149,6 +157,11 @@ namespace DistantWorlds
         {
             outputDevice.PlaybackStopped -= mediaPlayer_MediaEnded;
             outputDevice.Stop();
+            outputDevice.Dispose();
+            if (audioFile != null)
+            { 
+                audioFile.Dispose();
+            }
             _IsPlaying = false;
         }
 
@@ -164,7 +177,7 @@ namespace DistantWorlds
 
         public void StartThemeInternal()
         {
-            outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
+            // outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
             _currentMusicFile = _folder + _themeMusic;
             PlayMusic();
         }
@@ -220,9 +233,13 @@ namespace DistantWorlds
 
         private void mediaPlayer_MediaEnded(object sender, EventArgs e) {
             if (outputDevice.PlaybackState == PlaybackState.Stopped) {
-                _currentMusicFile = PickNewSong();
+                 _currentMusicFile = PickNewSong();
                 PlayMusic();
-            }
+            } 
+            /* else
+            {
+                Console.WriteLine("PlaybackState: " + outputDevice.PlaybackState);
+            } */
         }
 
         public void Resume()
@@ -259,14 +276,16 @@ namespace DistantWorlds
             
             SetVolume(_Volume);
             if (_dummy) return;
+
+            outputDevice.PlaybackStopped += mediaPlayer_MediaEnded;
             outputDevice.Play();
         }
 
         private void PlayMusic()
         {
             _IsInitiatingFade = false;
-            string themeFile = _currentMusicFile;
-            PlayMusicFile(themeFile);
+            string currentFile = _currentMusicFile;
+            PlayMusicFile(currentFile);
         }
 
         public void FadeResume()
