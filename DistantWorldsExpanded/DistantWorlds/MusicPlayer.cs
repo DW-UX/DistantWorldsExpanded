@@ -291,7 +291,7 @@ namespace DistantWorlds
             _fadeMode = -1.0;
             _musicFadeFinishAction = MusicFadeFinishAction.Pause;
             _timer.Start();
-            outputDevice.Pause(); // debug
+            // outputDevice.Pause(); // debug
         }
 
         public void FadeStop()
@@ -301,7 +301,7 @@ namespace DistantWorlds
             _fadeMode = -1.0;
             _musicFadeFinishAction = MusicFadeFinishAction.Stop;
             _timer.Start();
-            outputDevice.Stop(); // debug
+            // outputDevice.Stop(); // debug
         }
 
         public void ForceSwitch()
