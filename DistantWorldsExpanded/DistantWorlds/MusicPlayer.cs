@@ -78,7 +78,7 @@ namespace DistantWorlds
         private Random _random;
 
         // naudio
-        private WaveOut outputDevice;
+        private WaveOutEvent outputDevice;
         private AudioFileReader audioFile;
 
         public bool IsPlaying
@@ -92,16 +92,20 @@ namespace DistantWorlds
         public bool IsInitiatingFade => _IsInitiatingFade;
 
         public double Volume => _Volume;
-        public double ActualVolume { get { return outputDevice.Volume; } }
+        public double ActualVolume { get { if (audioFile != null) {return audioFile.Volume; } else { return 0.0; } } }
 
         ~MusicPlayer()
         {
             _timer.Stop();
         }
 
-        public MusicPlayer(Main mainForm, string folder, string themeMusic):base()
+        private bool _dummy = false;
+
+        public MusicPlayer(Main mainForm, string folder, string themeMusic, bool dummy=false):base()
         {
             outputDevice = new WaveOutEvent();
+            outputDevice.DesiredLatency = 100;
+            _dummy = dummy;
 
             _IsPlaying = false;
             _fadeMode = -1.0;
@@ -169,7 +173,10 @@ namespace DistantWorlds
         {
             if (volume >= 0.0 && volume <= 1.0)
             {
-                outputDevice.Volume = (float)(volume * 0.6);
+                if (audioFile != null)
+                { 
+                    audioFile.Volume = (float)(volume * 0.6);
+                }
             }
         }
 
@@ -178,7 +185,10 @@ namespace DistantWorlds
             if (volume >= 0.0 && volume <= 1.0)
             {
                 _Volume = volume;
-                outputDevice.Volume = (float)(_Volume * 0.6);
+                if (audioFile != null)
+                { 
+                    audioFile.Volume = (float)(_Volume * 0.6);
+                }
             }
         }
 
@@ -218,6 +228,7 @@ namespace DistantWorlds
         public void Resume()
         {
             _IsInitiatingFade = false;
+            if (_dummy) return;
             outputDevice.Play();
         }
 
@@ -241,11 +252,13 @@ namespace DistantWorlds
             }
 
             outputDevice = new WaveOutEvent();
+            outputDevice.DesiredLatency = 100;
             audioFile = new AudioFileReader(file);
             outputDevice.Init(audioFile);
             _IsPlaying = true;
             
             SetVolume(_Volume);
+            if (_dummy) return;
             outputDevice.Play();
         }
 
@@ -262,7 +275,11 @@ namespace DistantWorlds
             _FadeVolume = 0.0;
             _fadeMode = 1.0;
             _musicFadeFinishAction = MusicFadeFinishAction.Resume;
-            outputDevice.Volume = 0.0f;
+            if (audioFile != null)
+            { 
+                audioFile.Volume = 0.0f;
+            }
+            if (_dummy) return;
             outputDevice.Play();
             _timer.Start();
         }
