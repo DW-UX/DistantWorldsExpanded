@@ -30,13 +30,14 @@ using BaconDistantWorlds;
 using ExpansionMod;
 using DistantWorlds.Controls;
 using DistantWorlds.Types;
-using Ionic.Zlib;
+//using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Xna.Framework.Graphics;
 //using SlimDX.DirectSound;
 using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
+using Ionic.Zlib;
 
 namespace DistantWorlds {
 

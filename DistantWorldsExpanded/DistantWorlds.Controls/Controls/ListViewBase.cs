@@ -33,7 +33,8 @@ namespace DistantWorlds.Controls
     private IContainer components;
     public DataGridView _Grid;
 
-    public bool SoundsEnabled
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool SoundsEnabled
     {
       get => this._SoundsEnabled;
       set => this._SoundsEnabled = value;
@@ -173,13 +174,15 @@ namespace DistantWorlds.Controls
 
     public DataGridViewRowCollection Rows => this._Grid.Rows;
 
-    public int RowTemplateHeight
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int RowTemplateHeight
     {
       get => this._Grid.RowTemplate.Height;
       set => this._Grid.RowTemplate.Height = value;
     }
 
-    public new Size Size
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Size Size
     {
       get => this._Grid.Size;
       set
@@ -190,7 +193,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new int Height
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new int Height
     {
       get => this._Grid.Height;
       set
@@ -200,7 +204,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new int Width
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new int Width
     {
       get => this._Grid.Width;
       set

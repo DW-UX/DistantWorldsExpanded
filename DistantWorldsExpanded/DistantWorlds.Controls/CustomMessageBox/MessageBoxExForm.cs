@@ -63,7 +63,8 @@ namespace DistantWorlds.Controls
     private TextBox rtbMessage;
     private Hashtable _buttonControlsTable = new Hashtable();
 
-    public string Message
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string Message
     {
       set
       {
@@ -73,14 +74,16 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public string Caption
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string Caption
     {
       set => this.Text = value;
     }
 
     public ArrayList Buttons => this._buttons;
 
-    public bool AllowSaveResponse
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool AllowSaveResponse
     {
       get => this._allowSaveResponse;
       set => this._allowSaveResponse = value;
@@ -88,17 +91,20 @@ namespace DistantWorlds.Controls
 
     public bool SaveResponse => this.chbSaveResponse.Checked;
 
-    public string SaveResponseText
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string SaveResponseText
     {
       set => this.chbSaveResponse.Text = value;
     }
 
-    public MessageBoxIcon StandardIcon
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public MessageBoxIcon StandardIcon
     {
       set => this.SetStandardIcon(value);
     }
 
-    public Icon CustomIcon
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Icon CustomIcon
     {
       set
       {
@@ -107,26 +113,30 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public MessageBoxExButton CustomCancelButton
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public MessageBoxExButton CustomCancelButton
     {
       set => this._cancelButton = value;
     }
 
     public string Result => this._result;
 
-    public bool PlayAlertSound
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool PlayAlertSound
     {
       get => this._playAlert;
       set => this._playAlert = value;
     }
 
-    public int Timeout
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int Timeout
     {
       get => this._timeout;
       set => this._timeout = value;
     }
 
-    public TimeoutResult TimeoutResult
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public TimeoutResult TimeoutResult
     {
       get => this._timeoutResult;
       set => this._timeoutResult = value;

@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -23,25 +24,29 @@ namespace DistantWorlds.Controls
 
     public DataGridViewNumericUpDownEditingControl() => this.TabStop = false;
 
-    public virtual DataGridView EditingControlDataGridView
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual DataGridView EditingControlDataGridView
     {
       get => this.dataGridView;
       set => this.dataGridView = value;
     }
 
-    public virtual object EditingControlFormattedValue
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual object EditingControlFormattedValue
     {
       get => this.GetEditingControlFormattedValue(DataGridViewDataErrorContexts.Formatting);
       set => this.Text = (string) value;
     }
 
-    public virtual int EditingControlRowIndex
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual int EditingControlRowIndex
     {
       get => this.rowIndex;
       set => this.rowIndex = value;
     }
 
-    public virtual bool EditingControlValueChanged
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual bool EditingControlValueChanged
     {
       get => this.valueChanged;
       set => this.valueChanged = value;

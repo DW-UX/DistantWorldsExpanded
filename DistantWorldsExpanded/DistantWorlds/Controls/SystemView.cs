@@ -12,6 +12,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Threading;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -67,6 +68,7 @@ namespace DistantWorlds.Controls
 
         private Galaxy galaxy_0;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool ShowFleetPostures
         {
             get
@@ -79,6 +81,7 @@ namespace DistantWorlds.Controls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool ShowBuiltObjects
         {
             get

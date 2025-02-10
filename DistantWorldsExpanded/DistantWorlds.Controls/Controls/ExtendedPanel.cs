@@ -38,7 +38,8 @@ namespace DistantWorlds.Controls
 
     public event EventHandler CaptionClicked;
 
-    public Size BackupSize
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Size BackupSize
     {
       set
       {
@@ -510,7 +511,8 @@ namespace DistantWorlds.Controls
 
     [Description("Get/Set the color of the text displayed in the caption")]
     [Category("Caption")]
-    public Color CaptionTextColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color CaptionTextColor
     {
       get => this.captionCtrl.TextColor;
       set => this.captionCtrl.TextColor = value;
@@ -518,7 +520,8 @@ namespace DistantWorlds.Controls
 
     [Category("Caption")]
     [Description("Get/Set the starting color for the gradient brush if brush type is chose to be gradient")]
-    public Color CaptionColorOne
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color CaptionColorOne
     {
       get => this.captionCtrl.ColorOne;
       set => this.captionCtrl.ColorOne = value;
@@ -526,7 +529,8 @@ namespace DistantWorlds.Controls
 
     [Category("Caption")]
     [Description("Get/Set the ending color for the gradient brush if brush type is chose to be gradient")]
-    public Color CaptionColorTwo
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color CaptionColorTwo
     {
       get => this.captionCtrl.ColorTwo;
       set => this.captionCtrl.ColorTwo = value;
@@ -534,7 +538,8 @@ namespace DistantWorlds.Controls
 
     [Description("Get/Set the font used for drawing the caption text")]
     [Category("Caption")]
-    public Font CaptionFont
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Font CaptionFont
     {
       get => this.captionCtrl.CaptionFont;
       set => this.captionCtrl.CaptionFont = value;
@@ -590,14 +595,16 @@ namespace DistantWorlds.Controls
     }
 
     [Browsable(false)]
-    public Color DirectionCtrlColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DirectionCtrlColor
     {
       get => this.captionCtrl.DirectionCtrlColor;
       set => this.captionCtrl.DirectionCtrlColor = value;
     }
 
     [Browsable(false)]
-    public Color DirectionCtrlHoverColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DirectionCtrlHoverColor
     {
       get => this.captionCtrl.DirectionCtrlHoverColor;
       set => this.captionCtrl.DirectionCtrlHoverColor = value;

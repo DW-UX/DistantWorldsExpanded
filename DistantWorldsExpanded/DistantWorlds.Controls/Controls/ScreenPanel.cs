@@ -131,7 +131,8 @@ namespace DistantWorlds.Controls
 
     [Category("Appearance")]
     [Description("The icon of the header.")]
-    public virtual Image HeaderIcon
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Image HeaderIcon
     {
       get => pnlHeader.Icon;
       set => pnlHeader.Icon = value;
@@ -139,7 +140,8 @@ namespace DistantWorlds.Controls
 
     [Category("Appearance")]
     [Description("The title of the header.")]
-    public virtual string HeaderTitle
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual string HeaderTitle
     {
       get => pnlHeader.TitleText;
       set

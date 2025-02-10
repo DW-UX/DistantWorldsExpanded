@@ -18,6 +18,7 @@ namespace DistantWorlds.Controls
         private bool _SummarizedMode;
         private IContainer components;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool SummarizedMode
         {
             get => this._SummarizedMode;

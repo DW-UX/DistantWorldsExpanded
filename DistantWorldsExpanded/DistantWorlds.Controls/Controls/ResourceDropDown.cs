@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -117,7 +118,8 @@ namespace DistantWorlds.Controls
       this.SelectedIndex = num;
     }
 
-    public string AllowNullResourceText
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string AllowNullResourceText
     {
       get => this._AllowNullResourceText;
       set => this._AllowNullResourceText = value;

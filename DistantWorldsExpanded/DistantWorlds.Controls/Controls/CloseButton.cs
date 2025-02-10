@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Media;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -23,7 +24,8 @@ namespace DistantWorlds.Controls
     private static object _SoundLock = new object();
     public static double Volume = 1.0;
 
-    public int Radius
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int Radius
     {
       get => this._Radius;
       set => this._Radius = value;

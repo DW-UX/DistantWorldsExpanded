@@ -10,6 +10,8 @@ using DistantWorlds.Controls;
 using DistantWorlds.Types;
 using ExpansionMod;
 using Ionic.Zlib;
+
+//using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections;

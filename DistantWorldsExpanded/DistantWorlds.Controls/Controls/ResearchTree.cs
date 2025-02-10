@@ -1868,37 +1868,43 @@ label_114:
       return Color.FromArgb((int) (byte) ((uint) normalColor.A - (uint) (byte) ((double) ((int) normalColor.A - (int) alternateColor.A) * num)), (int) (byte) ((uint) normalColor.R - (uint) (byte) ((double) ((int) normalColor.R - (int) alternateColor.R) * num)), (int) (byte) ((uint) normalColor.G - (uint) (byte) ((double) ((int) normalColor.G - (int) alternateColor.G) * num)), (int) (byte) ((uint) normalColor.B - (uint) (byte) ((double) ((int) normalColor.B - (int) alternateColor.B) * num)));
     }
 
-    public new virtual Color BackColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new virtual Color BackColor
     {
       get => this.backColor;
       set => this.backColor = value;
     }
 
-    public new virtual Color ForeColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new virtual Color ForeColor
     {
       get => base.ForeColor;
       set => base.ForeColor = value;
     }
 
-    public virtual Color TextColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color TextColor
     {
       get => this._TextColor;
       set => this._TextColor = value;
     }
 
-    public virtual Color TextColor2
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color TextColor2
     {
       get => this._TextColor2;
       set => this._TextColor2 = value;
     }
 
-    public override Image BackgroundImage
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override Image BackgroundImage
     {
       get => base.BackgroundImage;
       set => base.BackgroundImage = value;
     }
 
-    public override ImageLayout BackgroundImageLayout
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override ImageLayout BackgroundImageLayout
     {
       get => base.BackgroundImageLayout;
       set => base.BackgroundImageLayout = value;
@@ -1906,7 +1912,8 @@ label_114:
 
     [Category("Appearance")]
     [Description("The inner border color of the control.")]
-    public virtual Color InnerBorderColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color InnerBorderColor
     {
       get => this.innerBorderColor;
       set
@@ -1920,7 +1927,8 @@ label_114:
 
     [Description("The outer border color of the control.")]
     [Category("Appearance")]
-    public virtual Color OuterBorderColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color OuterBorderColor
     {
       get => this.outerBorderColor;
       set
@@ -1933,7 +1941,8 @@ label_114:
 
     [Description("The shine color of the control.")]
     [Category("Appearance")]
-    public virtual Color ShineColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color ShineColor
     {
       get => this.shineColor;
       set
@@ -1946,7 +1955,8 @@ label_114:
 
     [Category("Appearance")]
     [Description("The glow color of the control.")]
-    public virtual Color GlowColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color GlowColor
     {
       get => this.glowColor;
       set

@@ -97,19 +97,22 @@ namespace DistantWorlds.Controls
       this.Invalidate();
     }
 
-    public new int Height
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new int Height
     {
       get => base.Height;
       set => base.Height = value;
     }
 
-    public new int Width
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new int Width
     {
       get => base.Width;
       set => base.Width = value;
     }
 
-    public int RelationViewWidth
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int RelationViewWidth
     {
       get => this._RelationViewWidth;
       set
@@ -533,7 +536,8 @@ namespace DistantWorlds.Controls
       this.ResumeLayout(false);
     }
 
-    public EmpireListView EmpireListView
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public EmpireListView EmpireListView
     {
       get => this._EmpireListView;
       set => this._EmpireListView = value;

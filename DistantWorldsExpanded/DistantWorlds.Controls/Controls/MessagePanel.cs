@@ -7,6 +7,7 @@
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -26,7 +27,8 @@ namespace DistantWorlds.Controls
       this.Padding = new Padding(12);
     }
 
-    public string Message
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string Message
     {
       get => this._Message;
       set

@@ -57,6 +57,7 @@ namespace DistantWorlds
 
         private int int_1;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string Title
         {
             get
@@ -73,6 +74,7 @@ namespace DistantWorlds
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public override string Text
         {
             get
@@ -89,6 +91,7 @@ namespace DistantWorlds
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Image Picture
         {
             get
@@ -109,6 +112,7 @@ namespace DistantWorlds
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int PictureSize
         {
             get
@@ -121,6 +125,7 @@ namespace DistantWorlds
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool AlignPictureRight
         {
             get
@@ -133,6 +138,7 @@ namespace DistantWorlds
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Image SmallPicture
         {
             get
@@ -145,6 +151,7 @@ namespace DistantWorlds
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Rectangle SmallPictureLocation
         {
             get

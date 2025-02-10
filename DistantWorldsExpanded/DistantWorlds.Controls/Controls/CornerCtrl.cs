@@ -82,7 +82,8 @@ namespace DistantWorlds.Controls
 
     [Description("Set/Get the color used to draw the borders")]
     [Category("Behavior")]
-    public Color BorderColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor
     {
       get => this.borderColor;
       set

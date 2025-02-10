@@ -12,6 +12,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.Timers;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -145,7 +146,8 @@ namespace DistantWorlds.Controls
       this._DataBound = true;
     }
 
-    public Empire CurrentGameSelectedFaction
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Empire CurrentGameSelectedFaction
     {
       get => this._CurrentGameSelectedFaction;
       set => this._CurrentGameSelectedFaction = value;
@@ -202,7 +204,8 @@ namespace DistantWorlds.Controls
       this.MouseClick(client.X, client.Y);
     }
 
-    public new Size Size
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Size Size
     {
       get => this._Size;
       set
@@ -613,7 +616,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public List<string> OverlayTextLines
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public List<string> OverlayTextLines
     {
       get => this._OverlayTextLines;
       set => this._OverlayTextLines = value;

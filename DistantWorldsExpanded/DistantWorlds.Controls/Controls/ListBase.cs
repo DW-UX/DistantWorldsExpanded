@@ -6,6 +6,7 @@
 
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -21,7 +22,8 @@ namespace DistantWorlds.Controls
       this.Height = 20;
     }
 
-    public new Color BackColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Color BackColor
     {
       get => base.BackColor;
       set
@@ -29,7 +31,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new Color ForeColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Color ForeColor
     {
       get => base.ForeColor;
       set
@@ -37,7 +40,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new int Height
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new int Height
     {
       get => base.Height;
       set
@@ -45,7 +49,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new BorderStyle BorderStyle
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new BorderStyle BorderStyle
     {
       get => base.BorderStyle;
       set
@@ -53,7 +58,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new bool MultiColumn
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new bool MultiColumn
     {
       get => base.MultiColumn;
       set
@@ -61,7 +67,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new Font Font
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Font Font
     {
       get => base.Font;
       set

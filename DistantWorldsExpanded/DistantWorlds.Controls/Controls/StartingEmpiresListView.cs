@@ -33,7 +33,8 @@ namespace DistantWorlds.Controls
       this.AutoScaleMode = AutoScaleMode.Font;
     }
 
-    public Bitmap RemoveImage
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Bitmap RemoveImage
     {
       get => this._RemoveImage;
       set => this._RemoveImage = value;

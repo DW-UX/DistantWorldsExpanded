@@ -8,6 +8,7 @@ using System;
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -55,7 +56,8 @@ namespace DistantWorlds.Controls
       base.Font = new Font("Verdana", 8f, FontStyle.Regular);
     }
 
-    public new Color BackColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Color BackColor
     {
       get => base.BackColor;
       set
@@ -63,7 +65,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new Color ForeColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Color ForeColor
     {
       get => base.ForeColor;
       set
@@ -71,7 +74,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new FlatStyle FlatStyle
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new FlatStyle FlatStyle
     {
       get => base.FlatStyle;
       set
@@ -79,13 +83,15 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new Font Font
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Font Font
     {
       get => base.Font;
       set => base.Font = value;
     }
 
-    public new FlatButtonAppearance FlatAppearance
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new FlatButtonAppearance FlatAppearance
     {
       get => base.FlatAppearance;
       set

@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -35,7 +36,8 @@ namespace DistantWorlds.Controls
 
     public TransparentButton() => this.InitializeComponent();
 
-    public Point AdjustImageLocation
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Point AdjustImageLocation
     {
       get => this.locPoint;
       set

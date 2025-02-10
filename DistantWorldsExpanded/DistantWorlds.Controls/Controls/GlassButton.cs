@@ -66,7 +66,8 @@ namespace DistantWorlds.Controls
     private IContainer components;
     private System.Timers.Timer timer;
 
-    public bool ToggledOn
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool ToggledOn
     {
       get => this._ToggledOn;
       set
@@ -179,7 +180,8 @@ namespace DistantWorlds.Controls
       this.DelayFrameRefresh = false;
     }
 
-    public bool IntensifyColors
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool IntensifyColors
     {
       get => this._IntensifyColors;
       set
@@ -192,7 +194,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public bool ClipBackground
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool ClipBackground
     {
       get => this._ClipBackground;
       set
@@ -206,7 +209,8 @@ namespace DistantWorlds.Controls
 
     public void ClearText() => base.Text = string.Empty;
 
-    public new string Text
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new string Text
     {
       get => base.Text;
       set => base.Text = value;
@@ -218,7 +222,8 @@ namespace DistantWorlds.Controls
       this.SetFont(false);
     }
 
-    public new Point Location
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Point Location
     {
       get => base.Location;
       set
@@ -228,7 +233,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new Size Size
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Size Size
     {
       get => base.Size;
       set
@@ -241,7 +247,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public bool DelayFrameRefresh
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool DelayFrameRefresh
     {
       get => this._DelayFrameRefresh;
       set
@@ -267,7 +274,8 @@ namespace DistantWorlds.Controls
       this.OnBackColorChanged(EventArgs.Empty);
     }
 
-    public new virtual Color BackColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new virtual Color BackColor
     {
       get => this._BackColor;
       set
@@ -282,31 +290,36 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public new virtual Color ForeColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new virtual Color ForeColor
     {
       get => base.ForeColor;
       set => base.ForeColor = value;
     }
 
-    public virtual Color TextColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color TextColor
     {
       get => this._TextColor;
       set => this._TextColor = value;
     }
 
-    public virtual Color TextColor2
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color TextColor2
     {
       get => this._TextColor2;
       set => this._TextColor2 = value;
     }
 
-    public override Image BackgroundImage
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override Image BackgroundImage
     {
       get => base.BackgroundImage;
       set => base.BackgroundImage = value;
     }
 
-    public override ImageLayout BackgroundImageLayout
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override ImageLayout BackgroundImageLayout
     {
       get => base.BackgroundImageLayout;
       set => base.BackgroundImageLayout = value;
@@ -314,7 +327,8 @@ namespace DistantWorlds.Controls
 
     [Category("Appearance")]
     [Description("The inner border color of the control.")]
-    public virtual Color InnerBorderColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color InnerBorderColor
     {
       get => this._InnerBorderColor;
       set
@@ -348,7 +362,8 @@ namespace DistantWorlds.Controls
 
     [Category("Appearance")]
     [Description("The outer border color of the control.")]
-    public virtual Color OuterBorderColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color OuterBorderColor
     {
       get => this._OuterBorderColor;
       set
@@ -382,7 +397,8 @@ namespace DistantWorlds.Controls
 
     [Description("The shine color of the control.")]
     [Category("Appearance")]
-    public virtual Color ShineColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color ShineColor
     {
       get => this._ShineColor;
       set
@@ -416,7 +432,8 @@ namespace DistantWorlds.Controls
 
     [Category("Appearance")]
     [Description("The glow color of the control.")]
-    public virtual Color GlowColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public virtual Color GlowColor
     {
       get => this._GlowColor;
       set
@@ -1050,19 +1067,19 @@ namespace DistantWorlds.Controls
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public new FlatButtonAppearance FlatAppearance => base.FlatAppearance;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public new FlatStyle FlatStyle
     {
       get => base.FlatStyle;
       set => base.FlatStyle = value;
     }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [Browsable(false)]
     public new bool UseVisualStyleBackColor

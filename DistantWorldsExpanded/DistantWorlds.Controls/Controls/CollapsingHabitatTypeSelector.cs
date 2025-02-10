@@ -1139,7 +1139,8 @@ namespace DistantWorlds.Controls
       this.cmbPlaceShipDesign.BindData((DesignList) null, new Bitmap[0], (Empire) null);
     }
 
-    public Empire PlayerEmpire
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Empire PlayerEmpire
     {
       get => this._PlayerEmpire;
       set
@@ -1149,7 +1150,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Empire IndependentEmpire
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Empire IndependentEmpire
     {
       get => this._IndependentEmpire;
       set
@@ -1159,7 +1161,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public DistantWorlds.Types.EmpireList Empires
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public DistantWorlds.Types.EmpireList Empires
     {
       get => this._Empires;
       set
@@ -1169,7 +1172,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public DistantWorlds.Types.EmpireList PirateFactions
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public DistantWorlds.Types.EmpireList PirateFactions
     {
       get => this._PirateFactions;
       set

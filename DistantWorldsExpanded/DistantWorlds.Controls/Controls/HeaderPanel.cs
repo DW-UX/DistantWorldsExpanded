@@ -52,13 +52,15 @@ namespace DistantWorlds.Controls
       this.ResumeLayout(false);
     }
 
-    public string TitleText
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string TitleText
     {
       get => this._TitleText;
       set => this._TitleText = value;
     }
 
-    public Image Icon
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Image Icon
     {
       get => this._Icon;
       set => this._Icon = value;

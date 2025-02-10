@@ -355,7 +355,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public string Title
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string Title
     {
       get => this._Title;
       set
@@ -374,7 +375,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public override string Text
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override string Text
     {
       get => this._Text;
       set
@@ -393,7 +395,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Image Picture
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Image Picture
     {
       get => this._Picture;
       set
@@ -406,25 +409,29 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public int PictureSize
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int PictureSize
     {
       get => this._PictureSize;
       set => this._PictureSize = value;
     }
 
-    public bool AlignPictureRight
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool AlignPictureRight
     {
       get => this._AlignPictureRight;
       set => this._AlignPictureRight = value;
     }
 
-    public Image SmallPicture
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Image SmallPicture
     {
       get => this._SmallPicture;
       set => this._SmallPicture = value;
     }
 
-    public Rectangle SmallPictureLocation
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Rectangle SmallPictureLocation
     {
       get => this._SmallPictureLocation;
       set => this._SmallPictureLocation = value;

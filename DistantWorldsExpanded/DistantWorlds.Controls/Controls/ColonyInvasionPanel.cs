@@ -8,6 +8,7 @@ using DistantWorlds.Types;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -80,7 +81,8 @@ namespace DistantWorlds.Controls
       this._ColonyInvasion.ClearColony();
     }
 
-    public new Size Size
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Size Size
     {
       get => base.Size;
       set

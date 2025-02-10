@@ -30,18 +30,21 @@ namespace DistantWorlds.Controls
 
         private void InitializeComponent() => this.components = (IContainer)new System.ComponentModel.Container();
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int RowHeight
         {
             get => this._RowHeight;
             set => this._RowHeight = value;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int DamageGraphWidth
         {
             get => this._DamageGraphWidth;
             set => this._DamageGraphWidth = value;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int DamageGraphHeight
         {
             get => this._DamageGraphHeight;

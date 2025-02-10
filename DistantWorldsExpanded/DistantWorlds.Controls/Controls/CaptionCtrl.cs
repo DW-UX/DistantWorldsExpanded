@@ -41,14 +41,16 @@ namespace DistantWorlds.Controls
     }
 
     [Browsable(false)]
-    public Color DirectionCtrlColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DirectionCtrlColor
     {
       get => this.directionCtrl.Color;
       set => this.directionCtrl.Color = value;
     }
 
     [Browsable(false)]
-    public Color DirectionCtrlHoverColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DirectionCtrlHoverColor
     {
       get => this.directionCtrl.HoverColor;
       set => this.directionCtrl.HoverColor = value;
@@ -75,7 +77,8 @@ namespace DistantWorlds.Controls
 
     [Description("Get or set the image to be displayed in the caption")]
     [Category("Appearance")]
-    public Image CaptionIcon
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Image CaptionIcon
     {
       get => this.captionIcon;
       set
@@ -95,7 +98,8 @@ namespace DistantWorlds.Controls
 
     [Description("Get/Set the text to be displayed")]
     [Category("Appearance")]
-    public string CaptionText
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string CaptionText
     {
       get => this.text;
       set
@@ -107,7 +111,8 @@ namespace DistantWorlds.Controls
 
     [Description("The font for this control also used to draw the text in the caption")]
     [Category("Appearance")]
-    public Font CaptionFont
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Font CaptionFont
     {
       get => this.Font;
       set
@@ -119,7 +124,8 @@ namespace DistantWorlds.Controls
 
     [Description("The starting color for the gradient brush")]
     [Category("Appearance")]
-    public Color ColorOne
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ColorOne
     {
       get => this.colorOne;
       set
@@ -132,7 +138,8 @@ namespace DistantWorlds.Controls
 
     [Description("The end color for the gradient brush ")]
     [Category("Appearance")]
-    public Color ColorTwo
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ColorTwo
     {
       get => this.colorTwo;
       set
@@ -145,7 +152,8 @@ namespace DistantWorlds.Controls
 
     [Description("The color used for drawing caption text ")]
     [Category("Appearance")]
-    public Color TextColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color TextColor
     {
       get => this.textColor;
       set
@@ -157,7 +165,8 @@ namespace DistantWorlds.Controls
 
     [Category("Appearance")]
     [Description("The brush used in painting the caption")]
-    public BrushType BrushType
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public BrushType BrushType
     {
       get => this.brushType;
       set

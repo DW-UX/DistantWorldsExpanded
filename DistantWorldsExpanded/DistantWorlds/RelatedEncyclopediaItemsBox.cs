@@ -38,6 +38,7 @@ namespace DistantWorlds
 
         private DateTime dateTime_0;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public EncyclopediaItemList Items
         {
             get

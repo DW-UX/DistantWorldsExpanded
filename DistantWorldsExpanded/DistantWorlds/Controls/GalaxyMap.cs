@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -60,6 +61,7 @@ namespace DistantWorlds.Controls
 
         private Bitmap bitmap_3;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool ShowFleetPostures
         {
             get
@@ -72,6 +74,7 @@ namespace DistantWorlds.Controls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool ShowEmpireTerritory
         {
             get

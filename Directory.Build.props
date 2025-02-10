@@ -4,19 +4,18 @@
         <ExpansionModVersion>1.09.05</ExpansionModVersion>
         <Company>CodeForce Limited</Company>
         <Copyright>Copyright © CodeForce 2014</Copyright>
-        <LangVersion>11</LangVersion>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <!-- hacks -->
     <PropertyGroup>
         <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
         <OutDir>$(MSBuildThisFileDirectory)bin</OutDir>
-        <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
         <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
-        <XnaFormsPackage>MonoGame.Forms.DX</XnaFormsPackage>
+		<!--<XnaFormsPackage>MonoGame.Forms.DX</XnaFormsPackage>
         <XnaFormsVersion>3.2.0</XnaFormsVersion>
         <XnaFrameworkPackage>MonoGame.Framework.WindowsDX.9000</XnaFrameworkPackage>
-        <!--<XnaFrameworkVersion>3.8.1.303</XnaFrameworkVersion>-->
-        <XnaFrameworkVersion>3.10.9001</XnaFrameworkVersion>
+        <XnaFrameworkVersion>3.8.1.303</XnaFrameworkVersion>
+        <XnaFrameworkVersion>3.10.9001</XnaFrameworkVersion>-->
     </PropertyGroup>
 </Project>

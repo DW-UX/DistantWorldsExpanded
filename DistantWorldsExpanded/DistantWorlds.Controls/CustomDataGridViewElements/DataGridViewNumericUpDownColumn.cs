@@ -19,7 +19,7 @@ namespace DistantWorlds.Controls
     {
     }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Browsable(false)]
     public override DataGridViewCell CellTemplate
     {

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls;
 
@@ -17,7 +18,8 @@ public partial class CheckBox : System.Windows.Forms.CheckBox {
     base.AutoSize = false;
   }
 
-  public override bool AutoSize {
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public override bool AutoSize {
     set => base.AutoSize = false; // don't support
     get => base.AutoSize;
   }

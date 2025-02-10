@@ -22,7 +22,8 @@ namespace DistantWorlds.Controls
 
     public DropLabel() => this.ForeColor = Color.White;
 
-    public new string Text
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new string Text
     {
       get => this._Text;
       set
@@ -34,13 +35,15 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Color DropshadowColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DropshadowColor
     {
       get => this._DropshadowColor;
       set => this._DropshadowColor = value;
     }
 
-    public int DropshadowOffset
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int DropshadowOffset
     {
       get => this._DropshadowOffset;
       set => this._DropshadowOffset = value;

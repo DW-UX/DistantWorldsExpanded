@@ -315,7 +315,8 @@ namespace DistantWorlds.Controls
 
     [Description("Set Slider thumb outer color")]
     [Category("ColorSlider")]
-    public Color ThumbOuterColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ThumbOuterColor
     {
       get => this.thumbOuterColor;
       set => this.Invalidate();
@@ -323,7 +324,8 @@ namespace DistantWorlds.Controls
 
     [Description("Set Slider thumb inner color")]
     [Category("ColorSlider")]
-    public Color ThumbInnerColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ThumbInnerColor
     {
       get => this.thumbInnerColor;
       set => this.Invalidate();
@@ -331,7 +333,8 @@ namespace DistantWorlds.Controls
 
     [Category("ColorSlider")]
     [Description("Set Slider thumb pen color")]
-    public Color ThumbPenColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ThumbPenColor
     {
       get => this.thumbPenColor;
       set => this.Invalidate();
@@ -339,7 +342,8 @@ namespace DistantWorlds.Controls
 
     [Category("ColorSlider")]
     [Description("Set Slider bar outer color")]
-    public Color BarOuterColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BarOuterColor
     {
       get => this.barOuterColor;
       set => this.Invalidate();
@@ -347,7 +351,8 @@ namespace DistantWorlds.Controls
 
     [Category("ColorSlider")]
     [Description("Set Slider bar inner color")]
-    public Color BarInnerColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BarInnerColor
     {
       get => this.barInnerColor;
       set => this.Invalidate();
@@ -355,7 +360,8 @@ namespace DistantWorlds.Controls
 
     [Category("ColorSlider")]
     [Description("Set Slider bar pen color")]
-    public Color BarPenColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BarPenColor
     {
       get => this.barPenColor;
       set => this.Invalidate();
@@ -363,7 +369,8 @@ namespace DistantWorlds.Controls
 
     [Description("Set Slider's elapsed part outer color")]
     [Category("ColorSlider")]
-    public Color ElapsedOuterColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ElapsedOuterColor
     {
       get => this.elapsedOuterColor;
       set => this.Invalidate();
@@ -371,7 +378,8 @@ namespace DistantWorlds.Controls
 
     [Category("ColorSlider")]
     [Description("Set Slider's elapsed part inner color")]
-    public Color ElapsedInnerColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ElapsedInnerColor
     {
       get => this.elapsedInnerColor;
       set => this.Invalidate();

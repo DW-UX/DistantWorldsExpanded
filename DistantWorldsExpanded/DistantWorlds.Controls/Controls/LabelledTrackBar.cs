@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -30,25 +31,29 @@ namespace DistantWorlds.Controls
 
     public event EventHandler ValueChanged;
 
-    public int LabelWidth
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int LabelWidth
     {
       get => this._LabelWidth;
       set => this._LabelWidth = value;
     }
 
-    public string LabelText
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string LabelText
     {
       get => this._LabelText;
       set => this._LabelText = value;
     }
 
-    public int LinkWidth
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int LinkWidth
     {
       get => this._LinkWidth;
       set => this._LinkWidth = value;
     }
 
-    public string LinkText
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string LinkText
     {
       get => this._LinkText;
       set
@@ -178,7 +183,8 @@ namespace DistantWorlds.Controls
       this.ValueChanged((object) this, new EventArgs());
     }
 
-    public int Value
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int Value
     {
       get => this._Slider.Value;
       set
@@ -194,7 +200,8 @@ namespace DistantWorlds.Controls
       this._Slider.Location = new Point(this._Padding + this._LabelWidth + this._SliderOffset, this.Height - (this._SliderHeight + this._Padding));
     }
 
-    public new Size Size
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Size Size
     {
       get => base.Size;
       set
@@ -204,7 +211,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public int SliderOffset
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int SliderOffset
     {
       get => this._SliderOffset;
       set

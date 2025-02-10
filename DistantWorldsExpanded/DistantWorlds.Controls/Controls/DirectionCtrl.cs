@@ -52,7 +52,8 @@ namespace DistantWorlds.Controls
 
     [Category("Appearance")]
     [Description("Get/Set the color used for the direction control")]
-    public Color Color
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color Color
     {
       get => this.color;
       set
@@ -66,7 +67,8 @@ namespace DistantWorlds.Controls
 
     [Description("Get/Set the color used for the direction control")]
     [Category("Appearance")]
-    public Color HoverColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color HoverColor
     {
       get => this.hoverColor;
       set

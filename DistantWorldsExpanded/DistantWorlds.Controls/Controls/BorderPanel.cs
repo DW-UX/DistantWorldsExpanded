@@ -56,7 +56,7 @@ namespace DistantWorlds.Controls
       this.UpdateStyles();
     }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public List<Control> HighlightControls
     {
       get => this._HighlightControls;
@@ -67,13 +67,15 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public int BorderSize
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int BorderSize
     {
       get => this._BorderSize;
       set => this._BorderSize = value;
     }
 
-    public Color BorderColor1
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor1
     {
       get => this._BorderColor1;
       set
@@ -81,7 +83,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Color BorderColor2
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor2
     {
       get => this._BorderColor2;
       set
@@ -89,7 +92,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Color BorderColor3
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor3
     {
       get => this._BorderColor3;
       set
@@ -97,7 +101,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Color BorderColor4
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor4
     {
       get => this._BorderColor4;
       set

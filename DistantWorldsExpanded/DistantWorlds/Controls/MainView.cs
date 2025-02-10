@@ -20,6 +20,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -548,6 +549,7 @@ namespace DistantWorlds.Controls
 
         public List<EventPing> EventLocations => list_29;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public System.Drawing.Point HoverMessageLocation
         {
             get
@@ -560,6 +562,7 @@ namespace DistantWorlds.Controls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public System.Drawing.Point HoverMessageLocationMap
         {
             get
@@ -572,6 +575,7 @@ namespace DistantWorlds.Controls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public System.Drawing.Point HoverMessageLocationButtons
         {
             get

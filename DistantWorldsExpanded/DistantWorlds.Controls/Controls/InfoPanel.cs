@@ -340,6 +340,7 @@ namespace DistantWorlds.Controls
 
         public bool ContentSizeIsLarge => _ContentSizeIsLarge;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool AddHotspots
         {
             get
@@ -515,6 +516,7 @@ namespace DistantWorlds.Controls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool ShowExtendedInfo
         {
             get
@@ -527,6 +529,7 @@ namespace DistantWorlds.Controls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Bitmap Picture
         {
             get

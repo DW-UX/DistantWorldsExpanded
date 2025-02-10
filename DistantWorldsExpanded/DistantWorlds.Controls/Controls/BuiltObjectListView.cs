@@ -71,6 +71,7 @@ namespace DistantWorlds.Controls
 
         private IContainer components;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool ShowBuiltObjectDetail
         {
             get
