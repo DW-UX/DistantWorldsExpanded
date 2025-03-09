@@ -2431,7 +2431,7 @@ namespace DistantWorlds {
                     return;
                 }
                 Habitat habitat12 = method_201(int_64, int_65);
-                if (habitat12 == null || (habitat12.Empire != null && habitat12.Empire != _Game.Galaxy.IndependentEmpire) || (habitat12.Category != HabitatCategoryType.Planet && habitat12.Category != HabitatCategoryType.Moon) || habitat12.Type == HabitatType.GasGiant || habitat12.Type == HabitatType.FrozenGasGiant)
+                if (habitat12 == null || (habitat12.Empire != null && habitat12.Empire != _Game.Galaxy.IndependentEmpire) || (habitat12.Category != HabitatCategoryType.Planet && habitat12.Category != HabitatCategoryType.Moon && habitat12.Category != HabitatCategoryType.Asteroid) || habitat12.Type == HabitatType.GasGiant || habitat12.Type == HabitatType.FrozenGasGiant)
                 {
                     return;
                 }
