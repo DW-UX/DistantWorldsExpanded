@@ -10,8 +10,24 @@ namespace ExpansionMod.ModSettings
     {
         public static bool IsUpgradeNeeded(SettingsModel model, out SettingsModel updatedSettings)
         {
+            bool res = false;
             updatedSettings = null;
-            return false;
+            if (model.Version == 1)
+            {
+                updatedSettings = new SettingsModel
+                {
+                    Version = 2,
+                    PlayerEmprireDefaultRepairPriotityTemplate = model.PlayerEmprireDefaultRepairPriotityTemplate,
+                    AIEmprireDefaultRepairPriotityTemplate = model.AIEmprireDefaultRepairPriotityTemplate,
+                    TargetHappinessTaxColonyMaxed = 10,
+                    TargetHappinessTaxColonyLarge = 10,
+                    TargetHappinessTaxColonyMedium = 16,
+                    TargetHappinessTaxColonySmall = 25,
+                    EnableTargetHappinessTax = true
+                };
+                res = true;
+            }
+            return res;
         }
     }
 }

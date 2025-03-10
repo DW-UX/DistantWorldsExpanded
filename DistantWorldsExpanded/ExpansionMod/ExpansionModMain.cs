@@ -33,6 +33,7 @@ namespace ExpansionMod
         private RepairPriorityManager _repairPriorityManager;
 
         private Main _gameMain = null;
+        private SettingsModel _settings = null;
 
         public bool Inited { get; private set; }
         public static ExpansionModMain ModMain { get; private set; }
@@ -65,6 +66,7 @@ namespace ExpansionMod
                 HotKeysInitImpl(false);
                 FindOtherMods();
                 LoadRepairPriority(model);
+                _settings = model;
             }
             else
             {
@@ -245,6 +247,17 @@ namespace ExpansionMod
             return res;
         }
 
+        internal SettingsModel GetSettings()
+        {
+            if (this.Inited)
+            {
+                return _settings;
+            }
+            else
+            {
+                return null;
+            }
+        }
         #endregion
 
         #region Private

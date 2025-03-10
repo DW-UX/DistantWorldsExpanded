@@ -1,6 +1,7 @@
 ﻿using BaconDistantWorlds;
 
 using DistantWorlds.Types.Properties;
+using ExpansionMod.ModSettings;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -5457,31 +5458,54 @@ namespace DistantWorlds.Types
             {
                 taxRate = num2 * num;
             }
-            double colonySizeCostTax = 16.0;
-            int num5 = 1;
+            double colonyTargetHappiness = 16.0;
+            //int num5 = 1;
             if (colony.Population != null)
             {
-                num5 = ((colony.Population.TotalAmount > 2000000000) ? Policy.ColonyTaxRateLargeColony : ((colony.Population.TotalAmount <= 200000000) ? Policy.ColonyTaxRateSmallColony : Policy.ColonyTaxRateMediumColony));
+                //num5 = ((colony.Population.TotalAmount > 2000000000) ? Policy.ColonyTaxRateLargeColony : ((colony.Population.TotalAmount <= 200000000) ? Policy.ColonyTaxRateSmallColony : Policy.ColonyTaxRateMediumColony));
+                SettingsModel sett = Main._ExpModMain.GetSettings();
+                if (sett == null)
+                {
+                    if (colony._MaxPopulation == colony.Population.TotalAmount)
+                        colonyTargetHappiness = 10;
+                    else if (colony.Population.TotalAmount > 2000000000)
+                        colonyTargetHappiness = 10;
+                    else if (colony.Population.TotalAmount <= 200000000)
+                        colonyTargetHappiness = 25;
+                    else
+                        colonyTargetHappiness = 16;
+                }
+                else
+                {
+                    if (colony.Population.TotalAmount >= colony._MaxPopulation)
+                        colonyTargetHappiness = sett.TargetHappinessTaxColonyMaxed;
+                    else if (colony.Population.TotalAmount > 2000000000)
+                        colonyTargetHappiness = sett.TargetHappinessTaxColonyLarge;
+                    else if (colony.Population.TotalAmount <= 200000000)
+                        colonyTargetHappiness = sett.TargetHappinessTaxColonySmall;
+                    else
+                        colonyTargetHappiness = sett.TargetHappinessTaxColonyMedium;
+                }
             }
             double num6 = -1.0;
-            switch (num5)
-            {
-                case 0:
-                    num6 = 0.0;
-                    break;
-                case 1:
-                    colonySizeCostTax = 25.0;
-                    break;
-                case 2:
-                    colonySizeCostTax = 16.0;
-                    break;
-                case 3:
-                    colonySizeCostTax = 10.0;
-                    break;
-            }
+            //switch (num5)
+            //{
+            //    case 0:
+            //        num6 = 0.0;
+            //        break;
+            //    case 1:
+            //        colonySizeCostTax = 25.0;
+            //        break;
+            //    case 2:
+            //        colonySizeCostTax = 16.0;
+            //        break;
+            //    case 3:
+            //        colonySizeCostTax = 10.0;
+            //        break;
+            //}
             if (atWar && Policy.ColonyTaxRateIncreaseWhenAtWar && colony.Population.TotalAmount > 500000000)
             {
-                colonySizeCostTax = 8.0;
+                colonyTargetHappiness = 8.0;
             }
             int num7 = 0;
             if (colony.Characters != null && colony.Characters.Count > 0)
@@ -5496,13 +5520,13 @@ namespace DistantWorlds.Types
             if (colony.Population != null)
             {
                 double empireApprovalRating = colony.EmpireApprovalRating;
-                if (empireApprovalRating < colonySizeCostTax && colony.TaxRate <= 0f)
+                if (empireApprovalRating < colonyTargetHappiness && colony.TaxRate <= 0f)
                 {
                     taxRate = 0.0;
                 }
-                else if (empireApprovalRating > colonySizeCostTax || colony.TaxRate > 0f)
+                else if (empireApprovalRating > colonyTargetHappiness || colony.TaxRate > 0f)
                 {
-                    double num8 = empireApprovalRating - colonySizeCostTax;
+                    double num8 = empireApprovalRating - colonyTargetHappiness;
                     double num10 = colony.CalculateUnmodifiedApproval(num8, subtractAdditives: false);
                     taxRate = (double)colony.TaxRate + num10 / 100.0;
                 }
