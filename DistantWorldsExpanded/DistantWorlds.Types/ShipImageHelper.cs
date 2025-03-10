@@ -129,7 +129,6 @@ namespace DistantWorlds.Types
 
         public static int ResolveMajorShipImageIndex(int family, BuiltObjectSubRole subRole, bool aged)
         {
-            int num = 0;
             int num2 = 0;
             switch (subRole)
             {

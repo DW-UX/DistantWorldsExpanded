@@ -4124,7 +4124,6 @@ namespace DistantWorlds.Types
 
         private int DetermineDiplomaticMissionDifficulty(Empire targetEmpire, DiplomaticRelationType desiredDiplomaticRelationType, Empire subjectEmpire)
         {
-            int num = 0;
             int num2 = 0;
             int num3 = 0;
             EmpireEvaluation empireEvaluation = targetEmpire.EmpireEvaluations[subjectEmpire];
@@ -5329,7 +5328,6 @@ namespace DistantWorlds.Types
             {
                 pirateRelation = ObtainPirateRelation(targetEmpire);
             }
-            int num = 0;
             if ((diplomaticRelation != null && diplomaticRelation.Type == DiplomaticRelationType.War) || (pirateRelation != null && pirateRelation.Type == PirateRelationType.None && pirateRelation.Evaluation < -5f))
             {
                 switch (Galaxy.Rnd.Next(0, 3))

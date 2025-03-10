@@ -1101,7 +1101,6 @@ namespace DistantWorlds.Types
 
         private Habitat SetupSun(GalaxyShape galaxyShape)
         {
-            int num = 0;
             double num2 = 0.0;
             double num3 = 0.0;
             double val = 300000.0 + 175000000.0 / Math.Sqrt(StarCount);

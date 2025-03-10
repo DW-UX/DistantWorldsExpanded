@@ -467,7 +467,6 @@ namespace DistantWorlds.Types
 
         public int CalculateWarValue(Fighter fighter)
         {
-            int num = 0;
             return 1;
         }
 

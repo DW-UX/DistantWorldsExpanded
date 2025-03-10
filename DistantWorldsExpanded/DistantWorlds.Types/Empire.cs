@@ -2188,7 +2188,6 @@ namespace DistantWorlds.Types
         {
             get
             {
-                double num = 0.0;
                 double num2 = CalculateAccurateAnnualIncome();
                 double num3 = num2 * Galaxy.SpendingTroopPercentage;
                 if (num3 < Galaxy.TroopAnnualMaintenance)

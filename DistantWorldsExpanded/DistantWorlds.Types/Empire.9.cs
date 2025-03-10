@@ -4420,7 +4420,6 @@ namespace DistantWorlds.Types
 
         public int EvaluateMilitaryPotency(int ourWeightedMilitaryPotency, int theirWeightedMilitaryPotency, Empire otherEmpire)
         {
-            int num = 0;
             double num2 = (double)ourWeightedMilitaryPotency * 2.0;
             double num3 = (double)ourWeightedMilitaryPotency * 0.5;
             if (otherEmpire == _Galaxy.PlayerEmpire)
@@ -5453,12 +5452,12 @@ namespace DistantWorlds.Types
                 num += (1.0 - ((double)DominantRace.FriendlinessLevel + (double)DominantRace.IntelligenceLevel) / 200.0) / 2.0;
             }
             double num2 = 0.15;
-            double num3 = colony.TaxRate;
-            if (num3 <= 0.0)
+            double taxRate = colony.TaxRate;
+            if (taxRate <= 0.0)
             {
-                num3 = num2 * num;
+                taxRate = num2 * num;
             }
-            double num4 = 16.0;
+            double colonySizeCostTax = 16.0;
             int num5 = 1;
             if (colony.Population != null)
             {
@@ -5471,18 +5470,18 @@ namespace DistantWorlds.Types
                     num6 = 0.0;
                     break;
                 case 1:
-                    num4 = 25.0;
+                    colonySizeCostTax = 25.0;
                     break;
                 case 2:
-                    num4 = 16.0;
+                    colonySizeCostTax = 16.0;
                     break;
                 case 3:
-                    num4 = 10.0;
+                    colonySizeCostTax = 10.0;
                     break;
             }
             if (atWar && Policy.ColonyTaxRateIncreaseWhenAtWar && colony.Population.TotalAmount > 500000000)
             {
-                num4 = 8.0;
+                colonySizeCostTax = 8.0;
             }
             int num7 = 0;
             if (colony.Characters != null && colony.Characters.Count > 0)
@@ -5497,36 +5496,34 @@ namespace DistantWorlds.Types
             if (colony.Population != null)
             {
                 double empireApprovalRating = colony.EmpireApprovalRating;
-                if (empireApprovalRating < num4 && colony.TaxRate <= 0f)
+                if (empireApprovalRating < colonySizeCostTax && colony.TaxRate <= 0f)
                 {
-                    num3 = 0.0;
+                    taxRate = 0.0;
                 }
-                else if (empireApprovalRating > num4 || colony.TaxRate > 0f)
+                else if (empireApprovalRating > colonySizeCostTax || colony.TaxRate > 0f)
                 {
-                    double num8 = empireApprovalRating - num4;
-                    double num9 = colony.TaxApproval - num8;
-                    num9 *= -1.0;
+                    double num8 = empireApprovalRating - colonySizeCostTax;
                     double num10 = colony.CalculateUnmodifiedApproval(num8, subtractAdditives: false);
-                    num3 = (double)colony.TaxRate + num10 / 100.0;
+                    taxRate = (double)colony.TaxRate + num10 / 100.0;
                 }
                 if (num6 >= 0.0)
                 {
-                    num3 = num6;
+                    taxRate = num6;
                 }
                 _ = colony.EmpireApprovalRating;
                 _ = 0.0;
                 if (GovernmentAttributes != null && GovernmentAttributes.SpecialFunctionCode == 1)
                 {
-                    num3 = 1.0;
+                    taxRate = 1.0;
                 }
             }
-            num3 = ((GovernmentAttributes == null || GovernmentAttributes.SpecialFunctionCode != 1) ? Math.Max(0.0, Math.Min(0.5, num3)) : Math.Max(0.0, num3));
-            num3 = Math.Round(num3, 2);
-            if (double.IsNaN(num3))
+            taxRate = ((GovernmentAttributes == null || GovernmentAttributes.SpecialFunctionCode != 1) ? Math.Max(0.0, taxRate) : Math.Max(0.0, taxRate));
+            taxRate = Math.Round(taxRate, 2);
+            if (double.IsNaN(taxRate))
             {
-                num3 = 0.0;
+                taxRate = 0.0;
             }
-            colony.TaxRate = (float)num3;
+            colony.TaxRate = (float)taxRate;
             colony.RecalculateAnnualTaxRevenue();
         }
     }

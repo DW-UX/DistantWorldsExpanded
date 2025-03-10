@@ -1140,7 +1140,6 @@ namespace DistantWorlds.Types
                                 bool flag2 = true;
                                 if (shipGroup != null)
                                 {
-                                    bool flag3 = false;
                                     if (shipGroup.Mission == null || shipGroup.Mission.Type == BuiltObjectMissionType.Undefined || shipGroup.Mission.Priority == BuiltObjectMissionPriority.Low || shipGroup.Mission.Priority == BuiltObjectMissionPriority.Normal)
                                     {
                                         flag2 = true;

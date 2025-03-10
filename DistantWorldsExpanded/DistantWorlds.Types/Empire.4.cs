@@ -4397,7 +4397,6 @@ namespace DistantWorlds.Types
 
         public double DetermineProximityFromCapital(BuiltObject builtObject)
         {
-            double num = 0.0;
             if (PirateEmpireBaseHabitat == null)
             {
                 return Math.Sqrt(Math.Sqrt(1.0 + _Galaxy.CalculateDistance(Capital.Xpos, Capital.Ypos, builtObject.Xpos, builtObject.Ypos)) / 100.0);

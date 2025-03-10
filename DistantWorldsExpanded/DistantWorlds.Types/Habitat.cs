@@ -5609,7 +5609,6 @@ namespace DistantWorlds.Types
             if (Empire != null && Empire.Capital != null && Empire.Capital != this)
             {
                 double num = _Galaxy.CalculateDistance(Empire.Capital.Xpos, Empire.Capital.Ypos, Xpos, Ypos);
-                double num2 = 1.0;
                 return num * Type switch
                 {
                     HabitatType.Ice => 1000.0,

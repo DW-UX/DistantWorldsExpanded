@@ -591,7 +591,6 @@ namespace DistantWorlds.Types
 
         public static ComponentCategoryType ResolveTechDisallow(int index)
         {
-            ComponentCategoryType componentCategoryType = ComponentCategoryType.Undefined;
             return index switch
             {
                 1 => ComponentCategoryType.WeaponTorpedo,
@@ -833,7 +832,6 @@ namespace DistantWorlds.Types
 
         public static PlanetaryFacilityDefinition ResolveRaceWonder(int index)
         {
-            PlanetaryFacilityDefinition planetaryFacilityDefinition = null;
             return index switch
             {
                 1 => PlanetaryFacilityDefinitionsStatic[21],
@@ -3582,7 +3580,6 @@ namespace DistantWorlds.Types
 
         public int ValueMoney(double moneyAmount)
         {
-            int num = -1;
             return (int)moneyAmount;
         }
 

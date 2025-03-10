@@ -1642,13 +1642,11 @@ namespace DistantWorlds.Types
 
         private static float ParseFloatValue(string value)
         {
-            float num = 0f;
             return float.Parse(value, NumberFormatInfo.InvariantInfo);
         }
 
         private static double ParseDoubleValue(string value)
         {
-            double num = 0.0;
             return double.Parse(value, NumberFormatInfo.InvariantInfo);
         }
 

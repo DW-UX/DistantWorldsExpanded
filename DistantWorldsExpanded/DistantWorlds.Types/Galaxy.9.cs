@@ -1058,7 +1058,6 @@ namespace DistantWorlds.Types
 
         public ComponentCategoryType SelectRandomComponentCategory(IndustryType industry)
         {
-            int num = 0;
             switch (industry)
             {
                 case IndustryType.Energy:

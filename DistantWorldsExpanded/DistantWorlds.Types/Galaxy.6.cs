@@ -21,7 +21,6 @@ namespace DistantWorlds.Types
         {
             string empty = string.Empty;
             bool flag = CheckRuinsHaveBenefit(ruin, PlayerEmpire);
-            bool flag2 = false;
             if ((!ruin.PlayerEmpireEncountered || ruin.Type != RuinType.UnlockResearchProject) && (!ruin.PlayerEmpireEncountered || flag || 1 == 0))
             {
                 empty = empty + "(" + TextResolver.GetText("Not Investigated - Details Unknown") + ")";
@@ -2736,7 +2735,6 @@ namespace DistantWorlds.Types
 
         public double CalculateAngleFromCoords(double x, double y, double centerX, double centerY, double distance)
         {
-            double num = 0.0;
             double num2 = Math.PI / 2.0;
             double num3 = num2 * -1.0;
             if (x < centerX)

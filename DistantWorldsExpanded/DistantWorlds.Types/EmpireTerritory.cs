@@ -207,7 +207,6 @@ namespace DistantWorlds.Types
       {
         float num6 = (float) num1;
         int num7 = 0;
-        int num8 = 0;
         if (territoryColonyList != null)
         {
           for (int index5 = 0; index5 < territoryColonyList.Count; ++index5)
@@ -222,8 +221,7 @@ namespace DistantWorlds.Types
                 if (colony != null && colony.Empire != null)
                   num9 = colony.Empire.EmpireId + 1;
                 num7 = num9;
-                num8 = 0;
-                int x1 = galaxySection.X;
+                                int x1 = galaxySection.X;
                 int y1 = galaxySection.Y;
                 int indexX;
                 int indexY;

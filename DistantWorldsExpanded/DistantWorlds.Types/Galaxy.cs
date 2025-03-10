@@ -1587,7 +1587,6 @@ namespace DistantWorlds.Types
             {
                 if (resource.Group == ResourceGroup.Mineral || resource.Group == ResourceGroup.Gas)
                 {
-                    int num2 = 0;
                     if (resource.RelativeImportance > 0.25f)
                     {
                         return 4000;
@@ -3757,7 +3756,6 @@ namespace DistantWorlds.Types
                     BuiltObject builtObject = empire.BuiltObjects[j];
                     if (builtObject.Role == BuiltObjectRole.Base && !builtObject.HasBeenDestroyed)
                     {
-                        bool flag = true;
                         if (!((builtObject.ParentHabitat == null) ? CheckEmpireTerritoryCanBuildAtLocation(empire, builtObject.Xpos, builtObject.Ypos) : CheckEmpireTerritoryCanBuildAtHabitat(empire, builtObject.ParentHabitat)))
                         {
                             empire.DisputedBases.Add(builtObject);
@@ -3769,7 +3767,6 @@ namespace DistantWorlds.Types
                     BuiltObject builtObject2 = empire.PrivateBuiltObjects[k];
                     if (builtObject2.Role == BuiltObjectRole.Base && !builtObject2.HasBeenDestroyed)
                     {
-                        bool flag2 = true;
                         if (!((builtObject2.ParentHabitat == null) ? CheckEmpireTerritoryCanBuildAtLocation(empire, builtObject2.Xpos, builtObject2.Ypos) : CheckEmpireTerritoryCanBuildAtHabitat(empire, builtObject2.ParentHabitat)))
                         {
                             empire.DisputedBases.Add(builtObject2);

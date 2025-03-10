@@ -1055,7 +1055,6 @@ namespace BaconDistantWorlds
             string str2 = "";
             string str3 = "";
             string str4 = "";
-            string str5 = "";
             object target = ship?.Mission?.Target;
             object secondaryTarget = ship?.Mission?.SecondaryTarget;
             if (ship.Mission != null && ship.Mission.Cargo != null)
@@ -1098,7 +1097,7 @@ namespace BaconDistantWorlds
                         break;
                 }
             }
-            str5 = "Mission Information";
+
             string str6;
             if (ship.Mission != null && ship.Mission.Type == BuiltObjectMissionType.Transport)
                 str6 = "Transport" + (ship.BaconValues == null || !ship.BaconValues.ContainsKey("RepeatingMission") ? "" : " (repeating)") + Environment.NewLine + "From: " + str1 + Environment.NewLine + "To: " + str2 + Environment.NewLine + Environment.NewLine + "Mission Cargo: " + Environment.NewLine + str3 + Environment.NewLine + Environment.NewLine + "Currently carrying: " + Environment.NewLine + str4;
@@ -1108,7 +1107,6 @@ namespace BaconDistantWorlds
             }
             else
             {
-                str5 = "Cargo";
                 str6 = str4;
             }
             return str6;
@@ -5164,12 +5162,10 @@ namespace BaconDistantWorlds
             if (attacker != null && attacker.CargoSpace > 0 && attacker.BaconValues != null && attacker.BaconValues.ContainsKey("cash"))
             {
                 WeaponList weapons = attacker.Weapons;
-                int num1 = 0;
                 float num2;
                 if (weapons == null || weapons.Count == 0)
                 {
                     num2 = 1f;
-                    num1 = 1;
                 }
                 else
                 {

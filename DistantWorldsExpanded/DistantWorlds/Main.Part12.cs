@@ -3777,7 +3777,6 @@ namespace DistantWorlds {
 
         private int method_89()
         {
-            int num = 0;
             /*try
             {
                 ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher("Select * from Win32_Processor");

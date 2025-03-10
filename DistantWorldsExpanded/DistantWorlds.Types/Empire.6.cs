@@ -963,7 +963,6 @@ namespace DistantWorlds.Types
                     }
                     if (cargo == null)
                     {
-                        int num3 = 0;
                         Cargo cargo2 = new Cargo(amount: (!orderPreciseAmount) ? Math.Max(Galaxy.MinimumOrderAmount, componentResource.Quantity) : componentResource.Quantity, resource: new Resource(componentResource.ResourceID), empire: this);
                         resourcesToOrder.Add(cargo2);
                         cargo = new Cargo(componentResource, 0, this, componentResource.Quantity);
@@ -3965,7 +3964,6 @@ namespace DistantWorlds.Types
 
         public int MaximumCharactersAllowedNonIntelligenceAgent()
         {
-            int num = 0;
             if (PirateEmpireBaseHabitat == null)
             {
                 return Math.Min(20, (int)(Math.Sqrt(TotalColonyStrategicValue) / 150.0));
@@ -4622,7 +4620,6 @@ namespace DistantWorlds.Types
             }
             for (int j = 0; j < list3.Count; j++)
             {
-                int num4 = 0;
                 int maxValue = 4;
                 if (boostSkillLevels)
                 {
