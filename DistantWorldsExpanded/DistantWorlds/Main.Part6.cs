@@ -3703,14 +3703,22 @@ namespace DistantWorlds {
             }
             if (selectedHabitat.CheckFacilityOwnedByColonyOwner(selectedFacility))
             {
-                MessageBoxEx messageBoxEx = method_372("Are you sure that you want to scrap the " + selectedFacility.Name + " at your colony " + selectedHabitat.Name + "?", "Scrap Facility");
-                if (messageBoxEx.Show(this).ToLower(CultureInfo.InvariantCulture) == "yes")
+                if (selectedHabitat.Owner == Main.Main._Game.PlayerEmpire)
                 {
-                    selectedHabitat.Facilities.Remove(selectedFacility);
-                    selectedHabitat.CheckRemoveFacilityTracking(selectedFacility);
-                    selectedHabitat.ReviewPlanetaryFacilities(_Game.PlayerEmpire);
-                    ctlColonyFacilities.BindData(_Game.Galaxy, selectedHabitat.Facilities, selectedHabitat);
-                    cmbColonyFacilitiesToBuild.BindData(_Game.PlayerEmpire, selectedHabitat.ResolveBuildableFacilities(), bitmap_8);
+                    MessageBoxEx messageBoxEx = method_372("Are you sure that you want to scrap the " + selectedFacility.Name + " at your colony " + selectedHabitat.Name + "?", "Scrap Facility");
+                    if (messageBoxEx.Show(this).ToLower(CultureInfo.InvariantCulture) == "yes")
+                    {
+                        selectedHabitat.Facilities.Remove(selectedFacility);
+                        selectedHabitat.CheckRemoveFacilityTracking(selectedFacility);
+                        selectedHabitat.ReviewPlanetaryFacilities(_Game.PlayerEmpire);
+                        ctlColonyFacilities.BindData(_Game.Galaxy, selectedHabitat.Facilities, selectedHabitat);
+                        cmbColonyFacilitiesToBuild.BindData(_Game.PlayerEmpire, selectedHabitat.ResolveBuildableFacilities(), bitmap_8);
+                    }
+                }
+                else
+                {
+                    MessageBoxEx messageBoxEx = method_371("You don't own " + selectedFacility.Name + " facility at colony " + selectedHabitat.Name, "Scrap Facility", MessageBoxExIcon.Exclamation);
+                    messageBoxEx.Show(this).ToLower(CultureInfo.InvariantCulture);
                 }
             }
             else
