@@ -873,7 +873,7 @@ namespace DistantWorlds {
                                 }
                                 double num7 = habitat4.TaxRate;
                                 num7 += num6;
-                                num7 = Math.Max(0.0, Math.Min(num7, 0.5));
+                                num7 = Math.Max(0.0, Math.Min(num7, Empire._MaxTaxRate));
                                 habitat4.TaxRate = (float)num7;
                                 pnlDetailInfo.Invalidate();
                             }

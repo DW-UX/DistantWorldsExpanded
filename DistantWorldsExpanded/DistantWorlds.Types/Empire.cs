@@ -20,6 +20,8 @@ namespace DistantWorlds.Types
     [Serializable]
     public partial class Empire : IComparable<Empire>
     {
+        public const double _MaxTaxRate = 0.75;
+
         public object _LockObject = new object();
 
         public Galaxy _Galaxy;

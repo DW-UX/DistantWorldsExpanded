@@ -5541,7 +5541,7 @@ namespace DistantWorlds.Types
                     taxRate = 1.0;
                 }
             }
-            taxRate = ((GovernmentAttributes == null || GovernmentAttributes.SpecialFunctionCode != 1) ? Math.Max(0.0, taxRate) : Math.Max(0.0, taxRate));
+            taxRate = ((GovernmentAttributes == null || GovernmentAttributes.SpecialFunctionCode != 1) ? Math.Max(0.0, Math.Min(Empire._MaxTaxRate, taxRate)) : Math.Max(0.0, taxRate));
             taxRate = Math.Round(taxRate, 2);
             if (double.IsNaN(taxRate))
             {
