@@ -4,7 +4,7 @@
 		<OutputType>WinExe</OutputType>
 		<RootNamespace>DistantWorlds</RootNamespace>
 		<AssemblyName>DistantWorlds</AssemblyName>
-		<TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
+		<TargetFramework>net9.0-windows</TargetFramework>
 		<UseWindowsForms>True</UseWindowsForms>
 		<DistantWorldsVersion>$(DistantWorldsVersion)</DistantWorldsVersion>
 		<InformationalVersion>$(DistantWorldsVersion)-DWUX-$(ExpansionModVersion)</InformationalVersion>
@@ -30,7 +30,6 @@
 		<TieredCompilationQuickJit>true</TieredCompilationQuickJit>
 		<TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
 		<TieredPGO>true</TieredPGO>
-		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 		<BaseOutputPath></BaseOutputPath>
 	</PropertyGroup>
 	<ItemGroup>

@@ -461,12 +461,12 @@ namespace DistantWorlds.Controls
                         {
                             if (base.Controls.Contains(list_0[list[num6]]))
                             {
+                                base.Controls.Remove(list_0[list[num6]]);
                                 object linkData = list_0[list[num6]].Links[0].LinkData;
                                 if (linkData != null)
                                 {
-                                    if (linkData is EmpireMessage)
+                                    if (linkData is EmpireMessage empireMessage_)
                                     {
-                                        EmpireMessage empireMessage_ = (EmpireMessage)linkData;
                                         main_0.method_244(empireMessage_);
                                     }
                                     else
@@ -481,7 +481,6 @@ namespace DistantWorlds.Controls
                                 list_0[list[num6]].MouseLeave -= main_0.method_248;
                                 list_0[list[num6]].Parent = null;
                                 list_0[list[num6]].Cursor = null;
-                                base.Controls.Remove(list_0[list[num6]]);
                                 list_0.RemoveAt(list[num6]);
                             }
                             list_1.RemoveAt(list[num6]);
