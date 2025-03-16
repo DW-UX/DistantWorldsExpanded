@@ -316,6 +316,10 @@ namespace DistantWorlds.Types
                 {
                     bitmap2.Save((Stream)memoryStream, ImageFormat.Png);
                 }
+                catch (Exception ex)
+                {
+                    Main.LogError($"{nameof(LoadImageFromFilePath)} - {imagePath} - {ex.ToString()}");
+                }
                 finally
                 {
                     bitmap2.Dispose();
@@ -323,6 +327,10 @@ namespace DistantWorlds.Types
                 bitmap1 = new Bitmap(Image.FromStream((Stream)memoryStream));
                 memoryStream.Close();
                 bitmap1.SetResolution(horizontalResolution, verticalResolution);
+            }
+            catch (Exception ex)
+            {
+                Main.LogError($"{nameof(LoadImageFromFilePath)} - {imagePath} - {ex.ToString()}");
             }
             finally
             {

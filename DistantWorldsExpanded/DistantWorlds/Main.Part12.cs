@@ -4221,7 +4221,7 @@ namespace DistantWorlds {
                         string_0 = "ProcGx";
                         method_86(currentDateTime, currentStarDate, builtObjectList, bool_);
                         method_253();
-                        lstMessages.Invalidate();
+                        //lstMessages.Invalidate();
                     }
                     else if ((thread_0 != null && thread_0.IsAlive) || (thread_1 != null && thread_1.IsAlive))
                     {
@@ -4236,6 +4236,7 @@ namespace DistantWorlds {
                     {
                         mainView.Invalidate();
                     }
+                    lstMessages.method_3();
                     Application.DoEvents();
                     bool flag = method_98();
                     method_352(!flag);

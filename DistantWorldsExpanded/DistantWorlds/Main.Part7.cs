@@ -39,9 +39,11 @@ using ExpansionMod.Objects;
 using System.Collections.Concurrent;
 using Ionic.Zlib;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
         private void method_347(ShipAction shipAction_1, bool bool_28)
         {
@@ -516,7 +518,8 @@ namespace DistantWorlds {
                                         musicPlayer_0.FadePause();
                                         string filePath = Application.StartupPath + "\\sounds\\effects\\discovery.mp3";
                                         musicPlayer_1.SetVolume(SoundVolume.Maximum);
-                                        musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+                                        //musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+                                        Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
                                         builtObject4.PlayerEmpireEncounterAction = BuiltObjectEncounterAction.Prompt;
                                         _Game.Galaxy.InvestigateAbandonedBuiltObject(_Game.PlayerEmpire, builtObject4);
                                     }
@@ -4248,6 +4251,33 @@ namespace DistantWorlds {
             }
         }
 
+        public static void LogError(string text)
+        {
+            try
+            {
+                string path = GetGameFilesFolderCreateIfNeeded() + "DW_Errors.txt";
+                if (Main._streamWriterErrors == null)
+                {
+                    lock (Main._errorLogLock)
+                    {
+                        if (Main._streamWriterErrors == null)
+                        {
+                            FileStream stream = new FileStream(path, FileMode.Append, FileAccess.ReadWrite);
+                            Main._streamWriterErrors = (StreamWriter)TextWriter.Synchronized(new StreamWriter(stream));
+                        }
+                    }
+                }
+                Main._streamWriterErrors.WriteLineAsync($"{DateTime.Now.ToString()} {text}");
+                Main._streamWriterErrors.FlushAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+
+
         private void method_367()
         {
             bool_0 = true;
@@ -4347,7 +4377,8 @@ namespace DistantWorlds {
             }
         }
 
-        private ICryptoTransform CreateDecryptor(byte[] key, byte[] iv) {
+        private ICryptoTransform CreateDecryptor(byte[] key, byte[] iv)
+        {
             var rijndael = Aes.Create();
             rijndael.KeySize = 128;
             rijndael.BlockSize = 128;
@@ -4356,7 +4387,8 @@ namespace DistantWorlds {
             return rijndael.CreateDecryptor(key, iv);
         }
 
-        private ICryptoTransform CreateEncryptor(byte[] key, byte[] iv) {
+        private ICryptoTransform CreateEncryptor(byte[] key, byte[] iv)
+        {
             var rijndael = Aes.Create();
             rijndael.KeySize = 128;
             rijndael.BlockSize = 128;
@@ -5129,6 +5161,6 @@ namespace DistantWorlds {
 
 
 
-  }
+    }
 
 }

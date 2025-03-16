@@ -9,6 +9,7 @@ using System;
 using System.IO;
 using System.Timers;
 using Microsoft.Xna.Framework.Media;
+using System.Windows.Forms;
 
 namespace DistantWorlds
 {
@@ -56,7 +57,7 @@ namespace DistantWorlds
 
         private string[] string_3;
 
-        private Timer timer_0;
+        private System.Timers.Timer timer_0;
 
         private double double_0;
 
@@ -78,7 +79,9 @@ namespace DistantWorlds
         {
             get
             {
-                if (MediaPlayer.PlayPosition.TotalSeconds > 0.0)
+                //if (MediaPlayer.PlayPosition.TotalSeconds > 0.0)
+                //if(MediaPlayer.Volume > 0.005)
+                if(MediaPlayer.State == MediaState.Playing)
                 {
                     return true;
                 }
@@ -112,7 +115,7 @@ namespace DistantWorlds
                     throw new ApplicationException("Music folder does not contain Theme music: " + string_1);
                 }
                 random_0 = new Random((int)DateTime.Now.Ticks);
-                timer_0 = new Timer();
+                timer_0 = new System.Timers.Timer();
                 timer_0.Interval = 50.0;
                 timer_0.Elapsed += timer_0_Elapsed;
                 timer_0.Stop();
@@ -222,13 +225,13 @@ namespace DistantWorlds
             var songName = "<unknown>";
             try {
                 songName = Path.GetFileNameWithoutExtension(string_4);
+                MediaPlayer.Play(Song.FromUri(songName, new Uri(string_4)));
+                SetVolume(double_2);
             }
-            catch {
-                // oh well
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error playing music: {songName}\r\n{ex.ToString()}");
             }
-            MediaPlayer.Play(Song.FromUri(songName, new Uri(string_4)));
-            SetVolume(double_2);
-            //MediaPlayer.Play();
         }
 
         private void method_1()

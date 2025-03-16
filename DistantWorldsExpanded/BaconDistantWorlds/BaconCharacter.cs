@@ -31,6 +31,8 @@ namespace BaconDistantWorlds
     public static bool Kill(Character character)
     {
       bool flag1 = true;
+            if (BaconBuiltObject.myMain == null)
+                return flag1;
       if (character.Empire != null && character.Empire.Name.Contains("Romulan"))
       {
         if (character.Role == CharacterRole.IntelligenceAgent)

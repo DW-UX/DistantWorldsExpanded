@@ -283,7 +283,8 @@ namespace DistantWorlds {
                 }
             }
             musicPlayer_1.SetVolume(_Game.MusicVolume);
-            musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+            //Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
+            Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
         }
 
         private void method_516()
@@ -299,7 +300,7 @@ namespace DistantWorlds {
                 }
             }
             musicPlayer_1.SetVolume(_Game.MusicVolume);
-            musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+            Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
         }
 
         private void method_517()
@@ -315,7 +316,7 @@ namespace DistantWorlds {
                 }
             }
             musicPlayer_1.SetVolume(_Game.MusicVolume);
-            musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+            Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
         }
 
         private void method_518()
@@ -331,7 +332,7 @@ namespace DistantWorlds {
                 }
             }
             musicPlayer_1.SetVolume(_Game.MusicVolume);
-            musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+            Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
         }
 
         private void method_519()
@@ -347,7 +348,7 @@ namespace DistantWorlds {
                 }
             }
             musicPlayer_1.SetVolume(_Game.MusicVolume);
-            musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+            Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
         }
 
         private void method_520()
@@ -363,7 +364,7 @@ namespace DistantWorlds {
                 }
             }
             musicPlayer_1.SetVolume(_Game.MusicVolume);
-            musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+            Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
         }
 
         private void method_521(Empire empire_5)
@@ -446,7 +447,8 @@ namespace DistantWorlds {
                     }
                 }
             }
-            musicPlayer_1.PlayMusicFileMethodDelegate(text3);
+            //musicPlayer_1.PlayMusicFileMethodDelegate(text3); 
+            Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, text3);
         }
 
         private void ArhCaEfBkk()
@@ -462,7 +464,7 @@ namespace DistantWorlds {
                 }
             }
             musicPlayer_1.SetVolume(_Game.MusicVolume);
-            musicPlayer_1.PlayMusicFileMethodDelegate(filePath);
+            Invoke(musicPlayer_1.PlayMusicFileMethodDelegate, filePath);
         }
 
         private void method_522()

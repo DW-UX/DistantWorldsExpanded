@@ -50,6 +50,7 @@ namespace DistantWorlds.Controls
 
         private bool bool_1;
 
+        private int ctrlName = 0;
         public void ClearData()
         {
             galaxy_0 = null;
@@ -420,7 +421,7 @@ namespace DistantWorlds.Controls
             }
         }
 
-        private void method_3()
+        public void method_3()
         {
             DateTime dateTime = ((galaxy_0 == null) ? dateTime_0 : galaxy_0.CurrentDateTime);
             if (bool_1)
@@ -504,7 +505,7 @@ namespace DistantWorlds.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            method_3();
+            //method_3();
         }
     }
 }

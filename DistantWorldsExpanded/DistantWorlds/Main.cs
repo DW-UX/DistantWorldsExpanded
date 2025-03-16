@@ -3348,6 +3348,10 @@ namespace DistantWorlds
 
         private DiplomaticRelation diplomaticRelation_0;
 
+        private static object _errorLogLock = new object();
+
+        private static StreamWriter _streamWriterErrors = null;
+
         //[CompilerGenerated]
         //private static Comparison<KeyValuePair<string, int>> comparison_0;
         [IgnoreDataMember]
