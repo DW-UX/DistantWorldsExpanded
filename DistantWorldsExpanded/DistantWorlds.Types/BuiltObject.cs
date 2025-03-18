@@ -466,6 +466,7 @@ namespace DistantWorlds.Types
         private ManufacturingQueue _ManufacturingQueue;
 
         private object _redefineLock = new object();
+        private object _disabledListLock = new object();
 
         [OptionalField]
         public FighterList Fighters;

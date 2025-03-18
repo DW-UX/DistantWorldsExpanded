@@ -5195,7 +5195,7 @@ namespace DistantWorlds.Types
                     num = galaxy.Empires[j].Outlaws.IndexOf(this);
                     if (num >= 0)
                     {
-                        galaxy.Empires[j].Outlaws.RemoveAt(num);
+                        galaxy.Empires[j].Outlaws.Remove(this);
                     }
                 }
             }
@@ -5235,12 +5235,12 @@ namespace DistantWorlds.Types
                 num = CurrentTarget.Attackers.IndexOf(this);
                 if (num >= 0)
                 {
-                    CurrentTarget.Attackers.RemoveAt(num);
+                    CurrentTarget.Attackers.Remove(this);
                 }
                 num = CurrentTarget.Pursuers.IndexOf(this);
                 if (num >= 0)
                 {
-                    CurrentTarget.Pursuers.RemoveAt(num);
+                    CurrentTarget.Pursuers.Remove(this);
                 }
             }
             if (ShipGroup != null)
@@ -5410,62 +5410,62 @@ namespace DistantWorlds.Types
                 num = actualEmpire.Manufacturers.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.Manufacturers.RemoveAt(num);
+                    actualEmpire.Manufacturers.Remove(this);
                 }
                 num = actualEmpire.RefuellingDepots.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.RefuellingDepots.RemoveAt(num);
+                    actualEmpire.RefuellingDepots.Remove(this);
                 }
                 num = actualEmpire.ResourceExtractors.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.ResourceExtractors.RemoveAt(num);
+                    actualEmpire.ResourceExtractors.Remove(this);
                 }
                 num = actualEmpire.MiningStations.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.MiningStations.RemoveAt(num);
+                    actualEmpire.MiningStations.Remove(this);
                 }
                 num = actualEmpire.SpacePorts.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.SpacePorts.RemoveAt(num);
+                    actualEmpire.SpacePorts.Remove(this);
                 }
                 num = actualEmpire.ConstructionYards.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.ConstructionYards.RemoveAt(num);
+                    actualEmpire.ConstructionYards.Remove(this);
                 }
                 num = actualEmpire.Freighters.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.Freighters.RemoveAt(num);
+                    actualEmpire.Freighters.Remove(this);
                 }
                 num = actualEmpire.ConstructionShips.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.ConstructionShips.RemoveAt(num);
+                    actualEmpire.ConstructionShips.Remove(this);
                 }
                 num = actualEmpire.ResearchFacilities.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.ResearchFacilities.RemoveAt(num);
+                    actualEmpire.ResearchFacilities.Remove(this);
                 }
                 num = actualEmpire.ResortBases.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.ResortBases.RemoveAt(num);
+                    actualEmpire.ResortBases.Remove(this);
                 }
                 num = actualEmpire.PlanetDestroyers.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.PlanetDestroyers.RemoveAt(num);
+                    actualEmpire.PlanetDestroyers.Remove(this);
                 }
                 num = actualEmpire.LongRangeScanners.IndexOf(this);
                 if (num >= 0)
                 {
-                    actualEmpire.LongRangeScanners.RemoveAt(num);
+                    actualEmpire.LongRangeScanners.Remove(this);
                     if (actualEmpire == _Galaxy.PlayerEmpire)
                     {
                         _Galaxy.OnRefreshView(new RefreshViewEventArgs(Xpos, Ypos, null, onlyGalaxyBackdrops: true));
@@ -6107,10 +6107,13 @@ namespace DistantWorlds.Types
             }
             if (list.Count > 0)
             {
-                for (int num2 = list.Count - 1; num2 >= 0; num2--)
+                lock (_disabledListLock)
                 {
-                    DisabledComponentIndexes.RemoveAt(list[num2]);
-                    DisabledComponentDurations.RemoveAt(list[num2]);
+                    for (int num2 = list.Count - 1; num2 >= 0; num2--)
+                    {
+                        DisabledComponentIndexes.RemoveAt(list[num2]);
+                        DisabledComponentDurations.RemoveAt(list[num2]);
+                    }
                 }
             }
             if (DisabledComponentIndexes.Count <= 0)
@@ -6724,14 +6727,14 @@ namespace DistantWorlds.Types
                                             {
                                                 break;
                                             }
-                                            int num21 = Galaxy.Rnd.Next(0, builtObject.Troops.Count);
-                                            if (num21 < builtObject.Troops.Count)
+                                            var randTroop = builtObject.Troops[Galaxy.Rnd.Next(0, builtObject.Troops.Count - 1)];
+                                            if (randTroop != null)
                                             {
                                                 if (builtObject.Empire != null && builtObject.Empire.Troops != null)
                                                 {
-                                                    builtObject.Empire.Troops.Remove(builtObject.Troops[num21]);
+                                                    builtObject.Empire.Troops.Remove(randTroop);
                                                 }
-                                                builtObject.Troops.RemoveAt(num21);
+                                                builtObject.Troops.Remove(randTroop);
                                             }
                                             break;
                                         }
