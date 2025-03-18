@@ -6223,565 +6223,569 @@ namespace DistantWorlds.Types
 
         public bool InflictDamage(StellarObject abstractTarget, Weapon weapon, double hitPower, DateTime time, Galaxy galaxy, float weaponDistanceTravelled, bool allowRecursion, double strikeAngle, bool allowArmorInvulnerability)
         {
-            hitPower *= BaconBuiltObject.InflictDamage(this);
-            if (abstractTarget is Creature)
+            lock (_inflictDamageLock)
+
             {
-                Creature creature = (Creature)abstractTarget;
-                if (creature.DamageCreature(this, (int)hitPower, weapon))
+                hitPower *= BaconBuiltObject.InflictDamage(this);
+                if (abstractTarget is Creature)
                 {
-                    if (creature.Type == CreatureType.SilverMist && Empire != null)
+                    Creature creature = (Creature)abstractTarget;
+                    if (creature.DamageCreature(this, (int)hitPower, weapon))
                     {
-                        Empire.CivilityRating += Galaxy.DestroySilverMistReputationBonus;
-                    }
-                    _Galaxy.CheckTriggerEvent(creature.GameEventId, ActualEmpire, EventTriggerType.Destroy, null);
-                    creature.CompleteTeardown();
-                    return true;
-                }
-            }
-            else if (abstractTarget is Fighter)
-            {
-                Fighter fighter = (Fighter)abstractTarget;
-                if (BattleStats != null)
-                {
-                    BattleStats.WeaponHitEnemy((float)hitPower, weaponDistanceTravelled);
-                }
-                if (ShipGroup != null && ShipGroup.BattleStats != null)
-                {
-                    ShipGroup.BattleStats.WeaponHitEnemy((float)hitPower, weaponDistanceTravelled);
-                }
-                if ((double)fighter.CurrentShields >= hitPower)
-                {
-                    fighter.CurrentShields -= (float)hitPower;
-                    fighter.LastShieldStrike = time;
-                    fighter.LastShieldStrikeDirection = (float)strikeAngle;
-                    if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.BattleStats != null)
-                    {
-                        fighter.ParentBuiltObject.BattleStats.ShieldsStruckUs((float)hitPower);
-                    }
-                    if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.ShipGroup != null && fighter.ParentBuiltObject.ShipGroup.BattleStats != null)
-                    {
-                        fighter.ParentBuiltObject.ShipGroup.BattleStats.ShieldsStruckUs((float)hitPower);
-                    }
-                }
-                else
-                {
-                    int num = (int)((float)hitPower - fighter.CurrentShields + 0.5f);
-                    if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.BattleStats != null)
-                    {
-                        fighter.ParentBuiltObject.BattleStats.ShieldsStruckUs(fighter.CurrentShields);
-                    }
-                    if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.ShipGroup != null && fighter.ParentBuiltObject.ShipGroup.BattleStats != null)
-                    {
-                        fighter.ParentBuiltObject.ShipGroup.BattleStats.ShieldsStruckUs(fighter.CurrentShields);
-                    }
-                    fighter.CurrentShields = 0f;
-                    if (num > fighter.Size)
-                    {
-                        num = fighter.Size;
-                    }
-                    if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.BattleStats != null)
-                    {
-                        fighter.ParentBuiltObject.BattleStats.DamageHullUs(num);
-                    }
-                    if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.ShipGroup != null && fighter.ParentBuiltObject.ShipGroup.BattleStats != null)
-                    {
-                        fighter.ParentBuiltObject.ShipGroup.BattleStats.DamageHullUs(num);
-                    }
-                    if ((float)fighter.Size * fighter.Health <= (float)num && !fighter.HasBeenDestroyed)
-                    {
-                        fighter.Health = 0f;
-                        fighter.HasBeenDestroyed = true;
-                        if (BattleStats != null)
+                        if (creature.Type == CreatureType.SilverMist && Empire != null)
                         {
-                            BattleStats.FighterDestroyedEnemy();
+                            Empire.CivilityRating += Galaxy.DestroySilverMistReputationBonus;
                         }
-                        if (ShipGroup != null && ShipGroup.BattleStats != null)
-                        {
-                            ShipGroup.BattleStats.FighterDestroyedEnemy();
-                        }
+                        _Galaxy.CheckTriggerEvent(creature.GameEventId, ActualEmpire, EventTriggerType.Destroy, null);
+                        creature.CompleteTeardown();
+                        return true;
+                    }
+                }
+                else if (abstractTarget is Fighter)
+                {
+                    Fighter fighter = (Fighter)abstractTarget;
+                    if (BattleStats != null)
+                    {
+                        BattleStats.WeaponHitEnemy((float)hitPower, weaponDistanceTravelled);
+                    }
+                    if (ShipGroup != null && ShipGroup.BattleStats != null)
+                    {
+                        ShipGroup.BattleStats.WeaponHitEnemy((float)hitPower, weaponDistanceTravelled);
+                    }
+                    if ((double)fighter.CurrentShields >= hitPower)
+                    {
+                        fighter.CurrentShields -= (float)hitPower;
+                        fighter.LastShieldStrike = time;
+                        fighter.LastShieldStrikeDirection = (float)strikeAngle;
                         if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.BattleStats != null)
                         {
-                            fighter.ParentBuiltObject.BattleStats.FighterDestroyedFriendly();
+                            fighter.ParentBuiltObject.BattleStats.ShieldsStruckUs((float)hitPower);
                         }
                         if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.ShipGroup != null && fighter.ParentBuiltObject.ShipGroup.BattleStats != null)
                         {
-                            fighter.ParentBuiltObject.ShipGroup.BattleStats.FighterDestroyedFriendly();
+                            fighter.ParentBuiltObject.ShipGroup.BattleStats.ShieldsStruckUs((float)hitPower);
                         }
-                        if (Empire != null && Empire != galaxy.IndependentEmpire && fighter.Empire != null && fighter.Empire.PirateEmpireBaseHabitat != null)
-                        {
-                            double num2 = 0.015;
-                            Empire.CivilityRating += num2;
-                        }
-                        Explosion explosion = new Explosion();
-                        explosion.ExplosionStart = time;
-                        explosion.ExplosionSize = (short)(Math.Sqrt((double)fighter.Size * 0.3) * (Math.PI / 4.0) * 30.0);
-                        explosion.ExplosionProgression = 0f;
-                        explosion.ExplosionOffsetX = 0;
-                        explosion.ExplosionOffsetY = 0;
-                        explosion.ExplosionImageIndex = (short)Galaxy.Rnd.Next(10, 20);
-                        explosion.ExplosionWillDestroy = true;
-                        fighter.Explosions.Add(explosion);
-                        galaxy.InflictWarDamage(Empire, fighter);
-                        if (fighter.Empire != null)
-                        {
-                            fighter.Empire.ResolveSystemVisibility(fighter.Xpos, fighter.Ypos, null, null);
-                        }
-                        return true;
-                    }
-                    fighter.Health -= (float)((double)num / (double)fighter.Size);
-                    fighter.OverlayChanged = true;
-                    Explosion explosion2 = new Explosion();
-                    explosion2.ExplosionStart = time;
-                    if (weapon != null && weapon.Component != null && weapon.Component.Type == ComponentType.WeaponMissile)
-                    {
-                        explosion2.ExplosionSize = (short)(Math.Sqrt((double)num * 0.7) * (Math.PI / 4.0) * 30.0);
                     }
                     else
                     {
-                        explosion2.ExplosionSize = (short)(Math.Sqrt((double)num * 0.3) * (Math.PI / 4.0) * 30.0);
-                    }
-                    if (explosion2.ExplosionSize < 5)
-                    {
-                        explosion2.ExplosionSize = 5;
-                    }
-                    explosion2.ExplosionProgression = 0f;
-                    explosion2.ExplosionImageIndex = (short)Galaxy.Rnd.Next(0, 10);
-                    int num3 = Galaxy.Rnd.Next(0, (int)(Math.Sqrt(fighter.Size) * 0.7));
-                    if (Galaxy.Rnd.Next(0, 2) == 0)
-                    {
-                        num3 *= -1;
-                    }
-                    int num4 = Galaxy.Rnd.Next(0, (int)(Math.Sqrt(fighter.Size) * 0.7));
-                    if (Galaxy.Rnd.Next(0, 2) == 0)
-                    {
-                        num4 *= -1;
-                    }
-                    explosion2.ExplosionOffsetX = (short)num3;
-                    explosion2.ExplosionOffsetY = (short)num4;
-                    explosion2.ExplosionWillDestroy = false;
-                    fighter.Explosions.Add(explosion2);
-                }
-            }
-            else if (abstractTarget is BuiltObject)
-            {
-                BuiltObject builtObject = (BuiltObject)abstractTarget;
-                if (BattleStats != null)
-                {
-                    BattleStats.WeaponHitEnemy((float)hitPower, weaponDistanceTravelled);
-                }
-                if (ShipGroup != null && ShipGroup.BattleStats != null)
-                {
-                    ShipGroup.BattleStats.WeaponHitEnemy((float)hitPower, weaponDistanceTravelled);
-                }
-                bool flag = false;
-                bool flag2 = false;
-                bool flag3 = false;
-                if (weapon != null && weapon.Component != null)
-                {
-                    switch (weapon.Component.Type)
-                    {
-                        case ComponentType.WeaponRailGun:
-                        case ComponentType.WeaponSuperRailGun:
-                            flag = true;
-                            break;
-                        case ComponentType.WeaponPhaser:
-                        case ComponentType.WeaponSuperPhaser:
-                            flag2 = true;
-                            break;
-                        case ComponentType.WeaponGravityBeam:
-                        case ComponentType.WeaponAreaGravity:
-                            flag3 = true;
-                            break;
-                    }
-                }
-                if ((double)builtObject.CurrentShields >= hitPower && !flag && !flag3)
-                {
-                    builtObject.CurrentShields -= (float)hitPower;
-                    if (!flag2)
-                    {
-                        builtObject.LastShieldStrike = time;
-                    }
-                    builtObject.LastShieldStrikeDirection = (float)strikeAngle;
-                    if (builtObject.BattleStats != null)
-                    {
-                        builtObject.BattleStats.ShieldsStruckUs((float)hitPower);
-                    }
-                    if (builtObject.ShipGroup != null && builtObject.ShipGroup.BattleStats != null)
-                    {
-                        builtObject.ShipGroup.BattleStats.ShieldsStruckUs((float)hitPower);
-                    }
-                    _Galaxy.ChanceAttackedPirateFactionJoinsPhantomPirates(Empire, builtObject);
-                }
-                else
-                {
-                    int num5 = (int)((float)hitPower - builtObject.CurrentShields + 0.5f);
-                    if (flag3)
-                    {
-                        num5 = (int)((float)hitPower + 0.5f);
-                    }
-                    else if (flag)
-                    {
-                        double num6 = 0.25 + Galaxy.Rnd.NextDouble() * 0.5;
-                        double num7 = hitPower * num6;
-                        double num8 = hitPower - num7;
-                        if (num8 > 0.0)
+                        int num = (int)((float)hitPower - fighter.CurrentShields + 0.5f);
+                        if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.BattleStats != null)
                         {
-                            builtObject.CurrentShields -= (float)num8;
-                            if (!flag2)
+                            fighter.ParentBuiltObject.BattleStats.ShieldsStruckUs(fighter.CurrentShields);
+                        }
+                        if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.ShipGroup != null && fighter.ParentBuiltObject.ShipGroup.BattleStats != null)
+                        {
+                            fighter.ParentBuiltObject.ShipGroup.BattleStats.ShieldsStruckUs(fighter.CurrentShields);
+                        }
+                        fighter.CurrentShields = 0f;
+                        if (num > fighter.Size)
+                        {
+                            num = fighter.Size;
+                        }
+                        if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.BattleStats != null)
+                        {
+                            fighter.ParentBuiltObject.BattleStats.DamageHullUs(num);
+                        }
+                        if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.ShipGroup != null && fighter.ParentBuiltObject.ShipGroup.BattleStats != null)
+                        {
+                            fighter.ParentBuiltObject.ShipGroup.BattleStats.DamageHullUs(num);
+                        }
+                        if ((float)fighter.Size * fighter.Health <= (float)num && !fighter.HasBeenDestroyed)
+                        {
+                            fighter.Health = 0f;
+                            fighter.HasBeenDestroyed = true;
+                            if (BattleStats != null)
                             {
-                                builtObject.LastShieldStrike = time;
+                                BattleStats.FighterDestroyedEnemy();
                             }
-                            builtObject.LastShieldStrikeDirection = (float)strikeAngle;
+                            if (ShipGroup != null && ShipGroup.BattleStats != null)
+                            {
+                                ShipGroup.BattleStats.FighterDestroyedEnemy();
+                            }
+                            if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.BattleStats != null)
+                            {
+                                fighter.ParentBuiltObject.BattleStats.FighterDestroyedFriendly();
+                            }
+                            if (fighter.ParentBuiltObject != null && fighter.ParentBuiltObject.ShipGroup != null && fighter.ParentBuiltObject.ShipGroup.BattleStats != null)
+                            {
+                                fighter.ParentBuiltObject.ShipGroup.BattleStats.FighterDestroyedFriendly();
+                            }
+                            if (Empire != null && Empire != galaxy.IndependentEmpire && fighter.Empire != null && fighter.Empire.PirateEmpireBaseHabitat != null)
+                            {
+                                double num2 = 0.015;
+                                Empire.CivilityRating += num2;
+                            }
+                            Explosion explosion = new Explosion();
+                            explosion.ExplosionStart = time;
+                            explosion.ExplosionSize = (short)(Math.Sqrt((double)fighter.Size * 0.3) * (Math.PI / 4.0) * 30.0);
+                            explosion.ExplosionProgression = 0f;
+                            explosion.ExplosionOffsetX = 0;
+                            explosion.ExplosionOffsetY = 0;
+                            explosion.ExplosionImageIndex = (short)Galaxy.Rnd.Next(10, 20);
+                            explosion.ExplosionWillDestroy = true;
+                            fighter.Explosions.Add(explosion);
+                            galaxy.InflictWarDamage(Empire, fighter);
+                            if (fighter.Empire != null)
+                            {
+                                fighter.Empire.ResolveSystemVisibility(fighter.Xpos, fighter.Ypos, null, null);
+                            }
+                            return true;
+                        }
+                        fighter.Health -= (float)((double)num / (double)fighter.Size);
+                        fighter.OverlayChanged = true;
+                        Explosion explosion2 = new Explosion();
+                        explosion2.ExplosionStart = time;
+                        if (weapon != null && weapon.Component != null && weapon.Component.Type == ComponentType.WeaponMissile)
+                        {
+                            explosion2.ExplosionSize = (short)(Math.Sqrt((double)num * 0.7) * (Math.PI / 4.0) * 30.0);
+                        }
+                        else
+                        {
+                            explosion2.ExplosionSize = (short)(Math.Sqrt((double)num * 0.3) * (Math.PI / 4.0) * 30.0);
+                        }
+                        if (explosion2.ExplosionSize < 5)
+                        {
+                            explosion2.ExplosionSize = 5;
+                        }
+                        explosion2.ExplosionProgression = 0f;
+                        explosion2.ExplosionImageIndex = (short)Galaxy.Rnd.Next(0, 10);
+                        int num3 = Galaxy.Rnd.Next(0, (int)(Math.Sqrt(fighter.Size) * 0.7));
+                        if (Galaxy.Rnd.Next(0, 2) == 0)
+                        {
+                            num3 *= -1;
+                        }
+                        int num4 = Galaxy.Rnd.Next(0, (int)(Math.Sqrt(fighter.Size) * 0.7));
+                        if (Galaxy.Rnd.Next(0, 2) == 0)
+                        {
+                            num4 *= -1;
+                        }
+                        explosion2.ExplosionOffsetX = (short)num3;
+                        explosion2.ExplosionOffsetY = (short)num4;
+                        explosion2.ExplosionWillDestroy = false;
+                        fighter.Explosions.Add(explosion2);
+                    }
+                }
+                else if (abstractTarget is BuiltObject)
+                {
+                    BuiltObject builtObject = (BuiltObject)abstractTarget;
+                    if (BattleStats != null)
+                    {
+                        BattleStats.WeaponHitEnemy((float)hitPower, weaponDistanceTravelled);
+                    }
+                    if (ShipGroup != null && ShipGroup.BattleStats != null)
+                    {
+                        ShipGroup.BattleStats.WeaponHitEnemy((float)hitPower, weaponDistanceTravelled);
+                    }
+                    bool flag = false;
+                    bool flag2 = false;
+                    bool flag3 = false;
+                    if (weapon != null && weapon.Component != null)
+                    {
+                        switch (weapon.Component.Type)
+                        {
+                            case ComponentType.WeaponRailGun:
+                            case ComponentType.WeaponSuperRailGun:
+                                flag = true;
+                                break;
+                            case ComponentType.WeaponPhaser:
+                            case ComponentType.WeaponSuperPhaser:
+                                flag2 = true;
+                                break;
+                            case ComponentType.WeaponGravityBeam:
+                            case ComponentType.WeaponAreaGravity:
+                                flag3 = true;
+                                break;
+                        }
+                    }
+                    if ((double)builtObject.CurrentShields >= hitPower && !flag && !flag3)
+                    {
+                        builtObject.CurrentShields -= (float)hitPower;
+                        if (!flag2)
+                        {
+                            builtObject.LastShieldStrike = time;
+                        }
+                        builtObject.LastShieldStrikeDirection = (float)strikeAngle;
+                        if (builtObject.BattleStats != null)
+                        {
+                            builtObject.BattleStats.ShieldsStruckUs((float)hitPower);
+                        }
+                        if (builtObject.ShipGroup != null && builtObject.ShipGroup.BattleStats != null)
+                        {
+                            builtObject.ShipGroup.BattleStats.ShieldsStruckUs((float)hitPower);
+                        }
+                        _Galaxy.ChanceAttackedPirateFactionJoinsPhantomPirates(Empire, builtObject);
+                    }
+                    else
+                    {
+                        int num5 = (int)((float)hitPower - builtObject.CurrentShields + 0.5f);
+                        if (flag3)
+                        {
+                            num5 = (int)((float)hitPower + 0.5f);
+                        }
+                        else if (flag)
+                        {
+                            double num6 = 0.25 + Galaxy.Rnd.NextDouble() * 0.5;
+                            double num7 = hitPower * num6;
+                            double num8 = hitPower - num7;
+                            if (num8 > 0.0)
+                            {
+                                builtObject.CurrentShields -= (float)num8;
+                                if (!flag2)
+                                {
+                                    builtObject.LastShieldStrike = time;
+                                }
+                                builtObject.LastShieldStrikeDirection = (float)strikeAngle;
+                                if (builtObject.BattleStats != null)
+                                {
+                                    builtObject.BattleStats.ShieldsStruckUs((float)num8);
+                                }
+                                if (builtObject.ShipGroup != null && builtObject.ShipGroup.BattleStats != null)
+                                {
+                                    builtObject.ShipGroup.BattleStats.ShieldsStruckUs((float)num8);
+                                }
+                                _Galaxy.ChanceAttackedPirateFactionJoinsPhantomPirates(Empire, builtObject);
+                            }
+                            num5 = (int)num7;
+                        }
+                        else
+                        {
                             if (builtObject.BattleStats != null)
                             {
-                                builtObject.BattleStats.ShieldsStruckUs((float)num8);
+                                builtObject.BattleStats.ShieldsStruckUs(builtObject.CurrentShields);
                             }
                             if (builtObject.ShipGroup != null && builtObject.ShipGroup.BattleStats != null)
                             {
-                                builtObject.ShipGroup.BattleStats.ShieldsStruckUs((float)num8);
+                                builtObject.ShipGroup.BattleStats.ShieldsStruckUs(builtObject.CurrentShields);
                             }
-                            _Galaxy.ChanceAttackedPirateFactionJoinsPhantomPirates(Empire, builtObject);
+                            builtObject.CurrentShields = 0f;
                         }
-                        num5 = (int)num7;
-                    }
-                    else
-                    {
-                        if (builtObject.BattleStats != null)
+                        if (builtObject.DamageRepair > 0 && builtObject.DamagedComponentCount == 0)
                         {
-                            builtObject.BattleStats.ShieldsStruckUs(builtObject.CurrentShields);
+                            long num9 = (builtObject.LastRepair = _Galaxy.CurrentStarDate);
                         }
-                        if (builtObject.ShipGroup != null && builtObject.ShipGroup.BattleStats != null)
+                        if (builtObject.Armor > 0 && !flag3 && builtObject.Components != null)
                         {
-                            builtObject.ShipGroup.BattleStats.ShieldsStruckUs(builtObject.CurrentShields);
-                        }
-                        builtObject.CurrentShields = 0f;
-                    }
-                    if (builtObject.DamageRepair > 0 && builtObject.DamagedComponentCount == 0)
-                    {
-                        long num9 = (builtObject.LastRepair = _Galaxy.CurrentStarDate);
-                    }
-                    if (builtObject.Armor > 0 && !flag3 && builtObject.Components != null)
-                    {
-                        BuiltObjectComponent builtObjectComponent = builtObject.Components[ComponentCategoryType.Armor, ComponentStatus.Normal];
-                        int iterationCount = 0;
-                        while (Galaxy.ConditionCheckLimit(builtObjectComponent != null && num5 > 0, 500, ref iterationCount))
-                        {
-                            if (num5 < 1073741823 && builtObjectComponent.Value2 > 0)
+                            BuiltObjectComponent builtObjectComponent = builtObject.Components[ComponentCategoryType.Armor, ComponentStatus.Normal];
+                            int iterationCount = 0;
+                            while (Galaxy.ConditionCheckLimit(builtObjectComponent != null && num5 > 0, 500, ref iterationCount))
                             {
-                                int num10 = builtObjectComponent.Value2 * BaconBuiltObject.ArmorReactivityMultiplier(builtObject);
-                                if (builtObject.ArmorReinforcingFactor > 0)
+                                if (num5 < 1073741823 && builtObjectComponent.Value2 > 0)
                                 {
-                                    num10 = (int)((double)num10 * ((double)builtObject.ArmorReinforcingFactor / 100.0));
-                                }
-                                if (weapon != null && weapon.Component != null)
-                                {
-                                    ComponentType type = weapon.Component.Type;
-                                    if ((type == ComponentType.WeaponPhaser || type == ComponentType.WeaponSuperPhaser) && num10 > 0)
+                                    int num10 = builtObjectComponent.Value2 * BaconBuiltObject.ArmorReactivityMultiplier(builtObject);
+                                    if (builtObject.ArmorReinforcingFactor > 0)
                                     {
-                                        num10 = Math.Max(1, num10 / 2);
+                                        num10 = (int)((double)num10 * ((double)builtObject.ArmorReinforcingFactor / 100.0));
                                     }
-                                }
-                                if (num5 <= num10)
-                                {
-                                    if (allowArmorInvulnerability)
+                                    if (weapon != null && weapon.Component != null)
                                     {
-                                        num5 = 0;
+                                        ComponentType type = weapon.Component.Type;
+                                        if ((type == ComponentType.WeaponPhaser || type == ComponentType.WeaponSuperPhaser) && num10 > 0)
+                                        {
+                                            num10 = Math.Max(1, num10 / 2);
+                                        }
+                                    }
+                                    if (num5 <= num10)
+                                    {
+                                        if (allowArmorInvulnerability)
+                                        {
+                                            num5 = 0;
+                                        }
+                                        else
+                                        {
+                                            double num11 = (double)num10 / (double)num5;
+                                            double num12 = Galaxy.Rnd.NextDouble() * num11;
+                                            num5 = ((num12 < 0.2) ? 1 : 0);
+                                        }
                                     }
                                     else
                                     {
-                                        double num11 = (double)num10 / (double)num5;
-                                        double num12 = Galaxy.Rnd.NextDouble() * num11;
-                                        num5 = ((num12 < 0.2) ? 1 : 0);
+                                        num5 -= num10;
                                     }
                                 }
-                                else
+                                if (num5 <= 0)
                                 {
-                                    num5 -= num10;
+                                    continue;
                                 }
-                            }
-                            if (num5 <= 0)
-                            {
-                                continue;
-                            }
-                            if (weapon != null && weapon.Component != null)
-                            {
-                                switch (weapon.Component.Type)
+                                if (weapon != null && weapon.Component != null)
                                 {
-                                    case ComponentType.WeaponMissile:
-                                    case ComponentType.WeaponRailGun:
-                                    case ComponentType.WeaponSuperMissile:
-                                    case ComponentType.WeaponSuperRailGun:
-                                        num5 = Math.Max(1, num5 / 2);
-                                        break;
+                                    switch (weapon.Component.Type)
+                                    {
+                                        case ComponentType.WeaponMissile:
+                                        case ComponentType.WeaponRailGun:
+                                        case ComponentType.WeaponSuperMissile:
+                                        case ComponentType.WeaponSuperRailGun:
+                                            num5 = Math.Max(1, num5 / 2);
+                                            break;
+                                    }
                                 }
+                                int num13 = builtObjectComponent.Value1;
+                                if (builtObject.ArmorReinforcingFactor > 0)
+                                {
+                                    num13 = (int)((double)num13 * ((double)builtObject.ArmorReinforcingFactor / 100.0));
+                                }
+                                double val = (double)num5 / (double)num13;
+                                val = Math.Max(0.1, val);
+                                if (Galaxy.Rnd.NextDouble() < val)
+                                {
+                                    builtObjectComponent.Status = ComponentStatus.Damaged;
+                                }
+                                num5 -= num13;
+                                builtObjectComponent = builtObject.Components[ComponentCategoryType.Armor, ComponentStatus.Normal];
                             }
-                            int num13 = builtObjectComponent.Value1;
-                            if (builtObject.ArmorReinforcingFactor > 0)
-                            {
-                                num13 = (int)((double)num13 * ((double)builtObject.ArmorReinforcingFactor / 100.0));
-                            }
-                            double val = (double)num5 / (double)num13;
-                            val = Math.Max(0.1, val);
-                            if (Galaxy.Rnd.NextDouble() < val)
-                            {
-                                builtObjectComponent.Status = ComponentStatus.Damaged;
-                            }
-                            num5 -= num13;
-                            builtObjectComponent = builtObject.Components[ComponentCategoryType.Armor, ComponentStatus.Normal];
                         }
-                    }
-                    double num14 = builtObject.DamageReduction;
-                    if (builtObject.ShipGroup != null)
-                    {
-                        num14 *= builtObject.ShipGroup.DamageControlBonus;
-                    }
-                    num14 *= builtObject.CaptainDamageControlBonus;
-                    num5 = (int)((double)num5 + 0.49 - (double)num5 * num14);
-                    if (num5 > builtObject.Size)
-                    {
-                        num5 = builtObject.Size;
-                    }
-                    if (builtObject.BattleStats != null)
-                    {
-                        builtObject.BattleStats.DamageHullUs(num5);
-                    }
-                    if (builtObject.ShipGroup != null && builtObject.ShipGroup.BattleStats != null)
-                    {
-                        builtObject.ShipGroup.BattleStats.DamageHullUs(num5);
-                    }
-                    BaconBuiltObject.SaveShipInfoBeforeDestruction(builtObject);
-                    if (builtObject.UndamagedComponentSize <= num5 && !builtObject.HasBeenDestroyed)
-                    {
-                        if (BattleStats != null)
+                        double num14 = builtObject.DamageReduction;
+                        if (builtObject.ShipGroup != null)
                         {
-                            BattleStats.TargetDestroyedEnemy(builtObject);
+                            num14 *= builtObject.ShipGroup.DamageControlBonus;
                         }
-                        if (ShipGroup != null && ShipGroup.BattleStats != null)
+                        num14 *= builtObject.CaptainDamageControlBonus;
+                        num5 = (int)((double)num5 + 0.49 - (double)num5 * num14);
+                        if (num5 > builtObject.Size)
                         {
-                            ShipGroup.BattleStats.TargetDestroyedEnemy(builtObject);
+                            num5 = builtObject.Size;
                         }
                         if (builtObject.BattleStats != null)
                         {
-                            builtObject.BattleStats.TargetDestroyedFriendly(builtObject);
+                            builtObject.BattleStats.DamageHullUs(num5);
                         }
                         if (builtObject.ShipGroup != null && builtObject.ShipGroup.BattleStats != null)
                         {
-                            builtObject.ShipGroup.BattleStats.TargetDestroyedFriendly(builtObject);
+                            builtObject.ShipGroup.BattleStats.DamageHullUs(num5);
                         }
-                        _Galaxy.CheckTriggerEvent(builtObject.GameEventId, ActualEmpire, EventTriggerType.Destroy, null);
-                        if (Empire != null && Empire != _Galaxy.IndependentEmpire && builtObject.Empire != null && builtObject.Empire.PirateEmpireBaseHabitat != null)
+                        BaconBuiltObject.SaveShipInfoBeforeDestruction(builtObject);
+                        if (builtObject.UndamagedComponentSize <= num5 && !builtObject.HasBeenDestroyed)
                         {
-                            double num15 = 0.05;
-                            switch (builtObject.SubRole)
+                            if (BattleStats != null)
                             {
-                                case BuiltObjectSubRole.SmallSpacePort:
-                                    num15 = 0.25;
-                                    break;
-                                case BuiltObjectSubRole.MediumSpacePort:
-                                    num15 = 0.35;
-                                    break;
-                                case BuiltObjectSubRole.LargeSpacePort:
-                                    num15 = 0.5;
-                                    break;
+                                BattleStats.TargetDestroyedEnemy(builtObject);
                             }
-                            Empire.CivilityRating += num15;
-                        }
-                        if (Role != BuiltObjectRole.Base)
-                        {
-                            _Galaxy.ChanceRaceEvent(builtObject, this);
-                            if (!_Galaxy.ChanceNewShipCaptain(builtObject, Empire, this))
+                            if (ShipGroup != null && ShipGroup.BattleStats != null)
                             {
-                                _Galaxy.ChanceNewFleetAdmiral(builtObject, Empire, this);
+                                ShipGroup.BattleStats.TargetDestroyedEnemy(builtObject);
                             }
-                        }
-                        if (Empire != null && Empire.Counters != null)
-                        {
-                            Empire.Counters.ProcessBuiltObjectDestruction(builtObject);
-                        }
-                        Explosion explosion3 = new Explosion();
-                        explosion3.ExplosionStart = _tempNow;
-                        explosion3.ExplosionSize = (short)(Math.Sqrt(builtObject.Components.Count) * (Math.PI / 4.0) * 30.0);
-                        explosion3.ExplosionProgression = 0f;
-                        explosion3.ExplosionOffsetX = 0;
-                        explosion3.ExplosionOffsetY = 0;
-                        explosion3.ExplosionImageIndex = (short)Galaxy.Rnd.Next(10, 20);
-                        explosion3.ExplosionWillDestroy = true;
-                        builtObject.Explosions.Add(explosion3);
-                        BaconBuiltObject.CollectScrapFromDestroyedBuiltObjects(this, builtObject);
-                        builtObject.HasBeenDestroyed = true;
-                        _Galaxy.InflictWarDamage(Empire, builtObject);
-                        if (allowRecursion)
-                        {
-                            GalaxyIndex galaxyIndex = _Galaxy.ResolveIndex(builtObject.Xpos, builtObject.Ypos);
-                            for (int i = 0; i < galaxy.BuiltObjectIndex[galaxyIndex.X][galaxyIndex.Y].Count; i++)
+                            if (builtObject.BattleStats != null)
                             {
-                                BuiltObject builtObject2 = galaxy.BuiltObjectIndex[galaxyIndex.X][galaxyIndex.Y][i];
-                                if (builtObject2 != null && builtObject2 != builtObject && galaxy.CheckWithinDistancePotential(400.0, builtObject.Xpos, builtObject.Ypos, builtObject2.Xpos, builtObject2.Ypos))
+                                builtObject.BattleStats.TargetDestroyedFriendly(builtObject);
+                            }
+                            if (builtObject.ShipGroup != null && builtObject.ShipGroup.BattleStats != null)
+                            {
+                                builtObject.ShipGroup.BattleStats.TargetDestroyedFriendly(builtObject);
+                            }
+                            _Galaxy.CheckTriggerEvent(builtObject.GameEventId, ActualEmpire, EventTriggerType.Destroy, null);
+                            if (Empire != null && Empire != _Galaxy.IndependentEmpire && builtObject.Empire != null && builtObject.Empire.PirateEmpireBaseHabitat != null)
+                            {
+                                double num15 = 0.05;
+                                switch (builtObject.SubRole)
                                 {
-                                    double num16 = galaxy.CalculateDistance(builtObject.Xpos, builtObject.Ypos, builtObject2.Xpos, builtObject2.Ypos);
-                                    double num17 = (double)builtObject.Size * 0.25 - num16 * 2.0;
-                                    if (num17 > 0.0)
+                                    case BuiltObjectSubRole.SmallSpacePort:
+                                        num15 = 0.25;
+                                        break;
+                                    case BuiltObjectSubRole.MediumSpacePort:
+                                        num15 = 0.35;
+                                        break;
+                                    case BuiltObjectSubRole.LargeSpacePort:
+                                        num15 = 0.5;
+                                        break;
+                                }
+                                Empire.CivilityRating += num15;
+                            }
+                            if (Role != BuiltObjectRole.Base)
+                            {
+                                _Galaxy.ChanceRaceEvent(builtObject, this);
+                                if (!_Galaxy.ChanceNewShipCaptain(builtObject, Empire, this))
+                                {
+                                    _Galaxy.ChanceNewFleetAdmiral(builtObject, Empire, this);
+                                }
+                            }
+                            if (Empire != null && Empire.Counters != null)
+                            {
+                                Empire.Counters.ProcessBuiltObjectDestruction(builtObject);
+                            }
+                            Explosion explosion3 = new Explosion();
+                            explosion3.ExplosionStart = _tempNow;
+                            explosion3.ExplosionSize = (short)(Math.Sqrt(builtObject.Components.Count) * (Math.PI / 4.0) * 30.0);
+                            explosion3.ExplosionProgression = 0f;
+                            explosion3.ExplosionOffsetX = 0;
+                            explosion3.ExplosionOffsetY = 0;
+                            explosion3.ExplosionImageIndex = (short)Galaxy.Rnd.Next(10, 20);
+                            explosion3.ExplosionWillDestroy = true;
+                            builtObject.Explosions.Add(explosion3);
+                            BaconBuiltObject.CollectScrapFromDestroyedBuiltObjects(this, builtObject);
+                            builtObject.HasBeenDestroyed = true;
+                            _Galaxy.InflictWarDamage(Empire, builtObject);
+                            if (allowRecursion)
+                            {
+                                GalaxyIndex galaxyIndex = _Galaxy.ResolveIndex(builtObject.Xpos, builtObject.Ypos);
+                                for (int i = 0; i < galaxy.BuiltObjectIndex[galaxyIndex.X][galaxyIndex.Y].Count; i++)
+                                {
+                                    BuiltObject builtObject2 = galaxy.BuiltObjectIndex[galaxyIndex.X][galaxyIndex.Y][i];
+                                    if (builtObject2 != null && builtObject2 != builtObject && galaxy.CheckWithinDistancePotential(400.0, builtObject.Xpos, builtObject.Ypos, builtObject2.Xpos, builtObject2.Ypos))
                                     {
-                                        InflictDamage(builtObject2, null, num17, time, galaxy, weaponDistanceTravelled, allowRecursion: false, double.MinValue, allowArmorInvulnerability: false);
+                                        double num16 = galaxy.CalculateDistance(builtObject.Xpos, builtObject.Ypos, builtObject2.Xpos, builtObject2.Ypos);
+                                        double num17 = (double)builtObject.Size * 0.25 - num16 * 2.0;
+                                        if (num17 > 0.0)
+                                        {
+                                            InflictDamage(builtObject2, null, num17, time, galaxy, weaponDistanceTravelled, allowRecursion: false, double.MinValue, allowArmorInvulnerability: false);
+                                        }
                                     }
                                 }
                             }
-                        }
-                        if (builtObject.Empire != null)
-                        {
-                            builtObject.Empire.ResolveSystemVisibility(builtObject.Xpos, builtObject.Ypos, builtObject, null);
-                        }
-                        if (builtObject.ConstructionQueue != null && builtObject.ConstructionQueue.ConstructionYards != null && builtObject.ConstructionQueue.ConstructionYards.CountUnderConstruction > 0)
-                        {
-                            foreach (ConstructionYard constructionYard in builtObject.ConstructionQueue.ConstructionYards)
+                            if (builtObject.Empire != null)
                             {
-                                BuiltObject shipUnderConstruction = constructionYard.ShipUnderConstruction;
-                                shipUnderConstruction?.InflictDamage(shipUnderConstruction, null, double.MaxValue, time, _Galaxy, weaponDistanceTravelled, allowRecursion: false, double.MinValue, allowArmorInvulnerability: false);
+                                builtObject.Empire.ResolveSystemVisibility(builtObject.Xpos, builtObject.Ypos, builtObject, null);
+                            }
+                            if (builtObject.ConstructionQueue != null && builtObject.ConstructionQueue.ConstructionYards != null && builtObject.ConstructionQueue.ConstructionYards.CountUnderConstruction > 0)
+                            {
+                                foreach (ConstructionYard constructionYard in builtObject.ConstructionQueue.ConstructionYards)
+                                {
+                                    BuiltObject shipUnderConstruction = constructionYard.ShipUnderConstruction;
+                                    shipUnderConstruction?.InflictDamage(shipUnderConstruction, null, double.MaxValue, time, _Galaxy, weaponDistanceTravelled, allowRecursion: false, double.MinValue, allowArmorInvulnerability: false);
+                                }
+                            }
+                            builtObject.ReDefine();
+                            return true;
+                        }
+                        int num18 = num5;
+                        if (builtObject.Components != null)
+                        {
+                            int iterationCount2 = 0;
+                            while (Galaxy.ConditionCheckLimit(num5 > 0, 500, ref iterationCount2))
+                            {
+                                int num19 = 0;
+                                int num20 = 0;
+                                do
+                                {
+                                    num19 = Galaxy.Rnd.Next(0, builtObject.Components.Count);
+                                    num20++;
+                                }
+                                while (num20 <= 30 && num19 < builtObject.Components.Count && builtObject.Components[num19].Status == ComponentStatus.Damaged);
+                                if (num19 >= builtObject.Components.Count)
+                                {
+                                    continue;
+                                }
+                                if (builtObject.Components[num19].Status == ComponentStatus.Damaged)
+                                {
+                                    _Galaxy.ReseedRandom();
+                                }
+                                builtObject.Components[num19].Status = ComponentStatus.Damaged;
+                                if (builtObject.Role != BuiltObjectRole.Base)
+                                {
+                                    switch (builtObject.Components[num19].Type)
+                                    {
+                                        case ComponentType.StorageCargo:
+                                            {
+                                                int num22 = builtObject.Components[num19].Value1;
+                                                if (builtObject.Cargo == null || builtObject.Cargo.Count <= 0)
+                                                {
+                                                    break;
+                                                }
+                                                CargoList cargoList = new CargoList();
+                                                for (int j = 0; j < builtObject.Cargo.Count; j++)
+                                                {
+                                                    Cargo cargo = builtObject.Cargo[j];
+                                                    if (num22 <= 0)
+                                                    {
+                                                        break;
+                                                    }
+                                                    if (cargo.Amount > num22)
+                                                    {
+                                                        cargo.Amount -= num22;
+                                                        num22 = 0;
+                                                        break;
+                                                    }
+                                                    if (cargo.Amount > 0)
+                                                    {
+                                                        num22 -= cargo.Amount;
+                                                        cargoList.Add(cargo);
+                                                    }
+                                                }
+                                                foreach (Cargo item in cargoList)
+                                                {
+                                                    builtObject.Cargo.Remove(item);
+                                                }
+                                                break;
+                                            }
+                                        case ComponentType.StorageFuel:
+                                            {
+                                                int value2 = builtObject.Components[num19].Value1;
+                                                if (builtObject.CurrentFuel > 0.0)
+                                                {
+                                                    builtObject.CurrentFuel -= value2;
+                                                    if (builtObject.CurrentFuel < 0.0)
+                                                    {
+                                                        builtObject.CurrentFuel = 0.0;
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        case ComponentType.StorageTroop:
+                                            {
+                                                int value = builtObject.Components[num19].Value1;
+                                                if (builtObject.Troops == null || builtObject.TroopCapacity <= 0 || builtObject.Troops.TotalSize <= 0)
+                                                {
+                                                    break;
+                                                }
+                                                builtObject.TroopCapacity -= value;
+                                                if (builtObject.Troops.TotalSize <= builtObject.TroopCapacity)
+                                                {
+                                                    break;
+                                                }
+                                                var randTroop = builtObject.Troops[Galaxy.Rnd.Next(0, builtObject.Troops.Count - 1)];
+                                                if (randTroop != null)
+                                                {
+                                                    if (builtObject.Empire != null && builtObject.Empire.Troops != null)
+                                                    {
+                                                        builtObject.Empire.Troops.Remove(randTroop);
+                                                    }
+                                                    builtObject.Troops.Remove(randTroop);
+                                                }
+                                                break;
+                                            }
+                                    }
+                                }
+                                num5 -= builtObject.Components[num19].Size;
                             }
                         }
                         builtObject.ReDefine();
-                        return true;
-                    }
-                    int num18 = num5;
-                    if (builtObject.Components != null)
-                    {
-                        int iterationCount2 = 0;
-                        while (Galaxy.ConditionCheckLimit(num5 > 0, 500, ref iterationCount2))
+                        if (builtObject.Role != BuiltObjectRole.Base && builtObject.DamagedComponentCount > 0)
                         {
-                            int num19 = 0;
-                            int num20 = 0;
-                            do
-                            {
-                                num19 = Galaxy.Rnd.Next(0, builtObject.Components.Count);
-                                num20++;
-                            }
-                            while (num20 <= 30 && num19 < builtObject.Components.Count && builtObject.Components[num19].Status == ComponentStatus.Damaged);
-                            if (num19 >= builtObject.Components.Count)
-                            {
-                                continue;
-                            }
-                            if (builtObject.Components[num19].Status == ComponentStatus.Damaged)
-                            {
-                                _Galaxy.ReseedRandom();
-                            }
-                            builtObject.Components[num19].Status = ComponentStatus.Damaged;
-                            if (builtObject.Role != BuiltObjectRole.Base)
-                            {
-                                switch (builtObject.Components[num19].Type)
-                                {
-                                    case ComponentType.StorageCargo:
-                                        {
-                                            int num22 = builtObject.Components[num19].Value1;
-                                            if (builtObject.Cargo == null || builtObject.Cargo.Count <= 0)
-                                            {
-                                                break;
-                                            }
-                                            CargoList cargoList = new CargoList();
-                                            for (int j = 0; j < builtObject.Cargo.Count; j++)
-                                            {
-                                                Cargo cargo = builtObject.Cargo[j];
-                                                if (num22 <= 0)
-                                                {
-                                                    break;
-                                                }
-                                                if (cargo.Amount > num22)
-                                                {
-                                                    cargo.Amount -= num22;
-                                                    num22 = 0;
-                                                    break;
-                                                }
-                                                if (cargo.Amount > 0)
-                                                {
-                                                    num22 -= cargo.Amount;
-                                                    cargoList.Add(cargo);
-                                                }
-                                            }
-                                            foreach (Cargo item in cargoList)
-                                            {
-                                                builtObject.Cargo.Remove(item);
-                                            }
-                                            break;
-                                        }
-                                    case ComponentType.StorageFuel:
-                                        {
-                                            int value2 = builtObject.Components[num19].Value1;
-                                            if (builtObject.CurrentFuel > 0.0)
-                                            {
-                                                builtObject.CurrentFuel -= value2;
-                                                if (builtObject.CurrentFuel < 0.0)
-                                                {
-                                                    builtObject.CurrentFuel = 0.0;
-                                                }
-                                            }
-                                            break;
-                                        }
-                                    case ComponentType.StorageTroop:
-                                        {
-                                            int value = builtObject.Components[num19].Value1;
-                                            if (builtObject.Troops == null || builtObject.TroopCapacity <= 0 || builtObject.Troops.TotalSize <= 0)
-                                            {
-                                                break;
-                                            }
-                                            builtObject.TroopCapacity -= value;
-                                            if (builtObject.Troops.TotalSize <= builtObject.TroopCapacity)
-                                            {
-                                                break;
-                                            }
-                                            var randTroop = builtObject.Troops[Galaxy.Rnd.Next(0, builtObject.Troops.Count - 1)];
-                                            if (randTroop != null)
-                                            {
-                                                if (builtObject.Empire != null && builtObject.Empire.Troops != null)
-                                                {
-                                                    builtObject.Empire.Troops.Remove(randTroop);
-                                                }
-                                                builtObject.Troops.Remove(randTroop);
-                                            }
-                                            break;
-                                        }
-                                }
-                            }
-                            num5 -= builtObject.Components[num19].Size;
+                            builtObject.RepairForNextMission = true;
                         }
-                    }
-                    builtObject.ReDefine();
-                    if (builtObject.Role != BuiltObjectRole.Base && builtObject.DamagedComponentCount > 0)
-                    {
-                        builtObject.RepairForNextMission = true;
-                    }
-                    Explosion explosion4 = new Explosion();
-                    explosion4.ExplosionStart = _tempNow;
-                    explosion4.ExplosionSize = (short)(Math.Sqrt(num18) * (Math.PI / 4.0) * 30.0);
-                    if (weapon != null && weapon.Component != null && weapon.Component.Type == ComponentType.WeaponMissile)
-                    {
-                        explosion4.ExplosionSize = (short)(Math.Sqrt((double)num18 * 2.3) * (Math.PI / 4.0) * 30.0);
-                    }
-                    else
-                    {
+                        Explosion explosion4 = new Explosion();
+                        explosion4.ExplosionStart = _tempNow;
                         explosion4.ExplosionSize = (short)(Math.Sqrt(num18) * (Math.PI / 4.0) * 30.0);
+                        if (weapon != null && weapon.Component != null && weapon.Component.Type == ComponentType.WeaponMissile)
+                        {
+                            explosion4.ExplosionSize = (short)(Math.Sqrt((double)num18 * 2.3) * (Math.PI / 4.0) * 30.0);
+                        }
+                        else
+                        {
+                            explosion4.ExplosionSize = (short)(Math.Sqrt(num18) * (Math.PI / 4.0) * 30.0);
+                        }
+                        if (explosion4.ExplosionSize < 10)
+                        {
+                            explosion4.ExplosionSize = 10;
+                        }
+                        explosion4.ExplosionProgression = 0f;
+                        explosion4.ExplosionImageIndex = (short)Galaxy.Rnd.Next(0, 10);
+                        int num23 = Galaxy.Rnd.Next(0, (int)(Math.Sqrt(builtObject.Size) * 0.7));
+                        if (Galaxy.Rnd.Next(0, 2) == 0)
+                        {
+                            num23 *= -1;
+                        }
+                        int num24 = Galaxy.Rnd.Next(0, (int)(Math.Sqrt(builtObject.Size) * 0.7));
+                        if (Galaxy.Rnd.Next(0, 2) == 0)
+                        {
+                            num24 *= -1;
+                        }
+                        explosion4.ExplosionOffsetX = (short)num23;
+                        explosion4.ExplosionOffsetY = (short)num24;
+                        explosion4.ExplosionWillDestroy = false;
+                        builtObject.Explosions.Add(explosion4);
                     }
-                    if (explosion4.ExplosionSize < 10)
-                    {
-                        explosion4.ExplosionSize = 10;
-                    }
-                    explosion4.ExplosionProgression = 0f;
-                    explosion4.ExplosionImageIndex = (short)Galaxy.Rnd.Next(0, 10);
-                    int num23 = Galaxy.Rnd.Next(0, (int)(Math.Sqrt(builtObject.Size) * 0.7));
-                    if (Galaxy.Rnd.Next(0, 2) == 0)
-                    {
-                        num23 *= -1;
-                    }
-                    int num24 = Galaxy.Rnd.Next(0, (int)(Math.Sqrt(builtObject.Size) * 0.7));
-                    if (Galaxy.Rnd.Next(0, 2) == 0)
-                    {
-                        num24 *= -1;
-                    }
-                    explosion4.ExplosionOffsetX = (short)num23;
-                    explosion4.ExplosionOffsetY = (short)num24;
-                    explosion4.ExplosionWillDestroy = false;
-                    builtObject.Explosions.Add(explosion4);
                 }
+                return false;
             }
-            return false;
         }
 
         private bool EvaluateRelativeToParent(ref double parentXPos, ref double parentYPos, out double targetArrivalDistance, Galaxy galaxy)

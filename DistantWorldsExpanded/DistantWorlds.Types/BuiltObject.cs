@@ -467,6 +467,7 @@ namespace DistantWorlds.Types
 
         private object _redefineLock = new object();
         private object _disabledListLock = new object();
+        private object _inflictDamageLock = new object();
 
         [OptionalField]
         public FighterList Fighters;
