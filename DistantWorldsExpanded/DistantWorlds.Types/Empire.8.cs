@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DistantWorlds.Types
 {
@@ -76,14 +78,14 @@ namespace DistantWorlds.Types
             int num2 = DominantRace.TradeBonus + DominantRace.ResourceExtractionBonus + DominantRace.SatisfactionModifier;
             int num3 = DominantRace.AggressionLevel - 100 + (DominantRace.CautionLevel - 100) + DominantRace.WarWearinessAttenuation;
             int num4 = DominantRace.EspionageBonus * 2 + (DominantRace.IntelligenceLevel - 100);
-            DiplomaticRelation[] array = DiplomaticRelations.ToArray();
-            DiplomaticRelationList diplomaticRelationList = SummaryCopy(array);
-            foreach (DiplomaticRelation diplomaticRelation in array)
+            var tmpArr = new { Values = new double[DiplomaticRelations.Count], Relations = DiplomaticRelations.ToArray() };
+            DiplomaticRelationList diplomaticRelationList = SummaryCopy(tmpArr.Relations);
+            for (int i = 0; i > tmpArr.Relations.Length; i++)
             {
-                Empire otherEmpire = diplomaticRelation.OtherEmpire;
+                Empire otherEmpire = tmpArr.Relations[i].OtherEmpire;
                 EmpireEvaluation empireEvaluation = ObtainEmpireEvaluation(otherEmpire);
                 EmpireEvaluation empireEvaluation2 = otherEmpire.ObtainEmpireEvaluation(this);
-                if (diplomaticRelation.Type != 0 && otherEmpire != null && otherEmpire.Active)
+                if (tmpArr.Relations[i].Type != 0 && otherEmpire != null && otherEmpire.Active)
                 {
                     double bias = empireEvaluation.Bias;
                     double num5 = 0.0;
@@ -112,7 +114,7 @@ namespace DistantWorlds.Types
                         _ = (double)DominantRace.CautionLevel / 100.0;
                         double num13 = (double)DominantRace.FriendlinessLevel / 100.0;
                         double num14 = (double)DominantRace.LoyaltyLevel / 100.0;
-                        if (diplomaticRelation.Type == DiplomaticRelationType.FreeTradeAgreement)
+                        if (tmpArr.Relations[i].Type == DiplomaticRelationType.FreeTradeAgreement)
                         {
                             if (num14 > 1.0)
                             {
@@ -123,7 +125,7 @@ namespace DistantWorlds.Types
                                 num8 *= Math.Sqrt(Policy.BreakTreatyWillingness);
                             }
                         }
-                        else if (diplomaticRelation.Type == DiplomaticRelationType.Protectorate || diplomaticRelation.Type == DiplomaticRelationType.MutualDefensePact)
+                        else if (tmpArr.Relations[i].Type == DiplomaticRelationType.Protectorate || tmpArr.Relations[i].Type == DiplomaticRelationType.MutualDefensePact)
                         {
                             if (num14 > 1.0)
                             {
@@ -271,55 +273,56 @@ namespace DistantWorlds.Types
                     }
                     if (diplomaticStrategy == DiplomaticStrategy.Conquer)
                     {
-                        if (!CheckDesireToConquer(diplomaticRelation.OtherEmpire))
+                        if (!CheckDesireToConquer(tmpArr.Relations[i].OtherEmpire))
                         {
                             diplomaticStrategy = DiplomaticStrategy.Undefined;
                         }
                     }
-                    else if (CheckMustConquer(diplomaticRelation.OtherEmpire))
+                    else if (CheckMustConquer(tmpArr.Relations[i].OtherEmpire))
                     {
                         diplomaticStrategy = DiplomaticStrategy.Conquer;
                     }
-                    if (diplomaticStrategy == DiplomaticStrategy.Punish && num6 >= num11 && !CheckDesireToConquer(diplomaticRelation.OtherEmpire))
+                    if (diplomaticStrategy == DiplomaticStrategy.Punish && num6 >= num11 && !CheckDesireToConquer(tmpArr.Relations[i].OtherEmpire))
                     {
                         diplomaticStrategy = DiplomaticStrategy.Undermine;
                     }
-                    diplomaticRelation.SortTag = num6;
-                    diplomaticRelation.Strategy = diplomaticStrategy;
-                    Habitat habitat = CheckEmpireBuildingVictoryWonderAtKnownColony(diplomaticRelation.OtherEmpire);
-                    if (habitat != null && EvaluateShouldAttackWonderBuildingEmpire(diplomaticRelation.OtherEmpire, habitat, diplomaticRelation.Type, diplomaticRelation.Strategy))
+                    //tmpArr.Relations[i].SortTag = num6;
+                    tmpArr.Values[i] = num6;
+                    tmpArr.Relations[i].Strategy = diplomaticStrategy;
+                    Habitat habitat = CheckEmpireBuildingVictoryWonderAtKnownColony(tmpArr.Relations[i].OtherEmpire);
+                    if (habitat != null && EvaluateShouldAttackWonderBuildingEmpire(tmpArr.Relations[i].OtherEmpire, habitat, tmpArr.Relations[i].Type, tmpArr.Relations[i].Strategy))
                     {
-                        diplomaticRelation.Strategy = DiplomaticStrategy.Conquer;
+                        tmpArr.Relations[i].Strategy = DiplomaticStrategy.Conquer;
                     }
-                    if (diplomaticRelation.Type == DiplomaticRelationType.War && diplomaticRelation.Locked)
+                    if (tmpArr.Relations[i].Type == DiplomaticRelationType.War && tmpArr.Relations[i].Locked)
                     {
-                        diplomaticRelation.Strategy = DiplomaticStrategy.Conquer;
+                        tmpArr.Relations[i].Strategy = DiplomaticStrategy.Conquer;
                     }
                 }
-                if (diplomaticRelation.Locked)
+                if (tmpArr.Relations[i].Locked)
                 {
-                    switch (diplomaticRelation.Type)
+                    switch (tmpArr.Relations[i].Type)
                     {
                         case DiplomaticRelationType.None:
-                            diplomaticRelation.Strategy = DiplomaticStrategy.Undefined;
+                            tmpArr.Relations[i].Strategy = DiplomaticStrategy.Undefined;
                             break;
                         case DiplomaticRelationType.FreeTradeAgreement:
-                            diplomaticRelation.Strategy = DiplomaticStrategy.Befriend;
+                            tmpArr.Relations[i].Strategy = DiplomaticStrategy.Befriend;
                             break;
                         case DiplomaticRelationType.Protectorate:
-                            diplomaticRelation.Strategy = DiplomaticStrategy.Ally;
+                            tmpArr.Relations[i].Strategy = DiplomaticStrategy.Ally;
                             break;
                         case DiplomaticRelationType.MutualDefensePact:
-                            diplomaticRelation.Strategy = DiplomaticStrategy.Ally;
+                            tmpArr.Relations[i].Strategy = DiplomaticStrategy.Ally;
                             break;
                         case DiplomaticRelationType.SubjugatedDominion:
-                            diplomaticRelation.Strategy = DiplomaticStrategy.Undefined;
+                            tmpArr.Relations[i].Strategy = DiplomaticStrategy.Undefined;
                             break;
                         case DiplomaticRelationType.TradeSanctions:
-                            diplomaticRelation.Strategy = DiplomaticStrategy.Punish;
+                            tmpArr.Relations[i].Strategy = DiplomaticStrategy.Punish;
                             break;
                         case DiplomaticRelationType.War:
-                            diplomaticRelation.Strategy = DiplomaticStrategy.Conquer;
+                            tmpArr.Relations[i].Strategy = DiplomaticStrategy.Conquer;
                             break;
                     }
                 }
@@ -328,23 +331,26 @@ namespace DistantWorlds.Types
             int num16 = 0;
             int num17 = 0;
             double num18 = 25.0 * ((double)DominantRace.AggressionLevel / 100.0);
-            DiplomaticRelationList diplomaticRelationList2 = new DiplomaticRelationList();
-            DiplomaticRelationList diplomaticRelationList3 = new DiplomaticRelationList();
-            foreach (DiplomaticRelation diplomaticRelation2 in array)
+            List<(double value, DiplomaticRelation relation)> list2 = new List<(double value, DiplomaticRelation relation)>();
+            List<(double value, DiplomaticRelation relation)> list3 = new List<(double value, DiplomaticRelation relation)>();
+            //DiplomaticRelationList diplomaticRelationList2 = new DiplomaticRelationList();
+            //DiplomaticRelationList diplomaticRelationList3 = new DiplomaticRelationList();
+            for (int i = 0; i < tmpArr.Relations.Length; i++)
             {
-                if (diplomaticRelation2.Type != 0)
+                if (tmpArr.Relations[i].Type != 0)
                 {
-                    diplomaticRelationList2.Add(diplomaticRelation2);
-                    if (diplomaticRelation2.Type == DiplomaticRelationType.War)
+                    list2.Add((tmpArr.Values[i], tmpArr.Relations[i]));
+                    if (tmpArr.Relations[i].Type == DiplomaticRelationType.War)
                     {
                         num17++;
                     }
-                    else if (diplomaticRelation2.Strategy == DiplomaticStrategy.Conquer)
+                    else if (tmpArr.Relations[i].Strategy == DiplomaticStrategy.Conquer)
                     {
-                        diplomaticRelationList3.Add(diplomaticRelation2);
+                        //diplomaticRelationList3.Add(diplomaticRelation2);
+                        list3.Add((tmpArr.Values[i], tmpArr.Relations[i]));
                         num15++;
                     }
-                    else if (diplomaticRelation2.Strategy == DiplomaticStrategy.Befriend || diplomaticRelation2.Strategy == DiplomaticStrategy.Ally)
+                    else if (tmpArr.Relations[i].Strategy == DiplomaticStrategy.Befriend || tmpArr.Relations[i].Strategy == DiplomaticStrategy.Ally)
                     {
                         num16++;
                     }
@@ -357,41 +363,45 @@ namespace DistantWorlds.Types
             }
             if (num15 > num19)
             {
-                diplomaticRelationList3.Sort();
-                for (int k = 0; k < diplomaticRelationList3.Count; k++)
+                //diplomaticRelationList3.Sort();
+                list3.Sort((x, y) => x.value.CompareTo(y.value));
+                for (int k = 0; k < list3.Count; k++)
                 {
                     if (k >= num19)
                     {
-                        int num20 = DetermineRelativeStrength(militaryPotency, diplomaticRelationList3[k].OtherEmpire);
+                        int num20 = DetermineRelativeStrength(militaryPotency, list3[k].relation.OtherEmpire);
                         if (num20 == 1)
                         {
-                            diplomaticRelationList3[k].Strategy = DiplomaticStrategy.Undermine;
+                            list3[k].relation.Strategy = DiplomaticStrategy.Undermine;
                         }
                         else if (num4 > num3 || DominantRace.EspionageBonus > 0)
                         {
-                            diplomaticRelationList3[k].Strategy = DiplomaticStrategy.DefendUndermine;
+                            list3[k].relation.Strategy = DiplomaticStrategy.DefendUndermine;
                         }
                         else
                         {
-                            diplomaticRelationList3[k].Strategy = DiplomaticStrategy.Defend;
+                            list3[k].relation.Strategy = DiplomaticStrategy.Defend;
                         }
                     }
                 }
             }
             int num21 = 0;
             int num22 = 0;
-            DiplomaticRelationList diplomaticRelationList4 = new DiplomaticRelationList();
-            foreach (DiplomaticRelation diplomaticRelation3 in array)
+            //DiplomaticRelationList diplomaticRelationList4 = new DiplomaticRelationList();
+            List<(double value, DiplomaticRelation relation)> list4 = new List<(double value, DiplomaticRelation relation)>();
+            //foreach (DiplomaticRelation diplomaticRelation in array)
+            for(int i = 0; i < tmpArr.Relations.Length; i++)
             {
-                if (diplomaticRelation3.Type != 0)
+                if (tmpArr.Relations[i].Type != 0)
                 {
-                    if (diplomaticRelation3.Type == DiplomaticRelationType.TradeSanctions)
+                    if (tmpArr.Relations[i].Type == DiplomaticRelationType.TradeSanctions)
                     {
                         num22++;
                     }
-                    else if (diplomaticRelation3.Strategy == DiplomaticStrategy.Punish)
+                    else if (tmpArr.Relations[i].Strategy == DiplomaticStrategy.Punish)
                     {
-                        diplomaticRelationList4.Add(diplomaticRelation3);
+                        //diplomaticRelationList4.Add(diplomaticRelation);
+                        list4.Add((tmpArr.Values[i], tmpArr.Relations[i]));
                         num21++;
                     }
                 }
@@ -403,37 +413,40 @@ namespace DistantWorlds.Types
             }
             if (num21 > num23)
             {
-                diplomaticRelationList4.Sort();
-                for (int m = 0; m < diplomaticRelationList4.Count; m++)
+                //diplomaticRelationList4.Sort();
+                list4.Sort((x, y) => x.value.CompareTo(y.value));
+                for (int m = 0; m < list4.Count; m++)
                 {
                     if (m >= num23)
                     {
-                        int num24 = DetermineRelativeStrength(militaryPotency, diplomaticRelationList4[m].OtherEmpire);
+                        int num24 = DetermineRelativeStrength(militaryPotency, list4[m].relation.OtherEmpire);
                         if (num24 == 1)
                         {
-                            diplomaticRelationList4[m].Strategy = DiplomaticStrategy.Undermine;
+                            list4[m].relation.Strategy = DiplomaticStrategy.Undermine;
                         }
                         else
                         {
-                            diplomaticRelationList4[m].Strategy = DiplomaticStrategy.Undefined;
+                            list4[m].relation.Strategy = DiplomaticStrategy.Undefined;
                         }
                     }
                 }
             }
-            if (!Reclusive && num16 <= 0 && diplomaticRelationList2.Count > 1)
+            if (!Reclusive && num16 <= 0 && list2.Count > 1)
             {
-                diplomaticRelationList2.Sort();
-                diplomaticRelationList2.Reverse();
-                if (diplomaticRelationList2[0].SortTag > 2.0 && diplomaticRelationList2[0].Type != DiplomaticRelationType.War && diplomaticRelationList2[0].Type != DiplomaticRelationType.TradeSanctions && diplomaticRelationList2[0].Type != 0)
+                //diplomaticRelationList2.Sort();
+                //diplomaticRelationList2.Reverse();
+                list2.Sort((x, y) => x.value.CompareTo(y.value));
+                list2.Reverse();
+                if (list2[0].value > 2.0 && list2[0].relation.Type != DiplomaticRelationType.War && list2[0].relation.Type != DiplomaticRelationType.TradeSanctions && list2[0].relation.Type != 0)
                 {
-                    EmpireEvaluation empireEvaluation3 = ObtainEmpireEvaluation(diplomaticRelationList2[0].OtherEmpire);
+                    EmpireEvaluation empireEvaluation3 = ObtainEmpireEvaluation(list2[0].relation.OtherEmpire);
                     if (empireEvaluation3.OverallAttitude >= 5)
                     {
-                        diplomaticRelationList2[0].Strategy = DiplomaticStrategy.Befriend;
+                        list2[0].relation.Strategy = DiplomaticStrategy.Befriend;
                     }
                 }
             }
-            foreach (DiplomaticRelation diplomaticRelation4 in array)
+            foreach (DiplomaticRelation diplomaticRelation4 in tmpArr.Relations)
             {
                 DiplomaticRelation diplomaticRelation5 = diplomaticRelationList[diplomaticRelation4.OtherEmpire];
                 if (diplomaticRelation4.Strategy == DiplomaticStrategy.Conquer)
@@ -4755,60 +4768,75 @@ namespace DistantWorlds.Types
         private ShipGroupList GenerateOrderedFleetsByOverallStrength()
         {
             ShipGroupList shipGroupList = new ShipGroupList();
+            List<(int strenght, ShipGroup gr)> list = new List<(int strenght, ShipGroup gr)>();
             for (int i = 0; i < ShipGroups.Count; i++)
             {
                 ShipGroup shipGroup = ShipGroups[i];
-                shipGroup.SortTag = shipGroup.TotalOverallStrengthFactor;
-                shipGroupList.Add(shipGroup);
+                //shipGroup.SortTag = shipGroup.TotalOverallStrengthFactor;
+                //shipGroupList.Add(shipGroup);
+                list.Add((shipGroup.TotalOverallStrengthFactor, shipGroup));
             }
-            shipGroupList.Sort();
-            shipGroupList.Reverse();
-            shipGroupList.ClearSortTags();
+            list.Sort((x, y) => x.strenght.CompareTo(y.strenght));
+            list.Reverse();
+            //shipGroupList.ClearSortTags();
+            shipGroupList.AddRange(list.Select(x => x.gr));
             return shipGroupList;
         }
 
         private ShipGroupList GenerateOrderedFleetsByFighterStrength()
         {
             ShipGroupList shipGroupList = new ShipGroupList();
+            List<(int strenght, ShipGroup gr)> list = new List<(int strenght, ShipGroup gr)>();
             for (int i = 0; i < ShipGroups.Count; i++)
             {
                 ShipGroup shipGroup = ShipGroups[i];
-                shipGroup.SortTag = shipGroup.TotalFighterCount;
-                shipGroupList.Add(shipGroup);
+                //shipGroup.SortTag = shipGroup.TotalFighterCount;
+                //shipGroupList.Add(shipGroup);
+                list.Add((shipGroup.TotalFighterCount, shipGroup));
             }
-            shipGroupList.Sort();
-            shipGroupList.Reverse();
-            shipGroupList.ClearSortTags();
+            list.Sort((x, y) => x.strenght.CompareTo(y.strenght));
+            list.Reverse();
+            //shipGroupList.ClearSortTags();
+            //shipGroupList.ClearSortTags();
+            shipGroupList.AddRange(list.Select(x => x.gr));
             return shipGroupList;
         }
 
         private ShipGroupList GenerateOrderedFleetsByTroopAttackStrength()
         {
             ShipGroupList shipGroupList = new ShipGroupList();
+            List<(int strenght, ShipGroup gr)> list = new List<(int strenght, ShipGroup gr)>();
             for (int i = 0; i < ShipGroups.Count; i++)
             {
                 ShipGroup shipGroup = ShipGroups[i];
-                shipGroup.SortTag = shipGroup.TotalTroopAttackStrength;
-                shipGroupList.Add(shipGroup);
+                //shipGroup.SortTag = shipGroup.TotalTroopAttackStrength;
+                //shipGroupList.Add(shipGroup);
+                list.Add((shipGroup.TotalTroopAttackStrength, shipGroup));
             }
-            shipGroupList.Sort();
-            shipGroupList.Reverse();
-            shipGroupList.ClearSortTags();
+            list.Sort((x, y) => x.strenght.CompareTo(y.strenght));
+            list.Reverse();
+            //shipGroupList.ClearSortTags();
+            //shipGroupList.ClearSortTags();
+            shipGroupList.AddRange(list.Select(x => x.gr));
             return shipGroupList;
         }
 
         private ShipGroupList GenerateOrderedFleetsByTroopDefendStrength()
         {
             ShipGroupList shipGroupList = new ShipGroupList();
+            List<(int strenght, ShipGroup gr)> list = new List<(int strenght, ShipGroup gr)>();
             for (int i = 0; i < ShipGroups.Count; i++)
             {
                 ShipGroup shipGroup = ShipGroups[i];
-                shipGroup.SortTag = shipGroup.TotalTroopDefendStrength;
-                shipGroupList.Add(shipGroup);
+                //shipGroup.SortTag = shipGroup.TotalTroopDefendStrength;
+                //shipGroupList.Add(shipGroup);
+                list.Add((shipGroup.TotalTroopDefendStrength, shipGroup));
             }
-            shipGroupList.Sort();
-            shipGroupList.Reverse();
-            shipGroupList.ClearSortTags();
+            list.Sort((x, y) => x.strenght.CompareTo(y.strenght));
+            list.Reverse();
+            //shipGroupList.ClearSortTags();
+            //shipGroupList.ClearSortTags();
+            shipGroupList.AddRange(list.Select(x => x.gr));
             return shipGroupList;
         }
 
@@ -4828,17 +4856,22 @@ namespace DistantWorlds.Types
         private ShipGroupList GenerateOrderedFleetsForTarget(double x, double y, bool includeSmallFleets)
         {
             ShipGroupList shipGroupList = new ShipGroupList();
+            List<(double distance, ShipGroup gr)> list = new List<(double distance, ShipGroup gr)>();
             for (int i = 0; i < ShipGroups.Count; i++)
             {
                 if ((includeSmallFleets || ShipGroups[i].ShipTargetAmount >= 10 || ShipGroups[i].Ships.Count >= 10) && ShipGroups[i].LeadShip != null)
                 {
                     double sortTag = _Galaxy.CalculateDistance(x, y, ShipGroups[i].LeadShip.Xpos, ShipGroups[i].LeadShip.Ypos);
-                    ShipGroups[i].SortTag = sortTag;
-                    shipGroupList.Add(ShipGroups[i]);
+                    //ShipGroups[i].SortTag = sortTag;
+                    //shipGroupList.Add(ShipGroups[i]);
+                    list.Add((sortTag, ShipGroups[i]));
                 }
             }
-            shipGroupList.Sort();
-            shipGroupList.ClearSortTags();
+            list.Sort((x, y) => x.distance.CompareTo(y.distance));
+            list.Reverse();
+            //shipGroupList.ClearSortTags();
+            //shipGroupList.ClearSortTags();
+            shipGroupList.AddRange(list.Select(x => x.gr));
             return shipGroupList;
         }
 

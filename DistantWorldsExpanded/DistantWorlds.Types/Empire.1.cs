@@ -1722,7 +1722,7 @@ namespace DistantWorlds.Types
             if (!newEmpire.ShipGroups.Contains(fleet))
             {
                 newEmpire.ShipGroups.Add(fleet);
-                newEmpire.ShipGroups.Sort();
+                newEmpire.ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
             }
             fleet.Empire = newEmpire;
             fleet.GatherPoint = newEmpire.SelectFleetBase(fleet);
@@ -2987,7 +2987,7 @@ namespace DistantWorlds.Types
                         }
                         shipGroupList.Add(shipGroup);
                         empire.ShipGroups.Add(shipGroup);
-                        empire.ShipGroups.Sort();
+                        empire.ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                         foreach (BuiltObject ship in shipGroup.Ships)
                         {
                             empire.TakeOwnershipOfBuiltObject(ship, empire, setDesignAsObsolete: true);

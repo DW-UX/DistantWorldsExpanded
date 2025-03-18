@@ -101,7 +101,7 @@ namespace DistantWorlds.Controls
         this.Items.Add((object) "");
       if (this._Fleets != null)
       {
-        this._Fleets.Sort();
+        this._Fleets.Sort((x,y) => x.Name.CompareTo(y.Name));
         this.Items.AddRange((object[]) this._Fleets.ToArray());
       }
       if (this._Habitats == null)

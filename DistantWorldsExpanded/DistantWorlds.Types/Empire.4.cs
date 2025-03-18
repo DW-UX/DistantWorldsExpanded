@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
@@ -635,11 +636,16 @@ namespace DistantWorlds.Types
 
         private SortableStellarObjectList SortTradingPostsByDistance(SortableStellarObjectList tradingPosts, double x, double y)
         {
+            List<(double distnce, SortableStellarObject obj)> list = new();
             for (int i = 0; i < tradingPosts.Count; i++)
             {
-                tradingPosts[i].SortTag = _Galaxy.CalculateDistanceSquared(x, y, tradingPosts[i].StellarObject.Xpos, tradingPosts[i].StellarObject.Ypos);
+                //tradingPosts[i].SortTag = _Galaxy.CalculateDistanceSquared(x, y, tradingPosts[i].StellarObject.Xpos, tradingPosts[i].StellarObject.Ypos);
+                list.Add((_Galaxy.CalculateDistanceSquared(x, y, tradingPosts[i].StellarObject.Xpos, tradingPosts[i].StellarObject.Ypos), tradingPosts[i]));
             }
-            tradingPosts.Sort();
+            //tradingPosts.Sort();
+            list.Sort((x, y) => x.distnce.CompareTo(y.distnce));
+            tradingPosts.Clear();
+            tradingPosts.AddRange(list.Select(x => x.obj));
             return tradingPosts;
         }
 
@@ -4854,7 +4860,7 @@ namespace DistantWorlds.Types
             {
                 atWar = true;
             }
-            BuiltObjectList patrolMiningStations = ResolvePrioritizedPatrolMiningStations();
+            List<(double priority, BuiltObject obj)> patrolMiningStations = ResolvePrioritizedPatrolMiningStations();
             AssignMissionsToBuiltObjectList(BuiltObjects, atWar, patrolMiningStations);
             AssignMissionsToBuiltObjectList(PrivateBuiltObjects, atWar, patrolMiningStations);
         }

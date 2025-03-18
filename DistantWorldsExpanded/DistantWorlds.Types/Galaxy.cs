@@ -821,6 +821,7 @@ namespace DistantWorlds.Types
 
         private bool[] _WondersBuilt = new bool[PlanetaryFacilityDefinitionsStatic.Count];
 
+        public static readonly object GalaxyLocationRemoveLock = new object();
         public CreatureList Creatures => _Creatures;
 
         public static Random Rnd

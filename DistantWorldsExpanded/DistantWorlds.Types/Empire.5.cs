@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
@@ -1325,9 +1326,10 @@ namespace DistantWorlds.Types
             return null;
         }
 
-        public BuiltObjectList ResolvePrioritizedPatrolMiningStations()
+        public List<(double priority, BuiltObject obj)> ResolvePrioritizedPatrolMiningStations()
         {
             BuiltObjectList builtObjectList = new BuiltObjectList();
+            List<(double priority, BuiltObject obj)> list = new List<(double priority, BuiltObject obj)>();
             bool flag = CheckEmpireHasHyperDriveTech(this);
             for (int i = 0; i < MiningStations.Count; i++)
             {
@@ -1348,17 +1350,20 @@ namespace DistantWorlds.Types
                     num = Math.Min(num, 60.0);
                     if (builtObject.CurrentEscortForceAssigned < (int)num)
                     {
-                        builtObject.SortTag = num;
-                        builtObjectList.Add(builtObject);
+                        //builtObject.SortTag = num;
+                        //builtObjectList.Add(builtObject);
+                        list.Add((num, builtObject));
                     }
                 }
             }
-            builtObjectList.Sort();
-            builtObjectList.Reverse();
-            return builtObjectList;
+            //builtObjectList.Sort();
+            //builtObjectList.Reverse();
+            list.Sort((x, y) => x.priority.CompareTo(y.priority));
+            list.Reverse();
+            return list;
         }
 
-        public void AssignMissionsToBuiltObjectList(BuiltObjectList builtObjectList, bool atWar, BuiltObjectList patrolMiningStations)
+        public void AssignMissionsToBuiltObjectList(BuiltObjectList builtObjectList, bool atWar, List<(double priority, BuiltObject obj)> patrolMiningStations)
         {
             for (int i = 0; i < builtObjectList.Count; i++)
             {
@@ -1367,7 +1372,7 @@ namespace DistantWorlds.Types
             }
         }
 
-        public void AssignMissionToBuiltObject(BuiltObject ship, bool atWar, BuiltObjectList patrolMiningStations)
+        public void AssignMissionToBuiltObject(BuiltObject ship, bool atWar, List<(double priority, BuiltObject obj)> patrolMiningStations)
         {
             int refusalCount = 0;
             if (ship == null || ship.TopSpeed <= 0 || ship.BuiltAt != null || !ship.IsAutoControlled || (ship.Mission != null && ship.Mission.Type != 0))
@@ -1779,8 +1784,8 @@ namespace DistantWorlds.Types
                                         }
                                         for (int num53 = 0; num53 < patrolMiningStations.Count; num53++)
                                         {
-                                            BuiltObject builtObject15 = patrolMiningStations[num53];
-                                            if (builtObject15 != null && builtObject15.CurrentEscortForceAssigned < (int)builtObject15.SortTag && ship.WithinFuelRangeAndRefuel(builtObject15.Xpos, builtObject15.Ypos, 0.1) && _Galaxy.CheckMilitaryShipWelcomeAtTerritoryLocation(builtObject15.Xpos, builtObject15.Ypos, ship.Empire))
+                                            BuiltObject builtObject15 = patrolMiningStations[num53].obj;
+                                            if (builtObject15 != null && builtObject15.CurrentEscortForceAssigned < (int)patrolMiningStations[num53].priority && ship.WithinFuelRangeAndRefuel(builtObject15.Xpos, builtObject15.Ypos, 0.1) && _Galaxy.CheckMilitaryShipWelcomeAtTerritoryLocation(builtObject15.Xpos, builtObject15.Ypos, ship.Empire))
                                             {
                                                 ship.AssignMission(BuiltObjectMissionType.Patrol, builtObject15, null, BuiltObjectMissionPriority.Low);
                                                 builtObject15.CurrentEscortForceAssigned += ship.FirepowerRaw;
@@ -1856,8 +1861,8 @@ namespace DistantWorlds.Types
                                     }
                                     for (int num60 = 0; num60 < patrolMiningStations.Count; num60++)
                                     {
-                                        BuiltObject builtObject16 = patrolMiningStations[num60];
-                                        if (builtObject16 != null && builtObject16.CurrentEscortForceAssigned < (int)builtObject16.SortTag && ship.WithinFuelRangeAndRefuel(builtObject16.Xpos, builtObject16.Ypos, 0.1) && _Galaxy.CheckMilitaryShipWelcomeAtTerritoryLocation(builtObject16.Xpos, builtObject16.Ypos, ship.Empire))
+                                        BuiltObject builtObject16 = patrolMiningStations[num60].obj;
+                                        if (builtObject16 != null && builtObject16.CurrentEscortForceAssigned < (int)patrolMiningStations[num60].priority && ship.WithinFuelRangeAndRefuel(builtObject16.Xpos, builtObject16.Ypos, 0.1) && _Galaxy.CheckMilitaryShipWelcomeAtTerritoryLocation(builtObject16.Xpos, builtObject16.Ypos, ship.Empire))
                                         {
                                             ship.AssignMission(BuiltObjectMissionType.Patrol, builtObject16, null, BuiltObjectMissionPriority.Low);
                                             builtObject16.CurrentEscortForceAssigned += ship.FirepowerRaw;

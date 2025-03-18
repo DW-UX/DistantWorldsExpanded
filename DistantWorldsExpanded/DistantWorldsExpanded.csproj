@@ -51,6 +51,7 @@
 	<ItemGroup>
 		<FormCandidate Include="**/Forms/*.cs" />
 		<Compile Remove="@(FormCandidate)" />
+		<Compile Remove="DistantWorlds\FastBitmap.cs" />
 		<Compile Include="@(FormCandidate)" Exclude="**/Forms/*.Designer.cs">
 			<SubType>Form</SubType>
 		</Compile>

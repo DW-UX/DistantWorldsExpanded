@@ -550,7 +550,7 @@ namespace DistantWorlds.Types
       {
         throw new ApplicationException("Error at line " + num1.ToString() + " reading file " + filePath);
       }
-      governmentAttributesList.Sort();
+      governmentAttributesList.Sort((x,y)=>x.GovernmentId.CompareTo(y.GovernmentId));
       if (!this.CheckSequentialIds(governmentAttributesList))
         throw new ApplicationException("Non-sequential Government IDs detected in file " + filePath + ". Government ID values must start at 0 (zero) and be sequential.");
       this.AddRange((IEnumerable<GovernmentAttributes>) governmentAttributesList);

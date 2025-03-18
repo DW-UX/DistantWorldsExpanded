@@ -2924,7 +2924,7 @@ namespace DistantWorlds {
                     }
                 }
                 shipGroup.Update();
-                selectedBuiltObjects[0].Empire.ShipGroups.Sort();
+                selectedBuiltObjects[0].Empire.ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                 btnBuiltObjectViewShipGroup.Enabled = true;
                 foreach (DataGridViewRow selectedRow in ctlBuiltObjectList.Grid.SelectedRows)
                 {

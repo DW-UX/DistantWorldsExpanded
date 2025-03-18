@@ -2151,7 +2151,7 @@ namespace DistantWorlds.Types
                     shipGroup.Name = "Guardian Fleet";
                     shipGroup.Empire = empire3;
                     empire3.ShipGroups.Add(shipGroup);
-                    empire3.ShipGroups.Sort();
+                    empire3.ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                     for (int l = 0; l < 8; l++)
                     {
                         Design design = null;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
@@ -3440,20 +3441,27 @@ namespace DistantWorlds.Types
         private HabitatList IdentifyBestNewPenalColonies()
         {
             HabitatList habitatList = new HabitatList();
+            List<(double value, Habitat hab)> list = new List<(double value, Habitat hab)>();
             for (int i = 0; i < Colonies.Count; i++)
             {
                 Habitat habitat = Colonies[i];
                 if (habitat != null && !_PenalColonies.Contains(habitat))
                 {
-                    habitat.SortTag = habitat.CalculatePenalColonyValue();
-                    if (habitat.SortTag > 0.0)
-                    {
-                        habitatList.Add(habitat);
+                    //habitat.SortTag = habitat.CalculatePenalColonyValue();
+                    double value = habitat.CalculatePenalColonyValue();
+                    //if (habitat.SortTag > 0.0)
+                    if (value > 0.0)
+                        {
+                        //habitatList.Add(habitat);
+                        list.Add((value, habitat));
                     }
                 }
             }
-            habitatList.Sort();
-            habitatList.Reverse();
+            //habitatList.Sort();
+            //habitatList.Reverse();
+            list.Sort((x, y) => x.value.CompareTo(y.value));
+            list.Reverse();
+            habitatList.AddRange(list.Select(x => x.hab));
             return habitatList;
         }
 

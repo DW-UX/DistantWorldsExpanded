@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
@@ -2885,7 +2886,8 @@ namespace DistantWorlds.Types
                     }
                 }
                 RemoveGalaxyLocationIndex(item);
-                GalaxyLocations.Remove(item);
+                lock(Galaxy.GalaxyLocationRemoveLock)
+                { GalaxyLocations.Remove(item); }            
             }
         }
 
@@ -2915,7 +2917,9 @@ namespace DistantWorlds.Types
                     }
                 }
                 RemoveGalaxyLocationIndex(item);
-                GalaxyLocations.Remove(item);
+
+                lock (Galaxy.GalaxyLocationRemoveLock)
+                   { GalaxyLocations.Remove(item); }
             }
         }
 
@@ -2971,12 +2975,17 @@ namespace DistantWorlds.Types
         {
             if (builtObjects != null)
             {
+                List<(double distance, BuiltObject obj)> list = new List<(double distance, BuiltObject obj)>();
                 for (int i = 0; i < builtObjects.Count; i++)
                 {
                     double sortTag = CalculateDistanceSquared(x, y, builtObjects[i].Xpos, builtObjects[i].Ypos);
-                    builtObjects[i].SortTag = sortTag;
+                    //builtObjects[i].SortTag = sortTag;
+                    list.Add((sortTag, builtObjects[i]));
                 }
-                builtObjects.Sort();
+                //builtObjects.Sort();
+                builtObjects.Clear();
+                list.Sort((x, y) => x.distance.CompareTo(y.distance));
+                builtObjects.AddRange(list.Select(x => x.obj));
             }
             return builtObjects;
         }

@@ -8150,42 +8150,46 @@ namespace DistantWorlds.Types
 
         int IComparable<StellarObject>.CompareTo(StellarObject other)
         {
-            return SortTag.CompareTo(other.SortTag);
+            throw new NotImplementedException("FIX THIS");
+            //return SortTag.CompareTo(other.SortTag);
         }
 
         int IComparable<BuiltObject>.CompareTo(BuiltObject other)
         {
-            return SortTag.CompareTo(other.SortTag);
+            throw new NotImplementedException("FIX THIS");
+            //return SortTag.CompareTo(other.SortTag);
         }
 
         int IComparable<Habitat>.CompareTo(Habitat other)
         {
-            return SortTag.CompareTo(other.SortTag);
+            throw new NotImplementedException("FIX THIS");
+            //return SortTag.CompareTo(other.SortTag);
         }
 
         int IComparable.CompareTo(object obj)
         {
-            if (obj == this)
-            {
-                return 0;
-            }
-            if (obj == null)
-            {
-                return 1;
-            }
-            if (obj is BuiltObject)
-            {
-                return SortTag.CompareTo(((BuiltObject)obj).SortTag);
-            }
-            if (obj is Habitat)
-            {
-                return SortTag.CompareTo(((Habitat)obj).SortTag);
-            }
-            if (obj is Creature)
-            {
-                return SortTag.CompareTo(((Creature)obj).SortTag);
-            }
-            return 0;
+            throw new NotImplementedException("FIX THIS");
+            //if (obj == this)
+            //{
+            //    return 0;
+            //}
+            //if (obj == null)
+            //{
+            //    return 1;
+            //}
+            //if (obj is BuiltObject)
+            //{
+            //    return SortTag.CompareTo(((BuiltObject)obj).SortTag);
+            //}
+            //if (obj is Habitat)
+            //{
+            //    return SortTag.CompareTo(((Habitat)obj).SortTag);
+            //}
+            //if (obj is Creature)
+            //{
+            //    return SortTag.CompareTo(((Creature)obj).SortTag);
+            //}
+            //return 0;
         }
 
         public override string ToString()
@@ -8195,7 +8199,8 @@ namespace DistantWorlds.Types
 
         int IComparable<Creature>.CompareTo(Creature other)
         {
-            return SortTag.CompareTo(other.SortTag);
+            throw new NotImplementedException("FIX THIS");
+            //return SortTag.CompareTo(other.SortTag);
         }
     }
 }

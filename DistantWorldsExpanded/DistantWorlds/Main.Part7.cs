@@ -457,7 +457,7 @@ namespace DistantWorlds
                                     builtObject.Empire.ShipGroups.Add(shipGroup3);
                                     shipGroup3.AddShipToFleet(builtObject);
                                     shipGroup3.Update();
-                                    builtObject.Empire.ShipGroups.Sort();
+                                    builtObject.Empire.ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                                     method_208(shipGroup3);
                                 }
                                 return;
@@ -1585,7 +1585,7 @@ namespace DistantWorlds
                                 string nextFleetNumberDescription2 = _Game.PlayerEmpire.GetNextFleetNumberDescription();
                                 shipGroup6.Name = string.Format(TextResolver.GetText("Nth Fleet"), nextFleetNumberDescription2);
                                 _Game.PlayerEmpire.ShipGroups.Add(shipGroup6);
-                                _Game.PlayerEmpire.ShipGroups.Sort();
+                                _Game.PlayerEmpire.ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                             }
                             shipGroup6.Update();
                             method_208(shipGroup6);
@@ -1653,7 +1653,7 @@ namespace DistantWorlds
                                 shipGroup8.Name = string.Format(TextResolver.GetText("Nth Fleet"), nextFleetNumberDescription3);
                                 builtObjectList2[0].Empire.ShipGroups.Add(shipGroup8);
                                 shipGroup8.Update();
-                                builtObjectList2[0].Empire.ShipGroups.Sort();
+                                builtObjectList2[0].Empire.ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                             }
                             method_208(shipGroup8);
                             return;

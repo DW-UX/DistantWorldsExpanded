@@ -37,8 +37,8 @@ namespace DistantWorlds.Types
     private WarObjective _WarObjective;
     private HabitatList _WarObjectiveColonies = new HabitatList();
     private BuiltObjectList _WarObjectiveBases = new BuiltObjectList();
-    [NonSerialized]
-    public double SortTag;
+    //[NonSerialized]
+    //public double SortTag;
 
     public WarObjective WarObjective
     {
@@ -279,6 +279,6 @@ namespace DistantWorlds.Types
       set => this._OtherEmpire = value;
     }
 
-    int IComparable<DiplomaticRelation>.CompareTo(DiplomaticRelation other) => this.SortTag.CompareTo(other.SortTag);
-  }
+    int IComparable<DiplomaticRelation>.CompareTo(DiplomaticRelation other) => throw new NotImplementedException();//  this.SortTag.CompareTo(other.SortTag);
+    }
 }

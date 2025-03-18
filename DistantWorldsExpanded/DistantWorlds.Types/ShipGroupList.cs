@@ -281,15 +281,15 @@ namespace DistantWorlds.Types
       return shipGroupList;
     }
 
-    public void ClearSortTags()
-    {
-      for (int index = 0; index < this.Count; ++index)
-      {
-        ShipGroup shipGroup = this[index];
-        if (shipGroup != null)
-          shipGroup.SortTag = 0.0;
-      }
-    }
+    //public void ClearSortTags()
+    //{
+    //  for (int index = 0; index < this.Count; ++index)
+    //  {
+    //    ShipGroup shipGroup = this[index];
+    //    if (shipGroup != null)
+    //      shipGroup.SortTag = 0.0;
+    //  }
+    //}
 
     public ShipGroupList OrderByName()
     {

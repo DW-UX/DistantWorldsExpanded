@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
@@ -2163,7 +2164,8 @@ namespace DistantWorlds.Types
 
         public StellarObjectList IdentifyDefendLocations()
         {
-            StellarObjectList stellarObjectList = new StellarObjectList();
+            StellarObjectList res = new StellarObjectList();
+            List<(double defPriority, StellarObject obj)> list = new List<(double, StellarObject)>();
             HabitatList habitatList = IdentifyEmpireCapitals();
             if (Colonies != null)
             {
@@ -2174,14 +2176,14 @@ namespace DistantWorlds.Types
                     {
                         num = Math.Max(num, 1000000.0);
                     }
-                    Colonies[i].SortTag = num;
-                    stellarObjectList.Add(Colonies[i]);
+                    //Colonies[i].SortTag = num;
+                    list.Add((num, Colonies[i]));
                 }
             }
             for (int j = 0; j < SpacePorts.Count; j++)
             {
                 bool flag = true;
-                if (SpacePorts[j].ParentHabitat != null && stellarObjectList.Contains(SpacePorts[j].ParentHabitat))
+                if (SpacePorts[j].ParentHabitat != null && list.Exists(x => x.obj.Equals(SpacePorts[j].ParentHabitat)))
                 {
                     flag = false;
                 }
@@ -2200,8 +2202,9 @@ namespace DistantWorlds.Types
                             sortTag = 2000000.0;
                             break;
                     }
-                    SpacePorts[j].SortTag = sortTag;
-                    stellarObjectList.Add(SpacePorts[j]);
+                    //SpacePorts[j].SortTag = sortTag;
+                    //stellarObjectList.Add(SpacePorts[j]);
+                    list.Add((sortTag, SpacePorts[j]));
                 }
             }
             StellarObjectList stellarObjectList2 = DetermineRestrictedResourceSupplyLocations();
@@ -2210,24 +2213,28 @@ namespace DistantWorlds.Types
                 bool flag2 = true;
                 if (stellarObjectList2[k].ParentHabitat != null)
                 {
-                    if (stellarObjectList.Contains(stellarObjectList2[k].ParentHabitat))
-                    {
-                        flag2 = false;
-                    }
-                    else if (stellarObjectList.Contains(stellarObjectList2[k]))
-                    {
-                        flag2 = false;
-                    }
+                    //if (stellarObjectList.Contains(stellarObjectList2[k].ParentHabitat))
+                    //{
+                    //    flag2 = false;
+                    //}
+                    //else if (stellarObjectList.Contains(stellarObjectList2[k]))
+                    //{
+                    //    flag2 = false;
+                    //}
+                    if (list.Exists(x => x.obj.Equals(stellarObjectList2[k].ParentHabitat)) || list.Exists(x => x.obj.Equals(stellarObjectList2[k]))) 
+                    { flag2 = false; }
                 }
                 if (flag2)
                 {
-                    stellarObjectList2[k].SortTag = 3000000.0;
-                    stellarObjectList.Add(stellarObjectList2[k]);
+                    //stellarObjectList2[k].SortTag = 3000000.0;
+                    //stellarObjectList.Add(stellarObjectList2[k]);
+                    list.Add((3000000.0, stellarObjectList2[k]));
                 }
             }
-            stellarObjectList.Sort();
-            stellarObjectList.Reverse();
-            return stellarObjectList;
+            list.Sort((x,y) => x.defPriority.CompareTo(y.defPriority));
+            list.Reverse();
+            res.AddRange(list.Select(x => x.obj));
+            return res;
         }
 
         public StellarObject FindNearestRefuellingPoint(double x, double y, Resource fuelType, int minimumDockingBays)
@@ -2689,7 +2696,7 @@ namespace DistantWorlds.Types
                 string nextFleetNumberDescription = GetNextFleetNumberDescription();
                 shipGroup4.Name = string.Format(TextResolver.GetText("Nth Fleet"), nextFleetNumberDescription);
                 ShipGroups.Add(shipGroup4);
-                ShipGroups.Sort();
+                ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                 num7 -= shipGroup4.Ships.Count;
                 num8++;
                 num21++;
@@ -2716,7 +2723,7 @@ namespace DistantWorlds.Types
                     string nextFleetNumberDescription2 = GetNextFleetNumberDescription();
                     shipGroup5.Name = string.Format(TextResolver.GetText("Nth Strike Force"), nextFleetNumberDescription2);
                     ShipGroups.Add(shipGroup5);
-                    ShipGroups.Sort();
+                    ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                     num7 -= shipGroup5.Ships.Count;
                     num9++;
                     num21++;
@@ -2739,6 +2746,7 @@ namespace DistantWorlds.Types
         {
             if (builtObjects != null)
             {
+                List<(double distance, BuiltObject obj)> list = new List<(double distance, BuiltObject obj)>();
                 for (int i = 0; i < builtObjects.Count; i++)
                 {
                     if (minimumFuelPortionFilter > 0.0)
@@ -2749,14 +2757,18 @@ namespace DistantWorlds.Types
                         {
                             num *= 100.0;
                         }
-                        builtObjects[i].SortTag = num;
+                        //builtObjects[i].SortTag = num;
+                        list.Add((num, builtObjects[i]));
                     }
                     else
                     {
-                        builtObjects[i].SortTag = _Galaxy.CalculateDistanceSquared(builtObjects[i].Xpos, builtObjects[i].Ypos, x, y);
+                        //builtObjects[i].SortTag = _Galaxy.CalculateDistanceSquared(builtObjects[i].Xpos, builtObjects[i].Ypos, x, y);
+                        list.Add((_Galaxy.CalculateDistanceSquared(builtObjects[i].Xpos, builtObjects[i].Ypos, x, y), builtObjects[i]));
                     }
                 }
-                builtObjects.Sort();
+                //builtObjects.Sort();
+                list.Sort((x, y) => x.distance.CompareTo(y.distance));
+                builtObjects.AddRange(list.Select(x => x.obj));
             }
             return builtObjects;
         }
@@ -3505,16 +3517,19 @@ namespace DistantWorlds.Types
 
         public ShipGroupList GenerateDistanceOrderedFleetList(double targetX, double targetY, ShipGroupList fleets)
         {
-            ShipGroupList shipGroupList = new ShipGroupList();
-            shipGroupList.AddRange(fleets);
-            for (int i = 0; i < shipGroupList.Count; i++)
+            ShipGroupList res = new ShipGroupList();
+            List<(double distance, ShipGroup shipGroup)> list = new List<(double distance, ShipGroup shipGroup)>();
+            //shipGroupList.AddRange(fleets);
+            for (int i = 0; i < fleets.Count; i++)
             {
-                ShipGroup shipGroup = shipGroupList[i];
-                shipGroup.SortTag = _Galaxy.CalculateDistance(shipGroup.LeadShip.Xpos, shipGroup.LeadShip.Ypos, targetX, targetY);
+                ShipGroup shipGroup = fleets[i];
+                //shipGroup.SortTag = _Galaxy.CalculateDistance(shipGroup.LeadShip.Xpos, shipGroup.LeadShip.Ypos, targetX, targetY);
+                list.Add((_Galaxy.CalculateDistance(shipGroup.LeadShip.Xpos, shipGroup.LeadShip.Ypos, targetX, targetY), fleets[i]));
             }
-            shipGroupList.Sort();
-            shipGroupList.ClearSortTags();
-            return shipGroupList;
+            //shipGroupList.ClearSortTags();
+            list.Sort((x, y) => x.distance.CompareTo(y.distance));
+            res.AddRange(list.Select(x => x.shipGroup));
+            return res;
         }
 
         public HabitatList IdentifyOurDisputedColonies(Empire empire)

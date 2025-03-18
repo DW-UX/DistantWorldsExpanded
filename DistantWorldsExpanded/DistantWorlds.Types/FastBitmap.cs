@@ -55,39 +55,17 @@ namespace DistantWorlds.Types
 
         public unsafe void SetPixel(ref int X, ref int Y, Color Colour)
         {
-            try
-            {
-                FastBitmap.PixelData* pixelDataPtr = this.PixelAt(X, Y);
-                pixelDataPtr->red = Colour.R;
-                pixelDataPtr->green = Colour.G;
-                pixelDataPtr->blue = Colour.B;
-                pixelDataPtr->alpha = Colour.A;
-            }
-            catch (AccessViolationException ex)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            FastBitmap.PixelData* pixelDataPtr = this.PixelAt(X, Y);
+            pixelDataPtr->red = Colour.R;
+            pixelDataPtr->green = Colour.G;
+            pixelDataPtr->blue = Colour.B;
+            pixelDataPtr->alpha = Colour.A;
         }
 
         public unsafe Color GetPixel(ref int X, ref int Y)
         {
-            try
-            {
-                FastBitmap.PixelData* pixelDataPtr = this.PixelAt(X, Y);
-                return Color.FromArgb((int)pixelDataPtr->alpha, (int)pixelDataPtr->red, (int)pixelDataPtr->green, (int)pixelDataPtr->blue);
-            }
-            catch (AccessViolationException ex)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            FastBitmap.PixelData* pixelDataPtr = this.PixelAt(X, Y);
+            return Color.FromArgb(pixelDataPtr->alpha, pixelDataPtr->red, pixelDataPtr->green, pixelDataPtr->blue);
         }
 
         private unsafe void LockBitmap()

@@ -2412,7 +2412,7 @@ namespace DistantWorlds {
                 gameOptions_0.StartGameOptions = method_259();
                 flag = true;
             }
-            string path2 = GetGameFilesFolderCreateIfNeeded() + "defaultOptions";
+            string path2 = GetGameFilesFolderCreateIfNeeded() + "EM_defaultOptions";
             if (!File.Exists(path2))
             {
                 flag = true;
@@ -3584,10 +3584,11 @@ namespace DistantWorlds {
                 }
                 if (habitatList.Count > 0)
                 {
-                    for (int k = 0; k < habitatList.Count; k++)
+                    //for (int k = 0; k < habitatList.Count; k++)
+                    Parallel.For(0, habitatList.Count, k =>
                     {
                         habitatList[k]?.DoTasks(dateTime_7);
-                    }
+                    });
                     int_48 = num;
                 }
                 else
@@ -3609,10 +3610,11 @@ namespace DistantWorlds {
                         Empire empire3 = _Game.Galaxy.Empires[int_55];
                         if (empire3 != null && empire3.ShipGroups != null && empire3.ShipGroups.Count > 0)
                         {
-                            for (int m = 0; m < empire3.ShipGroups.Count; m++)
+                            //for (int m = 0; m < empire3.ShipGroups.Count; m++)
+                            Parallel.For(0, empire3.ShipGroups.Count, m =>
                             {
                                 empire3.ShipGroups[m]?.DoTasks(dateTime_7);
-                            }
+                            });
                         }
                         int_56 = 0;
                         int_55++;
@@ -3679,10 +3681,11 @@ namespace DistantWorlds {
                 }
                 if (builtObjectList.Count > 0)
                 {
-                    for (int num6 = 0; num6 < builtObjectList.Count; num6++)
+                    //for (int num6 = 0; num6 < builtObjectList.Count; num6++)
+                    Parallel.For(0, builtObjectList.Count, num6 =>
                     {
                         builtObjectList[num6]?.DoTasks(dateTime_7, long_1, inView: false);
-                    }
+                    });
                     int_49 = num2;
                     int_50 = num4;
                 }
@@ -3701,6 +3704,7 @@ namespace DistantWorlds {
                     {
                         int_51 = 0;
                     }
+                    //todo parralell
                     _Game.Galaxy.Creatures[int_51]?.DoTasks(dateTime_7);
                     int_51++;
                 }

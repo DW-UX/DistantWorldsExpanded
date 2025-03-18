@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
@@ -2238,6 +2239,7 @@ namespace DistantWorlds.Types
                 }
                 HabitatList habitatList2 = new HabitatList();
                 BuiltObjectList builtObjectList = new BuiltObjectList();
+                List<(double resValue, BuiltObject obj)> resValueList = new List<(double resValue, BuiltObject obj)>();
                 int num2 = 60 - (DominantRace.FriendlinessLevel - DominantRace.CautionLevel);
                 EmpireEvaluation empireEvaluation = ObtainEmpireEvaluation(empire);
                 if (empireEvaluation != null && empireEvaluation.OverallAttitude < num2)
@@ -2256,22 +2258,26 @@ namespace DistantWorlds.Types
                         {
                             if (builtObject.ParentHabitat != null)
                             {
-                                builtObject.SortTag = 100.0 * DetermineResourceValue(builtObject.ParentHabitat);
+                                //builtObject.SortTag = 100.0 * DetermineResourceValue(builtObject.ParentHabitat);
+                                resValueList.Add((100.0 * DetermineResourceValue(builtObject.ParentHabitat), builtObject));
                             }
                             else
                             {
-                                builtObject.SortTag = 1000.0;
+                                //builtObject.SortTag = 1000.0;
+                                resValueList.Add((1000.0, builtObject));
                             }
                         }
                         else if (builtObject.SubRole == BuiltObjectSubRole.ResortBase)
                         {
-                            builtObject.SortTag = 10000.0;
+                            //builtObject.SortTag = 10000.0;
+                            resValueList.Add((10000.0, builtObject));
                         }
                         else
                         {
-                            builtObject.SortTag = 10000.0;
+                            //builtObject.SortTag = 10000.0;
+                            resValueList.Add((10000, builtObject));
                         }
-                        builtObjectList.Add(builtObject);
+                        //builtObjectList.Add(builtObject);
                     }
                 }
                 for (int k = 0; k < habitatList.Count; k++)
@@ -2297,8 +2303,9 @@ namespace DistantWorlds.Types
                 }
                 habitatList2.Sort();
                 habitatList2.Reverse();
-                builtObjectList.Sort();
-                builtObjectList.Reverse();
+                resValueList.Sort((x,y)=>x.resValue.CompareTo(y.resValue));
+                resValueList.Reverse();
+                builtObjectList.AddRange(resValueList.Select(x => x.obj));
                 TradeableItemList tradeableItemList = new TradeableItemList();
                 TradeableItemList tradeableItemList2 = new TradeableItemList();
                 if (habitatList2.Count > 0 && Galaxy.Rnd.Next(0, 3) > 0)

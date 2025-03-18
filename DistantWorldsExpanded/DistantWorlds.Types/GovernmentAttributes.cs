@@ -35,8 +35,8 @@ namespace DistantWorlds.Types
     public List<string> EmpireNameAdjectives = new List<string>();
     public List<string> EmpireNameNouns = new List<string>();
     public GovernmentBiasList Biases = new GovernmentBiasList();
-    [NonSerialized]
-    public float SortTag;
+    //[NonSerialized]
+    //public float SortTag;
 
     public GovernmentAttributes(
       int governmentId,
@@ -104,6 +104,6 @@ namespace DistantWorlds.Types
 
     public double NaturalAffinity(int governmentId) => (double) this.Biases.GetBias(governmentId);
 
-    int IComparable<GovernmentAttributes>.CompareTo(GovernmentAttributes other) => (double) this.SortTag > 0.0 || (double) other.SortTag > 0.0 ? this.SortTag.CompareTo(other.SortTag) : this.GovernmentId.CompareTo(other.GovernmentId);
+        int IComparable<GovernmentAttributes>.CompareTo(GovernmentAttributes other) => throw new NotImplementedException();// (double) this.SortTag > 0.0 || (double) other.SortTag > 0.0 ? this.SortTag.CompareTo(other.SortTag) : this.GovernmentId.CompareTo(other.GovernmentId);
   }
 }

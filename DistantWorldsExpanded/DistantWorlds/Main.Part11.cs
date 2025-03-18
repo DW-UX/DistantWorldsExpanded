@@ -550,13 +550,20 @@ namespace DistantWorlds {
                     }
                     method_149();
                 }
-                for (int i = int_28; i <= int_29; i++)
+                //for (int i = int_28; i <= int_29; i++)
+                //{
+                //    if (i < _Game.Galaxy.Habitats.Count)
+                //    {
+                //        _Game.Galaxy.Habitats[i]?.DoTasks(time);
+                //    }
+                //}
+                Parallel.For(int_28, int_29 + 1, i =>
                 {
                     if (i < _Game.Galaxy.Habitats.Count)
                     {
                         _Game.Galaxy.Habitats[i]?.DoTasks(time);
                     }
-                }
+                });
             }
             if (bool_19)
             {
@@ -585,22 +592,24 @@ namespace DistantWorlds {
                 picSystem.ShowFleetPostures = true;
                 bool_20 = false;
             }
-            for (int j = 0; j < builtObjectsInView.Count; j++)
+            //for (int j = 0; j < builtObjectsInView.Count; j++)
+            Parallel.For(0, builtObjectsInView.Count, j =>
             {
                 if (builtObjectsInView[j] != null)
                 {
                     builtObjectsInView[j].DoTasks(time, starDate, inView: true);
                 }
-            }
+            });
             if (habitat_6 != null)
             {
-                for (int k = 0; k < _Game.Galaxy.Systems[habitat_6.SystemIndex].Creatures.Count; k++)
+                //for (int k = 0; k < _Game.Galaxy.Systems[habitat_6.SystemIndex].Creatures.Count; k++)
+                Parallel.For(0, _Game.Galaxy.Systems[habitat_6.SystemIndex].Creatures.Count, k =>
                 {
                     if (_Game.Galaxy.Systems[habitat_6.SystemIndex].Creatures[k] != null)
                     {
                         _Game.Galaxy.Systems[habitat_6.SystemIndex].Creatures[k].DoTasks(time);
                     }
-                }
+                });                
             }
             if (UhvLmNjli7 && _Game.SelectedObject != null)
             {

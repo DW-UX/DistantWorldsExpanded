@@ -8047,33 +8047,36 @@ namespace DistantWorlds.Types
 
         int IComparable<StellarObject>.CompareTo(StellarObject other)
         {
-            return SortTag.CompareTo(other.SortTag);
+            throw new NotImplementedException();
+            //return SortTag.CompareTo(other.SortTag);
         }
 
         int IComparable<BuiltObject>.CompareTo(BuiltObject other)
         {
-            return SortTag.CompareTo(other.SortTag);
+            throw new NotImplementedException();
+            //return SortTag.CompareTo(other.SortTag);
         }
 
         int IComparable.CompareTo(object obj)
         {
-            if (obj == this)
-            {
-                return 0;
-            }
-            if (obj == null)
-            {
-                return 1;
-            }
-            if (obj is BuiltObject)
-            {
-                return SortTag.CompareTo(((BuiltObject)obj).SortTag);
-            }
-            if (obj is Habitat)
-            {
-                return SortTag.CompareTo(((Habitat)obj).SortTag);
-            }
-            return 0;
+            throw new NotImplementedException();
+            //if (obj == this)
+            //{
+            //    return 0;
+            //}
+            //if (obj == null)
+            //{
+            //    return 1;
+            //}
+            //if (obj is BuiltObject)
+            //{
+            //    return SortTag.CompareTo(((BuiltObject)obj).SortTag);
+            //}
+            //if (obj is Habitat)
+            //{
+            //    return SortTag.CompareTo(((Habitat)obj).SortTag);
+            //}
+            //return 0;
         }
     }
 }

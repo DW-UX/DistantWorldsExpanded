@@ -579,6 +579,7 @@ namespace DistantWorlds.Types
         public static StellarObjectList EnsureSingleStellarObjectPerSystem(StellarObjectList stellarObjects)
         {
             HabitatList habitatList = DetermineSystemsForStellarObjects(stellarObjects);
+            List<(double value, StellarObject obj)> list = new List<(double value, StellarObject obj)>();
             for (int i = 0; i < habitatList.Count; i++)
             {
                 Habitat systemStar = habitatList[i];
@@ -593,27 +594,33 @@ namespace DistantWorlds.Types
                     if (stellarObject is BuiltObject)
                     {
                         BuiltObject builtObject = (BuiltObject)stellarObject;
-                        stellarObject.SortTag = builtObject.Size;
+                        list.Add((builtObject.Size, builtObject));
+                        //stellarObject.SortTag = builtObject.Size;
                     }
                     else if (stellarObject is Habitat)
                     {
                         Habitat habitat = (Habitat)stellarObject;
-                        stellarObject.SortTag = Math.Max((double)habitat.StrategicValue / 10.0, habitat.Size);
+                        //stellarObject.SortTag = Math.Max((double)habitat.StrategicValue / 10.0, habitat.Size);
+                        list.Add((Math.Max((double)habitat.StrategicValue / 10.0, habitat.Size), stellarObject));
                     }
                     else
                     {
-                        stellarObject.SortTag = 1.0;
+                        //stellarObject.SortTag = 1.0;
+                        list.Add((1.0, stellarObject));
                     }
                 }
-                StellarObject.SortStellarObject comparer = new StellarObject.SortStellarObject();
-                stellarObjectList.Sort(comparer);
-                stellarObjectList.Reverse();
+                //StellarObject.SortStellarObject comparer = new StellarObject.SortStellarObject();
+                //stellarObjectList.Sort(comparer);
+                //stellarObjectList.Reverse();
+                list.Sort((x, y) => x.value.CompareTo(y.value));
+                list.Reverse();
                 if (stellarObjectList.Count > 1)
                 {
-                    for (int k = 1; k < stellarObjectList.Count; k++)
+                    for (int k = 1; k < list.Count; k++)
                     {
-                        stellarObjects.Remove(stellarObjectList[k]);
+                        stellarObjects.Remove(list[k].obj);
                     }
+
                 }
             }
             return stellarObjects;

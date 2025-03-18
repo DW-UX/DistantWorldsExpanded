@@ -9,6 +9,7 @@ using BaconDistantWorlds;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace DistantWorlds.Types
 {
@@ -80,35 +81,39 @@ namespace DistantWorlds.Types
             return builtObjectList;
         }
 
-        public BuiltObjectList GenerateDistanceOrderedList(double x, double y)
-        {
-            BuiltObjectList builtObjectList = new BuiltObjectList();
-            builtObjectList.AddRange(this);
-            for (int i = 0; i < builtObjectList.Count; i++)
-            {
-                BuiltObject builtObject = builtObjectList[i];
-                builtObject.SortTag = Galaxy.CalculateDistanceStatic(builtObject.Xpos, builtObject.Ypos, x, y);
-            }
-            builtObjectList.Sort();
-            return builtObjectList;
-        }
+        //public BuiltObjectList GenerateDistanceOrderedList(double x, double y)
+        //{
+        //    BuiltObjectList builtObjectList = new BuiltObjectList();
+        //    builtObjectList.AddRange(this);
+        //    for (int i = 0; i < builtObjectList.Count; i++)
+        //    {
+        //        BuiltObject builtObject = builtObjectList[i];
+        //        builtObject.SortTag = Galaxy.CalculateDistanceStatic(builtObject.Xpos, builtObject.Ypos, x, y);
+        //    }
+        //    builtObjectList.Sort();
+        //    return builtObjectList;
+        //}
 
         public BuiltObjectList GenerateDistanceOrderedList(double x, double y, HabitatList systemPriorities)
         {
-            BuiltObjectList builtObjectList = new BuiltObjectList();
-            builtObjectList.AddRange(this);
-            for (int i = 0; i < builtObjectList.Count; i++)
+            //BuiltObjectList builtObjectList = new BuiltObjectList();
+            //builtObjectList.AddRange(this);
+            List<(double distance, BuiltObject builtObject)> builtObjectList = new List<(double distance, BuiltObject builtObject)>();
+            for (int i = 0; i < this.Count; i++)
             {
-                BuiltObject builtObject = builtObjectList[i];
+                BuiltObject builtObject = this[i];
                 double num = Galaxy.CalculateDistanceStatic(builtObject.Xpos, builtObject.Ypos, x, y);
                 if (builtObject.NearestSystemStar != null && systemPriorities.Contains(builtObject.NearestSystemStar))
                 {
                     num /= 3.0;
                 }
-                builtObject.SortTag = num;
+                //builtObject.SortTag = num;
+                builtObjectList.Add((num, builtObject));
             }
-            builtObjectList.Sort();
-            return builtObjectList;
+            builtObjectList.Sort((x, y) => x.distance.CompareTo(y.distance));
+            var res = new BuiltObjectList();
+            res.AddRange(builtObjectList.Select(x => x.builtObject));
+            return res;
         }
 
         public BuiltObject GetFirstAvailableWithinRange(BuiltObjectRole role, double x, double y, double fuelPortionMargin, bool includeLowAndNormalPriorityMissions)

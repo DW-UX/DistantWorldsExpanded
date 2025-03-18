@@ -309,7 +309,7 @@ namespace DistantWorlds.Types
                 {
                     shipGroup.Name = TextResolver.GetText("Phantom Fleet");
                     superPirateFaction.ShipGroups.Add(shipGroup);
-                    superPirateFaction.ShipGroups.Sort();
+                    superPirateFaction.ShipGroups.Sort((x, y) => x.Name.CompareTo(y.Name));
                 }
             }
             if (superPirateFaction.ShipGroups.Count <= 0)

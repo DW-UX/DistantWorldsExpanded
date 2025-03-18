@@ -300,12 +300,16 @@ namespace DistantWorlds
                 galaxy_0.RuinCount = 0;
             }
             GalaxyLocationList galaxyLocationList = galaxy_0.GalaxyLocations.FindLocations(GalaxyLocationType.RaceRegion);
-            for (int num7 = 0; num7 < galaxyLocationList.Count; num7++)
+
+            lock (Galaxy.GalaxyLocationRemoveLock)
             {
-                GalaxyLocation galaxyLocation = galaxyLocationList[num7];
-                if (galaxyLocation != null)
+                for (int num7 = 0; num7 < galaxyLocationList.Count; num7++)
                 {
-                    galaxy_0.GalaxyLocations.Remove(galaxyLocation);
+                    GalaxyLocation galaxyLocation = galaxyLocationList[num7];
+                    if (galaxyLocation != null)
+                    {
+                        galaxy_0.GalaxyLocations.Remove(galaxyLocation);
+                    }
                 }
             }
             if (bool_9)
@@ -374,9 +378,13 @@ namespace DistantWorlds
                     galaxyLocation2.RelatedRace = null;
                     galaxyLocationList2.Add(galaxyLocation2);
                 }
-                for (int num10 = 0; num10 < galaxyLocationList2.Count; num10++)
+
+                lock (Galaxy.GalaxyLocationRemoveLock)
                 {
-                    galaxy_0.GalaxyLocations.Remove(galaxyLocationList2[num10]);
+                    for (int num10 = 0; num10 < galaxyLocationList2.Count; num10++)
+                    {
+                        galaxy_0.GalaxyLocations.Remove(galaxyLocationList2[num10]);
+                    }
                 }
             }
             galaxy_0.RebuildGalaxyLocationIndexes();

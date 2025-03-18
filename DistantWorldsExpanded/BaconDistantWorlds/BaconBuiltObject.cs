@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using ExpansionMod.Objects;
 using BaconDistantWorlds.HotKeys;
 using BaconDistantWorlds.Forms;
+using System.Threading;
 
 namespace BaconDistantWorlds
 {
@@ -4864,7 +4865,8 @@ namespace BaconDistantWorlds
           out int[] threatLevels,
           out int totalThreatLevel)
         {
-            StellarObjectList stellarObjectList = new StellarObjectList();
+            //StellarObjectList stellarObjectList = new StellarObjectList();
+            List<(double threatLevel, StellarObject threat)> threats = new List<(double threatLevel, StellarObject threat)>(); ;
             double num1 = (double)Galaxy.ThreatRange;
             if ((double)ship.SensorProximityArrayRange > num1)
                 num1 = (double)ship.SensorProximityArrayRange;
@@ -4877,7 +4879,7 @@ namespace BaconDistantWorlds
                 if (distanceSquared <= num3)
                 {
                     double num4 = Math.Sqrt(distanceSquared);
-                    if (num4 < 1500.0 || stellarObjectList.Count<StellarObject>() < 50)
+                    if (num4 < 1500.0 || threats.Count() < 50)
                     {
                         double num5 = Math.Max(1.0, num2 - num4);
                         double num6 = num5 * num5 / 1000000.0;
@@ -4902,13 +4904,14 @@ namespace BaconDistantWorlds
                                 }
                             }
                         }
-                        stellarObjectList.Add((StellarObject)threat);
+                        //stellarObjectList.Add((StellarObject)threat);
                         double d1 = num6 * (double)ship.Empire.SystemVisibility[systemStar.SystemIndex].ThreatLevels[index];
                         if (double.IsNaN(d1))
                             d1 = 1.0;
                         if (ship.SubRole == BuiltObjectSubRole.DefensiveBase && BaconBuiltObject.myMain != null && threat.Empire == BaconBuiltObject.myMain._Game.PlayerEmpire && threat.Troops != null && threat.Troops.Count > 0)
                             d1 *= 100.0;
-                        threat.SortTag = d1;
+                        //threat.SortTag = d1;
+                        threats.Add((d1, threat));
                     }
                 }
             }
@@ -4923,22 +4926,25 @@ namespace BaconDistantWorlds
                         double num9 = Math.Sqrt(distanceSquared);
                         double num10 = Math.Max(1.0, num2 - num9);
                         double num11 = num10 * num10 / 1000000.0;
-                        stellarObjectList.Add((StellarObject)creature);
+                        //stellarObjectList.Add((StellarObject)creature);
                         double d = Math.Max(1.0, num11 * 4000.0);
                         if (double.IsNaN(d))
                             d = 1.0;
-                        creature.SortTag = d;
+                        //creature.SortTag = d;
+                        threats.Add((d, creature));
                     }
                 }
             }
-            StellarObjectList source = BaconBuiltObject.FilterInvalidTargets(ship, stellarObjectList);
-            StellarObject.SortStellarObject sortStellarObject = new StellarObject.SortStellarObject();
-            source.Sort((IComparer<StellarObject>)sortStellarObject);
-            source.Reverse();
+            //StellarObjectList source = BaconBuiltObject.FilterInvalidTargets(ship, stellarObjectList);
+            threats = BaconBuiltObject.FilterInvalidTargets(ship, threats);
+            //StellarObject.SortStellarObject sortStellarObject = new StellarObject.SortStellarObject();
+            //source.Sort((IComparer<StellarObject>)sortStellarObject);
+            threats.Sort((x, y) => x.threatLevel.CompareTo(y.threatLevel));
+            threats.Reverse();
             totalThreatLevel = 0;
-            for (int index = 0; index < source.Count<StellarObject>(); ++index)
+            for (int index = 0; index < threats.Count(); ++index)
             {
-                double d = source[index].SortTag / 1000.0;
+                double d = threats[index].threatLevel / 1000.0;
                 if (d > 21474836.0)
                     d = 21474836.0;
                 else if (d < 1.0)
@@ -4947,32 +4953,32 @@ namespace BaconDistantWorlds
                     d = 1.0;
                 totalThreatLevel += (int)d;
             }
-            int count = Math.Min(10, source.Count<StellarObject>());
+            int count = Math.Min(10, threats.Count);
             StellarObject[] array = new StellarObject[count];
-            source.CopyTo(0, array, 0, count);
+            threats.Select(x => x.threat).Take(count).ToArray().CopyTo(array, 0);
             threatLevels = new int[count];
             for (int index = 0; index < count; ++index)
-                threatLevels[index] = (int)Math.Max((double)int.MinValue, Math.Min((double)int.MaxValue, source[index].SortTag));
+                threatLevels[index] = (int)Math.Max((double)int.MinValue, Math.Min((double)int.MaxValue, threats[index].threatLevel));
             return array;
         }
 
-        public static StellarObjectList FilterInvalidTargets(
+        public static List<(double threatLevel, StellarObject thread)> FilterInvalidTargets(
           BuiltObject ship,
-          StellarObjectList threatList)
+          List<(double threatLevel, StellarObject threat)> threatList)
         {
-            StellarObjectList stellarObjectList1 = new StellarObjectList();
-            StellarObjectList stellarObjectList2 = new StellarObjectList();
+            List<(double threatLevel, StellarObject thread)> stellarObjectList1 = new List<(double threatLevel, StellarObject thread)>();
+            List<(double threatLevel, StellarObject thread)> stellarObjectList2 = new List<(double threatLevel, StellarObject thread)>();
             List<string> stringList = new List<string>();
             if (ship.BaconValues == null || !ship.BaconValues.ContainsKey("notarget"))
                 return threatList;
             List<string> baconValue = (List<string>)ship.BaconValues["notarget"];
             for (int index = 0; index < threatList.Count; ++index)
             {
-                if (threatList[index] is BuiltObject)
+                if (threatList[index].threat is BuiltObject)
                 {
-                    BuiltObject threat = threatList[index] as BuiltObject;
+                    BuiltObject threat = threatList[index].threat as BuiltObject;
                     if (threat.Role == BuiltObjectRole.Military && baconValue.Contains("military") || threat.Role == BuiltObjectRole.Base && baconValue.Contains("bases") || threat.CalculateFirepowerFactor() > ship.CalculateFirepowerFactor() && baconValue.Contains("stronger") || (int)threat.TopSpeed > (int)ship.TopSpeed && baconValue.Contains("faster"))
-                        stellarObjectList2.Add((StellarObject)threat);
+                        stellarObjectList2.Add(threatList[index]);
                 }
             }
             for (int index = 0; index < threatList.Count; ++index)

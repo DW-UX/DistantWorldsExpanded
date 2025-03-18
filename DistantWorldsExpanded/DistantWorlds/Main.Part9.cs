@@ -2509,7 +2509,7 @@ namespace DistantWorlds {
 
         internal void method_257()
         {
-            string path = GetGameFilesFolderCreateIfNeeded() + "defaultOptions";
+            string path = GetGameFilesFolderCreateIfNeeded() + "EM_defaultOptions";
             try
             {
                 FileStream fileStream = new FileStream(path, FileMode.Create);
@@ -2848,7 +2848,7 @@ namespace DistantWorlds {
         internal static GameOptions smethod_0()
         {
             GameOptions result = null;
-            string path = GetGameFilesFolderCreateIfNeeded() + "defaultOptions";
+            string path = GetGameFilesFolderCreateIfNeeded() + "EM_defaultOptions";
             if (File.Exists(path))
             {
                 try
@@ -3610,8 +3610,8 @@ namespace DistantWorlds {
             pnlShipGroupInfo.Visible = false;
             if (_Game.PlayerEmpire.ShipGroups != null)
             {
-                _Game.PlayerEmpire.ShipGroups.ClearSortTags();
-                _Game.PlayerEmpire.ShipGroups.Sort();
+                //_Game.PlayerEmpire.ShipGroups.ClearSortTags();
+                _Game.PlayerEmpire.ShipGroups.Sort((x,y) => x.Name.CompareTo(y.Name));
             }
             if (!method_470() && bool_11)
             {

@@ -609,14 +609,24 @@ namespace DistantWorlds.Types
                     double val = 1.0 - Math.Abs(privateAnnualCashflow) / AnnualPrivateMaintenanceWithoutRetirees;
                     val = Math.Max(0.0, Math.Min(1.0, val));
                     num2 = (int)((double)PrivateBuiltObjects.Count - (double)PrivateBuiltObjects.Count * val);
-                    for (int i = 0; i < builtObjectList.Count; i++)
+                    //for (int i = 0; i < builtObjectList.Count; i++)
+                    //{
+                    //    if (builtObjectList[i] != null && builtObjectList[i].Design != null)
+                    //    {
+                    //        builtObjectList[i].SortTag = builtObjectList[i].Design.DateCreated;
+                    //    }
+                    //}
+                    builtObjectList.Sort((x, y) =>
                     {
-                        if (builtObjectList[i] != null && builtObjectList[i].Design != null)
+                        if (x == null || y == null)
                         {
-                            builtObjectList[i].SortTag = builtObjectList[i].Design.DateCreated;
+                            return 0;
                         }
-                    }
-                    builtObjectList.Sort();
+                        else if (x.Design == null || y.Design == null)
+                        { return 0; }
+                        else
+                        { return x.Design.DateCreated.CompareTo(y.Design.DateCreated); }
+                    });
                 }
             }
             if (num4 < Galaxy.AllowableYearsMaintenanceFromCashOnHand)
@@ -628,14 +638,24 @@ namespace DistantWorlds.Types
                     val2 = Math.Max(0.0, Math.Min(1.0, val2));
                     _ = BuiltObjects.Count;
                     _ = BuiltObjects.Count;
-                    for (int j = 0; j < builtObjectList2.Count; j++)
+                    //for (int j = 0; j < builtObjectList2.Count; j++)
+                    //{
+                    //    if (builtObjectList2[j] != null && builtObjectList2[j].Design != null)
+                    //    {
+                    //        builtObjectList2[j].SortTag = builtObjectList2[j].Design.DateCreated;
+                    //    }
+                    //}
+                    builtObjectList2.Sort((x, y) =>
                     {
-                        if (builtObjectList2[j] != null && builtObjectList2[j].Design != null)
+                        if (x == null || y == null)
                         {
-                            builtObjectList2[j].SortTag = builtObjectList2[j].Design.DateCreated;
+                            return 0;
                         }
-                    }
-                    builtObjectList2.Sort();
+                        else if (x.Design == null || y.Design == null)
+                        { return 0; }
+                        else
+                        { return x.Design.DateCreated.CompareTo(y.Design.DateCreated); }
+                    });
                 }
             }
             BuiltObjectList builtObjectList3 = new BuiltObjectList();

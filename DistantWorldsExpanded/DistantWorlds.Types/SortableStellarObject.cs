@@ -26,6 +26,10 @@ namespace DistantWorlds.Types
       this.SortTag = sortTag;
     }
 
-    int IComparable<SortableStellarObject>.CompareTo(SortableStellarObject other) => this.SortTag.CompareTo(other.SortTag);
+        int IComparable<SortableStellarObject>.CompareTo(SortableStellarObject other)
+        {
+            throw new NotImplementedException();
+            this.SortTag.CompareTo(other.SortTag);
+        }
   }
 }

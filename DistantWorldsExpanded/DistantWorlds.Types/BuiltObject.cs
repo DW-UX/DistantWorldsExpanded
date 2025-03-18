@@ -2037,7 +2037,7 @@ namespace DistantWorlds.Types
             {
                 for (int i = 0; i < Weapons.Count; i++)
                 {
-                    Weapons[i].ReviewValues(Empire);
+                    Weapons[i]?.ReviewValues(Empire);
                 }
             }
         }

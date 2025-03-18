@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
@@ -4335,6 +4336,7 @@ namespace DistantWorlds.Types
             int bracket4 = 0;
             DetermineRacialCharacteristicFactor(race.FriendlinessLevel, out bracket4);
             GovernmentAttributesList governmentAttributesList = new GovernmentAttributesList();
+            List<(double suitability, GovernmentAttributes govAtr)> list = new List<(double suitability, GovernmentAttributes govAtr)>();
             for (int i = 0; i < Galaxy.GovernmentsStatic.Count; i++)
             {
                 GovernmentAttributes governmentAttributes = Galaxy.GovernmentsStatic[i];
@@ -4355,20 +4357,24 @@ namespace DistantWorlds.Types
                     }
                     if (allowableGovernmentTypes.Contains(governmentAttributes.GovernmentId))
                     {
-                        governmentAttributes.SortTag = (float)num5;
-                        governmentAttributesList.Add(governmentAttributes);
+                        //governmentAttributes.SortTag = (float)num5;
+                        //governmentAttributesList.Add(governmentAttributes);
+                        list.Add((num, governmentAttributes));
                     }
                 }
             }
-            governmentAttributesList.Sort();
-            governmentAttributesList.Reverse();
-            if (governmentAttributesList.Count > maximumCount)
+            //governmentAttributesList.Sort();
+            //governmentAttributesList.Reverse();
+            list.Sort((x, y) => x.suitability.CompareTo(y.suitability));
+            list.Reverse();
+            if (list.Count > maximumCount)
             {
                 GovernmentAttributesList governmentAttributesList2 = new GovernmentAttributesList();
-                for (int j = 0; j < maximumCount; j++)
-                {
-                    governmentAttributesList2.Add(governmentAttributesList[j]);
-                }
+                //for (int j = 0; j < maximumCount; j++)
+                //{
+                //    governmentAttributesList2.Add(governmentAttributesList[j]);
+                //}
+                governmentAttributesList2.AddRange(list.Select(x => x.govAtr).Take(maximumCount));
                 return governmentAttributesList2;
             }
             return governmentAttributesList;

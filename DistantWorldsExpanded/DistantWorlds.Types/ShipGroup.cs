@@ -12,7 +12,7 @@ using System.Globalization;
 namespace DistantWorlds.Types
 {
   [Serializable]
-  public class ShipGroup : IComparable<ShipGroup>
+  public class ShipGroup
   {
     private BuiltObjectList _Ships;
     private BuiltObjectRole _Role;
@@ -59,8 +59,8 @@ namespace DistantWorlds.Types
     private Galaxy _Galaxy;
     private DateTime _LastTouch;
     private DateTime _LastPeriodicTouch;
-    [NonSerialized]
-    public double SortTag;
+    //[NonSerialized]
+    //public double SortTag;
 
     public bool LocalDefenseTacticsApply => this._TargetingBonusExtra > 0.0 || this._CountermeasuresBonusExtra > 0.0;
 
@@ -3569,10 +3569,10 @@ namespace DistantWorlds.Types
 
     public bool IsShipAvailable(BuiltObject ship) => ship.BuiltAt == null && ship.RetrofitDesign == null && (ship.Mission == null || ship.Mission.Type != BuiltObjectMissionType.Repair);
 
-    int IComparable<ShipGroup>.CompareTo(ShipGroup other)
-    {
-      int num = this.SortTag.CompareTo(other.SortTag);
-      return num == 0 ? this.Name.CompareTo(other.Name) : num;
+        //int IComparable<ShipGroup>.CompareTo(ShipGroup other)
+        //{
+        //    int num = this.SortTag.CompareTo(other.SortTag);
+        //    return num == 0 ? this.Name.CompareTo(other.Name) : num;
+        //}
     }
-  }
 }
