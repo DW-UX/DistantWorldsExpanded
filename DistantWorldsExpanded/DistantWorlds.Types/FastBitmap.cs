@@ -21,14 +21,7 @@ namespace DistantWorlds.Types
         public FastBitmap(Bitmap image)
         {
             this._Image = image;
-            try
-            {
-                this.LockBitmap();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            this.LockBitmap();
         }
 
         public void Dispose()
@@ -52,6 +45,11 @@ namespace DistantWorlds.Types
         ~FastBitmap() => this.Dispose(false);
 
         public Bitmap Bitmap => this._Image;
+
+        public void Release()
+        {
+            ReleaseImpl();
+        }
 
         public unsafe void SetPixel(ref int X, ref int Y, Color Colour)
         {
@@ -90,6 +88,12 @@ namespace DistantWorlds.Types
             }
         }
 
+        private unsafe void ReleaseImpl()
+        {
+            _Image.UnlockBits(_BitmapData);
+            _BitmapData = null;
+            _BaseOffset = null;
+        }
         private unsafe void LockBitmap()
         {
             GraphicsUnit pageUnit = GraphicsUnit.Pixel;

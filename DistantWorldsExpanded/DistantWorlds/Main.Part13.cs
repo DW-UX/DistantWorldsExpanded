@@ -578,7 +578,7 @@ namespace DistantWorlds {
             int_64 = 10000;
             int_65 = -1;
             int_66 = bitmap_225.Height - 1;
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             for (int Y = bitmap_225.Height - 1; Y >= 0; Y--)
             {
                 for (int i = 0; i < bitmap_225.Width; i++)
@@ -629,7 +629,7 @@ namespace DistantWorlds {
             int num2 = Color.Black.ToArgb();
             int num3 = Color.FromArgb(0, 0, 0, 0).ToArgb();
             int num4 = Color.FromArgb(0, 255, 255, 255).ToArgb();
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             for (int i = 0; i < bitmap_225.Width; i++)
             {
                 for (int j = 0; j < bitmap_225.Height; j++)
@@ -654,7 +654,7 @@ namespace DistantWorlds {
             int num5 = Color.Black.ToArgb();
             int num6 = Color.FromArgb(0, 0, 0, 0).ToArgb();
             int num7 = Color.FromArgb(0, 255, 255, 255).ToArgb();
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             for (int i = 0; i < bitmap_225.Width; i++)
             {
                 for (int j = 0; j < bitmap_225.Height; j++)
@@ -1085,7 +1085,7 @@ namespace DistantWorlds {
         {
             int num = bitmap_225.Width;
             int num2 = bitmap_225.Height;
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             for (int i = 0; i < num; i++)
             {
                 for (int j = 0; j < num2; j++)
@@ -1547,7 +1547,7 @@ namespace DistantWorlds {
             {
                 string shadowsFilePath = "shadow\\shading.png";
                 bitmap_191 = method_10(custOverlays, gameOverlays, shadowsFilePath, bool_28: true);
-                DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_191);
+                FastBitmap fastBitmap = new FastBitmap(bitmap_191);
                 for (int i = 0; i < bitmap_191.Width; i++)
                 {
                     for (int j = 0; j < bitmap_191.Height; j++)
@@ -1575,7 +1575,7 @@ namespace DistantWorlds {
                 taskList.Add(Task.Run(() =>
                 {
                     Bitmap bitmap = method_10(custOverlays, gameOverlays, shadowsFilePath, bool_28: true);
-                    DistantWorlds.FastBitmap fastBitmap2 = new DistantWorlds.FastBitmap(bitmap);
+                    FastBitmap fastBitmap2 = new FastBitmap(bitmap);
                     for (int l = 0; l < bitmap.Width; l++)
                     {
                         for (int m = 0; m < bitmap.Height; m++)
@@ -1603,7 +1603,7 @@ namespace DistantWorlds {
                 taskList.Add(Task.Run(() =>
                 {
                     Bitmap bitmap2 = method_10(custOverlays, gameOverlays, shadowsFilePath, bool_28: true);
-                    DistantWorlds.FastBitmap fastBitmap3 = new DistantWorlds.FastBitmap(bitmap2);
+                    FastBitmap fastBitmap3 = new FastBitmap(bitmap2);
                     for (int X = 0; X < bitmap2.Width; X++)
                     {
                         for (int Y = 0; Y < bitmap2.Height; Y++)
@@ -1634,7 +1634,7 @@ namespace DistantWorlds {
                 for (int num5 = 0; num5 < GalaxyImages.HabitatQualityDamageImageCount; num5++)
                 {
                     Bitmap bitmap3 = new Bitmap(original);
-                    DistantWorlds.FastBitmap fastBitmap4 = new DistantWorlds.FastBitmap(bitmap3);
+                    FastBitmap fastBitmap4 = new FastBitmap(bitmap3);
                     for (int X2 = 0; X2 < bitmap3.Width; X2++)
                     {
                         for (int Y2 = 0; Y2 < bitmap3.Height; Y2++)

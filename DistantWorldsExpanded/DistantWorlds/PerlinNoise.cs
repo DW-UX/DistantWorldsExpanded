@@ -4,6 +4,7 @@
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
+using DistantWorlds.Types;
 using System;
 using System.Drawing;
 
@@ -31,7 +32,7 @@ namespace DistantWorlds
 
         public void Render(Bitmap image, Rectangle rectangle)
         {
-            FastBitmap fastBitmap = new FastBitmap(image);
+            Types.FastBitmap fastBitmap = new Types.FastBitmap(image);
             for (int i = rectangle.Top; i < rectangle.Bottom; i++)
             {
                 for (int j = rectangle.Left; j < rectangle.Right; j++)
