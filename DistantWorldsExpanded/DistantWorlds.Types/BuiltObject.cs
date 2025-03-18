@@ -464,6 +464,8 @@ namespace DistantWorlds.Types
 
         private ManufacturingQueue _ManufacturingQueue;
 
+        private object _redefineLock = new object();
+
         [OptionalField]
         public FighterList Fighters;
 
@@ -2157,1259 +2159,1262 @@ namespace DistantWorlds.Types
             int num39 = 0;
             int num40 = 0;
             int num41 = 0;
-            WeaponList weaponList = new WeaponList();
-            for (int i = 0; i < Components.Count; i++)
+            lock (_redefineLock)
             {
-                num28 += _Galaxy.ComponentCurrentPrices[Components[i].ComponentID];
-                num23 += Components[i].Size;
-                StaticEnergyConsumption += Components[i].EnergyUsed;
-                if (Components[i].Status == ComponentStatus.Normal)
+                WeaponList weaponList = new WeaponList();
+                for (int i = 0; i < Components.Count; i++)
                 {
-                    num32 += Components[i].Size;
-                    bool flag11 = false;
-                    if (DisabledComponentIndexes != null && DisabledComponentIndexes.Count > 0 && DisabledComponentIndexes.Contains((short)i))
+                    num28 += _Galaxy.ComponentCurrentPrices[Components[i].ComponentID];
+                    num23 += Components[i].Size;
+                    StaticEnergyConsumption += Components[i].EnergyUsed;
+                    if (Components[i].Status == ComponentStatus.Normal)
                     {
-                        flag11 = true;
-                    }
-                    if (flag11)
-                    {
-                        continue;
-                    }
-                    ComponentImprovement componentImprovement = null;
-                    Empire actualEmpire = ActualEmpire;
-                    componentImprovement = ((actualEmpire == null || actualEmpire.Research == null) ? new ComponentImprovement(Components[i]) : actualEmpire.Research.ResolveImprovedComponentValues(Components[i]));
-                    switch (componentImprovement.ImprovedComponent.Category)
-                    {
-                        case ComponentCategoryType.AssaultPod:
-                            {
-                                if (componentImprovement.ImprovedComponent.Type != ComponentType.AssaultPod)
-                                {
-                                    break;
-                                }
-                                AssaultStrength += (short)componentImprovement.Value1;
-                                if (componentImprovement.Value2 > 0)
-                                {
-                                    if (AssaultRange > 0)
-                                    {
-                                        AssaultRange = Math.Min(AssaultRange, (short)componentImprovement.Value2);
-                                    }
-                                    else
-                                    {
-                                        AssaultRange = (short)componentImprovement.Value2;
-                                    }
-                                }
-                                if (componentImprovement.Value5 > 0)
-                                {
-                                    if (AssaultShieldPenetration > 0)
-                                    {
-                                        AssaultShieldPenetration = Math.Max(AssaultShieldPenetration, (short)componentImprovement.Value5);
-                                    }
-                                    else
-                                    {
-                                        AssaultShieldPenetration = (short)componentImprovement.Value5;
-                                    }
-                                }
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                break;
-                            }
-                        case ComponentCategoryType.Fighter:
-                            if (componentImprovement.ImprovedComponent.Type == ComponentType.FighterBay)
-                            {
-                                num33 += componentImprovement.Value1;
-                                num34 += componentImprovement.Value2;
-                            }
-                            break;
-                        case ComponentCategoryType.Engine:
-                            switch (componentImprovement.ImprovedComponent.Type)
-                            {
-                                case ComponentType.EngineMainThrust:
-                                    num14 += componentImprovement.Value1;
-                                    num16 += componentImprovement.Value2;
-                                    num15 += componentImprovement.Value3;
-                                    num17 += componentImprovement.Value4;
-                                    switch (componentImprovement.ImprovedComponent.SpecialImageIndex)
-                                    {
-                                        case 0:
-                                            num35++;
-                                            break;
-                                        case 1:
-                                            num36++;
-                                            break;
-                                        case 2:
-                                            num37++;
-                                            break;
-                                        case 3:
-                                            num38++;
-                                            break;
-                                        case 4:
-                                            num39++;
-                                            break;
-                                        case 5:
-                                            num40++;
-                                            break;
-                                    }
-                                    break;
-                                case ComponentType.EngineVectoring:
-                                    num18 += componentImprovement.Value1;
-                                    num19 += componentImprovement.Value2;
-                                    break;
-                            }
-                            break;
-                        case ComponentCategoryType.HyperDrive:
-                            if (componentImprovement.Value1 > num20)
-                            {
-                                num20 = componentImprovement.Value1;
-                            }
-                            if (componentImprovement.Value2 > num21)
-                            {
-                                num21 = componentImprovement.Value2;
-                            }
-                            if (componentImprovement.Value3 < num22)
-                            {
-                                num22 = (short)componentImprovement.Value3;
-                            }
-                            break;
-                        case ComponentCategoryType.HyperDisrupt:
-                            if (componentImprovement.ImprovedComponent.Type == ComponentType.HyperDeny)
-                            {
-                                if (componentImprovement.Value2 > WeaponHyperDenyRange)
-                                {
-                                    WeaponHyperDenyRange = componentImprovement.Value2;
-                                }
-                            }
-                            else if (componentImprovement.ImprovedComponent.Type == ComponentType.HyperStop && componentImprovement.Value2 > HyperStopRange)
-                            {
-                                HyperStopRange = (short)componentImprovement.Value2;
-                            }
-                            break;
-                        case ComponentCategoryType.ShieldRecharge:
-                            if ((short)componentImprovement.Value1 > ShieldAreaRechargeRange)
-                            {
-                                ShieldAreaRechargeRange = (short)componentImprovement.Value1;
-                                ShieldAreaRechargeCapacity = (short)componentImprovement.Value2;
-                                ShieldAreaRechargeEnergyRequired = (short)componentImprovement.Value3;
-                            }
-                            break;
-                        case ComponentCategoryType.Shields:
-                            num9 += componentImprovement.Value1;
-                            num10 += (float)componentImprovement.Value2 / 10f;
-                            break;
-                        case ComponentCategoryType.Reactor:
-                            ReactorPowerOutput += componentImprovement.Value1;
-                            ReactorStorageCapacity += componentImprovement.Value2;
-                            ReactorCycleFuelConsumption += componentImprovement.Value3;
-                            FuelType = new Resource((byte)componentImprovement.Value4);
-                            break;
-                        case ComponentCategoryType.WeaponArea:
-                        case ComponentCategoryType.WeaponSuperArea:
-                            {
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                if (item.RawDamage > 0)
-                                {
-                                    num5 += componentImprovement.Value1;
-                                    if (componentImprovement.Value2 > StandoffWeaponsMaxRange)
-                                    {
-                                        StandoffWeaponsMaxRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > MaximumWeaponsRange)
-                                    {
-                                        MaximumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < MinimumWeaponsRange)
-                                    {
-                                        MinimumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                }
-                                if (item.BombardDamage > 0)
-                                {
-                                    num6 += componentImprovement.Value7;
-                                    if (componentImprovement.Value2 < num7)
-                                    {
-                                        num7 = componentImprovement.Value2;
-                                    }
-                                }
-                                break;
-                            }
-                        case ComponentCategoryType.WeaponPointDefense:
-                            {
-                                if (componentImprovement.Value1 > 0 && componentImprovement.Value2 > PointDefenseWeaponsRange)
-                                {
-                                    PointDefenseWeaponsRange = componentImprovement.Value2;
-                                }
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                break;
-                            }
-                        case ComponentCategoryType.WeaponBeam:
-                        case ComponentCategoryType.WeaponSuperBeam:
-                            {
-                                if (componentImprovement.Value1 > 0)
-                                {
-                                    num5 += componentImprovement.Value1;
-                                    if (componentImprovement.Value2 < BeamWeaponsMinRange)
-                                    {
-                                        BeamWeaponsMinRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > MaximumWeaponsRange)
-                                    {
-                                        MaximumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < MinimumWeaponsRange)
-                                    {
-                                        MinimumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                }
-                                if (componentImprovement.Value7 > 0)
-                                {
-                                    num6 += componentImprovement.Value7;
-                                    if (componentImprovement.Value2 < num7)
-                                    {
-                                        num7 = componentImprovement.Value2;
-                                    }
-                                }
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                if ((componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperBeam || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperTorpedo || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperMissile || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperRailGun || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperPhaser) && componentImprovement.ImprovedComponent.Value1 >= 10000)
-                                {
-                                    PlanetDestroyerWeaponsRange = (int)((double)componentImprovement.Value2 * 0.9);
-                                    if (Role == BuiltObjectRole.Military)
-                                    {
-                                        _IsPlanetDestroyer = true;
-                                    }
-                                }
-                                break;
-                            }
-                        case ComponentCategoryType.WeaponTorpedo:
-                        case ComponentCategoryType.WeaponSuperTorpedo:
-                            {
-                                if (componentImprovement.Value1 > 0)
-                                {
-                                    num5 += componentImprovement.Value1;
-                                    if (componentImprovement.Value2 > StandoffWeaponsMaxRange)
-                                    {
-                                        StandoffWeaponsMaxRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > MaximumWeaponsRange)
-                                    {
-                                        MaximumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < MinimumWeaponsRange)
-                                    {
-                                        MinimumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                }
-                                if (componentImprovement.Value7 > 0)
-                                {
-                                    num6 += componentImprovement.Value7;
-                                    if (componentImprovement.Value2 < num7)
-                                    {
-                                        num7 = componentImprovement.Value2;
-                                    }
-                                }
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                if ((componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperBeam || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperTorpedo || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperMissile || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperRailGun || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperPhaser) && componentImprovement.ImprovedComponent.Value1 >= 10000)
-                                {
-                                    PlanetDestroyerWeaponsRange = (int)((double)componentImprovement.Value2 * 0.9);
-                                    if (Role == BuiltObjectRole.Military)
-                                    {
-                                        _IsPlanetDestroyer = true;
-                                    }
-                                }
-                                break;
-                            }
-                        case ComponentCategoryType.Labs:
-                            flag6 = true;
-                            switch (componentImprovement.ImprovedComponent.Type)
-                            {
-                                case ComponentType.LabsEnergyLab:
-                                    ResearchEnergy += componentImprovement.Value1;
-                                    break;
-                                case ComponentType.LabsHighTechLab:
-                                    ResearchHighTech += componentImprovement.Value1;
-                                    break;
-                                case ComponentType.LabsWeaponsLab:
-                                    ResearchWeapons += componentImprovement.Value1;
-                                    break;
-                            }
-                            break;
-                        case ComponentCategoryType.Extractor:
-                            flag8 = true;
-                            switch (componentImprovement.ImprovedComponent.Type)
-                            {
-                                case ComponentType.ExtractorGasExtractor:
-                                    ExtractionGas += (short)componentImprovement.Value1;
-                                    break;
-                                case ComponentType.ExtractorMine:
-                                    ExtractionMine += (short)componentImprovement.Value1;
-                                    break;
-                                case ComponentType.ExtractorLuxury:
-                                    ExtractionLuxury += (short)componentImprovement.Value1;
-                                    break;
-                            }
-                            break;
-                        case ComponentCategoryType.Manufacturer:
-                            flag9 = true;
-                            _ = componentImprovement.ImprovedComponent.Type;
-                            break;
-                        case ComponentCategoryType.EnergyCollector:
-                            flag10 = true;
-                            switch (componentImprovement.ImprovedComponent.Type)
-                            {
-                                case ComponentType.EnergyCollector:
-                                    EnergyCollection += componentImprovement.Value1;
-                                    break;
-                                case ComponentType.EnergyToFuel:
-                                    {
-                                        int val = EnergyToFuelRate + componentImprovement.Value1;
-                                        EnergyToFuelRate = (short)Math.Min(32767, val);
-                                        break;
-                                    }
-                            }
-                            break;
-                        case ComponentCategoryType.Armor:
-                            {
-                                ComponentType type = componentImprovement.ImprovedComponent.Type;
-                                if (type == ComponentType.Armor)
-                                {
-                                    Armor += (short)componentImprovement.Value1;
-                                    if (componentImprovement.Value2 > ArmorReactive)
-                                    {
-                                        ArmorReactive = (short)componentImprovement.Value2;
-                                    }
-                                }
-                                break;
-                            }
-                        case ComponentCategoryType.Construction:
-                            {
-                                ComponentType type = componentImprovement.ImprovedComponent.Type;
-                                if (type != ComponentType.ConstructionBuild && type == ComponentType.DamageControl)
-                                {
-                                    if (componentImprovement.Value1 > num26)
-                                    {
-                                        num26 = componentImprovement.Value1;
-                                    }
-                                    if (componentImprovement.Value2 > 0 && (num31 == 0 || componentImprovement.Value2 < num31))
-                                    {
-                                        num31 = (short)componentImprovement.Value2;
-                                    }
-                                }
-                                break;
-                            }
-                        case ComponentCategoryType.Computer:
-                            switch (componentImprovement.ImprovedComponent.Type)
-                            {
-                                case ComponentType.ComputerTargettingFleet:
-                                    if (componentImprovement.Value1 > TargettingModifier)
-                                    {
-                                        TargettingModifier = (short)componentImprovement.Value1;
-                                    }
-                                    if (componentImprovement.Value2 > FleetTargettingModifier)
-                                    {
-                                        FleetTargettingModifier = (short)componentImprovement.Value2;
-                                    }
-                                    break;
-                                case ComponentType.ComputerTargetting:
-                                    if (componentImprovement.Value1 > TargettingModifier)
-                                    {
-                                        TargettingModifier = (short)componentImprovement.Value1;
-                                    }
-                                    break;
-                                case ComponentType.ComputerCountermeasuresFleet:
-                                    if (componentImprovement.Value1 > CountermeasureModifier)
-                                    {
-                                        CountermeasureModifier = (short)componentImprovement.Value1;
-                                    }
-                                    if (componentImprovement.Value2 > FleetCountermeasureModifier)
-                                    {
-                                        FleetCountermeasureModifier = (short)componentImprovement.Value2;
-                                    }
-                                    break;
-                                case ComponentType.ComputerCountermeasures:
-                                    if (componentImprovement.Value1 > CountermeasureModifier)
-                                    {
-                                        CountermeasureModifier = (short)componentImprovement.Value1;
-                                    }
-                                    break;
-                                case ComponentType.ComputerCommandCenter:
-                                    {
-                                        float num43 = (float)componentImprovement.Value1 / 100f;
-                                        if (num43 > MaintenanceSavings)
-                                        {
-                                            MaintenanceSavings = num43;
-                                        }
-                                        break;
-                                    }
-                                case ComponentType.ComputerCommerceCenter:
-                                    {
-                                        float num42 = (float)componentImprovement.Value1 / 1000f;
-                                        if (num42 > TradeBonuses)
-                                        {
-                                            TradeBonuses = num42;
-                                        }
-                                        break;
-                                    }
-                            }
-                            break;
-                        case ComponentCategoryType.Sensor:
-                            switch (componentImprovement.ImprovedComponent.Type)
-                            {
-                                case ComponentType.SensorStealth:
-                                    if (componentImprovement.Value1 > num27)
-                                    {
-                                        num27 = componentImprovement.Value1;
-                                    }
-                                    break;
-                                case ComponentType.SensorProximityArray:
-                                    if (componentImprovement.Value1 > SensorProximityArrayRange)
-                                    {
-                                        SensorProximityArrayRange = componentImprovement.Value1;
-                                    }
-                                    if ((byte)componentImprovement.Value2 > SensorJumpIntercept)
-                                    {
-                                        SensorJumpIntercept = (byte)componentImprovement.Value2;
-                                    }
-                                    break;
-                                case ComponentType.SensorResourceProfileSensor:
-                                    if (componentImprovement.Value1 > SensorResourceProfileSensorRange)
-                                    {
-                                        SensorResourceProfileSensorRange = componentImprovement.Value1;
-                                    }
-                                    break;
-                                case ComponentType.SensorLongRange:
-                                    if (componentImprovement.Value1 > SensorLongRange)
-                                    {
-                                        SensorLongRange = componentImprovement.Value1;
-                                    }
-                                    break;
-                                case ComponentType.SensorTraceScanner:
-                                    if (componentImprovement.Value1 > SensorTraceScannerRange)
-                                    {
-                                        SensorTraceScannerRange = (short)componentImprovement.Value1;
-                                        SensorTraceScannerPower = (short)componentImprovement.Value2;
-                                    }
-                                    break;
-                                case ComponentType.SensorScannerJammer:
-                                    if (componentImprovement.Value2 > SensorTraceScannerJamming)
-                                    {
-                                        SensorTraceScannerJamming = (short)componentImprovement.Value1;
-                                    }
-                                    break;
-                            }
-                            break;
-                        case ComponentCategoryType.Habitation:
-                            switch (componentImprovement.ImprovedComponent.Type)
-                            {
-                                case ComponentType.HabitationHabModule:
-                                    num25 += componentImprovement.Value1;
-                                    break;
-                                case ComponentType.HabitationLifeSupport:
-                                    num24 += componentImprovement.Value1;
-                                    break;
-                                case ComponentType.HabitationMedicalCenter:
-                                    if (componentImprovement.Value1 > MedicalCapacity)
-                                    {
-                                        MedicalCapacity = componentImprovement.Value1;
-                                    }
-                                    break;
-                                case ComponentType.HabitationRecreationCenter:
-                                    if (componentImprovement.Value1 > RecreationCapacity)
-                                    {
-                                        RecreationCapacity = componentImprovement.Value1;
-                                    }
-                                    break;
-                                case ComponentType.HabitationColonization:
-                                    IsColony = true;
-                                    break;
-                            }
-                            break;
-                    }
-                    switch (componentImprovement.ImprovedComponent.Type)
-                    {
-                        case ComponentType.WeaponTractorBeam:
-                            {
-                                if (componentImprovement.Value1 > 0)
-                                {
-                                    if (componentImprovement.Value2 > MaximumWeaponsRange)
-                                    {
-                                        MaximumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < MinimumWeaponsRange)
-                                    {
-                                        MinimumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > TractorBeamRange)
-                                    {
-                                        TractorBeamRange = (short)componentImprovement.Value2;
-                                    }
-                                }
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                break;
-                            }
-                        case ComponentType.WeaponGravityBeam:
-                            {
-                                if (componentImprovement.Value1 > 0)
-                                {
-                                    num5 += componentImprovement.Value1;
-                                    if (componentImprovement.Value2 < BeamWeaponsMinRange)
-                                    {
-                                        BeamWeaponsMinRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > MaximumWeaponsRange)
-                                    {
-                                        MaximumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < MinimumWeaponsRange)
-                                    {
-                                        MinimumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                }
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                break;
-                            }
-                        case ComponentType.WeaponAreaGravity:
-                            {
-                                if (componentImprovement.Value1 > 0)
-                                {
-                                    num5 += componentImprovement.Value1;
-                                    if (componentImprovement.Value2 > StandoffWeaponsMaxRange)
-                                    {
-                                        StandoffWeaponsMaxRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > MaximumWeaponsRange)
-                                    {
-                                        MaximumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < MinimumWeaponsRange)
-                                    {
-                                        MinimumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                }
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                break;
-                            }
-                        case ComponentType.WeaponIonDefense:
-                            if (componentImprovement.Value1 > IonDefense)
-                            {
-                                IonDefense = componentImprovement.Value1;
-                            }
-                            break;
-                        case ComponentType.WeaponIonPulse:
-                            {
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                if (item.RawDamage > 0)
-                                {
-                                    num8 += componentImprovement.Value1;
-                                    num5 += componentImprovement.Value1;
-                                    if (componentImprovement.Value2 > IonWeaponRange)
-                                    {
-                                        IonWeaponRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > StandoffWeaponsMaxRange)
-                                    {
-                                        StandoffWeaponsMaxRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > MaximumWeaponsRange)
-                                    {
-                                        MaximumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < MinimumWeaponsRange)
-                                    {
-                                        MinimumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                }
-                                break;
-                            }
-                        case ComponentType.WeaponIonCannon:
-                            {
-                                if (componentImprovement.Value1 > 0)
-                                {
-                                    num8 += componentImprovement.Value1;
-                                    num5 += componentImprovement.Value1;
-                                    if (componentImprovement.Value2 > IonWeaponRange)
-                                    {
-                                        IonWeaponRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < BeamWeaponsMinRange)
-                                    {
-                                        BeamWeaponsMinRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 > MaximumWeaponsRange)
-                                    {
-                                        MaximumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                    if (componentImprovement.Value2 < MinimumWeaponsRange)
-                                    {
-                                        MinimumWeaponsRange = componentImprovement.Value2;
-                                    }
-                                }
-                                Weapon item = new Weapon(componentImprovement);
-                                weaponList.Add(item);
-                                break;
-                            }
-                        case ComponentType.ConstructionBuild:
-                            flag7 = true;
-                            break;
-                        case ComponentType.ComputerCommerceCenter:
-                            flag = true;
-                            break;
-                        case ComponentType.StorageFuel:
-                            num4 += componentImprovement.Value1;
-                            break;
-                        case ComponentType.StorageDockingBay:
-                            flag2 = true;
-                            break;
-                        case ComponentType.StoragePassenger:
-                            num2 += componentImprovement.Value1;
-                            break;
-                        case ComponentType.StorageCargo:
-                            num += componentImprovement.Value1;
-                            break;
-                        case ComponentType.StorageTroop:
-                            num3 += componentImprovement.Value1;
-                            break;
-                        case ComponentType.ComputerCommandCenter:
-                            flag3 = true;
-                            break;
-                        case ComponentType.HabitationLifeSupport:
-                            flag4 = true;
-                            break;
-                        case ComponentType.HabitationHabModule:
-                            flag5 = true;
-                            break;
-                    }
-                }
-                else if (Components[i].Status == ComponentStatus.Unbuilt)
-                {
-                    num29++;
-                }
-                else if (Components[i].Status == ComponentStatus.Damaged)
-                {
-                    num30++;
-                    switch (Components[i].Category)
-                    {
-                        case ComponentCategoryType.WeaponBeam:
-                        case ComponentCategoryType.WeaponTorpedo:
-                        case ComponentCategoryType.WeaponArea:
-                        case ComponentCategoryType.WeaponPointDefense:
-                        case ComponentCategoryType.WeaponIon:
-                        case ComponentCategoryType.WeaponGravity:
-                        case ComponentCategoryType.WeaponSuperBeam:
-                        case ComponentCategoryType.WeaponSuperArea:
-                        case ComponentCategoryType.WeaponSuperTorpedo:
-                            num41++;
-                            break;
-                    }
-                }
-            }
-            if (Weapons == null && weaponList != null && weaponList.Count > 0)
-            {
-                Weapons = new WeaponList();
-            }
-            if (!Weapons.QuickCompareEquivalent(weaponList))
-            {
-                WeaponList weaponList2 = weaponList.DetermineWeaponsNotInSuppliedList(Weapons);
-                WeaponList weaponList3 = Weapons.DetermineWeaponsNotInSuppliedList(weaponList);
-                for (int j = 0; j < weaponList3.Count; j++)
-                {
-                    Weapons.RemoveAndResetFirstMatchingWeaponById(weaponList3[j]);
-                }
-                for (int k = 0; k < weaponList2.Count; k++)
-                {
-                    Weapons.Add(weaponList2[k]);
-                }
-            }
-            UndamagedComponentSize = num32;
-            if (num2 > 0)
-            {
-                PopulationCapacity = num2;
-                if (Population == null)
-                {
-                    Population = new PopulationList();
-                }
-            }
-            else
-            {
-                PopulationCapacity = 0;
-                Population = null;
-            }
-            if (num > 0)
-            {
-                if (Cargo == null)
-                {
-                    Cargo = new CargoList();
-                }
-            }
-            else
-            {
-                Cargo = null;
-            }
-            if (num3 > 0)
-            {
-                if (Troops == null)
-                {
-                    Troops = new TroopList();
-                }
-            }
-            else
-            {
-                if (Troops != null && Troops.Count > 0)
-                {
-                    for (int l = 0; l < Troops.Count; l++)
-                    {
-                        if (Troops[l].Empire != null && Troops[l].Empire.Troops != null)
+                        num32 += Components[i].Size;
+                        bool flag11 = false;
+                        if (DisabledComponentIndexes != null && DisabledComponentIndexes.Count > 0 && DisabledComponentIndexes.Contains((short)i))
                         {
-                            Troops[l].Empire.Troops.Remove(Troops[l]);
+                            flag11 = true;
                         }
-                        Troops[l].BuiltObject = null;
-                        Troops[l].Colony = null;
-                        Troops[l].Empire = null;
+                        if (flag11)
+                        {
+                            continue;
+                        }
+                        ComponentImprovement componentImprovement = null;
+                        Empire actualEmpire = ActualEmpire;
+                        componentImprovement = ((actualEmpire == null || actualEmpire.Research == null) ? new ComponentImprovement(Components[i]) : actualEmpire.Research.ResolveImprovedComponentValues(Components[i]));
+                        switch (componentImprovement.ImprovedComponent.Category)
+                        {
+                            case ComponentCategoryType.AssaultPod:
+                                {
+                                    if (componentImprovement.ImprovedComponent.Type != ComponentType.AssaultPod)
+                                    {
+                                        break;
+                                    }
+                                    AssaultStrength += (short)componentImprovement.Value1;
+                                    if (componentImprovement.Value2 > 0)
+                                    {
+                                        if (AssaultRange > 0)
+                                        {
+                                            AssaultRange = Math.Min(AssaultRange, (short)componentImprovement.Value2);
+                                        }
+                                        else
+                                        {
+                                            AssaultRange = (short)componentImprovement.Value2;
+                                        }
+                                    }
+                                    if (componentImprovement.Value5 > 0)
+                                    {
+                                        if (AssaultShieldPenetration > 0)
+                                        {
+                                            AssaultShieldPenetration = Math.Max(AssaultShieldPenetration, (short)componentImprovement.Value5);
+                                        }
+                                        else
+                                        {
+                                            AssaultShieldPenetration = (short)componentImprovement.Value5;
+                                        }
+                                    }
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    break;
+                                }
+                            case ComponentCategoryType.Fighter:
+                                if (componentImprovement.ImprovedComponent.Type == ComponentType.FighterBay)
+                                {
+                                    num33 += componentImprovement.Value1;
+                                    num34 += componentImprovement.Value2;
+                                }
+                                break;
+                            case ComponentCategoryType.Engine:
+                                switch (componentImprovement.ImprovedComponent.Type)
+                                {
+                                    case ComponentType.EngineMainThrust:
+                                        num14 += componentImprovement.Value1;
+                                        num16 += componentImprovement.Value2;
+                                        num15 += componentImprovement.Value3;
+                                        num17 += componentImprovement.Value4;
+                                        switch (componentImprovement.ImprovedComponent.SpecialImageIndex)
+                                        {
+                                            case 0:
+                                                num35++;
+                                                break;
+                                            case 1:
+                                                num36++;
+                                                break;
+                                            case 2:
+                                                num37++;
+                                                break;
+                                            case 3:
+                                                num38++;
+                                                break;
+                                            case 4:
+                                                num39++;
+                                                break;
+                                            case 5:
+                                                num40++;
+                                                break;
+                                        }
+                                        break;
+                                    case ComponentType.EngineVectoring:
+                                        num18 += componentImprovement.Value1;
+                                        num19 += componentImprovement.Value2;
+                                        break;
+                                }
+                                break;
+                            case ComponentCategoryType.HyperDrive:
+                                if (componentImprovement.Value1 > num20)
+                                {
+                                    num20 = componentImprovement.Value1;
+                                }
+                                if (componentImprovement.Value2 > num21)
+                                {
+                                    num21 = componentImprovement.Value2;
+                                }
+                                if (componentImprovement.Value3 < num22)
+                                {
+                                    num22 = (short)componentImprovement.Value3;
+                                }
+                                break;
+                            case ComponentCategoryType.HyperDisrupt:
+                                if (componentImprovement.ImprovedComponent.Type == ComponentType.HyperDeny)
+                                {
+                                    if (componentImprovement.Value2 > WeaponHyperDenyRange)
+                                    {
+                                        WeaponHyperDenyRange = componentImprovement.Value2;
+                                    }
+                                }
+                                else if (componentImprovement.ImprovedComponent.Type == ComponentType.HyperStop && componentImprovement.Value2 > HyperStopRange)
+                                {
+                                    HyperStopRange = (short)componentImprovement.Value2;
+                                }
+                                break;
+                            case ComponentCategoryType.ShieldRecharge:
+                                if ((short)componentImprovement.Value1 > ShieldAreaRechargeRange)
+                                {
+                                    ShieldAreaRechargeRange = (short)componentImprovement.Value1;
+                                    ShieldAreaRechargeCapacity = (short)componentImprovement.Value2;
+                                    ShieldAreaRechargeEnergyRequired = (short)componentImprovement.Value3;
+                                }
+                                break;
+                            case ComponentCategoryType.Shields:
+                                num9 += componentImprovement.Value1;
+                                num10 += (float)componentImprovement.Value2 / 10f;
+                                break;
+                            case ComponentCategoryType.Reactor:
+                                ReactorPowerOutput += componentImprovement.Value1;
+                                ReactorStorageCapacity += componentImprovement.Value2;
+                                ReactorCycleFuelConsumption += componentImprovement.Value3;
+                                FuelType = new Resource((byte)componentImprovement.Value4);
+                                break;
+                            case ComponentCategoryType.WeaponArea:
+                            case ComponentCategoryType.WeaponSuperArea:
+                                {
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    if (item.RawDamage > 0)
+                                    {
+                                        num5 += componentImprovement.Value1;
+                                        if (componentImprovement.Value2 > StandoffWeaponsMaxRange)
+                                        {
+                                            StandoffWeaponsMaxRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > MaximumWeaponsRange)
+                                        {
+                                            MaximumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < MinimumWeaponsRange)
+                                        {
+                                            MinimumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                    }
+                                    if (item.BombardDamage > 0)
+                                    {
+                                        num6 += componentImprovement.Value7;
+                                        if (componentImprovement.Value2 < num7)
+                                        {
+                                            num7 = componentImprovement.Value2;
+                                        }
+                                    }
+                                    break;
+                                }
+                            case ComponentCategoryType.WeaponPointDefense:
+                                {
+                                    if (componentImprovement.Value1 > 0 && componentImprovement.Value2 > PointDefenseWeaponsRange)
+                                    {
+                                        PointDefenseWeaponsRange = componentImprovement.Value2;
+                                    }
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    break;
+                                }
+                            case ComponentCategoryType.WeaponBeam:
+                            case ComponentCategoryType.WeaponSuperBeam:
+                                {
+                                    if (componentImprovement.Value1 > 0)
+                                    {
+                                        num5 += componentImprovement.Value1;
+                                        if (componentImprovement.Value2 < BeamWeaponsMinRange)
+                                        {
+                                            BeamWeaponsMinRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > MaximumWeaponsRange)
+                                        {
+                                            MaximumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < MinimumWeaponsRange)
+                                        {
+                                            MinimumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                    }
+                                    if (componentImprovement.Value7 > 0)
+                                    {
+                                        num6 += componentImprovement.Value7;
+                                        if (componentImprovement.Value2 < num7)
+                                        {
+                                            num7 = componentImprovement.Value2;
+                                        }
+                                    }
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    if ((componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperBeam || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperTorpedo || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperMissile || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperRailGun || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperPhaser) && componentImprovement.ImprovedComponent.Value1 >= 10000)
+                                    {
+                                        PlanetDestroyerWeaponsRange = (int)((double)componentImprovement.Value2 * 0.9);
+                                        if (Role == BuiltObjectRole.Military)
+                                        {
+                                            _IsPlanetDestroyer = true;
+                                        }
+                                    }
+                                    break;
+                                }
+                            case ComponentCategoryType.WeaponTorpedo:
+                            case ComponentCategoryType.WeaponSuperTorpedo:
+                                {
+                                    if (componentImprovement.Value1 > 0)
+                                    {
+                                        num5 += componentImprovement.Value1;
+                                        if (componentImprovement.Value2 > StandoffWeaponsMaxRange)
+                                        {
+                                            StandoffWeaponsMaxRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > MaximumWeaponsRange)
+                                        {
+                                            MaximumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < MinimumWeaponsRange)
+                                        {
+                                            MinimumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                    }
+                                    if (componentImprovement.Value7 > 0)
+                                    {
+                                        num6 += componentImprovement.Value7;
+                                        if (componentImprovement.Value2 < num7)
+                                        {
+                                            num7 = componentImprovement.Value2;
+                                        }
+                                    }
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    if ((componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperBeam || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperTorpedo || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperMissile || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperRailGun || componentImprovement.ImprovedComponent.Type == ComponentType.WeaponSuperPhaser) && componentImprovement.ImprovedComponent.Value1 >= 10000)
+                                    {
+                                        PlanetDestroyerWeaponsRange = (int)((double)componentImprovement.Value2 * 0.9);
+                                        if (Role == BuiltObjectRole.Military)
+                                        {
+                                            _IsPlanetDestroyer = true;
+                                        }
+                                    }
+                                    break;
+                                }
+                            case ComponentCategoryType.Labs:
+                                flag6 = true;
+                                switch (componentImprovement.ImprovedComponent.Type)
+                                {
+                                    case ComponentType.LabsEnergyLab:
+                                        ResearchEnergy += componentImprovement.Value1;
+                                        break;
+                                    case ComponentType.LabsHighTechLab:
+                                        ResearchHighTech += componentImprovement.Value1;
+                                        break;
+                                    case ComponentType.LabsWeaponsLab:
+                                        ResearchWeapons += componentImprovement.Value1;
+                                        break;
+                                }
+                                break;
+                            case ComponentCategoryType.Extractor:
+                                flag8 = true;
+                                switch (componentImprovement.ImprovedComponent.Type)
+                                {
+                                    case ComponentType.ExtractorGasExtractor:
+                                        ExtractionGas += (short)componentImprovement.Value1;
+                                        break;
+                                    case ComponentType.ExtractorMine:
+                                        ExtractionMine += (short)componentImprovement.Value1;
+                                        break;
+                                    case ComponentType.ExtractorLuxury:
+                                        ExtractionLuxury += (short)componentImprovement.Value1;
+                                        break;
+                                }
+                                break;
+                            case ComponentCategoryType.Manufacturer:
+                                flag9 = true;
+                                _ = componentImprovement.ImprovedComponent.Type;
+                                break;
+                            case ComponentCategoryType.EnergyCollector:
+                                flag10 = true;
+                                switch (componentImprovement.ImprovedComponent.Type)
+                                {
+                                    case ComponentType.EnergyCollector:
+                                        EnergyCollection += componentImprovement.Value1;
+                                        break;
+                                    case ComponentType.EnergyToFuel:
+                                        {
+                                            int val = EnergyToFuelRate + componentImprovement.Value1;
+                                            EnergyToFuelRate = (short)Math.Min(32767, val);
+                                            break;
+                                        }
+                                }
+                                break;
+                            case ComponentCategoryType.Armor:
+                                {
+                                    ComponentType type = componentImprovement.ImprovedComponent.Type;
+                                    if (type == ComponentType.Armor)
+                                    {
+                                        Armor += (short)componentImprovement.Value1;
+                                        if (componentImprovement.Value2 > ArmorReactive)
+                                        {
+                                            ArmorReactive = (short)componentImprovement.Value2;
+                                        }
+                                    }
+                                    break;
+                                }
+                            case ComponentCategoryType.Construction:
+                                {
+                                    ComponentType type = componentImprovement.ImprovedComponent.Type;
+                                    if (type != ComponentType.ConstructionBuild && type == ComponentType.DamageControl)
+                                    {
+                                        if (componentImprovement.Value1 > num26)
+                                        {
+                                            num26 = componentImprovement.Value1;
+                                        }
+                                        if (componentImprovement.Value2 > 0 && (num31 == 0 || componentImprovement.Value2 < num31))
+                                        {
+                                            num31 = (short)componentImprovement.Value2;
+                                        }
+                                    }
+                                    break;
+                                }
+                            case ComponentCategoryType.Computer:
+                                switch (componentImprovement.ImprovedComponent.Type)
+                                {
+                                    case ComponentType.ComputerTargettingFleet:
+                                        if (componentImprovement.Value1 > TargettingModifier)
+                                        {
+                                            TargettingModifier = (short)componentImprovement.Value1;
+                                        }
+                                        if (componentImprovement.Value2 > FleetTargettingModifier)
+                                        {
+                                            FleetTargettingModifier = (short)componentImprovement.Value2;
+                                        }
+                                        break;
+                                    case ComponentType.ComputerTargetting:
+                                        if (componentImprovement.Value1 > TargettingModifier)
+                                        {
+                                            TargettingModifier = (short)componentImprovement.Value1;
+                                        }
+                                        break;
+                                    case ComponentType.ComputerCountermeasuresFleet:
+                                        if (componentImprovement.Value1 > CountermeasureModifier)
+                                        {
+                                            CountermeasureModifier = (short)componentImprovement.Value1;
+                                        }
+                                        if (componentImprovement.Value2 > FleetCountermeasureModifier)
+                                        {
+                                            FleetCountermeasureModifier = (short)componentImprovement.Value2;
+                                        }
+                                        break;
+                                    case ComponentType.ComputerCountermeasures:
+                                        if (componentImprovement.Value1 > CountermeasureModifier)
+                                        {
+                                            CountermeasureModifier = (short)componentImprovement.Value1;
+                                        }
+                                        break;
+                                    case ComponentType.ComputerCommandCenter:
+                                        {
+                                            float num43 = (float)componentImprovement.Value1 / 100f;
+                                            if (num43 > MaintenanceSavings)
+                                            {
+                                                MaintenanceSavings = num43;
+                                            }
+                                            break;
+                                        }
+                                    case ComponentType.ComputerCommerceCenter:
+                                        {
+                                            float num42 = (float)componentImprovement.Value1 / 1000f;
+                                            if (num42 > TradeBonuses)
+                                            {
+                                                TradeBonuses = num42;
+                                            }
+                                            break;
+                                        }
+                                }
+                                break;
+                            case ComponentCategoryType.Sensor:
+                                switch (componentImprovement.ImprovedComponent.Type)
+                                {
+                                    case ComponentType.SensorStealth:
+                                        if (componentImprovement.Value1 > num27)
+                                        {
+                                            num27 = componentImprovement.Value1;
+                                        }
+                                        break;
+                                    case ComponentType.SensorProximityArray:
+                                        if (componentImprovement.Value1 > SensorProximityArrayRange)
+                                        {
+                                            SensorProximityArrayRange = componentImprovement.Value1;
+                                        }
+                                        if ((byte)componentImprovement.Value2 > SensorJumpIntercept)
+                                        {
+                                            SensorJumpIntercept = (byte)componentImprovement.Value2;
+                                        }
+                                        break;
+                                    case ComponentType.SensorResourceProfileSensor:
+                                        if (componentImprovement.Value1 > SensorResourceProfileSensorRange)
+                                        {
+                                            SensorResourceProfileSensorRange = componentImprovement.Value1;
+                                        }
+                                        break;
+                                    case ComponentType.SensorLongRange:
+                                        if (componentImprovement.Value1 > SensorLongRange)
+                                        {
+                                            SensorLongRange = componentImprovement.Value1;
+                                        }
+                                        break;
+                                    case ComponentType.SensorTraceScanner:
+                                        if (componentImprovement.Value1 > SensorTraceScannerRange)
+                                        {
+                                            SensorTraceScannerRange = (short)componentImprovement.Value1;
+                                            SensorTraceScannerPower = (short)componentImprovement.Value2;
+                                        }
+                                        break;
+                                    case ComponentType.SensorScannerJammer:
+                                        if (componentImprovement.Value2 > SensorTraceScannerJamming)
+                                        {
+                                            SensorTraceScannerJamming = (short)componentImprovement.Value1;
+                                        }
+                                        break;
+                                }
+                                break;
+                            case ComponentCategoryType.Habitation:
+                                switch (componentImprovement.ImprovedComponent.Type)
+                                {
+                                    case ComponentType.HabitationHabModule:
+                                        num25 += componentImprovement.Value1;
+                                        break;
+                                    case ComponentType.HabitationLifeSupport:
+                                        num24 += componentImprovement.Value1;
+                                        break;
+                                    case ComponentType.HabitationMedicalCenter:
+                                        if (componentImprovement.Value1 > MedicalCapacity)
+                                        {
+                                            MedicalCapacity = componentImprovement.Value1;
+                                        }
+                                        break;
+                                    case ComponentType.HabitationRecreationCenter:
+                                        if (componentImprovement.Value1 > RecreationCapacity)
+                                        {
+                                            RecreationCapacity = componentImprovement.Value1;
+                                        }
+                                        break;
+                                    case ComponentType.HabitationColonization:
+                                        IsColony = true;
+                                        break;
+                                }
+                                break;
+                        }
+                        switch (componentImprovement.ImprovedComponent.Type)
+                        {
+                            case ComponentType.WeaponTractorBeam:
+                                {
+                                    if (componentImprovement.Value1 > 0)
+                                    {
+                                        if (componentImprovement.Value2 > MaximumWeaponsRange)
+                                        {
+                                            MaximumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < MinimumWeaponsRange)
+                                        {
+                                            MinimumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > TractorBeamRange)
+                                        {
+                                            TractorBeamRange = (short)componentImprovement.Value2;
+                                        }
+                                    }
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    break;
+                                }
+                            case ComponentType.WeaponGravityBeam:
+                                {
+                                    if (componentImprovement.Value1 > 0)
+                                    {
+                                        num5 += componentImprovement.Value1;
+                                        if (componentImprovement.Value2 < BeamWeaponsMinRange)
+                                        {
+                                            BeamWeaponsMinRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > MaximumWeaponsRange)
+                                        {
+                                            MaximumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < MinimumWeaponsRange)
+                                        {
+                                            MinimumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                    }
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    break;
+                                }
+                            case ComponentType.WeaponAreaGravity:
+                                {
+                                    if (componentImprovement.Value1 > 0)
+                                    {
+                                        num5 += componentImprovement.Value1;
+                                        if (componentImprovement.Value2 > StandoffWeaponsMaxRange)
+                                        {
+                                            StandoffWeaponsMaxRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > MaximumWeaponsRange)
+                                        {
+                                            MaximumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < MinimumWeaponsRange)
+                                        {
+                                            MinimumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                    }
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    break;
+                                }
+                            case ComponentType.WeaponIonDefense:
+                                if (componentImprovement.Value1 > IonDefense)
+                                {
+                                    IonDefense = componentImprovement.Value1;
+                                }
+                                break;
+                            case ComponentType.WeaponIonPulse:
+                                {
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    if (item.RawDamage > 0)
+                                    {
+                                        num8 += componentImprovement.Value1;
+                                        num5 += componentImprovement.Value1;
+                                        if (componentImprovement.Value2 > IonWeaponRange)
+                                        {
+                                            IonWeaponRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > StandoffWeaponsMaxRange)
+                                        {
+                                            StandoffWeaponsMaxRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > MaximumWeaponsRange)
+                                        {
+                                            MaximumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < MinimumWeaponsRange)
+                                        {
+                                            MinimumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                    }
+                                    break;
+                                }
+                            case ComponentType.WeaponIonCannon:
+                                {
+                                    if (componentImprovement.Value1 > 0)
+                                    {
+                                        num8 += componentImprovement.Value1;
+                                        num5 += componentImprovement.Value1;
+                                        if (componentImprovement.Value2 > IonWeaponRange)
+                                        {
+                                            IonWeaponRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < BeamWeaponsMinRange)
+                                        {
+                                            BeamWeaponsMinRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 > MaximumWeaponsRange)
+                                        {
+                                            MaximumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                        if (componentImprovement.Value2 < MinimumWeaponsRange)
+                                        {
+                                            MinimumWeaponsRange = componentImprovement.Value2;
+                                        }
+                                    }
+                                    Weapon item = new Weapon(componentImprovement);
+                                    weaponList.Add(item);
+                                    break;
+                                }
+                            case ComponentType.ConstructionBuild:
+                                flag7 = true;
+                                break;
+                            case ComponentType.ComputerCommerceCenter:
+                                flag = true;
+                                break;
+                            case ComponentType.StorageFuel:
+                                num4 += componentImprovement.Value1;
+                                break;
+                            case ComponentType.StorageDockingBay:
+                                flag2 = true;
+                                break;
+                            case ComponentType.StoragePassenger:
+                                num2 += componentImprovement.Value1;
+                                break;
+                            case ComponentType.StorageCargo:
+                                num += componentImprovement.Value1;
+                                break;
+                            case ComponentType.StorageTroop:
+                                num3 += componentImprovement.Value1;
+                                break;
+                            case ComponentType.ComputerCommandCenter:
+                                flag3 = true;
+                                break;
+                            case ComponentType.HabitationLifeSupport:
+                                flag4 = true;
+                                break;
+                            case ComponentType.HabitationHabModule:
+                                flag5 = true;
+                                break;
+                        }
                     }
-                    Troops.Clear();
+                    else if (Components[i].Status == ComponentStatus.Unbuilt)
+                    {
+                        num29++;
+                    }
+                    else if (Components[i].Status == ComponentStatus.Damaged)
+                    {
+                        num30++;
+                        switch (Components[i].Category)
+                        {
+                            case ComponentCategoryType.WeaponBeam:
+                            case ComponentCategoryType.WeaponTorpedo:
+                            case ComponentCategoryType.WeaponArea:
+                            case ComponentCategoryType.WeaponPointDefense:
+                            case ComponentCategoryType.WeaponIon:
+                            case ComponentCategoryType.WeaponGravity:
+                            case ComponentCategoryType.WeaponSuperBeam:
+                            case ComponentCategoryType.WeaponSuperArea:
+                            case ComponentCategoryType.WeaponSuperTorpedo:
+                                num41++;
+                                break;
+                        }
+                    }
                 }
-                Troops = null;
-            }
-            if (Armor > 0 && (SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort) && ParentHabitat != null && ParentHabitat.Population != null && ParentHabitat.Population.DominantRace != null)
-            {
-                Race dominantRace = ParentHabitat.Population.DominantRace;
-                if (dominantRace.SpaceportArmorStrengthFactor != 0.0)
+                if (Weapons == null && weaponList != null && weaponList.Count > 0)
                 {
-                    ArmorReinforcingFactor = (short)(100.0 * dominantRace.SpaceportArmorStrengthFactor);
+                    Weapons = new WeaponList();
                 }
-            }
-            FighterCapacity = num33;
-            FighterRepairRate = num34;
-            if (num33 > 0)
-            {
-                if (Fighters == null)
+                if (!Weapons.QuickCompareEquivalent(weaponList))
                 {
-                    Fighters = new FighterList();
+                    WeaponList weaponList2 = weaponList.DetermineWeaponsNotInSuppliedList(Weapons);
+                    WeaponList weaponList3 = Weapons.DetermineWeaponsNotInSuppliedList(weaponList);
+                    for (int j = 0; j < weaponList3.Count; j++)
+                    {
+                        Weapons.RemoveAndResetFirstMatchingWeaponById(weaponList3[j]);
+                    }
+                    for (int k = 0; k < weaponList2.Count; k++)
+                    {
+                        Weapons.Add(weaponList2[k]);
+                    }
                 }
-            }
-            else if (Fighters != null && Fighters.Count <= 0)
-            {
-                Fighters = null;
-            }
-            else if (Fighters != null && Fighters.Count > 0)
-            {
-                FighterList fighterList = new FighterList();
-                fighterList.AddRange(Fighters);
-                for (int m = 0; m < fighterList.Count; m++)
+                UndamagedComponentSize = num32;
+                if (num2 > 0)
                 {
-                    fighterList[m].CompleteTeardown(_Galaxy);
+                    PopulationCapacity = num2;
+                    if (Population == null)
+                    {
+                        Population = new PopulationList();
+                    }
                 }
-            }
-            if (ParentHabitat != null && Role == BuiltObjectRole.Base && ParentHabitat.Population.Count > 0 && ParentHabitat.Empire == ActualEmpire)
-            {
-                if (ParentHabitat.Cargo == null)
+                else
                 {
-                    ParentHabitat.Cargo = new CargoList();
+                    PopulationCapacity = 0;
+                    Population = null;
                 }
-                Cargo = ParentHabitat.Cargo;
-            }
-            if (ParentHabitat != null)
-            {
-                if (Role == BuiltObjectRole.Base && ParentHabitat.Population.Count > 0 && ParentHabitat.Empire == ActualEmpire)
+                if (num > 0)
                 {
-                    num = 536870911;
+                    if (Cargo == null)
+                    {
+                        Cargo = new CargoList();
+                    }
+                }
+                else
+                {
+                    Cargo = null;
+                }
+                if (num3 > 0)
+                {
+                    if (Troops == null)
+                    {
+                        Troops = new TroopList();
+                    }
+                }
+                else
+                {
+                    if (Troops != null && Troops.Count > 0)
+                    {
+                        for (int l = 0; l < Troops.Count; l++)
+                        {
+                            if (Troops[l].Empire != null && Troops[l].Empire.Troops != null)
+                            {
+                                Troops[l].Empire.Troops.Remove(Troops[l]);
+                            }
+                            Troops[l].BuiltObject = null;
+                            Troops[l].Colony = null;
+                            Troops[l].Empire = null;
+                        }
+                        Troops.Clear();
+                    }
+                    Troops = null;
+                }
+                if (Armor > 0 && (SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort) && ParentHabitat != null && ParentHabitat.Population != null && ParentHabitat.Population.DominantRace != null)
+                {
+                    Race dominantRace = ParentHabitat.Population.DominantRace;
+                    if (dominantRace.SpaceportArmorStrengthFactor != 0.0)
+                    {
+                        ArmorReinforcingFactor = (short)(100.0 * dominantRace.SpaceportArmorStrengthFactor);
+                    }
+                }
+                FighterCapacity = num33;
+                FighterRepairRate = num34;
+                if (num33 > 0)
+                {
+                    if (Fighters == null)
+                    {
+                        Fighters = new FighterList();
+                    }
+                }
+                else if (Fighters != null && Fighters.Count <= 0)
+                {
+                    Fighters = null;
+                }
+                else if (Fighters != null && Fighters.Count > 0)
+                {
+                    FighterList fighterList = new FighterList();
+                    fighterList.AddRange(Fighters);
+                    for (int m = 0; m < fighterList.Count; m++)
+                    {
+                        fighterList[m].CompleteTeardown(_Galaxy);
+                    }
+                }
+                if (ParentHabitat != null && Role == BuiltObjectRole.Base && ParentHabitat.Population.Count > 0 && ParentHabitat.Empire == ActualEmpire)
+                {
+                    if (ParentHabitat.Cargo == null)
+                    {
+                        ParentHabitat.Cargo = new CargoList();
+                    }
+                    Cargo = ParentHabitat.Cargo;
+                }
+                if (ParentHabitat != null)
+                {
+                    if (Role == BuiltObjectRole.Base && ParentHabitat.Population.Count > 0 && ParentHabitat.Empire == ActualEmpire)
+                    {
+                        num = 536870911;
+                    }
+                    else if (Role == BuiltObjectRole.Base)
+                    {
+                        num *= 4;
+                    }
                 }
                 else if (Role == BuiltObjectRole.Base)
                 {
                     num *= 4;
                 }
-            }
-            else if (Role == BuiltObjectRole.Base)
-            {
-                num *= 4;
-            }
-            _CargoCapacity = num;
-            if (flag3 && flag4 && flag5)
-            {
-                IsFunctional = true;
-            }
-            if (IsFunctional && CargoCapacity > 0 && flag2)
-            {
-                IsRefuellingDepot = true;
-            }
-            if (IsRefuellingDepot && flag && CargoCapacity > 0)
-            {
-                IsSpacePort = true;
-            }
-            if (IsFunctional && flag6)
-            {
-                IsResearchLab = true;
-            }
-            if (IsFunctional && flag8)
-            {
-                IsResourceExtractor = true;
-            }
-            if (IsFunctional && flag9)
-            {
-                IsManufacturer = true;
-            }
-            if (IsFunctional && flag7 && flag9)
-            {
-                IsShipYard = true;
-            }
-            if (IsFunctional && flag10)
-            {
-                IsEnergyCollector = true;
-            }
-            if (IsResourceExtractor)
-            {
-                _ = Role;
-                _ = 8;
-            }
-            if (num27 > 0)
-            {
-                double num44 = (double)num27 / (double)num23;
-                Stealth = (float)Math.Min(1.0, 0.5 / num44);
-            }
-            if (num26 > 0)
-            {
-                _DamageReduction = (float)num26 / 1000f;
-            }
-            ReviewWeaponsComponentValues();
-            double num45 = (double)ReactorPowerOutput - (double)StaticEnergyConsumption;
-            num13 = num20;
-            num11 = (short)(num14 / Math.Max(1, num23));
-            num12 = (short)(num15 / Math.Max(1, num23));
-            double num46;
-            double num47;
-            double num48;
-            if (ReactorPowerOutput > 0)
-            {
-                num46 = (double)num21 / num45;
-                num47 = (double)num16 / num45;
-                num48 = (double)num17 / num45;
-            }
-            else
-            {
-                num46 = 1000000.0;
-                num47 = 1000000.0;
-                num48 = 1000000.0;
-            }
-            if (num46 > 1.0)
-            {
-                num13 = (int)((double)num13 / num46);
-                if (num20 > 0 && ReactorPowerOutput > 0)
+                _CargoCapacity = num;
+                if (flag3 && flag4 && flag5)
                 {
-                    num13 = Math.Max(num13, 600);
+                    IsFunctional = true;
                 }
-                num21 = (int)((double)num21 / num46);
-            }
-            if (num47 > 1.0)
-            {
-                num11 = (short)((double)num11 / num47);
-                num16 = (short)((double)num16 / num47);
-            }
-            if (num48 > 1.0)
-            {
-                num12 = (short)((double)num12 / num48);
-                num17 = (short)((double)num17 / num48);
-            }
-            List<int> list = new List<int>();
-            list.Add(num35);
-            list.Add(num36);
-            list.Add(num37);
-            list.Add(num38);
-            list.Add(num39);
-            list.Add(num40);
-            list.Sort();
-            list.Reverse();
-            if (list[0] == num35)
-            {
-                EngineType = EngineType.Proton;
-            }
-            else if (list[0] == num36)
-            {
-                EngineType = EngineType.Quantum;
-            }
-            else if (list[0] == num37)
-            {
-                EngineType = EngineType.Acceleros;
-            }
-            else if (list[0] == num38)
-            {
-                EngineType = EngineType.Vortex;
-            }
-            else if (list[0] == num39)
-            {
-                EngineType = EngineType.StarBurner;
-            }
-            else if (list[0] == num40)
-            {
-                EngineType = EngineType.TurboThruster;
-            }
-            else
-            {
-                EngineType = EngineType.Proton;
-            }
-            Size = num23;
-            TroopCapacity = num3;
-            FuelCapacity = num4;
-            FirepowerRaw = num5;
-            IonWeaponPower = num8;
-            BombardWeaponPower = num6;
-            if (num7 < 10000)
-            {
-                BombardRange = num7;
-            }
-            else
-            {
-                BombardRange = 0;
-            }
-            ShieldsCapacity = num9;
-            ShieldRechargeRate = num10;
-            MaxPopulation = Math.Min(num25, num24);
-            TopSpeed = num11;
-            _TopSpeedBase = num11;
-            TopSpeedFuelBurn = (short)num16;
-            CruiseSpeed = num12;
-            _CruiseSpeedBase = num12;
-            CruiseSpeedFuelBurn = (short)num17;
-            WarpSpeed = num13;
-            WarpSpeedFuelBurn = num21;
-            ImpulseSpeedFuelBurn = (short)(CruiseSpeedFuelBurn / 4);
-            HyperjumpInitiate = Math.Min((short)15, num22);
-            _DamageRepair = num31;
-            TurnRate = 0.1f + (float)num18 * 2f / (float)num23;
-            double num49 = (double)ReactorPowerOutput - (double)StaticEnergyConsumption;
-            double num50 = num49 / (double)num16;
-            if (num50 > 1.0)
-            {
-                num50 = Math.Sqrt(Math.Sqrt(num50));
-                num50 = Math.Min(num50, 2.0);
-            }
-            AccelerationRate = ((float)num11 / 8f + 0.5f) * (float)num50;
-            if (Role != BuiltObjectRole.Base)
-            {
-                AccelerationRate = Math.Min(AccelerationRate, TopSpeed);
-                AccelerationRate = Math.Max(AccelerationRate, 1f);
-            }
-            _FuelHandicapped = false;
-            if (CurrentSpeed > (float)TopSpeed || TargetSpeed > TopSpeed || PreferredSpeed > (float)TopSpeed)
-            {
-                TargetSpeed = TopSpeed;
-                PreferredSpeed = TopSpeed;
-                UpdatePosition();
-            }
-            if (MinimumWeaponsRange >= 100000)
-            {
-                MinimumWeaponsRange = 0;
-            }
-            if (BeamWeaponsMinRange >= 100000)
-            {
-                BeamWeaponsMinRange = 0;
-            }
-            for (int n = 0; n < Components.Count; n++)
-            {
-                BuiltObjectComponent builtObjectComponent = Components[n];
-                if (builtObjectComponent.Type != ComponentType.StorageDockingBay)
+                if (IsFunctional && CargoCapacity > 0 && flag2)
                 {
-                    continue;
+                    IsRefuellingDepot = true;
                 }
-                if (DockingBays == null)
+                if (IsRefuellingDepot && flag && CargoCapacity > 0)
                 {
-                    DockingBays = new DockingBayList();
+                    IsSpacePort = true;
                 }
-                if (DockingBayWaitQueue == null)
+                if (IsFunctional && flag6)
                 {
-                    DockingBayWaitQueue = new BuiltObjectList();
+                    IsResearchLab = true;
                 }
-                int num51 = DockingBays.IndexOf(builtObjectComponent);
-                if (builtObjectComponent.Status == ComponentStatus.Damaged || builtObjectComponent.Status == ComponentStatus.Unbuilt)
+                if (IsFunctional && flag8)
                 {
-                    if (num51 < 0)
+                    IsResourceExtractor = true;
+                }
+                if (IsFunctional && flag9)
+                {
+                    IsManufacturer = true;
+                }
+                if (IsFunctional && flag7 && flag9)
+                {
+                    IsShipYard = true;
+                }
+                if (IsFunctional && flag10)
+                {
+                    IsEnergyCollector = true;
+                }
+                if (IsResourceExtractor)
+                {
+                    _ = Role;
+                    _ = 8;
+                }
+                if (num27 > 0)
+                {
+                    double num44 = (double)num27 / (double)num23;
+                    Stealth = (float)Math.Min(1.0, 0.5 / num44);
+                }
+                if (num26 > 0)
+                {
+                    _DamageReduction = (float)num26 / 1000f;
+                }
+                ReviewWeaponsComponentValues();
+                double num45 = (double)ReactorPowerOutput - (double)StaticEnergyConsumption;
+                num13 = num20;
+                num11 = (short)(num14 / Math.Max(1, num23));
+                num12 = (short)(num15 / Math.Max(1, num23));
+                double num46;
+                double num47;
+                double num48;
+                if (ReactorPowerOutput > 0)
+                {
+                    num46 = (double)num21 / num45;
+                    num47 = (double)num16 / num45;
+                    num48 = (double)num17 / num45;
+                }
+                else
+                {
+                    num46 = 1000000.0;
+                    num47 = 1000000.0;
+                    num48 = 1000000.0;
+                }
+                if (num46 > 1.0)
+                {
+                    num13 = (int)((double)num13 / num46);
+                    if (num20 > 0 && ReactorPowerOutput > 0)
+                    {
+                        num13 = Math.Max(num13, 600);
+                    }
+                    num21 = (int)((double)num21 / num46);
+                }
+                if (num47 > 1.0)
+                {
+                    num11 = (short)((double)num11 / num47);
+                    num16 = (short)((double)num16 / num47);
+                }
+                if (num48 > 1.0)
+                {
+                    num12 = (short)((double)num12 / num48);
+                    num17 = (short)((double)num17 / num48);
+                }
+                List<int> list = new List<int>();
+                list.Add(num35);
+                list.Add(num36);
+                list.Add(num37);
+                list.Add(num38);
+                list.Add(num39);
+                list.Add(num40);
+                list.Sort();
+                list.Reverse();
+                if (list[0] == num35)
+                {
+                    EngineType = EngineType.Proton;
+                }
+                else if (list[0] == num36)
+                {
+                    EngineType = EngineType.Quantum;
+                }
+                else if (list[0] == num37)
+                {
+                    EngineType = EngineType.Acceleros;
+                }
+                else if (list[0] == num38)
+                {
+                    EngineType = EngineType.Vortex;
+                }
+                else if (list[0] == num39)
+                {
+                    EngineType = EngineType.StarBurner;
+                }
+                else if (list[0] == num40)
+                {
+                    EngineType = EngineType.TurboThruster;
+                }
+                else
+                {
+                    EngineType = EngineType.Proton;
+                }
+                Size = num23;
+                TroopCapacity = num3;
+                FuelCapacity = num4;
+                FirepowerRaw = num5;
+                IonWeaponPower = num8;
+                BombardWeaponPower = num6;
+                if (num7 < 10000)
+                {
+                    BombardRange = num7;
+                }
+                else
+                {
+                    BombardRange = 0;
+                }
+                ShieldsCapacity = num9;
+                ShieldRechargeRate = num10;
+                MaxPopulation = Math.Min(num25, num24);
+                TopSpeed = num11;
+                _TopSpeedBase = num11;
+                TopSpeedFuelBurn = (short)num16;
+                CruiseSpeed = num12;
+                _CruiseSpeedBase = num12;
+                CruiseSpeedFuelBurn = (short)num17;
+                WarpSpeed = num13;
+                WarpSpeedFuelBurn = num21;
+                ImpulseSpeedFuelBurn = (short)(CruiseSpeedFuelBurn / 4);
+                HyperjumpInitiate = Math.Min((short)15, num22);
+                _DamageRepair = num31;
+                TurnRate = 0.1f + (float)num18 * 2f / (float)num23;
+                double num49 = (double)ReactorPowerOutput - (double)StaticEnergyConsumption;
+                double num50 = num49 / (double)num16;
+                if (num50 > 1.0)
+                {
+                    num50 = Math.Sqrt(Math.Sqrt(num50));
+                    num50 = Math.Min(num50, 2.0);
+                }
+                AccelerationRate = ((float)num11 / 8f + 0.5f) * (float)num50;
+                if (Role != BuiltObjectRole.Base)
+                {
+                    AccelerationRate = Math.Min(AccelerationRate, TopSpeed);
+                    AccelerationRate = Math.Max(AccelerationRate, 1f);
+                }
+                _FuelHandicapped = false;
+                if (CurrentSpeed > (float)TopSpeed || TargetSpeed > TopSpeed || PreferredSpeed > (float)TopSpeed)
+                {
+                    TargetSpeed = TopSpeed;
+                    PreferredSpeed = TopSpeed;
+                    UpdatePosition();
+                }
+                if (MinimumWeaponsRange >= 100000)
+                {
+                    MinimumWeaponsRange = 0;
+                }
+                if (BeamWeaponsMinRange >= 100000)
+                {
+                    BeamWeaponsMinRange = 0;
+                }
+                for (int n = 0; n < Components.Count; n++)
+                {
+                    BuiltObjectComponent builtObjectComponent = Components[n];
+                    if (builtObjectComponent.Type != ComponentType.StorageDockingBay)
                     {
                         continue;
                     }
-                    if (DockingBays[num51].DockedShip != null)
+                    if (DockingBays == null)
                     {
-                        bool flag12 = false;
-                        for (int num52 = 0; num52 < DockingBays.Count; num52++)
-                        {
-                            DockingBay dockingBay = DockingBays[num52];
-                            BuiltObjectComponent builtObjectComponent2 = Components.FindComponentByBuiltObjectComponentId(dockingBay.ParentBuiltObjectComponentId);
-                            if (builtObjectComponent2 != null && builtObjectComponent2.Status == ComponentStatus.Normal && dockingBay.DockedShip == null)
-                            {
-                                dockingBay.DockedShip = DockingBays[num51].DockedShip;
-                                flag12 = true;
-                                break;
-                            }
-                        }
-                        if (!flag12)
-                        {
-                            DockingBays[num51].DockedShip.ClearPreviousMissionRequirements();
-                        }
-                        DockingBays[num51].DockedShip = null;
+                        DockingBays = new DockingBayList();
                     }
-                    DockingBays.RemoveAt(num51);
+                    if (DockingBayWaitQueue == null)
+                    {
+                        DockingBayWaitQueue = new BuiltObjectList();
+                    }
+                    int num51 = DockingBays.IndexOf(builtObjectComponent);
+                    if (builtObjectComponent.Status == ComponentStatus.Damaged || builtObjectComponent.Status == ComponentStatus.Unbuilt)
+                    {
+                        if (num51 < 0)
+                        {
+                            continue;
+                        }
+                        if (DockingBays[num51].DockedShip != null)
+                        {
+                            bool flag12 = false;
+                            for (int num52 = 0; num52 < DockingBays.Count; num52++)
+                            {
+                                DockingBay dockingBay = DockingBays[num52];
+                                BuiltObjectComponent builtObjectComponent2 = Components.FindComponentByBuiltObjectComponentId(dockingBay.ParentBuiltObjectComponentId);
+                                if (builtObjectComponent2 != null && builtObjectComponent2.Status == ComponentStatus.Normal && dockingBay.DockedShip == null)
+                                {
+                                    dockingBay.DockedShip = DockingBays[num51].DockedShip;
+                                    flag12 = true;
+                                    break;
+                                }
+                            }
+                            if (!flag12)
+                            {
+                                DockingBays[num51].DockedShip.ClearPreviousMissionRequirements();
+                            }
+                            DockingBays[num51].DockedShip = null;
+                        }
+                        DockingBays.RemoveAt(num51);
+                    }
+                    else if (num51 < 0)
+                    {
+                        DockingBay item2 = new DockingBay(builtObjectComponent.ComponentID, builtObjectComponent.BuiltObjectComponentId, builtObjectComponent.Value1 * BaconBuiltObject.CargoBayCapacityMultiplier(this));
+                        DockingBays.Add(item2);
+                    }
                 }
-                else if (num51 < 0)
+                if (UnbuiltComponentCount != num29 || DamagedComponentCount != num30)
                 {
-                    DockingBay item2 = new DockingBay(builtObjectComponent.ComponentID, builtObjectComponent.BuiltObjectComponentId, builtObjectComponent.Value1 * BaconBuiltObject.CargoBayCapacityMultiplier(this));
-                    DockingBays.Add(item2);
+                    OverlayChanged = true;
                 }
-            }
-            if (UnbuiltComponentCount != num29 || DamagedComponentCount != num30)
-            {
-                OverlayChanged = true;
-            }
-            UnbuiltComponentCount = num29;
-            DamagedComponentCount = num30;
-            if (DamagedComponentCount == 0)
-            {
-                StrandedMessageSent = false;
-            }
-            if (flag7)
-            {
-                if (ConstructionQueue == null)
+                UnbuiltComponentCount = num29;
+                DamagedComponentCount = num30;
+                if (DamagedComponentCount == 0)
                 {
-                    ConstructionQueue = new ConstructionQueue(this, _Galaxy);
+                    StrandedMessageSent = false;
                 }
-                if (!ConstructionQueue.Redefine(this))
+                if (flag7)
+                {
+                    if (ConstructionQueue == null)
+                    {
+                        ConstructionQueue = new ConstructionQueue(this, _Galaxy);
+                    }
+                    if (!ConstructionQueue.Redefine(this))
+                    {
+                        ConstructionQueue = null;
+                    }
+                }
+                else if (ConstructionQueue != null && !ConstructionQueue.Redefine(this))
                 {
                     ConstructionQueue = null;
                 }
-            }
-            else if (ConstructionQueue != null && !ConstructionQueue.Redefine(this))
-            {
-                ConstructionQueue = null;
-            }
-            if (flag9)
-            {
-                if (ManufacturingQueue == null)
+                if (flag9)
                 {
-                    _ManufacturingQueue = new ManufacturingQueue(this, _Galaxy);
+                    if (ManufacturingQueue == null)
+                    {
+                        _ManufacturingQueue = new ManufacturingQueue(this, _Galaxy);
+                    }
+                    if (!ManufacturingQueue.Redefine(this))
+                    {
+                        _ManufacturingQueue = null;
+                    }
                 }
-                if (!ManufacturingQueue.Redefine(this))
+                else if (ManufacturingQueue != null && !ManufacturingQueue.Redefine(this))
                 {
                     _ManufacturingQueue = null;
                 }
-            }
-            else if (ManufacturingQueue != null && !ManufacturingQueue.Redefine(this))
-            {
-                _ManufacturingQueue = null;
-            }
-            AnnualSupportCost = (int)num28;
-            Empire actualEmpire2 = ActualEmpire;
-            if (actualEmpire2 == null)
-            {
-                return;
-            }
-            if (IsManufacturer && !HasBeenDestroyed)
-            {
-                if (!actualEmpire2.Manufacturers.Contains(this))
+                AnnualSupportCost = (int)num28;
+                Empire actualEmpire2 = ActualEmpire;
+                if (actualEmpire2 == null)
                 {
-                    actualEmpire2.Manufacturers.Add(this);
-                }
-            }
-            else
-            {
-                int num53 = Empire.Manufacturers.IndexOf(this);
-                if (num53 >= 0)
-                {
-                    Empire.Manufacturers.RemoveAt(num53);
-                }
-            }
-            if (IsRefuellingDepot && !HasBeenDestroyed && DockingBays != null && DockingBays.Count > 0)
-            {
-                if (!actualEmpire2.RefuellingDepots.Contains(this))
-                {
-                    actualEmpire2.RefuellingDepots.Add(this);
-                }
-            }
-            else
-            {
-                int num54 = actualEmpire2.RefuellingDepots.IndexOf(this);
-                if (num54 >= 0)
-                {
-                    actualEmpire2.RefuellingDepots.RemoveAt(num54);
-                }
-            }
-            if (IsResourceExtractor && !HasBeenDestroyed)
-            {
-                if (!actualEmpire2.ResourceExtractors.Contains(this))
-                {
-                    actualEmpire2.ResourceExtractors.Add(this);
-                }
-                if (Role == BuiltObjectRole.Base && !actualEmpire2.MiningStations.Contains(this))
-                {
-                    actualEmpire2.MiningStations.Add(this);
-                }
-            }
-            else
-            {
-                int num55 = actualEmpire2.ResourceExtractors.IndexOf(this);
-                if (num55 >= 0)
-                {
-                    actualEmpire2.ResourceExtractors.RemoveAt(num55);
-                }
-                if (Role == BuiltObjectRole.Base)
-                {
-                    num55 = actualEmpire2.MiningStations.IndexOf(this);
-                    if (num55 >= 0)
-                    {
-                        actualEmpire2.MiningStations.RemoveAt(num55);
-                    }
-                }
-            }
-            if (IsSpacePort && !HasBeenDestroyed && DockingBays != null && DockingBays.Count > 0)
-            {
-                if (ParentHabitat != null && (SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort) && !actualEmpire2.SpacePorts.Contains(this))
-                {
-                    actualEmpire2.SpacePorts.Add(this);
-                }
-            }
-            else
-            {
-                int num56 = actualEmpire2.SpacePorts.IndexOf(this);
-                if (num56 >= 0)
-                {
-                    actualEmpire2.SpacePorts.RemoveAt(num56);
-                }
-            }
-            if (IsShipYard && !HasBeenDestroyed)
-            {
-                if (!actualEmpire2.ConstructionYards.Contains(this))
-                {
-                    actualEmpire2.ConstructionYards.Add(this);
-                }
-            }
-            else
-            {
-                int num57 = actualEmpire2.ConstructionYards.IndexOf(this);
-                if (num57 >= 0)
-                {
-                    actualEmpire2.ConstructionYards.RemoveAt(num57);
-                }
-            }
-            if (Role == BuiltObjectRole.Freight && !HasBeenDestroyed)
-            {
-                if (!actualEmpire2.Freighters.Contains(this))
-                {
-                    actualEmpire2.Freighters.Add(this);
-                }
-            }
-            else
-            {
-                int num58 = actualEmpire2.Freighters.IndexOf(this);
-                if (num58 >= 0)
-                {
-                    actualEmpire2.Freighters.RemoveAt(num58);
-                }
-            }
-            if (SubRole == BuiltObjectSubRole.ConstructionShip && !HasBeenDestroyed)
-            {
-                if (!actualEmpire2.ConstructionShips.Contains(this))
-                {
-                    actualEmpire2.ConstructionShips.Add(this);
-                }
-            }
-            else
-            {
-                int num59 = actualEmpire2.ConstructionShips.IndexOf(this);
-                if (num59 >= 0)
-                {
-                    actualEmpire2.ConstructionShips.RemoveAt(num59);
-                }
-            }
-            if (SensorLongRange > 0 && !HasBeenDestroyed)
-            {
-                if (!actualEmpire2.LongRangeScanners.Contains(this))
-                {
-                    actualEmpire2.LongRangeScanners.Add(this);
-                    if (actualEmpire2 == _Galaxy.PlayerEmpire)
-                    {
-                        _Galaxy.OnRefreshView(new RefreshViewEventArgs(Xpos, Ypos, null, onlyGalaxyBackdrops: true));
-                    }
-                }
-                else if (sensorLongRange != SensorLongRange && actualEmpire2 == _Galaxy.PlayerEmpire)
-                {
-                    _Galaxy.OnRefreshView(new RefreshViewEventArgs(Xpos, Ypos, null, onlyGalaxyBackdrops: true));
-                }
-            }
-            else
-            {
-                int num60 = actualEmpire2.LongRangeScanners.IndexOf(this);
-                if (num60 >= 0)
-                {
-                    actualEmpire2.LongRangeScanners.RemoveAt(num60);
-                    if (actualEmpire2 == _Galaxy.PlayerEmpire)
-                    {
-                        _Galaxy.OnRefreshView(new RefreshViewEventArgs(Xpos, Ypos, null, onlyGalaxyBackdrops: true));
-                    }
-                }
-            }
-            if (SubRole == BuiltObjectSubRole.ResupplyShip && IsFunctional && DockingBays != null && DockingBays.Count > 0 && CargoCapacity > 0 && ExtractionGas > 0)
-            {
-                if (!actualEmpire2.ResupplyShips.Contains(this))
-                {
-                    actualEmpire2.ResupplyShips.Add(this);
-                }
-            }
-            else
-            {
-                int num61 = actualEmpire2.ResupplyShips.IndexOf(this);
-                if (num61 >= 0)
-                {
-                    actualEmpire2.ResupplyShips.RemoveAt(num61);
-                }
-            }
-            if (IsFunctional && RecreationCapacity > 0 && SubRole == BuiltObjectSubRole.ResortBase)
-            {
-                if (!actualEmpire2.ResortBases.Contains(this))
-                {
-                    actualEmpire2.ResortBases.Add(this);
-                }
-            }
-            else
-            {
-                int num62 = actualEmpire2.ResortBases.IndexOf(this);
-                if (num62 >= 0)
-                {
-                    actualEmpire2.ResortBases.RemoveAt(num62);
-                }
-            }
-            if ((ResearchEnergy > 0 || ResearchHighTech > 0 || ResearchWeapons > 0) && !HasBeenDestroyed)
-            {
-                if (!actualEmpire2.ResearchFacilities.Contains(this))
-                {
-                    actualEmpire2.ResearchFacilities.Add(this);
-                }
-            }
-            else
-            {
-                int num63 = actualEmpire2.ResearchFacilities.IndexOf(this);
-                if (num63 >= 0)
-                {
-                    actualEmpire2.ResearchFacilities.RemoveAt(num63);
-                }
-            }
-            if (IsPlanetDestroyer && IsFunctional && TopSpeed > 0 && WarpSpeed > 0 && !HasBeenDestroyed)
-            {
-                if (!actualEmpire2.PlanetDestroyers.Contains(this))
-                {
-                    actualEmpire2.PlanetDestroyers.Add(this);
                     return;
                 }
-            }
-            else
-            {
-                int num64 = actualEmpire2.PlanetDestroyers.IndexOf(this);
-                if (num64 >= 0)
+                if (IsManufacturer && !HasBeenDestroyed)
                 {
-                    actualEmpire2.PlanetDestroyers.RemoveAt(num64);
+                    if (!actualEmpire2.Manufacturers.Contains(this))
+                    {
+                        actualEmpire2.Manufacturers.Add(this);
+                    }
                 }
+                else
+                {
+                    int num53 = Empire.Manufacturers.IndexOf(this);
+                    if (num53 >= 0)
+                    {
+                        Empire.Manufacturers.RemoveAt(num53);
+                    }
+                }
+                if (IsRefuellingDepot && !HasBeenDestroyed && DockingBays != null && DockingBays.Count > 0)
+                {
+                    if (!actualEmpire2.RefuellingDepots.Contains(this))
+                    {
+                        actualEmpire2.RefuellingDepots.Add(this);
+                    }
+                }
+                else
+                {
+                    int num54 = actualEmpire2.RefuellingDepots.IndexOf(this);
+                    if (num54 >= 0)
+                    {
+                        actualEmpire2.RefuellingDepots.RemoveAt(num54);
+                    }
+                }
+                if (IsResourceExtractor && !HasBeenDestroyed)
+                {
+                    if (!actualEmpire2.ResourceExtractors.Contains(this))
+                    {
+                        actualEmpire2.ResourceExtractors.Add(this);
+                    }
+                    if (Role == BuiltObjectRole.Base && !actualEmpire2.MiningStations.Contains(this))
+                    {
+                        actualEmpire2.MiningStations.Add(this);
+                    }
+                }
+                else
+                {
+                    int num55 = actualEmpire2.ResourceExtractors.IndexOf(this);
+                    if (num55 >= 0)
+                    {
+                        actualEmpire2.ResourceExtractors.RemoveAt(num55);
+                    }
+                    if (Role == BuiltObjectRole.Base)
+                    {
+                        num55 = actualEmpire2.MiningStations.IndexOf(this);
+                        if (num55 >= 0)
+                        {
+                            actualEmpire2.MiningStations.RemoveAt(num55);
+                        }
+                    }
+                }
+                if (IsSpacePort && !HasBeenDestroyed && DockingBays != null && DockingBays.Count > 0)
+                {
+                    if (ParentHabitat != null && (SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort) && !actualEmpire2.SpacePorts.Contains(this))
+                    {
+                        actualEmpire2.SpacePorts.Add(this);
+                    }
+                }
+                else
+                {
+                    int num56 = actualEmpire2.SpacePorts.IndexOf(this);
+                    if (num56 >= 0)
+                    {
+                        actualEmpire2.SpacePorts.RemoveAt(num56);
+                    }
+                }
+                if (IsShipYard && !HasBeenDestroyed)
+                {
+                    if (!actualEmpire2.ConstructionYards.Contains(this))
+                    {
+                        actualEmpire2.ConstructionYards.Add(this);
+                    }
+                }
+                else
+                {
+                    int num57 = actualEmpire2.ConstructionYards.IndexOf(this);
+                    if (num57 >= 0)
+                    {
+                        actualEmpire2.ConstructionYards.RemoveAt(num57);
+                    }
+                }
+                if (Role == BuiltObjectRole.Freight && !HasBeenDestroyed)
+                {
+                    if (!actualEmpire2.Freighters.Contains(this))
+                    {
+                        actualEmpire2.Freighters.Add(this);
+                    }
+                }
+                else
+                {
+                    int num58 = actualEmpire2.Freighters.IndexOf(this);
+                    if (num58 >= 0)
+                    {
+                        actualEmpire2.Freighters.RemoveAt(num58);
+                    }
+                }
+                if (SubRole == BuiltObjectSubRole.ConstructionShip && !HasBeenDestroyed)
+                {
+                    if (!actualEmpire2.ConstructionShips.Contains(this))
+                    {
+                        actualEmpire2.ConstructionShips.Add(this);
+                    }
+                }
+                else
+                {
+                    int num59 = actualEmpire2.ConstructionShips.IndexOf(this);
+                    if (num59 >= 0)
+                    {
+                        actualEmpire2.ConstructionShips.RemoveAt(num59);
+                    }
+                }
+                if (SensorLongRange > 0 && !HasBeenDestroyed)
+                {
+                    if (!actualEmpire2.LongRangeScanners.Contains(this))
+                    {
+                        actualEmpire2.LongRangeScanners.Add(this);
+                        if (actualEmpire2 == _Galaxy.PlayerEmpire)
+                        {
+                            _Galaxy.OnRefreshView(new RefreshViewEventArgs(Xpos, Ypos, null, onlyGalaxyBackdrops: true));
+                        }
+                    }
+                    else if (sensorLongRange != SensorLongRange && actualEmpire2 == _Galaxy.PlayerEmpire)
+                    {
+                        _Galaxy.OnRefreshView(new RefreshViewEventArgs(Xpos, Ypos, null, onlyGalaxyBackdrops: true));
+                    }
+                }
+                else
+                {
+                    int num60 = actualEmpire2.LongRangeScanners.IndexOf(this);
+                    if (num60 >= 0)
+                    {
+                        actualEmpire2.LongRangeScanners.RemoveAt(num60);
+                        if (actualEmpire2 == _Galaxy.PlayerEmpire)
+                        {
+                            _Galaxy.OnRefreshView(new RefreshViewEventArgs(Xpos, Ypos, null, onlyGalaxyBackdrops: true));
+                        }
+                    }
+                }
+                if (SubRole == BuiltObjectSubRole.ResupplyShip && IsFunctional && DockingBays != null && DockingBays.Count > 0 && CargoCapacity > 0 && ExtractionGas > 0)
+                {
+                    if (!actualEmpire2.ResupplyShips.Contains(this))
+                    {
+                        actualEmpire2.ResupplyShips.Add(this);
+                    }
+                }
+                else
+                {
+                    int num61 = actualEmpire2.ResupplyShips.IndexOf(this);
+                    if (num61 >= 0)
+                    {
+                        actualEmpire2.ResupplyShips.RemoveAt(num61);
+                    }
+                }
+                if (IsFunctional && RecreationCapacity > 0 && SubRole == BuiltObjectSubRole.ResortBase)
+                {
+                    if (!actualEmpire2.ResortBases.Contains(this))
+                    {
+                        actualEmpire2.ResortBases.Add(this);
+                    }
+                }
+                else
+                {
+                    int num62 = actualEmpire2.ResortBases.IndexOf(this);
+                    if (num62 >= 0)
+                    {
+                        actualEmpire2.ResortBases.RemoveAt(num62);
+                    }
+                }
+                if ((ResearchEnergy > 0 || ResearchHighTech > 0 || ResearchWeapons > 0) && !HasBeenDestroyed)
+                {
+                    if (!actualEmpire2.ResearchFacilities.Contains(this))
+                    {
+                        actualEmpire2.ResearchFacilities.Add(this);
+                    }
+                }
+                else
+                {
+                    int num63 = actualEmpire2.ResearchFacilities.IndexOf(this);
+                    if (num63 >= 0)
+                    {
+                        actualEmpire2.ResearchFacilities.RemoveAt(num63);
+                    }
+                }
+                if (IsPlanetDestroyer && IsFunctional && TopSpeed > 0 && WarpSpeed > 0 && !HasBeenDestroyed)
+                {
+                    if (!actualEmpire2.PlanetDestroyers.Contains(this))
+                    {
+                        actualEmpire2.PlanetDestroyers.Add(this);
+                        return;
+                    }
+                }
+                else
+                {
+                    int num64 = actualEmpire2.PlanetDestroyers.IndexOf(this);
+                    if (num64 >= 0)
+                    {
+                        actualEmpire2.PlanetDestroyers.RemoveAt(num64);
+                    }
+                }
+                BaconBuiltObject.ModMyShip(this);
             }
-            BaconBuiltObject.ModMyShip(this);
         }
 
         public void PerformFinancialTransaction(double amount, long date, bool incomeFromTax)
@@ -5098,6 +5103,6 @@ namespace DistantWorlds.Types
             }
         }
 
-      
+
     }
 }

@@ -4833,7 +4833,7 @@ namespace DistantWorlds {
             List<Rectangle> list = new List<Rectangle>();
             List<Point> list2 = new List<Point>();
             List<Color> list3 = new List<Color>();
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             Color transparent = Color.Transparent;
             for (int i = 0; i < bitmap_225.Width; i++)
             {
@@ -4883,7 +4883,7 @@ namespace DistantWorlds {
             return list;
         }
 
-        private Color method_102(DistantWorlds.FastBitmap fastBitmap_0, int int_64, int int_65)
+        private Color method_102(FastBitmap fastBitmap_0, int int_64, int int_65)
         {
             int X = Math.Max(0, int_64 - 1);
             if (int_64 == 0)
@@ -4909,7 +4909,7 @@ namespace DistantWorlds {
             List<Point> list = new List<Point>();
             List<Point> list2 = new List<Point>();
             List<Color> list3 = new List<Color>();
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             Color transparent = Color.Transparent;
             for (int i = 0; i < bitmap_225.Height; i++)
             {
@@ -4940,9 +4940,9 @@ namespace DistantWorlds {
 
         internal Bitmap method_104(Bitmap bitmap_225, Color color_43)
         {
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             Bitmap bitmap = new Bitmap(bitmap_225.Width, bitmap_225.Height, PixelFormat.Format32bppPArgb);
-            DistantWorlds.FastBitmap fastBitmap2 = new DistantWorlds.FastBitmap(bitmap);
+            FastBitmap fastBitmap2 = new FastBitmap(bitmap);
             int num = bitmap_225.Width;
             int num2 = bitmap_225.Height;
             for (int i = 0; i < num2; i++)
@@ -4966,9 +4966,9 @@ namespace DistantWorlds {
 
         internal Bitmap method_105(Bitmap bitmap_225, Color color_43, Color color_44)
         {
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             Bitmap bitmap = new Bitmap(bitmap_225.Width, bitmap_225.Height, PixelFormat.Format32bppPArgb);
-            DistantWorlds.FastBitmap fastBitmap2 = new DistantWorlds.FastBitmap(bitmap);
+            FastBitmap fastBitmap2 = new FastBitmap(bitmap);
             int num = color_43.ToArgb();
             for (int i = 0; i < bitmap_225.Height; i++)
             {

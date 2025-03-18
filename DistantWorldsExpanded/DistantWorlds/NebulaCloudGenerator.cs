@@ -702,7 +702,7 @@ namespace DistantWorlds
         {
             int num = int_4;
             //Rectangle rectangle = default(Rectangle);
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_0);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_0);
             int num2 = 0;
             int num3 = 0;
             int num4 = 0;

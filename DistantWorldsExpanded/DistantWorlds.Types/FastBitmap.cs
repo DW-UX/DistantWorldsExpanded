@@ -21,14 +21,7 @@ namespace DistantWorlds.Types
         public FastBitmap(Bitmap image)
         {
             this._Image = image;
-            try
-            {
-                this.LockBitmap();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            this.LockBitmap();
         }
 
         public void Dispose()
@@ -67,6 +60,8 @@ namespace DistantWorlds.Types
             FastBitmap.PixelData* pixelDataPtr = this.PixelAt(X, Y);
             return Color.FromArgb(pixelDataPtr->alpha, pixelDataPtr->red, pixelDataPtr->green, pixelDataPtr->blue);
         }
+        public void Release()
+        { ReleaseImpl(); }
 
         private unsafe void LockBitmap()
         {
@@ -80,6 +75,12 @@ namespace DistantWorlds.Types
             this._BaseOffset = (byte*)this._BitmapData.Scan0.ToPointer();
         }
 
+        private unsafe void ReleaseImpl()
+        {
+            _Image.UnlockBits(_BitmapData);
+            _BitmapData = null;
+            _BaseOffset = null;
+        }
         private unsafe FastBitmap.PixelData* PixelAt(int x, int y)
         {
             //return (FastBitmap.PixelData*)(this._BaseOffset + ((IntPtr)y * this._ImageWidth).ToInt64() + ((IntPtr)x * sizeof(FastBitmap.PixelData)).ToInt64());

@@ -3192,8 +3192,8 @@ namespace DistantWorlds.Controls
             int num5 = 0;
             int num6 = bitmap_7.Width;
             Bitmap bitmap = new Bitmap(num6, num4);
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_7);
-            DistantWorlds.FastBitmap fastBitmap2 = new DistantWorlds.FastBitmap(bitmap);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_7);
+            FastBitmap fastBitmap2 = new FastBitmap(bitmap);
             double num7 = 0.0;
             double num8 = 0.0;
             double num9 = bitmap_7.Width / 2;
