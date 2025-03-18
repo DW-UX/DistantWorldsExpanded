@@ -32,7 +32,7 @@ namespace DistantWorlds
 
         public void Render(Bitmap image, Rectangle rectangle)
         {
-            FastBitmap fastBitmap = new FastBitmap(image);
+            Types.FastBitmap fastBitmap = new Types.FastBitmap(image);
             for (int i = rectangle.Top; i < rectangle.Bottom; i++)
             {
                 for (int j = rectangle.Left; j < rectangle.Right; j++)

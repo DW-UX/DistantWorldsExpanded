@@ -9,6 +9,7 @@ using DistantWorlds.Types;
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace DistantWorlds
@@ -91,7 +92,7 @@ namespace DistantWorlds
                         this.lblMessage.Text = text;
                         this.lblMessage.ForeColor = Color.FromArgb(255, 192, 0);
                         this.lblModVersion.MaximumSize = new Size(450, 30);
-                        this.lblModVersion.Text = "Expansion mod version: 1.10.01";
+                        this.lblModVersion.Text = $"Expansion mod version: {App.ExpansionModVersion}";
                         this.lblModVersion.ForeColor = Color.FromArgb(255, 192, 0);
                         SizeF sizeF = this.lblMessage.Size;
                         Point point = new Point((this.Width - (int)sizeF.Width) / 2, 195);

@@ -1,12 +1,11 @@
 <Project>
     <PropertyGroup>
         <DistantWorldsVersion>1.9.5.12</DistantWorldsVersion>
-        <ExpansionModVersion>2.00.00</ExpansionModVersion>
         <Company>CodeForce Limited</Company>
         <Copyright>Copyright © CodeForce 2014</Copyright>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
-
+	
     <!-- hacks -->
     <PropertyGroup>
         <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>

@@ -556,52 +556,7 @@ namespace BaconDistantWorlds
             }
             BaconBuiltObject.myMain = main;
             Galaxy.MinimumHabitatPopulationAmount = 100L;
-            empireSaveStatsName = "SaveStatsEmpire" + main._Game.Galaxy.RandomSeed + ".xml";
-            pirateSaveStatsName = "SaveStatsPirates" + main._Game.Galaxy.RandomSeed + ".xml";
-            if (!File.Exists(empireSaveStatsName))
-            {
-                try
-                {
-                    XmlDocument xmlDocument = new XmlDocument();
-                    XmlNode documentElement = xmlDocument.DocumentElement;
-                    XmlElement newChild = xmlDocument.CreateElement("GameStats");
-                    if (documentElement != null)
-                    {
-                        documentElement.AppendChild(newChild);
-                    }
-                    else
-                    {
-                        xmlDocument.AppendChild(newChild);
-                    }
-                    xmlDocument.Save(empireSaveStatsName);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-            if (!File.Exists(pirateSaveStatsName))
-            {
-                try
-                {
-                    XmlDocument xmlDocument2 = new XmlDocument();
-                    XmlNode documentElement2 = xmlDocument2.DocumentElement;
-                    XmlElement newChild2 = xmlDocument2.CreateElement("GameStats");
-                    if (documentElement2 != null)
-                    {
-                        documentElement2.AppendChild(newChild2);
-                    }
-                    else
-                    {
-                        xmlDocument2.AppendChild(newChild2);
-                    }
-                    xmlDocument2.Save(pirateSaveStatsName);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
+
             Dictionary<string, string> dictionary = ReadBaconSettings();
             if (dictionary.TryGetValue("HyperJumpThreshhold", out var value) && int.TryParse(value, out var result))
             {
@@ -673,6 +628,55 @@ namespace BaconDistantWorlds
                 if (bool.TryParse(value, out result7))
                 {
                     saveStats = result7;
+                    if (saveStats)
+                    {
+                        empireSaveStatsName = "SaveStatsEmpire" + main._Game.Galaxy.RandomSeed + ".xml";
+                        pirateSaveStatsName = "SaveStatsPirates" + main._Game.Galaxy.RandomSeed + ".xml";
+                        if (!File.Exists(empireSaveStatsName))
+                        {
+                            try
+                            {
+                                XmlDocument xmlDocument = new XmlDocument();
+                                XmlNode documentElement = xmlDocument.DocumentElement;
+                                XmlElement newChild = xmlDocument.CreateElement("GameStats");
+                                if (documentElement != null)
+                                {
+                                    documentElement.AppendChild(newChild);
+                                }
+                                else
+                                {
+                                    xmlDocument.AppendChild(newChild);
+                                }
+                                xmlDocument.Save(empireSaveStatsName);
+                            }
+                            catch (Exception)
+                            {
+                                throw;
+                            }
+                        }
+                        if (!File.Exists(pirateSaveStatsName))
+                        {
+                            try
+                            {
+                                XmlDocument xmlDocument2 = new XmlDocument();
+                                XmlNode documentElement2 = xmlDocument2.DocumentElement;
+                                XmlElement newChild2 = xmlDocument2.CreateElement("GameStats");
+                                if (documentElement2 != null)
+                                {
+                                    documentElement2.AppendChild(newChild2);
+                                }
+                                else
+                                {
+                                    xmlDocument2.AppendChild(newChild2);
+                                }
+                                xmlDocument2.Save(pirateSaveStatsName);
+                            }
+                            catch (Exception)
+                            {
+                                throw;
+                            }
+                        }
+                    }
                 }
             }
             if (dictionary.TryGetValue("saveInterval", out value) && short.TryParse(value, out var result8))

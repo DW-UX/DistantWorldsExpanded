@@ -3698,8 +3698,8 @@ namespace DistantWorlds
             lblVictorySandbox.MaximumSize = new Size(339, 139);
             chkVictoryTimeStart.Location = new Point(365, 175);
             chkVictoryTimeLimit.Location = new Point(365, 200);
-            numVictoryTimeStartYears.Location = new Point(840, 175);
-            numVictoryTimeLimitYears.Location = new Point(840, 200);
+            numVictoryTimeStartYears.Location = new Point(830, 175);
+            numVictoryTimeLimitYears.Location = new Point(830, 200);
             chkVictoryEconomy.AutoSize = true;
             chkVictoryEconomy.MaximumSize = new Size(550, 48);
             chkVictoryTerritory.Text = string.Format(TextResolver.GetText("TERRITORY control X"), "XX");

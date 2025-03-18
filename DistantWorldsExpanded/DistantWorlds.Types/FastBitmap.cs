@@ -46,6 +46,11 @@ namespace DistantWorlds.Types
 
         public Bitmap Bitmap => this._Image;
 
+        public void Release()
+        {
+            ReleaseImpl();
+        }
+
         public unsafe void SetPixel(ref int X, ref int Y, Color Colour)
         {
             FastBitmap.PixelData* pixelDataPtr = this.PixelAt(X, Y);
@@ -63,6 +68,12 @@ namespace DistantWorlds.Types
         public void Release()
         { ReleaseImpl(); }
 
+        private unsafe void ReleaseImpl()
+        {
+            _Image.UnlockBits(_BitmapData);
+            _BitmapData = null;
+            _BaseOffset = null;
+        }
         private unsafe void LockBitmap()
         {
             GraphicsUnit pageUnit = GraphicsUnit.Pixel;
