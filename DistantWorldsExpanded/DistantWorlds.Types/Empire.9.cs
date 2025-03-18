@@ -4694,7 +4694,7 @@ namespace DistantWorlds.Types
             int num = _SystemsVisible.IndexOf(nearestSystemStar);
             if (num >= 0 && _SystemsVisible.Count > num)
             {
-                _SystemsVisible.RemoveAt(num);
+                _SystemsVisible.Remove(nearestSystemStar);
             }
         }
 

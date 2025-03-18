@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace DistantWorlds.Types
@@ -3127,36 +3128,36 @@ namespace DistantWorlds.Types
                     {
                         DockingBayWaitQueue = new BuiltObjectList();
                     }
-                    int num51 = DockingBays.IndexOf(builtObjectComponent);
+                    var dockingBay = DockingBays.GetObjIndexOf(builtObjectComponent);
                     if (builtObjectComponent.Status == ComponentStatus.Damaged || builtObjectComponent.Status == ComponentStatus.Unbuilt)
                     {
-                        if (num51 < 0)
+                        if (dockingBay == null)
                         {
                             continue;
                         }
-                        if (DockingBays[num51].DockedShip != null)
+                        if (dockingBay.DockedShip != null)
                         {
                             bool flag12 = false;
-                            for (int num52 = 0; num52 < DockingBays.Count; num52++)
+                            var otherBay = DockingBays.FirstOrDefault(x =>
                             {
-                                DockingBay dockingBay = DockingBays[num52];
-                                BuiltObjectComponent builtObjectComponent2 = Components.FindComponentByBuiltObjectComponentId(dockingBay.ParentBuiltObjectComponentId);
-                                if (builtObjectComponent2 != null && builtObjectComponent2.Status == ComponentStatus.Normal && dockingBay.DockedShip == null)
+                                var comp = Components.FindComponentByBuiltObjectComponentId(dockingBay.ParentBuiltObjectComponentId);
+                                if (comp != null && comp.Status == ComponentStatus.Normal && x.DockedShip == null)
                                 {
-                                    dockingBay.DockedShip = DockingBays[num51].DockedShip;
+                                    x.DockedShip = dockingBay.DockedShip;
                                     flag12 = true;
-                                    break;
+                                    return true;
                                 }
-                            }
+                                return false;
+                            });
                             if (!flag12)
                             {
-                                DockingBays[num51].DockedShip.ClearPreviousMissionRequirements();
+                                dockingBay.DockedShip.ClearPreviousMissionRequirements();
                             }
-                            DockingBays[num51].DockedShip = null;
+                            dockingBay.DockedShip = null;
                         }
-                        DockingBays.RemoveAt(num51);
+                        DockingBays.Remove(dockingBay);
                     }
-                    else if (num51 < 0)
+                    else if (dockingBay == null)
                     {
                         DockingBay item2 = new DockingBay(builtObjectComponent.ComponentID, builtObjectComponent.BuiltObjectComponentId, builtObjectComponent.Value1 * BaconBuiltObject.CargoBayCapacityMultiplier(this));
                         DockingBays.Add(item2);
@@ -3220,7 +3221,7 @@ namespace DistantWorlds.Types
                     int num53 = Empire.Manufacturers.IndexOf(this);
                     if (num53 >= 0)
                     {
-                        Empire.Manufacturers.RemoveAt(num53);
+                        Empire.Manufacturers.Remove(this);
                     }
                 }
                 if (IsRefuellingDepot && !HasBeenDestroyed && DockingBays != null && DockingBays.Count > 0)
@@ -3235,7 +3236,7 @@ namespace DistantWorlds.Types
                     int num54 = actualEmpire2.RefuellingDepots.IndexOf(this);
                     if (num54 >= 0)
                     {
-                        actualEmpire2.RefuellingDepots.RemoveAt(num54);
+                        actualEmpire2.RefuellingDepots.Remove(this);
                     }
                 }
                 if (IsResourceExtractor && !HasBeenDestroyed)
@@ -3254,14 +3255,14 @@ namespace DistantWorlds.Types
                     int num55 = actualEmpire2.ResourceExtractors.IndexOf(this);
                     if (num55 >= 0)
                     {
-                        actualEmpire2.ResourceExtractors.RemoveAt(num55);
+                        actualEmpire2.ResourceExtractors.Remove(this);
                     }
                     if (Role == BuiltObjectRole.Base)
                     {
                         num55 = actualEmpire2.MiningStations.IndexOf(this);
                         if (num55 >= 0)
                         {
-                            actualEmpire2.MiningStations.RemoveAt(num55);
+                            actualEmpire2.MiningStations.Remove(this);
                         }
                     }
                 }
@@ -3277,7 +3278,7 @@ namespace DistantWorlds.Types
                     int num56 = actualEmpire2.SpacePorts.IndexOf(this);
                     if (num56 >= 0)
                     {
-                        actualEmpire2.SpacePorts.RemoveAt(num56);
+                        actualEmpire2.SpacePorts.Remove(this);
                     }
                 }
                 if (IsShipYard && !HasBeenDestroyed)
@@ -3292,7 +3293,7 @@ namespace DistantWorlds.Types
                     int num57 = actualEmpire2.ConstructionYards.IndexOf(this);
                     if (num57 >= 0)
                     {
-                        actualEmpire2.ConstructionYards.RemoveAt(num57);
+                        actualEmpire2.ConstructionYards.Remove(this);
                     }
                 }
                 if (Role == BuiltObjectRole.Freight && !HasBeenDestroyed)
@@ -3307,7 +3308,7 @@ namespace DistantWorlds.Types
                     int num58 = actualEmpire2.Freighters.IndexOf(this);
                     if (num58 >= 0)
                     {
-                        actualEmpire2.Freighters.RemoveAt(num58);
+                        actualEmpire2.Freighters.Remove(this);
                     }
                 }
                 if (SubRole == BuiltObjectSubRole.ConstructionShip && !HasBeenDestroyed)
@@ -3322,7 +3323,7 @@ namespace DistantWorlds.Types
                     int num59 = actualEmpire2.ConstructionShips.IndexOf(this);
                     if (num59 >= 0)
                     {
-                        actualEmpire2.ConstructionShips.RemoveAt(num59);
+                        actualEmpire2.ConstructionShips.Remove(this);
                     }
                 }
                 if (SensorLongRange > 0 && !HasBeenDestroyed)
@@ -3345,7 +3346,7 @@ namespace DistantWorlds.Types
                     int num60 = actualEmpire2.LongRangeScanners.IndexOf(this);
                     if (num60 >= 0)
                     {
-                        actualEmpire2.LongRangeScanners.RemoveAt(num60);
+                        actualEmpire2.LongRangeScanners.Remove(this);
                         if (actualEmpire2 == _Galaxy.PlayerEmpire)
                         {
                             _Galaxy.OnRefreshView(new RefreshViewEventArgs(Xpos, Ypos, null, onlyGalaxyBackdrops: true));
@@ -3364,7 +3365,7 @@ namespace DistantWorlds.Types
                     int num61 = actualEmpire2.ResupplyShips.IndexOf(this);
                     if (num61 >= 0)
                     {
-                        actualEmpire2.ResupplyShips.RemoveAt(num61);
+                        actualEmpire2.ResupplyShips.Remove(this);
                     }
                 }
                 if (IsFunctional && RecreationCapacity > 0 && SubRole == BuiltObjectSubRole.ResortBase)
@@ -3379,7 +3380,7 @@ namespace DistantWorlds.Types
                     int num62 = actualEmpire2.ResortBases.IndexOf(this);
                     if (num62 >= 0)
                     {
-                        actualEmpire2.ResortBases.RemoveAt(num62);
+                        actualEmpire2.ResortBases.Remove(this);
                     }
                 }
                 if ((ResearchEnergy > 0 || ResearchHighTech > 0 || ResearchWeapons > 0) && !HasBeenDestroyed)
@@ -3394,7 +3395,7 @@ namespace DistantWorlds.Types
                     int num63 = actualEmpire2.ResearchFacilities.IndexOf(this);
                     if (num63 >= 0)
                     {
-                        actualEmpire2.ResearchFacilities.RemoveAt(num63);
+                        actualEmpire2.ResearchFacilities.Remove(this);
                     }
                 }
                 if (IsPlanetDestroyer && IsFunctional && TopSpeed > 0 && WarpSpeed > 0 && !HasBeenDestroyed)
@@ -3410,7 +3411,7 @@ namespace DistantWorlds.Types
                     int num64 = actualEmpire2.PlanetDestroyers.IndexOf(this);
                     if (num64 >= 0)
                     {
-                        actualEmpire2.PlanetDestroyers.RemoveAt(num64);
+                        actualEmpire2.PlanetDestroyers.Remove(this);
                     }
                 }
                 BaconBuiltObject.ModMyShip(this);

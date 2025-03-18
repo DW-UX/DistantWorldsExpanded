@@ -105,9 +105,27 @@ namespace DistantWorlds.Types
         }
       }
       return -1;
-    }
+        }
+        public DockingBay GetObjIndexOf(BuiltObjectComponent builtObjectComponent)
+        {
+            lock (this._LockObject)
+            {
+                if (builtObjectComponent != null)
+                {
+                    if (builtObjectComponent.BuiltObjectComponentId >= (short)0)
+                    {
+                        for (int index = 0; index < this.Count; ++index)
+                        {
+                            if ((int)builtObjectComponent.BuiltObjectComponentId == (int)this[index].ParentBuiltObjectComponentId)
+                                return this[index];
+                        }
+                    }
+                }
+            }
+            return null;
+        }
 
-    public int IndexOf(BuiltObject builtObject)
+        public int IndexOf(BuiltObject builtObject)
     {
       lock (this._LockObject)
       {
