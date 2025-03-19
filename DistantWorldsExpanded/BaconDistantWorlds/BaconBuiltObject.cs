@@ -4957,6 +4957,8 @@ namespace BaconDistantWorlds
             StellarObject[] array = new StellarObject[count];
             threats.Select(x => x.threat).Take(count).ToArray().CopyTo(array, 0);
             threatLevels = new int[count];
+            if (threats.Count < count)
+                count = threats.Count;
             for (int index = 0; index < count; ++index)
                 threatLevels[index] = (int)Math.Max((double)int.MinValue, Math.Min((double)int.MaxValue, threats[index].threatLevel));
             return array;

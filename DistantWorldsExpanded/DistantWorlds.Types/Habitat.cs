@@ -20,6 +20,7 @@ namespace DistantWorlds.Types
     {
         public object _LockObject = new object();
 
+        private object _teardownLock = new object();
         public HabitatCategoryType Category;
 
         public HabitatType Type;
@@ -7611,395 +7612,398 @@ namespace DistantWorlds.Types
 
         public void CompleteTeardown()
         {
-            int num = -1;
-            ClearColony(TeardownEmpire);
-            _Galaxy.Orders.UpdateHabitatIndexes(HabitatIndex, -1);
-            for (int i = 0; i < _Galaxy.BuiltObjects.Count; i++)
+            lock (_teardownLock)
             {
-                BuiltObject builtObject = _Galaxy.BuiltObjects[i];
-                if (builtObject != null && builtObject.ParentHabitat == this)
+                int num = -1;
+                ClearColony(TeardownEmpire);
+                _Galaxy.Orders.UpdateHabitatIndexes(HabitatIndex, -1);
+                for (int i = 0; i < _Galaxy.BuiltObjects.Count; i++)
                 {
-                    if (builtObject.Role == BuiltObjectRole.Base || builtObject.DockedAt == this || builtObject.BuiltAt == this)
+                    BuiltObject builtObject = _Galaxy.BuiltObjects[i];
+                    if (builtObject != null && builtObject.ParentHabitat == this)
                     {
-                        builtObject.ClearPreviousMissionRequirements();
-                        builtObject.CompleteTeardown(_Galaxy, removeFromEmpire: true);
-                    }
-                    else
-                    {
-                        builtObject.ParentHabitat = null;
-                        builtObject.ParentOffsetX = -2000000001.0;
-                        builtObject.ParentOffsetY = -2000000001.0;
-                    }
-                }
-            }
-            CreatureList creatureList = new CreatureList();
-            for (int j = 0; j < _Galaxy.Creatures.Count; j++)
-            {
-                Creature creature = _Galaxy.Creatures[j];
-                if (creature != null && creature.ParentHabitat == this)
-                {
-                    if (creature.Type == CreatureType.RockSpaceSlug || creature.Type == CreatureType.DesertSpaceSlug)
-                    {
-                        creatureList.Add(creature);
-                    }
-                    else
-                    {
-                        creature.ParentHabitat = null;
+                        if (builtObject.Role == BuiltObjectRole.Base || builtObject.DockedAt == this || builtObject.BuiltAt == this)
+                        {
+                            builtObject.ClearPreviousMissionRequirements();
+                            builtObject.CompleteTeardown(_Galaxy, removeFromEmpire: true);
+                        }
+                        else
+                        {
+                            builtObject.ParentHabitat = null;
+                            builtObject.ParentOffsetX = -2000000001.0;
+                            builtObject.ParentOffsetY = -2000000001.0;
+                        }
                     }
                 }
-            }
-            foreach (Creature item in creatureList)
-            {
-                item.CompleteTeardown();
-            }
-            if (DockingBays != null)
-            {
-                foreach (DockingBay dockingBay in DockingBays)
+                CreatureList creatureList = new CreatureList();
+                for (int j = 0; j < _Galaxy.Creatures.Count; j++)
                 {
-                    dockingBay.DockedShip?.CompleteTeardown(_Galaxy, removeFromEmpire: true);
-                    dockingBay.DockedShip = null;
+                    Creature creature = _Galaxy.Creatures[j];
+                    if (creature != null && creature.ParentHabitat == this)
+                    {
+                        if (creature.Type == CreatureType.RockSpaceSlug || creature.Type == CreatureType.DesertSpaceSlug)
+                        {
+                            creatureList.Add(creature);
+                        }
+                        else
+                        {
+                            creature.ParentHabitat = null;
+                        }
+                    }
                 }
-            }
-            for (int k = 0; k < _Galaxy.Empires.Count; k++)
-            {
-                Empire empire = _Galaxy.Empires[k];
-                if (empire == null || empire.ShipGroups == null)
+                foreach (Creature item in creatureList)
                 {
-                    continue;
+                    item.CompleteTeardown();
                 }
-                for (int l = 0; l < empire.ShipGroups.Count; l++)
+                if (DockingBays != null)
                 {
-                    ShipGroup shipGroup = empire.ShipGroups[l];
-                    if (shipGroup == null)
+                    foreach (DockingBay dockingBay in DockingBays)
+                    {
+                        dockingBay.DockedShip?.CompleteTeardown(_Galaxy, removeFromEmpire: true);
+                        dockingBay.DockedShip = null;
+                    }
+                }
+                for (int k = 0; k < _Galaxy.Empires.Count; k++)
+                {
+                    Empire empire = _Galaxy.Empires[k];
+                    if (empire == null || empire.ShipGroups == null)
                     {
                         continue;
                     }
-                    BuiltObjectMission mission = shipGroup.Mission;
-                    if (mission != null)
+                    for (int l = 0; l < empire.ShipGroups.Count; l++)
                     {
-                        if (mission.TargetHabitat != null && mission.TargetHabitat == this)
+                        ShipGroup shipGroup = empire.ShipGroups[l];
+                        if (shipGroup == null)
                         {
-                            shipGroup.CompleteMission();
+                            continue;
                         }
-                        if (mission.SecondaryTargetHabitat != null && mission.SecondaryTargetHabitat == this)
+                        BuiltObjectMission mission = shipGroup.Mission;
+                        if (mission != null)
                         {
-                            shipGroup.CompleteMission();
+                            if (mission.TargetHabitat != null && mission.TargetHabitat == this)
+                            {
+                                shipGroup.CompleteMission();
+                            }
+                            if (mission.SecondaryTargetHabitat != null && mission.SecondaryTargetHabitat == this)
+                            {
+                                shipGroup.CompleteMission();
+                            }
                         }
                     }
                 }
-            }
-            GalaxyIndex galaxyIndex = _Galaxy.ResolveIndex(Xpos, Ypos);
-            _ = galaxyIndex.X;
-            _ = galaxyIndex.Y;
-            for (int m = 0; m < _Galaxy.BuiltObjects.Count; m++)
-            {
-                BuiltObject builtObject2 = _Galaxy.BuiltObjects[m];
-                if (builtObject2 == null)
+                GalaxyIndex galaxyIndex = _Galaxy.ResolveIndex(Xpos, Ypos);
+                _ = galaxyIndex.X;
+                _ = galaxyIndex.Y;
+                for (int m = 0; m < _Galaxy.BuiltObjects.Count; m++)
                 {
-                    continue;
-                }
-                builtObject2.ClearAllMissionsForTarget(builtObject2, this, BuiltObjectMissionType.Undefined, dropOutOfHyperspace: true);
-                if (builtObject2.NearestSystemStar == this)
-                {
-                    builtObject2.ClearPreviousMissionRequirements();
-                    builtObject2.CompleteTeardown(_Galaxy, removeFromEmpire: true);
-                    continue;
-                }
-                if (builtObject2.DockedAt == this)
-                {
-                    num = -1;
-                    if (DockingBays != null)
+                    BuiltObject builtObject2 = _Galaxy.BuiltObjects[m];
+                    if (builtObject2 == null)
                     {
-                        num = DockingBays.IndexOf(builtObject2);
-                    }
-                    if (num >= 0)
-                    {
-                        DockingBays[num].DockedShip?.CompleteTeardown(_Galaxy, removeFromEmpire: true);
                         continue;
                     }
-                }
-                if (builtObject2.BuiltAt == this && ConstructionQueue != null && ConstructionQueue.ConstructionYards != null)
-                {
-                    num = ConstructionQueue.ConstructionYards.IndexOf(builtObject2);
-                    if (num >= 0)
+                    builtObject2.ClearAllMissionsForTarget(builtObject2, this, BuiltObjectMissionType.Undefined, dropOutOfHyperspace: true);
+                    if (builtObject2.NearestSystemStar == this)
                     {
-                        ConstructionQueue.ConstructionYards[num].ShipUnderConstruction?.CompleteTeardown(_Galaxy, removeFromEmpire: true);
+                        builtObject2.ClearPreviousMissionRequirements();
+                        builtObject2.CompleteTeardown(_Galaxy, removeFromEmpire: true);
+                        continue;
                     }
-                }
-            }
-            if (_Galaxy.RuinsHabitats.Contains(this))
-            {
-                _Galaxy.RuinsHabitats.Remove(this);
-            }
-            if (_Galaxy.Systems != null && SystemIndex >= 0 && SystemIndex < _Galaxy.Systems.Count)
-            {
-                SystemInfo systemInfo = _Galaxy.Systems[SystemIndex];
-                if (systemInfo != null && systemInfo.Habitats != null)
-                {
-                    num = systemInfo.Habitats.IndexOf(this);
-                    if (num >= 0)
+                    if (builtObject2.DockedAt == this)
                     {
-                        systemInfo.Habitats.RemoveAt(num);
-                    }
-                }
-            }
-            for (int n = 0; n < _Galaxy.Empires.Count; n++)
-            {
-                Empire empire2 = _Galaxy.Empires[n];
-                if (empire2 == null)
-                {
-                    continue;
-                }
-                HabitatPrioritizationList habitatPrioritizationList = new HabitatPrioritizationList();
-                PrioritizedTargetList prioritizedTargetList = new PrioritizedTargetList();
-                HabitatList habitatList = new HabitatList();
-                if (empire2.MonitoringHabitats != null)
-                {
-                    foreach (Habitat monitoringHabitat in empire2.MonitoringHabitats)
-                    {
-                        if (monitoringHabitat == this)
+                        num = -1;
+                        if (DockingBays != null)
                         {
-                            habitatList.Add(monitoringHabitat);
+                            num = DockingBays.IndexOf(builtObject2);
                         }
-                    }
-                    foreach (Habitat item2 in habitatList)
-                    {
-                        empire2.MonitoringHabitats.Remove(item2);
-                    }
-                }
-                habitatList.Clear();
-                if (empire2.DangerousHabitats != null)
-                {
-                    foreach (Habitat dangerousHabitat in empire2.DangerousHabitats)
-                    {
-                        if (dangerousHabitat == this)
-                        {
-                            habitatList.Add(dangerousHabitat);
-                        }
-                    }
-                    foreach (Habitat item3 in habitatList)
-                    {
-                        empire2.DangerousHabitats.Remove(item3);
-                    }
-                }
-                habitatList.Clear();
-                if (empire2.ResortHabitats != null)
-                {
-                    foreach (PrioritizedTarget resortHabitat in empire2.ResortHabitats)
-                    {
-                        if (resortHabitat.Target is Habitat && (Habitat)resortHabitat.Target == this)
-                        {
-                            prioritizedTargetList.Add(resortHabitat);
-                        }
-                    }
-                    PurgePrioritizedTargets(empire2.ResortHabitats, prioritizedTargetList);
-                }
-                prioritizedTargetList.Clear();
-                if (empire2.MigrationSources != null)
-                {
-                    foreach (PrioritizedTarget migrationSource in empire2.MigrationSources)
-                    {
-                        if (migrationSource.Target is Habitat && (Habitat)migrationSource.Target == this)
-                        {
-                            prioritizedTargetList.Add(migrationSource);
-                        }
-                    }
-                    PurgePrioritizedTargets(empire2.MigrationSources, prioritizedTargetList);
-                }
-                prioritizedTargetList.Clear();
-                if (empire2.MigrationDestinations != null)
-                {
-                    foreach (PrioritizedTarget migrationDestination in empire2.MigrationDestinations)
-                    {
-                        if (migrationDestination.Target is Habitat && (Habitat)migrationDestination.Target == this)
-                        {
-                            prioritizedTargetList.Add(migrationDestination);
-                        }
-                    }
-                    PurgePrioritizedTargets(empire2.MigrationDestinations, prioritizedTargetList);
-                }
-                prioritizedTargetList.Clear();
-                if (empire2.TourismSources != null)
-                {
-                    foreach (PrioritizedTarget tourismSource in empire2.TourismSources)
-                    {
-                        if (tourismSource.Target is Habitat && (Habitat)tourismSource.Target == this)
-                        {
-                            prioritizedTargetList.Add(tourismSource);
-                        }
-                    }
-                    PurgePrioritizedTargets(empire2.TourismSources, prioritizedTargetList);
-                }
-                prioritizedTargetList.Clear();
-                if (empire2.TourismDestinations != null)
-                {
-                    foreach (PrioritizedTarget tourismDestination in empire2.TourismDestinations)
-                    {
-                        if (tourismDestination.Target is Habitat && (Habitat)tourismDestination.Target == this)
-                        {
-                            prioritizedTargetList.Add(tourismDestination);
-                        }
-                    }
-                    PurgePrioritizedTargets(empire2.TourismDestinations, prioritizedTargetList);
-                }
-                prioritizedTargetList.Clear();
-                if (empire2.ResortBaseBuildLocations != null)
-                {
-                    foreach (PrioritizedTarget resortBaseBuildLocation in empire2.ResortBaseBuildLocations)
-                    {
-                        if (resortBaseBuildLocation.Target is Habitat && (Habitat)resortBaseBuildLocation.Target == this)
-                        {
-                            prioritizedTargetList.Add(resortBaseBuildLocation);
-                        }
-                    }
-                    PurgePrioritizedTargets(empire2.ResortBaseBuildLocations, prioritizedTargetList);
-                }
-                prioritizedTargetList.Clear();
-                if (empire2.ResourceTargets != null)
-                {
-                    foreach (HabitatPrioritization resourceTarget in empire2.ResourceTargets)
-                    {
-                        if (resourceTarget.Habitat == this)
-                        {
-                            habitatPrioritizationList.Add(resourceTarget);
-                        }
-                    }
-                    empire2.ResourceTargets = PurgeHabitatPrioritizations(empire2.ResourceTargets, habitatPrioritizationList);
-                }
-                habitatPrioritizationList.Clear();
-                if (empire2.ColonizationTargets != null)
-                {
-                    foreach (HabitatPrioritization colonizationTarget in empire2.ColonizationTargets)
-                    {
-                        if (colonizationTarget.Habitat == this)
-                        {
-                            habitatPrioritizationList.Add(colonizationTarget);
-                        }
-                    }
-                    empire2.ColonizationTargets = PurgeHabitatPrioritizations(empire2.ColonizationTargets, habitatPrioritizationList);
-                }
-                habitatPrioritizationList.Clear();
-                if (empire2.DesiredForeignColonies != null)
-                {
-                    foreach (HabitatPrioritization desiredForeignColony in empire2.DesiredForeignColonies)
-                    {
-                        if (desiredForeignColony.Habitat == this)
-                        {
-                            habitatPrioritizationList.Add(desiredForeignColony);
-                        }
-                    }
-                    empire2.DesiredForeignColonies = PurgeHabitatPrioritizations(empire2.DesiredForeignColonies, habitatPrioritizationList);
-                }
-                habitatPrioritizationList.Clear();
-                if (empire2.EmpireResourceTargets != null)
-                {
-                    foreach (HabitatPrioritization empireResourceTarget in empire2.EmpireResourceTargets)
-                    {
-                        if (empireResourceTarget.Habitat == this)
-                        {
-                            habitatPrioritizationList.Add(empireResourceTarget);
-                        }
-                    }
-                    empire2.EmpireResourceTargets = PurgeHabitatPrioritizations(empire2.EmpireResourceTargets, habitatPrioritizationList);
-                }
-                habitatPrioritizationList.Clear();
-            }
-            if (SystemIndex >= 0 && _Galaxy.Systems.Count > SystemIndex)
-            {
-                SystemInfo systemInfo2 = _Galaxy.Systems[SystemIndex];
-                if (systemInfo2 != null && systemInfo2.SystemStar == this)
-                {
-                    GalaxyIndex galaxyIndex2 = _Galaxy.ResolveIndex(Xpos, Ypos);
-                    if (_Galaxy.SystemsIndex[galaxyIndex2.X][galaxyIndex2.Y].Contains(systemInfo2))
-                    {
-                        _Galaxy.SystemsIndex[galaxyIndex2.X][galaxyIndex2.Y].Remove(systemInfo2);
-                    }
-                    foreach (Empire empire3 in _Galaxy.Empires)
-                    {
-                        if (empire3 == null)
-                        {
-                            continue;
-                        }
-                        if (empire3.SystemVisibility != null)
-                        {
-                            for (int num2 = 0; num2 < empire3.SystemVisibility.Count; num2++)
-                            {
-                                if (empire3.SystemVisibility[num2].SystemStar == this)
-                                {
-                                    empire3.SystemVisibility.RemoveAt(num2);
-                                    break;
-                                }
-                            }
-                        }
-                        if (empire3.SystemsVisible != null)
-                        {
-                            num = empire3.SystemsVisible.IndexOf(systemInfo2.SystemStar);
-                            if (num >= 0)
-                            {
-                                empire3.SystemsVisible.RemoveAt(num);
-                            }
-                        }
-                    }
-                    foreach (Empire pirateEmpire in _Galaxy.PirateEmpires)
-                    {
-                        if (pirateEmpire == null)
-                        {
-                            continue;
-                        }
-                        if (pirateEmpire.SystemVisibility != null)
-                        {
-                            for (int num3 = 0; num3 < pirateEmpire.SystemVisibility.Count; num3++)
-                            {
-                                if (pirateEmpire.SystemVisibility[num3].SystemStar == this)
-                                {
-                                    pirateEmpire.SystemVisibility.RemoveAt(num3);
-                                    break;
-                                }
-                            }
-                        }
-                        if (pirateEmpire.SystemsVisible != null)
-                        {
-                            num = pirateEmpire.SystemsVisible.IndexOf(systemInfo2.SystemStar);
-                            if (num >= 0)
-                            {
-                                pirateEmpire.SystemsVisible.RemoveAt(num);
-                            }
-                        }
-                    }
-                    if (_Galaxy.IndependentEmpire != null && _Galaxy.IndependentEmpire.SystemVisibility != null)
-                    {
-                        for (int num4 = 0; num4 < _Galaxy.IndependentEmpire.SystemVisibility.Count; num4++)
-                        {
-                            if (_Galaxy.IndependentEmpire.SystemVisibility[num4].SystemStar == this)
-                            {
-                                _Galaxy.IndependentEmpire.SystemVisibility.RemoveAt(num4);
-                                break;
-                            }
-                        }
-                    }
-                    if (_Galaxy.IndependentEmpire.SystemsVisible != null)
-                    {
-                        num = _Galaxy.IndependentEmpire.SystemsVisible.IndexOf(systemInfo2.SystemStar);
                         if (num >= 0)
                         {
-                            _Galaxy.IndependentEmpire.SystemsVisible.RemoveAt(num);
+                            DockingBays[num].DockedShip?.CompleteTeardown(_Galaxy, removeFromEmpire: true);
+                            continue;
                         }
                     }
-                    systemInfo2.SystemStar = null;
-                }
-            }
-            for (int num5 = 0; num5 < Galaxy.IndexMaxX; num5++)
-            {
-                for (int num6 = 0; num6 < Galaxy.IndexMaxY; num6++)
-                {
-                    num = _Galaxy.HabitatIndex[num5][num6].IndexOf(this);
-                    if (num >= 0)
+                    if (builtObject2.BuiltAt == this && ConstructionQueue != null && ConstructionQueue.ConstructionYards != null)
                     {
-                        _Galaxy.HabitatIndex[num5][num6].RemoveAt(num);
+                        num = ConstructionQueue.ConstructionYards.IndexOf(builtObject2);
+                        if (num >= 0)
+                        {
+                            ConstructionQueue.ConstructionYards[num].ShipUnderConstruction?.CompleteTeardown(_Galaxy, removeFromEmpire: true);
+                        }
                     }
                 }
+                if (_Galaxy.RuinsHabitats.Contains(this))
+                {
+                    _Galaxy.RuinsHabitats.Remove(this);
+                }
+                if (_Galaxy.Systems != null && SystemIndex >= 0 && SystemIndex < _Galaxy.Systems.Count)
+                {
+                    SystemInfo systemInfo = _Galaxy.Systems[SystemIndex];
+                    if (systemInfo != null && systemInfo.Habitats != null)
+                    {
+                        num = systemInfo.Habitats.IndexOf(this);
+                        if (num >= 0)
+                        {
+                            systemInfo.Habitats.RemoveAt(num);
+                        }
+                    }
+                }
+                for (int n = 0; n < _Galaxy.Empires.Count; n++)
+                {
+                    Empire empire2 = _Galaxy.Empires[n];
+                    if (empire2 == null)
+                    {
+                        continue;
+                    }
+                    HabitatPrioritizationList habitatPrioritizationList = new HabitatPrioritizationList();
+                    PrioritizedTargetList prioritizedTargetList = new PrioritizedTargetList();
+                    HabitatList habitatList = new HabitatList();
+                    if (empire2.MonitoringHabitats != null)
+                    {
+                        foreach (Habitat monitoringHabitat in empire2.MonitoringHabitats)
+                        {
+                            if (monitoringHabitat == this)
+                            {
+                                habitatList.Add(monitoringHabitat);
+                            }
+                        }
+                        foreach (Habitat item2 in habitatList)
+                        {
+                            empire2.MonitoringHabitats.Remove(item2);
+                        }
+                    }
+                    habitatList.Clear();
+                    if (empire2.DangerousHabitats != null)
+                    {
+                        foreach (Habitat dangerousHabitat in empire2.DangerousHabitats)
+                        {
+                            if (dangerousHabitat == this)
+                            {
+                                habitatList.Add(dangerousHabitat);
+                            }
+                        }
+                        foreach (Habitat item3 in habitatList)
+                        {
+                            empire2.DangerousHabitats.Remove(item3);
+                        }
+                    }
+                    habitatList.Clear();
+                    if (empire2.ResortHabitats != null)
+                    {
+                        foreach (PrioritizedTarget resortHabitat in empire2.ResortHabitats)
+                        {
+                            if (resortHabitat.Target is Habitat && (Habitat)resortHabitat.Target == this)
+                            {
+                                prioritizedTargetList.Add(resortHabitat);
+                            }
+                        }
+                        PurgePrioritizedTargets(empire2.ResortHabitats, prioritizedTargetList);
+                    }
+                    prioritizedTargetList.Clear();
+                    if (empire2.MigrationSources != null)
+                    {
+                        foreach (PrioritizedTarget migrationSource in empire2.MigrationSources)
+                        {
+                            if (migrationSource.Target is Habitat && (Habitat)migrationSource.Target == this)
+                            {
+                                prioritizedTargetList.Add(migrationSource);
+                            }
+                        }
+                        PurgePrioritizedTargets(empire2.MigrationSources, prioritizedTargetList);
+                    }
+                    prioritizedTargetList.Clear();
+                    if (empire2.MigrationDestinations != null)
+                    {
+                        foreach (PrioritizedTarget migrationDestination in empire2.MigrationDestinations)
+                        {
+                            if (migrationDestination.Target is Habitat && (Habitat)migrationDestination.Target == this)
+                            {
+                                prioritizedTargetList.Add(migrationDestination);
+                            }
+                        }
+                        PurgePrioritizedTargets(empire2.MigrationDestinations, prioritizedTargetList);
+                    }
+                    prioritizedTargetList.Clear();
+                    if (empire2.TourismSources != null)
+                    {
+                        foreach (PrioritizedTarget tourismSource in empire2.TourismSources)
+                        {
+                            if (tourismSource.Target is Habitat && (Habitat)tourismSource.Target == this)
+                            {
+                                prioritizedTargetList.Add(tourismSource);
+                            }
+                        }
+                        PurgePrioritizedTargets(empire2.TourismSources, prioritizedTargetList);
+                    }
+                    prioritizedTargetList.Clear();
+                    if (empire2.TourismDestinations != null)
+                    {
+                        foreach (PrioritizedTarget tourismDestination in empire2.TourismDestinations)
+                        {
+                            if (tourismDestination.Target is Habitat && (Habitat)tourismDestination.Target == this)
+                            {
+                                prioritizedTargetList.Add(tourismDestination);
+                            }
+                        }
+                        PurgePrioritizedTargets(empire2.TourismDestinations, prioritizedTargetList);
+                    }
+                    prioritizedTargetList.Clear();
+                    if (empire2.ResortBaseBuildLocations != null)
+                    {
+                        foreach (PrioritizedTarget resortBaseBuildLocation in empire2.ResortBaseBuildLocations)
+                        {
+                            if (resortBaseBuildLocation.Target is Habitat && (Habitat)resortBaseBuildLocation.Target == this)
+                            {
+                                prioritizedTargetList.Add(resortBaseBuildLocation);
+                            }
+                        }
+                        PurgePrioritizedTargets(empire2.ResortBaseBuildLocations, prioritizedTargetList);
+                    }
+                    prioritizedTargetList.Clear();
+                    if (empire2.ResourceTargets != null)
+                    {
+                        foreach (HabitatPrioritization resourceTarget in empire2.ResourceTargets)
+                        {
+                            if (resourceTarget.Habitat == this)
+                            {
+                                habitatPrioritizationList.Add(resourceTarget);
+                            }
+                        }
+                        empire2.ResourceTargets = PurgeHabitatPrioritizations(empire2.ResourceTargets, habitatPrioritizationList);
+                    }
+                    habitatPrioritizationList.Clear();
+                    if (empire2.ColonizationTargets != null)
+                    {
+                        foreach (HabitatPrioritization colonizationTarget in empire2.ColonizationTargets)
+                        {
+                            if (colonizationTarget.Habitat == this)
+                            {
+                                habitatPrioritizationList.Add(colonizationTarget);
+                            }
+                        }
+                        empire2.ColonizationTargets = PurgeHabitatPrioritizations(empire2.ColonizationTargets, habitatPrioritizationList);
+                    }
+                    habitatPrioritizationList.Clear();
+                    if (empire2.DesiredForeignColonies != null)
+                    {
+                        foreach (HabitatPrioritization desiredForeignColony in empire2.DesiredForeignColonies)
+                        {
+                            if (desiredForeignColony.Habitat == this)
+                            {
+                                habitatPrioritizationList.Add(desiredForeignColony);
+                            }
+                        }
+                        empire2.DesiredForeignColonies = PurgeHabitatPrioritizations(empire2.DesiredForeignColonies, habitatPrioritizationList);
+                    }
+                    habitatPrioritizationList.Clear();
+                    if (empire2.EmpireResourceTargets != null)
+                    {
+                        foreach (HabitatPrioritization empireResourceTarget in empire2.EmpireResourceTargets)
+                        {
+                            if (empireResourceTarget.Habitat == this)
+                            {
+                                habitatPrioritizationList.Add(empireResourceTarget);
+                            }
+                        }
+                        empire2.EmpireResourceTargets = PurgeHabitatPrioritizations(empire2.EmpireResourceTargets, habitatPrioritizationList);
+                    }
+                    habitatPrioritizationList.Clear();
+                }
+                if (SystemIndex >= 0 && _Galaxy.Systems.Count > SystemIndex)
+                {
+                    SystemInfo systemInfo2 = _Galaxy.Systems[SystemIndex];
+                    if (systemInfo2 != null && systemInfo2.SystemStar == this)
+                    {
+                        GalaxyIndex galaxyIndex2 = _Galaxy.ResolveIndex(Xpos, Ypos);
+                        if (_Galaxy.SystemsIndex[galaxyIndex2.X][galaxyIndex2.Y].Contains(systemInfo2))
+                        {
+                            _Galaxy.SystemsIndex[galaxyIndex2.X][galaxyIndex2.Y].Remove(systemInfo2);
+                        }
+                        foreach (Empire empire3 in _Galaxy.Empires)
+                        {
+                            if (empire3 == null)
+                            {
+                                continue;
+                            }
+                            if (empire3.SystemVisibility != null)
+                            {
+                                for (int num2 = 0; num2 < empire3.SystemVisibility.Count; num2++)
+                                {
+                                    if (empire3.SystemVisibility[num2].SystemStar == this)
+                                    {
+                                        empire3.SystemVisibility.RemoveAt(num2);
+                                        break;
+                                    }
+                                }
+                            }
+                            if (empire3.SystemsVisible != null)
+                            {
+                                num = empire3.SystemsVisible.IndexOf(systemInfo2.SystemStar);
+                                if (num >= 0)
+                                {
+                                    empire3.SystemsVisible.RemoveAt(num);
+                                }
+                            }
+                        }
+                        foreach (Empire pirateEmpire in _Galaxy.PirateEmpires)
+                        {
+                            if (pirateEmpire == null)
+                            {
+                                continue;
+                            }
+                            if (pirateEmpire.SystemVisibility != null)
+                            {
+                                for (int num3 = 0; num3 < pirateEmpire.SystemVisibility.Count; num3++)
+                                {
+                                    if (pirateEmpire.SystemVisibility[num3].SystemStar == this)
+                                    {
+                                        pirateEmpire.SystemVisibility.RemoveAt(num3);
+                                        break;
+                                    }
+                                }
+                            }
+                            if (pirateEmpire.SystemsVisible != null)
+                            {
+                                num = pirateEmpire.SystemsVisible.IndexOf(systemInfo2.SystemStar);
+                                if (num >= 0)
+                                {
+                                    pirateEmpire.SystemsVisible.RemoveAt(num);
+                                }
+                            }
+                        }
+                        if (_Galaxy.IndependentEmpire != null && _Galaxy.IndependentEmpire.SystemVisibility != null)
+                        {
+                            for (int num4 = 0; num4 < _Galaxy.IndependentEmpire.SystemVisibility.Count; num4++)
+                            {
+                                if (_Galaxy.IndependentEmpire.SystemVisibility[num4].SystemStar == this)
+                                {
+                                    _Galaxy.IndependentEmpire.SystemVisibility.RemoveAt(num4);
+                                    break;
+                                }
+                            }
+                        }
+                        if (_Galaxy.IndependentEmpire.SystemsVisible != null)
+                        {
+                            num = _Galaxy.IndependentEmpire.SystemsVisible.IndexOf(systemInfo2.SystemStar);
+                            if (num >= 0)
+                            {
+                                _Galaxy.IndependentEmpire.SystemsVisible.RemoveAt(num);
+                            }
+                        }
+                        systemInfo2.SystemStar = null;
+                    }
+                }
+                for (int num5 = 0; num5 < Galaxy.IndexMaxX; num5++)
+                {
+                    for (int num6 = 0; num6 < Galaxy.IndexMaxY; num6++)
+                    {
+                        num = _Galaxy.HabitatIndex[num5][num6].IndexOf(this);
+                        if (num >= 0)
+                        {
+                            _Galaxy.HabitatIndex[num5][num6].RemoveAt(num);
+                        }
+                    }
+                }
+                _Galaxy.Habitats.Remove(this);
             }
-            _Galaxy.Habitats.Remove(this);
         }
 
         private void PurgePrioritizedTargets(PrioritizedTargetList prioritizations, PrioritizedTargetList prioritizationsToRemove)

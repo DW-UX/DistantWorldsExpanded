@@ -22,6 +22,7 @@ namespace DistantWorlds.Types
       ISerializable
     {
         public object _LockObject = new object();
+        private object _teardownLockObj = new object();
         private Galaxy _Galaxy;
         private int _CreatureID;
         private int _AttackStrength;
@@ -946,54 +947,55 @@ namespace DistantWorlds.Types
         }
 
         public void CompleteTeardown()
-        {
-            if (this.CurrentTarget != null)
+        {lock (_teardownLockObj)
             {
-                if (this.CurrentTarget.Pursuers != null)
-                    this.CurrentTarget.Pursuers.Remove((StellarObject)this);
-                if (this.CurrentTarget.Attackers != null)
-                    this.CurrentTarget.Attackers.Remove((StellarObject)this);
-            }
-            for (int index1 = 0; index1 < this._Galaxy.BuiltObjects.Count; ++index1)
-            {
-                if (this._Galaxy.BuiltObjects[index1] != null)
+                if (this.CurrentTarget != null)
                 {
-                    int index2 = this._Galaxy.BuiltObjects[index1].Attackers.IndexOf((StellarObject)this);
-                    if (index2 >= 0)
-                        this._Galaxy.BuiltObjects[index1].Attackers.RemoveAt(index2);
-                    int index3 = this._Galaxy.BuiltObjects[index1].Pursuers.IndexOf((StellarObject)this);
-                    if (index3 >= 0)
-                        this._Galaxy.BuiltObjects[index1].Pursuers.RemoveAt(index3);
-                    if (this._Galaxy.BuiltObjects[index1].CurrentTarget == this)
-                        this._Galaxy.BuiltObjects[index1].CurrentTarget = (StellarObject)null;
-                    if (this._Galaxy.BuiltObjects[index1].Fighters != null && this._Galaxy.BuiltObjects[index1].Fighters.Count > 0)
+                    if (this.CurrentTarget.Pursuers != null)
+                        this.CurrentTarget.Pursuers.Remove((StellarObject)this);
+                    if (this.CurrentTarget.Attackers != null)
+                        this.CurrentTarget.Attackers.Remove((StellarObject)this);
+                }
+                for (int index1 = 0; index1 < this._Galaxy.BuiltObjects.Count; ++index1)
+                {
+                    if (this._Galaxy.BuiltObjects[index1] != null)
                     {
-                        for (int index4 = 0; index4 < this._Galaxy.BuiltObjects[index1].Fighters.Count; ++index4)
+                        int index2 = this._Galaxy.BuiltObjects[index1].Attackers.IndexOf((StellarObject)this);
+                        if (index2 >= 0)
+                            this._Galaxy.BuiltObjects[index1].Attackers.RemoveAt(index2);
+                        int index3 = this._Galaxy.BuiltObjects[index1].Pursuers.IndexOf((StellarObject)this);
+                        if (index3 >= 0)
+                            this._Galaxy.BuiltObjects[index1].Pursuers.RemoveAt(index3);
+                        if (this._Galaxy.BuiltObjects[index1].CurrentTarget == this)
+                            this._Galaxy.BuiltObjects[index1].CurrentTarget = (StellarObject)null;
+                        if (this._Galaxy.BuiltObjects[index1].Fighters != null && this._Galaxy.BuiltObjects[index1].Fighters.Count > 0)
                         {
-                            Fighter fighter = this._Galaxy.BuiltObjects[index1].Fighters[index4];
-                            if (fighter.CurrentTarget == this)
+                            for (int index4 = 0; index4 < this._Galaxy.BuiltObjects[index1].Fighters.Count; ++index4)
                             {
-                                fighter.AbandonAttackTarget();
-                                fighter.EvaluateThreats(this._Galaxy);
-                                if (fighter.MissionType == FighterMissionType.Undefined)
-                                    fighter.MissionType = FighterMissionType.Patrol;
+                                Fighter fighter = this._Galaxy.BuiltObjects[index1].Fighters[index4];
+                                if (fighter.CurrentTarget == this)
+                                {
+                                    fighter.AbandonAttackTarget();
+                                    fighter.EvaluateThreats(this._Galaxy);
+                                    if (fighter.MissionType == FighterMissionType.Undefined)
+                                        fighter.MissionType = FighterMissionType.Patrol;
+                                }
                             }
                         }
                     }
                 }
-            }
-            this._Galaxy.Creatures.Remove(this);
-            for (int index = 0; index < this._Galaxy.Systems.Count; ++index)
-            {
-                while (this._Galaxy.Systems[index].Creatures.Contains(this))
-                    this._Galaxy.Systems[index].Creatures.Remove(this);
-            }
-            lock (Galaxy.GalaxyLocationRemoveLock)
-            {
-                for (int index = 0; index < this._Galaxy.GalaxyLocations.Count; ++index)
+                for (int index = 0; index < this._Galaxy.Systems.Count; ++index)
                 {
-                    if (this._Galaxy.GalaxyLocations[index].RelatedCreatures != null && this._Galaxy.GalaxyLocations[index].RelatedCreatures.Contains(this))
-                        this._Galaxy.GalaxyLocations[index].RelatedCreatures.Remove(this);
+                    while (this._Galaxy.Systems[index].Creatures.Contains(this))
+                        this._Galaxy.Systems[index].Creatures.Remove(this);
+                }
+                lock (Galaxy.GalaxyLocationRemoveLock)
+                {
+                    for (int index = 0; index < this._Galaxy.GalaxyLocations.Count; ++index)
+                    {
+                        if (this._Galaxy.GalaxyLocations[index].RelatedCreatures != null && this._Galaxy.GalaxyLocations[index].RelatedCreatures.Contains(this))
+                            this._Galaxy.GalaxyLocations[index].RelatedCreatures.Remove(this);
+                    }
                 }
             }
         }
