@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TxtFileParser": {
+      "commandName": "Project",
+      "commandLineArgs": "insert"
+    }
+  }
+}
