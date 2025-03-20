@@ -9,7 +9,7 @@ namespace TxtFileParser
     }
     internal class Program
     {
-        private static readonly ImmutableList<string> _files = ImmutableList.Create<string>("characterNames.txt", "raceFamilies.txt", "raceFamilyBiases.txt", "plagues.txt", "races", "governments.txt", "GovernmentBiases.txt", "Facilities.txt", "Fighters.txt");
+        private static readonly ImmutableList<string> _files = ImmutableList.Create<string>("characterNames.txt", "raceFamilies.txt", "raceFamilyBiases.txt", "plagues.txt", "races", "governments.txt", "GovernmentBiases.txt", "Facilities.txt", "Fighters.txt", "Resources.txt", "Research.txt");
         private const string _outputFolder = "Converted";
         static void Main(string[] args)
         {
@@ -43,10 +43,11 @@ namespace TxtFileParser
             var govBaiasParser = new GovBiasConverter(convertType);
             var facilitiesParser = new FacilitiesConverter(convertType);
             var fightersParser = new FightersConverter(convertType);
+            var fresourceParser = new ResourceConverter(convertType);
+            var researchParser = new ResearchConverter(convertType);
             int i = 0;
 
-            need to finish res and research
-            if (!charParser.Parse(_files[i++], _outputFolder) || !raceFamParser.Parse(_files[i++], _outputFolder) || !raceFamBiasParser.Parse(_files[i++], _outputFolder) || !plagueParser.Parse(_files[i++], _outputFolder) || !raceParser.Parse(_files[i++], _outputFolder) || !govParser.Parse(_files[i++], _outputFolder) || !govBaiasParser.Parse(_files[i++], _outputFolder) || !facilitiesParser.Parse(_files[i++], _outputFolder) || !fightersParser.Parse(_files[i++], _outputFolder))
+            if (!charParser.Parse(_files[i++], _outputFolder) || !raceFamParser.Parse(_files[i++], _outputFolder) || !raceFamBiasParser.Parse(_files[i++], _outputFolder) || !plagueParser.Parse(_files[i++], _outputFolder) || !raceParser.Parse(_files[i++], _outputFolder) || !govParser.Parse(_files[i++], _outputFolder) || !govBaiasParser.Parse(_files[i++], _outputFolder) || !facilitiesParser.Parse(_files[i++], _outputFolder) || !fightersParser.Parse(_files[i++], _outputFolder) || !fresourceParser.Parse(_files[i++], _outputFolder) || !researchParser.Parse(_files[i++], _outputFolder))
             {
                 Console.WriteLine("Conversion failed");
                 Console.ReadLine();
