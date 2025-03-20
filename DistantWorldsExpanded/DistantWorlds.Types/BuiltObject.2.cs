@@ -6552,9 +6552,9 @@ namespace DistantWorlds.Types
                         {
                             builtObject.ShipGroup.BattleStats.DamageHullUs(num5);
                         }
-                        BaconBuiltObject.SaveShipInfoBeforeDestruction(builtObject);
                         if (builtObject.UndamagedComponentSize <= num5 && !builtObject.HasBeenDestroyed)
                         {
+                            BaconBuiltObject.SaveShipInfoBeforeDestruction(builtObject);
                             if (BattleStats != null)
                             {
                                 BattleStats.TargetDestroyedEnemy(builtObject);
