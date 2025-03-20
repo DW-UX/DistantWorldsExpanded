@@ -31,20 +31,20 @@ internal static class Class5
     //private static int int_8;
     //private static int int_9;
     internal static Splash _Splash;
-    
-    static bool _isExiting = false;
+
+    internal static bool _IsExiting = false;
     internal static void smethod_0()
     {
         var gcThread = new Thread(static () => {
             for (;;) {
-                if (_isExiting) return;
+                if (_IsExiting) return;
                 GC.Collect(0, GCCollectionMode.Forced, false, false);
-                if (_isExiting) return;
+                if (_IsExiting) return;
                 try {
                     Thread.Sleep(1000 / 30);
                 }
                 catch (ThreadInterruptedException) {
-                    if (_isExiting) return;
+                    if (_IsExiting) return;
                 }
             }
         }) { IsBackground = true, Name = "GC Watcher Thread"};
@@ -82,7 +82,7 @@ internal static class Class5
             throw;
         }
         finally {
-            _isExiting = true;
+            _IsExiting = true;
             gcThread.Interrupt();   
         }
     }

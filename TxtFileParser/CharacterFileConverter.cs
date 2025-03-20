@@ -77,8 +77,8 @@ namespace TxtFileParser
                     agent.Value = $"INSERT INTO {_tableName} ({_FirstNameCol}, {_LastNameCol}, {_RaceFamilieCol}, {_RaceIdCol}) VALUES ('{firstName}', '{lastName}', {i}, {i})";
                 }
                 root.Add(agent);
-                doc.Save(fileStream);
             }
+            doc.Save(fileStream);
         }
 
         private string GetValidFileLine(StreamReader reader)

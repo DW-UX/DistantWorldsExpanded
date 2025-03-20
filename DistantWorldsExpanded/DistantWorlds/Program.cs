@@ -56,18 +56,20 @@ internal static class Program
     {
         // redirect DistantWorlds.Types and DistantWorlds.Controls to DistantWorlds
         var fullyQualifiedTypeName = args.Name;
-
         var fqtnParts = fullyQualifiedTypeName.Split(new[] { ',' }, 2);
-        var typeName = fqtnParts[0];
-        var assemblyNameStr = fqtnParts[1].Trim();
-        var assemblyName = new AssemblyName(assemblyNameStr);
-
-        switch (assemblyName.Name)
+        if (fqtnParts.Length != 1)
         {
-            case "DistantWorlds.Types":
-            case "DistantWorlds.Controls":
-                var type = Type.GetType($"{typeName}, {ThisAsmName}", false);
-                return type?.Assembly;
+            var typeName = fqtnParts[0];
+            var assemblyNameStr = fqtnParts[1].Trim();
+            var assemblyName = new AssemblyName(assemblyNameStr);
+
+            switch (assemblyName.Name)
+            {
+                case "DistantWorlds.Types":
+                case "DistantWorlds.Controls":
+                    var type = Type.GetType($"{typeName}, {ThisAsmName}", false);
+                    return type?.Assembly;
+            }
         }
 
         return null;

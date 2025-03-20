@@ -291,6 +291,12 @@ namespace DistantWorlds {
                 InitializeComponent();
                 //splash_0 = splashForm;
                 SteamAPI.Initialize(Application.UserAppDataPath);
+
+                DBLoader.DB dbLoader = new DBLoader.DB();
+                DBLoader.ModData data = new DBLoader.ModData(@"AdvMods\ExpansionMod\Patches");
+                dbLoader.LoadDB();
+                dbLoader.ApplyChanges(data.ParseChanges());
+
                 MainInit(width, height, windowedMode);
             }
             catch (Exception ex)

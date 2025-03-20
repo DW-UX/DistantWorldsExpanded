@@ -37,6 +37,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
+using DistantWorlds.DBLoader;
 
 namespace DistantWorlds {
 

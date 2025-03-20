@@ -4249,6 +4249,7 @@ namespace DistantWorlds
             {
                 throw;
             }
+            Class5._IsExiting = true;
         }
 
         public static void LogError(string text)
