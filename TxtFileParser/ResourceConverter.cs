@@ -40,9 +40,9 @@ namespace TxtFileParser
                     var values = temp.Split(',').Take(10).ToList();
                     for (int i = 0; i < values.Count; i++)
                     {
-                        values[i] = values[i].Trim();
+                        values[i] = values[i].Trim().Replace('\'', '′');
                     }
-                    string distr = string.Join(",", temp.Split(',', StringSplitOptions.RemoveEmptyEntries).Skip(10).Select(x=>x.Trim()));
+                    string distr = string.Join(",", temp.Split(',', StringSplitOptions.RemoveEmptyEntries).Skip(10).Select(x=>x.Trim().Replace('\'', '′')));
                     agentFirstNames.Add(values.Append(distr).ToArray());
                 }
 
@@ -69,13 +69,13 @@ namespace TxtFileParser
                 var race = new XElement("Resources");
                 if (convertType == ConvertType.Update)
                 {
-                    race.Value = $"UPDATE {_tableName} SET {_IDCol} = {values[i][0]}, {_NameCol} = '{values[i][1]}', {_PictureRefCol} = {values[i][2]}, {_BasePriceCol} = {values[i][3]}, {_TypeOfResourceCol} = {values[i][4]}, {_SuperLuxuryBonusAmountCol} = {values[i][5]}, {_IsFuelCol} = {values[i][6]}, {_IsImportantPreWarpResourceCol} = {values[i][7]}, {_ColonyGrowthResourceLevelCol} = {values[i][8]}, {_ColonyManufacturingLevelCol} = {values[i][9]}, {_DistributionlCol} = '{values[i][10]}' WHERE {_NameCol} = '{values[i][1]}'";
+                    race.Value = $"UPDATE {_tableName} SET {_IDCol} = {values[i][0]}, {_NameCol} = '{values[i][1]}', {_PictureRefCol} = {values[i][2]}, {_BasePriceCol} = {values[i][3]}, {_TypeOfResourceCol} = {values[i][4]}, {_SuperLuxuryBonusAmountCol} = {values[i][5]}, {_IsFuelCol} = {(values[i][6].Trim().ToUpperInvariant() == "Y" ? true : false)}, {_IsImportantPreWarpResourceCol} = {(values[i][7].Trim().ToUpperInvariant() == "Y" ? true : false)}, {_ColonyGrowthResourceLevelCol} = {values[i][8]}, {_ColonyManufacturingLevelCol} = {values[i][9]}, {_DistributionlCol} = '{values[i][10]}' WHERE {_NameCol} = '{values[i][1]}'";
 
 
                 }
                 else
                 {
-                    race.Value = $"INSERT INTO {_tableName} ({_IDCol}, {_NameCol}, {_PictureRefCol}, {_BasePriceCol}, {_TypeOfResourceCol}, {_SuperLuxuryBonusAmountCol}, {_IsFuelCol}, {_IsImportantPreWarpResourceCol}, {_ColonyGrowthResourceLevelCol}, {_ColonyManufacturingLevelCol}, {_DistributionlCol}) VALUES ({i}, {values[i][0]}, '{values[i][1]}', {values[i][2]}, {values[i][3]}, {values[i][4]}, {values[i][5]}, {values[i][6]}, {values[i][7]}, '{values[i][8]}', {values[i][9]}, '{values[i][10]}')";
+                    race.Value = $"INSERT INTO {_tableName} ({_IDCol}, {_NameCol}, {_PictureRefCol}, {_BasePriceCol}, {_TypeOfResourceCol}, {_SuperLuxuryBonusAmountCol}, {_IsFuelCol}, {_IsImportantPreWarpResourceCol}, {_ColonyGrowthResourceLevelCol}, {_ColonyManufacturingLevelCol}, {_DistributionlCol}) VALUES ({values[i][0]}, '{values[i][1]}', {values[i][2]}, {values[i][3]}, {values[i][4]}, {values[i][5]}, {(values[i][6].Trim().ToUpperInvariant() == "Y" ? true : false)}, {(values[i][7].Trim().ToUpperInvariant() == "Y" ? true : false)}, '{values[i][8]}', {values[i][9]}, '{values[i][10]}')";
                 }
                 root.Add(race);
             }

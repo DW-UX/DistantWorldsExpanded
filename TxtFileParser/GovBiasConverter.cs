@@ -56,7 +56,7 @@ namespace TxtFileParser
             doc.Add(root);
             for (int i = 0; i < values.Count; i++)
             {
-                var biases = string.Join(',', values[i].AsSpan(2));
+                var biases = string.Join(',', values[i].AsSpan(2)).Replace('\'', '′');
                 var race = new XElement("GovernmentBias");
                 if (convertType == ConvertType.Update)
                 {
@@ -64,7 +64,7 @@ namespace TxtFileParser
                 }
                 else
                 {
-                    race.Value = $"INSERT INTO {_tableName} ({_IdCol}, {_NameCol}, {_BiasesCol}) VALUES ({i}, {values[i][0]}, '{values[i][1]}', '{biases}')";
+                    race.Value = $"INSERT INTO {_tableName} ({_IdCol}, {_NameCol}, {_BiasesCol}) VALUES ({values[i][0]}, '{values[i][1]}', '{biases}')";
                 }
                 root.Add(race);
             }

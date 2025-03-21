@@ -50,7 +50,7 @@ namespace TxtFileParser
                     var temp = GetValidFileLine(streamReader).Replace(" ", "").Trim().Split(',');
                     for (int i = 0; i < temp.Length; i++)
                     {
-                        temp[i] = temp[i].Trim();
+                        temp[i] = temp[i].Trim().Replace('\'', '′');
                     }
                     var empAdjectives = string.Join(",", temp.Skip(20).Take(5));
                     var empNouns = string.Join(",", temp.Skip(20 + 5));
@@ -84,7 +84,7 @@ namespace TxtFileParser
                 }
                 else
                 {
-                    agent.Value = $"INSERT INTO {_tableName} ({_IDCol}, {_NameCol}, {_CorruptionCol}, {_WarWearinessCol}, {_MaintenanceCostsCol}, {_ApprovalRatingCol}, {_PopulationGrowthCol}, {_ResearchSpeedCol}, {_TroopRecruitmentCol}, {_IncomeBonusCol}, {_LeaderReplacementLikelinessCol}, {_LeaderReplacementDisruptionLevelCol}, {_LeaderReplacementBoostCol}, {_LeaderReplacementCharacterPoolCol}, {_LeaderReplacementTypicalMannerCol}, {_StabilityCol}, {_PopulationsConcernOverOwnReputationCol}, {_ImportanceOfOtherEmpiresReputationsCol}, {_SpecialFunctionCodeCol}, {_AvailabilityCol}, {_EmpireNameAdjectivesCol}, {_EmpireNameNounsCol}) VALUES ({values[i][0]} '{values[i][1]}', {values[i][2]}, {values[i][3]}, {values[i][4]}, {values[i][5]}, {values[i][6]}, {values[i][7]}, {values[i][8]}, {values[i][9]}, {values[i][10]}, {values[i][11]}, {values[i][12]}, {values[i][13]}, {values[i][14]}, {values[i][15]}, {values[i][16]}, {values[i][17]}, {values[i][18]}, {values[i][19]}, '{values[i][20]}', '{values[i][21]}')";
+                    agent.Value = $"INSERT INTO {_tableName} ({_IDCol}, {_NameCol}, {_CorruptionCol}, {_WarWearinessCol}, {_MaintenanceCostsCol}, {_ApprovalRatingCol}, {_PopulationGrowthCol}, {_ResearchSpeedCol}, {_TroopRecruitmentCol}, {_IncomeBonusCol}, {_LeaderReplacementLikelinessCol}, {_LeaderReplacementDisruptionLevelCol}, {_LeaderReplacementBoostCol}, {_LeaderReplacementCharacterPoolCol}, {_LeaderReplacementTypicalMannerCol}, {_StabilityCol}, {_PopulationsConcernOverOwnReputationCol}, {_ImportanceOfOtherEmpiresReputationsCol}, {_SpecialFunctionCodeCol}, {_AvailabilityCol}, {_EmpireNameAdjectivesCol}, {_EmpireNameNounsCol}) VALUES ({values[i][0]}, '{values[i][1]}', {values[i][2]}, {values[i][3]}, {values[i][4]}, {values[i][5]}, {values[i][6]}, {values[i][7]}, {values[i][8]}, {values[i][9]}, {values[i][10]}, {values[i][11]}, {values[i][12]}, {values[i][13]}, {values[i][14]}, {values[i][15]}, {values[i][16]}, {values[i][17]}, {values[i][18]}, {values[i][19]}, '{values[i][20]}', '{values[i][21]}')";
                 }
                 root.Add(agent);
             }

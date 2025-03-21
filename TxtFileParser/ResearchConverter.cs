@@ -45,41 +45,41 @@ namespace TxtFileParser
                         {
                             if (text.Trim().StartsWith("PROJECT"))
                             {
-                                curProj[1] = text.Split(';')[1].Trim();
-                                curProj[0] = curProj[1].Split(',')[0].Trim();
+                                curProj[1] = text.Split(';')[1].Trim().Replace('\'', '′');
+                                curProj[0] = curProj[1].Split(',')[0].Trim().Replace('\'', '′');
                                 projFound = true;
                             }
-                            else if (text.Trim().StartsWith("COMPONENTS"))
+                            else if (text.Trim().StartsWith("COMPONENTS".Replace('\'', '′')))
                             {
-                                curProj[2] = text.Split(';')[1].Trim();
+                                curProj[2] = text.Split(';')[1].Trim().Replace('\'', '′');
                             }
                             else if (text.Trim().StartsWith("COMPONENT IMPROVEMENTS"))
                             {
-                                curProj[3] = text.Split(';')[1].Trim();
+                                curProj[3] = text.Split(';')[1].Trim().Replace('\'', '′');
                             }
-                            else if (text.Trim().StartsWith("FIGHTERS"))
+                            else if (text.Trim().StartsWith("FIGHTERS".Replace('\'', '′')))
                             {
-                                curProj[4] = text.Split(';')[1].Trim();
+                                curProj[4] = text.Split(';')[1].Trim().Replace('\'', '′');
                             }
                             else if (text.Trim().StartsWith("FACILITY"))
                             {
-                                curProj[5] = text.Split(';')[1].Trim();
+                                curProj[5] = text.Split(';')[1].Trim().Replace('\'', '′');
                             }
                             else if (text.Trim().StartsWith("ABILITIES"))
                             {
-                                curProj[6] = text.Split(';')[1].Trim();
+                                curProj[6] = text.Split(';')[1].Trim().Replace('\'', '′');
                             }
                             else if (text.Trim().StartsWith("PLAGUE CHANGE"))
                             {
-                                curProj[7] = text.Split(';')[1].Trim();
+                                curProj[7] = text.Split(';')[1].Trim().Replace('\'', '′');
                             }
                             else if (text.Trim().StartsWith("ALLOWED RACES"))
                             {
-                                curProj[8] = text.Split(';')[1].Trim();
+                                curProj[8] = text.Split(';')[1].Trim().Replace('\'', '′');
                             }
                             else if (text.Trim().StartsWith("PARENTS"))
                             {
-                                curProj[9] = text.Split(';')[1].Trim();
+                                curProj[9] = text.Split(';')[1].Trim().Replace('\'', '′');
                             }
                         }
                         else if (projFound)

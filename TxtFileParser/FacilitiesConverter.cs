@@ -37,7 +37,7 @@ namespace TxtFileParser
                 List<string[]> agentFirstNames = new List<string[]>();
                 while (!streamReader.EndOfStream)
                 {
-                    var temp = GetValidFileLine(streamReader);
+                    var temp = GetValidFileLine(streamReader).Replace('\'', '′');
                     var values = temp.Split(",").Take(10).ToArray();
                     for (int i = 0; i < values.Length; i++)
                     {

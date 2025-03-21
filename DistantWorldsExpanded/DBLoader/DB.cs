@@ -34,7 +34,7 @@ namespace DistantWorlds.DBLoader
             {
                 foreach (var change in changes)
                 {
-                    using SQLiteCommand command = new SQLiteCommand(change.Replace("'", "''"), sQLiteConnection);
+                    using SQLiteCommand command = new SQLiteCommand(change, sQLiteConnection);
                     command.ExecuteNonQuery();
                 }
             }

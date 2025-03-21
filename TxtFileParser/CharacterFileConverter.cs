@@ -64,10 +64,10 @@ namespace TxtFileParser
             doc.Add(root);
             for (int i = 0; i < agentFirstNames.Count; i++)
             {
-                var firstName = string.Join(',', agentFirstNames[i]);
-                var lastName = string.Join(',', agentLastNames[i]);
-
+                var firstName = string.Join(',', agentFirstNames[i]).Replace('\'', '′');
+                var lastName = string.Join(',', agentLastNames[i]).Replace('\'', '′');
                 var agent = new XElement("Agent");
+
                 if (convertType == ConvertType.Update)
                 {
                     agent.Value = $"UPDATE {_tableName} SET {_FirstNameCol} = '{firstName}', {_LastNameCol} = '{lastName}' WHERE {_RaceFamilieCol} = '{i}'";

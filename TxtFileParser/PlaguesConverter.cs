@@ -39,12 +39,15 @@ namespace TxtFileParser
                 List<string[]> agentFirstNames = new List<string[]>();
                 while (!streamReader.EndOfStream)
                 {
-                    var temp = GetValidFileLine(streamReader).Replace(" ", "").Trim().Split(',');
-                    for (int i = 0; i < temp.Length; i++)
+                    var temp = GetValidFileLine(streamReader).Trim();
+                    var values = temp.Split(',', StringSplitOptions.RemoveEmptyEntries).Take(13).ToArray();
+                    var desc = temp.Split(',', StringSplitOptions.RemoveEmptyEntries).Skip(13).Take(1).ToArray()[0].Trim().Replace('\'', '′');
+                    for (int i = 0; i < values.Length; i++)
                     {
-                        temp[i] = temp[i].Trim();
+                        values[i] = values[i].Trim().Replace('\'', '′');
                     }
-                    agentFirstNames.Add(temp);
+
+                    agentFirstNames.Add(values.Append(desc).ToArray());
                 }
 
 
@@ -70,13 +73,13 @@ namespace TxtFileParser
                 var race = new XElement("Plagues");
                 if (convertType == ConvertType.Update)
                 {
-                    race.Value = $"UPDATE {_tableName} SET {_IdCol} = {values[i][0]}, {_PlagueNameCol} = '{values[i][1]}', {_PictureRefCol} = {values[i][2]}, {_MortalityRateCol} = {values[i][3]}, {_InfectionChanceCol} = {values[i][4]}, {_DurationCol} = {values[i][5]}, {_NaturalOccurrenceLevelCol} = {values[i][6]}, {_CanCompletelyEliminatePopulationCol} = {values[i][7]}, {_ExceptionRaceNameCol} = '{values[i][8]}', {_ExceptionMortalityRateCol} = {values[i][9]}, {_ExceptionInfectionChanceCol} = {values[i][10]}, {_ExceptionDurationCol} = {values[i][11]}, {_SpecialFunctionCodeCol} = {values[i][12]}, {_DescriptionCol} = '{values[i][13]}' WHERE {_PlagueNameCol} = '{values[i][1]}'";
+                    race.Value = $"UPDATE {_tableName} SET {_IdCol} = {values[i][0]}, {_PlagueNameCol} = '{values[i][1]}', {_PictureRefCol} = {values[i][2]}, {_MortalityRateCol} = {values[i][3]}, {_InfectionChanceCol} = {values[i][4]}, {_DurationCol} = {values[i][5]}, {_NaturalOccurrenceLevelCol} = {values[i][6]}, {_CanCompletelyEliminatePopulationCol} = {(values[i][7].Trim().ToUpperInvariant() == "Y" ? true : false)}, {_ExceptionRaceNameCol} = '{values[i][8]}', {_ExceptionMortalityRateCol} = {values[i][9]}, {_ExceptionInfectionChanceCol} = {values[i][10]}, {_ExceptionDurationCol} = {values[i][11]}, {_SpecialFunctionCodeCol} = {values[i][12]}, {_DescriptionCol} = '{values[i][13]}' WHERE {_PlagueNameCol} = '{values[i][1]}'";
 
 
                 }
                 else
                 {
-                    race.Value = $"INSERT INTO {_tableName} ({_IdCol}, {_PlagueNameCol}, {_PictureRefCol}, {_MortalityRateCol}, {_InfectionChanceCol}, {_DurationCol}, {_NaturalOccurrenceLevelCol}, {_CanCompletelyEliminatePopulationCol}, {_ExceptionRaceNameCol}, {_ExceptionMortalityRateCol}, {_ExceptionInfectionChanceCol}, {_ExceptionDurationCol}, {_SpecialFunctionCodeCol}, {_DescriptionCol}) VALUES ({i}, {values[i][0]}, '{values[i][1]}', {values[i][2]}, {values[i][3]}, {values[i][4]}, {values[i][5]}, {values[i][6]}, {values[i][7]}, '{values[i][8]}', {values[i][9]}, {values[i][10]}, {values[i][11]}, {values[i][12]}, '{values[i][13]}')";
+                    race.Value = $"INSERT INTO {_tableName} ({_IdCol}, {_PlagueNameCol}, {_PictureRefCol}, {_MortalityRateCol}, {_InfectionChanceCol}, {_DurationCol}, {_NaturalOccurrenceLevelCol}, {_CanCompletelyEliminatePopulationCol}, {_ExceptionRaceNameCol}, {_ExceptionMortalityRateCol}, {_ExceptionInfectionChanceCol}, {_ExceptionDurationCol}, {_SpecialFunctionCodeCol}, {_DescriptionCol}) VALUES ({values[i][0]}, '{values[i][1]}', {values[i][2]}, {values[i][3]}, {values[i][4]}, {values[i][5]}, {values[i][6]}, {(values[i][7].Trim().ToUpperInvariant() == "Y" ? true : false)}, '{values[i][8]}', {values[i][9]}, {values[i][10]}, {values[i][11]}, {values[i][12]}, '{values[i][13]}')";
                 }
                 root.Add(race);
             }
