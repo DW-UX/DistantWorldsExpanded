@@ -604,7 +604,7 @@ namespace DistantWorlds.Types
                         throw new ApplicationException($"Could not read Research Speed at ID {id}");
                     if (researchSpeed < 0.0 || researchSpeed > 3.0)
                         throw new ApplicationException($"Invalid Research Speed value (must be between 0 and 3.0) at ID {id}");
-                    double troopRecruitment = reader.GetDouble(reader.GetOrdinal("ResearchSpeed"));
+                    double troopRecruitment = reader.GetDouble(reader.GetOrdinal("TroopRecruitment"));
                     if (troopRecruitment < 0)
                         throw new ApplicationException($"Could not read Troop Recruitment at ID {id}");
                     if (troopRecruitment < 0.0 || troopRecruitment > 3.0)

@@ -559,7 +559,7 @@ namespace DistantWorlds.Types
                     if (topSpeedEnergyConsumptionRate < 0)
                         throw new ApplicationException($"Could not read TopSpeedEnergyConsumptionRate at {id}");
 
-                    float accelerationRate = reader.GetFloat(reader.GetOrdinal("TopSpeedEnergyConsumptionRate"));
+                    float accelerationRate = reader.GetFloat(reader.GetOrdinal("AccelerationRate"));
                     if (accelerationRate < 0)
                         throw new ApplicationException($"Could not read AccelerationRate at {id}");
 

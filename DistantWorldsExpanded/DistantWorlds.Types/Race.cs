@@ -1176,7 +1176,6 @@ namespace DistantWorlds.Types
                 while (reader.Read())
                 {
                     Race race = new Race();
-                    string value = ";";
                     byte resourceId = byte.MaxValue;
                     ColonyResourceEffect colonyResourceEffect = ColonyResourceEffect.Undefined;
                     double res1Amount = 0.0;

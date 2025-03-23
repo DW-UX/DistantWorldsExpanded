@@ -102,56 +102,35 @@ namespace DistantWorlds.Types
 
         public static void LoadFromFile(SQLiteDataReader reader, ref RaceFamilyList raceFamilies)
         {
-            //int num1 = 0;
             int raceId = 0;
             try
             {
-                //FileStream fileStream = File.OpenRead(filePath);
-                //StreamReader streamReader = new StreamReader((Stream)fileStream);
-
                 while (reader.Read())
                 {
-                    //++num1;
                     string empty1 = string.Empty;
-                    //string str = streamReader.ReadLine();
-                    //if (!string.IsNullOrEmpty(str) && str.Trim() != string.Empty && str.Trim().Substring(0, 1) != "'")
                     {
                         raceId = reader.GetInt32(0);
-                        //if (radeId < 0)
-                        //    throw new ApplicationException("Could not read RaceFamilyId number at line " + num1.ToString() + " of file " + filePath);
                         if (raceId < 0)
                             throw new ApplicationException($"Wrong RaceFamilyId, {raceId.ToString()}");
-                        //if (!int.TryParse(str.Substring(startIndex1, radeId - startIndex1).Trim(), out result1))
-                        //    throw new ApplicationException("Could not read RaceFamilyId number at line " + num1.ToString() + " of file " + filePath);
-                        //int startIndex2 = raceId + 1;
-                        //int num3 = str.IndexOf(",", startIndex2);
                         string raceName = reader.GetString(1);
                         if (string.IsNullOrEmpty(raceName))
                             throw new ApplicationException($"Could not read Race Family Name at id {raceId.ToString()}");
-                        //str.Substring(startIndex2, num3 - startIndex2).Trim();
-                        //int startIndex3 = num3 + 1;
                         List<int> intList = new List<int>();
-                        //int num4 = 1;
-                        //while (num3 >= 0)
-                        {
-                            //num3 = str.IndexOf(",", startIndex3);
-                            //string empty2 = string.Empty;
-                            //string s = (num3 < 0 ? str.Substring(startIndex3, str.Length - startIndex3) : str.Substring(startIndex3, num3 - startIndex3)).Trim();
                             string bias = reader.GetString(2);
-                            var biasArr = bias.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                            for (int i = 0; i < biasArr.Length; i++)
+                        var biasArr = bias.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                        for (int i = 0; i < biasArr.Length; i++)
+                        {
+                            if (int.TryParse(biasArr[i], out int result2))
                             {
-                                if (int.TryParse(biasArr[i], out int result2))
-                                {
-                                    int num5 = Math.Max(-50, Math.Min(result2, 50));
-                                    intList.Add(num5);
-                                    if (intList.Count > raceFamilies.Count)
-                                        throw new ApplicationException($"More bias values than race families at race ID {raceId}");
-                                }
-                                else
-                                    throw new ApplicationException($"Could not read Bias Value {biasArr[i]} at index {i} at raceID {raceId}");
+                                int num5 = Math.Max(-50, Math.Min(result2, 50));
+                                intList.Add(num5);
+                                if (intList.Count > raceFamilies.Count)
+                                    throw new ApplicationException($"More bias values than race families at race ID {raceId}");
                             }
+                            else
+                                throw new ApplicationException($"Could not read Bias Value {biasArr[i]} at index {i} at raceID {raceId}");
                         }
+
                         if (intList.Count != raceFamilies.Count)
                             throw new ApplicationException($"Wrong number of bias values at raceID {raceId}. Number of bias values should match number of race families, i.e. columns should match rows.");
                         if (raceId >= 0 && intList.Max() < raceFamilies.Count)
@@ -163,8 +142,6 @@ namespace DistantWorlds.Types
                         }
                     }
                 }
-                //streamReader.Close();
-                //fileStream.Close();
             }
             catch (ApplicationException ex)
             {
