@@ -2112,116 +2112,161 @@ namespace DistantWorlds.Types
 
         public static void InitializeRaceFamilyBiases(string applicationStartupPath, string customizationSetName, ref RaceFamilyList raceFamilies)
         {
-            string text = "raceFamilyBiases.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "raceFamilyBiases.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                RaceFamilyBiasList.LoadFromFile(filePath, ref raceFamilies);
             }
-            RaceFamilyBiasList.LoadFromFile(filePath, ref raceFamilies);
+            else
+            {
+                RaceFamilyBiasList.LoadFromFile(Main._FileDB.GetRaceFamilyBiasReader(), ref raceFamilies);
+            }
         }
 
         public static RaceFamilyList InitializeRaceFamilies(string applicationStartupPath, string customizationSetName)
         {
             RaceFamilyList raceFamilyList = new RaceFamilyList();
-            string text = "raceFamilies.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "raceFamilies.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                raceFamilyList.LoadFromFile(filePath);
             }
-            raceFamilyList.LoadFromFile(filePath);
+            else
+            {
+                raceFamilyList.LoadFromFile(Main._FileDB.GetRaceFamilyReader());
+            }
             return raceFamilyList;
         }
 
         public static PlagueList InitializePlagues(string applicationStartupPath, string customizationSetName)
         {
             PlagueList plagueList = new PlagueList();
-            string text = "plagues.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "plagues.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                plagueList.LoadFromFile(filePath);
             }
-            plagueList.LoadFromFile(filePath);
+            {
+                plagueList.LoadFromFile(Main._FileDB.GetPlaguesReader());
+            }
             return plagueList;
         }
 
         public static void InitializeGovernmentBiases(string applicationStartupPath, string customizationSetName, ref GovernmentAttributesList governments)
         {
-            string text = "governmentBiases.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "governmentBiases.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                GovernmentBiasList.LoadFromFile(filePath, ref governments);
             }
-            GovernmentBiasList.LoadFromFile(filePath, ref governments);
+            else
+            {
+                GovernmentBiasList.LoadFromFile(Main._FileDB.GetGovernmentsBiasReader(), ref governments);
+            }
         }
 
         public static GovernmentAttributesList InitializeGovernments(string applicationStartupPath, string customizationSetName)
         {
             GovernmentAttributesList governmentAttributesList = new GovernmentAttributesList();
-            string text = "governments.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "governments.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                governmentAttributesList.LoadFromFile(filePath);
             }
-            governmentAttributesList.LoadFromFile(filePath);
+            else
+            { governmentAttributesList.LoadFromFile(Main._FileDB.GetGovernmentsReader()); }
             return governmentAttributesList;
         }
 
         public static PlanetaryFacilityDefinitionList InitializePlanetaryFacilityDefinitions(string applicationStartupPath, string customizationSetName)
         {
             PlanetaryFacilityDefinitionList planetaryFacilityDefinitionList = new PlanetaryFacilityDefinitionList();
-            string text = "facilities.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "facilities.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                planetaryFacilityDefinitionList.LoadFromFile(filePath);
             }
-            planetaryFacilityDefinitionList.LoadFromFile(filePath);
+            else
+            { planetaryFacilityDefinitionList.LoadFromFile(Main._FileDB.GetFacilitiesReader()); }
             return planetaryFacilityDefinitionList;
         }
 
         public static ResourceSystem InitializeResourceDefinitions(string applicationStartupPath, string customizationSetName)
         {
             ResourceSystem resourceSystem = new ResourceSystem();
-            string text = "resources.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "resources.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                resourceSystem.LoadFromFile(filePath);
             }
-            resourceSystem.LoadFromFile(filePath);
+            else
+            {
+                resourceSystem.LoadFromFile(Main._FileDB.GetResourcesReader());
+            }
             return resourceSystem;
         }
 
@@ -4657,7 +4702,14 @@ namespace DistantWorlds.Types
             }
             RaceList races = LoadRaces(applicationStartupPath, customizationSetName);
             ResearchNodeDefinitionList researchNodeDefinitionList = new ResearchNodeDefinitionList();
-            researchNodeDefinitionList.LoadFromFile(filePath, races);
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
+            {
+                researchNodeDefinitionList.LoadFromFile(filePath, races);
+            }
+            else
+            {
+                researchNodeDefinitionList.LoadFromFile(Main._FileDB.GetResearchReader(), races, Main._FileDB.GetProjIdCOunt());
+            }
             SetResearchCosts(120000, researchNodeDefinitionList);
             return researchNodeDefinitionList;
         }
@@ -5794,17 +5846,24 @@ namespace DistantWorlds.Types
         public static FighterSpecificationList GenerateFighterSpecifications(string applicationStartupPath, string customizationSetName)
         {
             FighterSpecificationList fighterSpecificationList = new FighterSpecificationList();
-            string text = "fighters.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "fighters.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                fighterSpecificationList.LoadFromFile(filePath);
             }
-            fighterSpecificationList.LoadFromFile(filePath);
+            else
+            {
+                fighterSpecificationList.LoadFromFile(Main._FileDB.GetFightersReader());
+            }
             return fighterSpecificationList;
         }
 

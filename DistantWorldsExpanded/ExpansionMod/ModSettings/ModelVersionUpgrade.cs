@@ -11,20 +11,22 @@ namespace ExpansionMod.ModSettings
         public static bool IsUpgradeNeeded(SettingsModel model, out SettingsModel updatedSettings)
         {
             bool res = false;
-            updatedSettings = null;
+            updatedSettings = model.Clone();
             if (model.Version == 1)
             {
-                updatedSettings = new SettingsModel
-                {
-                    Version = 2,
-                    PlayerEmprireDefaultRepairPriotityTemplate = model.PlayerEmprireDefaultRepairPriotityTemplate,
-                    AIEmprireDefaultRepairPriotityTemplate = model.AIEmprireDefaultRepairPriotityTemplate,
-                    TargetHappinessTaxColonyMaxed = 10,
-                    TargetHappinessTaxColonyLarge = 10,
-                    TargetHappinessTaxColonyMedium = 16,
-                    TargetHappinessTaxColonySmall = 25,
-                    EnableTargetHappinessTax = true
-                };
+                model.Version = 3;
+                updatedSettings.TargetHappinessTaxColonyMaxed = 10;
+                updatedSettings.TargetHappinessTaxColonyLarge = 10;
+                updatedSettings.TargetHappinessTaxColonyMedium = 16;
+                updatedSettings.TargetHappinessTaxColonySmall = 25;
+                updatedSettings.EnableTargetHappinessTax = true;
+                updatedSettings.UseDbFiles = true;
+                res = true;
+            }
+            else if (model.Version == 2)
+            {
+                model.Version = 3;
+                updatedSettings.UseDbFiles = true;
                 res = true;
             }
             return res;

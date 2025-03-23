@@ -37,6 +37,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
+using DistantWorlds.DBLoader;
 
 namespace DistantWorlds
 {
@@ -3356,6 +3357,8 @@ namespace DistantWorlds
         //private static Comparison<KeyValuePair<string, int>> comparison_0;
         [IgnoreDataMember]
         public static ExpansionModMain _ExpModMain = new ExpansionModMain();
+        [IgnoreDataMember]
+        public static FileDB _FileDB = new FileDB();
 
         public MusicPlayer MusicPlayer => musicPlayer_0;
 

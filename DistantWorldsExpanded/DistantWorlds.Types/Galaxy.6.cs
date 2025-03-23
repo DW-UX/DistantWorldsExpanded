@@ -322,12 +322,12 @@ namespace DistantWorlds.Types
             return SelectRace(nativeHabitatType, byte.MaxValue);
         }
 
-        private Race SelectRace(HabitatType nativeHabitatType, byte raceFamilyIdToExclude)
+        private Race SelectRace(HabitatType nativeHabitatType, int raceFamilyIdToExclude)
         {
-            return SelectRace(nativeHabitatType, new List<byte> { raceFamilyIdToExclude });
+            return SelectRace(nativeHabitatType, new List<int> { raceFamilyIdToExclude });
         }
 
-        private Race SelectRace(HabitatType nativeHabitatType, List<byte> raceFamilyIdsToExclude)
+        private Race SelectRace(HabitatType nativeHabitatType, List<int> raceFamilyIdsToExclude)
         {
             Race race = null;
             int num = 0;

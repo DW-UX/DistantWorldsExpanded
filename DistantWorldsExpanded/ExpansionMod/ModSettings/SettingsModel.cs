@@ -16,5 +16,22 @@ namespace ExpansionMod.ModSettings
         public int TargetHappinessTaxColonyMedium { get; set; } = 16;
         public int TargetHappinessTaxColonySmall { get; set; } = 25;
         public bool EnableTargetHappinessTax { get; set; } = true;
+        public bool UseDbFiles { get; set; } = true;
+
+        public SettingsModel Clone()
+        {
+            return new SettingsModel
+            {
+                Version = Version,
+                PlayerEmprireDefaultRepairPriotityTemplate = PlayerEmprireDefaultRepairPriotityTemplate,
+                AIEmprireDefaultRepairPriotityTemplate = AIEmprireDefaultRepairPriotityTemplate,
+                TargetHappinessTaxColonyMaxed = TargetHappinessTaxColonyMaxed,
+                TargetHappinessTaxColonyLarge = TargetHappinessTaxColonyLarge,
+                TargetHappinessTaxColonyMedium = TargetHappinessTaxColonyMedium,
+                TargetHappinessTaxColonySmall = TargetHappinessTaxColonySmall,
+                EnableTargetHappinessTax = EnableTargetHappinessTax,
+                UseDbFiles = UseDbFiles
+            };
+        }
     }
 }

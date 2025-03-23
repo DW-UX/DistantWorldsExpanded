@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -1165,6 +1166,305 @@ namespace DistantWorlds.Types
             }
         }
 
+
+        public static RaceList LoadFromFile(SQLiteDataReader reader)
+        {
+            int id = 0;
+            RaceList raceList = new RaceList();
+            try
+            {
+                while (reader.Read())
+                {
+                    Race race = new Race();
+                    string value = ";";
+                    byte resourceId = byte.MaxValue;
+                    ColonyResourceEffect colonyResourceEffect = ColonyResourceEffect.Undefined;
+                    double res1Amount = 0.0;
+                    bool appliesOnlyToSource = false;
+                    byte resourceId2 = byte.MaxValue;
+                    ColonyResourceEffect colonyResourceEffect2 = ColonyResourceEffect.Undefined;
+                    double res2Amount = 0.0;
+                    bool appliesOnlyToSource2 = false;
+                    byte resourceId3 = byte.MaxValue;
+                    ColonyResourceEffect colonyResourceEffect3 = ColonyResourceEffect.Undefined;
+                    double res3Amount = 0.0;
+                    bool appliesOnlyToSource3 = false;
+                    RaceVictoryConditionType raceVictoryConditionType = RaceVictoryConditionType.Undefined;
+                    double amount = 0.0;
+                    float proportion = 0f;
+                    int index = 0;
+                    RaceVictoryConditionType raceVictoryConditionType2 = RaceVictoryConditionType.Undefined;
+                    double amount2 = 0.0;
+                    float proportion2 = 0f;
+                    int index2 = 0;
+                    RaceVictoryConditionType raceVictoryConditionType3 = RaceVictoryConditionType.Undefined;
+                    double amount3 = 0.0;
+                    float proportion3 = 0f;
+                    int index3 = 0;
+                    RaceVictoryConditionType raceVictoryConditionType4 = RaceVictoryConditionType.Undefined;
+                    double amount4 = 0.0;
+                    float proportion4 = 0f;
+                    int index4 = 0;
+                    RaceVictoryConditionType raceVictoryConditionType5 = RaceVictoryConditionType.Undefined;
+                    double amount5 = 0.0;
+                    float proportion5 = 0f;
+                    int index5 = 0;
+                    RaceEventType raceEventType = RaceEventType.Undefined;
+                    double frequency = 1.0;
+                    RaceEventType raceEventType2 = RaceEventType.Undefined;
+                    double frequency2 = 1.0;
+                    race = new Race();
+
+                    id = reader.GetInt32(0);
+                    string weaponsResearchProjectOrder = reader.GetString(reader.GetOrdinal("WeaponsResearchProjectOrder"));
+                    string energyResearchProjectOrder = reader.GetString(reader.GetOrdinal("EnergyResearchProjectOrder"));
+                    string highTechResearchProjectOrder = reader.GetString(reader.GetOrdinal("HighTechResearchProjectOrder"));
+                    string disallowedComponentIds = reader.GetString(reader.GetOrdinal("DisallowedComponentIds"));
+                    int raceEvent1TypeVal = reader.GetInt32(reader.GetOrdinal("RaceEvent1Type"));
+                    int raceEvent2TypeVal = reader.GetInt32(reader.GetOrdinal("RaceEvent2Type"));
+                    frequency = reader.GetDouble(reader.GetOrdinal("RaceEvent1Frequency"));
+                    frequency2 = reader.GetDouble(reader.GetOrdinal("RaceEvent2Frequency"));
+                    byte resourceIdVal = (byte)reader.GetInt32(reader.GetOrdinal("Resource1Type"));
+                    byte resourceId2Val = (byte)reader.GetInt32(reader.GetOrdinal("Resource2Type"));
+                    byte resourceId3Val = (byte)reader.GetInt32(reader.GetOrdinal("Resource3Type"));
+                    byte resourceEffectVal = (byte)reader.GetInt32(reader.GetOrdinal("Resource1Effect"));
+                    byte resourceEffect2Val = (byte)reader.GetInt32(reader.GetOrdinal("Resource2Effect"));
+                    byte resourceEffect3Val = (byte)reader.GetInt32(reader.GetOrdinal("Resource3Effect"));
+                    res1Amount = reader.GetDouble(reader.GetOrdinal("Resource1Amount"));
+                    res2Amount = reader.GetDouble(reader.GetOrdinal("Resource2Amount"));
+                    res3Amount = reader.GetDouble(reader.GetOrdinal("Resource3Amount"));
+                    appliesOnlyToSource = reader.GetBoolean(reader.GetOrdinal("Resource1AppliesOnlyToSource"));
+                    appliesOnlyToSource2 = reader.GetBoolean(reader.GetOrdinal("Resource2AppliesOnlyToSource"));
+                    appliesOnlyToSource3 = reader.GetBoolean(reader.GetOrdinal("Resource3AppliesOnlyToSource"));
+                    int cond1TypeVal = reader.GetInt32(reader.GetOrdinal("Condition1Type"));
+                    int cond2TypeVal = reader.GetInt32(reader.GetOrdinal("Condition2Type"));
+                    int cond3TypeVal = reader.GetInt32(reader.GetOrdinal("Condition3Type"));
+                    int cond4TypeVal = reader.GetInt32(reader.GetOrdinal("Condition4Type"));
+                    int cond5TypeVal = reader.GetInt32(reader.GetOrdinal("Condition5Type"));
+                    amount = reader.GetDouble(reader.GetOrdinal("Condition1Value"));
+                    amount2 = reader.GetDouble(reader.GetOrdinal("Condition2Value"));
+                    amount3 = reader.GetDouble(reader.GetOrdinal("Condition3Value"));
+                    amount4 = reader.GetDouble(reader.GetOrdinal("Condition4Value"));
+                    amount5 = reader.GetDouble(reader.GetOrdinal("Condition5Value"));
+                    proportion = reader.GetFloat(reader.GetOrdinal("Condition1Proportion"));
+                    proportion2 = reader.GetFloat(reader.GetOrdinal("Condition2Proportion"));
+                    proportion3 = reader.GetFloat(reader.GetOrdinal("Condition3Proportion"));
+                    proportion4 = reader.GetFloat(reader.GetOrdinal("Condition4Proportion"));
+                    proportion5 = reader.GetFloat(reader.GetOrdinal("Condition5Proportion"));
+                    index = reader.GetInt32(reader.GetOrdinal("Condition1AdditionalData"));
+                    index2 = reader.GetInt32(reader.GetOrdinal("Condition2AdditionalData"));
+                    index3 = reader.GetInt32(reader.GetOrdinal("Condition3AdditionalData"));
+                    index4 = reader.GetInt32(reader.GetOrdinal("Condition4AdditionalData"));
+                    index5 = reader.GetInt32(reader.GetOrdinal("Condition5AdditionalData"));
+                    if (!string.IsNullOrWhiteSpace(weaponsResearchProjectOrder))
+                    {
+                        string[] arr = weaponsResearchProjectOrder.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                        for (int l = 0; l < arr.Length; l++)
+                        {
+                            if (int.TryParse(arr[l], NumberStyles.Integer, CultureInfo.InvariantCulture, out int result4))
+                            {
+                                race.ResearchPathWeapons.Add(result4);
+                            }
+                        }
+                    }
+                    if (!string.IsNullOrWhiteSpace(energyResearchProjectOrder))
+                    {
+                        string[] arr = energyResearchProjectOrder.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                        for (int l = 0; l < arr.Length; l++)
+                        {
+                            if (int.TryParse(arr[l], NumberStyles.Integer, CultureInfo.InvariantCulture, out int result4))
+                            {
+                                race.ResearchPathEnergy.Add(result4);
+                            }
+                        }
+                    }
+                    if (!string.IsNullOrWhiteSpace(highTechResearchProjectOrder))
+                    {
+                        string[] arr = highTechResearchProjectOrder.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                        for (int l = 0; l < arr.Length; l++)
+                        {
+                            if (int.TryParse(arr[l], NumberStyles.Integer, CultureInfo.InvariantCulture, out int result4))
+                            {
+                                race.ResearchPathHighTech.Add(result4);
+                            }
+                        }
+                    }
+                    if (!string.IsNullOrWhiteSpace(disallowedComponentIds))
+                    {
+                        string[] arr = disallowedComponentIds.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                        for (int l = 0; l < arr.Length; l++)
+                        {
+                            if (int.TryParse(arr[l], NumberStyles.Integer, CultureInfo.InvariantCulture, out int result) && result >= 0 && result < Galaxy.ComponentDefinitionsStatic.Length)
+                            {
+                                Component component = new Component(result);
+                                if (component != null)
+                                {
+                                    race.DisallowedComponents.Add(component);
+                                }
+                            }
+                        }
+                    }
+                    if (Enum.IsDefined(typeof(RaceEventType), (byte)raceEvent1TypeVal))
+                    {
+                        raceEventType = (RaceEventType)raceEvent1TypeVal;
+                    }
+                    if (Enum.IsDefined(typeof(RaceEventType), (byte)raceEvent2TypeVal))
+                    {
+                        raceEventType2 = (RaceEventType)raceEvent2TypeVal;
+                    }
+                    if (resourceIdVal >= 0)
+                    {
+                        resourceId = resourceIdVal;
+                    }
+                    if (resourceId2Val >= 0)
+                    {
+                        resourceId2 = resourceId2Val;
+                    }
+                    if (resourceId3Val >= 0)
+                    {
+                        resourceId3 = resourceId3Val;
+                    }
+                    if (Enum.IsDefined(typeof(ColonyResourceEffect), resourceEffectVal))
+                    {
+                        colonyResourceEffect = (ColonyResourceEffect)resourceEffectVal;
+                    }
+                    if (Enum.IsDefined(typeof(ColonyResourceEffect), resourceEffect2Val))
+                    {
+                        colonyResourceEffect2 = (ColonyResourceEffect)resourceEffect2Val;
+                    }
+                    if (Enum.IsDefined(typeof(ColonyResourceEffect), resourceEffect3Val))
+                    {
+                        colonyResourceEffect3 = (ColonyResourceEffect)resourceEffect3Val;
+                    }
+                    if (Enum.IsDefined(typeof(RaceVictoryConditionType), (byte)cond1TypeVal))
+                    {
+                        raceVictoryConditionType = (RaceVictoryConditionType)cond1TypeVal;
+                    }
+                    if (Enum.IsDefined(typeof(RaceVictoryConditionType), (byte)cond2TypeVal))
+                    {
+                        raceVictoryConditionType2 = (RaceVictoryConditionType)cond2TypeVal;
+                    }
+                    if (Enum.IsDefined(typeof(RaceVictoryConditionType), (byte)cond3TypeVal))
+                    {
+                        raceVictoryConditionType3 = (RaceVictoryConditionType)cond3TypeVal;
+                    }
+                    if (Enum.IsDefined(typeof(RaceVictoryConditionType), (byte)cond4TypeVal))
+                    {
+                        raceVictoryConditionType4 = (RaceVictoryConditionType)cond4TypeVal;
+                    }
+                    if (Enum.IsDefined(typeof(RaceVictoryConditionType), (byte)cond5TypeVal))
+                    {
+                        raceVictoryConditionType5 = (RaceVictoryConditionType)cond5TypeVal;
+                    }
+                    race = SetNameValuePair(race, reader);
+
+                    if (!string.IsNullOrEmpty(race.TroopName) && string.IsNullOrEmpty(race.TroopNameArmored))
+                    {
+                        race.TroopNameArmored = race.TroopName;
+                    }
+                    if (!string.IsNullOrEmpty(race.TroopName) && string.IsNullOrEmpty(race.TroopNameArtillery))
+                    {
+                        race.TroopNameArtillery = race.TroopName;
+                    }
+                    if (!string.IsNullOrEmpty(race.TroopName) && string.IsNullOrEmpty(race.TroopNameSpecialForces))
+                    {
+                        race.TroopNameSpecialForces = race.TroopName;
+                    }
+                    if (raceEventType != 0)
+                    {
+                        RaceEvent item = new RaceEvent(raceEventType, frequency);
+                        race.RaceEvents.Add(item);
+                    }
+                    if (raceEventType2 != 0)
+                    {
+                        RaceEvent item2 = new RaceEvent(raceEventType2, frequency2);
+                        race.RaceEvents.Add(item2);
+                    }
+                    if (colonyResourceEffect != 0)
+                    {
+                        ResourceBonus item3 = new ResourceBonus(resourceId, colonyResourceEffect, res1Amount, appliesOnlyToSource);
+                        race.CriticalResources.Add(item3);
+                    }
+                    if (colonyResourceEffect2 != 0)
+                    {
+                        ResourceBonus item4 = new ResourceBonus(resourceId2, colonyResourceEffect2, res2Amount, appliesOnlyToSource2);
+                        race.CriticalResources.Add(item4);
+                    }
+                    if (colonyResourceEffect3 != 0)
+                    {
+                        ResourceBonus item5 = new ResourceBonus(resourceId3, colonyResourceEffect3, res3Amount, appliesOnlyToSource3);
+                        race.CriticalResources.Add(item5);
+                    }
+                    if (raceVictoryConditionType != 0)
+                    {
+                        object additionalData = ParseConditionAdditionalData(raceVictoryConditionType, index);
+                        RaceVictoryCondition item6 = new RaceVictoryCondition(raceVictoryConditionType, amount, proportion, additionalData);
+                        if (race.VictoryConditions == null)
+                        {
+                            race.VictoryConditions = new RaceVictoryConditionList();
+                        }
+                        race.VictoryConditions.Add(item6);
+                    }
+                    if (raceVictoryConditionType2 != 0)
+                    {
+                        object additionalData2 = ParseConditionAdditionalData(raceVictoryConditionType2, index2);
+                        RaceVictoryCondition item7 = new RaceVictoryCondition(raceVictoryConditionType2, amount2, proportion2, additionalData2);
+                        if (race.VictoryConditions == null)
+                        {
+                            race.VictoryConditions = new RaceVictoryConditionList();
+                        }
+                        race.VictoryConditions.Add(item7);
+                    }
+                    if (raceVictoryConditionType3 != 0)
+                    {
+                        object additionalData3 = ParseConditionAdditionalData(raceVictoryConditionType3, index3);
+                        RaceVictoryCondition item8 = new RaceVictoryCondition(raceVictoryConditionType3, amount3, proportion3, additionalData3);
+                        if (race.VictoryConditions == null)
+                        {
+                            race.VictoryConditions = new RaceVictoryConditionList();
+                        }
+                        race.VictoryConditions.Add(item8);
+                    }
+                    if (raceVictoryConditionType4 != 0)
+                    {
+                        object additionalData4 = ParseConditionAdditionalData(raceVictoryConditionType4, index4);
+                        RaceVictoryCondition item9 = new RaceVictoryCondition(raceVictoryConditionType4, amount4, proportion4, additionalData4);
+                        if (race.VictoryConditions == null)
+                        {
+                            race.VictoryConditions = new RaceVictoryConditionList();
+                        }
+                        race.VictoryConditions.Add(item9);
+                    }
+                    if (raceVictoryConditionType5 != 0)
+                    {
+                        object additionalData5 = ParseConditionAdditionalData(raceVictoryConditionType5, index5);
+                        RaceVictoryCondition item10 = new RaceVictoryCondition(raceVictoryConditionType5, amount5, proportion5, additionalData5);
+                        if (race.VictoryConditions == null)
+                        {
+                            race.VictoryConditions = new RaceVictoryConditionList();
+                        }
+                        race.VictoryConditions.Add(item10);
+                    }
+                    if (race.VictoryConditions != null)
+                    {
+                        race.VictoryConditions.Sort();
+                        race.VictoryConditions.Reverse();
+                    }
+                    raceList.Add(race);
+                }
+                return raceList;
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException($"Error at race with ID {id}");
+            }
+        }
+
+
         private static object ParseConditionAdditionalData(RaceVictoryConditionType type, int index)
         {
             object result = null;
@@ -1612,12 +1912,217 @@ namespace DistantWorlds.Types
             return race;
         }
 
+        private static Race SetNameValuePair(Race race, SQLiteDataReader reader)
+        {
+            if (race != null)
+            {
+                int tempValInt = 0;
+                byte tempValByte = 0;
+                race.Name = reader.GetString(reader.GetOrdinal("Name"));
+                race.PictureRef = reader.GetInt32(reader.GetOrdinal("PictureIndex"));
+                race.FamilyId = ParseRaceFamily(reader.GetInt32(reader.GetOrdinal("RaceFamily")));
+                race.ReproductiveRate = Math.Max(1.0, Math.Min(reader.GetFloat(reader.GetOrdinal("ReproductionRate")), 1.5));
+                race.IntelligenceLevel = Math.Max(50, Math.Min(reader.GetInt32(reader.GetOrdinal("Intelligence")), 150));
+                race.AggressionLevel = Math.Max(50, Math.Min(reader.GetInt32(reader.GetOrdinal("Aggression")), 150));
+                race.CautionLevel = Math.Max(50, Math.Min(reader.GetInt32(reader.GetOrdinal("Caution")), 150));
+                race.FriendlinessLevel = Math.Max(50, Math.Min(reader.GetInt32(reader.GetOrdinal("Friendliness")), 150));
+                race.LoyaltyLevel = Math.Max(50, Math.Min(reader.GetInt32(reader.GetOrdinal("Loyalty")), 150));
+                race.DesignPictureFamilyIndex = reader.GetInt32(reader.GetOrdinal("DesignsPictureFamilyIndex"));
+                race.DesignPictureFamilyIndexPirates = reader.GetInt32(reader.GetOrdinal("DesignsPictureFamilyIndexPirates"));
+                race.DesignNameIndex = reader.GetInt32(reader.GetOrdinal("DesignNamesIndex"));
+                race.ShipMaintenanceSavings = Math.Max(0, Math.Min(reader.GetInt32(reader.GetOrdinal("ShipMaintenanceSavings")), 100));
+                race.TroopMaintenanceSavings = Math.Max(0, Math.Min(reader.GetInt32(reader.GetOrdinal("TroopMaintenanceSavings")), 100));
+                race.ResourceExtractionBonus = Math.Max(0, Math.Min(reader.GetInt32(reader.GetOrdinal("ResourceExtractionBonus")), 500));
+                race.WarWearinessAttenuation = Math.Max(0, Math.Min(reader.GetInt32(reader.GetOrdinal("WarWearinessAttenuation")), 100));
+                race.SatisfactionModifier = Math.Max(0, Math.Min(reader.GetInt32(reader.GetOrdinal("SatisfactionModifier")), 505));
+                race.ResearchBonus = Math.Max(0, Math.Min(reader.GetInt32(reader.GetOrdinal("SatisfactionModifier")), 510));
+                race.EspionageBonus = Math.Max(0, Math.Min(reader.GetInt32(reader.GetOrdinal("EspionageBonus")), 515));
+                race.TradeBonus = Math.Max(0, Math.Min(reader.GetInt32(reader.GetOrdinal("TradeBonus")), 520));
+                tempValInt = reader.GetInt32(reader.GetOrdinal("OverallShipDesignFocus"));
+                if (Enum.IsDefined(typeof(ShipDesignFocus), tempValInt))
+                {
+                    race.ShipDesignFocus = (ShipDesignFocus)tempValInt;
+                }
+                Galaxy.ResolveTechFocus(reader.GetInt32(reader.GetOrdinal("TechFocus1")), out var category2, out var type2);
+                race.TechFocus1 = category2;
+                race.TechFocusType1 = type2;
+                Galaxy.ResolveTechFocus(reader.GetInt32(reader.GetOrdinal("TechFocus2")), out var category, out var type);
+                race.TechFocus2 = category;
+                race.TechFocusType2 = type;
+                race.NativeHabitatType = Galaxy.ResolveColonyHabitatTypeByIndexDesertBeforeOcean(reader.GetInt32(reader.GetOrdinal("NativePlanetType")));
+                race.SpecialComponent = Galaxy.ResolveSpecialComponent(reader.GetInt32(reader.GetOrdinal("SpecialComponent")));
+                race.SpecialGovernmentId = reader.GetInt32(reader.GetOrdinal("SpecialGovernment"));
+                race.PreferredStartingGovernmentId = reader.GetInt32(reader.GetOrdinal("PreferredStartingGovernment"));
+                string[] array = reader.GetString(reader.GetOrdinal("DisallowedGovernments")).Split(',');
+                if (array != null || array.Length > 0)
+                {
+
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        int result = -1;
+                        if (int.TryParse(array[i], out result))
+                        {
+                            race.DisallowedGovernmentIds.Add(result);
+                        }
+                    }
+                    List<int> list = new List<int>();
+                    for (int j = 0; j < Galaxy.GovernmentsStatic.Count; j++)
+                    {
+                        if (!race.DisallowedGovernmentIds.Contains(Galaxy.GovernmentsStatic[j].GovernmentId))
+                        {
+                            list.Add(Galaxy.GovernmentsStatic[j].GovernmentId);
+                        }
+                    }
+                    if (list.Count <= 0)
+                    {
+                        throw new ApplicationException($"No allowable governments for race {race.Name}. Must not disallow all governments.");
+                    }
+                }
+
+
+                race.CanChangeGovernment = reader.GetBoolean(reader.GetOrdinal("CanChangeGovernment"));
+                race.Expanding = reader.GetBoolean(reader.GetOrdinal("Expanding"));
+                race.CanBePirate = reader.GetBoolean(reader.GetOrdinal("CanBePirate"));
+                race.CanBeNormalEmpire = reader.GetBoolean(reader.GetOrdinal("CanBeNormalEmpire"));
+                race.Playable = reader.GetBoolean(reader.GetOrdinal("Playable"));
+                race.ChangePeriodYearsInterval = reader.GetInt32(reader.GetOrdinal("PeriodicChangeInterval"));
+                race.ChangePeriodYearsLength = reader.GetInt32(reader.GetOrdinal("PeriodicChangeLength"));
+                race.PeriodicGrowthRate = Math.Max(1.0, Math.Min(reader.GetDouble(reader.GetOrdinal("PeriodicFactorsGrowth")), 2.0));
+                race.PeriodicAggressionLevel = Math.Max(50, Math.Min(reader.GetInt32(reader.GetOrdinal("PeriodicFactorsAggression")), 200));
+                race.PeriodicCautionLevel = Math.Max(50, Math.Min(reader.GetInt32(reader.GetOrdinal("PeriodicFactorsCaution")), 200));
+                race.PeriodicFriendlinessLevel = Math.Max(50, Math.Min(reader.GetInt32(reader.GetOrdinal("PeriodicFactorsFriendliness")), 200));
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("PeriodicChangeCycleEvent"));
+                if (Enum.IsDefined(typeof(RaceEventType), tempValByte))
+                {
+                    race.PeriodicRaceEvent = (RaceEventType)tempValByte;
+                }
+                race.CivilianShipSizeFactor = Math.Max(0.7, Math.Min(reader.GetDouble(reader.GetOrdinal("ShipSizeFactorCivilian")), 5.1));
+                race.MilitaryShipSizeFactor = Math.Max(0.7, Math.Min(reader.GetDouble(reader.GetOrdinal("ShipSizeFactorMilitary")), 5.1));
+                if (race.DisallowedResearchAreas == null)
+                {
+                    race.DisallowedResearchAreas = new List<ComponentCategoryType>();
+                }
+                race.DisallowedResearchAreas.Add(Galaxy.ResolveTechDisallow(reader.GetInt32(reader.GetOrdinal("DisallowedResearchArea1"))));
+                if (race.DisallowedResearchAreas == null)
+                {
+                    race.DisallowedResearchAreas = new List<ComponentCategoryType>();
+                }
+                race.DisallowedResearchAreas.Add(Galaxy.ResolveTechDisallow(reader.GetInt32(reader.GetOrdinal("DisallowedResearchArea2"))));
+                if (race.DisallowedResearchAreas == null)
+                {
+                    race.DisallowedResearchAreas = new List<ComponentCategoryType>();
+                }
+                race.DisallowedResearchAreas.Add(Galaxy.ResolveTechDisallow(reader.GetInt32(reader.GetOrdinal("DisallowedResearchArea3"))));
+                race.IntelligenceAgentAdditional = Math.Min(5, Math.Max(0, reader.GetInt32(reader.GetOrdinal("AdditionalIntelligenceAgents"))));
+                race.ConstructionSpeedModifier = Math.Max(0.3, Math.Min(reader.GetDouble(reader.GetOrdinal("ConstructionSpeedFactor")), 5.5));
+                race.DefaultMainColor = Galaxy.SelectColorFromKey(reader.GetInt32(reader.GetOrdinal("DefaultPrimaryColor")));
+                race.DefaultSecondaryColor = Galaxy.SelectColorFromKey(reader.GetInt32(reader.GetOrdinal("DefaultSecondaryColor")));
+                race.DefaultFlagShape = reader.GetInt32(reader.GetOrdinal("DefaultFlagDesign"));
+                race.HomeSystemName = reader.GetString(reader.GetOrdinal("HomeSystemName"));
+                race.TroopStrength = Math.Min(400, Math.Max(50, reader.GetInt32(reader.GetOrdinal("TroopStrength"))));
+                race.TroopName = reader.GetString(reader.GetOrdinal("TroopName"));
+                race.TroopNameArmored = reader.GetString(reader.GetOrdinal("TroopNameArmored"));
+                race.TroopNameArtillery = reader.GetString(reader.GetOrdinal("TroopNamePlanetaryDefense"));
+                race.TroopNameSpecialForces = reader.GetString(reader.GetOrdinal("TroopNameSpecialForces"));
+                race.CharacterRandomAppearanceChanceLeader = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChanceLeader"))));
+                race.CharacterRandomAppearanceChanceAmbassador = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChanceAmbassador"))));
+                race.CharacterRandomAppearanceChanceGovernor = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChanceGovernor"))));
+                race.CharacterRandomAppearanceChanceAdmiral = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChanceAdmiral"))));
+                race.CharacterRandomAppearanceChanceGeneral = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChanceGeneral"))));
+                race.CharacterRandomAppearanceChanceScientist = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChanceScientist"))));
+                race.CharacterRandomAppearanceChanceIntelligenceAgent = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChanceIntelligenceAgent"))));
+                race.CharacterRandomAppearanceChancePirateLeader = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChancePirateLeader"))));
+                race.CharacterRandomAppearanceChanceShipCaptain = Math.Min(5.0, Math.Max(0.0, reader.GetDouble(reader.GetOrdinal("CharacterRandomAppearanceChanceShipCaptain"))));
+                race.ResearchColonizationCostFactorContinental = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ResearchColonizationCostFactorContinental"))));
+                race.ResearchColonizationCostFactorMarshySwamp = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ResearchColonizationCostFactorMarshySwamp"))));
+                race.ResearchColonizationCostFactorOcean = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ResearchColonizationCostFactorOcean"))));
+                race.ResearchColonizationCostFactorDesert = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ResearchColonizationCostFactorDesert"))));
+                race.ResearchColonizationCostFactorIce = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ResearchColonizationCostFactorIce"))));
+                race.ResearchColonizationCostFactorVolcanic = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ResearchColonizationCostFactorVolcanic"))));
+                race.ColonyConstructionSpeedFactorContinental = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ColonyConstructionSpeedFactorContinental"))));
+                race.ColonyConstructionSpeedFactorMarshySwamp = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ColonyConstructionSpeedFactorMarshySwamp"))));
+                race.ColonyConstructionSpeedFactorOcean = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ColonyConstructionSpeedFactorOcean"))));
+                race.ColonyConstructionSpeedFactorDesert = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ColonyConstructionSpeedFactorDesert"))));
+                race.ColonyConstructionSpeedFactorIce = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ColonyConstructionSpeedFactorIce"))));
+                race.ColonyConstructionSpeedFactorVolcanic = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ColonyConstructionSpeedFactorVolcanic"))));
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitLeader"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitLeader = (CharacterTraitType)tempValByte;
+                }
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitAmbassador"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitAmbassador = (CharacterTraitType)tempValByte;
+                }
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitGovernor"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitGovernor = (CharacterTraitType)tempValByte;
+                }
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitAdmiral"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitAdmiral = (CharacterTraitType)tempValByte;
+                }
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitGeneral"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitGeneral = (CharacterTraitType)tempValByte;
+                }
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitScientist"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitScientist = (CharacterTraitType)tempValByte;
+                }
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitIntelligenceAgent"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitIntelligenceAgent = (CharacterTraitType)tempValByte;
+                }
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitPirateLeader"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitPirateLeader = (CharacterTraitType)tempValByte;
+                }
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("CharacterStartingTraitShipCaptain"));
+                if (Enum.IsDefined(typeof(CharacterTraitType), tempValByte))
+                {
+                    race.CharacterStartingTraitShipCaptain = (CharacterTraitType)tempValByte;
+                }
+                race.ColonyPopulationPolicyGrowthFactorExterminate = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("ColonyPopulationPolicyGrowthFactorExterminate"))));
+                race.ImmuneNaturalDisastersAtColonyType = Galaxy.ResolveColonyHabitatTypeByIndexIncludingUndefined(reader.GetInt32(reader.GetOrdinal("ImmuneNaturalDisastersAtColonyType")));
+                race.SpaceportArmorStrengthFactor = Math.Min(3.0, Math.Max(0.3, reader.GetDouble(reader.GetOrdinal("SpaceportArmorStrengthFactor"))));
+                race.TourismIncomeFactor = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("TourismIncomeFactor"))));
+                race.FreeTradeIncomeFactor = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("FreeTradeIncomeFactor"))));
+                race.MigrationFactor = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("MigrationFactor"))));
+                race.TroopRegenerationFactor = Math.Min(5.0, Math.Max(0.2, reader.GetDouble(reader.GetOrdinal("TroopRegenerationFactor"))));
+                race.KnownStartingGalacticHistoryLocations = Math.Min(10, Math.Max(0, reader.GetInt32(reader.GetOrdinal("KnownStartingGalacticHistoryLocations"))));
+                tempValByte = (byte)reader.GetInt32(reader.GetOrdinal("PirateDefaultPlaystyle"));
+                tempValByte = (byte)(tempValByte + 1);
+                if (Enum.IsDefined(typeof(PiratePlayStyle), tempValByte))
+                {
+                    race.DefaultPiratePlaystyle = (PiratePlayStyle)tempValByte;
+                }
+                race.ImmuneToPlagues = reader.GetBoolean(reader.GetOrdinal("ImmuneToPlagues"));
+            }
+            return race;
+        }
+
         private static byte ParseRaceFamily(string value)
         {
             int num = ParseIntValue(value);
             if (num >= 0 && num < Galaxy.RaceFamiliesStatic.Count)
             {
                 return (byte)num;
+            }
+            return 0;
+        }
+        private static byte ParseRaceFamily(int value)
+        {
+            if (value >= 0 && value < Galaxy.RaceFamiliesStatic.Count)
+            {
+                return (byte)value;
             }
             return 0;
         }

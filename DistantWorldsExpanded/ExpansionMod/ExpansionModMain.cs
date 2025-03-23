@@ -36,6 +36,7 @@ namespace ExpansionMod
         private SettingsModel _settings = null;
 
         public bool Inited { get; private set; }
+        public bool StartupDone { get; private set; }
         public static ExpansionModMain ModMain { get; private set; }
 
 
@@ -67,6 +68,7 @@ namespace ExpansionMod
                 FindOtherMods();
                 LoadRepairPriority(model);
                 _settings = model;
+                this.StartupDone = true;
             }
             else
             {
@@ -249,7 +251,7 @@ namespace ExpansionMod
 
         internal SettingsModel GetSettings()
         {
-            if (this.Inited)
+            if (this.StartupDone)
             {
                 return _settings;
             }

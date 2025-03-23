@@ -5,6 +5,7 @@
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
 using DistantWorlds;
+using DistantWorlds.DBLoader;
 using DistantWorlds.Types;
 using System;
 using System.Diagnostics;
@@ -83,7 +84,8 @@ internal static class Class5
         }
         finally {
             _IsExiting = true;
-            gcThread.Interrupt();   
+            gcThread.Interrupt();
+            Main._FileDB?.Close();
         }
     }
     private static void smethod_1()

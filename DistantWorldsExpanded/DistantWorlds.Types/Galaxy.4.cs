@@ -373,41 +373,53 @@ namespace DistantWorlds.Types
 
         public void LoadAgentNames(string applicationStartupPath, string customizationSetName)
         {
-            int num = 0;
-            string text = applicationStartupPath + "\\characterNames.txt";
-            if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                text = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\characterNames.txt";
-            }
-            if (!File.Exists(text))
-            {
-                text = applicationStartupPath + "\\characterNames.txt";
-            }
-            try
-            {
+                int num = 0;
+                string text = applicationStartupPath + "\\characterNames.txt";
+                if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+                {
+                    text = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\characterNames.txt";
+                }
                 if (!File.Exists(text))
                 {
-                    throw new ApplicationException("Missing file: " + text);
+                    text = applicationStartupPath + "\\characterNames.txt";
                 }
-                FileStream fileStream = File.OpenRead(text);
-                StreamReader streamReader = new StreamReader(fileStream);
-                for (int i = 0; i < RaceFamilies.Count; i++)
+                try
                 {
-                    string[] item = GetValidFileLine(streamReader).Replace(" ", "").Split(',');
-                    string[] item2 = GetValidFileLine(streamReader).Replace(" ", "").Split(',');
-                    _AgentFirstNames.Add(item);
-                    _AgentLastNames.Add(item2);
+                    if (!File.Exists(text))
+                    {
+                        throw new ApplicationException("Missing file: " + text);
+                    }
+                    FileStream fileStream = File.OpenRead(text);
+                    StreamReader streamReader = new StreamReader(fileStream);
+                    for (int i = 0; i < RaceFamilies.Count; i++)
+                    {
+                        string[] item = GetValidFileLine(streamReader).Replace(" ", "").Split(',');
+                        string[] item2 = GetValidFileLine(streamReader).Replace(" ", "").Split(',');
+                        _AgentFirstNames.Add(item);
+                        _AgentLastNames.Add(item2);
+                    }
+                    streamReader.Close();
+                    fileStream.Close();
                 }
-                streamReader.Close();
-                fileStream.Close();
+                catch (ApplicationException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw new ApplicationException("Error at line " + num + " reading file " + text);
+                }
             }
-            catch (ApplicationException)
+            else
             {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Error at line " + num + " reading file " + text);
+                var reader = Main._FileDB.GetAgentNamesReader();
+                while (reader.Read())
+                {
+                    _AgentFirstNames.Add(reader.GetString(reader.GetOrdinal("FirstName")).Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+                    _AgentLastNames.Add(reader.GetString(reader.GetOrdinal("LastName")).Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+                }
             }
         }
 
@@ -1174,45 +1186,53 @@ namespace DistantWorlds.Types
         public static RaceList LoadRaces(string applicationStartupPath, string customizationSetName)
         {
             RaceList raceList = new RaceList();
-            List<Task<Race>> taskList = new List<Task<Race>>();
-            string text = string.Empty;
-            string path = applicationStartupPath + "\\races\\";
-            if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                path = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\races\\";
-            }
-            if (!Directory.Exists(path))
-            {
-                path = applicationStartupPath + "\\races\\";
-            }
-            try
-            {
-                string[] files = Directory.GetFiles(path, "*.txt", SearchOption.TopDirectoryOnly);
-                for (int i = 0; i < files.Length; i++)
+
+                List<Task<Race>> taskList = new List<Task<Race>>();
+                string text = string.Empty;
+                string path = applicationStartupPath + "\\races\\";
+                if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
                 {
-                    text = files[i];
-                    if (File.Exists(text))
+                    path = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\races\\";
+                }
+                if (!Directory.Exists(path))
+                {
+                    path = applicationStartupPath + "\\races\\";
+                }
+                try
+                {
+                    string[] files = Directory.GetFiles(path, "*.txt", SearchOption.TopDirectoryOnly);
+                    for (int i = 0; i < files.Length; i++)
                     {
-                        string localText = text;
-                        //Race item = Race.LoadFromFile(text);
-                        //raceList.Add(item);
-                        taskList.Add(Task.Run(() => Race.LoadFromFile(localText)));
+                        text = files[i];
+                        if (File.Exists(text))
+                        {
+                            string localText = text;
+                            //Race item = Race.LoadFromFile(text);
+                            //raceList.Add(item);
+                            taskList.Add(Task.Run(() => Race.LoadFromFile(localText)));
+                        }
+                    }
+                    Task.WaitAll(taskList.ToArray());
+                    foreach (var item in taskList)
+                    {
+                        if (item.Result != null)
+                        { raceList.Add(item.Result); }
                     }
                 }
-                Task.WaitAll(taskList.ToArray());
-                foreach (var item in taskList)
+                catch (ApplicationException)
                 {
-                    if (item.Result != null)
-                    { raceList.Add(item.Result); }
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw new ApplicationException("Error reading txt file of some race");
                 }
             }
-            catch (ApplicationException)
+            else
             {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Error reading txt file of some race");
+                raceList = Race.LoadFromFile(Main._FileDB.GetRaceReader());
             }
             LoadRaceBiases(applicationStartupPath, customizationSetName, raceList);
             return raceList;

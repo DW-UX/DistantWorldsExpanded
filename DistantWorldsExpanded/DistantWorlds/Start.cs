@@ -7,6 +7,7 @@
 //using AxWMPLib;
 using BaconDistantWorlds;
 using DistantWorlds.Controls;
+using DistantWorlds.DBLoader;
 using DistantWorlds.Types;
 using ExpansionMod;
 using Ionic.Zlib;
@@ -901,10 +902,14 @@ namespace DistantWorlds
                         TextResolver.LoadText(text2);
                     }
                 }
+                Main._ExpModMain.ModStartup(this);
+                Main._FileDB = new FileDB();
+                DBLoader.ModData data = new DBLoader.ModData(@"AdvMods\ExpansionMod\Patches");
+                Main._FileDB.LoadDB();
+                Main._FileDB.ApplyChanges(data.ParseChanges());
                 Galaxy.InitializeData(Application.StartupPath, customizationSetName, out resourceSystem_0);
                 InitializeComponent();
                 BaconStart.InitializeMore(this, gameOptions);
-                Main._ExpModMain.ModStartup(this);
                 intptr_0 = method_150("DistantWorlds.Resources.Forgotte.ttf");
                 intptr_1 = method_150("DistantWorlds.Resources.Forgottb.ttf");
                 SetStyle(ControlStyles.OptimizedDoubleBuffer, value: true);
