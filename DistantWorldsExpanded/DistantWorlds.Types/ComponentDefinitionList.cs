@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.IO;
 
 namespace DistantWorlds.Types
@@ -390,6 +391,122 @@ namespace DistantWorlds.Types
             componentDefinitionList.Sort();
             if (!this.CheckSequentialIds(componentDefinitionList))
                 throw new ApplicationException("Non-sequential Component IDs detected in file " + filePath + ". Component ID values must start at 0 (zero) and be sequential.");
+            this.AddRange((IEnumerable<ComponentDefinition>)componentDefinitionList);
+        }
+
+
+        public void LoadFromFile(SQLiteDataReader reader)
+        {
+            this.Clear();
+            ComponentDefinitionList componentDefinitionList = new ComponentDefinitionList();
+            int id = 0;
+            try
+            {
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(reader.GetOrdinal("ID"));
+                    if (id < 0)
+                        throw new ApplicationException($"Could not read ComponentId at ID {id} at Components");
+
+                    string name = reader.GetString(reader.GetOrdinal("Name"));
+                    if (string.IsNullOrWhiteSpace(name))
+                        throw new ApplicationException($"Could not read Name at ID {id} at Components");
+
+                    int pictureRef = reader.GetInt32(reader.GetOrdinal("PictureRef"));
+                    if (pictureRef < 0)
+                        throw new ApplicationException($"Could not read PictureRef at ID {id} at Components");
+
+                    int specialImageIndex = reader.GetInt32(reader.GetOrdinal("SpecialImageIndex"));
+                    if (specialImageIndex < 0)
+                        throw new ApplicationException($"Could not read SpecialImageIndex at ID {id} at Components");
+
+                    string soundEffectFilename = reader.GetString(reader.GetOrdinal("SoundEffectFilename"));
+                    //if (string.IsNullOrWhiteSpace(soundEffectFilename))
+                    //    throw new ApplicationException($"Could not read SoundEffectFilename at ID {id} at Components");
+
+                    ComponentType componentType;
+                    int typeVal = reader.GetInt32(reader.GetOrdinal("Type"));
+                    if (typeVal < 0)
+                        throw new ApplicationException($"Could not read Type at ID {id} at Components");
+                    componentType = ComponentDefinition.ResolveComponentTypeFromCode(typeVal);
+                    if (componentType == ComponentType.Undefined)
+                        throw new ApplicationException($"Invalid Type at ID {id} at Components");
+
+                    int size = reader.GetInt32(reader.GetOrdinal("Size"));
+                    if (size < 0)
+                        throw new ApplicationException($"Could not read Size at ID {id} at Components");
+
+                    int staticEnergyUsed = reader.GetInt32(reader.GetOrdinal("StaticEnergyUsed"));
+                    if (staticEnergyUsed < 0)
+                        throw new ApplicationException($"Could not read StaticEnergyUsed at ID {id} at Components");
+
+                    int value1 = reader.GetInt32(reader.GetOrdinal("Value1"));
+                    //if (value1 < 0)
+                    //    throw new ApplicationException($"Could not read Value1 at ID {id} at Components");
+                    int value2 = reader.GetInt32(reader.GetOrdinal("Value2"));
+                    //if (value2 < 0)
+                    //    throw new ApplicationException($"Could not read Value2 at ID {id} at Components");
+                    int value3 = reader.GetInt32(reader.GetOrdinal("Value3"));
+                    //if (value3 < 0)
+                    //    throw new ApplicationException($"Could not read Value3 at ID {id} at Components");
+                    int value4 = reader.GetInt32(reader.GetOrdinal("Value4"));
+                    //if (value4 < 0)
+                    //    throw new ApplicationException($"Could not read Value4 at ID {id} at Components");
+                    int value5 = reader.GetInt32(reader.GetOrdinal("Value5"));
+                    //if (value5 < 0)
+                    //    throw new ApplicationException($"Could not read Value5 at ID {id} at Components");
+                    int value6 = reader.GetInt32(reader.GetOrdinal("Value6"));
+                    //if (value6 < 0)
+                    //    throw new ApplicationException($"Could not read Value6 at ID {id} at Components");
+                    int value7 = reader.GetInt32(reader.GetOrdinal("Value7"));
+                    //if (value7 < 0)
+                    //    throw new ApplicationException($"Could not read Value7 at ID {id} at Components");
+
+                    ComponentDefinition component = new ComponentDefinition(id, name, componentType, pictureRef, specialImageIndex, soundEffectFilename, size, staticEnergyUsed);
+                    component.Value1 = value1;
+                    component.Value2 = value2;
+                    component.Value3 = value3;
+                    component.Value4 = value4;
+                    component.Value5 = value5;
+                    component.Value6 = value6;
+                    component.Value7 = value7;
+
+                    var resourceArr = reader.GetString(reader.GetOrdinal("ResourceRequired")).Split(',', StringSplitOptions.TrimEntries);
+                    if (resourceArr.Length % 2 != 0)
+                        throw new ApplicationException($"RequiredResource have wrong value count {resourceArr.Length} at ID {id} at Components");
+
+                    for (int i = 0; i < resourceArr.Length; i += 2)
+                    {
+                        if (!byte.TryParse(resourceArr[i], out byte resId))
+                            throw new ApplicationException($"Could not read ResourceId in Required Resource #{component.RequiredResources.Count + 1} at ID {id} at Components");
+                        if ((int)resId >= Galaxy.ResourceSystemStatic.Resources.Count)
+                            throw new ApplicationException($"Invalid ResourceId in Required Resource #{resId} at ID {id} of Components. ResourceId must match a defined resource.");
+
+                        if (!int.TryParse(resourceArr[i+1], out int resCount))
+                            throw new ApplicationException($"Could not read ResourceId in Required Resource #{component.RequiredResources.Count + 1} at ID {id} at Components");
+                        if (resCount <= 0 || resCount > (int)short.MaxValue)
+                            throw new ApplicationException($"Invalid Amount in Required Resource #{resCount} at ID {id} of Components. Amount must be greater than zero and less than 32767.");
+
+                        ComponentResource resource = new ComponentResource(resId, (short)resCount);
+                        component.RequiredResources.Add(resource);
+                    }
+
+                    componentDefinitionList.Add(component);
+
+
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error at ID {id} of Components");
+            }
+            componentDefinitionList.Sort();
+            if (!this.CheckSequentialIds(componentDefinitionList))
+                throw new ApplicationException("Non-sequential Component IDs detected in file. Component ID values must start at 0 (zero) and be sequential.");
             this.AddRange((IEnumerable<ComponentDefinition>)componentDefinitionList);
         }
     }

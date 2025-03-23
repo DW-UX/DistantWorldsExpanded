@@ -2293,17 +2293,24 @@ namespace DistantWorlds.Types
         public static ComponentDefinition[] InitializeComponentDefinitions(ResourceSystem resourceSystem, string applicationStartupPath, string customizationSetName)
         {
             ComponentDefinitionList componentDefinitionList = new ComponentDefinitionList();
-            string text = "components.txt";
-            string filePath = applicationStartupPath + "\\" + text;
-            if (!string.IsNullOrEmpty(customizationSetName))
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
-                if (File.Exists(text2))
+                string text = "components.txt";
+                string filePath = applicationStartupPath + "\\" + text;
+                if (!string.IsNullOrEmpty(customizationSetName))
                 {
-                    filePath = text2;
+                    string text2 = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\" + text;
+                    if (File.Exists(text2))
+                    {
+                        filePath = text2;
+                    }
                 }
+                componentDefinitionList.LoadFromFile(filePath);
             }
-            componentDefinitionList.LoadFromFile(filePath);
+            else
+            {
+                componentDefinitionList.LoadFromFile(Main._FileDB.GetComponentsReader());
+            }
             return componentDefinitionList.ToArray();
         }
 

@@ -90,6 +90,10 @@ namespace TxtFileParser
                         }
                     }
                 }
+                if (projFound)
+                {
+                    agentFirstNames.Add(curProj);
+                }
 
 
                 WriteXml(filePath, outputFolder, agentFirstNames);

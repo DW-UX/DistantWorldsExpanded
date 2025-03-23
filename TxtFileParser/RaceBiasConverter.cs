@@ -4,15 +4,15 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TxtFileParser
 {
-    internal class RaceFamiliesBiasConverter
+    internal class RaceBiasConverter
     {
-        private const string _tableName = "RaceFamilyBias";
+        private const string _tableName = "RaceBias";
         private const string _IdCol = "ID";
-        private const string _RaceFamilyNameCol = "Name";
+        private const string _NameCol = "Name";
         private const string _BiasesCol = "Biases";
         private readonly ConvertType convertType;
 
-        public RaceFamiliesBiasConverter(ConvertType convertType)
+        public RaceBiasConverter(ConvertType convertType)
         {
             this.convertType = convertType;
         }
@@ -28,12 +28,8 @@ namespace TxtFileParser
                 List<string[]> agentFirstNames = new List<string[]>();
                 while (!streamReader.EndOfStream)
                 {
-                    var temp = GetValidFileLine(streamReader).Replace(" ", "").Trim().Split(',');
+                    var temp = GetValidFileLine(streamReader).Replace('\'', '′').Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
                     agentFirstNames.Add(temp);
-                    for (int i = 0; i < temp.Length; i++)
-                    {
-                        temp[i] = temp[i].Trim();
-                    }
                 }
 
                 WriteXml(filePath, outputFolder, agentFirstNames);
@@ -56,18 +52,16 @@ namespace TxtFileParser
             for (int i = 0; i < values.Count; i++)
             {
                 var biases = string.Join(',', values[i].AsSpan(2));
-
-                var race = new XElement("RaceFamilyBias");
+                var race = new XElement("RaceBias");
                 if (convertType == ConvertType.Update)
                 {
-                    race.Value = $"UPDATE {_tableName} SET {_RaceFamilyNameCol} = '{values[i][1]}', {_BiasesCol} = '{biases}' WHERE {_RaceFamilyNameCol} = '{values[i][1]}'";
-
+                    race.Value = $"UPDATE {_tableName} SET {_NameCol} = '{values[i][1]}', {_BiasesCol} = '{biases}' WHERE {_NameCol} = '{values[i][1]}'";
                 }
                 else
                 {
-                    race.Value = $"INSERT INTO {_tableName} ({_IdCol}, {_RaceFamilyNameCol}, {_BiasesCol}) VALUES ({values[i][0]}, '{values[i][1]}', '{biases}')";
+                    race.Value = $"INSERT INTO {_tableName} ({_IdCol}, {_NameCol}, {_BiasesCol}) VALUES ({values[i][0]}, '{values[i][1]}', '{biases}')";
                 }
-                    root.Add(race);
+                root.Add(race);
             }
             doc.Save(fileStream);
         }

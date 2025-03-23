@@ -125,6 +125,16 @@ namespace DistantWorlds.DBLoader
             using SQLiteCommand command = new SQLiteCommand("Select * From Plagues", memoryConnection);
             return command.ExecuteReader();
         }
+        public SQLiteDataReader GetRaceBiasReader()
+        {
+            using SQLiteCommand command = new SQLiteCommand("Select * From RaceBias", memoryConnection);
+            return command.ExecuteReader();
+        }
+        public SQLiteDataReader GetComponentsReader()
+        {
+            using SQLiteCommand command = new SQLiteCommand("Select * From Components", memoryConnection);
+            return command.ExecuteReader();
+        }
         public int GetProjIdCOunt()
         {
             using SQLiteCommand cmd = new SQLiteCommand("SELECT COUNT(ID) FROM Research WHERE Project <> ''", memoryConnection);

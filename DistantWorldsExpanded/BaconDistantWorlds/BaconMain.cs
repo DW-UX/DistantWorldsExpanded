@@ -1173,73 +1173,76 @@ namespace BaconDistantWorlds
 
         public static void ProcessGameStats(Main main, List<Empire> empireList, List<string> statsToTrack, string saveFilename)
         {
-            long num = main._Game.Galaxy.CurrentStarDate - main._Game.Galaxy.ActualStartDate;
-            int num2 = Galaxy.RealSecondsInGalacticYear * 1000;
-            string innerText = $"{(double)num / (double)num2:0.00}";
-            try
+            if (saveStats)
             {
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(saveFilename);
-                XmlNode documentElement = xmlDocument.DocumentElement;
-                XmlNode xmlNode = null;
-                foreach (string item in statsToTrack)
+                long num = main._Game.Galaxy.CurrentStarDate - main._Game.Galaxy.ActualStartDate;
+                int num2 = Galaxy.RealSecondsInGalacticYear * 1000;
+                string innerText = $"{(double)num / (double)num2:0.00}";
+                try
                 {
-                    xmlNode = null;
-                    foreach (XmlNode childNode in xmlDocument.ChildNodes[0].ChildNodes)
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(saveFilename);
+                    XmlNode documentElement = xmlDocument.DocumentElement;
+                    XmlNode xmlNode = null;
+                    foreach (string item in statsToTrack)
                     {
-                        if (childNode.Attributes.Count > 0 && childNode.Attributes[0].InnerText == item)
+                        xmlNode = null;
+                        foreach (XmlNode childNode in xmlDocument.ChildNodes[0].ChildNodes)
                         {
-                            xmlNode = childNode;
-                            break;
-                        }
-                    }
-                    if (xmlNode == null)
-                    {
-                        XmlElement xmlElement = xmlDocument.CreateElement("GameStat");
-                        xmlElement.SetAttribute("name", item);
-                        xmlNode = xmlElement;
-                    }
-                    XmlNode xmlNode3 = xmlNode;
-                    XmlNode xmlNode4 = null;
-                    foreach (Empire empire in empireList)
-                    {
-                        xmlNode4 = null;
-                        foreach (XmlNode item2 in xmlNode3)
-                        {
-                            if (item2.Attributes != null && item2.Attributes[0].InnerText == empire.Name)
+                            if (childNode.Attributes.Count > 0 && childNode.Attributes[0].InnerText == item)
                             {
-                                xmlNode4 = item2;
+                                xmlNode = childNode;
                                 break;
                             }
                         }
-                        if (xmlNode4 == null)
+                        if (xmlNode == null)
                         {
-                            XmlElement xmlElement2 = xmlDocument.CreateElement("SpaceEmpire");
-                            xmlElement2.SetAttribute("name", empire.Name);
-                            xmlNode4 = xmlElement2;
+                            XmlElement xmlElement = xmlDocument.CreateElement("GameStat");
+                            xmlElement.SetAttribute("name", item);
+                            xmlNode = xmlElement;
                         }
-                        XmlNode xmlNode6 = xmlNode4;
-                        XmlElement xmlElement3 = xmlDocument.CreateElement("TimeAndValue");
-                        XmlElement xmlElement4 = xmlDocument.CreateElement("TimeAndValue");
-                        XmlElement xmlElement5 = xmlDocument.CreateElement("Time");
-                        xmlElement5.InnerText = innerText;
-                        XmlElement xmlElement6 = xmlDocument.CreateElement("Value");
-                        xmlElement6.InnerText = FindValueForThisNode(item, empire);
-                        xmlElement4.AppendChild(xmlElement5);
-                        xmlElement4.AppendChild(xmlElement6);
-                        xmlNode6.AppendChild(xmlElement4);
-                        xmlNode.AppendChild(xmlNode6);
-                        xmlDocument.DocumentElement.AppendChild(xmlNode);
+                        XmlNode xmlNode3 = xmlNode;
+                        XmlNode xmlNode4 = null;
+                        foreach (Empire empire in empireList)
+                        {
+                            xmlNode4 = null;
+                            foreach (XmlNode item2 in xmlNode3)
+                            {
+                                if (item2.Attributes != null && item2.Attributes[0].InnerText == empire.Name)
+                                {
+                                    xmlNode4 = item2;
+                                    break;
+                                }
+                            }
+                            if (xmlNode4 == null)
+                            {
+                                XmlElement xmlElement2 = xmlDocument.CreateElement("SpaceEmpire");
+                                xmlElement2.SetAttribute("name", empire.Name);
+                                xmlNode4 = xmlElement2;
+                            }
+                            XmlNode xmlNode6 = xmlNode4;
+                            XmlElement xmlElement3 = xmlDocument.CreateElement("TimeAndValue");
+                            XmlElement xmlElement4 = xmlDocument.CreateElement("TimeAndValue");
+                            XmlElement xmlElement5 = xmlDocument.CreateElement("Time");
+                            xmlElement5.InnerText = innerText;
+                            XmlElement xmlElement6 = xmlDocument.CreateElement("Value");
+                            xmlElement6.InnerText = FindValueForThisNode(item, empire);
+                            xmlElement4.AppendChild(xmlElement5);
+                            xmlElement4.AppendChild(xmlElement6);
+                            xmlNode6.AppendChild(xmlElement4);
+                            xmlNode.AppendChild(xmlNode6);
+                            xmlDocument.DocumentElement.AppendChild(xmlNode);
+                        }
                     }
+                    xmlDocument.Save(saveFilename);
                 }
-                xmlDocument.Save(saveFilename);
-            }
-            catch (FileNotFoundException)
-            {
-            }
-            catch (Exception ex2)
-            {
-                string stackTrace = ex2.StackTrace;
+                catch (FileNotFoundException)
+                {
+                }
+                catch (Exception ex2)
+                {
+                    string stackTrace = ex2.StackTrace;
+                }
             }
         }
 

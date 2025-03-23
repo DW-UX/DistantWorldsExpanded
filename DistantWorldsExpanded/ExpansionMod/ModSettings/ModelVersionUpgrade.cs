@@ -14,7 +14,7 @@ namespace ExpansionMod.ModSettings
             updatedSettings = model.Clone();
             if (model.Version == 1)
             {
-                model.Version = 3;
+                updatedSettings.Version = 3;
                 updatedSettings.TargetHappinessTaxColonyMaxed = 10;
                 updatedSettings.TargetHappinessTaxColonyLarge = 10;
                 updatedSettings.TargetHappinessTaxColonyMedium = 16;
@@ -25,7 +25,7 @@ namespace ExpansionMod.ModSettings
             }
             else if (model.Version == 2)
             {
-                model.Version = 3;
+                updatedSettings.Version = 3;
                 updatedSettings.UseDbFiles = true;
                 res = true;
             }

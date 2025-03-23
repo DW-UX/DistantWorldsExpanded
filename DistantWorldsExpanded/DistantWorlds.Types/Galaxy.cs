@@ -7,6 +7,7 @@
 using BaconDistantWorlds;
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -18,6 +19,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DistantWorlds.Types
 {
@@ -1965,122 +1967,154 @@ namespace DistantWorlds.Types
 
         public static void LoadRaceBiases(string applicationStartupPath, string customizationSetName, RaceList races)
         {
-            int num = 0;
-            string text = applicationStartupPath + "\\raceBiases.txt";
-            if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+            if (Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                text = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\raceBiases.txt";
+                var reader = Main._FileDB.GetRaceBiasReader();
+                int id = 0;
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(reader.GetOrdinal("ID"));
+                    string name = reader.GetString(reader.GetOrdinal("Name"));
+                    string[] biasArr = reader.GetString(reader.GetOrdinal("Biases")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+
+                    if(biasArr.Length > races.Count)
+                        throw new ApplicationException($" More Race bias then Races - {biasArr.Length} : {races.Count}");
+
+                    List<int> biasList = new List<int>();
+                    for (int j = 0; j < races.Count; j++)
+                    {
+                        biasList.Add(0);
+                    }
+                    for (int k = 0; k < biasArr.Length; k++)
+                    {
+                        if (!int.TryParse(biasArr[k], out int val))
+                            throw new ApplicationException($"Could not read Bias Value {biasArr[k]} at ID {id}");
+                        biasList[k] = val;
+                    }
+                    races[id].Biases = new RaceBiasList();
+                    races[id].Biases.LoadBiases(races, biasList);
+                }
             }
-            if (!File.Exists(text))
+            else
             {
-                text = applicationStartupPath + "\\raceBiases.txt";
-            }
-            try
-            {
+                int num = 0;
+                string text = applicationStartupPath + "\\raceBiases.txt";
+                if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+                {
+                    text = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\raceBiases.txt";
+                }
                 if (!File.Exists(text))
                 {
-                    return;
+                    text = applicationStartupPath + "\\raceBiases.txt";
                 }
-                List<List<int>> list = new List<List<int>>();
-                List<string> list2 = new List<string>();
-                List<int> list3 = new List<int>();
-                FileStream fileStream = File.OpenRead(text);
-                StreamReader streamReader = new StreamReader(fileStream);
-                while (!streamReader.EndOfStream)
+                try
                 {
-                    num++;
-                    string empty = string.Empty;
-                    string text2 = streamReader.ReadLine();
-                    if (string.IsNullOrEmpty(text2) || !(text2.Trim() != string.Empty) || !(text2.Trim().Substring(0, 1) != "'"))
+                    if (!File.Exists(text))
                     {
-                        continue;
+                        return;
                     }
-                    int num2 = 0;
-                    int num3 = text2.IndexOf(",", num2);
-                    if (num3 >= 0)
+                    List<List<int>> list = new List<List<int>>();
+                    List<string> list2 = new List<string>();
+                    List<int> list3 = new List<int>();
+                    FileStream fileStream = File.OpenRead(text);
+                    StreamReader streamReader = new StreamReader(fileStream);
+                    while (!streamReader.EndOfStream)
                     {
-                        string text3 = text2.Substring(num2, num3 - num2);
-                        text3 = text3.Trim();
-                        int result = -1;
-                        if (int.TryParse(text3, out result))
+                        num++;
+                        string empty = string.Empty;
+                        string text2 = streamReader.ReadLine();
+                        if (string.IsNullOrEmpty(text2) || !(text2.Trim() != string.Empty) || !(text2.Trim().Substring(0, 1) != "'"))
                         {
-                            list3.Add(result);
-                            num2 = num3 + 1;
-                            num3 = text2.IndexOf(",", num2);
-                            if (num3 >= 0)
+                            continue;
+                        }
+                        int num2 = 0;
+                        int num3 = text2.IndexOf(",", num2);
+                        if (num3 >= 0)
+                        {
+                            string text3 = text2.Substring(num2, num3 - num2);
+                            text3 = text3.Trim();
+                            int result = -1;
+                            if (int.TryParse(text3, out result))
                             {
-                                string text4 = text2.Substring(num2, num3 - num2);
-                                text4 = text4.Trim();
-                                empty = text4;
-                                list2.Add(empty);
+                                list3.Add(result);
                                 num2 = num3 + 1;
-                                List<int> list4 = new List<int>();
-                                int num4 = 1;
-                                while (num3 >= 0)
+                                num3 = text2.IndexOf(",", num2);
+                                if (num3 >= 0)
                                 {
-                                    num3 = text2.IndexOf(",", num2);
-                                    string empty2 = string.Empty;
-                                    empty2 = ((num3 < 0) ? text2.Substring(num2, text2.Length - num2) : text2.Substring(num2, num3 - num2));
-                                    empty2 = empty2.Trim();
-                                    int result2 = 0;
-                                    if (int.TryParse(empty2, out result2))
+                                    string text4 = text2.Substring(num2, num3 - num2);
+                                    text4 = text4.Trim();
+                                    empty = text4;
+                                    list2.Add(empty);
+                                    num2 = num3 + 1;
+                                    List<int> list4 = new List<int>();
+                                    int num4 = 1;
+                                    while (num3 >= 0)
                                     {
-                                        result2 = Math.Max(-50, Math.Min(result2, 50));
-                                        list4.Add(result2);
-                                        if (list4.Count > races.Count)
+                                        num3 = text2.IndexOf(",", num2);
+                                        string empty2 = string.Empty;
+                                        empty2 = ((num3 < 0) ? text2.Substring(num2, text2.Length - num2) : text2.Substring(num2, num3 - num2));
+                                        empty2 = empty2.Trim();
+                                        int result2 = 0;
+                                        if (int.TryParse(empty2, out result2))
                                         {
-                                            throw new ApplicationException("More bias values than races at line " + num + " in file " + text);
+                                            result2 = Math.Max(-50, Math.Min(result2, 50));
+                                            list4.Add(result2);
+                                            if (list4.Count > races.Count)
+                                            {
+                                                throw new ApplicationException("More bias values than races at line " + num + " in file " + text);
+                                            }
+                                            num2 = num3 + 1;
+                                            num4++;
+                                            continue;
                                         }
-                                        num2 = num3 + 1;
-                                        num4++;
-                                        continue;
+                                        throw new ApplicationException("Could not read Bias Value " + num4 + " at line " + num + " of file " + text);
                                     }
-                                    throw new ApplicationException("Could not read Bias Value " + num4 + " at line " + num + " of file " + text);
+                                    list.Add(list4);
+                                    continue;
                                 }
-                                list.Add(list4);
-                                continue;
+                                throw new ApplicationException("Could not read Race Name at line " + num + " of file " + text);
                             }
-                            throw new ApplicationException("Could not read Race Name at line " + num + " of file " + text);
+                            throw new ApplicationException("Could not read Race Index number at line " + num + " of file " + text);
                         }
                         throw new ApplicationException("Could not read Race Index number at line " + num + " of file " + text);
                     }
-                    throw new ApplicationException("Could not read Race Index number at line " + num + " of file " + text);
-                }
-                for (int i = 0; i < races.Count; i++)
-                {
-                    int num5 = list2.IndexOf(races[i].Name);
-                    if (num5 < 0 || num5 >= list.Count)
+                    for (int i = 0; i < races.Count; i++)
                     {
-                        continue;
-                    }
-                    List<int> list5 = new List<int>();
-                    for (int j = 0; j < list[num5].Count; j++)
-                    {
-                        list5.Add(0);
-                    }
-                    for (int k = 0; k < list[num5].Count; k++)
-                    {
-                        int num6 = list2.IndexOf(races[k].Name);
-                        if (num6 >= 0 && num6 < list[num5].Count)
+                        int num5 = list2.IndexOf(races[i].Name);
+                        if (num5 < 0 || num5 >= list.Count)
                         {
-                            list5[k] = list[num5][num6];
+                            continue;
                         }
+                        List<int> list5 = new List<int>();
+                        for (int j = 0; j < list[num5].Count; j++)
+                        {
+                            list5.Add(0);
+                        }
+                        for (int k = 0; k < list[num5].Count; k++)
+                        {
+                            int num6 = list2.IndexOf(races[k].Name);
+                            if (num6 >= 0 && num6 < list[num5].Count)
+                            {
+                                list5[k] = list[num5][num6];
+                            }
+                        }
+                        races[i].Biases = new RaceBiasList();
+                        races[i].Biases.LoadBiases(races, list5);
                     }
-                    races[i].Biases = new RaceBiasList();
-                    races[i].Biases.LoadBiases(races, list5);
+                    streamReader.Close();
+                    fileStream.Close();
                 }
-                streamReader.Close();
-                fileStream.Close();
-            }
-            catch (ApplicationException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Error at line " + num + " reading file " + text);
+                catch (ApplicationException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw new ApplicationException("Error at line " + num + " reading file " + text);
+                }
             }
         }
+
 
         public static double ResolveStandardRaceBias(Race race, Race otherRace)
         {
