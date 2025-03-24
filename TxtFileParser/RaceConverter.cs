@@ -157,6 +157,16 @@ namespace TxtFileParser
         public bool Parse(string dirPath, string outputFolder)
         {
             bool res = true;
+            if (!Directory.Exists(dirPath))
+            {
+                Console.WriteLine($"Race folder {dirPath} not found");
+                return true;
+            }
+            if (!Directory.EnumerateFiles(dirPath).Any())
+            {
+                Console.WriteLine("Race folder contains no files, skipped");
+                return true;
+            }
             try
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(dirPath);

@@ -29,6 +29,11 @@ namespace TxtFileParser
         public bool Parse(string filePath, string outputFolder)
         {
             bool res = true;
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($"File {filePath} not found");
+                return true;
+            }
             try
             {
 

@@ -13,7 +13,13 @@ namespace TxtFileParser
         private const string _outputFolder = "Converted";
         static void Main(string[] args)
         {
-            if (args.Length != 1 && (!args[0].Equals("insert", StringComparison.InvariantCultureIgnoreCase) || !args[0].Equals("update", StringComparison.InvariantCultureIgnoreCase)))
+            if(args.Length == 0)
+            {
+                Console.WriteLine("Please provide argument");
+                Console.ReadLine();
+                return;
+            }
+            else if (args.Length > 0 && (!args[0].Equals("insert", StringComparison.InvariantCultureIgnoreCase) || !args[0].Equals("update", StringComparison.InvariantCultureIgnoreCase)))
             {
                 Console.WriteLine("Invalide argument");
                 Console.ReadLine();
