@@ -3534,7 +3534,10 @@ namespace DistantWorlds.Types
                 {
                     habitat = GenerateTreasureAsteroid(nearestSystemStar, num15, num14, orbitDirection, orbitSpeed, doInitialMove: false);
                 }
-                habitatList.Add(habitat);
+                if (habitat != null)
+                {
+                    habitatList.Add(habitat);
+                }
             }
             return habitatList;
         }

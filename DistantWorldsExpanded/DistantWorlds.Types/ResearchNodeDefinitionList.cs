@@ -865,23 +865,16 @@ namespace DistantWorlds.Types
                         throw new ApplicationException($"Wrong ProjectId {id}");
                     ResearchNodeDefinition node;
                     {//project
-                        string[] projText = reader.GetString(reader.GetOrdinal("Project")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        if (projText.Length != 8)
-                            throw new ApplicationException($"Wrong Project line at {id} at Reseach. Value - {string.Join(',', projText)}");
-                        string projName = projText[1];
+                        string projName = reader.GetString(reader.GetOrdinal("Name"));
                         if (string.IsNullOrWhiteSpace(projName))
                             throw new ApplicationException($"Could not read Name at ID {id} at Research");
 
+                        int techLevel = reader.GetInt32(reader.GetOrdinal("TechLevel"));
 
-                        if (!int.TryParse(projText[2], out int techLevel))
-                            throw new ApplicationException($"Could not read TechLevel at ID {id} at Research");
-
-                        if (!int.TryParse(projText[3], out int rowIdx))
-                            throw new ApplicationException($"Could not read Row at ID {id} at Research");
+                        int rowIdx = reader.GetInt32(reader.GetOrdinal("RowIdx"));
 
                         IndustryType industry;
-                        if (!int.TryParse(projText[4], out int indTempVal))
-                            throw new ApplicationException($"Could not read Industry at ID {id} at Research");
+                        int indTempVal = reader.GetInt32(reader.GetOrdinal("Industry"));
                         switch (indTempVal)
                         {
                             case 0:
@@ -898,18 +891,13 @@ namespace DistantWorlds.Types
                         }
 
                         ComponentCategoryType componentCategoryByIndex;
-                        if (!int.TryParse(projText[5], out int categoryTempVal))
-                            throw new ApplicationException($"Could not read Category at ID {id} at Research");
+                        int categoryTempVal = reader.GetInt32(reader.GetOrdinal("Category"));
                         componentCategoryByIndex = Galaxy.DetermineComponentCategoryByIndex(categoryTempVal);
                         if (componentCategoryByIndex == ComponentCategoryType.Undefined)
                             throw new ApplicationException($"Invalid Category at ID {id} of Research. Category should be between 0 and 26.");
 
-                        if (!int.TryParse(projText[6], out int specialFunctionCode))
-                            throw new ApplicationException($"Could not read SpecialFunctionCode at ID {id} at Research");
-
-
-                        if (!double.TryParse(projText[7], CultureInfo.InvariantCulture, out double baseCostMultOverride))
-                            throw new ApplicationException($"Could not read Base Cost Multiplier Override at ID {id} at Research");
+                        int specialFunctionCode = reader.GetInt32(reader.GetOrdinal("SpecialFunctionCode"));
+                        double baseCostMultOverride = reader.GetInt32(reader.GetOrdinal("SpecialFunctionCode"));
 
                         node = new ResearchNodeDefinition(id, projName, industry, componentCategoryByIndex, techLevel, 0.0f, rowIdx)
                         {
@@ -919,72 +907,71 @@ namespace DistantWorlds.Types
                         nodeDefinitionList.Add(node);
                     }
                     {//AllowedRaces
-                        string[] allowedRacesArr = reader.GetString(reader.GetOrdinal("AllowedRaces")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        foreach (var item in allowedRacesArr)
+                        using var allowedRacesReader = Main._FileDB.GetResearchAllowedRacesReader(id);
+                        if (allowedRacesReader.HasRows)
                         {
-                            Race race = races[item];
-                            if (race == null)
-                                throw new ApplicationException($"Could not find matching race name '{item}' at ID {id} at AllowedRaces in Research");
-                            node.SpecifiedRaces.Add(race);
+                            while (allowedRacesReader.Read())
+                            {
+                                string raceName = allowedRacesReader.GetString(allowedRacesReader.GetOrdinal("RaceName"));
+                                Race race = races[raceName];
+                                if (race == null)
+                                    throw new ApplicationException($"Could not find matching race name '{raceName}' at ID {id} at ResearchAllowedRaces");
+                                node.SpecifiedRaces.Add(race);
+                            }
                         }
                     }
                     {//Components
-                        string[] components = reader.GetString(reader.GetOrdinal("Components")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        foreach (var item in components)
+
+                        using var componentReader = Main._FileDB.GetResearchComponentsReader(id);
+                        if (componentReader.HasRows)
                         {
-                            if (!int.TryParse(item, out int componentId))
-                                throw new ApplicationException($"Could not read ComponentID at ID {id} at Components in Research");
-                            node.Components.Add(new Component(componentId));
+                            while (componentReader.Read())
+                            {
+                                node.Components.Add(new Component(componentReader.GetInt32(componentReader.GetOrdinal("ComponentID"))));
+                            }
                         }
                     }
                     {//ComponentImprovements
-                        string[] componentImprovements = reader.GetString(reader.GetOrdinal("ComponentImprovements")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-
-                        if (componentImprovements.Length > 0)
+                        using var componentImproveReader = Main._FileDB.GetResearchComponentImprovementsReader(id);
+                        if (componentImproveReader.HasRows)
                         {
-                            if (!int.TryParse(componentImprovements[0], out int componentId))
-                                throw new ApplicationException($"Could not read ComponentID at ID {id} at ComponentImprovements in Research");
-                            if (!int.TryParse(componentImprovements[1], out int techLevel))
-                                throw new ApplicationException($"Could not read TechLevel at ID {id} at ComponentImprovements in Research");
-                            if (!int.TryParse(componentImprovements[2], out int val1))
-                                throw new ApplicationException($"Could not read Value1 at ID {id} at ComponentImprovements in Research");
-                            if (!int.TryParse(componentImprovements[3], out int val2))
-                                throw new ApplicationException($"Could not read Value2 at ID {id} at ComponentImprovements in Research");
-                            if (!int.TryParse(componentImprovements[4], out int val3))
-                                throw new ApplicationException($"Could not read Value3 at ID {id} at ComponentImprovements in Research");
-                            if (!int.TryParse(componentImprovements[5], out int val4))
-                                throw new ApplicationException($"Could not read Value4 at ID {id} at ComponentImprovements in Research");
-                            if (!int.TryParse(componentImprovements[6], out int val5))
-                                throw new ApplicationException($"Could not read Value5 at ID {id} at ComponentImprovements in Research");
-                            if (!int.TryParse(componentImprovements[7], out int val6))
-                                throw new ApplicationException($"Could not read Value6 at ID {id} at ComponentImprovements in Research");
-                            if (!int.TryParse(componentImprovements[8], out int val7))
-                                throw new ApplicationException($"Could not read Value7 at ID {id} at ComponentImprovements in Research");
+                            while (componentImproveReader.Read())
+                            {
+                                int componentId = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("ComponentID"));
+                                int techLevel = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("TechLevel"));
+                                int val1 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value1"));
+                                int val2 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value2"));
+                                int val3 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value3"));
+                                int val4 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value4"));
+                                int val5 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value5"));
+                                int val6 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value6"));
+                                int val7 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value7"));
 
-                            ComponentImprovement componentImprovement = new ComponentImprovement(new Component(componentId), techLevel, val1, val2, val3, val4, val5, val6, val7);
-                            node.ComponentImprovements.Add(componentImprovement);
+                                ComponentImprovement componentImprovement = new ComponentImprovement(new Component(componentId), techLevel, val1, val2, val3, val4, val5, val6, val7);
+                                node.ComponentImprovements.Add(componentImprovement);
+                            }
                         }
                     }
                     {//Fighters
-                        string[] fightersArr = reader.GetString(reader.GetOrdinal("Fighters")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        foreach (var item in fightersArr)
+                        using var fighterReader = Main._FileDB.GetResearchFightersReader(id);
+                        if (fighterReader.HasRows)
                         {
-                            if (!int.TryParse(item, out int fighterId))
-                                throw new ApplicationException($"Could not read FighterID at ID {id} at Fighters in Research");
-                            FighterSpecification byId = Galaxy.FighterSpecificationsStatic.GetById(fighterId);
-                            if (byId != null)
+                            while (fighterReader.Read())
                             {
-                                node.Fighters.Add(byId);
+                                int fighterId = fighterReader.GetInt32(fighterReader.GetOrdinal("FighterID"));
+                                FighterSpecification byId = Galaxy.FighterSpecificationsStatic.GetById(fighterId);
+                                if (byId != null)
+                                {
+                                    node.Fighters.Add(byId);
+                                }
                             }
                         }
                     }
                     { //Facility
 
-                        string facStr = reader.GetString(reader.GetOrdinal("Facility"));
-                        if (!string.IsNullOrWhiteSpace(facStr))
+                        int facId = reader.GetInt32(reader.GetOrdinal("FacilityID"));
+                        if (facId != -1)
                         {
-                            if (!int.TryParse(facStr, out int facId))
-                                throw new ApplicationException($"Could not read FacilityId at ID {id} at Facility in Research");
                             PlanetaryFacilityDefinition byId = Galaxy.PlanetaryFacilityDefinitionsStatic.GetById(facId);
                             if (byId != null)
                             {
@@ -993,25 +980,16 @@ namespace DistantWorlds.Types
                         }
                     }
                     {//Abilities
-                        string[] abbArr = reader.GetString(reader.GetOrdinal("Abilities")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        if (abbArr.Length > 0)
+                        using var abilityReader = Main._FileDB.GetResearchAbilitiesReader(id);
+                        if (abilityReader.HasRows)
                         {
-                            if (abbArr.Length % 5 != 0)
-                                throw new ApplicationException($"Wrong Abbility value count ID {id} at Abilities in Research");
-
-                            for (int i = 0; i < abbArr.Length; i += 5)
+                            while (abilityReader.Read())
                             {
-                                string abbName = abbArr[i];
-                                if (string.IsNullOrWhiteSpace(abbName))
-                                    throw new ApplicationException($"Could not read Abbility Name at ID {id} at Abilities in Research");
-                                if (!int.TryParse(abbArr[i+1], out int abbType))
-                                    throw new ApplicationException($"Could not read Abbility Type at ID {id} at Abilities in Research");
-                                if (!int.TryParse(abbArr[i + 2], out int abbLevel))
-                                    throw new ApplicationException($"Could not read Abbility Type at ID {id} at Abilities in Research");
-                                if (!int.TryParse(abbArr[i + 3], out int abbValue))
-                                    throw new ApplicationException($"Could not read Abbility Value at ID {id} at Abilities in Research");
-                                if (!int.TryParse(abbArr[i + 4], out int relatedObjIdx))
-                                    throw new ApplicationException($"Could not read Abbility Related Object at ID {id} at Abilities in Research");
+                                string abbName = abilityReader.GetString(abilityReader.GetOrdinal("Name"));
+                                int abbType = abilityReader.GetInt32(abilityReader.GetOrdinal("Type"));
+                                int abbLevel = abilityReader.GetInt32(abilityReader.GetOrdinal("Level"));
+                                int abbValue = abilityReader.GetInt32(abilityReader.GetOrdinal("Value"));
+                                int relatedObjIdx = abilityReader.GetInt32(abilityReader.GetOrdinal("RelatedObjectIndex"));
 
                                 ResearchAbilityType type = abbType switch
                                 {
@@ -1029,69 +1007,51 @@ namespace DistantWorlds.Types
                         }
                     }
                     {//Plague change
-                        string[] plagueArr = reader.GetString(reader.GetOrdinal("PlagueChange")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        if (plagueArr.Length > 0)
+                        using var plagueReader = Main._FileDB.GetResearchPlagueChangeReader(id);
+                        if (plagueReader.HasRows)
                         {
-                            if (plagueArr.Length != 8)
-                                throw new ApplicationException($"Wrong PlagueChange value count ID {id} at PlagueChange in Research");
-
-                            if (!int.TryParse(plagueArr[0], out int plagId))
-                                throw new ApplicationException($"Could not read PlagueChange ID at ID {id} at PlagueChange in Research");
-                            if (plagId < (byte)0 || (int)plagId >= Galaxy.PlaguesStatic.Count)
-                                throw new ApplicationException($"Invalid PlagueId encountered. Must match PlagueId from Plagues. ID {id} at PlagueChange at Reseach");
-                            string plagDesc = plagueArr[1];
-                            if (string.IsNullOrWhiteSpace(plagDesc))
-                                throw new ApplicationException($"Could not read PlagueChange Description at ID {id} at PlagueChange in Research");
-                            if (!double.TryParse(plagueArr[2], CultureInfo.InvariantCulture, out double plagMortRate))
-                                throw new ApplicationException($"Could not read PlagueChange Mortality Rate at ID {id} at PlagueChange in Research");
-                            if (plagMortRate < 0.0 || plagMortRate > 5.0)
-                                throw new ApplicationException($"Invalid MortalityRate. Should be in range 0.000 to 5.0. ID {id} at PlagueChange in Research");
-                            if (!int.TryParse(plagueArr[3], CultureInfo.InvariantCulture, out int plagInfChance))
-                                throw new ApplicationException($"Could not read PlagueChange Infection chance at ID {id} at PlagueChange in Research");
-                            if (!float.TryParse(plagueArr[4], CultureInfo.InvariantCulture, out float plagDuration))
-                                throw new ApplicationException($"Could not read PlagueChange Mortality Rate at ID {id} at PlagueChange in Research");
-                            if (!double.TryParse(plagueArr[5], CultureInfo.InvariantCulture, out double plagExMortRate))
-                                throw new ApplicationException($"Could not read PlagueChange Exception Mortality Rate at ID {id} at PlagueChange in Research");
-                            if (plagExMortRate < 0.0 || plagExMortRate > 5.0)
-                                throw new ApplicationException($"Invalid ExceptionMortalityRate. Should be in range 0.000 to 5.0. ID {id} at PlagueChange in Research");
-                            if (!int.TryParse(plagueArr[6], CultureInfo.InvariantCulture, out int plagExInfChance))
-                                throw new ApplicationException($"Could not read PlagueChange Exception Infection chance at ID {id} at PlagueChange in Research");
-                            if (!float.TryParse(plagueArr[7], CultureInfo.InvariantCulture, out float plagExDuration))
-                                throw new ApplicationException($"Could not read PlagueChange Exception Mortality Duration at ID {id} at PlagueChange in Research");
-
-                            Plague plague1 = Galaxy.PlaguesStatic[plagId];
-                            if (plague1 != null)
+                            while (plagueReader.Read())
                             {
-                                node.PlagueChange = new Plague((byte)plagId, plague1.Name, plague1.PictureRef, plagMortRate, plagInfChance, plagDuration)
+                                int plagId = plagueReader.GetInt32(plagueReader.GetOrdinal("PlagueID"));
+                                if (plagId < (byte)0 || (int)plagId >= Galaxy.PlaguesStatic.Count)
+                                    throw new ApplicationException($"Invalid PlagueId encountered. Must match PlagueId from Plagues. ID {id} at PlagueChange at Reseach");
+                                string plagDesc = plagueReader.GetString(plagueReader.GetOrdinal("Description"));
+                                if (string.IsNullOrWhiteSpace(plagDesc))
+                                    throw new ApplicationException($"Could not read PlagueChange Description at ID {id} at PlagueChange in Research");
+                                double plagMortRate = plagueReader.GetDouble(plagueReader.GetOrdinal("MortalityRate"));
+                                if (plagMortRate < 0.0 || plagMortRate > 5.0)
+                                    throw new ApplicationException($"Invalid MortalityRate. Should be in range 0.000 to 5.0. ID {id} at PlagueChange in Research");
+                                int plagInfChance = plagueReader.GetInt32(plagueReader.GetOrdinal("InfectionChance"));
+                                float plagDuration = plagueReader.GetFloat(plagueReader.GetOrdinal("Duration"));
+                                double plagExMortRate = plagueReader.GetDouble(plagueReader.GetOrdinal("ExceptionMortalityRate"));
+                                if (plagExMortRate < 0.0 || plagExMortRate > 5.0)
+                                    throw new ApplicationException($"Invalid ExceptionMortalityRate. Should be in range 0.000 to 5.0. ID {id} at PlagueChange in Research");
+                                int plagExInfChance = plagueReader.GetInt32(plagueReader.GetOrdinal("ExceptionInfectionChance"));
+                                float plagExDuration = plagueReader.GetFloat(plagueReader.GetOrdinal("ExceptionDuration"));
+
+                                Plague plague1 = Galaxy.PlaguesStatic[plagId];
+                                if (plague1 != null)
                                 {
-                                    ExceptionMortalityRate = plagExMortRate,
-                                    ExceptionInfectionChance = plagExInfChance,
-                                    ExceptionDuration = plagExDuration,
-                                    ExceptionRaceName = plague1.ExceptionRaceName,
-                                    Description = plagDesc
-                                };
+                                    node.PlagueChange = new Plague((byte)plagId, plague1.Name, plague1.PictureRef, plagMortRate, plagInfChance, plagDuration)
+                                    {
+                                        ExceptionMortalityRate = plagExMortRate,
+                                        ExceptionInfectionChance = plagExInfChance,
+                                        ExceptionDuration = plagExDuration,
+                                        ExceptionRaceName = plague1.ExceptionRaceName,
+                                        Description = plagDesc
+                                    };
+                                }
                             }
                         }
                     }
                     {//Parents
-                        string[] parentsArr = reader.GetString(reader.GetOrdinal("Parents")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                        if (parentsArr.Length > 0)
+                        using var parentReader = Main._FileDB.GetResearchParentReader(id);
+                        if (parentReader.HasRows)
                         {
-                            if (parentsArr.Length % 2 != 0)
-                                throw new ApplicationException($"Wrong Parents value count ID {id} at Parents in Research");
-
-                            for (int i = 0; i < parentsArr.Length; i += 2)
+                            while (parentReader.Read())
                             {
-                                if (!int.TryParse(parentsArr[i], out int parentId))
-                                    throw new ApplicationException($"Could not read PlagueChange ID at ID {id} at PlagueChange in Research");
-
-                                bool required;
-                                if (parentsArr[i + 1].ToUpperInvariant() == "Y")
-                                    required = true;
-                                else if (parentsArr[i + 1].ToUpperInvariant() == "N")
-                                    required = false;
-                                else
-                                    throw new ApplicationException($"Could not read Required Parent  at ID {id} at Parents in Research");
+                                int parentId = parentReader.GetInt32(parentReader.GetOrdinal("ParentProjectID"));
+                                bool required = parentReader.GetBoolean(parentReader.GetOrdinal("RequiredParent"));
 
                                 intListArray[node.ResearchNodeId].Add(parentId);
                                 boolListArray[node.ResearchNodeId].Add(required);

@@ -46,7 +46,7 @@ namespace TxtFileParser
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Character conversion error: {ex.Message}");
+                Console.WriteLine($"GovBias conversion error: {ex.Message}");
                 res = false;
             }
             return res;

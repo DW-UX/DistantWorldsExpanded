@@ -1714,31 +1714,38 @@ namespace DistantWorlds.Types
             EmpirePolicy empirePolicy = new EmpirePolicy();
             try
             {
-                string text = applicationPath + "\\Policy\\";
-                if (isPirate)
+                if (!Main._ExpModMain.GetSettings().UseDbFiles)
                 {
-                    text += "pirate\\";
-                }
-                string text2 = text;
-                string text3 = string.Empty;
-                if (!string.IsNullOrEmpty(customPath))
-                {
-                    text3 = customPath + "Policy\\";
+                    string text = applicationPath + "\\Policy\\";
                     if (isPirate)
                     {
-                        text3 += "pirate\\";
+                        text += "pirate\\";
+                    }
+                    string text2 = text;
+                    string text3 = string.Empty;
+                    if (!string.IsNullOrEmpty(customPath))
+                    {
+                        text3 = customPath + "Policy\\";
+                        if (isPirate)
+                        {
+                            text3 += "pirate\\";
+                        }
+                    }
+                    string text4 = name + ".txt";
+                    if (!string.IsNullOrEmpty(text3) && File.Exists(text3 + text4))
+                    {
+                        empirePolicy.LoadFromFile(text3 + text4);
+                        return empirePolicy;
+                    }
+                    if (File.Exists(text2 + text4))
+                    {
+                        empirePolicy.LoadFromFile(text2 + text4);
+                        return empirePolicy;
                     }
                 }
-                string text4 = name + ".txt";
-                if (!string.IsNullOrEmpty(text3) && File.Exists(text3 + text4))
+                else
                 {
-                    empirePolicy.LoadFromFile(text3 + text4);
-                    return empirePolicy;
-                }
-                if (File.Exists(text2 + text4))
-                {
-                    empirePolicy.LoadFromFile(text2 + text4);
-                    return empirePolicy;
+                    empirePolicy.LoadFromFile(Main._FileDB.GetEmpirePolicyReader(name), name);
                 }
                 return empirePolicy;
             }

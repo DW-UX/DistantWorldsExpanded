@@ -907,6 +907,7 @@ namespace DistantWorlds
                 DBLoader.ModData data = new DBLoader.ModData(@"AdvMods\ExpansionMod\Patches");
                 Main._FileDB.LoadDB();
                 Main._FileDB.ApplyChanges(data.ParseChanges());
+                Main._FileDB.ApplyChanges(data.ParseUserChanges());
                 Galaxy.InitializeData(Application.StartupPath, customizationSetName, out resourceSystem_0);
                 InitializeComponent();
                 BaconStart.InitializeMore(this, gameOptions);

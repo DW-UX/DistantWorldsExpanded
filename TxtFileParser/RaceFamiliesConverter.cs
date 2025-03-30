@@ -45,7 +45,7 @@ namespace TxtFileParser
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Character conversion error: {ex.Message}");
+                Console.WriteLine($"RaceFamilies conversion error: {ex.Message}");
                 res = false;
             }
             return res;

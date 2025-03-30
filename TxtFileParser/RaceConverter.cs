@@ -173,8 +173,8 @@ namespace TxtFileParser
                 List<string[]> agentFirstNames = new List<string[]>();
                 foreach (var item in directoryInfo.GetFiles("*.txt", SearchOption.TopDirectoryOnly))
                 {
-                    FileStream fileStream = item.OpenRead();
-                    StreamReader streamReader = new StreamReader(fileStream);
+                    using FileStream fileStream = item.OpenRead();
+                    using StreamReader streamReader = new StreamReader(fileStream);
 
                     List<string> raceRes = new List<string>();
                     var fileText = streamReader.ReadToEnd().Split("\r\n", StringSplitOptions.TrimEntries);
@@ -199,7 +199,7 @@ namespace TxtFileParser
 
             catch (Exception ex)
             {
-                Console.WriteLine($"Race conversion error: {ex.Message}");
+                Console.WriteLine($"Policy conversion error: {ex.Message}");
                 res = false;
             }
             return res;

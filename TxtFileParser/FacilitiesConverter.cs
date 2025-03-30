@@ -57,7 +57,7 @@ namespace TxtFileParser
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Character conversion error: {ex.Message}");
+                Console.WriteLine($"Facility conversion error: {ex.Message}");
                 res = false;
             }
             return res;

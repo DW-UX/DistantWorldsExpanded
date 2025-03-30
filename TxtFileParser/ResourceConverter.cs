@@ -56,7 +56,7 @@ namespace TxtFileParser
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Character conversion error: {ex.Message}");
+                Console.WriteLine($"Resource conversion error: {ex.Message}");
                 res = false;
             }
             return res;
@@ -80,7 +80,7 @@ namespace TxtFileParser
                 }
                 else
                 {
-                    race.Value = $"INSERT INTO {_tableName} ({_IDCol}, {_NameCol}, {_PictureRefCol}, {_BasePriceCol}, {_TypeOfResourceCol}, {_SuperLuxuryBonusAmountCol}, {_IsFuelCol}, {_IsImportantPreWarpResourceCol}, {_ColonyGrowthResourceLevelCol}, {_ColonyManufacturingLevelCol}, {_DistributionlCol}) VALUES ({values[i][0]}, '{values[i][1]}', {values[i][2]}, {values[i][3]}, {values[i][4]}, {values[i][5]}, {(values[i][6].Trim().ToUpperInvariant() == "Y" ? true : false)}, {(values[i][7].Trim().ToUpperInvariant() == "Y" ? true : false)}, '{values[i][8]}', {values[i][9]}, '{values[i][10]}')";
+                    race.Value = $"INSERT INTO {_tableName} ({_IDCol}, {_NameCol}, {_PictureRefCol}, {_BasePriceCol}, {_TypeOfResourceCol}, {_SuperLuxuryBonusAmountCol}, {_IsFuelCol}, {_IsImportantPreWarpResourceCol}, {_ColonyGrowthResourceLevelCol}, {_ColonyManufacturingLevelCol}, {_DistributionlCol}) VALUES ({values[i][0]}, '{values[i][1]}', {values[i][2]}, {values[i][3]}, {values[i][4]}, {values[i][5]}, {(values[i][6].Trim().ToUpperInvariant() == "Y" ? true : false)}, {(values[i][7].Trim().ToUpperInvariant() == "Y" ? true : false)}, {values[i][8]}, {values[i][9]}, '{values[i][10]}')";
                 }
                 root.Add(race);
             }

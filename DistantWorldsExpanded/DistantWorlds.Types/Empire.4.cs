@@ -3203,42 +3203,45 @@ namespace DistantWorlds.Types
                 Resource resource = null;
                 if (_ControlColonyDevelopment)
                 {
-                    for (int num24 = 0; num24 < num23; num24++)
+                    if (resourceList.Count != 0)
                     {
-                        resource = resourceList[num24];
-                        int iterationCount = 0;
-                        bool flag3 = false;
-                        do
+                        for (int num24 = 0; num24 < num23; num24++)
                         {
-                            flag3 = false;
                             resource = resourceList[num24];
-                            foreach (HabitatResource resource5 in habitat.Resources)
+                            int iterationCount = 0;
+                            bool flag3 = false;
+                            do
                             {
-                                if (resource5.ResourceID == resource.ResourceID)
+                                flag3 = false;
+                                resource = resourceList[num24];
+                                foreach (HabitatResource resource5 in habitat.Resources)
                                 {
-                                    flag3 = true;
-                                    num24++;
+                                    if (resource5.ResourceID == resource.ResourceID)
+                                    {
+                                        flag3 = true;
+                                        num24++;
+                                    }
                                 }
                             }
-                        }
-                        while (Galaxy.ConditionCheckLimit(flag3, 100, ref iterationCount));
-                        int amountToOrder = 0;
-                        int maximumResourceLevel = (int)((double)num6 * 1.5);
-                        CheckResourceMeetsMinimumLevel(resource, num6, maximumResourceLevel, habitat, orders, out amountToOrder);
-                        if (amountToOrder <= 0)
-                        {
-                            continue;
-                        }
-                        double num25 = (double)amountToOrder * _Galaxy.ResourceCurrentPrices[resource.ResourceID];
-                        if (num25 < GetPrivateFunds())
-                        {
-                            if (builtObject != null && builtObject.IsSpacePort)
+                            while (Galaxy.ConditionCheckLimit(flag3, 100, ref iterationCount));
+                            int amountToOrder = 0;
+                            int maximumResourceLevel = (int)((double)num6 * 1.5);
+                            CheckResourceMeetsMinimumLevel(resource, num6, maximumResourceLevel, habitat, orders, out amountToOrder);
+                            if (amountToOrder <= 0)
                             {
-                                CreateOrder(builtObject, resource, amountToOrder, isState: false, OrderType.Standard, allowExpiry: true);
+                                continue;
                             }
-                            else
+                            double num25 = (double)amountToOrder * _Galaxy.ResourceCurrentPrices[resource.ResourceID];
+                            if (num25 < GetPrivateFunds())
                             {
-                                CreateOrder(habitat, resource, amountToOrder, isState: false, OrderType.Standard, allowExpiry: true);
+                                if (builtObject != null && builtObject.IsSpacePort)
+                                {
+                                    CreateOrder(builtObject, resource, amountToOrder, isState: false, OrderType.Standard, allowExpiry: true);
+                                }
+                                else
+                                {
+                                    CreateOrder(habitat, resource, amountToOrder, isState: false, OrderType.Standard, allowExpiry: true);
+                                }
                             }
                         }
                     }

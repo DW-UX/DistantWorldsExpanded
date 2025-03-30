@@ -20,15 +20,7 @@ namespace DistantWorlds.DBLoader
             {
                 throw new FileNotFoundException("Database file not found at path: " + fullPath);
             }
-            SQLiteConnectionStringBuilder builder = new SQLiteConnectionStringBuilder()
-            {
-                //DataSource = "'File:InMemoryDB?Mode=Memory&Cache=Shared'",
-                //Version = 3,
-                FullUri = "File:InMemoryDB?Mode=Memory&Cache=Shared",
-            };
             memoryConnection = new SQLiteConnection("FullUri='file:sharedmemdb?mode=memory&cache=shared'");
-            //memoryConnection = new SQLiteConnection("File:InMemoryDB?Mode=Memory&Cache=Shared");
-            //memoryConnection = new SQLiteConnection(builder.ConnectionString);
             memoryConnectionFile = new SQLiteConnection($"Data Source='{fullPath}'");
         }
 
@@ -36,7 +28,6 @@ namespace DistantWorlds.DBLoader
         {
             memoryConnectionFile.Open();
             memoryConnection.Open();
-            //using SQLiteCommand command = new SQLiteCommand("VACUUM INTO File:InMemoryDB?Cache=Shared", memoryConnectionFile);
             using SQLiteCommand command = new SQLiteCommand("VACUUM INTO 'file:sharedmemdb?mode=memory&cache=shared'", memoryConnectionFile);
             command.ExecuteNonQuery();
             memoryConnectionFile.Close();
@@ -135,10 +126,55 @@ namespace DistantWorlds.DBLoader
             using SQLiteCommand command = new SQLiteCommand("Select * From Components", memoryConnection);
             return command.ExecuteReader();
         }
+        public SQLiteDataReader GetComponentResourseRequiredReader(int compId)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From ComponentResourseRequired Where ComponentID = {compId}", memoryConnection);
+            return command.ExecuteReader();
+        }
+        public SQLiteDataReader GetEmpirePolicyReader(string name)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From EmpirePolicy Where EmpireName = '{name}'", memoryConnection);
+            return command.ExecuteReader();
+        }
         public int GetProjIdCOunt()
         {
-            using SQLiteCommand cmd = new SQLiteCommand("SELECT COUNT(ID) FROM Research WHERE Project <> ''", memoryConnection);
+            using SQLiteCommand cmd = new SQLiteCommand("SELECT COUNT(ID) FROM Research", memoryConnection);
             return Convert.ToInt32(cmd.ExecuteScalar());
+        }
+        public SQLiteDataReader GetResearchComponentsReader(int projId)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From ResearchComponents Where ProjectID = {projId}", memoryConnection);
+            return command.ExecuteReader();
+        }
+        public SQLiteDataReader GetResearchComponentImprovementsReader(int projId)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From ResearchComponentImprovements Where ProjectID = {projId}", memoryConnection);
+            return command.ExecuteReader();
+        }
+        public SQLiteDataReader GetResearchFightersReader(int projId)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From ResearchFighters Where ProjectID = {projId}", memoryConnection);
+            return command.ExecuteReader();
+        }
+        public SQLiteDataReader GetResearchAbilitiesReader(int projId)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From ResearchAbilities Where ProjectID = {projId}", memoryConnection);
+            return command.ExecuteReader();
+        }       
+        public SQLiteDataReader GetResearchPlagueChangeReader(int projId)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From ResearchPlagueChange Where ProjectID = {projId}", memoryConnection);
+            return command.ExecuteReader();
+        }
+        public SQLiteDataReader GetResearchAllowedRacesReader(int projId)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From ResearchAllowedRaces Where ProjectID = {projId}", memoryConnection);
+            return command.ExecuteReader();
+        }
+        public SQLiteDataReader GetResearchParentReader(int projId)
+        {
+            using SQLiteCommand command = new SQLiteCommand($"Select * From ResearchParent Where ProjectID = {projId}", memoryConnection);
+            return command.ExecuteReader();
         }
     }
 }

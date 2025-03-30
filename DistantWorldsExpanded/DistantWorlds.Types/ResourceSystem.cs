@@ -770,28 +770,28 @@ namespace DistantWorlds.Types
                         throw new ApplicationException($"Invalid distribution at {id} at Resourses. Distribution must have blocks of 5 values each");
                     for (int i = 0; i < distributionArr.Length; i += 5)
                     {
-                        int resourceType = int.Parse(distributionArr[0]);
+                        int resourceType = int.Parse(distributionArr[i]);
                         if (resourceType < 0 || resourceType > 2)
-                            throw new ApplicationException($"Invalid Type in Prevalence #{distributionArr[0]} at {id} at Resourses");
+                            throw new ApplicationException($"Invalid Type in Prevalence #{distributionArr[i]} at {id} at Resourses");
 
                         HabitatType subType;
-                        int result12 = int.Parse(distributionArr[1]);
+                        int result12 = int.Parse(distributionArr[i + 1]);
                         subType = Galaxy.ResolveHabitatTypeByIndexIncludeGasClouds(result12);
                         if (subType == HabitatType.Undefined)
-                            throw new ApplicationException($"Invalid Sub Type in Prevalence #{distributionArr[1]} at {id} at Resourses");
+                            throw new ApplicationException($"Invalid Sub Type in Prevalence #{distributionArr[i + 1]} at {id} at Resourses");
 
-                        float prevalenceValue = float.Parse(distributionArr[2], CultureInfo.InvariantCulture);
+                        float prevalenceValue = float.Parse(distributionArr[i + 2], CultureInfo.InvariantCulture);
                         if (superLuxuryBonusAmount == 0 && (prevalenceValue <= 0.0 || prevalenceValue > 1.0))
-                            throw new ApplicationException($"Invalid prevalence value in Prevalence #{distributionArr[2]} at {id} at Resourses");
+                            throw new ApplicationException($"Invalid prevalence value in Prevalence #{distributionArr[i + 2]} at {id} at Resourses");
 
 
-                        float abundanceMinimum = float.Parse(distributionArr[3], CultureInfo.InvariantCulture);
+                        float abundanceMinimum = float.Parse(distributionArr[i + 3], CultureInfo.InvariantCulture);
                         if (abundanceMinimum <= 0.0 || abundanceMinimum > 1.0)
-                            throw new ApplicationException($"Invalid Abundance Minimum in Prevalence #{distributionArr[3]} at {id} at Resourses");
+                            throw new ApplicationException($"Invalid Abundance Minimum in Prevalence #{distributionArr[i + 3]} at {id} at Resourses");
 
-                        float abundanceMaximum = float.Parse(distributionArr[4], CultureInfo.InvariantCulture);
+                        float abundanceMaximum = float.Parse(distributionArr[i + 4], CultureInfo.InvariantCulture);
                         if (abundanceMaximum <= 0.0 || abundanceMaximum > 1.0 || abundanceMaximum <= abundanceMinimum)
-                            throw new ApplicationException($"Invalid Abundance Maximum in Prevalence #{distributionArr[4]} at {id} at Resourses");
+                            throw new ApplicationException($"Invalid Abundance Maximum in Prevalence #{distributionArr[i + 4]} at {id} at Resourses");
 
                         bool isAsteroid = false;
                         bool isGasCloud = false;

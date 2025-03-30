@@ -30,5 +30,17 @@ namespace DistantWorlds.DBLoader
             }
             return changes;
         }
+        public List<string> ParseUserChanges()
+        {
+            var changes = new List<string>();
+            DirectoryInfo directory = new DirectoryInfo(_modFolder);
+            var files = directory.GetFiles("*.xml", SearchOption.TopDirectoryOnly);
+            foreach (var file in files.Where(x => !ModDbGlobals.Files.Any(y => y.Equals(x.Name, StringComparison.InvariantCultureIgnoreCase))))
+            {
+                XDocument doc = XDocument.Load(file.FullName);
+                changes.AddRange(doc.Root.Descendants().Select(x => x.Value).ToList());
+            }
+            return changes;
+        }
     }
 }

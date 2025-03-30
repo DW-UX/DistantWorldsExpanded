@@ -4231,7 +4231,7 @@ namespace DistantWorlds.Types
                         continue;
                     }
                     double num = 0.0;
-                    for (int k = 0; k < topResourceCount; k++)
+                    for (int k = 0; k < Math.Min(topResourceCount, resourceList.Count); k++)
                     {
                         if (resourceList[k].SortTag > 0.1 && habitat.Resources.ContainsId(resourceList[k].ResourceID))
                         {

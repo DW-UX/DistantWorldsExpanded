@@ -1901,8 +1901,11 @@ namespace DistantWorlds.Types
                         {
                             habitat3 = GenerateTreasureAsteroid(habitat, num31, num30, flag3, num19, doInitialMove: true);
                         }
-                        asteroidField.Add(habitat3);
-                        habitatList.Add(habitat3);
+                        if (habitat3 != null)
+                        {
+                            asteroidField.Add(habitat3);
+                            habitatList.Add(habitat3);
+                        }
                     }
                 }
             }

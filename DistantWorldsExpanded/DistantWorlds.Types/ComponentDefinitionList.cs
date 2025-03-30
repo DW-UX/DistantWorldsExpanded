@@ -471,24 +471,22 @@ namespace DistantWorlds.Types
                     component.Value6 = value6;
                     component.Value7 = value7;
 
-                    var resourceArr = reader.GetString(reader.GetOrdinal("ResourceRequired")).Split(',', StringSplitOptions.TrimEntries);
-                    if (resourceArr.Length % 2 != 0)
-                        throw new ApplicationException($"RequiredResource have wrong value count {resourceArr.Length} at ID {id} at Components");
-
-                    for (int i = 0; i < resourceArr.Length; i += 2)
+                    using var resourceReqReader = Main._FileDB.GetComponentResourseRequiredReader(id);
+                    if (resourceReqReader.HasRows)
                     {
-                        if (!byte.TryParse(resourceArr[i], out byte resId))
-                            throw new ApplicationException($"Could not read ResourceId in Required Resource #{component.RequiredResources.Count + 1} at ID {id} at Components");
-                        if ((int)resId >= Galaxy.ResourceSystemStatic.Resources.Count)
-                            throw new ApplicationException($"Invalid ResourceId in Required Resource #{resId} at ID {id} of Components. ResourceId must match a defined resource.");
+                        while (resourceReqReader.Read())
+                        {
+                            byte resId = resourceReqReader.GetByte(resourceReqReader.GetOrdinal("ResourceID"));
+                            if ((int)resId >= Galaxy.ResourceSystemStatic.Resources.Count)
+                                throw new ApplicationException($"Invalid ResourceId in Required Resource #{resId} at ID {id} of Components. ResourceId must match a defined resource.");
 
-                        if (!int.TryParse(resourceArr[i+1], out int resCount))
-                            throw new ApplicationException($"Could not read ResourceId in Required Resource #{component.RequiredResources.Count + 1} at ID {id} at Components");
-                        if (resCount <= 0 || resCount > (int)short.MaxValue)
-                            throw new ApplicationException($"Invalid Amount in Required Resource #{resCount} at ID {id} of Components. Amount must be greater than zero and less than 32767.");
+                            int resCount = resourceReqReader.GetByte(resourceReqReader.GetOrdinal("ResourceCount"));
+                            if (resCount <= 0 || resCount > (int)short.MaxValue)
+                                throw new ApplicationException($"Invalid Amount in Required Resource #{resCount} at ID {id} of Components. Amount must be greater than zero and less than 32767.");
 
-                        ComponentResource resource = new ComponentResource(resId, (short)resCount);
-                        component.RequiredResources.Add(resource);
+                            ComponentResource resource = new ComponentResource(resId, (short)resCount);
+                            component.RequiredResources.Add(resource);
+                        }
                     }
 
                     componentDefinitionList.Add(component);

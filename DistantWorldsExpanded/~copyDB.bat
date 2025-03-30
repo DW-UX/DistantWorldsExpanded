@@ -1,0 +1,1 @@
+copy FilesDb.db "c:\Projects\DistantWorldsExpanded\DistantWorldsExpanded\bin\Debug\net9.0-windows\AdvMods\FilesDb.db" /y /v

@@ -4000,38 +4000,41 @@ namespace DistantWorlds.Types
                     colony.Cargo.Add(cargo);
                 }
             }
-            for (int j = 0; j < 4; j++)
+            if (_Galaxy.ResourceSystem.LuxuryResources.Count != 0)
             {
-                int index = Galaxy.Rnd.Next(0, _Galaxy.ResourceSystem.LuxuryResources.Count);
-                ResourceDefinition resourceDefinition2 = _Galaxy.ResourceSystem.LuxuryResources[index];
-                if (resourceDefinition2 != null && resourceDefinition2.SuperLuxuryBonusAmount <= 0 && resourceDefinition2.ColonyManufacturingLevel <= 0)
+                for (int j = 0; j < 4; j++)
                 {
-                    cargo = new Cargo(new Resource(resourceDefinition2.ResourceID), 600, this);
+                    int index = Galaxy.Rnd.Next(0, _Galaxy.ResourceSystem.LuxuryResources.Count);
+                    ResourceDefinition resourceDefinition2 = _Galaxy.ResourceSystem.LuxuryResources[index];
+                    if (resourceDefinition2 != null && resourceDefinition2.SuperLuxuryBonusAmount <= 0 && resourceDefinition2.ColonyManufacturingLevel <= 0)
+                    {
+                        cargo = new Cargo(new Resource(resourceDefinition2.ResourceID), 600, this);
+                        colony.Cargo.Add(cargo);
+                    }
+                }
+                long num2 = Math.Max(500000000L, colony.Population.TotalAmount);
+                int num3 = (int)(Galaxy.ColonyAnnualLuxuryResourceConsumptionRate * (double)num2 * 5.0);
+                num3 = Math.Max(num3 * 3, Galaxy.MinimumLuxuryResourceReorderAmount);
+                num3 = Math.Max(400, num3);
+                num3 = (int)((double)num3 * 1.5);
+                for (int k = 0; k < val; k++)
+                {
+                    Resource resource = _Galaxy.SelectRandomLuxuryResource();
+                    int num4 = colony.Cargo.IndexOf(resource, this);
+                    int num5 = 0;
+                    while (num4 >= 0 && num5 < 10)
+                    {
+                        resource = _Galaxy.SelectRandomLuxuryResource();
+                        num4 = colony.Cargo.IndexOf(resource, this);
+                        num5++;
+                    }
+                    if (num4 >= 0)
+                    {
+                        resource = _Galaxy.SelectRandomLuxuryResource();
+                    }
+                    cargo = new Cargo(new Resource(resource.ResourceID), num3, this);
                     colony.Cargo.Add(cargo);
                 }
-            }
-            long num2 = Math.Max(500000000L, colony.Population.TotalAmount);
-            int num3 = (int)(Galaxy.ColonyAnnualLuxuryResourceConsumptionRate * (double)num2 * 5.0);
-            num3 = Math.Max(num3 * 3, Galaxy.MinimumLuxuryResourceReorderAmount);
-            num3 = Math.Max(400, num3);
-            num3 = (int)((double)num3 * 1.5);
-            for (int k = 0; k < val; k++)
-            {
-                Resource resource = _Galaxy.SelectRandomLuxuryResource();
-                int num4 = colony.Cargo.IndexOf(resource, this);
-                int num5 = 0;
-                while (num4 >= 0 && num5 < 10)
-                {
-                    resource = _Galaxy.SelectRandomLuxuryResource();
-                    num4 = colony.Cargo.IndexOf(resource, this);
-                    num5++;
-                }
-                if (num4 >= 0)
-                {
-                    resource = _Galaxy.SelectRandomLuxuryResource();
-                }
-                cargo = new Cargo(new Resource(resource.ResourceID), num3, this);
-                colony.Cargo.Add(cargo);
             }
             return val;
         }

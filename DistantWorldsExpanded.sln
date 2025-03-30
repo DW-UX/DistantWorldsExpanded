@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DwUxDesignHelper", "DwUxDes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TxtFileParser", "TxtFileParser\TxtFileParser.csproj", "{96B33B8E-37F4-4754-8623-852CEDAF7632}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patcher", "Patcher\Patcher.csproj", "{6DD35682-2B46-4050-84EC-7F1C3E62C335}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{96B33B8E-37F4-4754-8623-852CEDAF7632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96B33B8E-37F4-4754-8623-852CEDAF7632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96B33B8E-37F4-4754-8623-852CEDAF7632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DD35682-2B46-4050-84EC-7F1C3E62C335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD35682-2B46-4050-84EC-7F1C3E62C335}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD35682-2B46-4050-84EC-7F1C3E62C335}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD35682-2B46-4050-84EC-7F1C3E62C335}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

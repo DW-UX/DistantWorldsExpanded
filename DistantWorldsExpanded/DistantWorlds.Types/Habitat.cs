@@ -7286,6 +7286,8 @@ namespace DistantWorlds.Types
                 }
                 result = (double)num2 / (double)num;
             }
+            if (double.IsNaN(result))
+                result = 0;
             return result;
         }
 
