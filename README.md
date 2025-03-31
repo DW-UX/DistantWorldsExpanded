@@ -4,15 +4,21 @@ Expansion mod shortened to EM and Bacon mod to BM
 # Installation:
 ## First time:
   
-1.Unblock zip after download (file properties -> button or [checkbox](https://github.com/user-attachments/assets/e23b50d8-0740-41a3-97e7-3f8e555fcbe6) ) or don't use Windows built-in unpacking as it preserves alternate stream which block game from loading dll
+1. Unblock zip after download (file properties -> button or [checkbox](https://github.com/user-attachments/assets/e23b50d8-0740-41a3-97e7-3f8e555fcbe6) ) or don't use Windows built-in unpacking as it preserves alternate stream which block game from loading dll
+2. Copy "Full" folder to game root folder
 
-2.Copy "Full" folder to game root folder
+## Updating to newer version of EM:
+1. Copy all files from "Full" folder if you don't care about losing your settings
 
-Updating to newer version of EM:
-1.Copy all files from "Full" folder if you don't care about losing your settings
 Or
-2.Follow latest update instructions on changes in files to preserve your settings.
 
+2. Follow latest update instructions on changes in files to preserve your settings. Usualy you need to copy files from New folder
+
+# Plans for development:
+https://docs.google.com/spreadsheets/d/1kkAlo58E0PlX_MghXYLnTfGbRXW8STG3SyR5jWoZCbs/edit?gid=144762536#gid=144762536
+
+# Discord server:
+https://discord.gg/wJRcHWJaKG
 
 # Changes in BM:
 ## Assign mission:
