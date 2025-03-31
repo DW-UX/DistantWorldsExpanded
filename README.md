@@ -1,3 +1,7 @@
+# **Description**
+
+This mod is continuation of Bacon mod. I have permission to use decompiled code of DWU frov develepoers.
+
 # Notes:
 Expansion mod shortened to EM and Bacon mod to BM
 
