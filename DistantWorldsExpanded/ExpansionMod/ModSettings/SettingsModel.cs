@@ -16,7 +16,7 @@ namespace ExpansionMod.ModSettings
         public int TargetHappinessTaxColonyMedium { get; set; } = 16;
         public int TargetHappinessTaxColonySmall { get; set; } = 25;
         public bool EnableTargetHappinessTax { get; set; } = true;
-        public bool UseDbFiles { get; set; } = true;
+        public bool UseDbFiles { get; set; } = false;
 
         public SettingsModel Clone()
         {

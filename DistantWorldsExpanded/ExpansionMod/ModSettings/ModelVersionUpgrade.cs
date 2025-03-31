@@ -20,13 +20,13 @@ namespace ExpansionMod.ModSettings
                 updatedSettings.TargetHappinessTaxColonyMedium = 16;
                 updatedSettings.TargetHappinessTaxColonySmall = 25;
                 updatedSettings.EnableTargetHappinessTax = true;
-                updatedSettings.UseDbFiles = true;
+                updatedSettings.UseDbFiles = false;
                 res = true;
             }
             else if (model.Version == 2)
             {
                 updatedSettings.Version = 3;
-                updatedSettings.UseDbFiles = true;
+                updatedSettings.UseDbFiles = false;
                 res = true;
             }
             return res;
