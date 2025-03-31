@@ -4,8 +4,8 @@ Expansion mod shortened to EM and Bacon mod to BM
 # Installation:
 ## First time:
   
-1.Unblock zip after download (file properties -> button or checkbox ) or don't use Windows built-in unpacking as it preserves alternate stream which block game from loading dll
-<details><summary>Image</summary>![image](https://github.com/user-attachments/assets/e23b50d8-0740-41a3-97e7-3f8e555fcbe6)</details>
+1.Unblock zip after download (file properties -> button or [checkbox](https://github.com/user-attachments/assets/e23b50d8-0740-41a3-97e7-3f8e555fcbe6) ) or don't use Windows built-in unpacking as it preserves alternate stream which block game from loading dll
+
 2.Copy "Full" folder to game root folder
 
 Updating to newer version of EM:
