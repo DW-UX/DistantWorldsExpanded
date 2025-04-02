@@ -16,5 +16,6 @@ namespace DistantWorlds.Types
     Pirate,
     Mercenary,
     Smuggler,
+    Legendary
   }
 }

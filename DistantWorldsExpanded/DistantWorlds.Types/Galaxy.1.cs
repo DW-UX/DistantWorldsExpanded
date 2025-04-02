@@ -383,6 +383,13 @@ namespace DistantWorlds.Types
                     raceVictoryConditionList.Add(new RaceVictoryCondition(RaceVictoryConditionType.ResearchMostAdvanced, 0.0, 15f));
                     raceVictoryConditionList.Add(new RaceVictoryCondition(RaceVictoryConditionType.PirateBuildCriminalNetwork, 0.0, 15f));
                     break;
+                case PiratePlayStyle.Legendary:
+                    raceVictoryConditionList.Add(new RaceVictoryCondition(RaceVictoryConditionType.PirateControlColoniesPercentage, 10.0, 20f));
+                    raceVictoryConditionList.Add(new RaceVictoryCondition(RaceVictoryConditionType.PirateBuildCriminalNetwork, 0.0, 20f));
+                    raceVictoryConditionList.Add(new RaceVictoryCondition(RaceVictoryConditionType.PirateMostProtectionIncome, 0.0, 20f));
+                    raceVictoryConditionList.Add(new RaceVictoryCondition(RaceVictoryConditionType.PirateMostSuccessfulMissionsAttack, 0.0, 20f));
+                    raceVictoryConditionList.Add(new RaceVictoryCondition(RaceVictoryConditionType.CaptureMostShips, 0.0, 20f));
+                    break;
             }
             return raceVictoryConditionList;
         }

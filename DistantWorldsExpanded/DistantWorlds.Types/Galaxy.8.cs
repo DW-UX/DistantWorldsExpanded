@@ -3985,7 +3985,7 @@ namespace DistantWorlds.Types
         {
             if (string.IsNullOrEmpty(name))
             {
-                name = GeneratePirateEmpireName(habitat, PiratePlayStyle.Pirate);
+                name = GeneratePirateEmpireName(habitat, PiratePlayStyle.Legendary);
             }
             if (race == null)
             {
@@ -4000,7 +4000,7 @@ namespace DistantWorlds.Types
                 }
             }
             SelectRelativeHabitatSurfacePoint(habitat, out var x, out var y);
-            Empire empire = GeneratePirateEmpire(habitat, (int)x, (int)y, race, -1, techLevel, PiratePlayStyle.Pirate, isPlayerEmpire: false, isSuperPirates: true);
+            Empire empire = GeneratePirateEmpire(habitat, (int)x, (int)y, race, -1, techLevel, PiratePlayStyle.Legendary, isPlayerEmpire: false, isSuperPirates: true);
             empire.PirateEmpireSuperPirates = true;
             Design design = empire.GenerateDesignFromSpec(DesignSpecifications.GetBySubRole(BuiltObjectSubRole.Escort), techLevel);
             Design design2 = empire.GenerateDesignFromSpec(DesignSpecifications.GetBySubRole(BuiltObjectSubRole.Frigate), techLevel);
@@ -4290,12 +4290,13 @@ namespace DistantWorlds.Types
 
         public PiratePlayStyle SelectRandomPiratePlaystyle()
         {
-            return Rnd.Next(0, 4) switch
+            return Rnd.Next(0, 5) switch
             {
                 0 => PiratePlayStyle.Balanced,
                 1 => PiratePlayStyle.Pirate,
                 2 => PiratePlayStyle.Mercenary,
                 3 => PiratePlayStyle.Smuggler,
+                4 => PiratePlayStyle.Legendary,
                 _ => PiratePlayStyle.Balanced,
             };
         }
@@ -4465,6 +4466,21 @@ namespace DistantWorlds.Types
                     planetaryFacilityBuildFactor = 1.0;
                     planetaryWonderBuildFactor = 0.75;
                     break;
+                case 
+                PiratePlayStyle.Legendary:
+                    smugglingIncomeFactor = 1.5;
+                    raidStrengthFactor = 1.25;
+                    raidBonusFactor = 1.4;
+                    shipMaintenancePrivateFactor = 0.75;
+                    shipMaintenanceStateFactor = 0.75;
+                    researchWeaponsFactor = 1.2;
+                    researchEnergyFactor = 1.1;
+                    researchHighTechFactor = 1.1;
+                    planetaryFacilityEliminationFactor = 1.7;
+                    lootingFactor = 1.33;
+                    planetaryFacilityBuildFactor = 0.75;
+                    planetaryWonderBuildFactor = 0.75;
+                    break;
             }
         }
 
@@ -4585,6 +4601,9 @@ namespace DistantWorlds.Types
                         case PiratePlayStyle.Smuggler:
                             empire.FlagShape = GenerateEmpireFlag(mainColor, secondaryColor, -1, range2, ref smallFlagPicture, ref largeFlagPicture);
                             break;
+                        case PiratePlayStyle.Legendary:
+                            empire.FlagShape = GenerateEmpireFlag(mainColor, secondaryColor, -1, range, ref smallFlagPicture, ref largeFlagPicture);
+                            break;
                     }
                 }
                 else
@@ -4674,6 +4693,12 @@ namespace DistantWorlds.Types
                             break;
                         case PiratePlayStyle.Smuggler:
                             escortShipsCount = 1;
+                            smallFreighterCount = 4;
+                            minishShipCount = 1;
+                            count = 3;
+                            break;
+                        case PiratePlayStyle.Legendary:
+                            escortShipsCount = 4;
                             smallFreighterCount = 4;
                             minishShipCount = 1;
                             count = 3;
