@@ -3177,7 +3177,7 @@ namespace DistantWorlds.Types
                 }
                 double num2 = _Galaxy.CalculateDistance(pirateEmpireX, pirateEmpireY, colony.Xpos, colony.Ypos);
                 double num3 = (double)Galaxy.SizeX * 0.25;
-                if (PiratePlayStyle == PiratePlayStyle.Balanced)
+                if (PiratePlayStyle == PiratePlayStyle.Balanced || PiratePlayStyle == PiratePlayStyle.Legendary)
                 {
                     num3 *= 1.4;
                 }
@@ -4774,6 +4774,10 @@ namespace DistantWorlds.Types
                                 else if (PiratePlayStyle == PiratePlayStyle.Mercenary)
                                 {
                                     maxValue = 4;
+                                }
+                                else if (PiratePlayStyle == PiratePlayStyle.Legendary)
+                                {
+                                    maxValue = 5;
                                 }
                                 switch (Galaxy.Rnd.Next(0, maxValue))
                                 {

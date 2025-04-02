@@ -3140,6 +3140,9 @@ namespace DistantWorlds
                 case 3:
                     piratePlayStyle_ = PiratePlayStyle.Smuggler;
                     break;
+                case 4:
+                    piratePlayStyle_ = PiratePlayStyle.Legendary;
+                    break;
             }
             method_101(piratePlayStyle_, bool_5: false);
         }
@@ -3167,6 +3170,10 @@ namespace DistantWorlds
                 case PiratePlayStyle.Smuggler:
                     text = TextResolver.GetText("Pirate Playstyle Description Smuggler");
                     list = Galaxy.ResolvePirateFactionModifierDescriptions(PiratePlayStyle.Smuggler, out factorValues, out modifiersAreBonuses);
+                    break;
+                case PiratePlayStyle.Legendary:
+                    text = TextResolver.GetText("Pirate Playstyle Description Smuggler");
+                    list = Galaxy.ResolvePirateFactionModifierDescriptions(PiratePlayStyle.Legendary, out factorValues, out modifiersAreBonuses);
                     break;
             }
             if (list.Count > 0)

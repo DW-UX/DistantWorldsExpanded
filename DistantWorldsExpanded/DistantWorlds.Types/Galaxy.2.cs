@@ -2635,6 +2635,9 @@ namespace DistantWorlds.Types
                 case PiratePlayStyle.Smuggler:
                     result = TextResolver.GetText("PiratePlayStyle Smuggler");
                     break;
+                case PiratePlayStyle.Legendary:
+                    result = "Legendary";
+                    break;
             }
             return result;
         }

@@ -596,7 +596,8 @@ namespace DistantWorlds
                         webEncyclopediaContent.Refresh(WebBrowserRefreshOption.Completely);
                         webEncyclopediaContent.Document.Encoding = "utf-8";
                     }
-                    else {
+                    else
+                    {
                         webEncyclopediaContent.Navigate2(text3);
                         //webEncyclopediaContent.Navigate(text3);
                     }
@@ -1535,7 +1536,7 @@ namespace DistantWorlds
             pnlGameOptions.lblOptionsMainViewZoomSpeed.Font = font_1;
             pnlGameOptions.lblOptionsMainViewStarFieldSize.Font = font_1;
             pnlGameOptions.lblOptionsMainViewStarFieldSize.BringToFront();
-            
+
             var sliderLabelX = pnlGameOptions.lblOptionsMainViewScrollSpeed.Location.X;
             var sliderLabelY = 24;
             var sliderLineHeight = 16;
@@ -1543,7 +1544,7 @@ namespace DistantWorlds
             var sliderWidth = 515;
             var sliderX = 130;
             var sliderY = 26;
-            
+
             pnlGameOptions.lblOptionsMainViewScrollSpeed.Location = new Point(sliderLabelX, sliderLabelY);
             sliderLabelY += 16 + sliderYGap;
             pnlGameOptions.lblOptionsMainViewZoomSpeed.Location = new Point(sliderLabelX, sliderLabelY);
@@ -1559,21 +1560,21 @@ namespace DistantWorlds
             pnlGameOptions.sldOptionsMainViewZoomSpeed.Minimum = 1;
             pnlGameOptions.sldOptionsMainViewZoomSpeed.Location = new Point(sliderX, sliderY);
             pnlGameOptions.sldOptionsMainViewZoomSpeed.Size = new Size(sliderWidth, sliderLineHeight);
-            
+
             sliderY += 16 + sliderYGap;
             pnlGameOptions.sldOptionsMainViewStarFieldSize.Location = new Point(sliderX, sliderY);
             pnlGameOptions.sldOptionsMainViewStarFieldSize.Size = new Size(sliderWidth, sliderLineHeight);
-            
+
             sliderY += 16 + sliderYGap;
             pnlGameOptions.sldOptionsMainViewGuiScale.Location = new Point(sliderX, sliderY);
             pnlGameOptions.sldOptionsMainViewGuiScale.Size = new Size(sliderWidth, sliderLineHeight);
-            
+
             sliderY += 16 + sliderYGap;
-                
+
             // maybe move to straddling the group panel border?
             pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Location = new Point(395, sliderY);
             pnlGameOptions.btnGameOptionsAdvancedDisplaySettings.Size = new Size(250, 26);
-            
+
             pnlGameOptions.grpOptionsControl.Font = font_7;
             pnlGameOptions.grpOptionsDisplaySettings.Font = font_7;
             pnlGameOptions.grpOptionsPopupMessages.Font = font_7;
@@ -2291,7 +2292,7 @@ namespace DistantWorlds
             options.GuiScale = pnlGameOptions.sldOptionsMainViewGuiScale.Value / 1000.0;
             //var guiScale = (float)options.GuiScale;
             //main_0.Scale(new SizeF(guiScale, guiScale));
-            
+
             options.ShowSystemNebulae = pnlGameOptionsAdvancedDisplaySettings.chkOptionsShowSystemNebulae.Checked;
             options.MusicVolume = (double)pnlGameOptions.sldOptionsMusicVolume.Value / 100.0;
             options.SoundEffectsVolume = (double)pnlGameOptions.sldOptionsSoundEffectsVolume.Value / 100.0;
@@ -3014,7 +3015,8 @@ namespace DistantWorlds
             method_185();
         }
 
-        private void chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited_CheckedChanged(object sender, EventArgs e) {
+        private void chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited_CheckedChanged(object sender, EventArgs e)
+        {
             var gameOptions = main_0.gameOptions_0;
             var pnlAdvSettings = pnlGameOptionsAdvancedDisplaySettings;
 
@@ -3210,6 +3212,7 @@ namespace DistantWorlds
                 1 => PiratePlayStyle.Pirate,
                 2 => PiratePlayStyle.Mercenary,
                 3 => PiratePlayStyle.Smuggler,
+                4 => PiratePlayStyle.Legendary,
                 _ => PiratePlayStyle.Balanced,
             };
         }
@@ -3223,6 +3226,7 @@ namespace DistantWorlds
                 1 => PiratePlayStyle.Pirate,
                 2 => PiratePlayStyle.Mercenary,
                 3 => PiratePlayStyle.Smuggler,
+                4 => PiratePlayStyle.Legendary,
                 _ => PiratePlayStyle.Balanced,
             };
         }
@@ -3236,6 +3240,7 @@ namespace DistantWorlds
                 1 => PiratePlayStyle.Pirate,
                 2 => PiratePlayStyle.Mercenary,
                 3 => PiratePlayStyle.Smuggler,
+                4 => PiratePlayStyle.Legendary,
                 _ => PiratePlayStyle.Undefined,
             };
         }
@@ -4213,6 +4218,9 @@ namespace DistantWorlds
                 case PiratePlayStyle.Smuggler:
                     selectedIndex = 3;
                     break;
+                case PiratePlayStyle.Legendary:
+                    selectedIndex = 4;
+                    break;
             }
             if (bool_5)
             {
@@ -4805,19 +4813,21 @@ namespace DistantWorlds
             chkStoryShadows.Text = TextResolver.GetText("Enable Shadows story events");
             chkStoryDistantWorlds.Text = TextResolver.GetText("Enable original Distant Worlds story events");
             chkQuickStartDistantWorldsStoryEvents.Text = TextResolver.GetText("Distant Worlds original storyline");
-            cmbVictoryPiratePlayStyle.Items.AddRange(new string[4]
+            cmbVictoryPiratePlayStyle.Items.AddRange(new string[]
             {
             Galaxy.ResolveDescription(PiratePlayStyle.Balanced),
             Galaxy.ResolveDescription(PiratePlayStyle.Pirate),
             Galaxy.ResolveDescription(PiratePlayStyle.Mercenary),
-            Galaxy.ResolveDescription(PiratePlayStyle.Smuggler)
+            Galaxy.ResolveDescription(PiratePlayStyle.Smuggler),
+            Galaxy.ResolveDescription(PiratePlayStyle.Legendary)
             });
-            cmbJumpStartVictoryPiratePlayStyle.Items.AddRange(new string[4]
+            cmbJumpStartVictoryPiratePlayStyle.Items.AddRange(new string[]
             {
             Galaxy.ResolveDescription(PiratePlayStyle.Balanced),
             Galaxy.ResolveDescription(PiratePlayStyle.Pirate),
             Galaxy.ResolveDescription(PiratePlayStyle.Mercenary),
-            Galaxy.ResolveDescription(PiratePlayStyle.Smuggler)
+            Galaxy.ResolveDescription(PiratePlayStyle.Smuggler),
+            Galaxy.ResolveDescription(PiratePlayStyle.Legendary)
             });
             chkStartNewGameEnableTechTrading.Text = TextResolver.GetText("Allow Tech Trading");
             chkStartNewGameEnableGiantKaltors.Text = TextResolver.GetText("Allow Giant Kaltors at game start");

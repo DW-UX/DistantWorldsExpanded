@@ -5184,6 +5184,9 @@ namespace DistantWorlds
                 case 3:
                     piratePlayStyle_ = PiratePlayStyle.Smuggler;
                     break;
+                case 4:
+                    piratePlayStyle_ = PiratePlayStyle.Legendary;
+                    break;
             }
             method_101(piratePlayStyle_, bool_5: true);
         }

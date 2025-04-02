@@ -1054,6 +1054,10 @@ namespace DistantWorlds.Types
                     valueThreshold = 0.5;
                     maximumDefenseStrength = 80000;
                     break;
+                case PiratePlayStyle.Legendary:
+                    valueThreshold = 0.0;
+                    maximumDefenseStrength = 120000;
+                    break;
             }
             HabitatPrioritizationList habitatPrioritizationList = IdentifyDesiredEnemyMiningStations(5, excludeRecentRaids: true, valueThreshold);
             if (habitatPrioritizationList.Count > 0)
