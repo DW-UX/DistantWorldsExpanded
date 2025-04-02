@@ -990,18 +990,64 @@ namespace DistantWorlds.Types
                                 int abbLevel = abilityReader.GetInt32(abilityReader.GetOrdinal("Level"));
                                 int abbValue = abilityReader.GetInt32(abilityReader.GetOrdinal("Value"));
                                 int relatedObjIdx = abilityReader.GetInt32(abilityReader.GetOrdinal("RelatedObjectIndex"));
-
-                                ResearchAbilityType type = abbType switch
+                                object relatedObj = null;
+                                ResearchAbilityType type = ResearchAbilityType.Undefined;
+                                switch (abbType)
                                 {
-                                    0 => ResearchAbilityType.Boarding,
-                                    1 => ResearchAbilityType.ColonizeHabitatType,
-                                    2 => ResearchAbilityType.ConstructionSize,
-                                    3 => ResearchAbilityType.EnableShipSubRole,
-                                    4 => ResearchAbilityType.PopulationGrowthRate,
-                                    5 => ResearchAbilityType.Troop,
-                                    _ => ResearchAbilityType.Undefined
-                                };
-                                ResearchAbility researchAbility = new ResearchAbility(abbName, type, abbLevel, abbValue, relatedObjIdx);
+                                    case 0:
+                                        type = ResearchAbilityType.Boarding;
+                                        break;
+                                    case 1:
+                                        type = ResearchAbilityType.ColonizeHabitatType;
+                                        break;
+                                    case 2:
+                                        type = ResearchAbilityType.ConstructionSize;
+                                        break;
+                                    case 3:
+                                        type = ResearchAbilityType.EnableShipSubRole;
+                                        break;
+                                    case 4:
+                                        type = ResearchAbilityType.PopulationGrowthRate;
+                                        break;
+                                    case 5:
+                                        type = ResearchAbilityType.Troop;
+                                        break;
+                                }
+                                switch (type)
+                                {
+                                    case ResearchAbilityType.EnableShipSubRole:
+                                        switch (relatedObjIdx)
+                                        {
+                                            case 0:
+                                                relatedObj = (object)BuiltObjectSubRole.Carrier;
+                                                break;
+                                            case 1:
+                                                relatedObj = (object)BuiltObjectSubRole.ResupplyShip;
+                                                break;
+                                        }
+                                        break;
+                                    case ResearchAbilityType.Troop:
+                                        switch (relatedObjIdx)
+                                        {
+                                            case 0:
+                                                relatedObj = (object)TroopType.Undefined;
+                                                break;
+                                            case 1:
+                                                relatedObj = (object)TroopType.Infantry;
+                                                break;
+                                            case 2:
+                                                relatedObj = (object)TroopType.Armored;
+                                                break;
+                                            case 3:
+                                                relatedObj = (object)TroopType.Artillery;
+                                                break;
+                                            case 4:
+                                                relatedObj = (object)TroopType.SpecialForces;
+                                                break;
+                                        }
+                                        break;
+                                }
+                                ResearchAbility researchAbility = new ResearchAbility(abbName, type, abbLevel, abbValue, relatedObj);
                                 node.Abilities.Add(researchAbility);
                             }
                         }
