@@ -4651,42 +4651,42 @@ namespace DistantWorlds.Types
                             builtObject.Cargo.Add(new Cargo(new Resource(resourceDefinition.ResourceID), num6, empire));
                         }
                     }
-                    int num7 = 2;
-                    int num8 = 2;
-                    int num9 = 2;
-                    int num10 = 1;
-                    int num11 = 1;
-                    int num12 = 1;
+                    int escortShipsCount = 2;
+                    int explorationShipCount = 2;
+                    int smallFreighterCount = 2;
+                    int constructorShipCount = 1;
+                    int resuplyShipCount = 1;
+                    int minishShipCount = 1;
                     int count = 2;
                     switch (empire.PiratePlayStyle)
                     {
                         case PiratePlayStyle.Pirate:
-                            num7 = 3;
-                            num9 = 1;
-                            num12 = 1;
+                            escortShipsCount = 3;
+                            smallFreighterCount = 1;
+                            minishShipCount = 1;
                             break;
                         case PiratePlayStyle.Mercenary:
-                            num7 = 4;
-                            num8 = 1;
-                            num9 = 1;
-                            num12 = 0;
+                            escortShipsCount = 4;
+                            explorationShipCount = 1;
+                            smallFreighterCount = 1;
+                            minishShipCount = 0;
                             count = 1;
                             break;
                         case PiratePlayStyle.Smuggler:
-                            num7 = 1;
-                            num9 = 4;
-                            num12 = 1;
+                            escortShipsCount = 1;
+                            smallFreighterCount = 4;
+                            minishShipCount = 1;
                             count = 3;
                             break;
                     }
                     if (!flag)
                     {
-                        num7 /= 2;
-                        num8 /= 2;
-                        num11 = 0;
+                        escortShipsCount /= 2;
+                        explorationShipCount /= 2;
+                        resuplyShipCount = 0;
                     }
                     int num13 = 1;
-                    for (int k = 0; k < num7; k++)
+                    for (int k = 0; k < escortShipsCount; k++)
                     {
                         Design design2 = null;
                         if (num13 == 1)
@@ -4718,7 +4718,7 @@ namespace DistantWorlds.Types
                     Design design3 = empire.LatestDesigns.FindNewestCanBuild(BuiltObjectSubRole.ExplorationShip, empire);
                     if (design3 != null)
                     {
-                        for (int l = 0; l < num8; l++)
+                        for (int l = 0; l < explorationShipCount; l++)
                         {
                             design3.BuildCount++;
                             string name4 = SelectRandomUniqueStandardShipName(habitat);
@@ -4735,7 +4735,7 @@ namespace DistantWorlds.Types
                     Design design4 = empire.LatestDesigns.FindNewestCanBuild(BuiltObjectSubRole.SmallFreighter, empire);
                     if (design4 != null)
                     {
-                        for (int m = 0; m < num9; m++)
+                        for (int m = 0; m < smallFreighterCount; m++)
                         {
                             design4.BuildCount++;
                             string name5 = SelectUniqueBuiltObjectName(design4, habitat);
@@ -4752,7 +4752,7 @@ namespace DistantWorlds.Types
                     Design design5 = empire.LatestDesigns.FindNewestCanBuild(BuiltObjectSubRole.MiningShip, empire);
                     if (design5 != null)
                     {
-                        for (int n = 0; n < num12; n++)
+                        for (int n = 0; n < minishShipCount; n++)
                         {
                             design5.BuildCount++;
                             string name6 = SelectUniqueBuiltObjectName(design5, habitat);
@@ -4769,7 +4769,7 @@ namespace DistantWorlds.Types
                     Design design6 = empire.LatestDesigns.FindNewestCanBuild(BuiltObjectSubRole.GasMiningShip, empire);
                     if (design6 != null)
                     {
-                        for (int num14 = 0; num14 < num12; num14++)
+                        for (int num14 = 0; num14 < minishShipCount; num14++)
                         {
                             design6.BuildCount++;
                             string name7 = SelectUniqueBuiltObjectName(design6, habitat);
@@ -4786,7 +4786,7 @@ namespace DistantWorlds.Types
                     Design design7 = empire.LatestDesigns.FindNewestCanBuild(BuiltObjectSubRole.ConstructionShip, empire);
                     if (design7 != null)
                     {
-                        for (int num15 = 0; num15 < num10; num15++)
+                        for (int num15 = 0; num15 < constructorShipCount; num15++)
                         {
                             design7.BuildCount++;
                             string name8 = SelectRandomUniqueStandardShipName(habitat);
@@ -4803,7 +4803,7 @@ namespace DistantWorlds.Types
                     Design design8 = empire.Designs.FindNewest(BuiltObjectSubRole.ResupplyShip);
                     if (design8 != null)
                     {
-                        for (int num16 = 0; num16 < num11; num16++)
+                        for (int num16 = 0; num16 < resuplyShipCount; num16++)
                         {
                             design8.BuildCount++;
                             string name9 = SelectUniqueBuiltObjectName(design4, habitat);
