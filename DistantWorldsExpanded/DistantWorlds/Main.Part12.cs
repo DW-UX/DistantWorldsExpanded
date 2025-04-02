@@ -3931,7 +3931,7 @@ namespace DistantWorlds {
                 }
                 int num = (int)array[0];
                 int millisecondsTimeout = (int)array[1];
-                while (bool_3)
+                while (bool_3 && !Class5._IsExiting)
                 {
                     if (list_0.Length <= num || object_0.Length <= num)
                     {

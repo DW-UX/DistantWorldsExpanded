@@ -2256,16 +2256,22 @@ namespace DistantWorlds
             }
             taskList.Add(Task.Run(() =>
             {
-                array3[4] = method_12(text5 + array5[4] + ".png", bool_28: false);
-                if (array3[4] == null)
+                if (File.Exists(text5 + array5[4] + ".png"))
+                {
+                    array3[4] = method_12(text5 + array5[4] + ".png", bool_28: false);
+                }
+                else if (File.Exists(text4 + array5[4] + ".png"))
                 {
                     array3[4] = method_12(text4 + array5[4] + ".png", bool_28: true);
                 }
             }));
             taskList.Add(Task.Run(() =>
             {
-                array4[4] = method_12(text5 + array5[4] + "_a.png", bool_28: false);
-                if (array4[4] == null)
+                if (File.Exists(text5 + array5[4] + "_a.png"))
+                {
+                    array4[4] = method_12(text5 + array5[4] + "_a.png", bool_28: false);
+                }
+                else if (File.Exists(text4 + array5[4] + "_a.png"))
                 {
                     array4[4] = method_12(text4 + array5[4] + "_a.png", bool_28: false);
                 }
