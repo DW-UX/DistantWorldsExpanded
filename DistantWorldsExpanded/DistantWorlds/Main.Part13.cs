@@ -40,9 +40,11 @@ using System.Collections.Concurrent;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 using DistantWorlds.DBLoader;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
         private void _useResourcePercentFilter_CheckedChanged(object sender, EventArgs e)
         {
@@ -2222,9 +2224,9 @@ namespace DistantWorlds {
             }
             string text4 = string_30 + "units\\races\\pirates\\";
             string text5 = string_31 + "units\\races\\pirates\\";
-            Bitmap[] array3 = new Bitmap[4];
-            Bitmap[] array4 = new Bitmap[4];
-            string[] array5 = new string[4] { "balanced", "raider", "mercenary", "smuggler" };
+            Bitmap[] array3 = new Bitmap[5];
+            Bitmap[] array4 = new Bitmap[5];
+            string[] array5 = new string[5] { "balanced", "raider", "mercenary", "smuggler", "legendary" };
             for (int j = 0; j < 4; j++)
             {
                 int localJ = j;
@@ -2239,6 +2241,7 @@ namespace DistantWorlds {
                         array3[localJ] = method_12(local1, bool_28: true);
                     }
                 }));
+
                 text6 = array5[j] + "_a.png";
                 string local3 = text4 + text6;
                 string local4 = text5 + text6;
@@ -2251,7 +2254,31 @@ namespace DistantWorlds {
                     }
                 }));
             }
+            taskList.Add(Task.Run(() =>
+            {
+                array3[4] = method_12(text5 + array5[4] + ".png", bool_28: false);
+                if (array3[4] == null)
+                {
+                    array3[4] = method_12(text4 + array5[4] + ".png", bool_28: true);
+                }
+            }));
+            taskList.Add(Task.Run(() =>
+            {
+                array4[4] = method_12(text5 + array5[4] + "_a.png", bool_28: false);
+                if (array4[4] == null)
+                {
+                    array4[4] = method_12(text4 + array5[4] + "_a.png", bool_28: false);
+                }
+            }));
             Task.WaitAll(taskList.ToArray());
+            if (array3[4] == null)
+            {
+                array3 = array3.Take(4).ToArray();
+            }
+            if (array4[4] == null)
+            {
+                array4 = array4.Take(4).ToArray();
+            }
             if (raceImageCache_0 != null)
             {
                 raceImageCache_0.Clear();
@@ -2395,6 +2422,6 @@ namespace DistantWorlds {
         }
 
 
-  }
+    }
 
 }
