@@ -95,6 +95,9 @@ now player can edit queue to swap order or removing missions.
 ## Design:
 adding new warning to design window. Currently implemented warning about above\below count of miners on ship and bases.
 
+## Ultrawide screens
+Looks like original game have problem with large resolutuons. Should work now.
+
 # Latest beta version changes:
 1. Some UI change in start menu, adapts to resolution. Work in progres, have problem with checkboxes
 2. Bug fix for freeze during game launch
@@ -107,3 +110,6 @@ adding new warning to design window. Currently implemented warning about above\b
 9. Support for multiple mods at same time. New file structure, all files converted to SQLite database on game start. Modders can adjust patch files to change whatever they need, easier to make massive changes with SQL commands. Mooder need knowladge of SQL to make changes in new structure instead of txt file.
   - Convertion tool to convert txt files to new structure
   - New structure removes all limits on maximum count for various thing that original game have. (Government adjectives, resource needed for component, etc) 
+10. New pirate faction - Legendary pirates. Use best traits from other factions. Super pirates now use this factions on spawn.
+
+
