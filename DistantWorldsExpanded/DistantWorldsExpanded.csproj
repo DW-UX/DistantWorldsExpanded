@@ -154,6 +154,10 @@
 		<Compile Remove="DistantWorlds\test.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Remove="FilesDb – копія.db" />
+	  <None Remove="~copyDB.bat" />
+	</ItemGroup>
+	<ItemGroup>
 		<Folder Include="ExpansionMod.Objects\Properties\" />
 	</ItemGroup>
 
