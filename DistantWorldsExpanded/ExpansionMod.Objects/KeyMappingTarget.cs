@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,10 +109,75 @@ namespace ExpansionMod.Objects
 
         //ExtentedMod hotkeys
         OpenConstractionQueueEditor,
+        MoveViewLeft,
+        MoveViewRight,
+        MoveViewUp,
+        MoveViewDown,
+
+        //bacon mod hotkeys
+        ShowDetailedInfo,
+        ShowMissionCommand,
+        AssignCargoMission,
+        SetFighterTarget,
+        OrderBombersToAttack,
+        OrderBombersToAttackAll,
+        TransferFighter,
+        ToggleAutomateCarrierOps,
+        ToggleShipAutoBaconImpl,
+        ShowCustomBomberForm,
+        CalculateDistance,
+        ShipFinder,
+        FixExplorerCurrentSystem,
+        AssignMiningShipToTarget,
+        ShowPrisonForm,
+        IncreaseDockingBayCapacity,
+        ShowDamagedComponents,
+        RevealIfPirate,
+        RushStateShips,
+        ShowStats,
+        AddShipToTradeList,
+        ForceUnloadAtDestination,
+        AssignPassengershipMission,
+        CycleSelectedByRoleBackward,
+        GetParentCarrier,
+        CycleSelectedByRoleForward,
     }
+
+    //public enum BaconKeyMappingFriendlyNames
+    //{
+    //    ShowDetailedInfo = 1,
+    //    ShowMissionCommand,
+    //    AssignCargoMission,
+    //    SetFighterTarget,
+    //    OrderBombersToAttack,
+    //    OrderBombersToAttackAll,
+    //    TransferFighter,
+    //    ToggleAutomateCarrierOps,
+    //    ToggleShipAutoBaconImpl,
+    //    ShowCustomBomberForm,
+    //    CalculateDistance,
+    //    ShipFinder,
+    //    FixExplorerCurrentSystem,
+    //    AssignMiningShipToTarget,
+    //    ShowPrisonForm,
+    //    IncreaseDockingBayCapacity,
+    //    ShowDamagedComponents,
+    //    RevealIfPirate,
+    //    RushStateShips,
+    //    ShowStats,
+    //    AddShipToTradeList,
+    //    ForceUnloadAtDestination,
+    //    AssignPassengershipMission,
+    //    CycleSelectedByRoleBackward,
+    //    GetParentCarrier,
+    //    CycleSelectedByRoleForward,
+
+    //}
     public class KeyMappingTarget : IComparable<KeyMappingTarget>
     {
-        public string FriendlyName { get; set; }
+        public string FriendlyName { get { return KeyTarget.ToString(); } }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public KeyMappingFriendlyNames KeyTarget { get; set; }
         public int TargetMethodId { get; set; }
         public List<MappedHotKey> MappedHotKeys { get; set; } = new List<MappedHotKey>();
 
@@ -119,7 +185,7 @@ namespace ExpansionMod.Objects
         {
             return new KeyMappingTarget()
             {
-                FriendlyName = this.FriendlyName,
+                KeyTarget = this.KeyTarget,
                 MappedHotKeys = this.MappedHotKeys.Select(x => x.Clone()).ToList(),
                 TargetMethodId = this.TargetMethodId,
             };

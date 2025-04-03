@@ -1,5 +1,5 @@
-﻿using BaconDistantWorlds.HotKeys;
-using ExpansionMod.Controls;
+﻿using ExpansionMod.Controls;
+using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using ExpansionMod.Objects.HotKeyMapping;
 using System;
@@ -31,7 +31,7 @@ namespace BaconDistantWorlds
                 {
                     throw new ApplicationException($"Failed to map keys, check {_HotKeyFileName} file");
                 }
-                _manager = new HotKeyManager(keyMapper, _ModRootFolder);
+                _manager = new HotKeyManagerBacon(keyMapper, _ModRootFolder);
             }
             return _manager;
         }

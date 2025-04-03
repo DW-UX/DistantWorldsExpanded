@@ -12,6 +12,7 @@ namespace ExpansionMod.Objects
         public bool CanHandleKeysFromOverseer { get; }
         public Control GetHotKeyControl();
         public string GetTabPageName();
+        public List<KeyMappingTarget> GetAllTargets();
     }
     public interface IHotKeyChanges
     {

@@ -23,8 +23,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ExpansionMod.Objects;
-using BaconDistantWorlds.HotKeys;
 using BaconDistantWorlds.Forms;
+using ExpansionMod.HotKeyMapping;
 
 namespace BaconDistantWorlds
 {
@@ -134,7 +134,7 @@ namespace BaconDistantWorlds
         {
             if (BaconMain.settingsInitialized)
             {
-                var hotKeyManager = BaconMain.EntryPointClass.GetHotKeyManager() as HotKeyManager;
+                var hotKeyManager = BaconMain.EntryPointClass.GetHotKeyManager() as HotKeyManagerBacon;
                 //hotKeyManager.GetMappedTargetByKeyCode(e.KeyCode, out KeyMappingTarget target);
 
                 MappedHotKey target;
@@ -144,7 +144,7 @@ namespace BaconDistantWorlds
                     //{
                     //case Keys.Return:
                     int targetId;
-                    if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowDetailedInfo, out targetId) &&
+                    if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowDetailedInfo, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
 
@@ -154,7 +154,7 @@ namespace BaconDistantWorlds
                             e.Handled = true;
                         }
                     }
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowMissionCommand, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowMissionCommand, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -165,7 +165,7 @@ namespace BaconDistantWorlds
                         }
                     }
                     //case Keys.D3:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignCargoMission, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.AssignCargoMission, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -177,7 +177,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.D4:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.SetFighterTarget, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.SetFighterTarget, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -189,7 +189,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.D5:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttackAll, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.OrderBombersToAttackAll, out targetId) &&
                     targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -201,7 +201,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.D6:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
                 targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -213,7 +213,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.D7:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
             targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -225,7 +225,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.A:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ToggleAutomateCarrierOps, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ToggleAutomateCarrierOps, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -236,7 +236,7 @@ namespace BaconDistantWorlds
                         }
                         //break;
                     }
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ToggleShipAutoBaconImpl, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ToggleShipAutoBaconImpl, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).Empire == BaconBuiltObject.myMain._Game.PlayerEmpire && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).IsAutoControlled)
@@ -248,7 +248,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.B:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowCustomBomberForm, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowCustomBomberForm, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -275,7 +275,7 @@ namespace BaconDistantWorlds
                     //                //break;
                     //            }
                     //case Keys.D:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CalculateDistance, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.CalculateDistance, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -287,7 +287,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.E:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShipFinder, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShipFinder, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -299,7 +299,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.F:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.FixExplorerCurrentSystem, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.FixExplorerCurrentSystem, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -321,7 +321,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.M:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignMiningShipToTarget, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.AssignMiningShipToTarget, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -333,7 +333,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.P:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowPrisonForm, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowPrisonForm, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -351,7 +351,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.Q:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.IncreaseDockingBayCapacity, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.IncreaseDockingBayCapacity, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -362,7 +362,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.R:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowDamagedComponents, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowDamagedComponents, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -372,7 +372,7 @@ namespace BaconDistantWorlds
                             //break;
                         }
                     }
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.RevealIfPirate, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.RevealIfPirate, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -382,7 +382,7 @@ namespace BaconDistantWorlds
                             //break;
                         }
                     }
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.RushStateShips, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.RushStateShips, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Shift)
@@ -394,7 +394,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.S:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowStats, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowStats, out targetId) &&
                     targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -406,7 +406,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.T:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AddShipToTradeList, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.AddShipToTradeList, out targetId) &&
                 targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -418,7 +418,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.U:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ForceUnloadAtDestination, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ForceUnloadAtDestination, out targetId) &&
            targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -430,7 +430,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.W:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignPassengershipMission, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.AssignPassengershipMission, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -441,7 +441,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.OemSemicolon:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CycleSelectedByRoleBackward, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.CycleSelectedByRoleBackward, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -457,7 +457,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.OemQuestion:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.GetParentCarrier, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.GetParentCarrier, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -468,7 +468,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.OemQuotes:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CycleSelectedByRoleForward, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.CycleSelectedByRoleForward, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)

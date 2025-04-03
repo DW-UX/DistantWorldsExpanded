@@ -2133,25 +2133,43 @@ namespace DistantWorlds
             short num = 0;
             if (bool_28)
             {
-                num = GetAsyncKeyState(Keys.Up);
-                if (num < 0)
+                var targets = Main._ExpModMain.GetHotKeyManager().GetAllTargets();
+
+                var up = targets.FirstOrDefault(x => x.KeyTarget == KeyMappingFriendlyNames.MoveViewUp);
+                if (up != null)
                 {
-                    ebnBxUfJs7[0] = true;
+                    num = GetAsyncKeyState(up.MappedHotKeys[0].KeyCode[0]);
+                    if (num < 0)
+                    {
+                        ebnBxUfJs7[0] = true;
+                    }
                 }
-                num = GetAsyncKeyState(Keys.Down);
-                if (num < 0)
+                var down = targets.FirstOrDefault(x => x.KeyTarget == KeyMappingFriendlyNames.MoveViewDown);
+                if (down != null)
                 {
-                    ebnBxUfJs7[1] = true;
+                    num = GetAsyncKeyState(down.MappedHotKeys[0].KeyCode[0]);
+                    if (num < 0)
+                    {
+                        ebnBxUfJs7[1] = true;
+                    }
                 }
-                num = GetAsyncKeyState(Keys.Left);
-                if (num < 0)
+                var left = targets.FirstOrDefault(x => x.KeyTarget == KeyMappingFriendlyNames.MoveViewLeft);
+                if (left != null)
                 {
-                    ebnBxUfJs7[2] = true;
+                    num = GetAsyncKeyState(left.MappedHotKeys[0].KeyCode[0]);
+                    if (num < 0)
+                    {
+                        ebnBxUfJs7[2] = true;
+                    }
                 }
-                num = GetAsyncKeyState(Keys.Right);
-                if (num < 0)
+                var right = targets.FirstOrDefault(x => x.KeyTarget == KeyMappingFriendlyNames.MoveViewRight);
+                if (right != null)
                 {
-                    ebnBxUfJs7[3] = true;
+                    num = GetAsyncKeyState(right.MappedHotKeys[0].KeyCode[0]);
+                    if (num < 0)
+                    {
+                        ebnBxUfJs7[3] = true;
+                    }
                 }
             }
             num = GetAsyncKeyState(Keys.Prior);
@@ -4276,7 +4294,7 @@ namespace DistantWorlds
                 throw;
             }
         }
-        
+
 
 
         private void method_367()

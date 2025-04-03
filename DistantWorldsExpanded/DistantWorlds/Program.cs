@@ -4,10 +4,10 @@
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
-using BaconDistantWorlds.HotKeys;
 using DistantWorlds;
 using ExpansionMod;
 using ExpansionMod.ExternalMods;
+using ExpansionMod.Objects.HotKeyMapping;
 using Newtonsoft.Json;
 //using DistantWorlds.Types;
 using System;

@@ -122,6 +122,10 @@ namespace ExpansionMod.Controls
             res.Add(new EnumView<Keys>() { Key = Keys.ControlKey, Name = "Control" });
             res.Add(new EnumView<Keys>() { Key = Keys.Menu, Name = "Alt" });
             res.Add(new EnumView<Keys>() { Key = Keys.ShiftKey, Name = "Shift" });
+            res.Add(new EnumView<Keys>() { Key = Keys.Left, Name = "Arrow Left" });
+            res.Add(new EnumView<Keys>() { Key = Keys.Right, Name = "Arrow Right" });
+            res.Add(new EnumView<Keys>() { Key = Keys.Up, Name = "Arrow Up" });
+            res.Add(new EnumView<Keys>() { Key = Keys.Down, Name = "Arrow Down" });
             res.AddRange(allKeys.Where(x=>x.Key >= Keys.D0 && x.Key <= Keys.Z || 
             x.Key >= Keys.NumPad0 && x.Key <= Keys.F24));
             return res;

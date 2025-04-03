@@ -31,6 +31,8 @@
 		<TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
 		<TieredPGO>true</TieredPGO>
 		<BaseOutputPath></BaseOutputPath>
+		<AssemblyVersion>2.0.0.2</AssemblyVersion>
+		<FileVersion>2.0.0.2</FileVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<RuntimeHostConfigurationOption Include="System.GC.LOHThreshold" Value="2097152" />
@@ -66,14 +68,19 @@
 		<Compile Include="**/Controls/*.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Remove="BaconDistantWorlds\HotKeys\**" />
 		<Compile Remove="DistantWorlds.Controls\Mods\**" />
 		<Compile Remove="DistantWorlds.Types\EM interface\**" />
 		<Compile Remove="DistantWorlds.Types\Mods\**" />
 		<Compile Remove="DistantWorlds\Mods\**" />
+		<ControlCandidate Remove="BaconDistantWorlds\HotKeys\**" />
+		<EmbeddedResource Remove="BaconDistantWorlds\HotKeys\**" />
 		<EmbeddedResource Remove="DistantWorlds.Controls\Mods\**" />
 		<EmbeddedResource Remove="DistantWorlds.Types\EM interface\**" />
 		<EmbeddedResource Remove="DistantWorlds.Types\Mods\**" />
 		<EmbeddedResource Remove="DistantWorlds\Mods\**" />
+		<FormCandidate Remove="BaconDistantWorlds\HotKeys\**" />
+		<None Remove="BaconDistantWorlds\HotKeys\**" />
 		<None Remove="DistantWorlds.Controls\Mods\**" />
 		<None Remove="DistantWorlds.Types\EM interface\**" />
 		<None Remove="DistantWorlds.Types\Mods\**" />

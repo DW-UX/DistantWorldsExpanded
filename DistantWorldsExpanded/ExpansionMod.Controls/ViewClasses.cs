@@ -13,9 +13,9 @@ namespace ExpansionMod.Controls
     {
         public virtual string ViewName
         {
-            get { return this.FriendlyName; }
+            get { return this.KeyTarget.ToString(); }
         }
-        public string FriendlyName { get; set; }
+        public KeyMappingFriendlyNames KeyTarget { get; set; }
         public int TargetMethodId { get; set; }
         public List<ViewMappedHotKey> MappedHotKeys { get; set; }
     }
