@@ -45,13 +45,64 @@ namespace DistantWorlds.Types
 
         private short _CruiseSpeedBase;
 
-        public short CruiseSpeed;
+        private short _cruiseSpeed;
+        public short CruiseSpeed
+        {
+            get => _cruiseSpeed;
+            set
+            {
+                if (_cruiseSpeed != value)
+                {
+                    _cruiseSpeed = value;
+                    if (_cruiseSpeed < 0)
+                    {
+                        _cruiseSpeed = 0;
+                    }
+                    UpdateMaxFuelRange();
+                    UpdateCurrentFuelRange();
+                }
+            }
+        }
 
-        public short CruiseSpeedFuelBurn;
+        private short _cruiseSpeedFuelBurn;
+        public short CruiseSpeedFuelBurn
+        {
+            get => _cruiseSpeedFuelBurn;
+            set
+            {
+                if (_cruiseSpeedFuelBurn != value)
+                {
+                    _cruiseSpeedFuelBurn = value;
+                    if (_cruiseSpeedFuelBurn < 0)
+                    {
+                        _cruiseSpeedFuelBurn = 0;
+                    }
+                    UpdateMaxFuelRange();
+                    UpdateCurrentFuelRange();
+                }
+            }
+        }
 
         public int WarpSpeed;
 
-        public int WarpSpeedFuelBurn;
+        private int _warpSpeedFuelBurn;
+        public int WarpSpeedFuelBurn
+        {
+            get => _warpSpeedFuelBurn;
+            set
+            {
+                if (_warpSpeedFuelBurn != value)
+                {
+                    _warpSpeedFuelBurn = value;
+                    if (_warpSpeedFuelBurn < 0)
+                    {
+                        _warpSpeedFuelBurn = 0;
+                    }
+                    UpdateMaxFuelWarpRange();
+                    UpdateCurrentFuelWarpRange();
+                }
+            }
+        }
 
         public short HyperjumpInitiate;
 
@@ -77,19 +128,77 @@ namespace DistantWorlds.Types
 
         private float _ShipDamageAmountLocation;
 
-        public int FuelCapacity;
+        private int _fuelCapacity;
+        public int FuelCapacity
+        {
+            get => _fuelCapacity;
+            set
+            {
+                if(_fuelCapacity != value)
+                {
+                    _fuelCapacity = value;
+                    if (_fuelCapacity < 0)
+                    {
+                        _fuelCapacity = 0;
+                    }
+                    UpdateMaxFuelWarpRange();
+                    UpdateCurrentFuelWarpRange();
+                }
+            }
+        }
 
         public float AttackRangeSquared;
 
         public double CurrentEnergy;
 
-        public int StaticEnergyConsumption;
+        private int _staticEnergyConsumption;
+        public int StaticEnergyConsumption
+        {
+            get => _staticEnergyConsumption;
+            set
+            {
+                if (_staticEnergyConsumption != value)
+                {
+                    _staticEnergyConsumption = value;
+                    if (_staticEnergyConsumption < 0)
+                    {
+                        _warpSpeedFuelBurn = 0;
+                    }
+                    UpdateMaxFuelWarpRange();
+                    UpdateCurrentFuelWarpRange();
+                }
+            }
+        }
 
         public int ReactorPowerOutput;
 
-        public int ReactorStorageCapacity;
+        private int _reactorStorageCapacity;
+        public int ReactorStorageCapacity
+        {
+            get => _reactorStorageCapacity;
+            set
+            {
+                if (_reactorStorageCapacity != value)
+                {
+                    _reactorStorageCapacity = value;
+                    FuelUnitPerEnergyUnitValue = (double)_reactorCycleFuelConsumption / 1000.0 / ((double)_reactorStorageCapacity + 1.0);
+                }
+            }
+        }
 
-        public int ReactorCycleFuelConsumption;
+        private int _reactorCycleFuelConsumption;
+        public int ReactorCycleFuelConsumption
+        {
+            get => _reactorCycleFuelConsumption;
+            set
+            {
+                if (_reactorCycleFuelConsumption != value)
+                {
+                    _reactorCycleFuelConsumption = value;
+                    FuelUnitPerEnergyUnitValue = (double)_reactorCycleFuelConsumption / 1000.0 / ((double)_reactorStorageCapacity + 1.0);
+                }
+            }
+        }
 
         public double CurrentReactorStorage;
 
@@ -458,7 +567,26 @@ namespace DistantWorlds.Types
 
         private byte _CaptainRepairBonus = 100;
 
-        private byte _CaptainHyperjumpSpeedBonus = 100;
+        private byte _captainHyperjumpSpeedBonus = 100;
+        private byte _CaptainHyperjumpSpeedBonus
+        {
+            get => _captainHyperjumpSpeedBonus;
+            set
+            {
+                if (_captainHyperjumpSpeedBonus != value)
+                {
+                    _captainHyperjumpSpeedBonus = value;
+                    if (_captainHyperjumpSpeedBonus < 0)
+                    {
+                        _captainHyperjumpSpeedBonus = 0;
+                    }
+                    UpdateCurrentFuelRange();
+                    UpdateMaxFuelRange();
+                    UpdateCurrentFuelWarpRange();
+                    UpdateMaxFuelWarpRange();
+                }
+            }
+        }
 
         public BuiltObjectMissionList _SubsequentMissions = new BuiltObjectMissionList();
 
@@ -484,7 +612,22 @@ namespace DistantWorlds.Types
 
         public Design Design;
 
-        public ShipGroup ShipGroup;
+        private ShipGroup _shipGroup;
+        public ShipGroup ShipGroup
+        {
+            get => _shipGroup;
+            set
+            {
+                if (_shipGroup != value)
+                {
+                    _shipGroup = value;
+                    UpdateCurrentFuelRange();
+                    UpdateMaxFuelRange();
+                    UpdateCurrentFuelWarpRange();
+                    UpdateMaxFuelWarpRange();
+                }
+            }
+        }
 
         private DateTime _LastTouch;
 
@@ -568,6 +711,45 @@ namespace DistantWorlds.Types
         public SpaceBattleStats CareerBattleStats;
 
         public Dictionary<string, object> BaconValues;
+
+        private double _fuelUnitPerEnergyUnitValue;
+        public double FuelUnitPerEnergyUnitValue
+        {
+            get => _fuelUnitPerEnergyUnitValue;
+            set
+            {
+                if (_fuelUnitPerEnergyUnitValue != value)
+                {
+                    _fuelUnitPerEnergyUnitValue = value;
+                    if (_fuelUnitPerEnergyUnitValue < 0)
+                    {
+                        _warpSpeedFuelBurn = 0;
+                    }
+                    UpdateMaxFuelWarpRange();
+                    UpdateCurrentFuelWarpRange();
+                }
+            }
+        }
+        public double MaxFuelRange;
+        public void UpdateMaxFuelRange()
+        {
+            MaxFuelRange = (double)_fuelCapacity / (((double)_cruiseSpeedFuelBurn + (double)_staticEnergyConsumption) * _fuelUnitPerEnergyUnitValue) * (double)_cruiseSpeed;
+        }
+        public double MaxFuelRangeWarp;
+        public void UpdateMaxFuelWarpRange()
+        {
+            MaxFuelRangeWarp = (double)_fuelCapacity / (((double)_warpSpeedFuelBurn + (double)_staticEnergyConsumption) * _fuelUnitPerEnergyUnitValue) * (double)WarpSpeedWithBonuses;
+        }
+        public double CurrentFuelRange;
+        public void UpdateCurrentFuelRange()
+        {
+            CurrentFuelRange = (((double)_cruiseSpeedFuelBurn + (double)_staticEnergyConsumption) * _fuelUnitPerEnergyUnitValue) * (double)_cruiseSpeed;
+        }
+        public double CurrentFuelRangeWarp;
+        public void UpdateCurrentFuelWarpRange()
+        {
+            CurrentFuelRangeWarp =  (((double)_warpSpeedFuelBurn + (double)_staticEnergyConsumption) * _fuelUnitPerEnergyUnitValue) * (double)WarpSpeedWithBonuses;
+        }
 
         public int WarpSpeedWithBonuses
         {
@@ -5098,6 +5280,6 @@ namespace DistantWorlds.Types
             }
         }
 
-      
+
     }
 }

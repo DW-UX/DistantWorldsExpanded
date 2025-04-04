@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
 namespace DistantWorlds.Types
@@ -2335,9 +2336,11 @@ namespace DistantWorlds.Types
             return false;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double FuelUnitPerEnergyUnit()
         {
-            return (double)ReactorCycleFuelConsumption / 1000.0 / ((double)ReactorStorageCapacity + 1.0);
+            //return (double)ReactorCycleFuelConsumption / 1000.0 / ((double)ReactorStorageCapacity + 1.0);
+            return FuelUnitPerEnergyUnitValue;
         }
 
         public double CurrentRange()
@@ -2347,27 +2350,31 @@ namespace DistantWorlds.Types
 
         public double CurrentRange(double fuelPortionMargin)
         {
-            double num = FuelUnitPerEnergyUnit();
+            //double num = FuelUnitPerEnergyUnit();
             double currentFuel = CurrentFuel;
             currentFuel -= (double)FuelCapacity * fuelPortionMargin;
             currentFuel = Math.Max(0.0, currentFuel);
             //double num2 = 0.0;
             if (WarpSpeed > 0)
             {
-                return currentFuel / (((double)WarpSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)WarpSpeedWithBonuses;
+                //return currentFuel / (((double)WarpSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)WarpSpeedWithBonuses;
+                return currentFuel / CurrentFuelRangeWarp;
             }
-            return currentFuel / (((double)CruiseSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)CruiseSpeed;
+            //return currentFuel / (((double)CruiseSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)CruiseSpeed;
+            return currentFuel / CurrentFuelRange;
         }
 
         public double MaximumFuelRange()
         {
-            double num = FuelUnitPerEnergyUnit();
+            //double num = FuelUnitPerEnergyUnit();
             //double num2 = 0.0;
             if (WarpSpeed > 0)
             {
-                return (double)FuelCapacity / (((double)WarpSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)WarpSpeedWithBonuses;
+                //return (double)FuelCapacity / (((double)WarpSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)WarpSpeedWithBonuses;
+                return MaxFuelRangeWarp;
             }
-            return (double)FuelCapacity / (((double)CruiseSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)CruiseSpeed;
+            //return (double)FuelCapacity / (((double)CruiseSpeedFuelBurn + (double)StaticEnergyConsumption) * num) * (double)CruiseSpeed;
+            return MaxFuelRange;
         }
 
         public bool WithinFuelRange(double destinationX, double destinationY, double fuelPortionMargin)
@@ -2378,11 +2385,10 @@ namespace DistantWorlds.Types
 
         public bool WithinFuelRange(double destinationX, double destinationY, double fuelPortionMargin, out double rangeFactor)
         {
-            double num = CurrentRange(fuelPortionMargin);
-            double num2 = num * num;
+            double num = CurrentRange(fuelPortionMargin) * 2;
             double num3 = _Galaxy.CalculateDistanceSquared(Xpos, Ypos, destinationX, destinationY);
-            rangeFactor = num3 / num2;
-            if (num3 <= num2)
+            rangeFactor = num3 / num;
+            if (num3 <= num)
             {
                 return true;
             }
