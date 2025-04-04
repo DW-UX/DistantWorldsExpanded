@@ -8,6 +8,6 @@ namespace DistantWorlds
 {
     static class App
     {
-        public static string ExpansionModVersion = "2.0.0.2";
+        public static string ExpansionModVersion = "2.0.0.3";
     }
 }

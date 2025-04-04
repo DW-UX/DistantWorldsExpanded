@@ -156,15 +156,17 @@ namespace DistantWorlds
                     res = new FileStream(string_2, FileMode.Open, FileAccess.Read);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                string textEx = $"Could not load required sound: {string_2}\r\n{ex.ToString()}";
+                MessageBox.Show(textEx, TextResolver.GetText("Error loading file"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Environment.Exit(-1);
             }
             if (res != null)
             {
                 return res;
             }
-            string text = string.Format(TextResolver.GetText("Could not load required sound"), string_2);
+            string text = $"Could not load required sound: {string_2}";
             MessageBox.Show(text, TextResolver.GetText("Error loading file"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             Environment.Exit(-1);
             return null;
