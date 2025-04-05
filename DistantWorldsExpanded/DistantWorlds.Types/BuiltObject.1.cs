@@ -2342,7 +2342,7 @@ namespace DistantWorlds.Types
             //return (double)ReactorCycleFuelConsumption / 1000.0 / ((double)ReactorStorageCapacity + 1.0);
             return FuelUnitPerEnergyUnitValue;
         }
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double CurrentRange()
         {
             return CurrentRange(0.0);
