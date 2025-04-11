@@ -4405,7 +4405,9 @@ namespace DistantWorlds.Types
         {
             GovernmentAttributesList governmentAttributesList = DetermineMostSuitableGovermentTypes(race, allowableGovernmentTypes);
             int result = -1;
-            if (governmentAttributesList.Count > 0)
+            if (governmentAttributesList.Count == 1)
+            { result = governmentAttributesList[0].GovernmentId; }
+            else if (governmentAttributesList.Count > 0)
             {
                 result = governmentAttributesList[0].GovernmentId;
                 int num = -1;
@@ -4432,7 +4434,7 @@ namespace DistantWorlds.Types
                     int iterationCount = 0;
                     while (Galaxy.ConditionCheckLimit(governmentAttributesList[num3].GovernmentId == excludeId, 20, ref iterationCount))
                     {
-                        num3 = Galaxy.Rnd.Next(0, 4);
+                        num3 = Galaxy.Rnd.Next(0, Math.Min(4, governmentAttributesList.Count));
                         if (num3 == 3)
                         {
                             num3 = num2;
