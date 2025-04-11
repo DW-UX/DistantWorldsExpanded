@@ -135,6 +135,8 @@ namespace DistantWorlds
             galaxy_0.UpdateSystemInfo(null);
             galaxy_0.Orders.EnableIndexing();
             galaxy_0.GameSummary = galaxy_0.DetermineGameSummary();
+            galaxy_0.FillSystemInfoByDistance();
+            //galaxy_0.FillShipNearSystems();
             return galaxy_0;
         }
 

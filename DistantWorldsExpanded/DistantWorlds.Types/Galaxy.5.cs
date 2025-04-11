@@ -3202,6 +3202,7 @@ namespace DistantWorlds.Types
             RebuildSystemIndexes();
             RebuildGalaxyLocationIndexes();
             RebuildBuiltObjectIndexes();
+            FillSystemInfoByDistance();
         }
 
         public void RebuildBuiltObjectIndexes()

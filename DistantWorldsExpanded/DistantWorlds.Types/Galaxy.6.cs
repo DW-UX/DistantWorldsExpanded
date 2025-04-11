@@ -2,11 +2,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
@@ -3531,6 +3533,38 @@ namespace DistantWorlds.Types
             return result;
         }
 
+        public Habitat FastFindNearestUncolonizedOwnedSystem(Habitat hab)
+        {
+            Habitat result = null;
+            var topHab = GetTopHabitat(hab);
+            //var test = _SystemInfoByDistance.Values.Any(x => x.Any(y => y.Habitats.Contains(topHab)));
+            foreach (var item in _SystemInfoByDistance[topHab.SystemInfo])
+            {
+
+                int num = EmpireTerritory.CheckSystemOwnership(this, item.SystemStar, out bool disputed);
+                if (num < 0)
+                {
+                    continue;
+                }
+                if ((item.DominantEmpire != null && item.DominantEmpire.Empire != null))
+                {
+                    continue;
+                }
+                Empire byEmpireId = Empires.GetByEmpireId(num);
+                if (byEmpireId != null && !byEmpireId.Reclusive)
+                {
+                    result = item.SystemStar;
+                    break;
+                }
+            }
+            return result;
+        }
+        public Habitat GetTopHabitat(Habitat hab)
+        {
+            if (hab.Parent != null)
+                return GetTopHabitat(hab.Parent);
+            return hab;
+        }
         public Habitat FastFindNearestUncolonizedOwnedSystem(double x, double y)
         {
             double num = double.MaxValue;

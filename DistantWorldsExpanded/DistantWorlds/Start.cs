@@ -1880,6 +1880,8 @@ namespace DistantWorlds
             main_0.string_2 = string_;
             main_0._Game.Galaxy.ApplicationStartupPath = Application.StartupPath;
             main_0._Game.Galaxy.CustomizationSetPath = main_0.GetCustomizationPath();
+            main_0._Game.Galaxy.FillSystemInfoByDistance();
+            //main_0._Game.Galaxy.FillShipNearSystems();
         }
 
         private void method_15(object sender, RunWorkerCompletedEventArgs e)
@@ -1951,6 +1953,8 @@ namespace DistantWorlds
                 pirateEmpire.ReviewUnpersistedColonyData();
             }
             Cursor.Current = Cursors.Default;
+            game.Galaxy.FillSystemInfoByDistance();
+            //game.Galaxy.FillShipNearSystems();
             main_0.Ignite(game, currentFileName);
             method_9();
             base.Enabled = true;

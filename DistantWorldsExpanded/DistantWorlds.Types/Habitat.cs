@@ -210,6 +210,9 @@ namespace DistantWorlds.Types
 
         public Dictionary<string, object> BaconValues;
 
+        [NonSerialized]
+        public SystemInfo SystemInfo;
+
         public float BaseQuality
         {
             get

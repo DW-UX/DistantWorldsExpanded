@@ -4779,7 +4779,7 @@ namespace DistantWorlds {
             }
             if (_Game.PlayerEmpire != null && _Game.PlayerEmpire.Capital != null)
             {
-                Habitat habitat3 = _Game.Galaxy.FastFindNearestUncolonizedOwnedSystem(_Game.PlayerEmpire.Capital.Xpos, _Game.PlayerEmpire.Capital.Ypos);
+                Habitat habitat3 = _Game.Galaxy.FastFindNearestUncolonizedOwnedSystem(_Game.PlayerEmpire.Capital);
                 if (habitat3 != null)
                 {
                     SystemInfo systemInfo4 = _Game.Galaxy.Systems[habitat3.SystemIndex];
