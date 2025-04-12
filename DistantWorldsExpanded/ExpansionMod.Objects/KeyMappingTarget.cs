@@ -141,6 +141,7 @@ namespace ExpansionMod.Objects
         CycleSelectedByRoleBackward,
         GetParentCarrier,
         CycleSelectedByRoleForward,
+        DisableBaseShipyards,
     }
 
     //public enum BaconKeyMappingFriendlyNames
