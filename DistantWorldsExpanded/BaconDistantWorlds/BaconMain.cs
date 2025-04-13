@@ -1298,13 +1298,9 @@ namespace BaconDistantWorlds
             //IL_0068: Expected O, but got Unknown
             Point point = ((Control)(object)main).PointToClient(MouseHelper.GetCursorPosition());
             object obj = main.method_143(main.int_15, main.int_16, true);
-            Keyboard keyboard = new Keyboard();
-            if (!keyboard.AltKeyDown)
-            {
-                return;
-            }
+
             object obj2 = null;
-            main.actionMenu.Items.Clear();
+            //main.actionMenu.Items.Clear();
             ShipAction shipAction = null;
             main.actionMenu.Renderer = (ToolStripRenderer)new CustomToolStripRenderer(main.font_3);
             if (main._Game.SelectedObject == null)
@@ -1312,12 +1308,15 @@ namespace BaconDistantWorlds
                 return;
             }
             obj2 = ((main._Game.SelectedObject is BuiltObject) ? ((BuiltObject)main._Game.SelectedObject) : ((!(main._Game.SelectedObject is Habitat)) ? main._Game.SelectedObject : ((Habitat)main._Game.SelectedObject)));
-            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem("Hold position toggle");
-            shipAction = main.method_315(BuiltObjectMissionType.Undefined, obj2);
-            shipAction.Hint = "sleep";
-            shipAction.ExtraData = "This toggles sleep for a ship";
-            toolStripMenuItem.Tag = shipAction;
-            main.actionMenu.Items.Add(toolStripMenuItem);
+            if (main._Game.SelectedObject is BuiltObject ship)
+            {
+                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem("Hold position toggle");
+                shipAction = main.method_315(BuiltObjectMissionType.Undefined, ship);
+                shipAction.Hint = "sleep";
+                shipAction.ExtraData = "This toggles sleep for a ship";
+                toolStripMenuItem.Tag = shipAction;
+                main.actionMenu.Items.Add(toolStripMenuItem);
+            }
             if (CanDeployAsteroidColony(main, obj2, obj))
             {
                 ToolStripMenuItem toolStripMenuItem2 = new ToolStripMenuItem("Deploy Asteroid Colony");
@@ -1328,6 +1327,40 @@ namespace BaconDistantWorlds
                 shipAction2.Target2 = obj;
                 toolStripMenuItem2.Tag = shipAction2;
                 main.actionMenu.Items.Add(toolStripMenuItem2);
+            }
+            else if(obj2 is BuiltObject ship2 && ship2.SubRole == BuiltObjectSubRole.ColonyShip && ship2.Empire == main._Game.PlayerEmpire)
+            {
+                ToolStripMenuItem toolStripMenuItem2 = new ToolStripMenuItem("Deploy Asteroid Colony");
+                toolStripMenuItem2.Enabled = false;
+                toolStripMenuItem2.ToolTipText = "You need to select Colonizer and move it near asteroid to use that command.";
+                main.actionMenu.Items.Add(toolStripMenuItem2);
+            }
+            if (obj is Habitat && (obj as Habitat).InvadingTroops != null)
+            {
+                TroopList invadingTroops = (obj as Habitat).InvadingTroops;
+                if (invadingTroops != null && invadingTroops.Count > 0 && ((obj as Habitat).InvadingTroops[0]?.Empire == main._Game.PlayerEmpire || (obj as Habitat).Empire == main._Game.PlayerEmpire))
+                {
+                    Habitat habitat = obj as Habitat;
+                    ToolStripMenuItem toolStripMenuItem5 = new ToolStripMenuItem("Evaluate Tactics");
+                    ShipAction shipAction5 = main.method_315(BuiltObjectMissionType.Undefined, obj2);
+                    shipAction5.Hint = "invasionCommand";
+                    shipAction5.ExtraData = "Try to influence battle by analyzing enemy tactics.";
+                    shipAction5.Target = obj2;
+                    shipAction5.Target2 = obj;
+                    toolStripMenuItem5.Tag = shipAction5;
+                    main.actionMenu.Items.Add(toolStripMenuItem5);
+                }
+            }
+            else
+            {
+                ToolStripMenuItem toolStripMenuItem5 = new ToolStripMenuItem("Evaluate Tactics");
+                toolStripMenuItem5.Enabled = false;
+                toolStripMenuItem5.ToolTipText = "You need to have your empire troops invading colony to use that command.";
+                main.actionMenu.Items.Add(toolStripMenuItem5);
+            }
+            if (!new Keyboard().AltKeyDown)
+            {
+                return;
             }
             if (BaconBuiltObject.IsFreeTrader(main, obj2))
             {
@@ -1360,22 +1393,6 @@ namespace BaconDistantWorlds
                     shipAction4.Target2 = obj;
                     toolStripMenuItem4.Tag = shipAction4;
                     main.actionMenu.Items.Add(toolStripMenuItem4);
-                }
-            }
-            if (obj is Habitat && (obj as Habitat).InvadingTroops != null)
-            {
-                TroopList invadingTroops = (obj as Habitat).InvadingTroops;
-                if (invadingTroops != null && invadingTroops.Count > 0 && ((obj as Habitat).InvadingTroops[0]?.Empire == main._Game.PlayerEmpire || (obj as Habitat).Empire == main._Game.PlayerEmpire))
-                {
-                    Habitat habitat = obj as Habitat;
-                    ToolStripMenuItem toolStripMenuItem5 = new ToolStripMenuItem("Evaluate Tactics");
-                    ShipAction shipAction5 = main.method_315(BuiltObjectMissionType.Undefined, obj2);
-                    shipAction5.Hint = "invasionCommand";
-                    shipAction5.ExtraData = "Try to influence battle by analyzing enemy tactics.";
-                    shipAction5.Target = obj2;
-                    shipAction5.Target2 = obj;
-                    toolStripMenuItem5.Tag = shipAction5;
-                    main.actionMenu.Items.Add(toolStripMenuItem5);
                 }
             }
             if (IsScienceShip(main, obj2))

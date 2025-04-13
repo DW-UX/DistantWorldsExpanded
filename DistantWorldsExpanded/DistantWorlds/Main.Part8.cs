@@ -38,9 +38,11 @@ using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
 
         private void OpenDesignEditor(Design design_3)
@@ -1559,6 +1561,7 @@ namespace DistantWorlds {
                         empireList.Add(pirateRelation.OtherEmpire);
                     }
                 }
+                empireList.Add(_Game.Galaxy.IndependentEmpire);
                 empireList.Sort();
                 if (empireList.Count > 0)
                 {
@@ -5144,6 +5147,6 @@ namespace DistantWorlds {
 
 
 
-  }
+    }
 
 }
