@@ -3088,7 +3088,7 @@ namespace DistantWorlds
 
         private void btnStartNewGameYourRaceNext_Click(object sender, EventArgs e)
         {
-            if (bool_2)
+            if (isPlayerPirate)
             {
                 Race selectedRace = cmbStartNewGameYourEmpireRace.SelectedRace;
                 PiratePlayStyle piratePlayStyle = method_193(cmbVictoryPiratePlayStyle.SelectedIndex);
@@ -3128,7 +3128,7 @@ namespace DistantWorlds
         {
             pnlStartNewGameOtherEmpires.Visible = false;
             pnlStartNewGameYourEmpire.Visible = true;
-            if (bool_2)
+            if (isPlayerPirate)
             {
                 pnlNewGame.HeaderTitle = TextResolver.GetText("Start a New Game: Your Pirate Empire");
             }
@@ -3253,7 +3253,7 @@ namespace DistantWorlds
             startGameOptions.GalaxyDifficulty = tbarJumpStartTheGalaxyDifficulty.Value;
             startGameOptions.GalaxyDifficultyScaling = chkJumpStartTheGalaxyDifficultyScaling.Checked;
             startGameOptions.YourEmpireRace = cmbJumpStartYourEmpireRace.SelectedIndex;
-            if (bool_2)
+            if (isPlayerPirate)
             {
                 startGameOptions.PiratePlayStyle = (int)(method_192() - 1);
             }
@@ -4175,7 +4175,7 @@ namespace DistantWorlds
                 lnkStartNewGameYourEmpireRace.Visible = true;
             }
             IdyEbrKpy3(selectedRace, bool_5: false);
-            if (bool_2)
+            if (isPlayerPirate)
             {
                 if (selectedRace != null)
                 {
@@ -4424,7 +4424,7 @@ namespace DistantWorlds
 
         private void tbarStartNewGameYourEmpireTechLevel_ValueChanged(object sender, EventArgs e)
         {
-            if (bool_2 && tbarStartNewGameYourEmpireTechLevel.Value == 0)
+            if (isPlayerPirate && tbarStartNewGameYourEmpireTechLevel.Value == 0)
             {
                 tbarStartNewGameYourEmpireTechLevel.Value = 1;
             }

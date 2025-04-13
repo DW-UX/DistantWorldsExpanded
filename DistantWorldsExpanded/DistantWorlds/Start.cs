@@ -824,7 +824,7 @@ namespace DistantWorlds
 
         private List<Control> list_0;
 
-        private bool bool_2;
+        private bool isPlayerPirate;
 
         private bool bool_3;
 
@@ -2920,7 +2920,7 @@ namespace DistantWorlds
 
         private void method_35()
         {
-            if (bool_2)
+            if (isPlayerPirate)
             {
                 pnlJumpStartYourEmpireGovernment.Visible = false;
                 lblJumpStartVictoryPiratePlaystyle.Visible = true;
@@ -3414,7 +3414,7 @@ namespace DistantWorlds
             picStartNewGameYourEmpirePiratePlaystyle.Size = new Size(300, 300);
             picStartNewGameYourEmpirePiratePlaystyle.Location = new Point(360, 230);
             method_101(PiratePlayStyle.Balanced, bool_5: false);
-            if (bool_2)
+            if (isPlayerPirate)
             {
                 pnlStartNewGameYourEmpireGovernment.Visible = false;
                 tbarStartNewGameYourEmpireHomeSystem.Visible = false;
@@ -5208,12 +5208,12 @@ namespace DistantWorlds
         private void btnStartNewGameYourEmpireTypeNormalClassic_Click(object sender, EventArgs e)
         {
             wjhRtsSwmsa = "CustomStandard";
-            bool_2 = false;
+            isPlayerPirate = false;
             bool_3 = false;
-            method_45(bool_2);
+            method_45(isPlayerPirate);
             method_40(bool_5: false);
             cmbPrimaryColor.Ignite(allowWhite: false, allowBlack: false, useDarkerPalette: false, Color.Empty);
-            method_204(bool_2);
+            method_204(isPlayerPirate);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
             pnlStartNewGameTheGalaxy.Visible = true;
@@ -5248,14 +5248,14 @@ namespace DistantWorlds
         private void nVkoJxpyvO(object sender, EventArgs e)
         {
             wjhRtsSwmsa = "CustomPirate";
-            bool_2 = true;
+            isPlayerPirate = true;
             bool_3 = false;
-            method_45(bool_2);
+            method_45(isPlayerPirate);
             method_40(bool_5: false);
             cmbPrimaryColor.Ignite(allowWhite: false, allowBlack: true, useDarkerPalette: true, Color.Empty);
-            method_204(bool_2);
+            method_204(isPlayerPirate);
             method_222(main_0.gameOptions_0.StartGameOptions);
-            if (bool_2 && tbarStartNewGameYourEmpireTechLevel.Value == 0)
+            if (isPlayerPirate && tbarStartNewGameYourEmpireTechLevel.Value == 0)
             {
                 tbarStartNewGameYourEmpireTechLevel.Value = 1;
             }
@@ -5292,11 +5292,11 @@ namespace DistantWorlds
         private void btnStartNewGameYourEmpireTypeNormalShadows_Click(object sender, EventArgs e)
         {
             wjhRtsSwmsa = "ShadowsStandard";
-            bool_2 = false;
+            isPlayerPirate = false;
             bool_3 = true;
             method_35();
             cmbPrimaryColor.Ignite(allowWhite: false, allowBlack: false, useDarkerPalette: false, Color.Empty);
-            method_204(bool_2);
+            method_204(isPlayerPirate);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
             pnlStartNewGameJumpStart.Visible = true;
@@ -5355,11 +5355,11 @@ namespace DistantWorlds
         private void btnStartNewGameYourEmpireTypePirateShadows_Click(object sender, EventArgs e)
         {
             wjhRtsSwmsa = "ShadowsPirate";
-            bool_2 = true;
+            isPlayerPirate = true;
             bool_3 = true;
             method_35();
             cmbPrimaryColor.Ignite(allowWhite: false, allowBlack: false, useDarkerPalette: false, Color.Empty);
-            method_204(bool_2);
+            method_204(isPlayerPirate);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
             pnlStartNewGameJumpStart.Visible = true;
@@ -5393,7 +5393,7 @@ namespace DistantWorlds
 
         private void btnStartNewGameIntroductory_Click(object sender, EventArgs e)
         {
-            bool_2 = false;
+            isPlayerPirate = false;
             bool_3 = false;
             GalaxyShape galaxyShape = GalaxyShape.Elliptical;
             bool flag = true;
@@ -5469,11 +5469,11 @@ namespace DistantWorlds
         private void btnStartNewGameYourEmpireTypeClassicEra_Click(object sender, EventArgs e)
         {
             wjhRtsSwmsa = "ClassicEra";
-            bool_2 = false;
+            isPlayerPirate = false;
             bool_3 = false;
             method_35();
             cmbPrimaryColor.Ignite(allowWhite: false, allowBlack: false, useDarkerPalette: false, Color.Empty);
-            method_204(bool_2);
+            method_204(isPlayerPirate);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
             pnlStartNewGameJumpStart.Visible = true;
@@ -5508,11 +5508,11 @@ namespace DistantWorlds
         private void btnStartNewGameYourEmpireTypeReturnOfTheShakturi_Click(object sender, EventArgs e)
         {
             wjhRtsSwmsa = "ReturnOfTheShakturi";
-            bool_2 = false;
+            isPlayerPirate = false;
             bool_3 = false;
             method_35();
             cmbPrimaryColor.Ignite(allowWhite: false, allowBlack: false, useDarkerPalette: false, Color.Empty);
-            method_204(bool_2);
+            method_204(isPlayerPirate);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
             pnlStartNewGameJumpStart.Visible = true;
@@ -5547,11 +5547,11 @@ namespace DistantWorlds
         private void btnStartNewGameYourEmpireTypeLegends_Click(object sender, EventArgs e)
         {
             wjhRtsSwmsa = "Legends";
-            bool_2 = false;
+            isPlayerPirate = false;
             bool_3 = false;
             method_35();
             cmbPrimaryColor.Ignite(allowWhite: false, allowBlack: false, useDarkerPalette: false, Color.Empty);
-            method_204(bool_2);
+            method_204(isPlayerPirate);
             method_222(main_0.gameOptions_0.StartGameOptions);
             pnlStartNewGameYourEmpireType.Visible = false;
             pnlStartNewGameJumpStart.Visible = true;
@@ -5675,7 +5675,7 @@ namespace DistantWorlds
             }
             empireStart.Age = method_57(text);
             empireStart.TechLevel = method_54(TextResolver.GetText("Normal"));
-            if (bool_3 && !bool_2)
+            if (bool_3 && !isPlayerPirate)
             {
                 empireStart.TechLevel = method_54(TextResolver.GetText("PreWarp"));
             }

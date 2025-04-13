@@ -455,7 +455,7 @@ namespace DistantWorlds
                 string empty = string.Empty;
                 empty = main_0.string_3;
                 List<Bitmap> list = new List<Bitmap>();
-                list = ((!bool_2) ? Galaxy.FlagShapes : Galaxy.FlagShapesPirates);
+                list = ((!isPlayerPirate) ? Galaxy.FlagShapes : Galaxy.FlagShapesPirates);
                 RaceList raceList = Galaxy.LoadRaces(Application.StartupPath, empty);
                 raceList = raceList.ResolveNormalEmpireRaces();
                 EmpireStartList empireStartList = new EmpireStartList();
@@ -541,7 +541,7 @@ namespace DistantWorlds
                 galaxy.SetEmpireForAllIndependentHabitats();
                 galaxy.ReviewIndependentColonies();
                 Race race = null;
-                race = ((empireStart_0.RaceIndex < 0) ? method_48(galaxy, empireStart_0.Race, null, bool_2) : galaxy.Races[empireStart_0.RaceIndex]);
+                race = ((empireStart_0.RaceIndex < 0) ? method_48(galaxy, empireStart_0.Race, null, isPlayerPirate) : galaxy.Races[empireStart_0.RaceIndex]);
                 int num2 = Galaxy.ResolveGovernmentId(empireStart_0.GovernmentStyle, race);
                 GovernmentAttributes governmentAttributes = galaxy.Governments[num2];
                 if (governmentAttributes.SpecialFunctionCode == 1 && empireStart_0.GovernmentStyle == "(" + TextResolver.GetText("Random") + ")" && race.PreferredStartingGovernmentId != num2)
@@ -562,11 +562,11 @@ namespace DistantWorlds
                 {
                     designPictureFamilyIndex = empireStart_0.DesignPictureFamilyIndex;
                 }
-                Empire empire2 = null;
+                Empire playerEmpire = null;
                 Habitat habitat = null;
                 double xpos;
                 double ypos;
-                if (bool_2)
+                if (isPlayerPirate)
                 {
                     Habitat habitat2 = null;
                     double double_7 = 0.0;
@@ -707,25 +707,25 @@ namespace DistantWorlds
                     }
                     galaxy.AllowRaceStartingCharacters = true;
                     galaxy.SelectRelativeHabitatSurfacePoint(habitat2, out var num8, out var num9);
-                    empire2 = galaxy.GeneratePirateEmpire(habitat2, (int)num8, (int)num9, race, designPictureFamilyIndex, empireStart_0.TechLevel, empireStart_0.PiratePlayStyle, isPlayerEmpire: true, isSuperPirates: false);
+                    playerEmpire = galaxy.GeneratePirateEmpire(habitat2, (int)num8, (int)num9, race, designPictureFamilyIndex, empireStart_0.TechLevel, empireStart_0.PiratePlayStyle, isPlayerEmpire: true, isSuperPirates: false);
                     if (!string.IsNullOrEmpty(empireStart_0.Name))
                     {
-                        empire2.Name = empireStart_0.Name;
+                        playerEmpire.Name = empireStart_0.Name;
                     }
-                    empire2.PiratePlayStyle = empireStart_0.PiratePlayStyle;
+                    playerEmpire.PiratePlayStyle = empireStart_0.PiratePlayStyle;
                     habitat = habitat2;
                     xpos = habitat2.Xpos;
                     ypos = habitat2.Ypos;
                     galaxy.AllowRaceStartingCharacters = false;
                     Habitat habitat4 = galaxy.FastFindNearestIndependentHabitat(xpos, ypos);
-                    if (habitat4 != null && !empire2.CheckSystemExplored(habitat4.SystemIndex))
+                    if (habitat4 != null && !playerEmpire.CheckSystemExplored(habitat4.SystemIndex))
                     {
                         Habitat systemStar = Galaxy.DetermineHabitatSystemStar(habitat4);
-                        empire2.SetSystemVisibility(systemStar, SystemVisibilityStatus.Explored);
-                        empire2.ResourceMap.SetResourcesKnown(galaxy.Systems[systemStar].SystemStar, known: true);
+                        playerEmpire.SetSystemVisibility(systemStar, SystemVisibilityStatus.Explored);
+                        playerEmpire.ResourceMap.SetResourcesKnown(galaxy.Systems[systemStar].SystemStar, known: true);
                         for (int j = 0; j < galaxy.Systems[systemStar].Habitats.Count; j++)
                         {
-                            empire2.ResourceMap.SetResourcesKnown(galaxy.Systems[systemStar].Habitats[j], known: true);
+                            playerEmpire.ResourceMap.SetResourcesKnown(galaxy.Systems[systemStar].Habitats[j], known: true);
                         }
                     }
                 }
@@ -858,37 +858,37 @@ namespace DistantWorlds
                     {
                         designPictureFamilyIndex = empireStart_0.DesignPictureFamilyIndex;
                     }
-                    empire2 = galaxy.GenerateEmpire(galaxy, isPlayerEmpire: true, empireStart_0.Name, habitat, race, designPictureFamilyIndex, num2, homeSystemFactor, empireStart_0.HomeSystemFavourability, empireStart_0.Age, empireStart_0.TechLevel, empireStart_0.CorruptionMultiplier, out expansion, main_0.gameOptions_0, victoryConditions_0);
+                    playerEmpire = galaxy.GenerateEmpire(galaxy, isPlayerEmpire: true, empireStart_0.Name, habitat, race, designPictureFamilyIndex, num2, homeSystemFactor, empireStart_0.HomeSystemFavourability, empireStart_0.Age, empireStart_0.TechLevel, empireStart_0.CorruptionMultiplier, out expansion, main_0.gameOptions_0, victoryConditions_0);
                     if (empireStart_0.Age == 0)
                     {
                         galaxy.ClearIndependentColoniesFromSystem(habitat.SystemIndex);
                     }
-                    galaxy.PlayerEmpire = empire2;
-                    galaxy.SetEmpireDifficultyFactors(empire2);
+                    galaxy.PlayerEmpire = playerEmpire;
+                    galaxy.SetEmpireDifficultyFactors(playerEmpire);
                     xpos = habitat.Xpos;
                     ypos = habitat.Ypos;
                 }
-                galaxy.PlayerEmpire = empire2;
+                galaxy.PlayerEmpire = playerEmpire;
                 if (empireStart_0.FlagShape >= 0)
                 {
                     Color primaryColor = empireStart_0.PrimaryColor;
                     Color secondaryColor = empireStart_0.SecondaryColor;
-                    empire2.MainColor = primaryColor;
-                    empire2.SecondaryColor = secondaryColor;
+                    playerEmpire.MainColor = primaryColor;
+                    playerEmpire.SecondaryColor = secondaryColor;
                     Bitmap smallFlagPicture = null;
                     Bitmap largeFlagPicture = null;
-                    empire2.FlagShape = Galaxy.GenerateEmpireFlag(primaryColor, secondaryColor, empireStart_0.FlagShape, list, ref smallFlagPicture, ref largeFlagPicture);
-                    empire2.SmallFlagPicture = smallFlagPicture;
-                    empire2.LargeFlagPicture = largeFlagPicture;
-                    Bitmap bitmap3 = (empire2.MediumFlagPicture = GraphicsHelper.ScaleImage(largeFlagPicture, 35, 21, 1f, lowQuality: false));
-                    if (bool_2)
+                    playerEmpire.FlagShape = Galaxy.GenerateEmpireFlag(primaryColor, secondaryColor, empireStart_0.FlagShape, list, ref smallFlagPicture, ref largeFlagPicture);
+                    playerEmpire.SmallFlagPicture = smallFlagPicture;
+                    playerEmpire.LargeFlagPicture = largeFlagPicture;
+                    Bitmap bitmap3 = (playerEmpire.MediumFlagPicture = GraphicsHelper.ScaleImage(largeFlagPicture, 35, 21, 1f, lowQuality: false));
+                    if (isPlayerPirate)
                     {
                         using Graphics graphics2 = Graphics.FromImage(largeFlagPicture);
                         GraphicsHelper.SetGraphicsQualityToHigh(graphics2);
                         graphics2.DrawImage(srcRect: new Rectangle(0, 0, galaxy.PirateFlagLarge.Width, galaxy.PirateFlagLarge.Height), destRect: new Rectangle(2, 2, 35, 22), image: galaxy.PirateFlagLarge, srcUnit: GraphicsUnit.Pixel);
                     }
                 }
-                galaxy.UpdateSystemInfo(empire2);
+                galaxy.UpdateSystemInfo(playerEmpire);
                 int num14 = 0;
                 DistantWorlds.Types.EmpireList empireList = new DistantWorlds.Types.EmpireList();
                 List<HabitatList> list2 = new List<HabitatList>();
@@ -897,17 +897,17 @@ namespace DistantWorlds
                 List<int> list5 = new List<int>();
                 List<int> list6 = new List<int>();
                 EmpireStartList empireStartList2 = new EmpireStartList();
-                if (!bool_2)
+                if (!isPlayerPirate)
                 {
-                    empireList.Add(empire2);
+                    empireList.Add(playerEmpire);
                     list3.Add(expansion);
                     list6.Add(empireStart_0.Age);
                     empireStartList2.Add(empireStart_0);
                 }
                 num14 = empireStartList_0.Count;
-                if (empire2 != null && empire2.DominantRace != null)
+                if (playerEmpire != null && playerEmpire.DominantRace != null)
                 {
-                    empireStartList_0.Update(raceList, empire2.DominantRace.Name);
+                    empireStartList_0.Update(raceList, playerEmpire.DominantRace.Name);
                 }
                 else
                 {
@@ -968,7 +968,7 @@ namespace DistantWorlds
                         List<HabitatList> list10 = new List<HabitatList>();
                         for (int m = 0; m < empireList.Count; m++)
                         {
-                            galaxy.UpdateSystemInfo(empire2);
+                            galaxy.UpdateSystemInfo(playerEmpire);
                             Habitat capital = empireList[m].Capital;
                             list2.Add(new HabitatList());
                             list2[m].Add(capital);
@@ -988,12 +988,12 @@ namespace DistantWorlds
                         {
                             Empire byEmpireId = empireList.GetByEmpireId(list8[n]);
                             int num23 = byEmpireId.EmpireId - 1;
-                            if (bool_2)
+                            if (isPlayerPirate)
                             {
                                 num23--;
                             }
                             double num24 = list9[num23];
-                            galaxy.UpdateSystemInfo(empire2);
+                            galaxy.UpdateSystemInfo(playerEmpire);
                             Habitat habitat5 = null;
                             habitat5 = ((!bool_6) ? galaxy.FindNearestColonizableHabitatUnoccupiedSystem(byEmpireId.Capital.Xpos, byEmpireId.Capital.Ypos, byEmpireId) : galaxy.FindNearestColonizableHabitat(byEmpireId.Capital.Xpos, byEmpireId.Capital.Ypos, byEmpireId));
                             double num25 = double.MaxValue;
@@ -1101,14 +1101,14 @@ namespace DistantWorlds
                             }
                         }
                         galaxy.ReviewEmpireTerritoryCore(false);
-                        galaxy.UpdateSystemInfo(empire2);
+                        galaxy.UpdateSystemInfo(playerEmpire);
                         for (int num28 = 0; num28 < 20; num28++)
                         {
                             galaxy.ReviewResourcePrices();
                             galaxy.ReviewComponentPrices();
                         }
                         galaxy.ResetLastTouchTimes();
-                        galaxy.DoTasks(gameFinished: false, empire2, null, null, null);
+                        galaxy.DoTasks(gameFinished: false, playerEmpire, null, null, null);
                         galaxy.DeferEventsForGameStart = true;
                         for (int num29 = 0; num29 < empireList.Count; num29++)
                         {
@@ -1354,15 +1354,15 @@ namespace DistantWorlds
                         }
                         if (main_0.gameOptions_0 != null)
                         {
-                            empire2.AttackRangePatrol = main_0.gameOptions_0.AttackRangePatrol;
-                            empire2.AttackRangeEscort = main_0.gameOptions_0.AttackRangeEscort;
-                            empire2.AttackRangeOther = main_0.gameOptions_0.AttackRangeOther;
-                            empire2.AttackRangeAttack = main_0.gameOptions_0.AttackRangeAttack;
-                            empire2.AttackOvermatchFactor = main_0.gameOptions_0.AttackOverMatchFactor;
-                            empire2.AttackRangePatrolManual = main_0.gameOptions_0.AttackRangePatrolManual;
-                            empire2.AttackRangeEscortManual = main_0.gameOptions_0.AttackRangeEscortManual;
-                            empire2.AttackRangeOtherManual = main_0.gameOptions_0.AttackRangeOtherManual;
-                            empire2.AttackRangeAttackManual = main_0.gameOptions_0.AttackRangeAttackManual;
+                            playerEmpire.AttackRangePatrol = main_0.gameOptions_0.AttackRangePatrol;
+                            playerEmpire.AttackRangeEscort = main_0.gameOptions_0.AttackRangeEscort;
+                            playerEmpire.AttackRangeOther = main_0.gameOptions_0.AttackRangeOther;
+                            playerEmpire.AttackRangeAttack = main_0.gameOptions_0.AttackRangeAttack;
+                            playerEmpire.AttackOvermatchFactor = main_0.gameOptions_0.AttackOverMatchFactor;
+                            playerEmpire.AttackRangePatrolManual = main_0.gameOptions_0.AttackRangePatrolManual;
+                            playerEmpire.AttackRangeEscortManual = main_0.gameOptions_0.AttackRangeEscortManual;
+                            playerEmpire.AttackRangeOtherManual = main_0.gameOptions_0.AttackRangeOtherManual;
+                            playerEmpire.AttackRangeAttackManual = main_0.gameOptions_0.AttackRangeAttackManual;
                         }
                         for (int num35 = 0; num35 < empireList.Count; num35++)
                         {
@@ -1427,12 +1427,12 @@ namespace DistantWorlds
                                 }
                             }
                         }
-                        if (empire2.PirateEmpireBaseHabitat != null)
+                        if (playerEmpire.PirateEmpireBaseHabitat != null)
                         {
                             for (int num37 = 0; num37 < galaxy.Empires.Count; num37++)
                             {
                                 Empire empire5 = galaxy.Empires[num37];
-                                if (empire5 == null || !empire5.Active || empire5 == empire2)
+                                if (empire5 == null || !empire5.Active || empire5 == playerEmpire)
                                 {
                                     continue;
                                 }
@@ -1440,7 +1440,7 @@ namespace DistantWorlds
                                 {
                                     SystemInfo systemInfo = galaxy.Systems[num38];
                                     SystemVisibilityStatus status3 = empire5.SystemVisibility[systemInfo.SystemStar.SystemIndex].Status;
-                                    SystemVisibilityStatus status4 = empire2.SystemVisibility[systemInfo.SystemStar.SystemIndex].Status;
+                                    SystemVisibilityStatus status4 = playerEmpire.SystemVisibility[systemInfo.SystemStar.SystemIndex].Status;
                                     bool flag3 = false;
                                     if ((status4 == SystemVisibilityStatus.Explored || status4 == SystemVisibilityStatus.Visible) && status3 == SystemVisibilityStatus.Visible)
                                     {
@@ -1454,28 +1454,28 @@ namespace DistantWorlds
                                     {
                                         continue;
                                     }
-                                    PirateRelation pirateRelation = empire2.ObtainPirateRelation(empire5);
+                                    PirateRelation pirateRelation = playerEmpire.ObtainPirateRelation(empire5);
                                     if (pirateRelation.Type == PirateRelationType.NotMet)
                                     {
                                         pirateRelation.Type = PirateRelationType.None;
-                                        PirateRelation pirateRelation2 = empire5.ObtainPirateRelation(empire2);
+                                        PirateRelation pirateRelation2 = empire5.ObtainPirateRelation(playerEmpire);
                                         if (pirateRelation2.Type == PirateRelationType.NotMet)
                                         {
                                             pirateRelation2.Type = PirateRelationType.None;
                                         }
-                                        if (empire2.PirateEmpireBaseHabitat != null && empire5.KnownPirateEmpires != null && !empire5.KnownPirateEmpires.Contains(empire2))
+                                        if (playerEmpire.PirateEmpireBaseHabitat != null && empire5.KnownPirateEmpires != null && !empire5.KnownPirateEmpires.Contains(playerEmpire))
                                         {
-                                            empire5.KnownPirateEmpires.Add(empire2);
+                                            empire5.KnownPirateEmpires.Add(playerEmpire);
                                         }
-                                        if (empire5.PirateEmpireBaseHabitat != null && empire2.KnownPirateEmpires != null && !empire2.KnownPirateEmpires.Contains(empire5))
+                                        if (empire5.PirateEmpireBaseHabitat != null && playerEmpire.KnownPirateEmpires != null && !playerEmpire.KnownPirateEmpires.Contains(empire5))
                                         {
-                                            empire2.KnownPirateEmpires.Add(empire5);
+                                            playerEmpire.KnownPirateEmpires.Add(empire5);
                                         }
                                     }
                                     break;
                                 }
                             }
-                            empire2.ColonizationTargets = empire2.PirateReviewColoniesToControl();
+                            playerEmpire.ColonizationTargets = playerEmpire.PirateReviewColoniesToControl();
                         }
                         galaxy.AllowRaceStartingCharacters = true;
                         for (int num39 = 0; num39 < empireList.Count; num39++)
@@ -1485,14 +1485,14 @@ namespace DistantWorlds
                                 empireList[num39].GenerateStartingCharacters();
                             }
                         }
-                        galaxy.DoTasks(gameFinished: false, empire2, null, null, null);
+                        galaxy.DoTasks(gameFinished: false, playerEmpire, null, null, null);
                         galaxy.ReviewEmpireTerritoryCore(false);
-                        galaxy.UpdateSystemInfo(empire2);
-                        if (main_0 != null && empire2 != null)
+                        galaxy.UpdateSystemInfo(playerEmpire);
+                        if (main_0 != null && playerEmpire != null)
                         {
-                            Galaxy.ApplyDesignUpgradeGameOptionsToPolicies(main_0.gameOptions_0, empire2.Policy);
+                            Galaxy.ApplyDesignUpgradeGameOptionsToPolicies(main_0.gameOptions_0, playerEmpire.Policy);
                         }
-                        if (double_3 > 0.0 && int_4 == 0 && !bool_2)
+                        if (double_3 > 0.0 && int_4 == 0 && !isPlayerPirate)
                         {
                             Empire empire6 = galaxy.FindNearestPirateFaction(xpos, ypos, null, includeSuperPirates: true);
                             if (empire6 != null)
@@ -2023,14 +2023,14 @@ namespace DistantWorlds
                         {
                             bool_3 = true;
                         }
-                        game2.PlayAsAPirate = bool_2;
+                        game2.PlayAsAPirate = isPlayerPirate;
                         game2.AgeOfShadows = bool_3;
                         galaxy.GlobalVictoryConditions = victoryConditions_0;
                         game2.Galaxy = galaxy;
                         game2.CustomizationSetName = empty;
-                        game2.PlayerEmpire = empire2;
+                        game2.PlayerEmpire = playerEmpire;
                         game2.PlayerEmpire.PlayableInScenario = true;
-                        if (!bool_2 && bool_3 && victoryConditions_0.EnableStoryEventsShadows)
+                        if (!isPlayerPirate && bool_3 && victoryConditions_0.EnableStoryEventsShadows)
                         {
                             game2.PlayerEmpire.PreWarpProgressEventOccurredSendPirateRaid = false;
                         }
@@ -2075,7 +2075,7 @@ namespace DistantWorlds
                     Galaxy.Rnd.NextDouble();
                     Galaxy.ResolveHomeSystem(empireStartList_0[num15].HomeSystemFavourability, out capitalHabitatType, out homeSystemFactor);
                     capitalHabitatType = race.NativeHabitatType;
-                    Habitat habitat21 = method_51(galaxy, race, empireStartList_0[num15].ProximityDistance, habitat, capitalHabitatType, bool_2, num14 + 1, sector_);
+                    Habitat habitat21 = method_51(galaxy, race, empireStartList_0[num15].ProximityDistance, habitat, capitalHabitatType, isPlayerPirate, num14 + 1, sector_);
                     if (habitat21 != null)
                     {
                         designPictureFamilyIndex = race.DesignPictureFamilyIndex;
@@ -2940,7 +2940,7 @@ namespace DistantWorlds
             Color selectedColor2 = cmbSecondaryColor.SelectedColor;
             if (selectedColor == selectedColor2)
             {
-                if (bool_2)
+                if (isPlayerPirate)
                 {
                     Galaxy.GenerateEmpireFlag(Color.Gray, Color.White, e.Index, Galaxy.FlagShapesPirates, ref smallFlagPicture, ref largeFlagPicture);
                 }
@@ -2949,7 +2949,7 @@ namespace DistantWorlds
                     Galaxy.GenerateEmpireFlag(Color.Gray, Color.White, e.Index, Galaxy.FlagShapes, ref smallFlagPicture, ref largeFlagPicture);
                 }
             }
-            else if (bool_2)
+            else if (isPlayerPirate)
             {
                 Galaxy.GenerateEmpireFlag(selectedColor, selectedColor2, e.Index, Galaxy.FlagShapesPirates, ref smallFlagPicture, ref largeFlagPicture);
             }
@@ -2982,7 +2982,7 @@ namespace DistantWorlds
             int selectedIndex = cmbFlagShape.SelectedIndex;
             Bitmap smallFlagPicture = null;
             Bitmap largeFlagPicture = null;
-            if (bool_2)
+            if (isPlayerPirate)
             {
                 Galaxy.GenerateEmpireFlag(selectedColor, selectedColor2, selectedIndex, Galaxy.FlagShapesPirates, ref smallFlagPicture, ref largeFlagPicture);
             }
@@ -3110,7 +3110,7 @@ namespace DistantWorlds
 
         private void ijvJztcJac(object sender, EventArgs e)
         {
-            if (bool_2)
+            if (isPlayerPirate)
             {
                 method_100(TextResolver.GetText("Victory") + ": " + TextResolver.GetText("Pirate-specific Conditions"), TextResolver.GetText("Enables Pirate-specific Victory Conditions in the game"));
             }
@@ -3304,7 +3304,7 @@ namespace DistantWorlds
         {
             method_140();
             bool_3 = false;
-            bool_2 = false;
+            isPlayerPirate = false;
             string text = "(" + TextResolver.GetText("Random") + ")";
             GalaxyShape galaxyShape = GalaxyShape.Elliptical;
             int num = 0;
@@ -4401,7 +4401,7 @@ namespace DistantWorlds
             int num4 = random.Next(15, 20);
             EmpireStartList empireStartList = new EmpireStartList();
             EmpireStart empireStart = method_112(null, empireStartList, TextResolver.GetText("Starting"), TextResolver.GetText("Normal"), random);
-            bool_2 = true;
+            isPlayerPirate = true;
             bool_3 = true;
             empireStart.PiratePlayStyle = PiratePlayStyle.Pirate;
             for (int i = 0; i < num4; i++)
@@ -4477,7 +4477,7 @@ namespace DistantWorlds
             int num4 = random.Next(15, 20);
             EmpireStartList empireStartList = new EmpireStartList();
             EmpireStart empireStart = method_112(null, empireStartList, TextResolver.GetText("PreWarp"), TextResolver.GetText("PreWarp"), random);
-            bool_2 = false;
+            isPlayerPirate = false;
             bool_3 = true;
             for (int i = 0; i < num4; i++)
             {
@@ -4552,7 +4552,7 @@ namespace DistantWorlds
             int num4 = random.Next(15, 20);
             EmpireStartList empireStartList = new EmpireStartList();
             EmpireStart empireStart = method_112(null, empireStartList, TextResolver.GetText("PreWarp"), TextResolver.GetText("PreWarp"), random);
-            bool_2 = false;
+            isPlayerPirate = false;
             bool_3 = true;
             for (int i = 0; i < num4; i++)
             {

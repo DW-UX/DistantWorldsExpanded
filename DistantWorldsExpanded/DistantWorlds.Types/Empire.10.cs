@@ -4424,7 +4424,7 @@ namespace DistantWorlds.Types
                 {
                     num2 = num;
                 }
-                int num3 = Galaxy.Rnd.Next(0, governmentAttributesList.Count + 1);
+                int num3 = Galaxy.Rnd.Next(0, governmentAttributesList.Count);
                 if (num3 == governmentAttributesList.Count)
                 {
                     num3 = num2;
