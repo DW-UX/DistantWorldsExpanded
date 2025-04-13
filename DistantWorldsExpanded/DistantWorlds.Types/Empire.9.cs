@@ -235,7 +235,7 @@ namespace DistantWorlds.Types
                 {
                     foreach (BuiltObject item in resupplyShip.ParentHabitat.BasesAtHabitat)
                     {
-                        if (item.SubRole == BuiltObjectSubRole.SmallSpacePort || item.SubRole == BuiltObjectSubRole.MediumSpacePort || item.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                        if (item.SubRole == BuiltObjectSubRole.Outpost || item.SubRole == BuiltObjectSubRole.SmallSpacePort || item.SubRole == BuiltObjectSubRole.MediumSpacePort || item.SubRole == BuiltObjectSubRole.LargeSpacePort)
                         {
                             flag3 = true;
                             break;
@@ -2194,6 +2194,9 @@ namespace DistantWorlds.Types
                     double sortTag = 0.0;
                     switch (SpacePorts[j].SubRole)
                     {
+                        case BuiltObjectSubRole.Outpost:
+                            sortTag = 50000.0;
+                            break;
                         case BuiltObjectSubRole.SmallSpacePort:
                             sortTag = 200000.0;
                             break;
@@ -3797,7 +3800,7 @@ namespace DistantWorlds.Types
                 for (int n = 0; n < empire.LongRangeScanners.Count; n++)
                 {
                     BuiltObject builtObject5 = empire.LongRangeScanners[n];
-                    if (builtObject5.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject5.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject5.SubRole != BuiltObjectSubRole.LargeSpacePort && IsObjectVisibleToThisEmpire(builtObject5))
+                    if (builtObject5.SubRole != BuiltObjectSubRole.Outpost && builtObject5.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject5.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject5.SubRole != BuiltObjectSubRole.LargeSpacePort && IsObjectVisibleToThisEmpire(builtObject5))
                     {
                         int priority6 = 500000;
                         PrioritizedTarget prioritizedTarget7 = new PrioritizedTarget(builtObject5, priority6);

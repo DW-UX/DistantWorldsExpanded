@@ -1877,6 +1877,10 @@ namespace DistantWorlds.Types
             {
                 _ComponentsAvailable[20] = CheckDesignComponentsAvailable(BuiltObjectRole.Base, BuiltObjectSubRole.SmallSpacePort);
             }
+            if (!_ComponentsAvailable[29])
+            {
+                _ComponentsAvailable[29] = CheckDesignComponentsAvailable(BuiltObjectRole.Base, BuiltObjectSubRole.Outpost);
+            }
             if (!_ComponentsAvailable[6])
             {
                 _ComponentsAvailable[6] = CheckDesignComponentsAvailable(BuiltObjectRole.Military, BuiltObjectSubRole.TroopTransport);

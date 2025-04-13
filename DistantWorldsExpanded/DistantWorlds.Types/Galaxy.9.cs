@@ -259,7 +259,7 @@ namespace DistantWorlds.Types
                     for (int i = 0; i < pirateFaction.PirateEmpireBaseHabitat.BasesAtHabitat.Count; i++)
                     {
                         BuiltObject builtObject2 = pirateFaction.PirateEmpireBaseHabitat.BasesAtHabitat[i];
-                        if (builtObject2.Role == BuiltObjectRole.Base && builtObject2.ActualEmpire == pirateFaction && (builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject2.ParentHabitat != null && builtObject2.ParentHabitat == pirateFaction.PirateEmpireBaseHabitat && builtObject2.ExtractionGas > 0 && (builtObject == null || builtObject.Size < builtObject2.Size))
+                        if (builtObject2.Role == BuiltObjectRole.Base && builtObject2.ActualEmpire == pirateFaction && (builtObject2.SubRole == BuiltObjectSubRole.Outpost || builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject2.ParentHabitat != null && builtObject2.ParentHabitat == pirateFaction.PirateEmpireBaseHabitat && builtObject2.ExtractionGas > 0 && (builtObject == null || builtObject.Size < builtObject2.Size))
                         {
                             builtObject = builtObject2;
                         }
@@ -270,7 +270,7 @@ namespace DistantWorlds.Types
                     for (int j = 0; j < pirateFaction.BuiltObjects.Count; j++)
                     {
                         BuiltObject builtObject3 = pirateFaction.BuiltObjects[j];
-                        if (builtObject3.Role == BuiltObjectRole.Base && (builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject3.ExtractionGas > 0 && (builtObject == null || builtObject.Size < builtObject3.Size))
+                        if (builtObject3.Role == BuiltObjectRole.Base && (builtObject3.SubRole == BuiltObjectSubRole.Outpost || builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject3.ExtractionGas > 0 && (builtObject == null || builtObject.Size < builtObject3.Size))
                         {
                             builtObject = builtObject3;
                         }
@@ -376,6 +376,7 @@ namespace DistantWorlds.Types
             bool flag = false;
             switch (attackedPirateBase.SubRole)
             {
+                case BuiltObjectSubRole.Outpost:
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
                 case BuiltObjectSubRole.LargeSpacePort:

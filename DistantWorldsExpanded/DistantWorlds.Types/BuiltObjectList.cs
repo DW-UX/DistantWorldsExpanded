@@ -165,7 +165,7 @@ namespace DistantWorlds.Types
             for (int i = 0; i < base.Count; i++)
             {
                 BuiltObject builtObject = base[i];
-                if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                 {
                     num++;
                 }

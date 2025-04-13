@@ -2458,6 +2458,7 @@ namespace DistantWorlds.Types
                     case BuiltObjectSubRole.MiningShip:
                     case BuiltObjectSubRole.GasMiningStation:
                     case BuiltObjectSubRole.MiningStation:
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -2511,6 +2512,9 @@ namespace DistantWorlds.Types
                         break;
                     case BuiltObjectSubRole.HighTechResearchStation:
                         empty = design.Name + " " + ResolveDescription(BuiltObjectSubRole.HighTechResearchStation) + " " + design.BuildCount.ToString("000");
+                        break;
+                    case BuiltObjectSubRole.Outpost:
+                        empty = design.Name + " " + TextResolver.GetText("Outpost") + " " + design.BuildCount.ToString("000");
                         break;
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
@@ -2567,6 +2571,7 @@ namespace DistantWorlds.Types
                 case BuiltObjectSubRole.ExplorationShip:
                 case BuiltObjectSubRole.ColonyShip:
                 case BuiltObjectSubRole.ConstructionShip:
+                case BuiltObjectSubRole.Outpost:
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
                 case BuiltObjectSubRole.LargeSpacePort:
@@ -3707,6 +3712,7 @@ namespace DistantWorlds.Types
                             num = 20000.0;
                         }
                         break;
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:

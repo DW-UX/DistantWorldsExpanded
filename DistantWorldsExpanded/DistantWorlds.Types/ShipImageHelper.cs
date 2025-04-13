@@ -149,6 +149,7 @@ namespace DistantWorlds.Types
                     break;
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
+                case BuiltObjectSubRole.Outpost:
                     num2 = 6;
                     break;
                 case BuiltObjectSubRole.GasMiningStation:
@@ -193,6 +194,7 @@ namespace DistantWorlds.Types
                 case BuiltObjectSubRole.MiningStation:
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.GenericBase:
+                case BuiltObjectSubRole.Outpost:
                     if (_Rnd.Next(0, 2) == 1)
                     {
                         int family2 = _Rnd.Next(1, 3);

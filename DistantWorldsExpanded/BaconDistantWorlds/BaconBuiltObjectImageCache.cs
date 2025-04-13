@@ -44,6 +44,7 @@ namespace BaconDistantWorlds
                 "MiningShip",
                 "GasMiningStation",
                 "MiningStation",
+                "Outpost",
                 "SmallSpacePort",
                 "MediumSpacePort",
                 "LargeSpacePort",

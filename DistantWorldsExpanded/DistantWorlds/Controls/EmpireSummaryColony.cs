@@ -121,7 +121,7 @@ namespace DistantWorlds.Controls
                 for (int i = 0; i < empire_0.PirateEmpireBaseHabitat.BasesAtHabitat.Count; i++)
                 {
                     BuiltObject builtObject2 = empire_0.PirateEmpireBaseHabitat.BasesAtHabitat[i];
-                    if (builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                    if (builtObject2.SubRole == BuiltObjectSubRole.Outpost || builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort)
                     {
                         builtObject = builtObject2;
                     }

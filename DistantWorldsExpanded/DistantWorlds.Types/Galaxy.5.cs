@@ -2347,6 +2347,9 @@ namespace DistantWorlds.Types
                 case BuiltObjectSubRole.MiningShip:
                     empty = SelectRandomUniqueStandardShipName(parentHabitat);
                     break;
+                case BuiltObjectSubRole.Outpost:
+                    empty = text + " " + "Outpost";
+                    break;
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
                 case BuiltObjectSubRole.LargeSpacePort:
@@ -5002,6 +5005,7 @@ namespace DistantWorlds.Types
                             _ => IndustryType.Undefined,
                         };
                         break;
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:

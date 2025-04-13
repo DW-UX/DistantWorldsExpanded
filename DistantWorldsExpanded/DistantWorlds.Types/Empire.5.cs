@@ -74,8 +74,9 @@ namespace DistantWorlds.Types
             if (design != null)
             {
                 List<BuiltObjectSubRole> list = new List<BuiltObjectSubRole>();
-                list.AddRange(new BuiltObjectSubRole[3]
+                list.AddRange(new BuiltObjectSubRole[]
                 {
+                BuiltObjectSubRole.Outpost,
                 BuiltObjectSubRole.SmallSpacePort,
                 BuiltObjectSubRole.MediumSpacePort,
                 BuiltObjectSubRole.LargeSpacePort
@@ -3465,7 +3466,7 @@ namespace DistantWorlds.Types
                     for (int i = 0; i < empire.PirateEmpireBaseHabitat.BasesAtHabitat.Count; i++)
                     {
                         BuiltObject builtObject2 = empire.PirateEmpireBaseHabitat.BasesAtHabitat[i];
-                        if (builtObject2 != null && builtObject2.Empire == empire && (builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                        if (builtObject2 != null && builtObject2.Empire == empire && (builtObject2.SubRole == BuiltObjectSubRole.Outpost || builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort))
                         {
                             builtObject = builtObject2;
                             break;
@@ -3520,6 +3521,7 @@ namespace DistantWorlds.Types
             list.Add(BuiltObjectSubRole.HighTechResearchStation);
             list.Add(BuiltObjectSubRole.WeaponsResearchStation);
             list.Add(BuiltObjectSubRole.GenericBase);
+            list.Add(BuiltObjectSubRole.Outpost);
             list.Add(BuiltObjectSubRole.SmallSpacePort);
             list.Add(BuiltObjectSubRole.MediumSpacePort);
             list.Add(BuiltObjectSubRole.LargeSpacePort);
@@ -3689,7 +3691,7 @@ namespace DistantWorlds.Types
                 for (int i = 0; i < builtObjectsAtLocation.Count; i++)
                 {
                     BuiltObject builtObject = builtObjectsAtLocation[i];
-                    if (((builtObject != null && builtObject.ResearchWeapons > 0) || builtObject.ResearchEnergy > 0 || builtObject.ResearchHighTech > 0) && builtObject.Role == BuiltObjectRole.Base && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort && builtObject.NearestSystemStar == habitat)
+                    if (((builtObject != null && builtObject.ResearchWeapons > 0) || builtObject.ResearchEnergy > 0 || builtObject.ResearchHighTech > 0) && builtObject.Role == BuiltObjectRole.Base && builtObject.SubRole != BuiltObjectSubRole.Outpost && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort && builtObject.NearestSystemStar == habitat)
                     {
                         return true;
                     }
@@ -3959,7 +3961,7 @@ namespace DistantWorlds.Types
                 return false;
             }
             bool result = false;
-            if (miningStation != null && miningStation.Role == BuiltObjectRole.Base && miningStation.IsResourceExtractor && miningStation.SubRole != BuiltObjectSubRole.SmallSpacePort && miningStation.SubRole != BuiltObjectSubRole.MediumSpacePort && miningStation.SubRole != BuiltObjectSubRole.LargeSpacePort)
+            if (miningStation != null && miningStation.Role == BuiltObjectRole.Base && miningStation.IsResourceExtractor && miningStation.SubRole != BuiltObjectSubRole.Outpost && miningStation.SubRole != BuiltObjectSubRole.SmallSpacePort && miningStation.SubRole != BuiltObjectSubRole.MediumSpacePort && miningStation.SubRole != BuiltObjectSubRole.LargeSpacePort)
             {
                 if (!ship.WithinFuelRangeAndRefuel(miningStation.Xpos, miningStation.Ypos, 0.0))
                 {

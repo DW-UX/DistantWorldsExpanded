@@ -272,7 +272,7 @@ namespace DistantWorlds.Types
             bool empireHasWarptech = CheckEmpireHasHyperDriveTech(this);
             colony.RecalculateColonyInfluenceRadius(empireHasWarptech);
             BuiltObject builtObject = _Galaxy.DetermineMiningStationAtHabitat(colony);
-            if (builtObject != null && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort)
+            if (builtObject != null && builtObject.SubRole != BuiltObjectSubRole.Outpost && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort)
             {
                 builtObject.CompleteTeardown(_Galaxy);
             }
@@ -683,6 +683,7 @@ namespace DistantWorlds.Types
                         case BuiltObjectSubRole.ExplorationShip:
                         case BuiltObjectSubRole.ColonyShip:
                         case BuiltObjectSubRole.ConstructionShip:
+                        case BuiltObjectSubRole.Outpost:
                         case BuiltObjectSubRole.SmallSpacePort:
                         case BuiltObjectSubRole.MediumSpacePort:
                         case BuiltObjectSubRole.LargeSpacePort:

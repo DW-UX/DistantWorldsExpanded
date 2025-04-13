@@ -1227,11 +1227,13 @@ namespace DistantWorlds.Types
             long num = HabitatLargeSpacePortPopulationRequirement;
             long num2 = HabitatMediumSpacePortPopulationRequirement;
             long num3 = HabitatSmallSpacePortPopulationRequirement;
+            long num31 = HabitatOutpostPopulationRequirement;
             if (empire != null && empire.Policy != null)
             {
                 num = (long)empire.Policy.ConstructionSpaceportLargeColonyPopulationThreshold * 1000000L;
                 num2 = (long)empire.Policy.ConstructionSpaceportMediumColonyPopulationThreshold * 1000000L;
                 num3 = (long)empire.Policy.ConstructionSpaceportSmallColonyPopulationThreshold * 1000000L;
+                num31 = (long)empire.Policy.ConstructionOutpostColonyPopulationThreshold * 1000000L;
             }
             if (colony.Population.TotalAmount > num)
             {
@@ -1244,6 +1246,10 @@ namespace DistantWorlds.Types
             else if (colony.Population.TotalAmount > num3)
             {
                 design = empire.Designs.FindNewestCanBuild(BuiltObjectSubRole.SmallSpacePort);
+            }
+            else if (colony.Population.TotalAmount > num31)
+            {
+                design = empire.Designs.FindNewestCanBuild(BuiltObjectSubRole.Outpost);
             }
             if (empire.Colonies.Count == 1 && design != null && design.SubRole == BuiltObjectSubRole.LargeSpacePort)
             {
@@ -2854,7 +2860,7 @@ namespace DistantWorlds.Types
                 for (int k = 0; k < empire2.BuiltObjects.Count; k++)
                 {
                     BuiltObject builtObject2 = empire2.BuiltObjects[k];
-                    if (builtObject2 != null && (builtObject2.SubRole == BuiltObjectSubRole.GenericBase || builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                    if (builtObject2 != null && (builtObject2.SubRole == BuiltObjectSubRole.GenericBase || builtObject2.SubRole == BuiltObjectSubRole.Outpost || builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort))
                     {
                         flag = true;
                         break;
@@ -2889,7 +2895,7 @@ namespace DistantWorlds.Types
                 for (int j = 0; j < empire.BuiltObjects.Count; j++)
                 {
                     BuiltObject builtObject = empire.BuiltObjects[j];
-                    if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.GenericBase || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                    if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.GenericBase || builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                     {
                         flag = true;
                         break;
@@ -3131,6 +3137,7 @@ namespace DistantWorlds.Types
                         case BuiltObjectSubRole.HighTechResearchStation:
                             IndependentEmpire.TakeOwnershipOfBuiltObject(item, null);
                             break;
+                        case BuiltObjectSubRole.Outpost:
                         case BuiltObjectSubRole.SmallSpacePort:
                         case BuiltObjectSubRole.MediumSpacePort:
                         case BuiltObjectSubRole.LargeSpacePort:

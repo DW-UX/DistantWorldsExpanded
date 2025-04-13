@@ -1968,7 +1968,7 @@ namespace DistantWorlds.Types
                 for (int i = 0; i < BuiltObjects.Count; i++)
                 {
                     BuiltObject builtObject = BuiltObjects[i];
-                    if (builtObject != null && !builtObject.HasBeenDestroyed && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                    if (builtObject != null && !builtObject.HasBeenDestroyed && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                     {
                         stellarObjectList.Add(builtObject);
                     }
@@ -2191,6 +2191,7 @@ namespace DistantWorlds.Types
                         break;
                     case BuiltObjectSubRole.GasMiningStation:
                     case BuiltObjectSubRole.MiningStation:
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -2246,6 +2247,7 @@ namespace DistantWorlds.Types
                             habitatList.Add(builtObject.ParentHabitat);
                         }
                         break;
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -3661,7 +3663,7 @@ namespace DistantWorlds.Types
                     for (int k = 0; k < colony.BasesAtHabitat.Count; k++)
                     {
                         BuiltObject builtObject = colony.BasesAtHabitat[k];
-                        if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                        if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                         {
                             flag = false;
                         }
@@ -3809,7 +3811,7 @@ namespace DistantWorlds.Types
                     for (int i = 0; i < colony.BasesAtHabitat.Count; i++)
                     {
                         BuiltObject builtObject = colony.BasesAtHabitat[i];
-                        if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                        if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                         {
                             flag = false;
                         }

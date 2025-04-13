@@ -164,6 +164,8 @@ namespace DistantWorlds.Controls
                 num3 += num;
                 method_5(graphics_0, BuiltObjectSubRole.ColonyShip, num5, num3, empire_0.BuiltObjects, bool_0: false);
                 num3 += num + num2;
+                method_5(graphics_0, BuiltObjectSubRole.Outpost, num5, num3, empire_0.BuiltObjects, bool_0: false);
+                num3 += num;
                 method_5(graphics_0, BuiltObjectSubRole.SmallSpacePort, num5, num3, empire_0.BuiltObjects, bool_0: false);
                 num3 += num;
                 method_5(graphics_0, BuiltObjectSubRole.MediumSpacePort, num5, num3, empire_0.BuiltObjects, bool_0: false);
@@ -192,6 +194,7 @@ namespace DistantWorlds.Controls
                 BuiltObjectSubRole.ExplorationShip,
                 BuiltObjectSubRole.ConstructionShip,
                 BuiltObjectSubRole.ColonyShip,
+                BuiltObjectSubRole.Outpost,
                 BuiltObjectSubRole.SmallSpacePort,
                 BuiltObjectSubRole.MediumSpacePort,
                 BuiltObjectSubRole.LargeSpacePort,

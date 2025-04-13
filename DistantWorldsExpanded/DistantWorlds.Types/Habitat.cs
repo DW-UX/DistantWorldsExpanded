@@ -2751,7 +2751,7 @@ namespace DistantWorlds.Types
             for (int i = 0; i < BasesAtHabitat.Count; i++)
             {
                 BuiltObject builtObject = BasesAtHabitat[i];
-                if (builtObject != null && !builtObject.HasBeenDestroyed && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                if (builtObject != null && !builtObject.HasBeenDestroyed && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                 {
                     HasSpacePort = true;
                 }
