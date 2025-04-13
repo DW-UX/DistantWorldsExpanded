@@ -3,9 +3,11 @@
 using DistantWorlds.Types.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
@@ -4841,11 +4843,26 @@ namespace DistantWorlds.Types
                         if (builtObject3 != null && builtObject3.NearestSystemStar != null)
                         {
                             double num11 = _Galaxy.CalculateDistance(builtObject3.Xpos, builtObject3.Ypos, ship.Xpos, ship.Ypos);
-                            habitat7 = ((!(num11 < (double)Galaxy.SectorSize)) ? _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.Xpos, ship.Ypos) : builtObject3.NearestSystemStar);
+                            if (!(num11 < (double)Galaxy.SectorSize))
+                            {
+                                if (ship.NearestSystemStar != null)
+                                { habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.NearestSystemStar); }
+                                else
+                                { habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.Xpos, ship.Ypos); }
+                            }
+                            else
+                            { habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(builtObject3.NearestSystemStar); }
                         }
                         else
                         {
-                            habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.Xpos, ship.Ypos);
+                            if (ship.NearestSystemStar != null)
+                            {
+                                habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.NearestSystemStar);
+                            }
+                            else
+                            {
+                                habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.Xpos, ship.Ypos);
+                            }
                         }
                         if (habitat7 != null)
                         {

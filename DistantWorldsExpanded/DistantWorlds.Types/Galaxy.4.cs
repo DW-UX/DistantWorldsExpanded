@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
@@ -2371,6 +2372,8 @@ namespace DistantWorlds.Types
                 Systems.Add(systemInfo);
             }
             UpdateSystemInfo(null);
+            FillSystemInfoByDistance();
+            //FillShipNearSystems();
             for (int num31 = 0; num31 < Creatures.Count; num31++)
             {
                 if (!Systems[Creatures[num31].ParentHabitat.SystemIndex].Creatures.Contains(Creatures[num31]))
@@ -2382,6 +2385,38 @@ namespace DistantWorlds.Types
             GameSummary = DetermineGameSummary();
             list = null;
         }
+
+        public void FillSystemInfoByDistance()
+        {
+            _SystemInfoByDistance = new Dictionary<SystemInfo, SystemInfo[]>(Systems.Count);
+            for (int i = 0; i < Systems.Count; i++)
+            {
+                _SystemInfoByDistance.Add(Systems[i], Systems.Select(p => new
+                {
+                    SystemInfo = p,
+                    Distance = Math.Sqrt(
+                           Math.Pow(Math.Abs(p.SystemStar.Xpos - Systems[i].SystemStar.Xpos), 2) +
+                           Math.Pow(Math.Abs(p.SystemStar.Ypos - Systems[i].SystemStar.Ypos), 2)
+                       )
+                }).OrderBy(p => p.Distance).Select(x => x.SystemInfo).ToArray());
+                foreach (var hab in Systems[i].Habitats)
+                {
+                    hab.SystemInfo = Systems[i];
+                }
+                Systems[i].SystemStar.SystemInfo = Systems[i];
+            }
+        }
+
+        //public void FillShipNearSystems()
+        //{
+        //    foreach (var item in Empires)
+        //    {
+        //        foreach (var ship in item.BuiltObjects)
+        //            BaconBuiltObject.AssignNearestSystemStarIfNull(ship);
+        //        foreach (var ship in item.PrivateBuiltObjects)
+        //            BaconBuiltObject.AssignNearestSystemStarIfNull(ship);
+        //    }
+        //}
 
         public string GenerateBuiltObjectName(Design design)
         {

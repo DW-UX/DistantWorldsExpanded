@@ -482,6 +482,23 @@ namespace BaconDistantWorlds
                             //break;
                         }
                     }
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.DisableBaseShipyards, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject selectedObject)
+                        {
+                            if (selectedObject.BaseShipyardDisabled)
+                            {
+                                selectedObject.BaseShipyardDisabled = false;
+                                selectedObject.Name = selectedObject.Name.Replace("--", "");
+                            }
+                            else
+                            {
+                                selectedObject.BaseShipyardDisabled = true;
+                                selectedObject.Name = "--" + selectedObject.Name;
+                            }
+                        }
+                    }
                 }
                 //break;
                 //}
@@ -728,36 +745,38 @@ namespace BaconDistantWorlds
 
         public static void ToggleAutomateCarrierOps(Main main, object selectedObject)
         {
-            BuiltObject builtObject = (BuiltObject)null;
-            Fighter fighter = (Fighter)null;
             switch (selectedObject)
             {
-                case BuiltObject _:
-                    builtObject = selectedObject as BuiltObject;
+                case BuiltObject ship:
+                    if (ship.Fighters == null || ship.Empire != main._Game.PlayerEmpire)
+                        return;
+                    if (ship.BaconCarrierEnabled)
+                    {
+                        ship.Name = ship.Name.Replace("*", "");
+                        ship.BaconCarrierEnabled = false;
+                    }
+                    else
+                    {
+                        ship.Name = "*" + ship.Name;
+                        ship.BaconCarrierEnabled = true;
+                    }
                     break;
-                case Fighter _:
-                    fighter = selectedObject as Fighter;
+                case Fighter fighter:
+                    if (fighter == null)
+                        return;
+                    if (fighter.BaconAutomationEnabled)
+                    {
+                        fighter.BaconAutomationEnabled = false;
+                        fighter.Name = fighter.Name.Replace("!", "");
+                    }
+                    else
+                    {
+                        fighter.Name = "!" + fighter.Name;
+                        fighter.BaconAutomationEnabled = true;
+                    }
                     break;
                 default:
                     return;
-            }
-            if (builtObject != null)
-            {
-                if (builtObject.Fighters == null || builtObject.Empire != main._Game.PlayerEmpire)
-                    return;
-                if (builtObject.Name.StartsWith("*"))
-                    builtObject.Name = builtObject.Name.Replace("*", "");
-                else
-                    builtObject.Name = "*" + builtObject.Name;
-            }
-            else
-            {
-                if (fighter == null)
-                    return;
-                if (fighter.Name.StartsWith("!"))
-                    fighter.Name = fighter.Name.Replace("!", "");
-                else
-                    fighter.Name = "!" + fighter.Name;
             }
         }
 
@@ -814,8 +833,7 @@ namespace BaconDistantWorlds
                 return;
             switch (shipOrFighter)
             {
-                case BuiltObject _:
-                    BuiltObject builtObject = shipOrFighter as BuiltObject;
+                case BuiltObject builtObject:
                     if (builtObject.Fighters == null)
                         break;
                     FighterList source1 = new FighterList();
@@ -830,20 +848,26 @@ namespace BaconDistantWorlds
                             if (fighter.MissionType != FighterMissionType.ReturnToCarrier)
                             {
                                 fighter.AssignAttackTarget(BaconBuiltObject.fighterTarget);
-                                if (!fighter.Name.StartsWith("!"))
+                                if (!fighter.BaconAutomationEnabled)
+                                {
                                     fighter.Name = "!" + fighter.Name;
+                                    fighter.BaconAutomationEnabled = true;
+                                }
                             }
                         }
                     }
                     break;
-                case Fighter _:
-                    if ((shipOrFighter as Fighter).MissionType == FighterMissionType.ReturnToCarrier)
+                case Fighter fighter:
+                    if (fighter.MissionType == FighterMissionType.ReturnToCarrier)
                         break;
-                    if ((shipOrFighter as Fighter).OnboardCarrier)
-                        (shipOrFighter as Fighter).ParentBuiltObject.LaunchFighter(shipOrFighter as Fighter);
-                    (shipOrFighter as Fighter).AssignAttackTarget(BaconBuiltObject.fighterTarget);
-                    if (!(shipOrFighter as Fighter).Name.StartsWith("!"))
-                        (shipOrFighter as Fighter).Name = "!" + (shipOrFighter as Fighter).Name;
+                    if (fighter.OnboardCarrier)
+                        fighter.ParentBuiltObject.LaunchFighter(fighter);
+                    fighter.AssignAttackTarget(BaconBuiltObject.fighterTarget);
+                    if (!fighter.BaconAutomationEnabled)
+                    {
+                        fighter.Name = "!" + fighter.Name;
+                        fighter.BaconAutomationEnabled = true;
+                    }
                     break;
                 case BuiltObjectList _:
                     using (IEnumerator<BuiltObject> enumerator = ((IEnumerable<BuiltObject>)shipOrFighter).GetEnumerator())
@@ -865,8 +889,11 @@ namespace BaconDistantWorlds
                                         if (fighter.MissionType != FighterMissionType.ReturnToCarrier)
                                         {
                                             fighter.AssignAttackTarget(BaconBuiltObject.fighterTarget);
-                                            if (!fighter.Name.StartsWith("!"))
+                                            if (!fighter.BaconAutomationEnabled)
+                                            {
                                                 fighter.Name = "!" + fighter.Name;
+                                                fighter.BaconAutomationEnabled = true;
+                                            }
                                         }
                                     }
                                 }
@@ -891,8 +918,11 @@ namespace BaconDistantWorlds
                                     if (fighter.MissionType != FighterMissionType.ReturnToCarrier)
                                     {
                                         fighter.AssignAttackTarget(BaconBuiltObject.fighterTarget);
-                                        if (!fighter.Name.StartsWith("!"))
+                                        if (!fighter.BaconAutomationEnabled)
+                                        {
                                             fighter.Name = "!" + fighter.Name;
+                                            fighter.BaconAutomationEnabled = true;
+                                        }
                                     }
                                 }
                             }
@@ -5114,7 +5144,7 @@ namespace BaconDistantWorlds
                 StellarObjectList coloniesToExclude = new StellarObjectList();
                 foreach (BuiltObject spacePort in (SyncList<BuiltObject>)ship.ActualEmpire.SpacePorts)
                 {
-                    if (spacePort.Name.StartsWith("--"))
+                    if (spacePort.BaseShipyardDisabled)
                         coloniesToExclude.Add((StellarObject)spacePort);
                 }
                 Habitat habitat = ship.ActualEmpire.SelectRandomSpacePortColony(coloniesToExclude);

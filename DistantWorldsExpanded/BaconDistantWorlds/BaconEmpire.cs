@@ -1414,7 +1414,7 @@ namespace BaconDistantWorlds
                 StellarObjectList coloniesToExclude = new StellarObjectList();
                 foreach (BuiltObject spacePort in (SyncList<BuiltObject>)empire.SpacePorts)
                 {
-                    if (spacePort.Name.StartsWith("--"))
+                    if (spacePort.BaseShipyardDisabled)
                         coloniesToExclude.Add((StellarObject)spacePort);
                 }
                 Habitat habitat = empire.SelectRandomSpacePortColony(coloniesToExclude);

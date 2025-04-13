@@ -18,6 +18,10 @@ namespace DistantWorlds.Types
     [Serializable]
     public partial class BuiltObject : StellarObject, IComparable, IComparable<StellarObject>, IComparable<BuiltObject>, IComparable<Habitat>, IComparable<Creature>, ISerializable
     {
+        [OptionalField]
+        public bool BaseShipyardDisabled = false;
+        [OptionalField]
+        public bool BaconCarrierEnabled = false;
         public object _LockObject = new object();
 
         public int BuiltObjectID;

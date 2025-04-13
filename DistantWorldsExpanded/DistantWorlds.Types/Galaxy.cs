@@ -825,6 +825,9 @@ namespace DistantWorlds.Types
 
         public CreatureList Creatures => _Creatures;
 
+        [NonSerialized]
+        private Dictionary<SystemInfo, SystemInfo[]> _SystemInfoByDistance;
+
         public static Random Rnd
         {
             get

@@ -15,7 +15,7 @@ namespace ExpansionMod.Objects.HotKeyMapping
 {
     public class KeyMapper : IHotKeyParser
     {
-        public const int _CurrentCodeFormatVersion = 3;
+        public const int _CurrentCodeFormatVersion = 4;
         private const int _TargetCollectionVersion = 1;
 
         protected string _mappingFileName;
@@ -26,7 +26,7 @@ namespace ExpansionMod.Objects.HotKeyMapping
         public KeyMapper(string mappingFileName)
         {
             this._mappingFileName = mappingFileName;
-            KeyMappingTarget notFoundTarget = new KeyMappingTarget() { KeyTarget =  (KeyMappingFriendlyNames)(-1), MappedHotKeys = new List<MappedHotKey>(), TargetMethodId = -1 };
+            KeyMappingTarget notFoundTarget = new KeyMappingTarget() { KeyTarget = (KeyMappingFriendlyNames)(-1), MappedHotKeys = new List<MappedHotKey>(), TargetMethodId = -1 };
             _notFound = new MappedHotKey(notFoundTarget);
         }
 
@@ -181,7 +181,7 @@ namespace ExpansionMod.Objects.HotKeyMapping
         }
         protected virtual void RemapAndRenameOlderVersions(MappingJsonFileModel mappingModel)
         {
-            
+
         }
         protected virtual MappingJsonFileModel GetDefaultModel()
         {
@@ -516,9 +516,9 @@ namespace ExpansionMod.Objects.HotKeyMapping
         }
         protected override void RemapAndRenameOlderVersions(MappingJsonFileModel mappingModel)
         {
-            if(mappingModel.FormatVersion == 2)
+            if (mappingModel.FormatVersion == 2)
             {
-                mappingModel.FormatVersion = 3;
+                mappingModel.FormatVersion = _CurrentCodeFormatVersion;
 
                 var item = new KeyMappingTarget() { KeyTarget = KeyMappingFriendlyNames.MoveViewUp, TargetMethodId = 2 };
                 item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.Up } });
@@ -533,7 +533,11 @@ namespace ExpansionMod.Objects.HotKeyMapping
                 item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.Right } });
                 mappingModel.HotKeys.Add(item);
                 _reSaveNeeded = true;
-            }    
+            }
+            else if(mappingModel.FormatVersion == 3)
+            {
+                mappingModel.FormatVersion = _CurrentCodeFormatVersion;
+            }
         }
         protected override bool ValidateEscapeKeyMapped(MappingJsonFileModel mappingModel)
         {
@@ -547,7 +551,14 @@ namespace ExpansionMod.Objects.HotKeyMapping
         }
         protected override void RemoveKeysFromOlderVersions(MappingJsonFileModel mappingModel)
         {
-            mappingModel.HotKeys.RemoveAll(x => x.TargetMethodId == 3 || x.TargetMethodId == 4);
+            if (mappingModel.FormatVersion == 3)
+            {
+                mappingModel.FormatVersion = _CurrentCodeFormatVersion;
+
+                var item = new KeyMappingTarget() { KeyTarget = KeyMappingFriendlyNames.MoveViewUp, TargetMethodId = 29 };
+                item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.ShiftKey, Keys.D } });
+                mappingModel.HotKeys.Add(item);
+            }
         }
         protected override void RemapAndRenameOlderVersions(MappingJsonFileModel mappingModel)
         {
@@ -562,10 +573,12 @@ namespace ExpansionMod.Objects.HotKeyMapping
                 {
                     var defaultItem = defaultModel.HotKeys.FirstOrDefault(x => x.TargetMethodId == item.Key);
                     if (defaultItem != null)
-                    { temp.KeyTarget = defaultItem.KeyTarget; }
+                    {
+                        temp.KeyTarget = defaultItem.KeyTarget;
+                        _reSaveNeeded = true;
+                    }
                 }
             }
-            _reSaveNeeded = true;
         }
         protected override MappingJsonFileModel GetDefaultModel()
         {
@@ -651,6 +664,9 @@ namespace ExpansionMod.Objects.HotKeyMapping
             res.HotKeys.Add(item);
             item = new KeyMappingTarget() { KeyTarget = KeyMappingFriendlyNames.ToggleShipAutoBaconImpl, TargetMethodId = 28 };
             item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.A } });
+            res.HotKeys.Add(item);
+            item = new KeyMappingTarget() { KeyTarget = KeyMappingFriendlyNames.DisableBaseShipyards, TargetMethodId = 29 };
+            item.MappedHotKeys.Add(new MappedHotKey(item) { KeyCode = new List<Keys>() { Keys.ShiftKey, Keys.D } });
             res.HotKeys.Add(item);
             return res;
         }

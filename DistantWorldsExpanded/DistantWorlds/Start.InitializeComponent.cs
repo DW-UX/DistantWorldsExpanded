@@ -4626,6 +4626,7 @@ namespace DistantWorlds
             this.Text = "Distant Worlds";
             base.FormClosed += new System.Windows.Forms.FormClosedEventHandler(Start_FormClosed);
             base.Load += new System.EventHandler(Start_Load);
+            base.Shown += new System.EventHandler(Start_Shown);
             base.KeyDown += new System.Windows.Forms.KeyEventHandler(Start_KeyDown);
             base.MouseMove += new System.Windows.Forms.MouseEventHandler(Start_MouseMove);
             ((System.ComponentModel.ISupportInitialize)this.picTitle).EndInit();

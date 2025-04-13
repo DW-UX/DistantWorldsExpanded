@@ -3635,23 +3635,23 @@ namespace DistantWorlds {
                     }
                     bool flag = false;
                     BuiltObject builtObject = null;
-                    while (builtObject == null || !builtObject.InBattle)
-                    {
-                        num2++;
-                        if (num2 >= _Game.Galaxy.BuiltObjects.Count)
-                        {
-                            num2 = 0;
-                        }
-                        if (num2 == num3)
-                        {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (flag)
-                    {
-                        break;
-                    }
+                    //while (builtObject == null || !builtObject.InBattle)
+                    //{
+                    //    num2++;
+                    //    if (num2 >= _Game.Galaxy.BuiltObjects.Count)
+                    //    {
+                    //        num2 = 0;
+                    //    }
+                    //    if (num2 == num3)
+                    //    {
+                    //        flag = true;
+                    //        break;
+                    //    }
+                    //}
+                    //if (flag)
+                    //{
+                    //    break;
+                    //}
                     builtObject = _Game.Galaxy.BuiltObjects[num2];
                     if (builtObject != null && !builtObjectList_1.Contains(builtObject) && !builtObjectList.Contains(builtObject))
                     {

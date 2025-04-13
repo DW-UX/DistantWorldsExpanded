@@ -18,6 +18,11 @@ namespace DistantWorlds.Types
     [Serializable]
     public class Fighter : StellarObject, ISerializable
     {
+        [OptionalField]
+        public bool BaconFighterOutOfAmmo = false;
+        [OptionalField]
+        public bool BaconAutomationEnabled = false;
+
         public int FighterID;
 
         public FighterSpecification Specification;

@@ -4075,6 +4075,8 @@ namespace DistantWorlds
             Cursor.Current = cursor_0;
             base.KeyDown += Main_KeyDown;
             base.KeyUp += Main_KeyUp;
+            _Game.Galaxy.FillSystemInfoByDistance();
+            //_Game.Galaxy.FillShipNearSystems();
             if (_Game.Galaxy.TimeState == GalaxyTimeState.Paused && !gameOptions_0.LoadedGamesPaused)
             {
                 method_155();

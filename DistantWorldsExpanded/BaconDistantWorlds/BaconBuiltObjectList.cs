@@ -33,7 +33,7 @@ namespace BaconDistantWorlds
             num2 = builtObject2.ConstructionQueue.ConstructionYards.Count<ConstructionYard>();
           if (!includeVerySmallYards && builtObject2.ExtractionGas > (short) 0 && num2 <= 1)
             flag1 = false;
-          if (flag1 && builtObject2.Empire.CanBuildBuiltObject(ship) && !builtObject2.Name.StartsWith("--") && (builtObject2.ConstructionQueue.ConstructionWaitQueue.Count<BuiltObject>() + (num2 - 1)) / num2 <= maximumQueueDepth)
+          if (flag1 && builtObject2.Empire.CanBuildBuiltObject(ship) && !builtObject2.BaseShipyardDisabled && (builtObject2.ConstructionQueue.ConstructionWaitQueue.Count<BuiltObject>() + (num2 - 1)) / num2 <= maximumQueueDepth)
           {
             double num3 = double.MaxValue;
             if (builtObject2.ConstructionQueue != null)

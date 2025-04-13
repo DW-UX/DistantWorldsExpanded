@@ -1397,7 +1397,7 @@ namespace DistantWorlds
                     /*this.mediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
                     this.mediaPlayer.MediaError += new AxWMPLib._WMPOCXEvents_MediaErrorEventHandler(this.mediaPlayer_MediaError);
                     this.mediaPlayer.MouseDownEvent += new AxWMPLib._WMPOCXEvents_MouseDownEventHandler(this.mediaPlayer_MouseDownEvent);*/
-                    method_143();
+                    //method_143();
                 }
                 oyxRtRyAwjg.DoWork += gameStartBackgroundWorker_DoWork;
                 oyxRtRyAwjg.RunWorkerCompleted += oyxRtRyAwjg_RunWorkerCompleted;
@@ -1414,7 +1414,7 @@ namespace DistantWorlds
                 }
                 else
                 {
-                    method_143();
+                    //method_143();
                 }
             }
             catch (Exception ex)
@@ -1422,6 +1422,11 @@ namespace DistantWorlds
                 Main.CrashDump(ex);
                 throw;
             }
+        }
+
+        private void Start_Shown(object sender, EventArgs e)
+        {
+            method_143();
         }
 
         private void method_1(string string_2)
@@ -1880,6 +1885,8 @@ namespace DistantWorlds
             main_0.string_2 = string_;
             main_0._Game.Galaxy.ApplicationStartupPath = Application.StartupPath;
             main_0._Game.Galaxy.CustomizationSetPath = main_0.GetCustomizationPath();
+            main_0._Game.Galaxy.FillSystemInfoByDistance();
+            //main_0._Game.Galaxy.FillShipNearSystems();
         }
 
         private void method_15(object sender, RunWorkerCompletedEventArgs e)
@@ -1951,6 +1958,8 @@ namespace DistantWorlds
                 pirateEmpire.ReviewUnpersistedColonyData();
             }
             Cursor.Current = Cursors.Default;
+            game.Galaxy.FillSystemInfoByDistance();
+            //game.Galaxy.FillShipNearSystems();
             main_0.Ignite(game, currentFileName);
             method_9();
             base.Enabled = true;
