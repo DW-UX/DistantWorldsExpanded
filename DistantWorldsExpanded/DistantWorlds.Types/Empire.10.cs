@@ -1491,6 +1491,10 @@ namespace DistantWorlds.Types
                         list.Add(ComponentType.ComputerCommerceCenter);
                         list.Add(ComponentType.StorageCargo);
                         break;
+                    case BuiltObjectSubRole.Outpost:
+                        list.Add(ComponentType.HabitationRecreationCenter);
+                        list.Add(ComponentType.HabitationMedicalCenter);
+                        break;
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:

@@ -113,9 +113,10 @@ namespace DistantWorlds
         public MusicPlayer(Main mainForm, string folder, string themeMusic, bool dummy=false):base()
         {
             outputDevice = new WaveOutEvent();
-            outputDevice.DesiredLatency = 100;
-            _dummy = dummy;
+            outputDevice.DesiredLatency = 300;
+            outputDevice.NumberOfBuffers = 3;
 
+            _dummy = dummy;
             _IsPlaying = false;
             _fadeMode = -1.0;
             _fadeRatio = 0.02;
@@ -271,7 +272,8 @@ namespace DistantWorlds
             }
 
             outputDevice = new WaveOutEvent();
-            outputDevice.DesiredLatency = 100;
+            outputDevice.DesiredLatency = 300;
+            outputDevice.NumberOfBuffers = 3;
             audioFile = new AudioFileReader(file);
             outputDevice.Init(audioFile);
             _IsPlaying = true;

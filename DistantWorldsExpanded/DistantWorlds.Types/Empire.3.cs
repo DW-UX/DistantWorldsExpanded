@@ -1877,9 +1877,9 @@ namespace DistantWorlds.Types
             {
                 _ComponentsAvailable[20] = CheckDesignComponentsAvailable(BuiltObjectRole.Base, BuiltObjectSubRole.SmallSpacePort);
             }
-            if (!_ComponentsAvailable[29])
+            if (!_ComponentsAvailable[30])
             {
-                _ComponentsAvailable[29] = CheckDesignComponentsAvailable(BuiltObjectRole.Base, BuiltObjectSubRole.Outpost);
+                _ComponentsAvailable[30] = CheckDesignComponentsAvailable(BuiltObjectRole.Base, BuiltObjectSubRole.Outpost);
             }
             if (!_ComponentsAvailable[6])
             {
