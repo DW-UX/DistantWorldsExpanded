@@ -2600,7 +2600,7 @@ namespace DistantWorlds.Types
                         {
                             break;
                         }
-                        StellarObject stellarObject4 = _Galaxy.FastFindNearestSpacePort(ship.Xpos, ship.Ypos, this);
+                        StellarObject stellarObject4 = _Galaxy.FastFindNearestSpacePort(ship.Xpos, ship.Ypos, this, false);
                         if (stellarObject4 == null)
                         {
                             stellarObject4 = ((PirateEmpireBaseHabitat != null) ? PirateEmpireBaseHabitat : Capital);

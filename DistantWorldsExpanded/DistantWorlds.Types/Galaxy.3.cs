@@ -699,14 +699,14 @@ namespace DistantWorlds.Types
             return result;
         }
 
-        public BuiltObject FastFindNearestSpacePort(double x, double y, Empire empire)
+        public BuiltObject FastFindNearestSpacePort(double x, double y, Empire empire, bool excludeOutpost)
         {
             double num = double.MaxValue;
             BuiltObject result = null;
             for (int i = 0; i < empire.SpacePorts.Count; i++)
             {
                 BuiltObject builtObject = empire.SpacePorts[i];
-                if (builtObject != null)
+                if (builtObject != null && builtObject.SubRole != BuiltObjectSubRole.Outpost)
                 {
                     double num2 = CalculateDistanceSquared(x, y, builtObject.Xpos, builtObject.Ypos);
                     if (num2 < num && builtObject.IsSpacePort)

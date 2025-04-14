@@ -404,7 +404,7 @@ namespace DistantWorlds.Controls
                         row.Cells[2].Value = (object)this.ResolveHabitatTypeDescription(habitatPrioritization.Habitat);
                         row.Cells[3].Value = (object)((int)habitatPrioritization.Habitat.Diameter * 100);
                         row.Cells[4].Value = (object)habitatPrioritization.Habitat.Quality;
-                        BuiltObject nearestSpacePort = galaxy.FastFindNearestSpacePort(habitatPrioritization.Habitat.Xpos, habitatPrioritization.Habitat.Ypos, galaxy.PlayerEmpire);
+                        BuiltObject nearestSpacePort = galaxy.FastFindNearestSpacePort(habitatPrioritization.Habitat.Xpos, habitatPrioritization.Habitat.Ypos, galaxy.PlayerEmpire, false);
                         if (nearestSpacePort != null)
                         {
                             double distance = galaxy.CalculateDistance(nearestSpacePort.Xpos, nearestSpacePort.Ypos, habitatPrioritization.Habitat.Xpos, habitatPrioritization.Habitat.Ypos);

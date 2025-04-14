@@ -1448,7 +1448,7 @@ namespace DistantWorlds.Types
 
         public bool BuildStrategicResourceSupply(BuiltObject constructionShip, HabitatList empireHabitatsBeingMined)
         {
-            StellarObject stellarObject = _Galaxy.FastFindNearestSpacePort(constructionShip.Xpos, constructionShip.Ypos, this);
+            StellarObject stellarObject = _Galaxy.FastFindNearestSpacePort(constructionShip.Xpos, constructionShip.Ypos, this, false);
             if (stellarObject == null)
             {
                 stellarObject = ((PirateEmpireBaseHabitat != null) ? PirateEmpireBaseHabitat : Capital);
@@ -3279,7 +3279,7 @@ namespace DistantWorlds.Types
                 {
                     foreach (Habitat item5 in habitatList2)
                     {
-                        BuiltObject builtObject3 = _Galaxy.FastFindNearestSpacePort(item5.Xpos, item5.Ypos, this);
+                        BuiltObject builtObject3 = _Galaxy.FastFindNearestSpacePort(item5.Xpos, item5.Ypos, this, true);
                         if (builtObject3 != null)
                         {
                             double num3 = _Galaxy.CalculateDistance(item5.Xpos, item5.Ypos, builtObject3.Xpos, builtObject3.Ypos);

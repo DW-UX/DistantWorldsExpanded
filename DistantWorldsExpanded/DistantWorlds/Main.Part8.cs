@@ -3150,7 +3150,7 @@ namespace DistantWorlds
                     toolStripMenuItem2.DropDownItems.Add(method_310(TextResolver.GetText("At nearest refuelling point"), shipAction5, bool_28: true));
                 }
             }
-            BuiltObject builtObject = _Game.Galaxy.FastFindNearestSpacePort(shipGroup_3.LeadShip.Xpos, shipGroup_3.LeadShip.Ypos, shipGroup_3.Empire);
+            BuiltObject builtObject = _Game.Galaxy.FastFindNearestSpacePort(shipGroup_3.LeadShip.Xpos, shipGroup_3.LeadShip.Ypos, shipGroup_3.Empire, false);
             if (builtObject != null)
             {
                 ShipAction shipAction6 = shipAction2.Clone();
@@ -3443,7 +3443,7 @@ namespace DistantWorlds
                         toolStripMenuItem.DropDownItems.Add(method_310(TextResolver.GetText("At nearest refuelling point"), shipAction6, bool_28: true));
                     }
                 }
-                BuiltObject builtObject = _Game.Galaxy.FastFindNearestSpacePort(shipGroup.LeadShip.Xpos, shipGroup.LeadShip.Ypos, shipGroup.Empire);
+                BuiltObject builtObject = _Game.Galaxy.FastFindNearestSpacePort(shipGroup.LeadShip.Xpos, shipGroup.LeadShip.Ypos, shipGroup.Empire, false);
                 if (builtObject != null)
                 {
                     ShipAction shipAction7 = shipAction3.Clone();

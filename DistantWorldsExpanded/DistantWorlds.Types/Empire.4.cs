@@ -672,7 +672,7 @@ namespace DistantWorlds.Types
 
         private void SendFreightersToSmugglingDestination(Habitat colony, ref BuiltObjectList availableFreighters, int freightersToSend, byte resourceTypeToSupply)
         {
-            BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(colony.Xpos, colony.Ypos, this);
+            BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(colony.Xpos, colony.Ypos, this, false);
             if (builtObject == null || builtObject.Cargo == null)
             {
                 return;

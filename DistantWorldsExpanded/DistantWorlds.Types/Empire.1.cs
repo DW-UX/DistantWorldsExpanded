@@ -1317,7 +1317,7 @@ namespace DistantWorlds.Types
             }
             if (flag && resource != byte.MaxValue && empire != null && empire.Capital != null)
             {
-                BuiltObject spaceport = _Galaxy.FastFindNearestSpacePort(empire.Capital.Xpos, empire.Capital.Ypos, this);
+                BuiltObject spaceport = _Galaxy.FastFindNearestSpacePort(empire.Capital.Xpos, empire.Capital.Ypos, this, true);
                 RandomEventRareResourceIntercepted(new Resource(resource), spaceport, empire);
             }
         }
@@ -4942,7 +4942,7 @@ namespace DistantWorlds.Types
                                 }
                             }
                         }
-                        BuiltObject builtObject4 = _Galaxy.FastFindNearestSpacePort((int)ship.Xpos, (int)ship.Ypos, ship.ActualEmpire);
+                        BuiltObject builtObject4 = _Galaxy.FastFindNearestSpacePort((int)ship.Xpos, (int)ship.Ypos, ship.ActualEmpire, false);
                         if (builtObject4 != null)
                         {
                             double num15 = _Galaxy.CalculateDistance(ship.Xpos, ship.Ypos, builtObject4.Xpos, builtObject4.Ypos);

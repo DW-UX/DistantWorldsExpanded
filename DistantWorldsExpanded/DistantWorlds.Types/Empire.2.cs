@@ -4070,7 +4070,7 @@ namespace DistantWorlds.Types
                 {
                     continue;
                 }
-                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(SystemVisibility[i].SystemStar.Xpos, SystemVisibility[i].SystemStar.Ypos, this);
+                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(SystemVisibility[i].SystemStar.Xpos, SystemVisibility[i].SystemStar.Ypos, this, false);
                 for (int j = 0; j < _Galaxy.Systems[SystemVisibility[i].SystemStar.SystemIndex].Habitats.Count; j++)
                 {
                     Habitat habitat = _Galaxy.Systems[SystemVisibility[i].SystemStar.SystemIndex].Habitats[j];
@@ -4192,7 +4192,7 @@ namespace DistantWorlds.Types
                 {
                     continue;
                 }
-                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(SystemVisibility[i].SystemStar.Xpos, SystemVisibility[i].SystemStar.Ypos, this);
+                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(SystemVisibility[i].SystemStar.Xpos, SystemVisibility[i].SystemStar.Ypos, this, false);
                 for (int j = 0; j < _Galaxy.Systems[SystemVisibility[i].SystemStar.SystemIndex].Habitats.Count; j++)
                 {
                     Habitat habitat = _Galaxy.Systems[SystemVisibility[i].SystemStar.SystemIndex].Habitats[j];
@@ -4329,7 +4329,7 @@ namespace DistantWorlds.Types
                     {
                         continue;
                     }
-                    BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(habitat.Xpos, habitat.Ypos, this);
+                    BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(habitat.Xpos, habitat.Ypos, this, true);
                     bool flag2 = true;
                     if (PirateEmpireBaseHabitat == null && empire.PirateEmpireBaseHabitat == null)
                     {

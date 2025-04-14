@@ -2172,7 +2172,7 @@ namespace DistantWorlds.Types
                             x2 = gameEvent.TriggerObject.Xpos;
                             y2 = gameEvent.TriggerObject.Ypos;
                         }
-                        BuiltObject builtObject4 = FastFindNearestSpacePort(x2, y2, triggerEmpire);
+                        BuiltObject builtObject4 = FastFindNearestSpacePort(x2, y2, triggerEmpire, true);
                         triggerEmpire.RandomEventRareResourceIntercepted(resource3, builtObject4, null);
                         string arg2 = string.Empty;
                         if (builtObject4.NearestSystemStar != null)

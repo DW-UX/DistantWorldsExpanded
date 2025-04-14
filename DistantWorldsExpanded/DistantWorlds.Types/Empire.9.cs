@@ -157,7 +157,7 @@ namespace DistantWorlds.Types
                                 double xpos = stellarObjectList2[m].Xpos;
                                 double ypos = stellarObjectList2[m].Ypos;
                                 BuiltObject builtObject = _Galaxy.FastFindNearestResupplyShipByDestination(xpos, ypos, this, resupplyShip);
-                                BuiltObject builtObject2 = _Galaxy.FastFindNearestSpacePort(xpos, ypos, this);
+                                BuiltObject builtObject2 = _Galaxy.FastFindNearestSpacePort(xpos, ypos, this, false);
                                 double num4 = double.MaxValue;
                                 if (builtObject != null)
                                 {
@@ -246,7 +246,7 @@ namespace DistantWorlds.Types
                 {
                     return;
                 }
-                BuiltObject builtObject3 = _Galaxy.FastFindNearestSpacePort(resupplyShip.Xpos, resupplyShip.Ypos, this);
+                BuiltObject builtObject3 = _Galaxy.FastFindNearestSpacePort(resupplyShip.Xpos, resupplyShip.Ypos, this, false);
                 if (builtObject3 != null)
                 {
                     double num10 = resupplyShip.CurrentFuel / Math.Max(1.0, resupplyShip.FuelCapacity);
@@ -3312,7 +3312,7 @@ namespace DistantWorlds.Types
                 {
                     continue;
                 }
-                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(habitat2.Xpos, habitat2.Ypos, this);
+                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(habitat2.Xpos, habitat2.Ypos, this, false);
                 if (builtObject != null)
                 {
                     if (builtObject.NearestSystemStar != habitat2)
@@ -3350,7 +3350,7 @@ namespace DistantWorlds.Types
                     {
                         continue;
                     }
-                    BuiltObject builtObject2 = _Galaxy.FastFindNearestSpacePort(habitat5.Xpos, habitat5.Ypos, this);
+                    BuiltObject builtObject2 = _Galaxy.FastFindNearestSpacePort(habitat5.Xpos, habitat5.Ypos, this, false);
                     if (builtObject2 != null && builtObject2.NearestSystemStar == habitat5)
                     {
                         double num2 = _Galaxy.CalculateDistanceSquared(habitat5.Xpos, habitat5.Ypos, habitat.Xpos, habitat.Ypos);
