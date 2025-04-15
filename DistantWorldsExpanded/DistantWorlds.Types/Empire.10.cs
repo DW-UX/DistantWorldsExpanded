@@ -1491,6 +1491,10 @@ namespace DistantWorlds.Types
                         list.Add(ComponentType.ComputerCommerceCenter);
                         list.Add(ComponentType.StorageCargo);
                         break;
+                    case BuiltObjectSubRole.Outpost:
+                        list.Add(ComponentType.HabitationRecreationCenter);
+                        list.Add(ComponentType.HabitationMedicalCenter);
+                        break;
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -2212,6 +2216,7 @@ namespace DistantWorlds.Types
                     bool flag3 = true;
                     switch (designSpec.SubRole)
                     {
+                        case BuiltObjectSubRole.Outpost:
                         case BuiltObjectSubRole.SmallSpacePort:
                         case BuiltObjectSubRole.MediumSpacePort:
                         case BuiltObjectSubRole.LargeSpacePort:
@@ -3097,6 +3102,7 @@ namespace DistantWorlds.Types
                     BuiltObjectSubRole.ExplorationShip => Policy.DesignUpgradeExplorationShip,
                     BuiltObjectSubRole.ColonyShip => Policy.DesignUpgradeColonyShip,
                     BuiltObjectSubRole.ConstructionShip => Policy.DesignUpgradeConstructionShip,
+                    BuiltObjectSubRole.Outpost => Policy.DesignUpgradeOutpost,
                     BuiltObjectSubRole.SmallSpacePort => Policy.DesignUpgradeSmallSpacePort,
                     BuiltObjectSubRole.MediumSpacePort => Policy.DesignUpgradeMediumSpacePort,
                     BuiltObjectSubRole.LargeSpacePort => Policy.DesignUpgradeLargeSpacePort,
@@ -3159,6 +3165,9 @@ namespace DistantWorlds.Types
                         break;
                     case BuiltObjectSubRole.ConstructionShip:
                         Policy.DesignUpgradeConstructionShip = upgrade;
+                        break;
+                    case BuiltObjectSubRole.Outpost:
+                        Policy.DesignUpgradeOutpost = upgrade;
                         break;
                     case BuiltObjectSubRole.SmallSpacePort:
                         Policy.DesignUpgradeSmallSpacePort = upgrade;
@@ -3419,6 +3428,7 @@ namespace DistantWorlds.Types
                 design = PlaceComponentsOnDesign(design, designSpec, null, techAdvanceAmount);
                 switch (designSpec.SubRole)
                 {
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:

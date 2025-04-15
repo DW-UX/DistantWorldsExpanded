@@ -1419,7 +1419,7 @@ namespace DistantWorlds {
                                 double offsetX = 0.0;
                                 double offsetY = 0.0;
                                 _Game.PlayerEmpire.DetermineOrbitalBaseLocation(habitat6, out offsetX, out offsetY);
-                                if (design3.SubRole == BuiltObjectSubRole.SmallSpacePort || design3.SubRole == BuiltObjectSubRole.MediumSpacePort || design3.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                                if (design3.SubRole == BuiltObjectSubRole.Outpost || design3.SubRole == BuiltObjectSubRole.SmallSpacePort || design3.SubRole == BuiltObjectSubRole.MediumSpacePort || design3.SubRole == BuiltObjectSubRole.LargeSpacePort)
                                 {
                                     double range = (double)(habitat6.Diameter / 6) + 15.0;
                                     _Game.Galaxy.SelectRelativePoint(range, out offsetX, out offsetY);

@@ -719,6 +719,7 @@ namespace DistantWorlds
             list.Add(BuiltObjectSubRole.MiningShip);
             list.Add(BuiltObjectSubRole.GasMiningStation);
             list.Add(BuiltObjectSubRole.MiningStation);
+            list.Add(BuiltObjectSubRole.Outpost);
             list.Add(BuiltObjectSubRole.SmallSpacePort);
             list.Add(BuiltObjectSubRole.MediumSpacePort);
             list.Add(BuiltObjectSubRole.LargeSpacePort);
@@ -775,6 +776,7 @@ namespace DistantWorlds
             list.Add(BuiltObjectSubRole.MiningShip);
             list.Add(BuiltObjectSubRole.GasMiningStation);
             list.Add(BuiltObjectSubRole.MiningStation);
+            list.Add(BuiltObjectSubRole.Outpost);
             list.Add(BuiltObjectSubRole.SmallSpacePort);
             list.Add(BuiltObjectSubRole.MediumSpacePort);
             list.Add(BuiltObjectSubRole.LargeSpacePort);
@@ -882,6 +884,7 @@ namespace DistantWorlds
                         BuiltObjectSubRole.MediumSpacePort,
                         BuiltObjectSubRole.MonitoringStation,
                         BuiltObjectSubRole.ResortBase,
+                        BuiltObjectSubRole.Outpost,
                         BuiltObjectSubRole.SmallSpacePort,
                         BuiltObjectSubRole.WeaponsResearchStation
                     });
@@ -1801,6 +1804,7 @@ namespace DistantWorlds
                     }
                     if (flag3)
                     {
+                        list.Add(BuiltObjectSubRole.Outpost);
                         list.Add(BuiltObjectSubRole.SmallSpacePort);
                         list.Add(BuiltObjectSubRole.MediumSpacePort);
                         list.Add(BuiltObjectSubRole.LargeSpacePort);
@@ -3146,7 +3150,7 @@ namespace DistantWorlds
                     toolStripMenuItem2.DropDownItems.Add(method_310(TextResolver.GetText("At nearest refuelling point"), shipAction5, bool_28: true));
                 }
             }
-            BuiltObject builtObject = _Game.Galaxy.FastFindNearestSpacePort(shipGroup_3.LeadShip.Xpos, shipGroup_3.LeadShip.Ypos, shipGroup_3.Empire);
+            BuiltObject builtObject = _Game.Galaxy.FastFindNearestSpacePort(shipGroup_3.LeadShip.Xpos, shipGroup_3.LeadShip.Ypos, shipGroup_3.Empire, false);
             if (builtObject != null)
             {
                 ShipAction shipAction6 = shipAction2.Clone();
@@ -3439,7 +3443,7 @@ namespace DistantWorlds
                         toolStripMenuItem.DropDownItems.Add(method_310(TextResolver.GetText("At nearest refuelling point"), shipAction6, bool_28: true));
                     }
                 }
-                BuiltObject builtObject = _Game.Galaxy.FastFindNearestSpacePort(shipGroup.LeadShip.Xpos, shipGroup.LeadShip.Ypos, shipGroup.Empire);
+                BuiltObject builtObject = _Game.Galaxy.FastFindNearestSpacePort(shipGroup.LeadShip.Xpos, shipGroup.LeadShip.Ypos, shipGroup.Empire, false);
                 if (builtObject != null)
                 {
                     ShipAction shipAction7 = shipAction3.Clone();
@@ -3571,6 +3575,7 @@ namespace DistantWorlds
                         BuiltObject builtObject3 = _Game.Galaxy.DetermineSpacePortAtColonyIncludingUnderConstruction(habitat2);
                         if (builtObject3 == null)
                         {
+                            list.Add(BuiltObjectSubRole.Outpost);
                             list.Add(BuiltObjectSubRole.SmallSpacePort);
                             list.Add(BuiltObjectSubRole.MediumSpacePort);
                             list.Add(BuiltObjectSubRole.LargeSpacePort);
@@ -4020,7 +4025,7 @@ namespace DistantWorlds
                             }
                             actionMenu.Items.Add(toolStripMenuItem);
                         }
-                        if (builtObject6.Owner.PirateEmpireBaseHabitat != null && (builtObject6.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject6.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject6.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject6.ParentHabitat != null && builtObject6.ParentHabitat != builtObject6.Owner.PirateEmpireBaseHabitat)
+                        if (builtObject6.Owner.PirateEmpireBaseHabitat != null && (builtObject6.SubRole == BuiltObjectSubRole.Outpost | builtObject6.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject6.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject6.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject6.ParentHabitat != null && builtObject6.ParentHabitat != builtObject6.Owner.PirateEmpireBaseHabitat)
                         {
                             ShipAction tag5 = method_313(ShipActionType.ChangePirateHomeBase, builtObject6.ParentHabitat);
                             toolStripMenuItem = new ToolStripMenuItem(TextResolver.GetText("Set as Home Base"));
@@ -4057,7 +4062,7 @@ namespace DistantWorlds
                             {
                                 list3.Add(BuiltObjectSubRole.MiningStation);
                             }
-                            else if (builtObject6.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject6.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject6.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                            else if (builtObject6.SubRole != BuiltObjectSubRole.Outpost && builtObject6.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject6.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject6.SubRole != BuiltObjectSubRole.LargeSpacePort)
                             {
                                 if (builtObject6.SubRole == BuiltObjectSubRole.DefensiveBase)
                                 {
@@ -4090,6 +4095,7 @@ namespace DistantWorlds
                             }
                             else
                             {
+                                list3.Add(BuiltObjectSubRole.Outpost);
                                 list3.Add(BuiltObjectSubRole.SmallSpacePort);
                                 list3.Add(BuiltObjectSubRole.MediumSpacePort);
                                 list3.Add(BuiltObjectSubRole.LargeSpacePort);
@@ -4508,6 +4514,7 @@ namespace DistantWorlds
                                                 }
                                                 if (flag14)
                                                 {
+                                                    list4.Add(BuiltObjectSubRole.Outpost);
                                                     list4.Add(BuiltObjectSubRole.SmallSpacePort);
                                                     list4.Add(BuiltObjectSubRole.MediumSpacePort);
                                                     list4.Add(BuiltObjectSubRole.LargeSpacePort);
@@ -4949,7 +4956,7 @@ namespace DistantWorlds
                     {
                         list8.Add(BuiltObjectSubRole.MiningStation);
                     }
-                    else if (builtObject6.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject6.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject6.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                    else if (builtObject6.SubRole != BuiltObjectSubRole.Outpost && builtObject6.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject6.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject6.SubRole != BuiltObjectSubRole.LargeSpacePort)
                     {
                         if (builtObject6.SubRole == BuiltObjectSubRole.DefensiveBase)
                         {
@@ -4982,6 +4989,7 @@ namespace DistantWorlds
                     }
                     else
                     {
+                        list8.Add(BuiltObjectSubRole.Outpost);
                         list8.Add(BuiltObjectSubRole.SmallSpacePort);
                         list8.Add(BuiltObjectSubRole.MediumSpacePort);
                         list8.Add(BuiltObjectSubRole.LargeSpacePort);

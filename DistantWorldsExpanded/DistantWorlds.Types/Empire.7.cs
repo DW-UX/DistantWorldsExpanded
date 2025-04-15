@@ -1397,7 +1397,7 @@ namespace DistantWorlds.Types
             }
             _Galaxy.BuiltObjects.Add(builtObject);
             _Galaxy.BuiltObjectIndex[x][y].Add(builtObject);
-            if ((builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject.IsSpacePort && !builtObject.Empire.SpacePorts.Contains(builtObject))
+            if ((builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject.IsSpacePort && !builtObject.Empire.SpacePorts.Contains(builtObject))
             {
                 builtObject.Empire.SpacePorts.Add(builtObject);
             }

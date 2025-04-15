@@ -513,7 +513,7 @@ namespace DistantWorlds.Types
                 builtObject.CompleteTeardown(_Galaxy);
                 return true;
             }
-            if (builtObject.Role == BuiltObjectRole.Base && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort)
+            if (builtObject.Role == BuiltObjectRole.Base && builtObject.SubRole != BuiltObjectSubRole.Outpost && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort)
             {
                 builtObject.InflictDamage(builtObject, null, 100000.0, _Galaxy.CurrentDateTime, _Galaxy, 0f, allowRecursion: false, 0.0, allowArmorInvulnerability: false);
                 return true;
@@ -1349,7 +1349,7 @@ namespace DistantWorlds.Types
                 }
                 else
                 {
-                    if (PirateEmpireBaseHabitat == null || (builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort) || builtObject.ParentHabitat == null || builtObject.ParentHabitat.Empire == this)
+                    if (PirateEmpireBaseHabitat == null || (builtObject.SubRole != BuiltObjectSubRole.Outpost && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort) || builtObject.ParentHabitat == null || builtObject.ParentHabitat.Empire == this)
                     {
                         continue;
                     }
@@ -1448,7 +1448,7 @@ namespace DistantWorlds.Types
 
         public bool BuildStrategicResourceSupply(BuiltObject constructionShip, HabitatList empireHabitatsBeingMined)
         {
-            StellarObject stellarObject = _Galaxy.FastFindNearestSpacePort(constructionShip.Xpos, constructionShip.Ypos, this);
+            StellarObject stellarObject = _Galaxy.FastFindNearestSpacePort(constructionShip.Xpos, constructionShip.Ypos, this, false);
             if (stellarObject == null)
             {
                 stellarObject = ((PirateEmpireBaseHabitat != null) ? PirateEmpireBaseHabitat : Capital);
@@ -2012,14 +2012,14 @@ namespace DistantWorlds.Types
             if (flag)
             {
                 design.BuildCount++;
-                builtObject = ((design.SubRole != BuiltObjectSubRole.SmallSpacePort && design.SubRole != BuiltObjectSubRole.MediumSpacePort && design.SubRole != BuiltObjectSubRole.LargeSpacePort) ? new BuiltObject(design, _Galaxy.GenerateBuiltObjectName(design, constructionYard), _Galaxy) : new BuiltObject(design, constructionYard.Name + " " + TextResolver.GetText("Space Port"), _Galaxy));
+                builtObject = ((design.SubRole != BuiltObjectSubRole.Outpost && design.SubRole != BuiltObjectSubRole.SmallSpacePort && design.SubRole != BuiltObjectSubRole.MediumSpacePort && design.SubRole != BuiltObjectSubRole.LargeSpacePort) ? new BuiltObject(design, _Galaxy.GenerateBuiltObjectName(design, constructionYard), _Galaxy) : new BuiltObject(design, constructionYard.Name + " " + TextResolver.GetText("Space Port"), _Galaxy));
                 builtObject.IsAutoControlled = isAutoControlled;
                 builtObject.PurchasePrice = num;
                 if (constructionYard.ConstructionQueue != null && constructionYard.ConstructionQueue.AddBuiltObjectToConstruct(builtObject))
                 {
                     double x2 = 0.0;
                     double y2 = 0.0;
-                    if (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort || builtObject.SubRole == BuiltObjectSubRole.EnergyResearchStation || builtObject.SubRole == BuiltObjectSubRole.WeaponsResearchStation || builtObject.SubRole == BuiltObjectSubRole.HighTechResearchStation || builtObject.SubRole == BuiltObjectSubRole.MonitoringStation || builtObject.SubRole == BuiltObjectSubRole.DefensiveBase || builtObject.SubRole == BuiltObjectSubRole.GenericBase)
+                    if (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort || builtObject.SubRole == BuiltObjectSubRole.EnergyResearchStation || builtObject.SubRole == BuiltObjectSubRole.WeaponsResearchStation || builtObject.SubRole == BuiltObjectSubRole.HighTechResearchStation || builtObject.SubRole == BuiltObjectSubRole.MonitoringStation || builtObject.SubRole == BuiltObjectSubRole.DefensiveBase || builtObject.SubRole == BuiltObjectSubRole.GenericBase)
                     {
                         builtObject.ParentHabitat = constructionYard;
                         if (Math.Abs((double)x - constructionYard.Xpos) < 3.0 && Math.Abs((double)y - constructionYard.Ypos) < 3.0)
@@ -2027,6 +2027,7 @@ namespace DistantWorlds.Types
                             _Galaxy.SelectRelativeHabitatSurfacePoint(constructionYard, out x2, out y2);
                             switch (builtObject.SubRole)
                             {
+                                case BuiltObjectSubRole.Outpost:
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
                                 case BuiltObjectSubRole.LargeSpacePort:
@@ -2045,7 +2046,7 @@ namespace DistantWorlds.Types
                             x2 = (double)x - constructionYard.Xpos;
                             y2 = (double)y - constructionYard.Ypos;
                             double num2 = (double)(constructionYard.Diameter / 2) + 250.0;
-                            if (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 num2 = (double)(constructionYard.Diameter / 8) + 10.0;
                             }
@@ -2098,7 +2099,7 @@ namespace DistantWorlds.Types
         {
             BuiltObject builtObject = null;
             CargoList resourcesToOrder = new CargoList();
-            if (design.SubRole == BuiltObjectSubRole.SmallSpacePort || design.SubRole == BuiltObjectSubRole.MediumSpacePort || design.SubRole == BuiltObjectSubRole.LargeSpacePort)
+            if (design.SubRole == BuiltObjectSubRole.Outpost || design.SubRole == BuiltObjectSubRole.SmallSpacePort || design.SubRole == BuiltObjectSubRole.MediumSpacePort || design.SubRole == BuiltObjectSubRole.LargeSpacePort)
             {
                 return null;
             }
@@ -2488,7 +2489,7 @@ namespace DistantWorlds.Types
                 for (int j = 0; j < BuiltObjects.Count; j++)
                 {
                     BuiltObject builtObject2 = BuiltObjects[j];
-                    if (builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                    if (builtObject2.SubRole == BuiltObjectSubRole.Outpost || builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort)
                     {
                         num14++;
                     }
@@ -2501,6 +2502,7 @@ namespace DistantWorlds.Types
                 long num15 = (long)Policy.ConstructionSpaceportLargeColonyPopulationThreshold * 1000000L;
                 long num16 = (long)Policy.ConstructionSpaceportMediumColonyPopulationThreshold * 1000000L;
                 long num17 = (long)Policy.ConstructionSpaceportSmallColonyPopulationThreshold * 1000000L;
+                long num171 = (long)Policy.ConstructionOutpostColonyPopulationThreshold * 1000000L;
                 foreach (Habitat item in habitatList2)
                 {
                     if (!CheckSafeToBuildAtLocation(item))
@@ -2509,6 +2511,7 @@ namespace DistantWorlds.Types
                     }
                     Design design = null;
                     Design design2 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.SmallSpacePort);
+                    Design design21 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.Outpost);
                     Design design3 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.MediumSpacePort);
                     Design design4 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.LargeSpacePort);
                     if (design4 != null && item.Population.TotalAmount > num15)
@@ -2522,6 +2525,10 @@ namespace DistantWorlds.Types
                     else if (design2 != null && item.Population.TotalAmount > num17)
                     {
                         design = design2;
+                    }
+                    else if (design21 != null && item.Population.TotalAmount > num171)
+                    {
+                        design = design21;
                     }
                     if (design == null)
                     {
@@ -2538,6 +2545,10 @@ namespace DistantWorlds.Types
                         else if (design.SubRole == BuiltObjectSubRole.MediumSpacePort)
                         {
                             design = _Designs.FindNewestCanBuild(BuiltObjectSubRole.SmallSpacePort);
+                        }
+                        else if (design.SubRole == BuiltObjectSubRole.SmallSpacePort)
+                        {
+                            design = _Designs.FindNewestCanBuild(BuiltObjectSubRole.Outpost);
                         }
                         if (design != null)
                         {
@@ -3228,7 +3239,7 @@ namespace DistantWorlds.Types
                     Habitat habitat2 = colonies[j];
                     foreach (BuiltObject item2 in habitat2.ConstructionQueue.ConstructionWaitQueue)
                     {
-                        if (item2.SubRole == BuiltObjectSubRole.SmallSpacePort || item2.SubRole == BuiltObjectSubRole.MediumSpacePort || item2.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                        if (item2.SubRole == BuiltObjectSubRole.Outpost || item2.SubRole == BuiltObjectSubRole.MediumSpacePort || item2.SubRole == BuiltObjectSubRole.LargeSpacePort)
                         {
                             Habitat habitat3 = Galaxy.DetermineHabitatSystemStar(habitat2);
                             if (habitat3 != null && !habitatList3.Contains(habitat3))
@@ -3241,7 +3252,7 @@ namespace DistantWorlds.Types
                 for (int k = 0; k < BuiltObjects.Count; k++)
                 {
                     BuiltObject builtObject2 = BuiltObjects[k];
-                    if (builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                    if (builtObject2.SubRole == BuiltObjectSubRole.Outpost || builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort)
                     {
                         Habitat habitat4 = Galaxy.DetermineHabitatSystemStar(builtObject2.ParentHabitat);
                         if (habitat4 != null && !habitatList3.Contains(habitat4))
@@ -3268,7 +3279,7 @@ namespace DistantWorlds.Types
                 {
                     foreach (Habitat item5 in habitatList2)
                     {
-                        BuiltObject builtObject3 = _Galaxy.FastFindNearestSpacePort(item5.Xpos, item5.Ypos, this);
+                        BuiltObject builtObject3 = _Galaxy.FastFindNearestSpacePort(item5.Xpos, item5.Ypos, this, true);
                         if (builtObject3 != null)
                         {
                             double num3 = _Galaxy.CalculateDistance(item5.Xpos, item5.Ypos, builtObject3.Xpos, builtObject3.Ypos);
@@ -3486,6 +3497,7 @@ namespace DistantWorlds.Types
             long num = (long)Policy.ConstructionSpaceportLargeColonyPopulationThreshold * 1000000L;
             long num2 = (long)Policy.ConstructionSpaceportMediumColonyPopulationThreshold * 1000000L;
             long num3 = (long)Policy.ConstructionSpaceportSmallColonyPopulationThreshold * 1000000L;
+            long num34 = (long)Policy.ConstructionOutpostColonyPopulationThreshold * 1000000L;
             if (!flag && stateRetrofitPermitted)
             {
                 for (int i = 0; i < ShipGroups.Count; i++)
@@ -3561,7 +3573,7 @@ namespace DistantWorlds.Types
                     builtObject.RetrofitForNextMission = true;
                     if (builtObject.Role == BuiltObjectRole.Base)
                     {
-                        if (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                        if (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
                         {
                             if (PirateEmpireBaseHabitat != null)
                             {
@@ -3569,7 +3581,15 @@ namespace DistantWorlds.Types
                                 BuiltObject builtObject2 = _Galaxy.IdentifyPirateSpaceport(this);
                                 if (builtObject == builtObject2)
                                 {
-                                    if (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort)
+                                    if (builtObject.SubRole == BuiltObjectSubRole.Outpost)
+                                    {
+                                        Design design3 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.SmallSpacePort);
+                                        if (design3 != null && CanBuildDesign(design3))
+                                        {
+                                            design2 = design3;
+                                        }
+                                    }
+                                    else if (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort)
                                     {
                                         Design design3 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.MediumSpacePort);
                                         if (design3 != null && CanBuildDesign(design3))
@@ -3616,6 +3636,10 @@ namespace DistantWorlds.Types
                             else if (builtObject.ParentHabitat.Population.TotalAmount > num3 && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort)
                             {
                                 design5 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.SmallSpacePort);
+                            }
+                            else if (builtObject.ParentHabitat.Population.TotalAmount > num34 && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort)
+                            {
+                                design5 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.Outpost);
                             }
                             if (design5 != null && design5 != builtObject.Design && AssignRetrofitMission(builtObject, design5, null, forceUseOfYard: true))
                             {
@@ -3916,7 +3940,7 @@ namespace DistantWorlds.Types
                             if (builtObject4 != null && !builtObject4.HasBeenDestroyed && builtObject4.IsRefuellingDepot && builtObject4.Empire != null && _Galaxy.IsStellarObjectDockable(builtObject4, this))
                             {
                                 bool flag2 = true;
-                                if (this != _Galaxy.IndependentEmpire && builtObject4.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject4.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject4.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                                if (this != _Galaxy.IndependentEmpire && builtObject4.SubRole != BuiltObjectSubRole.Outpost && builtObject4.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject4.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject4.SubRole != BuiltObjectSubRole.LargeSpacePort)
                                 {
                                     flag2 = IsObjectVisibleToThisEmpire(builtObject4, includeLongRangeScanners: true, includeShipsOutsideSystems: false);
                                 }

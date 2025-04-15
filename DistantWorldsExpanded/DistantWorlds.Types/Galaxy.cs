@@ -200,6 +200,8 @@ namespace DistantWorlds.Types
         public static readonly int MiningStationResourceThreshhold;
 
         public static readonly long HabitatSmallSpacePortPopulationRequirement;
+        [OptionalField]
+        public static readonly long HabitatOutpostPopulationRequirement;
 
         public static readonly long HabitatMediumSpacePortPopulationRequirement;
 
@@ -1483,6 +1485,7 @@ namespace DistantWorlds.Types
                 {
                     return tradingPost.SubRole switch
                     {
+                        BuiltObjectSubRole.Outpost => CalculateResourceLevelSpaceport(resource, 0, 0.5),
                         BuiltObjectSubRole.SmallSpacePort => CalculateResourceLevelSpaceport(resource, 0, 1.0),
                         BuiltObjectSubRole.MediumSpacePort => CalculateResourceLevelSpaceport(resource, 0, 2.0),
                         BuiltObjectSubRole.LargeSpacePort => CalculateResourceLevelSpaceport(resource, 0, 4.0),
@@ -1510,6 +1513,7 @@ namespace DistantWorlds.Types
                 {
                     return tradingPost.SubRole switch
                     {
+                        BuiltObjectSubRole.Outpost => CalculateResourceLevelSpaceport(cargo.CommodityResource, 0, 0.5),
                         BuiltObjectSubRole.SmallSpacePort => CalculateResourceLevelSpaceport(cargo.CommodityResource, 0, 1.0),
                         BuiltObjectSubRole.MediumSpacePort => CalculateResourceLevelSpaceport(cargo.CommodityResource, 0, 2.0),
                         BuiltObjectSubRole.LargeSpacePort => CalculateResourceLevelSpaceport(cargo.CommodityResource, 0, 4.0),
@@ -1669,6 +1673,9 @@ namespace DistantWorlds.Types
             {
                 switch (pirateSpaceport.SubRole)
                 {
+                    case BuiltObjectSubRole.Outpost:
+                        num2 = 0.5;
+                        break;
                     case BuiltObjectSubRole.SmallSpacePort:
                         num2 = 1.0;
                         break;

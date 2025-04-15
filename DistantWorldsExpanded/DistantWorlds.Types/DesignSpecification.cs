@@ -117,6 +117,7 @@ namespace DistantWorlds.Types
           return BuiltObjectRole.Resource;
         case BuiltObjectSubRole.GasMiningStation:
         case BuiltObjectSubRole.MiningStation:
+        case BuiltObjectSubRole.Outpost:
         case BuiltObjectSubRole.SmallSpacePort:
         case BuiltObjectSubRole.MediumSpacePort:
         case BuiltObjectSubRole.LargeSpacePort:

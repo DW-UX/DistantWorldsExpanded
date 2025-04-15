@@ -1151,7 +1151,7 @@ namespace DistantWorlds
                     }
                     method_12(graphics_0, "(" + builtObject3.ShipGroup.Name + ")", Container.SmallFont, new Point(num34, int_2 + num4));
                 }
-                if (builtObject3.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject3.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject3.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                if (builtObject3.SubRole != BuiltObjectSubRole.Outpost && builtObject3.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject3.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject3.SubRole != BuiltObjectSubRole.LargeSpacePort)
                 {
                     if (builtObject3.SubRole == BuiltObjectSubRole.ExplorationShip)
                     {

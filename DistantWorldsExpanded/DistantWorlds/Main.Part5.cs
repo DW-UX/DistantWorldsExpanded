@@ -38,9 +38,11 @@ using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
 
         private TutorialItemList method_454(string string_30)
@@ -1717,6 +1719,9 @@ namespace DistantWorlds {
                                 case BuiltObjectSubRole.GasMiningStation:
                                 case BuiltObjectSubRole.MiningStation:
                                     empty = TextResolver.GetText("Mining Stations");
+                                    break;
+                                case BuiltObjectSubRole.Outpost:
+                                    empty = "Outpost";
                                     break;
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
@@ -5051,6 +5056,6 @@ namespace DistantWorlds {
         }
 
 
-  }
+    }
 
 }

@@ -916,6 +916,13 @@ namespace BaconDistantWorlds
                                             design5.TacticsWeakerShips = BattleTactics.PointBlank;
                                             design5.TacticsInvasion = InvasionTactics.DoNotInvade;
                                             break;
+                                        case BuiltObjectSubRole.Outpost:
+                                            design5.Stance = BuiltObjectStance.DoNotAttack;
+                                            design5.FleeWhen = BuiltObjectFleeWhen.Never;
+                                            design5.TacticsStrongerShips = BattleTactics.PointBlank;
+                                            design5.TacticsWeakerShips = BattleTactics.PointBlank;
+                                            design5.TacticsInvasion = InvasionTactics.DoNotInvade;
+                                            break;
                                         default:
                                             design5.Stance = BuiltObjectStance.DoNotAttack;
                                             design5.FleeWhen = BuiltObjectFleeWhen.Attacked;

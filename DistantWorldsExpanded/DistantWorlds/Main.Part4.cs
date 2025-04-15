@@ -3672,6 +3672,7 @@ namespace DistantWorlds {
             builtObjectList.AddRange(_Game.PlayerEmpire.BuiltObjects);
             builtObjectList.AddRange(_Game.PlayerEmpire.PrivateBuiltObjects);
             List<BuiltObjectSubRole> list = new List<BuiltObjectSubRole>();
+            list.Add(BuiltObjectSubRole.Outpost);
             list.Add(BuiltObjectSubRole.SmallSpacePort);
             list.Add(BuiltObjectSubRole.MediumSpacePort);
             list.Add(BuiltObjectSubRole.LargeSpacePort);

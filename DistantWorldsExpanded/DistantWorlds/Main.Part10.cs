@@ -2337,6 +2337,9 @@ namespace DistantWorlds {
                                 case BuiltObjectSubRole.MiningStation:
                                     text = " " + TextResolver.GetText("Mining Station");
                                     break;
+                                case BuiltObjectSubRole.Outpost:
+                                    text = " " + "Outpost";
+                                    break;
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
                                 case BuiltObjectSubRole.LargeSpacePort:

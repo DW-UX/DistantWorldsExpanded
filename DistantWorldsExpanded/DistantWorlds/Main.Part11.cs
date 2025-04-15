@@ -1434,7 +1434,7 @@ namespace DistantWorlds {
                                     continue;
                                 }
                                 bool flag = true;
-                                if (builtObject2.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject2.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject2.SubRole != BuiltObjectSubRole.LargeSpacePort && _Game.Galaxy.FastTestShipInColonizedSystem(builtObject2) && _Game.Galaxy.PirateEmpires != null && !_Game.Galaxy.PirateEmpires.Contains(builtObject2.Empire) && !empireList.Contains(builtObject2.Empire))
+                                if (builtObject2.SubRole != BuiltObjectSubRole.Outpost && builtObject2.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject2.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject2.SubRole != BuiltObjectSubRole.LargeSpacePort && _Game.Galaxy.FastTestShipInColonizedSystem(builtObject2) && _Game.Galaxy.PirateEmpires != null && !_Game.Galaxy.PirateEmpires.Contains(builtObject2.Empire) && !empireList.Contains(builtObject2.Empire))
                                 {
                                     flag = false;
                                 }

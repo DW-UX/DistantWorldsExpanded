@@ -650,6 +650,9 @@ namespace DistantWorlds.Types
 
         private int _SmallSpacePortCurrentModelNumber;
 
+        [OptionalField]
+        private int _OutpostCurrentModelNumber;
+
         private int _MediumSpacePortCurrentModelNumber;
 
         private int _LargeSpacePortCurrentModelNumber;
@@ -3502,6 +3505,10 @@ namespace DistantWorlds.Types
                     _DefensiveBaseCurrentModelNumber++;
                     text = "DFB-" + _DefensiveBaseCurrentModelNumber;
                     break;
+                case BuiltObjectSubRole.Outpost:
+                    _OutpostCurrentModelNumber++;
+                    text = "OPost-" + _OutpostCurrentModelNumber;
+                    break;
                 case BuiltObjectSubRole.SmallSpacePort:
                     _SmallSpacePortCurrentModelNumber++;
                     text = "SSP-" + _SmallSpacePortCurrentModelNumber;
@@ -4142,6 +4149,7 @@ namespace DistantWorlds.Types
             _DesignSpecifications.Add(DesignSpecification.LoadFromFile(galaxy, "ResortBase", BuiltObjectSubRole.ResortBase, isMobile: false, dominantRace, isPirate, raceNameOverride));
             _DesignSpecifications.Add(DesignSpecification.LoadFromFile(galaxy, "ResupplyShip", BuiltObjectSubRole.ResupplyShip, isMobile: true, dominantRace, isPirate, raceNameOverride));
             _DesignSpecifications.Add(DesignSpecification.LoadFromFile(galaxy, "SmallFreighter", BuiltObjectSubRole.SmallFreighter, isMobile: true, dominantRace, isPirate, raceNameOverride));
+            _DesignSpecifications.Add(DesignSpecification.LoadFromFile(galaxy, "OutPost", BuiltObjectSubRole.Outpost, isMobile: false, dominantRace, isPirate, raceNameOverride));
             _DesignSpecifications.Add(DesignSpecification.LoadFromFile(galaxy, "SmallSpacePort", BuiltObjectSubRole.SmallSpacePort, isMobile: false, dominantRace, isPirate, raceNameOverride));
             _DesignSpecifications.Add(DesignSpecification.LoadFromFile(galaxy, "TroopTransport", BuiltObjectSubRole.TroopTransport, isMobile: true, dominantRace, isPirate, raceNameOverride));
             _DesignSpecifications.Add(DesignSpecification.LoadFromFile(galaxy, "WeaponsResearchStation", BuiltObjectSubRole.WeaponsResearchStation, isMobile: false, dominantRace, isPirate, raceNameOverride));

@@ -488,6 +488,7 @@ namespace DistantWorlds.Controls
       List<BuiltObjectSubRole> subRoles = new List<BuiltObjectSubRole>();
       subRoles.Add(BuiltObjectSubRole.MiningStation);
       subRoles.Add(BuiltObjectSubRole.GasMiningStation);
+      subRoles.Add(BuiltObjectSubRole.Outpost);
       subRoles.Add(BuiltObjectSubRole.SmallSpacePort);
       subRoles.Add(BuiltObjectSubRole.MediumSpacePort);
       subRoles.Add(BuiltObjectSubRole.LargeSpacePort);

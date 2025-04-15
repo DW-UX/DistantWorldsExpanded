@@ -2348,7 +2348,7 @@ namespace DistantWorlds
                     continue;
                 }
                 design = design.Clone();
-                if (design.SubRole == BuiltObjectSubRole.SmallSpacePort || design.SubRole == BuiltObjectSubRole.MediumSpacePort || design.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                if (design.SubRole == BuiltObjectSubRole.Outpost || design.SubRole == BuiltObjectSubRole.SmallSpacePort || design.SubRole == BuiltObjectSubRole.MediumSpacePort || design.SubRole == BuiltObjectSubRole.LargeSpacePort)
                 {
                     galaxy_0.AddCargoBaysToDesign(design, 10);
                 }

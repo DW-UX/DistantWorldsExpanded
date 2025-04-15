@@ -2372,6 +2372,7 @@ namespace DistantWorlds.Controls
                             case BuiltObjectSubRole.MiningStation:
                                 result = texture2D_37;
                                 break;
+                            case BuiltObjectSubRole.Outpost:
                             case BuiltObjectSubRole.SmallSpacePort:
                             case BuiltObjectSubRole.MediumSpacePort:
                             case BuiltObjectSubRole.LargeSpacePort:
@@ -2418,6 +2419,7 @@ namespace DistantWorlds.Controls
                             case BuiltObjectSubRole.MiningStation:
                                 result = texture2D_45;
                                 break;
+                            case BuiltObjectSubRole.Outpost:
                             case BuiltObjectSubRole.SmallSpacePort:
                             case BuiltObjectSubRole.MediumSpacePort:
                             case BuiltObjectSubRole.LargeSpacePort:
@@ -4818,6 +4820,7 @@ namespace DistantWorlds.Controls
                                 case BuiltObjectSubRole.MiningShip:
                                     flag28 = flag10;
                                     break;
+                                case BuiltObjectSubRole.Outpost:
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
                                 case BuiltObjectSubRole.LargeSpacePort:
@@ -4896,7 +4899,7 @@ namespace DistantWorlds.Controls
                             {
                                 num84 = num85;
                             }
-                            if (builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if (builtObject3.SubRole == BuiltObjectSubRole.Outpost || builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 DrawShipSymbol(graphics_0, builtObject3, ResolveShipSymbolColor(builtObject3), num82 - num84 / 2, num83 - num84 / 2, num84, num84, num84, num84, fillInterior: true, main_0.double_0);
                                 if (main_0._Game.SelectedObject == builtObject3)
@@ -4914,7 +4917,7 @@ namespace DistantWorlds.Controls
                                     }
                                 }
                             }
-                            if ((!flag29 && galaxy_0.FastTestShipInColonizedSystem(builtObject3)) || builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if ((!flag29 && galaxy_0.FastTestShipInColonizedSystem(builtObject3)) || builtObject3.SubRole == BuiltObjectSubRole.Outpost || builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 continue;
                             }
@@ -5893,6 +5896,7 @@ namespace DistantWorlds.Controls
                                 case BuiltObjectSubRole.MiningShip:
                                     flag29 = flag11;
                                     break;
+                                case BuiltObjectSubRole.Outpost:
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
                                 case BuiltObjectSubRole.LargeSpacePort:
@@ -5978,7 +5982,7 @@ namespace DistantWorlds.Controls
                             {
                                 num68 = num69;
                             }
-                            if (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 DrawShipSymbolXna(spriteBatch_2, builtObject, ResolveShipSymbolColor(builtObject), num66 - num68 / 2, num67 - num68 / 2, num68, num68, num68, num68, galaxyLevel: true, currentDateTime);
                                 if (main_0._Game.SelectedObject == builtObject)
@@ -5996,7 +6000,7 @@ namespace DistantWorlds.Controls
                                     }
                                 }
                             }
-                            if ((!flag30 && galaxy_0.FastTestShipInColonizedSystem(builtObject)) || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if ((!flag30 && galaxy_0.FastTestShipInColonizedSystem(builtObject)) || builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 continue;
                             }

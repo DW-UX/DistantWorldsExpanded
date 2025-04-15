@@ -38,9 +38,11 @@ using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
 
         private void btnGalacticHistory_Click(object sender, EventArgs e)
@@ -274,7 +276,7 @@ namespace DistantWorlds {
             {
                 for (int i = 0; i < builtObjectList_1.Count; i++)
                 {
-                    if (builtObjectList_1[i].SubRole == BuiltObjectSubRole.SmallSpacePort || builtObjectList_1[i].SubRole == BuiltObjectSubRole.MediumSpacePort || builtObjectList_1[i].SubRole == BuiltObjectSubRole.LargeSpacePort)
+                    if (builtObjectList_1[i].SubRole == BuiltObjectSubRole.Outpost || builtObjectList_1[i].SubRole == BuiltObjectSubRole.SmallSpacePort || builtObjectList_1[i].SubRole == BuiltObjectSubRole.MediumSpacePort || builtObjectList_1[i].SubRole == BuiltObjectSubRole.LargeSpacePort)
                     {
                         flag = true;
                     }
@@ -284,7 +286,7 @@ namespace DistantWorlds {
                 {
                     if (num < builtObjectList_1.Count)
                     {
-                        if (!flag || builtObjectList_1[num].SubRole == BuiltObjectSubRole.SmallSpacePort || builtObjectList_1[num].SubRole == BuiltObjectSubRole.MediumSpacePort || builtObjectList_1[num].SubRole == BuiltObjectSubRole.LargeSpacePort)
+                        if (!flag || builtObjectList_1[num].SubRole == BuiltObjectSubRole.Outpost || builtObjectList_1[num].SubRole == BuiltObjectSubRole.SmallSpacePort || builtObjectList_1[num].SubRole == BuiltObjectSubRole.MediumSpacePort || builtObjectList_1[num].SubRole == BuiltObjectSubRole.LargeSpacePort)
                         {
                             if (builtObjectSubRole_0 != 0 && builtObjectList_1[num].SubRole != builtObjectSubRole_0)
                             {
@@ -2187,7 +2189,8 @@ namespace DistantWorlds {
                             Design design16 = null;
                             long num4 = _Game.PlayerEmpire.Policy.ConstructionSpaceportLargeColonyPopulationThreshold * 1000000L;
                             long num5 = _Game.PlayerEmpire.Policy.ConstructionSpaceportMediumColonyPopulationThreshold * 1000000L;
-                            _ = _Game.PlayerEmpire.Policy.ConstructionSpaceportSmallColonyPopulationThreshold;
+                            long num6 = _Game.PlayerEmpire.Policy.ConstructionSpaceportSmallColonyPopulationThreshold;
+                            long num61 = _Game.PlayerEmpire.Policy.ConstructionOutpostColonyPopulationThreshold;
                             if (habitat3.Population.TotalAmount > num4)
                             {
                                 design15 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.LargeSpacePort, habitat3);
@@ -2198,25 +2201,36 @@ namespace DistantWorlds {
                                 design15 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.MediumSpacePort, habitat3);
                                 design16 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.MediumSpacePort);
                             }
-                            else
+                            else if (habitat3.Population.TotalAmount > num6)
                             {
                                 design15 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.SmallSpacePort, habitat3);
                                 design16 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.SmallSpacePort);
+                            }
+                            else
+                            {
+                                design15 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.Outpost, habitat3);
+                                design16 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.Outpost);
                             }
                             Design design17 = null;
                             Design design18 = null;
                             if (design15 == null)
                             {
-                                design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.SmallSpacePort, habitat3);
-                                design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.SmallSpacePort);
+
+                                design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.Outpost, habitat3);
+                                design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.Outpost);
                                 if (design17 == null)
                                 {
-                                    design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.MediumSpacePort, habitat3);
-                                    design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.MediumSpacePort);
+                                    design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.SmallSpacePort, habitat3);
+                                    design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.SmallSpacePort);
                                     if (design17 == null)
                                     {
-                                        design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.LargeSpacePort, habitat3);
-                                        design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.LargeSpacePort);
+                                        design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.MediumSpacePort, habitat3);
+                                        design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.MediumSpacePort);
+                                        if (design17 == null)
+                                        {
+                                            design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.LargeSpacePort, habitat3);
+                                            design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.LargeSpacePort);
+                                        }
                                     }
                                 }
                                 if (design17 != null && design18 != null)
@@ -4126,6 +4140,7 @@ namespace DistantWorlds {
             empirePolicy.DesignUpgradeExplorationShip = method_603(panel_1, "DesignUpgradeExplorationShip");
             empirePolicy.DesignUpgradeColonyShip = method_603(panel_1, "DesignUpgradeColonyShip");
             empirePolicy.DesignUpgradeConstructionShip = method_603(panel_1, "DesignUpgradeConstructionShip");
+            empirePolicy.DesignUpgradeOutpost= method_603(panel_1, "DesignUpgradeOutpost");
             empirePolicy.DesignUpgradeSmallSpacePort = method_603(panel_1, "DesignUpgradeSmallSpacePort");
             empirePolicy.DesignUpgradeMediumSpacePort = method_603(panel_1, "DesignUpgradeMediumSpacePort");
             empirePolicy.DesignUpgradeLargeSpacePort = method_603(panel_1, "DesignUpgradeLargeSpacePort");
@@ -5064,6 +5079,7 @@ namespace DistantWorlds {
             method_624(panel_1, int_, "DesignUpgradeExplorationShip", Galaxy.ResolveDescription(BuiltObjectSubRole.ExplorationShip), "", empirePolicy_0.DesignUpgradeExplorationShip, ref num);
             method_624(panel_1, int_, "DesignUpgradeColonyShip", Galaxy.ResolveDescription(BuiltObjectSubRole.ColonyShip), "", empirePolicy_0.DesignUpgradeColonyShip, ref num);
             method_624(panel_1, int_, "DesignUpgradeConstructionShip", Galaxy.ResolveDescription(BuiltObjectSubRole.ConstructionShip), "", empirePolicy_0.DesignUpgradeConstructionShip, ref num);
+            method_624(panel_1, int_, "DesignUpgradeOutpost", "Small base to provide bonuses to planet", "", empirePolicy_0.DesignUpgradeOutpost, ref num);
             method_624(panel_1, int_, "DesignUpgradeSmallSpacePort", Galaxy.ResolveDescription(BuiltObjectSubRole.SmallSpacePort), "", empirePolicy_0.DesignUpgradeSmallSpacePort, ref num);
             method_624(panel_1, int_, "DesignUpgradeMediumSpacePort", Galaxy.ResolveDescription(BuiltObjectSubRole.MediumSpacePort), "", empirePolicy_0.DesignUpgradeMediumSpacePort, ref num);
             method_624(panel_1, int_, "DesignUpgradeLargeSpacePort", Galaxy.ResolveDescription(BuiltObjectSubRole.LargeSpacePort), "", empirePolicy_0.DesignUpgradeLargeSpacePort, ref num);
@@ -5340,6 +5356,6 @@ namespace DistantWorlds {
             method_625(panel_1, int_, "FleetStrikeForceTypicalSize", TextResolver.GetText("Typical number of ships in Strike Force"), "", 2f, 15f, empirePolicy_0.FleetStrikeForceTypicalSize, ref num);
         }
 
-  }
+    }
 
 }

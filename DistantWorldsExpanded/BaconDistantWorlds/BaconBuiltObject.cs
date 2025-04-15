@@ -3691,7 +3691,7 @@ namespace BaconDistantWorlds
                     {
                         if (x.Role != BuiltObjectRole.Base)
                             return false;
-                        return x.SubRole == BuiltObjectSubRole.LargeSpacePort || x.SubRole == BuiltObjectSubRole.MediumSpacePort || x.SubRole == BuiltObjectSubRole.SmallSpacePort || x.SubRole == BuiltObjectSubRole.GenericBase;
+                        return x.SubRole == BuiltObjectSubRole.LargeSpacePort || x.SubRole == BuiltObjectSubRole.MediumSpacePort || x.SubRole == BuiltObjectSubRole.SmallSpacePort || x.SubRole == BuiltObjectSubRole.GenericBase || x.SubRole == BuiltObjectSubRole.Outpost;
                     })).ToList<BuiltObject>();
                     if (list3.Any<BuiltObject>())
                     {

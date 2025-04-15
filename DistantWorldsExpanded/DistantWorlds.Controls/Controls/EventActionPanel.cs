@@ -769,7 +769,8 @@ namespace DistantWorlds.Controls
         BuiltObjectSubRole.SmallFreighter,
         BuiltObjectSubRole.SmallSpacePort,
         BuiltObjectSubRole.TroopTransport,
-        BuiltObjectSubRole.WeaponsResearchStation
+        BuiltObjectSubRole.WeaponsResearchStation,
+        BuiltObjectSubRole.Outpost
       }, false);
       this.cmbCreatureType.BindData(new List<CreatureType>()
       {

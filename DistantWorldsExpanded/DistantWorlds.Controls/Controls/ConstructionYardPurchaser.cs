@@ -135,6 +135,7 @@ namespace DistantWorlds.Controls
             {
               switch (design.SubRole)
               {
+                case BuiltObjectSubRole.Outpost:
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
                 case BuiltObjectSubRole.LargeSpacePort:

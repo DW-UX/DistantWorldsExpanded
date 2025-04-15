@@ -116,7 +116,6 @@ namespace DistantWorlds
             outputDevice.DesiredLatency = 300;
             outputDevice.NumberOfBuffers = 3;
             _dummy = dummy;
-
             _IsPlaying = false;
             _fadeMode = -1.0;
             _fadeRatio = 0.02;

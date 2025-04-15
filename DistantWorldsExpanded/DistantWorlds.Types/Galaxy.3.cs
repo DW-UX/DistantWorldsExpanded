@@ -699,14 +699,14 @@ namespace DistantWorlds.Types
             return result;
         }
 
-        public BuiltObject FastFindNearestSpacePort(double x, double y, Empire empire)
+        public BuiltObject FastFindNearestSpacePort(double x, double y, Empire empire, bool excludeOutpost)
         {
             double num = double.MaxValue;
             BuiltObject result = null;
             for (int i = 0; i < empire.SpacePorts.Count; i++)
             {
                 BuiltObject builtObject = empire.SpacePorts[i];
-                if (builtObject != null)
+                if (builtObject != null && builtObject.SubRole != BuiltObjectSubRole.Outpost)
                 {
                     double num2 = CalculateDistanceSquared(x, y, builtObject.Xpos, builtObject.Ypos);
                     if (num2 < num && builtObject.IsSpacePort)
@@ -5053,6 +5053,7 @@ namespace DistantWorlds.Types
             ExplosionHabitatImageCount = 120;
             HabitatColonizationThreshhold = 5;
             MiningStationResourceThreshhold = 10;
+            HabitatOutpostPopulationRequirement = 10000L;
             HabitatSmallSpacePortPopulationRequirement = 1000000L;
             HabitatMediumSpacePortPopulationRequirement = 500000000L;
             HabitatLargeSpacePortPopulationRequirement = 3000000000L;
@@ -5226,7 +5227,17 @@ namespace DistantWorlds.Types
         {
             new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentType.ComputerCommandCenter, 1)
         };
-            DesignSpecification designSpecification = new DesignSpecification(BuiltObjectSubRole.SmallSpacePort, mobile: false);
+            DesignSpecification designSpecification = new DesignSpecification(BuiltObjectSubRole.Outpost, mobile: false);
+            designSpecification.ComponentRules.AddRange(items2);
+            designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentCategoryType.Reactor, 1));
+            designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentType.StorageFuel, 2));
+            designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentType.StorageDockingBay, 6));
+            designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentType.StorageCargo, 6));
+            designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentType.EnergyCollector, 4));
+            designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentType.HabitationMedicalCenter, 1));
+            designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentType.HabitationRecreationCenter, 1));
+            DesignSpecifications.Add(designSpecification);
+            designSpecification = new DesignSpecification(BuiltObjectSubRole.SmallSpacePort, mobile: false);
             designSpecification.ComponentRules.AddRange(items2);
             designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentCategoryType.Reactor, 1));
             designSpecification.ComponentRules.Add(new DesignSpecificationComponentRule(DesignSpecificationComponentRuleType.MustHave, ComponentType.StorageFuel, 2));

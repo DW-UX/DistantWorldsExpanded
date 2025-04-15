@@ -81,6 +81,8 @@ namespace DistantWorlds.Types
         public float ConstructionMilitaryTroopTransport = 8f;
         public float ConstructionMilitaryCarrier = 8f;
         public int ConstructionSpaceportMinimumDistance = 700;
+        [OptionalField]
+        public int ConstructionOutpostColonyPopulationThreshold = 1;
         public int ConstructionSpaceportSmallColonyPopulationThreshold = 30;
         public int ConstructionSpaceportMediumColonyPopulationThreshold = 500;
         public int ConstructionSpaceportLargeColonyPopulationThreshold = 3000;
@@ -140,6 +142,8 @@ namespace DistantWorlds.Types
         public bool DesignUpgradeColonyShip = true;
         [OptionalField]
         public bool DesignUpgradeConstructionShip = true;
+        [OptionalField]
+        public bool DesignUpgradeOutpost = true;
         [OptionalField]
         public bool DesignUpgradeSmallSpacePort = true;
         [OptionalField]
@@ -351,6 +355,7 @@ namespace DistantWorlds.Types
                 this.ConstructionSpaceportMediumColonyPopulationThreshold = reader.GetInt32(reader.GetOrdinal("ConstructionSpaceportMediumColonyPopulationThreshold"));
                 this.ConstructionSpaceportMinimumDistance = reader.GetInt32(reader.GetOrdinal("ConstructionSpaceportMinimumDistance"));
                 this.ConstructionSpaceportSmallColonyPopulationThreshold = reader.GetInt32(reader.GetOrdinal("ConstructionSpaceportSmallColonyPopulationThreshold"));
+                this.ConstructionOutpostColonyPopulationThreshold = reader.GetInt32(reader.GetOrdinal("ConstructionOutpostColonyPopulationThreshold"));
 
                 // Diplomacy settings
                 this.DiplomacySendGiftsUpToAmount = reader.GetInt32(reader.GetOrdinal("DiplomacySendGiftsUpToAmount"));
@@ -399,6 +404,7 @@ namespace DistantWorlds.Types
                 this.DesignUpgradeExplorationShip = reader.GetBoolean(reader.GetOrdinal("DesignUpgradeExplorationShip"));
                 this.DesignUpgradeColonyShip = reader.GetBoolean(reader.GetOrdinal("DesignUpgradeColonyShip"));
                 this.DesignUpgradeConstructionShip = reader.GetBoolean(reader.GetOrdinal("DesignUpgradeConstructionShip"));
+                this.DesignUpgradeOutpost = reader.GetBoolean(reader.GetOrdinal("DesignUpgradeOutpost"));
                 this.DesignUpgradeSmallSpacePort = reader.GetBoolean(reader.GetOrdinal("DesignUpgradeSmallSpacePort"));
                 this.DesignUpgradeMediumSpacePort = reader.GetBoolean(reader.GetOrdinal("DesignUpgradeMediumSpacePort"));
                 this.DesignUpgradeLargeSpacePort = reader.GetBoolean(reader.GetOrdinal("DesignUpgradeLargeSpacePort"));
@@ -641,6 +647,9 @@ namespace DistantWorlds.Types
                 case "ConstructionSpaceportSmallColonyPopulationThreshold":
                     this.ConstructionSpaceportSmallColonyPopulationThreshold = this.ParseIntValue(value);
                     break;
+                case "ConstructionOutpostColonyPopulationThreshold":
+                    this.ConstructionOutpostColonyPopulationThreshold = this.ParseIntValue(value);
+                    break;
                 case "DiplomacySendGiftsUpToAmount":
                     this.DiplomacySendGiftsUpToAmount = this.ParseIntValue(value);
                     break;
@@ -853,6 +862,9 @@ namespace DistantWorlds.Types
                     break;
                 case "DesignUpgradeConstructionShip":
                     this.DesignUpgradeConstructionShip = this.ParseBoolValue(value);
+                    break;
+                case "DesignUpgradeOutpost":
+                    this.DesignUpgradeOutpost = this.ParseBoolValue(value);
                     break;
                 case "DesignUpgradeSmallSpacePort":
                     this.DesignUpgradeSmallSpacePort = this.ParseBoolValue(value);
@@ -1240,6 +1252,7 @@ namespace DistantWorlds.Types
                         streamWriter.WriteLine(this.BuildPolicyLine("DesignUpgradeExplorationShip", (object)this.DesignUpgradeExplorationShip));
                         streamWriter.WriteLine(this.BuildPolicyLine("DesignUpgradeColonyShip", (object)this.DesignUpgradeColonyShip));
                         streamWriter.WriteLine(this.BuildPolicyLine("DesignUpgradeConstructionShip", (object)this.DesignUpgradeConstructionShip));
+                        streamWriter.WriteLine(this.BuildPolicyLine("DesignUpgradeOutpost", (object)this.DesignUpgradeOutpost));
                         streamWriter.WriteLine(this.BuildPolicyLine("DesignUpgradeSmallSpacePort", (object)this.DesignUpgradeSmallSpacePort));
                         streamWriter.WriteLine(this.BuildPolicyLine("DesignUpgradeMediumSpacePort", (object)this.DesignUpgradeMediumSpacePort));
                         streamWriter.WriteLine(this.BuildPolicyLine("DesignUpgradeLargeSpacePort", (object)this.DesignUpgradeLargeSpacePort));
@@ -1453,6 +1466,7 @@ namespace DistantWorlds.Types
             DesignUpgradeExplorationShip = this.DesignUpgradeExplorationShip,
             DesignUpgradeColonyShip = this.DesignUpgradeColonyShip,
             DesignUpgradeConstructionShip = this.DesignUpgradeConstructionShip,
+            DesignUpgradeOutpost = this.DesignUpgradeOutpost,
             DesignUpgradeSmallSpacePort = this.DesignUpgradeSmallSpacePort,
             DesignUpgradeMediumSpacePort = this.DesignUpgradeMediumSpacePort,
             DesignUpgradeLargeSpacePort = this.DesignUpgradeLargeSpacePort,

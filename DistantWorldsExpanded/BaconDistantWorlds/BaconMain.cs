@@ -1897,6 +1897,7 @@ namespace BaconDistantWorlds
             }
             else if (text == TextResolver.GetText("Space Ports"))
             {
+                list.Add(BuiltObjectSubRole.Outpost);
                 list.Add(BuiltObjectSubRole.SmallSpacePort);
                 list.Add(BuiltObjectSubRole.MediumSpacePort);
                 list.Add(BuiltObjectSubRole.LargeSpacePort);

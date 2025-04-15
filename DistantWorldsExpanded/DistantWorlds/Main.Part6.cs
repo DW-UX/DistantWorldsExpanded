@@ -145,6 +145,7 @@ namespace DistantWorlds {
                 case BuiltObjectSubRole.MiningStation:
                     design_0.Stance = BuiltObjectStance.AttackIfAttacked;
                     break;
+                case BuiltObjectSubRole.Outpost:
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
                 case BuiltObjectSubRole.LargeSpacePort:
@@ -347,6 +348,29 @@ namespace DistantWorlds {
                     list.Add(ComponentType.ExtractorMine);
                     list.Add(ComponentType.ComputerCommerceCenter);
                     list.Add(ComponentType.StorageCargo);
+                    break;
+                case BuiltObjectSubRole.Outpost:
+                    list.Add(ComponentType.StorageCargo);
+                    list.Add(ComponentType.HabitationRecreationCenter);
+                    list.Add(ComponentType.HabitationMedicalCenter);
+                    list5.Add(ComponentType.EnergyCollector);
+                    list4.Add(ComponentCategoryType.WeaponArea);
+                    list4.Add(ComponentCategoryType.AssaultPod);
+                    list4.Add(ComponentCategoryType.Manufacturer);
+                    list4.Add(ComponentCategoryType.Engine);
+                    list4.Add(ComponentCategoryType.Fighter);
+                    list4.Add(ComponentCategoryType.Extractor);
+                    list4.Add(ComponentCategoryType.Labs);
+                    list4.Add(ComponentCategoryType.HyperDisrupt);
+                    list4.Add(ComponentCategoryType.Sensor);
+                    list4.Add(ComponentCategoryType.ShieldRecharge);
+                    list4.Add(ComponentCategoryType.Shields);
+                    list4.Add(ComponentCategoryType.WeaponBeam);
+                    list4.Add(ComponentCategoryType.WeaponGravity);
+                    list4.Add(ComponentCategoryType.WeaponIon);
+                    list4.Add(ComponentCategoryType.WeaponPointDefense);
+                    list4.Add(ComponentCategoryType.WeaponSuperTorpedo);
+                    list4.Add(ComponentCategoryType.WeaponTorpedo);
                     break;
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:

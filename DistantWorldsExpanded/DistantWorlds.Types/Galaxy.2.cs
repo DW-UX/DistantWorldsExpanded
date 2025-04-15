@@ -2161,6 +2161,7 @@ namespace DistantWorlds.Types
                 BuiltObjectSubRole.ResupplyShip => TextResolver.GetText("Ship SubRole ResupplyShip"),
                 BuiltObjectSubRole.SmallFreighter => TextResolver.GetText("Ship SubRole SmallFreighter"),
                 BuiltObjectSubRole.SmallSpacePort => TextResolver.GetText("Ship SubRole SmallSpacePort"),
+                BuiltObjectSubRole.Outpost => "Outpost",
                 BuiltObjectSubRole.TroopTransport => TextResolver.GetText("Ship SubRole TroopTransport"),
                 BuiltObjectSubRole.WeaponsResearchStation => TextResolver.GetText("Ship SubRole WeaponsResearchStation"),
                 BuiltObjectSubRole.Undefined => TextResolver.GetText("None"),

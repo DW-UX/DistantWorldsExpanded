@@ -3228,7 +3228,7 @@ namespace DistantWorlds.Types
                                 continue;
                             }
                             bool flag2 = true;
-                            if (empire != null && empire != IndependentEmpire && item2.SubRole != BuiltObjectSubRole.SmallSpacePort && item2.SubRole != BuiltObjectSubRole.MediumSpacePort && item2.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                            if (empire != null && empire != IndependentEmpire && item2.SubRole != BuiltObjectSubRole.Outpost && item2.SubRole != BuiltObjectSubRole.SmallSpacePort && item2.SubRole != BuiltObjectSubRole.MediumSpacePort && item2.SubRole != BuiltObjectSubRole.LargeSpacePort)
                             {
                                 flag2 = empire.IsObjectVisibleToThisEmpire(item2, includeLongRangeScanners: true, includeShipsOutsideSystems: false);
                             }
@@ -3391,7 +3391,7 @@ namespace DistantWorlds.Types
                                 continue;
                             }
                             bool flag4 = true;
-                            if (empire != null && empire != IndependentEmpire && builtObject2.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject2.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject2.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                            if (empire != null && empire != IndependentEmpire && builtObject2.SubRole != BuiltObjectSubRole.Outpost && builtObject2.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject2.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject2.SubRole != BuiltObjectSubRole.LargeSpacePort)
                             {
                                 flag4 = empire.IsObjectVisibleToThisEmpire(builtObject2, includeLongRangeScanners: true, includeShipsOutsideSystems: false);
                             }
@@ -3465,7 +3465,7 @@ namespace DistantWorlds.Types
                     }
                 }
             }
-            else if (refuellingEmpire.PirateEmpireBaseHabitat != null && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject.IsResourceExtractor && builtObject.ParentHabitat != null && builtObject.ParentHabitat.Resources != null)
+            else if (refuellingEmpire.PirateEmpireBaseHabitat != null && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject.IsResourceExtractor && builtObject.ParentHabitat != null && builtObject.ParentHabitat.Resources != null)
             {
                 bool flag = true;
                 for (int j = 0; j < fuelTypes.Count; j++)

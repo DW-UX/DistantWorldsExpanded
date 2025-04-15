@@ -2295,6 +2295,7 @@ namespace DistantWorlds {
                             case BuiltObjectSubRole.MonitoringStation:
                                 empty = method_252(message, _Game.DisplayPopupUnderAttackOtherStateBases, _Game.DisplayMessageUnderAttackOtherStateBases, ref bool_, ref bool_2);
                                 break;
+                            case BuiltObjectSubRole.Outpost:
                             case BuiltObjectSubRole.SmallSpacePort:
                             case BuiltObjectSubRole.MediumSpacePort:
                             case BuiltObjectSubRole.LargeSpacePort:
@@ -3011,6 +3012,7 @@ namespace DistantWorlds {
             builtObjectList.AddRange(_Game.PlayerEmpire.BuiltObjects);
             builtObjectList.AddRange(_Game.PlayerEmpire.PrivateBuiltObjects);
             List<BuiltObjectSubRole> list = new List<BuiltObjectSubRole>();
+            list.Add(BuiltObjectSubRole.Outpost);
             list.Add(BuiltObjectSubRole.SmallSpacePort);
             list.Add(BuiltObjectSubRole.MediumSpacePort);
             list.Add(BuiltObjectSubRole.LargeSpacePort);
@@ -4576,6 +4578,10 @@ namespace DistantWorlds {
             {
                 result = BuiltObjectSubRole.SmallFreighter;
             }
+            else if (string_30 == Galaxy.ResolveDescription(BuiltObjectSubRole.Outpost))
+            {
+                result = BuiltObjectSubRole.Outpost;
+            }
             else if (string_30 == Galaxy.ResolveDescription(BuiltObjectSubRole.SmallSpacePort))
             {
                 result = BuiltObjectSubRole.SmallSpacePort;
@@ -4685,6 +4691,9 @@ namespace DistantWorlds {
                     break;
                 case BuiltObjectSubRole.DefensiveBase:
                     result = 28;
+                    break;
+                case BuiltObjectSubRole.Outpost:
+                    result = 29;
                     break;
             }
             return result;
