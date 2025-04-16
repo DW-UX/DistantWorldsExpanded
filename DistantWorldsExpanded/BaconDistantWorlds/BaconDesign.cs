@@ -68,9 +68,16 @@ namespace BaconDistantWorlds
             else
             {
                 List<string> list = source.Where<string>((Func<string, bool>)(path2 => Path.GetFileNameWithoutExtension(path2) == subRoleAsString)).ToList<string>();
-                if (list.Count < 1)
+                if (list.Count < 1 && builtObjectSubRole != BuiltObjectSubRole.Outpost)
                 {
                     int num3 = (int)MessageBox.Show("No image for " + subRoleAsString + " for " + family, "Missing image in mod");
+                }
+                if (list.Count < 1 && builtObjectSubRole == BuiltObjectSubRole.Outpost)
+                {
+                    subRoleAsString = Enum.GetName(typeof(BuiltObjectSubRole), BuiltObjectSubRole.SmallSpacePort); 
+                    list = source.Where<string>((Func<string, bool>)(path2 => Path.GetFileNameWithoutExtension(path2) == subRoleAsString)).ToList<string>();
+                    if (list.Count < 1)
+                    { int num3 = (int)MessageBox.Show("No image for " + subRoleAsString + " for " + family, "Missing image in mod"); }
                 }
                 else
                     str = list[Galaxy.Rnd.Next(0, list.Count - 1)];
