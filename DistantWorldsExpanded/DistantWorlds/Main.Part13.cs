@@ -2293,54 +2293,54 @@ namespace DistantWorlds
             raceImageCache_0.Initialize(array, array2, array3, array4);
         }
 
-        internal void LoadUiComponents(string string_30, string string_31)
+        internal void LoadUiComponents(string string_30, string customSet)
         {
-            string text = string_30 + "ui\\components\\";
-            string text2 = string_31 + "ui\\components\\";
+            string originalPath = string_30 + "ui\\components\\";
+            string custmomPath = customSet + "ui\\components\\";
             List<Task> taskList = new List<Task>();
-            if (!File.Exists(text2 + "unbuilt.png"))
+            if (!File.Exists(custmomPath + "unbuilt.png"))
             {
-                taskList.Add(Task.Run(() => bitmap_22[0] = method_12(text + "unbuilt.png", bool_28: true)));
+                taskList.Add(Task.Run(() => bitmap_22[0] = method_12(originalPath + "unbuilt.png", bool_28: true)));
             }
             else
             {
-                taskList.Add(Task.Run(() => bitmap_22[0] = method_12(text2 + "unbuilt.png", bool_28: true)));
+                taskList.Add(Task.Run(() => bitmap_22[0] = method_12(custmomPath + "unbuilt.png", bool_28: true)));
             }
-            if (!File.Exists(text2 + "damaged.png"))
+            if (!File.Exists(custmomPath + "damaged.png"))
             {
-                taskList.Add(Task.Run(() => bitmap_22[1] = method_12(text + "damaged.png", bool_28: true)));
+                taskList.Add(Task.Run(() => bitmap_22[1] = method_12(originalPath + "damaged.png", bool_28: true)));
             }
             else
             {
-                taskList.Add(Task.Run(() => bitmap_22[1] = method_12(text2 + "damaged.png", bool_28: true)));
+                taskList.Add(Task.Run(() => bitmap_22[1] = method_12(custmomPath + "damaged.png", bool_28: true)));
             }
             bitmap_21 = new Bitmap[Galaxy.ComponentDefinitionsStatic.Length];
             for (int i = 0; i < bitmap_21.Length; i++)
             {
                 int localI = i;
                 bool flag = true;
-                string text3 = "Component_" + i + ".png";
-                string text4 = "Component_" + i + ".bmp";
+                string pngName = "Component_" + Galaxy.ComponentDefinitionsStatic[i].PictureRef + ".png";
+                string bmpName = "Component_" + Galaxy.ComponentDefinitionsStatic[i].PictureRef + ".bmp";
                 string empty = string.Empty;
-                string text5 = text2 + text3;
-                string text6 = text2 + text4;
-                string text7 = text + text3;
-                string text8 = text + text4;
-                if (!string.IsNullOrEmpty(string_31))
+                string customPngPath = custmomPath + pngName;
+                string customBmpPath = custmomPath + bmpName;
+                string originalPngPath = originalPath + pngName;
+                string originalBmpPath = originalPath + bmpName;
+                if (!string.IsNullOrEmpty(customSet))
                 {
-                    empty = text5;
+                    empty = customPngPath;
                     flag = true;
-                    if (!File.Exists(text5))
+                    if (!File.Exists(customPngPath))
                     {
-                        empty = text6;
+                        empty = customBmpPath;
                         flag = false;
-                        if (!File.Exists(text6))
+                        if (!File.Exists(customBmpPath))
                         {
-                            empty = text7;
+                            empty = originalPngPath;
                             flag = true;
-                            if (!File.Exists(text7))
+                            if (!File.Exists(originalPngPath))
                             {
-                                empty = text8;
+                                empty = originalBmpPath;
                                 flag = false;
                             }
                         }
@@ -2348,11 +2348,11 @@ namespace DistantWorlds
                 }
                 else
                 {
-                    empty = text7;
+                    empty = originalPngPath;
                     flag = true;
-                    if (!File.Exists(text7))
+                    if (!File.Exists(originalPngPath))
                     {
-                        empty = text8;
+                        empty = originalBmpPath;
                         flag = false;
                     }
                 }
