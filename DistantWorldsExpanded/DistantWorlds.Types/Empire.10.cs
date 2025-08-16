@@ -4522,6 +4522,7 @@ namespace DistantWorlds.Types
                         }
                     }
                 }
+                this.Name = GenerateEmpireName(governmentId);
                 ChangeGovernment(governmentId);
             }
             return governmentId;

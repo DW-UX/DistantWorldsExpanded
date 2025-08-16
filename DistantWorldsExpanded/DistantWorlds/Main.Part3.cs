@@ -3935,12 +3935,15 @@ namespace DistantWorlds
             pnlEmpirePolicyContainer.AutoSize = false;
             pnlEmpirePolicyContainer.Size = new Size(930, 635);
             pnlEmpirePolicyContainer.Location = new Point(10, 10);
-            pnlEmpirePolicyContainer.AutoScroll = true;
+            pnlEmpirePolicyContainer.AutoScroll = false;
             pnlEmpirePolicyContainer.AutoScrollPosition = new Point(0, 0);
+            pnlEmpirePolicyContainer.HorizontalScroll.Maximum = 0;
+            pnlEmpirePolicyContainer.VerticalScroll.Visible = false;
+            pnlEmpirePolicyContainer.AutoScroll = true;
             pnlEmpirePolicyContainer.BackColor = Color.FromArgb(32, 32, 32);
             if (_Game.PlayerEmpire.PirateEmpireBaseHabitat == null)
             {
-                nDrsqatloR.Size = new Size(910, 4840);
+                nDrsqatloR.Size = new Size(910, 4860);
             }
             else
             {
@@ -3949,10 +3952,10 @@ namespace DistantWorlds
                 {
                     flag = true;
                 }
-                nDrsqatloR.Size = new Size(910, 2840);
+                nDrsqatloR.Size = new Size(910, 2860);
                 if (flag)
                 {
-                    nDrsqatloR.Size = new Size(910, 4540);
+                    nDrsqatloR.Size = new Size(910, 4560);
                 }
             }
             nDrsqatloR.Location = new Point(0, 0);
