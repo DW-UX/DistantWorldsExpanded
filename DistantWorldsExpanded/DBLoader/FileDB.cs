@@ -14,8 +14,8 @@ namespace DistantWorlds.DBLoader
         private readonly SQLiteConnection memoryConnection;
         private readonly SQLiteConnection memoryConnectionFile;
         public FileDB()
-        {
-            string fullPath = Path.GetFullPath(_DiskDbPath);
+        {            
+            string fullPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory,_DiskDbPath));
             if (!File.Exists(fullPath))
             {
                 throw new FileNotFoundException("Database file not found at path: " + fullPath);

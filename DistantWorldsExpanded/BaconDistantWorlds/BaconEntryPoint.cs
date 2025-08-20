@@ -4,6 +4,7 @@ using ExpansionMod.Objects;
 using ExpansionMod.Objects.HotKeyMapping;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace BaconDistantWorlds
 
         public BaconEntryPoint()
         {
-            BaconMain.EntryPointClass = this; 
+            BaconMain.EntryPointClass = this;
         }
         public IHotKeyManager GetHotKeyManager()
         {
@@ -27,7 +28,7 @@ namespace BaconDistantWorlds
             if (_manager == null)
             {
                 var keyMapper = new BaconKeyMapper(_HotKeyFileName);
-                if (!keyMapper.MapKeys(_ModRootFolder))
+                if (!keyMapper.MapKeys(Path.Combine(AppContext.BaseDirectory, _ModRootFolder)))
                 {
                     throw new ApplicationException($"Failed to map keys, check {_HotKeyFileName} file");
                 }

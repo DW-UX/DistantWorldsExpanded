@@ -904,7 +904,7 @@ namespace DistantWorlds
                 }
                 Main._ExpModMain.ModStartup(this);
                 Main._FileDB = new FileDB();
-                DBLoader.ModData data = new DBLoader.ModData(@"AdvMods\ExpansionMod\Patches");
+                DBLoader.ModData data = new DBLoader.ModData(Path.Combine(AppContext.BaseDirectory, @"AdvMods\ExpansionMod\Patches"));
                 Main._FileDB.LoadDB();
                 Main._FileDB.ApplyChanges(data.ParseChanges());
                 Main._FileDB.ApplyChanges(data.ParseUserChanges());
@@ -5336,7 +5336,8 @@ namespace DistantWorlds
             chkJumpStartTheGalaxyDifficultyScaling.Checked = startGameOptions_0.GalaxyDifficultyScaling;
             if (startGameOptions_0.YourEmpireRace >= 0 && startGameOptions_0.YourEmpireRace < cmbJumpStartYourEmpireRace.Items.Count)
             {
-                cmbJumpStartYourEmpireRace.SelectedIndex = startGameOptions_0.YourEmpireRace;
+                // Ensure index is within valid range before setting
+                cmbJumpStartYourEmpireRace.SelectedIndex = Math.Max(0, Math.Min(startGameOptions_0.YourEmpireRace, cmbJumpStartYourEmpireRace.Items.Count - 1)); ;
             }
             cmbJumpStartYourEmpireGovernment.SetSelectedGovernmentStyle(startGameOptions_0.YourEmpireGovernmentStyle);
             cmbJumpStartVictoryPiratePlayStyle.SelectedIndex = startGameOptions_0.PiratePlayStyle;
