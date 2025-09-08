@@ -2079,6 +2079,7 @@ namespace DistantWorlds
             bitmap_25 = new Bitmap[num + 1];
             bitmap_26 = new Bitmap[num + 1];
             bitmap_27 = new Bitmap[num + 1];
+            ReaderWriterLockSlim[] readerWriterLockSlim = new ReaderWriterLockSlim[num + 1];
             //string empty = string.Empty;
             //string empty2 = string.Empty;
             List<Task> taskList = new List<Task>();
@@ -2094,6 +2095,7 @@ namespace DistantWorlds
                     if (bitmap_23[localI] == null)
                     {
                         bitmap_23[localI] = method_12(local1, bool_28: true);
+                        readerWriterLockSlim[localI] = new ReaderWriterLockSlim();
                     }
                     bitmap_23[localI].MakeTransparent();
                 }));
@@ -2111,7 +2113,9 @@ namespace DistantWorlds
                     }
                     if (bitmap_24[localI] == null)
                     {
+                        readerWriterLockSlim[localI].EnterWriteLock();
                         bitmap_24[localI] = new Bitmap(bitmap_23[localI]);
+                        readerWriterLockSlim[localI].ExitWriteLock();
                     }
                     bitmap_24[localI].MakeTransparent();
                 }));
@@ -2127,7 +2131,9 @@ namespace DistantWorlds
                     }
                     if (bitmap_25[localI] == null)
                     {
+                        readerWriterLockSlim[localI].EnterWriteLock();
                         bitmap_25[localI] = new Bitmap(bitmap_23[localI]);
+                        readerWriterLockSlim[localI].ExitWriteLock();
                     }
                     bitmap_25[localI].MakeTransparent();
                 }));
@@ -2143,7 +2149,9 @@ namespace DistantWorlds
                     }
                     if (bitmap_26[localI] == null)
                     {
+                        readerWriterLockSlim[localI].EnterWriteLock();
                         bitmap_26[localI] = new Bitmap(bitmap_23[localI]);
+                        readerWriterLockSlim[localI].ExitWriteLock();   
                     }
                     bitmap_26[localI].MakeTransparent();
                 }));
@@ -2159,7 +2167,9 @@ namespace DistantWorlds
                     }
                     if (bitmap_27[localI] == null)
                     {
+                        readerWriterLockSlim[localI].EnterWriteLock();
                         bitmap_27[localI] = new Bitmap(bitmap_23[localI]);
+                        readerWriterLockSlim[localI].ExitWriteLock();
                     }
                     bitmap_27[localI].MakeTransparent();
                 }));
