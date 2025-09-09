@@ -2080,6 +2080,9 @@ namespace DistantWorlds
             bitmap_26 = new Bitmap[num + 1];
             bitmap_27 = new Bitmap[num + 1];
             ReaderWriterLockSlim[] readerWriterLockSlim = new ReaderWriterLockSlim[num + 1];
+
+            for (int i = 0; i < num; i++)
+                readerWriterLockSlim[i] = new ReaderWriterLockSlim();
             //string empty = string.Empty;
             //string empty2 = string.Empty;
             List<Task> taskList = new List<Task>();
