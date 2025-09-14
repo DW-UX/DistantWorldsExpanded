@@ -41,23 +41,23 @@ namespace DistantWorlds.Types
 
         public void LeaveShipGroup()
         {
-            if (ShipGroup != null)
+            ShipGroup shipGroup = ShipGroup;
+            if (shipGroup != null)
             {
-                ShipGroup shipGroup = ShipGroup;
+                ShipGroup = null;
                 bool flag = false;
-                if (ShipGroup.LeadShip == this)
+                if (shipGroup.LeadShip == this)
                 {
                     flag = true;
                 }
-                ShipGroup.Ships.Remove(this);
-                ShipGroup = null;
+                shipGroup.Ships?.Remove(this);
                 if (flag)
                 {
                     shipGroup.Update();
                 }
                 if (shipGroup.Ships.Count <= 0)
                 {
-                    Empire.DisbandShipGroup(shipGroup);
+                    Empire?.DisbandShipGroup(shipGroup);
                 }
             }
         }

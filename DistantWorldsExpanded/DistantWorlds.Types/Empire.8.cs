@@ -5149,7 +5149,7 @@ namespace DistantWorlds.Types
                 BuiltObject builtObject = shipGroup.Ships[i];
                 builtObject.ShipGroup = null;
             }
-            shipGroup.Ships.Clear();
+            shipGroup.Ships?.Clear();
             if (ShipGroups.Contains(shipGroup))
             {
                 ShipGroups.Remove(shipGroup);
