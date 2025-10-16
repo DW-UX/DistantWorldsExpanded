@@ -101,7 +101,7 @@ Looks like original game have problem with large resolutuons. Should work now.
 # Latest beta version changes:
 1. Some UI change in start menu, adapts to resolution. Work in progres, have problem with checkboxes
 2. Bug fix for freeze during game launch
-3. Bug with music, only first song plays, problems with pause\continue. Possibly fixed in latest version
+3. New base type - Outpost, used for providing planets with bonuses from entertainment and medical modules on base without taking design slots of small,medium and large bases. Lot of restrictions on this design.
 4. State Tax upper limit set to 75% for Ai and player
 5. New tax algoritm, you can set dessired happiness bassed on colony size (“AdvMods\ExpansionMod\RepairPriorityTemplates.json”)
 6. Fixed scraping AI planetary facility playing as pirate  (you could scrap any facility after gaining 1% of control on planet)
