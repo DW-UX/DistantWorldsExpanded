@@ -103,7 +103,7 @@ Looks like original game have problem with large resolutuons. Should work now.
 2. Bug fix for freeze during game launch
 3. New base type - Outpost, used for providing planets with bonuses from entertainment and medical modules on base without taking design slots of small,medium and large bases. Lot of restrictions on this design.
 4. State Tax upper limit set to 75% for Ai and player
-5. New tax algoritm, you can set dessired happiness bassed on colony size (“AdvMods\ExpansionMod\RepairPriorityTemplates.json”)
+5. New tax algoritm, you can set dessired happiness bassed on colony size (“AdvMods\ExpansionMod\ExapnsionModSettings.json”)
 6. Fixed scraping AI planetary facility playing as pirate  (you could scrap any facility after gaining 1% of control on planet)
 7. Game editor can now colonize asteroid, still can't change pop for them
 8. Increased year limit for victory condition start and end.
@@ -111,5 +111,6 @@ Looks like original game have problem with large resolutuons. Should work now.
   - Convertion tool to convert txt files to new structure
   - New structure removes all limits on maximum count for various thing that original game have. (Government adjectives, resource needed for component, etc) 
 10. New pirate faction - Legendary pirates. Use best traits from other factions. Super pirates now use this factions on spawn.
-
+11.Save files from modded game probably not compatible with original game.
+12.Repair priority for modules (“AdvMods\ExpansionMod\GameHotKeysMappingFile.json”)
 
