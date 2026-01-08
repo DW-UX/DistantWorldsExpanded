@@ -631,9 +631,9 @@ namespace DistantWorlds {
                             typesCol[2] = luxCol;
                             foreach (var item in typesCol)
                             {
-                                if (item.Count() > 0)
+                                int max = _Game.PlayerEmpire.Research.ResolveImprovedComponentValues(item.First()).Value2;
+                                if (max > 0 && item.Count() > 0)
                                 {
-                                    int max = _Game.PlayerEmpire.Research.ResolveImprovedComponentValues(item.First()).Value2;
                                     int currentMiningValue = item.Select(x => _Game.PlayerEmpire.Research.ResolveImprovedComponentValues(x)).Sum(y => y.Value1);
                                     if (currentMiningValue > max)
                                     {
