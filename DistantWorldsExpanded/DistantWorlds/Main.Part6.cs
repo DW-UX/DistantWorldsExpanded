@@ -38,9 +38,11 @@ using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
         private void PrepareDesignForEditor()
         {
@@ -631,17 +633,20 @@ namespace DistantWorlds {
                             typesCol[2] = luxCol;
                             foreach (var item in typesCol)
                             {
-                                int max = _Game.PlayerEmpire.Research.ResolveImprovedComponentValues(item.First()).Value2;
-                                if (max > 0 && item.Count() > 0)
+                                if (item.Count() > 0)
                                 {
-                                    int currentMiningValue = item.Select(x => _Game.PlayerEmpire.Research.ResolveImprovedComponentValues(x)).Sum(y => y.Value1);
-                                    if (currentMiningValue > max)
+                                    int max = _Game.PlayerEmpire.Research.ResolveImprovedComponentValues(item.FirstOrDefault()).Value2;
+                                    if (max > 0)
                                     {
-                                        shouldDo.Add($"Current amount of {Galaxy.ResolveDescription(item.First().Type)} is above mining limit of {max}");
-                                    }
-                                    else if (currentMiningValue < max)
-                                    {
-                                        shouldDo.Add($"Current amount of {Galaxy.ResolveDescription(item.First().Type)} is below mining limit of {max}");
+                                        int currentMiningValue = item.Select(x => _Game.PlayerEmpire.Research.ResolveImprovedComponentValues(x)).Sum(y => y.Value1);
+                                        if (currentMiningValue > max)
+                                        {
+                                            shouldDo.Add($"Current amount of {Galaxy.ResolveDescription(item.First().Type)} is above mining limit of {max}");
+                                        }
+                                        else if (currentMiningValue < max)
+                                        {
+                                            shouldDo.Add($"Current amount of {Galaxy.ResolveDescription(item.First().Type)} is below mining limit of {max}");
+                                        }
                                     }
                                 }
                             }
@@ -5095,6 +5100,6 @@ namespace DistantWorlds {
         }
 
 
-  }
+    }
 
 }
