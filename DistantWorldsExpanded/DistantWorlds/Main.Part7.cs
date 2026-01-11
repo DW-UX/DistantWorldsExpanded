@@ -396,6 +396,27 @@ namespace DistantWorlds
                     {
                         switch (shipAction_1.ActionType)
                         {
+                            case ShipActionType.TransferToPrivateSector:
+                                {
+                                    if (!(shipAction_1.Target is BuiltObject))
+                                    {
+                                        break;
+                                    }
+                                    BuiltObject builtObject5 = (BuiltObject)shipAction_1.Target;
+                                    if (!builtObject5.Empire.PrivateBuiltObjects.Contains(builtObject5))
+                                    {
+                                        builtObject5.IsAutoControlled = true;
+                                        builtObject5.Empire.PrivateBuiltObjects.Add(builtObject5);
+                                        builtObject5.Empire.BuiltObjects.Remove(builtObject5);
+                                        builtObject5.Owner = null;
+                                        if (_Game.SelectedObject == builtObject5)
+                                        {
+                                            method_208(null);
+                                        }
+                                        return;
+                                    }
+                                }
+                                break;
                             case ShipActionType.GiveBuiltObject:
                                 {
                                     if (!(shipAction_1.Target is BuiltObject))

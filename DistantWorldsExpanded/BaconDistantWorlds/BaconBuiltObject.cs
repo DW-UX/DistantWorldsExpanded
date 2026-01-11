@@ -830,7 +830,20 @@ namespace BaconDistantWorlds
             num = 1;
         label_5:
             if (num != 0 || shipOrFighter is ShipGroup && (shipOrFighter as ShipGroup).Ships[0].Empire != main._Game.PlayerEmpire || shipOrFighter is BuiltObjectList && (shipOrFighter as BuiltObjectList)[0].Empire != main._Game.PlayerEmpire || shipOrFighter is StellarObject && (shipOrFighter as StellarObject).Empire != main._Game.PlayerEmpire)
-                return;
+              {
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+                messageBox.Text = "Selected ship can't use that command. Command can only be applied to single ship or baseof your empire";
+                messageBox.Caption = "Wrong target for command";
+                messageBox.AddButton(MessageBoxExButtons.Ok);
+                messageBox.Icon = MessageBoxExIcon.None;
+                bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                    main._Game.Galaxy.Pause();
+                messageBox.Show();
+                if (!flag)
+                    main._Game.Galaxy.Resume();
+                return; 
+            }
             switch (shipOrFighter)
             {
                 case BuiltObject builtObject:
@@ -935,10 +948,36 @@ namespace BaconDistantWorlds
         public static void TransferFighter(Main main, object fighterOrShip)
         {
             if (!(fighterOrShip is Fighter) && !(fighterOrShip is BuiltObject) || BaconBuiltObject.fighterTarget == null || !(BaconBuiltObject.fighterTarget is BuiltObject) || (BaconBuiltObject.fighterTarget as BuiltObject).ActualEmpire != main._Game.PlayerEmpire)
+            {
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+                messageBox.Text = "Selected ship can't use that command. Selected ship must be fighter/bomber and target set to other carrier.";
+                messageBox.Caption = "Wrong target for command";
+                messageBox.AddButton(MessageBoxExButtons.Ok);
+                messageBox.Icon = MessageBoxExIcon.None;
+                bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                    main._Game.Galaxy.Pause();
+                messageBox.Show();
+                if (!flag)
+                    main._Game.Galaxy.Resume();
                 return;
+            }
             BuiltObject fighterTarget = BaconBuiltObject.fighterTarget as BuiltObject;
             if (fighterTarget.Fighters == null || fighterTarget.FighterRepairRate <= 0)
+            {
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+                messageBox.Text = "Selected ship can't use that command. Target carrier can't transfer in fighters/bombers";
+                messageBox.Caption = "Wrong target for command";
+                messageBox.AddButton(MessageBoxExButtons.Ok);
+                messageBox.Icon = MessageBoxExIcon.None;
+                bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                    main._Game.Galaxy.Pause();
+                messageBox.Show();
+                if (!flag)
+                    main._Game.Galaxy.Resume();
                 return;
+            }
             List<Fighter> source = new List<Fighter>();
             if (fighterOrShip is Fighter && (fighterOrShip as Fighter).Empire == main._Game.PlayerEmpire)
                 source.Add(fighterOrShip as Fighter);

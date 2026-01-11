@@ -1333,6 +1333,8 @@ namespace DistantWorlds.Types
             for (int j = 0; j < builtObjectList.Count; j++)
             {
                 BuiltObject builtObject = builtObjectList[j];
+                if (builtObject == null)
+                    continue;
                 if (builtObject.SubRole == BuiltObjectSubRole.GasMiningStation || builtObject.SubRole == BuiltObjectSubRole.MiningStation)
                 {
                     if (builtObject.ParentHabitat == null)

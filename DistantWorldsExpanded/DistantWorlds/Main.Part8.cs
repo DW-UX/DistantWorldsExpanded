@@ -1581,6 +1581,12 @@ namespace DistantWorlds
                         toolStripMenuItem.DropDownItems.Add(toolStripMenuItem2);
                     }
                 }
+                if(builtObject_8.Role == BuiltObjectRole.Freight|| builtObject_8.Role == BuiltObjectRole.Passenger|| (builtObject_8.Role == BuiltObjectRole.Resource && builtObject_8.SubRole != BuiltObjectSubRole.ResupplyShip) && !builtObject_8.Empire.PrivateBuiltObjects.Contains(builtObject_8))
+                {
+                    ShipAction shipAction = new ShipAction(ShipActionType.TransferToPrivateSector, builtObject_8);
+                    ToolStripMenuItem toolStripMenuItem2 = method_311("Private sector", "Private sector", shipAction, bool_28: true);
+                    toolStripMenuItem.DropDownItems.Add(toolStripMenuItem2);
+                }
             }
             return toolStripMenuItem;
         }
