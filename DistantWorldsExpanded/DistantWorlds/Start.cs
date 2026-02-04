@@ -1422,6 +1422,8 @@ namespace DistantWorlds
                 Main.CrashDump(ex);
                 throw;
             }
+            //Class5._sw.Stop();
+            //MessageBox.Show(this, Class5._sw.Elapsed.ToString());
         }
 
         private void Start_Shown(object sender, EventArgs e)

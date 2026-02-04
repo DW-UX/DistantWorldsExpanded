@@ -95,65 +95,70 @@ namespace DistantWorlds.Types
                                     int num4 = str1.IndexOf(",", startIndex3);
                                     if (num4 < 0)
                                         throw new ApplicationException("Could not read Type at line " + num1.ToString() + " of file " + filePath);
-                                    int result8;
-                                    if (!int.TryParse(str1.Substring(startIndex3, num4 - startIndex3).Trim(), out result8))
+                                    byte result8;
+                                    if (!byte.TryParse(str1.Substring(startIndex3, num4 - startIndex3).Trim(), out result8))
                                         throw new ApplicationException("Could not read Type at line " + num1.ToString() + " of file " + filePath);
-                                    switch (result8)
-                                    {
-                                        case 0:
-                                            type = PlanetaryFacilityType.TroopTrainingCenter;
-                                            break;
-                                        case 1:
-                                            type = PlanetaryFacilityType.RoboticTroopFoundry;
-                                            break;
-                                        case 2:
-                                            type = PlanetaryFacilityType.CloningFacility;
-                                            break;
-                                        case 3:
-                                            type = PlanetaryFacilityType.PlanetaryShield;
-                                            break;
-                                        case 4:
-                                            type = PlanetaryFacilityType.IonCannon;
-                                            break;
-                                        case 5:
-                                            type = PlanetaryFacilityType.RegionalCapital;
-                                            break;
-                                        case 6:
-                                            type = PlanetaryFacilityType.FortifiedBunker;
-                                            break;
-                                        case 7:
-                                            type = PlanetaryFacilityType.TerraformingFacility;
-                                            break;
-                                        case 8:
-                                            type = PlanetaryFacilityType.Wonder;
-                                            break;
-                                        case 9:
-                                            type = PlanetaryFacilityType.PirateBase;
-                                            break;
-                                        case 10:
-                                            type = PlanetaryFacilityType.PirateFortress;
-                                            break;
-                                        case 11:
-                                            type = PlanetaryFacilityType.ArmoredFactory;
-                                            break;
-                                        case 12:
-                                            type = PlanetaryFacilityType.SpyAcademy;
-                                            break;
-                                        case 13:
-                                            type = PlanetaryFacilityType.ScienceAcademy;
-                                            break;
-                                        case 14:
-                                            type = PlanetaryFacilityType.NavalAcademy;
-                                            break;
-                                        case 15:
-                                            type = PlanetaryFacilityType.MilitaryAcademy;
-                                            break;
-                                        case 16:
-                                            type = PlanetaryFacilityType.PirateCriminalNetwork;
-                                            break;
-                                        default:
-                                            throw new ApplicationException("Invalid Type at line " + num1.ToString() + " of file " + filePath);
-                                    }
+                                    result8 += 1;
+                                    if (!Enum.IsDefined(typeof(PlanetaryFacilityType), result8))
+                                        throw new ApplicationException("Invalid Type at line " + num1.ToString() + " of file " + filePath);
+                                    type = (PlanetaryFacilityType)Enum.Parse(typeof(PlanetaryFacilityType), result8.ToString());
+
+                                    //switch (result8)
+                                    //{
+                                    //    case 0:
+                                    //        type = PlanetaryFacilityType.TroopTrainingCenter;
+                                    //        break;
+                                    //    case 1:
+                                    //        type = PlanetaryFacilityType.RoboticTroopFoundry;
+                                    //        break;
+                                    //    case 2:
+                                    //        type = PlanetaryFacilityType.CloningFacility;
+                                    //        break;
+                                    //    case 3:
+                                    //        type = PlanetaryFacilityType.PlanetaryShield;
+                                    //        break;
+                                    //    case 4:
+                                    //        type = PlanetaryFacilityType.IonCannon;
+                                    //        break;
+                                    //    case 5:
+                                    //        type = PlanetaryFacilityType.RegionalCapital;
+                                    //        break;
+                                    //    case 6:
+                                    //        type = PlanetaryFacilityType.FortifiedBunker;
+                                    //        break;
+                                    //    case 7:
+                                    //        type = PlanetaryFacilityType.TerraformingFacility;
+                                    //        break;
+                                    //    case 8:
+                                    //        type = PlanetaryFacilityType.Wonder;
+                                    //        break;
+                                    //    case 9:
+                                    //        type = PlanetaryFacilityType.PirateBase;
+                                    //        break;
+                                    //    case 10:
+                                    //        type = PlanetaryFacilityType.PirateFortress;
+                                    //        break;
+                                    //    case 11:
+                                    //        type = PlanetaryFacilityType.ArmoredFactory;
+                                    //        break;
+                                    //    case 12:
+                                    //        type = PlanetaryFacilityType.SpyAcademy;
+                                    //        break;
+                                    //    case 13:
+                                    //        type = PlanetaryFacilityType.ScienceAcademy;
+                                    //        break;
+                                    //    case 14:
+                                    //        type = PlanetaryFacilityType.NavalAcademy;
+                                    //        break;
+                                    //    case 15:
+                                    //        type = PlanetaryFacilityType.MilitaryAcademy;
+                                    //        break;
+                                    //    case 16:
+                                    //        type = PlanetaryFacilityType.PirateCriminalNetwork;
+                                    //        break;
+                                    //    default:
+                                    //        throw new ApplicationException("Invalid Type at line " + num1.ToString() + " of file " + filePath);
+                                    //}
                                     startIndex4 = num4 + 1;
                                 }
                                 catch
@@ -167,53 +172,58 @@ namespace DistantWorlds.Types
                                     int num5 = str1.IndexOf(",", startIndex4);
                                     if (num5 < 0)
                                         throw new ApplicationException("Could not read WonderType at line " + num1.ToString() + " of file " + filePath);
-                                    int result9;
-                                    if (!int.TryParse(str1.Substring(startIndex4, num5 - startIndex4).Trim(), out result9))
+                                    byte result9;
+                                    if (!byte.TryParse(str1.Substring(startIndex4, num5 - startIndex4).Trim(), out result9))
                                         throw new ApplicationException("Could not read WonderType at line " + num1.ToString() + " of file " + filePath);
-                                    switch (result9)
-                                    {
-                                        case 0:
-                                            wonderType = WonderType.Undefined;
-                                            break;
-                                        case 1:
-                                            wonderType = WonderType.EmpirePopulationGrowth;
-                                            break;
-                                        case 2:
-                                            wonderType = WonderType.EmpireHappiness;
-                                            break;
-                                        case 3:
-                                            wonderType = WonderType.EmpireResearchWeapons;
-                                            break;
-                                        case 4:
-                                            wonderType = WonderType.EmpireResearchEnergy;
-                                            break;
-                                        case 5:
-                                            wonderType = WonderType.EmpireResearchHighTech;
-                                            break;
-                                        case 6:
-                                            wonderType = WonderType.EmpireIncome;
-                                            break;
-                                        case 7:
-                                            wonderType = WonderType.ColonyPopulationGrowth;
-                                            break;
-                                        case 8:
-                                            wonderType = WonderType.ColonyHappiness;
-                                            break;
-                                        case 9:
-                                            wonderType = WonderType.ColonyDefense;
-                                            break;
-                                        case 10:
-                                            wonderType = WonderType.ColonyConstructionSpeed;
-                                            break;
-                                        case 11:
-                                            wonderType = WonderType.ColonyIncome;
-                                            break;
-                                        case 12:
-                                            wonderType = WonderType.RaceAchievement;
-                                            break;
-                                        default:
-                                            throw new ApplicationException("Invalid WonderType at line " + num1.ToString() + " of file " + filePath);
-                                    }
+
+                                    if (!Enum.IsDefined(typeof(WonderType), result9))
+                                        throw new ApplicationException("Invalid WonderType at line " + num1.ToString() + " of file " + filePath);
+                                    wonderType = (WonderType)Enum.Parse(typeof(WonderType), result9.ToString());
+
+                                    //switch (result9)
+                                    //{
+                                    //    case 0:
+                                    //        wonderType = WonderType.Undefined;
+                                    //        break;
+                                    //    case 1:
+                                    //        wonderType = WonderType.EmpirePopulationGrowth;
+                                    //        break;
+                                    //    case 2:
+                                    //        wonderType = WonderType.EmpireHappiness;
+                                    //        break;
+                                    //    case 3:
+                                    //        wonderType = WonderType.EmpireResearchWeapons;
+                                    //        break;
+                                    //    case 4:
+                                    //        wonderType = WonderType.EmpireResearchEnergy;
+                                    //        break;
+                                    //    case 5:
+                                    //        wonderType = WonderType.EmpireResearchHighTech;
+                                    //        break;
+                                    //    case 6:
+                                    //        wonderType = WonderType.EmpireIncome;
+                                    //        break;
+                                    //    case 7:
+                                    //        wonderType = WonderType.ColonyPopulationGrowth;
+                                    //        break;
+                                    //    case 8:
+                                    //        wonderType = WonderType.ColonyHappiness;
+                                    //        break;
+                                    //    case 9:
+                                    //        wonderType = WonderType.ColonyDefense;
+                                    //        break;
+                                    //    case 10:
+                                    //        wonderType = WonderType.ColonyConstructionSpeed;
+                                    //        break;
+                                    //    case 11:
+                                    //        wonderType = WonderType.ColonyIncome;
+                                    //        break;
+                                    //    case 12:
+                                    //        wonderType = WonderType.RaceAchievement;
+                                    //        break;
+                                    //    default:
+                                    //        throw new ApplicationException("Invalid WonderType at line " + num1.ToString() + " of file " + filePath);
+                                    //}
                                     startIndex5 = num5 + 1;
                                 }
                                 catch
@@ -357,111 +367,122 @@ namespace DistantWorlds.Types
                     if (string.IsNullOrWhiteSpace(name))
                         throw new ApplicationException($"Could not read Name at {id}");
 
-                    PlanetaryFacilityType type;
-                    int typeVal = reader.GetInt32(reader.GetOrdinal("Type"));
-                    switch (typeVal)
-                    {
-                        case 0:
-                            type = PlanetaryFacilityType.TroopTrainingCenter;
-                            break;
-                        case 1:
-                            type = PlanetaryFacilityType.RoboticTroopFoundry;
-                            break;
-                        case 2:
-                            type = PlanetaryFacilityType.CloningFacility;
-                            break;
-                        case 3:
-                            type = PlanetaryFacilityType.PlanetaryShield;
-                            break;
-                        case 4:
-                            type = PlanetaryFacilityType.IonCannon;
-                            break;
-                        case 5:
-                            type = PlanetaryFacilityType.RegionalCapital;
-                            break;
-                        case 6:
-                            type = PlanetaryFacilityType.FortifiedBunker;
-                            break;
-                        case 7:
-                            type = PlanetaryFacilityType.TerraformingFacility;
-                            break;
-                        case 8:
-                            type = PlanetaryFacilityType.Wonder;
-                            break;
-                        case 9:
-                            type = PlanetaryFacilityType.PirateBase;
-                            break;
-                        case 10:
-                            type = PlanetaryFacilityType.PirateFortress;
-                            break;
-                        case 11:
-                            type = PlanetaryFacilityType.ArmoredFactory;
-                            break;
-                        case 12:
-                            type = PlanetaryFacilityType.SpyAcademy;
-                            break;
-                        case 13:
-                            type = PlanetaryFacilityType.ScienceAcademy;
-                            break;
-                        case 14:
-                            type = PlanetaryFacilityType.NavalAcademy;
-                            break;
-                        case 15:
-                            type = PlanetaryFacilityType.MilitaryAcademy;
-                            break;
-                        case 16:
-                            type = PlanetaryFacilityType.PirateCriminalNetwork;
-                            break;
-                        default:
-                            throw new ApplicationException($"Invalid Type at ID {id} at Facility");
-                    }
+                    //PlanetaryFacilityType type;
+                    //int typeVal = reader.GetInt32(reader.GetOrdinal("Type"));
+                    //switch (typeVal)
+                    //{
+                    //    case 0:
+                    //        type = PlanetaryFacilityType.TroopTrainingCenter;
+                    //        break;
+                    //    case 1:
+                    //        type = PlanetaryFacilityType.RoboticTroopFoundry;
+                    //        break;
+                    //    case 2:
+                    //        type = PlanetaryFacilityType.CloningFacility;
+                    //        break;
+                    //    case 3:
+                    //        type = PlanetaryFacilityType.PlanetaryShield;
+                    //        break;
+                    //    case 4:
+                    //        type = PlanetaryFacilityType.IonCannon;
+                    //        break;
+                    //    case 5:
+                    //        type = PlanetaryFacilityType.RegionalCapital;
+                    //        break;
+                    //    case 6:
+                    //        type = PlanetaryFacilityType.FortifiedBunker;
+                    //        break;
+                    //    case 7:
+                    //        type = PlanetaryFacilityType.TerraformingFacility;
+                    //        break;
+                    //    case 8:
+                    //        type = PlanetaryFacilityType.Wonder;
+                    //        break;
+                    //    case 9:
+                    //        type = PlanetaryFacilityType.PirateBase;
+                    //        break;
+                    //    case 10:
+                    //        type = PlanetaryFacilityType.PirateFortress;
+                    //        break;
+                    //    case 11:
+                    //        type = PlanetaryFacilityType.ArmoredFactory;
+                    //        break;
+                    //    case 12:
+                    //        type = PlanetaryFacilityType.SpyAcademy;
+                    //        break;
+                    //    case 13:
+                    //        type = PlanetaryFacilityType.ScienceAcademy;
+                    //        break;
+                    //    case 14:
+                    //        type = PlanetaryFacilityType.NavalAcademy;
+                    //        break;
+                    //    case 15:
+                    //        type = PlanetaryFacilityType.MilitaryAcademy;
+                    //        break;
+                    //    case 16:
+                    //        type = PlanetaryFacilityType.PirateCriminalNetwork;
+                    //        break;
+                    //    default:
+                    //        throw new ApplicationException($"Invalid Type at ID {id} at Facility");
+                    //}
 
-                    WonderType wonderType;
-                    int wonderTypeVal = reader.GetInt32(reader.GetOrdinal("WonderType"));
-                    switch (wonderTypeVal)
-                    {
-                        case 0:
-                            wonderType = WonderType.Undefined;
-                            break;
-                        case 1:
-                            wonderType = WonderType.EmpirePopulationGrowth;
-                            break;
-                        case 2:
-                            wonderType = WonderType.EmpireHappiness;
-                            break;
-                        case 3:
-                            wonderType = WonderType.EmpireResearchWeapons;
-                            break;
-                        case 4:
-                            wonderType = WonderType.EmpireResearchEnergy;
-                            break;
-                        case 5:
-                            wonderType = WonderType.EmpireResearchHighTech;
-                            break;
-                        case 6:
-                            wonderType = WonderType.EmpireIncome;
-                            break;
-                        case 7:
-                            wonderType = WonderType.ColonyPopulationGrowth;
-                            break;
-                        case 8:
-                            wonderType = WonderType.ColonyHappiness;
-                            break;
-                        case 9:
-                            wonderType = WonderType.ColonyDefense;
-                            break;
-                        case 10:
-                            wonderType = WonderType.ColonyConstructionSpeed;
-                            break;
-                        case 11:
-                            wonderType = WonderType.ColonyIncome;
-                            break;
-                        case 12:
-                            wonderType = WonderType.RaceAchievement;
-                            break;
-                        default:
-                            throw new ApplicationException($"Invalid WonderType at ID {id} at Facility");
-                    }
+                    byte typeVal = (byte)reader.GetInt32(reader.GetOrdinal("Type"));
+                    if (!Enum.IsDefined(typeof(PlanetaryFacilityType), typeVal))
+                        throw new ApplicationException($"Invalid Type at ID {id} at Facility");
+                    PlanetaryFacilityType type = (PlanetaryFacilityType)Enum.Parse(typeof(PlanetaryFacilityType), typeVal.ToString());
+
+                    byte wonderTypeVal = (byte)reader.GetInt32(reader.GetOrdinal("WonderType"));
+                    if (!Enum.IsDefined(typeof(WonderType), wonderTypeVal))
+                        throw new ApplicationException($"Invalid WonderType at ID {id} at Facility");
+                    WonderType wonderType = (WonderType)Enum.Parse(typeof(WonderType), wonderTypeVal.ToString());
+
+
+                    //WonderType wonderType;
+                    //int wonderTypeVal = reader.GetInt32(reader.GetOrdinal("WonderType"));
+                    //switch (wonderTypeVal)
+                    //{
+                    //    case 0:
+                    //        wonderType = WonderType.Undefined;
+                    //        break;
+                    //    case 1:
+                    //        wonderType = WonderType.EmpirePopulationGrowth;
+                    //        break;
+                    //    case 2:
+                    //        wonderType = WonderType.EmpireHappiness;
+                    //        break;
+                    //    case 3:
+                    //        wonderType = WonderType.EmpireResearchWeapons;
+                    //        break;
+                    //    case 4:
+                    //        wonderType = WonderType.EmpireResearchEnergy;
+                    //        break;
+                    //    case 5:
+                    //        wonderType = WonderType.EmpireResearchHighTech;
+                    //        break;
+                    //    case 6:
+                    //        wonderType = WonderType.EmpireIncome;
+                    //        break;
+                    //    case 7:
+                    //        wonderType = WonderType.ColonyPopulationGrowth;
+                    //        break;
+                    //    case 8:
+                    //        wonderType = WonderType.ColonyHappiness;
+                    //        break;
+                    //    case 9:
+                    //        wonderType = WonderType.ColonyDefense;
+                    //        break;
+                    //    case 10:
+                    //        wonderType = WonderType.ColonyConstructionSpeed;
+                    //        break;
+                    //    case 11:
+                    //        wonderType = WonderType.ColonyIncome;
+                    //        break;
+                    //    case 12:
+                    //        wonderType = WonderType.RaceAchievement;
+                    //        break;
+                    //    default:
+                    //        throw new ApplicationException($"Invalid WonderType at ID {id} at Facility");
+                    //}
 
                     int pictureRef = reader.GetInt32(reader.GetOrdinal("PictureRef"));
                     if (pictureRef < 0)

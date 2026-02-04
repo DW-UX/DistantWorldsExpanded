@@ -725,6 +725,11 @@ namespace DistantWorlds.Types
                     descriptions[2] = TextResolver.GetText("Facility Maintenance Cost");
                     values[2] = planetaryFacility.Maintenance.ToString("#,###,##0") + " " + TextResolver.GetText("credits");
                     break;
+                case PlanetaryFacilityType.DiplomacyAcademy:
+                    descriptions[1] = planetaryFacility.Description;
+                    descriptions[2] = TextResolver.GetText("Facility Maintenance Cost");
+                    values[2] = planetaryFacility.Maintenance.ToString("#,###,##0") + " " + TextResolver.GetText("credits");
+                    break;
                 case PlanetaryFacilityType.ScienceAcademy:
                     descriptions[1] = planetaryFacility.Description;
                     descriptions[2] = TextResolver.GetText("Facility Maintenance Cost");

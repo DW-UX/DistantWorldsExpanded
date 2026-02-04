@@ -8,26 +8,27 @@ using System;
 
 namespace DistantWorlds.Types
 {
-  [Serializable]
-  public enum PlanetaryFacilityType : byte
-  {
-    Undefined,
-    TroopTrainingCenter,
-    RoboticTroopFoundry,
-    CloningFacility,
-    PlanetaryShield,
-    IonCannon,
-    RegionalCapital,
-    FortifiedBunker,
-    TerraformingFacility,
-    Wonder,
-    PirateBase,
-    PirateFortress,
-    ArmoredFactory,
-    MilitaryAcademy,
-    SpyAcademy,
-    NavalAcademy,
-    ScienceAcademy,
-    PirateCriminalNetwork,
-  }
+    [Serializable]
+    public enum PlanetaryFacilityType : byte
+    {
+        Undefined,
+        TroopTrainingCenter,
+        RoboticTroopFoundry,
+        CloningFacility,
+        PlanetaryShield,
+        IonCannon,
+        RegionalCapital,
+        FortifiedBunker,
+        TerraformingFacility,
+        Wonder,
+        PirateBase,
+        PirateFortress,
+        ArmoredFactory,
+        MilitaryAcademy,
+        SpyAcademy,
+        NavalAcademy,
+        ScienceAcademy,
+        PirateCriminalNetwork,
+        DiplomacyAcademy,
+    }
 }

@@ -39,9 +39,11 @@ using ExpansionMod.Objects;
 using System.Collections.Concurrent;
 using DistantWorlds.DBLoader;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
 
         internal void LoadEffectsWeapons(string string_30, string string_31)
@@ -5110,6 +5112,6 @@ namespace DistantWorlds {
         }
 
 
-  }
+    }
 
 }

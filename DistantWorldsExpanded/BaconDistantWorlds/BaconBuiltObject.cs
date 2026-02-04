@@ -832,7 +832,7 @@ namespace BaconDistantWorlds
             if (num != 0 || shipOrFighter is ShipGroup && (shipOrFighter as ShipGroup).Ships[0].Empire != main._Game.PlayerEmpire || shipOrFighter is BuiltObjectList && (shipOrFighter as BuiltObjectList)[0].Empire != main._Game.PlayerEmpire || shipOrFighter is StellarObject && (shipOrFighter as StellarObject).Empire != main._Game.PlayerEmpire)
               {
                 MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
-                messageBox.Text = "Selected ship can't use that command. Command can only be applied to single ship or baseof your empire";
+                messageBox.Text = "Selected ship can't use that command. Command can only be applied to single ship or base of your empire";
                 messageBox.Caption = "Wrong target for command";
                 messageBox.AddButton(MessageBoxExButtons.Ok);
                 messageBox.Icon = MessageBoxExIcon.None;

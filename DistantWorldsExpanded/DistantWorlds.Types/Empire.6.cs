@@ -1312,9 +1312,9 @@ namespace DistantWorlds.Types
         public int CountResourceSupplyLocations(byte resourceId, bool includeIndependentColonies)
         {
             int num = 0;
-            BuiltObjectList builtObjectList = new BuiltObjectList();
-            builtObjectList.AddRange(BuiltObjects);
-            builtObjectList.AddRange(PrivateBuiltObjects);
+            BuiltObjectList builtObjectList = new BuiltObjectList();            
+            builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjects));
+            builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(PrivateBuiltObjects));
             for (int i = 0; i < Colonies.Count; i++)
             {
                 Habitat habitat = Colonies[i];
@@ -4049,10 +4049,12 @@ namespace DistantWorlds.Types
             double num12 = Math.Min(2.0, 1.0 + (double)CumulateFacilityValue1(PlanetaryFacilityType.NavalAcademy, mustBeCompleted: true) / 100.0);
             double num13 = Math.Min(2.0, 1.0 + (double)CumulateFacilityValue1(PlanetaryFacilityType.ScienceAcademy, mustBeCompleted: true) / 100.0);
             double num14 = Math.Min(2.0, 1.0 + (double)CumulateFacilityValue1(PlanetaryFacilityType.SpyAcademy, mustBeCompleted: true) / 100.0);
+            double numDipAcad = Math.Min(2.0, 1.0 + (double)CumulateFacilityValue1(PlanetaryFacilityType.DiplomacyAcademy, mustBeCompleted: true) / 100.0);
             num7 *= num11;
             num6 *= num12;
             num8 *= num13;
             num9 *= num14;
+            num4 *= numDipAcad;
             int num15 = 0;
             num15 = ((PirateEmpireBaseHabitat != null) ? Characters.CountCharactersByRole(CharacterRole.PirateLeader) : Characters.CountCharactersByRole(CharacterRole.Leader));
             if (num15 > 0)

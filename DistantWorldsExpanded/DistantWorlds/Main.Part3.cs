@@ -4016,6 +4016,7 @@ namespace DistantWorlds
             empirePolicy.ColonyFacilityPopulationThresholdTerraformingFacility = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdTerraformingFacility");
             empirePolicy.ColonyFacilityPopulationThresholdArmoredFactory = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdArmoredFactory");
             empirePolicy.ColonyFacilityPopulationThresholdSpyAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdSpyAcademy");
+            empirePolicy.ColonyFacilityPopulationThresholdDiplomacyAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdDiplomacyAcademy");
             empirePolicy.ColonyFacilityPopulationThresholdScienceAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdScienceAcademy");
             empirePolicy.ColonyFacilityPopulationThresholdNavalAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdNavalAcademy");
             empirePolicy.ColonyFacilityPopulationThresholdMilitaryAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdMilitaryAcademy");
@@ -4057,6 +4058,7 @@ namespace DistantWorlds
             empirePolicy.ColonyAllowFacilityTerraformingFacility = method_603(panel_1, "ColonyAllowFacilityTerraformingFacility");
             empirePolicy.ColonyAllowFacilityArmoredFactory = method_603(panel_1, "ColonyAllowFacilityArmoredFactory");
             empirePolicy.ColonyAllowFacilitySpyAcademy = method_603(panel_1, "ColonyAllowFacilitySpyAcademy");
+            empirePolicy.ColonyAllowFacilityDiplomacyAcademy = method_603(panel_1, "ColonyAllowFacilityDiplomacyAcademy");
             empirePolicy.ColonyAllowFacilityScienceAcademy = method_603(panel_1, "ColonyAllowFacilityScienceAcademy");
             empirePolicy.ColonyAllowFacilityNavalAcademy = method_603(panel_1, "ColonyAllowFacilityNavalAcademy");
             empirePolicy.ColonyAllowFacilityMilitaryAcademy = method_603(panel_1, "ColonyAllowFacilityMilitaryAcademy");
@@ -4753,6 +4755,7 @@ namespace DistantWorlds
                 method_624(panel_1, int_, "ColonyAllowFacilityGiantIonCannon", TextResolver.GetText("Allow building facility: Giant Ion Cannon"), "", empirePolicy_0.ColonyAllowFacilityGiantIonCannon, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilityNavalAcademy", TextResolver.GetText("Allow building facility: Naval Academy"), "", empirePolicy_0.ColonyAllowFacilityNavalAcademy, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilitySpyAcademy", TextResolver.GetText("Allow building facility: Spy Academy"), "", empirePolicy_0.ColonyAllowFacilitySpyAcademy, ref num);
+                method_624(panel_1, int_, "ColonyAllowFacilityDiplomacyAcademy", TextResolver.GetText("Allow building facility: Diplomacy Academy"), "", empirePolicy_0.ColonyAllowFacilityDiplomacyAcademy, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilityScienceAcademy", TextResolver.GetText("Allow building facility: Science Academy"), "", empirePolicy_0.ColonyAllowFacilityScienceAcademy, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilityTerraformingFacility", TextResolver.GetText("Allow building facility: Terraforming Facility"), "", empirePolicy_0.ColonyAllowFacilityTerraformingFacility, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilityRegionalCapital", TextResolver.GetText("Allow building facility: Regional Capital"), "", empirePolicy_0.ColonyAllowFacilityRegionalCapital, ref num);
@@ -4766,6 +4769,7 @@ namespace DistantWorlds
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdGiantIonCannon", TextResolver.GetText("Do not build Giant Ion Cannon until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdGiantIonCannon, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdNavalAcademy", TextResolver.GetText("Do not build Naval Academy until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdNavalAcademy, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdSpyAcademy", TextResolver.GetText("Do not build Spy Academy until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdSpyAcademy, ref num);
+                method_625(panel_1, int_, "ColonyFacilityPopulationThresholdDiplomacyAcademy", "Do not build Diplomacy Academy until population reaches", "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdDiplomacyAcademy, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdScienceAcademy", TextResolver.GetText("Do not build Science Academy until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdScienceAcademy, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdTerraformingFacility", TextResolver.GetText("Do not build Terraforming Facility until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdTerraformingFacility, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdRegionalCapital", TextResolver.GetText("Do not build Regional Capital until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdRegionalCapital, ref num);

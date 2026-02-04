@@ -44,6 +44,8 @@ namespace DistantWorlds.Types
         public bool ColonyAllowFacilityArmoredFactory = true;
         public bool ColonyAllowFacilityMilitaryAcademy = true;
         public bool ColonyAllowFacilitySpyAcademy = true;
+        [OptionalField]
+        public bool ColonyAllowFacilityDiplomacyAcademy = true;
         public bool ColonyAllowFacilityNavalAcademy = true;
         public bool ColonyAllowFacilityScienceAcademy = true;
         public int ColonyFacilityPopulationThresholdTroopTrainingCenter = 500;
@@ -57,6 +59,8 @@ namespace DistantWorlds.Types
         public int ColonyFacilityPopulationThresholdArmoredFactory = 500;
         public int ColonyFacilityPopulationThresholdMilitaryAcademy = 2000;
         public int ColonyFacilityPopulationThresholdSpyAcademy = 2000;
+        [OptionalField]
+        public int ColonyFacilityPopulationThresholdDiplomacyAcademy = 2000;
         public int ColonyFacilityPopulationThresholdNavalAcademy = 5000;
         public int ColonyFacilityPopulationThresholdScienceAcademy = 5000;
         public int ColonyTaxRateSmallColony;
@@ -274,6 +278,7 @@ namespace DistantWorlds.Types
                 this.ColonyAllowFacilityTroopTrainingCenter = reader.GetBoolean(reader.GetOrdinal("ColonyAllowFacilityTroopTrainingCenter"));
                 this.ColonyAllowFacilityArmoredFactory = reader.GetBoolean(reader.GetOrdinal("ColonyAllowFacilityArmoredFactory"));
                 this.ColonyAllowFacilitySpyAcademy = reader.GetBoolean(reader.GetOrdinal("ColonyAllowFacilitySpyAcademy"));
+                this.ColonyAllowFacilityDiplomacyAcademy = reader.GetBoolean(reader.GetOrdinal("ColonyAllowFacilityDiplomacyAcademy"));
                 this.ColonyAllowFacilityScienceAcademy = reader.GetBoolean(reader.GetOrdinal("ColonyAllowFacilityScienceAcademy"));
                 this.ColonyAllowFacilityNavalAcademy = reader.GetBoolean(reader.GetOrdinal("ColonyAllowFacilityNavalAcademy"));
                 this.ColonyAllowFacilityMilitaryAcademy = reader.GetBoolean(reader.GetOrdinal("ColonyAllowFacilityMilitaryAcademy"));
@@ -290,6 +295,7 @@ namespace DistantWorlds.Types
                 this.ColonyFacilityPopulationThresholdTroopTrainingCenter = reader.GetInt32(reader.GetOrdinal("ColonyFacilityPopulationThresholdTroopTrainingCenter"));
                 this.ColonyFacilityPopulationThresholdArmoredFactory = reader.GetInt32(reader.GetOrdinal("ColonyFacilityPopulationThresholdArmoredFactory"));
                 this.ColonyFacilityPopulationThresholdSpyAcademy = reader.GetInt32(reader.GetOrdinal("ColonyFacilityPopulationThresholdSpyAcademy"));
+                this.ColonyFacilityPopulationThresholdDiplomacyAcademy = reader.GetInt32(reader.GetOrdinal("ColonyFacilityPopulationThresholdDiplomacyAcademy"));
                 this.ColonyFacilityPopulationThresholdScienceAcademy = reader.GetInt32(reader.GetOrdinal("ColonyFacilityPopulationThresholdScienceAcademy"));
                 this.ColonyFacilityPopulationThresholdNavalAcademy = reader.GetInt32(reader.GetOrdinal("ColonyFacilityPopulationThresholdNavalAcademy"));
                 this.ColonyFacilityPopulationThresholdMilitaryAcademy = reader.GetInt32(reader.GetOrdinal("ColonyFacilityPopulationThresholdMilitaryAcademy"));
@@ -548,6 +554,9 @@ namespace DistantWorlds.Types
                 case "ColonyAllowFacilitySpyAcademy":
                     this.ColonyAllowFacilitySpyAcademy = this.ParseBoolValue(value);
                     break;
+                case "ColonyAllowFacilityDiplomacyAcademy":
+                    this.ColonyAllowFacilityDiplomacyAcademy = this.ParseBoolValue(value);
+                    break;
                 case "ColonyAllowFacilityScienceAcademy":
                     this.ColonyAllowFacilityScienceAcademy = this.ParseBoolValue(value);
                     break;
@@ -586,6 +595,9 @@ namespace DistantWorlds.Types
                     break;
                 case "ColonyFacilityPopulationThresholdSpyAcademy":
                     this.ColonyFacilityPopulationThresholdSpyAcademy = this.ParseIntValue(value);
+                    break;
+                case "ColonyFacilityPopulationThresholdDiplomacyAcademy":
+                    this.ColonyFacilityPopulationThresholdDiplomacyAcademy = this.ParseIntValue(value);
                     break;
                 case "ColonyFacilityPopulationThresholdScienceAcademy":
                     this.ColonyFacilityPopulationThresholdScienceAcademy = this.ParseIntValue(value);
@@ -1120,7 +1132,8 @@ namespace DistantWorlds.Types
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyAllowFacilityTroopTrainingCenter", (object)this.ColonyAllowFacilityTroopTrainingCenter));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyAllowFacilityArmoredFactory", (object)this.ColonyAllowFacilityArmoredFactory));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyAllowFacilitySpyAcademy", (object)this.ColonyAllowFacilitySpyAcademy));
-                        streamWriter.WriteLine(this.BuildPolicyLine("ColonyAllowFacilityScienceAcademy", (object)this.ColonyAllowFacilityScienceAcademy));
+                        streamWriter.WriteLine(this.BuildPolicyLine("ColonyAllowFacilityScienceAcademy", (object)this.ColonyAllowFacilityScienceAcademy)); 
+                        streamWriter.WriteLine(this.BuildPolicyLine("ColonyAllowFacilityDiplomacyAcademy", (object)this.ColonyAllowFacilityDiplomacyAcademy));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyAllowFacilityNavalAcademy", (object)this.ColonyAllowFacilityNavalAcademy));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyAllowFacilityMilitaryAcademy", (object)this.ColonyAllowFacilityMilitaryAcademy));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdCloningFacility", (object)this.ColonyFacilityPopulationThresholdCloningFacility));
@@ -1132,7 +1145,8 @@ namespace DistantWorlds.Types
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdTerraformingFacility", (object)this.ColonyFacilityPopulationThresholdTerraformingFacility));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdTroopTrainingCenter", (object)this.ColonyFacilityPopulationThresholdTroopTrainingCenter));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdArmoredFactory", (object)this.ColonyFacilityPopulationThresholdArmoredFactory));
-                        streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdSpyAcademy", (object)this.ColonyFacilityPopulationThresholdSpyAcademy));
+                        streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdSpyAcademy", (object)this.ColonyFacilityPopulationThresholdSpyAcademy)); 
+                        streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdDiplomacyAcademy", (object)this.ColonyFacilityPopulationThresholdDiplomacyAcademy));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdScienceAcademy", (object)this.ColonyFacilityPopulationThresholdScienceAcademy));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdNavalAcademy", (object)this.ColonyFacilityPopulationThresholdNavalAcademy));
                         streamWriter.WriteLine(this.BuildPolicyLine("ColonyFacilityPopulationThresholdMilitaryAcademy", (object)this.ColonyFacilityPopulationThresholdMilitaryAcademy));
@@ -1364,6 +1378,7 @@ namespace DistantWorlds.Types
             ColonyAllowFacilityTroopTrainingCenter = this.ColonyAllowFacilityTroopTrainingCenter,
             ColonyAllowFacilityArmoredFactory = this.ColonyAllowFacilityArmoredFactory,
             ColonyAllowFacilitySpyAcademy = this.ColonyAllowFacilitySpyAcademy,
+            ColonyAllowFacilityDiplomacyAcademy = this.ColonyAllowFacilityDiplomacyAcademy,
             ColonyAllowFacilityScienceAcademy = this.ColonyAllowFacilityScienceAcademy,
             ColonyAllowFacilityNavalAcademy = this.ColonyAllowFacilityNavalAcademy,
             ColonyAllowFacilityMilitaryAcademy = this.ColonyAllowFacilityMilitaryAcademy,
@@ -1377,6 +1392,7 @@ namespace DistantWorlds.Types
             ColonyFacilityPopulationThresholdTroopTrainingCenter = this.ColonyFacilityPopulationThresholdTroopTrainingCenter,
             ColonyFacilityPopulationThresholdArmoredFactory = this.ColonyFacilityPopulationThresholdArmoredFactory,
             ColonyFacilityPopulationThresholdSpyAcademy = this.ColonyFacilityPopulationThresholdSpyAcademy,
+            ColonyFacilityPopulationThresholdDiplomacyAcademy = this.ColonyFacilityPopulationThresholdDiplomacyAcademy,
             ColonyFacilityPopulationThresholdScienceAcademy = this.ColonyFacilityPopulationThresholdScienceAcademy,
             ColonyFacilityPopulationThresholdNavalAcademy = this.ColonyFacilityPopulationThresholdNavalAcademy,
             ColonyFacilityPopulationThresholdMilitaryAcademy = this.ColonyFacilityPopulationThresholdMilitaryAcademy,

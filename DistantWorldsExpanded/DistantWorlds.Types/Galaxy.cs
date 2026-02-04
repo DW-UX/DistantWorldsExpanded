@@ -14,6 +14,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
@@ -1987,7 +1988,7 @@ namespace DistantWorlds.Types
                     string name = reader.GetString(reader.GetOrdinal("Name"));
                     string[] biasArr = reader.GetString(reader.GetOrdinal("Biases")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
-                    if(biasArr.Length > races.Count)
+                    if (biasArr.Length > races.Count)
                         throw new ApplicationException($" More Race bias then Races - {biasArr.Length} : {races.Count}");
 
                     List<int> biasList = new List<int>();
@@ -3402,8 +3403,20 @@ namespace DistantWorlds.Types
                 string[] array = new string[4] { "Deadly Phantoms", "Phantom Scourge", "Dark Ghostriders", "Dread Wraiths" };
                 int num3 = Rnd.Next(0, array.Length);
                 string name = array[num3];
-                double techLevel = Math.Min(7.0, 4 + Math.Min(3, _SuperPirateFactionsGenerated));
-                empire = GenerateSuperPirateFaction(habitat3, name, null, techLevel);
+                int currentMaxTechLvl = this.Empires.Max(x =>
+                {
+                    if (x.Name == "Ancient Guardians")
+                        return 0;
+                    else if (x.Name == "Erutkah Refugees")
+                        return 0;
+                    else if (x.Name == "Shakturi")
+                        return 0;
+                    else
+                        return x.Research.TechTree.Max(y => y.IsResearched ? y.TechLevel : 0);
+                }
+                ) + _SuperPirateFactionsGenerated;
+                //double techLevel = Math.Min(7.0, 4 + Math.Min(3, _SuperPirateFactionsGenerated));
+                empire = GenerateSuperPirateFaction(habitat3, name, null, currentMaxTechLvl);
                 if (empire != null)
                 {
                     _SuperPirateFactionsGenerated++;
@@ -5292,6 +5305,40 @@ namespace DistantWorlds.Types
             Ruin ruin = new Ruin(name, pictureRef, 0.1 + Rnd.NextDouble() * 0.2, x, y, 0, 0, 0);
             ruin.Type = type;
             return ruin;
+        }
+
+        public Dictionary<RaceBonusType, double> GetMaxBonuses()
+        {
+            Dictionary<RaceBonusType, double> res = new Dictionary<RaceBonusType, double>();
+            foreach (var item in Enum.GetValues(typeof(RaceBonusType)))
+            {
+                res[(RaceBonusType)item] = 0;
+            }
+            foreach (var item in Races)
+            {
+                if (item.RaceType != (int)RaceType.BonusCopy && item.RaceType != (int)RaceType.BonusMerge && item.RaceType != (int)RaceType.BonusAdaptation)
+
+                {
+                    res[RaceBonusType.ShipMaintance] = Math.Max(res[RaceBonusType.ShipMaintance], item.ShipMaintenanceSavings);
+                    res[RaceBonusType.Resource] = Math.Max(res[RaceBonusType.Resource], item.ResourceExtractionBonus);
+                    res[RaceBonusType.TroopRegeneration] = Math.Max(res[RaceBonusType.TroopRegeneration], item.TroopRegenerationFactor);
+                    res[RaceBonusType.Trade] = Math.Max(res[RaceBonusType.Trade], item.TradeBonus);
+                    res[RaceBonusType.Research] = Math.Max(res[RaceBonusType.Research], item.ResearchBonus);
+                    res[RaceBonusType.ConstractionSpeed] = Math.Max(res[RaceBonusType.ConstractionSpeed], item.ConstructionSpeedModifier);
+                    res[RaceBonusType.TroopMaintance] = Math.Max(res[RaceBonusType.TroopMaintance], item.TroopMaintenanceSavings);
+                    res[RaceBonusType.TroopStrenght] = Math.Max(res[RaceBonusType.TroopStrenght], item.TroopStrength);
+                    res[RaceBonusType.TroopRegeneration] = Math.Max(res[RaceBonusType.TroopRegeneration], item.TroopRegenerationFactor);
+                    res[RaceBonusType.CivilianSize] = Math.Max(res[RaceBonusType.CivilianSize], item.CivilianShipSizeFactor);
+                    res[RaceBonusType.MilitarySize] = Math.Max(res[RaceBonusType.MilitarySize], item.MilitaryShipSizeFactor);
+                    res[RaceBonusType.Espionage] = Math.Max(res[RaceBonusType.Espionage], item.EspionageBonus);
+                    res[RaceBonusType.TourismIncome] = Math.Max(res[RaceBonusType.TourismIncome], item.TourismIncomeFactor);
+                    res[RaceBonusType.Reproduction] = Math.Max(res[RaceBonusType.Reproduction], item.ReproductiveRate);
+                    res[RaceBonusType.WarWearines] = Math.Max(res[RaceBonusType.Reproduction], item.WarWearinessAttenuation);
+                    res[RaceBonusType.FreeTrade] = Math.Max(res[RaceBonusType.FreeTrade], item.FreeTradeIncomeFactor);
+                    res[RaceBonusType.SpacePortArmor] = Math.Max(res[RaceBonusType.SpacePortArmor], item.SpaceportArmorStrengthFactor);
+                }
+            }
+            return res;
         }
     }
 }
