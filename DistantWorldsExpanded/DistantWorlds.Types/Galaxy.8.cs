@@ -4071,7 +4071,22 @@ namespace DistantWorlds.Types
                 empire.AddBuiltObjectToGalaxy(builtObject2, habitat, offsetLocationFromParent: false, isStateOwned: true, (int)x, (int)y, sendMessage: false);
             }
             int num = Rnd.Next(20, 30);
-            for (int j = 0; j < num; j++)
+            //for (int j = 0; j < num; j++)
+            int totalFirepower = 0;
+            int targetFirePower = Empires.Max(x =>
+            {
+                if (x.PirateEmpireBaseHabitat != null)
+                    return x.BuiltObjects.Sum(y =>
+                    {
+                        if (y.Role == BuiltObjectRole.Military)
+                            return y.FirepowerRaw;
+                        else
+                            return 0;
+                    });
+                else
+                    return 0;
+            });
+            while (totalFirepower < targetFirePower)
             {
                 Design design9 = null;
                 switch (Rnd.Next(0, 25))
@@ -4115,6 +4130,7 @@ namespace DistantWorlds.Types
                         break;
                 }
                 design9.BuildCount++;
+                totalFirepower += design9.FirepowerRaw;
                 string name4 = SelectRandomUniqueMilitaryShipName();
                 BuiltObject builtObject3 = new BuiltObject(design9, name4, this, fullyBuilt: true);
                 builtObject3.Empire = empire;
@@ -4476,7 +4492,7 @@ namespace DistantWorlds.Types
                     planetaryFacilityBuildFactor = 1.0;
                     planetaryWonderBuildFactor = 0.75;
                     break;
-                case 
+                case
                 PiratePlayStyle.Legendary:
                     smugglingIncomeFactor = 1.5;
                     raidStrengthFactor = 1.25;
