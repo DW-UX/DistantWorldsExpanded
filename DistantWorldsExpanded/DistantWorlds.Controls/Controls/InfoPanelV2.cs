@@ -18,6 +18,8 @@ namespace DistantWorlds.Controls
 
             string text1 = "(" + TextResolver.GetText("Unknown mission") + ")";
             //добавить рисунки персов в панель под таблицой
+
+            //добавить отображение флота
         }
     }
 }

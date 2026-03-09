@@ -551,7 +551,6 @@ namespace BaconDistantWorlds
               description3 = builtObject.NativeRace.Name;
             infoPanel.DrawLabelledDescription(graphics, TextResolver.GetText("Race"), num5, description3, point4);
             int y11 = y10 + rowHeight;
-            List<HabitatType> habitatTypeList1 = new List<HabitatType>();
             List<HabitatType> habitatTypeList2 = builtObject.Empire == null ? infoPanel._Galaxy.PlayerEmpire.ColonizableHabitatTypesForBuiltObject(builtObject) : builtObject.Empire.ColonizableHabitatTypesForBuiltObjectAndEmpire(builtObject);
             string text8 = "";
             foreach (HabitatType type in habitatTypeList2)
