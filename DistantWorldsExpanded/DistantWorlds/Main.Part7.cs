@@ -4304,7 +4304,7 @@ namespace DistantWorlds
                     {
                         if (Main._streamWriterErrors == null)
                         {
-                            FileStream stream = new FileStream(path, FileMode.Append, FileAccess.ReadWrite);
+                            FileStream stream = new FileStream(path, FileMode.Append, FileAccess.Write);
                             Main._streamWriterErrors = (StreamWriter)TextWriter.Synchronized(new StreamWriter(stream));
                         }
                     }
