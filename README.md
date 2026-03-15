@@ -41,7 +41,7 @@ all available original and BM hotkeys can now be reassigned in Options → Hotke
 button. Hotkeys in start menu not available for now.
 If you Alt-Tab from game then first hotkey combination will be ignored (Known bug)
 ## x64:
-Latest stable version EM have support of x64 and x86 platforms in single exe. Newer beta version may drop x86 support
+Latest version of EM support only x64 (x86 was dropped after switching to .net6+).
 
 ## Game startup speed:
 EM mod massively improved startup time. Approximate loading time on myPC:
@@ -58,9 +58,12 @@ Original game - ~47s
 
 ## UPS timer:
 shows update per second done in game. Used by author to look for game features that massively drops performance. Located near current money (upper right corner).
-## Energy collection:
-RMB menu now contains “Energy colletion” option to show energy collected in selected point with current tech level
-
+## Changes to ingame po-up menu on RMB
+### Right button Energy collection:
+- RMB menu now contains “Energy colletion” option to show energy collected in selected point with current tech level
+- Give to -> Private - transfers shipto private sector, possible for transports and freighters.
+- Simple asteroid colonization instead of BM hotkey combo to display submenu.
+ 
 ## Repair templates:
 BM used random to select component to repair. EM allows setting order for repair for component types. This affects both crew and repair module. New templates could be added in designer page “Select repair priority” button. Player can adjust default templates for player and AI empires in “AdvMods\ExpansionMod\RepairPriorityTemplates.json” file. File support default and user template names created later. If file contains unknown template name then ships will use “Original” template until this template created.
 
@@ -76,7 +79,8 @@ Ctrl+E):
 2. !ResetAiRepairTemplates – to reset AI only empir designs
 3. !ResetPlayerRepairTemplates – to reset player only designs
 
-## Removed limit on various txt file:
+## Modding
+### Removed limit on various txt file:
 1. ShipSets – removed limit of maximum of 50 shipsets. Consecutive numbering not required
 now.
 2. Race families – removed limit of maximum of 50.
@@ -88,10 +92,13 @@ now.
 8. Research – removed limit of maximum of 1500.
 9. Fighters – removed limit of maximum of 50.
 
+### New facilities
+1. Diplomatic Academy Id - 17, increase chance of spawning diplomat
+
 ## Resource filter in planner:
 player can now set minimal % of selected resource to show. All resources" filter out total % of resources, selected filter by selected resource. Added resource rarity column in planner (C - common, R - rare, VR - very rare)
 ## Construction ship queue editor:
-now player can edit queue to swap order or removing missions.
+now player can edit queue to swap order or removing missions. Select construction ship, use hotkey to open menu. Can swap task to other ship and reorder building queue.
 ## Design:
 adding new warning to design window. Currently implemented warning about above\below count of miners on ship and bases.
 
@@ -101,16 +108,17 @@ Looks like original game have problem with large resolutuons. Should work now.
 # Latest beta version changes:
 1. Some UI change in start menu, adapts to resolution. Work in progres, have problem with checkboxes
 2. Bug fix for freeze during game launch
-3. New base type - Outpost, used for providing planets with bonuses from entertainment and medical modules on base without taking design slots of small,medium and large bases. Lot of restrictions on this design.
+3. New base type - Outpost, used for providing planets with bonuses from entertainment and medical modules on base without taking design slots of small,medium and large bases. Lot of restrictions on this design. Design locked from adding almost everything.
 4. State Tax upper limit set to 75% for Ai and player
 5. New tax algoritm, you can set dessired happiness bassed on colony size (“AdvMods\ExpansionMod\ExapnsionModSettings.json”)
 6. Fixed scraping AI planetary facility playing as pirate  (you could scrap any facility after gaining 1% of control on planet)
 7. Game editor can now colonize asteroid, still can't change pop for them
 8. Increased year limit for victory condition start and end.
-9. Support for multiple mods at same time. New file structure, all files converted to SQLite database on game start. Modders can adjust patch files to change whatever they need, easier to make massive changes with SQL commands. Mooder need knowladge of SQL to make changes in new structure instead of txt file.
+9. Support for multiple mods at same time. New file structure, all files converted to SQLite database on game start. Modders can adjust patch files to change whatever they need, easier to make massive changes with SQL commands. Mooder need knowledge of SQL to make changes in new structure instead of txt file.
   - Convertion tool to convert txt files to new structure
   - New structure removes all limits on maximum count for various thing that original game have. (Government adjectives, resource needed for component, etc) 
 10. New pirate faction - Legendary pirates. Use best traits from other factions. Super pirates now use this factions on spawn.
-11.Save files from modded game probably not compatible with original game.
-12.Repair priority for modules (“AdvMods\ExpansionMod\GameHotKeysMappingFile.json”)
-
+11. Save files from modded game not compatible with original game.
+12. Repair priority for modules (“AdvMods\ExpansionMod\GameHotKeysMappingFile.json”)
+13. Strenghs of late game events and factions: Shakturi and Ancients use top tech level in moded tech tree instead of 7 or lower. Super pirates now spawn with ship strenght\count of top pirate empire. Tech lvl bonus on spawn bumbped each time they are destroyed.
+14. Fixed bug with Scaling; in ship txt files for Vanila and BM - if decimal character in txt for scaling is not equal to system character, files failed to load.
