@@ -59,7 +59,6 @@ Original game - ~47s
 ## UPS timer:
 shows update per second done in game. Used by author to look for game features that massively drops performance. Located near current money (upper right corner).
 ## Changes to ingame po-up menu on RMB
-### Right button Energy collection:
 - RMB menu now contains “Energy colletion” option to show energy collected in selected point with current tech level
 - Give to -> Private - transfers shipto private sector, possible for transports and freighters.
 - Simple asteroid colonization instead of BM hotkey combo to display submenu.
@@ -95,6 +94,9 @@ now.
 ### New facilities
 1. Diplomatic Academy Id - 17, increase chance of spawning diplomat
 
+### New designs
+1.OutPost.txt - same as other ship types. Locked out of most components, used to provide cheap bonuses for planets.
+
 ## Resource filter in planner:
 player can now set minimal % of selected resource to show. All resources" filter out total % of resources, selected filter by selected resource. Added resource rarity column in planner (C - common, R - rare, VR - very rare)
 ## Construction ship queue editor:
@@ -121,4 +123,4 @@ Looks like original game have problem with large resolutuons. Should work now.
 11. Save files from modded game not compatible with original game.
 12. Repair priority for modules (“AdvMods\ExpansionMod\GameHotKeysMappingFile.json”)
 13. Strenghs of late game events and factions: Shakturi and Ancients use top tech level in moded tech tree instead of 7 or lower. Super pirates now spawn with ship strenght\count of top pirate empire. Tech lvl bonus on spawn bumbped each time they are destroyed.
-14. Fixed bug with Scaling; in ship txt files for Vanila and BM - if decimal character in txt for scaling is not equal to system character, files failed to load.
+14. Fixed bug with ImageScaling;Scaled 0.95 in ship txt files for Vanila and BM - if decimal character in txt for scaling is not equal to system character, files failed to load.
