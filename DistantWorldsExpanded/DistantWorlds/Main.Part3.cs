@@ -3943,7 +3943,7 @@ namespace DistantWorlds
             pnlEmpirePolicyContainer.BackColor = Color.FromArgb(32, 32, 32);
             if (_Game.PlayerEmpire.PirateEmpireBaseHabitat == null)
             {
-                nDrsqatloR.Size = new Size(910, 4860);
+                nDrsqatloR.Size = new Size(910, 4960);
             }
             else
             {
@@ -3952,10 +3952,10 @@ namespace DistantWorlds
                 {
                     flag = true;
                 }
-                nDrsqatloR.Size = new Size(910, 2860);
+                nDrsqatloR.Size = new Size(910, 2960);
                 if (flag)
                 {
-                    nDrsqatloR.Size = new Size(910, 4560);
+                    nDrsqatloR.Size = new Size(910, 4960);
                 }
             }
             nDrsqatloR.Location = new Point(0, 0);
