@@ -90,12 +90,12 @@ namespace BaconDistantWorlds
           this.buyFakePapersButton.Hide();
         this.SizeLabelFont(this.shipNamelabel);
         this.SizeLabelFont(this.planetNamelabel);
-        this.shipPictureBox.Image = (Image) new Bitmap(BaconBuiltObjectImageCache.shipPictures[tradeShip.PictureRef]);
+        this.shipPictureBox.Image = (Image) new Bitmap(BaconBuiltObjectImageCache.shipPictures[tradeShip.PictureRef].FilePath);
         string empty = string.Empty;
         Bitmap bitmap = (Bitmap) null;
         if (this.tradePartner is BuiltObject)
         {
-          bitmap = new Bitmap(BaconBuiltObjectImageCache.shipPictures[(this.tradePartner as BuiltObject).PictureRef]);
+          bitmap = new Bitmap(BaconBuiltObjectImageCache.shipPictures[(this.tradePartner as BuiltObject).PictureRef].FilePath);
           if ((this.tradePartner as BuiltObject).ActualEmpire == this.ship.ActualEmpire)
             this.takeCargoButton.Show();
           else

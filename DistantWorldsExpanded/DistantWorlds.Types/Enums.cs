@@ -32,4 +32,11 @@ namespace DistantWorlds.Types
         SpacePortArmor,
         FreeTrade,
     }
+    public enum ShipPictureInfoType
+    {
+        Family,
+        Major,
+        Minor,
+        Other,
+    }
 }

@@ -5,6 +5,7 @@
 // Assembly location: H:\7\BaconDistantWorlds.dll
 
 using DistantWorlds;
+using DistantWorlds.BaconDistantWorlds.DTO;
 using DistantWorlds.Types;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace BaconDistantWorlds
 
         public static int SetPictureRef(Design design, int originalValue)
         {
-            if (originalValue < 72)
+            if (originalValue < 72 || design?.Empire  == BaconBuiltObject.myMain?._Game?.PlayerEmpire)
                 return originalValue;
             string name = new StackTrace().GetFrame(1).GetMethod().Name;
             if (name == "PrepareDesignForEditor" || name == "Clone")
@@ -59,31 +60,31 @@ namespace BaconDistantWorlds
             string family = "family";
             int num2 = empire.PirateEmpireBaseHabitat != null ? design.Empire.DominantRace.DesignPictureFamilyIndexPirates : empire.DesignPictureFamilyIndex;
             family += num2.ToString();
-            IEnumerable<string> source = BaconBuiltObjectImageCache.shipPictures.Where<string>((Func<string, bool>)(path => path.Contains(family)));
-            string str = (string)null;
+            IEnumerable<ShipPictureInfo> source = BaconBuiltObjectImageCache.shipPictures.Where(x => x.Family == family);
+            ShipPictureInfo info = null;
             if (BaconBuiltObject.myMain == null || BaconBuiltObject.myMain._Game == null || design.Empire == BaconBuiltObject.myMain._Game.PlayerEmpire)
             {
-                str = source.FirstOrDefault<string>((Func<string, bool>)(path2 => Path.GetFileNameWithoutExtension(path2) == subRoleAsString));
+                info = source.FirstOrDefault(x => x.FamilyIdx == num2 && x.FileName == subRoleAsString);
             }
             else
             {
-                List<string> list = source.Where<string>((Func<string, bool>)(path2 => Path.GetFileNameWithoutExtension(path2) == subRoleAsString)).ToList<string>();
+                 List<ShipPictureInfo> list = source.Where(x => x.FamilyIdx == num2 && x.FileName.StartsWith(subRoleAsString)).ToList();
                 if (list.Count < 1 && builtObjectSubRole != BuiltObjectSubRole.Outpost)
                 {
                     int num3 = (int)MessageBox.Show("No image for " + subRoleAsString + " for " + family, "Missing image in mod");
                 }
                 if (list.Count < 1 && builtObjectSubRole == BuiltObjectSubRole.Outpost)
                 {
-                    subRoleAsString = Enum.GetName(typeof(BuiltObjectSubRole), BuiltObjectSubRole.SmallSpacePort); 
-                    list = source.Where<string>((Func<string, bool>)(path2 => Path.GetFileNameWithoutExtension(path2) == subRoleAsString)).ToList<string>();
+                    subRoleAsString = Enum.GetName(typeof(BuiltObjectSubRole), BuiltObjectSubRole.SmallSpacePort);
+                    list = source.Where(x => x.FamilyIdx == num2 && x.FileName.StartsWith(subRoleAsString)).ToList();
                     if (list.Count < 1)
                     { int num3 = (int)MessageBox.Show("No image for " + subRoleAsString + " for " + family, "Missing image in mod"); }
                 }
                 else
-                    str = list[Galaxy.Rnd.Next(0, list.Count - 1)];
+                    info = list[Galaxy.Rnd.Next(0, list.Count - 1)];
             }
-            if (str != null)
-                originalValue = BaconBuiltObjectImageCache.shipPictures.IndexOf(str);
+            if (info != null)
+                originalValue = BaconBuiltObjectImageCache.shipPictures.IndexOf(info);
             return originalValue;
         }
 

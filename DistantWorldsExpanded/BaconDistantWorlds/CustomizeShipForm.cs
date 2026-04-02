@@ -68,11 +68,11 @@ namespace BaconDistantWorlds
         }
         this.SizeLabelFont(this.shipNamelabel);
         this.SizeLabelFont(this.planetNamelabel);
-        this.shipPictureBox.Image = (Image) new Bitmap(BaconBuiltObjectImageCache.shipPictures[shipToCustomize.PictureRef]);
+        this.shipPictureBox.Image = (Image) new Bitmap(BaconBuiltObjectImageCache.shipPictures[shipToCustomize.PictureRef].FilePath);
         string empty = string.Empty;
         Bitmap bitmap = (Bitmap) null;
         if (shipOrPlanet is BuiltObject)
-          bitmap = new Bitmap(BaconBuiltObjectImageCache.shipPictures[(shipOrPlanet as BuiltObject).PictureRef]);
+          bitmap = new Bitmap(BaconBuiltObjectImageCache.shipPictures[(shipOrPlanet as BuiltObject).PictureRef].FilePath);
         else if (shipOrPlanet is Habitat)
         {
           bool smallImageSupplied = false;

@@ -4,6 +4,7 @@
 // MVID: 5BEEE04E-F6B8-4927-96B6-91C74B502CC0
 // Assembly location: H:\7\BaconDistantWorlds.dll
 
+using DistantWorlds.BaconDistantWorlds.DTO;
 using DistantWorlds.Types;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace BaconDistantWorlds
     public static class BaconBuiltObjectImageCache
     {
         private static int overallIndex = -1;
-        public static List<string> shipPictures = new List<string>();
+        public static List<ShipPictureInfo> shipPictures = new List<ShipPictureInfo>();
 
         public static void AddMoreImages(
           BuiltObjectImageCache imageCache,
@@ -85,7 +86,7 @@ namespace BaconDistantWorlds
                 if (item.Result != null)
                 { imageCache._Filepaths.Add(item.Result); }
             }
-            BaconBuiltObjectImageCache.shipPictures = imageCache._Filepaths;
+            BaconBuiltObjectImageCache.shipPictures = ShipPictureInfo.CreateShipPictureInfoFromPath(imageCache._Filepaths);
         }
     }
 }
