@@ -24,10 +24,10 @@ namespace DistantWorlds.Types
         PirateBase,
         PirateFortress,
         ArmoredFactory,
-        MilitaryAcademy,
         SpyAcademy,
         NavalAcademy,
         ScienceAcademy,
+        MilitaryAcademy,
         PirateCriminalNetwork,
         DiplomacyAcademy,
     }
