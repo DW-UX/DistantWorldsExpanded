@@ -34,6 +34,7 @@ internal static class Class5
     internal static Splash _Splash;
 
     internal static bool _IsExiting = false;
+    //public static Stopwatch _sw = new Stopwatch();
     internal static void smethod_0()
     {
         var gcThread = new Thread(static () => {
@@ -70,6 +71,7 @@ internal static class Class5
                 Application.Run(_Splash);
             });
             var start = new Start();
+            //_sw.Start();
             Application.Run(start);
 
         }

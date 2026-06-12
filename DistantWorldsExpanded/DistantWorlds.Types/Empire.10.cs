@@ -3606,6 +3606,10 @@ namespace DistantWorlds.Types
                     text = TextResolver.GetText("advisors");
                     text2 = TextResolver.GetText("Planetary Facility Explanation Science Academy");
                     break;
+                case PlanetaryFacilityType.DiplomacyAcademy:
+                    text = TextResolver.GetText("advisors");
+                    text2 = "This planetary facility would increase the chance of new Diplomats appearing in our empire";
+                    break;
                 case PlanetaryFacilityType.NavalAcademy:
                     text = TextResolver.GetText("military planners");
                     text2 = TextResolver.GetText("Planetary Facility Explanation Naval Academy");
@@ -4522,6 +4526,7 @@ namespace DistantWorlds.Types
                         }
                     }
                 }
+                this.Name = GenerateEmpireName(governmentId);
                 ChangeGovernment(governmentId);
                 this._Name = GenerateEmpireName(governmentId);
             }

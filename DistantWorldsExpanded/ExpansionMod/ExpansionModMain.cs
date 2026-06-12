@@ -53,8 +53,8 @@ namespace ExpansionMod
         {
             KeyMapper gameKeyMapper = new KeyMapper(_MainGameMappingFileName);
             ExpKeyMapper expKeyMapper = new ExpKeyMapper(_ExpansionMappingFileName);
-            gameKeyMapper.GenerateDefaultFile(_selfModEntity.RootFolder);
-            expKeyMapper.GenerateDefaultFile(_selfModEntity.RootFolder);
+            gameKeyMapper.GenerateDefaultFile(Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder));
+            expKeyMapper.GenerateDefaultFile(Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder));
         }
 
 
@@ -268,19 +268,19 @@ namespace ExpansionMod
         {
             KeyMapper gameKeyMapper = new KeyMapper(_MainGameMappingFileName);
             ExpKeyMapper expKeyMapper = new ExpKeyMapper(_ExpansionMappingFileName);
-            if (!gameKeyMapper.MapKeys(_selfModEntity.RootFolder))
+            if (!gameKeyMapper.MapKeys(Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder)))
             {
                 throw new ApplicationException($"Failed to map keys, check {_MainGameMappingFileName} file");
             }
-            if (!expKeyMapper.MapKeys(_selfModEntity.RootFolder))
+            if (!expKeyMapper.MapKeys(Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder)))
             {
                 throw new ApplicationException($"Failed to map keys, check {_ExpansionMappingFileName} file");
             }
-            _gameHotKeyManager = new HotKeyManager(gameKeyMapper, _selfModEntity.RootFolder, true);
-            _expModHotKeyManager = new HotKeyManager(expKeyMapper, _selfModEntity.RootFolder, false);
+            _gameHotKeyManager = new HotKeyManager(gameKeyMapper, Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder), true);
+            _expModHotKeyManager = new HotKeyManager(expKeyMapper, Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder), false);
             if (!generateDefaultKeys)
             {
-                _hotKeyOverseer.AddHotKeyManager(_gameHotKeyManager, new ModEntity(Helper.GetModPath(""), "DistantWorlds", null));
+                _hotKeyOverseer.AddHotKeyManager(_gameHotKeyManager, new ModEntity( Helper.GetModPath(""), "DistantWorlds", null));
                 //will self register later from FindOtherMods
                 //_hotKeyOverseer.AddHotKeyManager(_expModHotKeyManager, new ModEntity(Helper.GetModPath(""), _ModKey, null));
             }

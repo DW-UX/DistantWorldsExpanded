@@ -32,7 +32,7 @@ using DistantWorlds.Controls;
 using DistantWorlds.Types;
 //using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
-using Microsoft.Xna.Framework.Graphics;
+//using Microsoft.Xna.Framework.Graphics;
 //using SlimDX.DirectSound;
 using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;

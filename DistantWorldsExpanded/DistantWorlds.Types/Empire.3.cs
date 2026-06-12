@@ -412,6 +412,12 @@ namespace DistantWorlds.Types
                             planetaryFacilityDefinitionList2.Add(planetaryFacilityDefinitionList[i]);
                         }
                         break;
+                    case PlanetaryFacilityType.DiplomacyAcademy:
+                        if (!Policy.ColonyAllowFacilityDiplomacyAcademy)
+                        {
+                            planetaryFacilityDefinitionList2.Add(planetaryFacilityDefinitionList[i]);
+                        }
+                        break;
                     case PlanetaryFacilityType.ScienceAcademy:
                         if (!Policy.ColonyAllowFacilityScienceAcademy)
                         {
@@ -555,6 +561,7 @@ namespace DistantWorlds.Types
             PlanetaryFacilityDefinition planetaryFacilityDefinition3 = planetaryFacilityDefinitionList.FindFacilityByType(PlanetaryFacilityType.PlanetaryShield);
             PlanetaryFacilityDefinition planetaryFacilityDefinition4 = planetaryFacilityDefinitionList.FindFacilityByType(PlanetaryFacilityType.IonCannon);
             PlanetaryFacilityDefinition planetaryFacilityDefinition5 = planetaryFacilityDefinitionList.FindFacilityByType(PlanetaryFacilityType.SpyAcademy);
+            PlanetaryFacilityDefinition planetaryFacilityDefinitionDipAcademy = planetaryFacilityDefinitionList.FindFacilityByType(PlanetaryFacilityType.DiplomacyAcademy);
             PlanetaryFacilityDefinition planetaryFacilityDefinition6 = planetaryFacilityDefinitionList.FindFacilityByType(PlanetaryFacilityType.ScienceAcademy);
             PlanetaryFacilityDefinition planetaryFacilityDefinition7 = planetaryFacilityDefinitionList.FindFacilityByType(PlanetaryFacilityType.NavalAcademy);
             double num7 = 0.0;
@@ -573,6 +580,11 @@ namespace DistantWorlds.Types
             {
                 num7 = Galaxy.CalculatePlanetaryFacilityCost(planetaryFacilityDefinition7, this);
                 num8 = planetaryFacilityDefinition7.Maintenance;
+            }
+            else if (planetaryFacilityDefinitionDipAcademy != null)
+            {
+                num7 = Galaxy.CalculatePlanetaryFacilityCost(planetaryFacilityDefinitionDipAcademy, this);
+                num8 = planetaryFacilityDefinitionDipAcademy.Maintenance;
             }
             else if (planetaryFacilityDefinition3 != null)
             {
@@ -609,6 +621,7 @@ namespace DistantWorlds.Types
                 int num12 = CountFacilities(PlanetaryFacilityType.SpyAcademy);
                 int num13 = CountFacilities(PlanetaryFacilityType.ScienceAcademy);
                 int num14 = CountFacilities(PlanetaryFacilityType.NavalAcademy);
+                int numDipAcad = CountFacilities(PlanetaryFacilityType.DiplomacyAcademy);
                 for (int num15 = 0; num15 < habitatList3.Count; num15++)
                 {
                     if (StateMoney > num7 * 2.5 && num > num8 && habitatList3[num15].StrategicValue > 200000)
@@ -618,6 +631,7 @@ namespace DistantWorlds.Types
                         int num18 = 0;
                         int num19 = 0;
                         int num20 = 0;
+                        int numDipAcadCount = 0;
                         if (habitatList3[num15].Facilities != null)
                         {
                             num16 = habitatList3[num15].Facilities.CountByType(PlanetaryFacilityType.PlanetaryShield);
@@ -625,6 +639,7 @@ namespace DistantWorlds.Types
                             num18 = habitatList3[num15].Facilities.CountByType(PlanetaryFacilityType.SpyAcademy);
                             num19 = habitatList3[num15].Facilities.CountByType(PlanetaryFacilityType.ScienceAcademy);
                             num20 = habitatList3[num15].Facilities.CountByType(PlanetaryFacilityType.NavalAcademy);
+                            numDipAcadCount = habitatList3[num15].Facilities.CountByType(PlanetaryFacilityType.NavalAcademy);
                         }
                         if (planetaryFacilityDefinition3 != null && num16 <= 0 && StateMoney > Galaxy.CalculatePlanetaryFacilityCost(planetaryFacilityDefinition3, this) && num > planetaryFacilityDefinition3.Maintenance && habitatList3[num15].Population != null && habitatList3[num15].Population.TotalAmount >= (long)Policy.ColonyFacilityPopulationThresholdPlanetaryShield * 1000000L && CheckTaskAuthorized(_ControlColonyFacilities, ref refusalCount, GenerateAutomationMessageColonyFacility(habitatList3[num15], planetaryFacilityDefinition3), habitatList3[num15], AdvisorMessageType.ColonyFacility, planetaryFacilityDefinition3, null) && habitatList3[num15].QueueFacilityConstruction(PlanetaryFacilityType.PlanetaryShield))
                         {
@@ -653,6 +668,12 @@ namespace DistantWorlds.Types
                             StateMoney -= Galaxy.CalculatePlanetaryFacilityCost(planetaryFacilityDefinition7, this);
                             num -= planetaryFacilityDefinition7.Maintenance;
                             num14++;
+                        }
+                        if (planetaryFacilityDefinitionDipAcademy != null && numDipAcadCount <= 0 && numDipAcad < num11 && StateMoney > Galaxy.CalculatePlanetaryFacilityCost(planetaryFacilityDefinitionDipAcademy, this) && num > planetaryFacilityDefinitionDipAcademy.Maintenance && habitatList3[num15].Population != null && habitatList3[num15].Population.TotalAmount >= (long)Policy.ColonyFacilityPopulationThresholdDiplomacyAcademy * 1000000L && CheckTaskAuthorized(_ControlColonyFacilities, ref refusalCount, GenerateAutomationMessageColonyFacility(habitatList3[num15], planetaryFacilityDefinitionDipAcademy), habitatList3[num15], AdvisorMessageType.ColonyFacility, planetaryFacilityDefinitionDipAcademy, null) && habitatList3[num15].QueueFacilityConstruction(PlanetaryFacilityType.DiplomacyAcademy))
+                        {
+                            StateMoney -= Galaxy.CalculatePlanetaryFacilityCost(planetaryFacilityDefinitionDipAcademy, this);
+                            num -= planetaryFacilityDefinitionDipAcademy.Maintenance;
+                            numDipAcad++;
                         }
                     }
                 }

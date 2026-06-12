@@ -32,6 +32,8 @@ namespace DistantWorlds.Types
         base.AddRange(items);
     }
 
+        
+
     public IEnumerator<T> GetEnumerator() => (IEnumerator<T>) new SyncListEnumerator<T>(this);
   }
 }

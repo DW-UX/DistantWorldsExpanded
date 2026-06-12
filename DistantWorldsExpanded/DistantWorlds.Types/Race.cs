@@ -103,6 +103,9 @@ namespace DistantWorlds.Types
         private int _DefaultFlagShape;
 
         [OptionalField]
+        private int _RaceType;
+
+        [OptionalField]
         public RaceBiasList Biases = new RaceBiasList();
 
         public CharacterList AvailableCharacters = new CharacterList();
@@ -750,6 +753,17 @@ namespace DistantWorlds.Types
             }
         }
 
+        public int RaceType
+        {
+            get
+            {
+                return _RaceType;
+            }
+            set
+            {
+                _RaceType = value;
+            }
+        }
         public static Race LoadFromFile(string filePath)
         {
             int num = 0;
@@ -1906,6 +1920,9 @@ namespace DistantWorlds.Types
                     case "ImmuneToPlagues":
                         race.ImmuneToPlagues = ParseBoolValue(value);
                         break;
+                    case "RaceType":
+                        race.RaceType = ParseIntValue(value);
+                        break;
                 }
             }
             return race;
@@ -2104,6 +2121,7 @@ namespace DistantWorlds.Types
                     race.DefaultPiratePlaystyle = (PiratePlayStyle)tempValByte;
                 }
                 race.ImmuneToPlagues = reader.GetBoolean(reader.GetOrdinal("ImmuneToPlagues"));
+                race.RaceType = reader.GetInt32(reader.GetOrdinal("RaceType"));
             }
             return race;
         }

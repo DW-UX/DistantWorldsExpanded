@@ -4043,7 +4043,7 @@ namespace DistantWorlds
                 {
                     numEditHabitatDevelopmentLevel.Minimum = 0m;
                 }
-                numEditHabitatDevelopmentLevel.Maximum = 200m;
+                numEditHabitatDevelopmentLevel.Maximum = 20000m;
                 numEditHabitatDevelopmentLevel.Value = habitat.DevelopmentLevel;
                 cmbEditHabitatEmpire.BindData(_Game.PlayerEmpire, _Game.Galaxy.Empires, null, _Game.Galaxy.IndependentEmpire, includeNoEmpire: false);
                 cmbEditHabitatEmpire.SetSelectedEmpire(habitat.Empire);

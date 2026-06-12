@@ -478,6 +478,29 @@ namespace DistantWorlds.Types
         private Race _TradeBonusRace;
 
         [OptionalField]
+        private Race _WarWearinessAttenuationBonusRace;
+        [OptionalField]
+        private Race _TroopMaintenanceSavingsBonusRace;
+        [OptionalField]
+        private Race _TroopStrengthBonusRace;
+        [OptionalField]
+        private Race _TroopRegenerationFactorBonusRace;
+        [OptionalField]
+        private Race _MigrationFactorBonusRace;
+        [OptionalField]
+        private Race _MilitaryShipSizeFactorBonusRace;
+        [OptionalField]
+        private Race _CivilianShipSizeFactorBonusRace;
+        [OptionalField]
+        private Race _TourismIncomeFactorBonusRace;
+        [OptionalField]
+        private Race _ReproductiveRateBonusRace;
+        [OptionalField]
+        private Race _PeriodicGrowthRateBonusRace;
+        [OptionalField]
+        private Race _ConstructionSpeedModifierBonusRace;
+
+        [OptionalField]
         private int _EmpireOrderCount;
 
         private BuiltObjectList _KnownPirateBases = new BuiltObjectList();
@@ -2839,55 +2862,189 @@ namespace DistantWorlds.Types
         {
             List<string> list = new List<string>();
             bonusRaces = new RaceList();
-            if (_ShipMaintenanceSavings > 0.0)
+            if (DominantRace.RaceType == (int)RaceType.Classic)
             {
-                string text = Galaxy.ResolveEmpireAbilityBonusDescriptionShipMaintenance(_ShipMaintenanceSavings);
-                if (includeDominantRaceInDescriptions || _ShipMaintenanceSavingsRace != DominantRace)
+                if (_ShipMaintenanceSavings > 0.0)
                 {
+                    string text = Galaxy.ResolveEmpireAbilityBonusDescriptionShipMaintenance(_ShipMaintenanceSavings);
+                    if (includeDominantRaceInDescriptions || _ShipMaintenanceSavingsRace != DominantRace)
+                    {
+                        text = text + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _ShipMaintenanceSavingsRace.Name) + ")";
+                    }
+                    list.Add(text);
+                    bonusRaces.Add(_ShipMaintenanceSavingsRace);
+                }
+                if (_ResourceExtractionBonus > 0.0)
+                {
+                    string text2 = Galaxy.ResolveEmpireAbilityBonusDescriptionResourceExtraction(_ResourceExtractionBonus);
+                    if (includeDominantRaceInDescriptions || _ResourceExtractionBonusRace != DominantRace)
+                    {
+                        text2 = text2 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _ResourceExtractionBonusRace.Name) + ")";
+                    }
+                    list.Add(text2);
+                    bonusRaces.Add(_ResourceExtractionBonusRace);
+                }
+                if (_ResearchBonus > 0.0)
+                {
+                    string text3 = Galaxy.ResolveEmpireAbilityBonusDescriptionResearch(_ResearchBonus);
+                    if (includeDominantRaceInDescriptions || _ResearchBonusRace != DominantRace)
+                    {
+                        text3 = text3 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _ResearchBonusRace.Name) + ")";
+                    }
+                    list.Add(text3);
+                    bonusRaces.Add(_ResearchBonusRace);
+                }
+                if (_EspionageBonus > 0.0)
+                {
+                    string text4 = Galaxy.ResolveEmpireAbilityBonusDescriptionEspionage(_EspionageBonus);
+                    if (includeDominantRaceInDescriptions || _EspionageBonusRace != DominantRace)
+                    {
+                        text4 = text4 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _EspionageBonusRace.Name) + ")";
+                    }
+                    list.Add(text4);
+                    bonusRaces.Add(_EspionageBonusRace);
+                }
+                if (_TradeBonus > 0.0)
+                {
+                    string text5 = Galaxy.ResolveEmpireAbilityBonusDescriptionTrade(_TradeBonus);
+                    if (includeDominantRaceInDescriptions || _TradeBonusRace != DominantRace)
+                    {
+                        text5 = text5 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _TradeBonusRace.Name) + ")";
+                    }
+                    list.Add(text5);
+                    bonusRaces.Add(_TradeBonusRace);
+                }
+            }
+            else if (DominantRace.RaceType == (int)RaceType.BonusAdaptation)
+            {
+                if (_ShipMaintenanceSavings > 0.0)
+                {
+                    string text = Galaxy.ResolveEmpireAbilityBonusDescriptionShipMaintenance(_ShipMaintenanceSavings);
                     text = text + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _ShipMaintenanceSavingsRace.Name) + ")";
+
+                    list.Add(text);
+                    bonusRaces.Add(_ShipMaintenanceSavingsRace);
                 }
-                list.Add(text);
-                bonusRaces.Add(_ShipMaintenanceSavingsRace);
-            }
-            if (_ResourceExtractionBonus > 0.0)
-            {
-                string text2 = Galaxy.ResolveEmpireAbilityBonusDescriptionResourceExtraction(_ResourceExtractionBonus);
-                if (includeDominantRaceInDescriptions || _ResourceExtractionBonusRace != DominantRace)
+                if (_ResourceExtractionBonus > 0.0)
                 {
+                    string text2 = Galaxy.ResolveEmpireAbilityBonusDescriptionResourceExtraction(_ResourceExtractionBonus);
                     text2 = text2 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _ResourceExtractionBonusRace.Name) + ")";
+
+                    list.Add(text2);
+                    bonusRaces.Add(_ResourceExtractionBonusRace);
                 }
-                list.Add(text2);
-                bonusRaces.Add(_ResourceExtractionBonusRace);
-            }
-            if (_ResearchBonus > 0.0)
-            {
-                string text3 = Galaxy.ResolveEmpireAbilityBonusDescriptionResearch(_ResearchBonus);
-                if (includeDominantRaceInDescriptions || _ResearchBonusRace != DominantRace)
+                if (_ResearchBonus > 0.0)
                 {
+                    string text3 = Galaxy.ResolveEmpireAbilityBonusDescriptionResearch(_ResearchBonus);
                     text3 = text3 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _ResearchBonusRace.Name) + ")";
+
+                    list.Add(text3);
+                    bonusRaces.Add(_ResearchBonusRace);
                 }
-                list.Add(text3);
-                bonusRaces.Add(_ResearchBonusRace);
-            }
-            if (_EspionageBonus > 0.0)
-            {
-                string text4 = Galaxy.ResolveEmpireAbilityBonusDescriptionEspionage(_EspionageBonus);
-                if (includeDominantRaceInDescriptions || _EspionageBonusRace != DominantRace)
+                if (_EspionageBonus > 0.0)
                 {
+                    string text4 = Galaxy.ResolveEmpireAbilityBonusDescriptionEspionage(_EspionageBonus);
                     text4 = text4 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _EspionageBonusRace.Name) + ")";
+
+                    list.Add(text4);
+                    bonusRaces.Add(_EspionageBonusRace);
                 }
-                list.Add(text4);
-                bonusRaces.Add(_EspionageBonusRace);
-            }
-            if (_TradeBonus > 0.0)
-            {
-                string text5 = Galaxy.ResolveEmpireAbilityBonusDescriptionTrade(_TradeBonus);
-                if (includeDominantRaceInDescriptions || _TradeBonusRace != DominantRace)
+                if (_TradeBonus > 0.0)
                 {
+                    string text5 = Galaxy.ResolveEmpireAbilityBonusDescriptionTrade(_TradeBonus);
                     text5 = text5 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _TradeBonusRace.Name) + ")";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_TradeBonusRace);
                 }
-                list.Add(text5);
-                bonusRaces.Add(_TradeBonusRace);
+                if (_WarWeariness > 0.0)
+                {
+                    string text5 = Galaxy.ResolveEmpireAbilityBonusDescriptionWarWeariness(_WarWeariness);
+                    text5 = text5 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _WarWearinessAttenuationBonusRace.Name) + ")";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_WarWearinessAttenuationBonusRace);
+                }
+                if (DominantRace.TroopMaintenanceSavings > 0.0)
+                {
+                    string text5 = Galaxy.ResolveEmpireAbilityBonusDescriptionTroopMaintenance(DominantRace.TroopMaintenanceSavings);
+                    text5 = text5 + " (" + string.Format(TextResolver.GetText("BONUS from RACE"), _TroopMaintenanceSavingsBonusRace.Name) + ")";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_TroopMaintenanceSavingsBonusRace);
+                }
+                if (DominantRace.TroopStrength > 0.0 && DominantRace.TroopStrength != 1)
+                {
+                    string bonusText = DominantRace.TroopStrength < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Troops strength: {DominantRace.TroopStrength - 100}% {bonusText} from RACE {_TroopMaintenanceSavingsBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_TroopMaintenanceSavingsBonusRace);
+                }
+                if (DominantRace.TroopRegenerationFactor > 0.0 && DominantRace.TroopRegenerationFactor != 1)
+                {
+                    string bonusText = DominantRace.TroopRegenerationFactor < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Troops regeneration: {Math.Round((DominantRace.TroopRegenerationFactor - 1) * 100, 2)}% {bonusText} from RACE {_TroopRegenerationFactorBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_TroopRegenerationFactorBonusRace);
+                }
+                if (DominantRace.MigrationFactor > 0.0 && DominantRace.MigrationFactor != 1)
+                {
+                    string bonusText = DominantRace.MigrationFactor < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Migration: {Math.Round((DominantRace.MigrationFactor - 1) * 100, 2)}% {bonusText} from RACE {_MigrationFactorBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_MigrationFactorBonusRace);
+                }
+                if (DominantRace.MilitaryShipSizeFactor > 0.0 && DominantRace.MilitaryShipSizeFactor != 1)
+                {
+                    string bonusText = DominantRace.MilitaryShipSizeFactor < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Military ship size: {Math.Round((DominantRace.MilitaryShipSizeFactor - 1) * 100, 2)}% {bonusText} from RACE {_MilitaryShipSizeFactorBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_MilitaryShipSizeFactorBonusRace);
+                }
+                if (DominantRace.CivilianShipSizeFactor > 0.0 && DominantRace.CivilianShipSizeFactor != 1)
+                {
+                    string bonusText = DominantRace.CivilianShipSizeFactor < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Civilian ship size: {Math.Round((DominantRace.CivilianShipSizeFactor - 1) * 100, 2)}% {bonusText} from RACE {_CivilianShipSizeFactorBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_CivilianShipSizeFactorBonusRace);
+                }
+                if (DominantRace.TourismIncomeFactor > 0.0 && DominantRace.TourismIncomeFactor != 1)
+                {
+                    string bonusText = DominantRace.TourismIncomeFactor < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Tourism income: {Math.Round((DominantRace.TourismIncomeFactor - 1) * 100, 2)}% {bonusText} from RACE {_TourismIncomeFactorBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_TourismIncomeFactorBonusRace);
+                }
+                if (DominantRace.ConstructionSpeedModifier > 0.0 && DominantRace.ConstructionSpeedModifier != 1)
+                {
+                    string bonusText = DominantRace.ConstructionSpeedModifier < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Construction speed: {Math.Round((DominantRace.ConstructionSpeedModifier - 1) * 100,2)}% {bonusText} from RACE {_ConstructionSpeedModifierBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_ConstructionSpeedModifierBonusRace);
+                }
+                if (DominantRace.ReproductiveRate > 0.0 && DominantRace.ReproductiveRate != 1)
+                {
+                    string bonusText = DominantRace.ReproductiveRate < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Reproductive rate: {Math.Round((DominantRace.ReproductiveRate - 1) * 100, 2)}% {bonusText} from RACE {_ReproductiveRateBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_ReproductiveRateBonusRace);
+                }
+                if (DominantRace.PeriodicGrowthRate > 0.0 && DominantRace.PeriodicGrowthRate != 1)
+                {
+                    string bonusText = DominantRace.PeriodicGrowthRate < 1 ? "Penalty" : "BONUS";
+                    string text5 = $"Periodic growth rate: {Math.Round((DominantRace.PeriodicGrowthRate - 1) * 100, 2)}% {bonusText} from RACE {_PeriodicGrowthRateBonusRace.Name})";
+
+                    list.Add(text5);
+                    bonusRaces.Add(_PeriodicGrowthRateBonusRace);
+                }
             }
             return list;
         }
@@ -2912,160 +3069,191 @@ namespace DistantWorlds.Types
             double num3 = 0.0;
             double num4 = 0.0;
             double num5 = 0.0;
-            Race race = null;
-            Race race2 = null;
-            Race race3 = null;
-            Race race4 = null;
-            Race race5 = null;
-            RaceList raceList = new RaceList();
-            List<double> list = new List<double>();
-            raceList.Add(DominantRace);
-            list.Add(0.0);
-            double num6 = 0.0;
-            for (int i = 0; i < Colonies.Count; i++)
-            {
-                Habitat habitat = Colonies[i];
-                for (int j = 0; j < habitat.Population.Count; j++)
-                {
-                    Population population = habitat.Population[j];
-                    int num7 = raceList.IndexOf(population.Race);
-                    if (num7 >= 0)
-                    {
-                        list[num7] += (double)population.Amount / 1000000.0;
-                    }
-                    else
-                    {
-                        raceList.Add(population.Race);
-                        list.Add((double)population.Amount / 1000000.0);
-                    }
-                    num6 += (double)population.Amount / 1000000.0;
-                }
-            }
-            for (int k = 0; k < raceList.Count; k++)
-            {
-                double val = 0.0;
-                if (list[k] >= 10.0)
-                {
-                    val = list[k] / (num6 / 5.0);
-                    val = Math.Max(0.1, val);
-                }
-                else if (list[k] > 0.0)
-                {
-                    val = 0.0;
-                }
-                val = Math.Min(1.0, val);
-                double num8 = (double)raceList[k].ShipMaintenanceSavings / 100.0;
-                double num9 = (double)raceList[k].ResourceExtractionBonus / 100.0;
-                double num10 = (double)raceList[k].ResearchBonus / 100.0;
-                double num11 = (double)raceList[k].EspionageBonus / 100.0;
-                double num12 = (double)raceList[k].TradeBonus / 100.0;
-                if (num8 * val > num)
-                {
-                    num = num8 * val;
-                    race = raceList[k];
-                }
-                if (num9 * val > num2)
-                {
-                    num2 = num9 * val;
-                    race2 = raceList[k];
-                }
-                if (num10 * val > num3)
-                {
-                    num3 = num10 * val;
-                    race3 = raceList[k];
-                }
-                if (num11 * val > num4)
-                {
-                    num4 = num11 * val;
-                    race4 = raceList[k];
-                }
-                if (num12 * val > num5)
-                {
-                    num5 = num12 * val;
-                    race5 = raceList[k];
-                }
-            }
             List<string> list2 = new List<string>();
-            if (num > _ShipMaintenanceSavings)
+            if (DominantRace.RaceType == (int)RaceType.Classic)
             {
-                if (race != _ShipMaintenanceSavingsRace)
+                Race race = null;
+                Race race2 = null;
+                Race race3 = null;
+                Race race4 = null;
+                Race race5 = null;
+                RaceList raceList = new RaceList();
+                List<double> list = new List<double>();
+                raceList.Add(DominantRace);
+                list.Add(0.0);
+                double totalPop = 0.0;
+                for (int i = 0; i < Colonies.Count; i++)
                 {
-                    raceChanged = race;
+                    Habitat habitat = Colonies[i];
+                    for (int j = 0; j < habitat.Population.Count; j++)
+                    {
+                        Population population = habitat.Population[j];
+                        int num7 = raceList.IndexOf(population.Race);
+                        if (num7 >= 0)
+                        {
+                            list[num7] += (double)population.Amount / 1000000.0;
+                        }
+                        else
+                        {
+                            raceList.Add(population.Race);
+                            list.Add((double)population.Amount / 1000000.0);
+                        }
+                        totalPop += (double)population.Amount / 1000000.0;
+                    }
                 }
-                _ShipMaintenanceSavings = num;
-                _ShipMaintenanceSavingsRace = race;
-                list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionShipMaintenance(num));
-                newAbilityRaces.Add(race);
-            }
-            else if (num <= 0.0)
-            {
-                _ShipMaintenanceSavings = 0.0;
-                _ShipMaintenanceSavingsRace = null;
-            }
-            if (num2 > _ResourceExtractionBonus)
-            {
-                if (race2 != _ResourceExtractionBonusRace)
+                for (int k = 0; k < raceList.Count; k++)
                 {
-                    raceChanged = race2;
+                    double val = 0.0;
+                    if (list[k] >= 10.0)
+                    {
+                        val = list[k] / (totalPop / 5.0);
+                        val = Math.Max(0.1, val);
+                    }
+                    else if (list[k] > 0.0)
+                    {
+                        val = 0.0;
+                    }
+                    val = Math.Min(1.0, val);
+                    double num8 = (double)raceList[k].ShipMaintenanceSavings / 100.0;
+                    double num9 = (double)raceList[k].ResourceExtractionBonus / 100.0;
+                    double num10 = (double)raceList[k].ResearchBonus / 100.0;
+                    double num11 = (double)raceList[k].EspionageBonus / 100.0;
+                    double num12 = (double)raceList[k].TradeBonus / 100.0;
+                    if (num8 * val > num)
+                    {
+                        num = num8 * val;
+                        race = raceList[k];
+                    }
+                    if (num9 * val > num2)
+                    {
+                        num2 = num9 * val;
+                        race2 = raceList[k];
+                    }
+                    if (num10 * val > num3)
+                    {
+                        num3 = num10 * val;
+                        race3 = raceList[k];
+                    }
+                    if (num11 * val > num4)
+                    {
+                        num4 = num11 * val;
+                        race4 = raceList[k];
+                    }
+                    if (num12 * val > num5)
+                    {
+                        num5 = num12 * val;
+                        race5 = raceList[k];
+                    }
                 }
-                _ResourceExtractionBonus = num2;
-                _ResourceExtractionBonusRace = race2;
-                list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionResourceExtraction(num2));
-                newAbilityRaces.Add(race2);
-            }
-            else if (num2 <= 0.0)
-            {
-                _ResourceExtractionBonus = 0.0;
-                _ResourceExtractionBonusRace = null;
-            }
-            if (num3 > _ResearchBonus)
-            {
-                if (race3 != _ResearchBonusRace)
+                if (num > _ShipMaintenanceSavings)
                 {
-                    raceChanged = race3;
+                    if (race != _ShipMaintenanceSavingsRace)
+                    {
+                        raceChanged = race;
+                    }
+                    _ShipMaintenanceSavings = num;
+                    _ShipMaintenanceSavingsRace = race;
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionShipMaintenance(num));
+                    newAbilityRaces.Add(race);
                 }
-                _ResearchBonus = num3;
-                _ResearchBonusRace = race3;
-                list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionResearch(num3));
-                newAbilityRaces.Add(race3);
-            }
-            else if (num3 <= 0.0)
-            {
-                _ResearchBonus = 0.0;
-                _ResearchBonusRace = null;
-            }
-            if (num4 > _EspionageBonus)
-            {
-                if (race4 != _EspionageBonusRace)
+                else if (num <= 0.0)
                 {
-                    raceChanged = race4;
+                    _ShipMaintenanceSavings = 0.0;
+                    _ShipMaintenanceSavingsRace = null;
                 }
-                _EspionageBonus = num4;
-                _EspionageBonusRace = race4;
-                list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionEspionage(num4));
-                newAbilityRaces.Add(race4);
-            }
-            else if (num4 <= 0.0)
-            {
-                _EspionageBonus = 0.0;
-                _EspionageBonusRace = null;
-            }
-            if (num5 > _TradeBonus)
-            {
-                if (race5 != _TradeBonusRace)
+                if (num2 > _ResourceExtractionBonus)
                 {
-                    raceChanged = race5;
+                    if (race2 != _ResourceExtractionBonusRace)
+                    {
+                        raceChanged = race2;
+                    }
+                    _ResourceExtractionBonus = num2;
+                    _ResourceExtractionBonusRace = race2;
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionResourceExtraction(num2));
+                    newAbilityRaces.Add(race2);
                 }
-                _TradeBonus = num5;
-                _TradeBonusRace = race5;
-                list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionTrade(num5));
-                newAbilityRaces.Add(race5);
+                else if (num2 <= 0.0)
+                {
+                    _ResourceExtractionBonus = 0.0;
+                    _ResourceExtractionBonusRace = null;
+                }
+                if (num3 > _ResearchBonus)
+                {
+                    if (race3 != _ResearchBonusRace)
+                    {
+                        raceChanged = race3;
+                    }
+                    _ResearchBonus = num3;
+                    _ResearchBonusRace = race3;
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionResearch(num3));
+                    newAbilityRaces.Add(race3);
+                }
+                else if (num3 <= 0.0)
+                {
+                    _ResearchBonus = 0.0;
+                    _ResearchBonusRace = null;
+                }
+                if (num4 > _EspionageBonus)
+                {
+                    if (race4 != _EspionageBonusRace)
+                    {
+                        raceChanged = race4;
+                    }
+                    _EspionageBonus = num4;
+                    _EspionageBonusRace = race4;
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionEspionage(num4));
+                    newAbilityRaces.Add(race4);
+                }
+                else if (num4 <= 0.0)
+                {
+                    _EspionageBonus = 0.0;
+                    _EspionageBonusRace = null;
+                }
+                if (num5 > _TradeBonus)
+                {
+                    if (race5 != _TradeBonusRace)
+                    {
+                        raceChanged = race5;
+                    }
+                    _TradeBonus = num5;
+                    _TradeBonusRace = race5;
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionTrade(num5));
+                    newAbilityRaces.Add(race5);
+                }
+                else if (num5 <= 0.0)
+                {
+                    _TradeBonus = 0.0;
+                    _TradeBonusRace = null;
+                }
             }
-            else if (num5 <= 0.0)
+            /*else if (DominantRace.RaceType == (int)RaceType.BonusAdaptation)
             {
-                _TradeBonus = 0.0;
-                _TradeBonusRace = null;
-            }
+                if (_ShipMaintenanceSavings!=0)
+                {
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionShipMaintenance(_ShipMaintenanceSavings));
+                    newAbilityRaces.Add(DominantRace);
+                }
+                if (_ResourceExtractionBonus>0)
+                {
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionResourceExtraction(_ResourceExtractionBonus));
+                    newAbilityRaces.Add(DominantRace);
+                }
+                if (_ResearchBonus>0)
+                {
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionResearch(_ResearchBonus));
+                    newAbilityRaces.Add(DominantRace);
+                }
+                if (_EspionageBonus>0)
+                {
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionEspionage(_EspionageBonus));
+                    newAbilityRaces.Add(DominantRace);
+                }
+                if (_TradeBonus>0)
+                {
+                    list2.Add(Galaxy.ResolveEmpireAbilityBonusDescriptionTrade(_TradeBonus));
+                    newAbilityRaces.Add(DominantRace);
+                }
+            }*/
             return list2;
         }
 
@@ -5306,7 +5494,7 @@ namespace DistantWorlds.Types
             }
         }
 
-       
+
 
 
     }

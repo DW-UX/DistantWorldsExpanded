@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
@@ -1386,7 +1387,8 @@ namespace DistantWorlds.Types
                 governmentId = firstByAvailability.GovernmentId;
             }
             double actualTechLevel = 0.0;
-            Empire empire = GenerateEmpire(this, isPlayerEmpire: false, empireName, startingColony, race, race.DesignPictureFamilyIndex, governmentId, homeSystemFactor, text, age, 7.0, 1.0, out expansion, null, null, out actualTechLevel, "Shakturi");
+            int maxTechLvl = this.ResearchNodeDefinitions.Max(x => x.TechLevel);
+            Empire empire = GenerateEmpire(this, isPlayerEmpire: false, empireName, startingColony, race, race.DesignPictureFamilyIndex, governmentId, homeSystemFactor, text, age, maxTechLvl, 1.0, out expansion, null, null, out actualTechLevel, "Shakturi");
             startingColony.BaseQuality = 1f;
             Ruin ruin = new Ruin("Palace of Eternal Darkness", 12, 0.5, 0.0, 0.0, 0, 0, 0);
             ruin.BonusWealth = 2.0;
@@ -1973,7 +1975,8 @@ namespace DistantWorlds.Types
             {
                 governmentId = firstByAvailability.GovernmentId;
             }
-            Empire empire = GenerateEmpire(this, isPlayerEmpire: false, "Ancient Guardians", homeColony, race, race.DesignPictureFamilyIndex, governmentId, homeSystemFactor, text, 1, 7.0, 1.0, out expansion, null, null);
+            int maxTechLvl = this.ResearchNodeDefinitions.Max(x => x.TechLevel);
+            Empire empire = GenerateEmpire(this, isPlayerEmpire: false, "Ancient Guardians", homeColony, race, race.DesignPictureFamilyIndex, governmentId, homeSystemFactor, text, 1, maxTechLvl, 1.0, out expansion, null, null);
             if (empire.Policy != null)
             {
                 empire.Policy.ColonyAllowFacilityCloningFacility = false;
@@ -4068,7 +4071,22 @@ namespace DistantWorlds.Types
                 empire.AddBuiltObjectToGalaxy(builtObject2, habitat, offsetLocationFromParent: false, isStateOwned: true, (int)x, (int)y, sendMessage: false);
             }
             int num = Rnd.Next(20, 30);
-            for (int j = 0; j < num; j++)
+            //for (int j = 0; j < num; j++)
+            int totalFirepower = 0;
+            int targetFirePower = Empires.Max(x =>
+            {
+                if (x.PirateEmpireBaseHabitat != null)
+                    return x.BuiltObjects.Sum(y =>
+                    {
+                        if (y.Role == BuiltObjectRole.Military)
+                            return y.FirepowerRaw;
+                        else
+                            return 0;
+                    });
+                else
+                    return 0;
+            });
+            while (totalFirepower < targetFirePower)
             {
                 Design design9 = null;
                 switch (Rnd.Next(0, 25))
@@ -4112,6 +4130,7 @@ namespace DistantWorlds.Types
                         break;
                 }
                 design9.BuildCount++;
+                totalFirepower += design9.FirepowerRaw;
                 string name4 = SelectRandomUniqueMilitaryShipName();
                 BuiltObject builtObject3 = new BuiltObject(design9, name4, this, fullyBuilt: true);
                 builtObject3.Empire = empire;
@@ -4473,7 +4492,7 @@ namespace DistantWorlds.Types
                     planetaryFacilityBuildFactor = 1.0;
                     planetaryWonderBuildFactor = 0.75;
                     break;
-                case 
+                case
                 PiratePlayStyle.Legendary:
                     smugglingIncomeFactor = 1.5;
                     raidStrengthFactor = 1.25;

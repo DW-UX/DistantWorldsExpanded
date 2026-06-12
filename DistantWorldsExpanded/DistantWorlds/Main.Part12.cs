@@ -39,9 +39,11 @@ using ExpansionMod.Objects;
 using System.Collections.Concurrent;
 using DistantWorlds.DBLoader;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
 
         internal void LoadEffectsWeapons(string string_30, string string_31)
@@ -1049,6 +1051,8 @@ namespace DistantWorlds {
             () => LoadUiCursors(gameImages, customizationPath),
             () => LoadEnvGalaxybackdrops(gameImages, customizationPath));
 
+
+
             //LoadMapStars(gameImages);
             // LoadStars(gameImages, customizationPath, imageScale, bool_28: true);
             // LoadNebulae(gameImages, imageScale);
@@ -1081,7 +1085,23 @@ namespace DistantWorlds {
             // LoadUiShipsymbols(gameImages, customizationPath);
             // LoadUiCursors(gameImages, customizationPath);
             // LoadEnvGalaxybackdrops(gameImages, customizationPath);
+            ValidateImageReference();
+        }
 
+        private void ValidateImageReference()
+        {
+            var races = Galaxy.LoadRaces(Application.StartupPath, GetCustomizationPath());
+            foreach (var race in races)
+            {
+                if (!BaconBuiltObjectImageCache.shipPictures.Any(x => x.FamilyIdx == race.DesignPictureFamilyIndexPirates))
+                {
+                    throw new Exception($"Customization set references a pirate ship picture family that does not exist: {race.DesignPictureFamilyIndexPirates}");
+                }
+                if (!BaconBuiltObjectImageCache.shipPictures.Any(x => x.FamilyIdx == race.DesignPictureFamilyIndex))
+                {
+                    throw new Exception($"Customization set references a ship picture family that does not exist: {race.DesignPictureFamilyIndex}");
+                }
+            }
         }
 
         private void builtObjectImageCache_0_LoadProgress(object sender, EventArgs e)
@@ -5110,6 +5130,6 @@ namespace DistantWorlds {
         }
 
 
-  }
+    }
 
 }

@@ -506,6 +506,9 @@ namespace DistantWorlds
                 case (EmpireMessageType)96:
                     text = "message_major.wav";
                     break;
+                default:
+                    text = "message_minor.wav";
+                    break;
             }
             soundEffectRequest.Filename = text;
             soundEffectRequest.Balance = 0.0;
