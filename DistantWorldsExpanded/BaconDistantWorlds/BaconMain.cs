@@ -47,9 +47,9 @@ namespace BaconDistantWorlds
 
         public static double minZoomLevelForWeaponsCircles = 0.9;
 
-        public static prisonForm prisonForm;
+        //public static prisonForm prisonForm;
 
-        public static bool prisonFormOpen = false;
+        //public static bool prisonFormOpen = false;
 
         public static bool shipViewerOpen = false;
 

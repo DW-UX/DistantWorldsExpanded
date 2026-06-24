@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ExpansionMod.ModSettings
@@ -12,7 +13,8 @@ namespace ExpansionMod.ModSettings
     internal class SettingsParser
     {
         private const int _Version = 1;
-        private const string _SettingsFileName = "ExapnsionModSettings.json";
+        private const string _SettingsFileName = "ExpansionModSettings.json";
+        private const string _OldNameSettingsFileName = "ExapnsionModSettings.json";
         private string _modFolder;
         private ExpansionModMain _modMain;
         public SettingsParser(ExpansionModMain modMain, string modFolder)
@@ -25,6 +27,12 @@ namespace ExpansionMod.ModSettings
         {
             SettingsModel res = null;
             errorMsg = "";
+            if (File.Exists(Path.Combine(_modFolder, _OldNameSettingsFileName)))
+            {
+                FileInfo oldFileInfo = new FileInfo(Path.Combine(_modFolder, _OldNameSettingsFileName));
+                oldFileInfo.MoveTo(Path.Combine(_modFolder, _SettingsFileName));
+                Thread.Sleep(10);
+            }                
             FileInfo fileInfo = new FileInfo(Path.Combine(_modFolder, _SettingsFileName));
             if (fileInfo.Exists)
             {

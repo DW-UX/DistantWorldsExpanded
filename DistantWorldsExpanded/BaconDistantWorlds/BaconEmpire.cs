@@ -378,8 +378,6 @@ namespace BaconDistantWorlds
             return num;
         }
 
-        public static void ShowPrisonForm(Main main) => BaconMain.prisonForm = new prisonForm(main);
-
         public static void ShowCustomBomberForm(Main main) => BaconMain.CustomBomberForm = new CustomBomberForm(main);
 
         public static List<object> GetOutstandingLoans()

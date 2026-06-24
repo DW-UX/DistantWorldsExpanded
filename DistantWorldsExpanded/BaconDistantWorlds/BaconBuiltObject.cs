@@ -338,13 +338,15 @@ namespace BaconDistantWorlds
                     {
                         //if (e.Control)
                         {
-                            if (!BaconMain.prisonFormOpen)
-                            {
-                                BaconMain.prisonFormOpen = true;
-                                BaconEmpire.ShowPrisonForm(BaconBuiltObject.myMain);
-                            }
-                            else if (BaconMain.prisonForm != null)
-                                BaconMain.prisonForm.BringToFront();
+                            //if (!BaconMain.prisonFormOpen)
+                            //{
+                            //BaconMain.prisonFormOpen = true;
+                            //BaconEmpire.ShowPrisonForm(BaconBuiltObject.myMain);
+                            using var prisonForm = new prisonForm(BaconBuiltObject.myMain);
+                            prisonForm.ShowDialog(BaconBuiltObject.myMain);
+                            //}
+                            //else if (BaconMain.prisonForm != null)
+                            //    BaconMain.prisonForm.BringToFront();
                             e.Handled = true;
                             //break;
                         }
@@ -830,7 +832,7 @@ namespace BaconDistantWorlds
             num = 1;
         label_5:
             if (num != 0 || shipOrFighter is ShipGroup && (shipOrFighter as ShipGroup).Ships[0].Empire != main._Game.PlayerEmpire || shipOrFighter is BuiltObjectList && (shipOrFighter as BuiltObjectList)[0].Empire != main._Game.PlayerEmpire || shipOrFighter is StellarObject && (shipOrFighter as StellarObject).Empire != main._Game.PlayerEmpire)
-              {
+            {
                 MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
                 messageBox.Text = "Selected ship can't use that command. Command can only be applied to single ship or base of your empire";
                 messageBox.Caption = "Wrong target for command";
@@ -842,7 +844,7 @@ namespace BaconDistantWorlds
                 messageBox.Show();
                 if (!flag)
                     main._Game.Galaxy.Resume();
-                return; 
+                return;
             }
             switch (shipOrFighter)
             {
