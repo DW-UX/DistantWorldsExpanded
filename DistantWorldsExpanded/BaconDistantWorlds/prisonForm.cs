@@ -71,7 +71,7 @@ namespace BaconDistantWorlds
                     this.prisonersDataGridView.Rows[index].SetValues(objArray);
                     ++index;
                 }
-                this.Show();
+                //this.Show();
             }
             catch (Exception ex)
             {
