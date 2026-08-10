@@ -119,17 +119,17 @@ namespace DistantWorlds.Controls
       if (this._Fleets != null)
       {
         this._Fleets.Sort();
-        this.Items.AddRange((object[]) this._Fleets.ToArray());
+        this.Items.AddRange(this._Fleets.ToArray());
       }
       if (this._BuiltObjects != null)
       {
         this._BuiltObjects.OrderByName();
-        this.Items.AddRange((object[]) this._BuiltObjects.ToArray());
+        this.Items.AddRange(this._BuiltObjects.ToArray());
       }
       if (this._Habitats == null)
         return;
       this._Habitats = this._Habitats.OrderByName();
-      this.Items.AddRange((object[]) this._Habitats.ToArray());
+      this.Items.AddRange(this._Habitats.ToArray());
     }
 
     public ShipGroup SelectedFleet

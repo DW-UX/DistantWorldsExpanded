@@ -183,7 +183,7 @@ namespace BaconDistantWorlds
             {
                 foreach (Empire empiresAndPirate in (SyncList<Empire>)empiresAndPirates)
                 {
-                    foreach (BuiltObject ship in empiresAndPirate.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == BuiltObjectSubRole.ExplorationShip)))
+                    foreach (BuiltObject ship in empiresAndPirate.BuiltObjects.Values.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == BuiltObjectSubRole.ExplorationShip)))
                     {
                         if (ship.BaconValues != null)
                         {
@@ -392,9 +392,10 @@ namespace BaconDistantWorlds
             }
             else if (main._Game.PlayerEmpire.PirateEmpireBaseHabitat != null)
             {
-                if (main._Game.PlayerEmpire.BuiltObjects[0].BaconValues == null)
-                    main._Game.PlayerEmpire.BuiltObjects[0].BaconValues = new Dictionary<string, object>();
-                outstandingLoans = main._Game.PlayerEmpire.BuiltObjects[0].BaconValues.Where<KeyValuePair<string, object>>((Func<KeyValuePair<string, object>, bool>)(x => x.Key.Contains("loan"))).Select<KeyValuePair<string, object>, object>((Func<KeyValuePair<string, object>, object>)(y => y.Value)).ToList<object>();
+                var obj = main._Game.PlayerEmpire.BuiltObjects.Values.FirstOrDefault();
+                if (obj.BaconValues == null)
+                    obj.BaconValues = new Dictionary<string, object>();
+                outstandingLoans = obj.BaconValues.Where<KeyValuePair<string, object>>((Func<KeyValuePair<string, object>, bool>)(x => x.Key.Contains("loan"))).Select<KeyValuePair<string, object>, object>((Func<KeyValuePair<string, object>, object>)(y => y.Value)).ToList<object>();
             }
             return outstandingLoans;
         }
@@ -483,9 +484,10 @@ namespace BaconDistantWorlds
                                     }
                                     else
                                     {
-                                        if (main._Game.PlayerEmpire.BuiltObjects[0].BaconValues == null)
-                                            main._Game.PlayerEmpire.BuiltObjects[0].BaconValues = new Dictionary<string, object>();
-                                        while (main._Game.PlayerEmpire.BuiltObjects[0].BaconValues.ContainsKey("loan" + num5.ToString()))
+                                        var obj = main._Game.PlayerEmpire.BuiltObjects.Values.FirstOrDefault();
+                                        if (obj.BaconValues == null)
+                                            obj.BaconValues = new Dictionary<string, object>();
+                                        while (obj.BaconValues.ContainsKey("loan" + num5.ToString()))
                                             ++num5;
                                         key = "loan" + num5.ToString();
                                         main._Game.PlayerEmpire.BuiltObjects[0].BaconValues.Add(key, (object)intList);
@@ -520,8 +522,9 @@ namespace BaconDistantWorlds
             {
                 foreach (Empire pirateEmpire in (SyncList<Empire>)main._Game.Galaxy.PirateEmpires)
                 {
+                    BuiltObject obj = pirateEmpire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == pirateEmpire.PirateEmpireBaseHabitat);
                     if (pirateEmpire.BuiltObjects != null && pirateEmpire.BuiltObjects.Count > 0)
-                        BaconBuiltObject.GiveAllStrategicResourcesCargoToBase(pirateEmpire.BuiltObjects[0], result);
+                        BaconBuiltObject.GiveAllStrategicResourcesCargoToBase(obj, result);
                 }
             }
             else
@@ -575,8 +578,12 @@ namespace BaconDistantWorlds
                     if (BaconBuiltObject.myMain._Game.PlayerEmpire.Capital != null && BaconBuiltObject.myMain._Game.PlayerEmpire.Capital.BaconValues != null)
                         source = (List<int>)BaconBuiltObject.myMain._Game.PlayerEmpire.Capital.BaconValues[messageTitle];
                 }
-                else if (BaconBuiltObject.myMain._Game.PlayerEmpire.BuiltObjects[0].BaconValues != null)
-                    source = (List<int>)BaconBuiltObject.myMain._Game.PlayerEmpire.BuiltObjects[0].BaconValues[messageTitle];
+                else
+                {
+                    BuiltObject obj = BaconBuiltObject.myMain._Game.PlayerEmpire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == BaconBuiltObject.myMain._Game.PlayerEmpire.PirateEmpireBaseHabitat);
+                    if (obj != null && obj.BaconValues != null)
+                        source = (List<int>)obj.BaconValues[messageTitle];
+                }
                 if (source.Count<int>() != 2)
                     return;
                 int num1 = source[0];
@@ -592,7 +599,10 @@ namespace BaconDistantWorlds
                     if (BaconBuiltObject.myMain._Game.PlayerEmpire.PirateEmpireBaseHabitat == null)
                         BaconBuiltObject.myMain._Game.PlayerEmpire.Capital.BaconValues[messageTitle] = (object)intList;
                     else
-                        BaconBuiltObject.myMain._Game.PlayerEmpire.BuiltObjects[0].BaconValues[messageTitle] = (object)intList;
+                    {
+                        BuiltObject obj = BaconBuiltObject.myMain._Game.PlayerEmpire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == BaconBuiltObject.myMain._Game.PlayerEmpire.PirateEmpireBaseHabitat);
+                        obj.BaconValues[messageTitle] = (object)intList;
+                    }
                     eventAction.ExecutionDate = BaconBuiltObject.myMain._Game.Galaxy.CurrentStarDate + (long)(Galaxy.RealSecondsInGalacticYear * 1000 / 360 * 30);
                     EventActionExecutionPackage executionPackage = new EventActionExecutionPackage(eventAction, gameEvent, BaconBuiltObject.myMain._Game.PlayerEmpire);
                     BaconBuiltObject.myMain._Game.Galaxy.DelayedActions.Add(executionPackage);
@@ -605,13 +615,12 @@ namespace BaconDistantWorlds
 
         public static double AnnualStateMaintenanceExcludingUnderConstruction(Empire empire)
         {
-            double num1 = 0.0;
-            for (int index = 0; index < empire.BuiltObjects.Count<BuiltObject>(); ++index)
+            double num1 = empire.BuiltObjects.Values.Sum(builtObject =>
             {
-                BuiltObject builtObject = empire.BuiltObjects[index];
                 if (builtObject.UnbuiltComponentCount <= 0 && (builtObject.BaconValues == null || !builtObject.BaconValues.ContainsKey("cash") || builtObject.IsAutoControlled))
-                    num1 += (double)builtObject.AnnualSupportCost;
-            }
+                    return (double)builtObject.AnnualSupportCost;
+                return 0.0;
+            });
             double num2 = num1 * empire.ShipMaintenanceSavings;
             return num1 - num2;
         }
@@ -622,31 +631,27 @@ namespace BaconDistantWorlds
             if (main == null)
                 return;
             double num1 = timePassed / (double)Galaxy.RealSecondsInGalacticYear;
-            for (int index = 0; index < empire.BuiltObjects.Count<BuiltObject>(); ++index)
+            foreach (var builtObject in empire.BuiltObjects.Values.Where(x => x.UnbuiltComponentCount <= 0 && x.BaconValues != null && x.BaconValues.ContainsKey("cash") && !x.IsAutoControlled))
             {
-                BuiltObject builtObject = empire.BuiltObjects[index];
-                if (builtObject.UnbuiltComponentCount <= 0 && builtObject.BaconValues != null && builtObject.BaconValues.ContainsKey("cash") && !builtObject.IsAutoControlled)
+                int annualSupportCost = builtObject.AnnualSupportCost;
+                double num2 = (double)annualSupportCost * empire.ShipMaintenanceSavings;
+                int int32 = Convert.ToInt32(((double)annualSupportCost - num2) * num1);
+                int baconValue = (int)builtObject.BaconValues["cash"];
+                builtObject.BaconValues["cash"] = (object)((int)builtObject.BaconValues["cash"] - int32);
+                List<object[]> objArrayList = builtObject.BaconValues.ContainsKey("tradeHistory") ? (List<object[]>)builtObject.BaconValues["tradeHistory"] : new List<object[]>();
+                long currentStarDate = main._Game.Galaxy.CurrentStarDate;
+                int num3 = Galaxy.RealSecondsInGalacticYear * 1000;
+                string str = Galaxy.ResolveStarDateDescription(currentStarDate);
+                object[] objArray = new object[5]
                 {
-                    int annualSupportCost = builtObject.AnnualSupportCost;
-                    double num2 = (double)annualSupportCost * empire.ShipMaintenanceSavings;
-                    int int32 = Convert.ToInt32(((double)annualSupportCost - num2) * num1);
-                    int baconValue = (int)builtObject.BaconValues["cash"];
-                    builtObject.BaconValues["cash"] = (object)((int)builtObject.BaconValues["cash"] - int32);
-                    List<object[]> objArrayList = builtObject.BaconValues.ContainsKey("tradeHistory") ? (List<object[]>)builtObject.BaconValues["tradeHistory"] : new List<object[]>();
-                    long currentStarDate = main._Game.Galaxy.CurrentStarDate;
-                    int num3 = Galaxy.RealSecondsInGalacticYear * 1000;
-                    string str = Galaxy.ResolveStarDateDescription(currentStarDate);
-                    object[] objArray = new object[5]
-                    {
             (object) "maintenance",
             (object) "maintenance",
             (object) "0",
             (object) int32,
             (object) str
-                    };
-                    objArrayList.Add(objArray);
-                    builtObject.BaconValues["tradeHistory"] = (object)objArrayList;
-                }
+                };
+                objArrayList.Add(objArray);
+                builtObject.BaconValues["tradeHistory"] = (object)objArrayList;
             }
         }
 
@@ -1114,7 +1119,7 @@ namespace BaconDistantWorlds
           Main main,
           Empire empire)
         {
-            if ((double)BaconHabitat.pirateControlLevelToBuildShipsAtIndependentPlanets > 100.0 || empire.BuiltObjects.Count<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == BuiltObjectSubRole.ConstructionShip && x.WarpSpeed >= 1000 && x.DamagedComponentCount < 10)) > 20)
+            if ((double)BaconHabitat.pirateControlLevelToBuildShipsAtIndependentPlanets > 100.0 || empire.BuiltObjects.Values.Count<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == BuiltObjectSubRole.ConstructionShip && x.WarpSpeed >= 1000 && x.DamagedComponentCount < 10)) > 20)
                 return;
             double stateMoney = empire.StateMoney;
             Design newestCanBuild = empire.Designs.FindNewestCanBuild(BuiltObjectSubRole.ConstructionShip);
@@ -1192,6 +1197,8 @@ namespace BaconDistantWorlds
             }
             else
             {
+                BuiltObject obj = empire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == empire.PirateEmpireBaseHabitat);
+
                 main._Game.PlayAsAPirate = false;
                 empire.PirateEmpireBaseHabitat = (Habitat)null;
                 main._Game.Galaxy.Empires.Add(empire);
@@ -1224,7 +1231,7 @@ namespace BaconDistantWorlds
                     colony.RecalculateDistanceFactor();
                     colony.RecalculateAnnualTaxRevenue();
                 }
-                foreach (BuiltObject builtObject in (SyncList<BuiltObject>)empire.BuiltObjects)
+                foreach (BuiltObject builtObject in empire.BuiltObjects.Values)
                 {
                     builtObject.Empire = builtObject.ActualEmpire;
                     builtObject.PirateEmpireId = (byte)0;
@@ -1238,14 +1245,14 @@ namespace BaconDistantWorlds
                 empire.ChangeGovernment(0);
                 if (empire.Capital != null && empire.Capital.BaconValues == null)
                     empire.Capital.BaconValues = new Dictionary<string, object>();
-                if (empire.BuiltObjects != null && empire.BuiltObjects.Count > 0 && empire.BuiltObjects[0].BaconValues != null)
+                if (empire.BuiltObjects != null && empire.BuiltObjects.Count > 0 && obj.BaconValues != null)
                 {
-                    foreach (KeyValuePair<string, object> keyValuePair in new Dictionary<string, object>((IDictionary<string, object>)empire.BuiltObjects[0].BaconValues))
+                    foreach (KeyValuePair<string, object> keyValuePair in new Dictionary<string, object>((IDictionary<string, object>)obj.BaconValues))
                     {
                         if (BaconMain.baconValuesToCopyOnChangingCapital.Contains(keyValuePair.Key) && !empire.Capital.BaconValues.ContainsKey(keyValuePair.Key))
                         {
                             empire.Capital.BaconValues.Add(keyValuePair.Key, keyValuePair.Value);
-                            empire.BuiltObjects[0].BaconValues.Remove(keyValuePair.Key);
+                            obj.BaconValues.Remove(keyValuePair.Key);
                         }
                     }
                 }
@@ -1364,7 +1371,7 @@ namespace BaconDistantWorlds
             {
                 if (actualEmpire.BuiltObjects == null || actualEmpire.BuiltObjects.Count < 1)
                     return;
-                BuiltObject builtObject = actualEmpire.BuiltObjects[0];
+                BuiltObject builtObject = actualEmpire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == actualEmpire.PirateEmpireBaseHabitat);
                 if (builtObject == null || !BaconBuiltObject.CheckAndCreateBaconValuesKey(builtObject, "scientificData"))
                     return;
                 int num = Math.Min((int)builtObject.BaconValues["scientificData"], 100);
@@ -1396,7 +1403,7 @@ namespace BaconDistantWorlds
             {
                 if (actualEmpire.BuiltObjects == null || actualEmpire.BuiltObjects.Count < 1)
                     return;
-                BuiltObject builtObject = actualEmpire.BuiltObjects[0];
+                BuiltObject builtObject = actualEmpire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == actualEmpire.PirateEmpireBaseHabitat);
                 if (builtObject == null)
                     return;
                 BaconBuiltObject.CheckAndCreateBaconValuesKey(builtObject, "scientificData");

@@ -1312,8 +1312,7 @@ namespace DistantWorlds.Types
         {
             if (_NextBuiltObjectID < int.MaxValue)
             {
-                _NextBuiltObjectID++;
-                return _NextBuiltObjectID;
+                return Interlocked.Increment(ref _NextBuiltObjectID); ;
             }
             throw new ApplicationException("Maximum allowable ship number exceeded!");
         }
@@ -1322,8 +1321,7 @@ namespace DistantWorlds.Types
         {
             if (_NextFighterID < int.MaxValue)
             {
-                _NextFighterID++;
-                return _NextFighterID;
+                return Interlocked.Increment(ref _NextFighterID);
             }
             throw new ApplicationException("Maximum allowable fighter number exceeded!");
         }
@@ -1332,8 +1330,7 @@ namespace DistantWorlds.Types
         {
             if (_NextEmpireID < MaximumEmpireCount)
             {
-                _NextEmpireID++;
-                return _NextEmpireID;
+                return Interlocked.Increment(ref _NextEmpireID);
             }
             throw new ApplicationException("Maximum allowable empire number exceeded!");
         }
@@ -1342,8 +1339,7 @@ namespace DistantWorlds.Types
         {
             if (_NextCreatureID < int.MaxValue)
             {
-                _NextCreatureID++;
-                return _NextCreatureID;
+                return Interlocked.Increment(ref _NextCreatureID);
             }
             throw new ApplicationException("Maximum allowable creature number exceeded!");
         }

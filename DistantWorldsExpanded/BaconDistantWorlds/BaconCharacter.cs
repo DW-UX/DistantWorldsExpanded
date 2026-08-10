@@ -74,7 +74,7 @@ namespace BaconDistantWorlds
             }
             else if (spyTargetEmpire.PirateEmpireBaseHabitat != null)
             {
-              BuiltObject builtObject = spyTargetEmpire.BuiltObjects[0];
+              BuiltObject builtObject = spyTargetEmpire.BuiltObjects.Values.FirstOrDefault(x=>x.ParentHabitat==spyTargetEmpire.PirateEmpireBaseHabitat);
               if (builtObject.BaconValues == null)
                 builtObject.BaconValues = new Dictionary<string, object>();
               List<Character> characterList = !builtObject.BaconValues.Keys.Contains<string>("capturedSpies") ? new List<Character>() : (List<Character>) builtObject.BaconValues["capturedSpies"];

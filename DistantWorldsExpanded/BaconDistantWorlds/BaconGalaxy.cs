@@ -209,7 +209,7 @@ namespace BaconDistantWorlds
         }
         HabitatList dominatedSystems = receiver.DetermineEmpireDominatedSystems(receiver, true);
         BuiltObjectList builtObjectList = new BuiltObjectList();
-        builtObjectList.AddRange(giver.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>) (x =>
+        builtObjectList.AddRange(giver.BuiltObjects.Values.Where<BuiltObject>((Func<BuiltObject, bool>) (x =>
         {
           if (x.Role != BuiltObjectRole.Base)
             return false;

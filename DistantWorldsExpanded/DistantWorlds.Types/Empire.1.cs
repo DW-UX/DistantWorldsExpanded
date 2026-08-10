@@ -769,7 +769,7 @@ namespace DistantWorlds.Types
                             {
                                 newEmpire.PrivateBuiltObjects.Add(builtObject);
                             }
-                            if (newEmpire.BuiltObjects != null && newEmpire.BuiltObjects.Contains(builtObject))
+                            if (newEmpire.BuiltObjects != null && newEmpire.BuiltObjects.ContainsKey(builtObject.BuiltObjectID))
                             {
                                 newEmpire.BuiltObjects.Remove(builtObject);
                             }

@@ -31,7 +31,7 @@ namespace BaconDistantWorlds.Forms
             cmbSource.DisplayMember = nameof(BuiltObjectView.Text);
 
             List<BuiltObjectView> sourceList = main._Game.PlayerEmpire.Colonies.Select(x => new BuiltObjectView() { Item = x, Text = $"{x.Name} (Colony)"}).ToList();
-            sourceList = main._Game.PlayerEmpire.BuiltObjects.Where(x=>x.Role == BuiltObjectRole.Base || x.SubRole == BuiltObjectSubRole.ConstructionShip).Select(x => new BuiltObjectView() { Item = x, Text = $"{x.Name} ({x.SubRole})" }).ToList();
+            sourceList = main._Game.PlayerEmpire.BuiltObjects.Values.Where(x=>x.Role == BuiltObjectRole.Base || x.SubRole == BuiltObjectSubRole.ConstructionShip).Select(x => new BuiltObjectView() { Item = x, Text = $"{x.Name} ({x.SubRole})" }).ToList();
             sourceList.AddRange(main._Game.PlayerEmpire.ResourceExtractors.Where(x => x.Role == BuiltObjectRole.Base || x.SubRole == BuiltObjectSubRole.ConstructionShip).Select(x => new BuiltObjectView() { Item = x, Text = $"{x.Name} ({x.SubRole})" }).ToList());
             sourceList.Sort((x1, x2) => x1.Text.CompareTo(x2.Text));
 

@@ -486,7 +486,7 @@ namespace BaconDistantWorlds
 
     public void SendGeneralHome(Character general)
     {
-      StellarObject destination = general.Empire.Capital == null ? (StellarObject) general.Empire.BuiltObjects[0] : (StellarObject) general.Empire.Capital;
+      StellarObject destination = general.Empire.Capital == null ? (StellarObject) general.Empire.BuiltObjects.Values.FirstOrDefault(x=>x.ParentHabitat == general.Empire.PirateEmpireBaseHabitat) : (StellarObject) general.Empire.Capital;
       general.TransferToNewLocation(destination, BaconBuiltObject.myMain._Game.Galaxy);
       this.generalsInBattle.Remove(general);
       if (this.isPlayerInvading)

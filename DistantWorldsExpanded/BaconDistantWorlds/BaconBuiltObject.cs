@@ -535,7 +535,7 @@ namespace BaconDistantWorlds
                 List<BuiltObject> builtObjectList = new List<BuiltObject>();
                 for (int index = 1; index < selectedObject.ConstructionQueue.ConstructionWaitQueue.Count; ++index)
                 {
-                    if (selectedObject.ConstructionQueue.ConstructionWaitQueue[index] != null && selectedObject.ActualEmpire.BuiltObjects.Contains(selectedObject.ConstructionQueue.ConstructionWaitQueue[index]))
+                    if (selectedObject.ConstructionQueue.ConstructionWaitQueue[index] != null && selectedObject.ActualEmpire.BuiltObjects.ContainsKey(selectedObject.ConstructionQueue.ConstructionWaitQueue[index].BuiltObjectID))
                         builtObjectList.Add(selectedObject.ConstructionQueue.ConstructionWaitQueue[index]);
                 }
                 for (int index = 0; index < builtObjectList.Count; ++index)
@@ -1231,7 +1231,7 @@ namespace BaconDistantWorlds
                 builtObject = (BuiltObject)ship;
             }
             if (builtObject.Role == BuiltObjectRole.Passenger &&
-                (main._Game.PlayerEmpire.BuiltObjects.Contains(builtObject)
+                (main._Game.PlayerEmpire.BuiltObjects.ContainsKey(builtObject.BuiltObjectID)
                 || (BaconBuiltObject.AllowPrivateShipAssigment && main._Game.PlayerEmpire.PrivateBuiltObjects.Contains(builtObject)))
                 && builtObject.Empire != null)
             {
@@ -1316,7 +1316,7 @@ namespace BaconDistantWorlds
                 }
                 else
                 {
-                    main._Game.SelectedObject = (object)main._Game.PlayerEmpire.BuiltObjects.FirstOrDefault<BuiltObject>((Func<BuiltObject, bool>)(x => x.Name.StartsWith(input, StringComparison.InvariantCultureIgnoreCase)));
+                    main._Game.SelectedObject = (object)main._Game.PlayerEmpire.BuiltObjects.Values.FirstOrDefault<BuiltObject>((Func<BuiltObject, bool>)(x => x.Name.StartsWith(input, StringComparison.InvariantCultureIgnoreCase)));
                     if (main._Game.SelectedObject == null)
                         main._Game.SelectedObject = (object)main._Game.PlayerEmpire.PrivateBuiltObjects.FirstOrDefault<BuiltObject>((Func<BuiltObject, bool>)(x => x.Name.StartsWith(input, StringComparison.InvariantCultureIgnoreCase)));
                     if (main._Game.SelectedObject == null)
@@ -1628,7 +1628,7 @@ namespace BaconDistantWorlds
             }
             else
             {
-                list1 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == BuiltObjectSubRole.ExplorationShip)).ToList<BuiltObject>();
+                list1 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Values.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == BuiltObjectSubRole.ExplorationShip)).ToList<BuiltObject>();
                 designList = main._Game.Galaxy.PlayerEmpire.Designs.Where<Design>((Func<Design, bool>)(x => x.SubRole == BuiltObjectSubRole.ExplorationShip)).ToList<Design>();
             }
             foreach (BuiltObject builtObject in list1)
@@ -1706,7 +1706,7 @@ namespace BaconDistantWorlds
                         locationToSearch = (StellarObject)main._Game.PlayerEmpire.Capital;
                     else if (main._Game.PlayerEmpire.BuiltObjects != null && main._Game.PlayerEmpire.BuiltObjects.Count > 0)
                     {
-                        locationToSearch = (StellarObject)main._Game.PlayerEmpire.BuiltObjects[0];
+                        locationToSearch = (StellarObject)main._Game.PlayerEmpire.BuiltObjects.Values.FirstOrDefault();
                     }
                     else
                     {
@@ -2154,7 +2154,7 @@ namespace BaconDistantWorlds
             foreach (Design design1 in all.OrderByDescending<Design, long>((Func<Design, long>)(x => x.DateCreated)).ToList<Design>())
             {
                 Design design = design1;
-                List<BuiltObject> list = main._Game.PlayerEmpire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.Design == design)).ToList<BuiltObject>();
+                List<BuiltObject> list = main._Game.PlayerEmpire.BuiltObjects.Values.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.Design == design)).ToList<BuiltObject>();
                 source1.AddRange((IEnumerable<BuiltObject>)list);
             }
             List<BuiltObject> list1 = source1.OrderBy<BuiltObject, double>((Func<BuiltObject, double>)(x => Galaxy.CalculateDistanceSquaredStatic(x.Xpos, x.Ypos, xPos, yPos))).ToList<BuiltObject>();
@@ -2289,7 +2289,7 @@ namespace BaconDistantWorlds
             {
                 freighter = (BuiltObject)main._Game.SelectedObject;
                 if (freighter != null && freighter.Role == BuiltObjectRole.Freight
-                       && (main._Game.PlayerEmpire.BuiltObjects.Contains(main._Game.SelectedObject)
+                       && (main._Game.PlayerEmpire.BuiltObjects.ContainsKey(freighter.BuiltObjectID)
                        || (BaconBuiltObject.AllowPrivateShipAssigment && main._Game.PlayerEmpire.PrivateBuiltObjects.Contains(main._Game.SelectedObject))))
                 {
                     //sourceHab = BaconBuiltObject.globalCargoMissionSource;
@@ -2459,7 +2459,7 @@ namespace BaconDistantWorlds
             Empire empire = ship.Empire;
             if (empire == null || empire.Name == "Independent")
                 empire = ship.ActualEmpire;
-            List<BuiltObject> list = empire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == subRole)).OrderBy<BuiltObject, int>((Func<BuiltObject, int>)(x => x.BuiltObjectID)).ToList<BuiltObject>();
+            List<BuiltObject> list = empire.BuiltObjects.Values.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == subRole)).OrderBy<BuiltObject, int>((Func<BuiltObject, int>)(x => x.BuiltObjectID)).ToList<BuiltObject>();
             list.AddRange((IEnumerable<BuiltObject>)empire.PrivateBuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x => x.SubRole == subRole)).OrderBy<BuiltObject, int>((Func<BuiltObject, int>)(x => x.BuiltObjectID)).ToList<BuiltObject>());
             BuiltObject builtObject;
             if (direction == "forward")
@@ -3412,8 +3412,8 @@ namespace BaconDistantWorlds
                 if (empire.Capital != null && empire.Capital.BaconValues != null && empire.Capital.BaconValues.ContainsKey("customBomberDesigns"))
                     customFighterDesigns = (List<Tuple<FighterSpecification, float, float, short>>)empire.Capital.BaconValues["customBomberDesigns"];
             }
-            else if (empire.BuiltObjects != null && empire.BuiltObjects.Count > 0 && empire.BuiltObjects[0].BaconValues != null && empire.BuiltObjects[0].BaconValues.ContainsKey("customBomberDesigns"))
-                customFighterDesigns = (List<Tuple<FighterSpecification, float, float, short>>)empire.BuiltObjects[0].BaconValues["customBomberDesigns"];
+            else if (empire.BuiltObjects != null && empire.BuiltObjects.Count > 0 && empire.BuiltObjects.Values.FirstOrDefault().BaconValues != null && empire.BuiltObjects.Values.FirstOrDefault().BaconValues.ContainsKey("customBomberDesigns"))
+                customFighterDesigns = (List<Tuple<FighterSpecification, float, float, short>>)empire.BuiltObjects.Values.FirstOrDefault().BaconValues["customBomberDesigns"];
             return customFighterDesigns;
         }
 
@@ -3449,15 +3449,15 @@ namespace BaconDistantWorlds
             }
             else if (empire.BuiltObjects != null && empire.BuiltObjects.Count > 0)
             {
-                if (empire.BuiltObjects[0].BaconValues == null)
-                    empire.BuiltObjects[0].BaconValues = new Dictionary<string, object>();
-                if (empire.BuiltObjects[0].BaconValues.ContainsKey("customBomberDesigns"))
+                if (empire.BuiltObjects.Values.FirstOrDefault().BaconValues == null)
+                    empire.BuiltObjects.Values.FirstOrDefault().BaconValues = new Dictionary<string, object>();
+                if (empire.BuiltObjects.Values.FirstOrDefault().BaconValues.ContainsKey("customBomberDesigns"))
                 {
-                    List<Tuple<FighterSpecification, float, float, short>> baconValue = (List<Tuple<FighterSpecification, float, float, short>>)empire.BuiltObjects[0].BaconValues["customBomberDesigns"];
+                    List<Tuple<FighterSpecification, float, float, short>> baconValue = (List<Tuple<FighterSpecification, float, float, short>>)empire.BuiltObjects.Values.FirstOrDefault().BaconValues["customBomberDesigns"];
                     if (!baconValue.Contains(newDesign))
                     {
                         baconValue.Add(newDesign);
-                        empire.BuiltObjects[0].BaconValues["customBomberDesigns"] = (object)baconValue;
+                        empire.BuiltObjects.Values.FirstOrDefault().BaconValues["customBomberDesigns"] = (object)baconValue;
                         return true;
                     }
                 }
@@ -3683,7 +3683,7 @@ namespace BaconDistantWorlds
                     return x.Mission == null || x.Mission.Type == BuiltObjectMissionType.Undefined;
                 })).ToList<BuiltObject>();
                 }
-                List<BuiltObject> list2 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
+                List<BuiltObject> list2 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Values.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
                 {
                     if (x.SubRole != shipTypeToSelect)
                         return false;
@@ -3728,7 +3728,7 @@ namespace BaconDistantWorlds
                 }
                 else
                 {
-                    List<BuiltObject> list3 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
+                    List<BuiltObject> list3 = main._Game.Galaxy.PlayerEmpire.BuiltObjects.Values.Where<BuiltObject>((Func<BuiltObject, bool>)(x =>
                     {
                         if (x.Role != BuiltObjectRole.Base)
                             return false;
@@ -4130,9 +4130,8 @@ namespace BaconDistantWorlds
         {
             List<BuiltObject> source = new List<BuiltObject>();
             Empire actualEmpire = objectiveShip.ActualEmpire;
-            List<BuiltObject> builtObjects = (List<BuiltObject>)actualEmpire.BuiltObjects;
             List<BuiltObject> privateBuiltObjects = (List<BuiltObject>)actualEmpire.PrivateBuiltObjects;
-            foreach (BuiltObject builtObject in builtObjects)
+            foreach (BuiltObject builtObject in actualEmpire.BuiltObjects.Values)
             {
                 if (builtObject.Mission != null && builtObject.Mission.TargetBuiltObject != null && builtObject.Mission.TargetBuiltObject == objectiveShip)
                     source.Add(builtObject);
@@ -4213,7 +4212,7 @@ namespace BaconDistantWorlds
                 List<Character> spiesInPrison = BaconBuiltObject.GetSpiesInPrison(ship);
                 if (spiesInPrison == null || spiesInPrison.Count == 0)
                     return;
-                BuiltObject builtObject = BaconBuiltObject.myMain._Game.PlayerEmpire.BuiltObjects[0];
+                BuiltObject builtObject = BaconBuiltObject.myMain._Game.PlayerEmpire.BuiltObjects.Values.FirstOrDefault();
                 if (builtObject.BaconValues == null)
                     builtObject.BaconValues = new Dictionary<string, object>();
                 List<Character> characterList1 = new List<Character>();
@@ -4271,6 +4270,7 @@ namespace BaconDistantWorlds
                     return false;
                 if (spy.Empire.Characters == null)
                     spy.Empire.Characters = new CharacterList();
+                BuiltObject obj = spy.Empire.BuiltObjects.Values.FirstOrDefault();
                 spy.Empire.Characters.Add(spy);
                 if (spy.Empire.PirateEmpireBaseHabitat == null)
                 {
@@ -4280,17 +4280,17 @@ namespace BaconDistantWorlds
                 }
                 else
                 {
-                    if (spy.Empire.BuiltObjects[0].Characters == null)
-                        spy.Empire.BuiltObjects[0].Characters = new CharacterList();
-                    spy.Empire.BuiltObjects[0].Characters.Add(spy);
-                    spy.Location = (StellarObject)spy.Empire.BuiltObjects[0];
+                    if (obj.Characters == null)
+                        obj.Characters = new CharacterList();
+                    obj.Characters.Add(spy);
+                    spy.Location = (StellarObject)obj;
                 }
                 IntelligenceMission intelligenceMission = new IntelligenceMission(spy.Empire, spy, BaconBuiltObject.myMain._Game.Galaxy.CurrentStarDate)
                 {
                     TimeLength = (long)(Galaxy.RealSecondsInGalacticYear * 1000 / 4)
                 };
                 spy.Mission = intelligenceMission;
-                ((List<Character>)ship.Empire.BuiltObjects[0].BaconValues["capturedSpies"]).Remove(spy);
+                ((List<Character>)obj.BaconValues["capturedSpies"]).Remove(spy);
             }
             catch (Exception ex)
             {
@@ -4310,17 +4310,18 @@ namespace BaconDistantWorlds
                 if (ship.Empire.Characters == null)
                     ship.Empire.Characters = new CharacterList();
                 ship.Empire.Characters.Add(spy);
-                if (ship.Empire.BuiltObjects[0].Characters == null)
-                    ship.Empire.BuiltObjects[0].Characters = new CharacterList();
-                ship.Empire.BuiltObjects[0].Characters.Add(spy);
-                spy.Location = (StellarObject)ship.Empire.BuiltObjects[0];
+                BuiltObject obj = spy.Empire.BuiltObjects.Values.FirstOrDefault();
+                if (obj.Characters == null)
+                    obj.Characters = new CharacterList();
+                obj.Characters.Add(spy);
+                spy.Location = (StellarObject)obj;
                 spy.Empire = ship.ActualEmpire;
                 IntelligenceMission intelligenceMission = new IntelligenceMission(spy.Empire, spy, BaconBuiltObject.myMain._Game.Galaxy.CurrentStarDate)
                 {
                     TimeLength = (long)(Galaxy.RealSecondsInGalacticYear * 1000 / 4)
                 };
                 spy.Mission = intelligenceMission;
-                ((List<Character>)ship.Empire.BuiltObjects[0].BaconValues["capturedSpies"]).Remove(spy);
+                ((List<Character>)obj.BaconValues["capturedSpies"]).Remove(spy);
                 return true;
             }
             catch (Exception ex)
@@ -4770,9 +4771,7 @@ namespace BaconDistantWorlds
                         while (enumerator.MoveNext())
                         {
                             Empire current = enumerator.Current;
-                            BuiltObject parent = (BuiltObject)null;
-                            if (current.BuiltObjects.Count > 0)
-                                parent = current.BuiltObjects[0];
+                            BuiltObject parent = current.BuiltObjects.Values.FirstOrDefault();
                             if (parent != null)
                             {
                                 Design newestCanBuild = current.LatestDesigns.FindNewestCanBuild(subrole, current);

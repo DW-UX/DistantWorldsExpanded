@@ -1328,7 +1328,7 @@ namespace BaconDistantWorlds
                 toolStripMenuItem2.Tag = shipAction2;
                 main.actionMenu.Items.Add(toolStripMenuItem2);
             }
-            else if(obj2 is BuiltObject ship2 && ship2.SubRole == BuiltObjectSubRole.ColonyShip && ship2.Empire == main._Game.PlayerEmpire)
+            else if (obj2 is BuiltObject ship2 && ship2.SubRole == BuiltObjectSubRole.ColonyShip && ship2.Empire == main._Game.PlayerEmpire)
             {
                 ToolStripMenuItem toolStripMenuItem2 = new ToolStripMenuItem("Deploy Asteroid Colony");
                 toolStripMenuItem2.Enabled = false;
@@ -1763,7 +1763,7 @@ namespace BaconDistantWorlds
         {
             main.cmbBuiltObjectFilter.MaxDropDownItems = cmbBuiltObjectFilterStrings.Length;
             StellarObjectList stellarObjectList = new StellarObjectList();
-            BuiltObjectList builtObjectList = new BuiltObjectList();
+            List<BuiltObject> builtObjectList = new List<BuiltObject>();
             List<BuiltObjectSubRole> list = new List<BuiltObjectSubRole>();
             Empire playerEmpire = main._Game.PlayerEmpire;
             string text = string.Empty;
@@ -1780,14 +1780,7 @@ namespace BaconDistantWorlds
             else if (text == TextResolver.GetText("Construction Yards"))
             {
                 main.pnlBuiltObjectInfo.HeaderTitle = TextResolver.GetText("Construction Yards");
-                for (int i = 0; i < playerEmpire.BuiltObjects.Count(); i++)
-                {
-                    BuiltObject builtObject = playerEmpire.BuiltObjects[i];
-                    if (builtObject.IsShipYard && builtObject.ConstructionQueue != null && builtObject.ConstructionQueue.ConstructionYards.Count > 0)
-                    {
-                        builtObjectList.Add(builtObject);
-                    }
-                }
+                builtObjectList.AddRange(playerEmpire.BuiltObjects.Values.Where(x => x.IsShipYard && x.ConstructionQueue != null && x.ConstructionQueue.ConstructionYards.Count > 0));
                 for (int j = 0; j < playerEmpire.PrivateBuiltObjects.Count; j++)
                 {
                     BuiltObject builtObject2 = playerEmpire.PrivateBuiltObjects[j];
@@ -1905,14 +1898,7 @@ namespace BaconDistantWorlds
             }
             else if (text == TextResolver.GetText("Troop Carriers"))
             {
-                for (int l = 0; l < playerEmpire.BuiltObjects.Count; l++)
-                {
-                    BuiltObject builtObject3 = playerEmpire.BuiltObjects[l];
-                    if (builtObject3.TroopCapacity > 0)
-                    {
-                        builtObjectList.Add(builtObject3);
-                    }
-                }
+                builtObjectList.AddRange(playerEmpire.BuiltObjects.Values.Where(x => x.TroopCapacity > 0));
                 for (int m = 0; m < playerEmpire.PrivateBuiltObjects.Count; m++)
                 {
                     BuiltObject builtObject4 = playerEmpire.PrivateBuiltObjects[m];
@@ -1936,7 +1922,7 @@ namespace BaconDistantWorlds
                 {
                     case "Damaged Ships":
                         {
-                            List<BuiltObject> list7 = playerEmpire.BuiltObjects.FindAll((BuiltObject x) => x.Role != BuiltObjectRole.Base && x.Components.Count((BuiltObjectComponent y) => y.Status == ComponentStatus.Damaged) > 0);
+                            List<BuiltObject> list7 = playerEmpire.BuiltObjects.Values.Where(x => x.Role != BuiltObjectRole.Base && x.Components.Count((BuiltObjectComponent y) => y.Status == ComponentStatus.Damaged) > 0).ToList();
                             if (list7.Count <= 0)
                             {
                                 break;
@@ -1950,7 +1936,7 @@ namespace BaconDistantWorlds
                         }
                     case "Low Fuel Ships":
                         {
-                            List<BuiltObject> list5 = playerEmpire.BuiltObjects.FindAll((BuiltObject x) => x.BuiltAt == null && x.Role != BuiltObjectRole.Base && x.CurrentFuel <= 0.1);
+                            List<BuiltObject> list5 = playerEmpire.BuiltObjects.Values.Where(x => x.BuiltAt == null && x.Role != BuiltObjectRole.Base && x.CurrentFuel <= 0.1).ToList();
                             if (list5.Count <= 0)
                             {
                                 break;
@@ -1965,7 +1951,7 @@ namespace BaconDistantWorlds
                     case "Ships Under Attack":
                         {
                             List<BuiltObject> list8 = new BuiltObjectList();
-                            List<BuiltObject> list9 = playerEmpire.BuiltObjects.FindAll((BuiltObject x) => x.BuiltAt == null && x.Attackers != null && x.Attackers.Count > 0);
+                            List<BuiltObject> list9 = playerEmpire.BuiltObjects.Values.Where(x => x.BuiltAt == null && x.Attackers != null && x.Attackers.Count > 0).ToList();
                             List<BuiltObject> list10 = playerEmpire.PrivateBuiltObjects.FindAll((BuiltObject x) => x.BuiltAt == null && x.Attackers != null && x.Attackers.Count > 0);
                             if (list9.Any())
                             {
@@ -1988,7 +1974,7 @@ namespace BaconDistantWorlds
                         }
                     case "Newest Ships":
                         {
-                            List<BuiltObject> list6 = playerEmpire.BuiltObjects.FindAll((BuiltObject x) => x.Role != BuiltObjectRole.Base && (double)x.DateBuilt > lastTimeBuiltObjectPanelShowedNewShips && x.Components.Count((BuiltObjectComponent y) => y.Status == ComponentStatus.Unbuilt) == 0);
+                            List<BuiltObject> list6 = playerEmpire.BuiltObjects.Values.Where(x => x.Role != BuiltObjectRole.Base && (double)x.DateBuilt > lastTimeBuiltObjectPanelShowedNewShips && x.Components.Count((BuiltObjectComponent y) => y.Status == ComponentStatus.Unbuilt) == 0).ToList();
                             if (list6.Count <= 0)
                             {
                                 break;
@@ -2013,7 +1999,7 @@ namespace BaconDistantWorlds
                         break;
                     case "Upgradable":
                         {
-                            List<BuiltObject> list3 = playerEmpire.BuiltObjects.FindAll((BuiltObject x) => x.BuiltAt == null && x.Role != BuiltObjectRole.Base && x.Design.IsObsolete);
+                            List<BuiltObject> list3 = playerEmpire.BuiltObjects.Values.Where(x => x.BuiltAt == null && x.Role != BuiltObjectRole.Base && x.Design.IsObsolete).ToList();
                             if (list3.Count <= 0)
                             {
                                 break;
@@ -2027,7 +2013,7 @@ namespace BaconDistantWorlds
                         }
                     case "Free Traders":
                         {
-                            List<BuiltObject> list4 = playerEmpire.BuiltObjects.FindAll((BuiltObject x) => x.BuiltAt == null && x.BaconValues != null && x.BaconValues.ContainsKey("cash"));
+                            List<BuiltObject> list4 = playerEmpire.BuiltObjects.Values.Where(x => x.BuiltAt == null && x.BaconValues != null && x.BaconValues.ContainsKey("cash")).ToList();
                             if (list4.Count <= 0)
                             {
                                 break;
@@ -2041,7 +2027,7 @@ namespace BaconDistantWorlds
                         }
                     case "Repeating Mission":
                         {
-                            List<BuiltObject> list2 = playerEmpire.BuiltObjects.FindAll((BuiltObject x) => x.BuiltAt == null && x.Role != BuiltObjectRole.Base && x.BaconValues != null && x.BaconValues.ContainsKey("RepeatingMission"));
+                            List<BuiltObject> list2 = playerEmpire.BuiltObjects.Values.Where(x => x.BuiltAt == null && x.Role != BuiltObjectRole.Base && x.BaconValues != null && x.BaconValues.ContainsKey("RepeatingMission")).ToList();
                             if (list2.Count <= 0)
                             {
                                 break;
@@ -2054,7 +2040,7 @@ namespace BaconDistantWorlds
                             break;
                         }
                     default:
-                        builtObjectList.AddRange(playerEmpire.BuiltObjects);
+                        builtObjectList.AddRange(playerEmpire.BuiltObjects.Values.ToList());
                         builtObjectList.AddRange(playerEmpire.PrivateBuiltObjects);
                         break;
                 }
@@ -2106,6 +2092,26 @@ namespace BaconDistantWorlds
                 return builtObjectList;
             }
             return shiplist;
+        }
+        public static BuiltObject[] OrderByDistanceBuiltObjects(Main main, List<BuiltObject> shiplist)
+        {
+            List<BuiltObject> list = new List<BuiltObject>();
+            List<BuiltObject> source = shiplist;
+            BuiltObjectList builtObjectList = new BuiltObjectList();
+            if (main._Game.SelectedObject != null)
+            {
+                StellarObject selected = main._Game.SelectedObject as StellarObject;
+                if (selected != null)
+                {
+                    list = source.OrderBy((BuiltObject x) => Galaxy.CalculateDistanceSquaredStatic(selected.Xpos, selected.Ypos, x.Xpos, x.Ypos)).ToList();
+                }
+            }
+            if (list.Any())
+            {
+                builtObjectList.AddRange(list);
+                return builtObjectList.ToArray();
+            }
+            return shiplist.ToArray();
         }
 
         public static HabitatList OrderByDistanceHabitats(Main main, HabitatList habitatList)
@@ -2317,8 +2323,8 @@ namespace BaconDistantWorlds
             }
             else if (titleText == TextResolver.GetText("Exploration Ships"))
             {
-                BuiltObjectList builtObjectsBySubRole = main._Game.PlayerEmpire.BuiltObjects.GetBuiltObjectsBySubRole(new List<BuiltObjectSubRole> { BuiltObjectSubRole.ExplorationShip });
-                main.list_6.AddRange(ListHelper.ToArrayThreadSafe(OrderByDistanceBuiltObjects(main, builtObjectsBySubRole)));
+                List<BuiltObject> builtObjectsBySubRole = main._Game.PlayerEmpire.BuiltObjects.GetBuiltObjectsBySubRole(new List<BuiltObjectSubRole> { BuiltObjectSubRole.ExplorationShip });
+                main.list_6.AddRange(OrderByDistanceBuiltObjects(main, builtObjectsBySubRole));
             }
             else if (titleText == TextResolver.GetText("Enemy Targets"))
             {
@@ -2330,14 +2336,14 @@ namespace BaconDistantWorlds
             }
             else if (titleText == TextResolver.GetText("Military Ships"))
             {
-                BuiltObjectList builtObjectList = new BuiltObjectList();
-                for (int i = 0; i < main._Game.PlayerEmpire.BuiltObjects.Count(); i++)
+                List<BuiltObject> builtObjectList = main._Game.PlayerEmpire.BuiltObjects.Values.Where(x =>
                 {
-                    if (main._Game.PlayerEmpire.BuiltObjects[i].Role == BuiltObjectRole.Military && (itemListPanel_0.GetToggleButtonState(0) == 1 || main._Game.PlayerEmpire.BuiltObjects[i].ShipGroup == null))
+                    if (x.Role == BuiltObjectRole.Military && (itemListPanel_0.GetToggleButtonState(0) == 1 || x.ShipGroup == null))
                     {
-                        builtObjectList.Add(main._Game.PlayerEmpire.BuiltObjects[i]);
+                        return true;
                     }
-                }
+                    return false;
+                }).ToList();
                 main.list_6.AddRange(OrderByDistanceBuiltObjects(main, builtObjectList).ToArray());
             }
             else if (titleText != TextResolver.GetText("Pirate Missions"))
@@ -2666,11 +2672,7 @@ namespace BaconDistantWorlds
             {
                 num += builtObjectsBySubRole.Count();
             }
-            BuiltObjectList builtObjectsBySubRole2 = main._Game.PlayerEmpire.BuiltObjects.GetBuiltObjectsBySubRole(subrole);
-            if (builtObjectsBySubRole != null)
-            {
-                num += builtObjectsBySubRole2.Count();
-            }
+            num += main._Game.PlayerEmpire.BuiltObjects.GetBuiltObjectsBySubRole(subrole).Count;
             return num;
         }
 

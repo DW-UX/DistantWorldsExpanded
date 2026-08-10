@@ -875,7 +875,7 @@ namespace DistantWorlds.Types
 
         public BuiltObjectList PrivateBuiltObjects = new BuiltObjectList();
 
-        public BuiltObjectList BuiltObjects = new BuiltObjectList();
+        public BuiltObjectDict BuiltObjects = new BuiltObjectDict();
 
         public BuiltObjectList LongRangeScanners = new BuiltObjectList();
 

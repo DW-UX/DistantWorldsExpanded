@@ -681,9 +681,10 @@ namespace BaconDistantWorlds
                 }
                 else
                 {
-                    if (spy.Empire.BuiltObjects[0].Characters == null)
-                        spy.Empire.BuiltObjects[0].Characters = new CharacterList();
-                    spy.Empire.BuiltObjects[0].Characters.Add(spy);
+                    BuiltObject obj = spy.Empire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == spy.Empire.PirateEmpireBaseHabitat);
+                    if (obj.Characters == null)
+                        obj.Characters = new CharacterList();
+                    obj.Characters.Add(spy);
                 }
                 IntelligenceMission intelligenceMission = new IntelligenceMission(spy.Empire, spy, BaconBuiltObject.myMain._Game.Galaxy.CurrentStarDate)
                 {
@@ -782,8 +783,8 @@ namespace BaconDistantWorlds
                 }
                 else if (character.Empire.Capital != null)
                     character.Location = (StellarObject)character.Empire.Capital;
-                else if (character.Empire.BuiltObjects.Any<BuiltObject>())
-                    character.Location = (StellarObject)character.Empire.BuiltObjects[0];
+                else if (character.Empire.BuiltObjects.Count>0)
+                    character.Location = (StellarObject)character.Empire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == character.Empire.PirateEmpireBaseHabitat);
                 character.Empire.Characters.Add(character);
                 int num = planet.Resources != null ? planet.Resources.Count : 0;
                 if (BaconBuiltObject.myMain != null)
@@ -851,8 +852,8 @@ namespace BaconDistantWorlds
                 }
                 else if (character.Empire.Capital != null)
                     character.Location = (StellarObject)character.Empire.Capital;
-                else if (character.Empire.BuiltObjects.Any<BuiltObject>())
-                    character.Location = (StellarObject)character.Empire.BuiltObjects[0];
+                else if (character.Empire.BuiltObjects.Count > 0)
+                    character.Location = (StellarObject)character.Empire.BuiltObjects.Values.FirstOrDefault(x => x.ParentHabitat == character.Empire.PirateEmpireBaseHabitat);
                 character.Empire.Characters.Add(character);
                 description = character.Name + " has finished exploring " + planet.Name + " and has returned with valuable scient5ific data.";
             }

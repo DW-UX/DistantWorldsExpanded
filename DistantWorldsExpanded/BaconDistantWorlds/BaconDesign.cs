@@ -150,18 +150,18 @@ namespace BaconDistantWorlds
                 Empire empire = design.Empire;
                 if (empire == null)
                     return;
-                empire.BuiltObjects.ForEach((Action<BuiltObject>)(x =>
+                foreach (var x in empire.BuiltObjects.Values)
                 {
                     if (x.Design != design)
-                        return;
+                        continue;
                     x.ReDefine();
-                }));
-                empire.PrivateBuiltObjects.ForEach((Action<BuiltObject>)(x =>
+                }
+                foreach (var x in empire.PrivateBuiltObjects)
                 {
                     if (x.Design != design)
-                        return;
+                        continue;
                     x.ReDefine();
-                }));
+                }
             }
             catch (Exception ex)
             {
