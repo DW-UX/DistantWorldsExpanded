@@ -31,8 +31,8 @@
 		<TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
 		<TieredPGO>true</TieredPGO>
 		<BaseOutputPath></BaseOutputPath>
-		<AssemblyVersion>2.2.1.9</AssemblyVersion>
-		<FileVersion>2.2.1.9</FileVersion>
+		<AssemblyVersion>2.2.1.10</AssemblyVersion>
+		<FileVersion>2.2.1.10</FileVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <DebugType>embedded</DebugType>

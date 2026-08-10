@@ -350,7 +350,7 @@ namespace DistantWorlds
 
         private ThemesScreenPanel pnlThemes;
 
-        
+
         private LabelledTrackBar tbarStartNewGameYourEmpireCorruption;
 
         private ScreenPanel pnlGameOptionsEmpireSettings;
@@ -504,7 +504,7 @@ namespace DistantWorlds
         private GlassButton btnStartNewGameYourEmpireTypePirateClassic;
 
         private GlassButton btnStartNewGameTheGalaxyPrevious;
-        
+
         private CheckBox chkStoryShadows;
 
         private SmoothLabel lblVictoryPiratePlaystyle;
@@ -903,11 +903,14 @@ namespace DistantWorlds
                     }
                 }
                 Main._ExpModMain.ModStartup(this);
-                Main._FileDB = new FileDB();
-                DBLoader.ModData data = new DBLoader.ModData(Path.Combine(AppContext.BaseDirectory, @"AdvMods\ExpansionMod\Patches"));
-                Main._FileDB.LoadDB();
-                Main._FileDB.ApplyChanges(data.ParseChanges());
-                Main._FileDB.ApplyChanges(data.ParseUserChanges());
+                if (Main._ExpModMain.GetSettings().UseDbFiles)
+                {
+                    Main._FileDB = new FileDB();
+                    DBLoader.ModData data = new DBLoader.ModData(Path.Combine(AppContext.BaseDirectory, @"AdvMods\ExpansionMod\Patches"));
+                    Main._FileDB.LoadDB();
+                    Main._FileDB.ApplyChanges(data.ParseChanges());
+                    Main._FileDB.ApplyChanges(data.ParseUserChanges());
+                }
                 Galaxy.InitializeData(Application.StartupPath, customizationSetName, out resourceSystem_0);
                 InitializeComponent();
                 BaconStart.InitializeMore(this, gameOptions);
@@ -1668,7 +1671,8 @@ namespace DistantWorlds
             method_31("");
         }
 
-        private ICryptoTransform CreateDecryptor(byte[] key, byte[] iv) {
+        private ICryptoTransform CreateDecryptor(byte[] key, byte[] iv)
+        {
             var rijndael = Aes.Create();
             rijndael.KeySize = 128;
             rijndael.BlockSize = 128;
@@ -2564,7 +2568,7 @@ namespace DistantWorlds
             method_28(text);
             pnlThemes.DoLayout();
             pnlThemes.btnThemeSwitch.Font = font_7;
-            pnlThemes.btnThemeCancel.Font = font_7;            
+            pnlThemes.btnThemeCancel.Font = font_7;
             pnlThemes.Visible = true;
             pnlThemes.BringToFront();
         }

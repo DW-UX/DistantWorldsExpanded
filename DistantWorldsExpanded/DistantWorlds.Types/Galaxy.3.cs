@@ -2173,6 +2173,7 @@ namespace DistantWorlds.Types
                 }
                 plagueList.LoadFromFile(filePath);
             }
+            else
             {
                 plagueList.LoadFromFile(Main._FileDB.GetPlaguesReader());
             }
