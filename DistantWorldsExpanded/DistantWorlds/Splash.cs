@@ -235,7 +235,22 @@ namespace DistantWorlds
             ((Control)this.lblModVersion).TabIndex = 0;
 
             this.AutoScaleMode = AutoScaleMode.None;
-            this.BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            Image background = (Image)resources.GetObject("$this.BackgroundImage");
+            if (background != null && UiScale.Factor != 1f)
+            {
+                var enlarged = new Bitmap(UiScale.S(471), UiScale.S(290), System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                using (Graphics graphics = Graphics.FromImage(enlarged))
+                using (System.Drawing.Imaging.ImageAttributes attributes = new System.Drawing.Imaging.ImageAttributes())
+                {
+                    graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+                    graphics.DrawImage(background, new Rectangle(0, 0, enlarged.Width, enlarged.Height),
+                        0, 0, background.Width, background.Height, GraphicsUnit.Pixel, attributes);
+                }
+                background.Dispose();
+                background = enlarged;
+            }
+            this.BackgroundImage = background;
             this.BackgroundImageLayout = ImageLayout.None;
             this.ClientSize = new Size(UiScale.S(471), UiScale.S(290));
             this.Controls.Add((Control)this.lblMessage);

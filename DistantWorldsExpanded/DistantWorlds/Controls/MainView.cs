@@ -625,11 +625,12 @@ namespace DistantWorlds.Controls
             {
                 font_3.Dispose();
             }
-            font_0 = ((IFontCache)parentForm).GenerateFont(16.67f, isBold: false);
-            font_1 = ((IFontCache)parentForm).GenerateFont(18.67f, isBold: true);
-            font_2 = ((IFontCache)parentForm).GenerateFont(15.33f, isBold: false);
-            font_3 = ((IFontCache)parentForm).GenerateFont(10.67f, isBold: false);
             Font = ((IFontCache)parentForm).GenerateFont(15.33f, isBold: false);
+            FontFamily labelFontFamily = Font.FontFamily;
+            font_0 = new Font(labelFontFamily, 16.67f * UiScale.LabelFactor, FontStyle.Regular, GraphicsUnit.Pixel);
+            font_1 = new Font(labelFontFamily, 18.67f * UiScale.LabelFactor, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_2 = new Font(labelFontFamily, 15.33f * UiScale.LabelFactor, FontStyle.Regular, GraphicsUnit.Pixel);
+            font_3 = new Font(labelFontFamily, 10.67f * UiScale.LabelFactor, FontStyle.Regular, GraphicsUnit.Pixel);
             contentManager_0 = new ContentManager(serviceContainer_0);
             contentManager_0.RootDirectory = Application.StartupPath;
             spriteFont_0 = contentManager_0.Load<SpriteFont>("TinyFont");
@@ -641,11 +642,11 @@ namespace DistantWorlds.Controls
             {
                 // The pre-built sprite fonts are the game's own typeface at fixed sizes; redraw them larger.
                 System.Drawing.FontFamily family = Font.FontFamily;
-                spriteFont_0 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_0, UiScale.Factor, family, bold: false);
-                spriteFont_1 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_1, UiScale.Factor, family, bold: false);
-                spriteFont_2 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_2, UiScale.Factor, family, bold: true);
-                spriteFont_3 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_3, UiScale.Factor, family, bold: false);
-                spriteFont_4 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_4, UiScale.Factor, family, bold: true);
+                spriteFont_0 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_0, UiScale.LabelFactor, family, bold: false);
+                spriteFont_1 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_1, UiScale.LabelFactor, family, bold: false);
+                spriteFont_2 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_2, UiScale.LabelFactor, family, bold: true);
+                spriteFont_3 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_3, UiScale.LabelFactor, family, bold: false);
+                spriteFont_4 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_4, UiScale.LabelFactor, family, bold: true);
             }
             if (main_0._Game != null)
             {

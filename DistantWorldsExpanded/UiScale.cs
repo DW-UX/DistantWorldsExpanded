@@ -21,6 +21,8 @@ public static class UiScale
 
     public static bool IsScaled => Factor != 1f;
 
+    public static float LabelFactor => 1f + (Factor - 1f) * 0.6f;
+
     private static string SettingsPath
         => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),
             "My Games", "Distant Worlds Universe", "UiScale.txt");

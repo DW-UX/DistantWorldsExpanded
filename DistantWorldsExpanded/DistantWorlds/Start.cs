@@ -1366,6 +1366,7 @@ namespace DistantWorlds
                 Class5._Splash.Stop();
                 method_142(bool_5: false);
                 base.Visible = true;
+                Activate();
                 method_1(text4);
                 Cursor.Current = Cursors.Default;
                 string text5 = Application.StartupPath + "\\sounds\\effects\\";

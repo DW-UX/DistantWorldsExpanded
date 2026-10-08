@@ -4163,7 +4163,7 @@ namespace DistantWorlds
                 int upsCounter = 0;
                 int ups = 0;
                 DateTime upsLastTime = DateTime.Now;
-                while (!bool_4)
+                while (!bool_4 && !IsDisposed && !Disposing)
                 {
                     if (bool_7)
                     {
@@ -4383,7 +4383,19 @@ namespace DistantWorlds
 
         private bool method_98()
         {
-            Point point = PointToClient(MouseHelper.GetCursorPosition());
+            if (IsDisposed || Disposing)
+            {
+                return false;
+            }
+            Point point;
+            try
+            {
+                point = PointToClient(MouseHelper.GetCursorPosition());
+            }
+            catch (ObjectDisposedException)
+            {
+                return false;
+            }
             int int_ = 0;
             int int_2 = 0;
             if (point.X == 0 || point.X == 1)
