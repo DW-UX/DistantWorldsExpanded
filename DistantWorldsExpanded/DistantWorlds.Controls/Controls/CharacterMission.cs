@@ -63,11 +63,11 @@ namespace DistantWorlds.Controls
     public CharacterMission()
     {
       this.InitializeComponent();
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
-      this._LargeFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-      this._BoldFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._TitleFont = new Font(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._LargeFont = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
+      this._BoldFont = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = UiScale.NewFont(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData()
@@ -82,9 +82,9 @@ namespace DistantWorlds.Controls
       this._PlayerEmpire = playerEmpire;
       this._Galaxy = galaxy;
       this._Character = character;
-      this._LargeFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-      this._BoldFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._TitleFont = new Font(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._LargeFont = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
+      this._BoldFont = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = UiScale.NewFont(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
       DistantWorlds.Types.EmpireList empires = new DistantWorlds.Types.EmpireList();
       for (int index = 0; index < this._Galaxy.Empires.Count; ++index)
       {
@@ -133,38 +133,38 @@ namespace DistantWorlds.Controls
       this.cmbTimeToComplete.Items.Add((object) TextResolver.GetText("One month"));
       this.cmbTimeToComplete.Items.Add((object) TextResolver.GetText("Three months"));
       this.cmbTimeToComplete.Items.Add((object) TextResolver.GetText("One year"));
-      this.lblTargetEmpire.Location = new Point(10, 9);
-      this.cmbTargetEmpire.Size = new Size(180, 21);
-      this.cmbTargetEmpire.Location = new Point(10, 23);
-      this.lblMissionType.Location = new Point(10, 52);
-      this.cmbMissionType.Size = new Size(180, 21);
-      this.cmbMissionType.Location = new Point(10, 66);
-      this.lblTargetObject.Location = new Point(10, 95);
-      this.cmbTargetObject.Size = new Size(180, 21);
-      this.cmbTargetObject.Location = new Point(10, 109);
-      this.lblTimeToComplete.Location = new Point(10, 138);
-      this.cmbTimeToComplete.Size = new Size(180, 21);
-      this.cmbTimeToComplete.Location = new Point(10, 152);
-      this.lblMissionDifficulty.Location = new Point(275, 28);
+      this.lblTargetEmpire.Location = new Point(UiScale.S(10), UiScale.S(9));
+      this.cmbTargetEmpire.Size = new Size(UiScale.S(180), UiScale.S(21));
+      this.cmbTargetEmpire.Location = new Point(UiScale.S(10), UiScale.S(23));
+      this.lblMissionType.Location = new Point(UiScale.S(10), UiScale.S(52));
+      this.cmbMissionType.Size = new Size(UiScale.S(180), UiScale.S(21));
+      this.cmbMissionType.Location = new Point(UiScale.S(10), UiScale.S(66));
+      this.lblTargetObject.Location = new Point(UiScale.S(10), UiScale.S(95));
+      this.cmbTargetObject.Size = new Size(UiScale.S(180), UiScale.S(21));
+      this.cmbTargetObject.Location = new Point(UiScale.S(10), UiScale.S(109));
+      this.lblTimeToComplete.Location = new Point(UiScale.S(10), UiScale.S(138));
+      this.cmbTimeToComplete.Size = new Size(UiScale.S(180), UiScale.S(21));
+      this.cmbTimeToComplete.Location = new Point(UiScale.S(10), UiScale.S(152));
+      this.lblMissionDifficulty.Location = new Point(UiScale.S(275), UiScale.S(28));
       this.lblMissionDifficultyLabel.BringToFront();
-      this.lblMissionDifficultyLabel.Location = new Point(200, 56);
-      this.lblMissionDifficultyLabel.MaximumSize = new Size(190, 20);
-      this.lblMissionDifficultyLabel.Size = new Size(190, 20);
+      this.lblMissionDifficultyLabel.Location = new Point(UiScale.S(200), UiScale.S(56));
+      this.lblMissionDifficultyLabel.MaximumSize = new Size(UiScale.S(190), UiScale.S(20));
+      this.lblMissionDifficultyLabel.Size = new Size(UiScale.S(190), UiScale.S(20));
       this.lblMissionDifficultyLabel.AutoSize = false;
       this.lblMissionDifficultyLabel.TextAlign = ContentAlignment.MiddleCenter;
       this.lblMissionDifficultyWarning.Visible = true;
-      this.lblMissionDifficultyWarning.Location = new Point(200, 70);
-      this.lblMissionDifficultyWarning.MaximumSize = new Size(190, 82);
-      this.lblMissionDifficultyWarning.Size = new Size(190, 82);
+      this.lblMissionDifficultyWarning.Location = new Point(UiScale.S(200), UiScale.S(70));
+      this.lblMissionDifficultyWarning.MaximumSize = new Size(UiScale.S(190), UiScale.S(82));
+      this.lblMissionDifficultyWarning.Size = new Size(UiScale.S(190), UiScale.S(82));
       this.lblMissionDifficultyWarning.AutoSize = false;
       this.lblMissionDifficultyWarning.TextAlign = ContentAlignment.MiddleCenter;
-      this.btnAssignMission.Size = new Size(190, 25);
-      this.btnAssignMission.Location = new Point(200, 152);
-      this.btnCancelMission.Size = new Size(190, 25);
-      this.btnCancelMission.Location = new Point(200, 152);
-      this.lnkMissionTypes.Location = new Point(200, 5);
-      this.lnkMissionTypes.Size = new Size(190, 20);
-      this.lnkMissionTypes.MaximumSize = new Size(190, 20);
+      this.btnAssignMission.Size = new Size(UiScale.S(190), UiScale.S(25));
+      this.btnAssignMission.Location = new Point(UiScale.S(200), UiScale.S(152));
+      this.btnCancelMission.Size = new Size(UiScale.S(190), UiScale.S(25));
+      this.btnCancelMission.Location = new Point(UiScale.S(200), UiScale.S(152));
+      this.lnkMissionTypes.Location = new Point(UiScale.S(200), UiScale.S(5));
+      this.lnkMissionTypes.Size = new Size(UiScale.S(190), UiScale.S(20));
+      this.lnkMissionTypes.MaximumSize = new Size(UiScale.S(190), UiScale.S(20));
       this.lnkMissionTypes.AutoSize = false;
       this.lnkMissionTypes.TextAlign = ContentAlignment.MiddleRight;
       this.lnkMissionTypes.Text = TextResolver.GetText("Learn about Intelligence Missions...");
@@ -224,9 +224,9 @@ namespace DistantWorlds.Controls
         if (string.IsNullOrEmpty(difficultyDescription))
         {
           this.lblMissionDifficultyLabel.Text = string.Empty;
-          this.lblMissionDifficultyLabel.Location = new Point(200, 41);
-          this.lblMissionDifficultyLabel.MaximumSize = new Size(190, 50);
-          this.lblMissionDifficultyLabel.Size = new Size(190, 50);
+          this.lblMissionDifficultyLabel.Location = new Point(UiScale.S(200), UiScale.S(41));
+          this.lblMissionDifficultyLabel.MaximumSize = new Size(UiScale.S(190), UiScale.S(50));
+          this.lblMissionDifficultyLabel.Size = new Size(UiScale.S(190), UiScale.S(50));
           string str = Galaxy.ResolveDescriptionCharacterTask(this._Character, this._Galaxy);
           if (string.IsNullOrEmpty(str))
             str = Galaxy.ResolveCharacterLocationDescription(this._Character);
@@ -234,9 +234,9 @@ namespace DistantWorlds.Controls
         }
         else
         {
-          this.lblMissionDifficultyLabel.Location = new Point(200, 56);
-          this.lblMissionDifficultyLabel.MaximumSize = new Size(190, 20);
-          this.lblMissionDifficultyLabel.Size = new Size(190, 20);
+          this.lblMissionDifficultyLabel.Location = new Point(UiScale.S(200), UiScale.S(56));
+          this.lblMissionDifficultyLabel.MaximumSize = new Size(UiScale.S(190), UiScale.S(20));
+          this.lblMissionDifficultyLabel.Size = new Size(UiScale.S(190), UiScale.S(20));
           this.lblMissionDifficultyLabel.Text = TextResolver.GetText("Success Probability");
         }
       }
@@ -761,9 +761,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
 
@@ -788,50 +788,50 @@ namespace DistantWorlds.Controls
       this.cmbTargetEmpire.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbTargetEmpire.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbTargetEmpire.FlatStyle = FlatStyle.Popup;
-      this.cmbTargetEmpire.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.cmbTargetEmpire.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.cmbTargetEmpire.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbTargetEmpire.FormattingEnabled = true;
-      this.cmbTargetEmpire.Location = new Point(17, 92);
+      this.cmbTargetEmpire.Location = new Point(UiScale.S(17), UiScale.S(92));
       this.cmbTargetEmpire.Name = "cmbTargetEmpire";
-      this.cmbTargetEmpire.Size = new Size(121, 22);
+      this.cmbTargetEmpire.Size = new Size(UiScale.S(121), UiScale.S(22));
       this.cmbTargetEmpire.TabIndex = 51;
       this.cmbTargetEmpire.SelectedIndexChanged += new EventHandler(this.cmbTargetEmpire_SelectedIndexChanged);
       this.cmbMissionType.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbMissionType.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbMissionType.FlatStyle = FlatStyle.Popup;
-      this.cmbMissionType.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.cmbMissionType.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.cmbMissionType.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbMissionType.FormattingEnabled = true;
-      this.cmbMissionType.Location = new Point(17, 92);
+      this.cmbMissionType.Location = new Point(UiScale.S(17), UiScale.S(92));
       this.cmbMissionType.Name = "cmbMissionType";
-      this.cmbMissionType.Size = new Size(121, 21);
+      this.cmbMissionType.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbMissionType.TabIndex = 51;
       this.cmbMissionType.SelectedIndexChanged += new EventHandler(this.cmbMissionType_SelectedIndexChanged);
       this.cmbTargetObject.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbTargetObject.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbTargetObject.FlatStyle = FlatStyle.Popup;
-      this.cmbTargetObject.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.cmbTargetObject.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.cmbTargetObject.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbTargetObject.FormattingEnabled = true;
-      this.cmbTargetObject.Location = new Point(17, 92);
+      this.cmbTargetObject.Location = new Point(UiScale.S(17), UiScale.S(92));
       this.cmbTargetObject.Name = "cmbTargetObject";
-      this.cmbTargetObject.Size = new Size(121, 21);
+      this.cmbTargetObject.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbTargetObject.TabIndex = 51;
       this.cmbTargetObject.SelectedIndexChanged += new EventHandler(this.cmbTargetObject_SelectedIndexChanged);
       this.cmbTimeToComplete.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbTimeToComplete.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbTimeToComplete.FlatStyle = FlatStyle.Popup;
-      this.cmbTimeToComplete.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.cmbTimeToComplete.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.cmbTimeToComplete.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbTimeToComplete.FormattingEnabled = true;
-      this.cmbTimeToComplete.Location = new Point(17, 92);
+      this.cmbTimeToComplete.Location = new Point(UiScale.S(17), UiScale.S(92));
       this.cmbTimeToComplete.Name = "cmbTimeToComplete";
-      this.cmbTimeToComplete.Size = new Size(121, 21);
+      this.cmbTimeToComplete.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbTimeToComplete.TabIndex = 51;
       this.cmbTimeToComplete.SelectedIndexChanged += new EventHandler(this.cmbTimeToComplete_SelectedIndexChanged);
       this.btnCancelMission.BackColor = Color.FromArgb(0, 0, 0);
       this.btnCancelMission.ClipBackground = false;
-      this.btnCancelMission.Font = new Font("Verdana", 8f, FontStyle.Bold);
+      this.btnCancelMission.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Bold);
       this.btnCancelMission.ForeColor = Color.FromArgb(150, 150, 150);
       this.btnCancelMission.GlowColor = Color.FromArgb(48, 48, 128);
       this.btnCancelMission.InnerBorderColor = Color.FromArgb(67, 67, 77);
@@ -840,7 +840,7 @@ namespace DistantWorlds.Controls
       this.btnCancelMission.Name = "btnCancelMission";
       this.btnCancelMission.OuterBorderColor = Color.FromArgb(0, 0, 16);
       this.btnCancelMission.ShineColor = Color.FromArgb(96, 96, 104);
-      this.btnCancelMission.Size = new Size(75, 23);
+      this.btnCancelMission.Size = new Size(UiScale.S(75), UiScale.S(23));
       this.btnCancelMission.TabIndex = 0;
       this.btnCancelMission.Text = TextResolver.GetText("Cancel Mission");
       this.btnCancelMission.TextColor = Color.FromArgb(120, 120, 120);
@@ -848,7 +848,7 @@ namespace DistantWorlds.Controls
       this.btnCancelMission.Click += new EventHandler(this.btnCancelMission_Click);
       this.btnAssignMission.BackColor = Color.FromArgb(0, 0, 0);
       this.btnAssignMission.ClipBackground = false;
-      this.btnAssignMission.Font = new Font("Verdana", 8f, FontStyle.Bold);
+      this.btnAssignMission.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Bold);
       this.btnAssignMission.ForeColor = Color.FromArgb(150, 150, 150);
       this.btnAssignMission.GlowColor = Color.FromArgb(48, 48, 128);
       this.btnAssignMission.InnerBorderColor = Color.FromArgb(67, 67, 77);
@@ -857,7 +857,7 @@ namespace DistantWorlds.Controls
       this.btnAssignMission.Name = "btnAssignMission";
       this.btnAssignMission.OuterBorderColor = Color.FromArgb(0, 0, 16);
       this.btnAssignMission.ShineColor = Color.FromArgb(96, 96, 104);
-      this.btnAssignMission.Size = new Size(75, 23);
+      this.btnAssignMission.Size = new Size(UiScale.S(75), UiScale.S(23));
       this.btnAssignMission.TabIndex = 0;
       this.btnAssignMission.Text = TextResolver.GetText("Assign Mission");
       this.btnAssignMission.TextColor = Color.FromArgb(120, 120, 120);
@@ -865,75 +865,75 @@ namespace DistantWorlds.Controls
       this.btnAssignMission.Click += new EventHandler(this.btnAssignMission_Click);
       this.lblTargetEmpire.AutoSize = true;
       this.lblTargetEmpire.BackColor = Color.Transparent;
-      this.lblTargetEmpire.Font = new Font("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.lblTargetEmpire.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.lblTargetEmpire.ForeColor = Color.FromArgb(170, 170, 170);
       this.lblTargetEmpire.Location = new Point(0, 0);
       this.lblTargetEmpire.Name = "lblTargetEmpire";
-      this.lblTargetEmpire.Size = new Size(100, 13);
+      this.lblTargetEmpire.Size = new Size(UiScale.S(100), UiScale.S(13));
       this.lblTargetEmpire.TabIndex = 0;
       this.lblTargetEmpire.Text = TextResolver.GetText("Target Empire");
       this.lblMissionType.AutoSize = true;
       this.lblMissionType.BackColor = Color.Transparent;
-      this.lblMissionType.Font = new Font("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.lblMissionType.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.lblMissionType.ForeColor = Color.FromArgb(170, 170, 170);
       this.lblMissionType.Location = new Point(0, 0);
       this.lblMissionType.Name = "lblMissionType";
-      this.lblMissionType.Size = new Size(91, 13);
+      this.lblMissionType.Size = new Size(UiScale.S(91), UiScale.S(13));
       this.lblMissionType.TabIndex = 0;
       this.lblMissionType.Text = TextResolver.GetText("Mission Type");
       this.lblTargetObject.AutoSize = true;
       this.lblTargetObject.BackColor = Color.Transparent;
-      this.lblTargetObject.Font = new Font("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.lblTargetObject.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.lblTargetObject.ForeColor = Color.FromArgb(170, 170, 170);
       this.lblTargetObject.Location = new Point(0, 0);
       this.lblTargetObject.Name = "lblTargetObject";
-      this.lblTargetObject.Size = new Size(50, 13);
+      this.lblTargetObject.Size = new Size(UiScale.S(50), UiScale.S(13));
       this.lblTargetObject.TabIndex = 0;
       this.lblTargetObject.Text = TextResolver.GetText("Target");
       this.lblTimeToComplete.AutoSize = true;
       this.lblTimeToComplete.BackColor = Color.Transparent;
-      this.lblTimeToComplete.Font = new Font("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.lblTimeToComplete.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.lblTimeToComplete.ForeColor = Color.FromArgb(170, 170, 170);
       this.lblTimeToComplete.Location = new Point(0, 0);
       this.lblTimeToComplete.Name = "lblTimeToComplete";
-      this.lblTimeToComplete.Size = new Size(121, 13);
+      this.lblTimeToComplete.Size = new Size(UiScale.S(121), UiScale.S(13));
       this.lblTimeToComplete.TabIndex = 0;
       this.lblTimeToComplete.Text = TextResolver.GetText("Time to Complete");
       this.lblMissionDifficulty.AutoSize = true;
       this.lblMissionDifficulty.BackColor = Color.Transparent;
-      this.lblMissionDifficulty.Font = new Font("Verdana", 14.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.lblMissionDifficulty.Font = UiScale.NewFont("Verdana", 14.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.lblMissionDifficulty.ForeColor = Color.FromArgb(170, 170, 170);
       this.lblMissionDifficulty.Location = new Point(0, 0);
       this.lblMissionDifficulty.Name = "lblMissionDifficulty";
-      this.lblMissionDifficulty.Size = new Size(0, 23);
+      this.lblMissionDifficulty.Size = new Size(0, UiScale.S(23));
       this.lblMissionDifficulty.TabIndex = 0;
       this.lblMissionDifficultyLabel.AutoSize = true;
       this.lblMissionDifficultyLabel.BackColor = Color.Transparent;
-      this.lblMissionDifficultyLabel.Font = new Font("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.lblMissionDifficultyLabel.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.lblMissionDifficultyLabel.ForeColor = Color.FromArgb(170, 170, 170);
       this.lblMissionDifficultyLabel.Location = new Point(0, 0);
       this.lblMissionDifficultyLabel.Name = "lblMissionDifficultyLabel";
-      this.lblMissionDifficultyLabel.Size = new Size(78, 26);
+      this.lblMissionDifficultyLabel.Size = new Size(UiScale.S(78), UiScale.S(26));
       this.lblMissionDifficultyLabel.TabIndex = 0;
       this.lblMissionDifficultyLabel.Text = TextResolver.GetText("Success Probability");
       this.lblMissionDifficultyLabel.TextAlign = ContentAlignment.MiddleRight;
       this.lblMissionDifficultyWarning.AutoSize = true;
       this.lblMissionDifficultyWarning.BackColor = Color.Transparent;
-      this.lblMissionDifficultyWarning.Font = new Font("Verdana", 9.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.lblMissionDifficultyWarning.Font = UiScale.NewFont("Verdana", 9.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.lblMissionDifficultyWarning.ForeColor = Color.FromArgb(160, 160, (int) byte.MaxValue);
       this.lblMissionDifficultyWarning.Location = new Point(0, 0);
       this.lblMissionDifficultyWarning.Name = "lblMissionDifficultyWarning";
-      this.lblMissionDifficultyWarning.Size = new Size(0, 16);
+      this.lblMissionDifficultyWarning.Size = new Size(0, UiScale.S(16));
       this.lblMissionDifficultyWarning.TabIndex = 0;
       this.lnkMissionTypes.ActiveLinkColor = Color.FromArgb((int) byte.MaxValue, 128, 0);
       this.lnkMissionTypes.AutoSize = true;
       this.lnkMissionTypes.BackColor = Color.Transparent;
-      this.lnkMissionTypes.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.lnkMissionTypes.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.lnkMissionTypes.LinkBehavior = LinkBehavior.HoverUnderline;
       this.lnkMissionTypes.LinkColor = Color.FromArgb((int) byte.MaxValue, 192, 0);
-      this.lnkMissionTypes.Location = new Point(-16, 53);
+      this.lnkMissionTypes.Location = new Point(UiScale.S(-16), UiScale.S(53));
       this.lnkMissionTypes.Name = "lnkMissionTypes";
-      this.lnkMissionTypes.Size = new Size(151, 13);
+      this.lnkMissionTypes.Size = new Size(UiScale.S(151), UiScale.S(13));
       this.lnkMissionTypes.TabIndex = 79;
       this.lnkMissionTypes.TabStop = true;
       this.lnkMissionTypes.Text = TextResolver.GetText("About this mission type...");

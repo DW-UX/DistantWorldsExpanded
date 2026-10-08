@@ -21,6 +21,7 @@ namespace BaconDistantWorlds
         public SelectPassengerMissionTargets(Main main)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
 
             bindingSource.DataSource = typeof(HabitatView);
             bindingTarget.DataSource = typeof(HabitatView);

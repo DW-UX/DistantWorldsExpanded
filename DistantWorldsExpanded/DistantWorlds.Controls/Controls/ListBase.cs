@@ -16,10 +16,10 @@ namespace DistantWorlds.Controls
     {
       base.BackColor = Color.FromArgb(0, 0, 72);
       base.ForeColor = Color.White;
-      base.Font = new Font("Verdana", 7.5f, FontStyle.Regular, GraphicsUnit.Pixel);
+      base.Font = UiScale.NewFont("Verdana", 7.5f, FontStyle.Regular, GraphicsUnit.Pixel);
       this.MultiColumn = false;
       this.BorderStyle = BorderStyle.FixedSingle;
-      this.Height = 20;
+      this.Height = UiScale.S(20);
     }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]

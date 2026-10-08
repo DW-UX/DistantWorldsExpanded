@@ -17,6 +17,7 @@ namespace ExpansionMod.Controls
         public fAddNewHotkey()
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             bindingSourceSelectedHotKeys.DataSource = new List<Keys>();
             if (_availableKeys == null)
             { _availableKeys = GetAvailableKeys(); }

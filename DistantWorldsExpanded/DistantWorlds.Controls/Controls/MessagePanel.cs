@@ -14,7 +14,7 @@ namespace DistantWorlds.Controls
   public class MessagePanel : Panel
   {
     private string _Message = string.Empty;
-    private int _Padding = 12;
+    private int _Padding = UiScale.S(12);
     protected IFontCache _FontCache;
     private float _FontSize = 15.33f;
     private bool _FontIsBold;
@@ -24,7 +24,7 @@ namespace DistantWorlds.Controls
       this.SetFont(18.67f);
       this.BorderStyle = BorderStyle.None;
       this.BackColor = Color.FromArgb(64, 0, 0, 0);
-      this.Padding = new Padding(12);
+      this.Padding = new Padding(UiScale.S(12));
     }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -60,11 +60,11 @@ namespace DistantWorlds.Controls
     protected override void OnPaint(PaintEventArgs e)
     {
       base.OnPaint(e);
-      this._Padding = 6;
+      this._Padding = UiScale.S(6);
       RectangleF layoutRectangle = new RectangleF((float) this._Padding, (float) this._Padding, (float) (this.ClientRectangle.Width - this._Padding * 2), (float) (this.ClientRectangle.Height - this._Padding * 2));
       e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       e.Graphics.DrawString(this._Message, this.Font, (Brush) new SolidBrush(Color.FromArgb(0, 0, 0)), layoutRectangle, StringFormat.GenericDefault);
-      layoutRectangle.Offset(-1f, -1f);
+      layoutRectangle.Offset(UiScale.S(-1f), UiScale.S(-1f));
       e.Graphics.DrawString(this._Message, this.Font, (Brush) new SolidBrush(Color.FromArgb(224, 224, 224)), layoutRectangle, StringFormat.GenericDefault);
     }
   }

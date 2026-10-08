@@ -44,17 +44,17 @@ namespace DistantWorlds.Controls
         {
             
             int_0 = -1;
-            int_1 = 15;
+            int_1 = UiScale.S(15);
             //int_2 = 10;
-            int_3 = 10;
+            int_3 = UiScale.S(10);
             solidBrush_0 = new SolidBrush(Color.FromArgb(170, 170, 170));
             solidBrush_1 = new SolidBrush(Color.Black);
             solidBrush_2 = new SolidBrush(Color.Red);
             solidBrush_3 = new SolidBrush(Color.Green);
-            Font = new Font("Verdana", 8f);
+            Font = UiScale.NewFont("Verdana", 8f);
             SetFont(16.67f);
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         public void ClearData()
@@ -74,7 +74,7 @@ namespace DistantWorlds.Controls
             empire_0 = empire;
             int_0 = newGovernmentStyle;
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
             Invalidate();
         }
 
@@ -106,10 +106,10 @@ namespace DistantWorlds.Controls
         private void method_2(Graphics graphics_0)
         {
             int num = 0;
-            int num2 = 20;
-            int int_ = 103;
-            int num3 = 113;
-            int num4 = 17;
+            int num2 = UiScale.S(20);
+            int int_ = UiScale.S(103);
+            int num3 = UiScale.S(113);
+            int num4 = UiScale.S(17);
             int num5 = 0;
             if (empire_0 == null || empire_0.PirateEmpireBaseHabitat == null)
             {
@@ -129,7 +129,7 @@ namespace DistantWorlds.Controls
             }
             string string_ = TextResolver.GetText("Home Base");
             int num6 = method_1(graphics_0, string_, Font, int_);
-            method_8(graphics_0, string_, Font, new Point(num + num6, num5 + 1));
+            method_8(graphics_0, string_, Font, new Point(num + num6, num5 + UiScale.S(1)));
             if (builtObject != null)
             {
                 string string_2 = string.Format(TextResolver.GetText("Pirate Home Base at Location"), builtObject.Name, empire_0.PirateEmpireBaseHabitat.Name);
@@ -142,7 +142,7 @@ namespace DistantWorlds.Controls
             num5 += num4;
             string string_3 = TextResolver.GetText("Corruption");
             num6 = method_1(graphics_0, string_3, Font, int_);
-            method_8(graphics_0, string_3, Font, new Point(num + num6, num5 + 1));
+            method_8(graphics_0, string_3, Font, new Point(num + num6, num5 + UiScale.S(1)));
             method_8(graphics_0, empire_0.Corruption.ToString("0%"), font_0, new Point(num3, num5));
             num5 += num4;
             num5 += num4;
@@ -254,16 +254,16 @@ namespace DistantWorlds.Controls
                 }
                 using SolidBrush solidBrush_ = new SolidBrush(color);
                 method_9(graphics_0, list[m], Font, new Point(num2, num5), solidBrush_);
-                num5 += num4 - 3;
+                num5 += num4 - UiScale.S(3);
             }
         }
 
         private void method_3(Graphics graphics_0)
         {
             int num = 0;
-            int int_ = 103;
-            int num2 = 113;
-            int num3 = 2;
+            int int_ = UiScale.S(103);
+            int num2 = UiScale.S(113);
+            int num3 = UiScale.S(2);
             int num4 = 0;
             Point point = new Point(int_3, 0);
             if (empire_0 == null)
@@ -305,7 +305,7 @@ namespace DistantWorlds.Controls
             {
                 string_ = "(" + string.Format(TextResolver.GetText("Xth of Y"), Galaxy.OrderedNumberDescription(num5 + 1), empirePriorityList.Count.ToString()) + ")";
             }
-            method_8(point_0: new Point(num2 + (int)sizeF.Width + 10, num4), graphics_0: graphics_0, string_0: string_, font_2: Font);
+            method_8(point_0: new Point(num2 + (int)sizeF.Width + UiScale.S(10), num4), graphics_0: graphics_0, string_0: string_, font_2: Font);
             num4 += int_1;
             method_8(point_0: new Point(num + method_1(graphics_0, TextResolver.GetText("Population"), Font, int_), num4), graphics_0: graphics_0, string_0: TextResolver.GetText("Population"), font_2: Font);
             point = new Point(num2, num4 - num3);
@@ -318,7 +318,7 @@ namespace DistantWorlds.Controls
             {
                 string_2 = "(" + string.Format(TextResolver.GetText("Xth of Y"), Galaxy.OrderedNumberDescription(num5 + 1), empirePriorityList.Count.ToString()) + ")";
             }
-            method_8(point_0: new Point(num2 + (int)sizeF.Width + 10, num4), graphics_0: graphics_0, string_0: string_2, font_2: Font);
+            method_8(point_0: new Point(num2 + (int)sizeF.Width + UiScale.S(10), num4), graphics_0: graphics_0, string_0: string_2, font_2: Font);
             num4 += int_1;
             method_8(point_0: new Point(num + method_1(graphics_0, TextResolver.GetText("Strategic Value"), Font, int_), num4), graphics_0: graphics_0, string_0: TextResolver.GetText("Strategic Value"), font_2: Font);
             point = new Point(num2, num4 - num3);
@@ -331,7 +331,7 @@ namespace DistantWorlds.Controls
             {
                 string_3 = "(" + string.Format(TextResolver.GetText("Xth of Y"), Galaxy.OrderedNumberDescription(num5 + 1), empirePriorityList.Count.ToString()) + ")";
             }
-            method_8(point_0: new Point(num2 + (int)sizeF.Width + 10, num4), graphics_0: graphics_0, string_0: string_3, font_2: Font);
+            method_8(point_0: new Point(num2 + (int)sizeF.Width + UiScale.S(10), num4), graphics_0: graphics_0, string_0: string_3, font_2: Font);
             num4 += int_1;
             method_8(point_0: new Point(num + method_1(graphics_0, TextResolver.GetText("Reputation"), Font, int_), num4), graphics_0: graphics_0, string_0: TextResolver.GetText("Reputation"), font_2: Font);
             point = new Point(num2, num4 - num3);
@@ -420,23 +420,23 @@ namespace DistantWorlds.Controls
             method_8(point_0: new Point(num + method_1(graphics_0, TextResolver.GetText("Intelligence Agents"), Font, int_), num4), graphics_0: graphics_0, string_0: TextResolver.GetText("Intelligence Agents"), font_2: Font);
             method_8(point_0: new Point(num2, num4 - num3), graphics_0: graphics_0, string_0: empire_0.Characters.CountCharactersByRole(CharacterRole.IntelligenceAgent).ToString(), font_2: font_0);
             num4 += int_1;
-            num4 += 10;
-            num4 += 10;
+            num4 += UiScale.S(10);
+            num4 += UiScale.S(10);
             using (SolidBrush brush = new SolidBrush(Color.FromArgb(40, 80, 80, 255)))
             {
-                Rectangle rect = new Rectangle(0, num4 + 5, 256, 200);
+                Rectangle rect = new Rectangle(0, num4 + UiScale.S(5), UiScale.S(256), UiScale.S(200));
                 graphics_0.FillRectangle(brush, rect);
             }
             using (SolidBrush brush2 = new SolidBrush(Color.FromArgb(80, 80, 80, 80)))
             {
-                Rectangle rect2 = new Rectangle(257, num4 + 5, base.Width, 200);
+                Rectangle rect2 = new Rectangle(UiScale.S(257), num4 + UiScale.S(5), base.Width, UiScale.S(200));
                 graphics_0.FillRectangle(brush2, rect2);
             }
-            num4 += 10;
-            method_8(point_0: new Point(num + 4, num4), graphics_0: graphics_0, string_0: TextResolver.GetText("Government"), font_2: font_1);
-            method_8(point_0: new Point(num2, num4 - num3 + 4), graphics_0: graphics_0, string_0: empire_0.GovernmentAttributes.Name, font_2: font_0);
+            num4 += UiScale.S(10);
+            method_8(point_0: new Point(num + UiScale.S(4), num4), graphics_0: graphics_0, string_0: TextResolver.GetText("Government"), font_2: font_1);
+            method_8(point_0: new Point(num2, num4 - num3 + UiScale.S(4)), graphics_0: graphics_0, string_0: empire_0.GovernmentAttributes.Name, font_2: font_0);
             num4 += int_1;
-            num4 += 10;
+            num4 += UiScale.S(10);
             if (empire_0.GovernmentAttributes != null)
             {
                 method_8(point_0: new Point(num + method_1(graphics_0, TextResolver.GetText("War weariness"), Font, int_), num4), graphics_0: graphics_0, string_0: TextResolver.GetText("War weariness"), font_2: Font);
@@ -466,25 +466,25 @@ namespace DistantWorlds.Controls
             }
             if (int_0 != -1)
             {
-                num4 = 150;
+                num4 = UiScale.S(150);
                 GovernmentAttributes governmentAttributes = galaxy_0.Governments[int_0];
-                num4 = 150 + int_1;
-                num4 += 10;
-                method_9(point_0: new Point(260, num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.WarWeariness - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_5(governmentAttributes.WarWeariness - 1.0, bool_0: false));
+                num4 = UiScale.S(150) + int_1;
+                num4 += UiScale.S(10);
+                method_9(point_0: new Point(UiScale.S(260), num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.WarWeariness - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_5(governmentAttributes.WarWeariness - 1.0, bool_0: false));
                 num4 += int_1;
-                method_9(point_0: new Point(260, num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.MaintenanceCosts - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_5(governmentAttributes.MaintenanceCosts - 1.0, bool_0: false));
+                method_9(point_0: new Point(UiScale.S(260), num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.MaintenanceCosts - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_5(governmentAttributes.MaintenanceCosts - 1.0, bool_0: false));
                 num4 += int_1;
-                method_9(point_0: new Point(260, num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.ApprovalRating - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_4(governmentAttributes.ApprovalRating - 1.0));
+                method_9(point_0: new Point(UiScale.S(260), num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.ApprovalRating - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_4(governmentAttributes.ApprovalRating - 1.0));
                 num4 += int_1;
-                method_9(point_0: new Point(260, num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.PopulationGrowth - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_4(governmentAttributes.PopulationGrowth - 1.0));
+                method_9(point_0: new Point(UiScale.S(260), num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.PopulationGrowth - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_4(governmentAttributes.PopulationGrowth - 1.0));
                 num4 += int_1;
-                method_9(point_0: new Point(260, num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.ResearchSpeed - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_4(governmentAttributes.ResearchSpeed - 1.0));
+                method_9(point_0: new Point(UiScale.S(260), num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.ResearchSpeed - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_4(governmentAttributes.ResearchSpeed - 1.0));
                 num4 += int_1;
-                method_9(point_0: new Point(260, num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.TroopRecruitment - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_4(governmentAttributes.TroopRecruitment - 1.0));
+                method_9(point_0: new Point(UiScale.S(260), num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.TroopRecruitment - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_4(governmentAttributes.TroopRecruitment - 1.0));
                 num4 += int_1;
-                method_9(point_0: new Point(260, num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.Corruption - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_5(governmentAttributes.Corruption - 1.0, bool_0: false));
+                method_9(point_0: new Point(UiScale.S(260), num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.Corruption - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_5(governmentAttributes.Corruption - 1.0, bool_0: false));
                 num4 += int_1;
-                method_9(point_0: new Point(260, num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.TradeBonus - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_5(governmentAttributes.TradeBonus - 1.0, bool_0: true));
+                method_9(point_0: new Point(UiScale.S(260), num4 - num3), graphics_0: graphics_0, string_0: (governmentAttributes.TradeBonus - 1.0).ToString("+#0%;-#0%;" + TextResolver.GetText("Normal")), font_2: font_0, solidBrush_4: method_5(governmentAttributes.TradeBonus - 1.0, bool_0: true));
                 num4 += int_1;
             }
         }
@@ -530,9 +530,9 @@ namespace DistantWorlds.Controls
 
         private void method_9(Graphics graphics_0, string string_0, Font font_2, Point point_0, SolidBrush solidBrush_4)
         {
-            point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+            point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
-            point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+            point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_4, point_0, StringFormat.GenericTypographic);
         }
 
@@ -540,19 +540,19 @@ namespace DistantWorlds.Controls
         {
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 StringFormat genericTypographic = StringFormat.GenericTypographic;
                 graphics_0.DrawString(string_0, font_2, solidBrush_1, layoutRectangle, genericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle, genericTypographic);
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, brush_0, point_0);
             }
         }

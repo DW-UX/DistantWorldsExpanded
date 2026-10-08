@@ -48,17 +48,17 @@ namespace DistantWorlds.Controls
 
         public Font _TitleFont;
 
-        private int _ImageSize = 14;
+        private int _ImageSize = UiScale.S(14);
 
         private int _ImageScaleSize = 24;
 
-        private int _HabitatImageSize = 26;
+        private int _HabitatImageSize = UiScale.S(26);
 
-        public int _RowHeight = 15;
+        public int _RowHeight = UiScale.S(15);
 
-        public Size _FlagSizeSmall = new Size(30, 18);
+        public Size _FlagSizeSmall = new Size(UiScale.S(30), UiScale.S(18));
 
-        private Size _FlagSizeSystem = new Size(20, 12);
+        private Size _FlagSizeSystem = new Size(UiScale.S(20), UiScale.S(12));
 
         private int _MinPictureSize = 60;
 
@@ -66,31 +66,31 @@ namespace DistantWorlds.Controls
 
         private int _RuinImageHeight = 18;
 
-        public int _MaxGraphTextWidth = 200;
+        public int _MaxGraphTextWidth = UiScale.S(200);
 
-        private int _PopulationTextWidth = 75;
+        private int _PopulationTextWidth = UiScale.S(75);
 
-        private int _PopulationAmountWidth = 48;
+        private int _PopulationAmountWidth = UiScale.S(48);
 
-        private int _LabelWidth = 65;
+        private int _LabelWidth = UiScale.S(65);
 
-        private int _LabelWidthHabitat = 70;
+        private int _LabelWidthHabitat = UiScale.S(70);
 
-        public int _Height2 = 2;
+        public int _Height2 = UiScale.S(2);
 
-        public int _Height3 = 3;
+        public int _Height3 = UiScale.S(3);
 
-        public int _Height4 = 4;
+        public int _Height4 = UiScale.S(4);
 
-        public int _Height5 = 5;
+        public int _Height5 = UiScale.S(5);
 
-        private int _Height6 = 6;
+        private int _Height6 = UiScale.S(6);
 
-        private int _Height8 = 8;
+        private int _Height8 = UiScale.S(8);
 
-        private int _Height10 = 10;
+        private int _Height10 = UiScale.S(10);
 
-        private int _ColonySummaryDetailWidth = 20;
+        private int _ColonySummaryDetailWidth = UiScale.S(20);
 
         private Bitmap _Picture;
 
@@ -702,14 +702,14 @@ namespace DistantWorlds.Controls
                 }
                 int num3 = clientRectangle.Width - num2;
                 int num4 = clientRectangle.Height - num2;
-                int num5 = 1;
-                num5 = (((_CurveMode & CornerCurveMode.TopRight) == 0) ? 1 : (num * 2));
+                int num5 = UiScale.S(1);
+                num5 = (((_CurveMode & CornerCurveMode.TopRight) == 0) ? UiScale.S(1) : (num * 2));
                 graphicsPath.AddArc(num3 - num5, num2, num5, num5, 270f, 90f);
-                num5 = (((_CurveMode & CornerCurveMode.BottomRight) == 0) ? 1 : (num * 2));
+                num5 = (((_CurveMode & CornerCurveMode.BottomRight) == 0) ? UiScale.S(1) : (num * 2));
                 graphicsPath.AddArc(num3 - num5, num4 - num5, num5, num5, 0f, 90f);
-                num5 = (((_CurveMode & CornerCurveMode.BottomLeft) == 0) ? 1 : (num * 2));
+                num5 = (((_CurveMode & CornerCurveMode.BottomLeft) == 0) ? UiScale.S(1) : (num * 2));
                 graphicsPath.AddArc(num2, num4 - num5, num5, num5, 90f, 90f);
-                num5 = (((_CurveMode & CornerCurveMode.TopLeft) == 0) ? 1 : (num * 2));
+                num5 = (((_CurveMode & CornerCurveMode.TopLeft) == 0) ? UiScale.S(1) : (num * 2));
                 graphicsPath.AddArc(num2, num2, num5, num5, 180f, 90f);
                 graphicsPath.CloseFigure();
                 return graphicsPath;
@@ -724,14 +724,14 @@ namespace DistantWorlds.Controls
         public static void DrawBorder3D(Graphics graphics, Rectangle rectangle)
         {
             graphics.SmoothingMode = SmoothingMode.Default;
-            graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.Width - 1, rectangle.Y);
-            graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.X, rectangle.Height - 1);
-            graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + 1, rectangle.Y + 1, rectangle.Width - 1, rectangle.Y + 1);
-            graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + 1, rectangle.Y + 1, rectangle.X + 1, rectangle.Height - 1);
-            graphics.DrawLine(SystemPens.ControlLight, rectangle.X + 1, rectangle.Height - 2, rectangle.Width - 2, rectangle.Height - 2);
-            graphics.DrawLine(SystemPens.ControlLight, rectangle.Width - 2, rectangle.Y + 1, rectangle.Width - 2, rectangle.Height - 2);
-            graphics.DrawLine(SystemPens.ControlLightLight, rectangle.X, rectangle.Height - 1, rectangle.Width - 1, rectangle.Height - 1);
-            graphics.DrawLine(SystemPens.ControlLightLight, rectangle.Width - 1, rectangle.Y, rectangle.Width - 1, rectangle.Height - 1);
+            graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.Width - UiScale.S(1), rectangle.Y);
+            graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.X, rectangle.Height - UiScale.S(1));
+            graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + UiScale.S(1), rectangle.Y + UiScale.S(1), rectangle.Width - UiScale.S(1), rectangle.Y + UiScale.S(1));
+            graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + UiScale.S(1), rectangle.Y + UiScale.S(1), rectangle.X + UiScale.S(1), rectangle.Height - UiScale.S(1));
+            graphics.DrawLine(SystemPens.ControlLight, rectangle.X + UiScale.S(1), rectangle.Height - UiScale.S(2), rectangle.Width - UiScale.S(2), rectangle.Height - UiScale.S(2));
+            graphics.DrawLine(SystemPens.ControlLight, rectangle.Width - UiScale.S(2), rectangle.Y + UiScale.S(1), rectangle.Width - UiScale.S(2), rectangle.Height - UiScale.S(2));
+            graphics.DrawLine(SystemPens.ControlLightLight, rectangle.X, rectangle.Height - UiScale.S(1), rectangle.Width - UiScale.S(1), rectangle.Height - UiScale.S(1));
+            graphics.DrawLine(SystemPens.ControlLightLight, rectangle.Width - UiScale.S(1), rectangle.Y, rectangle.Width - UiScale.S(1), rectangle.Height - UiScale.S(1));
         }
 
         public static int DoubleToInt(double value)
@@ -1017,8 +1017,8 @@ namespace DistantWorlds.Controls
             image = FadeImage(image, 0.33f);
             Rectangle rectangle = default(Rectangle);
             Rectangle rectangle2 = default(Rectangle);
-            int num = base.ClientRectangle.Width - 6;
-            int num2 = base.ClientRectangle.Height - 6;
+            int num = base.ClientRectangle.Width - UiScale.S(6);
+            int num2 = base.ClientRectangle.Height - UiScale.S(6);
             double num3 = (double)image.Width / (double)image.Height;
             int num4;
             int num5;
@@ -1056,7 +1056,7 @@ namespace DistantWorlds.Controls
             int num7 = (num - (int)((double)num4 * num6)) / 2;
             int num8 = (num2 - (int)((double)num5 * num6)) / 2;
             int num9 = (int)((double)num4 * num6);
-            rectangle = new Rectangle(num7 + 3, num8 + 3, num9, (int)((double)num5 * num6));
+            rectangle = new Rectangle(num7 + UiScale.S(3), num8 + UiScale.S(3), num9, (int)((double)num5 * num6));
             Bitmap bitmap = new Bitmap(rectangle.Width, rectangle.Height, PixelFormat.Format32bppPArgb);
             using Graphics graphics = Graphics.FromImage(bitmap);
             rectangle2 = new Rectangle(0, 0, rectangle.Width, rectangle.Height);
@@ -1392,10 +1392,10 @@ namespace DistantWorlds.Controls
                 for (; i < bitmap.Height - 1; i += num7)
                 {
                     int num5 = random.Next(-num3, num3);
-                    int num6 = Math.Max(0, Math.Min(bitmap.Width - 1, num4 + num5));
+                    int num6 = Math.Max(0, Math.Min(bitmap.Width - UiScale.S(1), num4 + num5));
                     num7 = random.Next(3, 6);
                     int val = i + num7;
-                    val = Math.Min(val, bitmap.Height - 1);
+                    val = Math.Min(val, bitmap.Height - UiScale.S(1));
                     num7 = val - i;
                     graphics.FillRectangle(rect: new Rectangle(0, i, num6, num7), brush: _BlackBrush);
                 }
@@ -2422,63 +2422,63 @@ namespace DistantWorlds.Controls
 
         public void SetContentSizeNormal()
         {
-            _ImageSize = 14;
+            _ImageSize = UiScale.S(14);
             _ImageScaleSize = 24;
-            _HabitatImageSize = 26;
+            _HabitatImageSize = UiScale.S(26);
             _TinyFont = _TinyFontNormalSize;
             _NormalFont = _NormalFontNormalSize;
             _NormalFontBold = _NormalBoldFontNormalSize;
             _TitleFont = _TinyFontNormalSize;
-            _RowHeight = 15;
-            _FlagSizeSmall = new Size(30, 18);
-            _FlagSizeSystem = new Size(20, 12);
+            _RowHeight = UiScale.S(15);
+            _FlagSizeSmall = new Size(UiScale.S(30), UiScale.S(18));
+            _FlagSizeSystem = new Size(UiScale.S(20), UiScale.S(12));
             _MinPictureSize = 60;
             _MaxPictureSize = 200;
             _RuinImageHeight = 18;
-            _MaxGraphTextWidth = 200;
-            _PopulationTextWidth = 75;
-            _PopulationAmountWidth = 48;
-            _LabelWidth = 65;
-            _LabelWidthHabitat = 70;
-            _Height2 = 2;
-            _Height3 = 3;
-            _Height4 = 4;
-            _Height5 = 5;
-            _Height6 = 6;
-            _Height8 = 8;
-            _Height10 = 10;
-            _ColonySummaryDetailWidth = 20;
+            _MaxGraphTextWidth = UiScale.S(200);
+            _PopulationTextWidth = UiScale.S(75);
+            _PopulationAmountWidth = UiScale.S(48);
+            _LabelWidth = UiScale.S(65);
+            _LabelWidthHabitat = UiScale.S(70);
+            _Height2 = UiScale.S(2);
+            _Height3 = UiScale.S(3);
+            _Height4 = UiScale.S(4);
+            _Height5 = UiScale.S(5);
+            _Height6 = UiScale.S(6);
+            _Height8 = UiScale.S(8);
+            _Height10 = UiScale.S(10);
+            _ColonySummaryDetailWidth = UiScale.S(20);
             RepointImageInstances();
         }
 
         public void SetContentSizeLarge()
         {
-            _ImageSize = 20;
+            _ImageSize = UiScale.S(20);
             _ImageScaleSize = 34;
-            _HabitatImageSize = 36;
+            _HabitatImageSize = UiScale.S(36);
             _TinyFont = _TinyFontLargeSize;
             _NormalFont = _NormalFontLargeSize;
             _NormalFontBold = _NormalBoldFontLargeSize;
             _TitleFont = _TinyFontLargeSize;
-            _RowHeight = 21;
-            _FlagSizeSmall = new Size(42, 25);
-            _FlagSizeSystem = new Size(28, 17);
+            _RowHeight = UiScale.S(21);
+            _FlagSizeSmall = new Size(UiScale.S(42), UiScale.S(25));
+            _FlagSizeSystem = new Size(UiScale.S(28), UiScale.S(17));
             _MinPictureSize = 84;
             _MaxPictureSize = 280;
             _RuinImageHeight = 25;
-            _MaxGraphTextWidth = 280;
-            _PopulationTextWidth = 105;
-            _PopulationAmountWidth = 67;
-            _LabelWidth = 91;
-            _LabelWidthHabitat = 98;
-            _Height2 = 3;
-            _Height3 = 4;
-            _Height4 = 6;
-            _Height5 = 7;
-            _Height6 = 8;
-            _Height8 = 11;
-            _Height10 = 14;
-            _ColonySummaryDetailWidth = 28;
+            _MaxGraphTextWidth = UiScale.S(280);
+            _PopulationTextWidth = UiScale.S(105);
+            _PopulationAmountWidth = UiScale.S(67);
+            _LabelWidth = UiScale.S(91);
+            _LabelWidthHabitat = UiScale.S(98);
+            _Height2 = UiScale.S(3);
+            _Height3 = UiScale.S(4);
+            _Height4 = UiScale.S(6);
+            _Height5 = UiScale.S(7);
+            _Height6 = UiScale.S(8);
+            _Height8 = UiScale.S(11);
+            _Height10 = UiScale.S(14);
+            _ColonySummaryDetailWidth = UiScale.S(28);
             RepointImageInstances();
         }
 
@@ -2510,10 +2510,10 @@ namespace DistantWorlds.Controls
                 color2 = UpdateColor(fillColorEnd, alternateFillColorEnd);
             }
             int num = (int)graphics.MeasureString("99999", _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            num += 5;
+            num += UiScale.S(5);
             int num2 = (int)graphics.MeasureString(description, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location2 = new Point(location.X + (descriptionWidth - num2), location.Y - 2);
-            descriptionWidth += 10;
+            Point location2 = new Point(location.X + (descriptionWidth - num2), location.Y - UiScale.S(2));
+            descriptionWidth += UiScale.S(10);
             Point point = new Point(location.X + descriptionWidth, location.Y);
             int num3 = overallWidth - (descriptionWidth + num);
             int num4 = (int)((double)currentValue / (double)maximumValue * (double)num3);
@@ -2530,10 +2530,10 @@ namespace DistantWorlds.Controls
             }
             int num5 = (int)graphics.MeasureString(s, _NormalFont).Width;
             Point point2 = new Point(point.X + (num3 - num5) / 2, point.Y);
-            Point location3 = new Point(point.X + num3 + 5, point.Y);
+            Point location3 = new Point(point.X + num3 + UiScale.S(5), point.Y);
             Rectangle rect = new Rectangle(point.X, point.Y, num3, height);
             Rectangle rect2 = new Rectangle(point.X, point.Y, num4, height);
-            Rectangle rect3 = new Rectangle(point.X - 1, point.Y, num4 + 2, height);
+            Rectangle rect3 = new Rectangle(point.X - UiScale.S(1), point.Y, num4 + UiScale.S(2), height);
             LinearGradientBrush linearGradientBrush = null;
             if (rect2.Width > 0)
             {
@@ -2555,8 +2555,8 @@ namespace DistantWorlds.Controls
         private void DrawFacilities(int labelWidth, Habitat habitat, PlanetaryFacilityList facilities, Graphics graphics, Point location, int overallWidth)
         {
             int num = (int)graphics.MeasureString(TextResolver.GetText("Facilities"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
-            labelWidth += 10;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - UiScale.S(2));
+            labelWidth += UiScale.S(10);
             DrawStringWithDropShadow(graphics, TextResolver.GetText("Facilities"), _NormalFontBold, location2);
             int num2 = labelWidth;
             Color color = Color.FromArgb(190, 24, 24, 32);
@@ -2605,7 +2605,7 @@ namespace DistantWorlds.Controls
                 text = text + " (" + TextResolver.GetText("click for details") + ")";
                 graphics.DrawImageUnscaled(bitmap, point);
                 AddHotspot(new Rectangle(point.X, point.Y, bitmap.Width, bitmap.Height), planetaryFacility, text);
-                num2 += bitmap.Width + 2;
+                num2 += bitmap.Width + UiScale.S(2);
             }
         }
 
@@ -2617,12 +2617,12 @@ namespace DistantWorlds.Controls
         public void DrawTroopsAgents(int labelWidth, TroopList troops, TroopList troopsRecruiting, TroopList troopsInvading, CharacterList characters, CharacterList invadingCharacters, Graphics graphics, Point location, int overallWidth, int offsetX, string prefix)
         {
             int num = (int)graphics.MeasureString(TextResolver.GetText("Troops"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
-            labelWidth += 10;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - UiScale.S(2));
+            labelWidth += UiScale.S(10);
             int num2 = 0;
             if (!string.IsNullOrEmpty(prefix))
             {
-                num2 = 2 + (int)graphics.MeasureString(prefix, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+                num2 = UiScale.S(2) + (int)graphics.MeasureString(prefix, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
                 DrawStringWithDropShadow(location: new Point(location.X + labelWidth, location.Y), graphics: graphics, text: prefix, font: _NormalFont);
             }
             labelWidth += num2;
@@ -2665,7 +2665,7 @@ namespace DistantWorlds.Controls
                 }
                 if (num11 <= 0)
                 {
-                    num11 = 1;
+                    num11 = UiScale.S(1);
                 }
             }
             DrawStringWithDropShadow(graphics, TextResolver.GetText("Troops"), _NormalFontBold, location2);
@@ -2885,7 +2885,7 @@ namespace DistantWorlds.Controls
             if (troopsInvading.Count > 0 || invadingCharacters.Count > 0)
             {
                 using SolidBrush brush3 = new SolidBrush(Color.Red);
-                int num16 = invadingCharacters.Count * num11 + troopsInvading.Count * num11 + 6;
+                int num16 = invadingCharacters.Count * num11 + troopsInvading.Count * num11 + UiScale.S(6);
                 if (troopsInvading.Count > 0 && invadingCharacters.Count > 0)
                 {
                     num16 += num9;
@@ -2982,8 +2982,8 @@ namespace DistantWorlds.Controls
         public void DrawFighters(int labelWidth, FighterList fighters, Graphics graphics, Point location, int overallWidth)
         {
             int num = (int)graphics.MeasureString(TextResolver.GetText("Fighters"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
-            labelWidth += 10;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - UiScale.S(2));
+            labelWidth += UiScale.S(10);
             int num2 = overallWidth - labelWidth;
             if (fighters == null)
             {
@@ -3001,7 +3001,7 @@ namespace DistantWorlds.Controls
                 {
                     num6 = _ImageSize;
                 }
-                num6 = Math.Max(1, num6);
+                num6 = Math.Max(UiScale.S(1), num6);
             }
             DrawStringWithDropShadow(graphics, TextResolver.GetText("Fighters"), _NormalFontBold, location2);
             int num8 = labelWidth;
@@ -3094,8 +3094,8 @@ namespace DistantWorlds.Controls
                 populations.Reverse();
             }
             int num = (int)graphics.MeasureString(TextResolver.GetText("Populace"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            DrawStringWithDropShadow(location: new Point(location.X + (labelWidth - num), location.Y - 2), graphics: graphics, text: TextResolver.GetText("Populace"), font: _NormalFontBold);
-            labelWidth += 10;
+            DrawStringWithDropShadow(location: new Point(location.X + (labelWidth - num), location.Y - UiScale.S(2)), graphics: graphics, text: TextResolver.GetText("Populace"), font: _NormalFontBold);
+            labelWidth += UiScale.S(10);
             int num2 = 0;
             for (int i = 0; i < populations.Count; i++)
             {
@@ -3103,7 +3103,7 @@ namespace DistantWorlds.Controls
                 int num3 = labelWidth;
                 Color color = Color.FromArgb(190, 24, 24, 32);
                 SolidBrush solidBrush = new SolidBrush(color);
-                Rectangle rect = new Rectangle(location.X + num3, location.Y + num2, overallWidth - num3 + 4, _ImageSize);
+                Rectangle rect = new Rectangle(location.X + num3, location.Y + num2, overallWidth - num3 + UiScale.S(4), _ImageSize);
                 graphics.FillRectangle(solidBrush, rect);
                 Bitmap bitmap = _RaceImages[population.Race.PictureRef];
                 string name = population.Race.Name;
@@ -3142,11 +3142,11 @@ namespace DistantWorlds.Controls
                 }
                 num3 += _ImageSize;
                 point = new Point(location.X + num3, location.Y + num2);
-                Rectangle rectangle = new Rectangle(point.X, point.Y + 1, _PopulationTextWidth, _ImageSize);
+                Rectangle rectangle = new Rectangle(point.X, point.Y + UiScale.S(1), _PopulationTextWidth, _ImageSize);
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Trimming = StringTrimming.EllipsisCharacter;
                 graphics.DrawString(name, _NormalFont, _BlackBrush, rectangle, stringFormat);
-                rectangle = new Rectangle(point.X - 1, point.Y, _PopulationTextWidth, _ImageSize);
+                rectangle = new Rectangle(point.X - UiScale.S(1), point.Y, _PopulationTextWidth, _ImageSize);
                 graphics.DrawString(name, _NormalFont, textBrush, rectangle, stringFormat);
                 if (name != TextResolver.GetText("Others"))
                 {
@@ -3201,9 +3201,9 @@ namespace DistantWorlds.Controls
         private void DrawResources(int labelWidth, HabitatResourceList resources, Graphics graphics, Point location, int overallWidth, SolidBrush textBrush)
         {
             int num = (int)graphics.MeasureString(TextResolver.GetText("Resource"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            DrawStringWithDropShadow(location: new Point(location.X + (labelWidth - num), location.Y - 2), graphics: graphics, text: TextResolver.GetText("Resource"), font: _NormalFontBold);
-            labelWidth += 10;
-            overallWidth += 5;
+            DrawStringWithDropShadow(location: new Point(location.X + (labelWidth - num), location.Y - UiScale.S(2)), graphics: graphics, text: TextResolver.GetText("Resource"), font: _NormalFontBold);
+            labelWidth += UiScale.S(10);
+            overallWidth += UiScale.S(5);
             Color color = Color.FromArgb(190, 24, 24, 32);
             SolidBrush solidBrush = new SolidBrush(color);
             Rectangle rect = new Rectangle(location.X + labelWidth, location.Y, overallWidth - labelWidth, _ImageSize);
@@ -3215,7 +3215,7 @@ namespace DistantWorlds.Controls
                 DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, location3, textBrush);
                 return;
             }
-            int num3 = 3;
+            int num3 = UiScale.S(3);
             HabitatResourceList habitatResourceList = resources.Clone();
             for (int i = 0; i < habitatResourceList.Count; i++)
             {
@@ -3227,8 +3227,8 @@ namespace DistantWorlds.Controls
                 Point point = new Point(location3.X, location3.Y + num6);
                 graphics.DrawImageUnscaled(_ResourceImages[habitatResourceList[i].PictureRef], point);
                 AddHotspot(new Rectangle(point, _ResourceImages[habitatResourceList[i].PictureRef].Size), resources[i], habitatResourceList[i].Name + " (" + TextResolver.GetText("click for details") + ")");
-                num2 += num4 - 2;
-                DrawStringWithDropShadow(location: new Point(location.X + num2, location.Y + 1), graphics: graphics, text: text, font: _TinyFont, brush: textBrush);
+                num2 += num4 - UiScale.S(2);
+                DrawStringWithDropShadow(location: new Point(location.X + num2, location.Y + UiScale.S(1)), graphics: graphics, text: text, font: _TinyFont, brush: textBrush);
                 num2 += num5;
                 num2 += num3;
             }
@@ -3244,8 +3244,8 @@ namespace DistantWorlds.Controls
         {
             graphics.InterpolationMode = InterpolationMode.Bilinear;
             int num = (int)graphics.MeasureString(label, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
-            labelWidth += 10;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - UiScale.S(2));
+            labelWidth += UiScale.S(10);
             int num2 = overallWidth - labelWidth;
             if (builtObjects == null)
             {
@@ -3337,7 +3337,7 @@ namespace DistantWorlds.Controls
                 if (waitingCount > 0)
                 {
                     num11 = (int)graphics.MeasureString(text, _NormalFont, base.Width, StringFormat.GenericDefault).Width;
-                    num11 += 10;
+                    num11 += UiScale.S(10);
                 }
                 DrawStringWithDropShadow(location: new Point(location.X + num9 + num11, location.Y), graphics: graphics, text: suffix, font: _NormalFont);
             }
@@ -3464,17 +3464,17 @@ namespace DistantWorlds.Controls
             graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             graphics.CompositingQuality = CompositingQuality.HighQuality;
             graphics.InterpolationMode = InterpolationMode.Bilinear;
-            int num = 6;
+            int num = UiScale.S(6);
             int rowHeight = _RowHeight;
-            int num2 = 5;
-            int overallWidth = base.ClientRectangle.Width - 10;
+            int num2 = UiScale.S(5);
+            int overallWidth = base.ClientRectangle.Width - UiScale.S(10);
             int labelWidth = _LabelWidth;
             Color backgroundColor = Color.FromArgb(127, 8, 8, 48);
             Font titleFont = _TitleFont;
             DrawBackgroundPicture(graphics);
             StringFormat genericTypographic = StringFormat.GenericTypographic;
-            SizeF sizeF = graphics.MeasureString(creature.Name, titleFont, base.Width - 20, genericTypographic);
-            graphics.DrawString(layoutRectangle: new RectangleF(num2, num, sizeF.Width, sizeF.Height + 2f), s: creature.Name, font: titleFont, brush: _WhiteBrush, format: genericTypographic);
+            SizeF sizeF = graphics.MeasureString(creature.Name, titleFont, base.Width - UiScale.S(20), genericTypographic);
+            graphics.DrawString(layoutRectangle: new RectangleF(num2, num, sizeF.Width, sizeF.Height + UiScale.S(2f)), s: creature.Name, font: titleFont, brush: _WhiteBrush, format: genericTypographic);
             Point point = default(Point);
             num += (int)sizeF.Height;
             num += _Height8;
@@ -3483,15 +3483,15 @@ namespace DistantWorlds.Controls
             DrawStringWithDropShadow(graphics, text, _NormalFont, point);
             num += rowHeight;
             num += _Height10;
-            int num3 = rowHeight + (int)sizeF.Height + 5;
+            int num3 = rowHeight + (int)sizeF.Height + UiScale.S(5);
             num3 += rowHeight;
-            Rectangle rect = new Rectangle(num2 - 2, num3, num2 + labelWidth - 1, base.ClientRectangle.Height - (num3 + 2));
+            Rectangle rect = new Rectangle(num2 - UiScale.S(2), num3, num2 + labelWidth - UiScale.S(1), base.ClientRectangle.Height - (num3 + UiScale.S(2)));
             graphics.FillRectangle(_LabelAreaBrush, rect);
-            labelWidth -= 5;
-            DrawBarGraph(location: new Point(num2, num), description: TextResolver.GetText("Health"), descriptionWidth: labelWidth, maximumValue: creature.DamageKillThreshhold, currentValue: (int)((double)creature.DamageKillThreshhold - creature.Damage), height: rowHeight - 2, overallWidth: overallWidth, fillColorStart: Color.FromArgb(150, 48, 0, 96), fillColorEnd: Color.FromArgb(150, 128, 0, 255), backgroundColor: backgroundColor, graphics: graphics);
+            labelWidth -= UiScale.S(5);
+            DrawBarGraph(location: new Point(num2, num), description: TextResolver.GetText("Health"), descriptionWidth: labelWidth, maximumValue: creature.DamageKillThreshhold, currentValue: (int)((double)creature.DamageKillThreshhold - creature.Damage), height: rowHeight - UiScale.S(2), overallWidth: overallWidth, fillColorStart: Color.FromArgb(150, 48, 0, 96), fillColorEnd: Color.FromArgb(150, 128, 0, 255), backgroundColor: backgroundColor, graphics: graphics);
             num += rowHeight;
             num += _Height5;
-            DrawBarGraph(location: new Point(num2, num), description: TextResolver.GetText("Speed Abbreviation"), descriptionWidth: labelWidth, maximumValue: creature.MovementSpeed, currentValue: (int)creature.CurrentSpeed, height: rowHeight - 2, overallWidth: overallWidth, fillColorStart: Color.FromArgb(150, 48, 0, 96), fillColorEnd: Color.FromArgb(150, 128, 0, 255), backgroundColor: backgroundColor, graphics: graphics);
+            DrawBarGraph(location: new Point(num2, num), description: TextResolver.GetText("Speed Abbreviation"), descriptionWidth: labelWidth, maximumValue: creature.MovementSpeed, currentValue: (int)creature.CurrentSpeed, height: rowHeight - UiScale.S(2), overallWidth: overallWidth, fillColorStart: Color.FromArgb(150, 48, 0, 96), fillColorEnd: Color.FromArgb(150, 128, 0, 255), backgroundColor: backgroundColor, graphics: graphics);
             num += rowHeight;
         }
 
@@ -3512,19 +3512,19 @@ namespace DistantWorlds.Controls
             {
                 flag = true;
             }
-            int num = 6;
+            int num = UiScale.S(6);
             int rowHeight = _RowHeight;
-            int num2 = 5;
-            int num3 = base.ClientRectangle.Width - 10;
+            int num2 = UiScale.S(5);
+            int num3 = base.ClientRectangle.Width - UiScale.S(10);
             int num4 = (int)graphics.MeasureString(TextResolver.GetText("Weapons"), _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
             Color backgroundColor = Color.FromArgb(127, 8, 8, 48);
             Font titleFont = _TitleFont;
             DrawBackgroundPicture(graphics);
-            Point point = new Point(num3 - (_FlagSizeSmall.Width - 2), 6);
+            Point point = new Point(num3 - (_FlagSizeSmall.Width - UiScale.S(2)), UiScale.S(6));
             if (_Fighter.Empire == _Galaxy.IndependentEmpire)
             {
                 int num5 = (int)graphics.MeasureString(fighter.Empire.Name, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                graphics.DrawString(point: new PointF((float)num3 - (float)num5, 6f), s: fighter.Empire.Name, font: _NormalFont, brush: _WhiteBrush);
+                graphics.DrawString(point: new PointF((float)num3 - (float)num5, UiScale.S(6f)), s: fighter.Empire.Name, font: _NormalFont, brush: _WhiteBrush);
             }
             else
             {
@@ -3536,7 +3536,7 @@ namespace DistantWorlds.Controls
             }
             DrawStringWithDropShadow(location: new Point(num2, num), graphics: graphics, text: fighter.Name, font: titleFont, brush: new SolidBrush(_EmpireColor));
             num += titleFont.Height;
-            num += 8;
+            num += UiScale.S(8);
             Point location2 = new Point(num2, num);
             string text = "(" + TextResolver.GetText("Unknown mission") + ")";
             if (fighter.Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
@@ -3556,11 +3556,11 @@ namespace DistantWorlds.Controls
                 num += rowHeight;
             }
             num += _Height5;
-            num4 += 5;
+            num4 += UiScale.S(5);
             int num6 = num;
-            Rectangle rect = new Rectangle(num2 - 2, num6, num2 + num4 - 1, base.ClientRectangle.Height - (num6 + 2));
+            Rectangle rect = new Rectangle(num2 - UiScale.S(2), num6, num2 + num4 - UiScale.S(1), base.ClientRectangle.Height - (num6 + UiScale.S(2)));
             graphics.FillRectangle(_LabelAreaBrush, rect);
-            num4 -= 5;
+            num4 -= UiScale.S(5);
             location2 = new Point(num2, num);
             string description = "(" + TextResolver.GetText("Abandoned") + ")";
             if (fighter.Empire != null)
@@ -3583,7 +3583,7 @@ namespace DistantWorlds.Controls
                     suffixData = " (" + TextResolver.GetText("Under construction").ToLower(CultureInfo.InvariantCulture) + ")";
                 }
                 Math.Max(0, (int)fighter.CurrentEnergy);
-                DrawBarGraph(TextResolver.GetText("Health"), num4, 100, (int)(fighter.Health * 100f), rowHeight - 2, num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, suffixData);
+                DrawBarGraph(TextResolver.GetText("Health"), num4, 100, (int)(fighter.Health * 100f), rowHeight - UiScale.S(2), num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, suffixData);
             }
             else
             {
@@ -3594,7 +3594,7 @@ namespace DistantWorlds.Controls
             if (fighter.Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
             {
                 int currentValue = Math.Max(0, (int)fighter.CurrentEnergy);
-                DrawBarGraph(TextResolver.GetText("Energy"), num4, fighter.Specification.EnergyCapacity, currentValue, rowHeight - 2, num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2);
+                DrawBarGraph(TextResolver.GetText("Energy"), num4, fighter.Specification.EnergyCapacity, currentValue, rowHeight - UiScale.S(2), num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2);
             }
             else
             {
@@ -3607,7 +3607,7 @@ namespace DistantWorlds.Controls
             {
                 suffixData2 = " (" + TextResolver.GetText("reducing") + ")";
             }
-            DrawBarGraph(TextResolver.GetText("Shields"), num4, fighter.Specification.ShieldsCapacity, (int)fighter.CurrentShields, rowHeight - 2, num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, suffixData2);
+            DrawBarGraph(TextResolver.GetText("Shields"), num4, fighter.Specification.ShieldsCapacity, (int)fighter.CurrentShields, rowHeight - UiScale.S(2), num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, suffixData2);
             num += rowHeight;
             location2 = new Point(num2, num);
             string text2 = string.Empty;
@@ -3615,7 +3615,7 @@ namespace DistantWorlds.Controls
             {
                 text2 = text2 + " (" + TextResolver.GetText("slowed") + ")";
             }
-            DrawBarGraph(TextResolver.GetText("Speed"), num4, fighter.TopSpeed, (int)fighter.CurrentSpeed, rowHeight - 2, num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, text2);
+            DrawBarGraph(TextResolver.GetText("Speed"), num4, fighter.TopSpeed, (int)fighter.CurrentSpeed, rowHeight - UiScale.S(2), num3, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, 255), backgroundColor, graphics, location2, text2);
             num += rowHeight;
             num += _Height5;
             location2 = new Point(num2, num);
@@ -3631,7 +3631,7 @@ namespace DistantWorlds.Controls
                 DrawLabel(location: new Point(num2, num), graphics: graphics, label: TextResolver.GetText("Bonuses"), labelWidth: num4);
                 int num7 = num3 - num4;
                 SizeF size = graphics.MeasureString(_CharacterBonuses, _NormalFont, num7, StringFormat.GenericDefault);
-                DrawStringWithDropShadowBounded(location: new Point(num2 + num4 + 10, num + 1), graphics: graphics, text: _CharacterBonuses, font: _NormalFont, size: size);
+                DrawStringWithDropShadowBounded(location: new Point(num2 + num4 + UiScale.S(10), num + UiScale.S(1)), graphics: graphics, text: _CharacterBonuses, font: _NormalFont, size: size);
                 num += (int)size.Height;
             }
             solidBrush.Dispose();
@@ -3645,8 +3645,8 @@ namespace DistantWorlds.Controls
         private void DrawSystemColoniesSummary(Habitat systemStar, Graphics graphics, int startY, int labelWidth)
         {
             int habitatImageSize = _HabitatImageSize;
-            int num = 6;
-            int num2 = 3;
+            int num = UiScale.S(6);
+            int num2 = UiScale.S(3);
             HabitatList habitatList = new HabitatList();
             for (int i = 0; i < _Galaxy.Systems[systemStar.SystemIndex].Habitats.Count; i++)
             {
@@ -3664,25 +3664,25 @@ namespace DistantWorlds.Controls
                     habitatList.Add(habitat2);
                 }
             }
-            int num3 = base.Width - labelWidth - 10;
+            int num3 = base.Width - labelWidth - UiScale.S(10);
             int num4 = num3 / habitatImageSize;
             num = (num3 - habitatImageSize * habitatList.Count) / (habitatList.Count + 1);
-            num = Math.Max(1, num);
+            num = Math.Max(UiScale.S(1), num);
             int num5 = labelWidth + num;
             if (habitatList.Count > 0)
             {
                 using Pen pen = new Pen(Color.FromArgb(170, 170, 170), 1f);
                 pen.DashPattern = new float[2] { 1f, 2f };
-                int num6 = startY + _HabitatImageSize + num2 + 13;
-                int num7 = num5 - 5;
-                int x = num7 + 10 + (Math.Min(habitatList.Count, num4) * (habitatImageSize + num) - num);
+                int num6 = startY + _HabitatImageSize + num2 + UiScale.S(13);
+                int num7 = num5 - UiScale.S(5);
+                int x = num7 + UiScale.S(10) + (Math.Min(habitatList.Count, num4) * (habitatImageSize + num) - num);
                 graphics.DrawLine(pen, num7, num6, x, num6);
             }
             for (int k = 0; k < habitatList.Count; k++)
             {
                 if (k >= num4)
                 {
-                    DrawStringWithDropShadow(graphics, "...", _NormalFont, new Point(num5, startY + 5));
+                    DrawStringWithDropShadow(graphics, "...", _NormalFont, new Point(num5, startY + UiScale.S(5)));
                     break;
                 }
                 DrawSingleColonySummary(habitatList[k], graphics, num5, startY, num2);
@@ -3753,7 +3753,7 @@ namespace DistantWorlds.Controls
             int num2 = (int)graphics.MeasureString(empty3, _TinyFont, _MaxGraphTextWidth, StringFormat.GenericDefault).Width;
             int num3 = x + (colonySummaryDetailWidth - num2) / 2;
             DrawStringWithDropShadow(graphics, empty3, _TinyFont, new Point(num3, y));
-            y += 15 + rowPadding + rowPadding;
+            y += UiScale.S(15) + rowPadding + rowPadding;
             int num4 = (int)((double)colonySummaryDetailWidth * 0.6);
             if (!flag && colony.Empire != null && colony.Empire != _Galaxy.IndependentEmpire)
             {
@@ -3793,7 +3793,7 @@ namespace DistantWorlds.Controls
                 }
                 SetGraphicsQualityToHigh(graphics);
                 empty = new Rectangle(0, 0, _BuiltObjectImages[colony.BasesAtHabitat[0].PictureRef].Width, _BuiltObjectImages[colony.BasesAtHabitat[0].PictureRef].Height);
-                empty2 = new Rectangle(x + 1, y, colonySummaryDetailWidth - 2, colonySummaryDetailWidth - 2);
+                empty2 = new Rectangle(x + UiScale.S(1), y, colonySummaryDetailWidth - UiScale.S(2), colonySummaryDetailWidth - UiScale.S(2));
                 if (_Game.PlayerEmpire.IsObjectVisibleToThisEmpire(colony.BasesAtHabitat[0]))
                 {
                     AddHotspot(empty2, colony.BasesAtHabitat[0], colony.BasesAtHabitat[0].Name + " (" + TextResolver.GetText("click to select") + ")");
@@ -3825,15 +3825,15 @@ namespace DistantWorlds.Controls
 
         private void DrawPopulationIndicator(Habitat habitat, Graphics graphics, int x, int y)
         {
-            int num = 20;
-            int num2 = 15;
+            int num = UiScale.S(20);
+            int num2 = UiScale.S(15);
             int num3 = num / 5;
             int num4 = num2 / 5;
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    graphics.FillRectangle(_SemiSubtleBrush, x + i * num3, y + (4 - j) * num4, num3 - 1, num4 - 1);
+                    graphics.FillRectangle(_SemiSubtleBrush, x + i * num3, y + (4 - j) * num4, num3 - UiScale.S(1), num4 - UiScale.S(1));
                 }
             }
             int num5 = 0;
@@ -3882,7 +3882,7 @@ namespace DistantWorlds.Controls
             {
                 for (int l = 0; l < num6; l++)
                 {
-                    graphics.FillRectangle(_BrightBrush, x + k * num3, y + (4 - l) * num4, num3 - 1, num4 - 1);
+                    graphics.FillRectangle(_BrightBrush, x + k * num3, y + (4 - l) * num4, num3 - UiScale.S(1), num4 - UiScale.S(1));
                 }
             }
         }
@@ -3937,10 +3937,10 @@ namespace DistantWorlds.Controls
             }
             SolidBrush solidBrush = new SolidBrush(color);
             SolidBrush solidBrush2 = new SolidBrush(color2);
-            int num = 3;
+            int num = UiScale.S(3);
             int rowHeight = _RowHeight;
-            int num2 = 5;
-            int num3 = base.ClientRectangle.Width - 10;
+            int num2 = UiScale.S(5);
+            int num3 = base.ClientRectangle.Width - UiScale.S(10);
             Color.FromArgb(127, 8, 8, 48);
             Font titleFont = _TitleFont;
             DrawBackgroundPicture(graphics);
@@ -3951,8 +3951,8 @@ namespace DistantWorlds.Controls
                 description = habitat2.Name;
             }
             int labelWidthHabitat = _LabelWidthHabitat;
-            int num4 = num + titleFont.Height + 3;
-            num4 += rowHeight + 3;
+            int num4 = num + titleFont.Height + UiScale.S(3);
+            num4 += rowHeight + UiScale.S(3);
             if (habitat2 == habitat && habitat.Category != HabitatCategoryType.GasCloud)
             {
                 labelWidthHabitat = _LabelWidthHabitat;
@@ -3965,13 +3965,13 @@ namespace DistantWorlds.Controls
             {
                 num4 += rowHeight;
             }
-            Rectangle rect = new Rectangle(num2 - 2, num4, num2 + labelWidthHabitat - 1, base.ClientRectangle.Height - (num4 + 2));
+            Rectangle rect = new Rectangle(num2 - UiScale.S(2), num4, num2 + labelWidthHabitat - UiScale.S(1), base.ClientRectangle.Height - (num4 + UiScale.S(2)));
             if (habitat.Category != 0)
             {
                 graphics.FillRectangle(_LabelAreaBrush, rect);
             }
-            labelWidthHabitat -= 5;
-            Point point = new Point(num3 - (_FlagSizeSmall.Width - 5), 3);
+            labelWidthHabitat -= UiScale.S(5);
+            Point point = new Point(num3 - (_FlagSizeSmall.Width - UiScale.S(5)), UiScale.S(3));
             if (habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire)
             {
                 if (_EmpirePicture != null)
@@ -3986,7 +3986,7 @@ namespace DistantWorlds.Controls
             else if (habitat.Population.TotalAmount > 0)
             {
                 int num5 = (int)graphics.MeasureString(TextResolver.GetText("Independent"), _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                graphics.DrawString(point: new PointF((float)num3 - (float)num5, 6f), s: TextResolver.GetText("Independent"), font: _NormalFont, brush: solidBrush);
+                graphics.DrawString(point: new PointF((float)num3 - (float)num5, UiScale.S(6f)), s: TextResolver.GetText("Independent"), font: _NormalFont, brush: solidBrush);
             }
             Point point3 = new Point(num2, num + 2);
             if (habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire)
@@ -4012,8 +4012,8 @@ namespace DistantWorlds.Controls
                 DrawStringWithDropShadow(graphics, habitat.Name, titleFont, point3, brush);
                 if (habitat.Empire != null && habitat.Empire != _Galaxy.IndependentEmpire)
                 {
-                    int num6 = (int)graphics.MeasureString(habitat.Name, titleFont, 300, StringFormat.GenericTypographic).Width;
-                    DrawStringWithDropShadow(location: new Point(point3.X + num6 + 7, point3.Y + 3), graphics: graphics, text: "(" + habitat.Empire.Name + ")", font: _NormalFont, brush: brush);
+                    int num6 = (int)graphics.MeasureString(habitat.Name, titleFont, UiScale.S(300), StringFormat.GenericTypographic).Width;
+                    DrawStringWithDropShadow(location: new Point(point3.X + num6 + UiScale.S(7), point3.Y + UiScale.S(3)), graphics: graphics, text: "(" + habitat.Empire.Name + ")", font: _NormalFont, brush: brush);
                 }
             }
             else
@@ -4021,7 +4021,7 @@ namespace DistantWorlds.Controls
                 string text = Galaxy.ResolveDescription(habitat.Category);
                 DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + " " + text + ")", titleFont, point3, new SolidBrush(_UnknownColor));
             }
-            num += titleFont.Height + 3;
+            num += titleFont.Height + UiScale.S(3);
             point3 = new Point(num2, num);
             double num7 = (double)habitat.Diameter / 10.0;
             string text2 = Galaxy.ResolveDescription(habitat.Type);
@@ -4078,7 +4078,7 @@ namespace DistantWorlds.Controls
                     graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     int num10 = (int)((double)_FlagSizeSmall.Width * 0.734);
                     int num11 = (int)((double)num10 * 0.6);
-                    graphics.DrawImage(rect: new Rectangle(num2 + 2, num, num10, num11), image: empire.LargeFlagPicture);
+                    graphics.DrawImage(rect: new Rectangle(num2 + UiScale.S(2), num, num10, num11), image: empire.LargeFlagPicture);
                     graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
                     point3 = new Point(num2 + num10 + 5, num);
                     string empty = string.Empty;
@@ -4110,7 +4110,7 @@ namespace DistantWorlds.Controls
                         if (bitmap != null)
                         {
                             graphics.DrawImage(bitmap, new Point(num2, num));
-                            num12 += bitmap.Width + 3;
+                            num12 += bitmap.Width + UiScale.S(3);
                         }
                         string text5 = string.Format(TextResolver.GetText("Plague Colony Infection"), plague.Name).ToUpper(CultureInfo.InvariantCulture) + "!";
                         DrawStringWithDropShadow(location: new Point(num12, num), graphics: graphics, text: text5, font: _NormalFont, brush: _RedBrush);
@@ -4126,9 +4126,9 @@ namespace DistantWorlds.Controls
                         double num13 = (double)rowHeight / (double)_BlockadeImage.Height;
                         int num14 = (int)((double)_BlockadeImage.Width * num13);
                         graphics.DrawImage(rect: new Rectangle(num2, num, num14, rowHeight), image: _BlockadeImage);
-                        graphics.DrawImage(point: new Point(num2 + num14 + 2, num + 3), image: blockade.Initiator.SmallFlagPicture);
+                        graphics.DrawImage(point: new Point(num2 + num14 + UiScale.S(2), num + UiScale.S(3)), image: blockade.Initiator.SmallFlagPicture);
                         string text6 = string.Format(TextResolver.GetText("Blockaded by EMPIRE"), blockade.Initiator.Name);
-                        DrawStringWithDropShadow(location: new Point(num2 + num14 + blockade.Initiator.SmallFlagPicture.Width + 4, num), graphics: graphics, text: text6, font: _NormalFont, brush: solidBrush);
+                        DrawStringWithDropShadow(location: new Point(num2 + num14 + blockade.Initiator.SmallFlagPicture.Width + UiScale.S(4), num), graphics: graphics, text: text6, font: _NormalFont, brush: solidBrush);
                         num += rowHeight;
                     }
                 }
@@ -4155,15 +4155,15 @@ namespace DistantWorlds.Controls
                     }
                     Bitmap bitmap2 = _MessageImages[30];
                     Rectangle srcRect = new Rectangle(0, 0, bitmap2.Width, bitmap2.Height);
-                    Rectangle destRect = new Rectangle(num2 + 3, num, rowHeight, rowHeight);
+                    Rectangle destRect = new Rectangle(num2 + UiScale.S(3), num, rowHeight, rowHeight);
                     SetGraphicsQualityToHigh(graphics);
                     graphics.DrawImage(bitmap2, destRect, srcRect, GraphicsUnit.Pixel);
                     point3 = new Point(destRect.Right + 2, num);
                     string text8 = string.Format(TextResolver.GetText("Construction Resource Shortage Message Short"), text7);
-                    SizeF size = graphics.MeasureString(text8, _NormalFont, base.ClientSize.Width - (point3.X + 5));
+                    SizeF size = graphics.MeasureString(text8, _NormalFont, base.ClientSize.Width - (point3.X + UiScale.S(5)));
                     using (SolidBrush brush3 = new SolidBrush(Color.FromArgb(255, 128, 0)))
                     {
-                        size = new SizeF(size.Width, Math.Min((float)rowHeight * 2f + 1f, size.Height));
+                        size = new SizeF(size.Width, Math.Min((float)rowHeight * 2f + UiScale.S(1f), size.Height));
                         DrawStringWithDropShadowBounded(graphics, text8, _NormalFont, point3, size, brush3);
                     }
                     num += (int)size.Height;
@@ -4218,11 +4218,11 @@ namespace DistantWorlds.Controls
                         DrawLabelledDescription(graphics, TextResolver.GetText("Scenery"), labelWidthHabitat, description3, point3, solidBrush);
                         num += rowHeight;
                     }
-                    int maxWidth = num3 - (num2 + labelWidthHabitat + 10);
+                    int maxWidth = num3 - (num2 + labelWidthHabitat + UiScale.S(10));
                     DesignList designList = _Galaxy.PlayerEmpire.CheckBasesToBeBuiltAtHabitat(habitat);
                     if (designList.Count > 0)
                     {
-                        num += 4;
+                        num += UiScale.S(4);
                         point3 = new Point(num2 + labelWidthHabitat + 10, num);
                         string text11 = string.Format(TextResolver.GetText("Construction ship queued to build X here"), Galaxy.ResolveDescription(designList[0].SubRole));
                         SizeF sizeF = graphics.MeasureString(text11, _NormalFont, maxWidth, StringFormat.GenericTypographic);
@@ -4333,7 +4333,7 @@ namespace DistantWorlds.Controls
                         }
                         _ = graphics.MeasureString(value, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
                         DrawLabelledDescription(graphics, TextResolver.GetText("Value"), labelWidthHabitat, description6, point3, solidBrush);
-                        num17 += labelWidthHabitat + 10 + num18 + (int)((double)_ImageSize * 0.75);
+                        num17 += labelWidthHabitat + UiScale.S(10) + num18 + (int)((double)_ImageSize * 0.75);
                         graphics.DrawImageUnscaled(point: new Point(num17, num), image: _DevelopmentImage);
                         num17 += _ImageSize;
                         DrawStringWithDropShadow(location: new Point(num17, num), graphics: graphics, text: text12, font: _NormalFont, brush: solidBrush);
@@ -4425,7 +4425,7 @@ namespace DistantWorlds.Controls
                                 text13 = string.Format(TextResolver.GetText("Show Colony Battle Report"), habitat.Name);
                                 Color color3 = GraphicsHelper.OscillateColor(Color.FromArgb(0, 255, 0, 0), Color.FromArgb(160, 255, 0, 0), DateTime.Now);
                                 using SolidBrush brush4 = new SolidBrush(color3);
-                                graphics.FillRectangle(brush4, new Rectangle(5, point3.Y, base.Width - 10, rowHeight));
+                                graphics.FillRectangle(brush4, new Rectangle(UiScale.S(5), point3.Y, base.Width - UiScale.S(10), rowHeight));
                             }
                             Empire invader = null;
                             Empire defender = null;
@@ -4494,7 +4494,7 @@ namespace DistantWorlds.Controls
                             Color color4 = GraphicsHelper.OscillateColor(Color.FromArgb(0, 255, 0, 0), Color.FromArgb(160, 255, 0, 0), DateTime.Now);
                             using (SolidBrush brush5 = new SolidBrush(color4))
                             {
-                                graphics.FillRectangle(brush5, new Rectangle(5, point3.Y, base.Width - 10, rowHeight));
+                                graphics.FillRectangle(brush5, new Rectangle(UiScale.S(5), point3.Y, base.Width - UiScale.S(10), rowHeight));
                             }
                             DrawLabelledDescription(graphics, "", labelWidthHabitat, description7, point3);
                             string message = string.Format(TextResolver.GetText("Show Colony Battle Report"), habitat.Name);
@@ -4555,7 +4555,7 @@ namespace DistantWorlds.Controls
                     }
                     if (habitat.Empire == _Galaxy.IndependentEmpire || habitat.Empire == null)
                     {
-                        int maxWidth2 = num3 - (num2 + labelWidthHabitat + 10);
+                        int maxWidth2 = num3 - (num2 + labelWidthHabitat + UiScale.S(10));
                         BuiltObject builtObject = _Galaxy.PlayerEmpire.CheckColonizingHabitat(habitat);
                         if (builtObject != null)
                         {
@@ -4569,7 +4569,7 @@ namespace DistantWorlds.Controls
                         DesignList designList2 = _Galaxy.PlayerEmpire.CheckBasesToBeBuiltAtHabitat(habitat);
                         if (designList2.Count > 0)
                         {
-                            num += 4;
+                            num += UiScale.S(4);
                             point3 = new Point(num2 + labelWidthHabitat + 10, num);
                             string text19 = string.Format(TextResolver.GetText("Construction ship queued to build X here"), Galaxy.ResolveDescription(designList2[0].SubRole));
                             SizeF sizeF4 = graphics.MeasureString(text19, _NormalFont, maxWidth2, StringFormat.GenericTypographic);
@@ -4583,7 +4583,7 @@ namespace DistantWorlds.Controls
                     DrawLabel(location: new Point(num2, num), graphics: graphics, label: TextResolver.GetText("Bonuses"), labelWidth: labelWidthHabitat);
                     int num23 = num3 - labelWidthHabitat;
                     SizeF size2 = graphics.MeasureString(_CharacterBonuses, _NormalFont, num23, StringFormat.GenericDefault);
-                    DrawStringWithDropShadowBounded(location: new Point(num2 + labelWidthHabitat + 10, num + 1), graphics: graphics, text: _CharacterBonuses, font: _NormalFont, size: size2);
+                    DrawStringWithDropShadowBounded(location: new Point(num2 + labelWidthHabitat + UiScale.S(10), num + UiScale.S(1)), graphics: graphics, text: _CharacterBonuses, font: _NormalFont, size: size2);
                     num += (int)size2.Height;
                 }
             }
@@ -4606,8 +4606,8 @@ namespace DistantWorlds.Controls
         public void DrawLabelledDescription(Graphics graphics, string label, int labelWidth, string description, Point location, SolidBrush textBrush)
         {
             int num = (int)graphics.MeasureString(label, _NormalFontBold, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-            Point location2 = new Point(location.X + (labelWidth - num), location.Y - 2);
-            labelWidth += 10;
+            Point location2 = new Point(location.X + (labelWidth - num), location.Y - UiScale.S(2));
+            labelWidth += UiScale.S(10);
             Point location3 = new Point(location.X + labelWidth, location.Y);
             DrawStringWithDropShadow(graphics, label, _NormalFontBold, location2);
             DrawStringWithDropShadow(graphics, description, _NormalFont, location3, textBrush);
@@ -4834,9 +4834,9 @@ namespace DistantWorlds.Controls
                 color = _UnknownColor;
             }
             SolidBrush solidBrush = new SolidBrush(color);
-            int num = 6;
+            int num = UiScale.S(6);
             int rowHeight = _RowHeight;
-            int num2 = 5;
+            int num2 = UiScale.S(5);
             int num3 = base.ClientRectangle.Width - 10;
             Font titleFont = _TitleFont;
             Empire empire = _Galaxy.CheckSystemOwnership(systemInfo.SystemStar);
@@ -4863,7 +4863,7 @@ namespace DistantWorlds.Controls
             int num4 = num + titleFont.Height + 5;
             num4 += rowHeight + 3;
             new Rectangle(num2 - 2, num4, num2 + labelWidth - 1, base.ClientRectangle.Height - (num4 + 2));
-            labelWidth -= 5;
+            labelWidth -= UiScale.S(5);
             Point location = new Point(num2, num);
             if (systemVisibilityStatus == SystemVisibilityStatus.Explored || systemVisibilityStatus == SystemVisibilityStatus.Visible)
             {
@@ -4873,7 +4873,7 @@ namespace DistantWorlds.Controls
             {
                 DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("Unknown") + " " + empty + ")", titleFont, location, new SolidBrush(_UnknownColor));
             }
-            num += titleFont.Height + 5;
+            num += titleFont.Height + UiScale.S(5);
             location = new Point(num2, num);
             string text2 = string.Empty;
             if (systemInfo.SystemStar != null)
@@ -4909,14 +4909,14 @@ namespace DistantWorlds.Controls
                 }
             }
             num += _Height5;
-            DrawLabel(location: new Point(num2, num - 2), graphics: graphics, label: TextResolver.GetText("Owner"), labelWidth: labelWidth);
+            DrawLabel(location: new Point(num2, num - UiScale.S(2)), graphics: graphics, label: TextResolver.GetText("Owner"), labelWidth: labelWidth);
             Size flagSizeSystem = _FlagSizeSystem;
             Rectangle empty3 = Rectangle.Empty;
             Rectangle empty4 = Rectangle.Empty;
             SetGraphicsQualityToHigh(graphics);
             if (empire != null)
             {
-                int num5 = num2 + labelWidth + 10;
+                int num5 = num2 + labelWidth + UiScale.S(10);
                 string empty5 = string.Empty;
                 if (systemVisibilityStatus == SystemVisibilityStatus.Visible || systemVisibilityStatus == SystemVisibilityStatus.Explored || _Game.GodMode || flag)
                 {
@@ -4928,12 +4928,12 @@ namespace DistantWorlds.Controls
                     {
                         AddHotspot(empty4, empire, empire.Name + " (" + TextResolver.GetText("click for details") + ")");
                     }
-                    num5 += flagSizeSystem.Width + 2;
+                    num5 += flagSizeSystem.Width + UiScale.S(2);
                     location = new Point(num5, num);
                     empty5 = empire.Name;
                     DrawStringWithDropShadow(graphics, empty5, _NormalFont, location, solidBrush);
                     num5 += (int)graphics.MeasureString(empty5, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                    num5 += 10;
+                    num5 += UiScale.S(10);
                     location = new Point(num5, num);
                     if (systemInfo.DominantEmpire != null)
                     {
@@ -4951,12 +4951,12 @@ namespace DistantWorlds.Controls
                     empty5 = "(" + TextResolver.GetText("Unknown") + ")";
                     DrawStringWithDropShadow(graphics, empty5, _NormalFont, location, solidBrush);
                     num5 += (int)graphics.MeasureString(empty5, _NormalFont, _MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
-                    num5 += 10;
+                    num5 += UiScale.S(10);
                 }
             }
             else
             {
-                location = new Point(num2 + 10 + labelWidth, num);
+                location = new Point(num2 + UiScale.S(10) + labelWidth, num);
                 if (systemVisibilityStatus == SystemVisibilityStatus.Visible || systemVisibilityStatus == SystemVisibilityStatus.Explored || _Game.GodMode)
                 {
                     DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("None") + ")", _NormalFont, location, solidBrush);
@@ -4967,8 +4967,8 @@ namespace DistantWorlds.Controls
                 }
             }
             num += rowHeight + _Height6;
-            DrawLabel(location: new Point(num2, num - 2), graphics: graphics, label: TextResolver.GetText("Resource"), labelWidth: labelWidth);
-            location = new Point(num2 + 10 + labelWidth, num);
+            DrawLabel(location: new Point(num2, num - UiScale.S(2)), graphics: graphics, label: TextResolver.GetText("Resource"), labelWidth: labelWidth);
+            location = new Point(num2 + UiScale.S(10) + labelWidth, num);
             if (systemVisibilityStatus == SystemVisibilityStatus.Explored || systemVisibilityStatus == SystemVisibilityStatus.Visible)
             {
                 HabitatResourceList habitatResourceList = new HabitatResourceList();
@@ -5001,8 +5001,8 @@ namespace DistantWorlds.Controls
                         }
                     }
                 }
-                int num6 = 2;
-                int num7 = labelWidth + 10 + num2;
+                int num6 = UiScale.S(2);
+                int num7 = labelWidth + UiScale.S(10) + num2;
                 if (habitatResourceList.Count > 0)
                 {
                     for (int l = 0; l < habitatResourceList.Count; l++)
@@ -5011,7 +5011,7 @@ namespace DistantWorlds.Controls
                         if (num7 + num8 + num6 > num3)
                         {
                             num += rowHeight + _Height2;
-                            num7 = labelWidth + 10 + num2 - num6;
+                            num7 = labelWidth + UiScale.S(10) + num2 - num6;
                         }
                         location = new Point(num7, num);
                         graphics.DrawImageUnscaled(_ResourceImages[habitatResourceList[l].PictureRef], location);
@@ -5073,11 +5073,11 @@ namespace DistantWorlds.Controls
             {
                 flag = true;
             }
-            int num = 6;
+            int num = UiScale.S(6);
             int rowHeight = _RowHeight;
-            int num2 = 5;
-            int num3 = base.ClientRectangle.Width - 10;
-            Point point = new Point(num3 - (_FlagSizeSmall.Width - 2), 6);
+            int num2 = UiScale.S(5);
+            int num3 = base.ClientRectangle.Width - UiScale.S(10);
+            Point point = new Point(num3 - (_FlagSizeSmall.Width - UiScale.S(2)), UiScale.S(6));
             if (_EmpirePicture != null)
             {
                 graphics.DrawImageUnscaled(_EmpirePicture, point);
@@ -5112,15 +5112,15 @@ namespace DistantWorlds.Controls
             {
                 empty = builtObjects.Count + " " + TextResolver.GetText("Ships").ToLower(CultureInfo.InvariantCulture);
             }
-            SizeF sizeF = graphics.MeasureString(empty, _NormalFont, base.ClientSize.Width - (num2 + 10));
-            sizeF = new SizeF(sizeF.Width + 2f, sizeF.Height + 2f);
+            SizeF sizeF = graphics.MeasureString(empty, _NormalFont, base.ClientSize.Width - (num2 + UiScale.S(10)));
+            sizeF = new SizeF(sizeF.Width + UiScale.S(2f), sizeF.Height + UiScale.S(2f));
             DrawStringWithDropShadowBounded(location: new Point(num2, num), graphics: graphics, text: empty, font: _NormalFont, size: sizeF);
             num += (int)sizeF.Height;
             num += rowHeight / 4;
             int num8 = 0;
-            int num9 = -2;
+            int num9 = UiScale.S(-2);
             int num10 = 0;
-            int num11 = 27;
+            int num11 = UiScale.S(27);
             int num12 = num11;
             graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             while (num8 < builtObjects.Count)
@@ -5142,8 +5142,8 @@ namespace DistantWorlds.Controls
                 if (builtObjects[0].Empire == _Game.PlayerEmpire || _Game.GodMode || flag)
                 {
                     double num14 = builtObjects[num8].CurrentFuel / (double)builtObjects[num8].FuelCapacity;
-                    int num15 = (int)(num14 * (double)(num11 - 4));
-                    graphics.FillRectangle(rect: new Rectangle(num2 + num9 + num11 - 4, num + num10 + (num11 - 2 - num15), 2, num15), brush: new SolidBrush(Color.Green));
+                    int num15 = (int)(num14 * (double)(num11 - UiScale.S(4)));
+                    graphics.FillRectangle(rect: new Rectangle(num2 + num9 + num11 - UiScale.S(4), num + num10 + (num11 - UiScale.S(2) - num15), UiScale.S(2), num15), brush: new SolidBrush(Color.Green));
                 }
                 num8++;
                 if (num11 > num12)
@@ -5154,7 +5154,7 @@ namespace DistantWorlds.Controls
                 if (num9 > num3 - num11)
                 {
                     num10 += num12;
-                    num9 = -2;
+                    num9 = UiScale.S(-2);
                 }
             }
             solidBrush.Dispose();

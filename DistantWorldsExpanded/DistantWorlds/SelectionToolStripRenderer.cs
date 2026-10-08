@@ -24,7 +24,7 @@ namespace DistantWorlds
             toolStrip.AutoSize = true;
             toolStrip.CanOverflow = true;
             toolStrip.ShowItemToolTips = false;
-            toolStrip.Font = new Font("Verdana", 8f);
+            toolStrip.Font = UiScale.NewFont("Verdana", 8f);
         }
 
         protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
@@ -47,7 +47,7 @@ namespace DistantWorlds
         protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
         {
             Pen pen = new Pen(Color.DarkGray);
-            e.Graphics.DrawLine(pen, 4, e.Item.Bounds.Height / 2, e.Item.Bounds.Width - 8, e.Item.Bounds.Height / 2);
+            e.Graphics.DrawLine(pen, UiScale.S(4), e.Item.Bounds.Height / 2, e.Item.Bounds.Width - UiScale.S(8), e.Item.Bounds.Height / 2);
             pen.Dispose();
         }
 

@@ -41,7 +41,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             gridViewImageColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn.ValueType = typeof(Image);
-            gridViewImageColumn.Width = 30;
+            gridViewImageColumn.Width = UiScale.S(30);
             gridViewImageColumn.FillWeight = 30f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn);
             DataGridViewTextBoxColumn viewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -50,7 +50,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn.ReadOnly = false;
             viewTextBoxColumn.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn.ValueType = typeof(string);
-            viewTextBoxColumn.Width = 170;
+            viewTextBoxColumn.Width = UiScale.S(170);
             viewTextBoxColumn.FillWeight = 170f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn);
         }

@@ -13,8 +13,9 @@ namespace DistantWorlds.Controls
   {
     public EnhancedTabControl()
     {
-      this.Font = new Font("Verdana", 8f, FontStyle.Regular);
+      this.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
       this.DrawMode = TabDrawMode.OwnerDrawFixed;
+      this.Padding = new Point(UiScale.S(6), UiScale.S(3));
       this.DrawItem += new DrawItemEventHandler(this.tab_DrawItem);
     }
 
@@ -31,7 +32,7 @@ namespace DistantWorlds.Controls
       Color white = Color.White;
       Color color = Color.FromArgb(64, 64, 80);
       e.Graphics.FillRectangle((Brush) new SolidBrush(Color.FromArgb(128, 128, 144)), this.ClientRectangle);
-      e.Graphics.FillRectangle((Brush) new SolidBrush(color), new Rectangle(3, 21, this.Width - 6, 5));
+      e.Graphics.FillRectangle((Brush) new SolidBrush(color), new Rectangle(UiScale.S(3), UiScale.S(21), this.Width - UiScale.S(6), UiScale.S(5)));
       for (int index = 0; index < this.TabCount; ++index)
       {
         string text = this.TabPages[index].Text;
@@ -61,12 +62,15 @@ namespace DistantWorlds.Controls
       Rectangle rectangle = e.Bounds;
       Brush brush2 = (Brush) new SolidBrush(backColor);
       string text = tabControl.TabPages[e.Index].Text;
-      StringFormat format = new StringFormat();
+      // Windows sizes each tab for its caption; lay the caption out without the extra
+      // padding and wrapping of the default format, or its last letters drop out of the tab.
+      StringFormat format = new StringFormat(StringFormat.GenericTypographic);
       format.Alignment = StringAlignment.Center;
+      format.FormatFlags |= StringFormatFlags.NoWrap | StringFormatFlags.NoClip;
       e.Graphics.FillRectangle(brush2, rectangle);
       e.Graphics.DrawRectangle(new Pen(Color.FromArgb(128, 128, 144)), rectangle);
-      e.Graphics.FillRectangle(brush2, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height - 1, rectangle.Width, 2));
-      rectangle = new Rectangle(rectangle.X, rectangle.Y + 3, rectangle.Width, rectangle.Height - 3);
+      e.Graphics.FillRectangle(brush2, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height - UiScale.S(1), rectangle.Width, UiScale.S(2)));
+      rectangle = new Rectangle(rectangle.X, rectangle.Y + UiScale.S(3), rectangle.Width, rectangle.Height - UiScale.S(3));
       e.Graphics.DrawString(caption, font, brush1, (RectangleF) rectangle, format);
       format.Dispose();
       if (e.Index == tabControl.SelectedIndex)

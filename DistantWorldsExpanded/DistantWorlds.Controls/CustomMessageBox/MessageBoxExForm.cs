@@ -167,16 +167,16 @@ namespace DistantWorlds.Controls
       this.rtbMessage = new TextBox();
       this.SuspendLayout();
       this.panelIcon.BackColor = Color.Transparent;
-      this.panelIcon.Location = new Point(8, 8);
+      this.panelIcon.Location = new Point(UiScale.S(8), UiScale.S(8));
       this.panelIcon.Name = "panelIcon";
-      this.panelIcon.Size = new Size(32, 32);
+      this.panelIcon.Size = new Size(UiScale.S(32), UiScale.S(32));
       this.panelIcon.TabIndex = 3;
       this.panelIcon.Visible = false;
       this.chbSaveResponse.FlatStyle = FlatStyle.System;
       this.chbSaveResponse.ForeColor = Color.White;
-      this.chbSaveResponse.Location = new Point(56, 56);
+      this.chbSaveResponse.Location = new Point(UiScale.S(56), UiScale.S(56));
       this.chbSaveResponse.Name = "chbSaveResponse";
-      this.chbSaveResponse.Size = new Size(150, 16);
+      this.chbSaveResponse.Size = new Size(UiScale.S(150), UiScale.S(16));
       this.chbSaveResponse.TabIndex = 0;
       this.imageListIcons.ImageStream = (ImageListStreamer) resources.GetObject("imageListIcons.ImageStream");
       this.imageListIcons.TransparentColor = Color.Transparent;
@@ -186,19 +186,19 @@ namespace DistantWorlds.Controls
       this.imageListIcons.Images.SetKeyName(3, "");
       this.rtbMessage.BackColor = SystemColors.Control;
       this.rtbMessage.BorderStyle = BorderStyle.None;
-      this.rtbMessage.Location = new Point(200, 8);
+      this.rtbMessage.Location = new Point(UiScale.S(200), UiScale.S(8));
       this.rtbMessage.Name = "rtbMessage";
       this.rtbMessage.Multiline = true;
       this.rtbMessage.ReadOnly = true;
-      this.rtbMessage.Size = new Size(100, 48);
+      this.rtbMessage.Size = new Size(UiScale.S(100), UiScale.S(48));
       this.rtbMessage.TabIndex = 4;
       this.rtbMessage.Text = "";
       this.rtbMessage.Visible = false;
-      this.ClientSize = new Size(322, 224);
+      this.ClientSize = new Size(UiScale.S(322), UiScale.S(224));
       this.Controls.Add((Control) this.rtbMessage);
       this.Controls.Add((Control) this.chbSaveResponse);
       this.Controls.Add((Control) this.panelIcon);
-      this.Font = new Font("Tahoma", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.Font = UiScale.NewFont("Tahoma", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.FormBorderStyle = FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
@@ -211,7 +211,7 @@ namespace DistantWorlds.Controls
     {
       this._result = (string) null;
       this.Size = new Size(this._maxWidth, this._maxHeight);
-      this._maxLayoutWidth = this.ClientSize.Width - 12 - 12;
+      this._maxLayoutWidth = this.ClientSize.Width - UiScale.S(12) - UiScale.S(12);
       this._maxLayoutHeight = this.ClientSize.Height - 12 - 12;
       this.AddOkButtonIfNoButtonsPresent();
       this.DisableCloseIfMultipleButtonsAndNoCancelButton();
@@ -252,7 +252,7 @@ namespace DistantWorlds.Controls
       base.OnPaint(e);
       if (this._iconImage == null)
         return;
-      e.Graphics.DrawIcon(this._iconImage, new Rectangle(this.panelIcon.Location, new Size(32, 32)));
+      e.Graphics.DrawIcon(this._iconImage, new Rectangle(this.panelIcon.Location, new Size(UiScale.S(32), UiScale.S(32))));
     }
 
     private Size MeasureString(string str, int maxWidth, Font font)
@@ -291,7 +291,7 @@ namespace DistantWorlds.Controls
       {
         int maxLayoutWidth = this._maxLayoutWidth;
         if (this.panelIcon.Size.Width != 0)
-          maxLayoutWidth -= this.panelIcon.Size.Width + 15;
+          maxLayoutWidth -= this.panelIcon.Size.Width + UiScale.S(15);
         Size size = this.MeasureString(this.rtbMessage.Text, maxLayoutWidth - SystemInformation.VerticalScrollBarWidth);
         size.Width += SystemInformation.VerticalScrollBarWidth;
         size.Height = Math.Max(this.panelIcon.Height, size.Height) + SystemInformation.HorizontalScrollBarHeight;
@@ -309,7 +309,7 @@ namespace DistantWorlds.Controls
       }
       else
       {
-        this.panelIcon.Size = new Size(32, 32);
+        this.panelIcon.Size = new Size(UiScale.S(32), UiScale.S(32));
         this.panelIcon.Visible = true;
       }
     }
@@ -325,7 +325,7 @@ namespace DistantWorlds.Controls
       else
       {
         Size size = this.MeasureString(this.chbSaveResponse.Text, this._maxLayoutWidth);
-        size.Width += 50;
+        size.Width += UiScale.S(50);
         this.chbSaveResponse.Size = size;
         this.chbSaveResponse.Visible = true;
       }
@@ -334,11 +334,11 @@ namespace DistantWorlds.Controls
     private Size GetButtonSize()
     {
       Size size = this.MeasureString(this.GetLongestButtonText(), this._maxLayoutWidth);
-      Size buttonSize = new Size(size.Width + 4 + 4, size.Height + 4 + 4);
-      if (buttonSize.Width < 150)
-        buttonSize.Width = 150;
-      if (buttonSize.Height < 28)
-        buttonSize.Height = 28;
+      Size buttonSize = new Size(size.Width + UiScale.S(4) + UiScale.S(4), size.Height + UiScale.S(4) + UiScale.S(4));
+      if (buttonSize.Width < UiScale.S(150))
+        buttonSize.Width = UiScale.S(150);
+      if (buttonSize.Height < UiScale.S(28))
+        buttonSize.Height = UiScale.S(28);
       return buttonSize;
     }
 
@@ -382,40 +382,40 @@ namespace DistantWorlds.Controls
     {
       int num1 = this.Width - this.ClientSize.Width;
       int num2 = this.Height - this.ClientSize.Height;
-      int val1_1 = this.rtbMessage.Width + 15 + this.panelIcon.Width;
+      int val1_1 = this.rtbMessage.Width + UiScale.S(15) + this.panelIcon.Width;
       int val1_2 = this.chbSaveResponse.Width + this.panelIcon.Width / 2;
       int widthOfAllButtons = this.GetWidthOfAllButtons();
       int width = this.GetCaptionSize().Width;
-      int val1_3 = 12 + Math.Max(val1_2, Math.Max(val1_1, widthOfAllButtons)) + 12 + num1;
+      int val1_3 = UiScale.S(12) + Math.Max(val1_2, Math.Max(val1_1, widthOfAllButtons)) + UiScale.S(12) + num1;
       if (val1_3 < width)
         val1_3 = width;
-      int val1_4 = 12 + Math.Max(this.rtbMessage.Height, this.panelIcon.Height) + 10 + this.chbSaveResponse.Height + 10 + this.GetButtonSize().Height + 12 + num2;
+      int val1_4 = UiScale.S(12) + Math.Max(this.rtbMessage.Height, this.panelIcon.Height) + UiScale.S(10) + this.chbSaveResponse.Height + UiScale.S(10) + this.GetButtonSize().Height + UiScale.S(12) + num2;
       if (val1_4 > this._maxHeight)
         this.rtbMessage.Height -= val1_4 - this._maxHeight;
       int height = Math.Min(val1_4, this._maxHeight);
       this.Size = new Size(Math.Min(val1_3, this._maxWidth), height);
     }
 
-    private int GetWidthOfAllButtons() => this.GetButtonSize().Width * this._buttons.Count + 5 * (this._buttons.Count - 1);
+    private int GetWidthOfAllButtons() => this.GetButtonSize().Width * this._buttons.Count + UiScale.S(5) * (this._buttons.Count - 1);
 
     private Size GetCaptionSize()
     {
-      Size captionSize = this.MeasureString(this.Text, this._maxWidth - SystemInformation.CaptionButtonSize.Width - SystemInformation.Border3DSize.Width * 2, this.GetCaptionFont() ?? new Font("Tahoma", 11f));
+      Size captionSize = this.MeasureString(this.Text, this._maxWidth - SystemInformation.CaptionButtonSize.Width - SystemInformation.Border3DSize.Width * 2, this.GetCaptionFont() ?? UiScale.NewFont("Tahoma", 11f));
       captionSize.Width += SystemInformation.CaptionButtonSize.Width + SystemInformation.Border3DSize.Width * 2;
       return captionSize;
     }
 
     private void LayoutControls()
     {
-      this.panelIcon.Location = new Point(12, 12);
-      this.rtbMessage.Location = new Point(12 + this.panelIcon.Width + 15 * (this.panelIcon.Width == 0 ? 0 : 1), 12);
+      this.panelIcon.Location = new Point(UiScale.S(12), UiScale.S(12));
+      this.rtbMessage.Location = new Point(UiScale.S(12) + this.panelIcon.Width + 15 * (this.panelIcon.Width == 0 ? 0 : UiScale.S(1)), UiScale.S(12));
       this.rtbMessage.BackColor = this.BackColor;
       this.rtbMessage.ForeColor = this.ForeColor;
       this.rtbMessage.Font = this.Font;
-      this.chbSaveResponse.Location = new Point(12 + this.panelIcon.Width / 2, 12 + Math.Max(this.panelIcon.Height, this.rtbMessage.Height) + 10);
+      this.chbSaveResponse.Location = new Point(UiScale.S(12) + this.panelIcon.Width / 2, UiScale.S(12) + Math.Max(this.panelIcon.Height, this.rtbMessage.Height) + UiScale.S(10));
       this.chbSaveResponse.Font = this.Font;
       Size buttonSize = this.GetButtonSize();
-      Point location = new Point((this.ClientSize.Width - this.GetWidthOfAllButtons()) / 2, this.ClientSize.Height - 12 - buttonSize.Height);
+      Point location = new Point((this.ClientSize.Width - this.GetWidthOfAllButtons()) / 2, this.ClientSize.Height - UiScale.S(12) - buttonSize.Height);
       bool flag = false;
       foreach (MessageBoxExButton button1 in this._buttons)
       {
@@ -425,7 +425,7 @@ namespace DistantWorlds.Controls
           this._defaultButtonControl = button2;
           flag = true;
         }
-        location.X += buttonSize.Width + 5;
+        location.X += buttonSize.Width + UiScale.S(5);
       }
     }
 

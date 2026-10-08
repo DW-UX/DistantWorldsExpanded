@@ -44,7 +44,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn.ReadOnly = true;
             gridViewImageColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn.ValueType = typeof(Image);
-            gridViewImageColumn.Width = 40;
+            gridViewImageColumn.Width = UiScale.S(40);
             gridViewImageColumn.FillWeight = 40f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn);
             DataGridViewTextBoxColumn viewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -53,7 +53,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn1.ReadOnly = false;
             viewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
             viewTextBoxColumn1.ValueType = typeof(string);
-            viewTextBoxColumn1.Width = 160;
+            viewTextBoxColumn1.Width = UiScale.S(160);
             viewTextBoxColumn1.FillWeight = 160f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn1);
             DataGridViewNumericUpDownColumn numericUpDownColumn = new DataGridViewNumericUpDownColumn();
@@ -65,7 +65,7 @@ namespace DistantWorlds.Controls
             numericUpDownColumn.Maximum = 20000000000M;
             numericUpDownColumn.Increment = 10000000M;
             numericUpDownColumn.ValueType = typeof(long);
-            numericUpDownColumn.Width = 60;
+            numericUpDownColumn.Width = UiScale.S(60);
             numericUpDownColumn.FillWeight = 60f;
             numericUpDownColumn.DefaultCellStyle.Format = "0,,M";
             this._Grid.Columns.Add((DataGridViewColumn)numericUpDownColumn);
@@ -75,7 +75,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn2.ReadOnly = true;
             viewTextBoxColumn2.SortMode = DataGridViewColumnSortMode.NotSortable;
             viewTextBoxColumn2.ValueType = typeof(double);
-            viewTextBoxColumn2.Width = 60;
+            viewTextBoxColumn2.Width = UiScale.S(60);
             viewTextBoxColumn2.FillWeight = 60f;
             viewTextBoxColumn2.DefaultCellStyle.Format = "+#0.0%;-#0.0%;0.0%";
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn2);
@@ -178,7 +178,7 @@ namespace DistantWorlds.Controls
                 {
                     this._Grid.Rows.Add();
                     DataGridViewRow row = this._Grid.Rows[index];
-                    row.Height = 45;
+                    row.Height = UiScale.S(45);
                     row.Cells[0].Value = (object)this._RaceImages[populations[index].Race.PictureRef];
                     string str = populations[index].Race.Name;
                     if (this._Colony != null && this._Colony.Empire != null && this._Colony.Empire.DominantRace != null)
@@ -204,7 +204,7 @@ namespace DistantWorlds.Controls
                 }
                 this._Grid.Rows.Add();
                 DataGridViewRow row1 = this._Grid.Rows[populations.Count];
-                row1.Height = 45;
+                row1.Height = UiScale.S(45);
                 row1.Cells[0].Value = (object)this._BlankImage;
                 row1.Cells[1].Value = (object)TextResolver.GetText("TOTAL");
                 row1.Cells[1].Tag = (object)-1;

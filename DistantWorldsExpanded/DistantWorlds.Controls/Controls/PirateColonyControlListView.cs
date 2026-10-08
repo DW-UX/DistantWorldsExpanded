@@ -27,7 +27,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn.ReadOnly = true;
             gridViewImageColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn.ValueType = typeof(Image);
-            gridViewImageColumn.Width = 35;
+            gridViewImageColumn.Width = UiScale.S(35);
             gridViewImageColumn.FillWeight = 35f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn);
             DataGridViewTextBoxColumn viewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -36,7 +36,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn.ReadOnly = true;
             viewTextBoxColumn.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn.ValueType = typeof(string);
-            viewTextBoxColumn.Width = 145;
+            viewTextBoxColumn.Width = UiScale.S(145);
             viewTextBoxColumn.FillWeight = 145f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn);
             DataGridViewNumericUpDownColumn numericUpDownColumn = new DataGridViewNumericUpDownColumn();
@@ -48,7 +48,7 @@ namespace DistantWorlds.Controls
             numericUpDownColumn.Maximum = 100M;
             numericUpDownColumn.Increment = 1M;
             numericUpDownColumn.ValueType = typeof(float);
-            numericUpDownColumn.Width = 70;
+            numericUpDownColumn.Width = UiScale.S(70);
             numericUpDownColumn.FillWeight = 70f;
             this._Grid.Columns.Add((DataGridViewColumn)numericUpDownColumn);
             DataGridViewCheckBoxColumn viewCheckBoxColumn = new DataGridViewCheckBoxColumn();
@@ -58,7 +58,7 @@ namespace DistantWorlds.Controls
             viewCheckBoxColumn.ReadOnly = false;
             viewCheckBoxColumn.SortMode = DataGridViewColumnSortMode.Automatic;
             viewCheckBoxColumn.ValueType = typeof(bool);
-            viewCheckBoxColumn.Width = 50;
+            viewCheckBoxColumn.Width = UiScale.S(50);
             viewCheckBoxColumn.FillWeight = 50f;
             this._Grid.Columns.Add((DataGridViewColumn)viewCheckBoxColumn);
         }

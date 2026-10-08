@@ -37,7 +37,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             gridViewImageColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn.ValueType = typeof(Image);
-            gridViewImageColumn.Width = 30;
+            gridViewImageColumn.Width = UiScale.S(30);
             gridViewImageColumn.FillWeight = 30f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn);
             DataGridViewTextBoxColumn viewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -46,7 +46,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn.ReadOnly = false;
             viewTextBoxColumn.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn.ValueType = typeof(string);
-            viewTextBoxColumn.Width = 160;
+            viewTextBoxColumn.Width = UiScale.S(160);
             viewTextBoxColumn.FillWeight = 160f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn);
             DataGridViewNumericUpDownColumn numericUpDownColumn = new DataGridViewNumericUpDownColumn();
@@ -58,7 +58,7 @@ namespace DistantWorlds.Controls
             numericUpDownColumn.Maximum = 100M;
             numericUpDownColumn.Increment = 1M;
             numericUpDownColumn.ValueType = typeof(double);
-            numericUpDownColumn.Width = 45;
+            numericUpDownColumn.Width = UiScale.S(45);
             numericUpDownColumn.FillWeight = 45f;
             this._Grid.Columns.Add((DataGridViewColumn)numericUpDownColumn);
         }

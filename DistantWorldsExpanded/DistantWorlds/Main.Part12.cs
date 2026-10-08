@@ -1735,28 +1735,28 @@ namespace DistantWorlds
             Rectangle rectangle = new Rectangle(0, 0, width, height);
             int num = 64;
             int num2 = 80;
-            int num3 = (rectangle.Width - 700) / 2;
-            btnHistoryMessages.Size = new Size(32, 48);
-            btnGalacticHistory.Size = new Size(32, 32);
+            int num3 = (rectangle.Width - UiScale.S(700)) / 2;
+            btnHistoryMessages.Size = new Size(UiScale.S(32), UiScale.S(48));
+            btnGalacticHistory.Size = new Size(UiScale.S(32), UiScale.S(32));
             btnHistoryMessages.SetCornerCurves(topLeft: false, topRight: true, bottomRight: false, bottomLeft: false);
             btnGalacticHistory.SetCornerCurves(topLeft: false, topRight: false, bottomRight: true, bottomLeft: false);
-            btnHistoryMessages.Location = new Point(num3 + 668, 10);
-            btnGalacticHistory.Location = new Point(num3 + 668, 58);
+            btnHistoryMessages.Location = new Point(num3 + UiScale.S(668), UiScale.S(10));
+            btnGalacticHistory.Location = new Point(num3 + UiScale.S(668), UiScale.S(58));
             lstMessages.CurveMode = CornerCurveMode.TopLeft_BottomLeft;
-            lstMessages.Size = new Size(668, 80);
-            lstMessages.Location = new Point(num3, 10);
+            lstMessages.Size = new Size(UiScale.S(668), UiScale.S(80));
+            lstMessages.Location = new Point(num3, UiScale.S(10));
             lstMessages.BringToFront();
-            int num4 = (rectangle.Width - 624) / 2;
-            tbtnColonies.Size = new Size(32, 32);
-            btnExpansionPlanner.Size = new Size(32, 32);
-            btnEmpireGraphs.Size = new Size(32, 32);
-            btnEmpirePolicy.Size = new Size(32, 32);
-            btnGameEditor.Size = new Size(32, 32);
-            btnBuildOrder.Size = new Size(32, 32);
-            tbtnConstructionYards.Size = new Size(32, 32);
-            tbtnBuiltObjects.Size = new Size(32, 32);
-            tbtnShipGroups.Size = new Size(32, 32);
-            tbtnTroops.Size = new Size(32, 32);
+            int num4 = (rectangle.Width - UiScale.S(624)) / 2;
+            tbtnColonies.Size = new Size(UiScale.S(32), UiScale.S(32));
+            btnExpansionPlanner.Size = new Size(UiScale.S(32), UiScale.S(32));
+            btnEmpireGraphs.Size = new Size(UiScale.S(32), UiScale.S(32));
+            btnEmpirePolicy.Size = new Size(UiScale.S(32), UiScale.S(32));
+            btnGameEditor.Size = new Size(UiScale.S(32), UiScale.S(32));
+            btnBuildOrder.Size = new Size(UiScale.S(32), UiScale.S(32));
+            tbtnConstructionYards.Size = new Size(UiScale.S(32), UiScale.S(32));
+            tbtnBuiltObjects.Size = new Size(UiScale.S(32), UiScale.S(32));
+            tbtnShipGroups.Size = new Size(UiScale.S(32), UiScale.S(32));
+            tbtnTroops.Size = new Size(UiScale.S(32), UiScale.S(32));
             tbtnColonies.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: true);
             btnExpansionPlanner.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
             btnEmpireGraphs.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
@@ -1767,61 +1767,61 @@ namespace DistantWorlds
             tbtnBuiltObjects.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
             tbtnShipGroups.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
             tbtnTroops.SetCornerCurves(topLeft: false, topRight: false, bottomRight: true, bottomLeft: false);
-            tbtnIntelligenceAgents.Size = new Size(32, 64);
-            tbtnEmpires.Size = new Size(80, 64);
-            btnEmpireSummary.Size = new Size(80, 64);
-            tbtnResearch.Size = new Size(80, 64);
-            tbtnDesigns.Size = new Size(32, 64);
+            tbtnIntelligenceAgents.Size = new Size(UiScale.S(32), UiScale.S(64));
+            tbtnEmpires.Size = new Size(UiScale.S(80), UiScale.S(64));
+            btnEmpireSummary.Size = new Size(UiScale.S(80), UiScale.S(64));
+            tbtnResearch.Size = new Size(UiScale.S(80), UiScale.S(64));
+            tbtnDesigns.Size = new Size(UiScale.S(32), UiScale.S(64));
             tbtnIntelligenceAgents.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: true);
             tbtnEmpires.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
             btnEmpireSummary.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
             tbtnResearch.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
             tbtnDesigns.SetCornerCurves(topLeft: false, topRight: false, bottomRight: true, bottomLeft: false);
             int num5 = num4;
-            tbtnColonies.Location = new Point(num5, 90);
-            num5 += 32;
-            btnExpansionPlanner.Location = new Point(num5, 90);
-            num5 += 32;
-            btnEmpireGraphs.Location = new Point(num5, 90);
-            num5 += 32;
-            btnEmpirePolicy.Location = new Point(num5, 90);
-            num5 += 32;
-            btnGameEditor.Location = new Point(num5, 90);
-            num5 += 32;
-            tbtnIntelligenceAgents.Location = new Point(num5, 90);
-            num5 += 32;
-            tbtnEmpires.Location = new Point(num5, 90);
-            num5 += 80;
-            btnEmpireSummary.Location = new Point(num5, 90);
-            num5 += 80;
-            tbtnResearch.Location = new Point(num5, 90);
-            num5 += 80;
-            tbtnDesigns.Location = new Point(num5, 90);
-            num5 += 32;
-            btnBuildOrder.Location = new Point(num5, 90);
-            num5 += 32;
-            tbtnConstructionYards.Location = new Point(num5, 90);
-            num5 += 32;
-            tbtnBuiltObjects.Location = new Point(num5, 90);
-            num5 += 32;
-            tbtnShipGroups.Location = new Point(num5, 90);
-            num5 += 32;
-            tbtnTroops.Location = new Point(num5, 90);
-            num5 += 32;
-            btnGameMenu.Size = new Size(40, 40);
-            btnGameMenu.Location = new Point(10, 10);
+            tbtnColonies.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            btnExpansionPlanner.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            btnEmpireGraphs.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            btnEmpirePolicy.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            btnGameEditor.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            tbtnIntelligenceAgents.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            tbtnEmpires.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(80);
+            btnEmpireSummary.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(80);
+            tbtnResearch.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(80);
+            tbtnDesigns.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            btnBuildOrder.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            tbtnConstructionYards.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            tbtnBuiltObjects.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            tbtnShipGroups.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            tbtnTroops.Location = new Point(num5, UiScale.S(90));
+            num5 += UiScale.S(32);
+            btnGameMenu.Size = new Size(UiScale.S(40), UiScale.S(40));
+            btnGameMenu.Location = new Point(UiScale.S(10), UiScale.S(10));
             btnGameMenu.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
-            btnHelp.Size = new Size(40, 40);
-            btnHelp.Location = new Point(50, 10);
+            btnHelp.Size = new Size(UiScale.S(40), UiScale.S(40));
+            btnHelp.Location = new Point(UiScale.S(50), UiScale.S(10));
             btnHelp.SetCornerCurves(topLeft: false, topRight: true, bottomRight: true, bottomLeft: false);
-            btnPlayPause.Size = new Size(80, 34);
-            btnPlayPause.Location = new Point(10, 62);
+            btnPlayPause.Size = new Size(UiScale.S(80), UiScale.S(34));
+            btnPlayPause.Location = new Point(UiScale.S(10), UiScale.S(62));
             btnPlayPause.SetCornerCurves(topLeft: true, topRight: true, bottomRight: false, bottomLeft: false);
-            btnGameSpeedDecrease.Size = new Size(40, 20);
-            btnGameSpeedDecrease.Location = new Point(10, 96);
+            btnGameSpeedDecrease.Size = new Size(UiScale.S(40), UiScale.S(20));
+            btnGameSpeedDecrease.Location = new Point(UiScale.S(10), UiScale.S(96));
             btnGameSpeedDecrease.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: true);
-            btnGameSpeedIncrease.Size = new Size(40, 20);
-            btnGameSpeedIncrease.Location = new Point(50, 96);
+            btnGameSpeedIncrease.Size = new Size(UiScale.S(40), UiScale.S(20));
+            btnGameSpeedIncrease.Location = new Point(UiScale.S(50), UiScale.S(96));
             btnGameSpeedIncrease.SetCornerCurves(topLeft: false, topRight: false, bottomRight: true, bottomLeft: false);
             tbtnBuiltObjects.ClipBackground = true;
             tbtnBuiltObjects.IntensifyColors = true;
@@ -1976,35 +1976,35 @@ namespace DistantWorlds
             encyclopediaItemList_0 = method_465(null, Application.StartupPath, text);
             vTtmruAejE = new EncyclopediaItemList();
             int_25 = 0;
-            mainView.Font = new Font("Verdana", 8f, FontStyle.Regular);
+            mainView.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
             InfoPanel.InitializeImages(characterImageCache_0, bitmap_23, bitmap_24, bitmap_25, bitmap_26, bitmap_27, _uiResourcesBitmaps, raceImageCache_0,
                 builtObjectImageCache_0.GetImagesSmall(), bitmap_6, bitmap_2, habitatImageCache_0.GetImagesSmall(), bitmap_8, bitmap_33, bitmap_34,
                 bitmap_35, bitmap_36, bitmap_32, bitmap_37, bitmap_38, bitmap_43, bitmap_44, bitmap_43, bitmap_53, bitmap_28[20], bitmap_28, bitmap_9);
-            pnlDetailInfo.Size = new Size(280, 240);
-            pnlDetailInfo.Location = new Point(44, 5);
-            pnlDetailInfo.Font = new Font("Verdana", 8f, FontStyle.Regular);
+            pnlDetailInfo.Size = new Size(UiScale.S(280), UiScale.S(240));
+            pnlDetailInfo.Location = new Point(UiScale.S(44), UiScale.S(5));
+            pnlDetailInfo.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
             pnlDetailInfo.Reset();
             pnlDetailInfo.BringToFront();
-            pnlInfoPanel.Size = new Size(370, 250);
-            pnlInfoPanel.Location = new Point(26, mainView.Size.Height - (pnlDetailInfo.Size.Height + 50));
+            pnlInfoPanel.Size = new Size(UiScale.S(370), UiScale.S(250));
+            pnlInfoPanel.Location = new Point(UiScale.S(26), mainView.Size.Height - (pnlDetailInfo.Size.Height + UiScale.S(50)));
             pnlInfoPanel.BringToFront();
-            pnlDetailInfoShipGroup.Size = new Size(240, 240);
-            pnlDetailInfoShipGroup.Location = new Point(20, mainView.Size.Height - (pnlDetailInfo.Size.Height + 20));
-            pnlDetailInfoShipGroup.Font = new Font("Verdana", 8f, FontStyle.Regular);
+            pnlDetailInfoShipGroup.Size = new Size(UiScale.S(240), UiScale.S(240));
+            pnlDetailInfoShipGroup.Location = new Point(UiScale.S(20), mainView.Size.Height - (pnlDetailInfo.Size.Height + UiScale.S(20)));
+            pnlDetailInfoShipGroup.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
             pnlDetailInfoShipGroup.ShowExtendedInfo = true;
             pnlDetailInfoShipGroup.Reset();
-            pnlHabitatInfo.Size = new Size(240, 240);
-            pnlHabitatInfo.Location = new Point(20, mainView.Size.Height - (pnlDetailInfo.Size.Height + 20));
-            pnlHabitatInfo.Font = new Font("Verdana", 8f, FontStyle.Regular);
+            pnlHabitatInfo.Size = new Size(UiScale.S(240), UiScale.S(240));
+            pnlHabitatInfo.Location = new Point(UiScale.S(20), mainView.Size.Height - (pnlDetailInfo.Size.Height + UiScale.S(20)));
+            pnlHabitatInfo.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
             pnlHabitatInfo.Reset();
-            pnlColonyHabitatInfo.Size = new Size(240, 240);
-            pnlColonyHabitatInfo.Location = new Point(20, mainView.Size.Height - (pnlDetailInfo.Size.Height + 20));
-            pnlColonyHabitatInfo.Font = new Font("Verdana", 8f, FontStyle.Regular);
+            pnlColonyHabitatInfo.Size = new Size(UiScale.S(240), UiScale.S(240));
+            pnlColonyHabitatInfo.Location = new Point(UiScale.S(20), mainView.Size.Height - (pnlDetailInfo.Size.Height + UiScale.S(20)));
+            pnlColonyHabitatInfo.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
             pnlColonyHabitatInfo.Reset();
             UpdateSplashProgress();
-            pnlBuiltObjectDetail.Size = new Size(240, 240);
-            pnlBuiltObjectDetail.Location = new Point(20, mainView.Size.Height - (pnlDetailInfo.Size.Height + 20));
-            pnlBuiltObjectDetail.Font = new Font("Verdana", 8f, FontStyle.Regular);
+            pnlBuiltObjectDetail.Size = new Size(UiScale.S(240), UiScale.S(240));
+            pnlBuiltObjectDetail.Location = new Point(UiScale.S(20), mainView.Size.Height - (pnlDetailInfo.Size.Height + UiScale.S(20)));
+            pnlBuiltObjectDetail.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
             pnlBuiltObjectDetail.ShowExtendedInfo = true;
             pnlBuiltObjectDetail.Reset();
             ctlEditHabitatPopulation.InitializeImages(raceImageCache_0.GetRaceImages());
@@ -2020,42 +2020,42 @@ namespace DistantWorlds
             cmbEditBuiltObjectFleet.InitializeImages(builtObjectImageCache_0.GetImagesSmall());
             cmbTroopFilter.InitializeImages(builtObjectImageCache_0.GetImagesSmall(), habitatImageCache_0.GetImagesSmall());
             pnlColonyInvasionContainer.InitializeImages(bitmap_23, bitmap_24, bitmap_25, bitmap_26, bitmap_27, bitmap_8, builtObjectImageCache_0, characterImageCache_0, raceImageCache_0.GetRaceImages(), bitmap_19, bitmap_103, bitmap_104, bitmap_16[0], bitmap_16[1], bitmap_16[2], bitmap_16[3], Application.StartupPath, string.Empty);
-            int num6 = mainView.Size.Height - (pnlDetailInfo.Height + 45) + 1;
-            btnCycleColoniesBack.Location = new Point(10, num6 + 30);
+            int num6 = mainView.Size.Height - (pnlDetailInfo.Height + UiScale.S(45)) + UiScale.S(1);
+            btnCycleColoniesBack.Location = new Point(UiScale.S(10), num6 + UiScale.S(30));
             btnCycleColoniesBack.BringToFront();
-            btnCycleBasesBack.Location = new Point(10, num6 + 60);
+            btnCycleBasesBack.Location = new Point(UiScale.S(10), num6 + UiScale.S(60));
             btnCycleBasesBack.BringToFront();
-            btnCycleMilitaryBack.Location = new Point(10, num6 + 90);
+            btnCycleMilitaryBack.Location = new Point(UiScale.S(10), num6 + UiScale.S(90));
             btnCycleMilitaryBack.BringToFront();
-            btnCycleConstructionBack.Location = new Point(10, num6 + 120);
+            btnCycleConstructionBack.Location = new Point(UiScale.S(10), num6 + UiScale.S(120));
             btnCycleConstructionBack.BringToFront();
-            btnCycleOtherBack.Location = new Point(10, num6 + 150);
+            btnCycleOtherBack.Location = new Point(UiScale.S(10), num6 + UiScale.S(150));
             btnCycleOtherBack.BringToFront();
-            btnCycleShipGroupsBack.Location = new Point(10, num6 + 180);
+            btnCycleShipGroupsBack.Location = new Point(UiScale.S(10), num6 + UiScale.S(180));
             btnCycleShipGroupsBack.BringToFront();
-            btnCycleIdleShipsBack.Location = new Point(10, num6 + 210);
+            btnCycleIdleShipsBack.Location = new Point(UiScale.S(10), num6 + UiScale.S(210));
             btnCycleIdleShipsBack.BringToFront();
-            btnSelectionPanelSize.Location = new Point(353, num6 - 36);
+            btnSelectionPanelSize.Location = new Point(UiScale.S(353), num6 - UiScale.S(36));
             btnSelectionPanelSize.BringToFront();
             btnCycleShipStance.BringToFront();
-            btnSelectNearestMilitary.Location = new Point(353, num6);
+            btnSelectNearestMilitary.Location = new Point(UiScale.S(353), num6);
             btnSelectNearestMilitary.BringToFront();
-            btnCycleColonies.Location = new Point(353, num6 + 30);
+            btnCycleColonies.Location = new Point(UiScale.S(353), num6 + UiScale.S(30));
             btnCycleColonies.BringToFront();
-            btnCycleBases.Location = new Point(353, num6 + 60);
+            btnCycleBases.Location = new Point(UiScale.S(353), num6 + UiScale.S(60));
             btnCycleBases.BringToFront();
-            btnCycleMilitary.Location = new Point(353, num6 + 90);
+            btnCycleMilitary.Location = new Point(UiScale.S(353), num6 + UiScale.S(90));
             btnCycleMilitary.BringToFront();
-            btnCycleConstruction.Location = new Point(353, num6 + 120);
+            btnCycleConstruction.Location = new Point(UiScale.S(353), num6 + UiScale.S(120));
             btnCycleConstruction.BringToFront();
-            btnCycleOther.Location = new Point(353, num6 + 150);
+            btnCycleOther.Location = new Point(UiScale.S(353), num6 + UiScale.S(150));
             btnCycleOther.BringToFront();
-            btnCycleShipGroups.Location = new Point(353, num6 + 180);
+            btnCycleShipGroups.Location = new Point(UiScale.S(353), num6 + UiScale.S(180));
             btnCycleShipGroups.BringToFront();
-            btnCycleIdleShips.Location = new Point(353, num6 + 210);
+            btnCycleIdleShips.Location = new Point(UiScale.S(353), num6 + UiScale.S(210));
             btnCycleIdleShips.BringToFront();
-            btnCycleShipStance.Location = new Point(353, num6 + 240);
-            btnCycleShipStance.Size = new Size(56, 28);
+            btnCycleShipStance.Location = new Point(UiScale.S(353), num6 + UiScale.S(240));
+            btnCycleShipStance.Size = new Size(UiScale.S(56), UiScale.S(28));
             btnLockView.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
             btnCycleColoniesBack.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
             btnCycleBasesBack.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
@@ -2073,23 +2073,23 @@ namespace DistantWorlds
             btnCycleOther.SetCornerCurves(topLeft: false, topRight: true, bottomRight: true, bottomLeft: false);
             btnCycleShipGroups.SetCornerCurves(topLeft: false, topRight: true, bottomRight: true, bottomLeft: false);
             btnCycleIdleShips.SetCornerCurves(topLeft: false, topRight: true, bottomRight: true, bottomLeft: false);
-            btnSelectionAction1.Size = new Size(35, 28);
-            btnSelectionAction2.Size = new Size(35, 28);
-            btnSelectionAction3.Size = new Size(35, 28);
-            btnSelectionAction4.Size = new Size(35, 28);
-            btnSelectionAction5.Size = new Size(35, 28);
-            btnSelectionAction6.Size = new Size(35, 28);
-            btnSelectionAction7.Size = new Size(35, 28);
-            btnSelectionAction8.Size = new Size(35, 28);
-            int num7 = pnlInfoPanel.Bottom + 2;
-            btnSelectionAction1.Location = new Point(70, num7);
-            btnSelectionAction2.Location = new Point(105, num7);
-            btnSelectionAction3.Location = new Point(140, num7);
-            btnSelectionAction4.Location = new Point(175, num7);
-            btnSelectionAction5.Location = new Point(210, num7);
-            btnSelectionAction6.Location = new Point(245, num7);
-            btnSelectionAction7.Location = new Point(280, num7);
-            btnSelectionAction8.Location = new Point(315, num7);
+            btnSelectionAction1.Size = new Size(UiScale.S(35), UiScale.S(28));
+            btnSelectionAction2.Size = new Size(UiScale.S(35), UiScale.S(28));
+            btnSelectionAction3.Size = new Size(UiScale.S(35), UiScale.S(28));
+            btnSelectionAction4.Size = new Size(UiScale.S(35), UiScale.S(28));
+            btnSelectionAction5.Size = new Size(UiScale.S(35), UiScale.S(28));
+            btnSelectionAction6.Size = new Size(UiScale.S(35), UiScale.S(28));
+            btnSelectionAction7.Size = new Size(UiScale.S(35), UiScale.S(28));
+            btnSelectionAction8.Size = new Size(UiScale.S(35), UiScale.S(28));
+            int num7 = pnlInfoPanel.Bottom + UiScale.S(2);
+            btnSelectionAction1.Location = new Point(UiScale.S(70), num7);
+            btnSelectionAction2.Location = new Point(UiScale.S(105), num7);
+            btnSelectionAction3.Location = new Point(UiScale.S(140), num7);
+            btnSelectionAction4.Location = new Point(UiScale.S(175), num7);
+            btnSelectionAction5.Location = new Point(UiScale.S(210), num7);
+            btnSelectionAction6.Location = new Point(UiScale.S(245), num7);
+            btnSelectionAction7.Location = new Point(UiScale.S(280), num7);
+            btnSelectionAction8.Location = new Point(UiScale.S(315), num7);
             btnSelectionAction1.BringToFront();
             btnSelectionAction2.BringToFront();
             btnSelectionAction3.BringToFront();
@@ -2108,39 +2108,39 @@ namespace DistantWorlds
             btnSelectionAction8.Visible = true;
             btnSelectionBack.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
             btnSelectionForward.SetCornerCurves(topLeft: false, topRight: true, bottomRight: true, bottomLeft: false);
-            btnSelectionBack.Size = new Size(138, 28);
-            btnSelectionForward.Size = new Size(138, 28);
-            btnSelectionBack.Location = new Point(71, num6 - 36);
+            btnSelectionBack.Size = new Size(UiScale.S(138), UiScale.S(28));
+            btnSelectionForward.Size = new Size(UiScale.S(138), UiScale.S(28));
+            btnSelectionBack.Location = new Point(UiScale.S(71), num6 - UiScale.S(36));
             btnSelectionBack.BringToFront();
-            btnSelectionForward.Location = new Point(213, num6 - 36);
+            btnSelectionForward.Location = new Point(UiScale.S(213), num6 - UiScale.S(36));
             btnSelectionForward.BringToFront();
             method_212();
-            btnLockView.Location = new Point(10, num6);
+            btnLockView.Location = new Point(UiScale.S(10), num6);
             btnLockView.BringToFront();
-            pnlSystemMap.Width = 330;
-            pnlSystemMap.Height = 290;
-            picSystem.Width = 280;
-            picSystem.Height = 280;
+            pnlSystemMap.Width = UiScale.S(330);
+            pnlSystemMap.Height = UiScale.S(290);
+            picSystem.Width = UiScale.S(280);
+            picSystem.Height = UiScale.S(280);
             mainView.HoverMessageLocation = new Point(10, mainView.Size.Height - (pnlInfoPanel.Height + btnSelectionForward.Height + btnSelectionAction1.Height + 4 + 35));
             mainView.HoverMessageLocationMap = new Point(mainView.Size.Width - (pnlSystemMap.Width + 10), mainView.Height - (pnlSystemMap.Height + 64));
             mainView.HoverMessageLocationButtons = new Point(mainView.Size.Width / 2, num2 + num + 10 + 5);
-            num6 = mainView.Size.Height - (pnlSystemMap.Height + 7) + 1;
-            btnZoomSelection.Location = new Point(mainView.Width - (picSystem.Width + btnZoomSelection.Width + 17), num6);
+            num6 = mainView.Size.Height - (pnlSystemMap.Height + UiScale.S(7)) + UiScale.S(1);
+            btnZoomSelection.Location = new Point(mainView.Width - (picSystem.Width + btnZoomSelection.Width + UiScale.S(17)), num6);
             btnZoomSelection.BringToFront();
-            btnZoomIn.Location = new Point(mainView.Width - (picSystem.Width + btnZoomIn.Width + 17), num6 + 30);
+            btnZoomIn.Location = new Point(mainView.Width - (picSystem.Width + btnZoomIn.Width + UiScale.S(17)), num6 + UiScale.S(30));
             btnZoomIn.BringToFront();
-            btnZoomOut.Location = new Point(mainView.Width - (picSystem.Width + btnZoomOut.Width + 17), num6 + 60);
+            btnZoomOut.Location = new Point(mainView.Width - (picSystem.Width + btnZoomOut.Width + UiScale.S(17)), num6 + UiScale.S(60));
             btnZoomOut.BringToFront();
-            btnZoomColony.Location = new Point(mainView.Width - (picSystem.Width + btnZoomColony.Width + 17), num6 + 90);
+            btnZoomColony.Location = new Point(mainView.Width - (picSystem.Width + btnZoomColony.Width + UiScale.S(17)), num6 + UiScale.S(90));
             btnZoomColony.BringToFront();
-            btnZoomSystem.Location = new Point(mainView.Width - (picSystem.Width + btnZoomSystem.Width + 17), num6 + 120);
+            btnZoomSystem.Location = new Point(mainView.Width - (picSystem.Width + btnZoomSystem.Width + UiScale.S(17)), num6 + UiScale.S(120));
             btnZoomSystem.BringToFront();
-            jQaYpdpkDs.Location = new Point(mainView.Width - (picSystem.Width + jQaYpdpkDs.Width + 17), num6 + 150);
+            jQaYpdpkDs.Location = new Point(mainView.Width - (picSystem.Width + jQaYpdpkDs.Width + UiScale.S(17)), num6 + UiScale.S(150));
             jQaYpdpkDs.BringToFront();
-            btnZoomRegion.Location = new Point(mainView.Width - (picSystem.Width + btnZoomRegion.Width + 17), num6 + 180);
+            btnZoomRegion.Location = new Point(mainView.Width - (picSystem.Width + btnZoomRegion.Width + UiScale.S(17)), num6 + UiScale.S(180));
             btnZoomRegion.BringToFront();
-            tbtnGalaxyMap.Size = new Size(btnZoomColony.Width, 40);
-            tbtnGalaxyMap.Location = new Point(mainView.Width - (picSystem.Width + btnZoomRegion.Width + 17), num6 + 240);
+            tbtnGalaxyMap.Size = new Size(btnZoomColony.Width, UiScale.S(40));
+            tbtnGalaxyMap.Location = new Point(mainView.Width - (picSystem.Width + btnZoomRegion.Width + UiScale.S(17)), num6 + UiScale.S(240));
             tbtnGalaxyMap.BringToFront();
             btnZoomSelection.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
             btnZoomIn.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
@@ -2150,26 +2150,26 @@ namespace DistantWorlds
             jQaYpdpkDs.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
             btnZoomRegion.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
             tbtnGalaxyMap.SetCornerCurves(topLeft: true, topRight: false, bottomRight: false, bottomLeft: true);
-            pnlSystemMap.Location = new Point(mainView.Size.Width - (pnlSystemMap.Size.Width + 10), mainView.Size.Height - (pnlSystemMap.Size.Height + 10));
-            picSystem.Location = new Point(45, 5);
+            pnlSystemMap.Location = new Point(mainView.Size.Width - (pnlSystemMap.Size.Width + UiScale.S(10)), mainView.Size.Height - (pnlSystemMap.Size.Height + UiScale.S(10)));
+            picSystem.Location = new Point(UiScale.S(45), UiScale.S(5));
             picSystem.BringToFront();
-            btnMapCivilianFade.Size = new Size(35, 28);
+            btnMapCivilianFade.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapCivilianFade.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
-            btnMapOverlay1.Size = new Size(35, 28);
+            btnMapOverlay1.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapOverlay1.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
-            btnMapOverlay2.Size = new Size(35, 28);
+            btnMapOverlay2.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapOverlay2.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
-            btnMapOverlay3.Size = new Size(35, 28);
+            btnMapOverlay3.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapOverlay3.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
-            btnMapOverlay4.Size = new Size(35, 28);
+            btnMapOverlay4.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapOverlay4.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
-            btnMapOverlay5.Size = new Size(35, 28);
+            btnMapOverlay5.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapOverlay5.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
-            btnMapOverlay6.Size = new Size(35, 28);
+            btnMapOverlay6.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapOverlay6.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
-            btnMapOverlay7.Size = new Size(35, 28);
+            btnMapOverlay7.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapOverlay7.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
-            btnMapOverlay8.Size = new Size(35, 28);
+            btnMapOverlay8.Size = new Size(UiScale.S(35), UiScale.S(28));
             btnMapOverlay8.SetCornerCurves(topLeft: false, topRight: false, bottomRight: false, bottomLeft: false);
             btnMapCivilianFade.ClipBackground = false;
             btnMapCivilianFade.IntensifyColors = true;
@@ -2189,26 +2189,26 @@ namespace DistantWorlds
             btnMapOverlay7.IntensifyColors = true;
             btnMapOverlay8.ClipBackground = false;
             btnMapOverlay8.IntensifyColors = true;
-            int num8 = mainView.Size.Width - (pnlSystemMap.Size.Width + 10) + 11;
-            int num9 = mainView.Size.Height - (pnlSystemMap.Size.Height + 10) - 29;
+            int num8 = mainView.Size.Width - (pnlSystemMap.Size.Width + UiScale.S(10)) + UiScale.S(11);
+            int num9 = mainView.Size.Height - (pnlSystemMap.Size.Height + UiScale.S(10)) - UiScale.S(29);
             btnMapCivilianFade.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapOverlay1.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapOverlay2.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapOverlay3.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapOverlay4.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapOverlay5.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapOverlay6.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapOverlay7.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapOverlay8.Location = new Point(num8, num9);
-            num8 += 35;
+            num8 += UiScale.S(35);
             btnMapCivilianFade.Image = bitmap_99;
             btnMapOverlay1.Image = bitmap_98;
             btnMapOverlay2.Image = bitmap_96;
@@ -2221,19 +2221,19 @@ namespace DistantWorlds
             _ = (lstMessages.Size.Width - 336) / 2;
             _ = (mainView.Size.Width - lstMessages.Size.Width) / 2;
             _ = mainView.Size.Width / 2;
-            lblStarDate.Location = new Point(10, 10);
+            lblStarDate.Location = new Point(UiScale.S(10), UiScale.S(10));
             lblStarDate.BackColor = Color.Black;
-            lblSystemName.Location = new Point(10, 35);
+            lblSystemName.Location = new Point(UiScale.S(10), UiScale.S(35));
             lblSystemName.BackColor = Color.Black;
-            lblStateMoney.Location = new Point(mainView.Size.Width - 95, 10);
+            lblStateMoney.Location = new Point(mainView.Size.Width - UiScale.S(95), UiScale.S(10));
             lblStateMoney.BackColor = Color.Black;
-            lblPrivateMoney.Location = new Point(mainView.Size.Width - 95, 35);
+            lblPrivateMoney.Location = new Point(mainView.Size.Width - UiScale.S(95), UiScale.S(35));
             lblPrivateMoney.BackColor = Color.Black;
             lblStarDate.Visible = false;
             lblSystemName.Visible = false;
             lblStateMoney.Visible = false;
             lblPrivateMoney.Visible = false;
-            lblGodData.Location = new Point(10, 180);
+            lblGodData.Location = new Point(UiScale.S(10), UiScale.S(180));
             if (_Game != null)
             {
                 if (_Game.GodMode)
@@ -2264,45 +2264,45 @@ namespace DistantWorlds
             hoverPanel_0 = new HoverPanel();
             hoverPanel_0.SetFontCache(this);
             hoverPanel_0.InitializeImages(this, builtObjectImageCache_0.GetImagesSmall(), habitatImageCache_0.GetImagesSmall(), bitmap_10, raceImageCache_0.GetRaceImages(), _uiResourcesBitmaps);
-            int num10 = 260;
-            if (rectangle.Width <= 1024)
+            int num10 = UiScale.S(260);
+            if (rectangle.Width <= UiScale.S(1024))
             {
-                rectangle_0 = new Rectangle((rectangle.Width - num10) / 2 + 28, rectangle.Height - 135, num10, 130);
+                rectangle_0 = new Rectangle((rectangle.Width - num10) / 2 + UiScale.S(28), rectangle.Height - UiScale.S(135), num10, UiScale.S(130));
             }
             else
             {
-                rectangle_0 = new Rectangle((rectangle.Width - num10) / 2, rectangle.Height - 135, num10, 130);
+                rectangle_0 = new Rectangle((rectangle.Width - num10) / 2, rectangle.Height - UiScale.S(135), num10, UiScale.S(130));
             }
             pnlGameRaceVictoryConditions.InitializeImages(raceImageCache_0);
             pnlGameSummary.InitializeImages(bitmap_216, bitmap_217, bitmap_218, bitmap_219, bitmap_220, bitmap_221, bitmap_222, bitmap_223);
             UpdateSplashProgress();
             diplomaticMessageQueue_0 = new DiplomaticMessageQueue();
             diplomaticMessageQueue_0.SetFontCache(this);
-            Rectangle area = new Rectangle(rectangle.Width - 308, 90, 300, 200);
-            if (rectangle.Height > 768)
+            Rectangle area = new Rectangle(rectangle.Width - UiScale.S(308), UiScale.S(90), UiScale.S(300), UiScale.S(200));
+            if (rectangle.Height > UiScale.S(768))
             {
-                int num11 = Math.Min(7, 4 + (rectangle.Height - 768) / 50);
-                area = new Rectangle(rectangle.Width - 308, 90, 300, num11 * 50);
+                int num11 = Math.Min(7, 4 + (rectangle.Height - UiScale.S(768)) / UiScale.S(50));
+                area = new Rectangle(rectangle.Width - UiScale.S(308), UiScale.S(90), UiScale.S(300), num11 * UiScale.S(50));
             }
             diplomaticMessageQueue_0.Initialize(this, area);
             diplomaticMessageQueue_0.InitializeImages(raceImageCache_0, bitmap_72, bitmap_51, bitmap_37, bitmap_52, bitmap_73, bitmap_55, bitmap_81, bitmap_71, bitmap_82, bitmap_85, bitmap_28[28], bitmap_84, bitmap_49, bitmap_87);
             itemListCollectionPanel_0 = new ItemListCollectionPanel();
             itemListCollectionPanel_0.SetFontCache(this);
-            Rectangle area2 = new Rectangle(8, 150, 300, 265);
-            if (rectangle.Height > 768)
+            Rectangle area2 = new Rectangle(UiScale.S(8), UiScale.S(150), UiScale.S(300), UiScale.S(265));
+            if (rectangle.Height > UiScale.S(768))
             {
-                int num12 = Math.Min(10, 5 + (rectangle.Height - 793) / 43);
-                area2 = new Rectangle(8, 175, 300, 50 + num12 * 43);
+                int num12 = Math.Min(10, 5 + (rectangle.Height - UiScale.S(793)) / UiScale.S(43));
+                area2 = new Rectangle(UiScale.S(8), UiScale.S(175), UiScale.S(300), UiScale.S(50) + num12 * UiScale.S(43));
             }
-            if (rectangle.Height > 800)
+            if (rectangle.Height > UiScale.S(800))
             {
-                itemListCollectionPanel_0.SelectionButtonHeight = 26;
-                itemListCollectionPanel_0.SelectionButtonWidth = 26;
+                itemListCollectionPanel_0.SelectionButtonHeight = UiScale.S(26);
+                itemListCollectionPanel_0.SelectionButtonWidth = UiScale.S(26);
             }
             else
             {
-                itemListCollectionPanel_0.SelectionButtonHeight = 20;
-                itemListCollectionPanel_0.SelectionButtonWidth = 20;
+                itemListCollectionPanel_0.SelectionButtonHeight = UiScale.S(20);
+                itemListCollectionPanel_0.SelectionButtonWidth = UiScale.S(20);
             }
             itemListCollectionPanel_0.Initialize(this, area2);
             itemListCollectionPanel_0.InitializeImages(builtObjectImageCache_0.GetImagesSmall(), habitatImageCache_0.GetImagesSmall(), raceImageCache_0, _uiResourcesBitmaps, bitmap_8, bitmap_79, bitmap_80, bitmap_128, bitmap_129, bitmap_130, bitmap_131, bitmap_132, bitmap_126, bitmap_127, bitmap_28[30]);
@@ -2942,7 +2942,7 @@ namespace DistantWorlds
         private void method_81()
         {
             bool_9 = true;
-            pnlIntroduction.Size = new Size(800, 665);
+            pnlIntroduction.Size = new Size(UiScale.S(800), UiScale.S(665));
             pnlIntroduction.Location = new Point((mainView.Width - pnlIntroduction.Width) / 2, (mainView.Height - pnlIntroduction.Height) / 2);
             SizeF sizeF = SizeF.Empty;
             string text = TextResolver.GetText("Welcome to Your Empire");
@@ -2950,37 +2950,37 @@ namespace DistantWorlds
             {
                 sizeF = graphics.MeasureString(text, font_1);
             }
-            lblIntroductionTitle.Location = new Point((pnlIntroduction.Width - (int)sizeF.Width) / 2, 10);
+            lblIntroductionTitle.Location = new Point((pnlIntroduction.Width - (int)sizeF.Width) / 2, UiScale.S(10));
             lblIntroductionTitle.Text = text;
             lblIntroductionTitle.Font = font_1;
             pnlIntroductionBackground.BringToFront();
-            pnlIntroductionBackground.Size = new Size(780, 565);
-            pnlIntroductionBackground.Location = new Point(10, 45);
+            pnlIntroductionBackground.Size = new Size(UiScale.S(780), UiScale.S(565));
+            pnlIntroductionBackground.Location = new Point(UiScale.S(10), UiScale.S(45));
             picIntroductionFlag.Visible = false;
-            picIntroductionRace.Size = new Size(280, 200);
-            picIntroductionRace.Location = new Point(40, 15);
-            lblIntroductionEmpireName.Location = new Point(350, 20);
-            lblIntroductionEmpireDetails.Location = new Point(355, 42);
+            picIntroductionRace.Size = new Size(UiScale.S(280), UiScale.S(200));
+            picIntroductionRace.Location = new Point(UiScale.S(40), UiScale.S(15));
+            lblIntroductionEmpireName.Location = new Point(UiScale.S(350), UiScale.S(20));
+            lblIntroductionEmpireDetails.Location = new Point(UiScale.S(355), UiScale.S(42));
             lblIntroductionEmpireName.BringToFront();
             lblIntroductionEmpireDetails.BringToFront();
-            lblIntroductionVictoryConditions.Location = new Point(350, 100);
-            lblIntroductionVictoryConditions.MaximumSize = new Size(420, 115);
+            lblIntroductionVictoryConditions.Location = new Point(UiScale.S(350), UiScale.S(100));
+            lblIntroductionVictoryConditions.MaximumSize = new Size(UiScale.S(420), UiScale.S(115));
             lblIntroductionVictoryConditions.BringToFront();
-            lblIntroductionConclusion.Location = new Point(272, 475);
+            lblIntroductionConclusion.Location = new Point(UiScale.S(272), UiScale.S(475));
             lblIntroductionConclusion.Visible = false;
             lblIntroductionPlaystyleIntro.Font = font_7;
             lblIntroductionWhatToDoPointsTitle.Font = font_7;
             lblIntroductionWhatToDoPoints.Font = font_6;
-            picIntroductionPlaystyle.Location = new Point(130, 225);
-            picIntroductionPlaystyle.Size = new Size(520, 210);
+            picIntroductionPlaystyle.Location = new Point(UiScale.S(130), UiScale.S(225));
+            picIntroductionPlaystyle.Size = new Size(UiScale.S(520), UiScale.S(210));
             lblIntroductionPlaystyleIntro.Location = new Point(0, 0);
-            lblIntroductionPlaystyleIntro.Size = new Size(520, 210);
-            lblIntroductionPlaystyleIntro.MaximumSize = new Size(520, 210);
+            lblIntroductionPlaystyleIntro.Size = new Size(UiScale.S(520), UiScale.S(210));
+            lblIntroductionPlaystyleIntro.MaximumSize = new Size(UiScale.S(520), UiScale.S(210));
             lblIntroductionPlaystyleIntro.TextAlign = ContentAlignment.MiddleCenter;
-            lblIntroductionWhatToDoPointsTitle.Location = new Point(10, 415);
-            lblIntroductionWhatToDoPoints.Location = new Point(20, 435);
-            lblIntroductionWhatToDoPoints.Size = new Size(740, 100);
-            lblIntroductionWhatToDoPoints.MaximumSize = new Size(740, 100);
+            lblIntroductionWhatToDoPointsTitle.Location = new Point(UiScale.S(10), UiScale.S(415));
+            lblIntroductionWhatToDoPoints.Location = new Point(UiScale.S(20), UiScale.S(435));
+            lblIntroductionWhatToDoPoints.Size = new Size(UiScale.S(740), UiScale.S(100));
+            lblIntroductionWhatToDoPoints.MaximumSize = new Size(UiScale.S(740), UiScale.S(100));
             pnlIntroductionBackground.BackgroundImageLayout = ImageLayout.Stretch;
             lblIntroductionWhatToDoPointsTitle.Text = TextResolver.GetText("What You Should Do") + ":";
             picIntroductionPlaystyle.BackgroundImageLayout = ImageLayout.Center;
@@ -3038,19 +3038,19 @@ namespace DistantWorlds
             lblIntroductionWhatToDoPoints.BringToFront();
             int num = (picIntroductionPlaystyle.Height - lblIntroductionPlaystyleIntro.Size.Height) / 2;
             lblIntroductionPlaystyleIntro.Location = new Point(0, num);
-            btnIntroductionStart.Size = new Size(240, 35);
-            btnIntroductionStart.Location = new Point(280, 620);
-            btnIntroductionStart.Font = new Font(btnIntroductionStart.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+            btnIntroductionStart.Size = new Size(UiScale.S(240), UiScale.S(35));
+            btnIntroductionStart.Location = new Point(UiScale.S(280), UiScale.S(620));
+            btnIntroductionStart.Font = UiScale.NewFont(btnIntroductionStart.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
             btnIntroductionStart.Text = TextResolver.GetText("Start Playing");
             if (_Game != null && _Game.PlayerEmpire != null)
             {
-                Bitmap image = new Bitmap(280, 200, PixelFormat.Format32bppPArgb);
+                Bitmap image = new Bitmap(UiScale.S(280), UiScale.S(200), PixelFormat.Format32bppPArgb);
                 using (Graphics graphics2 = Graphics.FromImage(image))
                 {
                     okQtJmsUqH(graphics2);
-                    graphics2.DrawImage(destRect: new Rectangle(0, 65, 150, 90), srcRect: new Rectangle(0, 0, _Game.PlayerEmpire.LargeFlagPicture.Width, _Game.PlayerEmpire.LargeFlagPicture.Height), image: _Game.PlayerEmpire.LargeFlagPicture, srcUnit: GraphicsUnit.Pixel);
+                    graphics2.DrawImage(destRect: new Rectangle(0, UiScale.S(65), UiScale.S(150), UiScale.S(90)), srcRect: new Rectangle(0, 0, _Game.PlayerEmpire.LargeFlagPicture.Width, _Game.PlayerEmpire.LargeFlagPicture.Height), image: _Game.PlayerEmpire.LargeFlagPicture, srcUnit: GraphicsUnit.Pixel);
                     Bitmap empireDominantRaceImage = raceImageCache_0.GetEmpireDominantRaceImage(_Game.PlayerEmpire);
-                    Rectangle destRect2 = new Rectangle(80, 0, 200, 200);
+                    Rectangle destRect2 = new Rectangle(UiScale.S(80), 0, UiScale.S(200), UiScale.S(200));
                     Rectangle srcRect2 = new Rectangle(0, 0, empireDominantRaceImage.Width, empireDominantRaceImage.Height);
                     graphics2.DrawImage(empireDominantRaceImage, destRect2, srcRect2, GraphicsUnit.Pixel);
                 }
@@ -3131,7 +3131,7 @@ namespace DistantWorlds
             {
                 sizeF2 = graphics3.MeasureString(text11, font_7);
             }
-            lblIntroductionConclusion.Location = new Point((pnlIntroductionBackground.Width - (int)sizeF2.Width) / 2, 475);
+            lblIntroductionConclusion.Location = new Point((pnlIntroductionBackground.Width - (int)sizeF2.Width) / 2, UiScale.S(475));
             lblIntroductionConclusion.Font = font_7;
             lblIntroductionConclusion.Text = text11;
             pnlIntroduction.Visible = true;
@@ -4657,8 +4657,8 @@ namespace DistantWorlds
             double d = (double)num2 * num;
             double num3 = Math.Sqrt(d);
             double val = num3;
-            num3 = Math.Max(1.0, num3);
-            val = Math.Max(1.0, val);
+            num3 = Math.Max(UiScale.S(1.0), num3);
+            val = Math.Max(UiScale.S(1.0), val);
             return new Size((int)num3, (int)val);
         }
 
@@ -4692,7 +4692,7 @@ namespace DistantWorlds
                 num5 = (int)num5;
                 if (num5 % 2f == 1f)
                 {
-                    num5 += 1f;
+                    num5 += UiScale.S(1f);
                 }
                 int left = fighterImage.Width;
                 for (int i = 0; i < list.Count; i++)
@@ -4716,7 +4716,7 @@ namespace DistantWorlds
                 RectangleF srcRect = new RectangleF(0f, 0f, bitmap.Width, bitmap.Height);
                 for (int j = 0; j < list.Count; j++)
                 {
-                    float num9 = (float)list[j].Left * num - num5 + num8 + 3f;
+                    float num9 = (float)list[j].Left * num - num5 + num8 + UiScale.S(3f);
                     float num10 = 1.8f;
                     float num11 = (float)list[j].Height * num;
                     float num12 = num11 * num10 / 2f;
@@ -4781,7 +4781,7 @@ namespace DistantWorlds
                 num5 = (int)num5;
                 if (num5 % 2f == 1f)
                 {
-                    num5 += 1f;
+                    num5 += UiScale.S(1f);
                 }
                 int left = shipImage.Width;
                 for (int i = 0; i < thrusterLocations.Count; i++)
@@ -4807,7 +4807,7 @@ namespace DistantWorlds
                 RectangleF srcRect = new RectangleF(0f, 0f, bitmap3.Width, bitmap3.Height);
                 for (int j = 0; j < thrusterLocations.Count; j++)
                 {
-                    float num9 = (float)thrusterLocations[j].Left * num - num5 + num8 + 3f;
+                    float num9 = (float)thrusterLocations[j].Left * num - num5 + num8 + UiScale.S(3f);
                     float num10 = 1.8f;
                     float num11 = (float)thrusterLocations[j].Height * num;
                     float num12 = num11 * num10 / 2f;

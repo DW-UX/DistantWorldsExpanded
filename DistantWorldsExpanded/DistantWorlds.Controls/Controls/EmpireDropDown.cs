@@ -27,7 +27,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData()
@@ -163,7 +163,7 @@ namespace DistantWorlds.Controls
       base.OnDrawItem(e);
       e.DrawBackground();
       int num1 = 0;
-      PointF point = new PointF(30f, (float) (e.Bounds.Y + 1));
+      PointF point = new PointF(UiScale.S(30f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
       SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
       SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, 0, 128));
@@ -198,10 +198,10 @@ namespace DistantWorlds.Controls
           Bitmap largeFlagPicture = this._Empires[index].LargeFlagPicture;
           e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
           e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-          int height = e.Bounds.Height - 2;
+          int height = e.Bounds.Height - UiScale.S(2);
           double num3 = (double) height / (double) largeFlagPicture.Height;
           int width = (int) ((double) largeFlagPicture.Width * num3);
-          Rectangle rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+          Rectangle rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
           e.Graphics.DrawImage((Image) largeFlagPicture, rect);
           e.DrawFocusRectangle();
           return;
@@ -218,10 +218,10 @@ namespace DistantWorlds.Controls
       Bitmap largeFlagPicture1 = this._PirateFactions[index1].LargeFlagPicture;
       e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
       e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-      int height1 = e.Bounds.Height - 2;
+      int height1 = e.Bounds.Height - UiScale.S(2);
       double num6 = (double) height1 / (double) largeFlagPicture1.Height;
       int width1 = (int) ((double) largeFlagPicture1.Width * num6);
-      Rectangle rect1 = new Rectangle(3, e.Bounds.Y + 1, width1, height1);
+      Rectangle rect1 = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width1, height1);
       e.Graphics.DrawImage((Image) largeFlagPicture1, rect1);
       e.DrawFocusRectangle();
     }

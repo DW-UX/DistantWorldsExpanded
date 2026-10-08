@@ -47,6 +47,7 @@ namespace DistantWorlds.Controls
         public EncyclopediaTopicTree()
         {
             this.InitializeComponent();
+            UiScale.ScaleLayout(this);
             this.LayoutControls();
         }
 
@@ -190,7 +191,7 @@ namespace DistantWorlds.Controls
             this.SuspendLayout();
             this.Topics.BackColor = Color.FromArgb(48, 48, 64);
             this.Topics.BorderStyle = BorderStyle.None;
-            this.Topics.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte)0);
+            this.Topics.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte)0);
             this.Topics.ForeColor = Color.FromArgb(170, 170, 170);
             this.Topics.HideSelection = false;
             this.Topics.Location = new Point(3, 3);

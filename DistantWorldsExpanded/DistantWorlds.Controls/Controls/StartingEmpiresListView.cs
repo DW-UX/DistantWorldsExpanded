@@ -65,7 +65,7 @@ namespace DistantWorlds.Controls
     {
       this.InitializeComponent();
       this._Initialised = false;
-      this._Grid.RowTemplate.Height = 25;
+      this._Grid.RowTemplate.Height = UiScale.S(25);
       this._Grid.ReadOnly = false;
       this._Grid.EditMode = DataGridViewEditMode.EditOnEnter;
       this._Grid.RowsAdded += new DataGridViewRowsAddedEventHandler(this._Grid_RowsAdded);
@@ -77,7 +77,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn.ReadOnly = false;
       viewTextBoxColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
       viewTextBoxColumn.ValueType = typeof (string);
-      viewTextBoxColumn.Width = 180;
+      viewTextBoxColumn.Width = UiScale.S(180);
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn);
       DataGridViewComboBoxColumn viewComboBoxColumn1 = new DataGridViewComboBoxColumn();
       List<string> stringList = new List<string>();
@@ -91,7 +91,7 @@ namespace DistantWorlds.Controls
       viewComboBoxColumn1.FlatStyle = FlatStyle.Popup;
       viewComboBoxColumn1.HeaderText = TextResolver.GetText("Race");
       viewComboBoxColumn1.Name = "Race";
-      viewComboBoxColumn1.Width = 120;
+      viewComboBoxColumn1.Width = UiScale.S(120);
       viewComboBoxColumn1.ValueType = typeof (string);
       this._Grid.Columns.Add((DataGridViewColumn) viewComboBoxColumn1);
       DataGridViewComboBoxColumn viewComboBoxColumn2 = new DataGridViewComboBoxColumn();
@@ -108,7 +108,7 @@ namespace DistantWorlds.Controls
       viewComboBoxColumn2.FlatStyle = FlatStyle.Popup;
       viewComboBoxColumn2.HeaderText = TextResolver.GetText("Government");
       viewComboBoxColumn2.Name = "Government";
-      viewComboBoxColumn2.Width = 140;
+      viewComboBoxColumn2.Width = UiScale.S(140);
       viewComboBoxColumn2.ValueType = typeof (string);
       this._Grid.Columns.Add((DataGridViewColumn) viewComboBoxColumn2);
       DataGridViewComboBoxColumn viewComboBoxColumn3 = new DataGridViewComboBoxColumn();
@@ -122,7 +122,7 @@ namespace DistantWorlds.Controls
       viewComboBoxColumn3.FlatStyle = FlatStyle.Popup;
       viewComboBoxColumn3.HeaderText = TextResolver.GetText("Size");
       viewComboBoxColumn3.Name = "Size";
-      viewComboBoxColumn3.Width = 80;
+      viewComboBoxColumn3.Width = UiScale.S(80);
       viewComboBoxColumn3.ValueType = typeof (string);
       this._Grid.Columns.Add((DataGridViewColumn) viewComboBoxColumn3);
       DataGridViewComboBoxColumn viewComboBoxColumn4 = new DataGridViewComboBoxColumn();
@@ -139,7 +139,7 @@ namespace DistantWorlds.Controls
       viewComboBoxColumn4.FlatStyle = FlatStyle.Popup;
       viewComboBoxColumn4.HeaderText = TextResolver.GetText("Tech Level");
       viewComboBoxColumn4.Name = "TechLevel";
-      viewComboBoxColumn4.Width = 80;
+      viewComboBoxColumn4.Width = UiScale.S(80);
       viewComboBoxColumn4.ValueType = typeof (string);
       this._Grid.Columns.Add((DataGridViewColumn) viewComboBoxColumn4);
       DataGridViewComboBoxColumn viewComboBoxColumn5 = new DataGridViewComboBoxColumn();
@@ -151,7 +151,7 @@ namespace DistantWorlds.Controls
       viewComboBoxColumn5.FlatStyle = FlatStyle.Popup;
       viewComboBoxColumn5.HeaderText = TextResolver.GetText("Home System");
       viewComboBoxColumn5.Name = "HomeSystem";
-      viewComboBoxColumn5.Width = 100;
+      viewComboBoxColumn5.Width = UiScale.S(100);
       viewComboBoxColumn5.ValueType = typeof (string);
       this._Grid.Columns.Add((DataGridViewColumn) viewComboBoxColumn5);
       DataGridViewComboBoxColumn viewComboBoxColumn6 = new DataGridViewComboBoxColumn();
@@ -171,7 +171,7 @@ namespace DistantWorlds.Controls
       viewComboBoxColumn6.FlatStyle = FlatStyle.Popup;
       viewComboBoxColumn6.HeaderText = TextResolver.GetText("Proximity to You");
       viewComboBoxColumn6.Name = "Proximity";
-      viewComboBoxColumn6.Width = 110;
+      viewComboBoxColumn6.Width = UiScale.S(110);
       viewComboBoxColumn6.ValueType = typeof (string);
       this._Grid.Columns.Add((DataGridViewColumn) viewComboBoxColumn6);
       DataGridViewImageColumn gridViewImageColumn = new DataGridViewImageColumn();
@@ -180,7 +180,7 @@ namespace DistantWorlds.Controls
       gridViewImageColumn.ReadOnly = true;
       gridViewImageColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
       gridViewImageColumn.ValueType = typeof (Image);
-      gridViewImageColumn.Width = 30;
+      gridViewImageColumn.Width = UiScale.S(30);
       this._Grid.Columns.Add((DataGridViewColumn) gridViewImageColumn);
       this._Initialised = true;
     }

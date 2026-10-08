@@ -53,7 +53,7 @@ namespace DistantWorlds.Controls
       base.FlatAppearance.BorderSize = 0;
       base.FlatAppearance.MouseOverBackColor = Color.FromArgb(48, 48, 64);
       base.FlatAppearance.MouseDownBackColor = Color.FromArgb(64, 64, 80);
-      base.Font = new Font("Verdana", 8f, FontStyle.Regular);
+      base.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
     }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]

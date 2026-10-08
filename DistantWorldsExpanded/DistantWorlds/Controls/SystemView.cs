@@ -463,7 +463,7 @@ namespace DistantWorlds.Controls
                         {
                             continue;
                         }
-                        int num7 = ((habitat.Category == HabitatCategoryType.GasCloud || habitat.Type == HabitatType.BlackHole) ? ((int)((double)habitat.Diameter / num)) : ((habitat.Diameter > 1250) ? 11 : ((habitat.Diameter > 1000) ? 9 : ((habitat.Diameter > 750) ? 7 : ((habitat.Diameter > 300) ? 6 : ((habitat.Diameter >= 180) ? 5 : ((habitat.Diameter >= 80) ? 4 : ((habitat.Diameter < 30) ? 2 : 3))))))));
+                        int num7 = ((habitat.Category == HabitatCategoryType.GasCloud || habitat.Type == HabitatType.BlackHole) ? ((int)((double)habitat.Diameter / num)) : ((habitat.Diameter > 1250) ? UiScale.S(11) : ((habitat.Diameter > 1000) ? UiScale.S(9) : ((habitat.Diameter > 750) ? UiScale.S(7) : ((habitat.Diameter > 300) ? UiScale.S(6) : ((habitat.Diameter >= 180) ? UiScale.S(5) : ((habitat.Diameter >= 80) ? UiScale.S(4) : ((habitat.Diameter < 30) ? UiScale.S(2) : UiScale.S(3)))))))));
                         int num8 = (int)(habitat.Xpos - (double)num3) / (int)num + base.ClientRectangle.Width / 2;
                         int num9 = (int)(habitat.Ypos - (double)num4) / (int)num + base.ClientRectangle.Height / 2;
                         if (i == int_3)
@@ -510,7 +510,7 @@ namespace DistantWorlds.Controls
                             SolidBrush solidBrush = null;
                             if (habitatList_0.Contains(habitat))
                             {
-                                rectangle = new Rectangle(num8 - 2, num9 - 2, 4, 4);
+                                rectangle = new Rectangle(num8 - UiScale.S(2), num9 - UiScale.S(2), UiScale.S(4), UiScale.S(4));
                                 solidBrush = new SolidBrush(Color.Yellow);
                             }
                             else
@@ -523,7 +523,7 @@ namespace DistantWorlds.Controls
                         }
                         if (habitat.Empire != null && habitat.Empire != galaxy_0.IndependentEmpire)
                         {
-                            Rectangle rect2 = new Rectangle(rectangle.X - 2, rectangle.Y - 2, rectangle.Width + 4, rectangle.Height + 4);
+                            Rectangle rect2 = new Rectangle(rectangle.X - UiScale.S(2), rectangle.Y - UiScale.S(2), rectangle.Width + UiScale.S(4), rectangle.Height + UiScale.S(4));
                             using Pen pen = new Pen(habitat.Empire.MainColor, 2f);
                             graphics_0.DrawEllipse(pen, rect2);
                         }
@@ -609,11 +609,11 @@ namespace DistantWorlds.Controls
             }
             if (systemVisibilityStatus == SystemVisibilityStatus.Unexplored && galaxy_0.Habitats[int_3].Category != HabitatCategoryType.GasCloud)
             {
-                SizeF sizeF = graphics_0.MeasureString("(" + TextResolver.GetText("Not Explored") + ")", main_0.font_2, 300, StringFormat.GenericTypographic);
+                SizeF sizeF = graphics_0.MeasureString("(" + TextResolver.GetText("Not Explored") + ")", main_0.font_2, UiScale.S(300), StringFormat.GenericTypographic);
                 int num15 = (int)sizeF.Width;
                 int num16 = (int)sizeF.Height;
                 Point point = new Point(base.ClientRectangle.Width / 2 - num15 / 2, base.ClientRectangle.Height / 3 * 2 - num16 / 2);
-                graphics_0.DrawString(point: new Point(point.X + 1, point.Y + 1), s: "(" + TextResolver.GetText("Not Explored") + ")", font: main_0.font_2, brush: new SolidBrush(Color.Black));
+                graphics_0.DrawString(point: new Point(point.X + UiScale.S(1), point.Y + UiScale.S(1)), s: "(" + TextResolver.GetText("Not Explored") + ")", font: main_0.font_2, brush: new SolidBrush(Color.Black));
                 graphics_0.DrawString("(" + TextResolver.GetText("Not Explored") + ")", main_0.font_2, new SolidBrush(Color.FromArgb(128, 128, 128, 128)), point);
             }
             if (bool_7)
@@ -643,14 +643,14 @@ namespace DistantWorlds.Controls
             }
             if (!string.IsNullOrEmpty(string_1) && systemVisibilityStatus != SystemVisibilityStatus.Unexplored)
             {
-                graphics_0.DrawString(string_1, main_0.font_2, new SolidBrush(Color.Black), new PointF(9f, 9f));
-                graphics_0.DrawString(string_1, main_0.font_2, new SolidBrush(Color.White), new PointF(8f, 8f));
+                graphics_0.DrawString(string_1, main_0.font_2, new SolidBrush(Color.Black), new PointF(UiScale.S(9f), UiScale.S(9f)));
+                graphics_0.DrawString(string_1, main_0.font_2, new SolidBrush(Color.White), new PointF(UiScale.S(8f), UiScale.S(8f)));
             }
         }
 
         private void method_6(Graphics graphics_0, double double_3, Empire empire_0, Creature[] creature_0)
         {
-            double maxWidth = 10.0;
+            double maxWidth = UiScale.S(10.0);
             double num = main_0.CalculateCreatureZoomFactor(main_0.double_0, out maxWidth);
             num = double_3;
             maxWidth /= 10.0;
@@ -666,14 +666,14 @@ namespace DistantWorlds.Controls
                 {
                     continue;
                 }
-                int num8 = 50;
-                int num9 = 50;
+                int num8 = UiScale.S(50);
+                int num9 = UiScale.S(50);
                 num8 = (int)(50.0 / num);
                 num9 = (int)(50.0 / num);
                 num8 = Math.Min(num8, (int)maxWidth);
                 num9 = Math.Min(num9, (int)maxWidth);
-                num8 = Math.Max(7, num8);
-                num9 = Math.Max(7, num9);
+                num8 = Math.Max(UiScale.S(7), num8);
+                num9 = Math.Max(UiScale.S(7), num9);
                 if (creature.Xpos >= (double)num4 && creature.Xpos <= (double)num5 && creature.Ypos >= (double)num6 && creature.Ypos <= (double)num7 && (main_0._Game.GodMode || empire_0.IsObjectVisibleToThisEmpire(creature)))
                 {
                     float num10 = (float)((creature.Xpos - (double)num4) / double_3);
@@ -864,7 +864,7 @@ namespace DistantWorlds.Controls
             int num10 = galaxy_0.ResolveSector(int_3, int_10).Y;
             float num11 = 0f;
             graphics_0.SmoothingMode = SmoothingMode.AntiAlias;
-            num11 = ((!(main_0.double_0 < 6000.0)) ? 2f : 2f);
+            num11 = ((!(main_0.double_0 < 6000.0)) ? UiScale.S(2f) : UiScale.S(2f));
             bool flag = false;
             bool flag2 = false;
             int y = 0;
@@ -1063,7 +1063,7 @@ namespace DistantWorlds.Controls
                     }
                     if (systemInfo != null && systemInfo.DominantEmpire != null && systemInfo.DominantEmpire.Empire != null)
                     {
-                        RectangleF rect3 = new RectangleF(num20 - (num11 + 4f) / 2f, num21 - (num11 + 4f) / 2f, num11 + 4f, num11 + 4f);
+                        RectangleF rect3 = new RectangleF(num20 - (num11 + UiScale.S(4f)) / 2f, num21 - (num11 + UiScale.S(4f)) / 2f, num11 + UiScale.S(4f), num11 + UiScale.S(4f));
                         using Pen pen5 = new Pen(systemInfo.DominantEmpire.Empire.MainColor, 2f);
                         if (systemInfo.OtherEmpires != null && systemInfo.OtherEmpires.Count > 0)
                         {

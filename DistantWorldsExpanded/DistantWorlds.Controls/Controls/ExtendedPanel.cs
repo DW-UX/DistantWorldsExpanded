@@ -75,8 +75,8 @@ namespace DistantWorlds.Controls
       this.CaptionBrush = BrushType.Gradient;
       this.CaptionColorOne = Color.FromArgb(144, 144, 154);
       this.CaptionColorTwo = Color.FromArgb(56, 56, 64);
-      this.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
-      this.CaptionSize = 20;
+      this.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
+      this.CaptionSize = UiScale.S(20);
       this.CaptionTextColor = Color.White;
     }
 
@@ -728,7 +728,7 @@ namespace DistantWorlds.Controls
       this.captionCtrl.BackColor = Color.Transparent;
       this.captionCtrl.BorderColor = Color.Gray;
       this.captionCtrl.BrushType = BrushType.Gradient;
-      this.captionCtrl.CaptionFont = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.captionCtrl.CaptionFont = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.captionCtrl.CaptionIcon = (Image) null;
       this.captionCtrl.CaptionText = "Caption";
       this.captionCtrl.ColorOne = Color.White;
@@ -737,7 +737,7 @@ namespace DistantWorlds.Controls
       this.captionCtrl.DirectionCtrlHoverColor = Color.Orange;
       this.captionCtrl.Location = new Point(0, 0);
       this.captionCtrl.Name = "captionCtrl";
-      this.captionCtrl.Size = new Size(200, 100);
+      this.captionCtrl.Size = new Size(UiScale.S(200), UiScale.S(100));
       this.captionCtrl.TabIndex = 0;
       this.captionCtrl.TextColor = Color.Black;
       this.captionCtrl.Click += new EventHandler(this.captionCtrl_Click);

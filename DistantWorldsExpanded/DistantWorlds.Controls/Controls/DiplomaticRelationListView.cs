@@ -21,7 +21,7 @@ namespace DistantWorlds.Controls
     private DiplomaticRelationList _DiplomaticRelations;
     private DistantWorlds.Types.EmpireList _Empires;
     private int _RelationViewWidth;
-    private int _RowTemplateHeight = 30;
+    private int _RowTemplateHeight = UiScale.S(30);
     private Bitmap _TreatyImage;
     private Bitmap _AgentImage;
     private Bitmap _RefuelImage;
@@ -62,12 +62,13 @@ namespace DistantWorlds.Controls
     {
       this._Empires = new DistantWorlds.Types.EmpireList();
       this.InitializeComponent();
+      UiScale.ScaleLayout(this);
       this._Relations.BackColor = Color.FromArgb(48, 48, 64);
-      this._RelationViewWidth = 110;
+      this._RelationViewWidth = UiScale.S(110);
       this._EmpireListView.RowTemplateHeight = this._RowTemplateHeight;
       this._EmpireListView.Grid.ColumnHeadersVisible = false;
-      this.Width = 300;
-      this.Height = 200;
+      this.Width = UiScale.S(300);
+      this.Height = UiScale.S(200);
       this.LayoutControls();
       this.SelectionChanged = new EventHandler(this.OnSelectionChanged);
       this._Relations.Paint += new PaintEventHandler(this._Relations_Paint);
@@ -77,7 +78,7 @@ namespace DistantWorlds.Controls
 
     private void LayoutControls()
     {
-      this._Relations.Width = this._RelationViewWidth + 1;
+      this._Relations.Width = this._RelationViewWidth + UiScale.S(1);
       this._EmpireListView.Width = this.Width - this._RelationViewWidth;
       this._Relations.Height = this.Height;
       this._EmpireListView.Height = this.Height;
@@ -220,7 +221,7 @@ namespace DistantWorlds.Controls
       for (int index1 = scrollingRowIndex; index1 < this._Empires.Count; ++index1)
       {
         int tag = (int) this._EmpireListView.Rows[index1].Cells[2].Tag;
-        int num3 = 4 + rowTemplateHeight / 2 + (num1 + rowTemplateHeight * (num2 - scrollingRowIndex));
+        int num3 = UiScale.S(4) + rowTemplateHeight / 2 + (num1 + rowTemplateHeight * (num2 - scrollingRowIndex));
         if (this._SelectedEmpire != null && this._SelectedEmpire.PirateEmpireBaseHabitat != null && this._Empires[tag] != null)
         {
           switch (this._SelectedEmpire.ObtainPirateRelation(this._Empires[tag]).Type)
@@ -235,13 +236,13 @@ namespace DistantWorlds.Controls
           if (pen1 != null)
           {
             graphics.DrawLine(pen1, 0, num3, width1, num3);
-            Rectangle rect = new Rectangle(0, num3 - 1, 10, 3);
+            Rectangle rect = new Rectangle(0, num3 - UiScale.S(1), UiScale.S(10), UiScale.S(3));
             LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
             graphics.FillRectangle((Brush) linearGradientBrush, rect);
-            int y = num3 - 13;
+            int y = num3 - UiScale.S(13);
             string str = this._SelectedEmpire.ResolveFeelingDescription(this._Empires[tag].ObtainPirateRelation(this._SelectedEmpire));
             graphics.MeasureString(str, this._EmpireListView.Font);
-            graphics.DrawString(str, this._EmpireListView.Font, pen1.Brush, (PointF) new Point(2, y));
+            graphics.DrawString(str, this._EmpireListView.Font, pen1.Brush, (PointF) new Point(UiScale.S(2), y));
           }
         }
         else if (this._Empires[tag].PirateEmpireBaseHabitat != null)
@@ -261,13 +262,13 @@ namespace DistantWorlds.Controls
             if (pen1 != null)
             {
               graphics.DrawLine(pen1, 0, num3, width1, num3);
-              Rectangle rect = new Rectangle(0, num3 - 1, 10, 3);
+              Rectangle rect = new Rectangle(0, num3 - UiScale.S(1), UiScale.S(10), UiScale.S(3));
               LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
               graphics.FillRectangle((Brush) linearGradientBrush, rect);
-              int y = num3 - 13;
+              int y = num3 - UiScale.S(13);
               string str = this._SelectedEmpire.ResolveFeelingDescription(this._Empires[tag].ObtainPirateRelation(this._SelectedEmpire));
               graphics.MeasureString(str, this._EmpireListView.Font);
-              graphics.DrawString(str, this._EmpireListView.Font, pen1.Brush, (PointF) new Point(2, y));
+              graphics.DrawString(str, this._EmpireListView.Font, pen1.Brush, (PointF) new Point(UiScale.S(2), y));
             }
           }
         }
@@ -310,7 +311,7 @@ namespace DistantWorlds.Controls
             if (diplomaticRelation1.Type != DiplomaticRelationType.SubjugatedDominion && diplomaticRelation1.Type != DiplomaticRelationType.Protectorate && diplomaticRelation1.Type != DiplomaticRelationType.NotMet)
             {
               graphics.DrawLine(pen1, 0, num3, width1, num3);
-              Rectangle rect = new Rectangle(0, num3 - 1, 10, 3);
+              Rectangle rect = new Rectangle(0, num3 - UiScale.S(1), UiScale.S(10), UiScale.S(3));
               LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
               graphics.FillRectangle((Brush) linearGradientBrush, rect);
             }
@@ -336,20 +337,20 @@ namespace DistantWorlds.Controls
               graphics.FillPolygon((Brush) solidBrush, points);
               graphics.SmoothingMode = SmoothingMode.None;
             }
-            y1 = num3 - 13;
+            y1 = num3 - UiScale.S(13);
             string str1 = ((int) (diplomaticRelation1.NormalizedAnnualTradeValue / 1000.0)).ToString("######0K");
             if (diplomaticRelation1.TradeBonus > 0.0)
               str1 = str1 + " (+" + diplomaticRelation1.TradeBonus.ToString("##0%") + ")";
             SizeF sizeF = graphics.MeasureString(str1, this._EmpireListView.Font);
-            int x1 = (this._RelationViewWidth - (int) sizeF.Width) / 2 - 10;
+            int x1 = (this._RelationViewWidth - (int) sizeF.Width) / 2 - UiScale.S(10);
             graphics.DrawString(str1, this._EmpireListView.Font, pen1.Brush, (PointF) new Point(x1, y1));
             string str2 = this._Empire.ResolveFeelingDescription(this._Empires[tag].EmpireEvaluations[this._SelectedEmpire]);
             sizeF = graphics.MeasureString(str2, this._EmpireListView.Font);
-            int x2 = 2;
+            int x2 = UiScale.S(2);
             graphics.DrawString(str2, this._EmpireListView.Font, pen1.Brush, (PointF) new Point(x2, y1));
           }
           else
-            y1 = num3 - 13;
+            y1 = num3 - UiScale.S(13);
           if (diplomaticRelation1 != null && diplomaticRelation1.OtherEmpire != null && diplomaticRelation1.OtherEmpire.DiplomaticRelations != null)
           {
             string highestAllianceName = diplomaticRelation1.OtherEmpire.DiplomaticRelations.GetHighestAllianceName();
@@ -357,10 +358,10 @@ namespace DistantWorlds.Controls
             {
               using (SolidBrush brush = new SolidBrush(Color.FromArgb(170, 170, 170)))
               {
-                int width2 = 180;
+                int width2 = UiScale.S(180);
                 int x = (this._RelationViewWidth - width2) / 2;
-                int y2 = y1 + 12;
-                GraphicsHelper.DrawStringWithDropShadowCentered(graphics, highestAllianceName, this._TinyFont, brush, new Rectangle(x, y2, width2, 15));
+                int y2 = y1 + UiScale.S(12);
+                GraphicsHelper.DrawStringWithDropShadowCentered(graphics, highestAllianceName, this._TinyFont, brush, new Rectangle(x, y2, width2, UiScale.S(15)));
               }
             }
           }
@@ -369,7 +370,7 @@ namespace DistantWorlds.Controls
             Character character = this._Game.PlayerEmpire.Characters[index2];
             if (character.Role == CharacterRole.IntelligenceAgent && character.Mission != null && character.Mission.TargetEmpire == this._Empires[tag] && character.Mission.Type == IntelligenceMissionType.DeepCover && character.Mission.Outcome == IntelligenceMissionOutcome.SucceedNotDetect)
             {
-              Rectangle rect = new Rectangle(this._RelationViewWidth - 72, y1 - 4, this._AgentImage.Width, this._AgentImage.Height);
+              Rectangle rect = new Rectangle(this._RelationViewWidth - UiScale.S(72), y1 - UiScale.S(4), this._AgentImage.Width, this._AgentImage.Height);
               graphics.DrawImage((Image) this._AgentImage, rect);
             }
           }
@@ -387,22 +388,22 @@ namespace DistantWorlds.Controls
           }
           if (flag1 || flag2)
           {
-            int num4 = this._RelationViewWidth - 50;
+            int num4 = this._RelationViewWidth - UiScale.S(50);
             if (flag1)
-              graphics.DrawImage((Image) diplomaticRelation1.ThisEmpire.SmallFlagPicture, num4 - 2, y1 - 3);
+              graphics.DrawImage((Image) diplomaticRelation1.ThisEmpire.SmallFlagPicture, num4 - UiScale.S(2), y1 - UiScale.S(3));
             if (flag2)
-              graphics.DrawImage((Image) diplomaticRelation1.OtherEmpire.SmallFlagPicture, num4 - 2, y1 + 7);
-            Rectangle rect = new Rectangle(num4 + 6, y1 - 1, this._RefuelImage.Width, this._RefuelImage.Height);
+              graphics.DrawImage((Image) diplomaticRelation1.OtherEmpire.SmallFlagPicture, num4 - UiScale.S(2), y1 + UiScale.S(7));
+            Rectangle rect = new Rectangle(num4 + UiScale.S(6), y1 - UiScale.S(1), this._RefuelImage.Width, this._RefuelImage.Height);
             graphics.DrawImage((Image) this._RefuelImage, rect);
           }
           if (flag3 || flag4)
           {
-            int num5 = this._RelationViewWidth - 23;
+            int num5 = this._RelationViewWidth - UiScale.S(23);
             if (flag3)
-              graphics.DrawImage((Image) diplomaticRelation1.ThisEmpire.SmallFlagPicture, num5 - 2, y1 - 3);
+              graphics.DrawImage((Image) diplomaticRelation1.ThisEmpire.SmallFlagPicture, num5 - UiScale.S(2), y1 - UiScale.S(3));
             if (flag4)
-              graphics.DrawImage((Image) diplomaticRelation1.OtherEmpire.SmallFlagPicture, num5 - 2, y1 + 7);
-            Rectangle rect = new Rectangle(num5 + 7, y1 - 1, this._MiningImage.Width, this._MiningImage.Height);
+              graphics.DrawImage((Image) diplomaticRelation1.OtherEmpire.SmallFlagPicture, num5 - UiScale.S(2), y1 + UiScale.S(7));
+            Rectangle rect = new Rectangle(num5 + UiScale.S(7), y1 - UiScale.S(1), this._MiningImage.Width, this._MiningImage.Height);
             graphics.DrawImage((Image) this._MiningImage, rect);
           }
         }
@@ -519,7 +520,7 @@ namespace DistantWorlds.Controls
       this._Relations.MouseDoubleClick += new MouseEventHandler(this._Relations_MouseDoubleClick);
       this._EmpireListView.Location = new Point(108, 3);
       this._EmpireListView.Name = "_EmpireListView";
-      this._EmpireListView.RowTemplateHeight = 20;
+      this._EmpireListView.RowTemplateHeight = UiScale.S(20);
       this._EmpireListView.Size = new Size(100, 100);
       this._EmpireListView.SoundsEnabled = false;
       this._EmpireListView.TabIndex = 0;

@@ -77,10 +77,10 @@ namespace DistantWorlds.Controls
             this._Images = new Bitmap[images.Length];
             for (int index = 0; index < images.Length; ++index)
             {
-                int width = 32;
+                int width = UiScale.S(32);
                 double num = (double)width / (double)images[index].Width;
                 int height = (int)((double)images[index].Height * num);
-                this._Images[index] = this.PrescaleImage(images[index], 32, 32, width, height);
+                this._Images[index] = this.PrescaleImage(images[index], UiScale.S(32), UiScale.S(32), width, height);
                 imageList.Images.Add((Image)this._Images[index]);
             }
             this.LargeImageList = imageList;

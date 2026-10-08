@@ -21,9 +21,9 @@ namespace DistantWorlds.Controls
     private Font _LargeFont;
     private Font _NormalFont;
     private Font _BoldFont;
-    private int _Margin = 5;
-    private int _LineHeight = 12;
-    private int _SpaceHeight = 6;
+    private int _Margin = UiScale.S(5);
+    private int _LineHeight = UiScale.S(12);
+    private int _SpaceHeight = UiScale.S(6);
     private SolidBrush _Brush = new SolidBrush(Color.FromArgb(170, 170, 170));
     private Bitmap _Image;
 

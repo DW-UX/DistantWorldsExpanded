@@ -259,13 +259,13 @@ namespace DistantWorlds.Controls
           {
             int num3 = clientRectangle.Width - num2;
             int num4 = clientRectangle.Height - num2;
-            int num5 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? 1 : num1 * 2;
+            int num5 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
             path.AddArc(num3 - num5, num2, num5, num5, 270f, 90f);
-            int num6 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? 1 : num1 * 2;
+            int num6 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
             path.AddArc(num3 - num6, num4 - num6, num6, num6, 0.0f, 90f);
-            int num7 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? 1 : num1 * 2;
+            int num7 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
             path.AddArc(num2, num4 - num7, num7, num7, 90f, 90f);
-            int num8 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? 1 : num1 * 2;
+            int num8 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
             path.AddArc(num2, num2, num8, num8, 180f, 90f);
             path.CloseFigure();
           }
@@ -281,14 +281,14 @@ namespace DistantWorlds.Controls
     public static void DrawBorder3D(Graphics graphics, Rectangle rectangle)
     {
       graphics.SmoothingMode = SmoothingMode.Default;
-      graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.Width - 1, rectangle.Y);
-      graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.X, rectangle.Height - 1);
-      graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + 1, rectangle.Y + 1, rectangle.Width - 1, rectangle.Y + 1);
-      graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + 1, rectangle.Y + 1, rectangle.X + 1, rectangle.Height - 1);
-      graphics.DrawLine(SystemPens.ControlLight, rectangle.X + 1, rectangle.Height - 2, rectangle.Width - 2, rectangle.Height - 2);
-      graphics.DrawLine(SystemPens.ControlLight, rectangle.Width - 2, rectangle.Y + 1, rectangle.Width - 2, rectangle.Height - 2);
-      graphics.DrawLine(SystemPens.ControlLightLight, rectangle.X, rectangle.Height - 1, rectangle.Width - 1, rectangle.Height - 1);
-      graphics.DrawLine(SystemPens.ControlLightLight, rectangle.Width - 1, rectangle.Y, rectangle.Width - 1, rectangle.Height - 1);
+      graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.Width - UiScale.S(1), rectangle.Y);
+      graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.X, rectangle.Height - UiScale.S(1));
+      graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + UiScale.S(1), rectangle.Y + UiScale.S(1), rectangle.Width - UiScale.S(1), rectangle.Y + UiScale.S(1));
+      graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + UiScale.S(1), rectangle.Y + UiScale.S(1), rectangle.X + UiScale.S(1), rectangle.Height - UiScale.S(1));
+      graphics.DrawLine(SystemPens.ControlLight, rectangle.X + UiScale.S(1), rectangle.Height - UiScale.S(2), rectangle.Width - UiScale.S(2), rectangle.Height - UiScale.S(2));
+      graphics.DrawLine(SystemPens.ControlLight, rectangle.Width - UiScale.S(2), rectangle.Y + UiScale.S(1), rectangle.Width - UiScale.S(2), rectangle.Height - UiScale.S(2));
+      graphics.DrawLine(SystemPens.ControlLightLight, rectangle.X, rectangle.Height - UiScale.S(1), rectangle.Width - UiScale.S(1), rectangle.Height - UiScale.S(1));
+      graphics.DrawLine(SystemPens.ControlLightLight, rectangle.Width - UiScale.S(1), rectangle.Y, rectangle.Width - UiScale.S(1), rectangle.Height - UiScale.S(1));
     }
 
     public static int DoubleToInt(double value) => Decimal.ToInt32(Decimal.Floor(Decimal.Parse(value.ToString(), (IFormatProvider) NumberFormatInfo.InvariantInfo)));
@@ -452,13 +452,13 @@ namespace DistantWorlds.Controls
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
       graphics.InterpolationMode = InterpolationMode.High;
       graphics.CompositingQuality = CompositingQuality.HighQuality;
-      Font font = new Font(this.Font.FontFamily, this.Font.Size + 1.5f, FontStyle.Bold);
+      Font font = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(1.5f), FontStyle.Bold);
       this.AutoScrollMargin = new Size(0, 0);
       if (this._Picture != null)
       {
         Rectangle rect = new Rectangle();
-        int num1 = this.ClientRectangle.Width - 6;
-        int num2 = this.ClientRectangle.Height - 6;
+        int num1 = this.ClientRectangle.Width - UiScale.S(6);
+        int num2 = this.ClientRectangle.Height - UiScale.S(6);
         double num3 = (double) this._Picture.Width / (double) this._Picture.Height;
         int num4;
         int num5;
@@ -504,21 +504,21 @@ namespace DistantWorlds.Controls
           num8 = (num2 - (int) ((double) num5 * num6)) / 2;
           width = (int) ((double) num4 * num6);
         }
-        rect = new Rectangle(num7 + 3, num8 + 3, width, (int) ((double) num5 * num6));
+        rect = new Rectangle(num7 + UiScale.S(3), num8 + UiScale.S(3), width, (int) ((double) num5 * num6));
         graphics.DrawImage(this._Picture, rect);
         if (this._SmallPicture != null)
           graphics.DrawImage(this._SmallPicture, this._SmallPictureLocation);
       }
-      int y = 6;
+      int y = UiScale.S(6);
       if (!string.IsNullOrEmpty(this._Title))
       {
-        graphics.DrawString(this._Title, font, (Brush) new SolidBrush(Color.Black), new PointF(7f, (float) (y + 1)));
-        graphics.DrawString(this._Title, font, (Brush) new SolidBrush(Color.White), new PointF(6f, (float) y));
+        graphics.DrawString(this._Title, font, (Brush) new SolidBrush(Color.Black), new PointF(UiScale.S(7f), (float) (y + UiScale.S(1))));
+        graphics.DrawString(this._Title, font, (Brush) new SolidBrush(Color.White), new PointF(UiScale.S(6f), (float) y));
         SizeF sizeF = graphics.MeasureString(this._Title, font);
-        y += (int) sizeF.Height + 6;
+        y += (int) sizeF.Height + UiScale.S(6);
       }
-      graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(Color.Black), new PointF(7f, (float) (y + 1)));
-      graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(Color.White), new PointF(6f, (float) y));
+      graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(Color.Black), new PointF(UiScale.S(7f), (float) (y + UiScale.S(1))));
+      graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(Color.White), new PointF(UiScale.S(6f), (float) y));
     }
 
     protected override void OnPaint(PaintEventArgs e)

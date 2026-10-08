@@ -216,7 +216,7 @@ namespace BaconDistantWorlds
             if (action.Hint == "popup")
             {
                 string extraData = action.ExtraData;
-                MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, new Font("Verdana", 9f, FontStyle.Regular));
+                MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
                 messageBoxEx.Text = extraData;
                 messageBoxEx.Caption = "Message";
                 messageBoxEx.AddButton(MessageBoxExButtons.Ok);

@@ -17,6 +17,7 @@ namespace ExpansionMod.Controls
         public HotKeyModEditorControl(List<KeyMappingTarget> hotkeys)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             this.Dock = DockStyle.Fill;
             targetBindingSource.DataSource = ViewConvert.ConvertKeyMappingTarget(hotkeys);
         }

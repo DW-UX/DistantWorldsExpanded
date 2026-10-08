@@ -2959,10 +2959,10 @@ namespace DistantWorlds
             }
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            int num = e.Bounds.Height - 2;
+            int num = e.Bounds.Height - UiScale.S(2);
             int num2 = (int)((double)num / 0.6);
             int num3 = (e.Bounds.Width - num2) / 2;
-            int num4 = e.Bounds.Y + 1;
+            int num4 = e.Bounds.Y + UiScale.S(1);
             Rectangle rect = new Rectangle(num3, num4, num2, num);
             e.Graphics.DrawImage(largeFlagPicture, rect);
             e.DrawFocusRectangle();
@@ -3054,8 +3054,8 @@ namespace DistantWorlds
         {
             lblHelpTitle.Text = string_2;
             lblHelpDescription.Text = string_3;
-            lblHelpDescription.Location = new Point(lblHelpTitle.Width + 15, 8);
-            lblHelpDescription.MaximumSize = new Size(900 - lblHelpDescription.Left, 32);
+            lblHelpDescription.Location = new Point(lblHelpTitle.Width + UiScale.S(15), UiScale.S(8));
+            lblHelpDescription.MaximumSize = new Size(UiScale.S(900) - lblHelpDescription.Left, UiScale.S(32));
         }
 
         private void cmbYourEmpireStartLocation_Enter(object sender, EventArgs e)
@@ -4326,38 +4326,38 @@ namespace DistantWorlds
 
         private void method_119()
         {
-            FtIzCrmve5.Size = new Size(385, 481);
+            FtIzCrmve5.Size = new Size(UiScale.S(385), UiScale.S(481));
             FtIzCrmve5.Location = new Point((base.Width - FtIzCrmve5.Width) / 2, (base.Height - FtIzCrmve5.Height) / 2);
             FtIzCrmve5.DoLayout();
-            lnkTutorialFindingYourWayAround.Location = new Point(35, 20);
+            lnkTutorialFindingYourWayAround.Location = new Point(UiScale.S(35), UiScale.S(20));
             lnkTutorialFindingYourWayAround.Text = TextResolver.GetText("Finding Your Way Around");
-            lnkTutorialFindingYourWayAround.Font = new Font(lnkTutorialFindingYourWayAround.Font.FontFamily, 15f, FontStyle.Bold);
-            lnkTutorialEmpireAndColonies.Location = new Point(35, 58);
+            lnkTutorialFindingYourWayAround.Font = UiScale.NewFont(lnkTutorialFindingYourWayAround.Font.FontFamily, 15f, FontStyle.Bold);
+            lnkTutorialEmpireAndColonies.Location = new Point(UiScale.S(35), UiScale.S(58));
             lnkTutorialEmpireAndColonies.Text = TextResolver.GetText("Your Empire and Colonies");
-            lnkTutorialEmpireAndColonies.Font = new Font(lnkTutorialEmpireAndColonies.Font.FontFamily, 15f, FontStyle.Bold);
-            lnkTutorialShipsMissions.Location = new Point(35, 96);
+            lnkTutorialEmpireAndColonies.Font = UiScale.NewFont(lnkTutorialEmpireAndColonies.Font.FontFamily, 15f, FontStyle.Bold);
+            lnkTutorialShipsMissions.Location = new Point(UiScale.S(35), UiScale.S(96));
             lnkTutorialShipsMissions.Text = TextResolver.GetText("Ships and Bases");
-            lnkTutorialShipsMissions.Font = new Font(lnkTutorialShipsMissions.Font.FontFamily, 15f, FontStyle.Bold);
-            lnkTutorialExpansionDiplomacy.Location = new Point(35, 134);
+            lnkTutorialShipsMissions.Font = UiScale.NewFont(lnkTutorialShipsMissions.Font.FontFamily, 15f, FontStyle.Bold);
+            lnkTutorialExpansionDiplomacy.Location = new Point(UiScale.S(35), UiScale.S(134));
             lnkTutorialExpansionDiplomacy.Text = TextResolver.GetText("Expansion and Diplomacy");
-            lnkTutorialExpansionDiplomacy.Font = new Font(lnkTutorialExpansionDiplomacy.Font.FontFamily, 15f, FontStyle.Bold);
-            lnkTutorialResearchDesign.Location = new Point(35, 172);
+            lnkTutorialExpansionDiplomacy.Font = UiScale.NewFont(lnkTutorialExpansionDiplomacy.Font.FontFamily, 15f, FontStyle.Bold);
+            lnkTutorialResearchDesign.Location = new Point(UiScale.S(35), UiScale.S(172));
             lnkTutorialResearchDesign.Text = TextResolver.GetText("Research, Ship Design and Construction");
-            lnkTutorialResearchDesign.Font = new Font(lnkTutorialResearchDesign.Font.FontFamily, 15f, FontStyle.Bold);
-            lnkTutorialFleetsTroops.Location = new Point(35, 210);
+            lnkTutorialResearchDesign.Font = UiScale.NewFont(lnkTutorialResearchDesign.Font.FontFamily, 15f, FontStyle.Bold);
+            lnkTutorialFleetsTroops.Location = new Point(UiScale.S(35), UiScale.S(210));
             lnkTutorialFleetsTroops.Text = TextResolver.GetText("Fleets, Troops and Intelligence missions");
-            lnkTutorialFleetsTroops.Font = new Font(lnkTutorialFleetsTroops.Font.FontFamily, 15f, FontStyle.Bold);
-            lnkTutorialDealingWithPirates.Location = new Point(35, 248);
+            lnkTutorialFleetsTroops.Font = UiScale.NewFont(lnkTutorialFleetsTroops.Font.FontFamily, 15f, FontStyle.Bold);
+            lnkTutorialDealingWithPirates.Location = new Point(UiScale.S(35), UiScale.S(248));
             lnkTutorialDealingWithPirates.Text = TextResolver.GetText("Dealing with Pirates");
-            lnkTutorialDealingWithPirates.Font = new Font(lnkTutorialDealingWithPirates.Font.FontFamily, 15f, FontStyle.Bold);
-            lnkTutorialPlayAsPirate.Location = new Point(35, 286);
+            lnkTutorialDealingWithPirates.Font = UiScale.NewFont(lnkTutorialDealingWithPirates.Font.FontFamily, 15f, FontStyle.Bold);
+            lnkTutorialPlayAsPirate.Location = new Point(UiScale.S(35), UiScale.S(286));
             lnkTutorialPlayAsPirate.Text = TextResolver.GetText("Play as a Pirate Faction");
-            lnkTutorialPlayAsPirate.Font = new Font(lnkTutorialPlayAsPirate.Font.FontFamily, 15f, FontStyle.Bold);
-            lnkTutorialPreWarpEmpire.Location = new Point(35, 324);
+            lnkTutorialPlayAsPirate.Font = UiScale.NewFont(lnkTutorialPlayAsPirate.Font.FontFamily, 15f, FontStyle.Bold);
+            lnkTutorialPreWarpEmpire.Location = new Point(UiScale.S(35), UiScale.S(324));
             lnkTutorialPreWarpEmpire.Text = TextResolver.GetText("Play as a PreWarp Empire");
-            lnkTutorialPreWarpEmpire.Font = new Font(lnkTutorialPreWarpEmpire.Font.FontFamily, 15f, FontStyle.Bold);
-            btnTutorialStartCancel.Size = new Size(100, 25);
-            btnTutorialStartCancel.Location = new Point(260, 384);
+            lnkTutorialPreWarpEmpire.Font = UiScale.NewFont(lnkTutorialPreWarpEmpire.Font.FontFamily, 15f, FontStyle.Bold);
+            btnTutorialStartCancel.Size = new Size(UiScale.S(100), UiScale.S(25));
+            btnTutorialStartCancel.Location = new Point(UiScale.S(260), UiScale.S(384));
             FtIzCrmve5.Visible = true;
             FtIzCrmve5.BringToFront();
         }

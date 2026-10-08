@@ -637,6 +637,16 @@ namespace DistantWorlds.Controls
             spriteFont_2 = contentManager_0.Load<SpriteFont>("BoldFont");
             spriteFont_3 = contentManager_0.Load<SpriteFont>("NormalFont");
             spriteFont_4 = contentManager_0.Load<SpriteFont>("TitleFont");
+            if (UiScale.IsScaled)
+            {
+                // The pre-built sprite fonts are the game's own typeface at fixed sizes; redraw them larger.
+                System.Drawing.FontFamily family = Font.FontFamily;
+                spriteFont_0 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_0, UiScale.Factor, family, bold: false);
+                spriteFont_1 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_1, UiScale.Factor, family, bold: false);
+                spriteFont_2 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_2, UiScale.Factor, family, bold: true);
+                spriteFont_3 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_3, UiScale.Factor, family, bold: false);
+                spriteFont_4 = ScaledSpriteFont.Create(GraphicsDevice, spriteFont_4, UiScale.Factor, family, bold: true);
+            }
             if (main_0._Game != null)
             {
                 method_14(main_0._Game.StarFieldSize);
@@ -1118,49 +1128,49 @@ namespace DistantWorlds.Controls
             {
                 text = "  (" + main_0._Game.Galaxy.TimeSpeed.ToString("0.##") + "x)";
             }
-            XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, main_0.string_21 + text, spriteFont_2, solidBrush_0.Color, 12, 120);
+            XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, main_0.string_21 + text, spriteFont_2, solidBrush_0.Color, UiScale.S(12), UiScale.S(120));
             if (main_0.double_0 < 100.0)
             {
                 Vector2 vector = spriteFont_2.MeasureString(main_0.string_22);
-                int num = base.Width - ((int)vector.X + 40);
-                XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, main_0.string_22, spriteFont_2, solidBrush_0.Color, num, 67);
+                int num = base.Width - ((int)vector.X + UiScale.S(40));
+                XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, main_0.string_22, spriteFont_2, solidBrush_0.Color, num, UiScale.S(67));
             }
-            int num2 = base.Size.Width - 95;
+            int num2 = base.Size.Width - UiScale.S(95);
             System.Drawing.Color color = System.Drawing.Color.FromArgb(144, 144, 144);
             if (main_0._Game != null && main_0._Game.PlayerEmpire != null)
             {
                 if (texture2D_23 != null)
                 {
-                    XnaDrawingHelper.DrawTexture(spriteBatch_1, texture2D_23, num2 - (texture2D_23.Width + 73), 12, 0f, 1f);
+                    XnaDrawingHelper.DrawTexture(spriteBatch_1, texture2D_23, num2 - (texture2D_23.Width + UiScale.S(73)), UiScale.S(12), 0f, 1f);
                 }
-                XnaDrawingHelper.DrawString(spriteBatch_2, TextResolver.GetText("Money"), spriteFont_3, color, num2 - 57, 7);
+                XnaDrawingHelper.DrawString(spriteBatch_2, TextResolver.GetText("Money"), spriteFont_3, color, num2 - UiScale.S(57), UiScale.S(7));
                 if (main_0._Game.PlayerEmpire.StateMoney >= 0.0)
                 {
-                    XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, main_0.string_23, spriteFont_2, solidBrush_0.Color, num2, 4);
+                    XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, main_0.string_23, spriteFont_2, solidBrush_0.Color, num2, UiScale.S(4));
                 }
                 else
                 {
-                    XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, main_0.string_23, spriteFont_2, solidBrush_5.Color, num2, 4);
+                    XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, main_0.string_23, spriteFont_2, solidBrush_5.Color, num2, UiScale.S(4));
                 }
-                XnaDrawingHelper.DrawString(spriteBatch_2, TextResolver.GetText("Cashflow"), spriteFont_3, color, num2 - 71, 27);
+                XnaDrawingHelper.DrawString(spriteBatch_2, TextResolver.GetText("Cashflow"), spriteFont_3, color, num2 - UiScale.S(71), UiScale.S(27));
                 if (main_0.AheLexjQsu >= 0.0)
                 {
-                    XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, "(" + main_0.string_24 + ")", spriteFont_3, solidBrush_0.Color, num2 - 4, 27);
+                    XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, "(" + main_0.string_24 + ")", spriteFont_3, solidBrush_0.Color, num2 - UiScale.S(4), UiScale.S(27));
                 }
                 else
                 {
-                    XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, "(" + main_0.string_24 + ")", spriteFont_3, solidBrush_5.Color, num2 - 4, 27);
+                    XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, "(" + main_0.string_24 + ")", spriteFont_3, solidBrush_5.Color, num2 - UiScale.S(4), UiScale.S(27));
                 }
-                XnaDrawingHelper.DrawString(spriteBatch_2, TextResolver.GetText("Bonus Income"), spriteFont_3, color, num2 - 103, 47);
-                XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, "(" + main_0.string_25 + ")", spriteFont_3, solidBrush_0.Color, num2 - 4, 45);
+                XnaDrawingHelper.DrawString(spriteBatch_2, TextResolver.GetText("Bonus Income"), spriteFont_3, color, num2 - UiScale.S(103), UiScale.S(47));
+                XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, "(" + main_0.string_25 + ")", spriteFont_3, solidBrush_0.Color, num2 - UiScale.S(4), UiScale.S(45));
             }
         }
 
         private void DrawUPS(SpriteBatch spriteBatch, int currentUps)
         {
-            int num2 = base.Size.Width - 250;
-            XnaDrawingHelper.DrawString(spriteBatch, "UPS", spriteFont_3, System.Drawing.Color.FromArgb(144, 144, 144), num2 - 40, 7);
-            XnaDrawingHelper.DrawStringDropShadow(spriteBatch, currentUps.ToString(), spriteFont_2, solidBrush_0.Color, num2, 4);
+            int num2 = base.Size.Width - UiScale.S(250);
+            XnaDrawingHelper.DrawString(spriteBatch, "UPS", spriteFont_3, System.Drawing.Color.FromArgb(144, 144, 144), num2 - UiScale.S(40), UiScale.S(7));
+            XnaDrawingHelper.DrawStringDropShadow(spriteBatch, currentUps.ToString(), spriteFont_2, solidBrush_0.Color, num2, UiScale.S(4));
         }
 
         private void method_19(Graphics graphics_0)
@@ -1630,15 +1640,15 @@ namespace DistantWorlds.Controls
                     {
                         string text2 = TextResolver.GetText("Game Paused");
                         Vector2 vector2 = spriteFont_4.MeasureString(text2);
-                        XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point((base.Width - (int)vector2.X) / 2, 205), spriteBatch: spriteBatch_0, text: text2, font: spriteFont_4, foreColor: solidBrush_1.Color);
+                        XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point((base.Width - (int)vector2.X) / 2, UiScale.S(205)), spriteBatch: spriteBatch_0, text: text2, font: spriteFont_4, foreColor: solidBrush_1.Color);
                         string text3 = "(" + TextResolver.GetText("Press Spacebar or Pause key to resume") + ")";
                         Vector2 vector3 = spriteFont_3.MeasureString(text3);
-                        XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point((base.Width - (int)vector3.X) / 2, 230), spriteBatch: spriteBatch_0, text: text3, font: spriteFont_3, foreColor: solidBrush_1.Color);
+                        XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point((base.Width - (int)vector3.X) / 2, UiScale.S(230)), spriteBatch: spriteBatch_0, text: text3, font: spriteFont_3, foreColor: solidBrush_1.Color);
                     }
                     if (!string.IsNullOrEmpty(main_0.string_20))
                     {
                         Vector2 vector4 = spriteFont_4.MeasureString(main_0.string_20);
-                        XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point((base.Width - (int)vector4.X) / 2, 260), spriteBatch: spriteBatch_0, text: main_0.string_20, font: spriteFont_4, foreColor: solidBrush_1.Color);
+                        XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point((base.Width - (int)vector4.X) / 2, UiScale.S(260)), spriteBatch: spriteBatch_0, text: main_0.string_20, font: spriteFont_4, foreColor: solidBrush_1.Color);
                     }
                     method_18(spriteBatch_0);
                     DrawUPS(spriteBatch_0, upsCounter);

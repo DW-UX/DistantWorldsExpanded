@@ -60,24 +60,24 @@ namespace DistantWorlds.Controls
 
     private void LayoutPanel()
     {
-      this.lblName.Location = new Point(5, 25);
-      this.txtName.Location = new Point(47, 23);
-      this.picImage.Location = new Point(205, 0);
-      this.scrImage.Size = new Size(50, 12);
-      this.scrImage.Location = new Point(205, 38);
+      this.lblName.Location = new Point(UiScale.S(5), UiScale.S(25));
+      this.txtName.Location = new Point(UiScale.S(47), UiScale.S(23));
+      this.picImage.Location = new Point(UiScale.S(205), 0);
+      this.scrImage.Size = new Size(UiScale.S(50), UiScale.S(12));
+      this.scrImage.Location = new Point(UiScale.S(205), UiScale.S(38));
       this.picImage.SendToBack();
-      this.grpBonuses.Size = new Size(254, 116);
-      this.grpBonuses.Location = new Point(3, 50);
-      this.lblDevelopmentBonus.Location = new Point(5, 17);
-      this.numDevelopmentBonus.Location = new Point(84, 15);
-      this.lblResearchBonus.Location = new Point(5, 42);
-      this.numResearchBonus.Location = new Point(84, 40);
-      this.lblExplorationBonus.Location = new Point(5, 67);
-      this.numExplorationBonus.Location = new Point(84, 65);
-      this.lblMoneyBonus.Location = new Point(5, 92);
-      this.numMoneyBonus.Location = new Point(84, 90);
-      this.chkCreatureSwarm.Location = new Point(149, 18);
-      this.chkPirateAmbush.Location = new Point(149, 43);
+      this.grpBonuses.Size = new Size(UiScale.S(254), UiScale.S(116));
+      this.grpBonuses.Location = new Point(UiScale.S(3), UiScale.S(50));
+      this.lblDevelopmentBonus.Location = new Point(UiScale.S(5), UiScale.S(17));
+      this.numDevelopmentBonus.Location = new Point(UiScale.S(84), UiScale.S(15));
+      this.lblResearchBonus.Location = new Point(UiScale.S(5), UiScale.S(42));
+      this.numResearchBonus.Location = new Point(UiScale.S(84), UiScale.S(40));
+      this.lblExplorationBonus.Location = new Point(UiScale.S(5), UiScale.S(67));
+      this.numExplorationBonus.Location = new Point(UiScale.S(84), UiScale.S(65));
+      this.lblMoneyBonus.Location = new Point(UiScale.S(5), UiScale.S(92));
+      this.numMoneyBonus.Location = new Point(UiScale.S(84), UiScale.S(90));
+      this.chkCreatureSwarm.Location = new Point(UiScale.S(149), UiScale.S(18));
+      this.chkPirateAmbush.Location = new Point(UiScale.S(149), UiScale.S(43));
       this.LocalizeControlText();
     }
 
@@ -234,18 +234,18 @@ namespace DistantWorlds.Controls
       ((ISupportInitialize) this.picImage).BeginInit();
       this.SuspendLayout();
       this.lblTitle.AutoSize = true;
-      this.lblTitle.Font = new Font("Verdana", 11.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.lblTitle.Font = UiScale.NewFont("Verdana", 11.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.lblTitle.Location = new Point(0, 0);
       this.lblTitle.Name = "lblTitle";
-      this.lblTitle.Size = new Size(53, 18);
+      this.lblTitle.Size = new Size(UiScale.S(53), UiScale.S(18));
       this.lblTitle.TabIndex = 0;
       this.lblTitle.Text = "Ruins";
       this.lblName.AutoSize = true;
-      this.lblName.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.lblName.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.lblName.ForeColor = Color.FromArgb(170, 170, 170);
-      this.lblName.Location = new Point(5, 25);
+      this.lblName.Location = new Point(UiScale.S(5), UiScale.S(25));
       this.lblName.Name = "lblName";
-      this.lblName.Size = new Size(40, 13);
+      this.lblName.Size = new Size(UiScale.S(40), UiScale.S(13));
       this.lblName.TabIndex = 1;
       this.lblName.Text = "Name";
       this.grpBonuses.BackColor = Color.Transparent;
@@ -259,39 +259,39 @@ namespace DistantWorlds.Controls
       this.grpBonuses.Controls.Add((Control) this.lblExplorationBonus);
       this.grpBonuses.Controls.Add((Control) this.lblResearchBonus);
       this.grpBonuses.Controls.Add((Control) this.lblDevelopmentBonus);
-      this.grpBonuses.Font = new Font("Verdana", 9f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.grpBonuses.Font = UiScale.NewFont("Verdana", 9f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.grpBonuses.ForeColor = Color.FromArgb(170, 170, 170);
-      this.grpBonuses.Location = new Point(3, 50);
+      this.grpBonuses.Location = new Point(UiScale.S(3), UiScale.S(50));
       this.grpBonuses.Name = "grpBonuses";
-      this.grpBonuses.Size = new Size(254, 116);
+      this.grpBonuses.Size = new Size(UiScale.S(254), UiScale.S(116));
       this.grpBonuses.TabIndex = 2;
       this.grpBonuses.TabStop = false;
       this.grpBonuses.Text = "Bonuses";
       this.chkPirateAmbush.AutoSize = true;
-      this.chkPirateAmbush.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.chkPirateAmbush.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.chkPirateAmbush.ForeColor = Color.FromArgb(170, 170, 170);
-      this.chkPirateAmbush.Location = new Point(152, 43);
+      this.chkPirateAmbush.Location = new Point(UiScale.S(152), UiScale.S(43));
       this.chkPirateAmbush.Name = "chkPirateAmbush";
-      this.chkPirateAmbush.Size = new Size(109, 17);
+      this.chkPirateAmbush.Size = new Size(UiScale.S(109), UiScale.S(17));
       this.chkPirateAmbush.TabIndex = 11;
       this.chkPirateAmbush.Text = "Pirate Ambush";
       this.chkPirateAmbush.UseVisualStyleBackColor = true;
       this.chkPirateAmbush.CheckedChanged += new EventHandler(this.chkPirateAmbush_CheckedChanged);
       this.chkCreatureSwarm.AutoSize = true;
-      this.chkCreatureSwarm.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.chkCreatureSwarm.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.chkCreatureSwarm.ForeColor = Color.FromArgb(170, 170, 170);
-      this.chkCreatureSwarm.Location = new Point(152, 18);
+      this.chkCreatureSwarm.Location = new Point(UiScale.S(152), UiScale.S(18));
       this.chkCreatureSwarm.Name = "chkCreatureSwarm";
-      this.chkCreatureSwarm.Size = new Size(121, 17);
+      this.chkCreatureSwarm.Size = new Size(UiScale.S(121), UiScale.S(17));
       this.chkCreatureSwarm.TabIndex = 10;
       this.chkCreatureSwarm.Text = "Creature Swarm";
       this.chkCreatureSwarm.UseVisualStyleBackColor = true;
       this.chkCreatureSwarm.CheckedChanged += new EventHandler(this.chkCreatureSwarm_CheckedChanged);
       this.numMoneyBonus.BackColor = Color.FromArgb(48, 48, 64);
       this.numMoneyBonus.BorderStyle = BorderStyle.FixedSingle;
-      this.numMoneyBonus.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.numMoneyBonus.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.numMoneyBonus.ForeColor = Color.FromArgb(170, 170, 170);
-      this.numMoneyBonus.Location = new Point(84, 90);
+      this.numMoneyBonus.Location = new Point(UiScale.S(84), UiScale.S(90));
       this.numMoneyBonus.Maximum = new Decimal(new int[4]
       {
         20000,
@@ -300,21 +300,21 @@ namespace DistantWorlds.Controls
         0
       });
       this.numMoneyBonus.Name = "numMoneyBonus";
-      this.numMoneyBonus.Size = new Size(60, 21);
+      this.numMoneyBonus.Size = new Size(UiScale.S(60), UiScale.S(21));
       this.numMoneyBonus.TabIndex = 9;
       this.lblMoneyBonus.AutoSize = true;
-      this.lblMoneyBonus.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.lblMoneyBonus.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.lblMoneyBonus.ForeColor = Color.FromArgb(170, 170, 170);
-      this.lblMoneyBonus.Location = new Point(5, 92);
+      this.lblMoneyBonus.Location = new Point(UiScale.S(5), UiScale.S(92));
       this.lblMoneyBonus.Name = "lblMoneyBonus";
-      this.lblMoneyBonus.Size = new Size(44, 13);
+      this.lblMoneyBonus.Size = new Size(UiScale.S(44), UiScale.S(13));
       this.lblMoneyBonus.TabIndex = 8;
       this.lblMoneyBonus.Text = "Money";
       this.numExplorationBonus.BackColor = Color.FromArgb(48, 48, 64);
       this.numExplorationBonus.BorderStyle = BorderStyle.FixedSingle;
-      this.numExplorationBonus.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.numExplorationBonus.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.numExplorationBonus.ForeColor = Color.FromArgb(170, 170, 170);
-      this.numExplorationBonus.Location = new Point(84, 65);
+      this.numExplorationBonus.Location = new Point(UiScale.S(84), UiScale.S(65));
       this.numExplorationBonus.Maximum = new Decimal(new int[4]
       {
         20,
@@ -323,13 +323,13 @@ namespace DistantWorlds.Controls
         0
       });
       this.numExplorationBonus.Name = "numExplorationBonus";
-      this.numExplorationBonus.Size = new Size(60, 21);
+      this.numExplorationBonus.Size = new Size(UiScale.S(60), UiScale.S(21));
       this.numExplorationBonus.TabIndex = 7;
       this.numResearchBonus.BackColor = Color.FromArgb(48, 48, 64);
       this.numResearchBonus.BorderStyle = BorderStyle.FixedSingle;
-      this.numResearchBonus.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.numResearchBonus.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.numResearchBonus.ForeColor = Color.FromArgb(170, 170, 170);
-      this.numResearchBonus.Location = new Point(84, 40);
+      this.numResearchBonus.Location = new Point(UiScale.S(84), UiScale.S(40));
       this.numResearchBonus.Maximum = new Decimal(new int[4]
       {
         150000,
@@ -338,13 +338,13 @@ namespace DistantWorlds.Controls
         0
       });
       this.numResearchBonus.Name = "numResearchBonus";
-      this.numResearchBonus.Size = new Size(60, 21);
+      this.numResearchBonus.Size = new Size(UiScale.S(60), UiScale.S(21));
       this.numResearchBonus.TabIndex = 6;
       this.numDevelopmentBonus.BackColor = Color.FromArgb(48, 48, 64);
       this.numDevelopmentBonus.BorderStyle = BorderStyle.FixedSingle;
-      this.numDevelopmentBonus.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.numDevelopmentBonus.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.numDevelopmentBonus.ForeColor = Color.FromArgb(170, 170, 170);
-      this.numDevelopmentBonus.Location = new Point(84, 15);
+      this.numDevelopmentBonus.Location = new Point(UiScale.S(84), UiScale.S(15));
       this.numDevelopmentBonus.Maximum = new Decimal(new int[4]
       {
         50,
@@ -353,48 +353,48 @@ namespace DistantWorlds.Controls
         0
       });
       this.numDevelopmentBonus.Name = "numDevelopmentBonus";
-      this.numDevelopmentBonus.Size = new Size(60, 21);
+      this.numDevelopmentBonus.Size = new Size(UiScale.S(60), UiScale.S(21));
       this.numDevelopmentBonus.TabIndex = 5;
       this.lblExplorationBonus.AutoSize = true;
-      this.lblExplorationBonus.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.lblExplorationBonus.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.lblExplorationBonus.ForeColor = Color.FromArgb(170, 170, 170);
-      this.lblExplorationBonus.Location = new Point(5, 67);
+      this.lblExplorationBonus.Location = new Point(UiScale.S(5), UiScale.S(67));
       this.lblExplorationBonus.Name = "lblExplorationBonus";
-      this.lblExplorationBonus.Size = new Size(71, 13);
+      this.lblExplorationBonus.Size = new Size(UiScale.S(71), UiScale.S(13));
       this.lblExplorationBonus.TabIndex = 4;
       this.lblExplorationBonus.Text = "Exploration";
       this.lblResearchBonus.AutoSize = true;
-      this.lblResearchBonus.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.lblResearchBonus.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.lblResearchBonus.ForeColor = Color.FromArgb(170, 170, 170);
-      this.lblResearchBonus.Location = new Point(5, 42);
+      this.lblResearchBonus.Location = new Point(UiScale.S(5), UiScale.S(42));
       this.lblResearchBonus.Name = "lblResearchBonus";
-      this.lblResearchBonus.Size = new Size(60, 13);
+      this.lblResearchBonus.Size = new Size(UiScale.S(60), UiScale.S(13));
       this.lblResearchBonus.TabIndex = 3;
       this.lblResearchBonus.Text = "Research";
       this.lblDevelopmentBonus.AutoSize = true;
-      this.lblDevelopmentBonus.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.lblDevelopmentBonus.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.lblDevelopmentBonus.ForeColor = Color.FromArgb(170, 170, 170);
-      this.lblDevelopmentBonus.Location = new Point(5, 17);
+      this.lblDevelopmentBonus.Location = new Point(UiScale.S(5), UiScale.S(17));
       this.lblDevelopmentBonus.Name = "lblDevelopmentBonus";
-      this.lblDevelopmentBonus.Size = new Size(83, 13);
+      this.lblDevelopmentBonus.Size = new Size(UiScale.S(83), UiScale.S(13));
       this.lblDevelopmentBonus.TabIndex = 2;
       this.lblDevelopmentBonus.Text = "Development";
       this.txtName.BackColor = Color.FromArgb(48, 48, 64);
       this.txtName.BorderStyle = BorderStyle.FixedSingle;
       this.txtName.ForeColor = Color.FromArgb(170, 170, 170);
-      this.txtName.Location = new Point(47, 23);
+      this.txtName.Location = new Point(UiScale.S(47), UiScale.S(23));
       this.txtName.Name = "txtName";
-      this.txtName.Size = new Size(150, 21);
+      this.txtName.Size = new Size(UiScale.S(150), UiScale.S(21));
       this.txtName.TabIndex = 3;
       this.picImage.BackColor = Color.Transparent;
-      this.picImage.Location = new Point(205, 0);
+      this.picImage.Location = new Point(UiScale.S(205), 0);
       this.picImage.Name = "picImage";
-      this.picImage.Size = new Size(50, 50);
+      this.picImage.Size = new Size(UiScale.S(50), UiScale.S(50));
       this.picImage.TabIndex = 4;
       this.picImage.TabStop = false;
-      this.scrImage.Location = new Point(66, 4);
+      this.scrImage.Location = new Point(UiScale.S(66), UiScale.S(4));
       this.scrImage.Name = "scrImage";
-      this.scrImage.Size = new Size(80, 17);
+      this.scrImage.Size = new Size(UiScale.S(80), UiScale.S(17));
       this.scrImage.TabIndex = 5;
       this.scrImage.Scroll += new ScrollEventHandler(this.scrImage_Scroll);
       this.AutoScaleMode = AutoScaleMode.None;
@@ -405,10 +405,10 @@ namespace DistantWorlds.Controls
       this.Controls.Add((Control) this.grpBonuses);
       this.Controls.Add((Control) this.lblName);
       this.Controls.Add((Control) this.lblTitle);
-      this.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ForeColor = Color.White;
       this.Name = nameof (RuinPanel);
-      this.Size = new Size(260, 170);
+      this.Size = new Size(UiScale.S(260), UiScale.S(170));
       this.grpBonuses.ResumeLayout(false);
       this.grpBonuses.PerformLayout();
       this.numMoneyBonus.EndInit();

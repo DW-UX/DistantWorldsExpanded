@@ -1,0 +1,4 @@
+G:\DistantWorldsExpanded\Patcher\Program.cs
+G:\DistantWorldsExpanded\Patcher\obj\Release\net9.0\Patcher.GlobalUsings.g.cs
+G:\DistantWorldsExpanded\Patcher\obj\Release\net9.0\.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+G:\DistantWorldsExpanded\Patcher\obj\Release\net9.0\Patcher.AssemblyInfo.cs

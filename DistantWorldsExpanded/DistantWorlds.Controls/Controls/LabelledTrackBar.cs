@@ -16,16 +16,16 @@ namespace DistantWorlds.Controls
   public class LabelledTrackBar : GradientPanel
   {
     private ColorSlider _Slider = new ColorSlider();
-    private int _LabelWidth = 100;
+    private int _LabelWidth = UiScale.S(100);
     private string _LabelText;
-    private int _LinkWidth = 100;
+    private int _LinkWidth = UiScale.S(100);
     private string _LinkText;
     private string[] _Labels = new string[0];
     private List<SmoothLabel> _LabelControls = new List<SmoothLabel>();
     private LinkLabel _LinkLabel = new LinkLabel();
-    private int _SliderOffset = 30;
-    private int _SliderHeight = 22;
-    private int _Padding = 5;
+    private int _SliderOffset = UiScale.S(30);
+    private int _SliderHeight = UiScale.S(22);
+    private int _Padding = UiScale.S(5);
 
     public event EventHandler LinkClicked;
 
@@ -131,7 +131,7 @@ namespace DistantWorlds.Controls
       this.Invalidate();
     }
 
-    public void Setup() => this.Setup(25);
+    public void Setup() => this.Setup(UiScale.S(25));
 
     public void Setup(int sliderOffset)
     {
@@ -140,14 +140,14 @@ namespace DistantWorlds.Controls
         this.Controls.Add((Control) this._Slider);
         this._Slider.Parent = (Control) this;
       }
-      this._Padding = 3;
-      this.Curvature = 10;
+      this._Padding = UiScale.S(3);
+      this.Curvature = UiScale.S(10);
       this.GradientMode = LinearGradientMode.Vertical;
       this.BorderStyle = BorderStyle.FixedSingle;
-      this.BorderWidth = 1;
+      this.BorderWidth = UiScale.S(1);
       this.BackColor2 = Color.FromArgb(36, 35, 40);
       this._Slider.BackColor = Color.Transparent;
-      this._Slider.BorderRoundRectSize = new Size(2, 2);
+      this._Slider.BorderRoundRectSize = new Size(UiScale.S(2), UiScale.S(2));
       this._Slider.BarInnerColor = Color.FromArgb(64, 64, 72);
       this._Slider.BarOuterColor = Color.FromArgb(32, 32, 40);
       this._Slider.BarPenColor = Color.FromArgb(16, 16, 24);
@@ -161,16 +161,16 @@ namespace DistantWorlds.Controls
       this.Padding = new Padding(0);
       this._Slider.Margin = new Padding(0);
       this._Slider.Padding = new Padding(0);
-      this._LinkWidth = 100;
+      this._LinkWidth = UiScale.S(100);
       this._SliderOffset = sliderOffset;
       this._Slider.Minimum = 0;
       this._Slider.Maximum = 100;
       this._Slider.MouseWheelBarPartitions = 1;
       this._Slider.SmallChange = 1U;
-      this._Slider.ThumbRoundRectSize = new Size(3, 3);
-      this._Slider.ThumbSize = 10;
+      this._Slider.ThumbRoundRectSize = new Size(UiScale.S(3), UiScale.S(3));
+      this._Slider.ThumbSize = UiScale.S(10);
       this._Slider.Font = this.Font;
-      this._Slider.BorderRoundRectSize = new Size(3, 3);
+      this._Slider.BorderRoundRectSize = new Size(UiScale.S(3), UiScale.S(3));
       this._Slider.ValueChanged -= new EventHandler(this._Slider_ValueChanged);
       this._Slider.ValueChanged += new EventHandler(this._Slider_ValueChanged);
       this.DoLayout();
@@ -196,7 +196,7 @@ namespace DistantWorlds.Controls
 
     private void DoLayout()
     {
-      this._Slider.Size = new Size(Math.Max(1, this.Width - (this._Padding * 2 + this._LabelWidth + this._SliderOffset * 2 + this._LinkWidth)), this._SliderHeight);
+      this._Slider.Size = new Size(Math.Max(UiScale.S(1), this.Width - (this._Padding * 2 + this._LabelWidth + this._SliderOffset * 2 + this._LinkWidth)), this._SliderHeight);
       this._Slider.Location = new Point(this._Padding + this._LabelWidth + this._SliderOffset, this.Height - (this._SliderHeight + this._Padding));
     }
 
@@ -230,7 +230,7 @@ namespace DistantWorlds.Controls
       {
         Font font = new Font(this.Font, FontStyle.Bold);
         SizeF sizeF = e.Graphics.MeasureString(this._LabelText, font, new SizeF((float) this._LabelWidth, (float) this.Height), StringFormat.GenericDefault);
-        RectangleF layoutRectangle = new RectangleF((float) (((double) this._LabelWidth - (double) sizeF.Width) / 2.0), (float) (((double) this.Height - (double) sizeF.Height) / 2.0), sizeF.Width + 1f, sizeF.Height + 1f);
+        RectangleF layoutRectangle = new RectangleF((float) (((double) this._LabelWidth - (double) sizeF.Width) / 2.0), (float) (((double) this.Height - (double) sizeF.Height) / 2.0), sizeF.Width + UiScale.S(1f), sizeF.Height + UiScale.S(1f));
         e.Graphics.DrawString(this._LabelText, font, (Brush) new SolidBrush(this.ForeColor), layoutRectangle, StringFormat.GenericDefault);
       }
       if (this._LinkLabel != null && !string.IsNullOrEmpty(this._LinkLabel.Text))
@@ -243,12 +243,14 @@ namespace DistantWorlds.Controls
       int padding = this._Padding;
       for (int index = 0; index < this._Labels.Length; ++index)
       {
-        int x = this._Padding + this._LabelWidth + this._SliderOffset - 1 + this._Slider.ThumbSize / 2 + (int) ((double) (this._Slider.Width - this._Slider.ThumbSize) * ((double) index / (double) (this._Labels.Length - 1)));
-        e.Graphics.FillRectangle((Brush) new SolidBrush(this._Slider.BarInnerColor), x, this.Height - (this._SliderHeight + this._Padding), 2, 7);
+        int x = this._Padding + this._LabelWidth + this._SliderOffset - UiScale.S(1) + this._Slider.ThumbSize / 2 + (int) ((double) (this._Slider.Width - this._Slider.ThumbSize) * ((double) index / (double) (this._Labels.Length - 1)));
+        e.Graphics.FillRectangle((Brush) new SolidBrush(this._Slider.BarInnerColor), x, this.Height - (this._SliderHeight + this._Padding), UiScale.S(2), UiScale.S(7));
         SizeF sizeF = e.Graphics.MeasureString(this._Labels[index], this.Font, width, StringFormat.GenericDefault);
-        PointF pointF = new PointF((float) x - sizeF.Width / 2f, (float) padding);
+        // Keep the first and last captions inside the control, or their ends are cut off.
+        float captionX = Math.Max(0f, Math.Min((float) x - sizeF.Width / 2f, (float) this.Width - sizeF.Width - UiScale.S(1f)));
+        PointF pointF = new PointF(captionX, (float) padding);
         RectangleF rectangleF = new RectangleF(pointF.X, pointF.Y, sizeF.Width, sizeF.Height);
-        this._LabelControls[index].Size = new Size((int) ((double) sizeF.Width + 1.0), (int) ((double) sizeF.Height + 1.0));
+        this._LabelControls[index].Size = new Size((int) ((double) sizeF.Width + UiScale.S(1.0)), (int) ((double) sizeF.Height + UiScale.S(1.0)));
         this._LabelControls[index].Location = new Point((int) pointF.X, (int) pointF.Y);
       }
     }

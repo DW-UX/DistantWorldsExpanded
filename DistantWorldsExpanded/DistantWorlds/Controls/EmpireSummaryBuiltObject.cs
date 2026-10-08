@@ -41,17 +41,17 @@ namespace DistantWorlds.Controls
         public EmpireSummaryBuiltObject():base()
         {
             
-            int_0 = 15;
-            int_1 = 10;
-            int_2 = 10;
+            int_0 = UiScale.S(15);
+            int_1 = UiScale.S(10);
+            int_2 = UiScale.S(10);
             solidBrush_0 = new SolidBrush(Color.FromArgb(170, 170, 170));
             solidBrush_1 = new SolidBrush(Color.Black);
             solidBrush_2 = new SolidBrush(Color.Red);
             method_9();
-            Font = new Font("Verdana", 8f);
+            Font = UiScale.NewFont("Verdana", 8f);
             SetFont(16.67f);
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         public void ClearData()
@@ -66,9 +66,9 @@ namespace DistantWorlds.Controls
             galaxy_0 = galaxy;
             empire_0 = empire;
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
             lnkShipCosts.Font = Font;
-            lnkShipCosts.Location = new Point(443, int_1 + 2);
+            lnkShipCosts.Location = new Point(UiScale.S(443), int_1 + UiScale.S(2));
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -99,29 +99,29 @@ namespace DistantWorlds.Controls
             if (empire_0 != null && galaxy_0 != null)
             {
                 int num = int_0;
-                int num2 = 8;
+                int num2 = UiScale.S(8);
                 int num3 = int_1;
                 jcqXwriUgM(point_0: new Point(int_2, num3), graphics_0: graphics_0, string_0: TextResolver.GetText("Ships & Bases"), font_2: font_1);
-                int num4 = -5;
-                int num5 = 234;
-                int num6 = 432;
-                num3 = int_1 + 25;
+                int num4 = UiScale.S(-5);
+                int num5 = UiScale.S(234);
+                int num6 = UiScale.S(432);
+                num3 = int_1 + UiScale.S(25);
                 using (SolidBrush brush = new SolidBrush(Color.FromArgb(52, 80, 80, 255)))
                 {
-                    Rectangle rect = new Rectangle(num4 + 15, num3, 215, 235);
+                    Rectangle rect = new Rectangle(num4 + UiScale.S(15), num3, UiScale.S(215), UiScale.S(235));
                     graphics_0.FillRectangle(brush, rect);
                 }
                 using (SolidBrush brush2 = new SolidBrush(Color.FromArgb(28, 80, 80, 255)))
                 {
-                    Rectangle rect2 = new Rectangle(num5, num3, 188, 235);
+                    Rectangle rect2 = new Rectangle(num5, num3, UiScale.S(188), UiScale.S(235));
                     graphics_0.FillRectangle(brush2, rect2);
                 }
                 using (SolidBrush brush3 = new SolidBrush(Color.FromArgb(50, 80, 80, 80)))
                 {
-                    Rectangle rect3 = new Rectangle(num6, num3, 189, 235);
+                    Rectangle rect3 = new Rectangle(num6, num3, UiScale.S(189), UiScale.S(235));
                     graphics_0.FillRectangle(brush3, rect3);
                 }
-                jcqXwriUgM(graphics_0, TextResolver.GetText("Ship Role Military").ToUpper(CultureInfo.InvariantCulture), font_0, new Point(num4 + 20, num3 + 4));
+                jcqXwriUgM(graphics_0, TextResolver.GetText("Ship Role Military").ToUpper(CultureInfo.InvariantCulture), font_0, new Point(num4 + UiScale.S(20), num3 + UiScale.S(4)));
                 num3 += num;
                 method_3(graphics_0, num4, num3, bool_0: true);
                 num3 += num + num2;
@@ -153,8 +153,8 @@ namespace DistantWorlds.Controls
                 BuiltObjectSubRole.ResupplyShip
             }), num4, num3, bool_0: true);
                 num3 += int_0;
-                num3 = int_1 + 25;
-                jcqXwriUgM(graphics_0, TextResolver.GetText("Other State").ToUpper(CultureInfo.InvariantCulture), font_0, new Point(num5 + 5, num3 + 4));
+                num3 = int_1 + UiScale.S(25);
+                jcqXwriUgM(graphics_0, TextResolver.GetText("Other State").ToUpper(CultureInfo.InvariantCulture), font_0, new Point(num5 + UiScale.S(5), num3 + UiScale.S(4)));
                 num3 += num;
                 method_3(graphics_0, num5, num3, bool_0: false);
                 num3 += num + num2;
@@ -207,8 +207,8 @@ namespace DistantWorlds.Controls
                 BuiltObjectSubRole.MonitoringStation
             }), num5, num3, bool_0: false);
                 num3 += int_0;
-                num3 = int_1 + 25;
-                jcqXwriUgM(graphics_0, TextResolver.GetText("PRIVATE"), font_0, new Point(num6 + 5, num3 + 4));
+                num3 = int_1 + UiScale.S(25);
+                jcqXwriUgM(graphics_0, TextResolver.GetText("PRIVATE"), font_0, new Point(num6 + UiScale.S(5), num3 + UiScale.S(4)));
                 num3 += num;
                 method_3(graphics_0, num6, num3, bool_0: false);
                 num3 += num + num2;
@@ -247,20 +247,20 @@ namespace DistantWorlds.Controls
         {
             if (main_0 != null)
             {
-                int num = int_3 + 105;
-                int int_5 = 35;
-                int num2 = int_3 + 134;
-                int int_6 = 40;
-                int num3 = int_3 + 180;
-                int int_7 = 20;
+                int num = int_3 + UiScale.S(105);
+                int int_5 = UiScale.S(35);
+                int num2 = int_3 + UiScale.S(134);
+                int int_6 = UiScale.S(40);
+                int num3 = int_3 + UiScale.S(180);
+                int int_7 = UiScale.S(20);
                 if (!bool_0)
                 {
-                    num3 = int_3 + 134 + 10;
+                    num3 = int_3 + UiScale.S(134) + UiScale.S(10);
                 }
                 jcqXwriUgM(point_0: new Point(num + method_1(graphics_0, TextResolver.GetText("Amount Abbreviation"), font_0, int_5), int_4), graphics_0: graphics_0, string_0: TextResolver.GetText("Amount Abbreviation"), font_2: font_0);
                 if (bool_0)
                 {
-                    graphics_0.DrawImageUnscaled(point: new Point(num2 + method_1(graphics_0, "_", font_0, int_6), int_4 + 2), image: main_0.bitmap_38);
+                    graphics_0.DrawImageUnscaled(point: new Point(num2 + method_1(graphics_0, "_", font_0, int_6), int_4 + UiScale.S(2)), image: main_0.bitmap_38);
                 }
                 jcqXwriUgM(point_0: new Point(num3 + method_1(graphics_0, TextResolver.GetText("Maintenance Abbreviation"), font_0, int_7), int_4), graphics_0: graphics_0, string_0: TextResolver.GetText("Maintenance Abbreviation"), font_2: font_0);
             }
@@ -268,16 +268,16 @@ namespace DistantWorlds.Controls
 
         private void method_4(Graphics graphics_0, BuiltObjectList builtObjectList_0, int int_3, int int_4, bool bool_0)
         {
-            int int_5 = 105;
-            int num = int_3 + 105;
-            int int_6 = 35;
-            int num2 = int_3 + 140;
-            int int_7 = 40;
-            int num3 = int_3 + 180;
-            int int_8 = 35;
+            int int_5 = UiScale.S(105);
+            int num = int_3 + UiScale.S(105);
+            int int_6 = UiScale.S(35);
+            int num2 = int_3 + UiScale.S(140);
+            int int_7 = UiScale.S(40);
+            int num3 = int_3 + UiScale.S(180);
+            int int_8 = UiScale.S(35);
             if (!bool_0)
             {
-                num3 = int_3 + 140;
+                num3 = int_3 + UiScale.S(140);
             }
             int num4 = 0;
             int num5 = 0;
@@ -294,9 +294,9 @@ namespace DistantWorlds.Controls
             double num7 = (double)num6 * empire_0.ShipMaintenanceSavings;
             num6 -= (int)num7;
             string string_ = TextResolver.GetText("TOTAL");
-            jcqXwriUgM(point_0: new Point(int_3 + method_1(graphics_0, string_, font_0, int_5), int_4 - 2), graphics_0: graphics_0, string_0: string_, font_2: font_0);
+            jcqXwriUgM(point_0: new Point(int_3 + method_1(graphics_0, string_, font_0, int_5), int_4 - UiScale.S(2)), graphics_0: graphics_0, string_0: string_, font_2: font_0);
             string string_2 = num5.ToString();
-            jcqXwriUgM(point_0: new Point(num + method_1(graphics_0, string_2, font_0, int_6), int_4 - 2), graphics_0: graphics_0, string_0: string_2, font_2: font_0);
+            jcqXwriUgM(point_0: new Point(num + method_1(graphics_0, string_2, font_0, int_6), int_4 - UiScale.S(2)), graphics_0: graphics_0, string_0: string_2, font_2: font_0);
             if (bool_0)
             {
                 string string_3 = num4.ToString();
@@ -324,16 +324,16 @@ namespace DistantWorlds.Controls
 
         private void method_7(Graphics graphics_0, List<BuiltObjectSubRole> subRoles, int int_3, int int_4, BuiltObjectList builtObjectList_0, bool bool_0, string string_0)
         {
-            int int_5 = 105;
-            int num = int_3 + 105;
-            int int_6 = 35;
-            int num2 = int_3 + 140;
-            int int_7 = 40;
-            int num3 = int_3 + 180;
-            int int_8 = 35;
+            int int_5 = UiScale.S(105);
+            int num = int_3 + UiScale.S(105);
+            int int_6 = UiScale.S(35);
+            int num2 = int_3 + UiScale.S(140);
+            int int_7 = UiScale.S(40);
+            int num3 = int_3 + UiScale.S(180);
+            int int_8 = UiScale.S(35);
             if (!bool_0)
             {
-                num3 = int_3 + 140;
+                num3 = int_3 + UiScale.S(140);
             }
             BuiltObjectList builtObjectsBySubRole = builtObjectList_0.GetBuiltObjectsBySubRole(subRoles);
             int num4 = 0;
@@ -360,7 +360,7 @@ namespace DistantWorlds.Controls
             }
             jcqXwriUgM(point_0: new Point(int_3 + method_1(graphics_0, string_0, Font, int_5), int_4), graphics_0: graphics_0, string_0: string_0, font_2: Font);
             string string_ = num5.ToString();
-            jcqXwriUgM(point_0: new Point(num + method_1(graphics_0, string_, font_0, int_6), int_4 - 2), graphics_0: graphics_0, string_0: string_, font_2: font_0);
+            jcqXwriUgM(point_0: new Point(num + method_1(graphics_0, string_, font_0, int_6), int_4 - UiScale.S(2)), graphics_0: graphics_0, string_0: string_, font_2: font_0);
             if (bool_0)
             {
                 string string_2 = num4.ToString();
@@ -386,9 +386,9 @@ namespace DistantWorlds.Controls
 
         private void jcqXwriUgM(Graphics graphics_0, string string_0, Font font_2, Point point_0)
         {
-            point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+            point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0);
-            point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+            point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_0, point_0);
         }
 
@@ -399,12 +399,12 @@ namespace DistantWorlds.Controls
             lnkShipCosts.ActiveLinkColor = Color.FromArgb(255, 128, 0);
             lnkShipCosts.AutoSize = true;
             lnkShipCosts.BackColor = Color.Transparent;
-            lnkShipCosts.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lnkShipCosts.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
             lnkShipCosts.LinkBehavior = LinkBehavior.HoverUnderline;
             lnkShipCosts.LinkColor = Color.FromArgb(255, 192, 0);
-            lnkShipCosts.Location = new Point(-16, 53);
+            lnkShipCosts.Location = new Point(UiScale.S(-16), UiScale.S(53));
             lnkShipCosts.Name = "lnkShipCosts";
-            lnkShipCosts.Size = new Size(151, 13);
+            lnkShipCosts.Size = new Size(UiScale.S(151), UiScale.S(13));
             lnkShipCosts.TabIndex = 79;
             lnkShipCosts.TabStop = true;
             lnkShipCosts.Text = TextResolver.GetText("About ship maintenance costs...");

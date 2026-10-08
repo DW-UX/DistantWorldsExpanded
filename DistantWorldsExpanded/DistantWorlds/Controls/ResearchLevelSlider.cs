@@ -42,6 +42,7 @@ namespace DistantWorlds.Controls
         {
             
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             LayoutControls();
         }
 
@@ -97,15 +98,15 @@ namespace DistantWorlds.Controls
         public void LayoutControls()
         {
             //int num = base.ClientRectangle.Width - (388 + int_1);
-            int num = base.ClientRectangle.Width - (388);
+            int num = base.ClientRectangle.Width - (UiScale.S(388));
             SuspendLayout();
             picResearchArea.Location = new Point(0, 0);
-            lblResearchArea.Location = new Point(24, 2);
+            lblResearchArea.Location = new Point(UiScale.S(24), UiScale.S(2));
             lblResearchArea.ForeColor = Color.FromArgb(170, 170, 170);
-            sldResearchLevel.Location = new Point(134, 0);
-            sldResearchLevel.Size = new Size(num, 16);
-            picLatestComponent.Location = new Point(138 + num + 4, 0);
-            lblLatestComponent.Location = new Point(138 + num + 4 + 20 + 4, 2);
+            sldResearchLevel.Location = new Point(UiScale.S(134), 0);
+            sldResearchLevel.Size = new Size(num, UiScale.S(16));
+            picLatestComponent.Location = new Point(UiScale.S(138) + num + UiScale.S(4), 0);
+            lblLatestComponent.Location = new Point(UiScale.S(138) + num + UiScale.S(4) + UiScale.S(20) + UiScale.S(4), UiScale.S(2));
             lblLatestComponent.ForeColor = Color.FromArgb(170, 170, 170);
             ResumeLayout();
         }
@@ -271,10 +272,10 @@ namespace DistantWorlds.Controls
             this.sldResearchLevel.BarInnerColor = System.Drawing.Color.FromArgb(64, 0, 192);
             this.sldResearchLevel.BarOuterColor = System.Drawing.Color.FromArgb(40, 0, 120);
             this.sldResearchLevel.BarPenColor = System.Drawing.Color.FromArgb(24, 0, 96);
-            this.sldResearchLevel.BorderRoundRectSize = new System.Drawing.Size(2, 2);
+            this.sldResearchLevel.BorderRoundRectSize = new System.Drawing.Size(UiScale.S(2), UiScale.S(2));
             this.sldResearchLevel.ElapsedInnerColor = System.Drawing.Color.FromArgb(96, 96, 255);
             this.sldResearchLevel.ElapsedOuterColor = System.Drawing.Color.FromArgb(48, 48, 180);
-            this.sldResearchLevel.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.sldResearchLevel.Font = UiScale.NewFont("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             this.sldResearchLevel.ForeColor = System.Drawing.Color.White;
             this.sldResearchLevel.LargeChange = 5u;
             this.sldResearchLevel.Location = new System.Drawing.Point(74, 7);
@@ -287,11 +288,11 @@ namespace DistantWorlds.Controls
             this.sldResearchLevel.ThumbInnerColor = System.Drawing.Color.FromArgb(80, 80, 255);
             this.sldResearchLevel.ThumbOuterColor = System.Drawing.Color.FromArgb(48, 32, 160);
             this.sldResearchLevel.ThumbPenColor = System.Drawing.Color.FromArgb(32, 32, 64);
-            this.sldResearchLevel.ThumbRoundRectSize = new System.Drawing.Size(3, 3);
-            this.sldResearchLevel.ThumbSize = 20;
+            this.sldResearchLevel.ThumbRoundRectSize = new System.Drawing.Size(UiScale.S(3), UiScale.S(3));
+            this.sldResearchLevel.ThumbSize = UiScale.S(20);
             this.sldResearchLevel.Scroll += new System.Windows.Forms.ScrollEventHandler(sldResearchLevel_Scroll);
             this.lblResearchArea.AutoSize = true;
-            this.lblResearchArea.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblResearchArea.Font = UiScale.NewFont("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             this.lblResearchArea.ForeColor = System.Drawing.Color.White;
             this.lblResearchArea.Location = new System.Drawing.Point(33, 10);
             this.lblResearchArea.Name = "lblResearchArea";
@@ -299,7 +300,7 @@ namespace DistantWorlds.Controls
             this.lblResearchArea.TabIndex = 77;
             this.lblResearchArea.Text = "Area";
             this.lblLatestComponent.AutoSize = true;
-            this.lblLatestComponent.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblLatestComponent.Font = UiScale.NewFont("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             this.lblLatestComponent.ForeColor = System.Drawing.Color.White;
             this.lblLatestComponent.Location = new System.Drawing.Point(240, 10);
             this.lblLatestComponent.Name = "lblLatestComponent";

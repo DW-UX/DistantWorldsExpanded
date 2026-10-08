@@ -42,10 +42,10 @@ namespace DistantWorlds.Controls
     public ResearchProgress()
     {
       this.InitializeComponent();
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData()

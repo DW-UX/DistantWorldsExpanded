@@ -119,7 +119,7 @@ namespace BaconDistantWorlds
 
         public static MessageBoxEx method_372(string string_30, string string_31)
         {
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             string_30 = string_30.Replace("\n", Environment.NewLine);
             messageBox.Text = string_30;
             messageBox.Caption = string_31;
@@ -705,7 +705,7 @@ namespace BaconDistantWorlds
             }
             string str1 = stringBuilder.ToString();
             string str2 = selectedObject.Name + " Damaged Components";
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = str1;
             messageBox.Caption = str2;
             messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -731,7 +731,7 @@ namespace BaconDistantWorlds
             {
                 string str1 = "Distance from " + BaconBuiltObject.fighterTarget.Name + " to " + (main._Game.SelectedObject as StellarObject).Name + " is " + ((int)distanceStatic).ToString();
                 string str2 = "Distance";
-                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
                 messageBox.Text = str1;
                 messageBox.Caption = str2;
                 messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -833,7 +833,7 @@ namespace BaconDistantWorlds
         label_5:
             if (num != 0 || shipOrFighter is ShipGroup && (shipOrFighter as ShipGroup).Ships[0].Empire != main._Game.PlayerEmpire || shipOrFighter is BuiltObjectList && (shipOrFighter as BuiltObjectList)[0].Empire != main._Game.PlayerEmpire || shipOrFighter is StellarObject && (shipOrFighter as StellarObject).Empire != main._Game.PlayerEmpire)
             {
-                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
                 messageBox.Text = "Selected ship can't use that command. Command can only be applied to single ship or base of your empire";
                 messageBox.Caption = "Wrong target for command";
                 messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -951,7 +951,7 @@ namespace BaconDistantWorlds
         {
             if (!(fighterOrShip is Fighter) && !(fighterOrShip is BuiltObject) || BaconBuiltObject.fighterTarget == null || !(BaconBuiltObject.fighterTarget is BuiltObject) || (BaconBuiltObject.fighterTarget as BuiltObject).ActualEmpire != main._Game.PlayerEmpire)
             {
-                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
                 messageBox.Text = "Selected ship can't use that command. Selected ship must be fighter/bomber and target set to other carrier.";
                 messageBox.Caption = "Wrong target for command";
                 messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -967,7 +967,7 @@ namespace BaconDistantWorlds
             BuiltObject fighterTarget = BaconBuiltObject.fighterTarget as BuiltObject;
             if (fighterTarget.Fighters == null || fighterTarget.FighterRepairRate <= 0)
             {
-                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
                 messageBox.Text = "Selected ship can't use that command. Target carrier can't transfer in fighters/bombers";
                 messageBox.Caption = "Wrong target for command";
                 messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -1185,7 +1185,7 @@ namespace BaconDistantWorlds
 
         public static void ShowMessageBox(Main main, string text, string caption)
         {
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = text;
             messageBox.Caption = caption;
             messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -1200,7 +1200,7 @@ namespace BaconDistantWorlds
         }
         public static void ShowMessageBox(Main main, Exception ex, string caption)
         {
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = ex.ToString();
             messageBox.Caption = caption;
             messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -2221,7 +2221,7 @@ namespace BaconDistantWorlds
             bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
             if (!flag)
                 main._Game.Galaxy.Pause();
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = stringBuilder.ToString();
             messageBox.Caption = "Battle Stats";
             messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -3991,7 +3991,7 @@ namespace BaconDistantWorlds
             bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
             if (!flag)
                 main._Game.Galaxy.Pause();
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = message;
             messageBox.Caption = caption;
             messageBox.AddButton(MessageBoxExButtons.Yes);
@@ -4008,7 +4008,7 @@ namespace BaconDistantWorlds
             bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
             if (!flag)
                 main._Game.Galaxy.Pause();
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = message;
             messageBox.Caption = caption;
             messageBox.Icon = MessageBoxExIcon.None;

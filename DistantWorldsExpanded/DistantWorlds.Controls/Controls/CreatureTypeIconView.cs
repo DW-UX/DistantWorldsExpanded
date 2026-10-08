@@ -105,10 +105,10 @@ namespace DistantWorlds.Controls
             this._CreatureImages = new Bitmap[creatureImages.Length];
             for (int index = 0; index < creatureImages.Length; ++index)
             {
-                int width = 32;
+                int width = UiScale.S(32);
                 double num = (double)width / (double)creatureImages[index].Width;
                 int height = (int)((double)creatureImages[index].Height * num);
-                this._CreatureImages[index] = this.PrescaleImage(creatureImages[index], 32, 32, width, height);
+                this._CreatureImages[index] = this.PrescaleImage(creatureImages[index], UiScale.S(32), UiScale.S(32), width, height);
                 imageList.Images.Add((Image)this._CreatureImages[index]);
             }
             this.LargeImageList = imageList;

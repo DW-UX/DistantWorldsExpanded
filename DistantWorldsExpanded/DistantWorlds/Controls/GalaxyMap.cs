@@ -463,19 +463,19 @@ namespace DistantWorlds.Controls
                 graphics_0.DrawImage(bitmap2, destRect3, 0, 0, bitmap2.Width, bitmap2.Height, GraphicsUnit.Pixel);
             }
             double num21 = (double)num / (double)Galaxy.SectorMaxX;
-            SizeF sizeF = graphics_0.MeasureString("H", font_0, 200, StringFormat.GenericTypographic);
+            SizeF sizeF = graphics_0.MeasureString("H", font_0, UiScale.S(200), StringFormat.GenericTypographic);
             int num22 = (int)(num21 / 2.0 - (double)sizeF.Width / 2.0);
             int num23 = (int)(num21 / 2.0 - (double)sizeF.Height / 2.0);
             int num24 = galaxy_0.ResolveSector(int_8, int_5).X;
             int num25 = galaxy_0.ResolveSector(int_9, int_5).X;
             int num26 = galaxy_0.ResolveSector(int_4, int_10).Y;
             int num27 = galaxy_0.ResolveSector(int_4, int_11).Y;
-            int num28 = 2;
-            int num29 = 5;
+            int num28 = UiScale.S(2);
+            int num29 = UiScale.S(5);
             if (int_6 >= 400 && (habitatList_0 != null || int_2 > 0))
             {
-                num28 = 3;
-                num29 = 5;
+                num28 = UiScale.S(3);
+                num29 = UiScale.S(5);
             }
             graphics_0.SmoothingMode = SmoothingMode.AntiAlias;
             bool flag = false;
@@ -507,7 +507,7 @@ namespace DistantWorlds.Controls
                 int num32 = (int)((double)(i * Galaxy.SectorSize - int_8) / double_5);
                 graphics_0.DrawLine(main_0.pen_1, num32, num30, num32, y);
                 string s = ((char)(i + 65)).ToString();
-                graphics_0.DrawString(point: new Point(num32 + num22, num30 + 2), s: s, font: font_0, brush: solidBrush_0);
+                graphics_0.DrawString(point: new Point(num32 + num22, num30 + UiScale.S(2)), s: s, font: font_0, brush: solidBrush_0);
             }
             if (flag)
             {
@@ -519,7 +519,7 @@ namespace DistantWorlds.Controls
                 int num34 = (int)((double)(j * Galaxy.SectorSize - int_10) / double_5);
                 graphics_0.DrawLine(main_0.pen_1, num31, num34, x, num34);
                 string s2 = (j + 1).ToString();
-                graphics_0.DrawString(point: new Point(num31 + 2, num34 + num23), s: s2, font: font_0, brush: solidBrush_0);
+                graphics_0.DrawString(point: new Point(num31 + UiScale.S(2), num34 + num23), s: s2, font: font_0, brush: solidBrush_0);
             }
             if (flag2)
             {
@@ -658,7 +658,7 @@ namespace DistantWorlds.Controls
                             }
                         }
                     }
-                    RectangleF rect = new RectangleF(num36 - (num38 + 4f) / 2f, num37 - (num38 + 4f) / 2f, num38 + 4f, num38 + 4f);
+                    RectangleF rect = new RectangleF(num36 - (num38 + UiScale.S(4f)) / 2f, num37 - (num38 + UiScale.S(4f)) / 2f, num38 + UiScale.S(4f), num38 + UiScale.S(4f));
                     Pen pen2 = new Pen(systemInfo.DominantEmpire.Empire.MainColor, 2f);
                     if (systemInfo.OtherEmpires != null && systemInfo.OtherEmpires.Count > 0)
                     {
@@ -681,20 +681,20 @@ namespace DistantWorlds.Controls
             {
                 int num43 = (int)((double)item.X / double_4);
                 int num44 = (int)((double)item.Y / double_4);
-                Rectangle rect3 = new Rectangle(num43 - 2, num44 - 2, 5, 5);
+                Rectangle rect3 = new Rectangle(num43 - UiScale.S(2), num44 - UiScale.S(2), UiScale.S(5), UiScale.S(5));
                 graphics_0.FillEllipse(brush2, rect3);
             }
             if (double_0 > 0.0 && double_1 > 0.0)
             {
-                int num45 = (int)(double_0 / double_5) + 1;
-                int num46 = (int)(double_1 / double_5) + 1;
+                int num45 = (int)(double_0 / double_5) + UiScale.S(1);
+                int num46 = (int)(double_1 / double_5) + UiScale.S(1);
                 graphics_0.DrawLine(main_0.pen_2, num45, 0, num45, base.ClientRectangle.Height);
                 graphics_0.DrawLine(main_0.pen_2, 0, num46, base.ClientRectangle.Width, num46);
             }
             if (double_2 > 0.0 && double_3 > 0.0)
             {
-                int num47 = (int)(double_2 / double_5) + 1;
-                int num48 = (int)(double_3 / double_5) + 1;
+                int num47 = (int)(double_2 / double_5) + UiScale.S(1);
+                int num48 = (int)(double_3 / double_5) + UiScale.S(1);
                 using Pen pen3 = new Pen(Color.FromArgb(255, 32, 128));
                 graphics_0.DrawLine(pen3, num47, 0, num47, base.ClientRectangle.Height);
                 graphics_0.DrawLine(pen3, 0, num48, base.ClientRectangle.Width, num48);
@@ -706,7 +706,7 @@ namespace DistantWorlds.Controls
             
             list_0 = new List<Point>();
             bool_0 = true;
-            font_0 = new Font("Verdana", 7f);
+            font_0 = UiScale.NewFont("Verdana", 7f);
         }
     }
 }

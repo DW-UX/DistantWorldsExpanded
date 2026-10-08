@@ -35,17 +35,17 @@ namespace DistantWorlds.Controls
     public ConstructionYardPurchaser()
     {
       this.InitializeComponent();
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold);
       this.BackColor = Color.FromArgb(39, 40, 44);
       this.BackColor2 = Color.FromArgb(22, 21, 26);
       this.BackColor3 = Color.FromArgb(51, 54, 61);
       this.BorderColor = Color.FromArgb(67, 67, 77);
-      this.BorderWidth = 2;
+      this.BorderWidth = UiScale.S(2);
       this.BorderStyle = BorderStyle.FixedSingle;
-      this.Curvature = 20;
+      this.Curvature = UiScale.S(20);
       this.CurveMode = CornerCurveMode.All;
       this.GradientMode = LinearGradientMode.Vertical;
     }
@@ -85,15 +85,15 @@ namespace DistantWorlds.Controls
       this.LocalizeControlText();
       this.lblStateMoneyLabel.Text = TextResolver.GetText("Available Funds");
       this.lblStateMoneyLabel.ForeColor = Color.FromArgb(170, 170, 170);
-      this.lblStateMoneyLabel.Location = new Point(10, 8);
-      this.lblStateMoney.Location = new Point(105, 8);
+      this.lblStateMoneyLabel.Location = new Point(UiScale.S(10), UiScale.S(8));
+      this.lblStateMoney.Location = new Point(UiScale.S(105), UiScale.S(8));
       this.lblStateMoney.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbDesigns.BringToFront();
       this.cmbDesigns.Visible = true;
-      this.cmbDesigns.Size = new Size(this.Width - 20, 21);
-      this.cmbDesigns.Location = new Point(10, 27);
-      this.btnPurchase.Size = new Size(this.Width - 20, 25);
-      this.btnPurchase.Location = new Point(10, 56);
+      this.cmbDesigns.Size = new Size(this.Width - UiScale.S(20), UiScale.S(21));
+      this.cmbDesigns.Location = new Point(UiScale.S(10), UiScale.S(27));
+      this.btnPurchase.Size = new Size(this.Width - UiScale.S(20), UiScale.S(25));
+      this.btnPurchase.Location = new Point(UiScale.S(10), UiScale.S(56));
       this.ResumeLayout();
     }
 
@@ -240,12 +240,12 @@ namespace DistantWorlds.Controls
       this.cmbDesigns.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbDesigns.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbDesigns.FlatStyle = FlatStyle.Popup;
-      this.cmbDesigns.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.cmbDesigns.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.cmbDesigns.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbDesigns.FormattingEnabled = true;
-      this.cmbDesigns.Location = new Point(23, 36);
+      this.cmbDesigns.Location = new Point(UiScale.S(23), UiScale.S(36));
       this.cmbDesigns.Name = "cmbDesigns";
-      this.cmbDesigns.Size = new Size(150, 21);
+      this.cmbDesigns.Size = new Size(UiScale.S(150), UiScale.S(21));
       this.cmbDesigns.TabIndex = 52;
       this.cmbDesigns.Visible = false;
       this.cmbDesigns.SelectedIndexChanged += new EventHandler(this.cmbDesigns_SelectedIndexChanged);
@@ -254,38 +254,38 @@ namespace DistantWorlds.Controls
       this.btnPurchase.FlatAppearance.MouseDownBackColor = Color.FromArgb(128, 0, (int) byte.MaxValue);
       this.btnPurchase.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 0, 224);
       this.btnPurchase.FlatStyle = FlatStyle.Flat;
-      this.btnPurchase.Font = new Font("Verdana", 8f);
+      this.btnPurchase.Font = UiScale.NewFont("Verdana", 8f);
       this.btnPurchase.ForeColor = Color.FromArgb(170, 170, 170);
-      this.btnPurchase.Location = new Point(23, 63);
+      this.btnPurchase.Location = new Point(UiScale.S(23), UiScale.S(63));
       this.btnPurchase.Name = "btnPurchase";
-      this.btnPurchase.Size = new Size(150, 25);
+      this.btnPurchase.Size = new Size(UiScale.S(150), UiScale.S(25));
       this.btnPurchase.TabIndex = 53;
       this.btnPurchase.Text = "Purchase";
       this.btnPurchase.UseVisualStyleBackColor = true;
       this.btnPurchase.Click += new EventHandler(this.btnPurchase_Click);
       this.lblStateMoney.AutoSize = true;
       this.lblStateMoney.BackColor = Color.Transparent;
-      this.lblStateMoney.Font = new Font("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
+      this.lblStateMoney.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.lblStateMoney.ForeColor = Color.White;
-      this.lblStateMoney.Location = new Point(24, 16);
+      this.lblStateMoney.Location = new Point(UiScale.S(24), UiScale.S(16));
       this.lblStateMoney.Name = "lblStateMoney";
-      this.lblStateMoney.Size = new Size(49, 13);
+      this.lblStateMoney.Size = new Size(UiScale.S(49), UiScale.S(13));
       this.lblStateMoney.TabIndex = 54;
       this.lblStateMoney.Text = "Money";
       this.lblStateMoneyLabel.AutoSize = true;
       this.lblStateMoneyLabel.BackColor = Color.Transparent;
-      this.lblStateMoneyLabel.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.lblStateMoneyLabel.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.lblStateMoneyLabel.ForeColor = Color.White;
-      this.lblStateMoneyLabel.Location = new Point(24, 16);
+      this.lblStateMoneyLabel.Location = new Point(UiScale.S(24), UiScale.S(16));
       this.lblStateMoneyLabel.Name = "lblStateMoneyLabel";
-      this.lblStateMoneyLabel.Size = new Size(96, 13);
+      this.lblStateMoneyLabel.Size = new Size(UiScale.S(96), UiScale.S(13));
       this.lblStateMoneyLabel.TabIndex = 54;
       this.lblStateMoneyLabel.Text = "Available Funds";
       this.Controls.Add((Control) this.lblStateMoneyLabel);
       this.Controls.Add((Control) this.lblStateMoney);
       this.Controls.Add((Control) this.btnPurchase);
       this.Controls.Add((Control) this.cmbDesigns);
-      this.Size = new Size(278, 178);
+      this.Size = new Size(UiScale.S(278), UiScale.S(178));
       this.ResumeLayout(false);
       this.PerformLayout();
     }

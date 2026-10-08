@@ -30,6 +30,7 @@ namespace ExpansionMod.Controls.Forms
             RepairPriority originalTemplate, string playerDefaultTemplate, string aiDefaultTemplate)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             _defaultTemplate = defaultTemplate;
             _originalTemplate = originalTemplate;
             _playerDefaultTemplate = playerDefaultTemplate;

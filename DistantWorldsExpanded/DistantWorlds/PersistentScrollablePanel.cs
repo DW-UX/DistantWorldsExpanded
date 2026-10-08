@@ -179,7 +179,7 @@ namespace DistantWorlds
             SuspendLayout();
             _InternalPanel.Location = new Point(0, 0);
             _InternalPanel.Name = "_InternalPanel";
-            _InternalPanel.Size = new Size(200, 100);
+            _InternalPanel.Size = new Size(UiScale.S(200), UiScale.S(100));
             _InternalPanel.TabIndex = 0;
             ResumeLayout(performLayout: false);
         }
@@ -230,19 +230,19 @@ namespace DistantWorlds
         private void method_1()
         {
             Graphics graphics = _InternalPanel.CreateGraphics();
-            Font font = new Font(Font.FontFamily, Font.Size + 1.5f, FontStyle.Bold);
+            Font font = new Font(Font.FontFamily, Font.Size + UiScale.S(1.5f), FontStyle.Bold);
             _InternalPanel.Font = Font;
             SizeF sizeF = new SizeF(0f, 0f);
             SizeF sizeF2 = new SizeF(0f, 0f);
             sizeF = graphics.MeasureString(string_0, font);
             if (!string.IsNullOrEmpty(string_0))
             {
-                sizeF.Height += 6f;
+                sizeF.Height += UiScale.S(6f);
             }
             sizeF2 = graphics.MeasureString(string_1, Font);
             if (!string.IsNullOrEmpty(string_1))
             {
-                sizeF2.Height += 12f;
+                sizeF2.Height += UiScale.S(12f);
             }
             if ((int)sizeF.Height + (int)sizeF2.Height > _InternalPanel.Height)
             {
@@ -274,7 +274,7 @@ namespace DistantWorlds
             PaintEventArgs pevent = new PaintEventArgs(graphics, new Rectangle(0, 0, base.Width, base.Height));
             OnPaintBackground(pevent);
             Graphics graphics2 = _InternalPanel.CreateGraphics();
-            Font font = new Font(Font.FontFamily, Font.Size + 1.5f, FontStyle.Bold);
+            Font font = new Font(Font.FontFamily, Font.Size + UiScale.S(1.5f), FontStyle.Bold);
             _InternalPanel.Font = Font;
             base.AutoScrollMargin = new Size(0, 0);
             graphics2.SmoothingMode = SmoothingMode.AntiAlias;
@@ -283,8 +283,8 @@ namespace DistantWorlds
             if (image_0 != null)
             {
                 //Rectangle rectangle = default(Rectangle);
-                int num = _InternalPanel.ClientRectangle.Width - 6;
-                int num2 = _InternalPanel.ClientRectangle.Height - 6;
+                int num = _InternalPanel.ClientRectangle.Width - UiScale.S(6);
+                int num2 = _InternalPanel.ClientRectangle.Height - UiScale.S(6);
                 double num3 = (double)image_0.Width / (double)image_0.Height;
                 int num4;
                 int num5;
@@ -338,21 +338,21 @@ namespace DistantWorlds
                     num8 = (num2 - (int)((double)num5 * num6)) / 2;
                     num9 = (int)((double)num4 * num6);
                 }
-                graphics2.DrawImage(rect: new Rectangle(num7 + 3, num8 + 3, num9, (int)((double)num5 * num6)), image: image_0);
+                graphics2.DrawImage(rect: new Rectangle(num7 + UiScale.S(3), num8 + UiScale.S(3), num9, (int)((double)num5 * num6)), image: image_0);
                 if (image_1 != null)
                 {
                     graphics2.DrawImage(image_1, rectangle_0);
                 }
             }
-            int num10 = 6;
+            int num10 = UiScale.S(6);
             if (!string.IsNullOrEmpty(string_0))
             {
-                graphics2.DrawString(string_0, font, new SolidBrush(Color.Black), new PointF(7f, num10 + 1));
-                graphics2.DrawString(string_0, font, new SolidBrush(Color.White), new PointF(6f, num10));
-                num10 += (int)graphics2.MeasureString(string_0, font).Height + 6;
+                graphics2.DrawString(string_0, font, new SolidBrush(Color.Black), new PointF(UiScale.S(7f), num10 + UiScale.S(1)));
+                graphics2.DrawString(string_0, font, new SolidBrush(Color.White), new PointF(UiScale.S(6f), num10));
+                num10 += (int)graphics2.MeasureString(string_0, font).Height + UiScale.S(6);
             }
-            graphics2.DrawString(string_1, Font, new SolidBrush(Color.Black), new PointF(7f, num10 + 1));
-            graphics2.DrawString(string_1, Font, new SolidBrush(Color.White), new PointF(6f, num10));
+            graphics2.DrawString(string_1, Font, new SolidBrush(Color.Black), new PointF(UiScale.S(7f), num10 + UiScale.S(1)));
+            graphics2.DrawString(string_1, Font, new SolidBrush(Color.White), new PointF(UiScale.S(6f), num10));
         }
 
         protected override void OnPaint(PaintEventArgs e)

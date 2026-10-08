@@ -85,10 +85,10 @@ namespace DistantWorlds.Controls
                 Bitmap habitatTypeImage = habitatTypeImages[index];
                 if (habitatTypeImage != null && habitatTypeImage.PixelFormat != PixelFormat.Undefined)
                 {
-                    int width = 32;
+                    int width = UiScale.S(32);
                     double num = (double)width / (double)habitatTypeImage.Width;
                     int height = (int)((double)habitatTypeImage.Height * num);
-                    this._HabitatTypeImages[index] = this.PrescaleImage(habitatTypeImage, 32, 32, width, height);
+                    this._HabitatTypeImages[index] = this.PrescaleImage(habitatTypeImage, UiScale.S(32), UiScale.S(32), width, height);
                     imageList.Images.Add((Image)this._HabitatTypeImages[index]);
                 }
             }

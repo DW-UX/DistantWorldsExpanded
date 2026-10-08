@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -10,9 +10,19 @@ namespace DistantWorlds.Controls;
 public partial class CheckBox : System.Windows.Forms.CheckBox
 {
 
+    private static readonly StringFormat _textFormat = new(StringFormat.GenericDefault)
+    {
+        FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.NoClip,
+        LineAlignment = StringAlignment.Center,
+        // Captions are written for standard check boxes, where "&&" stands for a plain ampersand.
+        HotkeyPrefix = HotkeyPrefix.Hide,
+    };
+
     private SolidBrush _foreBrush;
 
     private Pen _backPen;
+
+    private bool _fitToText;
 
     public CheckBox()
       : base()
@@ -20,11 +30,55 @@ public partial class CheckBox : System.Windows.Forms.CheckBox
         base.AutoSize = false;
     }
 
+    // The base class cannot auto-size an owner-drawn check box, so asking for it
+    // makes this control grow to fit its own text instead.
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public override bool AutoSize
     {
-        set => base.AutoSize = false; // don't support
+        set
+        {
+            base.AutoSize = false;
+            _fitToText = value;
+            FitToText();
+        }
         get => base.AutoSize;
+    }
+
+    protected override void OnTextChanged(EventArgs e)
+    {
+        base.OnTextChanged(e);
+        FitToText();
+    }
+
+    protected override void OnFontChanged(EventArgs e)
+    {
+        base.OnFontChanged(e);
+        FitToText();
+    }
+
+    protected override void OnSizeChanged(EventArgs e)
+    {
+        base.OnSizeChanged(e);
+        FitToText();
+    }
+
+    private void FitToText()
+    {
+        if (!_fitToText || string.IsNullOrEmpty(Text))
+        {
+            return;
+        }
+        SizeF text;
+        using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
+        {
+            text = g.MeasureString(Text, Font, int.MaxValue, _textFormat);
+        }
+        // Only the width follows the text: the height also sets the size of the box, and rows are spaced for it.
+        int width = Padding.Horizontal + Height + (int)Math.Ceiling(text.Width);
+        if (width > Width)
+        {
+            Width = width;
+        }
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -36,7 +90,12 @@ public partial class CheckBox : System.Windows.Forms.CheckBox
         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
         g.PixelOffsetMode = PixelOffsetMode.HighQuality;
         g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-        var side = Math.Min(ClientSize.Width, ClientSize.Height);
+        int lineHeight = (int)Math.Ceiling(Font.GetHeight(g));
+        // A check box taller than a line and a half is meant to hold wrapped text beside a normal-sized box.
+        bool multiline = ClientSize.Height > lineHeight * 3 / 2 + Padding.Vertical;
+        var side = multiline ? Math.Min(ClientSize.Width, lineHeight + 2) : Math.Min(ClientSize.Width, ClientSize.Height);
+        int boxY = multiline ? Padding.Top + (ClientSize.Height - Padding.Vertical - side) / 2 : Padding.Top;
+        int textHeight = multiline ? ClientSize.Height - Padding.Vertical : side;
         var state = Checked ? ButtonState.Checked : ButtonState.Normal;
 
         if (_foreBrush?.Color != ForeColor)
@@ -49,29 +108,27 @@ public partial class CheckBox : System.Windows.Forms.CheckBox
             case ContentAlignment.TopLeft:
             case ContentAlignment.MiddleLeft:
                 {
-                    ControlPaint.DrawCheckBox(g, Padding.Left, Padding.Top, side, side, state);
+                    ControlPaint.DrawCheckBox(g, Padding.Left, boxY, side, side, state);
                     var stringRect = new RectangleF(
                       Padding.Left + side,
                       Padding.Top,
                       ClientSize.Width - side - Padding.Left,
-                      side);
-                    FitTextAndFontToRect(g, stringRect, DeviceDpi);
-                    g.DrawString(Text, Font, _foreBrush, stringRect);
+                      textHeight);
+                    DrawText(g, stringRect, multiline);
                     break;
                 }
             case ContentAlignment.TopRight:
             case ContentAlignment.MiddleRight:
                 {
                     var x = ClientSize.Width - side - Padding.Right;
-                    ControlPaint.DrawCheckBox(g, x, Padding.Top, side, side, state);
+                    ControlPaint.DrawCheckBox(g, x, boxY, side, side, state);
                     var stringRect = new RectangleF(
                       Padding.Left,
                       Padding.Top,
                       x - Padding.Left,
-                      side
+                      textHeight
                     );
-                    FitTextAndFontToRect(g, stringRect, DeviceDpi);
-                    g.DrawString(Text, Font, _foreBrush, stringRect);
+                    DrawText(g, stringRect, multiline);
                     break;
                 }
             default:
@@ -79,9 +136,34 @@ public partial class CheckBox : System.Windows.Forms.CheckBox
         }
     }
 
-    private void FitTextAndFontToRect(Graphics g, in RectangleF stringRect, int deviceDpi)
+    private static readonly StringFormat _wrappedFormat = new(StringFormat.GenericDefault)
     {
-        // measure string and update font to fit the box
+        LineAlignment = StringAlignment.Center,
+        HotkeyPrefix = HotkeyPrefix.Hide,
+    };
+
+    private void DrawText(Graphics g, RectangleF stringRect, bool multiline)
+    {
+        if (multiline)
+        {
+            using Font wrapped = FitFont(g, font => g.MeasureString(Text, font, (int)stringRect.Width, _wrappedFormat).Height <= stringRect.Height + 1);
+            g.DrawString(Text, wrapped, _foreBrush, stringRect, _wrappedFormat);
+            return;
+        }
+        if (_fitToText)
+        {
+            g.DrawString(Text, Font, _foreBrush, stringRect, _textFormat);
+            return;
+        }
+        float width = stringRect.Width + 1;
+        using Font fitted = FitFont(g, font => g.MeasureString(Text, font).Width <= width);
+        g.DrawString(Text, fitted, _foreBrush, stringRect);
+    }
+
+    // A fixed-size check box keeps its bounds, so shrink the font until the text fits them.
+    private Font FitFont(Graphics g, Func<Font, bool> fits)
+    {
+        int deviceDpi = DeviceDpi;
         var step = Font.Unit switch
         {
             GraphicsUnit.Pixel => 1f,
@@ -93,13 +175,14 @@ public partial class CheckBox : System.Windows.Forms.CheckBox
             _ => throw new NotImplementedException()
         };
 
-        var width = stringRect.Width + 1;
-        //int textLines = Math.Max(1, (int)((stringRect.Height + 1) / g.MeasureString(Text, Font).Height));
-        //while (g.MeasureString(Text, Font).Width > width * textLines)
-        while (g.MeasureString(Text, Font).Width > width)
+        var font = new Font(Font.FontFamily, Font.Size, Font.Style, Font.Unit);
+        while (font.Size - step > 0f && !fits(font))
         {
-            Font = new(Font.FontFamily, Font.Size - step, Font.Style, Font.Unit);
+            var smaller = new Font(font.FontFamily, font.Size - step, font.Style, font.Unit);
+            font.Dispose();
+            font = smaller;
         }
+        return font;
     }
 
 }

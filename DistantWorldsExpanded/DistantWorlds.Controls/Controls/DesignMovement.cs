@@ -19,8 +19,8 @@ namespace DistantWorlds.Controls
     private IContainer components;
     private Galaxy _Galaxy;
     private Design _Design;
-    private int _RowHeight = 16;
-    private int _TopMargin = 10;
+    private int _RowHeight = UiScale.S(16);
+    private int _TopMargin = UiScale.S(10);
     private int _LeftMargin = 10;
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
     private SolidBrush _BlackBrush = new SolidBrush(Color.Black);
@@ -38,10 +38,10 @@ namespace DistantWorlds.Controls
 
     public DesignMovement()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData()
@@ -55,7 +55,7 @@ namespace DistantWorlds.Controls
       this._Galaxy = galaxy;
       this._Design = design;
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
       this.Invalidate();
     }
 
@@ -87,23 +87,23 @@ namespace DistantWorlds.Controls
 
     private void DrawMovementInfo(Graphics graphics)
     {
-      int width1 = 60;
-      int x1 = 10;
-      int width2 = 55;
-      int num1 = 70;
-      int width3 = 55;
-      int x2 = 125;
-      int width4 = 55;
-      int x3 = 180;
-      int width5 = 55;
-      int x4 = 235;
-      int y1 = this._TopMargin + this._RowHeight + 4;
-      int y2 = this._TopMargin + this._RowHeight * 2 + 4;
-      int y3 = this._TopMargin + this._RowHeight * 3 + 4;
-      int num2 = this._TopMargin + this._RowHeight * 4 + 4;
-      int num3 = this._TopMargin + this._RowHeight * 4 + 60 + 4;
-      int y4 = this._TopMargin + this._RowHeight * 4 + 66 + 4;
-      int y5 = this._TopMargin + this._RowHeight * 5 + 72 + 4;
+      int width1 = UiScale.S(60);
+      int x1 = UiScale.S(10);
+      int width2 = UiScale.S(55);
+      int num1 = UiScale.S(70);
+      int width3 = UiScale.S(55);
+      int x2 = UiScale.S(125);
+      int width4 = UiScale.S(55);
+      int x3 = UiScale.S(180);
+      int width5 = UiScale.S(55);
+      int x4 = UiScale.S(235);
+      int y1 = this._TopMargin + this._RowHeight + UiScale.S(4);
+      int y2 = this._TopMargin + this._RowHeight * 2 + UiScale.S(4);
+      int y3 = this._TopMargin + this._RowHeight * 3 + UiScale.S(4);
+      int num2 = this._TopMargin + this._RowHeight * 4 + UiScale.S(4);
+      int num3 = this._TopMargin + this._RowHeight * 4 + UiScale.S(60) + UiScale.S(4);
+      int y4 = this._TopMargin + this._RowHeight * 4 + UiScale.S(66) + UiScale.S(4);
+      int y5 = this._TopMargin + this._RowHeight * 5 + UiScale.S(72) + UiScale.S(4);
       SolidBrush solidBrush1 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, (int) byte.MaxValue, 80));
       SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, 168, 80));
       SolidBrush solidBrush3 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, 80, 80));
@@ -113,19 +113,19 @@ namespace DistantWorlds.Controls
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       Point location = new Point();
-      location = new Point(8, 8);
+      location = new Point(UiScale.S(8), UiScale.S(8));
       this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Movement"), this._TitleFont, location);
       if (this._Design == null)
         return;
       if (this._Design.TopSpeed <= 0)
       {
-        location = new Point(this.CalculateCenterAlignedOffsetPosition(graphics, "(" + TextResolver.GetText("No movement") + ")", this._BoldFont, 300), 75);
+        location = new Point(this.CalculateCenterAlignedOffsetPosition(graphics, "(" + TextResolver.GetText("No movement") + ")", this._BoldFont, UiScale.S(300)), UiScale.S(75));
         this.DrawStringWithDropShadow(graphics, "(" + TextResolver.GetText("No movement") + ")", this._BoldFont, location);
       }
       else
       {
-        graphics.FillRectangle((Brush) solidBrush5, x1, y2, 280, y3 - y2);
-        graphics.FillRectangle((Brush) solidBrush6, x1, y3, 280, num2 - y3);
+        graphics.FillRectangle((Brush) solidBrush5, x1, y2, UiScale.S(280), y3 - y2);
+        graphics.FillRectangle((Brush) solidBrush6, x1, y3, UiScale.S(280), num2 - y3);
         graphics.FillRectangle((Brush) solidBrush1, num1, y1, width2, num3 - y1);
         graphics.FillRectangle((Brush) solidBrush2, x2, y1, width3, num3 - y1);
         graphics.FillRectangle((Brush) solidBrush3, x3, y1, width4, num3 - y1);
@@ -143,7 +143,7 @@ namespace DistantWorlds.Controls
         location = new Point(x4 + alignedOffsetPosition4, y1);
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Hyper"), this.Font, location);
         int alignedOffsetPosition5 = this.CalculateRightAlignedOffsetPosition(graphics, TextResolver.GetText("Speed Abbreviation"), this.Font, width1);
-        location = new Point(x1 + alignedOffsetPosition5 - 10, y2);
+        location = new Point(x1 + alignedOffsetPosition5 - UiScale.S(10), y2);
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Speed Abbreviation"), this.Font, location);
         int alignedOffsetPosition6 = this.CalculateCenterAlignedOffsetPosition(graphics, Galaxy.MovementImpulseSpeed.ToString(), this.Font, width2);
         location = new Point(num1 + alignedOffsetPosition6, y2);
@@ -158,7 +158,7 @@ namespace DistantWorlds.Controls
         location = new Point(x4 + alignedOffsetPosition9, y2);
         this.DrawStringWithDropShadow(graphics, this._Design.WarpSpeed.ToString(), this.Font, location);
         int alignedOffsetPosition10 = this.CalculateRightAlignedOffsetPosition(graphics, TextResolver.GetText("Energy"), this.Font, width1);
-        location = new Point(x1 + alignedOffsetPosition10 - 10, y3);
+        location = new Point(x1 + alignedOffsetPosition10 - UiScale.S(10), y3);
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Energy"), this.Font, location);
         int alignedOffsetPosition11 = this.CalculateCenterAlignedOffsetPosition(graphics, this._Design.ImpulseSpeedFuelBurn.ToString(), this.Font, width2);
         location = new Point(num1 + alignedOffsetPosition11, y3);
@@ -173,10 +173,10 @@ namespace DistantWorlds.Controls
         location = new Point(x4 + alignedOffsetPosition14, y3);
         this.DrawStringWithDropShadow(graphics, this._Design.WarpSpeedFuelBurn.ToString(), this.Font, location);
         int alignedOffsetPosition15 = this.CalculateCenterAlignedOffsetPosition(graphics, TextResolver.GetText("Energy"), this.Font, width1);
-        location = new Point(x1 + alignedOffsetPosition15, num2 + 15);
+        location = new Point(x1 + alignedOffsetPosition15, num2 + UiScale.S(15));
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Energy"), this.Font, location);
         int alignedOffsetPosition16 = this.CalculateCenterAlignedOffsetPosition(graphics, TextResolver.GetText("Curve"), this.Font, width1);
-        location = new Point(x1 + alignedOffsetPosition16, num2 + 30);
+        location = new Point(x1 + alignedOffsetPosition16, num2 + UiScale.S(30));
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Curve"), this.Font, location);
         int num4 = Math.Max(this._Design.TopSpeedFuelBurn, this._Design.WarpSpeedFuelBurn);
         int energyConsumption = this._Design.StaticEnergyConsumption;
@@ -186,9 +186,9 @@ namespace DistantWorlds.Controls
         Pen pen2 = new Pen((Brush) this._WhiteBrush, 3f);
         int num6 = num3 - (int) ((double) energyConsumption * num5);
         graphics.DrawLine(pen1, num1, num6, x4 + width5, num6);
-        Font font = new Font(this.Font.FontFamily, this.Font.Size - 2f, GraphicsUnit.Pixel);
-        int alignedOffsetPosition17 = this.CalculateCenterAlignedOffsetPosition(graphics, TextResolver.GetText("Static Energy Usage"), font, 220);
-        location = new Point(num1 + alignedOffsetPosition17, num6 + 1);
+        Font font = new Font(this.Font.FontFamily, this.Font.Size - UiScale.S(2f), GraphicsUnit.Pixel);
+        int alignedOffsetPosition17 = this.CalculateCenterAlignedOffsetPosition(graphics, TextResolver.GetText("Static Energy Usage"), font, UiScale.S(220));
+        location = new Point(num1 + alignedOffsetPosition17, num6 + UiScale.S(1));
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Static Energy Usage"), font, location);
         graphics.DrawLine(pen2, num1, num3 - (int) ((double) energyConsumption * num5), num1 + width2 / 2, num3 - (int) ((double) (energyConsumption + this._Design.ImpulseSpeedFuelBurn) * num5));
         graphics.DrawLine(pen2, num1 + width2 / 2, num3 - (int) ((double) (energyConsumption + this._Design.ImpulseSpeedFuelBurn) * num5), x2 + width3 / 2, num3 - (int) ((double) (energyConsumption + this._Design.CruiseSpeedFuelBurn) * num5));
@@ -198,7 +198,7 @@ namespace DistantWorlds.Controls
         location = new Point(x1, y4);
         string str1 = this._Design.AccelerationRate.ToString("#0.#") + "/" + TextResolver.GetText("seconds abbreviation");
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Acceleration") + ": " + str1, this.Font, location);
-        location = new Point(x1 + 150, y4);
+        location = new Point(x1 + UiScale.S(150), y4);
         string str2 = (this._Design.TurnRate * (180.0 / Math.PI)).ToString("##0") + "°/" + TextResolver.GetText("seconds abbreviation");
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Turn Rate") + ": " + str2, this.Font, location);
         location = new Point(x1, y5);
@@ -246,9 +246,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
   }

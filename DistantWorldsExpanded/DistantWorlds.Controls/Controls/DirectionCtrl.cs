@@ -109,9 +109,9 @@ namespace DistantWorlds.Controls
       int width = this.Width;
       int height = this.Height;
       if (width == 0)
-        width = 1;
+        width = UiScale.S(1);
       if (height == 0)
-        height = 1;
+        height = UiScale.S(1);
       Image image = (Image) new Bitmap(width, height, PixelFormat.Format32bppPArgb);
       Graphics graphics = Graphics.FromImage(image);
       graphics.Clear(Color.Transparent);
@@ -119,7 +119,7 @@ namespace DistantWorlds.Controls
       graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       graphics.MeasureString(str, this.Font);
-      Font font = !flag ? new Font("Arial", 15f, FontStyle.Bold) : new Font("Arial", 12f, FontStyle.Bold);
+      Font font = !flag ? UiScale.NewFont("Arial", 15f, FontStyle.Bold) : UiScale.NewFont("Arial", 12f, FontStyle.Bold);
       graphics.DrawString(str, font, brush, new RectangleF(0.0f, 0.0f, (float) this.Width, (float) this.Height), format);
       graphics.Dispose();
       image.RotateFlip((RotateFlipType) this.directionStyle);

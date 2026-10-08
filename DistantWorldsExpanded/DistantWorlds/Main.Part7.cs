@@ -3133,7 +3133,7 @@ namespace DistantWorlds
                     if (pnlInfoPanel.Visible)
                     {
                         method_472(bool_28: true);
-                        int num = pnlInfoPanel.Height + btnSelectionBack.Height + btnSelectionAction1.Height + 4;
+                        int num = pnlInfoPanel.Height + btnSelectionBack.Height + btnSelectionAction1.Height + UiScale.S(4);
                         rectangle_0.Y += num;
                         mainView.HoverMessageLocation = new Point(mainView.HoverMessageLocation.X, mainView.HoverMessageLocation.Y + num);
                     }
@@ -3144,7 +3144,7 @@ namespace DistantWorlds
                     else
                     {
                         method_473();
-                        int num2 = pnlInfoPanel.Height + btnSelectionBack.Height + btnSelectionAction1.Height + 4;
+                        int num2 = pnlInfoPanel.Height + btnSelectionBack.Height + btnSelectionAction1.Height + UiScale.S(4);
                         rectangle_0.Y -= num2;
                         mainView.HoverMessageLocation = new Point(mainView.HoverMessageLocation.X, mainView.HoverMessageLocation.Y - num2);
                     }
@@ -3665,7 +3665,7 @@ namespace DistantWorlds
             selectionMenu.Items.Clear();
             selectionMenu.Renderer = new CustomToolStripRenderer(font_3);
             selectionMenu.ShowImageMargin = true;
-            selectionMenu.Margin = new Padding(1);
+            selectionMenu.Margin = new Padding(UiScale.S(1));
             selectionMenu.ImageScalingSize = new Size(32, 15);
         }
 
@@ -3716,35 +3716,35 @@ namespace DistantWorlds
                 bool_11 = true;
                 method_154();
             }
-            pnlGameMenu.Size = new Size(220, 408);
+            pnlGameMenu.Size = new Size(UiScale.S(220), UiScale.S(408));
             pnlGameMenu.Location = new Point((mainView.Width - pnlGameMenu.Width) / 2, (mainView.Height - pnlGameMenu.Height) / 2);
-            picGameMenuHeader.Size = new Size(196, 118);
-            picGameMenuHeader.Location = new Point(12, 10);
+            picGameMenuHeader.Size = new Size(UiScale.S(196), UiScale.S(118));
+            picGameMenuHeader.Location = new Point(UiScale.S(12), UiScale.S(10));
             lblGameMenuTitle.Visible = false;
-            btnGameMenuQuit.Size = new Size(200, 30);
-            btnGameMenuQuit.Location = new Point(10, 137);
+            btnGameMenuQuit.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnGameMenuQuit.Location = new Point(UiScale.S(10), UiScale.S(137));
             btnGameMenuQuit.Font = font_2;
-            btnGameMenuStartMenu.Size = new Size(200, 30);
-            btnGameMenuStartMenu.Location = new Point(10, 170);
+            btnGameMenuStartMenu.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnGameMenuStartMenu.Location = new Point(UiScale.S(10), UiScale.S(170));
             btnGameMenuStartMenu.Font = font_2;
-            btnGameMenuLoad.Size = new Size(200, 30);
-            btnGameMenuLoad.Location = new Point(10, 203);
+            btnGameMenuLoad.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnGameMenuLoad.Location = new Point(UiScale.S(10), UiScale.S(203));
             btnGameMenuLoad.Font = font_2;
-            btnGameMenuSave.Size = new Size(200, 30);
-            btnGameMenuSave.Location = new Point(10, 236);
+            btnGameMenuSave.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnGameMenuSave.Location = new Point(UiScale.S(10), UiScale.S(236));
             btnGameMenuSave.Font = font_2;
-            btnGameMenuSaveAs.Size = new Size(200, 30);
-            btnGameMenuSaveAs.Location = new Point(10, 269);
+            btnGameMenuSaveAs.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnGameMenuSaveAs.Location = new Point(UiScale.S(10), UiScale.S(269));
             btnGameMenuSaveAs.Font = font_2;
-            btnGameMenuOptions.Size = new Size(200, 30);
-            btnGameMenuOptions.Location = new Point(10, 302);
+            btnGameMenuOptions.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnGameMenuOptions.Location = new Point(UiScale.S(10), UiScale.S(302));
             btnGameMenuOptions.Font = font_2;
-            btnGameMenuEditor.Size = new Size(200, 30);
-            btnGameMenuEditor.Location = new Point(10, 335);
+            btnGameMenuEditor.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnGameMenuEditor.Location = new Point(UiScale.S(10), UiScale.S(335));
             btnGameMenuEditor.Font = font_2;
             btnGameMenuCancel.Text = TextResolver.GetText("Resume Playing");
-            btnGameMenuCancel.Size = new Size(200, 30);
-            btnGameMenuCancel.Location = new Point(10, 368);
+            btnGameMenuCancel.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnGameMenuCancel.Location = new Point(UiScale.S(10), UiScale.S(368));
             btnGameMenuCancel.Font = font_2;
             pnlGameMenu.Visible = true;
             pnlGameMenu.BringToFront();
@@ -4830,10 +4830,10 @@ namespace DistantWorlds
 
         private void method_383(string string_30)
         {
-            pnlSaveLoadProgress.Size = new Size(320, 330);
+            pnlSaveLoadProgress.Size = new Size(UiScale.S(320), UiScale.S(330));
             pnlSaveLoadProgress.Location = new Point((mainView.Width - pnlSaveLoadProgress.Width) / 2, (mainView.Height - pnlSaveLoadProgress.Height) / 2);
-            pnlSaveLoadProgress.Font = new Font("Verdana", 11f, FontStyle.Bold);
-            Point location = new Point((pnlSaveLoadProgress.Width - bitmap_47.Width) / 2, (pnlSaveLoadProgress.Height - bitmap_47.Height) / 2 + 15);
+            pnlSaveLoadProgress.Font = UiScale.NewFont("Verdana", 11f, FontStyle.Bold);
+            Point location = new Point((pnlSaveLoadProgress.Width - bitmap_47.Width) / 2, (pnlSaveLoadProgress.Height - bitmap_47.Height) / 2 + UiScale.S(15));
             picSaveLoadGalaxy.Size = new Size(bitmap_47.Width, bitmap_47.Height);
             picSaveLoadGalaxy.Location = location;
             picSaveLoadGalaxy.BringToFront();
@@ -4841,11 +4841,11 @@ namespace DistantWorlds
             int num2 = 0;
             using (Graphics graphics = lblSaveLoadMessage.CreateGraphics())
             {
-                num = (int)graphics.MeasureString(string_30, font_2, 320, StringFormat.GenericTypographic).Width;
-                num2 = (int)graphics.MeasureString(string_30, font_2, 320, StringFormat.GenericTypographic).Height;
+                num = (int)graphics.MeasureString(string_30, font_2, UiScale.S(320), StringFormat.GenericTypographic).Width;
+                num2 = (int)graphics.MeasureString(string_30, font_2, UiScale.S(320), StringFormat.GenericTypographic).Height;
             }
-            lblSaveLoadMessage.Size = new Size(num + 2, num2 + 2);
-            lblSaveLoadMessage.Location = new Point((pnlSaveLoadProgress.Width - num) / 2, 13);
+            lblSaveLoadMessage.Size = new Size(num + UiScale.S(2), num2 + UiScale.S(2));
+            lblSaveLoadMessage.Location = new Point((pnlSaveLoadProgress.Width - num) / 2, UiScale.S(13));
             lblSaveLoadMessage.Font = font_2;
             lblSaveLoadMessage.ForeColor = Color.White;
             lblSaveLoadMessage.BackColor = Color.Transparent;
@@ -5018,11 +5018,11 @@ namespace DistantWorlds
                 bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                int num = e.Bounds.Height - 2;
+                int num = e.Bounds.Height - UiScale.S(2);
                 double num2 = (double)num / (double)bitmap.Height;
                 int num3 = (int)((double)bitmap.Width * num2);
                 int num4 = (e.Bounds.Width - num3) / 2;
-                int num5 = e.Bounds.Y + 1;
+                int num5 = e.Bounds.Y + UiScale.S(1);
                 Rectangle rect = new Rectangle(num4, num5, num3, num);
                 e.Graphics.DrawImage(bitmap, rect);
                 e.DrawFocusRectangle();

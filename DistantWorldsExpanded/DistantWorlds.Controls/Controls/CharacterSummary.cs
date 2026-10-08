@@ -73,9 +73,9 @@ namespace DistantWorlds.Controls
       this.btnChangeRole = new GlassButton();
       this.btnChangeEmpire = new GlassButton();
       this.SuspendLayout();
-      this.txtName.Location = new Point(21, 52);
+      this.txtName.Location = new Point(UiScale.S(21), UiScale.S(52));
       this.txtName.Name = "txtName";
-      this.txtName.Size = new Size(100, 20);
+      this.txtName.Size = new Size(UiScale.S(100), UiScale.S(20));
       this.txtName.TabIndex = 0;
       this.txtName.Enter += new EventHandler(this.txtName_Enter);
       this.txtName.KeyDown += new KeyEventHandler(this.txtName_KeyDown);
@@ -84,50 +84,50 @@ namespace DistantWorlds.Controls
       this.cmbBuiltObjects.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbBuiltObjects.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbBuiltObjects.FlatStyle = FlatStyle.Popup;
-      this.cmbBuiltObjects.Font = new Font("Verdana", 8.25f);
+      this.cmbBuiltObjects.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbBuiltObjects.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbBuiltObjects.FormattingEnabled = true;
       this.cmbBuiltObjects.Location = new Point(0, 0);
       this.cmbBuiltObjects.Name = "cmbBuiltObjects";
-      this.cmbBuiltObjects.Size = new Size(121, 21);
+      this.cmbBuiltObjects.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbBuiltObjects.TabIndex = 0;
       this.cmbFleets.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbFleets.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbFleets.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbFleets.FlatStyle = FlatStyle.Popup;
-      this.cmbFleets.Font = new Font("Verdana", 8.25f);
+      this.cmbFleets.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbFleets.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbFleets.FormattingEnabled = true;
       this.cmbFleets.Location = new Point(0, 0);
       this.cmbFleets.Name = "cmbFleets";
-      this.cmbFleets.Size = new Size(121, 21);
+      this.cmbFleets.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbFleets.TabIndex = 0;
       this.cmbFleetsHabitats.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbFleetsHabitats.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbFleetsHabitats.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbFleetsHabitats.FlatStyle = FlatStyle.Popup;
-      this.cmbFleetsHabitats.Font = new Font("Verdana", 8.25f);
+      this.cmbFleetsHabitats.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbFleetsHabitats.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbFleetsHabitats.FormattingEnabled = true;
       this.cmbFleetsHabitats.Location = new Point(0, 0);
       this.cmbFleetsHabitats.Name = "cmbFleetsHabitats";
-      this.cmbFleetsHabitats.Size = new Size(121, 21);
+      this.cmbFleetsHabitats.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbFleetsHabitats.TabIndex = 0;
       this.cmbHabitats.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbHabitats.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbHabitats.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbHabitats.FlatStyle = FlatStyle.Popup;
-      this.cmbHabitats.Font = new Font("Verdana", 8.25f);
+      this.cmbHabitats.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbHabitats.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbHabitats.FormattingEnabled = true;
       this.cmbHabitats.Location = new Point(0, 0);
       this.cmbHabitats.Name = "cmbHabitats";
-      this.cmbHabitats.Size = new Size(121, 21);
+      this.cmbHabitats.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbHabitats.TabIndex = 0;
       this.btnTransfer.BackColor = Color.FromArgb(0, 0, 0);
       this.btnTransfer.ClipBackground = false;
       this.btnTransfer.DelayFrameRefresh = false;
-      this.btnTransfer.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this.btnTransfer.Font = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
       this.btnTransfer.ForeColor = Color.FromArgb(150, 150, 150);
       this.btnTransfer.GlowColor = Color.FromArgb(48, 48, 128);
       this.btnTransfer.InnerBorderColor = Color.FromArgb(67, 67, 77);
@@ -136,39 +136,39 @@ namespace DistantWorlds.Controls
       this.btnTransfer.Name = "btnTransfer";
       this.btnTransfer.OuterBorderColor = Color.FromArgb(0, 0, 16);
       this.btnTransfer.ShineColor = Color.FromArgb(112, 112, 128);
-      this.btnTransfer.Size = new Size(75, 23);
+      this.btnTransfer.Size = new Size(UiScale.S(75), UiScale.S(23));
       this.btnTransfer.TabIndex = 0;
       this.btnTransfer.Text = "Transfer";
       this.btnTransfer.TextColor = Color.FromArgb(120, 120, 120);
       this.btnTransfer.TextColor2 = Color.FromArgb((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue);
       this.btnTransfer.ToggledOn = false;
       this.btnTransfer.Click += new EventHandler(this.btnTransfer_Click);
-      this.pnlCharacterSkillsTraits.Font = new Font("Verdana", 8f);
+      this.pnlCharacterSkillsTraits.Font = UiScale.NewFont("Verdana", 8f);
       this.pnlCharacterSkillsTraits.Location = new Point(0, 0);
       this.pnlCharacterSkillsTraits.Name = "pnlCharacterSkillsTraits";
-      this.pnlCharacterSkillsTraits.Size = new Size(200, 100);
+      this.pnlCharacterSkillsTraits.Size = new Size(UiScale.S(200), UiScale.S(100));
       this.pnlCharacterSkillsTraits.TabIndex = 0;
       this.pnlCharacterSkillsTraits.Enter += new EventHandler(this.pnlCharacterSkillsTraits_Enter);
       this.pnlCharacterSkillsTraits.MouseEnter += new EventHandler(this.pnlCharacterSkillsTraits_MouseEnter);
       this.pnlCharacterSkillsTraitsContainer.Location = new Point(0, 0);
       this.pnlCharacterSkillsTraitsContainer.Name = "pnlCharacterSkillsTraitsContainer";
-      this.pnlCharacterSkillsTraitsContainer.Size = new Size(200, 100);
+      this.pnlCharacterSkillsTraitsContainer.Size = new Size(UiScale.S(200), UiScale.S(100));
       this.pnlCharacterSkillsTraitsContainer.TabIndex = 0;
       this.cmbFleetBuiltObjectHabitats.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbFleetBuiltObjectHabitats.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbFleetBuiltObjectHabitats.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbFleetBuiltObjectHabitats.FlatStyle = FlatStyle.Popup;
-      this.cmbFleetBuiltObjectHabitats.Font = new Font("Verdana", 8.25f);
+      this.cmbFleetBuiltObjectHabitats.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbFleetBuiltObjectHabitats.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbFleetBuiltObjectHabitats.FormattingEnabled = true;
       this.cmbFleetBuiltObjectHabitats.Location = new Point(0, 0);
       this.cmbFleetBuiltObjectHabitats.Name = "cmbFleetBuiltObjectHabitats";
-      this.cmbFleetBuiltObjectHabitats.Size = new Size(121, 21);
+      this.cmbFleetBuiltObjectHabitats.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbFleetBuiltObjectHabitats.TabIndex = 0;
       this.btnChangeImage.BackColor = Color.FromArgb(0, 0, 0);
       this.btnChangeImage.ClipBackground = false;
       this.btnChangeImage.DelayFrameRefresh = false;
-      this.btnChangeImage.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this.btnChangeImage.Font = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
       this.btnChangeImage.ForeColor = Color.FromArgb(150, 150, 150);
       this.btnChangeImage.GlowColor = Color.FromArgb(48, 48, 128);
       this.btnChangeImage.InnerBorderColor = Color.FromArgb(67, 67, 77);
@@ -177,7 +177,7 @@ namespace DistantWorlds.Controls
       this.btnChangeImage.Name = "btnChangeImage";
       this.btnChangeImage.OuterBorderColor = Color.FromArgb(0, 0, 16);
       this.btnChangeImage.ShineColor = Color.FromArgb(112, 112, 128);
-      this.btnChangeImage.Size = new Size(75, 23);
+      this.btnChangeImage.Size = new Size(UiScale.S(75), UiScale.S(23));
       this.btnChangeImage.TabIndex = 0;
       this.btnChangeImage.Text = "Change Image";
       this.btnChangeImage.TextColor = Color.FromArgb(120, 120, 120);
@@ -187,7 +187,7 @@ namespace DistantWorlds.Controls
       this.btnEditSkillsTraits.BackColor = Color.FromArgb(0, 0, 0);
       this.btnEditSkillsTraits.ClipBackground = false;
       this.btnEditSkillsTraits.DelayFrameRefresh = false;
-      this.btnEditSkillsTraits.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this.btnEditSkillsTraits.Font = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
       this.btnEditSkillsTraits.ForeColor = Color.FromArgb(150, 150, 150);
       this.btnEditSkillsTraits.GlowColor = Color.FromArgb(48, 48, 128);
       this.btnEditSkillsTraits.InnerBorderColor = Color.FromArgb(67, 67, 77);
@@ -196,7 +196,7 @@ namespace DistantWorlds.Controls
       this.btnEditSkillsTraits.Name = "btnEditSkillsTraits";
       this.btnEditSkillsTraits.OuterBorderColor = Color.FromArgb(0, 0, 16);
       this.btnEditSkillsTraits.ShineColor = Color.FromArgb(112, 112, 128);
-      this.btnEditSkillsTraits.Size = new Size(75, 23);
+      this.btnEditSkillsTraits.Size = new Size(UiScale.S(75), UiScale.S(23));
       this.btnEditSkillsTraits.TabIndex = 0;
       this.btnEditSkillsTraits.Text = "Edit Skills and Traits";
       this.btnEditSkillsTraits.TextColor = Color.FromArgb(120, 120, 120);
@@ -207,28 +207,28 @@ namespace DistantWorlds.Controls
       this.cmbEmpire.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbEmpire.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbEmpire.FlatStyle = FlatStyle.Popup;
-      this.cmbEmpire.Font = new Font("Verdana", 8.25f);
+      this.cmbEmpire.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbEmpire.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbEmpire.FormattingEnabled = true;
       this.cmbEmpire.Location = new Point(0, 0);
       this.cmbEmpire.Name = "cmbEmpire";
-      this.cmbEmpire.Size = new Size(121, 21);
+      this.cmbEmpire.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbEmpire.TabIndex = 0;
       this.cmbRole.BackColor = Color.FromArgb(48, 48, 64);
       this.cmbRole.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbRole.FlatStyle = FlatStyle.Popup;
-      this.cmbRole.Font = new Font("Verdana", 8.25f);
+      this.cmbRole.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbRole.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbRole.FormattingEnabled = true;
       this.cmbRole.Location = new Point(0, 0);
       this.cmbRole.Name = "cmbRole";
-      this.cmbRole.Size = new Size(121, 21);
+      this.cmbRole.Size = new Size(UiScale.S(121), UiScale.S(21));
       this.cmbRole.TabIndex = 0;
       this.btnChangeRole.BackColor = Color.FromArgb(0, 0, 0);
       this.btnChangeRole.ClipBackground = false;
       this.btnChangeRole.DelayFrameRefresh = false;
-      this.btnChangeRole.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this.btnChangeRole.Font = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
       this.btnChangeRole.ForeColor = Color.FromArgb(150, 150, 150);
       this.btnChangeRole.GlowColor = Color.FromArgb(48, 48, 128);
       this.btnChangeRole.InnerBorderColor = Color.FromArgb(67, 67, 77);
@@ -237,7 +237,7 @@ namespace DistantWorlds.Controls
       this.btnChangeRole.Name = "btnChangeRole";
       this.btnChangeRole.OuterBorderColor = Color.FromArgb(0, 0, 16);
       this.btnChangeRole.ShineColor = Color.FromArgb(112, 112, 128);
-      this.btnChangeRole.Size = new Size(75, 23);
+      this.btnChangeRole.Size = new Size(UiScale.S(75), UiScale.S(23));
       this.btnChangeRole.TabIndex = 0;
       this.btnChangeRole.Text = "Change Role";
       this.btnChangeRole.TextColor = Color.FromArgb(120, 120, 120);
@@ -247,7 +247,7 @@ namespace DistantWorlds.Controls
       this.btnChangeEmpire.BackColor = Color.FromArgb(0, 0, 0);
       this.btnChangeEmpire.ClipBackground = false;
       this.btnChangeEmpire.DelayFrameRefresh = false;
-      this.btnChangeEmpire.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this.btnChangeEmpire.Font = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
       this.btnChangeEmpire.ForeColor = Color.FromArgb(150, 150, 150);
       this.btnChangeEmpire.GlowColor = Color.FromArgb(48, 48, 128);
       this.btnChangeEmpire.InnerBorderColor = Color.FromArgb(67, 67, 77);
@@ -256,7 +256,7 @@ namespace DistantWorlds.Controls
       this.btnChangeEmpire.Name = "btnChangeEmpire";
       this.btnChangeEmpire.OuterBorderColor = Color.FromArgb(0, 0, 16);
       this.btnChangeEmpire.ShineColor = Color.FromArgb(112, 112, 128);
-      this.btnChangeEmpire.Size = new Size(75, 23);
+      this.btnChangeEmpire.Size = new Size(UiScale.S(75), UiScale.S(23));
       this.btnChangeEmpire.TabIndex = 0;
       this.btnChangeEmpire.Text = "Change Empire";
       this.btnChangeEmpire.TextColor = Color.FromArgb(120, 120, 120);
@@ -284,7 +284,7 @@ namespace DistantWorlds.Controls
     public CharacterSummary()
     {
       this.InitializeComponent();
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this.InitializeFonts();
     }
@@ -309,10 +309,10 @@ namespace DistantWorlds.Controls
 
     private void InitializeFonts()
     {
-      this._LargeFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-      this._BoldFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._TitleFont = new Font(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._HugeFont = new Font(this.Font.FontFamily, 25f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._LargeFont = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
+      this._BoldFont = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = UiScale.NewFont(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._HugeFont = UiScale.NewFont(this.Font.FontFamily, 25f, FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void BindData(
@@ -333,8 +333,8 @@ namespace DistantWorlds.Controls
       this._FrameImage = frameImage;
       this._SpaceImage = spaceImage;
       this.InitializeFonts();
-      this.txtName.Size = new Size(120, 62);
-      this.txtName.Location = new Point(270, 38);
+      this.txtName.Size = new Size(UiScale.S(120), UiScale.S(62));
+      this.txtName.Location = new Point(UiScale.S(270), UiScale.S(38));
       this.txtName.Multiline = true;
       this.txtName.BackColor = this.BackColor;
       this.txtName.ForeColor = Color.FromArgb(170, 170, 170);
@@ -345,13 +345,13 @@ namespace DistantWorlds.Controls
         this.txtName.Text = this._Character.Name;
       else
         this.txtName.Text = string.Empty;
-      Point point1 = new Point(13, 272);
-      Size size1 = new Size(377, 270);
-      Size size2 = new Size(357, 270);
+      Point point1 = new Point(UiScale.S(13), UiScale.S(272));
+      Size size1 = new Size(UiScale.S(377), UiScale.S(270));
+      Size size2 = new Size(UiScale.S(357), UiScale.S(270));
       if (character != null && character.Role == CharacterRole.IntelligenceAgent && !editing)
       {
-        size1 = new Size(377, 188);
-        size2 = new Size(357, 188);
+        size1 = new Size(UiScale.S(377), UiScale.S(188));
+        size2 = new Size(UiScale.S(357), UiScale.S(188));
       }
       this.pnlCharacterSkillsTraits.Visible = true;
       if (!this.Controls.Contains((Control) this.pnlCharacterSkillsTraitsContainer))
@@ -367,21 +367,21 @@ namespace DistantWorlds.Controls
       this.pnlCharacterSkillsTraits.Font = this.Font;
       this.pnlCharacterSkillsTraits.Location = new Point(0, 0);
       this.pnlCharacterSkillsTraits.Size = size2;
-      this.pnlCharacterSkillsTraits.MaximumSize = new Size(360, 1000);
+      this.pnlCharacterSkillsTraits.MaximumSize = new Size(UiScale.S(360), UiScale.S(1000));
       this.pnlCharacterSkillsTraits.MinimumSize = size2;
       this.pnlCharacterSkillsTraits.AutoSize = true;
       this.pnlCharacterSkillsTraits.BindData(character);
-      this.btnChangeImage.Size = new Size(125, 25);
-      this.btnChangeImage.Location = new Point(268, 235);
+      this.btnChangeImage.Size = new Size(UiScale.S(125), UiScale.S(25));
+      this.btnChangeImage.Location = new Point(UiScale.S(268), UiScale.S(235));
       this.btnChangeImage.Text = TextResolver.GetText("Change Image") + "...";
       this.btnChangeImage.Font = this._BoldFont;
       this.btnChangeImage.Parent = (Control) this;
       this.btnChangeImage.BringToFront();
-      Point point2 = new Point(85, 565);
-      Size size3 = new Size(230, 22);
+      Point point2 = new Point(UiScale.S(85), UiScale.S(565));
+      Size size3 = new Size(UiScale.S(230), UiScale.S(22));
       this.btnTransfer.Text = TextResolver.GetText("Transfer to new location");
-      this.btnTransfer.Size = new Size(230, 25);
-      this.btnTransfer.Location = new Point(85, 595);
+      this.btnTransfer.Size = new Size(UiScale.S(230), UiScale.S(25));
+      this.btnTransfer.Location = new Point(UiScale.S(85), UiScale.S(595));
       this.btnTransfer.Font = this._BoldFont;
       this.btnTransfer.Parent = (Control) this;
       if (editing)
@@ -402,18 +402,18 @@ namespace DistantWorlds.Controls
         this.btnChangeRole.BringToFront();
         this.cmbEmpire.BringToFront();
         this.btnChangeEmpire.BringToFront();
-        point2 = new Point(85, 598);
-        size3 = new Size(230, 22);
+        point2 = new Point(UiScale.S(85), UiScale.S(598));
+        size3 = new Size(UiScale.S(230), UiScale.S(22));
         this.btnTransfer.Text = TextResolver.GetText("Change location immediately");
-        this.btnTransfer.Location = new Point(85, 626);
-        this.btnChangeImage.Size = new Size(125, 25);
-        this.btnChangeImage.Location = new Point(268, 205);
-        this.btnEditSkillsTraits.Size = new Size(125, 25);
-        this.btnEditSkillsTraits.Location = new Point(268, 235);
+        this.btnTransfer.Location = new Point(UiScale.S(85), UiScale.S(626));
+        this.btnChangeImage.Size = new Size(UiScale.S(125), UiScale.S(25));
+        this.btnChangeImage.Location = new Point(UiScale.S(268), UiScale.S(205));
+        this.btnEditSkillsTraits.Size = new Size(UiScale.S(125), UiScale.S(25));
+        this.btnEditSkillsTraits.Location = new Point(UiScale.S(268), UiScale.S(235));
         this.btnEditSkillsTraits.Text = TextResolver.GetText("Edit Skills and Traits");
         this.btnEditSkillsTraits.Font = this._BoldFont;
-        this.cmbRole.Size = new Size(200, 21);
-        this.cmbRole.Location = new Point(22, 544);
+        this.cmbRole.Size = new Size(UiScale.S(200), UiScale.S(21));
+        this.cmbRole.Location = new Point(UiScale.S(22), UiScale.S(544));
         Empire empire = (Empire) null;
         if (this._Character != null)
           empire = this._Character.Empire;
@@ -421,18 +421,18 @@ namespace DistantWorlds.Controls
         if (this._Character != null)
           this.cmbRole.SetSelectedCharacter(this._Character.Role);
         this.cmbRole.Font = this.Font;
-        this.btnChangeRole.Size = new Size(150, 25);
-        this.btnChangeRole.Location = new Point(227, 544);
+        this.btnChangeRole.Size = new Size(UiScale.S(150), UiScale.S(25));
+        this.btnChangeRole.Location = new Point(UiScale.S(227), UiScale.S(544));
         this.btnChangeRole.Text = TextResolver.GetText("Change Role");
         this.btnChangeRole.Font = this._BoldFont;
-        this.cmbEmpire.Size = new Size(200, 21);
-        this.cmbEmpire.Location = new Point(22, 571);
+        this.cmbEmpire.Size = new Size(UiScale.S(200), UiScale.S(21));
+        this.cmbEmpire.Location = new Point(UiScale.S(22), UiScale.S(571));
         this.cmbEmpire.BindData(galaxy.PlayerEmpire, galaxy.Empires, galaxy.PirateEmpires, (Empire) null, false);
         if (this._Character != null)
           this.cmbEmpire.SetSelectedEmpire(this._Character.Empire);
         this.cmbEmpire.Font = this.Font;
-        this.btnChangeEmpire.Size = new Size(150, 25);
-        this.btnChangeEmpire.Location = new Point(227, 571);
+        this.btnChangeEmpire.Size = new Size(UiScale.S(150), UiScale.S(25));
+        this.btnChangeEmpire.Location = new Point(UiScale.S(227), UiScale.S(571));
         this.btnChangeEmpire.Text = TextResolver.GetText("Change Empire");
         this.btnChangeEmpire.Font = this._BoldFont;
       }
@@ -595,23 +595,23 @@ namespace DistantWorlds.Controls
         bool inTransitOrUnknown = false;
         if (character.Location == null || character.TransferDestination != null && (double) character.TransferTimeRemaining > 0.0 || character.Mission != null && character.Mission.Type != IntelligenceMissionType.CounterIntelligence && character.Mission.Type != IntelligenceMissionType.Undefined)
           inTransitOrUnknown = true;
-        int width = 250;
-        int height = 250;
+        int width = UiScale.S(250);
+        int height = UiScale.S(250);
         Bitmap planetCompositeImage = this.GenerateCharacterPlanetCompositeImage(character, width, height, this._FrameImage, 6, inTransitOrUnknown);
         Rectangle srcRect = new Rectangle(0, 0, planetCompositeImage.Width, planetCompositeImage.Height);
-        Rectangle destRect = new Rectangle(10, 10, width, height);
+        Rectangle destRect = new Rectangle(UiScale.S(10), UiScale.S(10), width, height);
         graphics.DrawImage((Image) planetCompositeImage, destRect, srcRect, GraphicsUnit.Pixel);
         planetCompositeImage.Dispose();
       }
-      int y1 = 10;
+      int y1 = UiScale.S(10);
       string text = Galaxy.ResolveDescription(character.Role);
-      Point location = new Point(270 + (120 - (int) graphics.MeasureString(text, this._BoldFont, 120, StringFormat.GenericDefault).Width) / 2, y1);
+      Point location = new Point(UiScale.S(270) + (UiScale.S(120) - (int) graphics.MeasureString(text, this._BoldFont, UiScale.S(120), StringFormat.GenericDefault).Width) / 2, y1);
       this.DrawStringWithDropShadow(graphics, text, this._BoldFont, location);
-      int y2 = 108;
+      int y2 = UiScale.S(108);
       string s = Galaxy.ResolveDescriptionCharacterTask(character, this._Galaxy);
       if (string.IsNullOrEmpty(s))
         s = Galaxy.ResolveCharacterLocationDescription(character);
-      RectangleF layoutRectangle = new RectangleF(270f, (float) y2, 120f, 152f);
+      RectangleF layoutRectangle = new RectangleF(UiScale.S(270f), (float) y2, UiScale.S(120f), UiScale.S(152f));
       graphics.DrawString(s, this._LargeFont, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);
     }
 
@@ -678,9 +678,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
 
@@ -691,13 +691,13 @@ namespace DistantWorlds.Controls
       Point location,
       SizeF size)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       PointF pointF = new PointF((float) location.X, (float) location.Y);
-      RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + 2f, size.Height + 2f);
+      RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       pointF = new PointF((float) location.X, (float) location.Y);
-      layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + 2f, size.Height + 2f);
+      layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);
     }
 

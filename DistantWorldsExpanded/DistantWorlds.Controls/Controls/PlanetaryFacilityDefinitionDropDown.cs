@@ -26,7 +26,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData()
@@ -127,7 +127,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      PointF point = new PointF(23f, (float) (e.Bounds.Y + 1));
+      PointF point = new PointF(UiScale.S(23f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
       SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       string empty = string.Empty;
@@ -145,10 +145,10 @@ namespace DistantWorlds.Controls
         Bitmap facilityImage = this._FacilityImages[(int) this._Facilities[index].PictureRef];
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        int height = e.Bounds.Height - 2;
+        int height = e.Bounds.Height - UiScale.S(2);
         double num = (double) height / (double) facilityImage.Height;
         int width = (int) ((double) facilityImage.Width * num);
-        rect = new Rectangle(0, e.Bounds.Y + 1, width, height);
+        rect = new Rectangle(0, e.Bounds.Y + UiScale.S(1), width, height);
         e.Graphics.DrawImage((Image) facilityImage, rect);
       }
       e.DrawFocusRectangle();

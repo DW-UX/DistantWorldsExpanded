@@ -39,17 +39,17 @@ namespace DistantWorlds.Controls
             
             _BonusesPanel = new EmpireSummaryBonuses();
             _Container = new Panel();
-            int_0 = 15;
-            int_1 = 10;
-            int_2 = 10;
+            int_0 = UiScale.S(15);
+            int_1 = UiScale.S(10);
+            int_2 = UiScale.S(10);
             solidBrush_0 = new SolidBrush(Color.FromArgb(170, 170, 170));
             solidBrush_1 = new SolidBrush(Color.Black);
             solidBrush_2 = new SolidBrush(Color.Red);
             solidBrush_3 = new SolidBrush(Color.Green);
-            Font = new Font("Verdana", 8f);
+            Font = UiScale.NewFont("Verdana", 8f);
             SetFont(16.67f);
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         public void ClearData()
@@ -63,8 +63,8 @@ namespace DistantWorlds.Controls
             {
                 base.Controls.Add(_Container);
             }
-            _Container.Size = new Size(base.Width - 20, base.Height - (int_1 * 2 + int_0 + 10));
-            _Container.Location = new Point(int_2, int_1 + int_0 + 10);
+            _Container.Size = new Size(base.Width - UiScale.S(20), base.Height - (int_1 * 2 + int_0 + UiScale.S(10)));
+            _Container.Location = new Point(int_2, int_1 + int_0 + UiScale.S(10));
             _Container.AutoScroll = true;
             _Container.SetAutoScrollMargin(0, 0);
             _Container.AutoScrollPosition = new Point(0, 0);
@@ -74,17 +74,17 @@ namespace DistantWorlds.Controls
             }
             _Container.Visible = true;
             _Container.BringToFront();
-            _BonusesPanel.Size = new Size(_Container.Width - 20, _Container.Height - 20);
+            _BonusesPanel.Size = new Size(_Container.Width - UiScale.S(20), _Container.Height - UiScale.S(20));
             _BonusesPanel.Location = new Point(0, 0);
-            _BonusesPanel.MaximumSize = new Size(_Container.Width - 20, 1000);
-            _BonusesPanel.MinimumSize = new Size(_Container.Width - 20, _Container.Height - 20);
+            _BonusesPanel.MaximumSize = new Size(_Container.Width - UiScale.S(20), UiScale.S(1000));
+            _BonusesPanel.MinimumSize = new Size(_Container.Width - UiScale.S(20), _Container.Height - UiScale.S(20));
             _BonusesPanel.AutoSize = true;
             _BonusesPanel.Visible = true;
             _BonusesPanel.BringToFront();
             _BonusesPanel.Font = Font;
             _BonusesPanel.Ignite(parentForm, galaxy, empire, characterImageCache);
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
             Invalidate();
         }
 
@@ -108,9 +108,9 @@ namespace DistantWorlds.Controls
 
         private void method_2(Graphics graphics_0, string string_0, Font font_2, Point point_0, SolidBrush solidBrush_4)
         {
-            point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+            point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
-            point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+            point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_4, point_0, StringFormat.GenericTypographic);
         }
 
@@ -119,18 +119,18 @@ namespace DistantWorlds.Controls
             int_3 = 0;
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_2, brush: solidBrush_1, format: StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 RectangleF layoutRectangle2 = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle2, StringFormat.GenericTypographic);
                 int_3 = (int)graphics_0.MeasureString(string_0, font_2, (int)sizeF_0.Width, StringFormat.GenericTypographic).Height;
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, brush_0, point_0, StringFormat.GenericTypographic);
             }
         }

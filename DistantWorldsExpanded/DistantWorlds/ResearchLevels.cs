@@ -67,6 +67,7 @@ namespace DistantWorlds
         {
             
             InitializeComponent();
+            UiScale.ScaleLayout(this);
         }
 
         private void method_0()
@@ -79,49 +80,49 @@ namespace DistantWorlds
 
         public void LayoutControls()
         {
-            int num = base.Width - 20;
+            int num = base.Width - UiScale.S(20);
             SuspendLayout();
             method_0();
             lblAreaTitle.Font = new Font(lblAreaTitle.Font, FontStyle.Bold);
             lblProgressTitle.Font = new Font(lblProgressTitle.Font, FontStyle.Bold);
             lblLatestComponentTitle.Font = new Font(lblLatestComponentTitle.Font, FontStyle.Bold);
-            lblAreaTitle.Location = new Point(10, 10);
-            lblProgressTitle.Location = new Point(150, 10);
-            lblLatestComponentTitle.Location = new Point(400, 10);
-            resBeamWeapon.Size = new Size(num, 24);
-            kabbfiXxi.Size = new Size(num, 24);
-            resAreaWeapon.Size = new Size(num, 24);
-            resArmor.Size = new Size(num, 24);
-            resShields.Size = new Size(num, 24);
-            resEngine.Size = new Size(num, 24);
-            resHyperDrive.Size = new Size(num, 24);
-            resReactor.Size = new Size(num, 24);
-            resEnergyCollector.Size = new Size(num, 24);
-            resExtractor.Size = new Size(num, 24);
-            resManufacturer.Size = new Size(num, 24);
-            resStorage.Size = new Size(num, 24);
-            resSensor.Size = new Size(num, 24);
-            resComputer.Size = new Size(num, 24);
-            resLabs.Size = new Size(num, 24);
-            resConstruction.Size = new Size(num, 24);
-            resHabitation.Size = new Size(num, 24);
-            resBeamWeapon.Location = new Point(10, 36);
-            kabbfiXxi.Location = new Point(10, 63);
-            resAreaWeapon.Location = new Point(10, 90);
-            resArmor.Location = new Point(10, 117);
-            resShields.Location = new Point(10, 144);
-            resEngine.Location = new Point(10, 171);
-            resHyperDrive.Location = new Point(10, 198);
-            resReactor.Location = new Point(10, 225);
-            resEnergyCollector.Location = new Point(10, 252);
-            resExtractor.Location = new Point(10, 279);
-            resManufacturer.Location = new Point(10, 306);
-            resStorage.Location = new Point(10, 333);
-            resSensor.Location = new Point(10, 360);
-            resComputer.Location = new Point(10, 387);
-            resLabs.Location = new Point(10, 414);
-            resConstruction.Location = new Point(10, 441);
-            resHabitation.Location = new Point(10, 468);
+            lblAreaTitle.Location = new Point(UiScale.S(10), UiScale.S(10));
+            lblProgressTitle.Location = new Point(UiScale.S(150), UiScale.S(10));
+            lblLatestComponentTitle.Location = new Point(UiScale.S(400), UiScale.S(10));
+            resBeamWeapon.Size = new Size(num, UiScale.S(24));
+            kabbfiXxi.Size = new Size(num, UiScale.S(24));
+            resAreaWeapon.Size = new Size(num, UiScale.S(24));
+            resArmor.Size = new Size(num, UiScale.S(24));
+            resShields.Size = new Size(num, UiScale.S(24));
+            resEngine.Size = new Size(num, UiScale.S(24));
+            resHyperDrive.Size = new Size(num, UiScale.S(24));
+            resReactor.Size = new Size(num, UiScale.S(24));
+            resEnergyCollector.Size = new Size(num, UiScale.S(24));
+            resExtractor.Size = new Size(num, UiScale.S(24));
+            resManufacturer.Size = new Size(num, UiScale.S(24));
+            resStorage.Size = new Size(num, UiScale.S(24));
+            resSensor.Size = new Size(num, UiScale.S(24));
+            resComputer.Size = new Size(num, UiScale.S(24));
+            resLabs.Size = new Size(num, UiScale.S(24));
+            resConstruction.Size = new Size(num, UiScale.S(24));
+            resHabitation.Size = new Size(num, UiScale.S(24));
+            resBeamWeapon.Location = new Point(UiScale.S(10), UiScale.S(36));
+            kabbfiXxi.Location = new Point(UiScale.S(10), UiScale.S(63));
+            resAreaWeapon.Location = new Point(UiScale.S(10), UiScale.S(90));
+            resArmor.Location = new Point(UiScale.S(10), UiScale.S(117));
+            resShields.Location = new Point(UiScale.S(10), UiScale.S(144));
+            resEngine.Location = new Point(UiScale.S(10), UiScale.S(171));
+            resHyperDrive.Location = new Point(UiScale.S(10), UiScale.S(198));
+            resReactor.Location = new Point(UiScale.S(10), UiScale.S(225));
+            resEnergyCollector.Location = new Point(UiScale.S(10), UiScale.S(252));
+            resExtractor.Location = new Point(UiScale.S(10), UiScale.S(279));
+            resManufacturer.Location = new Point(UiScale.S(10), UiScale.S(306));
+            resStorage.Location = new Point(UiScale.S(10), UiScale.S(333));
+            resSensor.Location = new Point(UiScale.S(10), UiScale.S(360));
+            resComputer.Location = new Point(UiScale.S(10), UiScale.S(387));
+            resLabs.Location = new Point(UiScale.S(10), UiScale.S(414));
+            resConstruction.Location = new Point(UiScale.S(10), UiScale.S(441));
+            resHabitation.Location = new Point(UiScale.S(10), UiScale.S(468));
             ResumeLayout();
         }
 
@@ -291,21 +292,21 @@ namespace DistantWorlds
             this.resHabitation.Size = new System.Drawing.Size(563, 20);
             this.resHabitation.TabIndex = 16;
             this.lblProgressTitle.AutoSize = true;
-            this.lblProgressTitle.Font = new System.Drawing.Font("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblProgressTitle.Font = UiScale.NewFont("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             this.lblProgressTitle.Location = new System.Drawing.Point(187, 13);
             this.lblProgressTitle.Name = "lblProgressTitle";
             this.lblProgressTitle.Size = new System.Drawing.Size(72, 16);
             this.lblProgressTitle.TabIndex = 17;
             this.lblProgressTitle.Text = "Progress";
             this.lblLatestComponentTitle.AutoSize = true;
-            this.lblLatestComponentTitle.Font = new System.Drawing.Font("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblLatestComponentTitle.Font = UiScale.NewFont("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             this.lblLatestComponentTitle.Location = new System.Drawing.Point(462, 13);
             this.lblLatestComponentTitle.Name = "lblLatestComponentTitle";
             this.lblLatestComponentTitle.Size = new System.Drawing.Size(142, 16);
             this.lblLatestComponentTitle.TabIndex = 18;
             this.lblLatestComponentTitle.Text = "Latest Component";
             this.lblAreaTitle.AutoSize = true;
-            this.lblAreaTitle.Font = new System.Drawing.Font("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblAreaTitle.Font = UiScale.NewFont("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             this.lblAreaTitle.Location = new System.Drawing.Point(32, 13);
             this.lblAreaTitle.Name = "lblAreaTitle";
             this.lblAreaTitle.Size = new System.Drawing.Size(42, 16);
@@ -334,7 +335,7 @@ namespace DistantWorlds
             base.Controls.Add(this.resAreaWeapon);
             base.Controls.Add(this.kabbfiXxi);
             base.Controls.Add(this.resBeamWeapon);
-            this.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.Font = UiScale.NewFont("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             this.ForeColor = System.Drawing.Color.White;
             base.Name = "ResearchLevels";
             base.Size = new System.Drawing.Size(665, 491);

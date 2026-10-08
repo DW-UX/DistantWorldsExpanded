@@ -5187,11 +5187,11 @@ namespace DistantWorlds.Controls
                         float num21 = (float)((double)(i * Galaxy.SectorSize - int_16) / double_15);
                         XnaDrawingHelper.DrawLine(spriteBatch_2, num21, num17, num21, num18, main_0.color_5, 1);
                         string text = ((char)(i + 65)).ToString();
-                        float val = num17 - 1f;
+                        float val = num17 - UiScale.S(1f);
                         val = Math.Max(0f, val);
                         XnaDrawingHelper.DrawString(point: new PointF(num21 + num6, val), spriteBatch: spriteBatch_2, text: text, font: spriteFont_1, color: solidBrush.Color);
-                        val = num18 - 14f;
-                        val = Math.Min((float)base.ClientRectangle.Height - 11f, val);
+                        val = num18 - UiScale.S(14f);
+                        val = Math.Min((float)base.ClientRectangle.Height - UiScale.S(11f), val);
                         XnaDrawingHelper.DrawString(point: new PointF(num21 + num6, val), spriteBatch: spriteBatch_2, text: text, font: spriteFont_1, color: solidBrush.Color);
                     }
                     if (flag21)
@@ -5204,11 +5204,11 @@ namespace DistantWorlds.Controls
                         float num23 = (float)((double)(j * Galaxy.SectorSize - int_18) / double_15);
                         XnaDrawingHelper.DrawLine(spriteBatch_2, num19, num23, num20, num23, main_0.color_5, 1);
                         string text2 = (j + 1).ToString();
-                        float val2 = num19 - 2f;
+                        float val2 = num19 - UiScale.S(2f);
                         val2 = Math.Max(0f, val2);
                         XnaDrawingHelper.DrawString(point: new PointF(val2, num23 + num7), spriteBatch: spriteBatch_2, text: text2, font: spriteFont_1, color: solidBrush.Color);
-                        val2 = num20 - 14f;
-                        val2 = Math.Min((float)base.ClientRectangle.Width - 8f, val2);
+                        val2 = num20 - UiScale.S(14f);
+                        val2 = Math.Min((float)base.ClientRectangle.Width - UiScale.S(8f), val2);
                         XnaDrawingHelper.DrawString(point: new PointF(val2, num23 + num7), spriteBatch: spriteBatch_2, text: text2, font: spriteFont_1, color: solidBrush.Color);
                     }
                     if (flag22)
@@ -5628,8 +5628,8 @@ namespace DistantWorlds.Controls
                             num44 += (int)num46;
                         }
                         string name = systemInfo.SystemStar.Name;
-                        int num47 = (int)(num25 + 1f + (float)num44 + val3);
-                        int num48 = (int)num26 - (spriteFont.LineSpacing + 1);
+                        int num47 = (int)(num25 + UiScale.S(1f) + (float)num44 + val3);
+                        int num48 = (int)num26 - (spriteFont.LineSpacing + UiScale.S(1));
                         XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point(num47, num48), spriteBatch: spriteBatch_2, text: name, font: spriteFont, foreColor: solidBrush2.Color);
                         if (flag23)
                         {
@@ -5760,8 +5760,8 @@ namespace DistantWorlds.Controls
                             int num58 = num56 - (int)(vector2.Y / 2f);
                             if (galaxyLocation.Type != GalaxyLocationType.NebulaCloud)
                             {
-                                num57 -= 5;
-                                num58 -= 20;
+                                num57 -= UiScale.S(5);
+                                num58 -= UiScale.S(20);
                             }
                             XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, galaxyLocation.Name, spriteFont2, solidBrush_0.Color, num57, num58);
                         }

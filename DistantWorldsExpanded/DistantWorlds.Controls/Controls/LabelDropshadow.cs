@@ -17,7 +17,7 @@ namespace DistantWorlds.Controls
   {
     private string _Text;
     private Color _DropshadowColor = Color.Black;
-    private int _DropshadowOffset = 1;
+    private int _DropshadowOffset = UiScale.S(1);
 
     public LabelDropshadow() => this.ForeColor = Color.White;
 
@@ -52,9 +52,9 @@ namespace DistantWorlds.Controls
       e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       SizeF sizeF = e.Graphics.MeasureString(this._Text, this.Font, this.Width, StringFormat.GenericTypographic);
       float x = Math.Max(0.0f, (float) (((double) this.Width - (double) sizeF.Width) / 2.0));
-      RectangleF layoutRectangle = new RectangleF(x + (float) this._DropshadowOffset, (float) this._DropshadowOffset, sizeF.Width + 2f, (float) this.Height + 2f);
+      RectangleF layoutRectangle = new RectangleF(x + (float) this._DropshadowOffset, (float) this._DropshadowOffset, sizeF.Width + UiScale.S(2f), (float) this.Height + UiScale.S(2f));
       e.Graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(this.DropshadowColor), layoutRectangle, StringFormat.GenericTypographic);
-      layoutRectangle = new RectangleF(x, 0.0f, sizeF.Width + 2f, (float) this.Height + 2f);
+      layoutRectangle = new RectangleF(x, 0.0f, sizeF.Width + UiScale.S(2f), (float) this.Height + UiScale.S(2f));
       e.Graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(this.ForeColor), layoutRectangle, StringFormat.GenericTypographic);
     }
   }

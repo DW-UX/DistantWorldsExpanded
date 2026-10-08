@@ -1,0 +1,5 @@
+G:\DistantWorldsExpanded\DwUxDesignHelper\GenericUserControlDocumentDesigner.cs
+G:\DistantWorldsExpanded\DwUxDesignHelper\ScreenPanelDocumentDesigner.cs
+G:\DistantWorldsExpanded\DwUxDesignHelper\obj\Release\net7.0-windows\DwUxDesignHelper.GlobalUsings.g.cs
+G:\DistantWorldsExpanded\DwUxDesignHelper\obj\Release\net7.0-windows\.NETCoreApp,Version=v7.0.AssemblyAttributes.cs
+G:\DistantWorldsExpanded\DwUxDesignHelper\obj\Release\net7.0-windows\DwUxDesignHelper.AssemblyInfo.cs

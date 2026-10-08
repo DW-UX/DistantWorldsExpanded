@@ -38,29 +38,29 @@ namespace DistantWorlds.Controls
       switch (this.cornerStyle)
       {
         case CornerStyle.Normal:
-          this.graphicPath.AddLine(0, 0, this.Width - 1, 0);
+          this.graphicPath.AddLine(0, 0, this.Width - UiScale.S(1), 0);
           this.regionPath.AddLine(0, 0, this.Width, 0);
-          this.graphicPath.AddLine(this.Width - 1, 0, this.Width - 1, this.Height - 1);
+          this.graphicPath.AddLine(this.Width - UiScale.S(1), 0, this.Width - UiScale.S(1), this.Height - UiScale.S(1));
           this.regionPath.AddLine(this.Width, 0, this.Width, this.Height);
-          this.graphicPath.AddLine(this.Width - 1, this.Height - 1, 0, this.Height - 1);
+          this.graphicPath.AddLine(this.Width - UiScale.S(1), this.Height - UiScale.S(1), 0, this.Height - UiScale.S(1));
           this.regionPath.AddLine(this.Width, this.Height, 0, this.Height);
-          this.graphicPath.AddLine(0, this.Height - 1, 0, 0);
+          this.graphicPath.AddLine(0, this.Height - UiScale.S(1), 0, 0);
           this.regionPath.AddLine(0, this.Height, 0, 0);
           break;
         case CornerStyle.Rounded:
           this.graphicPath.AddArc(0, 0, this.cornerSquare, this.cornerSquare, 180f, 90f);
           this.regionPath.AddArc(0, 0, this.cornerSquare, this.cornerSquare, 180f, 90f);
-          this.graphicPath.AddLine(this.cornerSquare - this.cornerSquare / 2, 0, this.Width - this.cornerSquare + this.cornerSquare / 2 - 1, 0);
+          this.graphicPath.AddLine(this.cornerSquare - this.cornerSquare / 2, 0, this.Width - this.cornerSquare + this.cornerSquare / 2 - UiScale.S(1), 0);
           this.regionPath.AddLine(this.cornerSquare - this.cornerSquare / 2, 0, this.Width - this.cornerSquare + this.cornerSquare / 2, 0);
-          this.graphicPath.AddArc(this.Width - this.cornerSquare - 1, 0, this.cornerSquare, this.cornerSquare, -90f, 90f);
+          this.graphicPath.AddArc(this.Width - this.cornerSquare - UiScale.S(1), 0, this.cornerSquare, this.cornerSquare, -90f, 90f);
           this.regionPath.AddArc(this.Width - this.cornerSquare, 0, this.cornerSquare, this.cornerSquare, -90f, 90f);
-          this.graphicPath.AddLine(this.Width - 1, this.cornerSquare - this.cornerSquare / 2, this.Width - 1, this.Height - this.cornerSquare + this.cornerSquare / 2);
+          this.graphicPath.AddLine(this.Width - UiScale.S(1), this.cornerSquare - this.cornerSquare / 2, this.Width - UiScale.S(1), this.Height - this.cornerSquare + this.cornerSquare / 2);
           this.regionPath.AddLine(this.Width, this.cornerSquare - this.cornerSquare / 2, this.Width, this.Height - this.cornerSquare + this.cornerSquare / 2);
-          this.graphicPath.AddArc(this.Width - this.cornerSquare - 1, this.Height - 1 - this.cornerSquare, this.cornerSquare, this.cornerSquare, 0.0f, 90f);
+          this.graphicPath.AddArc(this.Width - this.cornerSquare - UiScale.S(1), this.Height - UiScale.S(1) - this.cornerSquare, this.cornerSquare, this.cornerSquare, 0.0f, 90f);
           this.regionPath.AddArc(this.Width - this.cornerSquare, this.Height - this.cornerSquare, this.cornerSquare, this.cornerSquare, 0.0f, 90f);
-          this.graphicPath.AddLine(this.cornerSquare - this.cornerSquare / 2, this.Height - 1, this.Width - this.cornerSquare + this.cornerSquare / 2, this.Height - 1);
+          this.graphicPath.AddLine(this.cornerSquare - this.cornerSquare / 2, this.Height - UiScale.S(1), this.Width - this.cornerSquare + this.cornerSquare / 2, this.Height - UiScale.S(1));
           this.regionPath.AddLine(this.cornerSquare - this.cornerSquare / 2, this.Height, this.Width - this.cornerSquare + this.cornerSquare / 2, this.Height);
-          this.graphicPath.AddArc(0, this.Height - this.cornerSquare - 1, this.cornerSquare, this.cornerSquare, 90f, 90f);
+          this.graphicPath.AddArc(0, this.Height - this.cornerSquare - UiScale.S(1), this.cornerSquare, this.cornerSquare, 90f, 90f);
           this.regionPath.AddArc(0, this.Height - this.cornerSquare, this.cornerSquare, this.cornerSquare, 90f, 90f);
           this.graphicPath.AddLine(0, this.cornerSquare - this.cornerSquare / 2, 0, this.Height - this.cornerSquare + this.cornerSquare / 2);
           this.regionPath.AddLine(0, this.cornerSquare - this.cornerSquare / 2, 0, this.Height - this.cornerSquare + this.cornerSquare / 2);

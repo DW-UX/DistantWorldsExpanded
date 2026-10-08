@@ -131,10 +131,11 @@ namespace DistantWorlds.Controls
         public BuiltObjectListView()
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             _Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             _Grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             _Grid.EnableHeadersVisualStyles = false;
-            _Grid.RowTemplate.Height = 25;
+            _Grid.RowTemplate.Height = UiScale.S(25);
             DataGridViewImageColumn dataGridViewImageColumn = null;
             DataGridViewTextBoxColumn dataGridViewTextBoxColumn = null;
             dataGridViewImageColumn = new SortableImageColumn
@@ -145,7 +146,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = true,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(string),
-                Width = 25,
+                Width = UiScale.S(25),
                 FillWeight = 25f
             };
             _Grid.Columns.Add(dataGridViewImageColumn);
@@ -158,7 +159,7 @@ namespace DistantWorlds.Controls
                 ImageLayout = DataGridViewImageCellLayout.Zoom,
                 SortMode = DataGridViewColumnSortMode.NotSortable,
                 ValueType = typeof(Image),
-                Width = 30,
+                Width = UiScale.S(30),
                 FillWeight = 30f
             };
             _Grid.Columns.Add(dataGridViewImageColumn);
@@ -169,7 +170,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = false,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(string),
-                Width = 105,
+                Width = UiScale.S(105),
                 FillWeight = 105f
             };
             _Grid.Columns.Add(dataGridViewTextBoxColumn);
@@ -180,7 +181,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = false,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(string),
-                Width = 105,
+                Width = UiScale.S(105),
                 FillWeight = 105f
             };
             _Grid.Columns.Add(dataGridViewTextBoxColumn);
@@ -191,7 +192,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = false,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(string),
-                Width = 60,
+                Width = UiScale.S(60),
                 FillWeight = 60f
             };
             _Grid.Columns.Add(dataGridViewTextBoxColumn);
@@ -202,7 +203,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = false,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(string),
-                Width = 60,
+                Width = UiScale.S(60),
                 FillWeight = 60f
             };
             _Grid.Columns.Add(dataGridViewTextBoxColumn);
@@ -213,7 +214,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = false,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(int),
-                Width = 50,
+                Width = UiScale.S(50),
                 FillWeight = 50f,
                 DefaultCellStyle =
             {
@@ -228,7 +229,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = false,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(int),
-                Width = 50,
+                Width = UiScale.S(50),
                 FillWeight = 50f,
                 DefaultCellStyle =
             {
@@ -243,7 +244,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = false,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(double),
-                Width = 50,
+                Width = UiScale.S(50),
                 FillWeight = 50f,
                 DefaultCellStyle =
             {
@@ -258,7 +259,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = false,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(string),
-                Width = 60,
+                Width = UiScale.S(60),
                 FillWeight = 60f
             };
             _Grid.Columns.Add(dataGridViewTextBoxColumn);
@@ -270,7 +271,7 @@ namespace DistantWorlds.Controls
                 ReadOnly = true,
                 SortMode = DataGridViewColumnSortMode.Automatic,
                 ValueType = typeof(string),
-                Width = 25,
+                Width = UiScale.S(25),
                 FillWeight = 25f
             };
             _Grid.Columns.Add(dataGridViewImageColumn);
@@ -455,7 +456,7 @@ namespace DistantWorlds.Controls
 
         public void BindSingleHabitat(Habitat habitat, DataGridViewRow row, Empire defaultEmpire)
         {
-            row.Height = 30;
+            row.Height = UiScale.S(30);
             if (habitat != null)
             {
                 if (habitat.Empire != null)
@@ -492,7 +493,7 @@ namespace DistantWorlds.Controls
 
         public void BindSingleBuiltObject(BuiltObject builtObject, DataGridViewRow row, Empire defaultEmpire, Galaxy galaxy)
         {
-            row.Height = 30;
+            row.Height = UiScale.S(30);
             Empire empire = builtObject.Empire;
             if (builtObject.PirateEmpireId > 0)
             {

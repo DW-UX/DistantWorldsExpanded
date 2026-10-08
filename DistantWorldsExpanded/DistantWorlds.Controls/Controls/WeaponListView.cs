@@ -17,9 +17,9 @@ namespace DistantWorlds.Controls
     {
         private IContainer components;
         private WeaponList _Weapons;
-        private int _DamageGraphWidth = 270;
-        private int _DamageGraphHeight = 45;
-        private int _RowHeight = 45;
+        private int _DamageGraphWidth = UiScale.S(270);
+        private int _DamageGraphHeight = UiScale.S(45);
+        private int _RowHeight = UiScale.S(45);
 
         protected override void Dispose(bool disposing)
         {
@@ -62,7 +62,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn1.ImageLayout = DataGridViewImageCellLayout.Zoom;
             gridViewImageColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn1.ValueType = typeof(Image);
-            gridViewImageColumn1.Width = 30;
+            gridViewImageColumn1.Width = UiScale.S(30);
             gridViewImageColumn1.FillWeight = 30f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn1);
             DataGridViewTextBoxColumn viewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -71,7 +71,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn1.ReadOnly = false;
             viewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn1.ValueType = typeof(string);
-            viewTextBoxColumn1.Width = 130;
+            viewTextBoxColumn1.Width = UiScale.S(130);
             viewTextBoxColumn1.FillWeight = 130f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn1);
             DataGridViewTextBoxColumn viewTextBoxColumn2 = new DataGridViewTextBoxColumn();
@@ -80,7 +80,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn2.ReadOnly = false;
             viewTextBoxColumn2.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn2.ValueType = typeof(int);
-            viewTextBoxColumn2.Width = 40;
+            viewTextBoxColumn2.Width = UiScale.S(40);
             viewTextBoxColumn2.FillWeight = 40f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn2);
             DataGridViewTextBoxColumn viewTextBoxColumn3 = new DataGridViewTextBoxColumn();
@@ -89,7 +89,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn3.ReadOnly = false;
             viewTextBoxColumn3.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn3.ValueType = typeof(int);
-            viewTextBoxColumn3.Width = 40;
+            viewTextBoxColumn3.Width = UiScale.S(40);
             viewTextBoxColumn3.FillWeight = 40f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn3);
             DataGridViewTextBoxColumn viewTextBoxColumn4 = new DataGridViewTextBoxColumn();
@@ -98,7 +98,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn4.ReadOnly = false;
             viewTextBoxColumn4.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn4.ValueType = typeof(int);
-            viewTextBoxColumn4.Width = 40;
+            viewTextBoxColumn4.Width = UiScale.S(40);
             viewTextBoxColumn4.FillWeight = 40f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn4);
             DataGridViewImageColumn gridViewImageColumn2 = new DataGridViewImageColumn();
@@ -109,7 +109,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn2.ImageLayout = DataGridViewImageCellLayout.Zoom;
             gridViewImageColumn2.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn2.ValueType = typeof(Image);
-            gridViewImageColumn2.Width = 260;
+            gridViewImageColumn2.Width = UiScale.S(260);
             gridViewImageColumn2.FillWeight = 30f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn2);
         }

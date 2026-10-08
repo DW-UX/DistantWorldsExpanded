@@ -37,7 +37,7 @@ namespace DistantWorlds.Controls
       this.BackColor = Color.Black;
       this._HoverForeColor = Color.FromArgb(134, 134, 154);
       this._HoverBackColor = Color.Black;
-      this._Radius = 8;
+      this._Radius = UiScale.S(8);
       this.FlatStyle = FlatStyle.Standard;
       this.SetStyle(ControlStyles.OptimizedDoubleBuffer, false);
       this.UpdateStyles();
@@ -135,7 +135,7 @@ namespace DistantWorlds.Controls
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
       graphics.CompositingQuality = CompositingQuality.HighQuality;
       graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-      this._Radius = 8;
+      this._Radius = UiScale.S(8);
       int num = 8;
       if ((double) penWidth <= 2.5)
         ++num;

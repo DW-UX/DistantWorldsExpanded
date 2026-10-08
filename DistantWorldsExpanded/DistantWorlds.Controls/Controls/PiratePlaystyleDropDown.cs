@@ -23,7 +23,7 @@ namespace DistantWorlds.Controls
             this.FlatStyle = FlatStyle.Popup;
             this.BackColor = Color.FromArgb(48, 48, 64);
             this.ForeColor = Color.FromArgb(170, 170, 170);
-            this.Font = new Font("Verdana", 8.25f);
+            this.Font = UiScale.NewFont("Verdana", 8.25f);
         }
 
         public void ClearData() => this._Playstyles = (List<PiratePlayStyle>)null;
@@ -40,7 +40,7 @@ namespace DistantWorlds.Controls
         public void BindData()
         {
             this._Playstyles = this.ResolvePiratePlaystyles();
-            this.ItemHeight = 22;
+            this.ItemHeight = UiScale.S(22);
             this.Items.Clear();
             if (this._Playstyles == null)
                 return;
@@ -73,7 +73,7 @@ namespace DistantWorlds.Controls
         {
             base.OnDrawItem(e);
             e.DrawBackground();
-            PointF point = new PointF(4f, (float)(e.Bounds.Y + 3));
+            PointF point = new PointF(UiScale.S(4f), (float)(e.Bounds.Y + UiScale.S(3)));
             Font font = this.Font;
             SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
             SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int)byte.MaxValue, 0, 128));

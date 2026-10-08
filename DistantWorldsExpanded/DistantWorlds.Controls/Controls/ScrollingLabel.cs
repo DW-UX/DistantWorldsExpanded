@@ -24,9 +24,9 @@ namespace DistantWorlds.Controls
     private System.Timers.Timer _Timer = new System.Timers.Timer();
     private double _ScrollSpeed = 20.0;
     private double _SecondsPerTimerInterval = 0.05;
-    private Font _DefaultFont = new Font("Verdana", 12f, FontStyle.Bold);
+    private Font _DefaultFont = UiScale.NewFont("Verdana", 12f, FontStyle.Bold);
     private Color _DefaultTextColor = Color.Yellow;
-    private int _DefaultSpacerHeight = 20;
+    private int _DefaultSpacerHeight = UiScale.S(20);
     public ScrollingLabel.DoScrollDelegate DoScrollMethod;
     private Image _BackgroundImage;
     private bool _ShowBackground;
@@ -204,7 +204,7 @@ namespace DistantWorlds.Controls
           using (Graphics graphics = this.CreateGraphics())
           {
             SizeF sizeF = graphics.MeasureString(control.Text, control.Font, this.Width, StringFormat.GenericDefault);
-            Size size = new Size((int) sizeF.Width + 1, (int) sizeF.Height + 1);
+            Size size = new Size((int) sizeF.Width + UiScale.S(1), (int) sizeF.Height + UiScale.S(1));
             control.MinimumSize = size;
             control.Size = size;
             ((Label) control).TextAlign = ContentAlignment.MiddleCenter;
