@@ -104,7 +104,7 @@ namespace DistantWorlds.Controls
       this._Grid.Margin = new Padding(0);
       this._Grid.MultiSelect = false;
       this._Grid.ReadOnly = true;
-      this._Grid.RowHeadersWidth = UiScale.S(4);
+      this._Grid.RowHeadersWidth = Math.Max(4,UiScale.S(4));
       this._Grid.ScrollBars = ScrollBars.Vertical;
       this._Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       this._Grid.ShowCellToolTips = true;
