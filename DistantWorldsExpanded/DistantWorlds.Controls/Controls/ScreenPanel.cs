@@ -41,12 +41,12 @@ namespace DistantWorlds.Controls
       pnlBody = new GradientPanel();
       SuspendLayout();
       pnlHeader.BackColor = Color.FromArgb(0, 0, 0);
-      pnlHeader.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold);
+      pnlHeader.Font = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Bold);
       pnlHeader.ForeColor = Color.FromArgb(150, 150, 150);
       pnlHeader.Icon = null;
       pnlHeader.Location = new Point(0, 0);
       pnlHeader.Name = "pnlHeader";
-      pnlHeader.Size = new Size(200, 100);
+      pnlHeader.Size = new Size(UiScale.S(200), UiScale.S(100));
       pnlHeader.TabIndex = 0;
       pnlHeader.TitleText = null;
       pnlHeader.CloseButtonClicked += new EventHandler(pnlHeader_CloseButtonClicked);
@@ -55,14 +55,14 @@ namespace DistantWorlds.Controls
       pnlBody.BackColor3 = Color.FromArgb(51, 54, 61);
       pnlBody.BorderColor = Color.FromArgb(67, 67, 77);
       pnlBody.BorderStyle = BorderStyle.FixedSingle;
-      pnlBody.BorderWidth = 2;
-      pnlBody.Curvature = 20;
+      pnlBody.BorderWidth = UiScale.S(2);
+      pnlBody.Curvature = UiScale.S(20);
       pnlBody.CurveMode = CornerCurveMode.BottomRight_BottomLeft;
       pnlBody.GradientMode = LinearGradientMode.Vertical;
       pnlBody.Location = new Point(0, 0);
       pnlBody.Margin = new Padding(0);
       pnlBody.Name = "pnlBody";
-      pnlBody.Size = new Size(200, 100);
+      pnlBody.Size = new Size(UiScale.S(200), UiScale.S(100));
       pnlBody.TabIndex = 0;
       ResumeLayout(false);
     }
@@ -165,14 +165,14 @@ namespace DistantWorlds.Controls
       const int halfHeaderMarginY = headerMarginY / 2;
       const int tripleHalfHeaderMarginY = halfHeaderMarginY * 3; 
       
-      pnlHeader.Size = new Size(ClientRectangle.Width - headerMarginX*2, headerHeight);
-      pnlHeader.Location = new Point(headerMarginX, headerMarginY);
+      pnlHeader.Size = new Size(ClientRectangle.Width - UiScale.S(headerMarginX)*2, UiScale.S(headerHeight));
+      pnlHeader.Location = new Point(UiScale.S(headerMarginX), UiScale.S(headerMarginY));
       ReparentControl(this, pnlHeader);
       const int bodyMarginX = 8;
       pnlBody.Size = new Size(
-        ClientRectangle.Width - bodyMarginX*2,
-        ClientRectangle.Height - (pnlHeader.Height + tripleHalfHeaderMarginY));
-      pnlBody.Location = new Point(bodyMarginX, headerHeight + headerMarginY);
+        ClientRectangle.Width - UiScale.S(bodyMarginX)*2,
+        ClientRectangle.Height - (pnlHeader.Height + UiScale.S(tripleHalfHeaderMarginY)));
+      pnlBody.Location = new Point(UiScale.S(bodyMarginX), UiScale.S(headerHeight) + UiScale.S(headerMarginY));
       ReparentControl(this, pnlBody);
       ReparentControls();
       pnlHeader.DoLayout();

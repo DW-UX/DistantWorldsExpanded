@@ -67,6 +67,7 @@ namespace BaconDistantWorlds
         this.ship = tradeShip;
         this.tradePartner = shipOrPlanet;
         this.InitializeComponent();
+        UiScale.ScaleLayout(this);
         this.UpdateInventories();
         this.LoadTradeHistory();
         this.DisableButtonsWhenTradePartnerNotPresent();
@@ -323,7 +324,7 @@ namespace BaconDistantWorlds
         this.marketCashLabel.Visible = false;
         this.tradePartnerCargoDataGridView.Visible = false;
         this.tradePartnerRemainingCargoSpaceLabel.Visible = false;
-        this.Width = 500;
+        this.Width = UiScale.S(500);
       }
       if (this.ship.Components.Count<BuiltObjectComponent>((Func<BuiltObjectComponent, bool>) (x => x.Category == ComponentCategoryType.Extractor)) <= 0)
         return;
@@ -609,7 +610,7 @@ namespace BaconDistantWorlds
       {
         for (int emSize2 = 1; emSize2 <= 100; ++emSize2)
         {
-          using (Font font = new Font(lbl.Font.FontFamily, (float) emSize2))
+          using (Font font = UiScale.NewFont(lbl.Font.FontFamily, (float) emSize2))
           {
             SizeF sizeF = graphics.MeasureString(text, font);
             if ((double) sizeF.Width > (double) num1 || (double) sizeF.Height > (double) num2)
@@ -620,7 +621,7 @@ namespace BaconDistantWorlds
           }
         }
       }
-      lbl.Font = new Font(lbl.Font.FontFamily, (float) emSize1);
+      lbl.Font = UiScale.NewFont(lbl.Font.FontFamily, (float) emSize1);
     }
 
     public void LoadTradeHistory()
@@ -751,11 +752,11 @@ namespace BaconDistantWorlds
       this.cargoNameColumn.HeaderText = "Cargo";
       this.cargoNameColumn.Name = "cargoNameColumn";
       this.cargoNameColumn.ReadOnly = true;
-      this.cargoNameColumn.Width = 150;
+      this.cargoNameColumn.Width = UiScale.S(150);
       this.cargoQuantityColumn.HeaderText = "Quantity";
       this.cargoQuantityColumn.Name = "cargoQuantityColumn";
       this.cargoQuantityColumn.ReadOnly = true;
-      this.cargoQuantityColumn.Width = 150;
+      this.cargoQuantityColumn.Width = UiScale.S(150);
       this.tradePartnerCargoDataGridView.AllowUserToAddRows = false;
       this.tradePartnerCargoDataGridView.AllowUserToDeleteRows = false;
       this.tradePartnerCargoDataGridView.AllowUserToResizeRows = false;
@@ -773,22 +774,22 @@ namespace BaconDistantWorlds
       this.planetCargoNameColumn.HeaderText = "Cargo";
       this.planetCargoNameColumn.Name = "planetCargoNameColumn";
       this.planetCargoNameColumn.ReadOnly = true;
-      this.planetCargoNameColumn.Width = 150;
+      this.planetCargoNameColumn.Width = UiScale.S(150);
       this.planetQuantityColumn.FillWeight = 25f;
       this.planetQuantityColumn.HeaderText = "Quantity";
       this.planetQuantityColumn.Name = "planetQuantityColumn";
       this.planetQuantityColumn.ReadOnly = true;
-      this.planetQuantityColumn.Width = 75;
+      this.planetQuantityColumn.Width = UiScale.S(75);
       this.planetSellPriceColumn.FillWeight = 25f;
       this.planetSellPriceColumn.HeaderText = "Sell Price";
       this.planetSellPriceColumn.Name = "planetSellPriceColumn";
       this.planetSellPriceColumn.ReadOnly = true;
-      this.planetSellPriceColumn.Width = 75;
+      this.planetSellPriceColumn.Width = UiScale.S(75);
       this.planetPurchasePriceColumn.FillWeight = 25f;
       this.planetPurchasePriceColumn.HeaderText = "Purchase Price";
       this.planetPurchasePriceColumn.Name = "planetPurchasePriceColumn";
       this.planetPurchasePriceColumn.ReadOnly = true;
-      this.planetPurchasePriceColumn.Width = 75;
+      this.planetPurchasePriceColumn.Width = UiScale.S(75);
       this.sellCargoButton.Location = new Point(361, 244);
       this.sellCargoButton.Name = "sellCargoButton";
       this.sellCargoButton.Size = new Size(75, 23);
@@ -800,7 +801,7 @@ namespace BaconDistantWorlds
       this.sellAllButton.BackColor = Color.FromArgb(0, 0, 0);
       this.sellAllButton.ClipBackground = false;
       this.sellAllButton.DelayFrameRefresh = false;
-      this.sellAllButton.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this.sellAllButton.Font = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Bold, GraphicsUnit.Pixel);
       this.sellAllButton.ForeColor = Color.FromArgb(150, 150, 150);
       this.sellAllButton.GlowColor = Color.FromArgb(48, 48, 128);
       this.sellAllButton.InnerBorderColor = Color.FromArgb(67, 67, 77);
@@ -847,27 +848,27 @@ namespace BaconDistantWorlds
       this.buyCargoButton.Text = "Buy";
       this.buyCargoButton.UseVisualStyleBackColor = true;
       this.buyCargoButton.Click += new EventHandler(this.buyCargoButton_Click);
-      this.shipNamelabel.Font = new Font("Microsoft Sans Serif", 27.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.shipNamelabel.Font = UiScale.NewFont("Microsoft Sans Serif", 27.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.shipNamelabel.Location = new Point(9, 24);
       this.shipNamelabel.Name = "shipNamelabel";
       this.shipNamelabel.Size = new Size(346, 42);
       this.shipNamelabel.TabIndex = 11;
       this.shipNamelabel.Text = "Ship name here";
-      this.planetNamelabel.Font = new Font("Microsoft Sans Serif", 27.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.planetNamelabel.Font = UiScale.NewFont("Microsoft Sans Serif", 27.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.planetNamelabel.Location = new Point(611, 24);
       this.planetNamelabel.Name = "planetNamelabel";
       this.planetNamelabel.Size = new Size(426, 42);
       this.planetNamelabel.TabIndex = 12;
       this.planetNamelabel.Text = "Planet name here";
       this.remainingCargoSpacelabel.AutoSize = true;
-      this.remainingCargoSpacelabel.Font = new Font("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.remainingCargoSpacelabel.Font = UiScale.NewFont("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.remainingCargoSpacelabel.Location = new Point(13, 393);
       this.remainingCargoSpacelabel.Name = "remainingCargoSpacelabel";
       this.remainingCargoSpacelabel.Size = new Size(183, 20);
       this.remainingCargoSpacelabel.TabIndex = 13;
       this.remainingCargoSpacelabel.Text = "Remaining Cargo space:";
       this.totalCashLabel.AutoSize = true;
-      this.totalCashLabel.Font = new Font("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.totalCashLabel.Font = UiScale.NewFont("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.totalCashLabel.Location = new Point(13, 428);
       this.totalCashLabel.Name = "totalCashLabel";
       this.totalCashLabel.Size = new Size(150, 20);
@@ -903,35 +904,35 @@ namespace BaconDistantWorlds
       this.dataGridViewTextBoxColumn1.HeaderText = "Type";
       this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
       this.dataGridViewTextBoxColumn1.ReadOnly = true;
-      this.dataGridViewTextBoxColumn1.Width = 75;
+      this.dataGridViewTextBoxColumn1.Width = UiScale.S(75);
       this.resourceColumn.HeaderText = "Resource";
       this.resourceColumn.Name = "resourceColumn";
       this.resourceColumn.ReadOnly = true;
-      this.resourceColumn.Width = 75;
+      this.resourceColumn.Width = UiScale.S(75);
       this.dataGridViewTextBoxColumn2.FillWeight = 25f;
       this.dataGridViewTextBoxColumn2.HeaderText = "Quantity";
       this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
       this.dataGridViewTextBoxColumn2.ReadOnly = true;
-      this.dataGridViewTextBoxColumn2.Width = 75;
+      this.dataGridViewTextBoxColumn2.Width = UiScale.S(75);
       this.dataGridViewTextBoxColumn3.FillWeight = 25f;
       this.dataGridViewTextBoxColumn3.HeaderText = "Price";
       this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
       this.dataGridViewTextBoxColumn3.ReadOnly = true;
-      this.dataGridViewTextBoxColumn3.Width = 75;
+      this.dataGridViewTextBoxColumn3.Width = UiScale.S(75);
       this.dataGridViewTextBoxColumn4.FillWeight = 25f;
       this.dataGridViewTextBoxColumn4.HeaderText = "Date";
       this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
       this.dataGridViewTextBoxColumn4.ReadOnly = true;
-      this.dataGridViewTextBoxColumn4.Width = 76;
+      this.dataGridViewTextBoxColumn4.Width = UiScale.S(76);
       this.marketCashLabel.AutoSize = true;
-      this.marketCashLabel.Font = new Font("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.marketCashLabel.Font = UiScale.NewFont("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.marketCashLabel.Location = new Point(13, 468);
       this.marketCashLabel.Name = "marketCashLabel";
       this.marketCashLabel.Size = new Size(119, 20);
       this.marketCashLabel.TabIndex = 18;
       this.marketCashLabel.Text = "Market Liquidity";
       this.tradePartnerRemainingCargoSpaceLabel.AutoSize = true;
-      this.tradePartnerRemainingCargoSpaceLabel.Font = new Font("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.tradePartnerRemainingCargoSpaceLabel.Font = UiScale.NewFont("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.tradePartnerRemainingCargoSpaceLabel.Location = new Point(13, 509);
       this.tradePartnerRemainingCargoSpaceLabel.Name = "tradePartnerRemainingCargoSpaceLabel";
       this.tradePartnerRemainingCargoSpaceLabel.Size = new Size(197, 20);

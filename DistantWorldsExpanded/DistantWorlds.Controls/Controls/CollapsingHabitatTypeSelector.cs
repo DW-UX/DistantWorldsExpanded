@@ -160,9 +160,9 @@ namespace DistantWorlds.Controls
       this.cpnClearItems.BorderColor = Color.Gray;
       this.cpnClearItems.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnClearItems.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnClearItems.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnClearItems.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnClearItems.CaptionImage = (Image) componentResourceManager.GetObject("cpnClearItems.CaptionImage");
-      this.cpnClearItems.CaptionSize = 20;
+      this.cpnClearItems.CaptionSize = UiScale.S(20);
       this.cpnClearItems.CaptionText = "Clear Items";
       this.cpnClearItems.CaptionTextColor = Color.White;
       this.cpnClearItems.Controls.Add((Control) this.vwClearItems);
@@ -179,7 +179,7 @@ namespace DistantWorlds.Controls
       this.vwClearItems.BackColor = Color.FromArgb(32, 32, 48);
       this.vwClearItems.BorderStyle = BorderStyle.None;
       this.vwClearItems.Dock = DockStyle.Fill;
-      this.vwClearItems.Font = new Font("Verdana", 6.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.vwClearItems.Font = UiScale.NewFont("Verdana", 6.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.vwClearItems.ForeColor = Color.White;
       this.vwClearItems.Location = new Point(0, 0);
       this.vwClearItems.MultiSelect = false;
@@ -194,9 +194,9 @@ namespace DistantWorlds.Controls
       this.cpnEmpireExploration.BorderColor = Color.Gray;
       this.cpnEmpireExploration.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnEmpireExploration.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnEmpireExploration.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnEmpireExploration.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnEmpireExploration.CaptionImage = (Image) componentResourceManager.GetObject("cpnEmpireExploration.CaptionImage");
-      this.cpnEmpireExploration.CaptionSize = 20;
+      this.cpnEmpireExploration.CaptionSize = UiScale.S(20);
       this.cpnEmpireExploration.CaptionText = "Empire Exploration";
       this.cpnEmpireExploration.CaptionTextColor = Color.White;
       this.cpnEmpireExploration.Controls.Add((Control) this.label5);
@@ -212,7 +212,7 @@ namespace DistantWorlds.Controls
       this.cpnEmpireExploration.State = ExtendedPanelState.Collapsed;
       this.cpnEmpireExploration.TabIndex = 12;
       this.label5.AutoSize = true;
-      this.label5.Font = new Font("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.label5.Font = UiScale.NewFont("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.label5.Location = new Point(4, 33);
       this.label5.Name = "label5";
       this.label5.Size = new Size(50, 14);
@@ -222,7 +222,7 @@ namespace DistantWorlds.Controls
       this.cmbSetEmpireExploration.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbSetEmpireExploration.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbSetEmpireExploration.FlatStyle = FlatStyle.Popup;
-      this.cmbSetEmpireExploration.Font = new Font("Verdana", 8.25f);
+      this.cmbSetEmpireExploration.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbSetEmpireExploration.ForeColor = Color.White;
       this.cmbSetEmpireExploration.FormattingEnabled = true;
       this.cmbSetEmpireExploration.Location = new Point(59, 30);
@@ -234,9 +234,9 @@ namespace DistantWorlds.Controls
       this.cpnRuins.BorderColor = Color.Gray;
       this.cpnRuins.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnRuins.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnRuins.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnRuins.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnRuins.CaptionImage = (Image) componentResourceManager.GetObject("cpnRuins.CaptionImage");
-      this.cpnRuins.CaptionSize = 20;
+      this.cpnRuins.CaptionSize = UiScale.S(20);
       this.cpnRuins.CaptionText = "Ruins";
       this.cpnRuins.CaptionTextColor = Color.White;
       this.cpnRuins.Controls.Add((Control) this.vwRuins);
@@ -253,7 +253,7 @@ namespace DistantWorlds.Controls
       this.vwRuins.BackColor = Color.FromArgb(32, 32, 48);
       this.vwRuins.BorderStyle = BorderStyle.None;
       this.vwRuins.Dock = DockStyle.Fill;
-      this.vwRuins.Font = new Font("Verdana", 8.25f);
+      this.vwRuins.Font = UiScale.NewFont("Verdana", 8.25f);
       this.vwRuins.ForeColor = Color.White;
       this.vwRuins.Location = new Point(0, 0);
       this.vwRuins.MultiSelect = false;
@@ -268,9 +268,9 @@ namespace DistantWorlds.Controls
       this.cpnPirates.BorderColor = Color.Gray;
       this.cpnPirates.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnPirates.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnPirates.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnPirates.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnPirates.CaptionImage = (Image) componentResourceManager.GetObject("cpnPirates.CaptionImage");
-      this.cpnPirates.CaptionSize = 20;
+      this.cpnPirates.CaptionSize = UiScale.S(20);
       this.cpnPirates.CaptionText = "Pirates and Ruins";
       this.cpnPirates.CaptionTextColor = Color.White;
       this.cpnPirates.Controls.Add((Control) this.vwPirates);
@@ -287,7 +287,7 @@ namespace DistantWorlds.Controls
       this.vwPirates.BackColor = Color.FromArgb(32, 32, 48);
       this.vwPirates.BorderStyle = BorderStyle.None;
       this.vwPirates.Dock = DockStyle.Fill;
-      this.vwPirates.Font = new Font("Verdana", 8.25f);
+      this.vwPirates.Font = UiScale.NewFont("Verdana", 8.25f);
       this.vwPirates.ForeColor = Color.White;
       this.vwPirates.Location = new Point(0, 0);
       this.vwPirates.MultiSelect = false;
@@ -302,9 +302,9 @@ namespace DistantWorlds.Controls
       this.cpnCreature.BorderColor = Color.Gray;
       this.cpnCreature.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnCreature.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnCreature.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnCreature.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnCreature.CaptionImage = (Image) componentResourceManager.GetObject("cpnCreature.CaptionImage");
-      this.cpnCreature.CaptionSize = 20;
+      this.cpnCreature.CaptionSize = UiScale.S(20);
       this.cpnCreature.CaptionText = "Space Creatures";
       this.cpnCreature.CaptionTextColor = Color.White;
       this.cpnCreature.Controls.Add((Control) this.vwCreature);
@@ -321,7 +321,7 @@ namespace DistantWorlds.Controls
       this.vwCreature.BackColor = Color.FromArgb(32, 32, 48);
       this.vwCreature.BorderStyle = BorderStyle.None;
       this.vwCreature.Dock = DockStyle.Fill;
-      this.vwCreature.Font = new Font("Verdana", 6.75f);
+      this.vwCreature.Font = UiScale.NewFont("Verdana", 6.75f);
       this.vwCreature.ForeColor = Color.White;
       this.vwCreature.Location = new Point(0, 0);
       this.vwCreature.MultiSelect = false;
@@ -336,9 +336,9 @@ namespace DistantWorlds.Controls
       this.cpnCharacters.BorderColor = Color.Gray;
       this.cpnCharacters.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnCharacters.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnCharacters.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnCharacters.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnCharacters.CaptionImage = (Image) componentResourceManager.GetObject("cpnCharacters.CaptionImage");
-      this.cpnCharacters.CaptionSize = 20;
+      this.cpnCharacters.CaptionSize = UiScale.S(20);
       this.cpnCharacters.CaptionText = "Characters";
       this.cpnCharacters.CaptionTextColor = Color.White;
       this.cpnCharacters.Controls.Add((Control) this.label7);
@@ -355,7 +355,7 @@ namespace DistantWorlds.Controls
       this.cpnCharacters.Size = new Size(320, 100);
       this.cpnCharacters.TabIndex = 14;
       this.label7.AutoSize = true;
-      this.label7.Font = new Font("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.label7.Font = UiScale.NewFont("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.label7.Location = new Point(4, 61);
       this.label7.Name = "label7";
       this.label7.Size = new Size(34, 14);
@@ -365,7 +365,7 @@ namespace DistantWorlds.Controls
       this.cmbCharacters.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbCharacters.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbCharacters.FlatStyle = FlatStyle.Popup;
-      this.cmbCharacters.Font = new Font("Verdana", 8.25f);
+      this.cmbCharacters.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbCharacters.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbCharacters.FormattingEnabled = true;
       this.cmbCharacters.Location = new Point(59, 59);
@@ -373,7 +373,7 @@ namespace DistantWorlds.Controls
       this.cmbCharacters.Size = new Size(250, 22);
       this.cmbCharacters.TabIndex = 9;
       this.label6.AutoSize = true;
-      this.label6.Font = new Font("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.label6.Font = UiScale.NewFont("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.label6.Location = new Point(4, 30);
       this.label6.Name = "label6";
       this.label6.Size = new Size(50, 14);
@@ -383,7 +383,7 @@ namespace DistantWorlds.Controls
       this.cmbCharacterEmpire.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbCharacterEmpire.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbCharacterEmpire.FlatStyle = FlatStyle.Popup;
-      this.cmbCharacterEmpire.Font = new Font("Verdana", 8.25f);
+      this.cmbCharacterEmpire.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbCharacterEmpire.ForeColor = Color.White;
       this.cmbCharacterEmpire.FormattingEnabled = true;
       this.cmbCharacterEmpire.Location = new Point(59, 28);
@@ -396,9 +396,9 @@ namespace DistantWorlds.Controls
       this.cpnAliens.BorderColor = Color.Gray;
       this.cpnAliens.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnAliens.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnAliens.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnAliens.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnAliens.CaptionImage = (Image) componentResourceManager.GetObject("cpnAliens.CaptionImage");
-      this.cpnAliens.CaptionSize = 20;
+      this.cpnAliens.CaptionSize = UiScale.S(20);
       this.cpnAliens.CaptionText = "Independent Alien Races";
       this.cpnAliens.CaptionTextColor = Color.White;
       this.cpnAliens.Controls.Add((Control) this.label4);
@@ -414,7 +414,7 @@ namespace DistantWorlds.Controls
       this.cpnAliens.State = ExtendedPanelState.Collapsed;
       this.cpnAliens.TabIndex = 8;
       this.label4.AutoSize = true;
-      this.label4.Font = new Font("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.label4.Font = UiScale.NewFont("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.label4.Location = new Point(4, 33);
       this.label4.Name = "label4";
       this.label4.Size = new Size(37, 14);
@@ -424,7 +424,7 @@ namespace DistantWorlds.Controls
       this.cmbPlaceAlienRace.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbPlaceAlienRace.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbPlaceAlienRace.FlatStyle = FlatStyle.Popup;
-      this.cmbPlaceAlienRace.Font = new Font("Verdana", 8.25f);
+      this.cmbPlaceAlienRace.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbPlaceAlienRace.ForeColor = Color.White;
       this.cmbPlaceAlienRace.FormattingEnabled = true;
       this.cmbPlaceAlienRace.Location = new Point(59, 30);
@@ -436,9 +436,9 @@ namespace DistantWorlds.Controls
       this.cpnColony.BorderColor = Color.Gray;
       this.cpnColony.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnColony.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnColony.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnColony.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnColony.CaptionImage = (Image) componentResourceManager.GetObject("cpnColony.CaptionImage");
-      this.cpnColony.CaptionSize = 20;
+      this.cpnColony.CaptionSize = UiScale.S(20);
       this.cpnColony.CaptionText = "Colonies";
       this.cpnColony.CaptionTextColor = Color.White;
       this.cpnColony.Controls.Add((Control) this.label3);
@@ -454,7 +454,7 @@ namespace DistantWorlds.Controls
       this.cpnColony.State = ExtendedPanelState.Collapsed;
       this.cpnColony.TabIndex = 7;
       this.label3.AutoSize = true;
-      this.label3.Font = new Font("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.label3.Font = UiScale.NewFont("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.label3.Location = new Point(4, 33);
       this.label3.Name = "label3";
       this.label3.Size = new Size(50, 14);
@@ -464,7 +464,7 @@ namespace DistantWorlds.Controls
       this.cmbPlaceColonyEmpire.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbPlaceColonyEmpire.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbPlaceColonyEmpire.FlatStyle = FlatStyle.Popup;
-      this.cmbPlaceColonyEmpire.Font = new Font("Verdana", 8.25f);
+      this.cmbPlaceColonyEmpire.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbPlaceColonyEmpire.ForeColor = Color.White;
       this.cmbPlaceColonyEmpire.FormattingEnabled = true;
       this.cmbPlaceColonyEmpire.Location = new Point(59, 30);
@@ -476,9 +476,9 @@ namespace DistantWorlds.Controls
       this.cpnBuiltObject.BorderColor = Color.Gray;
       this.cpnBuiltObject.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnBuiltObject.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnBuiltObject.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnBuiltObject.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnBuiltObject.CaptionImage = (Image) componentResourceManager.GetObject("cpnBuiltObject.CaptionImage");
-      this.cpnBuiltObject.CaptionSize = 20;
+      this.cpnBuiltObject.CaptionSize = UiScale.S(20);
       this.cpnBuiltObject.CaptionText = "Ships and Bases";
       this.cpnBuiltObject.CaptionTextColor = Color.White;
       this.cpnBuiltObject.Controls.Add((Control) this.label2);
@@ -496,14 +496,14 @@ namespace DistantWorlds.Controls
       this.cpnBuiltObject.State = ExtendedPanelState.Collapsed;
       this.cpnBuiltObject.TabIndex = 6;
       this.label2.AutoSize = true;
-      this.label2.Font = new Font("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.label2.Font = UiScale.NewFont("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.label2.Location = new Point(4, 64);
       this.label2.Name = "label2";
       this.label2.Size = new Size(50, 14);
       this.label2.TabIndex = 4;
       this.label2.Text = "Design";
       this.label1.AutoSize = true;
-      this.label1.Font = new Font("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.label1.Font = UiScale.NewFont("Verdana", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.label1.Location = new Point(4, 33);
       this.label1.Name = "label1";
       this.label1.Size = new Size(50, 14);
@@ -513,7 +513,7 @@ namespace DistantWorlds.Controls
       this.cmbPlaceShipDesign.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbPlaceShipDesign.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbPlaceShipDesign.FlatStyle = FlatStyle.Popup;
-      this.cmbPlaceShipDesign.Font = new Font("Verdana", 8.25f);
+      this.cmbPlaceShipDesign.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbPlaceShipDesign.ForeColor = Color.White;
       this.cmbPlaceShipDesign.FormattingEnabled = true;
       this.cmbPlaceShipDesign.Location = new Point(59, 61);
@@ -524,7 +524,7 @@ namespace DistantWorlds.Controls
       this.cmbPlaceShipEmpire.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbPlaceShipEmpire.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbPlaceShipEmpire.FlatStyle = FlatStyle.Popup;
-      this.cmbPlaceShipEmpire.Font = new Font("Verdana", 8.25f);
+      this.cmbPlaceShipEmpire.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbPlaceShipEmpire.ForeColor = Color.White;
       this.cmbPlaceShipEmpire.FormattingEnabled = true;
       this.cmbPlaceShipEmpire.Location = new Point(59, 30);
@@ -537,9 +537,9 @@ namespace DistantWorlds.Controls
       this.cpnAsteroid.BorderColor = Color.Gray;
       this.cpnAsteroid.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnAsteroid.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnAsteroid.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnAsteroid.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnAsteroid.CaptionImage = (Image) componentResourceManager.GetObject("cpnAsteroid.CaptionImage");
-      this.cpnAsteroid.CaptionSize = 20;
+      this.cpnAsteroid.CaptionSize = UiScale.S(20);
       this.cpnAsteroid.CaptionText = "Asteroids";
       this.cpnAsteroid.CaptionTextColor = Color.White;
       this.cpnAsteroid.Controls.Add((Control) this.vwAsteroids);
@@ -556,7 +556,7 @@ namespace DistantWorlds.Controls
       this.vwAsteroids.BackColor = Color.FromArgb(32, 32, 48);
       this.vwAsteroids.BorderStyle = BorderStyle.None;
       this.vwAsteroids.Dock = DockStyle.Fill;
-      this.vwAsteroids.Font = new Font("Verdana", 8.25f);
+      this.vwAsteroids.Font = UiScale.NewFont("Verdana", 8.25f);
       this.vwAsteroids.ForeColor = Color.White;
       this.vwAsteroids.Location = new Point(0, 0);
       this.vwAsteroids.MultiSelect = false;
@@ -571,9 +571,9 @@ namespace DistantWorlds.Controls
       this.cpnMoon.BorderColor = Color.Gray;
       this.cpnMoon.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnMoon.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnMoon.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnMoon.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnMoon.CaptionImage = (Image) componentResourceManager.GetObject("cpnMoon.CaptionImage");
-      this.cpnMoon.CaptionSize = 20;
+      this.cpnMoon.CaptionSize = UiScale.S(20);
       this.cpnMoon.CaptionText = "Moons";
       this.cpnMoon.CaptionTextColor = Color.White;
       this.cpnMoon.Controls.Add((Control) this.vwMoon);
@@ -590,7 +590,7 @@ namespace DistantWorlds.Controls
       this.vwMoon.BackColor = Color.FromArgb(32, 32, 48);
       this.vwMoon.BorderStyle = BorderStyle.None;
       this.vwMoon.Dock = DockStyle.Fill;
-      this.vwMoon.Font = new Font("Verdana", 6.75f);
+      this.vwMoon.Font = UiScale.NewFont("Verdana", 6.75f);
       this.vwMoon.ForeColor = Color.White;
       this.vwMoon.Location = new Point(0, 0);
       this.vwMoon.Margin = new Padding(5);
@@ -606,9 +606,9 @@ namespace DistantWorlds.Controls
       this.cpnPlanet.BorderColor = Color.Gray;
       this.cpnPlanet.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnPlanet.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnPlanet.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnPlanet.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnPlanet.CaptionImage = (Image) componentResourceManager.GetObject("cpnPlanet.CaptionImage");
-      this.cpnPlanet.CaptionSize = 20;
+      this.cpnPlanet.CaptionSize = UiScale.S(20);
       this.cpnPlanet.CaptionText = "Planets";
       this.cpnPlanet.CaptionTextColor = Color.White;
       this.cpnPlanet.Controls.Add((Control) this.vwPlanet);
@@ -625,7 +625,7 @@ namespace DistantWorlds.Controls
       this.vwPlanet.BackColor = Color.FromArgb(32, 32, 48);
       this.vwPlanet.BorderStyle = BorderStyle.None;
       this.vwPlanet.Dock = DockStyle.Fill;
-      this.vwPlanet.Font = new Font("Verdana", 6.75f);
+      this.vwPlanet.Font = UiScale.NewFont("Verdana", 6.75f);
       this.vwPlanet.ForeColor = Color.White;
       this.vwPlanet.Location = new Point(0, 0);
       this.vwPlanet.Margin = new Padding(5);
@@ -641,9 +641,9 @@ namespace DistantWorlds.Controls
       this.cpnStar.BorderColor = Color.Gray;
       this.cpnStar.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnStar.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnStar.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnStar.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnStar.CaptionImage = (Image) componentResourceManager.GetObject("cpnStar.CaptionImage");
-      this.cpnStar.CaptionSize = 20;
+      this.cpnStar.CaptionSize = UiScale.S(20);
       this.cpnStar.CaptionText = "Stars";
       this.cpnStar.CaptionTextColor = Color.White;
       this.cpnStar.Controls.Add((Control) this.vwStar);
@@ -660,7 +660,7 @@ namespace DistantWorlds.Controls
       this.vwStar.BackColor = Color.FromArgb(32, 32, 48);
       this.vwStar.BorderStyle = BorderStyle.None;
       this.vwStar.Dock = DockStyle.Fill;
-      this.vwStar.Font = new Font("Verdana", 6.75f);
+      this.vwStar.Font = UiScale.NewFont("Verdana", 6.75f);
       this.vwStar.ForeColor = Color.White;
       this.vwStar.Location = new Point(0, 0);
       this.vwStar.Margin = new Padding(5);
@@ -676,9 +676,9 @@ namespace DistantWorlds.Controls
       this.cpnGasCloud.BorderColor = Color.Gray;
       this.cpnGasCloud.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnGasCloud.CaptionColorTwo = Color.FromArgb(48, 48, 64);
-      this.cpnGasCloud.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnGasCloud.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnGasCloud.CaptionImage = (Image) componentResourceManager.GetObject("cpnGasCloud.CaptionImage");
-      this.cpnGasCloud.CaptionSize = 20;
+      this.cpnGasCloud.CaptionSize = UiScale.S(20);
       this.cpnGasCloud.CaptionText = "Gas Clouds";
       this.cpnGasCloud.CaptionTextColor = Color.White;
       this.cpnGasCloud.Controls.Add((Control) this.vwGasCloud);
@@ -695,7 +695,7 @@ namespace DistantWorlds.Controls
       this.vwGasCloud.BackColor = Color.FromArgb(32, 32, 48);
       this.vwGasCloud.BorderStyle = BorderStyle.None;
       this.vwGasCloud.Dock = DockStyle.Fill;
-      this.vwGasCloud.Font = new Font("Verdana", 6.75f);
+      this.vwGasCloud.Font = UiScale.NewFont("Verdana", 6.75f);
       this.vwGasCloud.ForeColor = Color.White;
       this.vwGasCloud.Location = new Point(0, 0);
       this.vwGasCloud.Margin = new Padding(5);
@@ -711,9 +711,9 @@ namespace DistantWorlds.Controls
       this.cpnSystem.BorderColor = Color.Gray;
       this.cpnSystem.CaptionColorOne = Color.FromArgb(128, 128, 152);
       this.cpnSystem.CaptionColorTwo = Color.FromArgb(48, 48, 56);
-      this.cpnSystem.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
+      this.cpnSystem.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
       this.cpnSystem.CaptionImage = (Image) componentResourceManager.GetObject("cpnSystem.CaptionImage");
-      this.cpnSystem.CaptionSize = 20;
+      this.cpnSystem.CaptionSize = UiScale.S(20);
       this.cpnSystem.CaptionText = "Systems";
       this.cpnSystem.CaptionTextColor = Color.White;
       this.cpnSystem.Controls.Add((Control) this.vwSystem);
@@ -730,7 +730,7 @@ namespace DistantWorlds.Controls
       this.vwSystem.BackColor = Color.FromArgb(32, 32, 48);
       this.vwSystem.BorderStyle = BorderStyle.None;
       this.vwSystem.Dock = DockStyle.Fill;
-      this.vwSystem.Font = new Font("Verdana", 6.75f);
+      this.vwSystem.Font = UiScale.NewFont("Verdana", 6.75f);
       this.vwSystem.ForeColor = Color.White;
       this.vwSystem.Location = new Point(0, 0);
       this.vwSystem.Margin = new Padding(5);
@@ -777,6 +777,7 @@ namespace DistantWorlds.Controls
     public CollapsingHabitatTypeSelector()
     {
       this.InitializeComponent();
+      UiScale.ScaleLayout(this);
       this.SetMainPanelSize();
       this.AttachEvents();
     }
@@ -814,8 +815,8 @@ namespace DistantWorlds.Controls
 
     private void SetFonts()
     {
-      Font font1 = new Font(this.Font.FontFamily, 15.33f, FontStyle.Regular, GraphicsUnit.Pixel);
-      Font font2 = new Font(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      Font font1 = UiScale.NewFont(this.Font.FontFamily, 15.33f, FontStyle.Regular, GraphicsUnit.Pixel);
+      Font font2 = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
       this.vwAsteroids.Font = font1;
       this.vwClearItems.Font = font1;
       this.vwCreature.Font = font1;
@@ -929,8 +930,8 @@ namespace DistantWorlds.Controls
       };
       this.vwSystem.BindData(habitatTypes1, habitatTypeImages1, mouseWheelRefocusControl);
       this.cpnSystem.CheckDocking(0);
-      this.cpnSystem.BackupSize = new Size(320, 85);
-      this.cpnSystem.Size = new Size(320, 85);
+      this.cpnSystem.BackupSize = new Size(UiScale.S(320), UiScale.S(85));
+      this.cpnSystem.Size = new Size(UiScale.S(320), UiScale.S(85));
       this.cpnSystem.CheckDocking(0);
       this.vwSystem.View = View.LargeIcon;
       if (this.cpnSystem.State == ExtendedPanelState.Collapsed)
@@ -962,7 +963,7 @@ namespace DistantWorlds.Controls
       };
       this.vwGasCloud.BindData(habitatTypes2, habitatTypeImages2, mouseWheelRefocusControl);
       this.cpnGasCloud.CheckDocking(0);
-      this.cpnGasCloud.BackupSize = new Size(320, 145);
+      this.cpnGasCloud.BackupSize = new Size(UiScale.S(320), UiScale.S(145));
       this.vwGasCloud.View = View.LargeIcon;
       List<HabitatType> habitatTypes3 = new List<HabitatType>();
       habitatTypes3.Add(HabitatType.MainSequence);
@@ -984,7 +985,7 @@ namespace DistantWorlds.Controls
       };
       this.vwStar.BindData(habitatTypes3, habitatTypeImages3, mouseWheelRefocusControl);
       this.cpnStar.CheckDocking(0);
-      this.cpnStar.BackupSize = new Size(320, 145);
+      this.cpnStar.BackupSize = new Size(UiScale.S(320), UiScale.S(145));
       this.vwStar.View = View.LargeIcon;
       List<HabitatType> habitatTypes4 = new List<HabitatType>();
       habitatTypes4.Add(HabitatType.Continental);
@@ -1010,7 +1011,7 @@ namespace DistantWorlds.Controls
       };
       this.vwPlanet.BindData(habitatTypes4, habitatTypeImages4, mouseWheelRefocusControl);
       this.cpnPlanet.CheckDocking(0);
-      this.cpnPlanet.BackupSize = new Size(320, 145);
+      this.cpnPlanet.BackupSize = new Size(UiScale.S(320), UiScale.S(145));
       this.vwPlanet.View = View.LargeIcon;
       List<HabitatType> habitatTypes5 = new List<HabitatType>();
       habitatTypes5.Add(HabitatType.Continental);
@@ -1032,7 +1033,7 @@ namespace DistantWorlds.Controls
       };
       this.vwMoon.BindData(habitatTypes5, habitatTypeImages5, mouseWheelRefocusControl);
       this.cpnMoon.CheckDocking(0);
-      this.cpnMoon.BackupSize = new Size(320, 145);
+      this.cpnMoon.BackupSize = new Size(UiScale.S(320), UiScale.S(145));
       this.vwMoon.View = View.LargeIcon;
       List<CreatureType> creatureTypes = new List<CreatureType>();
       creatureTypes.Add(CreatureType.RockSpaceSlug);
@@ -1052,7 +1053,7 @@ namespace DistantWorlds.Controls
         creatureImages1[index].RotateFlip(RotateFlipType.Rotate270FlipNone);
       this.vwCreature.BindData(creatureTypes, creatureImages1, mouseWheelRefocusControl);
       this.cpnCreature.CheckDocking(0);
-      this.cpnCreature.BackupSize = new Size(320, 85);
+      this.cpnCreature.BackupSize = new Size(UiScale.S(320), UiScale.S(85));
       this.vwCreature.View = View.LargeIcon;
       List<string> values1 = new List<string>();
       values1.Add(TextResolver.GetText("Asteroid"));
@@ -1068,7 +1069,7 @@ namespace DistantWorlds.Controls
       };
       this.vwAsteroids.BindData(values1, images1, mouseWheelRefocusControl);
       this.cpnAsteroid.CheckDocking(0);
-      this.cpnAsteroid.BackupSize = new Size(320, 85);
+      this.cpnAsteroid.BackupSize = new Size(UiScale.S(320), UiScale.S(85));
       this.vwAsteroids.View = View.LargeIcon;
       List<string> values2 = new List<string>();
       values2.Add(TextResolver.GetText("Pirate Faction"));
@@ -1087,7 +1088,7 @@ namespace DistantWorlds.Controls
       }
       this.vwPirates.BindData(values2, images2, mouseWheelRefocusControl);
       this.cpnPirates.CheckDocking(0);
-      this.cpnPirates.BackupSize = new Size(320, 350);
+      this.cpnPirates.BackupSize = new Size(UiScale.S(320), UiScale.S(350));
       this.vwPirates.View = View.LargeIcon;
       List<string> values3 = new List<string>();
       values3.Add(TextResolver.GetText("Ruins"));
@@ -1115,7 +1116,7 @@ namespace DistantWorlds.Controls
       }
       this.vwRuins.BindData(values3, images3, mouseWheelRefocusControl);
       this.cpnRuins.CheckDocking(0);
-      this.cpnRuins.BackupSize = new Size(320, 145);
+      this.cpnRuins.BackupSize = new Size(UiScale.S(320), UiScale.S(145));
       this.vwRuins.View = View.LargeIcon;
       List<string> values4 = new List<string>();
       values4.Add(TextResolver.GetText("Erase Items"));
@@ -1133,7 +1134,7 @@ namespace DistantWorlds.Controls
       };
       this.vwClearItems.BindData(values4, images4, mouseWheelRefocusControl);
       this.cpnClearItems.CheckDocking(0);
-      this.cpnClearItems.BackupSize = new Size(320, 95);
+      this.cpnClearItems.BackupSize = new Size(UiScale.S(320), UiScale.S(95));
       this.vwClearItems.View = View.LargeIcon;
       this.SetEmpireData();
       this.cmbPlaceShipDesign.BindData((DesignList) null, new Bitmap[0], (Empire) null);

@@ -40,17 +40,17 @@ namespace DistantWorlds.Controls
         public EmpireSummaryEconomy() : base()
         {
             
-            int_0 = 13;
-            int_1 = 10;
-            GqYieCfHe = 10;
+            int_0 = UiScale.S(13);
+            int_1 = UiScale.S(10);
+            GqYieCfHe = UiScale.S(10);
             solidBrush_0 = new SolidBrush(Color.FromArgb(170, 170, 170));
             solidBrush_1 = new SolidBrush(Color.Black);
             solidBrush_2 = new SolidBrush(Color.Red);
             method_9();
-            Font = new Font("Verdana", 8f);
+            Font = UiScale.NewFont("Verdana", 8f);
             SetFont(16.67f);
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         public void ClearData()
@@ -65,9 +65,9 @@ namespace DistantWorlds.Controls
             abbeuQmfU = galaxy;
             empire_0 = empire;
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
             lnkEconomy.Font = Font;
-            lnkEconomy.Location = new Point(323, int_1 - 2);
+            lnkEconomy.Location = new Point(UiScale.S(323), int_1 - UiScale.S(2));
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -105,32 +105,32 @@ namespace DistantWorlds.Controls
 
         private void method_2(Graphics graphics_0, PirateEconomy pirateEconomy_0)
         {
-            int num = 17;
-            int num2 = 10;
-            int int_ = 20;
-            int num3 = 150;
-            int num4 = 210;
-            int num5 = 270;
-            int num6 = 290;
-            int int_2 = 300;
-            int num7 = 420;
-            int num8 = 480;
-            int num9 = 540;
+            int num = UiScale.S(17);
+            int num2 = UiScale.S(10);
+            int int_ = UiScale.S(20);
+            int num3 = UiScale.S(150);
+            int num4 = UiScale.S(210);
+            int num5 = UiScale.S(270);
+            int num6 = UiScale.S(290);
+            int int_2 = UiScale.S(300);
+            int num7 = UiScale.S(420);
+            int num8 = UiScale.S(480);
+            int num9 = UiScale.S(540);
             ecrlHwNiM(point_0: new Point(GqYieCfHe, int_1), graphics_0: graphics_0, string_0: TextResolver.GetText("Pirate Economy"), font_2: font_1);
-            int num10 = 40;
-            int num11 = -8;
+            int num10 = UiScale.S(40);
+            int num11 = UiScale.S(-8);
             using (SolidBrush brush = new SolidBrush(Color.FromArgb(56, 128, 128, 128)))
             {
-                Rectangle rect = new Rectangle(num3, num10 + num11, num4 - num3, 253);
+                Rectangle rect = new Rectangle(num3, num10 + num11, num4 - num3, UiScale.S(253));
                 graphics_0.FillRectangle(brush, rect);
-                Rectangle rect2 = new Rectangle(num7, num10 + num11, num8 - num7, 203);
+                Rectangle rect2 = new Rectangle(num7, num10 + num11, num8 - num7, UiScale.S(203));
                 graphics_0.FillRectangle(brush, rect2);
             }
             using (SolidBrush brush2 = new SolidBrush(Color.FromArgb(128, 128, 128, 128)))
             {
-                Rectangle rect3 = new Rectangle(num4, num10 + num11, num5 - num4, 253);
+                Rectangle rect3 = new Rectangle(num4, num10 + num11, num5 - num4, UiScale.S(253));
                 graphics_0.FillRectangle(brush2, rect3);
-                Rectangle rect4 = new Rectangle(num8, num10 + num11, num9 - num8, 203);
+                Rectangle rect4 = new Rectangle(num8, num10 + num11, num9 - num8, UiScale.S(203));
                 graphics_0.FillRectangle(brush2, rect4);
             }
             string string_ = TextResolver.GetText("Income").ToUpper(CultureInfo.InvariantCulture);
@@ -147,7 +147,7 @@ namespace DistantWorlds.Controls
             ecrlHwNiM(graphics_0, string_2, font_0, new Point(num12, num10 + num11));
             num13 = num8 + method_0(graphics_0, string_3, font_0, num9 - num8);
             ecrlHwNiM(graphics_0, string_3, font_0, new Point(num13, num10 + num11));
-            num10 += 20;
+            num10 += UiScale.S(20);
             int num14 = num10;
             PirateEconomyYear pirateEconomyYear = pirateEconomy_0.LastYear;
             PirateEconomyYear thisYear = pirateEconomy_0.ThisYear;
@@ -202,10 +202,10 @@ namespace DistantWorlds.Controls
             num14 += num;
             method_5(graphics_0, TextResolver.GetText("TOTAL"), pirateEconomyYear.TotalExpenses, thisYear.TotalExpenses, num14, num6, num7, num8, num9, 1, solidBrush_2, bool_0: true);
             num14 += num;
-            int num15 = 295;
+            int num15 = UiScale.S(295);
             string string_5 = TextResolver.GetText("Cash on hand") + ":";
             SizeF sizeF = graphics_0.MeasureString(string_5, font_1);
-            ecrlHwNiM(graphics_0, string_5, font_1, new Point(num2, 295));
+            ecrlHwNiM(graphics_0, string_5, font_1, new Point(num2, UiScale.S(295)));
             if (empire_0.StateMoney < 0.0)
             {
                 atRsyCrma(graphics_0, empire_0.StateMoney.ToString("0"), font_1, new Point(num2 + (int)sizeF.Width, num15), solidBrush_2);
@@ -250,7 +250,7 @@ namespace DistantWorlds.Controls
                     {
                         using (SolidBrush brush2 = new SolidBrush(Color.FromArgb(96, 96, 96, 96)))
                         {
-                            Rectangle rect2 = new Rectangle(int_3, int_2, int_6 - int_3, 17);
+                            Rectangle rect2 = new Rectangle(int_3, int_2, int_6 - int_3, UiScale.S(17));
                             graphics_0.FillRectangle(brush2, rect2);
                         }
                         break;
@@ -259,7 +259,7 @@ namespace DistantWorlds.Controls
                     {
                         using (SolidBrush brush = new SolidBrush(Color.FromArgb(96, 64, 64, 64)))
                         {
-                            Rectangle rect = new Rectangle(int_3, int_2, int_6 - int_3, 17);
+                            Rectangle rect = new Rectangle(int_3, int_2, int_6 - int_3, UiScale.S(17));
                             graphics_0.FillRectangle(brush, rect);
                         }
                         break;
@@ -275,8 +275,8 @@ namespace DistantWorlds.Controls
             }
             int num = int_5 - int_4;
             int num2 = int_6 - int_5;
-            num -= 5;
-            num2 -= 5;
+            num -= UiScale.S(5);
+            num2 -= UiScale.S(5);
             string string_ = double_0.ToString("0");
             int num3 = int_4 + method_1(graphics_0, string_, font_0, num);
             atRsyCrma(graphics_0, string_, font_0, new Point(num3, int_2), solidBrush_3);
@@ -287,23 +287,23 @@ namespace DistantWorlds.Controls
 
         private void method_6(Graphics graphics_0)
         {
-            int_0 = 15;
+            int_0 = UiScale.S(15);
             SolidBrush solidBrush = null;
-            int num = 135;
-            int num2 = 120;
-            int num3 = 60;
-            int num4 = 255;
-            int num5 = 135;
-            int num6 = 335;
-            int num7 = 60;
-            int num8 = 470;
+            int num = UiScale.S(135);
+            int num2 = UiScale.S(120);
+            int num3 = UiScale.S(60);
+            int num4 = UiScale.S(255);
+            int num5 = UiScale.S(135);
+            int num6 = UiScale.S(335);
+            int num7 = UiScale.S(60);
+            int num8 = UiScale.S(470);
             int num9 = int_1 + int_0 * 4;
             int num10 = int_1 + int_0 * 6;
             int num11 = int_1 + int_0 * 9;
             int num12 = int_1 + int_0 * 16;
             int num13 = int_1 + int_0 * 18;
-            int num14 = 4;
-            int num15 = 2;
+            int num14 = UiScale.S(4);
+            int num15 = UiScale.S(2);
             if (empire_0 != null)
             {
                 empire_0.PurchaseStateFuel(0.0);
@@ -331,12 +331,12 @@ namespace DistantWorlds.Controls
             ecrlHwNiM(point_0: new Point(GqYieCfHe, int_1), graphics_0: graphics_0, string_0: TextResolver.GetText("Economy"), font_2: font_1);
             ecrlHwNiM(point_0: new Point(num2 + method_0(graphics_0, TextResolver.GetText("STATE"), font_0, num + num3), int_1 + int_0 * 2), graphics_0: graphics_0, string_0: TextResolver.GetText("STATE"), font_2: font_0);
             ecrlHwNiM(point_0: new Point(num6 + method_0(graphics_0, TextResolver.GetText("PRIVATE"), font_0, num5 + num7), int_1 + int_0 * 2), graphics_0: graphics_0, string_0: TextResolver.GetText("PRIVATE"), font_2: font_0);
-            SizeF sizeF_ = new SizeF(90f, 100f);
-            method_8(point_0: new Point(GqYieCfHe + 10, num9 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("Cash on hand"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
-            method_8(point_0: new Point(GqYieCfHe + 10, num10 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("Annual Income"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
-            method_8(point_0: new Point(GqYieCfHe + 10, num11 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("Annual Expenses"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
-            method_8(point_0: new Point(GqYieCfHe + 10, num12 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("Cashflow"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
-            method_8(point_0: new Point(GqYieCfHe + 10, num13 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("This Year's Bonus Income"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
+            SizeF sizeF_ = new SizeF(UiScale.S(90f), UiScale.S(100f));
+            method_8(point_0: new Point(GqYieCfHe + UiScale.S(10), num9 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("Cash on hand"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
+            method_8(point_0: new Point(GqYieCfHe + UiScale.S(10), num10 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("Annual Income"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
+            method_8(point_0: new Point(GqYieCfHe + UiScale.S(10), num11 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("Annual Expenses"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
+            method_8(point_0: new Point(GqYieCfHe + UiScale.S(10), num12 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("Cashflow"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
+            method_8(point_0: new Point(GqYieCfHe + UiScale.S(10), num13 - num15), graphics_0: graphics_0, string_0: TextResolver.GetText("This Year's Bonus Income"), font_2: font_0, brush_0: solidBrush_0, sizeF_0: sizeF_);
             if (empire_0 != null)
             {
                 string string_ = empire_0.StateMoney.ToString("0,K");
@@ -499,9 +499,9 @@ namespace DistantWorlds.Controls
 
         private void atRsyCrma(Graphics graphics_0, string string_0, Font font_2, Point point_0, SolidBrush solidBrush_3)
         {
-            point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+            point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
-            point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+            point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_3, point_0, StringFormat.GenericTypographic);
         }
 
@@ -509,17 +509,17 @@ namespace DistantWorlds.Controls
         {
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_2, brush: solidBrush_1, format: StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 RectangleF layoutRectangle2 = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle2, StringFormat.GenericTypographic);
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, brush_0, point_0, StringFormat.GenericTypographic);
             }
         }
@@ -531,12 +531,12 @@ namespace DistantWorlds.Controls
             lnkEconomy.ActiveLinkColor = Color.FromArgb(255, 128, 0);
             lnkEconomy.AutoSize = true;
             lnkEconomy.BackColor = Color.Transparent;
-            lnkEconomy.Font = new Font("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lnkEconomy.Font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
             lnkEconomy.LinkBehavior = LinkBehavior.HoverUnderline;
             lnkEconomy.LinkColor = Color.FromArgb(255, 192, 0);
-            lnkEconomy.Location = new Point(-16, 53);
+            lnkEconomy.Location = new Point(UiScale.S(-16), UiScale.S(53));
             lnkEconomy.Name = "lnkEconomy";
-            lnkEconomy.Size = new Size(151, 13);
+            lnkEconomy.Size = new Size(UiScale.S(151), UiScale.S(13));
             lnkEconomy.TabIndex = 79;
             lnkEconomy.TabStop = true;
             lnkEconomy.Text = TextResolver.GetText("How does my empire make money?...");

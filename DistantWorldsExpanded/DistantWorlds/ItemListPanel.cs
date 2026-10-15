@@ -133,12 +133,12 @@ namespace DistantWorlds
         public ItemListPanel(string title, Bitmap iconImage, Type itemType, List<string[]> toggleButtonText):base()
         {
             
-            TitleBarHeight = 18;
-            ToggleButtonHeight = 14;
-            ScrollUpHeight = 14;
-            ScrollDownHeight = 14;
-            ItemHeight = 41;
-            ItemGap = 2;
+            TitleBarHeight = UiScale.S(18);
+            ToggleButtonHeight = UiScale.S(14);
+            ScrollUpHeight = UiScale.S(14);
+            ScrollDownHeight = UiScale.S(14);
+            ItemHeight = UiScale.S(41);
+            ItemGap = UiScale.S(2);
             ItemHeightOverrideFactor = 1f;
             DefaultTitleBarHeight = 18;
             DefaultToggleButtonHeight = 14;
@@ -148,7 +148,7 @@ namespace DistantWorlds
             int_0 = -1;
             list_0 = new List<int>();
             list_1 = new List<string[]>();
-            ScrollAmountPerClick = 25;
+            ScrollAmountPerClick = UiScale.S(25);
             DefaultScrollAmountPerClick = 25;
             TitleText = title;
             IconImageOriginal = iconImage;
@@ -255,10 +255,10 @@ namespace DistantWorlds
                 bool_8 = galaxy.PlayerEmpire.CheckConstructionShipAndMiningStationCanSurviveStorms();
             }
             Items = items;
-            int num = TitleBarHeight + 1 + ScrollUpHeight + 1 + ScrollDownHeight + 4;
+            int num = TitleBarHeight + UiScale.S(1) + ScrollUpHeight + UiScale.S(1) + ScrollDownHeight + UiScale.S(4);
             if (ToggleButtonEnabled)
             {
-                num += ToggleButtonHeight + 1;
+                num += ToggleButtonHeight + UiScale.S(1);
             }
             int val = Math.Max(0, Items.Length * (ItemHeight + ItemGap) - ItemGap - (Container.Area.Height - num));
             ScrollPosition = Math.Min(val, Math.Max(0, ScrollPosition));
@@ -391,7 +391,7 @@ namespace DistantWorlds
             {
                 color = Color.FromArgb(220, 220, 220, 220);
             }
-            int num = TitleBarHeight - 10;
+            int num = TitleBarHeight - UiScale.S(10);
             using Pen pen = new Pen(color, 2f);
             graphics_0.DrawLine(pen, point_0.X, point_0.Y, point_0.X + num, point_0.Y + num);
             graphics_0.DrawLine(pen, point_0.X, point_0.Y + num, point_0.X + num, point_0.Y);
@@ -404,7 +404,7 @@ namespace DistantWorlds
             {
                 color = Color.FromArgb(220, 220, 220, 220);
             }
-            int num = TitleBarHeight - 10;
+            int num = TitleBarHeight - UiScale.S(10);
             int num2 = (int)((float)num * 0.6f);
             using Pen pen = new Pen(color, 2f);
             using Pen pen2 = new Pen(color, 1f);
@@ -419,7 +419,7 @@ namespace DistantWorlds
         {
             for (int i = 0; i < list_1.Count; i++)
             {
-                Rectangle rect = new Rectangle(point_0.X, point_0.Y + i * (ToggleButtonHeight + 1), int_1 - 1, ToggleButtonHeight);
+                Rectangle rect = new Rectangle(point_0.X, point_0.Y + i * (ToggleButtonHeight + UiScale.S(1)), int_1 - UiScale.S(1), ToggleButtonHeight);
                 Color color = color_0;
                 if (int_2 == i)
                 {
@@ -462,7 +462,7 @@ namespace DistantWorlds
                 color2 = Color.FromArgb(160, 64, 64, 64);
                 font_ = Container.BoldFont;
             }
-            Rectangle rect = new Rectangle(x, y, width - 1, TitleBarHeight);
+            Rectangle rect = new Rectangle(x, y, width - UiScale.S(1), TitleBarHeight);
             using (LinearGradientBrush brush = new LinearGradientBrush(rect, color, color2, LinearGradientMode.Vertical))
             {
                 graphics.FillRectangle(brush, rect);
@@ -470,27 +470,27 @@ namespace DistantWorlds
             int num = x;
             if (IconImage != null)
             {
-                graphics.DrawImage(IconImage, new Point(x + 2, y + 2));
-                num += 2 + IconImage.Width + 3;
+                graphics.DrawImage(IconImage, new Point(x + UiScale.S(2), y + UiScale.S(2)));
+                num += UiScale.S(2) + IconImage.Width + UiScale.S(3);
             }
             string text = TitleText;
             if (Items != null && Items.Length > 0)
             {
                 text = text + " (" + Items.Length + ")";
             }
-            method_12(graphics, text, font_, new Point(num, y - 1));
-            method_3(graphics, new Point(x + width - (TitleBarHeight * 2 - 4), y + 5), bool_2);
-            method_2(graphics, new Point(x + width - (TitleBarHeight - 4), y + 5), bool_1);
+            method_12(graphics, text, font_, new Point(num, y - UiScale.S(1)));
+            method_3(graphics, new Point(x + width - (TitleBarHeight * 2 - UiScale.S(4)), y + UiScale.S(5)), bool_2);
+            method_2(graphics, new Point(x + width - (TitleBarHeight - UiScale.S(4)), y + UiScale.S(5)), bool_1);
             if (ToggleButtonEnabled)
             {
-                method_4(graphics, new Point(x, y + TitleBarHeight + 1), width, int_0, Color.FromArgb(80, 170, 170, 170), Color.FromArgb(144, 170, 170, 170));
+                method_4(graphics, new Point(x, y + TitleBarHeight + UiScale.S(1)), width, int_0, Color.FromArgb(80, 170, 170, 170), Color.FromArgb(144, 170, 170, 170));
             }
             if (Container.ActivePanel == this)
             {
-                int num2 = height - (TitleBarHeight + 1 + ScrollUpHeight + 1 + ScrollDownHeight);
-                int num3 = height - (TitleBarHeight + 1 + ScrollUpHeight + 1 + ScrollDownHeight + 3);
-                int num4 = y + TitleBarHeight + 1 + ScrollUpHeight + 2;
-                int num5 = (ToggleButtonHeight + 1) * list_1.Count;
+                int num2 = height - (TitleBarHeight + UiScale.S(1) + ScrollUpHeight + UiScale.S(1) + ScrollDownHeight);
+                int num3 = height - (TitleBarHeight + UiScale.S(1) + ScrollUpHeight + UiScale.S(1) + ScrollDownHeight + UiScale.S(3));
+                int num4 = y + TitleBarHeight + UiScale.S(1) + ScrollUpHeight + UiScale.S(2);
+                int num5 = (ToggleButtonHeight + UiScale.S(1)) * list_1.Count;
                 if (ToggleButtonEnabled)
                 {
                     num2 -= num5;
@@ -514,12 +514,12 @@ namespace DistantWorlds
                 {
                     color3 = Color.FromArgb(144, 170, 170, 170);
                 }
-                int num6 = y + TitleBarHeight + 1;
+                int num6 = y + TitleBarHeight + UiScale.S(1);
                 if (ToggleButtonEnabled)
                 {
                     num6 += num5;
                 }
-                Rectangle rect2 = new Rectangle(x, num6, width - 1, ScrollUpHeight);
+                Rectangle rect2 = new Rectangle(x, num6, width - UiScale.S(1), ScrollUpHeight);
                 using (SolidBrush brush2 = new SolidBrush(color3))
                 {
                     graphics.FillRectangle(brush2, rect2);
@@ -535,12 +535,12 @@ namespace DistantWorlds
                 {
                     color4 = Color.FromArgb(144, 170, 170, 170);
                 }
-                int num7 = y + TitleBarHeight + 1 + ScrollUpHeight + num2;
+                int num7 = y + TitleBarHeight + UiScale.S(1) + ScrollUpHeight + num2;
                 if (ToggleButtonEnabled)
                 {
                     num7 += num5;
                 }
-                Rectangle rect3 = new Rectangle(x, num7, width - 1, ScrollDownHeight);
+                Rectangle rect3 = new Rectangle(x, num7, width - UiScale.S(1), ScrollDownHeight);
                 using (SolidBrush brush3 = new SolidBrush(color4))
                 {
                     graphics.FillRectangle(brush3, rect3);
@@ -548,7 +548,7 @@ namespace DistantWorlds
                 if (flag2)
                 {
                     Bitmap scrollDownImage = Container.ScrollDownImage;
-                    Point point2 = new Point(x + (width - scrollDownImage.Width) / 2, num7 + 1 + (ScrollDownHeight - scrollDownImage.Height) / 2);
+                    Point point2 = new Point(x + (width - scrollDownImage.Width) / 2, num7 + UiScale.S(1) + (ScrollDownHeight - scrollDownImage.Height) / 2);
                     graphics.DrawImage(scrollDownImage, point2);
                 }
             }
@@ -564,10 +564,10 @@ namespace DistantWorlds
                 int num2 = method_10(ScrollPosition + rectangle_0.Height);
                 if (num < Items.Length)
                 {
-                    int int_ = rectangle_0.Left + 1;
+                    int int_ = rectangle_0.Left + UiScale.S(1);
                     int num3 = rectangle_0.Top + num * (ItemHeight + ItemGap);
                     num3 -= ScrollPosition;
-                    int int_2 = rectangle_0.Width - 2;
+                    int int_2 = rectangle_0.Width - UiScale.S(2);
                     int itemHeight = ItemHeight;
                     for (int i = num; i < Items.Length && i <= num2; i++)
                     {
@@ -584,7 +584,7 @@ namespace DistantWorlds
             int num5 = (rectangle_0.Height - (int)sizeF.Height) / 2;
             Point point_ = new Point(rectangle_0.X + num4, rectangle_0.Y + num5);
             using SolidBrush brush_ = new SolidBrush(Color.FromArgb(96, 170, 170, 170));
-            sizeF = new SizeF(sizeF.Width + 2f, sizeF.Height + 2f);
+            sizeF = new SizeF(sizeF.Width + UiScale.S(2f), sizeF.Height + UiScale.S(2f));
             method_14(graphics_0, text, Container.LargeBoldFont, point_, brush_, sizeF, bool_9: false);
         }
 
@@ -663,10 +663,10 @@ namespace DistantWorlds
                         }
                         break;
                 }
-                int num25 = int_1 + 5;
+                int num25 = int_1 + UiScale.S(5);
                 if (bitmap != null)
                 {
-                    graphics_0.DrawImage(bitmap, new Point(num25, int_2 + 5));
+                    graphics_0.DrawImage(bitmap, new Point(num25, int_2 + UiScale.S(5)));
                     num25 += bitmap.Width + num3;
                 }
                 SizeF sizeF = graphics_0.MeasureString(galaxyLocation.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
@@ -699,9 +699,9 @@ namespace DistantWorlds
                     return;
                 }
                 Bitmap image = Container.Parent.characterImageCache_0.ObtainCharacterImageSmall(character);
-                Rectangle rect = new Rectangle(int_1 + 5, int_2 + 5, imageSize, imageSize);
+                Rectangle rect = new Rectangle(int_1 + UiScale.S(5), int_2 + UiScale.S(5), imageSize, imageSize);
                 graphics_0.DrawImage(image, rect);
-                int num26 = int_1 + (5 + num17 + num3);
+                int num26 = int_1 + (UiScale.S(5) + num17 + num3);
                 SizeF sizeF2 = graphics_0.MeasureString(character.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
                 method_12(graphics_0, character.Name, Container.BoldFont, new Point(num26, int_2 + num));
                 string string_ = "(" + Galaxy.ResolveDescription(character.Role) + ")";
@@ -729,17 +729,17 @@ namespace DistantWorlds
                 {
                     if (Container.HabitatImages[habitat2.PictureRef] != null)
                     {
-                        graphics_0.DrawImage(Container.HabitatImages[habitat2.PictureRef], new Point(int_1 + 5, int_2 + 5));
+                        graphics_0.DrawImage(Container.HabitatImages[habitat2.PictureRef], new Point(int_1 + UiScale.S(5), int_2 + UiScale.S(5)));
                     }
                     if (habitat2.ManufacturingQueue != null && habitat2.ManufacturingQueue.DeficientResources != null && habitat2.ManufacturingQueue.DeficientResources.Count > 0)
                     {
-                        graphics_0.DrawImage(Container.ConstructionStalledImage, new Point(int_1 + 5, int_2 + num13));
+                        graphics_0.DrawImage(Container.ConstructionStalledImage, new Point(int_1 + UiScale.S(5), int_2 + num13));
                     }
                     if (habitat2.Population != null && habitat2.Population.DominantRace != null)
                     {
-                        graphics_0.DrawImage(Container.RaceImageCache.GetRaceImageSize30(habitat2.Population.DominantRace.PictureRef, useTransparent: true), new Point(int_1 + 5 + imageSize + num3, int_2 + num3));
+                        graphics_0.DrawImage(Container.RaceImageCache.GetRaceImageSize30(habitat2.Population.DominantRace.PictureRef, useTransparent: true), new Point(int_1 + UiScale.S(5) + imageSize + num3, int_2 + num3));
                     }
-                    int num27 = int_1 + (5 + imageSize + num3 + imageSize + num3);
+                    int num27 = int_1 + (UiScale.S(5) + imageSize + num3 + imageSize + num3);
                     SizeF sizeF3 = graphics_0.MeasureString(habitat2.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
                     Color color2 = Container.WhiteBrush.Color;
                     if (habitat2.Empire != null && habitat2.Empire != galaxy_0.IndependentEmpire)
@@ -800,7 +800,7 @@ namespace DistantWorlds
                                 }
                                 Point point = new Point(num27, int_2 + num14 + (num10 - bitmap2.Height) / 2);
                                 graphics_0.DrawImage(bitmap2, point);
-                                num27 += bitmap2.Width + 1;
+                                num27 += bitmap2.Width + UiScale.S(1);
                             }
                             num27 += num4;
                         }
@@ -850,18 +850,18 @@ namespace DistantWorlds
                 {
                     if (Container.HabitatImages[habitat2.PictureRef] != null)
                     {
-                        graphics_0.DrawImage(Container.HabitatImages[habitat2.PictureRef], new Point(int_1 + 5, int_2 + 5));
+                        graphics_0.DrawImage(Container.HabitatImages[habitat2.PictureRef], new Point(int_1 + UiScale.S(5), int_2 + UiScale.S(5)));
                     }
                     if (habitat2.Empire.Capital == habitat2)
                     {
                         if (Container.Parent != null && Container.Parent.bitmap_44 != null)
                         {
-                            graphics_0.DrawImage(Container.Parent.bitmap_44, new Point(int_1 + 2, int_2 + 2));
+                            graphics_0.DrawImage(Container.Parent.bitmap_44, new Point(int_1 + UiScale.S(2), int_2 + UiScale.S(2)));
                         }
                     }
                     else if (habitat2.Empire.Capitals.Contains(habitat2) && Container.Parent != null && Container.Parent.bitmap_43 != null)
                     {
-                        graphics_0.DrawImage(Container.Parent.bitmap_43, new Point(int_1 + 2, int_2 + 2));
+                        graphics_0.DrawImage(Container.Parent.bitmap_43, new Point(int_1 + UiScale.S(2), int_2 + UiScale.S(2)));
                     }
                     CharacterList characterList = new CharacterList();
                     if (habitat2.Empire != null && habitat2.Empire.Characters != null)
@@ -870,7 +870,7 @@ namespace DistantWorlds
                     }
                     if (characterList.Count > 0 && Container != null && Container.Parent != null && Container.Parent.characterImageCache_0 != null && Container.HabitatImages[habitat2.PictureRef] != null)
                     {
-                        int num28 = int_1 + 5 + Container.HabitatImages[habitat2.PictureRef].Width - num7;
+                        int num28 = int_1 + UiScale.S(5) + Container.HabitatImages[habitat2.PictureRef].Width - num7;
                         for (int k = 0; k < characterList.Count; k++)
                         {
                             if (characterList[k].Role == CharacterRole.ColonyGovernor)
@@ -883,9 +883,9 @@ namespace DistantWorlds
                     }
                     if (habitat2.Population != null && habitat2.Population.DominantRace != null)
                     {
-                        graphics_0.DrawImage(rect: new Rectangle(int_1 + 5 + imageSize + num3, int_2 + num3, imageSize, imageSize), image: Container.RaceImageCache.GetRaceImageSize30(habitat2.Population.DominantRace.PictureRef, useTransparent: true));
+                        graphics_0.DrawImage(rect: new Rectangle(int_1 + UiScale.S(5) + imageSize + num3, int_2 + num3, imageSize, imageSize), image: Container.RaceImageCache.GetRaceImageSize30(habitat2.Population.DominantRace.PictureRef, useTransparent: true));
                     }
-                    int num29 = int_1 + (5 + imageSize + num3 + imageSize + num3);
+                    int num29 = int_1 + (UiScale.S(5) + imageSize + num3 + imageSize + num3);
                     SizeF sizeF7 = graphics_0.MeasureString(habitat2.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
                     method_12(graphics_0, habitat2.Name, Container.BoldFont, new Point(num29, int_2 + num));
                     string text8 = "(" + ((double)habitat2.Diameter / 10.0).ToString("0.0") + "K";
@@ -936,7 +936,7 @@ namespace DistantWorlds
                         if (habitat2.ConstructionQueue.ConstructionWaitQueue != null && habitat2.ConstructionQueue.ConstructionWaitQueue.Count > 0)
                         {
                             string string_5 = " (" + habitat2.ConstructionQueue.ConstructionWaitQueue.Count + " " + TextResolver.GetText("waiting") + ")";
-                            method_12(graphics_0, string_5, Container.SmallFont, new Point(num29 + num23 + bitmap_.Width + 2, int_2 + num15));
+                            method_12(graphics_0, string_5, Container.SmallFont, new Point(num29 + num23 + bitmap_.Width + UiScale.S(2), int_2 + num15));
                         }
                         Container.Parent.method_112(graphics_0, GraphicsQuality.Low);
                     }
@@ -944,26 +944,26 @@ namespace DistantWorlds
                 }
                 if (habitat2.Category == HabitatCategoryType.GasCloud)
                 {
-                    graphics_0.DrawImage(rect: new Rectangle(int_1 + 5, int_2 + 5, imageSize, imageSize), image: Container.GasCloudImage);
+                    graphics_0.DrawImage(rect: new Rectangle(int_1 + UiScale.S(5), int_2 + UiScale.S(5), imageSize, imageSize), image: Container.GasCloudImage);
                 }
                 else if (habitat2.Category == HabitatCategoryType.Star)
                 {
                     Bitmap bitmap6 = Container.Parent.bitmap_196[habitat2.MapPictureRef];
                     Rectangle srcRect2 = new Rectangle(0, 0, bitmap6.Width, bitmap6.Height);
-                    Rectangle destRect2 = new Rectangle(int_1 + 5, int_2 + 5, Container.ImageSize, Container.ImageSize);
+                    Rectangle destRect2 = new Rectangle(int_1 + UiScale.S(5), int_2 + UiScale.S(5), Container.ImageSize, Container.ImageSize);
                     Container.Parent.method_112(graphics_0, GraphicsQuality.High);
                     graphics_0.DrawImage(bitmap6, destRect2, srcRect2, GraphicsUnit.Pixel);
                     Container.Parent.method_112(graphics_0, GraphicsQuality.Low);
                 }
                 else if (Container.HabitatImages[habitat2.PictureRef] != null)
                 {
-                    graphics_0.DrawImage(Container.HabitatImages[habitat2.PictureRef], new Point(int_1 + 5, int_2 + 5));
+                    graphics_0.DrawImage(Container.HabitatImages[habitat2.PictureRef], new Point(int_1 + UiScale.S(5), int_2 + UiScale.S(5)));
                 }
                 if (habitat2.Population != null && habitat2.Population.DominantRace != null)
                 {
-                    graphics_0.DrawImage(rect: new Rectangle(int_1 + 5 + imageSize + num3, int_2 + 5, imageSize, imageSize), image: Container.RaceImageCache.GetRaceImageSize30(habitat2.Population.DominantRace.PictureRef, useTransparent: true));
+                    graphics_0.DrawImage(rect: new Rectangle(int_1 + UiScale.S(5) + imageSize + num3, int_2 + UiScale.S(5), imageSize, imageSize), image: Container.RaceImageCache.GetRaceImageSize30(habitat2.Population.DominantRace.PictureRef, useTransparent: true));
                 }
-                int num30 = int_1 + (5 + imageSize + num3);
+                int num30 = int_1 + (UiScale.S(5) + imageSize + num3);
                 if (habitat2.Population != null && habitat2.Population.DominantRace != null)
                 {
                     num30 += imageSize + num3;
@@ -1029,7 +1029,7 @@ namespace DistantWorlds
                             }
                             Point point2 = new Point(num30, int_2 + num14 + (num10 - bitmap7.Height) / 2);
                             graphics_0.DrawImage(bitmap7, point2);
-                            num30 += bitmap7.Width + 2;
+                            num30 += bitmap7.Width + UiScale.S(2);
                         }
                         num30 += num6;
                     }
@@ -1113,13 +1113,13 @@ namespace DistantWorlds
                 BuiltObject builtObject3 = (BuiltObject)object_1;
                 if (Container.BuiltObjectImages[builtObject3.PictureRef] != null)
                 {
-                    graphics_0.DrawImage(Container.BuiltObjectImages[builtObject3.PictureRef], new Point(int_1 + 5, int_2 + 5));
+                    graphics_0.DrawImage(Container.BuiltObjectImages[builtObject3.PictureRef], new Point(int_1 + UiScale.S(5), int_2 + UiScale.S(5)));
                 }
                 if ((builtObject3.Role == BuiltObjectRole.Base || builtObject3.SubRole == BuiltObjectSubRole.ConstructionShip) && builtObject3.ManufacturingQueue != null && builtObject3.ManufacturingQueue.DeficientResources != null && builtObject3.ManufacturingQueue.DeficientResources.Count > 0)
                 {
-                    graphics_0.DrawImage(Container.ConstructionStalledImage, new Point(int_1 + 5, int_2 + num13));
+                    graphics_0.DrawImage(Container.ConstructionStalledImage, new Point(int_1 + UiScale.S(5), int_2 + num13));
                 }
-                int num33 = int_1 + (5 + imageSize + num3);
+                int num33 = int_1 + (UiScale.S(5) + imageSize + num3);
                 SizeF sizeF12 = graphics_0.MeasureString(builtObject3.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
                 Color color4 = Color.FromArgb(170, 170, 170);
                 if (builtObject3.DamagedComponentCount > 0)
@@ -1162,7 +1162,7 @@ namespace DistantWorlds
                         graphics_0.DrawImage(Container.RefuelImage, new Point(num33, int_2 + num14));
                         string text14 = (builtObject3.CurrentFuel / Math.Max(1.0, builtObject3.FuelCapacity)).ToString("0%");
                         graphics_0.MeasureString(text14, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
-                        method_12(graphics_0, text14, Container.SmallFont, new Point(num33 + Container.RefuelImage.Width + 2, int_2 + num15));
+                        method_12(graphics_0, text14, Container.SmallFont, new Point(num33 + Container.RefuelImage.Width + UiScale.S(2), int_2 + num15));
                     }
                     else if (builtObject3.Role == BuiltObjectRole.Military)
                     {
@@ -1177,7 +1177,7 @@ namespace DistantWorlds
                         method_12(graphics_0, text16, Container.SmallFont, new Point(num33, int_2 + num15));
                         num33 += (int)sizeF17.Width + num6;
                         graphics_0.DrawImage(Container.RefuelImage, new Point(num33, int_2 + num14));
-                        num33 += Container.RefuelImage.Width + 2;
+                        num33 += Container.RefuelImage.Width + UiScale.S(2);
                         string text17 = (builtObject3.CurrentFuel / Math.Max(1.0, builtObject3.FuelCapacity)).ToString("0%");
                         SizeF sizeF18 = graphics_0.MeasureString(text17, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
                         method_12(graphics_0, text17, Container.SmallFont, new Point(num33, int_2 + num15));
@@ -1191,7 +1191,7 @@ namespace DistantWorlds
                                     Container.TroopImage = Container.ScaleLimitImage(Container.Parent.bitmap_23[Container.Parent._Game.PlayerEmpire.TroopPictureRef], num10, num10, Container.AlphaTransparency);
                                 }
                                 graphics_0.DrawImage(Container.TroopImage, new Point(num33, int_2 + num14 + (num10 - Container.TroopImage.Height) / 2));
-                                num33 += Container.TroopImage.Width + 2;
+                                num33 += Container.TroopImage.Width + UiScale.S(2);
                             }
                             string text18 = builtObject3.Troops.Count.ToString();
                             SizeF sizeF19 = graphics_0.MeasureString(text18, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
@@ -1214,7 +1214,7 @@ namespace DistantWorlds
                                 }
                             }
                             graphics_0.DrawImage(Container.FighterImage, new Point(num33, int_2 + num14));
-                            num33 += Container.FighterImage.Width + 2;
+                            num33 += Container.FighterImage.Width + UiScale.S(2);
                         }
                         string text19 = builtObject3.Fighters.Count.ToString();
                         SizeF sizeF20 = graphics_0.MeasureString(text19, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
@@ -1228,7 +1228,7 @@ namespace DistantWorlds
                         method_15(graphics_0, text20, Container.SmallFont, new Point(num33, int_2 + num15), Container.WhiteBrush, sizeF_);
                         num33 += (int)sizeF_.Width + num6;
                         graphics_0.DrawImage(Container.RefuelImage, new Point(num33, int_2 + num14));
-                        num33 += Container.RefuelImage.Width + 2;
+                        num33 += Container.RefuelImage.Width + UiScale.S(2);
                         string text21 = (builtObject3.CurrentFuel / Math.Max(1.0, builtObject3.FuelCapacity)).ToString("0%");
                         SizeF sizeF21 = graphics_0.MeasureString(text21, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
                         method_12(graphics_0, text21, Container.SmallFont, new Point(num33, int_2 + num15));
@@ -1288,7 +1288,7 @@ namespace DistantWorlds
                             method_12(graphics_0, text23, Container.SmallFont, new Point(num33, int_2 + num15));
                             num33 += (int)sizeF23.Width + num10;
                             graphics_0.DrawImage(Container.RefuelImage, new Point(num33, int_2 + num14));
-                            num33 += Container.RefuelImage.Width + 2;
+                            num33 += Container.RefuelImage.Width + UiScale.S(2);
                             string text24 = (builtObject3.CurrentFuel / Math.Max(1.0, builtObject3.FuelCapacity)).ToString("0%");
                             SizeF sizeF24 = graphics_0.MeasureString(text24, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
                             method_12(graphics_0, text24, Container.SmallFont, new Point(num33, int_2 + num15));
@@ -1308,7 +1308,7 @@ namespace DistantWorlds
                             {
                                 Bitmap bitmap13 = Container.ResourceImages[habitatResource3.ResourceID];
                                 graphics_0.DrawImage(bitmap13, new Point(num33, int_2 + num14 + (num10 - bitmap13.Height) / 2));
-                                num33 += bitmap13.Width + 2;
+                                num33 += bitmap13.Width + UiScale.S(2);
                             }
                         }
                     }
@@ -1367,7 +1367,7 @@ namespace DistantWorlds
                 ShipGroup shipGroup = (ShipGroup)object_1;
                 if (Container.BuiltObjectImages[shipGroup.LeadShip.PictureRef] != null)
                 {
-                    graphics_0.DrawImage(Container.BuiltObjectImages[shipGroup.LeadShip.PictureRef], new Point(int_1 + 5, int_2 + 5));
+                    graphics_0.DrawImage(Container.BuiltObjectImages[shipGroup.LeadShip.PictureRef], new Point(int_1 + UiScale.S(5), int_2 + UiScale.S(5)));
                 }
                 CharacterList characterList2 = new CharacterList();
                 if (shipGroup.Empire != null && shipGroup.Empire.Characters != null)
@@ -1382,7 +1382,7 @@ namespace DistantWorlds
                         Bitmap image3 = Container.Parent.characterImageCache_0.ObtainCharacterImageVerySmall(characterList2[num37]);
                         if (Container.BuiltObjectImages[shipGroup.LeadShip.PictureRef] != null)
                         {
-                            graphics_0.DrawImage(image3, new Point(int_1 + 5 + Container.BuiltObjectImages[shipGroup.LeadShip.PictureRef].Width - num7, num36));
+                            graphics_0.DrawImage(image3, new Point(int_1 + UiScale.S(5) + Container.BuiltObjectImages[shipGroup.LeadShip.PictureRef].Width - num7, num36));
                         }
                         num36 += num10;
                         if (num36 > int_2 + num12)
@@ -1391,7 +1391,7 @@ namespace DistantWorlds
                         }
                     }
                 }
-                int num38 = int_1 + (5 + imageSize + num3);
+                int num38 = int_1 + (UiScale.S(5) + imageSize + num3);
                 SizeF sizeF27 = graphics_0.MeasureString(shipGroup.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
                 method_12(graphics_0, shipGroup.Name, Container.BoldFont, new Point(num38, int_2 + num));
                 string text27 = "(" + shipGroup.Ships.Count + " " + TextResolver.GetText("Ships").ToLower(CultureInfo.InvariantCulture) + ")";
@@ -1440,7 +1440,7 @@ namespace DistantWorlds
                             Container.TroopImage = Container.ScaleLimitImage(Container.Parent.bitmap_23[Container.Parent._Game.PlayerEmpire.TroopPictureRef], num10, num10, Container.AlphaTransparency);
                         }
                         graphics_0.DrawImage(Container.TroopImage, new Point(num38, int_2 + num14 + (num10 - Container.TroopImage.Height) / 2));
-                        num38 += Container.TroopImage.Width + 2;
+                        num38 += Container.TroopImage.Width + UiScale.S(2);
                     }
                     string text30 = totalTroopCount.ToString();
                     SizeF sizeF31 = graphics_0.MeasureString(text30, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
@@ -1464,7 +1464,7 @@ namespace DistantWorlds
                         }
                     }
                     graphics_0.DrawImage(Container.FighterImage, new Point(num38, int_2 + num14));
-                    num38 += Container.FighterImage.Width + 2;
+                    num38 += Container.FighterImage.Width + UiScale.S(2);
                 }
                 string text31 = totalFighterCount.ToString();
                 SizeF sizeF32 = graphics_0.MeasureString(text31, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
@@ -1523,11 +1523,11 @@ namespace DistantWorlds
                     int num39 = 0;
                     if (bitmap19 != null)
                     {
-                        graphics_0.DrawImage(bitmap19, int_1 + 5 + num20, int_2 + 5);
+                        graphics_0.DrawImage(bitmap19, int_1 + UiScale.S(5) + num20, int_2 + UiScale.S(5));
                         num39 = bitmap19.Width + num;
                     }
                     Container.Parent.method_112(graphics_0, GraphicsQuality.Medium);
-                    Point point_ = new Point(int_1 + 5 + num20 + num39, int_2 + num);
+                    Point point_ = new Point(int_1 + UiScale.S(5) + num20 + num39, int_2 + num);
                     using (SolidBrush brush_7 = new SolidBrush(color5))
                     {
                         int num40 = (int)((float)Container.Area.Width * 0.67f);
@@ -1540,7 +1540,7 @@ namespace DistantWorlds
                             method_14(point_0: new Point(point_.X + (int)(sizeF33.Width + (float)num4), point_.Y + num2), graphics_0: graphics_0, string_0: "(" + prioritizedTarget.Empire.Name + ")", font_0: Container.SmallFont, brush_0: brush_7, sizeF_0: sizeF_2, bool_9: false);
                         }
                     }
-                    Point point3 = new Point(int_1 + 5 + num20 + num39, int_2 + num15);
+                    Point point3 = new Point(int_1 + UiScale.S(5) + num20 + num39, int_2 + num15);
                     string s = method_8(prioritizedTarget);
                     Color color6 = Color.FromArgb(alpha, 170, 170, 170);
                     using (SolidBrush brush2 = new SolidBrush(color6))
@@ -1718,8 +1718,8 @@ namespace DistantWorlds
                 {
                     num17 = bitmap.Width;
                 }
-                method_13(graphics_0, empireActivity_0.Target.Name, Container.BoldFont, new Point(int_1 + num6 + num17 + 1, int_2 + num2), brush_);
-                method_13(graphics_0, "(" + empireActivity_0.TargetEmpire.Name + ")", Container.SmallFont, new Point(int_1 + num6 + num17 + 1, int_2 + num9), brush_);
+                method_13(graphics_0, empireActivity_0.Target.Name, Container.BoldFont, new Point(int_1 + num6 + num17 + UiScale.S(1), int_2 + num2), brush_);
+                method_13(graphics_0, "(" + empireActivity_0.TargetEmpire.Name + ")", Container.SmallFont, new Point(int_1 + num6 + num17 + UiScale.S(1), int_2 + num9), brush_);
             }
             int num18 = int_2 + num12;
             graphics_0.DrawImage(empireActivity_0.RequestingEmpire.SmallFlagPicture, new Point(int_1 + num4, int_2 + num13));
@@ -1740,7 +1740,7 @@ namespace DistantWorlds
                     num19 = (int)((float)num21 * num20);
                     graphics_0.DrawImage(bitmap3, new Rectangle(int_1 + num11, num18, num19, num21));
                 }
-                method_12(graphics_0, string_3, Container.Font, new Point(int_1 + num11 + num19 + 2, num18));
+                method_12(graphics_0, string_3, Container.Font, new Point(int_1 + num11 + num19 + UiScale.S(2), num18));
                 num18 += num7;
             }
             if (galaxy_0.PlayerEmpire.PirateEmpireBaseHabitat != null)
@@ -1886,7 +1886,7 @@ namespace DistantWorlds
             method_12(graphics_0, empty2, Container.SmallFont, new Point(int_1 + num14, num18));
             if (flag)
             {
-                Rectangle rect2 = new Rectangle(int_1 + int_3 - num, int_2 + 1, num, int_4 - num2);
+                Rectangle rect2 = new Rectangle(int_1 + int_3 - num, int_2 + UiScale.S(1), num, int_4 - num2);
                 Color color2 = Color.FromArgb(216, 96, 96, 96);
                 if (bool_6 && object_0 == empireActivity_0)
                 {
@@ -1904,7 +1904,7 @@ namespace DistantWorlds
                 SizeF sizeF = graphics_0.MeasureString(text3, Container.BoldFont, num);
                 int x = rect2.X + (rect2.Width - (int)sizeF.Width) / 2;
                 int y = rect2.Y + (rect2.Height - (int)sizeF.Height) / 2;
-                method_14(graphics_0, text3, Container.BoldFont, new Point(x, y), Container.WhiteBrush, new SizeF(sizeF.Width + 1f, sizeF.Height + 1f), bool_9: true);
+                method_14(graphics_0, text3, Container.BoldFont, new Point(x, y), Container.WhiteBrush, new SizeF(sizeF.Width + UiScale.S(1f), sizeF.Height + UiScale.S(1f)), bool_9: true);
             }
             else if (flag2)
             {
@@ -1912,7 +1912,7 @@ namespace DistantWorlds
                 {
                     text2 = "(" + TextResolver.GetText("Already Bidded") + ")";
                 }
-                Rectangle rect3 = new Rectangle(int_1 + int_3 - num, int_2 + 1, num, int_4 - num2);
+                Rectangle rect3 = new Rectangle(int_1 + int_3 - num, int_2 + UiScale.S(1), num, int_4 - num2);
                 Color color3 = Color.FromArgb(216, 96, 96, 96);
                 if (bool_6 && object_0 == empireActivity_0)
                 {
@@ -1933,7 +1933,7 @@ namespace DistantWorlds
                 SizeF sizeF3 = graphics_0.MeasureString(empty3, Container.SmallFont, num);
                 int x2 = rect3.X + (rect3.Width - (int)sizeF2.Width) / 2;
                 int num26 = rect3.Y + (rect3.Height - ((int)sizeF2.Height + num4 + (int)sizeF3.Height)) / 2;
-                method_14(graphics_0, text2, Container.BoldFont, new Point(x2, num26), Container.WhiteBrush, new SizeF(sizeF2.Width + 1f, sizeF2.Height + 1f), bool_9: true);
+                method_14(graphics_0, text2, Container.BoldFont, new Point(x2, num26), Container.WhiteBrush, new SizeF(sizeF2.Width + UiScale.S(1f), sizeF2.Height + UiScale.S(1f)), bool_9: true);
                 int x3 = rect3.X + (rect3.Width - (int)sizeF3.Width) / 2;
                 int y2 = num26 + (num4 + (int)sizeF2.Height);
                 method_12(graphics_0, empty3, Container.SmallFont, new Point(x3, y2));
@@ -2053,10 +2053,10 @@ namespace DistantWorlds
             {
                 double num = (double)scrollAmount / 100.0;
                 ScrollPosition += (int)((double)ScrollAmountPerClick * num * -1.0);
-                int num2 = TitleBarHeight + 1 + ScrollUpHeight + 1 + ScrollDownHeight + 4;
+                int num2 = TitleBarHeight + UiScale.S(1) + ScrollUpHeight + UiScale.S(1) + ScrollDownHeight + UiScale.S(4);
                 if (ToggleButtonEnabled)
                 {
-                    num2 += ToggleButtonHeight * list_1.Count + 1;
+                    num2 += ToggleButtonHeight * list_1.Count + UiScale.S(1);
                 }
                 int val = Math.Max(0, Items.Length * (ItemHeight + ItemGap) - ItemGap - (Container.Area.Height - num2));
                 ScrollPosition = Math.Min(val, Math.Max(0, ScrollPosition));
@@ -2086,10 +2086,10 @@ namespace DistantWorlds
                 else if (bool_5 && Items != null && Items.Length > 0)
                 {
                     ScrollPosition += ScrollAmountPerClick;
-                    int num = TitleBarHeight + 1 + ScrollUpHeight + 1 + ScrollDownHeight + 4;
+                    int num = TitleBarHeight + UiScale.S(1) + ScrollUpHeight + UiScale.S(1) + ScrollDownHeight + UiScale.S(4);
                     if (ToggleButtonEnabled)
                     {
-                        num += ToggleButtonHeight + 1;
+                        num += ToggleButtonHeight + UiScale.S(1);
                     }
                     int val = Math.Max(0, Items.Length * (ItemHeight + ItemGap) - ItemGap - (Container.Area.Height - num));
                     ScrollPosition = Math.Min(val, ScrollPosition);
@@ -2147,10 +2147,10 @@ namespace DistantWorlds
                     if (Items != null && Items.Length > 0)
                     {
                         ScrollPosition += ScrollAmountPerClick;
-                        int num2 = TitleBarHeight + 1 + ScrollUpHeight + 1 + ScrollDownHeight + 4;
+                        int num2 = TitleBarHeight + UiScale.S(1) + ScrollUpHeight + UiScale.S(1) + ScrollDownHeight + UiScale.S(4);
                         if (ToggleButtonEnabled)
                         {
-                            num2 += ToggleButtonHeight + 1;
+                            num2 += ToggleButtonHeight + UiScale.S(1);
                         }
                         int val = Math.Max(0, Items.Length * (ItemHeight + ItemGap) - ItemGap - (Container.Area.Height - num2));
                         ScrollPosition = Math.Min(val, ScrollPosition);
@@ -2454,7 +2454,7 @@ namespace DistantWorlds
         {
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 StringFormat stringFormat = StringFormat.GenericTypographic;
                 if (bool_9)
@@ -2463,15 +2463,15 @@ namespace DistantWorlds
                     stringFormat.Alignment = StringAlignment.Center;
                 }
                 graphics_0.DrawString(string_0, font_0, Container.BlackBrush, layoutRectangle, stringFormat);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_0, brush_0, layoutRectangle, stringFormat);
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_0, Container.BlackBrush, point_0);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_0, brush_0, point_0);
             }
         }
@@ -2480,20 +2480,20 @@ namespace DistantWorlds
         {
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 StringFormat stringFormat = new StringFormat(StringFormat.GenericTypographic);
                 stringFormat.Trimming = StringTrimming.EllipsisCharacter;
                 graphics_0.DrawString(string_0, font_0, Container.BlackBrush, layoutRectangle, stringFormat);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_0, brush_0, layoutRectangle, stringFormat);
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_0, Container.BlackBrush, point_0);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_0, brush_0, point_0);
             }
         }

@@ -23,10 +23,10 @@ namespace DistantWorlds.Controls
     private Rectangle barHalfRect;
     private Rectangle thumbHalfRect;
     private Rectangle elapsedRect;
-    private int thumbSize = 15;
+    private int thumbSize = UiScale.S(15);
     private GraphicsPath thumbCustomShape;
-    private Size thumbRoundRectSize = new Size(8, 8);
-    private Size borderRoundRectSize = new Size(8, 8);
+    private Size thumbRoundRectSize = new Size(UiScale.S(8), UiScale.S(8));
+    private Size borderRoundRectSize = new Size(UiScale.S(8), UiScale.S(8));
     private Orientation barOrientation;
     private int trackerValue = 50;
     private int barMinimum;
@@ -129,7 +129,7 @@ namespace DistantWorlds.Controls
       set
       {
         this.thumbCustomShape = value;
-        this.thumbSize = (this.barOrientation == Orientation.Horizontal ? (int) value.GetBounds().Width : (int) value.GetBounds().Height) + 1;
+        this.thumbSize = (this.barOrientation == Orientation.Horizontal ? (int) value.GetBounds().Width : (int) value.GetBounds().Height) + UiScale.S(1);
         this.Invalidate();
       }
     }
@@ -145,9 +145,9 @@ namespace DistantWorlds.Controls
         int height = value.Height;
         int width = value.Width;
         if (height <= 0)
-          height = 1;
+          height = UiScale.S(1);
         if (width <= 0)
-          width = 1;
+          width = UiScale.S(1);
         this.thumbRoundRectSize = new Size(width, height);
         this.Invalidate();
       }
@@ -164,9 +164,9 @@ namespace DistantWorlds.Controls
         int height = value.Height;
         int width = value.Width;
         if (height <= 0)
-          height = 1;
+          height = UiScale.S(1);
         if (width <= 0)
-          width = 1;
+          width = UiScale.S(1);
         this.borderRoundRectSize = new Size(width, height);
         this.Invalidate();
       }
@@ -187,7 +187,7 @@ namespace DistantWorlds.Controls
         this.Width = this.Height;
         this.Height = width;
         if (this.thumbCustomShape != null)
-          this.thumbSize = (this.barOrientation == Orientation.Horizontal ? (int) this.thumbCustomShape.GetBounds().Width : (int) this.thumbCustomShape.GetBounds().Height) + 1;
+          this.thumbSize = (this.barOrientation == Orientation.Horizontal ? (int) this.thumbCustomShape.GetBounds().Width : (int) this.thumbCustomShape.GetBounds().Height) + UiScale.S(1);
         this.Invalidate();
       }
     }
@@ -459,13 +459,13 @@ namespace DistantWorlds.Controls
     {
       try
       {
-        this.thumbRect = this.barOrientation != Orientation.Horizontal ? new Rectangle(1, (this.trackerValue - this.barMinimum) * (this.ClientRectangle.Height - this.thumbSize) / (this.barMaximum - this.barMinimum), this.ClientRectangle.Width - 3, this.thumbSize - 1) : new Rectangle((this.trackerValue - this.barMinimum) * (this.ClientRectangle.Width - this.thumbSize) / (this.barMaximum - this.barMinimum), 1, this.thumbSize - 1, this.ClientRectangle.Height - 3);
+        this.thumbRect = this.barOrientation != Orientation.Horizontal ? new Rectangle(UiScale.S(1), (this.trackerValue - this.barMinimum) * (this.ClientRectangle.Height - this.thumbSize) / (this.barMaximum - this.barMinimum), this.ClientRectangle.Width - UiScale.S(3), this.thumbSize - UiScale.S(1)) : new Rectangle((this.trackerValue - this.barMinimum) * (this.ClientRectangle.Width - this.thumbSize) / (this.barMaximum - this.barMinimum), UiScale.S(1), this.thumbSize - UiScale.S(1), this.ClientRectangle.Height - UiScale.S(3));
         this.barRect = this.ClientRectangle;
         this.thumbHalfRect = this.thumbRect;
         System.Drawing.Drawing2D.LinearGradientMode linearGradientMode;
         if (this.barOrientation == Orientation.Horizontal)
         {
-          this.barRect.Inflate(-1, -this.barRect.Height / 3);
+          this.barRect.Inflate(UiScale.S(-1), -this.barRect.Height / 3);
           this.barHalfRect = this.barRect;
           this.barHalfRect.Height /= 2;
           linearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
@@ -475,7 +475,7 @@ namespace DistantWorlds.Controls
         }
         else
         {
-          this.barRect.Inflate(-this.barRect.Width / 3, -1);
+          this.barRect.Inflate(-this.barRect.Width / 3, UiScale.S(-1));
           this.barHalfRect = this.barRect;
           this.barHalfRect.Width /= 2;
           linearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
@@ -764,7 +764,7 @@ namespace DistantWorlds.Controls
     private void InitializeComponent()
     {
       this.SuspendLayout();
-      this.Size = new Size(200, 30);
+      this.Size = new Size(UiScale.S(200), UiScale.S(30));
       this.ResumeLayout(false);
     }
 

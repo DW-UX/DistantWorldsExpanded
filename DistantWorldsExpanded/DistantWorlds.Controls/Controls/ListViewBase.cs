@@ -86,6 +86,7 @@ namespace DistantWorlds.Controls
     public ListViewBase()
     {
       this.InitializeComponent();
+      UiScale.ScaleLayout(this);
       this._Grid.AllowUserToAddRows = false;
       this._Grid.AllowUserToDeleteRows = false;
       this._Grid.AllowUserToOrderColumns = false;
@@ -96,26 +97,26 @@ namespace DistantWorlds.Controls
       this._Grid.BorderStyle = BorderStyle.None;
       this._Grid.CellBorderStyle = DataGridViewCellBorderStyle.None;
       this._Grid.ColumnHeadersVisible = true;
-      this._Grid.Font = new Font("Verdana", 8f, FontStyle.Regular);
+      this._Grid.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
       this._Grid.ForeColor = Color.White;
       this._Grid.GridColor = Color.Black;
       this._Grid.Location = new Point(0, 0);
       this._Grid.Margin = new Padding(0);
       this._Grid.MultiSelect = false;
       this._Grid.ReadOnly = true;
-      this._Grid.RowHeadersWidth = 4;
+      this._Grid.RowHeadersWidth = UiScale.S(4);
       this._Grid.ScrollBars = ScrollBars.Vertical;
       this._Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       this._Grid.ShowCellToolTips = true;
-      this._Grid.Size = new Size(100, 100);
+      this._Grid.Size = new Size(UiScale.S(100), UiScale.S(100));
       this._Grid.RowHeadersVisible = false;
       this._Grid.ColumnHeadersVisible = true;
-      this._Grid.ColumnHeadersHeight = 14;
-      this._Grid.RowTemplate.Height = 20;
+      this._Grid.ColumnHeadersHeight = UiScale.S(14);
+      this._Grid.RowTemplate.Height = UiScale.S(20);
       this._Grid.EnableHeadersVisualStyles = false;
       this._Grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(24, 24, 24);
       this._Grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(170, 170, 170);
-      this._Grid.ColumnHeadersDefaultCellStyle.Font = new Font("Verdana", 8f, FontStyle.Regular);
+      this._Grid.ColumnHeadersDefaultCellStyle.Font = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
       this._Grid.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
       this._Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
       DataGridViewCellStyle gridViewCellStyle1 = new DataGridViewCellStyle();

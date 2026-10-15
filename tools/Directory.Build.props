@@ -1,0 +1,3 @@
+<Project>
+  <!-- Stops the game's Directory.Build.props (shared output folder, C# 11) from applying to tools. -->
+</Project>

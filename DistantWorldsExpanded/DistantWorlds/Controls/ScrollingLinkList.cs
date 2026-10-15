@@ -80,14 +80,14 @@ namespace DistantWorlds.Controls
             rectangle.Height -= 2;
             Rectangle rectangle2 = rectangle;
             rectangle2.Height >>= 1;
-            using (GraphicsPath path2 = smethod_3(rectangle, int_3 - 2, gradientPanel_0))
+            using (GraphicsPath path2 = smethod_3(rectangle, int_3 - UiScale.S(2), gradientPanel_0))
             {
                 using Brush brush = new SolidBrush(color_0);
                 graphics_0.FillPath(brush, path2);
             }
             if ((bool_3 || bool_4) && !bool_2)
             {
-                using GraphicsPath path3 = smethod_3(rectangle, int_3 - 2, gradientPanel_0);
+                using GraphicsPath path3 = smethod_3(rectangle, int_3 - UiScale.S(2), gradientPanel_0);
                 graphics_0.SetClip(path3, CombineMode.Intersect);
                 using (GraphicsPath graphicsPath = smethod_1(rectangle))
                 {
@@ -104,7 +104,7 @@ namespace DistantWorlds.Controls
             if (rectangle2.Width > 0 && rectangle2.Height > 0)
             {
                 rectangle2.Height++;
-                using (GraphicsPath path4 = smethod_2(rectangle2, int_3 - 2, gradientPanel_0))
+                using (GraphicsPath path4 = smethod_2(rectangle2, int_3 - UiScale.S(2), gradientPanel_0))
                 {
                     rectangle2.Height++;
                     int num = 153;
@@ -117,7 +117,7 @@ namespace DistantWorlds.Controls
                 }
                 rectangle2.Height -= 2;
             }
-            using (GraphicsPath path5 = smethod_3(rectangle, int_3 - 1, gradientPanel_0))
+            using (GraphicsPath path5 = smethod_3(rectangle, int_3 - UiScale.S(1), gradientPanel_0))
             {
                 Pen pen2 = new Pen(color_4);
                 graphics_0.DrawPath(pen2, path5);
@@ -276,12 +276,12 @@ namespace DistantWorlds.Controls
         {
             main_0 = parentForm;
             galaxy_0 = galaxy;
-            font_0 = new Font(Font.FontFamily, 19f, GraphicsUnit.Pixel);
+            font_0 = UiScale.NewFont(Font.FontFamily, 19f, GraphicsUnit.Pixel);
             cursor_0 = defaultMouseCursor;
             Cursor = defaultMouseCursor;
             base.CurveMode = CornerCurveMode.TopLeft_BottomLeft;
-            base.Curvature = 15;
-            base.BorderWidth = 1;
+            base.Curvature = UiScale.S(15);
+            base.BorderWidth = UiScale.S(1);
             DoRegionClip();
             list_0 = new List<LinkLabel>();
             list_1 = new List<double>();
@@ -300,18 +300,18 @@ namespace DistantWorlds.Controls
             double_0 = 20.0;
             object_0 = new object();
             object_1 = new object();
-            font_0 = new Font("Verdana", 8.25f, FontStyle.Regular);
+            font_0 = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular);
             int_2 = 5;
             dateTime_0 = DateTime.Now.ToUniversalTime();
             base.BorderColor = Color.FromArgb(67, 67, 77);
             base.BorderStyle = BorderStyle.FixedSingle;
-            base.BorderWidth = 4;
+            base.BorderWidth = UiScale.S(4);
             base.CurveMode = CornerCurveMode.TopLeft_BottomLeft;
             base.GradientMode = DistantWorlds.Controls.LinearGradientMode.Vertical;
             base.BackColor = Color.FromArgb(58, 58, 66);
             base.BackColor2 = Color.FromArgb(31, 31, 41);
             base.BackColor3 = Color.FromArgb(12, 12, 20);
-            base.BorderWidth = 1;
+            base.BorderWidth = UiScale.S(1);
         }
 
         public void ClearItems()
@@ -400,7 +400,7 @@ namespace DistantWorlds.Controls
                 linkLabel.LinkArea = new LinkArea(0, text.Length);
                 linkLabel.Parent = this;
                 linkLabel.Width = base.ClientRectangle.Width;
-                linkLabel.Height = 18;
+                linkLabel.Height = UiScale.S(18);
                 if (linkLabel.Links != null && linkLabel.Links.Count > 0)
                 {
                     linkLabel.Links[0].LinkData = relatedObject;
@@ -413,7 +413,7 @@ namespace DistantWorlds.Controls
                 int_1 = linkLabel.Height;
                 double_2 = (double)int_1 * -1.0 + (double)int_2;
                 double num = base.ClientRectangle.Height;
-                num = (double)base.ClientRectangle.Height + method_1(int_1 + 1);
+                num = (double)base.ClientRectangle.Height + method_1(int_1 + UiScale.S(1));
                 linkLabel.Location = new Point(0, (int)num);
                 list_0.Add(linkLabel);
                 list_1.Add(num);
@@ -500,7 +500,7 @@ namespace DistantWorlds.Controls
             Color color_2 = Color.FromArgb(96, 96, 104);
             Color color_3 = Color.FromArgb(0, 0, 16);
             Color color_4 = Color.FromArgb(67, 67, 77);
-            smethod_0(e.Graphics, base.ClientRectangle, bool_2: false, bool_3: false, bool_4: false, bool_5: true, color_3, color_, Color.FromArgb(48, 48, 128), color_2, color_4, 153f, 15, bool_6: true, Color.FromArgb(48, 48, 48), this);
+            smethod_0(e.Graphics, base.ClientRectangle, bool_2: false, bool_3: false, bool_4: false, bool_5: true, color_3, color_, Color.FromArgb(48, 48, 128), color_2, color_4, 153f, UiScale.S(15), bool_6: true, Color.FromArgb(48, 48, 48), this);
         }
 
         protected override void OnPaint(PaintEventArgs e)

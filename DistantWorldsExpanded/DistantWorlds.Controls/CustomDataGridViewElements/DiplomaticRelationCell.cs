@@ -99,7 +99,7 @@ namespace DistantWorlds.Controls
       graphics.FillRectangle((Brush) solidBrush1, cellBounds);
       SolidBrush solidBrush2 = new SolidBrush(color2);
       SizeF sizeF = graphics.MeasureString(formattedValue as string, cellStyle.Font);
-      float x = (float) (cellBounds.X + 2);
+      float x = (float) (cellBounds.X + UiScale.S(2));
       float num = (float) cellBounds.Y + (float) (((double) cellBounds.Height - (double) sizeF.Height) / 2.0);
       switch (value)
       {
@@ -110,8 +110,8 @@ namespace DistantWorlds.Controls
           solidBrush2 = this.SelectBrush(diplomaticRelationType2);
           break;
       }
-      Font font = new Font("Verdana", 8.25f, FontStyle.Bold);
-      graphics.DrawString(formattedValue as string, font, (Brush) solidBrush2, x, num + 1f);
+      Font font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold);
+      graphics.DrawString(formattedValue as string, font, (Brush) solidBrush2, x, num + UiScale.S(1f));
     }
 
     private static bool PartPainted(

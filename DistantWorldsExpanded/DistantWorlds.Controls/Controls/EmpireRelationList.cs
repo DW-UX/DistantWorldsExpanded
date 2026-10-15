@@ -36,7 +36,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn1.ReadOnly = true;
             gridViewImageColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn1.ValueType = typeof(Image);
-            gridViewImageColumn1.Width = 30;
+            gridViewImageColumn1.Width = UiScale.S(30);
             gridViewImageColumn1.FillWeight = 30f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn1);
             DataGridViewImageColumn gridViewImageColumn2 = (DataGridViewImageColumn)new EmpireRelationList.SortableImageColumn();
@@ -47,7 +47,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn2.ImageLayout = DataGridViewImageCellLayout.Zoom;
             gridViewImageColumn2.SortMode = DataGridViewColumnSortMode.Automatic;
             gridViewImageColumn2.ValueType = typeof(string);
-            gridViewImageColumn2.Width = 30;
+            gridViewImageColumn2.Width = UiScale.S(30);
             gridViewImageColumn2.FillWeight = 30f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn2);
             DataGridViewTextBoxColumn viewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -56,7 +56,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn.ReadOnly = false;
             viewTextBoxColumn.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn.ValueType = typeof(string);
-            viewTextBoxColumn.Width = 135;
+            viewTextBoxColumn.Width = UiScale.S(135);
             viewTextBoxColumn.FillWeight = 135f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn);
             DiplomaticRelationColumn diplomaticRelationColumn = new DiplomaticRelationColumn();
@@ -65,7 +65,7 @@ namespace DistantWorlds.Controls
             diplomaticRelationColumn.ReadOnly = false;
             diplomaticRelationColumn.SortMode = DataGridViewColumnSortMode.Automatic;
             diplomaticRelationColumn.ValueType = typeof(object);
-            diplomaticRelationColumn.Width = 100;
+            diplomaticRelationColumn.Width = UiScale.S(100);
             diplomaticRelationColumn.FillWeight = 100f;
             this._Grid.Columns.Add((DataGridViewColumn)diplomaticRelationColumn);
             DataGridViewNumericUpDownColumn numericUpDownColumn = new DataGridViewNumericUpDownColumn();
@@ -76,7 +76,7 @@ namespace DistantWorlds.Controls
             numericUpDownColumn.Minimum = -50M;
             numericUpDownColumn.Maximum = 50M;
             numericUpDownColumn.ValueType = typeof(double);
-            numericUpDownColumn.Width = 60;
+            numericUpDownColumn.Width = UiScale.S(60);
             numericUpDownColumn.FillWeight = 60f;
             this._Grid.Columns.Add((DataGridViewColumn)numericUpDownColumn);
         }

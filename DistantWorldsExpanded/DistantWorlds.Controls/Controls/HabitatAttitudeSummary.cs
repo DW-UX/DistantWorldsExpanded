@@ -18,8 +18,8 @@ namespace DistantWorlds.Controls
     private IContainer components;
     private Habitat _Habitat;
     private Galaxy _Galaxy;
-    private Font _NormalFont = new Font("Verdana", 8f, FontStyle.Regular);
-    private Font _NormalFontBold = new Font("Verdana", 8f, FontStyle.Bold);
+    private Font _NormalFont = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
+    private Font _NormalFontBold = UiScale.NewFont("Verdana", 8f, FontStyle.Bold);
     private Color _NormalFontColor = Color.FromArgb(170, 170, 170);
 
     protected override void Dispose(bool disposing)
@@ -76,16 +76,16 @@ namespace DistantWorlds.Controls
         string str1 = this.ResolveFeelingDescription(this._Habitat.EmpireApprovalRating);
         string str2 = string.Format(TextResolver.GetText("The inhabitants of COLONY are FEELING with you"), (object) this._Habitat.Name, (object) str1) + " (" + this._Habitat.EmpireApprovalRating.ToString("+0;-0;0") + ")";
         SizeF sizeF = graphics.MeasureString(str2, this._NormalFontBold, this.Width, format);
-        RectangleF layoutRectangle = new RectangleF(x, (float) y1, sizeF.Width + 2f, sizeF.Height);
+        RectangleF layoutRectangle = new RectangleF(x, (float) y1, sizeF.Width + UiScale.S(2f), sizeF.Height);
         graphics.DrawString(str2, this._NormalFontBold, (Brush) solidBrush1, layoutRectangle, format);
-        double y2 = y1 + (double) ((int) sizeF.Height + 8);
+        double y2 = y1 + (double) ((int) sizeF.Height + UiScale.S(8));
         if (this._Habitat.RaidCountdown > (byte) 0)
         {
           string str3 = TextResolver.GetText("Raid Economy Damage Description") + " (-" + this._Habitat.RaidEconomyDamageFactor.ToString("0%") + ")";
           sizeF = graphics.MeasureString(str3, this._NormalFont, this.Width, format);
-          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + 2f, sizeF.Height);
+          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + UiScale.S(2f), sizeF.Height);
           graphics.DrawString(str3, this._NormalFont, (Brush) solidBrush1, layoutRectangle, format);
-          y2 += (double) ((int) sizeF.Height + 6);
+          y2 += (double) ((int) sizeF.Height + UiScale.S(6));
         }
         if (this._Habitat.Empire != null)
         {
@@ -93,17 +93,17 @@ namespace DistantWorlds.Controls
           {
             string str4 = TextResolver.GetText("Economy Efficiency Bonus Description") + " (+" + (this._Habitat.Empire.EconomyEfficiency - 1.0).ToString("0%") + ")";
             sizeF = graphics.MeasureString(str4, this._NormalFont, this.Width, format);
-            layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + 2f, sizeF.Height);
+            layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + UiScale.S(2f), sizeF.Height);
             graphics.DrawString(str4, this._NormalFont, (Brush) solidBrush1, layoutRectangle, format);
-            y2 += (double) ((int) sizeF.Height + 6);
+            y2 += (double) ((int) sizeF.Height + UiScale.S(6));
           }
           else if (this._Habitat.Empire.EconomyEfficiency < 1.0)
           {
             string str5 = TextResolver.GetText("Economy Efficiency Penalty Description") + " (-" + (1.0 - this._Habitat.Empire.EconomyEfficiency).ToString("0%") + ")";
             sizeF = graphics.MeasureString(str5, this._NormalFont, this.Width, format);
-            layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + 2f, sizeF.Height);
+            layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + UiScale.S(2f), sizeF.Height);
             graphics.DrawString(str5, this._NormalFont, (Brush) solidBrush1, layoutRectangle, format);
-            y2 += (double) ((int) sizeF.Height + 6);
+            y2 += (double) ((int) sizeF.Height + UiScale.S(6));
           }
         }
         PirateColonyControlList pirateControl = this._Habitat.GetPirateControl();
@@ -123,34 +123,34 @@ namespace DistantWorlds.Controls
           {
             string str6 = TextResolver.GetText("Pirate Corruption Description") + " (+" + num.ToString("0%") + ")";
             sizeF = graphics.MeasureString(str6, this._NormalFont, this.Width, format);
-            layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + 2f, sizeF.Height);
+            layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + UiScale.S(2f), sizeF.Height);
             graphics.DrawString(str6, this._NormalFont, (Brush) solidBrush1, layoutRectangle, format);
-            y2 += (double) ((int) sizeF.Height + 6);
+            y2 += (double) ((int) sizeF.Height + UiScale.S(6));
           }
         }
         List<string> habitatWonderBonuses = this.DetermineHabitatWonderBonuses();
         for (int index = 0; index < habitatWonderBonuses.Count; ++index)
         {
           sizeF = graphics.MeasureString(habitatWonderBonuses[index], this._NormalFont, this.Width, format);
-          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + 2f, sizeF.Height);
+          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + UiScale.S(2f), sizeF.Height);
           graphics.DrawString(habitatWonderBonuses[index], this._NormalFont, (Brush) solidBrush1, layoutRectangle, format);
-          y2 += (double) ((int) sizeF.Height + 6);
+          y2 += (double) ((int) sizeF.Height + UiScale.S(6));
         }
         List<string> habitatRacialBonuses = this.DetermineHabitatRacialBonuses();
         for (int index = 0; index < habitatRacialBonuses.Count; ++index)
         {
           sizeF = graphics.MeasureString(habitatRacialBonuses[index], this._NormalFont, this.Width, format);
-          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + 2f, sizeF.Height);
+          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + UiScale.S(2f), sizeF.Height);
           graphics.DrawString(habitatRacialBonuses[index], this._NormalFont, (Brush) solidBrush1, layoutRectangle, format);
-          y2 += (double) ((int) sizeF.Height + 6);
+          y2 += (double) ((int) sizeF.Height + UiScale.S(6));
         }
         List<string> habitatResourceBonuses = this.DetermineHabitatResourceBonuses();
         for (int index = 0; index < habitatResourceBonuses.Count; ++index)
         {
           sizeF = graphics.MeasureString(habitatResourceBonuses[index], this._NormalFont, this.Width, format);
-          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + 2f, sizeF.Height);
+          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + UiScale.S(2f), sizeF.Height);
           graphics.DrawString(habitatResourceBonuses[index], this._NormalFont, (Brush) solidBrush1, layoutRectangle, format);
-          y2 += (double) ((int) sizeF.Height + 6);
+          y2 += (double) ((int) sizeF.Height + UiScale.S(6));
         }
         HabitatAttitudeFactorList habitatAttitudeFactors = this.DetermineHabitatAttitudeFactors();
         for (int index = 0; index < habitatAttitudeFactors.Count; ++index)
@@ -158,7 +158,7 @@ namespace DistantWorlds.Controls
           double num = habitatAttitudeFactors[index].Value;
           string str7 = habitatAttitudeFactors[index].Description + " (" + num.ToString("+0;-0;0") + ")";
           sizeF = graphics.MeasureString(str7, this._NormalFont, this.Width, format);
-          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + 2f, sizeF.Height);
+          layoutRectangle = new RectangleF(x, (float) y2, sizeF.Width + UiScale.S(2f), sizeF.Height);
           if (num < 0.0)
           {
             using (SolidBrush solidBrush2 = new SolidBrush(Color.Red))
@@ -169,11 +169,11 @@ namespace DistantWorlds.Controls
             using (SolidBrush solidBrush3 = new SolidBrush(Color.LightGreen))
               graphics.DrawString(str7, this._NormalFont, (Brush) solidBrush3, layoutRectangle, format);
           }
-          y2 += (double) ((int) sizeF.Height + 2);
+          y2 += (double) ((int) sizeF.Height + UiScale.S(2));
         }
         if (this.Height >= (int) y2 + 1)
           return;
-        this.Height = (int) y2 + 1;
+        this.Height = (int) y2 + UiScale.S(1);
       }
     }
 

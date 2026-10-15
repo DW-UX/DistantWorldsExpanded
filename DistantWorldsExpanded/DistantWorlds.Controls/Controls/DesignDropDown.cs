@@ -26,7 +26,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData()
@@ -129,7 +129,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      PointF point = new PointF(49f, (float) (e.Bounds.Y + 1));
+      PointF point = new PointF(UiScale.S(49f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
       SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       string empty = string.Empty;
@@ -148,19 +148,19 @@ namespace DistantWorlds.Controls
           Bitmap largeFlagPicture = this._Designs[index].Empire.LargeFlagPicture;
           e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
           e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-          int height = e.Bounds.Height - 2;
+          int height = e.Bounds.Height - UiScale.S(2);
           double num = (double) height / (double) largeFlagPicture.Height;
           int width = (int) ((double) largeFlagPicture.Width * num);
-          rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+          rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
           e.Graphics.DrawImage((Image) largeFlagPicture, rect);
         }
         Bitmap builtObjectImage = this._BuiltObjectImages[this._Designs[index].PictureRef];
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        int height1 = e.Bounds.Height - 2;
+        int height1 = e.Bounds.Height - UiScale.S(2);
         double num1 = (double) height1 / (double) builtObjectImage.Height;
         int width1 = (int) ((double) builtObjectImage.Width * num1);
-        rect = new Rectangle(30, e.Bounds.Y + 1, width1, height1);
+        rect = new Rectangle(UiScale.S(30), e.Bounds.Y + UiScale.S(1), width1, height1);
         e.Graphics.DrawImage((Image) builtObjectImage, rect);
       }
       e.DrawFocusRectangle();

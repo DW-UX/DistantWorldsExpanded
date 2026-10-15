@@ -41,7 +41,7 @@ namespace DistantWorlds.Controls
     private Font _BoldFont;
     private Font _HeadingFont;
     private Font _HugeFont;
-    private Size _Size = new Size(100, 60);
+    private Size _Size = new Size(UiScale.S(100), UiScale.S(60));
     private Rectangle _FactionDetailArea;
     private Rectangle _FactionAchievementArea;
     private Rectangle _FactionSummaryArea;
@@ -51,15 +51,15 @@ namespace DistantWorlds.Controls
     private int _FactionSummaryScrollPosition;
     private int _AchievementCollectionScrollPosition;
     private int _GameSummaryCollectionScrollPosition;
-    private int _Gap = 10;
-    private int _Margin = 5;
-    private int _DoubleMargin = 10;
-    public static Size MedalLargeSize = new Size(140, 140);
-    public static Size MedalSmallSize = new Size(70, 70);
-    public static Size MedalVerySmallSize = new Size(20, 20);
-    private Size _RaceSize = new Size(80, 80);
-    private int _ScrollArrowWidth = 13;
-    private int _ScrollArrowHeight = 13;
+    private int _Gap = UiScale.S(10);
+    private int _Margin = UiScale.S(5);
+    private int _DoubleMargin = UiScale.S(10);
+    public static Size MedalLargeSize = new Size(UiScale.S(140), UiScale.S(140));
+    public static Size MedalSmallSize = new Size(UiScale.S(70), UiScale.S(70));
+    public static Size MedalVerySmallSize = new Size(UiScale.S(20), UiScale.S(20));
+    private Size _RaceSize = new Size(UiScale.S(80), UiScale.S(80));
+    private int _ScrollArrowWidth = UiScale.S(13);
+    private int _ScrollArrowHeight = UiScale.S(13);
     private SolidBrush _HoverHighlightBrush = new SolidBrush(Color.FromArgb(128, 170, 170, 170));
 
     public void InitializeImages(
@@ -218,7 +218,7 @@ namespace DistantWorlds.Controls
 
     private void CalculateDrawAreas(Rectangle drawArea)
     {
-      this._FactionDetailArea = new Rectangle(this._Gap, this._Gap, 240, 170);
+      this._FactionDetailArea = new Rectangle(this._Gap, this._Gap, UiScale.S(240), UiScale.S(170));
       this._FactionAchievementArea = new Rectangle(this._Gap + this._FactionDetailArea.Width + this._Gap, this._Gap, drawArea.Width - (this._Gap + this._FactionDetailArea.Width + this._Gap + this._Gap), this._FactionDetailArea.Height);
       this._FactionSummaryArea = new Rectangle(this._Gap, this._FactionDetailArea.Bottom + this._Gap, drawArea.Width - (this._Gap + this._Gap), this._RaceSize.Height + this._Gap + this._Gap + this._Margin + GameSummaryPanel.MedalVerySmallSize.Height + this._Margin);
       this._AchievementCollectionArea = new Rectangle(this._Gap, this._FactionSummaryArea.Bottom + this._Gap, drawArea.Width - (this._Gap + this._Gap), GameSummaryPanel.MedalSmallSize.Height + this._DoubleMargin);
@@ -233,7 +233,7 @@ namespace DistantWorlds.Controls
       switch (hoveredElement)
       {
         case string _:
-          int num = 20;
+          int num = UiScale.S(20);
           switch (((string) hoveredElement).ToLower(CultureInfo.InvariantCulture))
           {
             case "scrollfactionachievementleft":
@@ -394,13 +394,13 @@ namespace DistantWorlds.Controls
         y1 += this._RaceSize.Height;
         GraphicsHelper.SetGraphicsQuality(graphics, GraphicsQuality.Medium);
       }
-      int y2 = y1 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, selectFaction.Name, this._HeadingFont, new Rectangle(x1, y1, width, this._FactionDetailArea.Height)) - 2;
+      int y2 = y1 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, selectFaction.Name, this._HeadingFont, new Rectangle(x1, y1, width, this._FactionDetailArea.Height)) - UiScale.S(2);
       if (selectFaction.GovernmentAttributes != null)
-        y2 = y2 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, selectFaction.GovernmentAttributes.Name, this._NormalFont, new Rectangle(x1, y2, width, this._FactionDetailArea.Height)) - 4;
+        y2 = y2 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, selectFaction.GovernmentAttributes.Name, this._NormalFont, new Rectangle(x1, y2, width, this._FactionDetailArea.Height)) - UiScale.S(4);
       else if (selectFaction.PirateEmpireBaseHabitat != null)
-        y2 = y2 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, TextResolver.GetText("Pirate Faction"), this._NormalFont, new Rectangle(x1, y2, width, this._FactionDetailArea.Height)) - 4;
-      int y3 = y2 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Game Summary Galaxy Size"), (object) gameSummary.GalaxyStarCount.ToString()), this._NormalFont, new Rectangle(x1, y2, width, this._FactionDetailArea.Height)) - 4;
-      int y4 = y3 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Game Summary Difficulty"), (object) Galaxy.ResolveDifficultyDescription(gameSummary.DifficultyLevel)), this._NormalFont, new Rectangle(x1, y3, width, this._FactionDetailArea.Height)) - 4;
+        y2 = y2 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, TextResolver.GetText("Pirate Faction"), this._NormalFont, new Rectangle(x1, y2, width, this._FactionDetailArea.Height)) - UiScale.S(4);
+      int y3 = y2 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Game Summary Galaxy Size"), (object) gameSummary.GalaxyStarCount.ToString()), this._NormalFont, new Rectangle(x1, y2, width, this._FactionDetailArea.Height)) - UiScale.S(4);
+      int y4 = y3 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Game Summary Difficulty"), (object) Galaxy.ResolveDifficultyDescription(gameSummary.DifficultyLevel)), this._NormalFont, new Rectangle(x1, y3, width, this._FactionDetailArea.Height)) - UiScale.S(4);
       int num = y4 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Game Summary Score"), (object) selectFaction.Score.ToString("###,###,##0")), this._NormalFont, new Rectangle(x1, y4, width, this._FactionDetailArea.Height));
     }
 
@@ -489,7 +489,7 @@ namespace DistantWorlds.Controls
       {
         using (SolidBrush dropShadowBrush = new SolidBrush(Color.FromArgb(24, 0, 0, 0)))
         {
-          Rectangle textArea = new Rectangle(this._FactionAchievementArea.X, this._FactionAchievementArea.Y + this._FactionAchievementArea.Height / 2 - 20, this._FactionAchievementArea.Width, 40);
+          Rectangle textArea = new Rectangle(this._FactionAchievementArea.X, this._FactionAchievementArea.Y + this._FactionAchievementArea.Height / 2 - UiScale.S(20), this._FactionAchievementArea.Width, UiScale.S(40));
           GraphicsHelper.DrawStringWithDropShadowCentered(graphics, TextResolver.GetText("Empire Achievements"), this._HugeFont, brush, dropShadowBrush, textArea);
         }
       }
@@ -547,7 +547,7 @@ namespace DistantWorlds.Controls
             x = 0;
           else if (x + width > this._Size.Width)
             x = this._Size.Width - width;
-          Rectangle rectangle2 = new Rectangle(x, bottom, width, 40);
+          Rectangle rectangle2 = new Rectangle(x, bottom, width, UiScale.S(40));
           this.DrawMedalSummary(graphics, hoveredElement, rectangle2, Color.FromArgb(128, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue), false);
         }
         else if (this._HoveredElementIsAchievementCollection)
@@ -557,7 +557,7 @@ namespace DistantWorlds.Controls
             index = this._GameSummaries.PlayerAchievements.IndexOf(hoveredElement);
           Rectangle rectangle3 = this.ResolveAchievementCollectionDrawLocation(index);
           int width = (int) ((double) GameSummaryPanel.MedalLargeSize.Width * 1.4);
-          int height = GameSummaryPanel.MedalLargeSize.Height + 55;
+          int height = GameSummaryPanel.MedalLargeSize.Height + UiScale.S(55);
           int x = rectangle3.X + rectangle3.Width / 2 - width / 2;
           int bottom = rectangle3.Bottom;
           if (x < 0)
@@ -580,9 +580,9 @@ namespace DistantWorlds.Controls
           int research;
           int wonders;
           int empireScore = this._CurrentGame.Galaxy.CalculateEmpireScore(hoveredElement, out population, out economy, out colonies, out military, out research, out wonders);
-          Rectangle rectangle = new Rectangle(this._FactionDetailArea.X, this._FactionDetailArea.Bottom, this._FactionDetailArea.Width, 130);
+          Rectangle rectangle = new Rectangle(this._FactionDetailArea.X, this._FactionDetailArea.Bottom, this._FactionDetailArea.Width, UiScale.S(130));
           int top = rectangle.Top;
-          int height = 20;
+          int height = UiScale.S(20);
           using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(192, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
             graphics.FillRectangle((Brush) solidBrush, rectangle);
           using (SolidBrush brush = new SolidBrush(Color.Orange))
@@ -606,7 +606,7 @@ namespace DistantWorlds.Controls
       if (this._OverlayTextLines.Count <= 0)
         return;
       Font hugeFont = this._HugeFont;
-      int height1 = this._OverlayTextLines.Count * hugeFont.Height + 5;
+      int height1 = this._OverlayTextLines.Count * hugeFont.Height + UiScale.S(5);
       int y = (this._Size.Height - height1) / 2;
       for (int index = 0; index < this._OverlayTextLines.Count; ++index)
       {
@@ -641,18 +641,18 @@ namespace DistantWorlds.Controls
         {
           int x = rectangle.X + (rectangle.Width - medalImage.Width) / 2;
           graphics.DrawImage((Image) medalImage, new Point(x, y1));
-          y1 = y1 + medalImage.Height + 5;
+          y1 = y1 + medalImage.Height + UiScale.S(5);
           if (disposeWhenFinished)
             medalImage.Dispose();
         }
       }
       string text1 = Galaxy.ResolveAchievementTitleComplete(achievement);
-      Rectangle textArea1 = new Rectangle(rectangle.X, y1, rectangle.Width, 35);
+      Rectangle textArea1 = new Rectangle(rectangle.X, y1, rectangle.Width, UiScale.S(35));
       using (SolidBrush brush = new SolidBrush(Color.Yellow))
       {
         int y2 = y1 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, text1, this._BoldFont, brush, textArea1);
         string text2 = Galaxy.ResolveDescription(achievement);
-        Rectangle textArea2 = new Rectangle(rectangle.X, y2, rectangle.Width, 40);
+        Rectangle textArea2 = new Rectangle(rectangle.X, y2, rectangle.Width, UiScale.S(40));
         int num = y2 + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, text2, this._NormalFont, brush, textArea2);
       }
     }
@@ -672,7 +672,7 @@ namespace DistantWorlds.Controls
       {
         using (SolidBrush dropShadowBrush = new SolidBrush(Color.FromArgb(24, 0, 0, 0)))
         {
-          Rectangle textArea = new Rectangle(this._FactionSummaryArea.X, this._FactionSummaryArea.Y + this._FactionSummaryArea.Height / 2 - 20, this._FactionSummaryArea.Width, 40);
+          Rectangle textArea = new Rectangle(this._FactionSummaryArea.X, this._FactionSummaryArea.Y + this._FactionSummaryArea.Height / 2 - UiScale.S(20), this._FactionSummaryArea.Width, UiScale.S(40));
           GraphicsHelper.DrawStringWithDropShadowCentered(graphics, TextResolver.GetText("Empires in this Game"), this._HugeFont, brush, dropShadowBrush, textArea);
         }
       }
@@ -697,7 +697,7 @@ namespace DistantWorlds.Controls
                 graphics.DrawImage((Image) raceImage, rect);
               }
               GraphicsHelper.SetGraphicsQuality(graphics, GraphicsQuality.Medium);
-              Rectangle textArea = new Rectangle(x1, y1 + this._RaceSize.Height, this._RaceSize.Width, 15);
+              Rectangle textArea = new Rectangle(x1, y1 + this._RaceSize.Height, this._RaceSize.Width, UiScale.S(15));
               string text = string.Format(TextResolver.GetText("Game Summary Score"), (object) empire.Score.ToString("###,###,##0"));
               GraphicsHelper.DrawStringWithDropShadowCentered(graphics, text, this._NormalFont, textArea);
               int x2 = x1;
@@ -711,7 +711,7 @@ namespace DistantWorlds.Controls
                   Bitmap medalImage = this.ObtainMedalImage(achievement, 2, out disposeWhenFinished);
                   if (medalImage != null)
                   {
-                    graphics.DrawImage((Image) medalImage, new Point(x2, y1 + 12 + this._RaceSize.Height + this._Margin));
+                    graphics.DrawImage((Image) medalImage, new Point(x2, y1 + UiScale.S(12) + this._RaceSize.Height + this._Margin));
                     if (disposeWhenFinished)
                       medalImage.Dispose();
                     x2 += GameSummaryPanel.MedalVerySmallSize.Width;
@@ -749,7 +749,7 @@ namespace DistantWorlds.Controls
       {
         using (SolidBrush dropShadowBrush = new SolidBrush(Color.FromArgb(24, 0, 0, 0)))
         {
-          Rectangle textArea = new Rectangle(this._AchievementCollectionArea.X, this._AchievementCollectionArea.Y + this._AchievementCollectionArea.Height / 2 - 20, this._AchievementCollectionArea.Width, 40);
+          Rectangle textArea = new Rectangle(this._AchievementCollectionArea.X, this._AchievementCollectionArea.Y + this._AchievementCollectionArea.Height / 2 - UiScale.S(20), this._AchievementCollectionArea.Width, UiScale.S(40));
           GraphicsHelper.DrawStringWithDropShadowCentered(graphics, TextResolver.GetText("Player's Achievements"), this._HugeFont, brush, dropShadowBrush, textArea);
         }
       }
@@ -802,7 +802,7 @@ namespace DistantWorlds.Controls
       {
         using (SolidBrush dropShadowBrush = new SolidBrush(Color.FromArgb(24, 0, 0, 0)))
         {
-          Rectangle textArea = new Rectangle(this._GameSummaryCollectionArea.X, this._GameSummaryCollectionArea.Y + this._GameSummaryCollectionArea.Height / 2 - 20, this._GameSummaryCollectionArea.Width, 40);
+          Rectangle textArea = new Rectangle(this._GameSummaryCollectionArea.X, this._GameSummaryCollectionArea.Y + this._GameSummaryCollectionArea.Height / 2 - UiScale.S(20), this._GameSummaryCollectionArea.Width, UiScale.S(40));
           GraphicsHelper.DrawStringWithDropShadowCentered(graphics, TextResolver.GetText("Completed Games"), this._HugeFont, brush, dropShadowBrush, textArea);
         }
       }
@@ -838,24 +838,24 @@ namespace DistantWorlds.Controls
               int x2 = x1 + (GameSummaryPanel.MedalVerySmallSize.Height + this._Margin);
               using (SolidBrush brush = new SolidBrush(gameSummary.PlayerMainColor))
               {
-                int num3 = 3;
+                int num3 = UiScale.S(3);
                 GraphicsHelper.DrawStringWithDropShadow(graphics, gameSummary.PlayerEmpireName, this._BoldFont, new Point(x2, y), brush);
-                int x3 = x2 + 180;
+                int x3 = x2 + UiScale.S(180);
                 GraphicsHelper.DrawStringWithDropShadow(graphics, gameSummary.PlayerGovernmentName, this._NormalFont, new Point(x3, y + num3), brush);
-                int x4 = x3 + 100;
+                int x4 = x3 + UiScale.S(100);
                 GraphicsHelper.DrawStringWithDropShadow(graphics, string.Format(TextResolver.GetText("Game Summary Galaxy Size"), (object) gameSummary.GalaxyStarCount.ToString()), this._NormalFont, new Point(x4, y + num3), brush);
-                int x5 = x4 + 120;
+                int x5 = x4 + UiScale.S(120);
                 GraphicsHelper.DrawStringWithDropShadow(graphics, string.Format(TextResolver.GetText("Game Summary Difficulty"), (object) Galaxy.ResolveDifficultyDescription(gameSummary.DifficultyLevel)), this._NormalFont, new Point(x5, y + num3), brush);
-                int x6 = x5 + 100;
+                int x6 = x5 + UiScale.S(100);
                 GraphicsHelper.DrawStringWithDropShadow(graphics, string.Format(TextResolver.GetText("Game Summary Score"), (object) gameSummary.PlayerScore.ToString()), this._NormalFont, new Point(x6, y + num3), brush);
-                int x7 = x6 + 80;
+                int x7 = x6 + UiScale.S(80);
                 if (gameSummary.PlayerVictory)
                   GraphicsHelper.DrawStringWithDropShadow(graphics, TextResolver.GetText("Game Summary Victory"), this._NormalFont, new Point(x7, y + num3), brush);
                 else
                   GraphicsHelper.DrawStringWithDropShadow(graphics, TextResolver.GetText("Game Summary Defeat"), this._NormalFont, new Point(x7, y + num3), brush);
                 int num4 = x7 + 50;
               }
-              int x8 = 670;
+              int x8 = UiScale.S(670);
               for (int index2 = 0; index2 < gameSummary.PlayerAchievements.Count; ++index2)
               {
                 Achievement playerAchievement = gameSummary.PlayerAchievements[index2];

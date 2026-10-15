@@ -69,8 +69,8 @@ namespace DistantWorlds
 
         private void method_1()
         {
-            font_0 = new Font(Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-            font_1 = new Font(Font.FontFamily, 18.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_0 = UiScale.NewFont(Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
+            font_1 = UiScale.NewFont(Font.FontFamily, 18.67f, FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         public void KickStart(Main parentForm)
@@ -95,16 +95,16 @@ namespace DistantWorlds
         {
             
             list_0 = new List<LinkLabel>();
-            font_0 = new Font("Verdana", 9f, FontStyle.Regular);
-            font_1 = new Font("Verdana", 10f, FontStyle.Bold);
+            font_0 = UiScale.NewFont("Verdana", 9f, FontStyle.Regular);
+            font_1 = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
             solidBrush_0 = new SolidBrush(Color.White);
-            int_0 = 10;
+            int_0 = UiScale.S(10);
             dateTime_0 = DateTime.Now.ToUniversalTime();
             base.BorderColor = Color.FromArgb(0, 0, 255);
             base.BorderStyle = BorderStyle.FixedSingle;
-            base.BorderWidth = 2;
+            base.BorderWidth = UiScale.S(2);
             base.CurveMode = CornerCurveMode.All;
-            base.Curvature = 20;
+            base.Curvature = UiScale.S(20);
             base.GradientMode = LinearGradientMode.Vertical;
             base.BackColor = Color.FromArgb(8, 8, 32);
             base.BackColor2 = Color.Navy;
@@ -168,7 +168,7 @@ namespace DistantWorlds
                     linkLabel.Text = encyclopediaItem.Title;
                     linkLabel.LinkArea = new LinkArea(0, linkLabel.Text.Length);
                 }
-                linkLabel.Height += 4;
+                linkLabel.Height += UiScale.S(4);
                 linkLabel.LinkBehavior = LinkBehavior.HoverUnderline;
                 linkLabel.LinkColor = Color.Yellow;
                 linkLabel.ForeColor = Color.Yellow;
@@ -193,7 +193,7 @@ namespace DistantWorlds
                 int num3 = num + (linkLabel.Width + int_0);
                 if (num3 > base.ClientRectangle.Width - int_0)
                 {
-                    num2 += linkLabel.Height - 7;
+                    num2 += linkLabel.Height - UiScale.S(7);
                     num = int_0;
                 }
                 linkLabel.Location = new Point(num, num2);

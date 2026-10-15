@@ -43,8 +43,8 @@ namespace DistantWorlds.Controls
       this.btnClose.ForeColor = Color.FromArgb(67, 67, 77);
       this.btnClose.Location = new Point(0, 0);
       this.btnClose.Name = "btnClose";
-      this.btnClose.Radius = 5;
-      this.btnClose.Size = new Size(30, 30);
+      this.btnClose.Radius = UiScale.S(5);
+      this.btnClose.Size = new Size(UiScale.S(30), UiScale.S(30));
       this.btnClose.TabIndex = 0;
       this.btnClose.Text = "Close";
       this.btnClose.UseVisualStyleBackColor = true;
@@ -87,7 +87,7 @@ namespace DistantWorlds.Controls
     public void SetFont()
     {
       this.Font = new Font(this.Font.FontFamily, this.Font.Size, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._TitleFont = new Font(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = UiScale.NewFont(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
       this.BackColor = Color.Transparent;
       this.BackColor = Color.FromArgb(0, 0, 0);
       this.ForeColor = Color.FromArgb(150, 150, 150);
@@ -113,11 +113,11 @@ namespace DistantWorlds.Controls
       this.SuspendLayout();
       this.ReparentControl((Control) this, (Control) this.btnClose);
       this._IconLocation = new Rectangle(10, 10, 30, 30);
-      this._TitleLocation = new Point(45, 11);
+      this._TitleLocation = new Point(UiScale.S(45), UiScale.S(11));
       if (this._Icon == null)
-        this._TitleLocation = new Point(10, 11);
-      this.btnClose.Size = new Size(30, 30);
-      this.btnClose.Location = new Point(this.ClientRectangle.Width - 41, 9);
+        this._TitleLocation = new Point(UiScale.S(10), UiScale.S(11));
+      this.btnClose.Size = new Size(UiScale.S(30), UiScale.S(30));
+      this.btnClose.Location = new Point(this.ClientRectangle.Width - UiScale.S(41), UiScale.S(9));
       this.ResumeLayout();
       this.btnClose.Invalidate();
       this.Invalidate();
@@ -130,14 +130,14 @@ namespace DistantWorlds.Controls
       if (this._Icon == null)
         return;
       double num1 = (double) this._Icon.Width / (double) this._Icon.Height;
-      int num2 = 10;
-      int num3 = 10;
+      int num2 = UiScale.S(10);
+      int num3 = UiScale.S(10);
       int width1 = this._Icon.Width;
       int height1 = this._Icon.Height;
       double num4 = height1 <= 30 || height1 <= width1 ? (width1 <= 30 || width1 <= height1 ? 30.0 / (double) width1 : 30.0 / (double) width1) : 30.0 / (double) height1;
       int width2 = (int) ((double) width1 * num4);
       int height2 = (int) ((double) height1 * num4);
-      Rectangle rect = new Rectangle(num2 + (30 - width2) / 2, num3 + (30 - height2) / 2, width2, height2);
+      Rectangle rect = new Rectangle(num2 + (UiScale.S(30) - width2) / 2, num3 + (UiScale.S(30) - height2) / 2, width2, height2);
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
       graphics.CompositingQuality = CompositingQuality.HighQuality;
       graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;

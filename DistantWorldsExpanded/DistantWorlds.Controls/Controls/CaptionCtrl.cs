@@ -85,10 +85,10 @@ namespace DistantWorlds.Controls
       {
         if (value != null)
         {
-          int width = 16;
+          int width = UiScale.S(16);
           double num = (double) width / (double) value.Width;
           int height = (int) ((double) value.Height * num);
-          this.captionIcon = this.PrescaleImage(value, 16, 16, width, height);
+          this.captionIcon = this.PrescaleImage(value, UiScale.S(16), UiScale.S(16), width, height);
         }
         else
           this.captionIcon = (Image) null;
@@ -213,9 +213,9 @@ namespace DistantWorlds.Controls
         int width = this.Width;
         int height = this.Height;
         if (width == 0)
-          width = 1;
+          width = UiScale.S(1);
         if (height == 0)
-          height = 1;
+          height = UiScale.S(1);
         if (this.directionCtrl.DirectionStyle == DirectionStyle.Up || this.directionCtrl.DirectionStyle == DirectionStyle.Down)
           this.brush = (Brush) new LinearGradientBrush(new Rectangle(0, 0, width, height), this.colorOne, this.colorTwo, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
         else
@@ -252,8 +252,8 @@ namespace DistantWorlds.Controls
         stringFormat = new StringFormat(StringFormatFlags.DirectionVertical);
         num1 = (float) (((double) this.Width - (double) e.Graphics.MeasureString(this.text, this.Font, new PointF(0.0f, 0.0f), stringFormat).Width) * 0.5);
       }
-      float num3 = num2 - 2f;
-      float num4 = num1 + 3f;
+      float num3 = num2 - UiScale.S(2f);
+      float num4 = num1 + UiScale.S(3f);
       if (this.captionIcon != null)
       {
         if (this.Width >= this.Height)

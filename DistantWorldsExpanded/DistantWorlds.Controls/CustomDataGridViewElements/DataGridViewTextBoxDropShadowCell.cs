@@ -92,21 +92,21 @@ namespace DistantWorlds.Controls
           graphics.FillRectangle((Brush) solidBrush1, cellBounds);
           if (this._Amount > 0 && this._MaximumAmount > 0)
           {
-            int width = Math.Max(1, (int) ((double) this._Amount * ((double) (cellBounds.Width - 4) / (double) this._MaximumAmount)) - 4);
-            Rectangle rect = new Rectangle(cellBounds.X, cellBounds.Y + 3, width, cellBounds.Height - 6);
+            int width = Math.Max(UiScale.S(1), (int) ((double) this._Amount * ((double) (cellBounds.Width - UiScale.S(4)) / (double) this._MaximumAmount)) - UiScale.S(4));
+            Rectangle rect = new Rectangle(cellBounds.X, cellBounds.Y + UiScale.S(3), width, cellBounds.Height - UiScale.S(6));
             Color color1_1 = Color.FromArgb(32, (int) color2.R, (int) color2.G, (int) color2.B);
             Color color2_1 = Color.FromArgb(128, (int) color2.R, (int) color2.G, (int) color2.B);
-            LinearGradientBrush linearGradientBrush = new LinearGradientBrush(new Rectangle(rect.X - 1, rect.Y, rect.Width + 2, rect.Height), color1_1, color2_1, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+            LinearGradientBrush linearGradientBrush = new LinearGradientBrush(new Rectangle(rect.X - UiScale.S(1), rect.Y, rect.Width + UiScale.S(2), rect.Height), color1_1, color2_1, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
             graphics.FillRectangle((Brush) linearGradientBrush, rect);
           }
           SolidBrush solidBrush2 = new SolidBrush(color2);
           SizeF sizeF = graphics.MeasureString(formattedValue as string, cellStyle.Font);
-          float x = (float) (cellBounds.X + 2);
+          float x = (float) (cellBounds.X + UiScale.S(2));
           float num = (float) cellBounds.Y + (float) (((double) cellBounds.Height - (double) sizeF.Height) / 2.0);
-          Font font = new Font(cellStyle.Font.FontFamily, 17f, FontStyle.Bold, GraphicsUnit.Pixel);
+          Font font = UiScale.NewFont(cellStyle.Font.FontFamily, 17f, FontStyle.Bold, GraphicsUnit.Pixel);
           SolidBrush solidBrush3 = new SolidBrush(this.SelectComplimentaryShadowColor(color2, color1));
-          graphics.DrawString(formattedValue as string, font, (Brush) solidBrush3, x + 1f, num + 2f, StringFormat.GenericTypographic);
-          graphics.DrawString(formattedValue as string, font, (Brush) solidBrush2, x, num + 1f, StringFormat.GenericTypographic);
+          graphics.DrawString(formattedValue as string, font, (Brush) solidBrush3, x + UiScale.S(1f), num + UiScale.S(2f), StringFormat.GenericTypographic);
+          graphics.DrawString(formattedValue as string, font, (Brush) solidBrush2, x, num + UiScale.S(1f), StringFormat.GenericTypographic);
         }
         if (!DataGridViewTextBoxDropShadowCell.PartPainted(paintParts, DataGridViewPaintParts.ErrorIcon))
           return;

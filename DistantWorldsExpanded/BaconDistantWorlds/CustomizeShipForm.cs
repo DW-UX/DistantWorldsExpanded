@@ -48,6 +48,7 @@ namespace BaconDistantWorlds
         this.ship = shipToCustomize;
         this.planetDoingTheMod = shipOrPlanet;
         this.InitializeComponent();
+        UiScale.ScaleLayout(this);
         this.UpdateInventories();
         this.DisableButtonsWhenTradePartnerNotPresent();
         this.shipNamelabel.Text = this.ship.Name;
@@ -207,7 +208,7 @@ namespace BaconDistantWorlds
       {
         for (int emSize2 = 1; emSize2 <= 100; ++emSize2)
         {
-          using (Font font = new Font(lbl.Font.FontFamily, (float) emSize2))
+          using (Font font = UiScale.NewFont(lbl.Font.FontFamily, (float) emSize2))
           {
             SizeF sizeF = graphics.MeasureString(text, font);
             if ((double) sizeF.Width > (double) num1 || (double) sizeF.Height > (double) num2)
@@ -218,7 +219,7 @@ namespace BaconDistantWorlds
           }
         }
       }
-      lbl.Font = new Font(lbl.Font.FontFamily, (float) emSize1);
+      lbl.Font = UiScale.NewFont(lbl.Font.FontFamily, (float) emSize1);
     }
 
     private void unequipButton_Click(object sender, EventArgs e)
@@ -380,13 +381,13 @@ namespace BaconDistantWorlds
       this.shipPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
       this.shipPictureBox.TabIndex = 19;
       this.shipPictureBox.TabStop = false;
-      this.planetNamelabel.Font = new Font("Microsoft Sans Serif", 27.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.planetNamelabel.Font = UiScale.NewFont("Microsoft Sans Serif", 27.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.planetNamelabel.Location = new Point(612, 25);
       this.planetNamelabel.Name = "planetNamelabel";
       this.planetNamelabel.Size = new Size(426, 42);
       this.planetNamelabel.TabIndex = 18;
       this.planetNamelabel.Text = "Planet name here";
-      this.shipNamelabel.Font = new Font("Microsoft Sans Serif", 27.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.shipNamelabel.Font = UiScale.NewFont("Microsoft Sans Serif", 27.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.shipNamelabel.Location = new Point(10, 25);
       this.shipNamelabel.Name = "shipNamelabel";
       this.shipNamelabel.Size = new Size(346, 42);
@@ -433,16 +434,16 @@ namespace BaconDistantWorlds
       this.componentID.Name = "componentID";
       this.componentID.ReadOnly = true;
       this.componentID.Visible = false;
-      this.componentID.Width = 5;
+      this.componentID.Width = UiScale.S(5);
       this.planetQuantityColumn.FillWeight = 25f;
       this.planetQuantityColumn.HeaderText = "Quantity";
       this.planetQuantityColumn.Name = "planetQuantityColumn";
       this.planetQuantityColumn.ReadOnly = true;
-      this.planetQuantityColumn.Width = 50;
+      this.planetQuantityColumn.Width = UiScale.S(50);
       this.planetCargoNameColumn.HeaderText = "Component Name";
       this.planetCargoNameColumn.Name = "planetCargoNameColumn";
       this.planetCargoNameColumn.ReadOnly = true;
-      this.planetCargoNameColumn.Width = 330;
+      this.planetCargoNameColumn.Width = UiScale.S(330);
       this.unequipedComponentsDataGridView.AllowUserToAddRows = false;
       this.unequipedComponentsDataGridView.AllowUserToDeleteRows = false;
       this.unequipedComponentsDataGridView.AllowUserToResizeRows = false;
@@ -460,18 +461,18 @@ namespace BaconDistantWorlds
       this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
       this.dataGridViewTextBoxColumn1.ReadOnly = true;
       this.dataGridViewTextBoxColumn1.Visible = false;
-      this.dataGridViewTextBoxColumn1.Width = 5;
+      this.dataGridViewTextBoxColumn1.Width = UiScale.S(5);
       this.dataGridViewTextBoxColumn2.FillWeight = 25f;
       this.dataGridViewTextBoxColumn2.HeaderText = "Quantity";
       this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
       this.dataGridViewTextBoxColumn2.ReadOnly = true;
-      this.dataGridViewTextBoxColumn2.Width = 50;
+      this.dataGridViewTextBoxColumn2.Width = UiScale.S(50);
       this.dataGridViewTextBoxColumn3.HeaderText = "Component Name";
       this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
       this.dataGridViewTextBoxColumn3.ReadOnly = true;
-      this.dataGridViewTextBoxColumn3.Width = 330;
+      this.dataGridViewTextBoxColumn3.Width = UiScale.S(330);
       this.totalCashLabel.AutoSize = true;
-      this.totalCashLabel.Font = new Font("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.totalCashLabel.Font = UiScale.NewFont("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.totalCashLabel.Location = new Point(13, 93);
       this.totalCashLabel.Name = "totalCashLabel";
       this.totalCashLabel.Size = new Size(150, 20);

@@ -25,7 +25,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void Ignite()
@@ -76,7 +76,7 @@ namespace DistantWorlds.Controls
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
         e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-        int height = e.Bounds.Height - 2;
+        int height = e.Bounds.Height - UiScale.S(2);
         int width = (int) ((double) height * 1.666666);
         Rectangle rect = new Rectangle((e.Bounds.Width - width) / 2, e.Bounds.Y + (e.Bounds.Height - height) / 2, width, height);
         e.Graphics.DrawImage((Image) largeFlagPicture, rect);

@@ -248,7 +248,7 @@ namespace DistantWorlds
         {
             int x = rectangle_0.X;
             int y = rectangle_0.Y;
-            int num = int_3 + 2;
+            int num = int_3 + UiScale.S(2);
             Point point = new Point(x, y);
             SystemVisibilityStatus systemVisibilityStatus = game_0.PlayerEmpire.CheckSystemVisibilityStatus(habitat_1.SystemIndex);
             bool flag = false;
@@ -293,12 +293,12 @@ namespace DistantWorlds
                     x += int_1;
                     point = new Point(x, y);
                     using SolidBrush brush_ = new SolidBrush(habitat_1.Empire.MainColor);
-                    method_10(point_0: new Point(point.X, point.Y - 2), graphics_0: graphics_0, string_0: habitat_1.Empire.Name, font_3: font_1, brush_0: brush_);
+                    method_10(point_0: new Point(point.X, point.Y - UiScale.S(2)), graphics_0: graphics_0, string_0: habitat_1.Empire.Name, font_3: font_1, brush_0: brush_);
                 }
                 else
                 {
                     point = new Point(x, y);
-                    Point point_3 = new Point(point.X, point.Y - 2);
+                    Point point_3 = new Point(point.X, point.Y - UiScale.S(2));
                     if (habitat_1.Empire == game_0.Galaxy.IndependentEmpire && habitat_1.Population.Count > 0)
                     {
                         method_9(graphics_0, TextResolver.GetText("Independent"), font_1, point_3);
@@ -323,12 +323,12 @@ namespace DistantWorlds
                         Population population = habitat_1.Population[i];
                         point = new Point(x, y);
                         string name = population.Race.Name;
-                        int num2 = (int)graphics_0.MeasureString(name, font_0, 200).Width;
+                        int num2 = (int)graphics_0.MeasureString(name, font_0, UiScale.S(200)).Width;
                         if (x + num2 + bitmap_4[population.Race.PictureRef].Width <= rectangle_0.Right)
                         {
                             graphics_0.DrawImageUnscaled(bitmap_4[population.Race.PictureRef], point);
                             x += bitmap_4[population.Race.PictureRef].Width;
-                            method_9(point_0: new Point(x, y + 2), graphics_0: graphics_0, string_0: name, font_3: font_0);
+                            method_9(point_0: new Point(x, y + UiScale.S(2)), graphics_0: graphics_0, string_0: name, font_3: font_0);
                             x += num2;
                             x += int_0 / 2;
                             continue;
@@ -407,7 +407,7 @@ namespace DistantWorlds
             x += bitmap_2[fighter_1.PictureRef].Width;
             x += int_1;
             SizeF sizeF = graphics_0.MeasureString(fighter_1.Name, font_2, rectangle_0.Width - x, StringFormat.GenericTypographic);
-            sizeF = new SizeF(sizeF.Width, sizeF.Height + 2f);
+            sizeF = new SizeF(sizeF.Width, sizeF.Height + UiScale.S(2f));
             method_11(point_0: new Point(x, y + (int_0 * 2 - (int)sizeF.Height) / 2), graphics_0: graphics_0, string_0: fighter_1.Name, font_3: font_2, brush_0: solidBrush_1, sizeF_0: sizeF);
             y += int_0 * 2;
             y += int_1;
@@ -425,12 +425,12 @@ namespace DistantWorlds
                     color = Color.FromArgb(96, 96, 96);
                 }
                 using SolidBrush brush_ = new SolidBrush(color);
-                method_10(point_0: new Point(point.X, point.Y - 2), graphics_0: graphics_0, string_0: fighter_1.Empire.Name, font_3: font_1, brush_0: brush_);
+                method_10(point_0: new Point(point.X, point.Y - UiScale.S(2)), graphics_0: graphics_0, string_0: fighter_1.Empire.Name, font_3: font_1, brush_0: brush_);
             }
             else
             {
                 point = new Point(x, y);
-                Point point_3 = new Point(point.X, point.Y - 2);
+                Point point_3 = new Point(point.X, point.Y - UiScale.S(2));
                 if (fighter_1.Empire == game_0.Galaxy.IndependentEmpire)
                 {
                     method_9(graphics_0, TextResolver.GetText("Independent"), font_1, point_3);
@@ -451,7 +451,7 @@ namespace DistantWorlds
         {
             int x = rectangle_0.X;
             int y = rectangle_0.Y;
-            int num = int_3 + 2;
+            int num = int_3 + UiScale.S(2);
             Point point = new Point(x, y);
             graphics_0.FillRectangle(solidBrush_0, rectangle_0);
             rectangle_0 = new Rectangle(rectangle_0.X + int_2, rectangle_0.Y + int_2, rectangle_0.Width - int_2 * 2, rectangle_0.Height - int_2 * 2);
@@ -470,7 +470,7 @@ namespace DistantWorlds
                 x += int_1;
             }
             SizeF sizeF = graphics_0.MeasureString(builtObject_1.Name, font_2, rectangle_0.Width - x, StringFormat.GenericTypographic);
-            sizeF = new SizeF(sizeF.Width, sizeF.Height + 2f);
+            sizeF = new SizeF(sizeF.Width, sizeF.Height + UiScale.S(2f));
             method_11(point_0: new Point(x, y + (int_0 * 2 - (int)sizeF.Height) / 2), graphics_0: graphics_0, string_0: builtObject_1.Name, font_3: font_2, brush_0: solidBrush_1, sizeF_0: sizeF);
             y += int_0 * 2;
             y += int_1;
@@ -501,12 +501,12 @@ namespace DistantWorlds
                     color = Color.FromArgb(96, 96, 96);
                 }
                 using SolidBrush brush_ = new SolidBrush(color);
-                method_10(point_0: new Point(point.X, point.Y - 2), graphics_0: graphics_0, string_0: builtObject_1.ActualEmpire.Name, font_3: font_1, brush_0: brush_);
+                method_10(point_0: new Point(point.X, point.Y - UiScale.S(2)), graphics_0: graphics_0, string_0: builtObject_1.ActualEmpire.Name, font_3: font_1, brush_0: brush_);
             }
             else
             {
                 point = new Point(x, y);
-                Point point_3 = new Point(point.X, point.Y - 2);
+                Point point_3 = new Point(point.X, point.Y - UiScale.S(2));
                 if (builtObject_1.Empire == game_0.Galaxy.IndependentEmpire)
                 {
                     method_9(graphics_0, TextResolver.GetText("Independent"), font_1, point_3);
@@ -543,7 +543,7 @@ namespace DistantWorlds
             string text = Galaxy.ResolveMissionDescription(fighter_1);
             Rectangle rectangle_ = main_0.rectangle_0;
             SizeF sizeF = graphics_0.MeasureString(text, font_0, rectangle_.Width - point_0.X, StringFormat.GenericTypographic);
-            method_11(sizeF_0: new SizeF(sizeF.Width, sizeF.Height + 2f), graphics_0: graphics_0, string_0: text, font_3: font_0, point_0: point_0, brush_0: solidBrush_1);
+            method_11(sizeF_0: new SizeF(sizeF.Width, sizeF.Height + UiScale.S(2f)), graphics_0: graphics_0, string_0: text, font_3: font_0, point_0: point_0, brush_0: solidBrush_1);
         }
 
         private void method_8(Graphics graphics_0, BuiltObject builtObject_1, Point point_0)
@@ -590,7 +590,7 @@ namespace DistantWorlds
             string text = Galaxy.ResolveDescription(empire, builtObject_1.Mission);
             Rectangle rectangle_ = main_0.rectangle_0;
             SizeF sizeF = graphics_0.MeasureString(text, font_0, rectangle_.Width - point_0.X, StringFormat.GenericTypographic);
-            sizeF = new SizeF(sizeF.Width, sizeF.Height + 2f);
+            sizeF = new SizeF(sizeF.Width, sizeF.Height + UiScale.S(2f));
             if (builtObject_1.Mission != null && builtObject_1.Mission.Type != 0)
             {
                 method_11(graphics_0, text, font_0, point_0, solidBrush_1, sizeF);
@@ -634,17 +634,17 @@ namespace DistantWorlds
         {
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_3, brush: solidBrush_2, format: StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 RectangleF layoutRectangle2 = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_3, brush_0, layoutRectangle2, StringFormat.GenericTypographic);
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_3, solidBrush_2, point_0);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_3, brush_0, point_0);
             }
         }
@@ -845,14 +845,14 @@ namespace DistantWorlds
         public HoverPanel():base()
         {
             
-            int_0 = 16;
-            int_1 = 5;
-            int_2 = 6;
+            int_0 = UiScale.S(16);
+            int_1 = UiScale.S(5);
+            int_2 = UiScale.S(6);
             solidBrush_1 = new SolidBrush(Color.White);
             solidBrush_2 = new SolidBrush(Color.Black);
-            font_0 = new Font("Verdana", 8f);
-            font_1 = new Font("Verdana", 8f);
-            font_2 = new Font("Verdana", 10f, FontStyle.Bold);
+            font_0 = UiScale.NewFont("Verdana", 8f);
+            font_1 = UiScale.NewFont("Verdana", 8f);
+            font_2 = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
             LastRefresh = DateTime.MinValue;
         }
     }

@@ -30,7 +30,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData() => this._DiplomaticRelationTypes = (List<DiplomaticRelationType>) null;
@@ -75,7 +75,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      PointF point = new PointF(0.0f, (float) (e.Bounds.Y + 1));
+      PointF point = new PointF(0.0f, (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
       string empty = string.Empty;
       if (this._DiplomaticRelationTypes != null && this._DiplomaticRelationTypes.Count > 0 && e.Index >= 0)

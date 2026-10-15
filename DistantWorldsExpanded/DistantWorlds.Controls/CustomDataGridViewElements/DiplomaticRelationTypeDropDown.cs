@@ -183,7 +183,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      PointF point = new PointF(0.0f, (float) (e.Bounds.Y + 1));
+      PointF point = new PointF(0.0f, (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
       SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
       if (this.PirateRelationMode)

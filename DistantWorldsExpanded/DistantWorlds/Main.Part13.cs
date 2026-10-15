@@ -154,18 +154,18 @@ namespace DistantWorlds
             float_1 = 1f;
             int_12 = 10;
             dateTime_0 = DateTime.MinValue;
-            font_0 = new Font("Verdana", 15f, FontStyle.Bold);
-            font_1 = new Font("Verdana", 12f, FontStyle.Bold);
+            font_0 = UiScale.NewFont("Verdana", 15f, FontStyle.Bold);
+            font_1 = UiScale.NewFont("Verdana", 12f, FontStyle.Bold);
             color_0 = Color.White;
-            font_2 = new Font("Verdana", 9f, FontStyle.Bold);
+            font_2 = UiScale.NewFont("Verdana", 9f, FontStyle.Bold);
             color_1 = Color.FromArgb(120, 120, 120);
-            font_3 = new Font("Verdana", 8f, FontStyle.Regular);
-            font_4 = new Font("Verdana", 8f, FontStyle.Regular);
-            font_5 = new Font("Verdana", 8f, FontStyle.Bold);
+            font_3 = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
+            font_4 = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
+            font_5 = UiScale.NewFont("Verdana", 8f, FontStyle.Bold);
             color_2 = Color.FromArgb(170, 170, 170);
-            font_6 = new Font("Verdana", 9f, FontStyle.Regular);
-            font_7 = new Font("Verdana", 9f, FontStyle.Bold);
-            font_8 = new Font("Verdana", 9f, FontStyle.Regular);
+            font_6 = UiScale.NewFont("Verdana", 9f, FontStyle.Regular);
+            font_7 = UiScale.NewFont("Verdana", 9f, FontStyle.Bold);
+            font_8 = UiScale.NewFont("Verdana", 9f, FontStyle.Regular);
             rectangle_1 = new Rectangle[2000];
             int_20 = 3;
             gyCmRgDujR = Point.Empty;
@@ -293,6 +293,7 @@ namespace DistantWorlds
             try
             {
                 InitializeComponent();
+                UiScale.ScalePictures(this);
                 //splash_0 = splashForm;
                 SteamAPI.Initialize(Application.UserAppDataPath);
                 MainInit(width, height, windowedMode);

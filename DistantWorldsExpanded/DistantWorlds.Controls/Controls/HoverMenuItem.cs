@@ -28,7 +28,7 @@ namespace DistantWorlds.Controls
       this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
       this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
       this.SetStyle(ControlStyles.UserPaint, true);
-      this.Size = new Size(100, 30);
+      this.Size = new Size(UiScale.S(100), UiScale.S(30));
     }
 
     private static void PlaySound()

@@ -32,10 +32,10 @@ namespace DistantWorlds.Controls
 
     public DesignWarnings()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
       this.BackColor = Color.Transparent;
       this.BackColor2 = Color.Transparent;
       this.BackColor3 = Color.Transparent;
@@ -56,7 +56,7 @@ namespace DistantWorlds.Controls
       this._MustDo = mustDo;
       this._ShouldDo = shouldDo;
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
       this.Height = 0;
       this.BackColor = Color.Transparent;
       this.BackColor2 = Color.Transparent;
@@ -96,10 +96,10 @@ namespace DistantWorlds.Controls
 
     public void DrawWarningInfo(Graphics graphics)
     {
-      int x = 10;
-      int y = 30;
+      int x = UiScale.S(10);
+      int y = UiScale.S(30);
       Point location1 = new Point();
-      location1 = new Point(x, 10);
+      location1 = new Point(x, UiScale.S(10));
       this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Warnings"), this._TitleFont, location1);
       if (this._Design == null)
         return;
@@ -109,7 +109,7 @@ namespace DistantWorlds.Controls
         Point location2 = new Point(x, y);
         SizeF maxSize = graphics.MeasureString(text, this._BoldFont, this.Width);
         GraphicsHelper.DrawStringWithDropShadow(graphics, text, this._BoldFont, location2, (Brush) redBrush, maxSize);
-        y += (int) maxSize.Height - 4;
+        y += (int) maxSize.Height - UiScale.S(4);
       }
       SolidBrush yellowBrush = this._YellowBrush;
       foreach (string text in this._ShouldDo)
@@ -117,11 +117,11 @@ namespace DistantWorlds.Controls
         Point location3 = new Point(x, y);
         SizeF maxSize = graphics.MeasureString(text, this._BoldFont, this.Width);
         GraphicsHelper.DrawStringWithDropShadow(graphics, text, this._BoldFont, location3, (Brush) yellowBrush, maxSize);
-        y += (int) maxSize.Height - 4;
+        y += (int) maxSize.Height - UiScale.S(4);
       }
       if (this.Height >= y + 1)
         return;
-      this.Height = y + 1;
+      this.Height = y + UiScale.S(1);
     }
 
     private SolidBrush SelectGoodBadBrush(double value) => this.SelectGoodBadBrush(value, true);
@@ -152,9 +152,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
 

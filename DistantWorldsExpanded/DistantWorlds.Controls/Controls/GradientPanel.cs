@@ -21,7 +21,7 @@ namespace DistantWorlds.Controls
     private LinearGradientMode _GradientMode = LinearGradientMode.Vertical;
     private BorderStyle _BorderStyle = BorderStyle.FixedSingle;
     private Color _BorderColour = Color.FromArgb(67, 67, 77);
-    private int _BorderWidth = 1;
+    private int _BorderWidth = UiScale.S(1);
     private int _Curvature;
     private CornerCurveMode _CurveMode = CornerCurveMode.All;
     protected IFontCache _FontCache;
@@ -275,7 +275,7 @@ namespace DistantWorlds.Controls
           if (this._BorderWidth > 1)
             num2 = GradientPanel.DoubleToInt((double) (this.BorderWidth / 2));
           else if (this._BorderWidth == 1)
-            num2 = 1;
+            num2 = UiScale.S(1);
           num1 = this.AdjustedCurve;
           break;
       }
@@ -314,18 +314,18 @@ namespace DistantWorlds.Controls
         LinearGradientBrush linearGradientBrush4 = new LinearGradientBrush(new Rectangle(clientRectangle.Width - num1, clientRectangle.Height - num1, num1, num1), rightColor, bottomColor, System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
         Pen pen10 = new Pen((Brush) linearGradientBrush4, (float) this._BorderWidth);
         int num8 = 0;
-        int num9 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? 1 : num1 * 2;
+        int num9 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
         graphics.DrawArc(pen8, num3 - num9, num8, num9, num9, 270, 90);
         graphics.DrawLine(pen5, num3, y1, num3, num4 - num6);
-        int num10 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? 1 : num1 * 2;
+        int num10 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
         graphics.DrawArc(pen10, num3 - num10, num4 - num10, num10, num10, 0, 90);
-        graphics.DrawLine(pen6, num7 - 1, num4, num3 - num6 + 1, num4);
-        int num11 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? 1 : num1 * 2;
+        graphics.DrawLine(pen6, num7 - UiScale.S(1), num4, num3 - num6 + UiScale.S(1), num4);
+        int num11 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
         graphics.DrawArc(pen9, num8, num4 - num11, num11, num11, 90, 90);
-        graphics.DrawLine(pen4, 0.0f, (float) ((double) clientRectangle.Height - (double) num7 + 1.0), 0.0f, (float) num5);
-        int num12 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? 1 : num1 * 2;
+        graphics.DrawLine(pen4, 0.0f, (float) ((double) clientRectangle.Height - (double) num7 + UiScale.S(1.0)), 0.0f, (float) num5);
+        int num12 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
         graphics.DrawArc(pen7, num8, num8, num12, num12, 180, 90);
-        graphics.DrawLine(pen3, (float) num5, 0.0f, (float) ((double) clientRectangle.Width - (double) y1 + 1.0), 0.0f);
+        graphics.DrawLine(pen3, (float) num5, 0.0f, (float) ((double) clientRectangle.Width - (double) y1 + UiScale.S(1.0)), 0.0f);
         pen2.Dispose();
         pen3.Dispose();
         pen4.Dispose();
@@ -350,16 +350,16 @@ namespace DistantWorlds.Controls
       float width = rectangle.Width;
       float height = rectangle.Height;
       float num1 = radius * 2f;
-      float num2 = num1 + 1f;
+      float num2 = num1 + UiScale.S(1f);
       float num3 = radius;
       rectangleCorrected.AddArc(left, top, num1, num1, 180f, 90f);
-      rectangleCorrected.AddLine(left + num3, top + 1f, left + width - num3, top + 1f);
+      rectangleCorrected.AddLine(left + num3, top + UiScale.S(1f), left + width - num3, top + UiScale.S(1f));
       rectangleCorrected.AddArc(left + width - num2, top, num1, num1, 270f, 90f);
-      rectangleCorrected.AddLine((float) ((double) left + (double) width - 1.0), top + num3, (float) ((double) left + (double) width - 1.0), top + height - num3);
+      rectangleCorrected.AddLine((float) ((double) left + (double) width - UiScale.S(1.0)), top + num3, (float) ((double) left + (double) width - UiScale.S(1.0)), top + height - num3);
       rectangleCorrected.AddArc(left + width - num2, top + height - num2, num1, num1, 0.0f, 90f);
-      rectangleCorrected.AddLine(left + width - num3, (float) ((double) top + (double) height - 1.0), left + num3, (float) ((double) top + (double) height - 1.0));
+      rectangleCorrected.AddLine(left + width - num3, (float) ((double) top + (double) height - UiScale.S(1.0)), left + num3, (float) ((double) top + (double) height - UiScale.S(1.0)));
       rectangleCorrected.AddArc(left, top + height - num2, num1, num1, 90f, 90f);
-      rectangleCorrected.AddLine(left + 1f, top + height - num3, left + 1f, top + num3);
+      rectangleCorrected.AddLine(left + UiScale.S(1f), top + height - num3, left + UiScale.S(1f), top + num3);
       rectangleCorrected.CloseFigure();
       return rectangleCorrected;
     }
@@ -394,13 +394,13 @@ namespace DistantWorlds.Controls
       {
         int width = rect.Width;
         int height = rect.Height;
-        int num3 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? 1 : num1 * 2;
+        int num3 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
         graphicsPath.AddArc(width - num3, 0, num3, num3, 270f, 90f);
-        int num4 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? 1 : num1 * 2;
+        int num4 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
         graphicsPath.AddArc(width - num4, height - num4, num4, num4, 0.0f, 90f);
-        int num5 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? 1 : num1 * 2;
-        graphicsPath.AddArc(0.0f, (float) height - ((float) num5 + 1f), (float) num5, (float) num5, 90f, 90f);
-        int num6 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? 1 : num1 * 2;
+        int num5 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
+        graphicsPath.AddArc(0.0f, (float) height - ((float) num5 + UiScale.S(1f)), (float) num5, (float) num5, 90f, 90f);
+        int num6 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
         graphicsPath.AddArc(0, 0, num6, num6, 180f, 90f);
         graphicsPath.CloseFigure();
       }
@@ -410,7 +410,7 @@ namespace DistantWorlds.Controls
     public void DoRegionClip()
     {
       RectangleF rectangleF = new RectangleF((float) this.ClientRectangle.X, (float) this.ClientRectangle.Y, (float) this.ClientRectangle.Width, (float) this.ClientRectangle.Height);
-      int num = Math.Max(0, this.BorderWidth - 1);
+      int num = Math.Max(0, this.BorderWidth - UiScale.S(1));
       rectangleF.Inflate((float) num, (float) num);
       using (GraphicsPath path = this.DefineOutline(new Rectangle((int) rectangleF.X, (int) rectangleF.Y, (int) rectangleF.Width, (int) rectangleF.Height)))
         this.Region = new Region(path);
@@ -453,7 +453,7 @@ namespace DistantWorlds.Controls
               if (this._BorderWidth > 1)
                 num2 = GradientPanel.DoubleToInt((double) (this.BorderWidth / 2));
               else if (this._BorderWidth == 1)
-                num2 = 1;
+                num2 = UiScale.S(1);
               num1 = this.AdjustedCurve;
               break;
           }
@@ -465,13 +465,13 @@ namespace DistantWorlds.Controls
           {
             int num3 = rect.Width - num2;
             int num4 = rect.Height - num2;
-            int num5 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? 1 : num1 * 2;
+            int num5 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
             path.AddArc(num3 - num5, num2, num5, num5, 270f, 90f);
-            int num6 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? 1 : num1 * 2;
+            int num6 = (this._CurveMode & CornerCurveMode.BottomRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
             path.AddArc(num3 - num6, num4 - num6, num6, num6, 0.0f, 90f);
-            int num7 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? 1 : num1 * 2;
+            int num7 = (this._CurveMode & CornerCurveMode.BottomLeft) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
             path.AddArc(num2, num4 - num7, num7, num7, 90f, 90f);
-            int num8 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? 1 : num1 * 2;
+            int num8 = (this._CurveMode & CornerCurveMode.TopLeft) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
             path.AddArc(num2, num2, num8, num8, 180f, 90f);
             path.CloseFigure();
           }
@@ -487,14 +487,14 @@ namespace DistantWorlds.Controls
     public static void DrawBorder3D(Graphics graphics, Rectangle rectangle)
     {
       graphics.SmoothingMode = SmoothingMode.Default;
-      graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.Width - 1, rectangle.Y);
-      graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.X, rectangle.Height - 1);
-      graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + 1, rectangle.Y + 1, rectangle.Width - 1, rectangle.Y + 1);
-      graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + 1, rectangle.Y + 1, rectangle.X + 1, rectangle.Height - 1);
-      graphics.DrawLine(SystemPens.ControlLight, rectangle.X + 1, rectangle.Height - 2, rectangle.Width - 2, rectangle.Height - 2);
-      graphics.DrawLine(SystemPens.ControlLight, rectangle.Width - 2, rectangle.Y + 1, rectangle.Width - 2, rectangle.Height - 2);
-      graphics.DrawLine(SystemPens.ControlLightLight, rectangle.X, rectangle.Height - 1, rectangle.Width - 1, rectangle.Height - 1);
-      graphics.DrawLine(SystemPens.ControlLightLight, rectangle.Width - 1, rectangle.Y, rectangle.Width - 1, rectangle.Height - 1);
+      graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.Width - UiScale.S(1), rectangle.Y);
+      graphics.DrawLine(SystemPens.ControlDark, rectangle.X, rectangle.Y, rectangle.X, rectangle.Height - UiScale.S(1));
+      graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + UiScale.S(1), rectangle.Y + UiScale.S(1), rectangle.Width - UiScale.S(1), rectangle.Y + UiScale.S(1));
+      graphics.DrawLine(SystemPens.ControlDarkDark, rectangle.X + UiScale.S(1), rectangle.Y + UiScale.S(1), rectangle.X + UiScale.S(1), rectangle.Height - UiScale.S(1));
+      graphics.DrawLine(SystemPens.ControlLight, rectangle.X + UiScale.S(1), rectangle.Height - UiScale.S(2), rectangle.Width - UiScale.S(2), rectangle.Height - UiScale.S(2));
+      graphics.DrawLine(SystemPens.ControlLight, rectangle.Width - UiScale.S(2), rectangle.Y + UiScale.S(1), rectangle.Width - UiScale.S(2), rectangle.Height - UiScale.S(2));
+      graphics.DrawLine(SystemPens.ControlLightLight, rectangle.X, rectangle.Height - UiScale.S(1), rectangle.Width - UiScale.S(1), rectangle.Height - UiScale.S(1));
+      graphics.DrawLine(SystemPens.ControlLightLight, rectangle.Width - UiScale.S(1), rectangle.Y, rectangle.Width - UiScale.S(1), rectangle.Height - UiScale.S(1));
     }
 
     public static int DoubleToInt(double value) => Decimal.ToInt32(Decimal.Floor(Decimal.Parse(value.ToString(), (IFormatProvider) NumberFormatInfo.InvariantInfo)));

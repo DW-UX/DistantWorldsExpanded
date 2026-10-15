@@ -16,9 +16,9 @@ namespace DistantWorlds.Controls
   public class GameVictoryConditions : GradientPanel
   {
     private Game _Game;
-    private int _RowHeight = 14;
-    private int _TopMargin = 10;
-    private int _LeftMargin = 10;
+    private int _RowHeight = UiScale.S(14);
+    private int _TopMargin = UiScale.S(10);
+    private int _LeftMargin = UiScale.S(10);
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
     private SolidBrush _BlackBrush = new SolidBrush(Color.Black);
     private SolidBrush _RedBrush = new SolidBrush(Color.Red);
@@ -28,10 +28,10 @@ namespace DistantWorlds.Controls
 
     public GameVictoryConditions()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData() => this._Game = (Game) null;
@@ -40,7 +40,7 @@ namespace DistantWorlds.Controls
     {
       this._Game = game;
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -71,17 +71,17 @@ namespace DistantWorlds.Controls
 
     private void DrawVictoryConditions(Graphics graphics)
     {
-      this._LeftMargin = 10;
+      this._LeftMargin = UiScale.S(10);
       graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
-      int num1 = 40;
-      int num2 = 80;
-      int num3 = 280;
+      int num1 = UiScale.S(40);
+      int num2 = UiScale.S(80);
+      int num3 = UiScale.S(280);
       int topMargin = this._TopMargin;
       Point location = new Point(this._LeftMargin, topMargin);
       this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Victory Conditions"), this._TitleFont, location);
-      this._LeftMargin += 20;
+      this._LeftMargin += UiScale.S(20);
       int y1 = topMargin + this._RowHeight + this._RowHeight + this._RowHeight;
       location = new Point(this._LeftMargin, y1);
       bool flag = false;
@@ -360,7 +360,7 @@ namespace DistantWorlds.Controls
       Point location,
       string description)
     {
-      int num = (int) graphics.MeasureString("9999", this.Font, 200, StringFormat.GenericTypographic).Width + 5;
+      int num = (int) graphics.MeasureString("9999", this.Font, UiScale.S(200), StringFormat.GenericTypographic).Width + 5;
       Point point1 = new Point(location.X, location.Y);
       int width1 = overallWidth;
       int width2 = (int) ((double) currentValue / (double) maximumValue * (double) width1);
@@ -370,7 +370,7 @@ namespace DistantWorlds.Controls
       Point point2 = new Point(point1.X + (width1 - width3) / 2, point1.Y);
       Rectangle rect1 = new Rectangle(point1.X, point1.Y, width1, height);
       Rectangle rect2 = new Rectangle(point1.X, point1.Y, width2, height);
-      Rectangle rect3 = new Rectangle(point1.X - 1, point1.Y, width2 + 2, height);
+      Rectangle rect3 = new Rectangle(point1.X - UiScale.S(1), point1.Y, width2 + UiScale.S(2), height);
       LinearGradientBrush linearGradientBrush = (LinearGradientBrush) null;
       if (rect2.Width > 0)
         linearGradientBrush = new LinearGradientBrush(rect3, fillColorStart, fillColorEnd, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
@@ -378,7 +378,7 @@ namespace DistantWorlds.Controls
       graphics.FillRectangle((Brush) solidBrush, rect1);
       if (rect2.Width > 0)
         graphics.FillRectangle((Brush) linearGradientBrush, rect2);
-      graphics.DrawString(description, this.Font, (Brush) this._WhiteBrush, new PointF((float) point2.X, (float) point2.Y + 3f));
+      graphics.DrawString(description, this.Font, (Brush) this._WhiteBrush, new PointF((float) point2.X, (float) point2.Y + UiScale.S(3f)));
     }
 
     private SolidBrush SelectGoodBadBrush(double value) => this.SelectGoodBadBrush(value, true);
@@ -419,9 +419,9 @@ namespace DistantWorlds.Controls
       Point location,
       Color foreColor)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location, StringFormat.GenericTypographic);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       using (SolidBrush solidBrush = new SolidBrush(foreColor))
         graphics.DrawString(text, font, (Brush) solidBrush, (PointF) location, StringFormat.GenericTypographic);
     }

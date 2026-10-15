@@ -201,7 +201,9 @@ public static class WebBrowserExtensions
                or WebBrowserReadyState.Loading)
             Application.DoEvents();
 
-        var unscaleFactor = 96.0 / browser.DeviceDpi;
+        // Web pages do not use the game's fonts, so apply the UI scale as page zoom.
+        var unscaleFactor = (96.0 / browser.DeviceDpi * UiScale.Factor)
+            .ToString("0.###", System.Globalization.CultureInfo.InvariantCulture);
 
         // wait an extra split sec
         var future = DateTime.Now.AddMilliseconds(20);

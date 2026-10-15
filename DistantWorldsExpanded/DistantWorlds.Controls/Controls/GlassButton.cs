@@ -146,8 +146,8 @@ namespace DistantWorlds.Controls
 
     private void SetFont(bool resetRegion)
     {
-      this.Font = new Font(this.Font.FontFamily, this.Font.Size, FontStyle.Bold, GraphicsUnit.Pixel);
-      this.MinorFont = new Font(this.Font.FontFamily, Math.Max(3f, this.Font.Size - 2f), FontStyle.Regular, GraphicsUnit.Pixel);
+      this.Font = new Font(this.Font.FontFamily, UiScale.Readable(this.Font.Size), FontStyle.Bold, GraphicsUnit.Pixel);
+      this.MinorFont = new Font(this.Font.FontFamily, UiScale.Readable(Math.Max(UiScale.S(3f), this.Font.Size - UiScale.S(2f))), FontStyle.Regular, GraphicsUnit.Pixel);
       if (!resetRegion)
         return;
       this.ResetDefaultColors(resetRegion);
@@ -686,9 +686,9 @@ namespace DistantWorlds.Controls
           g.Clear(Color.Black);
         else
           g.Clear(Color.Transparent);
-        int radius = 7;
-        if (this.Height < 30)
-          radius = 6;
+        int radius = UiScale.S(7);
+        if (this.Height < UiScale.S(30))
+          radius = UiScale.S(6);
         GlassButton.DrawButtonBackground(g, clientRectangle, pressed, hovered, animating, enabled, this.EmphasizeDisabled, this._OuterBorderColor, this._BackColor, this._GlowColor, this._ShineColor, this._InnerBorderColor, glowOpacity, radius, this._ClipBackground, this._ClipColor, this);
       }
       return image;
@@ -737,7 +737,7 @@ namespace DistantWorlds.Controls
       rectangle1.Height -= 2;
       Rectangle rectangle2 = rectangle1;
       rectangle2.Height >>= 1;
-      using (GraphicsPath roundRectangle = GlassButton.CreateRoundRectangle(rectangle1, radius - 2, instance))
+      using (GraphicsPath roundRectangle = GlassButton.CreateRoundRectangle(rectangle1, radius - UiScale.S(2), instance))
       {
         using (Brush brush = (Brush) new SolidBrush(outerBorderColor))
           g.FillPath(brush, roundRectangle);
@@ -752,7 +752,7 @@ namespace DistantWorlds.Controls
       }
       if ((hovered || animating) && !pressed)
       {
-        using (GraphicsPath roundRectangle = GlassButton.CreateRoundRectangle(rectangle1, radius - 2, instance))
+        using (GraphicsPath roundRectangle = GlassButton.CreateRoundRectangle(rectangle1, radius - UiScale.S(2), instance))
         {
           g.SetClip(roundRectangle, CombineMode.Intersect);
           using (GraphicsPath bottomRadialPath = GlassButton.CreateBottomRadialPath(rectangle1))
@@ -776,7 +776,7 @@ namespace DistantWorlds.Controls
       if (rectangle2.Width > 0 && rectangle2.Height > 0)
       {
         ++rectangle2.Height;
-        using (GraphicsPath topRoundRectangle = GlassButton.CreateTopRoundRectangle(rectangle2, radius - 2, instance))
+        using (GraphicsPath topRoundRectangle = GlassButton.CreateTopRoundRectangle(rectangle2, radius - UiScale.S(2), instance))
         {
           ++rectangle2.Height;
           int alpha = 153;
@@ -787,7 +787,7 @@ namespace DistantWorlds.Controls
         }
         rectangle2.Height -= 2;
       }
-      using (GraphicsPath roundRectangle = GlassButton.CreateRoundRectangle(rectangle1, radius - 1, instance))
+      using (GraphicsPath roundRectangle = GlassButton.CreateRoundRectangle(rectangle1, radius - UiScale.S(1), instance))
       {
         using (Pen pen = new Pen(innerBorderColor))
           g.DrawPath(pen, roundRectangle);
@@ -800,7 +800,7 @@ namespace DistantWorlds.Controls
       if (!this.Focused || !this.ShowFocusCues)
         return;
       Rectangle clientRectangle = this.ClientRectangle;
-      clientRectangle.Inflate(-4, -4);
+      clientRectangle.Inflate(UiScale.S(-4), UiScale.S(-4));
       ControlPaint.DrawFocusRectangle(g, clientRectangle);
     }
 
@@ -832,10 +832,12 @@ namespace DistantWorlds.Controls
       this.imageButton.RightToLeft = this.RightToLeft;
       if (this.Image != null)
       {
-        this.imageButton.Image = this.Image;
+        // Button images are fixed-size artwork, so they need enlarging to match a scaled button.
+        Image image = UiScale.Enlarged(this.Image, this.Size);
+        this.imageButton.Image = image;
         if (!this.Enabled)
         {
-          Size size = this.Image.Size;
+          Size size = image.Size;
           float[][] newColorMatrix1 = new float[5][]
           {
             new float[5]{ 0.2125f, 0.2125f, 0.2125f, 0.0f, 0.0f },
@@ -865,9 +867,9 @@ namespace DistantWorlds.Controls
           ImageAttributes imageAttr = new ImageAttributes();
           imageAttr.ClearColorKey();
           imageAttr.SetColorMatrix(newColorMatrix2);
-          this.imageButton.Image = (Image) new Bitmap(this.Image.Width, this.Image.Height);
+          this.imageButton.Image = (Image) new Bitmap(image.Width, image.Height);
           using (Graphics graphics = Graphics.FromImage(this.imageButton.Image))
-            graphics.DrawImage(this.Image, new Rectangle(0, 0, size.Width, size.Height), 0, 0, size.Width, size.Height, GraphicsUnit.Pixel, imageAttr);
+            graphics.DrawImage(image, new Rectangle(0, 0, size.Width, size.Height), 0, 0, size.Width, size.Height, GraphicsUnit.Pixel, imageAttr);
         }
       }
       this.imageButton.ImageAlign = this.ImageAlign;
@@ -906,7 +908,7 @@ namespace DistantWorlds.Controls
         sizeF2 = graphics.MeasureString(this.MinorText, this.MinorFont, this.Width, format);
       float height = sizeF1.Height;
       if (!string.IsNullOrEmpty(this.MinorText))
-        height += 1f + sizeF2.Height;
+        height += UiScale.S(1f) + sizeF2.Height;
       if (this.imageButton == null)
         return;
       using (SolidBrush solidBrush1 = new SolidBrush(this.imageButton.ForeColor))
@@ -917,21 +919,21 @@ namespace DistantWorlds.Controls
           float y1 = (float) (((double) this.Height - (double) height) / 2.0);
           if (this.EmphasizeDisabled)
           {
-            RectangleF layoutRectangle = new RectangleF(x1 + 1f, y1 + 1f, sizeF1.Width + 3f, sizeF1.Height + 3f);
+            RectangleF layoutRectangle = new RectangleF(x1 + UiScale.S(1f), y1 + UiScale.S(1f), sizeF1.Width + UiScale.S(3f), sizeF1.Height + UiScale.S(3f));
             graphics.DrawString(this.Text, this.Font, (Brush) solidBrush2, layoutRectangle, format);
           }
-          RectangleF layoutRectangle1 = new RectangleF(x1, y1, sizeF1.Width + 3f, sizeF1.Height + 3f);
+          RectangleF layoutRectangle1 = new RectangleF(x1, y1, sizeF1.Width + UiScale.S(3f), sizeF1.Height + UiScale.S(3f));
           graphics.DrawString(this.Text, this.Font, (Brush) solidBrush1, layoutRectangle1, format);
           if (string.IsNullOrEmpty(this.MinorText))
             return;
           float x2 = (float) (((double) this.Width - (double) sizeF2.Width) / 2.0);
-          float y2 = (float) (((double) this.Height - (double) height) / 2.0 + (double) sizeF1.Height + 1.0);
+          float y2 = (float) (((double) this.Height - (double) height) / 2.0 + (double) sizeF1.Height + UiScale.S(1.0));
           if (this.EmphasizeDisabled)
           {
-            RectangleF layoutRectangle2 = new RectangleF(x2 + 1f, y2 + 1f, sizeF2.Width + 3f, sizeF2.Height + 3f);
+            RectangleF layoutRectangle2 = new RectangleF(x2 + UiScale.S(1f), y2 + UiScale.S(1f), sizeF2.Width + UiScale.S(3f), sizeF2.Height + UiScale.S(3f));
             graphics.DrawString(this.MinorText, this.MinorFont, (Brush) solidBrush2, layoutRectangle2, format);
           }
-          RectangleF layoutRectangle3 = new RectangleF(x2, y2, sizeF2.Width + 3f, sizeF2.Height + 3f);
+          RectangleF layoutRectangle3 = new RectangleF(x2, y2, sizeF2.Width + UiScale.S(3f), sizeF2.Height + UiScale.S(3f));
           graphics.DrawString(this.MinorText, this.MinorFont, (Brush) solidBrush1, layoutRectangle3, format);
         }
       }
@@ -1035,7 +1037,7 @@ namespace DistantWorlds.Controls
       float radius,
       GlassButton instance)
     {
-      return GlassButton.DefineOutline(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height, radius * 2f, radius, 1f, instance);
+      return GlassButton.DefineOutline(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height, radius * 2f, radius, UiScale.S(1f), instance);
     }
 
     private static GraphicsPath CreateTopRoundRectangle(
@@ -1103,10 +1105,10 @@ namespace DistantWorlds.Controls
         this.frames = new List<Image>();
       if (resetRegion && this._ClipBackground)
       {
-        float num = 7f;
-        if (this.Height < 30)
-          num = 6f;
-        using (GraphicsPath rectangleCorrected = GlassButton.CreateRoundRectangleCorrected(new RectangleF((float) this.ClientRectangle.X, (float) this.ClientRectangle.Y, (float) this.ClientRectangle.Width, (float) this.ClientRectangle.Height), num + 1f, this))
+        float num = UiScale.S(7f);
+        if (this.Height < UiScale.S(30))
+          num = UiScale.S(6f);
+        using (GraphicsPath rectangleCorrected = GlassButton.CreateRoundRectangleCorrected(new RectangleF((float) this.ClientRectangle.X, (float) this.ClientRectangle.Y, (float) this.ClientRectangle.Width, (float) this.ClientRectangle.Height), num + UiScale.S(1f), this))
           this.SetRegion(rectangleCorrected);
       }
       this.frames.Add(this.CreateBackgroundFrame(false, false, false, false, 0.0f));

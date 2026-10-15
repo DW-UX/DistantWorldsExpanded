@@ -207,7 +207,7 @@ namespace DistantWorlds
             method_0();
             main_0 = parentForm;
             rectangle_0 = area;
-            int_0 = 46;
+            int_0 = UiScale.S(46);
             double_0 = 20.0;
             int_1 = area.Height / int_0;
             Reset();
@@ -844,14 +844,14 @@ namespace DistantWorlds
             using (Graphics graphics = Graphics.FromImage(bitmap_13))
             {
                 graphics.Clear(Color.Transparent);
-                DrawMessages(graphics, new Rectangle(0, 0, rectangle_0.Width, rectangle_0.Height + 3));
+                DrawMessages(graphics, new Rectangle(0, 0, rectangle_0.Width, rectangle_0.Height + UiScale.S(3)));
             }
             return bitmap_13;
         }
 
         public void DrawMessages(Graphics graphics)
         {
-            DrawMessages(graphics, new Rectangle(rectangle_0.X, rectangle_0.Y - 3, rectangle_0.Width, rectangle_0.Height + 3));
+            DrawMessages(graphics, new Rectangle(rectangle_0.X, rectangle_0.Y - UiScale.S(3), rectangle_0.Width, rectangle_0.Height + UiScale.S(3)));
         }
 
         public void DrawMessages(Graphics graphics, Rectangle area)
@@ -891,7 +891,7 @@ namespace DistantWorlds
                     num += (int)(num2 * 1.7);
                 }
                 num = Math.Max(0, Math.Min(255, num));
-                Rectangle rect = new Rectangle(area.X, area.Y + (int)list_0[i], area.Width - 1, int_0 - 5);
+                Rectangle rect = new Rectangle(area.X, area.Y + (int)list_0[i], area.Width - UiScale.S(1), int_0 - UiScale.S(5));
                 Color color = Color.FromArgb(num, empireMessageList_0[i].Sender.MainColor);
                 if (empireMessageList_0[i].Sender.MainColor == Color.FromArgb(1, 1, 1))
                 {
@@ -981,14 +981,14 @@ namespace DistantWorlds
                             break;
                     }
                     Rectangle srcRect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-                    int num3 = Math.Max(0, (30 - bitmap.Width) / 2);
-                    int num4 = Math.Max(0, (30 - bitmap.Height) / 2);
-                    Rectangle destRect = new Rectangle(rect.X + 15 + num3, rect.Y + 5 + num4, bitmap.Width, bitmap.Height);
+                    int num3 = Math.Max(0, (UiScale.S(30) - bitmap.Width) / 2);
+                    int num4 = Math.Max(0, (UiScale.S(30) - bitmap.Height) / 2);
+                    Rectangle destRect = new Rectangle(rect.X + UiScale.S(15) + num3, rect.Y + UiScale.S(5) + num4, bitmap.Width, bitmap.Height);
                     graphics.DrawImage(bitmap, destRect, srcRect, GraphicsUnit.Pixel);
                     main_0.method_112(graphics, GraphicsQuality.Medium);
-                    Point point_ = new Point(rect.X + 59, rect.Y + 3);
+                    Point point_ = new Point(rect.X + UiScale.S(59), rect.Y + UiScale.S(3));
                     using SolidBrush brush_ = new SolidBrush(color2);
-                    SizeF sizeF_ = new SizeF(238f, 20f);
+                    SizeF sizeF_ = new SizeF(UiScale.S(238f), UiScale.S(20f));
                     string text = Galaxy.ResolveDescription(empireMessageList_0[i].AdvisorMessageType, empireMessageList_0[i]);
                     if (empireMessageList_0[i].AdvisorMessageType == AdvisorMessageType.ColonyFacility && empireMessageList_0[i].AdvisorMessageData != null && empireMessageList_0[i].AdvisorMessageData is PlanetaryFacilityDefinition)
                     {
@@ -1000,21 +1000,21 @@ namespace DistantWorlds
                     }
                     string string_ = TextResolver.GetText("Advisors") + ": " + text;
                     method_7(graphics, string_, font_1, point_, brush_, sizeF_);
-                    Point point_2 = new Point(rect.X + 59, rect.Y + 21);
+                    Point point_2 = new Point(rect.X + UiScale.S(59), rect.Y + UiScale.S(21));
                     string description = empireMessageList_0[i].Description;
                     method_7(graphics, description, font_0, point_2, brush_, sizeF_);
                 }
                 else
                 {
-                    graphics.DrawImage(list_1[i], rect.X + 5, rect.Y + 5);
+                    graphics.DrawImage(list_1[i], rect.X + UiScale.S(5), rect.Y + UiScale.S(5));
                     Bitmap empireDominantRaceImageSize = raceImageCache_0.GetEmpireDominantRaceImageSize30(empireMessageList_0[i].Sender, useTransparent: true);
-                    graphics.DrawImage(empireDominantRaceImageSize, rect.X + 59, rect.Y + 5);
+                    graphics.DrawImage(empireDominantRaceImageSize, rect.X + UiScale.S(59), rect.Y + UiScale.S(5));
                     main_0.method_112(graphics, GraphicsQuality.Medium);
-                    Point point_3 = new Point(rect.X + 93, rect.Y + 3);
+                    Point point_3 = new Point(rect.X + UiScale.S(93), rect.Y + UiScale.S(3));
                     using SolidBrush brush_2 = new SolidBrush(color2);
-                    SizeF sizeF_2 = new SizeF(204f, 20f);
+                    SizeF sizeF_2 = new SizeF(UiScale.S(204f), UiScale.S(20f));
                     method_7(graphics, empireMessageList_0[i].Sender.Name, font_1, point_3, brush_2, sizeF_2);
-                    Point point_4 = new Point(rect.X + 93, rect.Y + 21);
+                    Point point_4 = new Point(rect.X + UiScale.S(93), rect.Y + UiScale.S(21));
                     string title = empireMessageList_0[i].Title;
                     method_7(graphics, title, font_0, point_4, brush_2, sizeF_2);
                 }
@@ -1043,18 +1043,18 @@ namespace DistantWorlds
             using SolidBrush brush = new SolidBrush(color);
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_2, brush, layoutRectangle, StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle, StringFormat.GenericTypographic);
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, brush, point_0);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, brush_0, point_0);
             }
         }
@@ -1070,14 +1070,14 @@ namespace DistantWorlds
             list_0 = new List<double>();
             list_1 = new List<Bitmap>();
             dateTime_0 = DateTime.MinValue;
-            rectangle_0 = new Rectangle(10, 100, 200, 50);
-            int_0 = 46;
+            rectangle_0 = new Rectangle(UiScale.S(10), UiScale.S(100), UiScale.S(200), UiScale.S(50));
+            int_0 = UiScale.S(46);
             int_1 = 4;
             double_0 = 20.0;
             solidBrush_0 = new SolidBrush(Color.White);
             solidBrush_1 = new SolidBrush(Color.Black);
-            font_0 = new Font("Verdana", 8f);
-            font_1 = new Font("Verdana", 10f, FontStyle.Bold);
+            font_0 = UiScale.NewFont("Verdana", 8f);
+            font_1 = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace ExpansionMod.Controls.Forms
         public fRepairPriorityRename(string name)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             txtNewName.Text = name;
         }
 

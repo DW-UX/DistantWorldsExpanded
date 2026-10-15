@@ -27,15 +27,15 @@ namespace DistantWorlds.Controls
 
     public CharacterSkillsTraitsProgress()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.InitializeFonts();
     }
 
     private void InitializeFonts()
     {
-      this._LargeFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-      this._LargeBoldFont = new Font(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._HugeFont = new Font(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._LargeFont = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Regular, GraphicsUnit.Pixel);
+      this._LargeBoldFont = UiScale.NewFont(this.Font.FontFamily, 16.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._HugeFont = UiScale.NewFont(this.Font.FontFamily, 22.67f, FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void BindData(Character character)
@@ -62,14 +62,14 @@ namespace DistantWorlds.Controls
         return;
       GraphicsHelper.SetGraphicsQualityToHigh(graphics);
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-      int y = 2;
-      int num1 = 5;
-      int width = 205;
-      int x1 = 200;
-      int x2 = 260;
-      int num2 = 100;
-      int height = 18;
-      int num3 = 3;
+      int y = UiScale.S(2);
+      int num1 = UiScale.S(5);
+      int width = UiScale.S(205);
+      int x1 = UiScale.S(200);
+      int x2 = UiScale.S(260);
+      int num2 = UiScale.S(100);
+      int height = UiScale.S(18);
+      int num3 = UiScale.S(3);
       string empty = string.Empty;
       if (character.Traits.Count > 0)
       {
@@ -103,14 +103,14 @@ namespace DistantWorlds.Controls
               int skillLevel = character.GetSkillLevel(skill.Type);
               string text2 = ((double) skillLevel / 100.0).ToString("+0%;-0%");
               if (skillLevel >= 0)
-                this.DrawStringWithDropShadow(graphics, text2, this._HugeFont, new Point(x1, y - 5), (Brush) this._GreenBrush);
+                this.DrawStringWithDropShadow(graphics, text2, this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._GreenBrush);
               else
-                this.DrawStringWithDropShadow(graphics, text2, this._HugeFont, new Point(x1, y - 5), (Brush) this._RedBrush);
+                this.DrawStringWithDropShadow(graphics, text2, this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._RedBrush);
             }
             else
-              this.DrawStringWithDropShadow(graphics, "?%", this._HugeFont, new Point(x1, y - 5), (Brush) this._WhiteBrush);
+              this.DrawStringWithDropShadow(graphics, "?%", this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._WhiteBrush);
             float num4 = skill.Progress / skill.NextProgressThreshold;
-            this.DrawBarGraph(skill.NextProgressThreshold, skill.Progress, height, num2, Color.FromArgb(40, 40, 40), Color.FromArgb(170, 170, 170), Color.FromArgb(96, 0, 0, 0), graphics, new Point(x2, y - 2), num4.ToString("0%"));
+            this.DrawBarGraph(skill.NextProgressThreshold, skill.Progress, height, num2, Color.FromArgb(40, 40, 40), Color.FromArgb(170, 170, 170), Color.FromArgb(96, 0, 0, 0), graphics, new Point(x2, y - UiScale.S(2)), num4.ToString("0%"));
             y = y + (int) size.Height + num3;
           }
         }
@@ -133,15 +133,15 @@ namespace DistantWorlds.Controls
               {
                 string text4 = ((double) skillLevel / 100.0).ToString("+0%;-0%");
                 if (skillLevel >= 0)
-                  this.DrawStringWithDropShadow(graphics, text4, this._HugeFont, new Point(x1, y - 5), (Brush) this._GreenBrush);
+                  this.DrawStringWithDropShadow(graphics, text4, this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._GreenBrush);
                 else
-                  this.DrawStringWithDropShadow(graphics, text4, this._HugeFont, new Point(x1, y - 5), (Brush) this._RedBrush);
+                  this.DrawStringWithDropShadow(graphics, text4, this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._RedBrush);
               }
               else
-                this.DrawStringWithDropShadow(graphics, "?%", this._HugeFont, new Point(x1, y - 5), (Brush) this._WhiteBrush);
+                this.DrawStringWithDropShadow(graphics, "?%", this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._WhiteBrush);
               string text5 = "(" + TextResolver.GetText("from Trait") + ")";
               SizeF sizeF = graphics.MeasureString(text5, this.Font, num2);
-              this.DrawStringWithDropShadow(graphics, text5, this.Font, new Point(x2 + (num2 - (int) sizeF.Width) / 2, y + 1));
+              this.DrawStringWithDropShadow(graphics, text5, this.Font, new Point(x2 + (num2 - (int) sizeF.Width) / 2, y + UiScale.S(1)));
               y = y + (int) size.Height + num3;
             }
           }
@@ -171,7 +171,7 @@ namespace DistantWorlds.Controls
         width2 = width1;
       Rectangle rect1 = new Rectangle(point1.X, point1.Y, width1, height);
       Rectangle rect2 = new Rectangle(point1.X, point1.Y, width2, height);
-      Rectangle rect3 = new Rectangle(point1.X - 1, point1.Y, width2 + 2, height);
+      Rectangle rect3 = new Rectangle(point1.X - UiScale.S(1), point1.Y, width2 + UiScale.S(2), height);
       using (SolidBrush solidBrush = new SolidBrush(backgroundColor))
       {
         graphics.FillRectangle((Brush) solidBrush, rect1);
@@ -184,8 +184,8 @@ namespace DistantWorlds.Controls
       SizeF sizeF = graphics.MeasureString(currentValueText, this.Font);
       int width3 = (int) sizeF.Width;
       int height1 = (int) sizeF.Height;
-      Point point2 = new Point(point1.X + (width1 - width3) / 2, point1.Y + (height - height1) / 2 + 2);
-      graphics.DrawString(currentValueText, this.Font, (Brush) this._BlackBrush, new PointF((float) point2.X + 1f, (float) point2.Y + 1f));
+      Point point2 = new Point(point1.X + (width1 - width3) / 2, point1.Y + (height - height1) / 2 + UiScale.S(2));
+      graphics.DrawString(currentValueText, this.Font, (Brush) this._BlackBrush, new PointF((float) point2.X + UiScale.S(1f), (float) point2.Y + UiScale.S(1f)));
       graphics.DrawString(currentValueText, this.Font, (Brush) this._WhiteBrush, new PointF((float) point2.X, (float) point2.Y));
     }
 
@@ -205,9 +205,9 @@ namespace DistantWorlds.Controls
       Point location,
       Brush brush)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, brush, (PointF) location);
     }
 
@@ -229,13 +229,13 @@ namespace DistantWorlds.Controls
       SizeF size,
       Color textColor)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       PointF pointF = new PointF((float) location.X, (float) location.Y);
-      RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + 2f, size.Height + 2f);
+      RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       pointF = new PointF((float) location.X, (float) location.Y);
-      layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + 2f, size.Height + 2f);
+      layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       if (textColor.IsEmpty)
       {
         graphics.DrawString(text, font, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);

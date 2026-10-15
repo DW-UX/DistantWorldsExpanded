@@ -26,7 +26,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData()
@@ -123,7 +123,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      PointF point = new PointF(60f, (float) (e.Bounds.Y + 1));
+      PointF point = new PointF(UiScale.S(60f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
       SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._Fleets != null && e.Index >= 0)
@@ -145,10 +145,10 @@ namespace DistantWorlds.Controls
             Bitmap largeFlagPicture = this._Fleets[index].Empire.LargeFlagPicture;
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            int height = e.Bounds.Height - 2;
+            int height = e.Bounds.Height - UiScale.S(2);
             double num2 = (double) height / (double) largeFlagPicture.Height;
             int width = (int) ((double) largeFlagPicture.Width * num2);
-            rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+            rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
             e.Graphics.DrawImage((Image) largeFlagPicture, rect);
           }
           BuiltObject leadShip = this._Fleets[index].LeadShip;
@@ -156,7 +156,7 @@ namespace DistantWorlds.Controls
           {
             Bitmap builtObjectImage = this._BuiltObjectImages[leadShip.PictureRef];
             if (builtObjectImage != null)
-              e.Graphics.DrawImage((Image) builtObjectImage, new Point(38, e.Bounds.Y + 1));
+              e.Graphics.DrawImage((Image) builtObjectImage, new Point(UiScale.S(38), e.Bounds.Y + UiScale.S(1)));
           }
         }
       }

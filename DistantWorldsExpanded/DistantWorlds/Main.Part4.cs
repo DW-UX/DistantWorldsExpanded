@@ -58,7 +58,7 @@ namespace DistantWorlds {
             btnEventMessageAvoid.Text = string_33;
             btnEventMessageClose.Visible = false;
             btnEventMessageGoto.Visible = false;
-            method_513(bool_28: false, 30);
+            method_513(bool_28: false, UiScale.S(30));
         }
 
         private void method_510(Bitmap bitmap_225, string string_30, string string_31)
@@ -116,19 +116,19 @@ namespace DistantWorlds {
         private void method_513(bool bool_28, int int_64)
         {
             bool_9 = true;
-            int num = 420;
-            int num2 = 660;
-            int num3 = 360;
-            int num4 = 270;
+            int num = UiScale.S(420);
+            int num2 = UiScale.S(660);
+            int num3 = UiScale.S(360);
+            int num4 = UiScale.S(270);
             if (bool_28)
             {
-                num3 = 200;
-                num4 = 150;
+                num3 = UiScale.S(200);
+                num4 = UiScale.S(150);
             }
             pnlEventMessage.Size = new Size(num, num2);
             pnlEventMessage.Location = new Point((mainView.Width - pnlEventMessage.Width) / 2, (mainView.Height - pnlEventMessage.Height) / 2);
-            pnlEventMessagePanel.Size = new Size(num - 20, num2 - 20);
-            pnlEventMessagePanel.Location = new Point(10, 10);
+            pnlEventMessagePanel.Size = new Size(num - UiScale.S(20), num2 - UiScale.S(20));
+            pnlEventMessagePanel.Location = new Point(UiScale.S(10), UiScale.S(10));
             lnkEventMessageLink.Font = font_6;
             bool flag = false;
             if (object_2 is BuiltObject)
@@ -157,61 +157,61 @@ namespace DistantWorlds {
             if (picEventMessage.Image != null)
             {
                 picEventMessage.Size = new Size(num3, num4);
-                picEventMessage.Location = new Point((num - 20 - num3) / 2, 10);
+                picEventMessage.Location = new Point((num - UiScale.S(20) - num3) / 2, UiScale.S(10));
                 picEventMessage.Visible = true;
                 SizeF empty = SizeF.Empty;
                 using (Graphics graphics = lblEventMessageTitle.CreateGraphics())
                 {
-                    empty = graphics.MeasureString(lblEventMessageTitle.Text, lblEventMessageTitle.Font, num - 40);
-                    lblEventMessageTitle.MaximumSize = new Size((int)empty.Width + 1, (int)empty.Height + 1);
+                    empty = graphics.MeasureString(lblEventMessageTitle.Text, lblEventMessageTitle.Font, num - UiScale.S(40));
+                    lblEventMessageTitle.MaximumSize = new Size((int)empty.Width + UiScale.S(1), (int)empty.Height + UiScale.S(1));
                 }
                 int num5 = (pnlEventMessagePanel.Width - lblEventMessageTitle.Width) / 2;
                 int num6 = (pnlEventMessagePanel.Width - lblEventMessageText.Width) / 2;
-                lblEventMessageTitle.Location = new Point(num5, num4 + 20);
-                lblEventMessageText.Location = new Point(num6, num4 + 50);
-                lblEventMessageText.MaximumSize = new Size(num - 55, 2000);
+                lblEventMessageTitle.Location = new Point(num5, num4 + UiScale.S(20));
+                lblEventMessageText.Location = new Point(num6, num4 + UiScale.S(50));
+                lblEventMessageText.MaximumSize = new Size(num - UiScale.S(55), UiScale.S(2000));
                 lblEventMessageText.Location = new Point(0, 0);
                 lblEventMessageText.Size = lblEventMessageText.PreferredSize;
                 if (lnkEventMessageLink.Enabled)
                 {
-                    lnkEventMessageLink.Location = new Point(0, lblEventMessageText.Size.Height + 10);
+                    lnkEventMessageLink.Location = new Point(0, lblEventMessageText.Size.Height + UiScale.S(10));
                 }
                 else
                 {
-                    lnkEventMessageLink.Location = new Point(0, 10);
+                    lnkEventMessageLink.Location = new Point(0, UiScale.S(10));
                 }
-                pnlEventMessageContainer.Size = new Size(num - 35, pnlEventMessagePanel.Height - (num4 + 75 + lblEventMessageTitle.Height + int_64));
-                pnlEventMessageContainer.Location = new Point(10, num4 + 20 + lblEventMessageTitle.Height + 5);
+                pnlEventMessageContainer.Size = new Size(num - UiScale.S(35), pnlEventMessagePanel.Height - (num4 + UiScale.S(75) + lblEventMessageTitle.Height + int_64));
+                pnlEventMessageContainer.Location = new Point(UiScale.S(10), num4 + UiScale.S(20) + lblEventMessageTitle.Height + UiScale.S(5));
             }
             else
             {
-                picEventMessage.Size = new Size(num - 40, 270);
-                picEventMessage.Location = new Point(10, 10);
+                picEventMessage.Size = new Size(num - UiScale.S(40), UiScale.S(270));
+                picEventMessage.Location = new Point(UiScale.S(10), UiScale.S(10));
                 picEventMessage.Visible = false;
                 SizeF empty2 = SizeF.Empty;
                 using (Graphics graphics2 = lblEventMessageTitle.CreateGraphics())
                 {
-                    empty2 = graphics2.MeasureString(lblEventMessageTitle.Text, lblEventMessageTitle.Font, num - 40);
-                    lblEventMessageTitle.MaximumSize = new Size((int)empty2.Width + 1, (int)empty2.Height + 1);
+                    empty2 = graphics2.MeasureString(lblEventMessageTitle.Text, lblEventMessageTitle.Font, num - UiScale.S(40));
+                    lblEventMessageTitle.MaximumSize = new Size((int)empty2.Width + UiScale.S(1), (int)empty2.Height + UiScale.S(1));
                 }
-                lblEventMessageText.Size = new Size(num - 40, pnlEventMessagePanel.Height - (50 + int_64));
+                lblEventMessageText.Size = new Size(num - UiScale.S(40), pnlEventMessagePanel.Height - (UiScale.S(50) + int_64));
                 int num7 = (pnlEventMessagePanel.Width - lblEventMessageTitle.Width) / 2;
                 int num8 = (pnlEventMessagePanel.Width - lblEventMessageText.Width) / 2;
-                lblEventMessageTitle.Location = new Point(num7, 10);
-                lblEventMessageText.Location = new Point(num8, 10 + lblEventMessageTitle.Height + 5);
-                lblEventMessageText.MaximumSize = new Size(num - 55, 2000);
+                lblEventMessageTitle.Location = new Point(num7, UiScale.S(10));
+                lblEventMessageText.Location = new Point(num8, UiScale.S(10) + lblEventMessageTitle.Height + UiScale.S(5));
+                lblEventMessageText.MaximumSize = new Size(num - UiScale.S(55), UiScale.S(2000));
                 lblEventMessageText.Location = new Point(0, 0);
                 lblEventMessageText.Size = lblEventMessageText.PreferredSize;
                 if (lnkEventMessageLink.Enabled)
                 {
-                    lnkEventMessageLink.Location = new Point(0, lblEventMessageText.Size.Height + 10);
+                    lnkEventMessageLink.Location = new Point(0, lblEventMessageText.Size.Height + UiScale.S(10));
                 }
                 else
                 {
-                    lnkEventMessageLink.Location = new Point(0, 10);
+                    lnkEventMessageLink.Location = new Point(0, UiScale.S(10));
                 }
-                pnlEventMessageContainer.Size = new Size(num - 35, pnlEventMessagePanel.Height - (75 + lblEventMessageTitle.Height + int_64));
-                pnlEventMessageContainer.Location = new Point(10, 20 + lblEventMessageTitle.Height + 5);
+                pnlEventMessageContainer.Size = new Size(num - UiScale.S(35), pnlEventMessagePanel.Height - (UiScale.S(75) + lblEventMessageTitle.Height + int_64));
+                pnlEventMessageContainer.Location = new Point(UiScale.S(10), UiScale.S(20) + lblEventMessageTitle.Height + UiScale.S(5));
             }
             btnEventMessageAvoid.Parent = pnlEventMessagePanel;
             btnEventMessageClose.Parent = pnlEventMessagePanel;
@@ -233,26 +233,26 @@ namespace DistantWorlds {
             {
                 pnlEventMessagePanel.Controls.Add(btnEventMessageInvestigate);
             }
-            int num9 = num - 20;
-            int num10 = num2 - (10 + int_64);
-            int num11 = (num9 - 360) / 2;
-            btnEventMessageInvestigate.Size = new Size(175, 30 + int_64);
-            btnEventMessageInvestigate.Location = new Point(num11, num10 - 50);
-            btnEventMessageAvoid.Size = new Size(175, 30 + int_64);
-            btnEventMessageAvoid.Location = new Point(num11 + 185, num10 - 50);
+            int num9 = num - UiScale.S(20);
+            int num10 = num2 - (UiScale.S(10) + int_64);
+            int num11 = (num9 - UiScale.S(360)) / 2;
+            btnEventMessageInvestigate.Size = new Size(UiScale.S(175), UiScale.S(30) + int_64);
+            btnEventMessageInvestigate.Location = new Point(num11, num10 - UiScale.S(50));
+            btnEventMessageAvoid.Size = new Size(UiScale.S(175), UiScale.S(30) + int_64);
+            btnEventMessageAvoid.Location = new Point(num11 + UiScale.S(185), num10 - UiScale.S(50));
             if (flag)
             {
-                btnEventMessageGoto.Size = new Size(175, 30);
-                btnEventMessageGoto.Location = new Point(num11 + 185, num10 - 50);
+                btnEventMessageGoto.Size = new Size(UiScale.S(175), UiScale.S(30));
+                btnEventMessageGoto.Location = new Point(num11 + UiScale.S(185), num10 - UiScale.S(50));
                 btnEventMessageGoto.Text = TextResolver.GetText("Go to Event Location");
                 btnEventMessageGoto.Visible = true;
-                btnEventMessageClose.Size = new Size(175, 30);
-                btnEventMessageClose.Location = new Point(num11, num10 - 50);
+                btnEventMessageClose.Size = new Size(UiScale.S(175), UiScale.S(30));
+                btnEventMessageClose.Location = new Point(num11, num10 - UiScale.S(50));
             }
             else
             {
-                btnEventMessageClose.Size = new Size(175, 30);
-                btnEventMessageClose.Location = new Point(num11 + 92, num10 - 50);
+                btnEventMessageClose.Size = new Size(UiScale.S(175), UiScale.S(30));
+                btnEventMessageClose.Location = new Point(num11 + UiScale.S(92), num10 - UiScale.S(50));
                 btnEventMessageGoto.Visible = false;
             }
             pnlEventMessage.Visible = true;
@@ -1766,7 +1766,7 @@ namespace DistantWorlds {
             {
                 style = FontStyle.Bold;
             }
-            return new Font(family, pixelSize, style, GraphicsUnit.Pixel);
+            return UiScale.NewFont(family, pixelSize, style, GraphicsUnit.Pixel);
         }
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
@@ -1863,12 +1863,12 @@ namespace DistantWorlds {
                 bool_11 = true;
                 method_154();
             }
-            pnlMessageHistory.Size = new Size(965, 580);
+            pnlMessageHistory.Size = new Size(UiScale.S(965), UiScale.S(580));
             pnlMessageHistory.Location = new Point((mainView.Width - pnlMessageHistory.Width) / 2, (mainView.Height - pnlMessageHistory.Height) / 2);
             pnlMessageHistory.DoLayout();
             method_531(null);
-            cmbMessageHistoryFilter.Location = new Point(10, 9);
-            cmbMessageHistoryFilter.Size = new Size(310, 21);
+            cmbMessageHistoryFilter.Location = new Point(UiScale.S(10), UiScale.S(9));
+            cmbMessageHistoryFilter.Size = new Size(UiScale.S(310), UiScale.S(21));
             cmbMessageHistoryFilter.BringToFront();
             cmbMessageHistoryFilter.Visible = true;
             if (cmbMessageHistoryFilter.Items == null || cmbMessageHistoryFilter.Items.Count == 0)
@@ -1906,30 +1906,30 @@ namespace DistantWorlds {
                 }
                 cmbMessageHistoryFilter.SelectedIndexChanged += cmbMessageHistoryFilter_SelectedIndexChanged;
             }
-            ctlMessageHistoryMessages.Height = 475;
-            ctlMessageHistoryMessages.Width = 310;
-            ctlMessageHistoryMessages.Location = new Point(10, 35);
+            ctlMessageHistoryMessages.Height = UiScale.S(475);
+            ctlMessageHistoryMessages.Width = UiScale.S(310);
+            ctlMessageHistoryMessages.Location = new Point(UiScale.S(10), UiScale.S(35));
             method_542();
             ctlMessageHistoryMessages.BringToFront();
-            ctlMessageHistoryMessages.Grid.Columns["Icon"].Width = 35;
-            ctlMessageHistoryMessages.Grid.Columns["Title"].Width = 195;
-            ctlMessageHistoryMessages.Grid.Columns["StarDate"].Width = 80;
+            ctlMessageHistoryMessages.Grid.Columns["Icon"].Width = UiScale.S(35);
+            ctlMessageHistoryMessages.Grid.Columns["Title"].Width = UiScale.S(195);
+            ctlMessageHistoryMessages.Grid.Columns["StarDate"].Width = UiScale.S(80);
             lblMessageHistoryHeading.Font = font_2;
             lblMessageHistoryHeading.ForeColor = color_1;
             lblMessageHistoryHeading.BackColor = Color.Transparent;
-            lblMessageHistoryHeading.Location = new Point(330, 10);
+            lblMessageHistoryHeading.Location = new Point(UiScale.S(330), UiScale.S(10));
             txtMessageHistoryText.Font = font_6;
             txtMessageHistoryText.BackColor = Color.FromArgb(48, 48, 64);
             txtMessageHistoryText.ForeColor = Color.FromArgb(170, 170, 170);
-            txtMessageHistoryText.Size = new Size(350, 475);
-            txtMessageHistoryText.Location = new Point(330, 35);
+            txtMessageHistoryText.Size = new Size(UiScale.S(350), UiScale.S(475));
+            txtMessageHistoryText.Location = new Point(UiScale.S(330), UiScale.S(35));
             txtMessageHistoryText.BringToFront();
             gmapMessageHistory.BringToFront();
-            gmapMessageHistory.Size = new Size(250, 250);
-            gmapMessageHistory.Location = new Point(690, 35);
+            gmapMessageHistory.Size = new Size(UiScale.S(250), UiScale.S(250));
+            gmapMessageHistory.Location = new Point(UiScale.S(690), UiScale.S(35));
             method_531(ctlMessageHistoryMessages.SelectedMessage);
-            btnMessageHistoryGoto.Location = new Point(690, 295);
-            btnMessageHistoryGoto.Size = new Size(250, 25);
+            btnMessageHistoryGoto.Location = new Point(UiScale.S(690), UiScale.S(295));
+            btnMessageHistoryGoto.Size = new Size(UiScale.S(250), UiScale.S(25));
             pnlMessageHistory.Visible = true;
             pnlMessageHistory.BringToFront();
             ctlMessageHistoryMessages.Focus();
@@ -3064,23 +3064,23 @@ namespace DistantWorlds {
                 bool_11 = true;
                 method_154();
             }
-            pnlComponentGuide.Size = new Size(360, 530);
+            pnlComponentGuide.Size = new Size(UiScale.S(360), UiScale.S(530));
             pnlComponentGuide.Location = new Point((mainView.Width - pnlComponentGuide.Width) / 2, (mainView.Height - pnlComponentGuide.Height) / 2);
             pnlComponentGuide.DoLayout();
-            pnlComponentGuideGroup.Size = new Size(325, 445);
-            pnlComponentGuideGroup.Location = new Point(10, 10);
+            pnlComponentGuideGroup.Size = new Size(UiScale.S(325), UiScale.S(445));
+            pnlComponentGuideGroup.Location = new Point(UiScale.S(10), UiScale.S(10));
             pnlComponentGuideGroup.CurveMode = CornerCurveMode.All;
-            pnlComponentGuideDetail.Size = new Size(305, 275);
-            pnlComponentGuideDetail.Location = new Point(10, 10);
-            pnlComponentGuideDetail.SetTextPositions(10, 140, 160, 115);
-            lnkComponentGuideType.Location = new Point(10, 290);
-            lblComponentGuideResources.Location = new Point(10, 315);
+            pnlComponentGuideDetail.Size = new Size(UiScale.S(305), UiScale.S(275));
+            pnlComponentGuideDetail.Location = new Point(UiScale.S(10), UiScale.S(10));
+            pnlComponentGuideDetail.SetTextPositions(UiScale.S(10), UiScale.S(140), UiScale.S(160), 115);
+            lnkComponentGuideType.Location = new Point(UiScale.S(10), UiScale.S(290));
+            lblComponentGuideResources.Location = new Point(UiScale.S(10), UiScale.S(315));
             lblComponentGuideResources.Text = TextResolver.GetText("Resources required to manufacture");
-            ctlComponentGuideResources.Size = new Size(305, 105);
-            ctlComponentGuideResources.Location = new Point(10, 330);
-            ctlComponentGuideResources.Grid.Columns["Picture"].Width = 50;
-            ctlComponentGuideResources.Grid.Columns["Type"].Width = 200;
-            ctlComponentGuideResources.Grid.Columns["Quantity"].Width = 55;
+            ctlComponentGuideResources.Size = new Size(UiScale.S(305), UiScale.S(105));
+            ctlComponentGuideResources.Location = new Point(UiScale.S(10), UiScale.S(330));
+            ctlComponentGuideResources.Grid.Columns["Picture"].Width = UiScale.S(50);
+            ctlComponentGuideResources.Grid.Columns["Type"].Width = UiScale.S(200);
+            ctlComponentGuideResources.Grid.Columns["Quantity"].Width = UiScale.S(55);
             ctlComponentGuideResources.BringToFront();
             method_544(component_0);
             pnlComponentGuide.BringToFront();
@@ -3370,10 +3370,10 @@ namespace DistantWorlds {
                 bool_11 = true;
                 method_154();
             }
-            pnlConstructionSummary.Size = new Size(418, 622);
+            pnlConstructionSummary.Size = new Size(UiScale.S(418), UiScale.S(622));
             pnlConstructionSummary.Location = new Point((mainView.Width - pnlConstructionSummary.Width) / 2, (mainView.Height - pnlConstructionSummary.Height) / 2);
             pnlConstructionSummary.DoLayout();
-            lblConstructionSummaryOverview.Location = new Point(10, 10);
+            lblConstructionSummaryOverview.Location = new Point(UiScale.S(10), UiScale.S(10));
             lblConstructionSummaryOverview.Font = font_7;
             string text = string.Format(TextResolver.GetText("Requirements for building ship design X"), design_3.Name);
             if (design_3.Role == BuiltObjectRole.Base)
@@ -3381,25 +3381,25 @@ namespace DistantWorlds {
                 text = string.Format(TextResolver.GetText("Requirements for building base design X"), design_3.Name);
             }
             lblConstructionSummaryOverview.Text = text;
-            lblConstructionSummaryOverview.MaximumSize = new Size(380, 40);
+            lblConstructionSummaryOverview.MaximumSize = new Size(UiScale.S(380), UiScale.S(40));
             lblConstructionSummaryOverview.BringToFront();
-            lblConstructionSummaryComponents.Location = new Point(10, 50);
+            lblConstructionSummaryComponents.Location = new Point(UiScale.S(10), UiScale.S(50));
             lblConstructionSummaryComponents.Text = TextResolver.GetText("Components Required");
-            ctlConstructionSummaryComponents.Size = new Size(380, 200);
-            ctlConstructionSummaryComponents.Location = new Point(10, 65);
+            ctlConstructionSummaryComponents.Size = new Size(UiScale.S(380), UiScale.S(200));
+            ctlConstructionSummaryComponents.Location = new Point(UiScale.S(10), UiScale.S(65));
             ctlConstructionSummaryComponents.Grid.Columns["TechPoints"].Visible = false;
-            ctlConstructionSummaryComponents.Grid.Columns["Category"].Width = 65;
-            ctlConstructionSummaryComponents.Grid.Columns["Picture"].Width = 35;
-            ctlConstructionSummaryComponents.Grid.Columns["Name"].Width = 230;
-            ctlConstructionSummaryComponents.Grid.Columns["Size"].Width = 50;
+            ctlConstructionSummaryComponents.Grid.Columns["Category"].Width = UiScale.S(65);
+            ctlConstructionSummaryComponents.Grid.Columns["Picture"].Width = UiScale.S(35);
+            ctlConstructionSummaryComponents.Grid.Columns["Name"].Width = UiScale.S(230);
+            ctlConstructionSummaryComponents.Grid.Columns["Size"].Width = UiScale.S(50);
             ctlConstructionSummaryComponents.BringToFront();
-            lblConstructionSummaryResources.Location = new Point(10, 280);
+            lblConstructionSummaryResources.Location = new Point(UiScale.S(10), UiScale.S(280));
             lblConstructionSummaryResources.Text = TextResolver.GetText("Resources Required");
-            ctlConstructionSummaryConstructionResources.Size = new Size(380, 250);
-            ctlConstructionSummaryConstructionResources.Location = new Point(10, 295);
-            ctlConstructionSummaryConstructionResources.Grid.Columns["Picture"].Width = 40;
-            ctlConstructionSummaryConstructionResources.Grid.Columns["Type"].Width = 290;
-            ctlConstructionSummaryConstructionResources.Grid.Columns["Quantity"].Width = 50;
+            ctlConstructionSummaryConstructionResources.Size = new Size(UiScale.S(380), UiScale.S(250));
+            ctlConstructionSummaryConstructionResources.Location = new Point(UiScale.S(10), UiScale.S(295));
+            ctlConstructionSummaryConstructionResources.Grid.Columns["Picture"].Width = UiScale.S(40);
+            ctlConstructionSummaryConstructionResources.Grid.Columns["Type"].Width = UiScale.S(290);
+            ctlConstructionSummaryConstructionResources.Grid.Columns["Quantity"].Width = UiScale.S(50);
             ctlConstructionSummaryConstructionResources.BringToFront();
             ctlConstructionSummaryComponents.BindData(design_3.Components, bitmap_21, _Game.Galaxy);
             ComponentResourceList componentResources = _Game.PlayerEmpire.ResolveResourcesFromComponents(design_3.Components);
@@ -3988,23 +3988,23 @@ namespace DistantWorlds {
             }
             if (ruin_0 != null)
             {
-                pnlRuinDetail.Size = new Size(360, 500);
+                pnlRuinDetail.Size = new Size(UiScale.S(360), UiScale.S(500));
                 pnlRuinDetail.Location = new Point((mainView.Width - pnlRuinDetail.Width) / 2, (mainView.Height - pnlRuinDetail.Height) / 2);
                 pnlRuinDetail.DoLayout();
-                picRuinDetailImage.Size = new Size(320, 160);
-                picRuinDetailImage.Location = new Point((pnlRuinDetail.Width - 15 - picRuinDetailImage.Width) / 2, 10);
+                picRuinDetailImage.Size = new Size(UiScale.S(320), UiScale.S(160));
+                picRuinDetailImage.Location = new Point((pnlRuinDetail.Width - UiScale.S(15) - picRuinDetailImage.Width) / 2, UiScale.S(10));
                 picRuinDetailImage.SizeMode = PictureBoxSizeMode.Zoom;
                 picRuinDetailImage.Image = bitmap_2[ruin_0.PictureRef];
                 lblRuinDetailName.Font = font_2;
                 lblRuinDetailName.Text = ruin_0.Name;
-                lblRuinDetailName.Location = new Point((pnlRuinDetail.Width - 15 - lblRuinDetailName.Width) / 2, 190);
+                lblRuinDetailName.Location = new Point((pnlRuinDetail.Width - UiScale.S(15) - lblRuinDetailName.Width) / 2, UiScale.S(190));
                 lblRuinDetailAbilities.Font = font_6;
                 lblRuinDetailAbilities.Text = _Game.Galaxy.GenerateRuinAbilitiesSummary(ruin_0);
-                lblRuinDetailAbilities.MaximumSize = new Size(320, 200);
-                lblRuinDetailAbilities.Location = new Point((pnlRuinDetail.Width - 15 - lblRuinDetailAbilities.Width) / 2, 225);
+                lblRuinDetailAbilities.MaximumSize = new Size(UiScale.S(320), UiScale.S(200));
+                lblRuinDetailAbilities.Location = new Point((pnlRuinDetail.Width - UiScale.S(15) - lblRuinDetailAbilities.Width) / 2, UiScale.S(225));
                 lblRuinDetailDescription.Font = font_6;
-                lblRuinDetailDescription.Location = new Point(10, 225 + lblRuinDetailAbilities.Height + 15);
-                lblRuinDetailDescription.MaximumSize = new Size(320, pnlRuinDetail.Height - (lblRuinDetailDescription.Location.Y + 20));
+                lblRuinDetailDescription.Location = new Point(UiScale.S(10), UiScale.S(225) + lblRuinDetailAbilities.Height + UiScale.S(15));
+                lblRuinDetailDescription.MaximumSize = new Size(UiScale.S(320), pnlRuinDetail.Height - (lblRuinDetailDescription.Location.Y + UiScale.S(20)));
                 if (ruin_0.PlayerEmpireEncountered && ruin_0.Type == RuinType.UnlockResearchProject)
                 {
                     lblRuinDetailDescription.Text = ruin_0.Description;
@@ -4052,7 +4052,7 @@ namespace DistantWorlds {
             }
             if (resource_0 != null && !resource_0.IsLuxuryResource)
             {
-                pnlResourceComponents.Size = new Size(660, 570);
+                pnlResourceComponents.Size = new Size(UiScale.S(660), UiScale.S(570));
                 pnlResourceComponents.Location = new Point((mainView.Width - pnlResourceComponents.Width) / 2, (mainView.Height - pnlResourceComponents.Height) / 2);
                 pnlResourceComponents.HeaderIcon = _uiResourcesBitmaps[resource_0.PictureRef];
                 pnlResourceComponents.HeaderTitle = string.Format(TextResolver.GetText("Components that use RESOURCE"), resource_0.Name);
@@ -4060,17 +4060,17 @@ namespace DistantWorlds {
                 lblResourceComponentsUsedBy.Visible = false;
                 lnkResourceComponentsAboutResource.Text = string.Format(TextResolver.GetText("Learn about X in the Galactopedia"), resource_0.Name) + "...";
                 lnkResourceComponentsAboutResource.Tag = resource_0;
-                lnkResourceComponentsAboutResource.Location = new Point(10, 10);
+                lnkResourceComponentsAboutResource.Location = new Point(UiScale.S(10), UiScale.S(10));
                 ctlResourceComponents.BringToFront();
-                ctlResourceComponents.Size = new Size(623, 463);
-                ctlResourceComponents.Location = new Point(10, 30);
+                ctlResourceComponents.Size = new Size(UiScale.S(623), UiScale.S(463));
+                ctlResourceComponents.Location = new Point(UiScale.S(10), UiScale.S(30));
                 ComponentList components = _Game.Galaxy.ResolveComponentsThatUseResource(resource_0);
                 ctlResourceComponents.BindData(components, bitmap_21);
-                ctlResourceComponents.Grid.Columns["Picture"].Width = 30;
-                ctlResourceComponents.Grid.Columns["Name"].Width = 353;
-                ctlResourceComponents.Grid.Columns["Category"].Width = 80;
-                ctlResourceComponents.Grid.Columns["Size"].Width = 70;
-                ctlResourceComponents.Grid.Columns["TechPoints"].Width = 70;
+                ctlResourceComponents.Grid.Columns["Picture"].Width = UiScale.S(30);
+                ctlResourceComponents.Grid.Columns["Name"].Width = UiScale.S(353);
+                ctlResourceComponents.Grid.Columns["Category"].Width = UiScale.S(80);
+                ctlResourceComponents.Grid.Columns["Size"].Width = UiScale.S(70);
+                ctlResourceComponents.Grid.Columns["TechPoints"].Width = UiScale.S(70);
             }
             pnlResourceComponents.BringToFront();
             pnlResourceComponents.Visible = true;
@@ -4167,16 +4167,16 @@ namespace DistantWorlds {
                 bool_11 = true;
                 method_154();
             }
-            pnlGameOptionsEmpireSettings.Size = new Size(500, 769);
+            pnlGameOptionsEmpireSettings.Size = new Size(UiScale.S(500), UiScale.S(769));
             pnlGameOptionsEmpireSettings.Location = new Point((base.Width - pnlGameOptionsEmpireSettings.Width) / 2, (base.Height - pnlGameOptionsEmpireSettings.Height) / 2);
             pnlGameOptionsEmpireSettings.DoLayout();
             pnlGameOptionsEmpireSettings.HeaderTitle = TextResolver.GetText("Your Empire Settings");
             if (!grpGameOptionsDefaultEngagementStances.Font.Bold)
             {
-                grpGameOptionsDefaultEngagementStances.Font = new Font(grpGameOptionsDefaultEngagementStances.Font.FontFamily, 19f, FontStyle.Bold, GraphicsUnit.Pixel);
+                grpGameOptionsDefaultEngagementStances.Font = UiScale.NewFont(grpGameOptionsDefaultEngagementStances.Font.FontFamily, 19f, FontStyle.Bold, GraphicsUnit.Pixel);
             }
-            grpGameOptionsDefaultEngagementStances.Size = new Size(465, 156);
-            grpGameOptionsDefaultEngagementStances.Location = new Point(10, 10);
+            grpGameOptionsDefaultEngagementStances.Size = new Size(UiScale.S(465), UiScale.S(156));
+            grpGameOptionsDefaultEngagementStances.Location = new Point(UiScale.S(10), UiScale.S(10));
             lblGameOptionsEngagementStancePatrol.Font = font_4;
             lblGameOptionsEngagementStanceEscort.Font = font_4;
             lblGameOptionsEngagementStanceAttack.Font = font_4;
@@ -4185,24 +4185,24 @@ namespace DistantWorlds {
             cmbGameOptionsEngagementStanceEscort.Font = font_4;
             cmbGameOptionsEngagementStanceAttack.Font = font_4;
             cmbGameOptionsEngagementStanceOther.Font = font_4;
-            lblGameOptionsEngagementStancePatrol.Location = new Point(10, 29);
-            lblGameOptionsEngagementStanceEscort.Location = new Point(10, 60);
-            lblGameOptionsEngagementStanceAttack.Location = new Point(10, 91);
-            lblGameOptionsEngagementStanceOther.Location = new Point(10, 122);
-            cmbGameOptionsEngagementStancePatrol.Size = new Size(230, 21);
-            cmbGameOptionsEngagementStanceEscort.Size = new Size(230, 21);
-            cmbGameOptionsEngagementStanceAttack.Size = new Size(230, 21);
-            cmbGameOptionsEngagementStanceOther.Size = new Size(230, 21);
-            cmbGameOptionsEngagementStancePatrol.Location = new Point(140, 25);
-            cmbGameOptionsEngagementStanceEscort.Location = new Point(140, 56);
-            cmbGameOptionsEngagementStanceAttack.Location = new Point(140, 87);
-            cmbGameOptionsEngagementStanceOther.Location = new Point(140, 118);
+            lblGameOptionsEngagementStancePatrol.Location = new Point(UiScale.S(10), UiScale.S(29));
+            lblGameOptionsEngagementStanceEscort.Location = new Point(UiScale.S(10), UiScale.S(60));
+            lblGameOptionsEngagementStanceAttack.Location = new Point(UiScale.S(10), UiScale.S(91));
+            lblGameOptionsEngagementStanceOther.Location = new Point(UiScale.S(10), UiScale.S(122));
+            cmbGameOptionsEngagementStancePatrol.Size = new Size(UiScale.S(230), UiScale.S(21));
+            cmbGameOptionsEngagementStanceEscort.Size = new Size(UiScale.S(230), UiScale.S(21));
+            cmbGameOptionsEngagementStanceAttack.Size = new Size(UiScale.S(230), UiScale.S(21));
+            cmbGameOptionsEngagementStanceOther.Size = new Size(UiScale.S(230), UiScale.S(21));
+            cmbGameOptionsEngagementStancePatrol.Location = new Point(UiScale.S(140), UiScale.S(25));
+            cmbGameOptionsEngagementStanceEscort.Location = new Point(UiScale.S(140), UiScale.S(56));
+            cmbGameOptionsEngagementStanceAttack.Location = new Point(UiScale.S(140), UiScale.S(87));
+            cmbGameOptionsEngagementStanceOther.Location = new Point(UiScale.S(140), UiScale.S(118));
             if (!grpGameOptionsDefaultEngagementStancesManual.Font.Bold)
             {
-                grpGameOptionsDefaultEngagementStancesManual.Font = new Font(grpGameOptionsDefaultEngagementStancesManual.Font.FontFamily, 19f, FontStyle.Bold, GraphicsUnit.Pixel);
+                grpGameOptionsDefaultEngagementStancesManual.Font = UiScale.NewFont(grpGameOptionsDefaultEngagementStancesManual.Font.FontFamily, 19f, FontStyle.Bold, GraphicsUnit.Pixel);
             }
-            grpGameOptionsDefaultEngagementStancesManual.Size = new Size(465, 156);
-            grpGameOptionsDefaultEngagementStancesManual.Location = new Point(10, 177);
+            grpGameOptionsDefaultEngagementStancesManual.Size = new Size(UiScale.S(465), UiScale.S(156));
+            grpGameOptionsDefaultEngagementStancesManual.Location = new Point(UiScale.S(10), UiScale.S(177));
             lblGameOptionsEngagementStancePatrolManual.Font = font_4;
             lblGameOptionsEngagementStanceEscortManual.Font = font_4;
             lblGameOptionsEngagementStanceAttackManual.Font = font_4;
@@ -4211,62 +4211,62 @@ namespace DistantWorlds {
             cmbGameOptionsEngagementStanceEscortManual.Font = font_4;
             cmbGameOptionsEngagementStanceAttackManual.Font = font_4;
             cmbGameOptionsEngagementStanceOtherManual.Font = font_4;
-            lblGameOptionsEngagementStancePatrolManual.Location = new Point(10, 29);
-            lblGameOptionsEngagementStanceEscortManual.Location = new Point(10, 60);
-            lblGameOptionsEngagementStanceAttackManual.Location = new Point(10, 91);
-            lblGameOptionsEngagementStanceOtherManual.Location = new Point(10, 122);
-            cmbGameOptionsEngagementStancePatrolManual.Size = new Size(230, 21);
-            cmbGameOptionsEngagementStanceEscortManual.Size = new Size(230, 21);
-            cmbGameOptionsEngagementStanceAttackManual.Size = new Size(230, 21);
-            cmbGameOptionsEngagementStanceOtherManual.Size = new Size(230, 21);
-            cmbGameOptionsEngagementStancePatrolManual.Location = new Point(140, 25);
-            cmbGameOptionsEngagementStanceEscortManual.Location = new Point(140, 56);
-            cmbGameOptionsEngagementStanceAttackManual.Location = new Point(140, 87);
-            cmbGameOptionsEngagementStanceOtherManual.Location = new Point(140, 118);
+            lblGameOptionsEngagementStancePatrolManual.Location = new Point(UiScale.S(10), UiScale.S(29));
+            lblGameOptionsEngagementStanceEscortManual.Location = new Point(UiScale.S(10), UiScale.S(60));
+            lblGameOptionsEngagementStanceAttackManual.Location = new Point(UiScale.S(10), UiScale.S(91));
+            lblGameOptionsEngagementStanceOtherManual.Location = new Point(UiScale.S(10), UiScale.S(122));
+            cmbGameOptionsEngagementStancePatrolManual.Size = new Size(UiScale.S(230), UiScale.S(21));
+            cmbGameOptionsEngagementStanceEscortManual.Size = new Size(UiScale.S(230), UiScale.S(21));
+            cmbGameOptionsEngagementStanceAttackManual.Size = new Size(UiScale.S(230), UiScale.S(21));
+            cmbGameOptionsEngagementStanceOtherManual.Size = new Size(UiScale.S(230), UiScale.S(21));
+            cmbGameOptionsEngagementStancePatrolManual.Location = new Point(UiScale.S(140), UiScale.S(25));
+            cmbGameOptionsEngagementStanceEscortManual.Location = new Point(UiScale.S(140), UiScale.S(56));
+            cmbGameOptionsEngagementStanceAttackManual.Location = new Point(UiScale.S(140), UiScale.S(87));
+            cmbGameOptionsEngagementStanceOtherManual.Location = new Point(UiScale.S(140), UiScale.S(118));
             if (!grpGameOptionsFleetAttackSettings.Font.Bold)
             {
-                grpGameOptionsFleetAttackSettings.Font = new Font(grpGameOptionsFleetAttackSettings.Font.FontFamily, 19f, FontStyle.Bold, GraphicsUnit.Pixel);
+                grpGameOptionsFleetAttackSettings.Font = UiScale.NewFont(grpGameOptionsFleetAttackSettings.Font.FontFamily, 19f, FontStyle.Bold, GraphicsUnit.Pixel);
             }
-            grpGameOptionsFleetAttackSettings.Size = new Size(465, 90);
-            grpGameOptionsFleetAttackSettings.Location = new Point(10, 344);
-            numGameOptionsFleetAttackRefuel.Location = new Point(10, 25);
-            numGameOptionsFleetAttackGather.Location = new Point(10, 56);
-            lblGameOptionsFleetAttackRefuel.Location = new Point(60, 27);
+            grpGameOptionsFleetAttackSettings.Size = new Size(UiScale.S(465), UiScale.S(90));
+            grpGameOptionsFleetAttackSettings.Location = new Point(UiScale.S(10), UiScale.S(344));
+            numGameOptionsFleetAttackRefuel.Location = new Point(UiScale.S(10), UiScale.S(25));
+            numGameOptionsFleetAttackGather.Location = new Point(UiScale.S(10), UiScale.S(56));
+            lblGameOptionsFleetAttackRefuel.Location = new Point(UiScale.S(60), UiScale.S(27));
             lblGameOptionsFleetAttackRefuel.Font = font_4;
-            lblGameOptionsFleetAttackGather.Location = new Point(60, 58);
+            lblGameOptionsFleetAttackGather.Location = new Point(UiScale.S(60), UiScale.S(58));
             lblGameOptionsFleetAttackGather.Font = font_4;
-            sldGameOptionsAttackOvermatch.Size = new Size(465, 62);
+            sldGameOptionsAttackOvermatch.Size = new Size(UiScale.S(465), UiScale.S(62));
             sldGameOptionsAttackOvermatch.Font = font_4;
-            sldGameOptionsAttackOvermatch.LabelWidth = 120;
-            sldGameOptionsAttackOvermatch.Location = new Point(10, 458);
+            sldGameOptionsAttackOvermatch.LabelWidth = UiScale.S(120);
+            sldGameOptionsAttackOvermatch.Location = new Point(UiScale.S(10), UiScale.S(458));
             sldGameOptionsAttackOvermatch.Setup();
             sldGameOptionsAttackOvermatch.SetLabels(new string[5] { "1:1", "1.5:1", "2:1", "3:1", "5:1" });
             sldGameOptionsAttackOvermatch.LinkWidth = 0;
-            sldGameOptionsAttackOvermatch.Size = new Size(465, 62);
+            sldGameOptionsAttackOvermatch.Size = new Size(UiScale.S(465), UiScale.S(62));
             chkOptionsAllowSameSystemAsOtherEmpires.CheckAlign = ContentAlignment.MiddleLeft;
-            chkOptionsAllowSameSystemAsOtherEmpires.Location = new Point(10, 513);
+            chkOptionsAllowSameSystemAsOtherEmpires.Location = new Point(UiScale.S(10), UiScale.S(513));
             chkOptionsAllowSameSystemAsOtherEmpires.Visible = false;
             if (!grpGameOptionsDiscoveries.Font.Bold)
             {
-                grpGameOptionsDiscoveries.Font = new Font(grpGameOptionsDefaultEngagementStances.Font.FontFamily, 19f, FontStyle.Bold, GraphicsUnit.Pixel);
+                grpGameOptionsDiscoveries.Font = UiScale.NewFont(grpGameOptionsDefaultEngagementStances.Font.FontFamily, 19f, FontStyle.Bold, GraphicsUnit.Pixel);
             }
-            grpGameOptionsDiscoveries.Size = new Size(465, 99);
-            grpGameOptionsDiscoveries.Location = new Point(10, 537);
-            lblGameOptionsEncounterRuins.Location = new Point(7, 23);
+            grpGameOptionsDiscoveries.Size = new Size(UiScale.S(465), UiScale.S(99));
+            grpGameOptionsDiscoveries.Location = new Point(UiScale.S(10), UiScale.S(537));
+            lblGameOptionsEncounterRuins.Location = new Point(UiScale.S(7), UiScale.S(23));
             lblGameOptionsEncounterRuins.Font = font_4;
-            cmbGameOptionsEncounterRuins.Size = new Size(260, 21);
+            cmbGameOptionsEncounterRuins.Size = new Size(UiScale.S(260), UiScale.S(21));
             cmbGameOptionsEncounterRuins.Font = font_4;
-            cmbGameOptionsEncounterRuins.Location = new Point(198, 18);
-            lblGameOptionsEncounterAbandonedShipOrBase.Location = new Point(7, 50);
-            lblGameOptionsEncounterAbandonedShipOrBase.MaximumSize = new Size(188, 40);
+            cmbGameOptionsEncounterRuins.Location = new Point(UiScale.S(198), UiScale.S(18));
+            lblGameOptionsEncounterAbandonedShipOrBase.Location = new Point(UiScale.S(7), UiScale.S(50));
+            lblGameOptionsEncounterAbandonedShipOrBase.MaximumSize = new Size(UiScale.S(188), UiScale.S(40));
             lblGameOptionsEncounterAbandonedShipOrBase.Font = font_4;
-            cmbGameOptionsEncounterAbandonedShipOrBase.Size = new Size(260, 21);
-            cmbGameOptionsEncounterAbandonedShipOrBase.Location = new Point(198, 58);
+            cmbGameOptionsEncounterAbandonedShipOrBase.Size = new Size(UiScale.S(260), UiScale.S(21));
+            cmbGameOptionsEncounterAbandonedShipOrBase.Location = new Point(UiScale.S(198), UiScale.S(58));
             cmbGameOptionsEncounterAbandonedShipOrBase.Font = font_4;
-            chkOptionsNewShipsAutomated.Location = new Point(10, 645);
+            chkOptionsNewShipsAutomated.Location = new Point(UiScale.S(10), UiScale.S(645));
             chkOptionsNewShipsAutomated.Font = font_4;
             chkOptionsNewShipsAutomated.CheckAlign = ContentAlignment.TopLeft;
-            chkOptionsSuppressAllPopups.Location = new Point(10, 670);
+            chkOptionsSuppressAllPopups.Location = new Point(UiScale.S(10), UiScale.S(670));
             chkOptionsSuppressAllPopups.BringToFront();
             chkOptionsSuppressAllPopups.Font = font_4;
             chkOptionsSuppressAllPopups.CheckAlign = ContentAlignment.TopLeft;
@@ -4462,7 +4462,7 @@ namespace DistantWorlds {
 
         private void method_566()
         {
-            pnlGameOptionsMessages.Size = new Size(735, 502);
+            pnlGameOptionsMessages.Size = new Size(UiScale.S(735), UiScale.S(502));
             pnlGameOptionsMessages.Location = new Point((base.Width - pnlGameOptionsMessages.Width) / 2, (base.Height - pnlGameOptionsMessages.Height) / 2);
             pnlGameOptionsMessages.DoLayout();
             grpOptionsPopupMessages.Visible = true;
@@ -4471,10 +4471,10 @@ namespace DistantWorlds {
             grpOptionsScrollingMessages.Font = font_2;
             grpOptionsPopupMessages.BringToFront();
             grpOptionsScrollingMessages.BringToFront();
-            grpOptionsScrollingMessages.Location = new Point(12, 10);
-            grpOptionsPopupMessages.Location = new Point(367, 10);
-            grpOptionsScrollingMessages.Size = new Size(340, 412);
-            grpOptionsPopupMessages.Size = new Size(340, 412);
+            grpOptionsScrollingMessages.Location = new Point(UiScale.S(12), UiScale.S(10));
+            grpOptionsPopupMessages.Location = new Point(UiScale.S(367), UiScale.S(10));
+            grpOptionsScrollingMessages.Size = new Size(UiScale.S(340), UiScale.S(412));
+            grpOptionsPopupMessages.Size = new Size(UiScale.S(340), UiScale.S(412));
             chkOptionsScrollingMessageNewShipBuilt.Font = font_4;
             chkOptionsScrollingMessageRequestWarning.Font = font_4;
             chkOptionsScrollingMessageDiplomacyTreaties.Font = font_4;
@@ -4494,25 +4494,25 @@ namespace DistantWorlds {
             chkOptionsScrollingMessageUnderAttackOtherStateBases.Font = font_4;
             chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Font = font_4;
             chkOptionsScrollingMessageConstructionResourceShortage.Font = font_4;
-            chkOptionsScrollingMessageNewShipBuilt.Location = new Point(7, 22);
-            chkOptionsScrollingMessageRequestWarning.Location = new Point(7, 42);
-            chkOptionsScrollingMessageDiplomacyTreaties.Location = new Point(7, 62);
-            chkOptionsScrollingMessageWarTradeSanctions.Location = new Point(7, 82);
-            chkOptionsScrollingMessageColonyGainLoss.Location = new Point(7, 102);
-            chkOptionsScrollingMessageEmpireMetDestroyed.Location = new Point(7, 122);
-            chkOptionsScrollingMessageResearchBreakthrough.Location = new Point(7, 142);
-            chkOptionsScrollingMessageIntelligenceMissions.Location = new Point(7, 162);
-            chkOptionsScrollingMessageExploration.Location = new Point(7, 182);
-            chkOptionsScrollingMessageShipMissionComplete.Location = new Point(7, 202);
-            chkOptionsScrollingMessageShipNeedsRefuelling.Location = new Point(7, 222);
-            chkOptionsScrollingMessageUnderAttackCivilianShips.Location = new Point(7, 242);
-            chkOptionsScrollingMessageUnderAttackCivilianBases.Location = new Point(7, 262);
-            chkOptionsScrollingMessageUnderAttackExplorationShips.Location = new Point(7, 282);
-            chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Location = new Point(7, 302);
-            chkOptionsScrollingMessageUnderAttackMilitaryShips.Location = new Point(7, 322);
-            chkOptionsScrollingMessageUnderAttackOtherStateBases.Location = new Point(7, 342);
-            chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Location = new Point(7, 362);
-            chkOptionsScrollingMessageConstructionResourceShortage.Location = new Point(7, 382);
+            chkOptionsScrollingMessageNewShipBuilt.Location = new Point(UiScale.S(7), UiScale.S(22));
+            chkOptionsScrollingMessageRequestWarning.Location = new Point(UiScale.S(7), UiScale.S(42));
+            chkOptionsScrollingMessageDiplomacyTreaties.Location = new Point(UiScale.S(7), UiScale.S(62));
+            chkOptionsScrollingMessageWarTradeSanctions.Location = new Point(UiScale.S(7), UiScale.S(82));
+            chkOptionsScrollingMessageColonyGainLoss.Location = new Point(UiScale.S(7), UiScale.S(102));
+            chkOptionsScrollingMessageEmpireMetDestroyed.Location = new Point(UiScale.S(7), UiScale.S(122));
+            chkOptionsScrollingMessageResearchBreakthrough.Location = new Point(UiScale.S(7), UiScale.S(142));
+            chkOptionsScrollingMessageIntelligenceMissions.Location = new Point(UiScale.S(7), UiScale.S(162));
+            chkOptionsScrollingMessageExploration.Location = new Point(UiScale.S(7), UiScale.S(182));
+            chkOptionsScrollingMessageShipMissionComplete.Location = new Point(UiScale.S(7), UiScale.S(202));
+            chkOptionsScrollingMessageShipNeedsRefuelling.Location = new Point(UiScale.S(7), UiScale.S(222));
+            chkOptionsScrollingMessageUnderAttackCivilianShips.Location = new Point(UiScale.S(7), UiScale.S(242));
+            chkOptionsScrollingMessageUnderAttackCivilianBases.Location = new Point(UiScale.S(7), UiScale.S(262));
+            chkOptionsScrollingMessageUnderAttackExplorationShips.Location = new Point(UiScale.S(7), UiScale.S(282));
+            chkOptionsScrollingMessageUnderAttackColonyConstructionShips.Location = new Point(UiScale.S(7), UiScale.S(302));
+            chkOptionsScrollingMessageUnderAttackMilitaryShips.Location = new Point(UiScale.S(7), UiScale.S(322));
+            chkOptionsScrollingMessageUnderAttackOtherStateBases.Location = new Point(UiScale.S(7), UiScale.S(342));
+            chkOptionsScrollingMessageUnderAttackColoniesSpaceports.Location = new Point(UiScale.S(7), UiScale.S(362));
+            chkOptionsScrollingMessageConstructionResourceShortage.Location = new Point(UiScale.S(7), UiScale.S(382));
             chkOptionsPopupMessageShipBuilt.Font = font_4;
             chkOptionsPopupMessageRequestWarning.Font = font_4;
             chkOptionsPopupMessageDiplomacyTreaties.Font = font_4;
@@ -4532,25 +4532,25 @@ namespace DistantWorlds {
             ltFewaOdau.Font = font_4;
             chkOptionsPopupMessageUnderAttackColoniesSpaceports.Font = font_4;
             chkOptionsPopupMessageConstructionResourceShortage.Font = font_4;
-            chkOptionsPopupMessageShipBuilt.Location = new Point(7, 22);
-            chkOptionsPopupMessageRequestWarning.Location = new Point(7, 42);
-            chkOptionsPopupMessageDiplomacyTreaties.Location = new Point(7, 62);
-            chkOptionsPopupMessageDiplomacyWarTradeSanctions.Location = new Point(7, 82);
-            chkOptionsPopupMessageColonyGainLoss.Location = new Point(7, 102);
-            XwwejKaRdv.Location = new Point(7, 122);
-            chkOptionsPopupMessageResearchBreakthrough.Location = new Point(7, 142);
-            KpfeuWqjpj.Location = new Point(7, 162);
-            chkOptionsPopupMessageExploration.Location = new Point(7, 182);
-            chkOptionsPopupMessageShipMissionComplete.Location = new Point(7, 202);
-            chkOptionsPopupMessageShipNeedsRefuelling.Location = new Point(7, 222);
-            chkOptionsPopupMessageUnderAttackCivilianShips.Location = new Point(7, 242);
-            gcbeGaamXG.Location = new Point(7, 262);
-            chkOptionsPopupMessageUnderAttackExplorationShips.Location = new Point(7, 282);
-            chkOptionsPopupMessageUnderAttackColonyConstructionShips.Location = new Point(7, 302);
-            chkOptionsPopupMessageUnderAttackMilitaryShips.Location = new Point(7, 322);
-            ltFewaOdau.Location = new Point(7, 342);
-            chkOptionsPopupMessageUnderAttackColoniesSpaceports.Location = new Point(7, 362);
-            chkOptionsPopupMessageConstructionResourceShortage.Location = new Point(7, 382);
+            chkOptionsPopupMessageShipBuilt.Location = new Point(UiScale.S(7), UiScale.S(22));
+            chkOptionsPopupMessageRequestWarning.Location = new Point(UiScale.S(7), UiScale.S(42));
+            chkOptionsPopupMessageDiplomacyTreaties.Location = new Point(UiScale.S(7), UiScale.S(62));
+            chkOptionsPopupMessageDiplomacyWarTradeSanctions.Location = new Point(UiScale.S(7), UiScale.S(82));
+            chkOptionsPopupMessageColonyGainLoss.Location = new Point(UiScale.S(7), UiScale.S(102));
+            XwwejKaRdv.Location = new Point(UiScale.S(7), UiScale.S(122));
+            chkOptionsPopupMessageResearchBreakthrough.Location = new Point(UiScale.S(7), UiScale.S(142));
+            KpfeuWqjpj.Location = new Point(UiScale.S(7), UiScale.S(162));
+            chkOptionsPopupMessageExploration.Location = new Point(UiScale.S(7), UiScale.S(182));
+            chkOptionsPopupMessageShipMissionComplete.Location = new Point(UiScale.S(7), UiScale.S(202));
+            chkOptionsPopupMessageShipNeedsRefuelling.Location = new Point(UiScale.S(7), UiScale.S(222));
+            chkOptionsPopupMessageUnderAttackCivilianShips.Location = new Point(UiScale.S(7), UiScale.S(242));
+            gcbeGaamXG.Location = new Point(UiScale.S(7), UiScale.S(262));
+            chkOptionsPopupMessageUnderAttackExplorationShips.Location = new Point(UiScale.S(7), UiScale.S(282));
+            chkOptionsPopupMessageUnderAttackColonyConstructionShips.Location = new Point(UiScale.S(7), UiScale.S(302));
+            chkOptionsPopupMessageUnderAttackMilitaryShips.Location = new Point(UiScale.S(7), UiScale.S(322));
+            ltFewaOdau.Location = new Point(UiScale.S(7), UiScale.S(342));
+            chkOptionsPopupMessageUnderAttackColoniesSpaceports.Location = new Point(UiScale.S(7), UiScale.S(362));
+            chkOptionsPopupMessageConstructionResourceShortage.Location = new Point(UiScale.S(7), UiScale.S(382));
             chkOptionsPopupMessageUnderAttackCivilianShips.BringToFront();
             gcbeGaamXG.BringToFront();
             chkOptionsPopupMessageUnderAttackExplorationShips.BringToFront();
@@ -4587,24 +4587,24 @@ namespace DistantWorlds {
                 bool_11 = true;
                 method_154();
             }
-            pnlGameOptionsAdvancedDisplaySettings.Size = new Size(440, 500);
+            pnlGameOptionsAdvancedDisplaySettings.Size = new Size(UiScale.S(440), UiScale.S(500));
             pnlGameOptionsAdvancedDisplaySettings.Location = new Point(
                 (base.Width - pnlGameOptionsAdvancedDisplaySettings.Width) / 2,
                 (base.Height - pnlGameOptionsAdvancedDisplaySettings.Height) / 2);
             pnlGameOptionsAdvancedDisplaySettings.DoLayout();
-            grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Size = new Size(400, 60);
+            grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Size = new Size(UiScale.S(400), UiScale.S(60));
             grpGameOptionsAdvancedDisplaySettingsMaximumFramerate.Font = font_2;
-            lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Location = new Point(177, 22);
-            numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Location = new Point(127, 23);
+            lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Location = new Point(UiScale.S(177), UiScale.S(22));
+            numGameOptionsAdvancedDisplaySettingsMaximumFramerate.Location = new Point(UiScale.S(127), UiScale.S(23));
             lblGameOptionsAdvancedDisplaySettingsMaximumFramerateFPS.Font = font_4;
             chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Font = font_4;
-            chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Location = new Point(8, 22);
-            chkOptionsShowSystemNebulae.Location = new Point(15, 87);
+            chkGameOptionsAdvancedDisplaySettingsMaximumFramerateUnlimited.Location = new Point(UiScale.S(8), UiScale.S(22));
+            chkOptionsShowSystemNebulae.Location = new Point(UiScale.S(15), UiScale.S(87));
             chkOptionsShowSystemNebulae.Font = font_4;
             tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.Font = font_4;
-            tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.Size = new Size(400, 52);
-            tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.Location = new Point(12, 115);
-            tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.LabelWidth = 160;
+            tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.Size = new Size(UiScale.S(400), UiScale.S(52));
+            tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.Location = new Point(UiScale.S(12), UiScale.S(115));
+            tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.LabelWidth = UiScale.S(160);
             tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.Setup();
             tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.LinkWidth = 0;
             tbarGameOptionsAdvancedDisplaySettingsSystemNebulaeDetail.LinkText = string.Empty;
@@ -4614,9 +4614,9 @@ namespace DistantWorlds {
             TextResolver.GetText("Medium"),
             TextResolver.GetText("High")
             });
-            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Location = new Point(12, 184);
-            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Width = 400;
-            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Height = 231;
+            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Location = new Point(UiScale.S(12), UiScale.S(184));
+            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Width = UiScale.S(400);
+            grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Height = UiScale.S(231);
             grpGameOptionsAdvancedDisplaySettingsGalaxyIcons.Font = font_2;
             chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Font = font_4;
             chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Font = font_4;
@@ -4630,29 +4630,29 @@ namespace DistantWorlds {
             chkGameOptionsGalaxyDisplayOtherBases.Font = font_4;
             chkGameOptionsGalaxyDisplayResupplyShips.Font = font_4;
             chkGameOptionsGalaxyDisplaySpacePorts.Font = font_4;
-            chkGameOptionsGalaxyDisplayFleets.Location = new Point(10, 22);
+            chkGameOptionsGalaxyDisplayFleets.Location = new Point(UiScale.S(10), UiScale.S(22));
             chkGameOptionsGalaxyDisplayFleets.BringToFront();
-            chkGameOptionsGalaxyDisplayResupplyShips.Location = new Point(10, 44);
+            chkGameOptionsGalaxyDisplayResupplyShips.Location = new Point(UiScale.S(10), UiScale.S(44));
             chkGameOptionsGalaxyDisplayResupplyShips.BringToFront();
-            chkGameOptionsGalaxyDisplayMilitaryShips.Location = new Point(10, 66);
+            chkGameOptionsGalaxyDisplayMilitaryShips.Location = new Point(UiScale.S(10), UiScale.S(66));
             chkGameOptionsGalaxyDisplayMilitaryShips.BringToFront();
-            chkGameOptionsGalaxyDisplaySpacePorts.Location = new Point(10, 88);
+            chkGameOptionsGalaxyDisplaySpacePorts.Location = new Point(UiScale.S(10), UiScale.S(88));
             chkGameOptionsGalaxyDisplaySpacePorts.BringToFront();
-            chkGameOptionsGalaxyDisplayOtherBases.Location = new Point(10, 110);
+            chkGameOptionsGalaxyDisplayOtherBases.Location = new Point(UiScale.S(10), UiScale.S(110));
             chkGameOptionsGalaxyDisplayOtherBases.BringToFront();
-            chkGameOptionsGalaxyDisplayExplorationShips.Location = new Point(180, 22);
+            chkGameOptionsGalaxyDisplayExplorationShips.Location = new Point(UiScale.S(180), UiScale.S(22));
             chkGameOptionsGalaxyDisplayExplorationShips.BringToFront();
-            chkGameOptionsGalaxyDisplayColonyShips.Location = new Point(180, 44);
+            chkGameOptionsGalaxyDisplayColonyShips.Location = new Point(UiScale.S(180), UiScale.S(44));
             chkGameOptionsGalaxyDisplayColonyShips.BringToFront();
-            chkGameOptionsGalaxyDisplayConstructionShips.Location = new Point(180, 66);
+            chkGameOptionsGalaxyDisplayConstructionShips.Location = new Point(UiScale.S(180), UiScale.S(66));
             chkGameOptionsGalaxyDisplayConstructionShips.BringToFront();
-            chkGameOptionsGalaxyDisplayCivilianShips.Location = new Point(180, 88);
+            chkGameOptionsGalaxyDisplayCivilianShips.Location = new Point(UiScale.S(180), UiScale.S(88));
             chkGameOptionsGalaxyDisplayCivilianShips.BringToFront();
-            chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Location = new Point(10, 154);
+            chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.Location = new Point(UiScale.S(10), UiScale.S(154));
             chkGameOptionsGalaxyDisplayAlwaysEnemyFleets.BringToFront();
-            chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Location = new Point(10, 176);
+            chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.Location = new Point(UiScale.S(10), UiScale.S(176));
             chkGameOptionsGalaxyDisplayAlwaysEnemyMilitaryShips.BringToFront();
-            chkGameOptionsGalaxyDisplayAlwaysPirates.Location = new Point(10, 198);
+            chkGameOptionsGalaxyDisplayAlwaysPirates.Location = new Point(UiScale.S(10), UiScale.S(198));
             chkGameOptionsGalaxyDisplayAlwaysPirates.BringToFront();
             if (gameOptions_0 != null)
             {
@@ -4856,30 +4856,30 @@ namespace DistantWorlds {
             pnlStoryEvent.BackColor = Color.Black;
             pnlStoryEvent.BackgroundImageLayout = ImageLayout.Zoom;
             pnlStoryEvent.BackgroundImage = bitmap_225;
-            int num = 20;
+            int num = UiScale.S(20);
             btnStoryEventAction.Visible = false;
-            btnStoryEventClose.Size = new Size(260, 33);
-            btnStoryEventClose.Location = new Point((mainView.Width - btnStoryEventClose.Width) / 2, mainView.Height - (btnStoryEventClose.Height + 20));
+            btnStoryEventClose.Size = new Size(UiScale.S(260), UiScale.S(33));
+            btnStoryEventClose.Location = new Point((mainView.Width - btnStoryEventClose.Width) / 2, mainView.Height - (btnStoryEventClose.Height + UiScale.S(20)));
             btnStoryEventClose.Font = font_2;
             btnStoryEventClose.Text = TextResolver.GetText("Close");
             using (Graphics graphics = Graphics.FromImage(bitmap_225))
             {
                 Font font = font_1;
-                SizeF sizeF = graphics.MeasureString(string_30, font, 800, StringFormat.GenericTypographic);
-                lblStoryEventTitle.Size = new Size((int)sizeF.Width + 5, (int)sizeF.Height + 10);
+                SizeF sizeF = graphics.MeasureString(string_30, font, UiScale.S(800), StringFormat.GenericTypographic);
+                lblStoryEventTitle.Size = new Size((int)sizeF.Width + UiScale.S(5), (int)sizeF.Height + UiScale.S(10));
                 font = font_7;
-                SizeF sizeF2 = graphics.MeasureString(string_31, font, 800, StringFormat.GenericTypographic);
-                lblStoryEventText.Size = new Size((int)sizeF2.Width + 5, (int)sizeF2.Height + 10);
-                int val = (mainView.Height - ((int)sizeF.Height + 12 + (int)sizeF2.Height + btnStoryEventClose.Height + num)) / 2;
-                val = Math.Max(5, val);
-                int num2 = val + ((int)sizeF.Height + 12);
+                SizeF sizeF2 = graphics.MeasureString(string_31, font, UiScale.S(800), StringFormat.GenericTypographic);
+                lblStoryEventText.Size = new Size((int)sizeF2.Width + UiScale.S(5), (int)sizeF2.Height + UiScale.S(10));
+                int val = (mainView.Height - ((int)sizeF.Height + UiScale.S(12) + (int)sizeF2.Height + btnStoryEventClose.Height + num)) / 2;
+                val = Math.Max(UiScale.S(5), val);
+                int num2 = val + ((int)sizeF.Height + UiScale.S(12));
                 lblStoryEventTitle.Location = new Point((mainView.Width - (int)sizeF.Width) / 2, val);
                 lblStoryEventTitle.ForeColor = Color.White;
                 lblStoryEventTitle.Font = font_1;
                 lblStoryEventTitle.BackColor = Color.Transparent;
                 lblStoryEventTitle.Parent = pnlStoryEvent;
                 lblStoryEventTitle.BringToFront();
-                lblStoryEventText.Location = new Point((mainView.Width - 800) / 2, num2);
+                lblStoryEventText.Location = new Point((mainView.Width - UiScale.S(800)) / 2, num2);
                 lblStoryEventText.ForeColor = Color.White;
                 lblStoryEventText.Font = font;
                 lblStoryEventText.BackColor = Color.Transparent;
@@ -4930,38 +4930,38 @@ namespace DistantWorlds {
                 };
             }
             pnlStoryEvent.BackgroundImage = bitmap;
-            int num = 20;
-            int num2 = 260;
+            int num = UiScale.S(20);
+            int num2 = UiScale.S(260);
             if (int_61 == 4)
             {
-                num2 = 360;
-                btnStoryEventClose.Size = new Size(360, 50);
-                btnStoryEventClose.Location = new Point((mainView.Width - (720 + num)) / 2, mainView.Height - (btnStoryEventClose.Height + num));
+                num2 = UiScale.S(360);
+                btnStoryEventClose.Size = new Size(UiScale.S(360), UiScale.S(50));
+                btnStoryEventClose.Location = new Point((mainView.Width - (UiScale.S(720) + num)) / 2, mainView.Height - (btnStoryEventClose.Height + num));
                 btnStoryEventClose.Font = font_2;
                 btnStoryEventClose.Text = TextResolver.GetText("No, we do not need any further help");
                 btnStoryEventAction.Visible = true;
-                btnStoryEventAction.Size = new Size(360, 50);
-                btnStoryEventAction.Location = new Point((mainView.Width - (720 + num)) / 2 + 360 + num, mainView.Height - (btnStoryEventAction.Height + num));
+                btnStoryEventAction.Size = new Size(UiScale.S(360), UiScale.S(50));
+                btnStoryEventAction.Location = new Point((mainView.Width - (UiScale.S(720) + num)) / 2 + UiScale.S(360) + num, mainView.Height - (btnStoryEventAction.Height + num));
                 btnStoryEventAction.Font = font_2;
                 btnStoryEventAction.Text = TextResolver.GetText("Yes, our dire situation calls for the use of this superweapon!");
             }
             else if (int_61 == 2)
             {
-                num2 = 360;
-                btnStoryEventClose.Size = new Size(360, 50);
-                btnStoryEventClose.Location = new Point((mainView.Width - (720 + num)) / 2, mainView.Height - (btnStoryEventClose.Height + num));
+                num2 = UiScale.S(360);
+                btnStoryEventClose.Size = new Size(UiScale.S(360), UiScale.S(50));
+                btnStoryEventClose.Location = new Point((mainView.Width - (UiScale.S(720) + num)) / 2, mainView.Height - (btnStoryEventClose.Height + num));
                 btnStoryEventClose.Font = font_2;
                 btnStoryEventClose.Text = TextResolver.GetText("No, we do not care about Utopia, and we will not join this alliance");
                 btnStoryEventAction.Visible = true;
-                btnStoryEventAction.Size = new Size(360, 50);
-                btnStoryEventAction.Location = new Point((mainView.Width - (720 + num)) / 2 + 360 + num, mainView.Height - (btnStoryEventAction.Height + num));
+                btnStoryEventAction.Size = new Size(UiScale.S(360), UiScale.S(50));
+                btnStoryEventAction.Location = new Point((mainView.Width - (UiScale.S(720) + num)) / 2 + UiScale.S(360) + num, mainView.Height - (btnStoryEventAction.Height + num));
                 btnStoryEventAction.Font = font_2;
                 btnStoryEventAction.Text = TextResolver.GetText("Yes, we will unite to fight the Shakturi!");
             }
             else
             {
                 btnStoryEventAction.Visible = false;
-                btnStoryEventClose.Size = new Size(num2, 33);
+                btnStoryEventClose.Size = new Size(num2, UiScale.S(33));
                 btnStoryEventClose.Location = new Point((mainView.Width - btnStoryEventClose.Width) / 2, mainView.Height - (btnStoryEventClose.Height + num));
                 btnStoryEventClose.Font = font_2;
                 btnStoryEventClose.Text = TextResolver.GetText("Close");
@@ -4969,21 +4969,21 @@ namespace DistantWorlds {
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
                 Font font = font_1;
-                SizeF sizeF = graphics.MeasureString(string_30, font, 800, StringFormat.GenericTypographic);
-                lblStoryEventTitle.Size = new Size((int)sizeF.Width + 5, (int)sizeF.Height + 10);
+                SizeF sizeF = graphics.MeasureString(string_30, font, UiScale.S(800), StringFormat.GenericTypographic);
+                lblStoryEventTitle.Size = new Size((int)sizeF.Width + UiScale.S(5), (int)sizeF.Height + UiScale.S(10));
                 font = font_7;
-                SizeF sizeF2 = graphics.MeasureString(string_31, font, 800, StringFormat.GenericTypographic);
-                lblStoryEventText.Size = new Size((int)sizeF2.Width + 5, (int)sizeF2.Height + 10);
-                int val = (mainView.Height - ((int)sizeF.Height + 12 + (int)sizeF2.Height + btnStoryEventClose.Height + num)) / 2;
-                val = Math.Max(5, val);
-                int num3 = val + ((int)sizeF.Height + 12);
+                SizeF sizeF2 = graphics.MeasureString(string_31, font, UiScale.S(800), StringFormat.GenericTypographic);
+                lblStoryEventText.Size = new Size((int)sizeF2.Width + UiScale.S(5), (int)sizeF2.Height + UiScale.S(10));
+                int val = (mainView.Height - ((int)sizeF.Height + UiScale.S(12) + (int)sizeF2.Height + btnStoryEventClose.Height + num)) / 2;
+                val = Math.Max(UiScale.S(5), val);
+                int num3 = val + ((int)sizeF.Height + UiScale.S(12));
                 lblStoryEventTitle.Location = new Point((mainView.Width - (int)sizeF.Width) / 2, val);
                 lblStoryEventTitle.ForeColor = Color.White;
                 lblStoryEventTitle.Font = font_1;
                 lblStoryEventTitle.BackColor = Color.Transparent;
                 lblStoryEventTitle.Parent = pnlStoryEvent;
                 lblStoryEventTitle.BringToFront();
-                lblStoryEventText.Location = new Point((mainView.Width - 800) / 2, num3);
+                lblStoryEventText.Location = new Point((mainView.Width - UiScale.S(800)) / 2, num3);
                 lblStoryEventText.ForeColor = Color.White;
                 lblStoryEventText.Font = font;
                 lblStoryEventText.BackColor = Color.Transparent;

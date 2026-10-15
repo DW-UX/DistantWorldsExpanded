@@ -24,7 +24,7 @@ namespace DistantWorlds.Controls
     private Bitmap _WeaponPlanetaryDefenseImage;
     private Bitmap _WeaponSpecialForcesImage;
 
-    public ColonyInvasionPanel() => this.Font = new Font("Verdana", 8f);
+    public ColonyInvasionPanel() => this.Font = UiScale.NewFont("Verdana", 8f);
 
     public void InitializeImages(
       Bitmap[] troopImagesInfantry,
@@ -133,38 +133,38 @@ namespace DistantWorlds.Controls
         if (this._ColonyInvasion.PanelSize > 0)
         {
           this._ColonyInvasion.ResetSize(0, this._AssaultPodImage, this._WeaponInfantryImage, this._WeaponArmoredImage, this._WeaponPlanetaryDefenseImage, this._WeaponSpecialForcesImage);
-          int width = 555;
-          int height = 520;
-          Point point = new Point(this.Parent.Parent.Parent.Controls["pnlInfoPanel"].Right + 20, this.Parent.Parent.Parent.ClientRectangle.Height - (height + 70 + 10));
+          int width = UiScale.S(555);
+          int height = UiScale.S(520);
+          Point point = new Point(this.Parent.Parent.Parent.Controls["pnlInfoPanel"].Right + UiScale.S(20), this.Parent.Parent.Parent.ClientRectangle.Height - (height + UiScale.S(70) + UiScale.S(10)));
           this.Size = new Size(width, height);
           this.Parent.Parent.Location = point;
-          this.Parent.Parent.Size = new Size(width + 25, height + 70);
+          this.Parent.Parent.Size = new Size(width + UiScale.S(25), height + UiScale.S(70));
           this._ColonyInvasion.Size = new Size(width, height);
           ((ScreenPanel) this.Parent.Parent).DoLayout();
           this.Parent.Parent.Invalidate();
         }
-        else if (this._ScreenSize.Width < 1120)
+        else if (this._ScreenSize.Width < UiScale.S(1120))
         {
           this._ColonyInvasion.ResetSize(0, this._AssaultPodImage, this._WeaponInfantryImage, this._WeaponArmoredImage, this._WeaponPlanetaryDefenseImage, this._WeaponSpecialForcesImage);
-          int width = 555;
-          int height = 520;
-          Point point = new Point(this.Parent.Parent.Parent.Controls["pnlInfoPanel"].Right + 20, this.Parent.Parent.Parent.ClientRectangle.Height - (height + 70 + 10));
+          int width = UiScale.S(555);
+          int height = UiScale.S(520);
+          Point point = new Point(this.Parent.Parent.Parent.Controls["pnlInfoPanel"].Right + UiScale.S(20), this.Parent.Parent.Parent.ClientRectangle.Height - (height + UiScale.S(70) + UiScale.S(10)));
           this.Size = new Size(width, height);
           this.Parent.Parent.Location = point;
-          this.Parent.Parent.Size = new Size(width + 25, height + 70);
+          this.Parent.Parent.Size = new Size(width + UiScale.S(25), height + UiScale.S(70));
           this._ColonyInvasion.Size = new Size(width, height);
           ((ScreenPanel) this.Parent.Parent).DoLayout();
           this.Parent.Parent.Invalidate();
         }
-        else if (this._ScreenSize.Width < 1320 || this._ScreenSize.Height < 820)
+        else if (this._ScreenSize.Width < UiScale.S(1320) || this._ScreenSize.Height < UiScale.S(820))
         {
           this._ColonyInvasion.ResetSize(1, this._AssaultPodImage, this._WeaponInfantryImage, this._WeaponArmoredImage, this._WeaponPlanetaryDefenseImage, this._WeaponSpecialForcesImage);
-          int width = 725;
-          int height = 647;
-          Point point = new Point(this.Parent.Parent.Parent.Controls["pnlInfoPanel"].Right + 20, this.Parent.Parent.Parent.ClientRectangle.Height - (height + 70 + 10));
+          int width = UiScale.S(725);
+          int height = UiScale.S(647);
+          Point point = new Point(this.Parent.Parent.Parent.Controls["pnlInfoPanel"].Right + UiScale.S(20), this.Parent.Parent.Parent.ClientRectangle.Height - (height + UiScale.S(70) + UiScale.S(10)));
           this.Size = new Size(width, height);
           this.Parent.Parent.Location = point;
-          this.Parent.Parent.Size = new Size(width + 25, height + 70);
+          this.Parent.Parent.Size = new Size(width + UiScale.S(25), height + UiScale.S(70));
           this._ColonyInvasion.Size = new Size(width, height);
           ((ScreenPanel) this.Parent.Parent).DoLayout();
           this.Parent.Parent.Invalidate();
@@ -172,12 +172,12 @@ namespace DistantWorlds.Controls
         else
         {
           this._ColonyInvasion.ResetSize(2, this._AssaultPodImage, this._WeaponInfantryImage, this._WeaponArmoredImage, this._WeaponPlanetaryDefenseImage, this._WeaponSpecialForcesImage);
-          int width = 910;
-          int height = 786;
-          Point point = new Point(this.Parent.Parent.Parent.Controls["pnlInfoPanel"].Right + 20, this.Parent.Parent.Parent.ClientRectangle.Height - (height + 70 + 10));
+          int width = UiScale.S(910);
+          int height = UiScale.S(786);
+          Point point = new Point(this.Parent.Parent.Parent.Controls["pnlInfoPanel"].Right + UiScale.S(20), this.Parent.Parent.Parent.ClientRectangle.Height - (height + UiScale.S(70) + UiScale.S(10)));
           this.Size = new Size(width, height);
           this.Parent.Parent.Location = point;
-          this.Parent.Parent.Size = new Size(width + 25, height + 70);
+          this.Parent.Parent.Size = new Size(width + UiScale.S(25), height + UiScale.S(70));
           this._ColonyInvasion.Size = new Size(width, height);
           ((ScreenPanel) this.Parent.Parent).DoLayout();
           this.Parent.Parent.Invalidate();

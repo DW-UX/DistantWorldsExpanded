@@ -32,6 +32,7 @@ namespace BaconDistantWorlds
             try
             {
                 this.InitializeComponent();
+                UiScale.ScaleLayout(this);
                 List<Character> characterList1 = (List<Character>)null;
                 if (main._Game.PlayerEmpire.Capital != null && main._Game.PlayerEmpire.Capital.BaconValues != null && main._Game.PlayerEmpire.Capital.BaconValues.ContainsKey("capturedSpies"))
                     characterList1 = (List<Character>)main._Game.PlayerEmpire.Capital.BaconValues["capturedSpies"];
@@ -214,19 +215,19 @@ namespace BaconDistantWorlds
             this.spyNameColumn.HeaderText = "Name";
             this.spyNameColumn.Name = "spyNameColumn";
             this.spyNameColumn.ReadOnly = true;
-            this.spyNameColumn.Width = 150;
+            this.spyNameColumn.Width = UiScale.S(150);
             this.spyNationalityColumn.HeaderText = "Empire";
             this.spyNationalityColumn.Name = "spyNationalityColumn";
             this.spyNationalityColumn.ReadOnly = true;
-            this.spyNationalityColumn.Width = 150;
+            this.spyNationalityColumn.Width = UiScale.S(150);
             this.spyLocationColumn.HeaderText = "Location";
             this.spyLocationColumn.Name = "spyLocationColumn";
             this.spyLocationColumn.ReadOnly = true;
-            this.spyLocationColumn.Width = 150;
+            this.spyLocationColumn.Width = UiScale.S(150);
             this.ransomColumn.HeaderText = "Ransom";
             this.ransomColumn.Name = "ransomColumn";
             this.ransomColumn.ReadOnly = true;
-            this.ransomColumn.Width = 150;
+            this.ransomColumn.Width = UiScale.S(150);
             this.ransomButton.Location = new Point(178, 332);
             this.ransomButton.Name = "ransomButton";
             this.ransomButton.Size = new Size(75, 23);

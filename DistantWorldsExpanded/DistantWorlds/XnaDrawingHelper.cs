@@ -701,7 +701,7 @@ namespace DistantWorlds
       System.Drawing.Color shadowColor,
       PointF point)
     {
-      PointF point1 = new PointF(point.X + 1f, point.Y + 1f);
+      PointF point1 = new PointF(point.X + UiScale.S(1f), point.Y + UiScale.S(1f));
       XnaDrawingHelper.DrawString(spriteBatch, text, font, shadowColor, point1);
       XnaDrawingHelper.DrawString(spriteBatch, text, font, foreColor, point);
     }

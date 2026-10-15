@@ -15,7 +15,7 @@ namespace DistantWorlds.Controls
   public class MapKey : GradientPanel
   {
     private IContainer components;
-    private int _RowHeight = 14;
+    private int _RowHeight = UiScale.S(14);
     private int _TopMargin = 10;
     private int _LeftMargin = 10;
     private SolidBrush _SunPen = new SolidBrush(Color.Yellow);
@@ -56,15 +56,15 @@ namespace DistantWorlds.Controls
     {
       base.SetFontCache(fontCache);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public MapKey()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -95,18 +95,18 @@ namespace DistantWorlds.Controls
 
     private void DrawKeyItem(Graphics graphics, Color color, string description, Point location)
     {
-      Point location1 = new Point(location.X + 10, location.Y + 2);
-      graphics.FillRectangle((Brush) new SolidBrush(color), new Rectangle(location1, new Size(10, 10)));
-      Point point = new Point(location.X + 26, location.Y);
+      Point location1 = new Point(location.X + UiScale.S(10), location.Y + UiScale.S(2));
+      graphics.FillRectangle((Brush) new SolidBrush(color), new Rectangle(location1, new Size(UiScale.S(10), UiScale.S(10))));
+      Point point = new Point(location.X + UiScale.S(26), location.Y);
       graphics.DrawString(description, this.Font, (Brush) this._WhiteBrush, (PointF) point);
     }
 
     private void DrawColorKey(Graphics graphics)
     {
-      int x = 10;
-      int y1 = 30;
+      int x = UiScale.S(10);
+      int y1 = UiScale.S(30);
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-      Point location = new Point(x, 10);
+      Point location = new Point(x, UiScale.S(10));
       this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Trade Description Galaxy Map"), this._TitleFont, location);
       location = new Point(x, y1);
       this.DrawKeyItem(graphics, this._MainSequencePen.Color, TextResolver.GetText("Main Sequence star system"), location);
@@ -198,9 +198,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
   }

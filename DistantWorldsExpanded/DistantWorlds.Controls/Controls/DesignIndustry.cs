@@ -17,7 +17,7 @@ namespace DistantWorlds.Controls
   {
     private Galaxy _Galaxy;
     private Design _Design;
-    private int _RowHeight = 13;
+    private int _RowHeight = UiScale.S(13);
     private int _TopMargin = 7;
     private int _LeftMargin = 8;
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
@@ -30,10 +30,10 @@ namespace DistantWorlds.Controls
 
     public DesignIndustry()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData()
@@ -47,7 +47,7 @@ namespace DistantWorlds.Controls
       this._Galaxy = galaxy;
       this._Design = design;
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
       this.Invalidate();
     }
 
@@ -79,14 +79,14 @@ namespace DistantWorlds.Controls
 
     private void DrawIndustryInfo(Graphics graphics)
     {
-      int num1 = 10;
-      int width = 90;
-      int x = 110;
+      int num1 = UiScale.S(10);
+      int width = UiScale.S(90);
+      int x = UiScale.S(110);
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-      int y1 = 28;
+      int y1 = UiScale.S(28);
       Point location = new Point();
-      int num2 = 2;
-      location = new Point(8, 8);
+      int num2 = UiScale.S(2);
+      location = new Point(UiScale.S(8), UiScale.S(8));
       this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Industry"), this._TitleFont, location);
       if (this._Design == null)
         return;
@@ -107,11 +107,11 @@ namespace DistantWorlds.Controls
       if (this._Design.MedicalCapacity > 0)
         text2 = this._Design.MedicalCapacity.ToString();
       this.DrawStringWithDropShadow(graphics, text2, this._BoldFont, location);
-      int num3 = this.Width / 2 + 10;
+      int num3 = this.Width / 2 + UiScale.S(10);
       location = new Point(num1 + num3, y2);
       this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Recreation"), this.Font, location);
       SizeF sizeF = graphics.MeasureString(TextResolver.GetText("Recreation"), this.Font);
-      location = new Point(num3 + (int) sizeF.Width + 10, y2 - num2);
+      location = new Point(num3 + (int) sizeF.Width + UiScale.S(10), y2 - num2);
       string text3 = "(" + TextResolver.GetText("None") + ")";
       if (this._Design.RecreationCapacity > 0)
         text3 = this._Design.RecreationCapacity.ToString();
@@ -208,9 +208,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
 

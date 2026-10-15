@@ -30,14 +30,14 @@ namespace DistantWorlds.Controls
       this.CommandListView = new CommandListView();
       this.lblMission = new Label();
       this.SuspendLayout();
-      this.CommandListView.Location = new Point(6, 44);
+      this.CommandListView.Location = new Point(UiScale.S(6), UiScale.S(44));
       this.CommandListView.Name = "CommandListView";
-      this.CommandListView.Size = new Size(100, 68);
+      this.CommandListView.Size = new Size(UiScale.S(100), UiScale.S(68));
       this.CommandListView.TabIndex = 0;
       this.lblMission.AutoSize = true;
-      this.lblMission.Location = new Point(3, 9);
+      this.lblMission.Location = new Point(UiScale.S(3), UiScale.S(9));
       this.lblMission.Name = "lblMission";
-      this.lblMission.Size = new Size(35, 13);
+      this.lblMission.Size = new Size(UiScale.S(35), UiScale.S(13));
       this.lblMission.TabIndex = 1;
       this.lblMission.Text = "label1";
       this.Controls.Add((Control) this.lblMission);
@@ -52,18 +52,18 @@ namespace DistantWorlds.Controls
       this.InitializeComponent();
       this.BackColor = Color.FromArgb(0, 0, 64);
       this.BorderStyle = BorderStyle.None;
-      this.Font = new Font("Verdana", 6.75f, FontStyle.Regular);
+      this.Font = UiScale.NewFont("Verdana", 6.75f, FontStyle.Regular);
       this.ForeColor = Color.White;
-      this.lblMission.Font = new Font("Verdana", 6.75f, FontStyle.Bold);
-      this.lblMission.Location = new Point(5, 5);
-      this.CommandListView.Location = new Point(5, 20);
-      this.CommandListView.Size = new Size(this.Width - 10, this.Height - 25);
+      this.lblMission.Font = UiScale.NewFont("Verdana", 6.75f, FontStyle.Bold);
+      this.lblMission.Location = new Point(UiScale.S(5), UiScale.S(5));
+      this.CommandListView.Location = new Point(UiScale.S(5), UiScale.S(20));
+      this.CommandListView.Size = new Size(this.Width - UiScale.S(10), this.Height - UiScale.S(25));
       this.CommandListView.BringToFront();
     }
 
     public void BindData(BuiltObject builtObject)
     {
-      this.CommandListView.Size = new Size(this.Width - 10, this.Height - 25);
+      this.CommandListView.Size = new Size(this.Width - UiScale.S(10), this.Height - UiScale.S(25));
       this._BuiltObject = builtObject;
       if (builtObject != null)
       {
