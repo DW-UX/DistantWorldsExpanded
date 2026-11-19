@@ -2122,7 +2122,7 @@ namespace DistantWorlds
             picSystem.Width = UiScale.S(280);
             picSystem.Height = UiScale.S(280);
             mainView.HoverMessageLocation = new Point(10, mainView.Size.Height - (pnlInfoPanel.Height + btnSelectionForward.Height + btnSelectionAction1.Height + 4 + 35));
-            mainView.HoverMessageLocationMap = new Point(mainView.Size.Width - (pnlSystemMap.Width + 10), mainView.Height - (pnlSystemMap.Height + 64));
+            mainView.HoverMessageLocationMap = new Point(mainView.Size.Width - (pnlSystemMap.Width + UiScale.S(10)), mainView.Height - (pnlSystemMap.Height + UiScale.S(64)));
             mainView.HoverMessageLocationButtons = new Point(mainView.Size.Width / 2, num2 + num + 10 + 5);
             num6 = mainView.Size.Height - (pnlSystemMap.Height + UiScale.S(7)) + UiScale.S(1);
             btnZoomSelection.Location = new Point(mainView.Width - (picSystem.Width + btnZoomSelection.Width + UiScale.S(17)), num6);
