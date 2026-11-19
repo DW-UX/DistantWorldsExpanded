@@ -135,7 +135,7 @@ namespace DistantWorlds.Controls
       this.cmbTrait4.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbTrait4.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbTrait4.FlatStyle = FlatStyle.Popup;
-      this.cmbTrait4.Font = new Font("Verdana", 8.25f);
+      this.cmbTrait4.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbTrait4.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbTrait4.FormattingEnabled = true;
       this.cmbTrait4.Location = new Point(75, 254);
@@ -153,7 +153,7 @@ namespace DistantWorlds.Controls
       this.cmbTrait3.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbTrait3.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbTrait3.FlatStyle = FlatStyle.Popup;
-      this.cmbTrait3.Font = new Font("Verdana", 8.25f);
+      this.cmbTrait3.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbTrait3.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbTrait3.FormattingEnabled = true;
       this.cmbTrait3.Location = new Point(75, 226);
@@ -171,7 +171,7 @@ namespace DistantWorlds.Controls
       this.cmbTrait2.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbTrait2.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbTrait2.FlatStyle = FlatStyle.Popup;
-      this.cmbTrait2.Font = new Font("Verdana", 8.25f);
+      this.cmbTrait2.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbTrait2.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbTrait2.FormattingEnabled = true;
       this.cmbTrait2.Location = new Point(75, 198);
@@ -196,7 +196,7 @@ namespace DistantWorlds.Controls
       this.cmbSkill4.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbSkill4.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbSkill4.FlatStyle = FlatStyle.Popup;
-      this.cmbSkill4.Font = new Font("Verdana", 8.25f);
+      this.cmbSkill4.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbSkill4.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbSkill4.FormattingEnabled = true;
       this.cmbSkill4.Location = new Point(75, 123);
@@ -214,7 +214,7 @@ namespace DistantWorlds.Controls
       this.cmbSkill3.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbSkill3.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbSkill3.FlatStyle = FlatStyle.Popup;
-      this.cmbSkill3.Font = new Font("Verdana", 8.25f);
+      this.cmbSkill3.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbSkill3.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbSkill3.FormattingEnabled = true;
       this.cmbSkill3.Location = new Point(75, 95);
@@ -232,7 +232,7 @@ namespace DistantWorlds.Controls
       this.cmbSkill2.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbSkill2.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbSkill2.FlatStyle = FlatStyle.Popup;
-      this.cmbSkill2.Font = new Font("Verdana", 8.25f);
+      this.cmbSkill2.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbSkill2.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbSkill2.FormattingEnabled = true;
       this.cmbSkill2.Location = new Point(75, 67);
@@ -250,7 +250,7 @@ namespace DistantWorlds.Controls
       this.cmbTrait1.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbTrait1.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbTrait1.FlatStyle = FlatStyle.Popup;
-      this.cmbTrait1.Font = new Font("Verdana", 8.25f);
+      this.cmbTrait1.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbTrait1.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbTrait1.FormattingEnabled = true;
       this.cmbTrait1.Location = new Point(75, 170);
@@ -261,7 +261,7 @@ namespace DistantWorlds.Controls
       this.cmbSkill1.DrawMode = DrawMode.OwnerDrawFixed;
       this.cmbSkill1.DropDownStyle = ComboBoxStyle.DropDownList;
       this.cmbSkill1.FlatStyle = FlatStyle.Popup;
-      this.cmbSkill1.Font = new Font("Verdana", 8.25f);
+      this.cmbSkill1.Font = UiScale.NewFont("Verdana", 8.25f);
       this.cmbSkill1.ForeColor = Color.FromArgb(170, 170, 170);
       this.cmbSkill1.FormattingEnabled = true;
       this.cmbSkill1.Location = new Point(75, 39);

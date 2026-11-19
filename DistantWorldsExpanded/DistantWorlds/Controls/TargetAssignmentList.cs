@@ -285,7 +285,7 @@ namespace DistantWorlds.Controls
             method_0();
             main_0 = parentForm;
             rectangle_0 = area;
-            int_2 = 46;
+            int_2 = UiScale.S(46);
             //double_0 = 20.0;
             int_0 = (area.Height - (int_4 + 5 + int_5)) / int_2;
             Reset();
@@ -655,9 +655,9 @@ namespace DistantWorlds.Controls
             {
                 return;
             }
-            int num = 15;
+            int num = UiScale.S(15);
             ShipGroupList shipGroupList = shipGroupList_0;
-            int height = (shipGroupList.Count + 1) * 15;
+            int height = (shipGroupList.Count + 1) * UiScale.S(15);
             Rectangle rectangle = new Rectangle(point_0, new Size(int_6, height));
             using (SolidBrush brush = new SolidBrush(Color.FromArgb(192, 0, 0, 0)))
             {
@@ -699,7 +699,7 @@ namespace DistantWorlds.Controls
                 return;
             }
             main_0.method_112(graphics, GraphicsQuality.Low);
-            graphics.SetClip(new Rectangle(rectangle_0.X, rectangle_0.Y - 3, rectangle_0.Width, rectangle_0.Height + 3));
+            graphics.SetClip(new Rectangle(rectangle_0.X, rectangle_0.Y - UiScale.S(3), rectangle_0.Width, rectangle_0.Height + UiScale.S(3)));
             Color color = Color.FromArgb(36, 255, 255, 255);
             if (bool_1)
             {
@@ -707,7 +707,7 @@ namespace DistantWorlds.Controls
             }
             using (SolidBrush brush = new SolidBrush(color))
             {
-                Rectangle rect = new Rectangle(rectangle_0.X, rectangle_0.Y, rectangle_0.Width - 1, int_4);
+                Rectangle rect = new Rectangle(rectangle_0.X, rectangle_0.Y, rectangle_0.Width - UiScale.S(1), int_4);
                 graphics.FillRectangle(brush, rect);
                 using (Pen pen = new Pen(Color.FromArgb(64, 255, 255, 255)))
                 {
@@ -721,7 +721,7 @@ namespace DistantWorlds.Controls
             }
             if (Expanded)
             {
-                int num = -1;
+                int num = UiScale.S(-1);
                 for (int i = int_1; i < prioritizedTargetList_0.Count && i < int_1 + int_0; i++)
                 {
                     int num2 = (i - int_1) * int_2;
@@ -745,7 +745,7 @@ namespace DistantWorlds.Controls
                         }
                         num3 += (int)(num4 * 1.7);
                     }
-                    Rectangle rect2 = new Rectangle(rectangle_0.X, rectangle_0.Y + num2 + int_4 + 5, rectangle_0.Width - 1, int_2 - 5);
+                    Rectangle rect2 = new Rectangle(rectangle_0.X, rectangle_0.Y + num2 + int_4 + UiScale.S(5), rectangle_0.Width - UiScale.S(1), int_2 - UiScale.S(5));
                     Color color2 = Color.FromArgb(num3, prioritizedTargetList_0[i].Empire.MainColor);
                     Color color3 = prioritizedTargetList_0[i].Empire.MainColor;
                     if (prioritizedTargetList_0[i].Empire.PirateEmpireBaseHabitat != null)
@@ -767,25 +767,25 @@ namespace DistantWorlds.Controls
                         using Pen pen2 = new Pen(Color.FromArgb(alpha, prioritizedTargetList_0[i].Empire.MainColor));
                         graphics.DrawRectangle(pen2, rect2);
                     }
-                    graphics.DrawImage(list_1[i], rect2.X + 5, rect2.Y + 5);
+                    graphics.DrawImage(list_1[i], rect2.X + UiScale.S(5), rect2.Y + UiScale.S(5));
                     Bitmap bitmap = method_8(prioritizedTargetList_0[i]);
                     int num5 = 0;
                     if (bitmap != null)
                     {
-                        graphics.DrawImage(bitmap, rect2.X + 59, rect2.Y + 5);
-                        num5 = bitmap.Width + 3;
+                        graphics.DrawImage(bitmap, rect2.X + UiScale.S(59), rect2.Y + UiScale.S(5));
+                        num5 = bitmap.Width + UiScale.S(3);
                     }
                     main_0.method_112(graphics, GraphicsQuality.Medium);
-                    Point point_ = new Point(rect2.X + 59 + num5, rect2.Y + 3);
+                    Point point_ = new Point(rect2.X + UiScale.S(59) + num5, rect2.Y + UiScale.S(3));
                     using (SolidBrush brush_ = new SolidBrush(color3))
                     {
-                        SizeF sizeF_ = new SizeF(200f, 20f);
+                        SizeF sizeF_ = new SizeF(UiScale.S(200f), UiScale.S(20f));
                         string name = prioritizedTargetList_0[i].Name;
-                        SizeF sizeF = graphics.MeasureString(name, font_1, 200, StringFormat.GenericTypographic);
+                        SizeF sizeF = graphics.MeasureString(name, font_1, UiScale.S(200), StringFormat.GenericTypographic);
                         method_13(graphics, name, font_1, point_, brush_, sizeF_);
-                        method_13(point_0: new Point(point_.X + (int)(sizeF.Width + 6f), point_.Y + 1), graphics_0: graphics, string_0: "(" + prioritizedTargetList_0[i].Empire.Name + ")", font_3: font_0, brush_0: brush_, sizeF_0: sizeF_);
+                        method_13(point_0: new Point(point_.X + (int)(sizeF.Width + UiScale.S(6f)), point_.Y + UiScale.S(1)), graphics_0: graphics, string_0: "(" + prioritizedTargetList_0[i].Empire.Name + ")", font_3: font_0, brush_0: brush_, sizeF_0: sizeF_);
                     }
-                    Point point = new Point(rect2.X + 59 + num5, rect2.Y + 22);
+                    Point point = new Point(rect2.X + UiScale.S(59) + num5, rect2.Y + UiScale.S(22));
                     string s = method_7(prioritizedTargetList_0[i]);
                     Color color4 = Color.FromArgb(170, 170, 170);
                     if (shipGroup != null)
@@ -803,12 +803,12 @@ namespace DistantWorlds.Controls
                         SizeF sizeF2 = graphics.MeasureString(text, font_2, rectangle_0.Width, StringFormat.GenericTypographic);
                         string text2 = "(" + TextResolver.GetText("right-click to cancel").ToLower(CultureInfo.InvariantCulture) + ")";
                         SizeF sizeF3 = graphics.MeasureString(text2, font_0, rectangle_0.Width, StringFormat.GenericTypographic);
-                        sizeF3 = new SizeF(sizeF3.Width, sizeF3.Height - 4f);
+                        sizeF3 = new SizeF(sizeF3.Width, sizeF3.Height - UiScale.S(4f));
                         int num6 = (rect2.Width - (int)sizeF2.Width) / 2;
                         int num7 = (rect2.Height - (int)(sizeF2.Height + sizeF3.Height)) / 2;
                         Point point_3 = new Point(rect2.X + num6, rect2.Y + num7);
                         int num8 = (rect2.Width - (int)sizeF3.Width) / 2;
-                        int num9 = num7 + (int)sizeF2.Height - 4;
+                        int num9 = num7 + (int)sizeF2.Height - UiScale.S(4);
                         Point point_4 = new Point(rect2.X + num8, rect2.Y + num9);
                         using SolidBrush brush_2 = new SolidBrush(Color.FromArgb(255, 220, 220, 220));
                         method_12(graphics, text, font_2, point_3, brush_2);
@@ -823,7 +823,7 @@ namespace DistantWorlds.Controls
                         color5 = Color.FromArgb(80, 255, 255, 255);
                     }
                     using SolidBrush brush4 = new SolidBrush(color5);
-                    Rectangle rect3 = new Rectangle(rectangle_0.X, rectangle_0.Bottom - int_5, rectangle_0.Width / 2 - 1, int_5 - 1);
+                    Rectangle rect3 = new Rectangle(rectangle_0.X, rectangle_0.Bottom - int_5, rectangle_0.Width / 2 - UiScale.S(1), int_5 - UiScale.S(1));
                     graphics.FillRectangle(brush4, rect3);
                     using (Pen pen3 = new Pen(Color.FromArgb(64, 255, 255, 255)))
                     {
@@ -846,7 +846,7 @@ namespace DistantWorlds.Controls
                         color6 = Color.FromArgb(80, 255, 255, 255);
                     }
                     using SolidBrush brush5 = new SolidBrush(color6);
-                    Rectangle rect4 = new Rectangle(rectangle_0.X + rectangle_0.Width / 2, rectangle_0.Bottom - int_5, rectangle_0.Width / 2 - 1, int_5 - 1);
+                    Rectangle rect4 = new Rectangle(rectangle_0.X + rectangle_0.Width / 2, rectangle_0.Bottom - int_5, rectangle_0.Width / 2 - UiScale.S(1), int_5 - UiScale.S(1));
                     graphics.FillRectangle(brush5, rect4);
                     using (Pen pen4 = new Pen(Color.FromArgb(64, 255, 255, 255)))
                     {
@@ -884,17 +884,17 @@ namespace DistantWorlds.Controls
         {
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_3, brush: solidBrush_1, format: StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 RectangleF layoutRectangle2 = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_3, brush_0, layoutRectangle2, StringFormat.GenericTypographic);
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_3, solidBrush_1, point_0);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_3, brush_0, point_0);
             }
         }
@@ -911,19 +911,19 @@ namespace DistantWorlds.Controls
             list_1 = new List<Bitmap>();
             int_0 = 5;
             dateTime_0 = DateTime.MinValue;
-            rectangle_0 = new Rectangle(10, 100, 200, 50);
-            int_2 = 46;
+            rectangle_0 = new Rectangle(UiScale.S(10), UiScale.S(100), UiScale.S(200), UiScale.S(50));
+            int_2 = UiScale.S(46);
             //double_0 = 20.0;
             int_3 = 30;
             float_0 = 0.6f;
-            int_4 = 17;
-            int_5 = 17;
+            int_4 = UiScale.S(17);
+            int_5 = UiScale.S(17);
             solidBrush_0 = new SolidBrush(Color.White);
             solidBrush_1 = new SolidBrush(Color.Black);
             solidBrush_2 = new SolidBrush(Color.FromArgb(170, 170, 170));
-            font_0 = new Font("Verdana", 8f);
-            font_1 = new Font("Verdana", 10f, FontStyle.Bold);
-            font_2 = new Font("Verdana", 12f, FontStyle.Bold);
+            font_0 = UiScale.NewFont("Verdana", 8f);
+            font_1 = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
+            font_2 = UiScale.NewFont("Verdana", 12f, FontStyle.Bold);
         }
     }
 }

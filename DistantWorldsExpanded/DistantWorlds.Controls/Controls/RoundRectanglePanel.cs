@@ -13,15 +13,15 @@ namespace DistantWorlds.Controls
 {
   public class RoundRectanglePanel : Panel
   {
-    public int CornerCurveRadius = 5;
-    public int BorderWidth = 5;
+    public int CornerCurveRadius = UiScale.S(5);
+    public int BorderWidth = UiScale.S(5);
 
     protected override void OnPaint(PaintEventArgs e) => this.DrawBorder(e.Graphics, this.ForeColor, this.BorderWidth);
 
     public void DrawBorder(Graphics graphics, Color color, int width)
     {
       int num = width / 2;
-      using (GraphicsPath roundRectangle = RoundRectanglePanel.CreateRoundRectangle(new Rectangle(num, num, this.Width - width, this.Height - width), this.CornerCurveRadius - 1))
+      using (GraphicsPath roundRectangle = RoundRectanglePanel.CreateRoundRectangle(new Rectangle(num, num, this.Width - width, this.Height - width), this.CornerCurveRadius - UiScale.S(1)))
       {
         GraphicsHelper.SetGraphicsQualityToHigh(graphics);
         using (Pen pen = new Pen(color))

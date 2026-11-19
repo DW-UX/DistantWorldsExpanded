@@ -38,7 +38,8 @@ namespace DistantWorlds.Controls
 
     public event EventHandler CaptionClicked;
 
-    public Size BackupSize
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Size BackupSize
     {
       set
       {
@@ -74,8 +75,8 @@ namespace DistantWorlds.Controls
       this.CaptionBrush = BrushType.Gradient;
       this.CaptionColorOne = Color.FromArgb(144, 144, 154);
       this.CaptionColorTwo = Color.FromArgb(56, 56, 64);
-      this.CaptionFont = new Font("Verdana", 10f, FontStyle.Bold);
-      this.CaptionSize = 20;
+      this.CaptionFont = UiScale.NewFont("Verdana", 10f, FontStyle.Bold);
+      this.CaptionSize = UiScale.S(20);
       this.CaptionTextColor = Color.White;
     }
 
@@ -510,7 +511,8 @@ namespace DistantWorlds.Controls
 
     [Description("Get/Set the color of the text displayed in the caption")]
     [Category("Caption")]
-    public Color CaptionTextColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color CaptionTextColor
     {
       get => this.captionCtrl.TextColor;
       set => this.captionCtrl.TextColor = value;
@@ -518,7 +520,8 @@ namespace DistantWorlds.Controls
 
     [Category("Caption")]
     [Description("Get/Set the starting color for the gradient brush if brush type is chose to be gradient")]
-    public Color CaptionColorOne
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color CaptionColorOne
     {
       get => this.captionCtrl.ColorOne;
       set => this.captionCtrl.ColorOne = value;
@@ -526,7 +529,8 @@ namespace DistantWorlds.Controls
 
     [Category("Caption")]
     [Description("Get/Set the ending color for the gradient brush if brush type is chose to be gradient")]
-    public Color CaptionColorTwo
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color CaptionColorTwo
     {
       get => this.captionCtrl.ColorTwo;
       set => this.captionCtrl.ColorTwo = value;
@@ -534,7 +538,8 @@ namespace DistantWorlds.Controls
 
     [Description("Get/Set the font used for drawing the caption text")]
     [Category("Caption")]
-    public Font CaptionFont
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Font CaptionFont
     {
       get => this.captionCtrl.CaptionFont;
       set => this.captionCtrl.CaptionFont = value;
@@ -590,14 +595,16 @@ namespace DistantWorlds.Controls
     }
 
     [Browsable(false)]
-    public Color DirectionCtrlColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DirectionCtrlColor
     {
       get => this.captionCtrl.DirectionCtrlColor;
       set => this.captionCtrl.DirectionCtrlColor = value;
     }
 
     [Browsable(false)]
-    public Color DirectionCtrlHoverColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DirectionCtrlHoverColor
     {
       get => this.captionCtrl.DirectionCtrlHoverColor;
       set => this.captionCtrl.DirectionCtrlHoverColor = value;
@@ -721,7 +728,7 @@ namespace DistantWorlds.Controls
       this.captionCtrl.BackColor = Color.Transparent;
       this.captionCtrl.BorderColor = Color.Gray;
       this.captionCtrl.BrushType = BrushType.Gradient;
-      this.captionCtrl.CaptionFont = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
+      this.captionCtrl.CaptionFont = UiScale.NewFont("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.captionCtrl.CaptionIcon = (Image) null;
       this.captionCtrl.CaptionText = "Caption";
       this.captionCtrl.ColorOne = Color.White;
@@ -730,7 +737,7 @@ namespace DistantWorlds.Controls
       this.captionCtrl.DirectionCtrlHoverColor = Color.Orange;
       this.captionCtrl.Location = new Point(0, 0);
       this.captionCtrl.Name = "captionCtrl";
-      this.captionCtrl.Size = new Size(200, 100);
+      this.captionCtrl.Size = new Size(UiScale.S(200), UiScale.S(100));
       this.captionCtrl.TabIndex = 0;
       this.captionCtrl.TextColor = Color.Black;
       this.captionCtrl.Click += new EventHandler(this.captionCtrl_Click);

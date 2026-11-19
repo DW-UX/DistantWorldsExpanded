@@ -12,10 +12,12 @@ namespace ExpansionMod.Controls.Forms
 {
     public partial class fRepairPriorityRename : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string Result { get; set; }
         public fRepairPriorityRename(string name)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             txtNewName.Text = name;
         }
 

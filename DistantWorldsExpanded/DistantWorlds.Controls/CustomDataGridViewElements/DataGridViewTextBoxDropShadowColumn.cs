@@ -19,7 +19,7 @@ namespace DistantWorlds.Controls
     {
     }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     [Browsable(false)]
     public override DataGridViewCell CellTemplate
     {
@@ -31,7 +31,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public int MaximumAmount
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int MaximumAmount
     {
       get => this.TextBoxDropShadowCellTemplate != null ? this.TextBoxDropShadowCellTemplate.MaximumAmount : throw new InvalidOperationException("Operation cannot be completed because this DataGridViewColumn does not have a CellTemplate.");
       set
@@ -52,7 +53,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public bool UseDropShadow
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool UseDropShadow
     {
       get => this.TextBoxDropShadowCellTemplate != null ? this.TextBoxDropShadowCellTemplate.UseDropShadow : throw new InvalidOperationException("Operation cannot be completed because this DataGridViewColumn does not have a CellTemplate.");
       set

@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -315,6 +316,10 @@ namespace DistantWorlds.Types
                 {
                     bitmap2.Save((Stream)memoryStream, ImageFormat.Png);
                 }
+                catch (Exception ex)
+                {
+                    Main.LogError($"{nameof(LoadImageFromFilePath)} - {imagePath} - {ex.ToString()}");
+                }
                 finally
                 {
                     bitmap2.Dispose();
@@ -323,45 +328,15 @@ namespace DistantWorlds.Types
                 memoryStream.Close();
                 bitmap1.SetResolution(horizontalResolution, verticalResolution);
             }
+            catch (Exception ex)
+            {
+                Main.LogError($"{nameof(LoadImageFromFilePath)} - {imagePath} - {ex.ToString()}");
+            }
             finally
             {
                 memoryStream.Dispose();
             }
             return bitmap1;
-
-            //Bitmap bitmap1 = (Bitmap)null;
-            //MemoryStream memoryStream = new MemoryStream();
-            //try
-            //{
-            //    bitmap1 = new Bitmap(imagePath);
-
-            //    float horizontalResolution = bitmap1.HorizontalResolution;
-            //    float verticalResolution = bitmap1.VerticalResolution;
-            //    if (bitmap1.RawFormat.Guid != System.Drawing.Imaging.ImageFormat.Png.Guid)
-            //    {
-            //        Bitmap bitmap2 = new Bitmap(bitmap1);
-            //        try
-            //        {
-            //            bitmap2.Save((Stream)memoryStream, ImageFormat.Png);
-            //        }
-            //        finally
-            //        {
-            //            bitmap2.Dispose();
-            //        }
-            //        bitmap1 = new Bitmap(Image.FromStream((Stream)memoryStream));
-            //        memoryStream.Close();
-            //    }
-            //    else
-            //    {
-            //        bitmap1.MakeTransparent(Color.Transparent);
-            //    }
-            //    bitmap1.SetResolution(horizontalResolution, verticalResolution);
-            //}
-            //finally
-            //{
-            //    memoryStream.Dispose();
-            //}
-            //return bitmap1;
         }
 
         public static Point MeasureCenterForImage(Bitmap image, int width, int height)
@@ -483,7 +458,7 @@ namespace DistantWorlds.Types
         {
             if (maxSize.IsEmpty)
             {
-                int width = 300;
+                int width = UiScale.S(300);
                 SizeF sizeF = graphics.MeasureString(text, font, width);
                 int x = location.X - (int)((double)sizeF.Width / 2.0);
                 GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, new Point(x, location.Y), brush);
@@ -527,8 +502,8 @@ namespace DistantWorlds.Types
         {
             SizeF sizeF = graphics.MeasureString(text, font, textArea.Width);
             int x = textArea.X + textArea.Width / 2 - (int)((double)sizeF.Width / 2.0);
-            GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, new Point(x, textArea.Y), (Brush)brush, (Brush)dropShadowBrush, new SizeF(sizeF.Width + 2f, sizeF.Height + 2f));
-            return (int)sizeF.Height + 1;
+            GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, new Point(x, textArea.Y), (Brush)brush, (Brush)dropShadowBrush, new SizeF(sizeF.Width + UiScale.S(2f), sizeF.Height + UiScale.S(2f)));
+            return (int)sizeF.Height + UiScale.S(1);
         }
 
         public static void DrawStringWithDropShadow(
@@ -548,10 +523,10 @@ namespace DistantWorlds.Types
           Point location,
           SolidBrush brush)
         {
-            location = new Point(location.X + 1, location.Y + 1);
+            location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
             using (SolidBrush solidBrush = new SolidBrush(Color.Black))
                 graphics.DrawString(text, font, (Brush)solidBrush, (PointF)location, StringFormat.GenericTypographic);
-            location = new Point(location.X - 1, location.Y - 1);
+            location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
             graphics.DrawString(text, font, (Brush)brush, (PointF)location, StringFormat.GenericTypographic);
         }
 
@@ -579,7 +554,7 @@ namespace DistantWorlds.Types
             if (maxSize != SizeF.Empty)
             {
                 bool flag = false;
-                location = new Point(location.X + 1, location.Y + 1);
+                location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF((float)location.X, (float)location.Y, maxSize.Width, maxSize.Height);
                 StringFormat genericTypographic = StringFormat.GenericTypographic;
                 //genericTypographic.Trimming = StringTrimming.None;
@@ -593,7 +568,7 @@ namespace DistantWorlds.Types
                     var bitmp = CopyGraphicsContent(graphics, rect);
                     bitmp.Save(@"H:\test1.bmp", ImageFormat.Bmp);
                 }
-                location = new Point(location.X - 1, location.Y - 1);
+                location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF((float)location.X, (float)location.Y, maxSize.Width, maxSize.Height);
                 graphics.DrawString(text, font, brush, layoutRectangle, genericTypographic);
 
@@ -606,9 +581,9 @@ namespace DistantWorlds.Types
             }
             else
             {
-                location = new Point(location.X + 1, location.Y + 1);
+                location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
                 graphics.DrawString(text, font, dropShadowBrush, (PointF)location);
-                location = new Point(location.X - 1, location.Y - 1);
+                location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
                 graphics.DrawString(text, font, brush, (PointF)location);
             }
         }

@@ -50,7 +50,7 @@ namespace DistantWorlds
         protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
         {
             Pen pen = new Pen(Color.Gray);
-            e.Graphics.DrawLine(pen, 4, e.Item.Bounds.Height / 2, e.Item.Bounds.Width - 8, e.Item.Bounds.Height / 2);
+            e.Graphics.DrawLine(pen, UiScale.S(4), e.Item.Bounds.Height / 2, e.Item.Bounds.Width - UiScale.S(8), e.Item.Bounds.Height / 2);
             pen.Dispose();
         }
 

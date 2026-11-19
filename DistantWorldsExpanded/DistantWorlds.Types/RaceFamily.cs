@@ -11,14 +11,14 @@ namespace DistantWorlds.Types
   [Serializable]
   public class RaceFamily : IComparable<RaceFamily>
   {
-    public byte RaceFamilyId;
+    public int RaceFamilyId;
     public string Name;
     public int SpecialFunctionCode;
     public RaceFamilyBiasList Biases = new RaceFamilyBiasList();
     [NonSerialized]
     public float SortTag;
 
-    public RaceFamily(byte raceFamilyId, string name, int specialFunctionCode)
+    public RaceFamily(int raceFamilyId, string name, int specialFunctionCode)
     {
       this.RaceFamilyId = raceFamilyId;
       this.Name = name;

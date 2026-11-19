@@ -35,14 +35,14 @@ namespace DistantWorlds.Types
       int pictureRef,
       double mortalityRate,
       int infectionChance,
-      float length)
+      float duration)
     {
       this.PlagueId = plagueId;
       this.Name = name;
       this.PictureRef = pictureRef;
       this.MortalityRate = mortalityRate;
       this.InfectionChance = infectionChance;
-      this.Duration = length;
+      this.Duration = duration;
     }
 
     int IComparable<Plague>.CompareTo(Plague other) => (double) this.SortTag > 0.0 || (double) other.SortTag > 0.0 ? this.SortTag.CompareTo(other.SortTag) : this.PlagueId.CompareTo(other.PlagueId);

@@ -45,16 +45,16 @@ namespace DistantWorlds.Controls
         public EmpireSummaryBonuses():base()
         {
             
-            int_0 = 15;
-            int_1 = 10;
-            int_2 = 10;
+            int_0 = UiScale.S(15);
+            int_1 = UiScale.S(10);
+            int_2 = UiScale.S(10);
             solidBrush_0 = new SolidBrush(Color.FromArgb(170, 170, 170));
             solidBrush_1 = new SolidBrush(Color.Black);
             solidBrush_2 = new SolidBrush(Color.Red);
             solidBrush_3 = new SolidBrush(Color.Green);
-            Font = new Font("Verdana", 8f);
+            Font = UiScale.NewFont("Verdana", 8f);
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
         }
 
         public void ClearData()
@@ -71,7 +71,7 @@ namespace DistantWorlds.Controls
             empire_0 = empire;
             characterImageCache_0 = characterImageCache;
             font_0 = new Font(Font, FontStyle.Bold);
-            font_1 = new Font(Font.FontFamily, Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+            font_1 = new Font(Font.FontFamily, Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
             Invalidate();
         }
 
@@ -89,11 +89,11 @@ namespace DistantWorlds.Controls
             }
             int_1 = 0;
             int_2 = 0;
-            int num = int_2 + int_0 + 5;
-            int num2 = 5;
+            int num = int_2 + int_0 + UiScale.S(5);
+            int num2 = UiScale.S(5);
             int int_ = 0;
             int num3 = int_1;
-            SizeF sizeF_ = new SizeF(base.Width - (int_0 + 5 + int_2 * 2), base.Height);
+            SizeF sizeF_ = new SizeF(base.Width - (int_0 + UiScale.S(5) + int_2 * 2), base.Height);
             RaceList bonusRaces = new RaceList();
             List<string> list = empire_0.ResolveEmpireAbilityBonusDescriptions(includeDominantRaceInDescriptions: true, out bonusRaces);
             for (int i = 0; i < list.Count; i++)
@@ -314,9 +314,9 @@ namespace DistantWorlds.Controls
 
         private void method_6(Graphics graphics_0, string string_0, Font font_2, Point point_0, SolidBrush solidBrush_4)
         {
-            point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+            point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
-            point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+            point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
             graphics_0.DrawString(string_0, font_2, solidBrush_4, point_0, StringFormat.GenericTypographic);
         }
 
@@ -325,18 +325,18 @@ namespace DistantWorlds.Controls
             int_3 = 0;
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_2, brush: solidBrush_1, format: StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 RectangleF layoutRectangle2 = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle2, StringFormat.GenericTypographic);
                 int_3 = (int)graphics_0.MeasureString(string_0, font_2, (int)sizeF_0.Width, StringFormat.GenericTypographic).Height;
             }
             else
             {
-                point_0 = new Point(point_0.X + 1, point_0.Y + 1);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
-                point_0 = new Point(point_0.X - 1, point_0.Y - 1);
+                point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 graphics_0.DrawString(string_0, font_2, brush_0, point_0, StringFormat.GenericTypographic);
             }
         }

@@ -60,7 +60,7 @@ namespace DistantWorlds.Controls
             this.View = View.LargeIcon;
             this.BackColor = Color.FromArgb(48, 48, 64);
             this.BorderStyle = BorderStyle.None;
-            this.Font = new Font("Verdana", 6.75f, FontStyle.Regular);
+            this.Font = UiScale.NewFont("Verdana", 6.75f, FontStyle.Regular);
             this.SetFont(12.67f);
             this.ForeColor = Color.FromArgb(170, 170, 170);
             this.MultiSelect = false;

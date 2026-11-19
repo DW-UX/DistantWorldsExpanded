@@ -33,8 +33,10 @@ namespace ExpansionMod
         private RepairPriorityManager _repairPriorityManager;
 
         private Main _gameMain = null;
+        private SettingsModel _settings = null;
 
         public bool Inited { get; private set; }
+        public bool StartupDone { get; private set; }
         public static ExpansionModMain ModMain { get; private set; }
 
 
@@ -51,8 +53,8 @@ namespace ExpansionMod
         {
             KeyMapper gameKeyMapper = new KeyMapper(_MainGameMappingFileName);
             ExpKeyMapper expKeyMapper = new ExpKeyMapper(_ExpansionMappingFileName);
-            gameKeyMapper.GenerateDefaultFile(_selfModEntity.RootFolder);
-            expKeyMapper.GenerateDefaultFile(_selfModEntity.RootFolder);
+            gameKeyMapper.GenerateDefaultFile(Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder));
+            expKeyMapper.GenerateDefaultFile(Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder));
         }
 
 
@@ -65,6 +67,8 @@ namespace ExpansionMod
                 HotKeysInitImpl(false);
                 FindOtherMods();
                 LoadRepairPriority(model);
+                _settings = model;
+                this.StartupDone = true;
             }
             else
             {
@@ -245,6 +249,17 @@ namespace ExpansionMod
             return res;
         }
 
+        internal SettingsModel GetSettings()
+        {
+            if (this.StartupDone)
+            {
+                return _settings;
+            }
+            else
+            {
+                return null;
+            }
+        }
         #endregion
 
         #region Private
@@ -253,19 +268,19 @@ namespace ExpansionMod
         {
             KeyMapper gameKeyMapper = new KeyMapper(_MainGameMappingFileName);
             ExpKeyMapper expKeyMapper = new ExpKeyMapper(_ExpansionMappingFileName);
-            if (!gameKeyMapper.MapKeys(_selfModEntity.RootFolder))
+            if (!gameKeyMapper.MapKeys(Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder)))
             {
                 throw new ApplicationException($"Failed to map keys, check {_MainGameMappingFileName} file");
             }
-            if (!expKeyMapper.MapKeys(_selfModEntity.RootFolder))
+            if (!expKeyMapper.MapKeys(Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder)))
             {
                 throw new ApplicationException($"Failed to map keys, check {_ExpansionMappingFileName} file");
             }
-            _gameHotKeyManager = new HotKeyManager(gameKeyMapper, _selfModEntity.RootFolder, true);
-            _expModHotKeyManager = new HotKeyManager(expKeyMapper, _selfModEntity.RootFolder, false);
+            _gameHotKeyManager = new HotKeyManager(gameKeyMapper, Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder), true);
+            _expModHotKeyManager = new HotKeyManager(expKeyMapper, Path.Combine(AppContext.BaseDirectory, _selfModEntity.RootFolder), false);
             if (!generateDefaultKeys)
             {
-                _hotKeyOverseer.AddHotKeyManager(_gameHotKeyManager, new ModEntity(Helper.GetModPath(""), "DistantWorlds", null));
+                _hotKeyOverseer.AddHotKeyManager(_gameHotKeyManager, new ModEntity( Helper.GetModPath(""), "DistantWorlds", null));
                 //will self register later from FindOtherMods
                 //_hotKeyOverseer.AddHotKeyManager(_expModHotKeyManager, new ModEntity(Helper.GetModPath(""), _ModKey, null));
             }

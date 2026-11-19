@@ -18,9 +18,9 @@ namespace DistantWorlds.Controls
     private Galaxy _Galaxy;
     private Empire _Empire;
     private Empire _PlayerEmpire;
-    private int _RowHeight = 14;
-    private int _TopMargin = 10;
-    private int _LeftMargin = 10;
+    private int _RowHeight = UiScale.S(14);
+    private int _TopMargin = UiScale.S(10);
+    private int _LeftMargin = UiScale.S(10);
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
     private SolidBrush _BlackBrush = new SolidBrush(Color.Black);
     private SolidBrush _RedBrush = new SolidBrush(Color.Red);
@@ -37,10 +37,10 @@ namespace DistantWorlds.Controls
 
     public DiplomacyEmpireSummary()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold);
     }
 
     public void ClearData()
@@ -56,7 +56,7 @@ namespace DistantWorlds.Controls
       this._Empire = empire;
       this._PlayerEmpire = playerEmpire;
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold);
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -87,7 +87,7 @@ namespace DistantWorlds.Controls
 
     private void DrawEmpireSummary(Graphics graphics)
     {
-      int x = 190;
+      int x = UiScale.S(190);
       int topMargin1 = this._TopMargin;
       Point point = new Point(this._LeftMargin, topMargin1);
       if (this._Empire == null || this._Empire.PirateEmpireBaseHabitat != null || this._PlayerEmpire.PirateEmpireBaseHabitat != null)
@@ -180,9 +180,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
   }

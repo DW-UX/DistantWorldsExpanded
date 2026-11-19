@@ -113,7 +113,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      float num1 = (float) ((double) (this.ClientRectangle.Height - this.Font.Height) / 2.0 - 2.0);
+      float num1 = (float) ((double) (this.ClientRectangle.Height - this.Font.Height) / 2.0 - UiScale.S(2.0));
       PointF point = new PointF((float) this.ClientRectangle.Height, (float) e.Bounds.Y + num1);
       Font font = this.Font;
       SolidBrush solidBrush = new SolidBrush(this.ForeColor);
@@ -129,10 +129,10 @@ namespace DistantWorlds.Controls
         e.Graphics.DrawString(this._Races[index].Name, font, (Brush) solidBrush, point);
         Rectangle rect = new Rectangle();
         Bitmap raceImage = this._RaceImages[this._Races[index].PictureRef];
-        int height = e.Bounds.Height - 2;
+        int height = e.Bounds.Height - UiScale.S(2);
         double num2 = (double) height / (double) raceImage.Height;
         int width = (int) ((double) raceImage.Width * num2);
-        rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+        rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
         e.Graphics.DrawImage((Image) raceImage, rect);
       }
       e.DrawFocusRectangle();

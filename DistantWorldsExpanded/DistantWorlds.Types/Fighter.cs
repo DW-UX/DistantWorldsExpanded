@@ -18,6 +18,11 @@ namespace DistantWorlds.Types
     [Serializable]
     public class Fighter : StellarObject, ISerializable
     {
+        [OptionalField]
+        public bool BaconFighterOutOfAmmo = false;
+        [OptionalField]
+        public bool BaconAutomationEnabled = false;
+
         public int FighterID;
 
         public FighterSpecification Specification;
@@ -749,6 +754,7 @@ namespace DistantWorlds.Types
                                                 bool flag5 = false;
                                                 switch (builtObject2.SubRole)
                                                 {
+                                                    case BuiltObjectSubRole.Outpost:
                                                     case BuiltObjectSubRole.SmallSpacePort:
                                                     case BuiltObjectSubRole.MediumSpacePort:
                                                     case BuiltObjectSubRole.LargeSpacePort:
@@ -846,6 +852,7 @@ namespace DistantWorlds.Types
                                                     bool flag3 = false;
                                                     switch (builtObject.SubRole)
                                                     {
+                                                        case BuiltObjectSubRole.Outpost:
                                                         case BuiltObjectSubRole.SmallSpacePort:
                                                         case BuiltObjectSubRole.MediumSpacePort:
                                                         case BuiltObjectSubRole.LargeSpacePort:
@@ -1010,6 +1017,7 @@ namespace DistantWorlds.Types
                             bool flag = false;
                             switch (pirateBase.SubRole)
                             {
+                                case BuiltObjectSubRole.Outpost:
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
                                 case BuiltObjectSubRole.LargeSpacePort:

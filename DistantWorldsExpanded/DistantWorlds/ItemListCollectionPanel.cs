@@ -158,7 +158,8 @@ namespace DistantWorlds
 
         //private bool bool_0;
 
-        public float SizeFactor => float_0;
+        // Callers use this to size the tool, so it includes the global UI scale.
+        public float SizeFactor => float_0 * UiScale.Factor;
 
         public Main Parent => main_0;
 
@@ -517,22 +518,22 @@ namespace DistantWorlds
                 float_0 = 1.77f;
             }
             method_0();
-            SelectionButtonWidth = (int)(26f * float_0);
-            SelectionButtonHeight = (int)(26f * float_0);
-            ImageSize = (int)(30f * float_0);
+            SelectionButtonWidth = (int)(26f * float_0 * UiScale.Factor);
+            SelectionButtonHeight = (int)(26f * float_0 * UiScale.Factor);
+            ImageSize = (int)(30f * float_0 * UiScale.Factor);
             for (int i = 0; i < Panels.Count; i++)
             {
                 ItemListPanel itemListPanel = Panels[i];
                 if (itemListPanel != null)
                 {
-                    itemListPanel.ItemHeight = (int)((float)itemListPanel.DefaultItemHeight * itemListPanel.ItemHeightOverrideFactor * float_0);
-                    itemListPanel.TitleBarHeight = (int)((float)itemListPanel.DefaultTitleBarHeight * float_0);
-                    itemListPanel.ToggleButtonHeight = (int)((float)itemListPanel.DefaultToggleButtonHeight * float_0);
-                    itemListPanel.ScrollUpHeight = (int)((float)itemListPanel.DefaultScrollUpHeight * float_0);
-                    itemListPanel.ScrollDownHeight = (int)((float)itemListPanel.DefaultScrollDownHeight * float_0);
-                    itemListPanel.ScrollAmountPerClick = (int)((float)itemListPanel.DefaultScrollAmountPerClick * float_0);
+                    itemListPanel.ItemHeight = (int)((float)itemListPanel.DefaultItemHeight * itemListPanel.ItemHeightOverrideFactor * float_0 * UiScale.Factor);
+                    itemListPanel.TitleBarHeight = (int)((float)itemListPanel.DefaultTitleBarHeight * float_0 * UiScale.Factor);
+                    itemListPanel.ToggleButtonHeight = (int)((float)itemListPanel.DefaultToggleButtonHeight * float_0 * UiScale.Factor);
+                    itemListPanel.ScrollUpHeight = (int)((float)itemListPanel.DefaultScrollUpHeight * float_0 * UiScale.Factor);
+                    itemListPanel.ScrollDownHeight = (int)((float)itemListPanel.DefaultScrollDownHeight * float_0 * UiScale.Factor);
+                    itemListPanel.ScrollAmountPerClick = (int)((float)itemListPanel.DefaultScrollAmountPerClick * float_0 * UiScale.Factor);
                     int val = Math.Min(SelectionButtonHeight, SelectionButtonWidth) - 4;
-                    int val2 = (int)(16f * float_0);
+                    int val2 = (int)(16f * float_0 * UiScale.Factor);
                     val = Math.Min(val2, val);
                     Bitmap bitmap = (itemListPanel.IconImage = ScaleLimitImage(itemListPanel.IconImageOriginal, val, val, AlphaTransparency));
                 }
@@ -564,7 +565,7 @@ namespace DistantWorlds
         public void AddPanel(string title, Bitmap iconImage, Type itemType, List<string[]> toggleButtonText, float itemHeightOverrideFactor)
         {
             int val = Math.Min(SelectionButtonHeight, SelectionButtonWidth) - 4;
-            int val2 = (int)(16f * float_0);
+            int val2 = (int)(16f * float_0 * UiScale.Factor);
             val = Math.Min(val2, val);
             Bitmap iconImage2 = ScaleLimitImage(iconImage, val, val, AlphaTransparency);
             ItemListPanel itemListPanel = new ItemListPanel(title, iconImage, itemType, toggleButtonText);
@@ -653,7 +654,7 @@ namespace DistantWorlds
                 }
                 if (ActivePanel != null)
                 {
-                    int x = areaX + SelectionButtonWidth + 2;
+                    int x = areaX + SelectionButtonWidth + UiScale.S(2);
                     int num3 = Panels.Count * SelectionButtonHeight;
                     int y2 = Math.Max(0, areaY - (Area.Height - num3) / 2);
                     ActivePanel.DrawPanel(graphics, x, y2, ActivePanelArea.Width, ActivePanelArea.Height);
@@ -776,7 +777,7 @@ namespace DistantWorlds
                         return true;
                     }
                     ActivePanel = HoveredPanelButton;
-                    ActivePanelArea = new Rectangle(Area.Left + SelectionButtonWidth + 2, Area.Top, Area.Width - (SelectionButtonWidth + 2), Area.Height);
+                    ActivePanelArea = new Rectangle(Area.Left + SelectionButtonWidth + UiScale.S(2), Area.Top, Area.Width - (SelectionButtonWidth + UiScale.S(2)), Area.Height);
                     DoBindPanel(HoveredPanelButton);
                     NeedsRefresh = true;
                     return true;
@@ -855,11 +856,11 @@ namespace DistantWorlds
             Visible = true;
             Panels = new ItemListPanelList();
             float_0 = 1f;
-            SelectionButtonHeight = 26;
-            SelectionButtonWidth = 26;
+            SelectionButtonHeight = UiScale.S(26);
+            SelectionButtonWidth = UiScale.S(26);
             WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
             BlackBrush = new SolidBrush(Color.Black);
-            ImageSize = 30;
+            ImageSize = UiScale.S(30);
             AlphaTransparency = 0.6f;
             LastRefresh = DateTime.MinValue;
         }

@@ -4,8 +4,7 @@
 		<OutputType>WinExe</OutputType>
 		<RootNamespace>DistantWorlds</RootNamespace>
 		<AssemblyName>DistantWorlds</AssemblyName>
-		<!--<TargetFramework>net48</TargetFramework>-->
-		<TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
+		<TargetFramework>net9.0-windows</TargetFramework>
 		<UseWindowsForms>True</UseWindowsForms>
 		<DistantWorldsVersion>$(DistantWorldsVersion)</DistantWorldsVersion>
 		<InformationalVersion>$(DistantWorldsVersion)-DWUX-$(ExpansionModVersion)</InformationalVersion>
@@ -31,7 +30,15 @@
 		<TieredCompilationQuickJit>true</TieredCompilationQuickJit>
 		<TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
 		<TieredPGO>true</TieredPGO>
-		<SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+		<BaseOutputPath></BaseOutputPath>
+		<AssemblyVersion>3.0.0.0</AssemblyVersion>
+		<FileVersion>3.0.0.0</FileVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 	<ItemGroup>
 		<RuntimeHostConfigurationOption Include="System.GC.LOHThreshold" Value="2097152" />
@@ -52,6 +59,7 @@
 	<ItemGroup>
 		<FormCandidate Include="**/Forms/*.cs" />
 		<Compile Remove="@(FormCandidate)" />
+		<Compile Remove="DistantWorlds\FastBitmap.cs" />
 		<Compile Include="@(FormCandidate)" Exclude="**/Forms/*.Designer.cs">
 			<SubType>Form</SubType>
 		</Compile>
@@ -66,14 +74,19 @@
 		<Compile Include="**/Controls/*.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
+		<Compile Remove="BaconDistantWorlds\HotKeys\**" />
 		<Compile Remove="DistantWorlds.Controls\Mods\**" />
 		<Compile Remove="DistantWorlds.Types\EM interface\**" />
 		<Compile Remove="DistantWorlds.Types\Mods\**" />
 		<Compile Remove="DistantWorlds\Mods\**" />
+		<ControlCandidate Remove="BaconDistantWorlds\HotKeys\**" />
+		<EmbeddedResource Remove="BaconDistantWorlds\HotKeys\**" />
 		<EmbeddedResource Remove="DistantWorlds.Controls\Mods\**" />
 		<EmbeddedResource Remove="DistantWorlds.Types\EM interface\**" />
 		<EmbeddedResource Remove="DistantWorlds.Types\Mods\**" />
 		<EmbeddedResource Remove="DistantWorlds\Mods\**" />
+		<FormCandidate Remove="BaconDistantWorlds\HotKeys\**" />
+		<None Remove="BaconDistantWorlds\HotKeys\**" />
 		<None Remove="DistantWorlds.Controls\Mods\**" />
 		<None Remove="DistantWorlds.Types\EM interface\**" />
 		<None Remove="DistantWorlds.Types\Mods\**" />
@@ -85,10 +98,13 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
 		<PackageReference Include="MimeKitLite" Version="4.2.0" />
+		<PackageReference Include="NAudio" Version="2.2.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="nkast.Kni.Platform.WinForms.DX11" Version="4.0.9001" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-		<PackageReference Include="$(XnaFrameworkPackage)" Version="$(XnaFrameworkVersion)" />
+		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+		<PackageReference Include="System.Drawing.Common" Version="9.0.1" />
+		<PackageReference Include="System.Runtime.Serialization.Formatters" Version="9.0.1" />
 		<!--<PackageReference Include="System.Management" Version="7.0.2" />-->
 	</ItemGroup>
 	<Choose>
@@ -151,7 +167,8 @@
 		<Compile Remove="DistantWorlds\test.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="DistantWorlds.Controls\lib\Ionic.Zip.dll" />
+	  <None Remove="FilesDb – копія.db" />
+	  <None Remove="~copyDB.bat" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="ExpansionMod.Objects\Properties\" />
@@ -227,9 +244,6 @@
 			<PrivateAssets>all</PrivateAssets>
 			<Aliases>design</Aliases>
 		</ProjectReference>
-	</ItemGroup>
-	<ItemGroup>
-	  <PackageReference Update="MonoGame.Framework.WindowsDX.9000" Version="3.10.9001" />
 	</ItemGroup>
 	<!--for auditing logical names of embedded resources-->
 	<!--<Target Name="AuditResx" BeforeTargets="Build">

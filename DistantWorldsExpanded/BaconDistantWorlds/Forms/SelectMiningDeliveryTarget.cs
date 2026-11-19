@@ -19,6 +19,7 @@ namespace BaconDistantWorlds.Forms
         public SelectMiningDeliveryTarget(Main main)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
 
             bindingTarget.DataSource = typeof(BuiltObjectView);
             PopulateControls(main);

@@ -176,6 +176,7 @@ namespace DistantWorlds.Types
                 case BuiltObjectSubRole.ResupplyShip:
                     DestroyedEnemyShipsResupplyShip++;
                     return;
+                case BuiltObjectSubRole.Outpost:
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
                 case BuiltObjectSubRole.LargeSpacePort:
@@ -241,6 +242,7 @@ namespace DistantWorlds.Types
                 case BuiltObjectSubRole.ResupplyShip:
                     DestroyedFriendlyShipsResupplyShip++;
                     return;
+                case BuiltObjectSubRole.Outpost:
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
                 case BuiltObjectSubRole.LargeSpacePort:

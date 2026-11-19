@@ -4,6 +4,7 @@
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
+using DistantWorlds.Types;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -236,7 +237,7 @@ namespace DistantWorlds
             return pathGradientBrush;
         }
 
-        private Color method_4(FastBitmap fastBitmap_0, int int_2, int int_3, int int_4)
+        private Color method_4(Types.FastBitmap fastBitmap_0, int int_2, int int_3, int int_4)
         {
             Color pixel = fastBitmap_0.GetPixel(ref int_2, ref int_3);
             int X = int_2 + int_4;

@@ -1500,7 +1500,7 @@ namespace DistantWorlds.Types
                                         bool flag6 = false;
                                         mission.Design.BuildCount++;
                                         string empty = string.Empty;
-                                        if ((Empire != null && Empire.PirateEmpireBaseHabitat != null && mission.Design.SubRole == BuiltObjectSubRole.SmallSpacePort) || mission.Design.SubRole == BuiltObjectSubRole.MediumSpacePort || mission.Design.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                                        if ((Empire != null && Empire.PirateEmpireBaseHabitat != null) && mission.Design.SubRole == BuiltObjectSubRole.Outpost || mission.Design.SubRole == BuiltObjectSubRole.SmallSpacePort || mission.Design.SubRole == BuiltObjectSubRole.MediumSpacePort || mission.Design.SubRole == BuiltObjectSubRole.LargeSpacePort)
                                         {
                                             empty = ((ParentHabitat == null) ? _Galaxy.GenerateBuiltObjectName(mission.Design) : _Galaxy.GeneratePirateBaseName(ParentHabitat));
                                         }
@@ -1549,6 +1549,7 @@ namespace DistantWorlds.Types
                                             bool flag8 = false;
                                             switch (builtObject.SubRole)
                                             {
+                                                case BuiltObjectSubRole.Outpost:
                                                 case BuiltObjectSubRole.SmallSpacePort:
                                                 case BuiltObjectSubRole.MediumSpacePort:
                                                 case BuiltObjectSubRole.LargeSpacePort:
@@ -5053,6 +5054,7 @@ namespace DistantWorlds.Types
                                 bool flag = false;
                                 switch (pirateBase.SubRole)
                                 {
+                                    case BuiltObjectSubRole.Outpost:
                                     case BuiltObjectSubRole.SmallSpacePort:
                                     case BuiltObjectSubRole.MediumSpacePort:
                                     case BuiltObjectSubRole.LargeSpacePort:
@@ -5111,7 +5113,7 @@ namespace DistantWorlds.Types
                 }
                 else
                 {
-                    if (pirateBase.SubRole != BuiltObjectSubRole.SmallSpacePort && pirateBase.SubRole != BuiltObjectSubRole.MediumSpacePort && pirateBase.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                    if (pirateBase.SubRole != BuiltObjectSubRole.Outpost && pirateBase.SubRole != BuiltObjectSubRole.SmallSpacePort && pirateBase.SubRole != BuiltObjectSubRole.MediumSpacePort && pirateBase.SubRole != BuiltObjectSubRole.LargeSpacePort)
                     {
                         return;
                     }

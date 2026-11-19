@@ -41,5 +41,6 @@ namespace DistantWorlds.Types
         HighTechResearchStation,
         MonitoringStation,
         DefensiveBase,
+        Outpost,
     }
 }

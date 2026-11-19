@@ -17,7 +17,7 @@ namespace DistantWorlds.Controls
     private IContainer components;
     private Galaxy _Galaxy;
     private Design _Design;
-    private int _RowHeight = 14;
+    private int _RowHeight = UiScale.S(14);
     private int _TopMargin = 8;
     private int _LeftMargin = 8;
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
@@ -36,10 +36,10 @@ namespace DistantWorlds.Controls
 
     public DesignDefense()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData()
@@ -53,7 +53,7 @@ namespace DistantWorlds.Controls
       this._Galaxy = galaxy;
       this._Design = design;
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
       this.Invalidate();
     }
 
@@ -85,13 +85,13 @@ namespace DistantWorlds.Controls
 
     private void DrawDefenseInfo(Graphics graphics)
     {
-      int x1 = 10;
-      int width = 140;
-      int x2 = 160;
-      int y1 = 25;
+      int x1 = UiScale.S(10);
+      int width = UiScale.S(140);
+      int x2 = UiScale.S(160);
+      int y1 = UiScale.S(25);
       Point location = new Point();
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-      location = new Point(x1, 10);
+      location = new Point(x1, UiScale.S(10));
       this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Defense"), this._TitleFont, location);
       if (this._Design == null)
         return;
@@ -213,9 +213,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
   }

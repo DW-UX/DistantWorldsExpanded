@@ -27,7 +27,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn1.ReadOnly = true;
             gridViewImageColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn1.ValueType = typeof(Image);
-            gridViewImageColumn1.Width = 45;
+            gridViewImageColumn1.Width = UiScale.S(45);
             gridViewImageColumn1.FillWeight = 45f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn1);
             DataGridViewImageColumn gridViewImageColumn2 = (DataGridViewImageColumn)new EmpireListView.SortableImageColumn();
@@ -38,7 +38,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn2.ImageLayout = DataGridViewImageCellLayout.Zoom;
             gridViewImageColumn2.SortMode = DataGridViewColumnSortMode.Automatic;
             gridViewImageColumn2.ValueType = typeof(string);
-            gridViewImageColumn2.Width = 30;
+            gridViewImageColumn2.Width = UiScale.S(30);
             gridViewImageColumn2.FillWeight = 30f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn2);
             DataGridViewTextBoxDropShadowColumn dropShadowColumn = new DataGridViewTextBoxDropShadowColumn();
@@ -48,7 +48,7 @@ namespace DistantWorlds.Controls
             dropShadowColumn.ReadOnly = false;
             dropShadowColumn.SortMode = DataGridViewColumnSortMode.Automatic;
             dropShadowColumn.ValueType = typeof(string);
-            dropShadowColumn.Width = 170;
+            dropShadowColumn.Width = UiScale.S(170);
             dropShadowColumn.FillWeight = 170f;
             this._Grid.Columns.Add((DataGridViewColumn)dropShadowColumn);
         }
@@ -98,8 +98,8 @@ namespace DistantWorlds.Controls
             this._Empires = empires;
             this._RaceImageCache = raceImageCache;
             this._Grid.Rows.Clear();
-            this._Grid.Columns[0].Width = 46;
-            this._Grid.Columns[1].Width = 30;
+            this._Grid.Columns[0].Width = UiScale.S(46);
+            this._Grid.Columns[1].Width = UiScale.S(30);
             if (empires != null)
             {
                 int num1 = 0;
@@ -109,7 +109,7 @@ namespace DistantWorlds.Controls
                     if (empire != null && empire.TotalColonyStrategicValue > num1)
                         num1 = empire.TotalColonyStrategicValue;
                 }
-                Font font = new Font(this._Grid.Font.FontFamily, 17f, FontStyle.Bold, GraphicsUnit.Pixel);
+                Font font = UiScale.NewFont(this._Grid.Font.FontFamily, 17f, FontStyle.Bold, GraphicsUnit.Pixel);
                 for (int index = 0; index < empires.Count; ++index)
                 {
                     Empire empire = empires[index];

@@ -28,7 +28,8 @@ namespace DistantWorlds.Controls
 
     public EnabledLabel() => this.InitializeComponent();
 
-    public new string Text
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new string Text
     {
       get => this._Text;
       set => this._Text = value;

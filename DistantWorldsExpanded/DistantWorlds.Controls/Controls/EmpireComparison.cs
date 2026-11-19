@@ -19,8 +19,8 @@ namespace DistantWorlds.Controls
     private Game _Game;
     private EmpireComparisonType _ComparisonType;
     private int _RowHeight = 14;
-    private int _TopMargin = 10;
-    private int _LeftMargin = 10;
+    private int _TopMargin = UiScale.S(10);
+    private int _LeftMargin = UiScale.S(10);
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
     private SolidBrush _BlackBrush = new SolidBrush(Color.Black);
     private SolidBrush _RedBrush = new SolidBrush(Color.Red);
@@ -37,10 +37,10 @@ namespace DistantWorlds.Controls
 
     public EmpireComparison()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData() => this._Game = (Game) null;
@@ -50,7 +50,7 @@ namespace DistantWorlds.Controls
       this._Game = game;
       this._ComparisonType = comparisonType;
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -84,9 +84,9 @@ namespace DistantWorlds.Controls
       graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
-      int num1 = this._TopMargin + 30;
-      int num2 = this._LeftMargin + 40;
-      int overallWidth = 800;
+      int num1 = this._TopMargin + UiScale.S(30);
+      int num2 = this._LeftMargin + UiScale.S(40);
+      int overallWidth = UiScale.S(800);
       int num3 = this.ClientRectangle.Height - (this._TopMargin + num1);
       int num4 = num3 / 25;
       int topMargin = this._TopMargin;
@@ -114,7 +114,7 @@ namespace DistantWorlds.Controls
       }
       Point location1 = new Point(this._LeftMargin, topMargin);
       this.DrawStringWithDropShadow(graphics, text1, this._TitleFont, location1);
-      int y = num1 + 7;
+      int y = num1 + UiScale.S(7);
       if (this._Game == null)
         return;
       EmpirePriorityList orderedKnownEmpires = this._Game.Galaxy.DetermineOrderedKnownEmpires(this._Game.PlayerEmpire, this._ComparisonType);
@@ -141,21 +141,21 @@ namespace DistantWorlds.Controls
           break;
       }
       string text2 = orderedKnownEmpires[0].Priority.ToString(format);
-      int width = (int) graphics.MeasureString(text2, this._BoldFont, 200, StringFormat.GenericTypographic).Width;
-      Point location2 = new Point(num2 + overallWidth - width, num1 - 14);
+      int width = (int) graphics.MeasureString(text2, this._BoldFont, UiScale.S(200), StringFormat.GenericTypographic).Width;
+      Point location2 = new Point(num2 + overallWidth - width, num1 - UiScale.S(14));
       this.DrawStringWithDropShadow(graphics, text2, this._BoldFont, location2);
       double num5 = (double) overallWidth / orderedKnownEmpires[0].Priority;
       int num6 = 0;
       foreach (EmpirePriority empirePriority in (SyncList<EmpirePriority>) orderedKnownEmpires)
       {
-        Rectangle rect = new Rectangle(this._LeftMargin, y, 33, 20);
+        Rectangle rect = new Rectangle(this._LeftMargin, y, UiScale.S(33), UiScale.S(20));
         graphics.DrawImage((Image) empirePriority.Empire.LargeFlagPicture, rect);
-        Point location3 = new Point(num2 + 1, y);
+        Point location3 = new Point(num2 + UiScale.S(1), y);
         if (empirePriority.Empire == this._Game.PlayerEmpire)
-          this.DrawBarGraph((int) (orderedKnownEmpires[0].Priority * num5), (int) (empirePriority.Priority * num5), 20, overallWidth, Color.FromArgb(150, 96, 0, 48), Color.FromArgb(150, (int) byte.MaxValue, 0, 128), Color.FromArgb((int) sbyte.MaxValue, 32, 32, 128), graphics, location3, (num6 + 1).ToString() + ". " + empirePriority.Empire.Name);
+          this.DrawBarGraph((int) (orderedKnownEmpires[0].Priority * num5), (int) (empirePriority.Priority * num5), UiScale.S(20), overallWidth, Color.FromArgb(150, 96, 0, 48), Color.FromArgb(150, (int) byte.MaxValue, 0, 128), Color.FromArgb((int) sbyte.MaxValue, 32, 32, 128), graphics, location3, (num6 + 1).ToString() + ". " + empirePriority.Empire.Name);
         else
-          this.DrawBarGraph((int) (orderedKnownEmpires[0].Priority * num5), (int) (empirePriority.Priority * num5), 20, overallWidth, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, (int) byte.MaxValue), Color.FromArgb((int) sbyte.MaxValue, 32, 32, 128), graphics, location3, (num6 + 1).ToString() + ". " + empirePriority.Empire.Name);
-        y += 25;
+          this.DrawBarGraph((int) (orderedKnownEmpires[0].Priority * num5), (int) (empirePriority.Priority * num5), UiScale.S(20), overallWidth, Color.FromArgb(150, 48, 0, 96), Color.FromArgb(150, 128, 0, (int) byte.MaxValue), Color.FromArgb((int) sbyte.MaxValue, 32, 32, 128), graphics, location3, (num6 + 1).ToString() + ". " + empirePriority.Empire.Name);
+        y += UiScale.S(25);
         ++num6;
         if (num6 > num4)
           break;
@@ -174,7 +174,7 @@ namespace DistantWorlds.Controls
       Point location,
       string description)
     {
-      int num = (int) graphics.MeasureString("9999", this.Font, 200, StringFormat.GenericTypographic).Width + 5;
+      int num = (int) graphics.MeasureString("9999", this.Font, UiScale.S(200), StringFormat.GenericTypographic).Width + 5;
       Point point1 = new Point(location.X, location.Y);
       int width1 = overallWidth;
       int width2 = (int) ((double) currentValue / (double) maximumValue * (double) width1);
@@ -184,7 +184,7 @@ namespace DistantWorlds.Controls
       Point point2 = new Point(point1.X + (width1 - width3) / 2, point1.Y);
       Rectangle rect1 = new Rectangle(point1.X, point1.Y, width1, height);
       Rectangle rect2 = new Rectangle(point1.X, point1.Y, width2, height);
-      Rectangle rect3 = new Rectangle(point1.X - 1, point1.Y, width2 + 2, height);
+      Rectangle rect3 = new Rectangle(point1.X - UiScale.S(1), point1.Y, width2 + UiScale.S(2), height);
       LinearGradientBrush linearGradientBrush = (LinearGradientBrush) null;
       if (rect2.Width > 0)
         linearGradientBrush = new LinearGradientBrush(rect3, fillColorStart, fillColorEnd, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
@@ -192,7 +192,7 @@ namespace DistantWorlds.Controls
       graphics.FillRectangle((Brush) solidBrush, rect1);
       if (rect2.Width > 0)
         graphics.FillRectangle((Brush) linearGradientBrush, rect2);
-      graphics.DrawString(description, this.Font, (Brush) this._WhiteBrush, new PointF((float) point2.X, (float) point2.Y + 3f));
+      graphics.DrawString(description, this.Font, (Brush) this._WhiteBrush, new PointF((float) point2.X, (float) point2.Y + UiScale.S(3f)));
     }
 
     private SolidBrush SelectGoodBadBrush(double value) => this.SelectGoodBadBrush(value, true);
@@ -223,9 +223,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location, StringFormat.GenericTypographic);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location, StringFormat.GenericTypographic);
     }
   }

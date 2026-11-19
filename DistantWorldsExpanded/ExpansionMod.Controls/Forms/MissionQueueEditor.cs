@@ -28,6 +28,7 @@ namespace ExpansionMod
         public MissionQueueEditor(BuiltObject targetShip, Main main)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             _targetShip = targetShip;
             _main = main;
 

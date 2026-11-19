@@ -55,5 +55,7 @@ namespace DistantWorlds.Types
     DeployVirus,
     DisbandShipGroup,
     ChangePirateHomeBase,
-  }
+    TransferToPrivateSector,
+    TransferToStateSector,
+    }
 }

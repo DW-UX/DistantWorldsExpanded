@@ -25,7 +25,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData()
@@ -89,7 +89,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      PointF point = new PointF(40f, (float) (e.Bounds.Y + 1));
+      PointF point = new PointF(UiScale.S(40f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
       SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._Systems[e.Index].SystemStar != null)
@@ -102,10 +102,10 @@ namespace DistantWorlds.Controls
         Bitmap largeFlagPicture = this._Systems[e.Index].DominantEmpire.Empire.LargeFlagPicture;
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        int height = e.Bounds.Height - 2;
+        int height = e.Bounds.Height - UiScale.S(2);
         double num = (double) height / (double) largeFlagPicture.Height;
         int width = (int) ((double) largeFlagPicture.Width * num);
-        rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+        rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
         e.Graphics.DrawImage((Image) largeFlagPicture, rect);
       }
       if (this._Systems[e.Index].SystemStar != null)
@@ -113,10 +113,10 @@ namespace DistantWorlds.Controls
         Bitmap habitatImage = this._HabitatImages[(int) this._Systems[e.Index].SystemStar.PictureRef];
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        int height = e.Bounds.Height - 2;
+        int height = e.Bounds.Height - UiScale.S(2);
         double num = (double) height / (double) habitatImage.Height;
         int width = (int) ((double) habitatImage.Width * num);
-        rect = new Rectangle(22, e.Bounds.Y + 1, width, height);
+        rect = new Rectangle(UiScale.S(22), e.Bounds.Y + UiScale.S(1), width, height);
         e.Graphics.DrawImage((Image) habitatImage, rect);
       }
       e.DrawFocusRectangle();

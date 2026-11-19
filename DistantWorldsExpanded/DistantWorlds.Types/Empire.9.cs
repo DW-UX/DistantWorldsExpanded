@@ -1,6 +1,7 @@
 ﻿using BaconDistantWorlds;
 
 using DistantWorlds.Types.Properties;
+using ExpansionMod.ModSettings;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -156,7 +157,7 @@ namespace DistantWorlds.Types
                                 double xpos = stellarObjectList2[m].Xpos;
                                 double ypos = stellarObjectList2[m].Ypos;
                                 BuiltObject builtObject = _Galaxy.FastFindNearestResupplyShipByDestination(xpos, ypos, this, resupplyShip);
-                                BuiltObject builtObject2 = _Galaxy.FastFindNearestSpacePort(xpos, ypos, this);
+                                BuiltObject builtObject2 = _Galaxy.FastFindNearestSpacePort(xpos, ypos, this, false);
                                 double num4 = double.MaxValue;
                                 if (builtObject != null)
                                 {
@@ -234,7 +235,7 @@ namespace DistantWorlds.Types
                 {
                     foreach (BuiltObject item in resupplyShip.ParentHabitat.BasesAtHabitat)
                     {
-                        if (item.SubRole == BuiltObjectSubRole.SmallSpacePort || item.SubRole == BuiltObjectSubRole.MediumSpacePort || item.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                        if (item.SubRole == BuiltObjectSubRole.Outpost || item.SubRole == BuiltObjectSubRole.SmallSpacePort || item.SubRole == BuiltObjectSubRole.MediumSpacePort || item.SubRole == BuiltObjectSubRole.LargeSpacePort)
                         {
                             flag3 = true;
                             break;
@@ -245,7 +246,7 @@ namespace DistantWorlds.Types
                 {
                     return;
                 }
-                BuiltObject builtObject3 = _Galaxy.FastFindNearestSpacePort(resupplyShip.Xpos, resupplyShip.Ypos, this);
+                BuiltObject builtObject3 = _Galaxy.FastFindNearestSpacePort(resupplyShip.Xpos, resupplyShip.Ypos, this, false);
                 if (builtObject3 != null)
                 {
                     double num10 = resupplyShip.CurrentFuel / Math.Max(1.0, resupplyShip.FuelCapacity);
@@ -1052,6 +1053,10 @@ namespace DistantWorlds.Types
                 case PiratePlayStyle.Pirate:
                     valueThreshold = 0.5;
                     maximumDefenseStrength = 80000;
+                    break;
+                case PiratePlayStyle.Legendary:
+                    valueThreshold = 0.0;
+                    maximumDefenseStrength = 120000;
                     break;
             }
             HabitatPrioritizationList habitatPrioritizationList = IdentifyDesiredEnemyMiningStations(5, excludeRecentRaids: true, valueThreshold);
@@ -2189,6 +2194,9 @@ namespace DistantWorlds.Types
                     double sortTag = 0.0;
                     switch (SpacePorts[j].SubRole)
                     {
+                        case BuiltObjectSubRole.Outpost:
+                            sortTag = 50000.0;
+                            break;
                         case BuiltObjectSubRole.SmallSpacePort:
                             sortTag = 200000.0;
                             break;
@@ -3304,7 +3312,7 @@ namespace DistantWorlds.Types
                 {
                     continue;
                 }
-                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(habitat2.Xpos, habitat2.Ypos, this);
+                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(habitat2.Xpos, habitat2.Ypos, this, false);
                 if (builtObject != null)
                 {
                     if (builtObject.NearestSystemStar != habitat2)
@@ -3342,7 +3350,7 @@ namespace DistantWorlds.Types
                     {
                         continue;
                     }
-                    BuiltObject builtObject2 = _Galaxy.FastFindNearestSpacePort(habitat5.Xpos, habitat5.Ypos, this);
+                    BuiltObject builtObject2 = _Galaxy.FastFindNearestSpacePort(habitat5.Xpos, habitat5.Ypos, this, false);
                     if (builtObject2 != null && builtObject2.NearestSystemStar == habitat5)
                     {
                         double num2 = _Galaxy.CalculateDistanceSquared(habitat5.Xpos, habitat5.Ypos, habitat.Xpos, habitat.Ypos);
@@ -3792,7 +3800,7 @@ namespace DistantWorlds.Types
                 for (int n = 0; n < empire.LongRangeScanners.Count; n++)
                 {
                     BuiltObject builtObject5 = empire.LongRangeScanners[n];
-                    if (builtObject5.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject5.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject5.SubRole != BuiltObjectSubRole.LargeSpacePort && IsObjectVisibleToThisEmpire(builtObject5))
+                    if (builtObject5.SubRole != BuiltObjectSubRole.Outpost && builtObject5.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject5.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject5.SubRole != BuiltObjectSubRole.LargeSpacePort && IsObjectVisibleToThisEmpire(builtObject5))
                     {
                         int priority6 = 500000;
                         PrioritizedTarget prioritizedTarget7 = new PrioritizedTarget(builtObject5, priority6);
@@ -4420,7 +4428,6 @@ namespace DistantWorlds.Types
 
         public int EvaluateMilitaryPotency(int ourWeightedMilitaryPotency, int theirWeightedMilitaryPotency, Empire otherEmpire)
         {
-            int num = 0;
             double num2 = (double)ourWeightedMilitaryPotency * 2.0;
             double num3 = (double)ourWeightedMilitaryPotency * 0.5;
             if (otherEmpire == _Galaxy.PlayerEmpire)
@@ -5453,36 +5460,59 @@ namespace DistantWorlds.Types
                 num += (1.0 - ((double)DominantRace.FriendlinessLevel + (double)DominantRace.IntelligenceLevel) / 200.0) / 2.0;
             }
             double num2 = 0.15;
-            double num3 = colony.TaxRate;
-            if (num3 <= 0.0)
+            double taxRate = colony.TaxRate;
+            if (taxRate <= 0.0)
             {
-                num3 = num2 * num;
+                taxRate = num2 * num;
             }
-            double num4 = 16.0;
-            int num5 = 1;
+            double colonyTargetHappiness = 16.0;
+            //int num5 = 1;
             if (colony.Population != null)
             {
-                num5 = ((colony.Population.TotalAmount > 2000000000) ? Policy.ColonyTaxRateLargeColony : ((colony.Population.TotalAmount <= 200000000) ? Policy.ColonyTaxRateSmallColony : Policy.ColonyTaxRateMediumColony));
+                //num5 = ((colony.Population.TotalAmount > 2000000000) ? Policy.ColonyTaxRateLargeColony : ((colony.Population.TotalAmount <= 200000000) ? Policy.ColonyTaxRateSmallColony : Policy.ColonyTaxRateMediumColony));
+                SettingsModel sett = Main._ExpModMain.GetSettings();
+                if (sett == null)
+                {
+                    if (colony._MaxPopulation == colony.Population.TotalAmount)
+                        colonyTargetHappiness = 10;
+                    else if (colony.Population.TotalAmount > 2000000000)
+                        colonyTargetHappiness = 10;
+                    else if (colony.Population.TotalAmount <= 200000000)
+                        colonyTargetHappiness = 25;
+                    else
+                        colonyTargetHappiness = 16;
+                }
+                else
+                {
+                    if (colony.Population.TotalAmount >= colony._MaxPopulation)
+                        colonyTargetHappiness = sett.TargetHappinessTaxColonyMaxed;
+                    else if (colony.Population.TotalAmount > 2000000000)
+                        colonyTargetHappiness = sett.TargetHappinessTaxColonyLarge;
+                    else if (colony.Population.TotalAmount <= 200000000)
+                        colonyTargetHappiness = sett.TargetHappinessTaxColonySmall;
+                    else
+                        colonyTargetHappiness = sett.TargetHappinessTaxColonyMedium;
+                }
             }
             double num6 = -1.0;
-            switch (num5)
-            {
-                case 0:
-                    num6 = 0.0;
-                    break;
-                case 1:
-                    num4 = 25.0;
-                    break;
-                case 2:
-                    num4 = 16.0;
-                    break;
-                case 3:
-                    num4 = 10.0;
-                    break;
-            }
+            //switch (num5)
+            //{
+            //    case 0:
+            //        num6 = 0.0;
+            //        break;
+            //    case 1:
+            //        colonySizeCostTax = 25.0;
+            //        break;
+            //    case 2:
+            //        colonySizeCostTax = 16.0;
+            //        break;
+            //    case 3:
+            //        colonySizeCostTax = 10.0;
+            //        break;
+            //}
             if (atWar && Policy.ColonyTaxRateIncreaseWhenAtWar && colony.Population.TotalAmount > 500000000)
             {
-                num4 = 8.0;
+                colonyTargetHappiness = 8.0;
             }
             int num7 = 0;
             if (colony.Characters != null && colony.Characters.Count > 0)
@@ -5497,36 +5527,34 @@ namespace DistantWorlds.Types
             if (colony.Population != null)
             {
                 double empireApprovalRating = colony.EmpireApprovalRating;
-                if (empireApprovalRating < num4 && colony.TaxRate <= 0f)
+                if (empireApprovalRating < colonyTargetHappiness && colony.TaxRate <= 0f)
                 {
-                    num3 = 0.0;
+                    taxRate = 0.0;
                 }
-                else if (empireApprovalRating > num4 || colony.TaxRate > 0f)
+                else if (empireApprovalRating > colonyTargetHappiness || colony.TaxRate > 0f)
                 {
-                    double num8 = empireApprovalRating - num4;
-                    double num9 = colony.TaxApproval - num8;
-                    num9 *= -1.0;
+                    double num8 = empireApprovalRating - colonyTargetHappiness;
                     double num10 = colony.CalculateUnmodifiedApproval(num8, subtractAdditives: false);
-                    num3 = (double)colony.TaxRate + num10 / 100.0;
+                    taxRate = (double)colony.TaxRate + num10 / 100.0;
                 }
                 if (num6 >= 0.0)
                 {
-                    num3 = num6;
+                    taxRate = num6;
                 }
                 _ = colony.EmpireApprovalRating;
                 _ = 0.0;
                 if (GovernmentAttributes != null && GovernmentAttributes.SpecialFunctionCode == 1)
                 {
-                    num3 = 1.0;
+                    taxRate = 1.0;
                 }
             }
-            num3 = ((GovernmentAttributes == null || GovernmentAttributes.SpecialFunctionCode != 1) ? Math.Max(0.0, Math.Min(0.5, num3)) : Math.Max(0.0, num3));
-            num3 = Math.Round(num3, 2);
-            if (double.IsNaN(num3))
+            taxRate = ((GovernmentAttributes == null || GovernmentAttributes.SpecialFunctionCode != 1) ? Math.Max(0.0, Math.Min(Empire._MaxTaxRate, taxRate)) : Math.Max(0.0, taxRate));
+            taxRate = Math.Round(taxRate, 2);
+            if (double.IsNaN(taxRate))
             {
-                num3 = 0.0;
+                taxRate = 0.0;
             }
-            colony.TaxRate = (float)num3;
+            colony.TaxRate = (float)taxRate;
             colony.RecalculateAnnualTaxRevenue();
         }
     }

@@ -1,4 +1,5 @@
-﻿using DistantWorlds;
+﻿using BaconDistantWorlds;
+using DistantWorlds;
 using DistantWorlds.Types;
 using ExpansionMod.Controls;
 using ExpansionMod.Objects;
@@ -67,6 +68,8 @@ namespace ExpansionMod.HotKeyMapping
 
         public bool ResolveTargetFriendlyName(KeyMappingFriendlyNames name, out int id)
         { return _hotKeyParser.GetTargetMethodIdByFriendlyName(name.ToString(), out id); }
+        public List<KeyMappingTarget> GetAllTargets()
+        { return _hotKeyParser.GetAllTargets(); }
         public void KeyboardInput(KeyEventArgs e, List<Keys> keys)
         {
             if (!e.Handled)
@@ -125,6 +128,75 @@ namespace ExpansionMod.HotKeyMapping
         private void _fEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
             _fEditor = null;
+        }
+    }
+    
+    internal class HotKeyManagerBacon : IHotKeyManager
+    {
+        private KeyMapper _hotKeyParser;
+        private string _folder;
+        private HotKeyModEditorControl _hotKeyControl;
+        private string _tabName;
+
+        public bool CanHandleKeysFromOverseer => true;
+
+        public HotKeyManagerBacon(KeyMapper hotKeyParser, string folder)
+        {
+            _hotKeyParser = hotKeyParser;
+            _folder = folder;
+            _tabName = "Bacon mod hotkeys";
+        }
+
+        public void SaveChanges()
+        {
+            //добавить сохранение в стиле апи. Обход всех модов
+            if (_hotKeyControl != null)
+            {
+                MappingJsonFileModel model = new MappingJsonFileModel();
+                model.FormatVersion = KeyMapper._CurrentCodeFormatVersion;
+                model.HotKeys = _hotKeyControl.GetHotKeys();
+                _hotKeyParser.Save(_folder, model);
+            }
+        }
+        public void CancelChanges()
+        {
+        }
+
+        public Control GetHotKeyControl()
+        {
+            if (_hotKeyControl != null)
+            { _hotKeyControl.Dispose(); }
+            _hotKeyControl = new ExpansionMod.Controls.HotKeyModEditorControl(_hotKeyParser.GetAllTargets());
+            return _hotKeyControl;
+        }
+
+        public bool GetMappedTarget(List<Keys> key, out MappedHotKey target)
+        {
+            return _hotKeyParser.GetMappedTarget(key, out target);
+        }
+        public bool ResolveTargetFriendlyName(KeyMappingFriendlyNames name, out int id)
+        { return _hotKeyParser.GetTargetMethodIdByFriendlyName(name.ToString(), out id); }
+        public List<KeyMappingTarget> GetAllTargets()
+        { return _hotKeyParser.GetAllTargets(); }
+        public string GetTabPageName()
+        {
+            return _tabName;
+        }
+
+        public bool MapKeys(string filePath = null)
+        {
+            return _hotKeyParser.MapKeys(filePath);
+        }
+
+        public void RestoreDefaults()
+        {
+            _hotKeyParser.RestoreDefaults();
+            SaveChanges();
+        }
+
+        public void KeyboardInput(KeyEventArgs e, List<Keys> keys)
+        {
+            BaconBuiltObject.BaconKeyboardInput(e, keys);
         }
     }
 }

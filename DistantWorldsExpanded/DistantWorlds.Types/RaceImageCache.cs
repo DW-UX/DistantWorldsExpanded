@@ -128,6 +128,9 @@ namespace DistantWorlds.Types
                 case PiratePlayStyle.Smuggler:
                     index = 3;
                     break;
+                case PiratePlayStyle.Legendary:
+                    index = 4;
+                    break;
             }
             return index >= 0 && index < this._PirateImages.Length ? this._PirateImages[index] : (Bitmap)null;
         }
@@ -169,6 +172,12 @@ namespace DistantWorlds.Types
                             break;
                         case PiratePlayStyle.Smuggler:
                             index = 3;
+                            break;
+                        case PiratePlayStyle.Legendary:
+                            if (_PirateImagesSmall.Length > 4)
+                            { index = 4; }
+                            else
+                            { index = 0; }
                             break;
                     }
                     if (useSmallSize)

@@ -30,7 +30,7 @@ using BaconDistantWorlds;
 using ExpansionMod;
 using DistantWorlds.Controls;
 using DistantWorlds.Types;
-using Ionic.Zlib;
+//using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Xna.Framework.Graphics;
 //using SlimDX.DirectSound;
@@ -38,9 +38,11 @@ using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
 
         private void btnGalacticHistory_Click(object sender, EventArgs e)
@@ -69,11 +71,11 @@ namespace DistantWorlds {
                 bool_11 = true;
                 method_154();
             }
-            pnlRetrofit.Size = new Size(400, 279);
+            pnlRetrofit.Size = new Size(UiScale.S(400), UiScale.S(279));
             pnlRetrofit.Location = new Point((mainView.Width - pnlRetrofit.Width) / 2, (mainView.Height - pnlRetrofit.Height) / 2);
             pnlRetrofit.DoLayout();
             lblRetrofitCost.Visible = true;
-            lblRetrofitCost.Location = new Point(80, 10);
+            lblRetrofitCost.Location = new Point(UiScale.S(80), UiScale.S(10));
             double num = _Game.PlayerEmpire.CalculateRetrofitCost(builtObjectList_1, null);
             string text = TextResolver.GetText("Total retrofit cost") + ": " + num.ToString("###,###,##0") + " " + TextResolver.GetText("credits");
             if (num > _Game.PlayerEmpire.StateMoney)
@@ -89,9 +91,9 @@ namespace DistantWorlds {
             {
                 btnRetrofitGo.Enabled = true;
             }
-            lblRetrofitDesignLabel.Location = new Point(10, 29);
-            cmbRetrofitDesign.Size = new Size(295, 21);
-            cmbRetrofitDesign.Location = new Point(80, 25);
+            lblRetrofitDesignLabel.Location = new Point(UiScale.S(10), UiScale.S(29));
+            cmbRetrofitDesign.Size = new Size(UiScale.S(295), UiScale.S(21));
+            cmbRetrofitDesign.Location = new Point(UiScale.S(80), UiScale.S(25));
             cmbRetrofitDesign.BackColor = Color.FromArgb(48, 48, 64);
             DesignList designs = null;
             BuiltObjectSubRole builtObjectSubRole_ = BuiltObjectSubRole.Undefined;
@@ -107,13 +109,13 @@ namespace DistantWorlds {
                 designs = _Game.PlayerEmpire.Designs.GetBuildableDesignsBySubRoles(list, _Game.PlayerEmpire);
             }
             cmbRetrofitDesign.BindData(designs, builtObjectImageCache_0.GetImagesSmall(), _Game.Galaxy.IndependentEmpire);
-            lblRetrofitMessage.Location = new Point(10, 60);
-            lblRetrofitMessage.MaximumSize = new Size(380, 100);
+            lblRetrofitMessage.Location = new Point(UiScale.S(10), UiScale.S(60));
+            lblRetrofitMessage.MaximumSize = new Size(UiScale.S(380), UiScale.S(100));
             string text2 = "";
             text2 = method_576(builtObjectList_1);
             lblRetrofitMessage.Text = text2;
-            btnRetrofitGo.Size = new Size(365, 40);
-            btnRetrofitGo.Location = new Point(10, 165);
+            btnRetrofitGo.Size = new Size(UiScale.S(365), UiScale.S(40));
+            btnRetrofitGo.Location = new Point(UiScale.S(10), UiScale.S(165));
             pnlRetrofit.Visible = true;
             pnlRetrofit.BringToFront();
         }
@@ -274,7 +276,7 @@ namespace DistantWorlds {
             {
                 for (int i = 0; i < builtObjectList_1.Count; i++)
                 {
-                    if (builtObjectList_1[i].SubRole == BuiltObjectSubRole.SmallSpacePort || builtObjectList_1[i].SubRole == BuiltObjectSubRole.MediumSpacePort || builtObjectList_1[i].SubRole == BuiltObjectSubRole.LargeSpacePort)
+                    if (builtObjectList_1[i].SubRole == BuiltObjectSubRole.Outpost || builtObjectList_1[i].SubRole == BuiltObjectSubRole.SmallSpacePort || builtObjectList_1[i].SubRole == BuiltObjectSubRole.MediumSpacePort || builtObjectList_1[i].SubRole == BuiltObjectSubRole.LargeSpacePort)
                     {
                         flag = true;
                     }
@@ -284,7 +286,7 @@ namespace DistantWorlds {
                 {
                     if (num < builtObjectList_1.Count)
                     {
-                        if (!flag || builtObjectList_1[num].SubRole == BuiltObjectSubRole.SmallSpacePort || builtObjectList_1[num].SubRole == BuiltObjectSubRole.MediumSpacePort || builtObjectList_1[num].SubRole == BuiltObjectSubRole.LargeSpacePort)
+                        if (!flag || builtObjectList_1[num].SubRole == BuiltObjectSubRole.Outpost || builtObjectList_1[num].SubRole == BuiltObjectSubRole.SmallSpacePort || builtObjectList_1[num].SubRole == BuiltObjectSubRole.MediumSpacePort || builtObjectList_1[num].SubRole == BuiltObjectSubRole.LargeSpacePort)
                         {
                             if (builtObjectSubRole_0 != 0 && builtObjectList_1[num].SubRole != builtObjectSubRole_0)
                             {
@@ -2187,7 +2189,8 @@ namespace DistantWorlds {
                             Design design16 = null;
                             long num4 = _Game.PlayerEmpire.Policy.ConstructionSpaceportLargeColonyPopulationThreshold * 1000000L;
                             long num5 = _Game.PlayerEmpire.Policy.ConstructionSpaceportMediumColonyPopulationThreshold * 1000000L;
-                            _ = _Game.PlayerEmpire.Policy.ConstructionSpaceportSmallColonyPopulationThreshold;
+                            long num6 = _Game.PlayerEmpire.Policy.ConstructionSpaceportSmallColonyPopulationThreshold;
+                            long num61 = _Game.PlayerEmpire.Policy.ConstructionOutpostColonyPopulationThreshold;
                             if (habitat3.Population.TotalAmount > num4)
                             {
                                 design15 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.LargeSpacePort, habitat3);
@@ -2198,25 +2201,36 @@ namespace DistantWorlds {
                                 design15 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.MediumSpacePort, habitat3);
                                 design16 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.MediumSpacePort);
                             }
-                            else
+                            else if (habitat3.Population.TotalAmount > num6)
                             {
                                 design15 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.SmallSpacePort, habitat3);
                                 design16 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.SmallSpacePort);
+                            }
+                            else
+                            {
+                                design15 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.Outpost, habitat3);
+                                design16 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.Outpost);
                             }
                             Design design17 = null;
                             Design design18 = null;
                             if (design15 == null)
                             {
-                                design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.SmallSpacePort, habitat3);
-                                design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.SmallSpacePort);
+
+                                design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.Outpost, habitat3);
+                                design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.Outpost);
                                 if (design17 == null)
                                 {
-                                    design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.MediumSpacePort, habitat3);
-                                    design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.MediumSpacePort);
+                                    design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.SmallSpacePort, habitat3);
+                                    design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.SmallSpacePort);
                                     if (design17 == null)
                                     {
-                                        design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.LargeSpacePort, habitat3);
-                                        design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.LargeSpacePort);
+                                        design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.MediumSpacePort, habitat3);
+                                        design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.MediumSpacePort);
+                                        if (design17 == null)
+                                        {
+                                            design17 = _Game.PlayerEmpire.Designs.FindNewestCanBuildFullEvaluate(BuiltObjectSubRole.LargeSpacePort, habitat3);
+                                            design18 = _Game.PlayerEmpire.Designs.FindNewestIncludingObsolete(BuiltObjectSubRole.LargeSpacePort);
+                                        }
                                     }
                                 }
                                 if (design17 != null && design18 != null)
@@ -3915,18 +3929,21 @@ namespace DistantWorlds {
                 bool_11 = true;
                 method_154();
             }
-            pnlEmpirePolicy.Size = new Size(965, 760);
+            pnlEmpirePolicy.Size = new Size(UiScale.S(965), UiScale.S(760));
             pnlEmpirePolicy.Location = new Point((mainView.Width - pnlEmpirePolicy.Width) / 2, (mainView.Height - pnlEmpirePolicy.Height) / 2);
             pnlEmpirePolicy.DoLayout();
             pnlEmpirePolicyContainer.AutoSize = false;
-            pnlEmpirePolicyContainer.Size = new Size(930, 635);
-            pnlEmpirePolicyContainer.Location = new Point(10, 10);
-            pnlEmpirePolicyContainer.AutoScroll = true;
+            pnlEmpirePolicyContainer.Size = new Size(UiScale.S(930), UiScale.S(635));
+            pnlEmpirePolicyContainer.Location = new Point(UiScale.S(10), UiScale.S(10));
+            pnlEmpirePolicyContainer.AutoScroll = false;
             pnlEmpirePolicyContainer.AutoScrollPosition = new Point(0, 0);
+            pnlEmpirePolicyContainer.HorizontalScroll.Maximum = 0;
+            pnlEmpirePolicyContainer.VerticalScroll.Visible = false;
+            pnlEmpirePolicyContainer.AutoScroll = true;
             pnlEmpirePolicyContainer.BackColor = Color.FromArgb(32, 32, 32);
             if (_Game.PlayerEmpire.PirateEmpireBaseHabitat == null)
             {
-                nDrsqatloR.Size = new Size(910, 4840);
+                nDrsqatloR.Size = new Size(UiScale.S(910), UiScale.S(4960));
             }
             else
             {
@@ -3935,22 +3952,22 @@ namespace DistantWorlds {
                 {
                     flag = true;
                 }
-                nDrsqatloR.Size = new Size(910, 2840);
+                nDrsqatloR.Size = new Size(UiScale.S(910), UiScale.S(2960));
                 if (flag)
                 {
-                    nDrsqatloR.Size = new Size(910, 4540);
+                    nDrsqatloR.Size = new Size(UiScale.S(910), UiScale.S(4960));
                 }
             }
             nDrsqatloR.Location = new Point(0, 0);
-            int num = (pnlEmpirePolicy.Width - 630) / 2;
-            WqesexberY.Size = new Size(180, 30);
-            WqesexberY.Location = new Point(num, 656);
-            XgxsOtuAmD.Size = new Size(180, 30);
-            XgxsOtuAmD.Location = new Point(num + 190, 656);
-            btnEmpirePolicyLoad.Size = new Size(110, 30);
-            btnEmpirePolicyLoad.Location = new Point(num + 400, 656);
-            btnEmpirePolicySave.Size = new Size(110, 30);
-            btnEmpirePolicySave.Location = new Point(num + 520, 656);
+            int num = (pnlEmpirePolicy.Width - UiScale.S(630)) / 2;
+            WqesexberY.Size = new Size(UiScale.S(180), UiScale.S(30));
+            WqesexberY.Location = new Point(num, UiScale.S(656));
+            XgxsOtuAmD.Size = new Size(UiScale.S(180), UiScale.S(30));
+            XgxsOtuAmD.Location = new Point(num + UiScale.S(190), UiScale.S(656));
+            btnEmpirePolicyLoad.Size = new Size(UiScale.S(110), UiScale.S(30));
+            btnEmpirePolicyLoad.Location = new Point(num + UiScale.S(400), UiScale.S(656));
+            btnEmpirePolicySave.Size = new Size(UiScale.S(110), UiScale.S(30));
+            btnEmpirePolicySave.Location = new Point(num + UiScale.S(520), UiScale.S(656));
             method_609(nDrsqatloR, _Game.PlayerEmpire.Policy, _Game.PlayerEmpire);
             pnlEmpirePolicy.Visible = true;
             pnlEmpirePolicy.BringToFront();
@@ -3999,6 +4016,7 @@ namespace DistantWorlds {
             empirePolicy.ColonyFacilityPopulationThresholdTerraformingFacility = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdTerraformingFacility");
             empirePolicy.ColonyFacilityPopulationThresholdArmoredFactory = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdArmoredFactory");
             empirePolicy.ColonyFacilityPopulationThresholdSpyAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdSpyAcademy");
+            empirePolicy.ColonyFacilityPopulationThresholdDiplomacyAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdDiplomacyAcademy");
             empirePolicy.ColonyFacilityPopulationThresholdScienceAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdScienceAcademy");
             empirePolicy.ColonyFacilityPopulationThresholdNavalAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdNavalAcademy");
             empirePolicy.ColonyFacilityPopulationThresholdMilitaryAcademy = (int)method_604(panel_1, "ColonyFacilityPopulationThresholdMilitaryAcademy");
@@ -4040,6 +4058,7 @@ namespace DistantWorlds {
             empirePolicy.ColonyAllowFacilityTerraformingFacility = method_603(panel_1, "ColonyAllowFacilityTerraformingFacility");
             empirePolicy.ColonyAllowFacilityArmoredFactory = method_603(panel_1, "ColonyAllowFacilityArmoredFactory");
             empirePolicy.ColonyAllowFacilitySpyAcademy = method_603(panel_1, "ColonyAllowFacilitySpyAcademy");
+            empirePolicy.ColonyAllowFacilityDiplomacyAcademy = method_603(panel_1, "ColonyAllowFacilityDiplomacyAcademy");
             empirePolicy.ColonyAllowFacilityScienceAcademy = method_603(panel_1, "ColonyAllowFacilityScienceAcademy");
             empirePolicy.ColonyAllowFacilityNavalAcademy = method_603(panel_1, "ColonyAllowFacilityNavalAcademy");
             empirePolicy.ColonyAllowFacilityMilitaryAcademy = method_603(panel_1, "ColonyAllowFacilityMilitaryAcademy");
@@ -4126,6 +4145,7 @@ namespace DistantWorlds {
             empirePolicy.DesignUpgradeExplorationShip = method_603(panel_1, "DesignUpgradeExplorationShip");
             empirePolicy.DesignUpgradeColonyShip = method_603(panel_1, "DesignUpgradeColonyShip");
             empirePolicy.DesignUpgradeConstructionShip = method_603(panel_1, "DesignUpgradeConstructionShip");
+            empirePolicy.DesignUpgradeOutpost= method_603(panel_1, "DesignUpgradeOutpost");
             empirePolicy.DesignUpgradeSmallSpacePort = method_603(panel_1, "DesignUpgradeSmallSpacePort");
             empirePolicy.DesignUpgradeMediumSpacePort = method_603(panel_1, "DesignUpgradeMediumSpacePort");
             empirePolicy.DesignUpgradeLargeSpacePort = method_603(panel_1, "DesignUpgradeLargeSpacePort");
@@ -4488,7 +4508,7 @@ namespace DistantWorlds {
         private void method_609(System.Windows.Forms.Panel panel_1, EmpirePolicy empirePolicy_0, Empire empire_5)
         {
             int num = 0;
-            int int_ = 350;
+            int int_ = UiScale.S(350);
             bool flag = false;
             if (empire_5.PirateEmpireBaseHabitat != null)
             {
@@ -4499,7 +4519,7 @@ namespace DistantWorlds {
             {
                 flag2 = true;
             }
-            int num2 = 715;
+            int num2 = UiScale.S(715);
             panel_1.Font = font_6;
             List<Control> list = new List<Control>();
             if (panel_1.Controls != null && panel_1.Controls.Count > 0)
@@ -4523,7 +4543,7 @@ namespace DistantWorlds {
                 list[k].Parent = null;
                 list[k].Dispose();
             }
-            num += 5;
+            num += UiScale.S(5);
             if (!flag)
             {
                 method_622(panel_1, "AutomationTreaties", new string[3]
@@ -4735,6 +4755,7 @@ namespace DistantWorlds {
                 method_624(panel_1, int_, "ColonyAllowFacilityGiantIonCannon", TextResolver.GetText("Allow building facility: Giant Ion Cannon"), "", empirePolicy_0.ColonyAllowFacilityGiantIonCannon, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilityNavalAcademy", TextResolver.GetText("Allow building facility: Naval Academy"), "", empirePolicy_0.ColonyAllowFacilityNavalAcademy, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilitySpyAcademy", TextResolver.GetText("Allow building facility: Spy Academy"), "", empirePolicy_0.ColonyAllowFacilitySpyAcademy, ref num);
+                method_624(panel_1, int_, "ColonyAllowFacilityDiplomacyAcademy", TextResolver.GetText("Allow building facility: Diplomacy Academy"), "", empirePolicy_0.ColonyAllowFacilityDiplomacyAcademy, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilityScienceAcademy", TextResolver.GetText("Allow building facility: Science Academy"), "", empirePolicy_0.ColonyAllowFacilityScienceAcademy, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilityTerraformingFacility", TextResolver.GetText("Allow building facility: Terraforming Facility"), "", empirePolicy_0.ColonyAllowFacilityTerraformingFacility, ref num);
                 method_624(panel_1, int_, "ColonyAllowFacilityRegionalCapital", TextResolver.GetText("Allow building facility: Regional Capital"), "", empirePolicy_0.ColonyAllowFacilityRegionalCapital, ref num);
@@ -4748,6 +4769,7 @@ namespace DistantWorlds {
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdGiantIonCannon", TextResolver.GetText("Do not build Giant Ion Cannon until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdGiantIonCannon, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdNavalAcademy", TextResolver.GetText("Do not build Naval Academy until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdNavalAcademy, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdSpyAcademy", TextResolver.GetText("Do not build Spy Academy until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdSpyAcademy, ref num);
+                method_625(panel_1, int_, "ColonyFacilityPopulationThresholdDiplomacyAcademy", "Do not build Diplomacy Academy until population reaches", "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdDiplomacyAcademy, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdScienceAcademy", TextResolver.GetText("Do not build Science Academy until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdScienceAcademy, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdTerraformingFacility", TextResolver.GetText("Do not build Terraforming Facility until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdTerraformingFacility, ref num);
                 method_625(panel_1, int_, "ColonyFacilityPopulationThresholdRegionalCapital", TextResolver.GetText("Do not build Regional Capital until population reaches"), "M", 0f, 20000f, empirePolicy_0.ColonyFacilityPopulationThresholdRegionalCapital, ref num);
@@ -4793,7 +4815,7 @@ namespace DistantWorlds {
             {
             TextResolver.GetText("Control Research manually"),
             TextResolver.GetText("Fully automate Research")
-            }, Convert.ToInt32(empire_5.ControlResearch), num2 - 200, num);
+            }, Convert.ToInt32(empire_5.ControlResearch), num2 - UiScale.S(200), num);
             method_622(panel_1, "AutomationDesigns", new string[2]
             {
             TextResolver.GetText("Control Ship Design manually"),
@@ -5064,6 +5086,7 @@ namespace DistantWorlds {
             method_624(panel_1, int_, "DesignUpgradeExplorationShip", Galaxy.ResolveDescription(BuiltObjectSubRole.ExplorationShip), "", empirePolicy_0.DesignUpgradeExplorationShip, ref num);
             method_624(panel_1, int_, "DesignUpgradeColonyShip", Galaxy.ResolveDescription(BuiltObjectSubRole.ColonyShip), "", empirePolicy_0.DesignUpgradeColonyShip, ref num);
             method_624(panel_1, int_, "DesignUpgradeConstructionShip", Galaxy.ResolveDescription(BuiltObjectSubRole.ConstructionShip), "", empirePolicy_0.DesignUpgradeConstructionShip, ref num);
+            method_624(panel_1, int_, "DesignUpgradeOutpost", "Small base to provide bonuses to planet", "", empirePolicy_0.DesignUpgradeOutpost, ref num);
             method_624(panel_1, int_, "DesignUpgradeSmallSpacePort", Galaxy.ResolveDescription(BuiltObjectSubRole.SmallSpacePort), "", empirePolicy_0.DesignUpgradeSmallSpacePort, ref num);
             method_624(panel_1, int_, "DesignUpgradeMediumSpacePort", Galaxy.ResolveDescription(BuiltObjectSubRole.MediumSpacePort), "", empirePolicy_0.DesignUpgradeMediumSpacePort, ref num);
             method_624(panel_1, int_, "DesignUpgradeLargeSpacePort", Galaxy.ResolveDescription(BuiltObjectSubRole.LargeSpacePort), "", empirePolicy_0.DesignUpgradeLargeSpacePort, ref num);
@@ -5285,7 +5308,7 @@ namespace DistantWorlds {
             TextResolver.GetText("When high tech or larger than we can build"),
             TextResolver.GetText("When stronger than target"),
             TextResolver.GetText("Always capture")
-            }, empirePolicy_0.CaptureTargetConditionShip, 550, ref num);
+            }, empirePolicy_0.CaptureTargetConditionShip, UiScale.S(550), ref num);
             method_621(panel_1, int_, "CaptureTargetConditionBase", TextResolver.GetText("Capture targeted bases"), "", new string[5]
             {
             TextResolver.GetText("Never (always destroy)"),
@@ -5293,20 +5316,20 @@ namespace DistantWorlds {
             TextResolver.GetText("When base in own or neutral territory"),
             TextResolver.GetText("When stronger than target"),
             TextResolver.GetText("Always capture")
-            }, empirePolicy_0.CaptureTargetConditionBase, 550, ref num);
+            }, empirePolicy_0.CaptureTargetConditionBase, UiScale.S(550), ref num);
             method_621(panel_1, int_, "CaptureEnlistMilitaryShip", TextResolver.GetText("Enlist captured Military ships"), "", new string[4]
             {
             TextResolver.GetText("Always Enlist"),
             TextResolver.GetText("When high tech or larger than we can build"),
             TextResolver.GetText("When NOT high tech or larger than we can build"),
             TextResolver.GetText("Never Enlist (always disassemble)")
-            }, empirePolicy_0.CaptureEnlistMilitaryShip, 550, ref num);
+            }, empirePolicy_0.CaptureEnlistMilitaryShip, UiScale.S(550), ref num);
             method_621(panel_1, int_, "CaptureDisassembleMilitaryShip", TextResolver.GetText("How Disassemble captured Military ships"), "", new string[3]
             {
             TextResolver.GetText("Always immediately scrap for money"),
             TextResolver.GetText("Disassemble at base when high tech or larger than we can build"),
             TextResolver.GetText("Always disassemble at base for tech and resources")
-            }, empirePolicy_0.CaptureDisassembleMilitaryShip, 550, ref num);
+            }, empirePolicy_0.CaptureDisassembleMilitaryShip, UiScale.S(550), ref num);
             method_624(panel_1, int_, "UpgradeEnlistedMilitaryShips", TextResolver.GetText("Upgrade enlisted Military ships to latest design"), "", empirePolicy_0.UpgradeEnlistedMilitaryShips, ref num);
             method_621(panel_1, int_, "CaptureEnlistCivilianShip", TextResolver.GetText("Enlist captured Civilian ships"), "", new string[4]
             {
@@ -5314,20 +5337,20 @@ namespace DistantWorlds {
             TextResolver.GetText("When high tech or larger than we can build"),
             TextResolver.GetText("When NOT high tech or larger than we can build"),
             TextResolver.GetText("Never Enlist (always disassemble)")
-            }, empirePolicy_0.CaptureEnlistCivilianShip, 550, ref num);
+            }, empirePolicy_0.CaptureEnlistCivilianShip, UiScale.S(550), ref num);
             method_621(panel_1, int_, "CaptureDisassembleCivilianShip", TextResolver.GetText("How Disassemble captured Civilian ships"), "", new string[3]
             {
             TextResolver.GetText("Always immediately scrap for money"),
             TextResolver.GetText("Disassemble at base when high tech or larger than we can build"),
             TextResolver.GetText("Always disassemble at base for tech and resources")
-            }, empirePolicy_0.CaptureDisassembleCivilianShip, 550, ref num);
+            }, empirePolicy_0.CaptureDisassembleCivilianShip, UiScale.S(550), ref num);
             method_624(panel_1, int_, "UpgradeEnlistedCivilianShips", TextResolver.GetText("Upgrade enlisted Civilian ships to latest design"), "", empirePolicy_0.UpgradeEnlistedCivilianShips, ref num);
             method_621(panel_1, int_, "CaptureEnlistBase", TextResolver.GetText("Enlist captured Bases"), "", new string[3]
             {
             TextResolver.GetText("Always Enlist"),
             TextResolver.GetText("Scrap when not Research Station"),
             TextResolver.GetText("Always Scrap")
-            }, empirePolicy_0.CaptureEnlistBase, 550, ref num);
+            }, empirePolicy_0.CaptureEnlistBase, UiScale.S(550), ref num);
             method_610(ref num);
             method_622(panel_1, "AutomationFleets", new string[2]
             {
@@ -5340,6 +5363,6 @@ namespace DistantWorlds {
             method_625(panel_1, int_, "FleetStrikeForceTypicalSize", TextResolver.GetText("Typical number of ships in Strike Force"), "", 2f, 15f, empirePolicy_0.FleetStrikeForceTypicalSize, ref num);
         }
 
-  }
+    }
 
 }

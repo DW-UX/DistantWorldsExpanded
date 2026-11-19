@@ -123,6 +123,7 @@ namespace DistantWorlds.Controls
         public DiplomacyTradeTree()
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             TradeableItems.ShowPlusMinus = true;
             TradeableItems.ShowLines = false;
             TradeableItems.LineColor = Color.FromArgb(24, 24, 80);
@@ -694,37 +695,37 @@ namespace DistantWorlds.Controls
         private void DoLayout()
         {
             int num = base.Width;
-            int num2 = 100;
-            int num3 = 34;
+            int num2 = UiScale.S(100);
+            int num3 = UiScale.S(34);
             LocalizeControlText();
             pnlTitleHeaderArea.Size = new Size(num, num3);
             pnlTitleHeaderArea.Location = new Point(0, 0);
             pnlTitleHeaderArea.BringToFront();
-            picFlag.Size = new Size(40, 24);
-            picFlag.Location = new Point(2, 4);
+            picFlag.Size = new Size(UiScale.S(40), UiScale.S(24));
+            picFlag.Location = new Point(UiScale.S(2), UiScale.S(4));
             picFlag.SizeMode = PictureBoxSizeMode.Zoom;
             picFlag.BringToFront();
-            lblTitle.Size = new Size(num - 47, num3);
-            lblTitle.Font = new Font(Font.FontFamily, Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+            lblTitle.Size = new Size(num - UiScale.S(47), num3);
+            lblTitle.Font = new Font(Font.FontFamily, Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
             lblTitle.TextAlign = ContentAlignment.MiddleLeft;
-            lblTitle.Location = new Point(47, 2);
+            lblTitle.Location = new Point(UiScale.S(47), UiScale.S(2));
             lblTitle.BringToFront();
             TradeableItems.Scrollable = true;
-            TradeableItems.Size = new Size(num, base.Height - (num3 + num3 + num2 + 25));
+            TradeableItems.Size = new Size(num, base.Height - (num3 + num3 + num2 + UiScale.S(25)));
             TradeableItems.Location = new Point(0, num3);
             pnlSelectedHeaderArea.Size = new Size(num, num3);
             pnlSelectedHeaderArea.Location = new Point(0, num3 + TradeableItems.Height);
             pnlSelectedHeaderArea.BringToFront();
             lblSelected.Size = new Size(num, num3);
-            lblSelected.Font = new Font(Font.FontFamily, Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
-            lblSelected.Location = new Point(0, num3 + TradeableItems.Height + 3);
+            lblSelected.Font = new Font(Font.FontFamily, Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
+            lblSelected.Location = new Point(0, num3 + TradeableItems.Height + UiScale.S(3));
             lblSelected.TextAlign = ContentAlignment.MiddleCenter;
             lblSelected.BringToFront();
             SelectedItems.Font = Font;
             SelectedItems.Size = new Size(num, num2);
             SelectedItems.Location = new Point(0, num3 + TradeableItems.Height + num3);
-            btnClearSelectedItems.Size = new Size(150, 25);
-            btnClearSelectedItems.Location = new Point((num - 150) / 2, base.Height - 25);
+            btnClearSelectedItems.Size = new Size(UiScale.S(150), UiScale.S(25));
+            btnClearSelectedItems.Location = new Point((num - UiScale.S(150)) / 2, base.Height - UiScale.S(25));
             btnClearSelectedItems.BringToFront();
             btnClearSelectedItems.Visible = true;
         }
@@ -903,7 +904,7 @@ namespace DistantWorlds.Controls
             {
                 tradeableItem = (TradeableItem)nodeAt.Tag;
             }
-            if (tradeableItem != null && e.X >= 25)
+            if (tradeableItem != null && e.X >= UiScale.S(25))
             {
                 int num = _SelectedItems.IndexOf(tradeableItem);
                 if (tradeableItem.Type == TradeableItemType.AdoptGovernmentStyle)
@@ -1010,7 +1011,7 @@ namespace DistantWorlds.Controls
                 {
                     _LiftTradeSanctionsToggled = !_LiftTradeSanctionsToggled;
                 }
-                if (e.X >= 25)
+                if (e.X >= UiScale.S(25))
                 {
                     nodeAt.Toggle();
                 }
@@ -1187,7 +1188,7 @@ namespace DistantWorlds.Controls
             base.SuspendLayout();
             this.TradeableItems.BackColor = System.Drawing.Color.FromArgb(48, 48, 64);
             this.TradeableItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TradeableItems.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.TradeableItems.Font = UiScale.NewFont("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             this.TradeableItems.ForeColor = System.Drawing.Color.White;
             this.TradeableItems.Location = new System.Drawing.Point(5, 40);
             this.TradeableItems.Name = "TradeableItems";
@@ -1200,7 +1201,7 @@ namespace DistantWorlds.Controls
             this.TradeableItems.MouseLeave += new System.EventHandler(TradeableItems_MouseLeave);
             this.SelectedItems.BackColor = System.Drawing.Color.FromArgb(48, 48, 64);
             this.SelectedItems.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.SelectedItems.Font = new System.Drawing.Font("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.SelectedItems.Font = UiScale.NewFont("Verdana", 8.25f, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             this.SelectedItems.ForeColor = System.Drawing.Color.White;
             this.SelectedItems.FormattingEnabled = true;
             this.SelectedItems.Location = new System.Drawing.Point(5, 174);
@@ -1212,7 +1213,7 @@ namespace DistantWorlds.Controls
             this.SelectedItems.MouseLeave += new System.EventHandler(SelectedItems_MouseLeave);
             this.lblTitle.AutoSize = true;
             this.lblTitle.BackColor = System.Drawing.Color.FromArgb(80, 80, 112);
-            this.lblTitle.Font = new System.Drawing.Font("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblTitle.Font = UiScale.NewFont("Verdana", 9.75f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
             this.lblTitle.Location = new System.Drawing.Point(48, 4);
             this.lblTitle.Name = "lblTitle";
@@ -1221,7 +1222,7 @@ namespace DistantWorlds.Controls
             this.lblTitle.Text = "Title";
             this.lblSelected.AutoSize = true;
             this.lblSelected.BackColor = System.Drawing.Color.FromArgb(80, 80, 112);
-            this.lblSelected.Font = new System.Drawing.Font("Verdana", 9f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            this.lblSelected.Font = UiScale.NewFont("Verdana", 9f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             this.lblSelected.ForeColor = System.Drawing.Color.White;
             this.lblSelected.Location = new System.Drawing.Point(17, 144);
             this.lblSelected.Name = "lblSelected";
@@ -1247,7 +1248,7 @@ namespace DistantWorlds.Controls
             this.btnClearSelectedItems.BackColor = System.Drawing.Color.FromArgb(0, 0, 0);
             this.btnClearSelectedItems.ClipBackground = false;
             this.btnClearSelectedItems.DelayFrameRefresh = false;
-            this.btnClearSelectedItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.btnClearSelectedItems.Font = UiScale.NewFont("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.btnClearSelectedItems.ForeColor = System.Drawing.Color.FromArgb(150, 150, 150);
             this.btnClearSelectedItems.GlowColor = System.Drawing.Color.FromArgb(48, 48, 128);
             this.btnClearSelectedItems.InnerBorderColor = System.Drawing.Color.FromArgb(67, 67, 77);

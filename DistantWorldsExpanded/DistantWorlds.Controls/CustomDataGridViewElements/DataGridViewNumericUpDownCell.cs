@@ -325,9 +325,9 @@ namespace DistantWorlds.Controls
                 graphics.FillRectangle((Brush)solidBrush1, cellBounds);
                 SolidBrush solidBrush2 = new SolidBrush(color2);
                 SizeF sizeF = graphics.MeasureString(formattedValue as string, cellStyle.Font);
-                float x = (float)(cellBounds.X + 2);
+                float x = (float)(cellBounds.X + UiScale.S(2));
                 float num = (float)cellBounds.Y + (float)(((double)cellBounds.Height - (double)sizeF.Height) / 2.0);
-                graphics.DrawString(formattedValue as string, cellStyle.Font, (Brush)solidBrush2, x, num + 1f);
+                graphics.DrawString(formattedValue as string, cellStyle.Font, (Brush)solidBrush2, x, num + UiScale.S(1f));
             }
             if (!DataGridViewNumericUpDownCell.PartPainted(paintParts, DataGridViewPaintParts.ErrorIcon))
                 return;

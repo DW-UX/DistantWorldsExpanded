@@ -10,8 +10,26 @@ namespace ExpansionMod.ModSettings
     {
         public static bool IsUpgradeNeeded(SettingsModel model, out SettingsModel updatedSettings)
         {
-            updatedSettings = null;
-            return false;
+            bool res = false;
+            updatedSettings = model.Clone();
+            if (model.Version == 1)
+            {
+                updatedSettings.Version = 3;
+                updatedSettings.TargetHappinessTaxColonyMaxed = 10;
+                updatedSettings.TargetHappinessTaxColonyLarge = 10;
+                updatedSettings.TargetHappinessTaxColonyMedium = 16;
+                updatedSettings.TargetHappinessTaxColonySmall = 25;
+                updatedSettings.EnableTargetHappinessTax = true;
+                updatedSettings.UseDbFiles = false;
+                res = true;
+            }
+            else if (model.Version == 2)
+            {
+                updatedSettings.Version = 3;
+                updatedSettings.UseDbFiles = false;
+                res = true;
+            }
+            return res;
         }
     }
 }

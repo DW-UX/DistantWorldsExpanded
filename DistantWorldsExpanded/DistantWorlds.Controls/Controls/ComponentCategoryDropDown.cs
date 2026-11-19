@@ -24,7 +24,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     private List<ComponentCategoryType> ReorderSpecialCategories(
@@ -78,7 +78,7 @@ namespace DistantWorlds.Controls
       this._Categories = this.ResolveComponentCategories();
       this._ComponentImages = componentImages;
       this._Categories = this.ReorderSpecialCategories(this._Categories);
-      this.ItemHeight = 22;
+      this.ItemHeight = UiScale.S(22);
       this.Items.Clear();
       if (this._Categories == null)
         return;
@@ -177,8 +177,8 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      int width = 20;
-      PointF point = new PointF(28f, (float) (e.Bounds.Y + 3));
+      int width = UiScale.S(20);
+      PointF point = new PointF(UiScale.S(28f), (float) (e.Bounds.Y + UiScale.S(3)));
       Font font = this.Font;
       SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
       SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, 0, 128));
@@ -191,12 +191,12 @@ namespace DistantWorlds.Controls
           e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
           Bitmap bitmap = this.SelectComponentImage(category);
           int height = (int) ((double) bitmap.Height / ((double) bitmap.Width / (double) width));
-          if (height > 20)
+          if (height > UiScale.S(20))
           {
             width = (int) ((double) width * (20.0 / (double) height));
-            height = 20;
+            height = UiScale.S(20);
           }
-          Rectangle rect = new Rectangle(e.Bounds.X + (20 - width) / 2, e.Bounds.Y + (20 - height) / 2, width, height);
+          Rectangle rect = new Rectangle(e.Bounds.X + (UiScale.S(20) - width) / 2, e.Bounds.Y + (UiScale.S(20) - height) / 2, width, height);
           e.Graphics.DrawImage((Image) bitmap, rect);
           string s = Galaxy.ResolveDescription(category);
           e.Graphics.DrawString(s, font, (Brush) solidBrush1, point);

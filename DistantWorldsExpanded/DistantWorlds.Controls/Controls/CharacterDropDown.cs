@@ -29,7 +29,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData()
@@ -183,7 +183,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      PointF point = new PointF(60f, (float) (e.Bounds.Y + 1));
+      PointF point = new PointF(UiScale.S(60f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
       SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (e.Index >= 0)
@@ -215,10 +215,10 @@ namespace DistantWorlds.Controls
             Bitmap largeFlagPicture = this._Empire.LargeFlagPicture;
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            int height = e.Bounds.Height - 2;
+            int height = e.Bounds.Height - UiScale.S(2);
             double num3 = (double) height / (double) largeFlagPicture.Height;
             int width = (int) ((double) largeFlagPicture.Width * num3);
-            rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+            rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
             e.Graphics.DrawImage((Image) largeFlagPicture, rect);
           }
           Bitmap roleIcon = this._CharacterImageCache.GetRoleIcon(role);
@@ -226,10 +226,10 @@ namespace DistantWorlds.Controls
           {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            int height = e.Bounds.Height - 2;
+            int height = e.Bounds.Height - UiScale.S(2);
             double num4 = (double) height / (double) roleIcon.Height;
             int width = (int) ((double) roleIcon.Width * num4);
-            rect = new Rectangle(38, e.Bounds.Y + 1, width, height);
+            rect = new Rectangle(UiScale.S(38), e.Bounds.Y + UiScale.S(1), width, height);
             e.Graphics.DrawImage((Image) roleIcon, rect);
           }
         }
@@ -248,15 +248,15 @@ namespace DistantWorlds.Controls
                 Bitmap largeFlagPicture = character.Empire.LargeFlagPicture;
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                int height = e.Bounds.Height - 2;
+                int height = e.Bounds.Height - UiScale.S(2);
                 double num5 = (double) height / (double) largeFlagPicture.Height;
                 int width = (int) ((double) largeFlagPicture.Width * num5);
-                rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+                rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
                 e.Graphics.DrawImage((Image) largeFlagPicture, rect);
               }
               Bitmap characterImageVerySmall = this._CharacterImageCache.ObtainCharacterImageVerySmall(character);
               if (characterImageVerySmall != null)
-                e.Graphics.DrawImage((Image) characterImageVerySmall, new Point(38, e.Bounds.Y + 1));
+                e.Graphics.DrawImage((Image) characterImageVerySmall, new Point(UiScale.S(38), e.Bounds.Y + UiScale.S(1)));
             }
           }
         }

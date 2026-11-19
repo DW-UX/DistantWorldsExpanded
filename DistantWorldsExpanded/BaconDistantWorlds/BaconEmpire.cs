@@ -378,8 +378,6 @@ namespace BaconDistantWorlds
             return num;
         }
 
-        public static void ShowPrisonForm(Main main) => BaconMain.prisonForm = new prisonForm(main);
-
         public static void ShowCustomBomberForm(Main main) => BaconMain.CustomBomberForm = new CustomBomberForm(main);
 
         public static List<object> GetOutstandingLoans()
@@ -916,6 +914,13 @@ namespace BaconDistantWorlds
                                             design5.TacticsWeakerShips = BattleTactics.PointBlank;
                                             design5.TacticsInvasion = InvasionTactics.DoNotInvade;
                                             break;
+                                        case BuiltObjectSubRole.Outpost:
+                                            design5.Stance = BuiltObjectStance.DoNotAttack;
+                                            design5.FleeWhen = BuiltObjectFleeWhen.Never;
+                                            design5.TacticsStrongerShips = BattleTactics.PointBlank;
+                                            design5.TacticsWeakerShips = BattleTactics.PointBlank;
+                                            design5.TacticsInvasion = InvasionTactics.DoNotInvade;
+                                            break;
                                         default:
                                             design5.Stance = BuiltObjectStance.DoNotAttack;
                                             design5.FleeWhen = BuiltObjectFleeWhen.Attacked;
@@ -1414,7 +1419,7 @@ namespace BaconDistantWorlds
                 StellarObjectList coloniesToExclude = new StellarObjectList();
                 foreach (BuiltObject spacePort in (SyncList<BuiltObject>)empire.SpacePorts)
                 {
-                    if (spacePort.Name.StartsWith("--"))
+                    if (spacePort.BaseShipyardDisabled)
                         coloniesToExclude.Add((StellarObject)spacePort);
                 }
                 Habitat habitat = empire.SelectRandomSpacePortColony(coloniesToExclude);

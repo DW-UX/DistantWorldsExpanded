@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Timers;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -23,14 +24,15 @@ namespace DistantWorlds.Controls
     private System.Timers.Timer _Timer = new System.Timers.Timer();
     private double _ScrollSpeed = 20.0;
     private double _SecondsPerTimerInterval = 0.05;
-    private Font _DefaultFont = new Font("Verdana", 12f, FontStyle.Bold);
+    private Font _DefaultFont = UiScale.NewFont("Verdana", 12f, FontStyle.Bold);
     private Color _DefaultTextColor = Color.Yellow;
     private int _DefaultSpacerHeight = 20;
     public ScrollingCreditsPanel.DoScrollDelegate DoScrollMethod;
     private Image _BackgroundImage;
     private bool _ShowBackground;
 
-    public override Image BackgroundImage
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override Image BackgroundImage
     {
       get => this._BackgroundImage;
       set
@@ -119,9 +121,9 @@ namespace DistantWorlds.Controls
               {
                 case string _:
                   string s = (string) obj;
-                  RectangleF layoutRectangle = new RectangleF((float) x + 1f, (float) scrollingItemTop + 1f, itemSize.Width + 1f, itemSize.Height + 1f);
+                  RectangleF layoutRectangle = new RectangleF((float) x + UiScale.S(1f), (float) scrollingItemTop + UiScale.S(1f), itemSize.Width + UiScale.S(1f), itemSize.Height + UiScale.S(1f));
                   graphics.DrawString(s, this._DefaultFont, (Brush) solidBrush2, layoutRectangle);
-                  layoutRectangle = new RectangleF((float) x, (float) scrollingItemTop, itemSize.Width + 1f, itemSize.Height + 1f);
+                  layoutRectangle = new RectangleF((float) x, (float) scrollingItemTop, itemSize.Width + UiScale.S(1f), itemSize.Height + UiScale.S(1f));
                   graphics.DrawString(s, this._DefaultFont, (Brush) solidBrush1, layoutRectangle);
                   continue;
                 case Bitmap _:
@@ -184,7 +186,7 @@ namespace DistantWorlds.Controls
       switch (item)
       {
         case int height:
-          itemSize = new SizeF(1f, (float) height);
+          itemSize = new SizeF(UiScale.S(1f), (float) height);
           break;
         case string _:
           string text = (string) item;
@@ -233,19 +235,22 @@ namespace DistantWorlds.Controls
 
     public void StopScroll() => this._Timer.Stop();
 
-    public double ScrollSpeed
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public double ScrollSpeed
     {
       get => this._ScrollSpeed;
       set => this._ScrollSpeed = value;
     }
 
-    public new Font DefaultFont
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Font DefaultFont
     {
       get => this._DefaultFont;
       set => this._DefaultFont = value;
     }
 
-    public Color DefaultTextColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DefaultTextColor
     {
       get => this._DefaultTextColor;
       set => this._DefaultTextColor = value;

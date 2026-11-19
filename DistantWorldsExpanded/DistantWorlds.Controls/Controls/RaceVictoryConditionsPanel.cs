@@ -34,18 +34,18 @@ namespace DistantWorlds.Controls
     private Galaxy _Galaxy;
     private VictoryConditionProgressList _ConditionProgresses;
     private VictoryConditions _GlobalVictoryConditions;
-    private double _RowHeight = 22.0;
-    private double _RowSpacing = 6.0;
+    private double _RowHeight = UiScale.S(22.0);
+    private double _RowSpacing = UiScale.S(6.0);
     private RaceImageCache _RaceImageCache;
     protected VictoryConditionProgress _HoveredCondition;
     private int _StartY;
 
     public RaceVictoryConditionsPanel()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void InitializeImages(RaceImageCache raceImageCache) => this._RaceImageCache = raceImageCache;
@@ -54,7 +54,7 @@ namespace DistantWorlds.Controls
     {
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
       this._Game = game;
       this._Galaxy = galaxy;
       this._GlobalVictoryConditions = globalVictoryConditions;
@@ -87,13 +87,13 @@ namespace DistantWorlds.Controls
 
     private int DrawVictoryConditions(Graphics graphics)
     {
-      int num1 = 14;
-      int num2 = 10;
-      int x = 10;
+      int num1 = UiScale.S(14);
+      int num2 = UiScale.S(10);
+      int x = UiScale.S(10);
       graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
-      int num3 = 40;
+      int num3 = UiScale.S(40);
       int y1 = num2;
       Point location = new Point(x, y1);
       bool flag = false;
@@ -168,12 +168,12 @@ namespace DistantWorlds.Controls
       GraphicsHelper.SetGraphicsQualityToHigh(graphics);
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       if (conditionProgress.BonusAmount > 0.0 || conditionProgress.PirateBonusAmount > 0.0)
-        rectangle.Height += 60;
+        rectangle.Height += UiScale.S(60);
       double width1 = (double) rectangle.Width;
-      int num1 = 5;
+      int num1 = UiScale.S(5);
       float num2 = (float) (num1 * 2);
-      int num3 = 5;
-      int num4 = 7;
+      int num3 = UiScale.S(5);
+      int num4 = UiScale.S(7);
       double num5 = width1;
       int portionCount = conditionProgress.GetPortionCount();
       if (portionCount > 0)
@@ -185,7 +185,7 @@ namespace DistantWorlds.Controls
         graphics.FillRectangle((Brush) solidBrush, rectangle);
       int x1 = rectangle.X + num1;
       int y1 = rectangle.Y + num1;
-      int num6 = 30;
+      int num6 = UiScale.S(30);
       int width3 = (int) ((double) num6 / 0.6);
       if (conditionProgress.Empire != null)
       {
@@ -208,10 +208,10 @@ namespace DistantWorlds.Controls
           x1 += num6 + num1;
         }
         string text1 = conditionProgress.Empire.Name + "  (" + conditionProgress.TotalProgress.ToString("0%") + ")";
-        this.DrawStringWithDropShadow(graphics, text1, this._TitleFont, new Point(x1, y1 + 6));
+        this.DrawStringWithDropShadow(graphics, text1, this._TitleFont, new Point(x1, y1 + UiScale.S(6)));
         string text2 = TextResolver.GetText("Victory Threshold") + ": " + this._GlobalVictoryConditions.VictoryThresholdPercentage.ToString("0%");
         SizeF sizeF = graphics.MeasureString(text2, this._TitleFont);
-        this.DrawStringWithDropShadow(graphics, text2, this._TitleFont, new Point(rectangle.Right - (int) sizeF.Width, y1 + 6));
+        this.DrawStringWithDropShadow(graphics, text2, this._TitleFont, new Point(rectangle.Right - (int) sizeF.Width, y1 + UiScale.S(6)));
       }
       using (Pen pen = new Pen(Color.FromArgb(170, 170, 170), 1f))
       {
@@ -251,8 +251,8 @@ namespace DistantWorlds.Controls
         this.DrawStringWithDropShadowBounded(graphics, text4, this._BoldFont, new Point(x3, y3), size2);
         int y4 = y3 + (int) size2.Height;
         string text5 = string.Format(TextResolver.GetText("Victory Conditions Economy"), (object) this._GlobalVictoryConditions.EconomyPercent.ToString("#0"));
-        size2 = graphics.MeasureString(text5, this.Font, (int) width2 - 20, StringFormat.GenericTypographic);
-        this.DrawStringWithDropShadowBounded(graphics, text5, this.Font, new Point(x3 + 20, y4), size2);
+        size2 = graphics.MeasureString(text5, this.Font, (int) width2 - UiScale.S(20), StringFormat.GenericTypographic);
+        this.DrawStringWithDropShadowBounded(graphics, text5, this.Font, new Point(x3 + UiScale.S(20), y4), size2);
         int y5 = y4 + (int) size2.Height + num4;
         string str1 = conditionProgress.Empire.Name;
         if (conditionProgress.Empire == this._Galaxy.PlayerEmpire)
@@ -266,8 +266,8 @@ namespace DistantWorlds.Controls
         if (conditionProgress.Empire != null && conditionProgress.Empire.PirateEmpireBaseHabitat != null)
           num9 = conditionProgress.Empire.CalculateAccurateAnnualIncome();
         string text7 = str2 + "  (" + string.Format(TextResolver.GetText("Trade Description Money"), (object) num9.ToString("###,###,###,###,##0")) + ")";
-        size2 = graphics.MeasureString(text7, this.Font, (int) width2 - 20, StringFormat.GenericTypographic);
-        this.DrawStringWithDropShadowBounded(graphics, text7, this.Font, new Point(x3 + 20, y6), size2);
+        size2 = graphics.MeasureString(text7, this.Font, (int) width2 - UiScale.S(20), StringFormat.GenericTypographic);
+        this.DrawStringWithDropShadowBounded(graphics, text7, this.Font, new Point(x3 + UiScale.S(20), y6), size2);
         y1 = y6 + (int) size2.Height;
         ++num8;
       }
@@ -284,8 +284,8 @@ namespace DistantWorlds.Controls
         this.DrawStringWithDropShadowBounded(graphics, text9, this._BoldFont, new Point(x4, y8), size3);
         int y9 = y8 + (int) size3.Height;
         string text10 = string.Format(TextResolver.GetText("Victory Conditions Population"), (object) this._GlobalVictoryConditions.PopulationPercent.ToString("#0"));
-        size3 = graphics.MeasureString(text10, this.Font, (int) width2 - 20, StringFormat.GenericTypographic);
-        this.DrawStringWithDropShadowBounded(graphics, text10, this.Font, new Point(x4 + 20, y9), size3);
+        size3 = graphics.MeasureString(text10, this.Font, (int) width2 - UiScale.S(20), StringFormat.GenericTypographic);
+        this.DrawStringWithDropShadowBounded(graphics, text10, this.Font, new Point(x4 + UiScale.S(20), y9), size3);
         int y10 = y9 + (int) size3.Height + num4;
         string str3 = conditionProgress.Empire.Name;
         if (conditionProgress.Empire == this._Galaxy.PlayerEmpire)
@@ -303,8 +303,8 @@ namespace DistantWorlds.Controls
           num10 = ownedColonies.TotalPopulation() + controlledColonies.TotalPopulation() / 2L;
         }
         string text12 = str4 + "  (" + TextResolver.GetText("Population") + ": " + num10.ToString("0,,M") + ")";
-        size3 = graphics.MeasureString(text12, this.Font, (int) width2 - 20, StringFormat.GenericTypographic);
-        this.DrawStringWithDropShadowBounded(graphics, text12, this.Font, new Point(x4 + 20, y11), size3);
+        size3 = graphics.MeasureString(text12, this.Font, (int) width2 - UiScale.S(20), StringFormat.GenericTypographic);
+        this.DrawStringWithDropShadowBounded(graphics, text12, this.Font, new Point(x4 + UiScale.S(20), y11), size3);
         y1 = y11 + (int) size3.Height;
         ++num8;
       }
@@ -321,8 +321,8 @@ namespace DistantWorlds.Controls
         this.DrawStringWithDropShadowBounded(graphics, text14, this._BoldFont, new Point(x5, y13), size4);
         int y14 = y13 + (int) size4.Height;
         string text15 = string.Format(TextResolver.GetText("Victory Conditions Territory"), (object) this._GlobalVictoryConditions.TerritoryPercent.ToString("#0"));
-        size4 = graphics.MeasureString(text15, this.Font, (int) width2 - 20, StringFormat.GenericTypographic);
-        this.DrawStringWithDropShadowBounded(graphics, text15, this.Font, new Point(x5 + 20, y14), size4);
+        size4 = graphics.MeasureString(text15, this.Font, (int) width2 - UiScale.S(20), StringFormat.GenericTypographic);
+        this.DrawStringWithDropShadowBounded(graphics, text15, this.Font, new Point(x5 + UiScale.S(20), y14), size4);
         int y15 = y14 + (int) size4.Height + num4;
         string str5 = conditionProgress.Empire.Name;
         if (conditionProgress.Empire == this._Galaxy.PlayerEmpire)
@@ -344,8 +344,8 @@ namespace DistantWorlds.Controls
         }
         else
           text17 = str6 + "  (" + count.ToString("#0") + " " + TextResolver.GetText("colonies") + ")";
-        size4 = graphics.MeasureString(text17, this.Font, (int) width2 - 20, StringFormat.GenericTypographic);
-        this.DrawStringWithDropShadowBounded(graphics, text17, this.Font, new Point(x5 + 20, y16), size4);
+        size4 = graphics.MeasureString(text17, this.Font, (int) width2 - UiScale.S(20), StringFormat.GenericTypographic);
+        this.DrawStringWithDropShadowBounded(graphics, text17, this.Font, new Point(x5 + UiScale.S(20), y16), size4);
         y1 = y16 + (int) size4.Height;
         ++num8;
       }
@@ -358,9 +358,9 @@ namespace DistantWorlds.Controls
           num13 = width1;
         double val1 = num13 - (double) num2;
         int num14 = 0;
-        int num15 = 30;
-        double width4 = Math.Min(val1, 840.0);
-        int width5 = (int) (width4 - 60.0);
+        int num15 = UiScale.S(30);
+        double width4 = Math.Min(val1, UiScale.S(840.0));
+        int width5 = (int) (width4 - UiScale.S(60.0));
         int num16 = num15 + width5;
         string empty1 = string.Empty;
         string text18;
@@ -401,7 +401,7 @@ namespace DistantWorlds.Controls
               }
               string text22 = empty2 + conditionProgress1.Detail;
               SizeF size7 = graphics.MeasureString(text22, this.Font, width5, StringFormat.GenericTypographic);
-              this.DrawStringWithDropShadowBounded(graphics, text22, this.Font, new Point(x6 + num15 + 20, y19), size7);
+              this.DrawStringWithDropShadowBounded(graphics, text22, this.Font, new Point(x6 + num15 + UiScale.S(20), y19), size7);
               y19 += (int) size7.Height;
             }
             y1 = y19 + num3;
@@ -414,7 +414,7 @@ namespace DistantWorlds.Controls
           return;
         int num17 = rectangle.Top + num1 + num6 + num1 + num1;
         int x7 = rectangle.Left + num1;
-        int y20 = y1 + 10;
+        int y20 = y1 + UiScale.S(10);
         if (y20 < num17)
           y20 = num17;
         using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(250, 0, 0, 0)))
@@ -429,7 +429,7 @@ namespace DistantWorlds.Controls
           SizeF sizeF = graphics.MeasureString(text23, this._BoldFont, rectangle.Width, StringFormat.GenericTypographic);
           this.DrawStringWithDropShadowBounded(graphics, text23, this._BoldFont, new Point(x7, y20), size1);
           int y21 = y20 + (int) sizeF.Height;
-          int x8 = rectangle.Left + num1 + 50;
+          int x8 = rectangle.Left + num1 + UiScale.S(50);
           string empty4 = string.Empty;
           string text24 = conditionProgress.StandingWonderBonusAmount <= 0.0 ? string.Format(TextResolver.GetText("Pirate Owned Colony Population Victory Condition Bonus Plus Others Detail"), (object) num19.ToString("0,,M"), (object) conditionProgress.Empire.Name) : string.Format(TextResolver.GetText("Pirate Owned Colony Population Victory Condition Bonus Plus Others Standing Wonders Detail"), (object) num19.ToString("0,,M"), (object) conditionProgress.Empire.Name);
           this.DrawStringWithDropShadowBounded(graphics, text24, this.Font, new Point(x8, y21), size1);
@@ -443,7 +443,7 @@ namespace DistantWorlds.Controls
           SizeF sizeF = graphics.MeasureString(text25, this._BoldFont, rectangle.Width, StringFormat.GenericTypographic);
           this.DrawStringWithDropShadowBounded(graphics, text25, this._BoldFont, new Point(x7, y20), size1);
           int y22 = y20 + (int) sizeF.Height;
-          int x9 = rectangle.Left + num1 + 50;
+          int x9 = rectangle.Left + num1 + UiScale.S(50);
           string text26 = string.Format(TextResolver.GetText("Pirate Owned Colony Population Victory Condition Bonus Detail"), (object) num20.ToString("0,,M"), (object) conditionProgress.Empire.Name);
           this.DrawStringWithDropShadowBounded(graphics, text26, this.Font, new Point(x9, y22), size1);
         }
@@ -454,7 +454,7 @@ namespace DistantWorlds.Controls
           return;
         int num21 = rectangle.Top + num1 + num6 + num1 + num1;
         int x10 = rectangle.Left + num1;
-        int y23 = y1 + 10;
+        int y23 = y1 + UiScale.S(10);
         if (y23 < num21)
           y23 = num21;
         using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(250, 0, 0, 0)))
@@ -465,7 +465,7 @@ namespace DistantWorlds.Controls
         SizeF sizeF = graphics.MeasureString(text27, this._BoldFont, rectangle.Width, StringFormat.GenericTypographic);
         this.DrawStringWithDropShadowBounded(graphics, text27, this._BoldFont, new Point(x10, y23), size1);
         int y24 = y23 + (int) sizeF.Height;
-        int x11 = rectangle.Left + num1 + 50;
+        int x11 = rectangle.Left + num1 + UiScale.S(50);
         string empty6 = string.Empty;
         string text28 = conditionProgress.StandingWonderBonusAmount <= 0.0 ? string.Format(TextResolver.GetText("Victory Condition Bonus Detail"), (object) conditionProgress.BonusAmount.ToString("+0.0%;-0.0%")) : string.Format(TextResolver.GetText("Victory Condition Bonus Detail Standing Wonders"), (object) conditionProgress.BonusAmount.ToString("+0.0%;-0.0%"));
         this.DrawStringWithDropShadowBounded(graphics, text28, this.Font, new Point(x11, y24), size1);
@@ -488,8 +488,8 @@ namespace DistantWorlds.Controls
       int num1 = conditionProgresses.IndexOf(condition);
       if (num1 < 0)
         return;
-      int num2 = 5 + num1 * (int) (this._RowHeight + this._RowSpacing);
-      int height = 300;
+      int num2 = UiScale.S(5) + num1 * (int) (this._RowHeight + this._RowSpacing);
+      int height = UiScale.S(300);
       int x = 0;
       Rectangle rectangle = Rectangle.Empty;
       rectangle = num2 + (int) this._RowHeight + height + startY <= this.Height ? new Rectangle(x, num2 + (int) this._RowHeight + startY, this.Width - x, height) : new Rectangle(x, num2 - height + startY, this.Width - x, height);
@@ -522,11 +522,11 @@ namespace DistantWorlds.Controls
       if (conditionProgresses == null || globalVictoryConditions == null)
         return;
       int width1 = (int) (this._RowHeight / 0.6);
-      int num1 = width1 + 3 + (int) this._RowHeight + 3;
+      int num1 = width1 + UiScale.S(3) + (int) this._RowHeight + UiScale.S(3);
       double width2 = (double) this.Width - (double) num1;
       double rowHeight = this._RowHeight;
       double rowSpacing = this._RowSpacing;
-      double num2 = 5.0 + (double) startY;
+      double num2 = UiScale.S(5.0) + (double) startY;
       int num3 = num1 + (int) (width2 * globalVictoryConditions.VictoryThresholdPercentage);
       conditionProgresses.Sort();
       conditionProgresses.Reverse();
@@ -571,11 +571,11 @@ namespace DistantWorlds.Controls
             if (bitmap != null)
             {
               Rectangle srcRect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-              Rectangle destRect = new Rectangle((int) x1 + width1 + 3, (int) num2, (int) this._RowHeight, (int) this._RowHeight);
+              Rectangle destRect = new Rectangle((int) x1 + width1 + UiScale.S(3), (int) num2, (int) this._RowHeight, (int) this._RowHeight);
               graphics.DrawImage((Image) bitmap, destRect, srcRect, GraphicsUnit.Pixel);
             }
           }
-          double x2 = x1 + ((double) (width1 + 3) + this._RowHeight + 3.0);
+          double x2 = x1 + ((double) (width1 + UiScale.S(3)) + this._RowHeight + UiScale.S(3.0));
           Rectangle rect1 = new Rectangle((int) x2, (int) num2, (int) width2, (int) rowHeight);
           using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(64, 0, 0, 0)))
             graphics.FillRectangle((Brush) solidBrush, rect1);
@@ -625,7 +625,7 @@ namespace DistantWorlds.Controls
           {
             using (Pen pen = new Pen(Color.Yellow, 2f))
             {
-              Rectangle rect2 = new Rectangle(0, (int) num2 - 2, this.Width, (int) this._RowHeight + 4);
+              Rectangle rect2 = new Rectangle(0, (int) num2 - UiScale.S(2), this.Width, (int) this._RowHeight + UiScale.S(4));
               graphics.DrawRectangle(pen, rect2);
             }
           }
@@ -650,9 +650,9 @@ namespace DistantWorlds.Controls
       Point location,
       Color foreColor)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location, StringFormat.GenericTypographic);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       using (SolidBrush solidBrush = new SolidBrush(foreColor))
         graphics.DrawString(text, font, (Brush) solidBrush, (PointF) location, StringFormat.GenericTypographic);
     }
@@ -664,9 +664,9 @@ namespace DistantWorlds.Controls
       Point location,
       Brush brush)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, brush, (PointF) location);
     }
 
@@ -688,13 +688,13 @@ namespace DistantWorlds.Controls
       SizeF size,
       Color textColor)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       PointF pointF = new PointF((float) location.X, (float) location.Y);
-      RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + 2f, size.Height + 2f);
+      RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       pointF = new PointF((float) location.X, (float) location.Y);
-      layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + 2f, size.Height + 2f);
+      layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       if (textColor.IsEmpty)
       {
         graphics.DrawString(text, font, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);

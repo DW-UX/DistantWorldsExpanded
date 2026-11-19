@@ -21,7 +21,7 @@ namespace DistantWorlds.Controls
 
     public void BindData(RaceSummary summary, Font font, Font headerFont)
     {
-      this.Height = 100;
+      this.Height = UiScale.S(100);
       this._Summary = summary;
       this._Font = font;
       this._HeaderFont = headerFont;
@@ -41,8 +41,8 @@ namespace DistantWorlds.Controls
       GraphicsHelper.SetGraphicsQualityToHigh(graphics);
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       float y = 0.0f;
-      int x = 20;
-      float num = 10f;
+      int x = UiScale.S(20);
+      float num = UiScale.S(10f);
       for (int index1 = 0; index1 < summary.Sections.Count; ++index1)
       {
         RaceSummarySection section = summary.Sections[index1];
@@ -63,7 +63,7 @@ namespace DistantWorlds.Controls
       }
       if (this.Height >= (int) y + 1)
         return;
-      this.Height = (int) y + 1;
+      this.Height = (int) y + UiScale.S(1);
     }
 
     private void DrawStringWithDropShadow(
@@ -82,9 +82,9 @@ namespace DistantWorlds.Controls
       Point location,
       Brush brush)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, brush, (PointF) location);
     }
 
@@ -106,13 +106,13 @@ namespace DistantWorlds.Controls
       SizeF size,
       Color textColor)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       PointF pointF = new PointF((float) location.X, (float) location.Y);
-      RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + 2f, size.Height + 2f);
+      RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       pointF = new PointF((float) location.X, (float) location.Y);
-      layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + 2f, size.Height + 2f);
+      layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       if (textColor.IsEmpty)
       {
         graphics.DrawString(text, font, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);

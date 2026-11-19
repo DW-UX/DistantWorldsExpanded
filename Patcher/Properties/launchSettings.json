@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Patcher": {
+      "commandName": "Project",
+      "commandLineArgs": "\"c:\\Projects\\DistantWorldsExpanded\\DistantWorldsExpanded\\FilesDb.db\" FilesDb.db \"c:\\Projects\\DistantWorldsExpanded\\DistantWorldsExpanded\\bin\\Debug\\net9.0-windows\\AdvMods\\ExpansionMod\\Patches\""
+    }
+  }
+}

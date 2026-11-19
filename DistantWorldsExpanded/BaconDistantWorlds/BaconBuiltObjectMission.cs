@@ -760,7 +760,7 @@ namespace BaconDistantWorlds
                 else
                 {
                   num21 = 20000.0;
-                  BuiltObject nearestSpacePort = theThis._Galaxy.FastFindNearestSpacePort(theThis._BuiltObject.Xpos, theThis._BuiltObject.Ypos, theThis._BuiltObject.ActualEmpire);
+                  BuiltObject nearestSpacePort = theThis._Galaxy.FastFindNearestSpacePort(theThis._BuiltObject.Xpos, theThis._BuiltObject.Ypos, theThis._BuiltObject.ActualEmpire, false);
                   if (nearestSpacePort != null && nearestSpacePort.Attackers.Count <= 0 && nearestSpacePort.NearestSystemStar == theThis._BuiltObject.NearestSystemStar && theThis._Galaxy.CalculateDistance(nearestSpacePort.Xpos, nearestSpacePort.Ypos, theThis._BuiltObject.Xpos, theThis._BuiltObject.Ypos) > 3000.0)
                   {
                     commandQueue.Enqueue(new Command(CommandAction.ConditionalHyperTo, nearestSpacePort));

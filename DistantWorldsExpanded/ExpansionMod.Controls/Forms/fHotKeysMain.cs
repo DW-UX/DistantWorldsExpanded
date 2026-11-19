@@ -17,6 +17,7 @@ namespace ExpansionMod.Controls
         public fHotKeysMain(List<IHotKeyManager> hotkeyManagers)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
 
             _hotkeyManagers = hotkeyManagers;
             FillTabControl(_hotkeyManagers);

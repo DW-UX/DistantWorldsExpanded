@@ -26,7 +26,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn1.ReadOnly = true;
             viewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn1.ValueType = typeof(string);
-            viewTextBoxColumn1.Width = 40;
+            viewTextBoxColumn1.Width = UiScale.S(40);
             viewTextBoxColumn1.FillWeight = 40f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn1);
             DataGridViewTextBoxColumn viewTextBoxColumn2 = new DataGridViewTextBoxColumn();
@@ -35,7 +35,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn2.ReadOnly = true;
             viewTextBoxColumn2.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn2.ValueType = typeof(string);
-            viewTextBoxColumn2.Width = 160;
+            viewTextBoxColumn2.Width = UiScale.S(160);
             viewTextBoxColumn2.FillWeight = 160f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn2);
         }

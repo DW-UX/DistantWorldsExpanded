@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Timers;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace DistantWorlds.Controls
 {
@@ -23,14 +24,15 @@ namespace DistantWorlds.Controls
     private System.Timers.Timer _Timer = new System.Timers.Timer();
     private double _ScrollSpeed = 20.0;
     private double _SecondsPerTimerInterval = 0.05;
-    private Font _DefaultFont = new Font("Verdana", 12f, FontStyle.Bold);
+    private Font _DefaultFont = UiScale.NewFont("Verdana", 12f, FontStyle.Bold);
     private Color _DefaultTextColor = Color.Yellow;
-    private int _DefaultSpacerHeight = 20;
+    private int _DefaultSpacerHeight = UiScale.S(20);
     public ScrollingLabel.DoScrollDelegate DoScrollMethod;
     private Image _BackgroundImage;
     private bool _ShowBackground;
 
-    public override Image BackgroundImage
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public override Image BackgroundImage
     {
       get => this._BackgroundImage;
       set
@@ -160,19 +162,22 @@ namespace DistantWorlds.Controls
 
     public void StopScroll() => this._Timer.Stop();
 
-    public double ScrollSpeed
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public double ScrollSpeed
     {
       get => this._ScrollSpeed;
       set => this._ScrollSpeed = value;
     }
 
-    public new Font DefaultFont
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new Font DefaultFont
     {
       get => this._DefaultFont;
       set => this._DefaultFont = value;
     }
 
-    public Color DefaultTextColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DefaultTextColor
     {
       get => this._DefaultTextColor;
       set => this._DefaultTextColor = value;
@@ -199,7 +204,7 @@ namespace DistantWorlds.Controls
           using (Graphics graphics = this.CreateGraphics())
           {
             SizeF sizeF = graphics.MeasureString(control.Text, control.Font, this.Width, StringFormat.GenericDefault);
-            Size size = new Size((int) sizeF.Width + 1, (int) sizeF.Height + 1);
+            Size size = new Size((int) sizeF.Width + UiScale.S(1), (int) sizeF.Height + UiScale.S(1));
             control.MinimumSize = size;
             control.Size = size;
             ((Label) control).TextAlign = ContentAlignment.MiddleCenter;

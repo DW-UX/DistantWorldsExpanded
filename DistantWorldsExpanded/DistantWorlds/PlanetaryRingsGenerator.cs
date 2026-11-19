@@ -4,6 +4,7 @@
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
+using DistantWorlds.Types;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

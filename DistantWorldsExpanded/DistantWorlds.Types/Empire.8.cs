@@ -4689,7 +4689,7 @@ namespace DistantWorlds.Types
                             if (flag && fleet.LeadShip.IsAutoControlled && stellarObject is BuiltObject)
                             {
                                 BuiltObject builtObject4 = (BuiltObject)stellarObject;
-                                if (builtObject4.ParentHabitat != null && (builtObject4.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject4.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject4.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                                if (builtObject4.ParentHabitat != null && (builtObject4.SubRole == BuiltObjectSubRole.Outpost || builtObject4.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject4.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject4.SubRole == BuiltObjectSubRole.LargeSpacePort))
                                 {
                                     fleet.GatherPoint = builtObject4.ParentHabitat;
                                 }
@@ -5149,7 +5149,7 @@ namespace DistantWorlds.Types
                 BuiltObject builtObject = shipGroup.Ships[i];
                 builtObject.ShipGroup = null;
             }
-            shipGroup.Ships.Clear();
+            shipGroup.Ships?.Clear();
             if (ShipGroups.Contains(shipGroup))
             {
                 ShipGroups.Remove(shipGroup);

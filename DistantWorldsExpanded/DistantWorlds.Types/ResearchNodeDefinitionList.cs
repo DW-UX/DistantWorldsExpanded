@@ -7,6 +7,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Globalization;
 using System.IO;
 
@@ -47,7 +48,7 @@ namespace DistantWorlds.Types
             ResearchNodeDefinitionList nodeDefinitionList = new ResearchNodeDefinitionList();
             List<int>[] intListArray;
             List<bool>[] boolListArray;
-            
+
             int num1 = 0;
             int projCount;
             try
@@ -838,6 +839,302 @@ namespace DistantWorlds.Types
             }
             this.AddRange((IEnumerable<ResearchNodeDefinition>)nodeDefinitionList);
         }
+        public void LoadFromFile(SQLiteDataReader reader, RaceList races, int projCount)
+        {
+            this.Clear();
+            ResearchNodeDefinitionList nodeDefinitionList = new ResearchNodeDefinitionList();
+            List<int>[] intListArray;
+            List<bool>[] boolListArray;
+
+            int id = 0;
+            try
+            {
+
+                intListArray = new List<int>[projCount];
+                boolListArray = new List<bool>[projCount];
+                for (int index = 0; index < projCount; ++index)
+                {
+                    intListArray[index] = new List<int>();
+                    boolListArray[index] = new List<bool>();
+                }
+
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(reader.GetOrdinal("ID"));
+                    if (id < 0)
+                        throw new ApplicationException($"Wrong ProjectId {id}");
+                    ResearchNodeDefinition node;
+                    {//project
+                        string projName = reader.GetString(reader.GetOrdinal("Name"));
+                        if (string.IsNullOrWhiteSpace(projName))
+                            throw new ApplicationException($"Could not read Name at ID {id} at Research");
+
+                        int techLevel = reader.GetInt32(reader.GetOrdinal("TechLevel"));
+
+                        int rowIdx = reader.GetInt32(reader.GetOrdinal("RowIdx"));
+
+                        IndustryType industry;
+                        int indTempVal = reader.GetInt32(reader.GetOrdinal("Industry"));
+                        switch (indTempVal)
+                        {
+                            case 0:
+                                industry = IndustryType.Weapon;
+                                break;
+                            case 1:
+                                industry = IndustryType.Energy;
+                                break;
+                            case 2:
+                                industry = IndustryType.HighTech;
+                                break;
+                            default:
+                                throw new ApplicationException($"Invalid Industry at ID {id} of Research. Industry should be 0 (Weapons), 1 (Energy) or 2 (HighTech).");
+                        }
+
+                        ComponentCategoryType componentCategoryByIndex;
+                        int categoryTempVal = reader.GetInt32(reader.GetOrdinal("Category"));
+                        componentCategoryByIndex = Galaxy.DetermineComponentCategoryByIndex(categoryTempVal);
+                        if (componentCategoryByIndex == ComponentCategoryType.Undefined)
+                            throw new ApplicationException($"Invalid Category at ID {id} of Research. Category should be between 0 and 26.");
+
+                        int specialFunctionCode = reader.GetInt32(reader.GetOrdinal("SpecialFunctionCode"));
+                        double baseCostMultOverride = reader.GetInt32(reader.GetOrdinal("SpecialFunctionCode"));
+
+                        node = new ResearchNodeDefinition(id, projName, industry, componentCategoryByIndex, techLevel, 0.0f, rowIdx)
+                        {
+                            BaseCostMultiplierOverride = baseCostMultOverride,
+                            SpecialFunctionCode = specialFunctionCode
+                        };
+                        nodeDefinitionList.Add(node);
+                    }
+                    {//AllowedRaces
+                        using var allowedRacesReader = Main._FileDB.GetResearchAllowedRacesReader(id);
+                        if (allowedRacesReader.HasRows)
+                        {
+                            while (allowedRacesReader.Read())
+                            {
+                                string raceName = allowedRacesReader.GetString(allowedRacesReader.GetOrdinal("RaceName"));
+                                Race race = races[raceName];
+                                if (race == null)
+                                    throw new ApplicationException($"Could not find matching race name '{raceName}' at ID {id} at ResearchAllowedRaces");
+                                node.SpecifiedRaces.Add(race);
+                            }
+                        }
+                    }
+                    {//Components
+
+                        using var componentReader = Main._FileDB.GetResearchComponentsReader(id);
+                        if (componentReader.HasRows)
+                        {
+                            while (componentReader.Read())
+                            {
+                                node.Components.Add(new Component(componentReader.GetInt32(componentReader.GetOrdinal("ComponentID"))));
+                            }
+                        }
+                    }
+                    {//ComponentImprovements
+                        using var componentImproveReader = Main._FileDB.GetResearchComponentImprovementsReader(id);
+                        if (componentImproveReader.HasRows)
+                        {
+                            while (componentImproveReader.Read())
+                            {
+                                int componentId = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("ComponentID"));
+                                int techLevel = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("TechLevel"));
+                                int val1 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value1"));
+                                int val2 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value2"));
+                                int val3 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value3"));
+                                int val4 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value4"));
+                                int val5 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value5"));
+                                int val6 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value6"));
+                                int val7 = componentImproveReader.GetInt32(componentImproveReader.GetOrdinal("Value7"));
+
+                                ComponentImprovement componentImprovement = new ComponentImprovement(new Component(componentId), techLevel, val1, val2, val3, val4, val5, val6, val7);
+                                node.ComponentImprovements.Add(componentImprovement);
+                            }
+                        }
+                    }
+                    {//Fighters
+                        using var fighterReader = Main._FileDB.GetResearchFightersReader(id);
+                        if (fighterReader.HasRows)
+                        {
+                            while (fighterReader.Read())
+                            {
+                                int fighterId = fighterReader.GetInt32(fighterReader.GetOrdinal("FighterID"));
+                                FighterSpecification byId = Galaxy.FighterSpecificationsStatic.GetById(fighterId);
+                                if (byId != null)
+                                {
+                                    node.Fighters.Add(byId);
+                                }
+                            }
+                        }
+                    }
+                    { //Facility
+
+                        int facId = reader.GetInt32(reader.GetOrdinal("FacilityID"));
+                        if (facId != -1)
+                        {
+                            PlanetaryFacilityDefinition byId = Galaxy.PlanetaryFacilityDefinitionsStatic.GetById(facId);
+                            if (byId != null)
+                            {
+                                node.PlanetaryFacility = byId;
+                            }
+                        }
+                    }
+                    {//Abilities
+                        using var abilityReader = Main._FileDB.GetResearchAbilitiesReader(id);
+                        if (abilityReader.HasRows)
+                        {
+                            while (abilityReader.Read())
+                            {
+                                string abbName = abilityReader.GetString(abilityReader.GetOrdinal("Name"));
+                                int abbType = abilityReader.GetInt32(abilityReader.GetOrdinal("Type"));
+                                int abbLevel = abilityReader.GetInt32(abilityReader.GetOrdinal("Level"));
+                                int abbValue = abilityReader.GetInt32(abilityReader.GetOrdinal("Value"));
+                                int relatedObjIdx = abilityReader.GetInt32(abilityReader.GetOrdinal("RelatedObjectIndex"));
+                                object relatedObj = null;
+                                ResearchAbilityType type = ResearchAbilityType.Undefined;
+                                switch (abbType)
+                                {
+                                    case 0:
+                                        type = ResearchAbilityType.Boarding;
+                                        break;
+                                    case 1:
+                                        type = ResearchAbilityType.ColonizeHabitatType;
+                                        break;
+                                    case 2:
+                                        type = ResearchAbilityType.ConstructionSize;
+                                        break;
+                                    case 3:
+                                        type = ResearchAbilityType.EnableShipSubRole;
+                                        break;
+                                    case 4:
+                                        type = ResearchAbilityType.PopulationGrowthRate;
+                                        break;
+                                    case 5:
+                                        type = ResearchAbilityType.Troop;
+                                        break;
+                                }
+                                switch (type)
+                                {
+                                    case ResearchAbilityType.EnableShipSubRole:
+                                        switch (relatedObjIdx)
+                                        {
+                                            case 0:
+                                                relatedObj = (object)BuiltObjectSubRole.Carrier;
+                                                break;
+                                            case 1:
+                                                relatedObj = (object)BuiltObjectSubRole.ResupplyShip;
+                                                break;
+                                        }
+                                        break;
+                                    case ResearchAbilityType.Troop:
+                                        switch (relatedObjIdx)
+                                        {
+                                            case 0:
+                                                relatedObj = (object)TroopType.Undefined;
+                                                break;
+                                            case 1:
+                                                relatedObj = (object)TroopType.Infantry;
+                                                break;
+                                            case 2:
+                                                relatedObj = (object)TroopType.Armored;
+                                                break;
+                                            case 3:
+                                                relatedObj = (object)TroopType.Artillery;
+                                                break;
+                                            case 4:
+                                                relatedObj = (object)TroopType.SpecialForces;
+                                                break;
+                                        }
+                                        break;
+                                }
+                                ResearchAbility researchAbility = new ResearchAbility(abbName, type, abbLevel, abbValue, relatedObj);
+                                node.Abilities.Add(researchAbility);
+                            }
+                        }
+                    }
+                    {//Plague change
+                        using var plagueReader = Main._FileDB.GetResearchPlagueChangeReader(id);
+                        if (plagueReader.HasRows)
+                        {
+                            while (plagueReader.Read())
+                            {
+                                int plagId = plagueReader.GetInt32(plagueReader.GetOrdinal("PlagueID"));
+                                if (plagId < (byte)0 || (int)plagId >= Galaxy.PlaguesStatic.Count)
+                                    throw new ApplicationException($"Invalid PlagueId encountered. Must match PlagueId from Plagues. ID {id} at PlagueChange at Reseach");
+                                string plagDesc = plagueReader.GetString(plagueReader.GetOrdinal("Description"));
+                                if (string.IsNullOrWhiteSpace(plagDesc))
+                                    throw new ApplicationException($"Could not read PlagueChange Description at ID {id} at PlagueChange in Research");
+                                double plagMortRate = plagueReader.GetDouble(plagueReader.GetOrdinal("MortalityRate"));
+                                if (plagMortRate < 0.0 || plagMortRate > 5.0)
+                                    throw new ApplicationException($"Invalid MortalityRate. Should be in range 0.000 to 5.0. ID {id} at PlagueChange in Research");
+                                int plagInfChance = plagueReader.GetInt32(plagueReader.GetOrdinal("InfectionChance"));
+                                float plagDuration = plagueReader.GetFloat(plagueReader.GetOrdinal("Duration"));
+                                double plagExMortRate = plagueReader.GetDouble(plagueReader.GetOrdinal("ExceptionMortalityRate"));
+                                if (plagExMortRate < 0.0 || plagExMortRate > 5.0)
+                                    throw new ApplicationException($"Invalid ExceptionMortalityRate. Should be in range 0.000 to 5.0. ID {id} at PlagueChange in Research");
+                                int plagExInfChance = plagueReader.GetInt32(plagueReader.GetOrdinal("ExceptionInfectionChance"));
+                                float plagExDuration = plagueReader.GetFloat(plagueReader.GetOrdinal("ExceptionDuration"));
+
+                                Plague plague1 = Galaxy.PlaguesStatic[plagId];
+                                if (plague1 != null)
+                                {
+                                    node.PlagueChange = new Plague((byte)plagId, plague1.Name, plague1.PictureRef, plagMortRate, plagInfChance, plagDuration)
+                                    {
+                                        ExceptionMortalityRate = plagExMortRate,
+                                        ExceptionInfectionChance = plagExInfChance,
+                                        ExceptionDuration = plagExDuration,
+                                        ExceptionRaceName = plague1.ExceptionRaceName,
+                                        Description = plagDesc
+                                    };
+                                }
+                            }
+                        }
+                    }
+                    {//Parents
+                        using var parentReader = Main._FileDB.GetResearchParentReader(id);
+                        if (parentReader.HasRows)
+                        {
+                            while (parentReader.Read())
+                            {
+                                int parentId = parentReader.GetInt32(parentReader.GetOrdinal("ParentProjectID"));
+                                bool required = parentReader.GetBoolean(parentReader.GetOrdinal("RequiredParent"));
+
+                                intListArray[node.ResearchNodeId].Add(parentId);
+                                boolListArray[node.ResearchNodeId].Add(required);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error at ID {id} at Research");
+            }
+            nodeDefinitionList.Sort();
+            if (!this.CheckSequentialIds(nodeDefinitionList))
+                throw new ApplicationException("Non-sequential Research Project IDs detected. Research Project ID values must start at 0 (zero) and be sequential.");
+            for (int index1 = 0; index1 < nodeDefinitionList.Count; ++index1)
+            {
+                nodeDefinitionList[index1].ParentNodes = new ResearchNodeDefinitionList();
+                nodeDefinitionList[index1].ParentIsRequired = new List<bool>();
+                if (intListArray[index1] != null)
+                {
+                    for (int index2 = 0; index2 < intListArray[index1].Count; ++index2)
+                    {
+                        nodeDefinitionList[index1].ParentNodes.Add(nodeDefinitionList[intListArray[index1][index2]]);
+                        if (boolListArray[index1] != null && boolListArray[index1].Count > 0)
+                            nodeDefinitionList[index1].ParentIsRequired.Add(boolListArray[index1][index2]);
+                        else
+                            nodeDefinitionList[index1].ParentIsRequired.Add(false);
+                    }
+                }
+            }
+            this.AddRange((IEnumerable<ResearchNodeDefinition>)nodeDefinitionList);
+        }
 
         public ResearchNodeList UpdateProjectCostsForRace(ResearchNodeList projects, Race race)
         {
@@ -1360,8 +1657,8 @@ namespace DistantWorlds.Types
                         }
                     }
                 }
-            }           
-            if(projIdCount != 0) { projIdCount++; }
+            }
+            if (projIdCount != 0) { projIdCount++; }
         }
     }
 }

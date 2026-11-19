@@ -106,9 +106,9 @@ namespace DistantWorlds.Controls
 
     public void DoLayout()
     {
-      int num1 = 18;
-      int num2 = 1;
-      int x = 1;
+      int num1 = UiScale.S(18);
+      int num2 = UiScale.S(1);
+      int x = UiScale.S(1);
       bool flag = false;
       if (this._ShouldBeVisible)
       {
@@ -153,17 +153,17 @@ namespace DistantWorlds.Controls
       this.lblTradeResources = new Label();
       this.SuspendLayout();
       this.chkTradeResources.AutoSize = true;
-      this.chkTradeResources.Location = new Point(3, 22);
+      this.chkTradeResources.Location = new Point(UiScale.S(3), UiScale.S(22));
       this.chkTradeResources.Name = "chkTradeResources";
-      this.chkTradeResources.Size = new Size(197, 17);
+      this.chkTradeResources.Size = new Size(UiScale.S(197), UiScale.S(17));
       this.chkTradeResources.TabIndex = 0;
       this.chkTradeResources.Text = "Trade restricted resources with them";
       this.chkTradeResources.UseVisualStyleBackColor = true;
       this.chkTradeResources.CheckedChanged += new EventHandler(this.chkTradeResources_CheckedChanged);
       this.lblTradeResources.AutoSize = true;
-      this.lblTradeResources.Location = new Point(3, 3);
+      this.lblTradeResources.Location = new Point(UiScale.S(3), UiScale.S(3));
       this.lblTradeResources.Name = "lblTradeResources";
-      this.lblTradeResources.Size = new Size(67, 13);
+      this.lblTradeResources.Size = new Size(UiScale.S(67), UiScale.S(13));
       this.lblTradeResources.TabIndex = 1;
       this.lblTradeResources.Text = "They have...";
       this.AutoScaleMode = AutoScaleMode.None;
@@ -171,7 +171,7 @@ namespace DistantWorlds.Controls
       this.Controls.Add((Control) this.lblTradeResources);
       this.Controls.Add((Control) this.chkTradeResources);
       this.Name = nameof (TradeRestrictedResourcesPanel);
-      this.Size = new Size(301, 41);
+      this.Size = new Size(UiScale.S(301), UiScale.S(41));
       this.ResumeLayout(false);
       this.PerformLayout();
     }

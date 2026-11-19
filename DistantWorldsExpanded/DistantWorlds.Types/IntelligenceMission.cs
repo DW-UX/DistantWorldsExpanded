@@ -247,7 +247,7 @@ namespace DistantWorlds.Types
             break;
           case IntelligenceMissionType.DestroyBase:
             double num9 = 4.0;
-            if (this._TargetIsBuiltObject && this._TargetBuiltObject != null && this._TargetBuiltObject.Empire != null && this._TargetBuiltObject.Empire.PirateEmpireBaseHabitat != null && (this._TargetBuiltObject.SubRole == BuiltObjectSubRole.SmallSpacePort || this._TargetBuiltObject.SubRole == BuiltObjectSubRole.MediumSpacePort || this._TargetBuiltObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+            if (this._TargetIsBuiltObject && this._TargetBuiltObject != null && this._TargetBuiltObject.Empire != null && this._TargetBuiltObject.Empire.PirateEmpireBaseHabitat != null && (this._TargetBuiltObject.SubRole == BuiltObjectSubRole.Outpost || this._TargetBuiltObject.SubRole == BuiltObjectSubRole.SmallSpacePort || this._TargetBuiltObject.SubRole == BuiltObjectSubRole.MediumSpacePort || this._TargetBuiltObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
             {
               num9 = 4.5;
               if (this._TargetBuiltObject.Empire.PirateEmpireBaseHabitat == this._TargetBuiltObject.ParentHabitat)

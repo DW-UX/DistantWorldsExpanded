@@ -21,13 +21,16 @@ namespace ExpansionMod.Controls.Forms
         private readonly string _playerDefaultTemplate;
         private readonly string _aiDefaultTemplate;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public List<RepairPriority> ResultList { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public RepairPriority SelectedTemplate { get; set; }
 
         public fRepairPriority(string currentSelected, List<RepairPriority> userTemplates, RepairPriority defaultTemplate,
             RepairPriority originalTemplate, string playerDefaultTemplate, string aiDefaultTemplate)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
             _defaultTemplate = defaultTemplate;
             _originalTemplate = originalTemplate;
             _playerDefaultTemplate = playerDefaultTemplate;

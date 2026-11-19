@@ -167,10 +167,10 @@ namespace System.Runtime.Serialization
             {
                 get
                 {
-                    FieldInfo field = MemberInfo as FieldInfo;
-                    if (field != null)
+                    FieldInfo @field = MemberInfo as FieldInfo;
+                    if (@field != null)
                     {
-                        return field.FieldType;
+                        return @field.FieldType;
                     }
 
                     return ((PropertyInfo)MemberInfo).PropertyType;

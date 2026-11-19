@@ -27,7 +27,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData()
@@ -75,9 +75,9 @@ namespace DistantWorlds.Controls
       this._Galaxy = galaxy;
       this.HighlightFleetLeadShipsColor = highlightFleetLeadShipsColor;
       if (normalHeight)
-        this.ItemHeight = 19;
+        this.ItemHeight = UiScale.S(19);
       else
-        this.ItemHeight = 28;
+        this.ItemHeight = UiScale.S(28);
       this.Items.Clear();
       if (this._BuiltObjects == null)
         return;
@@ -141,25 +141,25 @@ namespace DistantWorlds.Controls
           Bitmap largeFlagPicture = this._BuiltObjects[e.Index].Empire.LargeFlagPicture;
           e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
           e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-          int height = e.Bounds.Height - 4;
+          int height = e.Bounds.Height - UiScale.S(4);
           double num = (double) height / (double) largeFlagPicture.Height;
           int width = (int) ((double) largeFlagPicture.Width * num);
-          int x2 = 4;
-          int y = e.Bounds.Y + 2;
+          int x2 = UiScale.S(4);
+          int y = e.Bounds.Y + UiScale.S(2);
           rect = new Rectangle(x2, y, width, height);
           e.Graphics.DrawImage((Image) largeFlagPicture, rect);
-          x1 = x2 + width + 4;
+          x1 = x2 + width + UiScale.S(4);
         }
         Bitmap builtObjectImage = this._BuiltObjectImages[this._BuiltObjects[e.Index].PictureRef];
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        int height1 = e.Bounds.Height - 2;
+        int height1 = e.Bounds.Height - UiScale.S(2);
         double num1 = (double) height1 / (double) builtObjectImage.Height;
         int width1 = (int) ((double) builtObjectImage.Width * num1);
-        int y1 = e.Bounds.Y + 2;
+        int y1 = e.Bounds.Y + UiScale.S(2);
         rect = new Rectangle(x1, y1, width1, height1);
         e.Graphics.DrawImage((Image) builtObjectImage, rect);
-        PointF point = new PointF((float) (x1 + width1 + 4), (float) (e.Bounds.Y + Math.Max(1, (this.ItemHeight - 20) / 2)));
+        PointF point = new PointF((float) (x1 + width1 + UiScale.S(4)), (float) (e.Bounds.Y + Math.Max(UiScale.S(1), (this.ItemHeight - UiScale.S(20)) / 2)));
         Font font = this.Font;
         SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
         e.Graphics.DrawString(this._BuiltObjects[e.Index].Name, font, (Brush) solidBrush1, point);
@@ -170,7 +170,7 @@ namespace DistantWorlds.Controls
     private void InitializeComponent()
     {
       this.SuspendLayout();
-      this.ItemHeight = 36;
+      this.ItemHeight = UiScale.S(36);
       this.ResumeLayout(false);
     }
   }

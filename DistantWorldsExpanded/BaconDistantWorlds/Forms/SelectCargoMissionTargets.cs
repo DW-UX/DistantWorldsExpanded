@@ -20,6 +20,7 @@ namespace BaconDistantWorlds.Forms
         public SelectCargoMissionTargets(Main main)
         {
             InitializeComponent();
+            UiScale.ScaleLayout(this);
 
             bindingSource.DataSource = typeof(BuiltObjectView);
             bindingTarget.DataSource = typeof(BuiltObjectView);

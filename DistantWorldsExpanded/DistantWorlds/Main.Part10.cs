@@ -30,7 +30,7 @@ using BaconDistantWorlds;
 using ExpansionMod;
 using DistantWorlds.Controls;
 using DistantWorlds.Types;
-using Ionic.Zlib;
+//using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Xna.Framework.Graphics;
 //using SlimDX.DirectSound;
@@ -2337,6 +2337,9 @@ namespace DistantWorlds {
                                 case BuiltObjectSubRole.MiningStation:
                                     text = " " + TextResolver.GetText("Mining Station");
                                     break;
+                                case BuiltObjectSubRole.Outpost:
+                                    text = " " + "Outpost";
+                                    break;
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
                                 case BuiltObjectSubRole.LargeSpacePort:
@@ -2431,7 +2434,7 @@ namespace DistantWorlds {
                     return;
                 }
                 Habitat habitat12 = method_201(int_64, int_65);
-                if (habitat12 == null || (habitat12.Empire != null && habitat12.Empire != _Game.Galaxy.IndependentEmpire) || (habitat12.Category != HabitatCategoryType.Planet && habitat12.Category != HabitatCategoryType.Moon) || habitat12.Type == HabitatType.GasGiant || habitat12.Type == HabitatType.FrozenGasGiant)
+                if (habitat12 == null || (habitat12.Empire != null && habitat12.Empire != _Game.Galaxy.IndependentEmpire) || (habitat12.Category != HabitatCategoryType.Planet && habitat12.Category != HabitatCategoryType.Moon && habitat12.Category != HabitatCategoryType.Asteroid) || habitat12.Type == HabitatType.GasGiant || habitat12.Type == HabitatType.FrozenGasGiant)
                 {
                     return;
                 }

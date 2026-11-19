@@ -17,7 +17,7 @@ namespace DistantWorlds.Controls
   public class ResearchButton : GlassButton
   {
     private Empire _Empire;
-    private int _ImageSize = 14;
+    private int _ImageSize = UiScale.S(14);
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
     private SolidBrush _BlackBrush = new SolidBrush(Color.Black);
     private Bitmap[] _ComponentImages;
@@ -113,8 +113,8 @@ namespace DistantWorlds.Controls
         this._Font.Dispose();
       if (this._BoldFont != null)
         this._BoldFont.Dispose();
-      this._Font = new Font(this.Font.FontFamily, 14f, FontStyle.Regular, GraphicsUnit.Pixel);
-      this._BoldFont = new Font(this.Font.FontFamily, 14f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._Font = UiScale.NewFont(this.Font.FontFamily, 14f, FontStyle.Regular, GraphicsUnit.Pixel);
+      this._BoldFont = UiScale.NewFont(this.Font.FontFamily, 14f, FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void Reset() => this._Empire = (Empire) null;
@@ -130,15 +130,15 @@ namespace DistantWorlds.Controls
       if (!this.Enabled)
       {
         Bitmap bitmap = this.TransparentImage(this._ResearchImage, 0.33f);
-        graphics.DrawImage((Image) bitmap, new Point(7, 9));
+        graphics.DrawImage((Image) bitmap, new Point(UiScale.S(7), UiScale.S(9)));
       }
       else
-        graphics.DrawImage((Image) this._ResearchImage, new Point(7, 9));
+        graphics.DrawImage((Image) this._ResearchImage, new Point(UiScale.S(7), UiScale.S(9)));
       if (this._Empire == null || !this.Enabled)
         return;
-      this.DrawIndustryRow(graphics, IndustryType.Weapon, new Point(3, 5));
-      this.DrawIndustryRow(graphics, IndustryType.Energy, new Point(3, 23));
-      this.DrawIndustryRow(graphics, IndustryType.HighTech, new Point(3, 41));
+      this.DrawIndustryRow(graphics, IndustryType.Weapon, new Point(UiScale.S(3), UiScale.S(5)));
+      this.DrawIndustryRow(graphics, IndustryType.Energy, new Point(UiScale.S(3), UiScale.S(23)));
+      this.DrawIndustryRow(graphics, IndustryType.HighTech, new Point(UiScale.S(3), UiScale.S(41)));
     }
 
     private void DrawIndustryRow(Graphics graphics, IndustryType industry, Point location)
@@ -176,7 +176,7 @@ namespace DistantWorlds.Controls
       using (SolidBrush solidBrush = new SolidBrush(color))
       {
         Point point = new Point(location.X, location.Y);
-        int num = 37;
+        int num = UiScale.S(37);
         using (new SolidBrush(Color.FromArgb(64, color)))
         {
           Rectangle rectangle = new Rectangle(location.X + num - 2, location.Y, 36, 18);
@@ -186,10 +186,10 @@ namespace DistantWorlds.Controls
           Bitmap[] nodeImages = this.GenerateNodeImages(researchNode, 0.7f);
           if (nodeImages != null && nodeImages.Length > 0)
           {
-            point = new Point(location.X + num, location.Y + (15 - nodeImages[0].Height) / 2);
+            point = new Point(location.X + num, location.Y + (UiScale.S(15) - nodeImages[0].Height) / 2);
             graphics.DrawImage((Image) nodeImages[0], point);
           }
-          point = new Point(location.X + num + this._ImageSize - 1, location.Y);
+          point = new Point(location.X + num + this._ImageSize - UiScale.S(1), location.Y);
           string text = (researchNode.Progress / researchNode.Cost).ToString("0%");
           this.DrawStringWithDropShadow(graphics, text, this._Font, point, (Brush) solidBrush);
         }
@@ -395,18 +395,18 @@ namespace DistantWorlds.Controls
     {
       if (maxSize != SizeF.Empty)
       {
-        location = new Point(location.X + 1, location.Y + 1);
+        location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
         RectangleF layoutRectangle = new RectangleF((float) location.X, (float) location.Y, maxSize.Width, maxSize.Height);
         graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
-        location = new Point(location.X - 1, location.Y - 1);
+        location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         layoutRectangle = new RectangleF((float) location.X, (float) location.Y, maxSize.Width, maxSize.Height);
         graphics.DrawString(text, font, brush, layoutRectangle, StringFormat.GenericTypographic);
       }
       else
       {
-        location = new Point(location.X + 1, location.Y + 1);
+        location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
         graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-        location = new Point(location.X - 1, location.Y - 1);
+        location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         graphics.DrawString(text, font, brush, (PointF) location);
       }
     }

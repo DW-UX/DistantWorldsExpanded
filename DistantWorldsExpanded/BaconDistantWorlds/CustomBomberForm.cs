@@ -74,6 +74,7 @@ namespace BaconDistantWorlds
       CustomBomberForm.playerEmpire = BaconBuiltObject.myMain._Game.PlayerEmpire;
       CustomBomberForm.main = BaconBuiltObject.myMain;
       this.InitializeComponent();
+      UiScale.ScaleLayout(this);
       this.InitMore();
     }
 
@@ -84,6 +85,7 @@ namespace BaconDistantWorlds
       CustomBomberForm.main = theMain;
       CustomBomberForm.playerEmpire = BaconBuiltObject.myMain._Game.PlayerEmpire;
       this.InitializeComponent();
+      UiScale.ScaleLayout(this);
       this.InitMore();
     }
 

@@ -7,17 +7,20 @@
 using BaconDistantWorlds;
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DistantWorlds.Types
 {
@@ -198,6 +201,8 @@ namespace DistantWorlds.Types
         public static readonly int MiningStationResourceThreshhold;
 
         public static readonly long HabitatSmallSpacePortPopulationRequirement;
+        [OptionalField]
+        public static readonly long HabitatOutpostPopulationRequirement;
 
         public static readonly long HabitatMediumSpacePortPopulationRequirement;
 
@@ -822,6 +827,9 @@ namespace DistantWorlds.Types
         private bool[] _WondersBuilt = new bool[PlanetaryFacilityDefinitionsStatic.Count];
 
         public CreatureList Creatures => _Creatures;
+
+        [NonSerialized]
+        private Dictionary<SystemInfo, SystemInfo[]> _SystemInfoByDistance;
 
         public static Random Rnd
         {
@@ -1478,6 +1486,7 @@ namespace DistantWorlds.Types
                 {
                     return tradingPost.SubRole switch
                     {
+                        BuiltObjectSubRole.Outpost => CalculateResourceLevelSpaceport(resource, 0, 0.5),
                         BuiltObjectSubRole.SmallSpacePort => CalculateResourceLevelSpaceport(resource, 0, 1.0),
                         BuiltObjectSubRole.MediumSpacePort => CalculateResourceLevelSpaceport(resource, 0, 2.0),
                         BuiltObjectSubRole.LargeSpacePort => CalculateResourceLevelSpaceport(resource, 0, 4.0),
@@ -1505,6 +1514,7 @@ namespace DistantWorlds.Types
                 {
                     return tradingPost.SubRole switch
                     {
+                        BuiltObjectSubRole.Outpost => CalculateResourceLevelSpaceport(cargo.CommodityResource, 0, 0.5),
                         BuiltObjectSubRole.SmallSpacePort => CalculateResourceLevelSpaceport(cargo.CommodityResource, 0, 1.0),
                         BuiltObjectSubRole.MediumSpacePort => CalculateResourceLevelSpaceport(cargo.CommodityResource, 0, 2.0),
                         BuiltObjectSubRole.LargeSpacePort => CalculateResourceLevelSpaceport(cargo.CommodityResource, 0, 4.0),
@@ -1587,7 +1597,6 @@ namespace DistantWorlds.Types
             {
                 if (resource.Group == ResourceGroup.Mineral || resource.Group == ResourceGroup.Gas)
                 {
-                    int num2 = 0;
                     if (resource.RelativeImportance > 0.25f)
                     {
                         return 4000;
@@ -1665,6 +1674,9 @@ namespace DistantWorlds.Types
             {
                 switch (pirateSpaceport.SubRole)
                 {
+                    case BuiltObjectSubRole.Outpost:
+                        num2 = 0.5;
+                        break;
                     case BuiltObjectSubRole.SmallSpacePort:
                         num2 = 1.0;
                         break;
@@ -1966,122 +1978,154 @@ namespace DistantWorlds.Types
 
         public static void LoadRaceBiases(string applicationStartupPath, string customizationSetName, RaceList races)
         {
-            int num = 0;
-            string text = applicationStartupPath + "\\raceBiases.txt";
-            if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+            if (Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                text = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\raceBiases.txt";
+                var reader = Main._FileDB.GetRaceBiasReader();
+                int id = 0;
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(reader.GetOrdinal("ID"));
+                    string name = reader.GetString(reader.GetOrdinal("Name"));
+                    string[] biasArr = reader.GetString(reader.GetOrdinal("Biases")).Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+
+                    if (biasArr.Length > races.Count)
+                        throw new ApplicationException($" More Race bias then Races - {biasArr.Length} : {races.Count}");
+
+                    List<int> biasList = new List<int>();
+                    for (int j = 0; j < races.Count; j++)
+                    {
+                        biasList.Add(0);
+                    }
+                    for (int k = 0; k < biasArr.Length; k++)
+                    {
+                        if (!int.TryParse(biasArr[k], out int val))
+                            throw new ApplicationException($"Could not read Bias Value {biasArr[k]} at ID {id}");
+                        biasList[k] = val;
+                    }
+                    races[id].Biases = new RaceBiasList();
+                    races[id].Biases.LoadBiases(races, biasList);
+                }
             }
-            if (!File.Exists(text))
+            else
             {
-                text = applicationStartupPath + "\\raceBiases.txt";
-            }
-            try
-            {
+                int num = 0;
+                string text = applicationStartupPath + "\\raceBiases.txt";
+                if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+                {
+                    text = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\raceBiases.txt";
+                }
                 if (!File.Exists(text))
                 {
-                    return;
+                    text = applicationStartupPath + "\\raceBiases.txt";
                 }
-                List<List<int>> list = new List<List<int>>();
-                List<string> list2 = new List<string>();
-                List<int> list3 = new List<int>();
-                FileStream fileStream = File.OpenRead(text);
-                StreamReader streamReader = new StreamReader(fileStream);
-                while (!streamReader.EndOfStream)
+                try
                 {
-                    num++;
-                    string empty = string.Empty;
-                    string text2 = streamReader.ReadLine();
-                    if (string.IsNullOrEmpty(text2) || !(text2.Trim() != string.Empty) || !(text2.Trim().Substring(0, 1) != "'"))
+                    if (!File.Exists(text))
                     {
-                        continue;
+                        return;
                     }
-                    int num2 = 0;
-                    int num3 = text2.IndexOf(",", num2);
-                    if (num3 >= 0)
+                    List<List<int>> list = new List<List<int>>();
+                    List<string> list2 = new List<string>();
+                    List<int> list3 = new List<int>();
+                    FileStream fileStream = File.OpenRead(text);
+                    StreamReader streamReader = new StreamReader(fileStream);
+                    while (!streamReader.EndOfStream)
                     {
-                        string text3 = text2.Substring(num2, num3 - num2);
-                        text3 = text3.Trim();
-                        int result = -1;
-                        if (int.TryParse(text3, out result))
+                        num++;
+                        string empty = string.Empty;
+                        string text2 = streamReader.ReadLine();
+                        if (string.IsNullOrEmpty(text2) || !(text2.Trim() != string.Empty) || !(text2.Trim().Substring(0, 1) != "'"))
                         {
-                            list3.Add(result);
-                            num2 = num3 + 1;
-                            num3 = text2.IndexOf(",", num2);
-                            if (num3 >= 0)
+                            continue;
+                        }
+                        int num2 = 0;
+                        int num3 = text2.IndexOf(",", num2);
+                        if (num3 >= 0)
+                        {
+                            string text3 = text2.Substring(num2, num3 - num2);
+                            text3 = text3.Trim();
+                            int result = -1;
+                            if (int.TryParse(text3, out result))
                             {
-                                string text4 = text2.Substring(num2, num3 - num2);
-                                text4 = text4.Trim();
-                                empty = text4;
-                                list2.Add(empty);
+                                list3.Add(result);
                                 num2 = num3 + 1;
-                                List<int> list4 = new List<int>();
-                                int num4 = 1;
-                                while (num3 >= 0)
+                                num3 = text2.IndexOf(",", num2);
+                                if (num3 >= 0)
                                 {
-                                    num3 = text2.IndexOf(",", num2);
-                                    string empty2 = string.Empty;
-                                    empty2 = ((num3 < 0) ? text2.Substring(num2, text2.Length - num2) : text2.Substring(num2, num3 - num2));
-                                    empty2 = empty2.Trim();
-                                    int result2 = 0;
-                                    if (int.TryParse(empty2, out result2))
+                                    string text4 = text2.Substring(num2, num3 - num2);
+                                    text4 = text4.Trim();
+                                    empty = text4;
+                                    list2.Add(empty);
+                                    num2 = num3 + 1;
+                                    List<int> list4 = new List<int>();
+                                    int num4 = 1;
+                                    while (num3 >= 0)
                                     {
-                                        result2 = Math.Max(-50, Math.Min(result2, 50));
-                                        list4.Add(result2);
-                                        if (list4.Count > races.Count)
+                                        num3 = text2.IndexOf(",", num2);
+                                        string empty2 = string.Empty;
+                                        empty2 = ((num3 < 0) ? text2.Substring(num2, text2.Length - num2) : text2.Substring(num2, num3 - num2));
+                                        empty2 = empty2.Trim();
+                                        int result2 = 0;
+                                        if (int.TryParse(empty2, out result2))
                                         {
-                                            throw new ApplicationException("More bias values than races at line " + num + " in file " + text);
+                                            result2 = Math.Max(-50, Math.Min(result2, 50));
+                                            list4.Add(result2);
+                                            if (list4.Count > races.Count)
+                                            {
+                                                throw new ApplicationException("More bias values than races at line " + num + " in file " + text);
+                                            }
+                                            num2 = num3 + 1;
+                                            num4++;
+                                            continue;
                                         }
-                                        num2 = num3 + 1;
-                                        num4++;
-                                        continue;
+                                        throw new ApplicationException("Could not read Bias Value " + num4 + " at line " + num + " of file " + text);
                                     }
-                                    throw new ApplicationException("Could not read Bias Value " + num4 + " at line " + num + " of file " + text);
+                                    list.Add(list4);
+                                    continue;
                                 }
-                                list.Add(list4);
-                                continue;
+                                throw new ApplicationException("Could not read Race Name at line " + num + " of file " + text);
                             }
-                            throw new ApplicationException("Could not read Race Name at line " + num + " of file " + text);
+                            throw new ApplicationException("Could not read Race Index number at line " + num + " of file " + text);
                         }
                         throw new ApplicationException("Could not read Race Index number at line " + num + " of file " + text);
                     }
-                    throw new ApplicationException("Could not read Race Index number at line " + num + " of file " + text);
-                }
-                for (int i = 0; i < races.Count; i++)
-                {
-                    int num5 = list2.IndexOf(races[i].Name);
-                    if (num5 < 0 || num5 >= list.Count)
+                    for (int i = 0; i < races.Count; i++)
                     {
-                        continue;
-                    }
-                    List<int> list5 = new List<int>();
-                    for (int j = 0; j < list[num5].Count; j++)
-                    {
-                        list5.Add(0);
-                    }
-                    for (int k = 0; k < list[num5].Count; k++)
-                    {
-                        int num6 = list2.IndexOf(races[k].Name);
-                        if (num6 >= 0 && num6 < list[num5].Count)
+                        int num5 = list2.IndexOf(races[i].Name);
+                        if (num5 < 0 || num5 >= list.Count)
                         {
-                            list5[k] = list[num5][num6];
+                            continue;
                         }
+                        List<int> list5 = new List<int>();
+                        for (int j = 0; j < list[num5].Count; j++)
+                        {
+                            list5.Add(0);
+                        }
+                        for (int k = 0; k < list[num5].Count; k++)
+                        {
+                            int num6 = list2.IndexOf(races[k].Name);
+                            if (num6 >= 0 && num6 < list[num5].Count)
+                            {
+                                list5[k] = list[num5][num6];
+                            }
+                        }
+                        races[i].Biases = new RaceBiasList();
+                        races[i].Biases.LoadBiases(races, list5);
                     }
-                    races[i].Biases = new RaceBiasList();
-                    races[i].Biases.LoadBiases(races, list5);
+                    streamReader.Close();
+                    fileStream.Close();
                 }
-                streamReader.Close();
-                fileStream.Close();
-            }
-            catch (ApplicationException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Error at line " + num + " reading file " + text);
+                catch (ApplicationException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw new ApplicationException("Error at line " + num + " reading file " + text);
+                }
             }
         }
+
 
         public static double ResolveStandardRaceBias(Race race, Race otherRace)
         {
@@ -3359,8 +3403,20 @@ namespace DistantWorlds.Types
                 string[] array = new string[4] { "Deadly Phantoms", "Phantom Scourge", "Dark Ghostriders", "Dread Wraiths" };
                 int num3 = Rnd.Next(0, array.Length);
                 string name = array[num3];
-                double techLevel = Math.Min(7.0, 4 + Math.Min(3, _SuperPirateFactionsGenerated));
-                empire = GenerateSuperPirateFaction(habitat3, name, null, techLevel);
+                int currentMaxTechLvl = this.Empires.Max(x =>
+                {
+                    if (x.Name == "Ancient Guardians")
+                        return 0;
+                    else if (x.Name == "Erutkah Refugees")
+                        return 0;
+                    else if (x.Name == "Shakturi")
+                        return 0;
+                    else
+                        return x.Research.TechTree.Max(y => y.IsResearched ? y.TechLevel : 0);
+                }
+                ) + _SuperPirateFactionsGenerated;
+                //double techLevel = Math.Min(7.0, 4 + Math.Min(3, _SuperPirateFactionsGenerated));
+                empire = GenerateSuperPirateFaction(habitat3, name, null, currentMaxTechLvl);
                 if (empire != null)
                 {
                     _SuperPirateFactionsGenerated++;
@@ -3757,7 +3813,6 @@ namespace DistantWorlds.Types
                     BuiltObject builtObject = empire.BuiltObjects[j];
                     if (builtObject.Role == BuiltObjectRole.Base && !builtObject.HasBeenDestroyed)
                     {
-                        bool flag = true;
                         if (!((builtObject.ParentHabitat == null) ? CheckEmpireTerritoryCanBuildAtLocation(empire, builtObject.Xpos, builtObject.Ypos) : CheckEmpireTerritoryCanBuildAtHabitat(empire, builtObject.ParentHabitat)))
                         {
                             empire.DisputedBases.Add(builtObject);
@@ -3769,7 +3824,6 @@ namespace DistantWorlds.Types
                     BuiltObject builtObject2 = empire.PrivateBuiltObjects[k];
                     if (builtObject2.Role == BuiltObjectRole.Base && !builtObject2.HasBeenDestroyed)
                     {
-                        bool flag2 = true;
                         if (!((builtObject2.ParentHabitat == null) ? CheckEmpireTerritoryCanBuildAtLocation(empire, builtObject2.Xpos, builtObject2.Ypos) : CheckEmpireTerritoryCanBuildAtHabitat(empire, builtObject2.ParentHabitat)))
                         {
                             empire.DisputedBases.Add(builtObject2);
@@ -5251,6 +5305,40 @@ namespace DistantWorlds.Types
             Ruin ruin = new Ruin(name, pictureRef, 0.1 + Rnd.NextDouble() * 0.2, x, y, 0, 0, 0);
             ruin.Type = type;
             return ruin;
+        }
+
+        public Dictionary<RaceBonusType, double> GetMaxBonuses()
+        {
+            Dictionary<RaceBonusType, double> res = new Dictionary<RaceBonusType, double>();
+            foreach (var item in Enum.GetValues(typeof(RaceBonusType)))
+            {
+                res[(RaceBonusType)item] = 0;
+            }
+            foreach (var item in Races)
+            {
+                if (item.RaceType != (int)RaceType.BonusCopy && item.RaceType != (int)RaceType.BonusMerge && item.RaceType != (int)RaceType.BonusAdaptation)
+
+                {
+                    res[RaceBonusType.ShipMaintance] = Math.Max(res[RaceBonusType.ShipMaintance], item.ShipMaintenanceSavings);
+                    res[RaceBonusType.Resource] = Math.Max(res[RaceBonusType.Resource], item.ResourceExtractionBonus);
+                    res[RaceBonusType.TroopRegeneration] = Math.Max(res[RaceBonusType.TroopRegeneration], item.TroopRegenerationFactor);
+                    res[RaceBonusType.Trade] = Math.Max(res[RaceBonusType.Trade], item.TradeBonus);
+                    res[RaceBonusType.Research] = Math.Max(res[RaceBonusType.Research], item.ResearchBonus);
+                    res[RaceBonusType.ConstractionSpeed] = Math.Max(res[RaceBonusType.ConstractionSpeed], item.ConstructionSpeedModifier);
+                    res[RaceBonusType.TroopMaintance] = Math.Max(res[RaceBonusType.TroopMaintance], item.TroopMaintenanceSavings);
+                    res[RaceBonusType.TroopStrenght] = Math.Max(res[RaceBonusType.TroopStrenght], item.TroopStrength);
+                    res[RaceBonusType.TroopRegeneration] = Math.Max(res[RaceBonusType.TroopRegeneration], item.TroopRegenerationFactor);
+                    res[RaceBonusType.CivilianSize] = Math.Max(res[RaceBonusType.CivilianSize], item.CivilianShipSizeFactor);
+                    res[RaceBonusType.MilitarySize] = Math.Max(res[RaceBonusType.MilitarySize], item.MilitaryShipSizeFactor);
+                    res[RaceBonusType.Espionage] = Math.Max(res[RaceBonusType.Espionage], item.EspionageBonus);
+                    res[RaceBonusType.TourismIncome] = Math.Max(res[RaceBonusType.TourismIncome], item.TourismIncomeFactor);
+                    res[RaceBonusType.Reproduction] = Math.Max(res[RaceBonusType.Reproduction], item.ReproductiveRate);
+                    res[RaceBonusType.WarWearines] = Math.Max(res[RaceBonusType.Reproduction], item.WarWearinessAttenuation);
+                    res[RaceBonusType.FreeTrade] = Math.Max(res[RaceBonusType.FreeTrade], item.FreeTradeIncomeFactor);
+                    res[RaceBonusType.SpacePortArmor] = Math.Max(res[RaceBonusType.SpacePortArmor], item.SpaceportArmorStrengthFactor);
+                }
+            }
+            return res;
         }
     }
 }

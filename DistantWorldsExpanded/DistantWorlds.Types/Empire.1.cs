@@ -3,9 +3,12 @@
 using DistantWorlds.Types.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
@@ -270,7 +273,7 @@ namespace DistantWorlds.Types
             bool empireHasWarptech = CheckEmpireHasHyperDriveTech(this);
             colony.RecalculateColonyInfluenceRadius(empireHasWarptech);
             BuiltObject builtObject = _Galaxy.DetermineMiningStationAtHabitat(colony);
-            if (builtObject != null && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort)
+            if (builtObject != null && builtObject.SubRole != BuiltObjectSubRole.Outpost && builtObject.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject.SubRole != BuiltObjectSubRole.LargeSpacePort)
             {
                 builtObject.CompleteTeardown(_Galaxy);
             }
@@ -681,6 +684,7 @@ namespace DistantWorlds.Types
                         case BuiltObjectSubRole.ExplorationShip:
                         case BuiltObjectSubRole.ColonyShip:
                         case BuiltObjectSubRole.ConstructionShip:
+                        case BuiltObjectSubRole.Outpost:
                         case BuiltObjectSubRole.SmallSpacePort:
                         case BuiltObjectSubRole.MediumSpacePort:
                         case BuiltObjectSubRole.LargeSpacePort:
@@ -1314,7 +1318,7 @@ namespace DistantWorlds.Types
             }
             if (flag && resource != byte.MaxValue && empire != null && empire.Capital != null)
             {
-                BuiltObject spaceport = _Galaxy.FastFindNearestSpacePort(empire.Capital.Xpos, empire.Capital.Ypos, this);
+                BuiltObject spaceport = _Galaxy.FastFindNearestSpacePort(empire.Capital.Xpos, empire.Capital.Ypos, this, true);
                 RandomEventRareResourceIntercepted(new Resource(resource), spaceport, empire);
             }
         }
@@ -3177,7 +3181,7 @@ namespace DistantWorlds.Types
                 }
                 double num2 = _Galaxy.CalculateDistance(pirateEmpireX, pirateEmpireY, colony.Xpos, colony.Ypos);
                 double num3 = (double)Galaxy.SizeX * 0.25;
-                if (PiratePlayStyle == PiratePlayStyle.Balanced)
+                if (PiratePlayStyle == PiratePlayStyle.Balanced || PiratePlayStyle == PiratePlayStyle.Legendary)
                 {
                     num3 *= 1.4;
                 }
@@ -3656,6 +3660,7 @@ namespace DistantWorlds.Types
                     {
                         SendAvailableFleetsToGuardStrategicLocations();
                     }
+                    CalculateRaceBonuses();
                     ReviewEmpireAbilityBonuses();
                     ReviewGovernmentEffects(num5);
                     CheckChangeGovernment();
@@ -3725,6 +3730,108 @@ namespace DistantWorlds.Types
                     ReviewDisputedTerritory();
                 }
             }
+        }
+
+        private void CalculateRaceBonuses()
+        {
+            if (DominantRace.RaceType != (int)RaceType.Classic)
+            {
+                if (DominantRace.RaceType == (int)RaceType.BonusAdaptation)
+                {
+                    int dividerAmount = 120;
+                    List<Race> races = new();
+                    foreach (var item in Colonies)
+                    {
+                        var race = races.Find(x => x == item.Population.DominantRace);
+                        if (race == null)
+                        {
+                            races.Add(item.Population.DominantRace);
+                        }
+                    }
+                    Dictionary<RaceBonusType, Race> raceBonuses = new();
+                    raceBonuses[RaceBonusType.ShipMaintance] = races.MaxBy(x => x.ShipMaintenanceSavings);
+                    raceBonuses[RaceBonusType.Espionage] = races.MaxBy(x => x.EspionageBonus);
+                    raceBonuses[RaceBonusType.Trade] = races.MaxBy(x => x.TradeBonus);
+                    raceBonuses[RaceBonusType.Research] = races.MaxBy(x => x.ResearchBonus);
+                    raceBonuses[RaceBonusType.Resource] = races.MaxBy(x => x.ResourceExtractionBonus);
+                    raceBonuses[RaceBonusType.WarWearines] = races.MaxBy(x => x.WarWearinessAttenuation);
+                    raceBonuses[RaceBonusType.TroopMaintance] = races.MaxBy(x => x.TroopMaintenanceSavings);
+                    raceBonuses[RaceBonusType.TroopStrenght] = races.MaxBy(x => x.TroopStrength);
+                    raceBonuses[RaceBonusType.TroopRegeneration] = races.MaxBy(x => x.TroopRegenerationFactor);
+                    raceBonuses[RaceBonusType.Migration] = races.MaxBy(x => x.MigrationFactor);
+                    raceBonuses[RaceBonusType.MilitarySize] = races.MaxBy(x => x.MilitaryShipSizeFactor);
+                    raceBonuses[RaceBonusType.CivilianSize] = races.MaxBy(x => x.CivilianShipSizeFactor);
+                    raceBonuses[RaceBonusType.TourismIncome] = races.MaxBy(x => x.TourismIncomeFactor);
+                    raceBonuses[RaceBonusType.ConstractionSpeed] = races.MaxBy(x => x.ConstructionSpeedModifier);
+                    raceBonuses[RaceBonusType.Reproduction] = races.MaxBy(x => x.ReproductiveRate);
+                    raceBonuses[RaceBonusType.ReproductionGrowRate] = races.MaxBy(x => x.PeriodicGrowthRate);
+
+                    //finish calculating
+
+                    var maxValues = this.Galaxy.GetMaxBonuses();
+                    int sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.ShipMaintance].ShipMaintenanceSavings - DominantRace.ShipMaintenanceSavings);
+                    DominantRace.ShipMaintenanceSavings = (int)Math.Clamp(DominantRace.ShipMaintenanceSavings + maxValues[RaceBonusType.ShipMaintance] / dividerAmount * sign, 0, maxValues[RaceBonusType.ShipMaintance]);
+                    _ShipMaintenanceSavingsRace = raceBonuses[RaceBonusType.ShipMaintance];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.Espionage].EspionageBonus - DominantRace.EspionageBonus);
+                    DominantRace.EspionageBonus = (int)Math.Clamp(DominantRace.EspionageBonus + maxValues[RaceBonusType.Espionage] / dividerAmount * sign, 0, maxValues[RaceBonusType.Espionage]);
+                    _EspionageBonusRace = raceBonuses[RaceBonusType.Espionage];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.Trade].TradeBonus - DominantRace.TradeBonus);
+                    DominantRace.TradeBonus = (int)Math.Clamp(DominantRace.TradeBonus + maxValues[RaceBonusType.Trade] / dividerAmount * sign, 0, maxValues[RaceBonusType.Trade]);
+                    _TradeBonusRace = raceBonuses[RaceBonusType.Trade];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.Research].ResearchBonus - DominantRace.ResearchBonus);
+                    DominantRace.ResearchBonus = (int)Math.Clamp(DominantRace.ResearchBonus + maxValues[RaceBonusType.Research] / dividerAmount * sign, 0, maxValues[RaceBonusType.Research]);
+                    _ResearchBonusRace = raceBonuses[RaceBonusType.Research];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.Resource].ResourceExtractionBonus - DominantRace.ResourceExtractionBonus);
+                    DominantRace.ResourceExtractionBonus = (int)Math.Clamp(DominantRace.ResourceExtractionBonus + maxValues[RaceBonusType.Resource] / dividerAmount * sign, 0, maxValues[RaceBonusType.Resource]);
+                    _ResourceExtractionBonusRace = raceBonuses[RaceBonusType.Resource];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.WarWearines].WarWearinessAttenuation - DominantRace.WarWearinessAttenuation);
+                    DominantRace.WarWearinessAttenuation = (int)Math.Clamp(DominantRace.WarWearinessAttenuation + maxValues[RaceBonusType.WarWearines] / dividerAmount * sign, 0, maxValues[RaceBonusType.WarWearines]);
+                    _WarWearinessAttenuationBonusRace = raceBonuses[RaceBonusType.WarWearines];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.TroopMaintance].TroopMaintenanceSavings - DominantRace.TroopMaintenanceSavings);
+                    DominantRace.TroopMaintenanceSavings = (int)Math.Clamp(DominantRace.TroopMaintenanceSavings + maxValues[RaceBonusType.TroopMaintance] / dividerAmount * sign, 0, maxValues[RaceBonusType.TroopMaintance]);
+                    _TroopMaintenanceSavingsBonusRace = raceBonuses[RaceBonusType.TroopMaintance];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.TroopStrenght].TroopStrength - DominantRace.TroopStrength);
+                    DominantRace.TroopStrength = (int)Math.Clamp(DominantRace.TroopStrength + maxValues[RaceBonusType.TroopStrenght] / dividerAmount * sign, 0, maxValues[RaceBonusType.TroopStrenght]);
+                    _TroopStrengthBonusRace = raceBonuses[RaceBonusType.TroopStrenght];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.TroopRegeneration].TroopRegenerationFactor - DominantRace.TroopRegenerationFactor);
+                    DominantRace.TroopRegenerationFactor = Math.Clamp(DominantRace.TroopRegenerationFactor + maxValues[RaceBonusType.TroopRegeneration] / dividerAmount * sign, 0.2, raceBonuses[RaceBonusType.TroopRegeneration].TroopRegenerationFactor);
+                    _TroopRegenerationFactorBonusRace = raceBonuses[RaceBonusType.TroopRegeneration];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.Migration].MigrationFactor - DominantRace.MigrationFactor);
+                    DominantRace.MigrationFactor = Math.Clamp(DominantRace.MigrationFactor + maxValues[RaceBonusType.Migration] / dividerAmount * sign, 0.2, raceBonuses[RaceBonusType.Migration].MigrationFactor);
+                    _MigrationFactorBonusRace = raceBonuses[RaceBonusType.Migration];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.MilitarySize].MilitaryShipSizeFactor - DominantRace.MilitaryShipSizeFactor);
+                    DominantRace.MilitaryShipSizeFactor = Math.Clamp(DominantRace.MilitaryShipSizeFactor + maxValues[RaceBonusType.MilitarySize] / dividerAmount * sign, 0.7, raceBonuses[RaceBonusType.MilitarySize].MilitaryShipSizeFactor);
+                    _MilitaryShipSizeFactorBonusRace = raceBonuses[RaceBonusType.MilitarySize];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.CivilianSize].CivilianShipSizeFactor - DominantRace.CivilianShipSizeFactor);
+                    DominantRace.CivilianShipSizeFactor = Math.Clamp(DominantRace.CivilianShipSizeFactor + maxValues[RaceBonusType.CivilianSize] / dividerAmount * sign, 0.7, raceBonuses[RaceBonusType.CivilianSize].CivilianShipSizeFactor);
+                    _CivilianShipSizeFactorBonusRace = raceBonuses[RaceBonusType.CivilianSize];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.TourismIncome].TourismIncomeFactor - DominantRace.TourismIncomeFactor);
+                    DominantRace.TourismIncomeFactor = Math.Clamp(DominantRace.TourismIncomeFactor + maxValues[RaceBonusType.TourismIncome] / dividerAmount * sign, 0.2, raceBonuses[RaceBonusType.TourismIncome].TourismIncomeFactor);
+                    _TourismIncomeFactorBonusRace = raceBonuses[RaceBonusType.TourismIncome];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.ConstractionSpeed].ConstructionSpeedModifier - DominantRace.ConstructionSpeedModifier);
+                    DominantRace.ConstructionSpeedModifier = Math.Clamp(DominantRace.ConstructionSpeedModifier + maxValues[RaceBonusType.ConstractionSpeed] / dividerAmount * sign, 0.2, raceBonuses[RaceBonusType.ConstractionSpeed].ConstructionSpeedModifier);
+                    _ConstructionSpeedModifierBonusRace = raceBonuses[RaceBonusType.ConstractionSpeed];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.Reproduction].ReproductiveRate - DominantRace.ReproductiveRate);
+                    DominantRace.ReproductiveRate = Math.Clamp(DominantRace.ReproductiveRate + maxValues[RaceBonusType.Reproduction] / dividerAmount * sign, 0.3, raceBonuses[RaceBonusType.Reproduction].ReproductiveRate);
+                    _ReproductiveRateBonusRace = raceBonuses[RaceBonusType.Reproduction];
+                    sign = SelectBonusGrowDirection(raceBonuses[RaceBonusType.ReproductionGrowRate].ReproductiveRate - DominantRace.PeriodicGrowthRate);
+                    DominantRace.PeriodicGrowthRate = Math.Clamp(DominantRace.PeriodicGrowthRate + maxValues[RaceBonusType.ReproductionGrowRate] / dividerAmount * sign, 0.3, raceBonuses[RaceBonusType.ReproductionGrowRate].ReproductiveRate);
+                    _PeriodicGrowthRateBonusRace = raceBonuses[RaceBonusType.ReproductionGrowRate];
+                }
+            }
+        }
+
+        private int SelectBonusGrowDirection(double value)
+        {
+            if (value > 0)
+            {
+                return 1;
+            }
+            else if (value < 0)
+            {
+                return -1;
+            }
+            return 0;
         }
 
         public bool CoordinateFleetAttacksWithAllies(ShipGroup fleet)
@@ -4775,6 +4882,10 @@ namespace DistantWorlds.Types
                                 {
                                     maxValue = 4;
                                 }
+                                else if (PiratePlayStyle == PiratePlayStyle.Legendary)
+                                {
+                                    maxValue = 5;
+                                }
                                 switch (Galaxy.Rnd.Next(0, maxValue))
                                 {
                                     case 0:
@@ -4837,11 +4948,26 @@ namespace DistantWorlds.Types
                         if (builtObject3 != null && builtObject3.NearestSystemStar != null)
                         {
                             double num11 = _Galaxy.CalculateDistance(builtObject3.Xpos, builtObject3.Ypos, ship.Xpos, ship.Ypos);
-                            habitat7 = ((!(num11 < (double)Galaxy.SectorSize)) ? _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.Xpos, ship.Ypos) : builtObject3.NearestSystemStar);
+                            if (!(num11 < (double)Galaxy.SectorSize))
+                            {
+                                if (ship.NearestSystemStar != null)
+                                { habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.NearestSystemStar); }
+                                else
+                                { habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.Xpos, ship.Ypos); }
+                            }
+                            else
+                            { habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(builtObject3.NearestSystemStar); }
                         }
                         else
                         {
-                            habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.Xpos, ship.Ypos);
+                            if (ship.NearestSystemStar != null)
+                            {
+                                habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.NearestSystemStar);
+                            }
+                            else
+                            {
+                                habitat7 = _Galaxy.FastFindNearestUncolonizedOwnedSystem(ship.Xpos, ship.Ypos);
+                            }
                         }
                         if (habitat7 != null)
                         {
@@ -4920,7 +5046,7 @@ namespace DistantWorlds.Types
                                 }
                             }
                         }
-                        BuiltObject builtObject4 = _Galaxy.FastFindNearestSpacePort((int)ship.Xpos, (int)ship.Ypos, ship.ActualEmpire);
+                        BuiltObject builtObject4 = _Galaxy.FastFindNearestSpacePort((int)ship.Xpos, (int)ship.Ypos, ship.ActualEmpire, false);
                         if (builtObject4 != null)
                         {
                             double num15 = _Galaxy.CalculateDistance(ship.Xpos, ship.Ypos, builtObject4.Xpos, builtObject4.Ypos);

@@ -13,21 +13,21 @@ namespace DistantWorlds.Controls
             btnThemeSwitch.Text = TextResolver.GetText("Switch Theme");
 
 
-            lblThemeGalaxyMaps.MaximumSize = new Size(200, 100);
-            lblThemeGalaxyMaps.Location = new Point(338, 255);
-            picThemeImage.Size = new Size(200, 200);
-            picThemeImage.Location = new Point(338, 45);
-            lblThemeDescription.Location = new Point(10, 45);
-            lblThemeDescription.MaximumSize = new Size(320, 480);
+            lblThemeGalaxyMaps.MaximumSize = new Size(UiScale.S(200), UiScale.S(100));
+            lblThemeGalaxyMaps.Location = new Point(UiScale.S(338), UiScale.S(255));
+            picThemeImage.Size = new Size(UiScale.S(200), UiScale.S(200));
+            picThemeImage.Location = new Point(UiScale.S(338), UiScale.S(45));
+            lblThemeDescription.Location = new Point(UiScale.S(10), UiScale.S(45));
+            lblThemeDescription.MaximumSize = new Size(UiScale.S(320), UiScale.S(480));
             lblThemeTitle.ForeColor = Color.White;
-            lblThemeTitle.Location = new Point(10, 10);
-            lblCurrentTheme.Location = new Point(10, 10);
-            pnlThemeDetail.Size = new Size(550, 530);
-            pnlThemeDetail.Location = new Point(250, 40);
-            btnThemeCancel.Size = new Size(200, 30);
-            btnThemeCancel.Location = new Point(250, 580);
-            btnThemeSwitch.Size = new Size(340, 30);
-            btnThemeSwitch.Location = new Point(460, 580);
+            lblThemeTitle.Location = new Point(UiScale.S(10), UiScale.S(10));
+            lblCurrentTheme.Location = new Point(UiScale.S(10), UiScale.S(10));
+            pnlThemeDetail.Size = new Size(UiScale.S(550), UiScale.S(530));
+            pnlThemeDetail.Location = new Point(UiScale.S(250), UiScale.S(40));
+            btnThemeCancel.Size = new Size(UiScale.S(200), UiScale.S(30));
+            btnThemeCancel.Location = new Point(UiScale.S(250), UiScale.S(580));
+            btnThemeSwitch.Size = new Size(UiScale.S(340), UiScale.S(30));
+            btnThemeSwitch.Location = new Point(UiScale.S(460), UiScale.S(580));
         }
     }
 }

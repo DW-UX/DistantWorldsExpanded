@@ -30,13 +30,14 @@ using BaconDistantWorlds;
 using ExpansionMod;
 using DistantWorlds.Controls;
 using DistantWorlds.Types;
-using Ionic.Zlib;
+//using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Xna.Framework.Graphics;
 //using SlimDX.DirectSound;
 using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
+using DistantWorlds.DBLoader;
 
 namespace DistantWorlds
 {
@@ -3348,10 +3349,16 @@ namespace DistantWorlds
 
         private DiplomaticRelation diplomaticRelation_0;
 
+        private static object _errorLogLock = new object();
+
+        private static StreamWriter _streamWriterErrors = null;
+
         //[CompilerGenerated]
         //private static Comparison<KeyValuePair<string, int>> comparison_0;
         [IgnoreDataMember]
         public static ExpansionModMain _ExpModMain = new ExpansionModMain();
+        [IgnoreDataMember]
+        public static FileDB _FileDB = new FileDB();
 
         public MusicPlayer MusicPlayer => musicPlayer_0;
 

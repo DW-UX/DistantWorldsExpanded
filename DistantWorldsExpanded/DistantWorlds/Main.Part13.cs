@@ -30,17 +30,21 @@ using BaconDistantWorlds;
 using ExpansionMod;
 using DistantWorlds.Controls;
 using DistantWorlds.Types;
-using Ionic.Zlib;
+//using Ionic.Zlib;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Xna.Framework.Graphics;
 //using SlimDX.DirectSound;
 using ExpansionMod.HotKeyMapping;
 using ExpansionMod.Objects;
 using System.Collections.Concurrent;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
+using DistantWorlds.DBLoader;
 
-namespace DistantWorlds {
+namespace DistantWorlds
+{
 
-  public partial class Main {
+    public partial class Main
+    {
 
         private void _useResourcePercentFilter_CheckedChanged(object sender, EventArgs e)
         {
@@ -150,18 +154,18 @@ namespace DistantWorlds {
             float_1 = 1f;
             int_12 = 10;
             dateTime_0 = DateTime.MinValue;
-            font_0 = new Font("Verdana", 15f, FontStyle.Bold);
-            font_1 = new Font("Verdana", 12f, FontStyle.Bold);
+            font_0 = UiScale.NewFont("Verdana", 15f, FontStyle.Bold);
+            font_1 = UiScale.NewFont("Verdana", 12f, FontStyle.Bold);
             color_0 = Color.White;
-            font_2 = new Font("Verdana", 9f, FontStyle.Bold);
+            font_2 = UiScale.NewFont("Verdana", 9f, FontStyle.Bold);
             color_1 = Color.FromArgb(120, 120, 120);
-            font_3 = new Font("Verdana", 8f, FontStyle.Regular);
-            font_4 = new Font("Verdana", 8f, FontStyle.Regular);
-            font_5 = new Font("Verdana", 8f, FontStyle.Bold);
+            font_3 = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
+            font_4 = UiScale.NewFont("Verdana", 8f, FontStyle.Regular);
+            font_5 = UiScale.NewFont("Verdana", 8f, FontStyle.Bold);
             color_2 = Color.FromArgb(170, 170, 170);
-            font_6 = new Font("Verdana", 9f, FontStyle.Regular);
-            font_7 = new Font("Verdana", 9f, FontStyle.Bold);
-            font_8 = new Font("Verdana", 9f, FontStyle.Regular);
+            font_6 = UiScale.NewFont("Verdana", 9f, FontStyle.Regular);
+            font_7 = UiScale.NewFont("Verdana", 9f, FontStyle.Bold);
+            font_8 = UiScale.NewFont("Verdana", 9f, FontStyle.Regular);
             rectangle_1 = new Rectangle[2000];
             int_20 = 3;
             gyCmRgDujR = Point.Empty;
@@ -289,6 +293,7 @@ namespace DistantWorlds {
             try
             {
                 InitializeComponent();
+                UiScale.ScalePictures(this);
                 //splash_0 = splashForm;
                 SteamAPI.Initialize(Application.UserAppDataPath);
                 MainInit(width, height, windowedMode);
@@ -578,7 +583,7 @@ namespace DistantWorlds {
             int_64 = 10000;
             int_65 = -1;
             int_66 = bitmap_225.Height - 1;
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             for (int Y = bitmap_225.Height - 1; Y >= 0; Y--)
             {
                 for (int i = 0; i < bitmap_225.Width; i++)
@@ -629,7 +634,7 @@ namespace DistantWorlds {
             int num2 = Color.Black.ToArgb();
             int num3 = Color.FromArgb(0, 0, 0, 0).ToArgb();
             int num4 = Color.FromArgb(0, 255, 255, 255).ToArgb();
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             for (int i = 0; i < bitmap_225.Width; i++)
             {
                 for (int j = 0; j < bitmap_225.Height; j++)
@@ -654,7 +659,7 @@ namespace DistantWorlds {
             int num5 = Color.Black.ToArgb();
             int num6 = Color.FromArgb(0, 0, 0, 0).ToArgb();
             int num7 = Color.FromArgb(0, 255, 255, 255).ToArgb();
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             for (int i = 0; i < bitmap_225.Width; i++)
             {
                 for (int j = 0; j < bitmap_225.Height; j++)
@@ -1085,7 +1090,7 @@ namespace DistantWorlds {
         {
             int num = bitmap_225.Width;
             int num2 = bitmap_225.Height;
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_225);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_225);
             for (int i = 0; i < num; i++)
             {
                 for (int j = 0; j < num2; j++)
@@ -1547,7 +1552,7 @@ namespace DistantWorlds {
             {
                 string shadowsFilePath = "shadow\\shading.png";
                 bitmap_191 = method_10(custOverlays, gameOverlays, shadowsFilePath, bool_28: true);
-                DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_191);
+                FastBitmap fastBitmap = new FastBitmap(bitmap_191);
                 for (int i = 0; i < bitmap_191.Width; i++)
                 {
                     for (int j = 0; j < bitmap_191.Height; j++)
@@ -1575,7 +1580,7 @@ namespace DistantWorlds {
                 taskList.Add(Task.Run(() =>
                 {
                     Bitmap bitmap = method_10(custOverlays, gameOverlays, shadowsFilePath, bool_28: true);
-                    DistantWorlds.FastBitmap fastBitmap2 = new DistantWorlds.FastBitmap(bitmap);
+                    FastBitmap fastBitmap2 = new FastBitmap(bitmap);
                     for (int l = 0; l < bitmap.Width; l++)
                     {
                         for (int m = 0; m < bitmap.Height; m++)
@@ -1603,7 +1608,7 @@ namespace DistantWorlds {
                 taskList.Add(Task.Run(() =>
                 {
                     Bitmap bitmap2 = method_10(custOverlays, gameOverlays, shadowsFilePath, bool_28: true);
-                    DistantWorlds.FastBitmap fastBitmap3 = new DistantWorlds.FastBitmap(bitmap2);
+                    FastBitmap fastBitmap3 = new FastBitmap(bitmap2);
                     for (int X = 0; X < bitmap2.Width; X++)
                     {
                         for (int Y = 0; Y < bitmap2.Height; Y++)
@@ -1634,7 +1639,7 @@ namespace DistantWorlds {
                 for (int num5 = 0; num5 < GalaxyImages.HabitatQualityDamageImageCount; num5++)
                 {
                     Bitmap bitmap3 = new Bitmap(original);
-                    DistantWorlds.FastBitmap fastBitmap4 = new DistantWorlds.FastBitmap(bitmap3);
+                    FastBitmap fastBitmap4 = new FastBitmap(bitmap3);
                     for (int X2 = 0; X2 < bitmap3.Width; X2++)
                     {
                         for (int Y2 = 0; Y2 < bitmap3.Height; Y2++)
@@ -2075,6 +2080,10 @@ namespace DistantWorlds {
             bitmap_25 = new Bitmap[num + 1];
             bitmap_26 = new Bitmap[num + 1];
             bitmap_27 = new Bitmap[num + 1];
+            ReaderWriterLockSlim[] readerWriterLockSlim = new ReaderWriterLockSlim[num + 1];
+
+            for (int i = 0; i < num; i++)
+                readerWriterLockSlim[i] = new ReaderWriterLockSlim();
             //string empty = string.Empty;
             //string empty2 = string.Empty;
             List<Task> taskList = new List<Task>();
@@ -2107,7 +2116,9 @@ namespace DistantWorlds {
                     }
                     if (bitmap_24[localI] == null)
                     {
+                        readerWriterLockSlim[localI].EnterWriteLock();
                         bitmap_24[localI] = new Bitmap(bitmap_23[localI]);
+                        readerWriterLockSlim[localI].ExitWriteLock();
                     }
                     bitmap_24[localI].MakeTransparent();
                 }));
@@ -2123,7 +2134,9 @@ namespace DistantWorlds {
                     }
                     if (bitmap_25[localI] == null)
                     {
+                        readerWriterLockSlim[localI].EnterWriteLock();
                         bitmap_25[localI] = new Bitmap(bitmap_23[localI]);
+                        readerWriterLockSlim[localI].ExitWriteLock();
                     }
                     bitmap_25[localI].MakeTransparent();
                 }));
@@ -2139,7 +2152,9 @@ namespace DistantWorlds {
                     }
                     if (bitmap_26[localI] == null)
                     {
+                        readerWriterLockSlim[localI].EnterWriteLock();
                         bitmap_26[localI] = new Bitmap(bitmap_23[localI]);
+                        readerWriterLockSlim[localI].ExitWriteLock();   
                     }
                     bitmap_26[localI].MakeTransparent();
                 }));
@@ -2155,7 +2170,9 @@ namespace DistantWorlds {
                     }
                     if (bitmap_27[localI] == null)
                     {
+                        readerWriterLockSlim[localI].EnterWriteLock();
                         bitmap_27[localI] = new Bitmap(bitmap_23[localI]);
+                        readerWriterLockSlim[localI].ExitWriteLock();
                     }
                     bitmap_27[localI].MakeTransparent();
                 }));
@@ -2220,9 +2237,9 @@ namespace DistantWorlds {
             }
             string text4 = string_30 + "units\\races\\pirates\\";
             string text5 = string_31 + "units\\races\\pirates\\";
-            Bitmap[] array3 = new Bitmap[4];
-            Bitmap[] array4 = new Bitmap[4];
-            string[] array5 = new string[4] { "balanced", "raider", "mercenary", "smuggler" };
+            Bitmap[] array3 = new Bitmap[5];
+            Bitmap[] array4 = new Bitmap[5];
+            string[] array5 = new string[5] { "balanced", "raider", "mercenary", "smuggler", "legendary" };
             for (int j = 0; j < 4; j++)
             {
                 int localJ = j;
@@ -2237,6 +2254,7 @@ namespace DistantWorlds {
                         array3[localJ] = method_12(local1, bool_28: true);
                     }
                 }));
+
                 text6 = array5[j] + "_a.png";
                 string local3 = text4 + text6;
                 string local4 = text5 + text6;
@@ -2249,7 +2267,37 @@ namespace DistantWorlds {
                     }
                 }));
             }
+            taskList.Add(Task.Run(() =>
+            {
+                if (File.Exists(text5 + array5[4] + ".png"))
+                {
+                    array3[4] = method_12(text5 + array5[4] + ".png", bool_28: false);
+                }
+                else if (File.Exists(text4 + array5[4] + ".png"))
+                {
+                    array3[4] = method_12(text4 + array5[4] + ".png", bool_28: true);
+                }
+            }));
+            taskList.Add(Task.Run(() =>
+            {
+                if (File.Exists(text5 + array5[4] + "_a.png"))
+                {
+                    array4[4] = method_12(text5 + array5[4] + "_a.png", bool_28: false);
+                }
+                else if (File.Exists(text4 + array5[4] + "_a.png"))
+                {
+                    array4[4] = method_12(text4 + array5[4] + "_a.png", bool_28: false);
+                }
+            }));
             Task.WaitAll(taskList.ToArray());
+            if (array3[4] == null)
+            {
+                array3 = array3.Take(4).ToArray();
+            }
+            if (array4[4] == null)
+            {
+                array4 = array4.Take(4).ToArray();
+            }
             if (raceImageCache_0 != null)
             {
                 raceImageCache_0.Clear();
@@ -2258,54 +2306,54 @@ namespace DistantWorlds {
             raceImageCache_0.Initialize(array, array2, array3, array4);
         }
 
-        internal void LoadUiComponents(string string_30, string string_31)
+        internal void LoadUiComponents(string string_30, string customSet)
         {
-            string text = string_30 + "ui\\components\\";
-            string text2 = string_31 + "ui\\components\\";
+            string originalPath = string_30 + "ui\\components\\";
+            string custmomPath = customSet + "ui\\components\\";
             List<Task> taskList = new List<Task>();
-            if (!File.Exists(text2 + "unbuilt.png"))
+            if (!File.Exists(custmomPath + "unbuilt.png"))
             {
-                taskList.Add(Task.Run(() => bitmap_22[0] = method_12(text + "unbuilt.png", bool_28: true)));
+                taskList.Add(Task.Run(() => bitmap_22[0] = method_12(originalPath + "unbuilt.png", bool_28: true)));
             }
             else
             {
-                taskList.Add(Task.Run(() => bitmap_22[0] = method_12(text2 + "unbuilt.png", bool_28: true)));
+                taskList.Add(Task.Run(() => bitmap_22[0] = method_12(custmomPath + "unbuilt.png", bool_28: true)));
             }
-            if (!File.Exists(text2 + "damaged.png"))
+            if (!File.Exists(custmomPath + "damaged.png"))
             {
-                taskList.Add(Task.Run(() => bitmap_22[1] = method_12(text + "damaged.png", bool_28: true)));
+                taskList.Add(Task.Run(() => bitmap_22[1] = method_12(originalPath + "damaged.png", bool_28: true)));
             }
             else
             {
-                taskList.Add(Task.Run(() => bitmap_22[1] = method_12(text2 + "damaged.png", bool_28: true)));
+                taskList.Add(Task.Run(() => bitmap_22[1] = method_12(custmomPath + "damaged.png", bool_28: true)));
             }
             bitmap_21 = new Bitmap[Galaxy.ComponentDefinitionsStatic.Length];
             for (int i = 0; i < bitmap_21.Length; i++)
             {
                 int localI = i;
                 bool flag = true;
-                string text3 = "Component_" + i + ".png";
-                string text4 = "Component_" + i + ".bmp";
-                string empty = string.Empty;
-                string text5 = text2 + text3;
-                string text6 = text2 + text4;
-                string text7 = text + text3;
-                string text8 = text + text4;
-                if (!string.IsNullOrEmpty(string_31))
+                string pngName = "Component_" + Galaxy.ComponentDefinitionsStatic[i].PictureRef + ".png";
+                string bmpName = "Component_" + Galaxy.ComponentDefinitionsStatic[i].PictureRef + ".bmp";
+                string imgPath = string.Empty;
+                string customPngPath = custmomPath + pngName;
+                string customBmpPath = custmomPath + bmpName;
+                string originalPngPath = originalPath + pngName;
+                string originalBmpPath = originalPath + bmpName;
+                if (!string.IsNullOrEmpty(customSet))
                 {
-                    empty = text5;
+                    imgPath = customPngPath;
                     flag = true;
-                    if (!File.Exists(text5))
+                    if (!File.Exists(customPngPath))
                     {
-                        empty = text6;
+                        imgPath = customBmpPath;
                         flag = false;
-                        if (!File.Exists(text6))
+                        if (!File.Exists(customBmpPath))
                         {
-                            empty = text7;
+                            imgPath = originalPngPath;
                             flag = true;
-                            if (!File.Exists(text7))
+                            if (!File.Exists(originalPngPath))
                             {
-                                empty = text8;
+                                imgPath = originalBmpPath;
                                 flag = false;
                             }
                         }
@@ -2313,17 +2361,17 @@ namespace DistantWorlds {
                 }
                 else
                 {
-                    empty = text7;
+                    imgPath = originalPngPath;
                     flag = true;
-                    if (!File.Exists(text7))
+                    if (!File.Exists(originalPngPath))
                     {
-                        empty = text8;
+                        imgPath = originalBmpPath;
                         flag = false;
                     }
                 }
                 taskList.Add(Task.Run(() =>
                 {
-                    bitmap_21[localI] = method_12(empty, bool_28: true);
+                    bitmap_21[localI] = method_12(imgPath, bool_28: true);
                     if (!flag)
                     {
                         bitmap_21[localI].MakeTransparent(Color.FromArgb(21, 21, 28));
@@ -2393,6 +2441,6 @@ namespace DistantWorlds {
         }
 
 
-  }
+    }
 
 }

@@ -31,7 +31,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void ClearData()
@@ -213,7 +213,7 @@ namespace DistantWorlds.Controls
       {
         base.OnDrawItem(e);
         e.DrawBackground();
-        PointF point = new PointF(60f, (float) (e.Bounds.Y + 1));
+        PointF point = new PointF(UiScale.S(60f), (float) (e.Bounds.Y + UiScale.S(1)));
         Font font = this.Font;
         SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
         if (e.Index >= 0 && (this._Fleets != null || this._BuiltObjects != null || this._Habitats != null))
@@ -262,10 +262,10 @@ namespace DistantWorlds.Controls
                     Bitmap largeFlagPicture = fleet.Empire.LargeFlagPicture;
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    int height = e.Bounds.Height - 2;
+                    int height = e.Bounds.Height - UiScale.S(2);
                     double num7 = (double) height / (double) largeFlagPicture.Height;
                     int width = (int) ((double) largeFlagPicture.Width * num7);
-                    rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+                    rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
                     e.Graphics.DrawImage((Image) largeFlagPicture, rect);
                   }
                   BuiltObject leadShip = fleet.LeadShip;
@@ -273,7 +273,7 @@ namespace DistantWorlds.Controls
                   {
                     Bitmap builtObjectImage = this._BuiltObjectImages[leadShip.PictureRef];
                     if (builtObjectImage != null)
-                      e.Graphics.DrawImage((Image) builtObjectImage, new Point(38, e.Bounds.Y + 1));
+                      e.Graphics.DrawImage((Image) builtObjectImage, new Point(UiScale.S(38), e.Bounds.Y + UiScale.S(1)));
                   }
                 }
               }
@@ -299,19 +299,19 @@ namespace DistantWorlds.Controls
                     Bitmap largeFlagPicture = builtObject.Empire.LargeFlagPicture;
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    int height = e.Bounds.Height - 2;
+                    int height = e.Bounds.Height - UiScale.S(2);
                     double num8 = (double) height / (double) largeFlagPicture.Height;
                     int width = (int) ((double) largeFlagPicture.Width * num8);
-                    rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+                    rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
                     e.Graphics.DrawImage((Image) largeFlagPicture, rect);
                   }
                   Bitmap builtObjectImage = this._BuiltObjectImages[builtObject.PictureRef];
                   e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                   e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                  int height1 = e.Bounds.Height - 2;
+                  int height1 = e.Bounds.Height - UiScale.S(2);
                   double num9 = (double) height1 / (double) builtObjectImage.Height;
                   int width1 = (int) ((double) builtObjectImage.Width * num9);
-                  rect = new Rectangle(38, e.Bounds.Y + 1, width1, height1);
+                  rect = new Rectangle(UiScale.S(38), e.Bounds.Y + UiScale.S(1), width1, height1);
                   e.Graphics.DrawImage((Image) builtObjectImage, rect);
                 }
               }
@@ -334,19 +334,19 @@ namespace DistantWorlds.Controls
                     Bitmap largeFlagPicture = habitat.Empire.LargeFlagPicture;
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    int height = e.Bounds.Height - 2;
+                    int height = e.Bounds.Height - UiScale.S(2);
                     double num10 = (double) height / (double) largeFlagPicture.Height;
                     int width = (int) ((double) largeFlagPicture.Width * num10);
-                    rect = new Rectangle(3, e.Bounds.Y + 1, width, height);
+                    rect = new Rectangle(UiScale.S(3), e.Bounds.Y + UiScale.S(1), width, height);
                     e.Graphics.DrawImage((Image) largeFlagPicture, rect);
                   }
                   Bitmap habitatImage = this._HabitatImages[(int) habitat.PictureRef];
                   e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                   e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                  int height2 = e.Bounds.Height - 2;
+                  int height2 = e.Bounds.Height - UiScale.S(2);
                   double num11 = (double) height2 / (double) habitatImage.Height;
                   int width2 = (int) ((double) habitatImage.Width * num11);
-                  rect = new Rectangle(38, e.Bounds.Y + 1, width2, height2);
+                  rect = new Rectangle(UiScale.S(38), e.Bounds.Y + UiScale.S(1), width2, height2);
                   e.Graphics.DrawImage((Image) habitatImage, rect);
                 }
               }

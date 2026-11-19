@@ -5,6 +5,7 @@
 // Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
 
 using DistantWorlds;
+using DistantWorlds.DBLoader;
 using DistantWorlds.Types;
 using System;
 using System.Diagnostics;
@@ -31,20 +32,21 @@ internal static class Class5
     //private static int int_8;
     //private static int int_9;
     internal static Splash _Splash;
-    
-    static bool _isExiting = false;
+
+    internal static bool _IsExiting = false;
+    //public static Stopwatch _sw = new Stopwatch();
     internal static void smethod_0()
     {
         var gcThread = new Thread(static () => {
             for (;;) {
-                if (_isExiting) return;
+                if (_IsExiting) return;
                 GC.Collect(0, GCCollectionMode.Forced, false, false);
-                if (_isExiting) return;
+                if (_IsExiting) return;
                 try {
                     Thread.Sleep(1000 / 30);
                 }
                 catch (ThreadInterruptedException) {
-                    if (_isExiting) return;
+                    if (_IsExiting) return;
                 }
             }
         }) { IsBackground = true, Name = "GC Watcher Thread"};
@@ -59,7 +61,7 @@ internal static class Class5
             }
 
             Size size = Screen.GetBounds(new Point(0, 0)).Size;
-            if ((size.Width < 1024 || size.Height < 768)
+            if ((size.Width < UiScale.S(1024) || size.Height < UiScale.S(768))
                 && MessageBox.Show(
                     "Distant Worlds requires a screen resolution of at least 1024 x 768.\n\nYou should change the resolution of your Windows desktop and restart.\n\nYou may choose to continue, but some aspects of Distant Worlds may not work properly.\n\nDo you wish to continue loading Distant Worlds with a low screen resolution?",
                     "Screen resolution", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
@@ -69,6 +71,7 @@ internal static class Class5
                 Application.Run(_Splash);
             });
             var start = new Start();
+            //_sw.Start();
             Application.Run(start);
 
         }
@@ -82,8 +85,9 @@ internal static class Class5
             throw;
         }
         finally {
-            _isExiting = true;
-            gcThread.Interrupt();   
+            _IsExiting = true;
+            gcThread.Interrupt();
+            Main._FileDB?.Close();
         }
     }
     private static void smethod_1()

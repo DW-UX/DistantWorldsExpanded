@@ -56,7 +56,7 @@ namespace DistantWorlds.Controls
       this.UpdateStyles();
     }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public List<Control> HighlightControls
     {
       get => this._HighlightControls;
@@ -67,13 +67,15 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public int BorderSize
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int BorderSize
     {
       get => this._BorderSize;
       set => this._BorderSize = value;
     }
 
-    public Color BorderColor1
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor1
     {
       get => this._BorderColor1;
       set
@@ -81,7 +83,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Color BorderColor2
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor2
     {
       get => this._BorderColor2;
       set
@@ -89,7 +92,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Color BorderColor3
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor3
     {
       get => this._BorderColor3;
       set
@@ -97,7 +101,8 @@ namespace DistantWorlds.Controls
       }
     }
 
-    public Color BorderColor4
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color BorderColor4
     {
       get => this._BorderColor4;
       set
@@ -132,7 +137,7 @@ namespace DistantWorlds.Controls
           {
             if (highlightControl.Parent == this || this is ScreenPanel && ((ScreenPanel) this).pnlBody == highlightControl.Parent)
             {
-              Rectangle rect = new Rectangle(highlightControl.Location.X - 3, highlightControl.Location.Y - 3, highlightControl.Size.Width + 6, highlightControl.Size.Height + 6);
+              Rectangle rect = new Rectangle(highlightControl.Location.X - UiScale.S(3), highlightControl.Location.Y - UiScale.S(3), highlightControl.Size.Width + UiScale.S(6), highlightControl.Size.Height + UiScale.S(6));
               if (this is ScreenPanel && ((ScreenPanel) this).pnlBody == highlightControl.Parent)
               {
                 using (Graphics graphics = ((ScreenPanel) this).pnlBody.CreateGraphics())
@@ -151,9 +156,9 @@ namespace DistantWorlds.Controls
         base.OnPaint(e);
       }
       int num1 = 0;
-      int num2 = this.ClientRectangle.Width - 1;
+      int num2 = this.ClientRectangle.Width - UiScale.S(1);
       int num3 = 0;
-      int num4 = this.ClientRectangle.Height - 1;
+      int num4 = this.ClientRectangle.Height - UiScale.S(1);
       Pen pen1 = new Pen(this._BorderColor1, 1f);
       Pen pen2 = new Pen(this._BorderColor2, 1f);
       Pen pen3 = new Pen(this._BorderColor3, 1f);

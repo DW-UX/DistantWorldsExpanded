@@ -268,7 +268,7 @@ namespace DistantWorlds.Types
                 if (builtObject != null)
                 {
                     happinessModifier = Math.Max(happinessModifier, (double)(builtObject.MedicalCapacity + builtObject.RecreationCapacity) / 30.0);
-                    if (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                    if (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
                     {
                         hasSpacePort = true;
                     }
@@ -283,7 +283,7 @@ namespace DistantWorlds.Types
                 for (int i = 0; i < colony.BasesAtHabitat.Count; i++)
                 {
                     BuiltObject builtObject = colony.BasesAtHabitat[i];
-                    if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                    if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                     {
                         return builtObject;
                     }
@@ -315,7 +315,7 @@ namespace DistantWorlds.Types
                 for (int i = 0; i < habitat.BasesAtHabitat.Count; i++)
                 {
                     BuiltObject builtObject = habitat.BasesAtHabitat[i];
-                    if (builtObject != null && builtObject.ParentHabitat == habitat && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                    if (builtObject != null && builtObject.ParentHabitat == habitat && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                     {
                         return builtObject;
                     }
@@ -351,6 +351,7 @@ namespace DistantWorlds.Types
                     case BuiltObjectSubRole.GasMiningStation:
                     case BuiltObjectSubRole.MiningStation:
                         return builtObject;
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -424,6 +425,7 @@ namespace DistantWorlds.Types
                     case BuiltObjectSubRole.GasMiningStation:
                     case BuiltObjectSubRole.MiningStation:
                         return builtObject;
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -1030,7 +1032,7 @@ namespace DistantWorlds.Types
                     {
                         continue;
                     }
-                    if (builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                    if (builtObject2.SubRole == BuiltObjectSubRole.Outpost || builtObject2.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject2.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject2.SubRole == BuiltObjectSubRole.LargeSpacePort)
                     {
                         if (requester.IsObjectAreaKnownToThisEmpire(builtObject2))
                         {
@@ -5033,6 +5035,7 @@ namespace DistantWorlds.Types
                 gameOptions.DesignUpgradeResortBase = policy.DesignUpgradeResortBase;
                 gameOptions.DesignUpgradeResupplyShip = policy.DesignUpgradeResupplyShip;
                 gameOptions.DesignUpgradeSmallFreighter = policy.DesignUpgradeSmallFreighter;
+                gameOptions.DesignUpgradeOutpost = policy.DesignUpgradeOutpost;
                 gameOptions.DesignUpgradeSmallSpacePort = policy.DesignUpgradeSmallSpacePort;
                 gameOptions.DesignUpgradeTroopTransport = policy.DesignUpgradeTroopTransport;
                 gameOptions.DesignUpgradeWeaponsResearchStation = policy.DesignUpgradeWeaponsResearchStation;
@@ -5069,6 +5072,7 @@ namespace DistantWorlds.Types
                 policy.DesignUpgradeResortBase = gameOptions.DesignUpgradeResortBase;
                 policy.DesignUpgradeResupplyShip = gameOptions.DesignUpgradeResupplyShip;
                 policy.DesignUpgradeSmallFreighter = gameOptions.DesignUpgradeSmallFreighter;
+                policy.DesignUpgradeOutpost = gameOptions.DesignUpgradeOutpost;
                 policy.DesignUpgradeSmallSpacePort = gameOptions.DesignUpgradeSmallSpacePort;
                 policy.DesignUpgradeTroopTransport = gameOptions.DesignUpgradeTroopTransport;
                 policy.DesignUpgradeWeaponsResearchStation = gameOptions.DesignUpgradeWeaponsResearchStation;

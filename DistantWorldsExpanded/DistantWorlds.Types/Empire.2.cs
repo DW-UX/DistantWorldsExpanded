@@ -50,7 +50,7 @@ namespace DistantWorlds.Types
                     if (target.Role == BuiltObjectRole.Base)
                     {
                         int num2 = _Galaxy.CheckSystemOwnershipId(target.NearestSystemStar);
-                        if ((target.SubRole == BuiltObjectSubRole.SmallSpacePort || target.SubRole == BuiltObjectSubRole.MediumSpacePort || target.SubRole == BuiltObjectSubRole.LargeSpacePort || target.SubRole == BuiltObjectSubRole.DefensiveBase || target.SubRole == BuiltObjectSubRole.EnergyResearchStation || target.SubRole == BuiltObjectSubRole.HighTechResearchStation || target.SubRole == BuiltObjectSubRole.WeaponsResearchStation) && target.ParentHabitat != null && target.ParentHabitat.Empire != null)
+                        if ((target.SubRole == BuiltObjectSubRole.Outpost || target.SubRole == BuiltObjectSubRole.SmallSpacePort || target.SubRole == BuiltObjectSubRole.MediumSpacePort || target.SubRole == BuiltObjectSubRole.LargeSpacePort || target.SubRole == BuiltObjectSubRole.DefensiveBase || target.SubRole == BuiltObjectSubRole.EnergyResearchStation || target.SubRole == BuiltObjectSubRole.HighTechResearchStation || target.SubRole == BuiltObjectSubRole.WeaponsResearchStation) && target.ParentHabitat != null && target.ParentHabitat.Empire != null)
                         {
                             return BuiltObjectMissionType.Attack;
                         }
@@ -374,7 +374,7 @@ namespace DistantWorlds.Types
                 for (int l = 0; l < BuiltObjects.Count; l++)
                 {
                     BuiltObject builtObject3 = BuiltObjects[l];
-                    if (builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                    if (builtObject3.SubRole == BuiltObjectSubRole.Outpost || builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
                     {
                         num9++;
                     }
@@ -385,6 +385,7 @@ namespace DistantWorlds.Types
                 long num11 = (long)Policy.ConstructionSpaceportLargeColonyPopulationThreshold * 1000000L;
                 long num12 = (long)Policy.ConstructionSpaceportMediumColonyPopulationThreshold * 1000000L;
                 long num13 = (long)Policy.ConstructionSpaceportSmallColonyPopulationThreshold * 1000000L;
+                long num131 = (long)Policy.ConstructionOutpostColonyPopulationThreshold * 1000000L;
                 foreach (Habitat item in habitatList5)
                 {
                     Design design2 = null;
@@ -399,6 +400,10 @@ namespace DistantWorlds.Types
                     else if (item.Population.TotalAmount > num13)
                     {
                         design2 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.SmallSpacePort);
+                    }
+                    else if (item.Population.TotalAmount > num131)
+                    {
+                        design2 = _Designs.FindNewestCanBuild(BuiltObjectSubRole.Outpost);
                     }
                     if (design2 == null)
                     {
@@ -971,25 +976,29 @@ namespace DistantWorlds.Types
             }
             _StateForceStructureProjections = forceStructureProjectionList;
             forceStructureProjectionList = new ForceStructureProjectionList();
-            int num53 = 1 + (int)((double)BuiltObjects.Count * 1.0 * Policy.PirateSmugglerFreighterLevel);
-            int num54 = (int)((double)BuiltObjects.Count * 0.07 * Policy.PirateSmugglerPassengerLevel);
-            int num55 = 1 + (int)((double)BuiltObjects.Count * 0.35 * Policy.PirateSmugglerMiningLevel);
+            int freightLevel = 1 + (int)((double)BuiltObjects.Count * 1.0 * Policy.PirateSmugglerFreighterLevel);
+            int passengerLevel = (int)((double)BuiltObjects.Count * 0.07 * Policy.PirateSmugglerPassengerLevel);
+            int miningLevel = 1 + (int)((double)BuiltObjects.Count * 0.35 * Policy.PirateSmugglerMiningLevel);
             if (habitatList.Count <= 0 && ResortBases.Count <= 0)
             {
-                num54 = 0;
+                passengerLevel = 0;
             }
             switch (PiratePlayStyle)
             {
                 case PiratePlayStyle.Balanced:
-                    num53 = (int)((double)num53 * 1.3);
+                    freightLevel = (int)((double)freightLevel * 1.3);
                     break;
                 case PiratePlayStyle.Mercenary:
-                    num53 = (int)((double)num53 * 0.5);
-                    num55 = (int)((double)num55 * 0.5);
+                    freightLevel = (int)((double)freightLevel * 0.5);
+                    miningLevel = (int)((double)miningLevel * 0.5);
                     break;
                 case PiratePlayStyle.Smuggler:
-                    num53 = (int)((double)num53 * 2.0);
-                    num55 = (int)((double)num55 * 1.5);
+                    freightLevel = (int)((double)freightLevel * 2.0);
+                    miningLevel = (int)((double)miningLevel * 1.5);
+                    break;
+                case PiratePlayStyle.Legendary:
+                    freightLevel = (int)((double)freightLevel * 2.0);
+                    miningLevel = (int)((double)miningLevel * 1.5);
                     break;
             }
             int num56 = PrivateBuiltObjects.CountBySubRole(BuiltObjectSubRole.SmallFreighter);
@@ -1004,9 +1013,9 @@ namespace DistantWorlds.Types
             Design design13 = Designs.FindNewestCanBuild(BuiltObjectSubRole.PassengerShip);
             Design design14 = Designs.FindNewestCanBuild(BuiltObjectSubRole.MiningShip);
             Design design15 = Designs.FindNewestCanBuild(BuiltObjectSubRole.GasMiningShip);
-            int num62 = Math.Max(0, num53 - (num56 + num57 + num58));
-            int num63 = Math.Max(0, num55 - (num60 + num61));
-            int num64 = Math.Max(0, num54 - num59);
+            int num62 = Math.Max(0, freightLevel - (num56 + num57 + num58));
+            int num63 = Math.Max(0, miningLevel - (num60 + num61));
+            int num64 = Math.Max(0, passengerLevel - num59);
             int num65 = (int)((double)num62 * 0.25);
             int num66 = (int)((double)num62 * 0.35);
             int num67 = num62 - (num66 + num65);
@@ -1195,6 +1204,7 @@ namespace DistantWorlds.Types
                         case BuiltObjectSubRole.ResortBase:
                             pirateRelationList = relationsByType;
                             break;
+                        case BuiltObjectSubRole.Outpost:
                         case BuiltObjectSubRole.SmallSpacePort:
                         case BuiltObjectSubRole.MediumSpacePort:
                         case BuiltObjectSubRole.LargeSpacePort:
@@ -2051,7 +2061,7 @@ namespace DistantWorlds.Types
             if (PirateEmpireBaseHabitat != null && defendMission != null && defendMission.RequestingEmpire != null && defendMission.Target != null && ShipGroups.Count > 0 && defendMission.RequestingEmpire.DetermineOfferPirateDefendMissionToPirateFaction(this))
             {
                 double num = Math.Max((double)Galaxy.SectorSize * 2.0, (double)Galaxy.SizeX * 0.2);
-                if (PiratePlayStyle == PiratePlayStyle.Mercenary)
+                if (PiratePlayStyle == PiratePlayStyle.Mercenary || PiratePlayStyle == PiratePlayStyle.Legendary)
                 {
                     num *= 1.5;
                 }
@@ -2105,7 +2115,7 @@ namespace DistantWorlds.Types
             if (PirateEmpireBaseHabitat != null && attackMission != null && attackMission.Target != null && ShipGroups.Count > 0)
             {
                 double num = Math.Max((double)Galaxy.SectorSize * 3.0, (double)Galaxy.SizeX * 0.3);
-                if (PiratePlayStyle == PiratePlayStyle.Mercenary)
+                if (PiratePlayStyle == PiratePlayStyle.Mercenary || PiratePlayStyle == PiratePlayStyle.Legendary)
                 {
                     num *= 1.5;
                 }
@@ -2515,7 +2525,7 @@ namespace DistantWorlds.Types
             }
             double num = Math.Max((double)Galaxy.SectorSize * 2.0, (double)Galaxy.SizeX * 0.2);
             PiratePlayStyle piratePlayStyle = PiratePlayStyle;
-            if (piratePlayStyle == PiratePlayStyle.Balanced || piratePlayStyle == PiratePlayStyle.Smuggler)
+            if (piratePlayStyle == PiratePlayStyle.Balanced || piratePlayStyle == PiratePlayStyle.Smuggler || piratePlayStyle == PiratePlayStyle.Legendary)
             {
                 num *= 2.0;
             }
@@ -4060,7 +4070,7 @@ namespace DistantWorlds.Types
                 {
                     continue;
                 }
-                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(SystemVisibility[i].SystemStar.Xpos, SystemVisibility[i].SystemStar.Ypos, this);
+                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(SystemVisibility[i].SystemStar.Xpos, SystemVisibility[i].SystemStar.Ypos, this, false);
                 for (int j = 0; j < _Galaxy.Systems[SystemVisibility[i].SystemStar.SystemIndex].Habitats.Count; j++)
                 {
                     Habitat habitat = _Galaxy.Systems[SystemVisibility[i].SystemStar.SystemIndex].Habitats[j];
@@ -4182,7 +4192,7 @@ namespace DistantWorlds.Types
                 {
                     continue;
                 }
-                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(SystemVisibility[i].SystemStar.Xpos, SystemVisibility[i].SystemStar.Ypos, this);
+                BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(SystemVisibility[i].SystemStar.Xpos, SystemVisibility[i].SystemStar.Ypos, this, false);
                 for (int j = 0; j < _Galaxy.Systems[SystemVisibility[i].SystemStar.SystemIndex].Habitats.Count; j++)
                 {
                     Habitat habitat = _Galaxy.Systems[SystemVisibility[i].SystemStar.SystemIndex].Habitats[j];
@@ -4231,7 +4241,7 @@ namespace DistantWorlds.Types
                         continue;
                     }
                     double num = 0.0;
-                    for (int k = 0; k < topResourceCount; k++)
+                    for (int k = 0; k < Math.Min(topResourceCount, resourceList.Count); k++)
                     {
                         if (resourceList[k].SortTag > 0.1 && habitat.Resources.ContainsId(resourceList[k].ResourceID))
                         {
@@ -4319,7 +4329,7 @@ namespace DistantWorlds.Types
                     {
                         continue;
                     }
-                    BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(habitat.Xpos, habitat.Ypos, this);
+                    BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(habitat.Xpos, habitat.Ypos, this, true);
                     bool flag2 = true;
                     if (PirateEmpireBaseHabitat == null && empire.PirateEmpireBaseHabitat == null)
                     {

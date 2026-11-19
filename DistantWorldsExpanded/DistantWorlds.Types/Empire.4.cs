@@ -672,7 +672,7 @@ namespace DistantWorlds.Types
 
         private void SendFreightersToSmugglingDestination(Habitat colony, ref BuiltObjectList availableFreighters, int freightersToSend, byte resourceTypeToSupply)
         {
-            BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(colony.Xpos, colony.Ypos, this);
+            BuiltObject builtObject = _Galaxy.FastFindNearestSpacePort(colony.Xpos, colony.Ypos, this, false);
             if (builtObject == null || builtObject.Cargo == null)
             {
                 return;
@@ -1968,7 +1968,7 @@ namespace DistantWorlds.Types
                 for (int i = 0; i < BuiltObjects.Count; i++)
                 {
                     BuiltObject builtObject = BuiltObjects[i];
-                    if (builtObject != null && !builtObject.HasBeenDestroyed && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                    if (builtObject != null && !builtObject.HasBeenDestroyed && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                     {
                         stellarObjectList.Add(builtObject);
                     }
@@ -2191,6 +2191,7 @@ namespace DistantWorlds.Types
                         break;
                     case BuiltObjectSubRole.GasMiningStation:
                     case BuiltObjectSubRole.MiningStation:
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -2246,6 +2247,7 @@ namespace DistantWorlds.Types
                             habitatList.Add(builtObject.ParentHabitat);
                         }
                         break;
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -3203,42 +3205,45 @@ namespace DistantWorlds.Types
                 Resource resource = null;
                 if (_ControlColonyDevelopment)
                 {
-                    for (int num24 = 0; num24 < num23; num24++)
+                    if (resourceList.Count != 0)
                     {
-                        resource = resourceList[num24];
-                        int iterationCount = 0;
-                        bool flag3 = false;
-                        do
+                        for (int num24 = 0; num24 < num23; num24++)
                         {
-                            flag3 = false;
                             resource = resourceList[num24];
-                            foreach (HabitatResource resource5 in habitat.Resources)
+                            int iterationCount = 0;
+                            bool flag3 = false;
+                            do
                             {
-                                if (resource5.ResourceID == resource.ResourceID)
+                                flag3 = false;
+                                resource = resourceList[num24];
+                                foreach (HabitatResource resource5 in habitat.Resources)
                                 {
-                                    flag3 = true;
-                                    num24++;
+                                    if (resource5.ResourceID == resource.ResourceID)
+                                    {
+                                        flag3 = true;
+                                        num24++;
+                                    }
                                 }
                             }
-                        }
-                        while (Galaxy.ConditionCheckLimit(flag3, 100, ref iterationCount));
-                        int amountToOrder = 0;
-                        int maximumResourceLevel = (int)((double)num6 * 1.5);
-                        CheckResourceMeetsMinimumLevel(resource, num6, maximumResourceLevel, habitat, orders, out amountToOrder);
-                        if (amountToOrder <= 0)
-                        {
-                            continue;
-                        }
-                        double num25 = (double)amountToOrder * _Galaxy.ResourceCurrentPrices[resource.ResourceID];
-                        if (num25 < GetPrivateFunds())
-                        {
-                            if (builtObject != null && builtObject.IsSpacePort)
+                            while (Galaxy.ConditionCheckLimit(flag3, 100, ref iterationCount));
+                            int amountToOrder = 0;
+                            int maximumResourceLevel = (int)((double)num6 * 1.5);
+                            CheckResourceMeetsMinimumLevel(resource, num6, maximumResourceLevel, habitat, orders, out amountToOrder);
+                            if (amountToOrder <= 0)
                             {
-                                CreateOrder(builtObject, resource, amountToOrder, isState: false, OrderType.Standard, allowExpiry: true);
+                                continue;
                             }
-                            else
+                            double num25 = (double)amountToOrder * _Galaxy.ResourceCurrentPrices[resource.ResourceID];
+                            if (num25 < GetPrivateFunds())
                             {
-                                CreateOrder(habitat, resource, amountToOrder, isState: false, OrderType.Standard, allowExpiry: true);
+                                if (builtObject != null && builtObject.IsSpacePort)
+                                {
+                                    CreateOrder(builtObject, resource, amountToOrder, isState: false, OrderType.Standard, allowExpiry: true);
+                                }
+                                else
+                                {
+                                    CreateOrder(habitat, resource, amountToOrder, isState: false, OrderType.Standard, allowExpiry: true);
+                                }
                             }
                         }
                     }
@@ -3658,7 +3663,7 @@ namespace DistantWorlds.Types
                     for (int k = 0; k < colony.BasesAtHabitat.Count; k++)
                     {
                         BuiltObject builtObject = colony.BasesAtHabitat[k];
-                        if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                        if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                         {
                             flag = false;
                         }
@@ -3806,7 +3811,7 @@ namespace DistantWorlds.Types
                     for (int i = 0; i < colony.BasesAtHabitat.Count; i++)
                     {
                         BuiltObject builtObject = colony.BasesAtHabitat[i];
-                        if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                        if (builtObject != null && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                         {
                             flag = false;
                         }
@@ -4397,7 +4402,6 @@ namespace DistantWorlds.Types
 
         public double DetermineProximityFromCapital(BuiltObject builtObject)
         {
-            double num = 0.0;
             if (PirateEmpireBaseHabitat == null)
             {
                 return Math.Sqrt(Math.Sqrt(1.0 + _Galaxy.CalculateDistance(Capital.Xpos, Capital.Ypos, builtObject.Xpos, builtObject.Ypos)) / 100.0);

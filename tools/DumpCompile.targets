@@ -1,0 +1,9 @@
+<Project>
+  <!-- Writes the exact compiler inputs of a project so UiScaleRewriter can load it without MSBuild.
+       Use: dotnet build <csproj> -p:CustomAfterMicrosoftCommonTargets=<this file> -p:DumpDir=<folder>\ -->
+  <Target Name="DumpCompileInputs" AfterTargets="CoreCompile" Condition="'$(DumpDir)' != ''">
+    <WriteLinesToFile File="$(DumpDir)$(MSBuildProjectName).compile.txt" Lines="@(Compile->'%(FullPath)')" Overwrite="true" />
+    <WriteLinesToFile File="$(DumpDir)$(MSBuildProjectName).refs.txt" Lines="@(ReferencePathWithRefAssemblies->'%(FullPath)|%(Aliases)')" Overwrite="true" />
+    <WriteLinesToFile File="$(DumpDir)$(MSBuildProjectName).defines.txt" Lines="$(DefineConstants)" Overwrite="true" />
+  </Target>
+</Project>

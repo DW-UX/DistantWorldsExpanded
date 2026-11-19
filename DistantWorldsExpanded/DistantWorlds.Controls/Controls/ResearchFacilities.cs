@@ -22,7 +22,7 @@ namespace DistantWorlds.Controls
         public ResearchFacilities()
         {
             this.InitializeComponent();
-            this._Grid.RowTemplate.Height = 25;
+            this._Grid.RowTemplate.Height = UiScale.S(25);
             DataGridViewImageColumn gridViewImageColumn1 = (DataGridViewImageColumn)new ResearchFacilities.SortableImageColumn();
             gridViewImageColumn1.Description = "Empire";
             gridViewImageColumn1.HeaderText = "";
@@ -30,7 +30,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn1.ReadOnly = true;
             gridViewImageColumn1.SortMode = DataGridViewColumnSortMode.Automatic;
             gridViewImageColumn1.ValueType = typeof(string);
-            gridViewImageColumn1.Width = 25;
+            gridViewImageColumn1.Width = UiScale.S(25);
             gridViewImageColumn1.FillWeight = 25f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn1);
             DataGridViewImageColumn gridViewImageColumn2 = new DataGridViewImageColumn();
@@ -41,7 +41,7 @@ namespace DistantWorlds.Controls
             gridViewImageColumn2.ImageLayout = DataGridViewImageCellLayout.Zoom;
             gridViewImageColumn2.SortMode = DataGridViewColumnSortMode.NotSortable;
             gridViewImageColumn2.ValueType = typeof(Image);
-            gridViewImageColumn2.Width = 30;
+            gridViewImageColumn2.Width = UiScale.S(30);
             gridViewImageColumn2.FillWeight = 30f;
             this._Grid.Columns.Add((DataGridViewColumn)gridViewImageColumn2);
             DataGridViewTextBoxColumn viewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -50,7 +50,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn1.ReadOnly = false;
             viewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn1.ValueType = typeof(string);
-            viewTextBoxColumn1.Width = 125;
+            viewTextBoxColumn1.Width = UiScale.S(125);
             viewTextBoxColumn1.FillWeight = 125f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn1);
             DataGridViewTextBoxColumn viewTextBoxColumn2 = new DataGridViewTextBoxColumn();
@@ -59,7 +59,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn2.ReadOnly = false;
             viewTextBoxColumn2.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn2.ValueType = typeof(int);
-            viewTextBoxColumn2.Width = 100;
+            viewTextBoxColumn2.Width = UiScale.S(100);
             viewTextBoxColumn2.FillWeight = 100f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn2);
             DataGridViewTextBoxColumn viewTextBoxColumn3 = new DataGridViewTextBoxColumn();
@@ -68,7 +68,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn3.ReadOnly = false;
             viewTextBoxColumn3.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn3.ValueType = typeof(int);
-            viewTextBoxColumn3.Width = 100;
+            viewTextBoxColumn3.Width = UiScale.S(100);
             viewTextBoxColumn3.FillWeight = 100f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn3);
             DataGridViewTextBoxColumn viewTextBoxColumn4 = new DataGridViewTextBoxColumn();
@@ -77,7 +77,7 @@ namespace DistantWorlds.Controls
             viewTextBoxColumn4.ReadOnly = false;
             viewTextBoxColumn4.SortMode = DataGridViewColumnSortMode.Automatic;
             viewTextBoxColumn4.ValueType = typeof(int);
-            viewTextBoxColumn4.Width = 100;
+            viewTextBoxColumn4.Width = UiScale.S(100);
             viewTextBoxColumn4.FillWeight = 100f;
             this._Grid.Columns.Add((DataGridViewColumn)viewTextBoxColumn4);
         }
@@ -157,7 +157,7 @@ namespace DistantWorlds.Controls
                 {
                     this._Grid.Rows.Add();
                     DataGridViewRow row = this._Grid.Rows[index];
-                    row.Height = 30;
+                    row.Height = UiScale.S(30);
                     BuiltObject builtObject = builtObjects[index];
                     if (builtObject != null)
                     {

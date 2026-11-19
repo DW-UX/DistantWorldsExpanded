@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
@@ -373,41 +374,53 @@ namespace DistantWorlds.Types
 
         public void LoadAgentNames(string applicationStartupPath, string customizationSetName)
         {
-            int num = 0;
-            string text = applicationStartupPath + "\\characterNames.txt";
-            if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                text = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\characterNames.txt";
-            }
-            if (!File.Exists(text))
-            {
-                text = applicationStartupPath + "\\characterNames.txt";
-            }
-            try
-            {
+                int num = 0;
+                string text = applicationStartupPath + "\\characterNames.txt";
+                if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+                {
+                    text = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\characterNames.txt";
+                }
                 if (!File.Exists(text))
                 {
-                    throw new ApplicationException("Missing file: " + text);
+                    text = applicationStartupPath + "\\characterNames.txt";
                 }
-                FileStream fileStream = File.OpenRead(text);
-                StreamReader streamReader = new StreamReader(fileStream);
-                for (int i = 0; i < RaceFamilies.Count; i++)
+                try
                 {
-                    string[] item = GetValidFileLine(streamReader).Replace(" ", "").Split(',');
-                    string[] item2 = GetValidFileLine(streamReader).Replace(" ", "").Split(',');
-                    _AgentFirstNames.Add(item);
-                    _AgentLastNames.Add(item2);
+                    if (!File.Exists(text))
+                    {
+                        throw new ApplicationException("Missing file: " + text);
+                    }
+                    FileStream fileStream = File.OpenRead(text);
+                    StreamReader streamReader = new StreamReader(fileStream);
+                    for (int i = 0; i < RaceFamilies.Count; i++)
+                    {
+                        string[] item = GetValidFileLine(streamReader).Replace(" ", "").Split(',');
+                        string[] item2 = GetValidFileLine(streamReader).Replace(" ", "").Split(',');
+                        _AgentFirstNames.Add(item);
+                        _AgentLastNames.Add(item2);
+                    }
+                    streamReader.Close();
+                    fileStream.Close();
                 }
-                streamReader.Close();
-                fileStream.Close();
+                catch (ApplicationException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw new ApplicationException("Error at line " + num + " reading file " + text);
+                }
             }
-            catch (ApplicationException)
+            else
             {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Error at line " + num + " reading file " + text);
+                var reader = Main._FileDB.GetAgentNamesReader();
+                while (reader.Read())
+                {
+                    _AgentFirstNames.Add(reader.GetString(reader.GetOrdinal("FirstName")).Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+                    _AgentLastNames.Add(reader.GetString(reader.GetOrdinal("LastName")).Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+                }
             }
         }
 
@@ -591,7 +604,6 @@ namespace DistantWorlds.Types
 
         public static ComponentCategoryType ResolveTechDisallow(int index)
         {
-            ComponentCategoryType componentCategoryType = ComponentCategoryType.Undefined;
             return index switch
             {
                 1 => ComponentCategoryType.WeaponTorpedo,
@@ -833,7 +845,6 @@ namespace DistantWorlds.Types
 
         public static PlanetaryFacilityDefinition ResolveRaceWonder(int index)
         {
-            PlanetaryFacilityDefinition planetaryFacilityDefinition = null;
             return index switch
             {
                 1 => PlanetaryFacilityDefinitionsStatic[21],
@@ -1176,45 +1187,53 @@ namespace DistantWorlds.Types
         public static RaceList LoadRaces(string applicationStartupPath, string customizationSetName)
         {
             RaceList raceList = new RaceList();
-            List<Task<Race>> taskList = new List<Task<Race>>();
-            string text = string.Empty;
-            string path = applicationStartupPath + "\\races\\";
-            if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
+            if (!Main._ExpModMain.GetSettings().UseDbFiles)
             {
-                path = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\races\\";
-            }
-            if (!Directory.Exists(path))
-            {
-                path = applicationStartupPath + "\\races\\";
-            }
-            try
-            {
-                string[] files = Directory.GetFiles(path, "*.txt", SearchOption.TopDirectoryOnly);
-                for (int i = 0; i < files.Length; i++)
+
+                List<Task<Race>> taskList = new List<Task<Race>>();
+                string text = string.Empty;
+                string path = applicationStartupPath + "\\races\\";
+                if (!string.IsNullOrEmpty(customizationSetName) && customizationSetName.ToLower(CultureInfo.InvariantCulture) != "default")
                 {
-                    text = files[i];
-                    if (File.Exists(text))
+                    path = applicationStartupPath + "\\Customization\\" + customizationSetName + "\\races\\";
+                }
+                if (!Directory.Exists(path))
+                {
+                    path = applicationStartupPath + "\\races\\";
+                }
+                try
+                {
+                    string[] files = Directory.GetFiles(path, "*.txt", SearchOption.TopDirectoryOnly);
+                    for (int i = 0; i < files.Length; i++)
                     {
-                        string localText = text;
-                        //Race item = Race.LoadFromFile(text);
-                        //raceList.Add(item);
-                        taskList.Add(Task.Run(() => Race.LoadFromFile(localText)));
+                        text = files[i];
+                        if (File.Exists(text))
+                        {
+                            string localText = text;
+                            //Race item = Race.LoadFromFile(text);
+                            //raceList.Add(item);
+                            taskList.Add(Task.Run(() => Race.LoadFromFile(localText)));
+                        }
+                    }
+                    Task.WaitAll(taskList.ToArray());
+                    foreach (var item in taskList)
+                    {
+                        if (item.Result != null)
+                        { raceList.Add(item.Result); }
                     }
                 }
-                Task.WaitAll(taskList.ToArray());
-                foreach (var item in taskList)
+                catch (ApplicationException)
                 {
-                    if (item.Result != null)
-                    { raceList.Add(item.Result); }
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw new ApplicationException("Error reading txt file of some race");
                 }
             }
-            catch (ApplicationException)
+            else
             {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException("Error reading txt file of some race");
+                raceList = Race.LoadFromFile(Main._FileDB.GetRaceReader());
             }
             LoadRaceBiases(applicationStartupPath, customizationSetName, raceList);
             return raceList;
@@ -1696,31 +1715,38 @@ namespace DistantWorlds.Types
             EmpirePolicy empirePolicy = new EmpirePolicy();
             try
             {
-                string text = applicationPath + "\\Policy\\";
-                if (isPirate)
+                if (!Main._ExpModMain.GetSettings().UseDbFiles)
                 {
-                    text += "pirate\\";
-                }
-                string text2 = text;
-                string text3 = string.Empty;
-                if (!string.IsNullOrEmpty(customPath))
-                {
-                    text3 = customPath + "Policy\\";
+                    string text = applicationPath + "\\Policy\\";
                     if (isPirate)
                     {
-                        text3 += "pirate\\";
+                        text += "pirate\\";
+                    }
+                    string text2 = text;
+                    string text3 = string.Empty;
+                    if (!string.IsNullOrEmpty(customPath))
+                    {
+                        text3 = customPath + "Policy\\";
+                        if (isPirate)
+                        {
+                            text3 += "pirate\\";
+                        }
+                    }
+                    string text4 = name + ".txt";
+                    if (!string.IsNullOrEmpty(text3) && File.Exists(text3 + text4))
+                    {
+                        empirePolicy.LoadFromFile(text3 + text4);
+                        return empirePolicy;
+                    }
+                    if (File.Exists(text2 + text4))
+                    {
+                        empirePolicy.LoadFromFile(text2 + text4);
+                        return empirePolicy;
                     }
                 }
-                string text4 = name + ".txt";
-                if (!string.IsNullOrEmpty(text3) && File.Exists(text3 + text4))
+                else
                 {
-                    empirePolicy.LoadFromFile(text3 + text4);
-                    return empirePolicy;
-                }
-                if (File.Exists(text2 + text4))
-                {
-                    empirePolicy.LoadFromFile(text2 + text4);
-                    return empirePolicy;
+                    empirePolicy.LoadFromFile(Main._FileDB.GetEmpirePolicyReader(name), name);
                 }
                 return empirePolicy;
             }
@@ -2346,6 +2372,8 @@ namespace DistantWorlds.Types
                 Systems.Add(systemInfo);
             }
             UpdateSystemInfo(null);
+            FillSystemInfoByDistance();
+            //FillShipNearSystems();
             for (int num31 = 0; num31 < Creatures.Count; num31++)
             {
                 if (!Systems[Creatures[num31].ParentHabitat.SystemIndex].Creatures.Contains(Creatures[num31]))
@@ -2357,6 +2385,38 @@ namespace DistantWorlds.Types
             GameSummary = DetermineGameSummary();
             list = null;
         }
+
+        public void FillSystemInfoByDistance()
+        {
+            _SystemInfoByDistance = new Dictionary<SystemInfo, SystemInfo[]>(Systems.Count);
+            for (int i = 0; i < Systems.Count; i++)
+            {
+                _SystemInfoByDistance.Add(Systems[i], Systems.Select(p => new
+                {
+                    SystemInfo = p,
+                    Distance = Math.Sqrt(
+                           Math.Pow(Math.Abs(p.SystemStar.Xpos - Systems[i].SystemStar.Xpos), 2) +
+                           Math.Pow(Math.Abs(p.SystemStar.Ypos - Systems[i].SystemStar.Ypos), 2)
+                       )
+                }).OrderBy(p => p.Distance).Select(x => x.SystemInfo).ToArray());
+                foreach (var hab in Systems[i].Habitats)
+                {
+                    hab.SystemInfo = Systems[i];
+                }
+                Systems[i].SystemStar.SystemInfo = Systems[i];
+            }
+        }
+
+        //public void FillShipNearSystems()
+        //{
+        //    foreach (var item in Empires)
+        //    {
+        //        foreach (var ship in item.BuiltObjects)
+        //            BaconBuiltObject.AssignNearestSystemStarIfNull(ship);
+        //        foreach (var ship in item.PrivateBuiltObjects)
+        //            BaconBuiltObject.AssignNearestSystemStarIfNull(ship);
+        //    }
+        //}
 
         public string GenerateBuiltObjectName(Design design)
         {
@@ -2398,6 +2458,7 @@ namespace DistantWorlds.Types
                     case BuiltObjectSubRole.MiningShip:
                     case BuiltObjectSubRole.GasMiningStation:
                     case BuiltObjectSubRole.MiningStation:
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:
@@ -2451,6 +2512,9 @@ namespace DistantWorlds.Types
                         break;
                     case BuiltObjectSubRole.HighTechResearchStation:
                         empty = design.Name + " " + ResolveDescription(BuiltObjectSubRole.HighTechResearchStation) + " " + design.BuildCount.ToString("000");
+                        break;
+                    case BuiltObjectSubRole.Outpost:
+                        empty = design.Name + " " + TextResolver.GetText("Outpost") + " " + design.BuildCount.ToString("000");
                         break;
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
@@ -2507,6 +2571,7 @@ namespace DistantWorlds.Types
                 case BuiltObjectSubRole.ExplorationShip:
                 case BuiltObjectSubRole.ColonyShip:
                 case BuiltObjectSubRole.ConstructionShip:
+                case BuiltObjectSubRole.Outpost:
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
                 case BuiltObjectSubRole.LargeSpacePort:
@@ -3582,7 +3647,6 @@ namespace DistantWorlds.Types
 
         public int ValueMoney(double moneyAmount)
         {
-            int num = -1;
             return (int)moneyAmount;
         }
 
@@ -3648,6 +3712,7 @@ namespace DistantWorlds.Types
                             num = 20000.0;
                         }
                         break;
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:

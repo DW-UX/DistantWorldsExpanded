@@ -2372,6 +2372,7 @@ namespace DistantWorlds.Controls
                             case BuiltObjectSubRole.MiningStation:
                                 result = texture2D_37;
                                 break;
+                            case BuiltObjectSubRole.Outpost:
                             case BuiltObjectSubRole.SmallSpacePort:
                             case BuiltObjectSubRole.MediumSpacePort:
                             case BuiltObjectSubRole.LargeSpacePort:
@@ -2418,6 +2419,7 @@ namespace DistantWorlds.Controls
                             case BuiltObjectSubRole.MiningStation:
                                 result = texture2D_45;
                                 break;
+                            case BuiltObjectSubRole.Outpost:
                             case BuiltObjectSubRole.SmallSpacePort:
                             case BuiltObjectSubRole.MediumSpacePort:
                             case BuiltObjectSubRole.LargeSpacePort:
@@ -3192,8 +3194,8 @@ namespace DistantWorlds.Controls
             int num5 = 0;
             int num6 = bitmap_7.Width;
             Bitmap bitmap = new Bitmap(num6, num4);
-            DistantWorlds.FastBitmap fastBitmap = new DistantWorlds.FastBitmap(bitmap_7);
-            DistantWorlds.FastBitmap fastBitmap2 = new DistantWorlds.FastBitmap(bitmap);
+            FastBitmap fastBitmap = new FastBitmap(bitmap_7);
+            FastBitmap fastBitmap2 = new FastBitmap(bitmap);
             double num7 = 0.0;
             double num8 = 0.0;
             double num9 = bitmap_7.Width / 2;
@@ -4818,6 +4820,7 @@ namespace DistantWorlds.Controls
                                 case BuiltObjectSubRole.MiningShip:
                                     flag28 = flag10;
                                     break;
+                                case BuiltObjectSubRole.Outpost:
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
                                 case BuiltObjectSubRole.LargeSpacePort:
@@ -4896,7 +4899,7 @@ namespace DistantWorlds.Controls
                             {
                                 num84 = num85;
                             }
-                            if (builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if (builtObject3.SubRole == BuiltObjectSubRole.Outpost || builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 DrawShipSymbol(graphics_0, builtObject3, ResolveShipSymbolColor(builtObject3), num82 - num84 / 2, num83 - num84 / 2, num84, num84, num84, num84, fillInterior: true, main_0.double_0);
                                 if (main_0._Game.SelectedObject == builtObject3)
@@ -4914,7 +4917,7 @@ namespace DistantWorlds.Controls
                                     }
                                 }
                             }
-                            if ((!flag29 && galaxy_0.FastTestShipInColonizedSystem(builtObject3)) || builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if ((!flag29 && galaxy_0.FastTestShipInColonizedSystem(builtObject3)) || builtObject3.SubRole == BuiltObjectSubRole.Outpost || builtObject3.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject3.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject3.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 continue;
                             }
@@ -5184,11 +5187,11 @@ namespace DistantWorlds.Controls
                         float num21 = (float)((double)(i * Galaxy.SectorSize - int_16) / double_15);
                         XnaDrawingHelper.DrawLine(spriteBatch_2, num21, num17, num21, num18, main_0.color_5, 1);
                         string text = ((char)(i + 65)).ToString();
-                        float val = num17 - 1f;
+                        float val = num17 - UiScale.S(1f);
                         val = Math.Max(0f, val);
                         XnaDrawingHelper.DrawString(point: new PointF(num21 + num6, val), spriteBatch: spriteBatch_2, text: text, font: spriteFont_1, color: solidBrush.Color);
-                        val = num18 - 14f;
-                        val = Math.Min((float)base.ClientRectangle.Height - 11f, val);
+                        val = num18 - UiScale.S(14f);
+                        val = Math.Min((float)base.ClientRectangle.Height - UiScale.S(11f), val);
                         XnaDrawingHelper.DrawString(point: new PointF(num21 + num6, val), spriteBatch: spriteBatch_2, text: text, font: spriteFont_1, color: solidBrush.Color);
                     }
                     if (flag21)
@@ -5201,11 +5204,11 @@ namespace DistantWorlds.Controls
                         float num23 = (float)((double)(j * Galaxy.SectorSize - int_18) / double_15);
                         XnaDrawingHelper.DrawLine(spriteBatch_2, num19, num23, num20, num23, main_0.color_5, 1);
                         string text2 = (j + 1).ToString();
-                        float val2 = num19 - 2f;
+                        float val2 = num19 - UiScale.S(2f);
                         val2 = Math.Max(0f, val2);
                         XnaDrawingHelper.DrawString(point: new PointF(val2, num23 + num7), spriteBatch: spriteBatch_2, text: text2, font: spriteFont_1, color: solidBrush.Color);
-                        val2 = num20 - 14f;
-                        val2 = Math.Min((float)base.ClientRectangle.Width - 8f, val2);
+                        val2 = num20 - UiScale.S(14f);
+                        val2 = Math.Min((float)base.ClientRectangle.Width - UiScale.S(8f), val2);
                         XnaDrawingHelper.DrawString(point: new PointF(val2, num23 + num7), spriteBatch: spriteBatch_2, text: text2, font: spriteFont_1, color: solidBrush.Color);
                     }
                     if (flag22)
@@ -5625,8 +5628,8 @@ namespace DistantWorlds.Controls
                             num44 += (int)num46;
                         }
                         string name = systemInfo.SystemStar.Name;
-                        int num47 = (int)(num25 + 1f + (float)num44 + val3);
-                        int num48 = (int)num26 - (spriteFont.LineSpacing + 1);
+                        int num47 = (int)(num25 + UiScale.S(1f) + (float)num44 + val3);
+                        int num48 = (int)num26 - (spriteFont.LineSpacing + UiScale.S(1));
                         XnaDrawingHelper.DrawStringDropShadow(point: new System.Drawing.Point(num47, num48), spriteBatch: spriteBatch_2, text: name, font: spriteFont, foreColor: solidBrush2.Color);
                         if (flag23)
                         {
@@ -5757,8 +5760,8 @@ namespace DistantWorlds.Controls
                             int num58 = num56 - (int)(vector2.Y / 2f);
                             if (galaxyLocation.Type != GalaxyLocationType.NebulaCloud)
                             {
-                                num57 -= 5;
-                                num58 -= 20;
+                                num57 -= UiScale.S(5);
+                                num58 -= UiScale.S(20);
                             }
                             XnaDrawingHelper.DrawStringDropShadow(spriteBatch_2, galaxyLocation.Name, spriteFont2, solidBrush_0.Color, num57, num58);
                         }
@@ -5893,6 +5896,7 @@ namespace DistantWorlds.Controls
                                 case BuiltObjectSubRole.MiningShip:
                                     flag29 = flag11;
                                     break;
+                                case BuiltObjectSubRole.Outpost:
                                 case BuiltObjectSubRole.SmallSpacePort:
                                 case BuiltObjectSubRole.MediumSpacePort:
                                 case BuiltObjectSubRole.LargeSpacePort:
@@ -5978,7 +5982,7 @@ namespace DistantWorlds.Controls
                             {
                                 num68 = num69;
                             }
-                            if (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 DrawShipSymbolXna(spriteBatch_2, builtObject, ResolveShipSymbolColor(builtObject), num66 - num68 / 2, num67 - num68 / 2, num68, num68, num68, num68, galaxyLevel: true, currentDateTime);
                                 if (main_0._Game.SelectedObject == builtObject)
@@ -5996,7 +6000,7 @@ namespace DistantWorlds.Controls
                                     }
                                 }
                             }
-                            if ((!flag30 && galaxy_0.FastTestShipInColonizedSystem(builtObject)) || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
+                            if ((!flag30 && galaxy_0.FastTestShipInColonizedSystem(builtObject)) || builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort)
                             {
                                 continue;
                             }

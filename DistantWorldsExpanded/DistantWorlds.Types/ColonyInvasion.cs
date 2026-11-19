@@ -55,27 +55,27 @@ namespace DistantWorlds.Types
     private Dictionary<string, object> _InvadersLandingExplosionFirer = new Dictionary<string, object>();
     private DateTime _LastInvaderLandingProgressUpdate = DateTime.MinValue;
     private Random _Rnd;
-    private int _HeaderSize = 150;
-    private int _StatusBarAreaHeight = 32;
-    private Size _FacilitySize = new Size(40, 40);
-    private Size _TroopSize = new Size(30, 30);
-    private Size _CharacterSize = new Size(30, 30);
-    private Size _PopulationSize = new Size(30, 30);
-    private Size _BuiltObjectSize = new Size(40, 40);
-    private int _DefendingCharactersX = 5;
-    private int _PopulationX = 40;
-    private int _FacilityX = 70;
-    private int _DefendingTroopsSpecialForcesX = 110;
-    private int _AttackingTroopsSpecialForcesX = 145;
-    private int _DefendingTroopsArtilleryX = 180;
-    private int _DefendingTroopsInfantryX = 215;
-    private int _DefendingTroopsArmorX = 250;
-    private int _AttackingTroopsArmorX = 310;
+    private int _HeaderSize = UiScale.S(150);
+    private int _StatusBarAreaHeight = UiScale.S(32);
+    private Size _FacilitySize = new Size(UiScale.S(40), UiScale.S(40));
+    private Size _TroopSize = new Size(UiScale.S(30), UiScale.S(30));
+    private Size _CharacterSize = new Size(UiScale.S(30), UiScale.S(30));
+    private Size _PopulationSize = new Size(UiScale.S(30), UiScale.S(30));
+    private Size _BuiltObjectSize = new Size(UiScale.S(40), UiScale.S(40));
+    private int _DefendingCharactersX = UiScale.S(5);
+    private int _PopulationX = UiScale.S(40);
+    private int _FacilityX = UiScale.S(70);
+    private int _DefendingTroopsSpecialForcesX = UiScale.S(110);
+    private int _AttackingTroopsSpecialForcesX = UiScale.S(145);
+    private int _DefendingTroopsArtilleryX = UiScale.S(180);
+    private int _DefendingTroopsInfantryX = UiScale.S(215);
+    private int _DefendingTroopsArmorX = UiScale.S(250);
+    private int _AttackingTroopsArmorX = UiScale.S(310);
     private int _AttackingTroopsInfantryX = 345;
     private int _AttackingTroopsArtilleryX = 380;
-    private int _AttackingCharactersX = 415;
-    private int _AttackingForcesLowerAtmosphereX = 450;
-    private int _AttackingForcesOrbitX = 510;
+    private int _AttackingCharactersX = UiScale.S(415);
+    private int _AttackingForcesLowerAtmosphereX = UiScale.S(450);
+    private int _AttackingForcesOrbitX = UiScale.S(510);
     private float _DefendingTroopsSpecialForcesXRatio;
     private float _AttackingTroopsSpecialForcesXRatio = 0.2f;
     private float _DefendingTroopsArtilleryXRatio = 0.4f;
@@ -114,67 +114,67 @@ namespace DistantWorlds.Types
       switch (panelSize)
       {
         case 0:
-          this._FacilitySize = new Size(40, 40);
-          this._TroopSize = new Size(30, 30);
-          this._CharacterSize = new Size(30, 30);
-          this._PopulationSize = new Size(30, 30);
-          this._BuiltObjectSize = new Size(40, 40);
-          this._DefendingCharactersX = 5;
-          this._PopulationX = 40;
-          this._FacilityX = 70;
-          this._DefendingTroopsSpecialForcesX = 110;
-          this._AttackingTroopsSpecialForcesX = 145;
-          this._DefendingTroopsArtilleryX = 180;
-          this._DefendingTroopsInfantryX = 215;
-          this._DefendingTroopsArmorX = 250;
-          this._AttackingTroopsArmorX = 310;
+          this._FacilitySize = new Size(UiScale.S(40), UiScale.S(40));
+          this._TroopSize = new Size(UiScale.S(30), UiScale.S(30));
+          this._CharacterSize = new Size(UiScale.S(30), UiScale.S(30));
+          this._PopulationSize = new Size(UiScale.S(30), UiScale.S(30));
+          this._BuiltObjectSize = new Size(UiScale.S(40), UiScale.S(40));
+          this._DefendingCharactersX = UiScale.S(5);
+          this._PopulationX = UiScale.S(40);
+          this._FacilityX = UiScale.S(70);
+          this._DefendingTroopsSpecialForcesX = UiScale.S(110);
+          this._AttackingTroopsSpecialForcesX = UiScale.S(145);
+          this._DefendingTroopsArtilleryX = UiScale.S(180);
+          this._DefendingTroopsInfantryX = UiScale.S(215);
+          this._DefendingTroopsArmorX = UiScale.S(250);
+          this._AttackingTroopsArmorX = UiScale.S(310);
           this._AttackingTroopsInfantryX = 345;
           this._AttackingTroopsArtilleryX = 380;
-          this._AttackingCharactersX = 415;
-          this._AttackingForcesLowerAtmosphereX = 450;
-          this._AttackingForcesOrbitX = 510;
+          this._AttackingCharactersX = UiScale.S(415);
+          this._AttackingForcesLowerAtmosphereX = UiScale.S(450);
+          this._AttackingForcesOrbitX = UiScale.S(510);
           break;
         case 1:
-          this._FacilitySize = new Size(50, 50);
-          this._TroopSize = new Size(42, 42);
-          this._CharacterSize = new Size(42, 42);
-          this._PopulationSize = new Size(42, 42);
-          this._BuiltObjectSize = new Size(50, 50);
-          this._DefendingCharactersX = 5;
-          this._PopulationX = 55;
-          this._FacilityX = 97;
-          this._DefendingTroopsSpecialForcesX = 150;
-          this._AttackingTroopsSpecialForcesX = 200;
-          this._DefendingTroopsArtilleryX = 250;
-          this._DefendingTroopsInfantryX = 300;
-          this._DefendingTroopsArmorX = 350;
-          this._AttackingTroopsArmorX = 425;
+          this._FacilitySize = new Size(UiScale.S(50), UiScale.S(50));
+          this._TroopSize = new Size(UiScale.S(42), UiScale.S(42));
+          this._CharacterSize = new Size(UiScale.S(42), UiScale.S(42));
+          this._PopulationSize = new Size(UiScale.S(42), UiScale.S(42));
+          this._BuiltObjectSize = new Size(UiScale.S(50), UiScale.S(50));
+          this._DefendingCharactersX = UiScale.S(5);
+          this._PopulationX = UiScale.S(55);
+          this._FacilityX = UiScale.S(97);
+          this._DefendingTroopsSpecialForcesX = UiScale.S(150);
+          this._AttackingTroopsSpecialForcesX = UiScale.S(200);
+          this._DefendingTroopsArtilleryX = UiScale.S(250);
+          this._DefendingTroopsInfantryX = UiScale.S(300);
+          this._DefendingTroopsArmorX = UiScale.S(350);
+          this._AttackingTroopsArmorX = UiScale.S(425);
           this._AttackingTroopsInfantryX = 475;
           this._AttackingTroopsArtilleryX = 525;
-          this._AttackingCharactersX = 575;
-          this._AttackingForcesLowerAtmosphereX = 625;
-          this._AttackingForcesOrbitX = 700;
+          this._AttackingCharactersX = UiScale.S(575);
+          this._AttackingForcesLowerAtmosphereX = UiScale.S(625);
+          this._AttackingForcesOrbitX = UiScale.S(700);
           break;
         case 2:
-          this._FacilitySize = new Size(60, 60);
-          this._TroopSize = new Size(56, 56);
-          this._CharacterSize = new Size(56, 56);
-          this._PopulationSize = new Size(56, 56);
-          this._BuiltObjectSize = new Size(60, 60);
-          this._DefendingCharactersX = 5;
-          this._PopulationX = 65;
-          this._FacilityX = 121;
-          this._DefendingTroopsSpecialForcesX = 180;
-          this._AttackingTroopsSpecialForcesX = 240;
-          this._DefendingTroopsArtilleryX = 300;
-          this._DefendingTroopsInfantryX = 360;
-          this._DefendingTroopsArmorX = 420;
-          this._AttackingTroopsArmorX = 510;
+          this._FacilitySize = new Size(UiScale.S(60), UiScale.S(60));
+          this._TroopSize = new Size(UiScale.S(56), UiScale.S(56));
+          this._CharacterSize = new Size(UiScale.S(56), UiScale.S(56));
+          this._PopulationSize = new Size(UiScale.S(56), UiScale.S(56));
+          this._BuiltObjectSize = new Size(UiScale.S(60), UiScale.S(60));
+          this._DefendingCharactersX = UiScale.S(5);
+          this._PopulationX = UiScale.S(65);
+          this._FacilityX = UiScale.S(121);
+          this._DefendingTroopsSpecialForcesX = UiScale.S(180);
+          this._AttackingTroopsSpecialForcesX = UiScale.S(240);
+          this._DefendingTroopsArtilleryX = UiScale.S(300);
+          this._DefendingTroopsInfantryX = UiScale.S(360);
+          this._DefendingTroopsArmorX = UiScale.S(420);
+          this._AttackingTroopsArmorX = UiScale.S(510);
           this._AttackingTroopsInfantryX = 570;
           this._AttackingTroopsArtilleryX = 630;
-          this._AttackingCharactersX = 690;
-          this._AttackingForcesLowerAtmosphereX = 750;
-          this._AttackingForcesOrbitX = 840;
+          this._AttackingCharactersX = UiScale.S(690);
+          this._AttackingForcesLowerAtmosphereX = UiScale.S(750);
+          this._AttackingForcesOrbitX = UiScale.S(840);
           break;
       }
       this.ResizeWeaponImages(assaultPodImage, weaponInfantryImage, weaponArmoredImage, weaponPlanetaryDefenseImage, weaponSpecialForcesImage);
@@ -186,52 +186,52 @@ namespace DistantWorlds.Types
       switch (this.PanelSize)
       {
         case 0:
-          this._DefendingCharactersX = 5;
-          this._PopulationX = 40;
-          this._FacilityX = 70;
-          this._DefendingTroopsSpecialForcesX = 110;
-          this._AttackingTroopsSpecialForcesX = 145;
-          this._DefendingTroopsArtilleryX = 180;
-          this._DefendingTroopsInfantryX = 215;
-          this._DefendingTroopsArmorX = 250;
-          this._AttackingTroopsArmorX = 310;
+          this._DefendingCharactersX = UiScale.S(5);
+          this._PopulationX = UiScale.S(40);
+          this._FacilityX = UiScale.S(70);
+          this._DefendingTroopsSpecialForcesX = UiScale.S(110);
+          this._AttackingTroopsSpecialForcesX = UiScale.S(145);
+          this._DefendingTroopsArtilleryX = UiScale.S(180);
+          this._DefendingTroopsInfantryX = UiScale.S(215);
+          this._DefendingTroopsArmorX = UiScale.S(250);
+          this._AttackingTroopsArmorX = UiScale.S(310);
           this._AttackingTroopsInfantryX = 345;
           this._AttackingTroopsArtilleryX = 380;
-          this._AttackingCharactersX = 415;
-          this._AttackingForcesLowerAtmosphereX = 450;
-          this._AttackingForcesOrbitX = 510;
+          this._AttackingCharactersX = UiScale.S(415);
+          this._AttackingForcesLowerAtmosphereX = UiScale.S(450);
+          this._AttackingForcesOrbitX = UiScale.S(510);
           break;
         case 1:
-          this._DefendingCharactersX = 5;
-          this._PopulationX = 55;
-          this._FacilityX = 97;
-          this._DefendingTroopsSpecialForcesX = 150;
-          this._AttackingTroopsSpecialForcesX = 200;
-          this._DefendingTroopsArtilleryX = 250;
-          this._DefendingTroopsInfantryX = 300;
-          this._DefendingTroopsArmorX = 350;
-          this._AttackingTroopsArmorX = 425;
+          this._DefendingCharactersX = UiScale.S(5);
+          this._PopulationX = UiScale.S(55);
+          this._FacilityX = UiScale.S(97);
+          this._DefendingTroopsSpecialForcesX = UiScale.S(150);
+          this._AttackingTroopsSpecialForcesX = UiScale.S(200);
+          this._DefendingTroopsArtilleryX = UiScale.S(250);
+          this._DefendingTroopsInfantryX = UiScale.S(300);
+          this._DefendingTroopsArmorX = UiScale.S(350);
+          this._AttackingTroopsArmorX = UiScale.S(425);
           this._AttackingTroopsInfantryX = 475;
           this._AttackingTroopsArtilleryX = 525;
-          this._AttackingCharactersX = 575;
-          this._AttackingForcesLowerAtmosphereX = 625;
-          this._AttackingForcesOrbitX = 700;
+          this._AttackingCharactersX = UiScale.S(575);
+          this._AttackingForcesLowerAtmosphereX = UiScale.S(625);
+          this._AttackingForcesOrbitX = UiScale.S(700);
           break;
         case 2:
-          this._DefendingCharactersX = 5;
-          this._PopulationX = 65;
-          this._FacilityX = 121;
-          this._DefendingTroopsSpecialForcesX = 180;
-          this._AttackingTroopsSpecialForcesX = 240;
-          this._DefendingTroopsArtilleryX = 300;
-          this._DefendingTroopsInfantryX = 360;
-          this._DefendingTroopsArmorX = 420;
-          this._AttackingTroopsArmorX = 510;
+          this._DefendingCharactersX = UiScale.S(5);
+          this._PopulationX = UiScale.S(65);
+          this._FacilityX = UiScale.S(121);
+          this._DefendingTroopsSpecialForcesX = UiScale.S(180);
+          this._AttackingTroopsSpecialForcesX = UiScale.S(240);
+          this._DefendingTroopsArtilleryX = UiScale.S(300);
+          this._DefendingTroopsInfantryX = UiScale.S(360);
+          this._DefendingTroopsArmorX = UiScale.S(420);
+          this._AttackingTroopsArmorX = UiScale.S(510);
           this._AttackingTroopsInfantryX = 570;
           this._AttackingTroopsArtilleryX = 630;
-          this._AttackingCharactersX = 690;
-          this._AttackingForcesLowerAtmosphereX = 750;
-          this._AttackingForcesOrbitX = 840;
+          this._AttackingCharactersX = UiScale.S(690);
+          this._AttackingForcesLowerAtmosphereX = UiScale.S(750);
+          this._AttackingForcesOrbitX = UiScale.S(840);
           break;
       }
       TroopList infantryTroops;
@@ -252,7 +252,7 @@ namespace DistantWorlds.Types
         this._AttackingTroopsArtilleryX = this._AttackingTroopsInfantryX;
       if (specialForcesTroops.Count > 0)
         return;
-      this._DefendingTroopsSpecialForcesX = this._DefendingTroopsArtilleryX - 35;
+      this._DefendingTroopsSpecialForcesX = this._DefendingTroopsArtilleryX - UiScale.S(35);
     }
 
     public void InitializeImages(
@@ -1147,7 +1147,7 @@ namespace DistantWorlds.Types
             color1 = Color.FromArgb(96, 108, 160);
             break;
         }
-        Rectangle rect = new Rectangle(num1 - 1, this._HeaderSize, 40, this.Size.Height - this._HeaderSize);
+        Rectangle rect = new Rectangle(num1 - UiScale.S(1), this._HeaderSize, UiScale.S(40), this.Size.Height - this._HeaderSize);
         using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, color1, Color.Transparent, LinearGradientMode.Horizontal))
           graphics.FillRectangle((Brush) linearGradientBrush, rect);
         int num2 = this._AttackingTroopsArmorX;
@@ -1176,33 +1176,33 @@ namespace DistantWorlds.Types
           bool flag = false;
           if (this._Colony.InvadingTroops.Count > 0 && this._Colony.InvadingTroops[0].Type == TroopType.PirateRaider)
             flag = true;
-          int num3 = 40;
-          SizeF maxSize1 = new SizeF((float) area.Width, 40f);
-          int num4 = this._NormalFont.Height - 2;
+          int num3 = UiScale.S(40);
+          SizeF maxSize1 = new SizeF((float) area.Width, UiScale.S(40f));
+          int num4 = this._NormalFont.Height - UiScale.S(2);
           int num5 = this._LargeFont.Height + modifierAmountsDefense.Count * num4;
           int num6 = this._LargeFont.Height + modifierAmountsAttack.Count * num4;
           int y1 = (this._HeaderSize - num5) / 2;
           int y2 = (this._HeaderSize - num6) / 2;
-          SizeF maxSize2 = new SizeF((float) (220 - num3), (float) area.Height);
+          SizeF maxSize2 = new SizeF((float) (UiScale.S(220) - num3), (float) area.Height);
           this.DrawStringWithDropShadow(graphics, defender.Name, this._LargeFont, new Point(area.X, y1));
           for (int index = 0; index < modifierAmountsDefense.Count; ++index)
           {
-            int y3 = y1 + this._LargeFont.Height + index * (this._NormalFont.Height - 2);
-            this.DrawStringWithDropShadow(graphics, modifierAmountsDefense[index].ToString("+0%;-0%"), this._NormalFont, new Point(5, y3));
-            this.DrawStringWithDropShadow(graphics, modifierReasonsDefense[index], this._NormalFont, new Point(5 + num3, y3), (Brush) this._WhiteBrush, maxSize2);
+            int y3 = y1 + this._LargeFont.Height + index * (this._NormalFont.Height - UiScale.S(2));
+            this.DrawStringWithDropShadow(graphics, modifierAmountsDefense[index].ToString("+0%;-0%"), this._NormalFont, new Point(UiScale.S(5), y3));
+            this.DrawStringWithDropShadow(graphics, modifierReasonsDefense[index], this._NormalFont, new Point(UiScale.S(5) + num3, y3), (Brush) this._WhiteBrush, maxSize2);
           }
           if (invader != null)
           {
-            int x = area.Right - (5 + (int) maxSize2.Width);
+            int x = area.Right - (UiScale.S(5) + (int) maxSize2.Width);
             string text = invader.Name;
             if (flag)
               text = text + " (" + TextResolver.GetText("Raiding") + ")";
             this.DrawStringWithDropShadow(graphics, text, this._LargeFont, new Point(x, y2));
             for (int index = 0; index < modifierAmountsAttack.Count; ++index)
             {
-              int y4 = y2 + this._LargeFont.Height + index * (this._NormalFont.Height - 2);
-              this.DrawStringWithDropShadow(graphics, modifierAmountsAttack[index].ToString("+0%;-0%"), this._NormalFont, new Point(5 + x, y4));
-              this.DrawStringWithDropShadow(graphics, modifierReasonsAttack[index], this._NormalFont, new Point(5 + x + num3, y4), (Brush) this._WhiteBrush, maxSize2);
+              int y4 = y2 + this._LargeFont.Height + index * (this._NormalFont.Height - UiScale.S(2));
+              this.DrawStringWithDropShadow(graphics, modifierAmountsAttack[index].ToString("+0%;-0%"), this._NormalFont, new Point(UiScale.S(5) + x, y4));
+              this.DrawStringWithDropShadow(graphics, modifierReasonsAttack[index], this._NormalFont, new Point(UiScale.S(5) + x + num3, y4), (Brush) this._WhiteBrush, maxSize2);
             }
           }
           if (invader != null)
@@ -1233,14 +1233,14 @@ namespace DistantWorlds.Types
             if (defender != null)
             {
               using (SolidBrush solidBrush = new SolidBrush(defender.MainColor))
-                graphics.FillRectangle((Brush) solidBrush, new Rectangle(this._DefendingTroopsSpecialForcesX, this._HeaderSize + 5, width, this._StatusBarAreaHeight - 10));
+                graphics.FillRectangle((Brush) solidBrush, new Rectangle(this._DefendingTroopsSpecialForcesX, this._HeaderSize + UiScale.S(5), width, this._StatusBarAreaHeight - UiScale.S(10)));
             }
             if (invader != null)
             {
               using (SolidBrush solidBrush = new SolidBrush(invader.MainColor))
-                graphics.FillRectangle((Brush) solidBrush, new Rectangle(num2, this._HeaderSize + 5, width - (num2 - this._DefendingTroopsSpecialForcesX), this._StatusBarAreaHeight - 10));
+                graphics.FillRectangle((Brush) solidBrush, new Rectangle(num2, this._HeaderSize + UiScale.S(5), width - (num2 - this._DefendingTroopsSpecialForcesX), this._StatusBarAreaHeight - UiScale.S(10)));
             }
-            this.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Battle Strength Description"), (object) defendingStrength.ToString("0,K"), (object) attackingStrength.ToString("0,K")), this._NormalBoldFont, new Point(this._DefendingTroopsSpecialForcesX + width / 2, this._HeaderSize + 6));
+            this.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Battle Strength Description"), (object) defendingStrength.ToString("0,K"), (object) attackingStrength.ToString("0,K")), this._NormalBoldFont, new Point(this._DefendingTroopsSpecialForcesX + width / 2, this._HeaderSize + UiScale.S(6)));
           }
         }
         if (this._Colony.BasesAtHabitat != null && this._Colony.BasesAtHabitat.Count > 0)
@@ -1261,7 +1261,7 @@ namespace DistantWorlds.Types
         {
           using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(128, 160, 224, (int) byte.MaxValue)))
           {
-            Rectangle rectangle = new Rectangle(this._AttackingForcesLowerAtmosphereX + (this._AttackingForcesOrbitX - this._AttackingForcesLowerAtmosphereX) / 2 - 3, area.Top, 6, area.Bottom);
+            Rectangle rectangle = new Rectangle(this._AttackingForcesLowerAtmosphereX + (this._AttackingForcesOrbitX - this._AttackingForcesLowerAtmosphereX) / 2 - UiScale.S(3), area.Top, UiScale.S(6), area.Bottom);
             graphics.FillRectangle((Brush) solidBrush, rectangle);
             this.AddHotspot(rectangle, (object) 1, TextResolver.GetText("Planetary Facility Planetary Shield"));
           }
@@ -1363,8 +1363,8 @@ namespace DistantWorlds.Types
               this.AddHotspot(region, (object) relatedObject, message);
               int width = (int) ((double) troop.Readiness / 100.0 * (double) this._TroopSize.Width);
               if ((double) troop.Readiness < 100.0)
-                graphics.FillRectangle((Brush) this._RedBrush, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, 2));
-              graphics.FillRectangle((Brush) this._GreenBrush, new Rectangle(rectangle.X, rectangle.Y, width, 2));
+                graphics.FillRectangle((Brush) this._RedBrush, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, UiScale.S(2)));
+              graphics.FillRectangle((Brush) this._GreenBrush, new Rectangle(rectangle.X, rectangle.Y, width, UiScale.S(2)));
             }
           }
         }
@@ -1421,8 +1421,8 @@ namespace DistantWorlds.Types
               this.AddHotspot(region, (object) relatedObject, message);
               int width = (int) ((double) invadingTroop.Readiness / 100.0 * (double) this._TroopSize.Width);
               if ((double) invadingTroop.Readiness < 100.0)
-                graphics.FillRectangle((Brush) this._RedBrush, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, 2));
-              graphics.FillRectangle((Brush) this._GreenBrush, new Rectangle(rectangle.X, rectangle.Y, width, 2));
+                graphics.FillRectangle((Brush) this._RedBrush, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, UiScale.S(2)));
+              graphics.FillRectangle((Brush) this._GreenBrush, new Rectangle(rectangle.X, rectangle.Y, width, UiScale.S(2)));
             }
           }
         }
@@ -1459,29 +1459,29 @@ namespace DistantWorlds.Types
         {
           if (this._HoveredHotspot != null && this._HoveredHotspot.RelatedObject == (object) "resize")
             pen.Color = Color.FromArgb((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue);
-          int num12 = 18;
-          int y = 6;
-          int num13 = 6;
+          int num12 = UiScale.S(18);
+          int y = UiScale.S(6);
+          int num13 = UiScale.S(6);
           Rectangle region = new Rectangle(this.Size.Width - (num12 + num13), y, num12, num12);
           if (this.PanelSize > 0)
           {
-            graphics.DrawLine(pen, region.Left + 2, region.Top + 2, region.Left + 2, region.Bottom - 2);
-            graphics.DrawLine(pen, region.Right - 2, region.Bottom - 2, region.Left + 2, region.Bottom - 2);
-            graphics.DrawLine(pen, region.Right - 2, region.Top + 2, region.Left + 2, region.Bottom - 2);
+            graphics.DrawLine(pen, region.Left + UiScale.S(2), region.Top + UiScale.S(2), region.Left + UiScale.S(2), region.Bottom - UiScale.S(2));
+            graphics.DrawLine(pen, region.Right - UiScale.S(2), region.Bottom - UiScale.S(2), region.Left + UiScale.S(2), region.Bottom - UiScale.S(2));
+            graphics.DrawLine(pen, region.Right - UiScale.S(2), region.Top + UiScale.S(2), region.Left + UiScale.S(2), region.Bottom - UiScale.S(2));
             this.AddHotspot(region, (object) "resize", TextResolver.GetText("Shrink Screen"));
           }
           else
           {
-            graphics.DrawLine(pen, region.Left + 2, region.Top + 2, region.Right - 2, region.Top + 2);
-            graphics.DrawLine(pen, region.Right - 2, region.Bottom - 2, region.Right - 2, region.Top + 2);
-            graphics.DrawLine(pen, region.Right - 2, region.Top + 2, region.Left + 2, region.Bottom - 2);
+            graphics.DrawLine(pen, region.Left + UiScale.S(2), region.Top + UiScale.S(2), region.Right - UiScale.S(2), region.Top + UiScale.S(2));
+            graphics.DrawLine(pen, region.Right - UiScale.S(2), region.Bottom - UiScale.S(2), region.Right - UiScale.S(2), region.Top + UiScale.S(2));
+            graphics.DrawLine(pen, region.Right - UiScale.S(2), region.Top + UiScale.S(2), region.Left + UiScale.S(2), region.Bottom - UiScale.S(2));
             this.AddHotspot(region, (object) "resize", TextResolver.GetText("Expand Screen"));
           }
         }
         this._FrontlineX = num2;
         if (this._HoveredHotspot != null)
         {
-          Point location = new Point(this.Size.Width / 2, this._HeaderSize - 20);
+          Point location = new Point(this.Size.Width / 2, this._HeaderSize - UiScale.S(20));
           this.DrawStringWithDropShadowCentered(graphics, this._HoveredHotspot.HoverMessage, this._NormalFont, location, (Brush) this._YellowBrush);
           using (Pen pen = new Pen(Color.FromArgb(170, 170, 170), 1f))
           {
@@ -1629,18 +1629,18 @@ namespace DistantWorlds.Types
     {
       if (maxSize != SizeF.Empty)
       {
-        location = new Point(location.X + 1, location.Y + 1);
+        location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
         RectangleF layoutRectangle = new RectangleF((float) location.X, (float) location.Y, maxSize.Width, maxSize.Height);
         graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
-        location = new Point(location.X - 1, location.Y - 1);
+        location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         layoutRectangle = new RectangleF((float) location.X, (float) location.Y, maxSize.Width, maxSize.Height);
         graphics.DrawString(text, font, brush, layoutRectangle, StringFormat.GenericTypographic);
       }
       else
       {
-        location = new Point(location.X + 1, location.Y + 1);
+        location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
         graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-        location = new Point(location.X - 1, location.Y - 1);
+        location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         graphics.DrawString(text, font, brush, (PointF) location);
       }
     }

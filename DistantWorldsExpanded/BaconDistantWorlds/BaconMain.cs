@@ -47,9 +47,9 @@ namespace BaconDistantWorlds
 
         public static double minZoomLevelForWeaponsCircles = 0.9;
 
-        public static prisonForm prisonForm;
+        //public static prisonForm prisonForm;
 
-        public static bool prisonFormOpen = false;
+        //public static bool prisonFormOpen = false;
 
         public static bool shipViewerOpen = false;
 
@@ -216,7 +216,7 @@ namespace BaconDistantWorlds
             if (action.Hint == "popup")
             {
                 string extraData = action.ExtraData;
-                MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, new Font("Verdana", 9f, FontStyle.Regular));
+                MessageBoxEx messageBoxEx = MessageBoxExManager.CreateMessageBox(null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
                 messageBoxEx.Text = extraData;
                 messageBoxEx.Caption = "Message";
                 messageBoxEx.AddButton(MessageBoxExButtons.Ok);
@@ -556,52 +556,7 @@ namespace BaconDistantWorlds
             }
             BaconBuiltObject.myMain = main;
             Galaxy.MinimumHabitatPopulationAmount = 100L;
-            empireSaveStatsName = "SaveStatsEmpire" + main._Game.Galaxy.RandomSeed + ".xml";
-            pirateSaveStatsName = "SaveStatsPirates" + main._Game.Galaxy.RandomSeed + ".xml";
-            if (!File.Exists(empireSaveStatsName))
-            {
-                try
-                {
-                    XmlDocument xmlDocument = new XmlDocument();
-                    XmlNode documentElement = xmlDocument.DocumentElement;
-                    XmlElement newChild = xmlDocument.CreateElement("GameStats");
-                    if (documentElement != null)
-                    {
-                        documentElement.AppendChild(newChild);
-                    }
-                    else
-                    {
-                        xmlDocument.AppendChild(newChild);
-                    }
-                    xmlDocument.Save(empireSaveStatsName);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-            if (!File.Exists(pirateSaveStatsName))
-            {
-                try
-                {
-                    XmlDocument xmlDocument2 = new XmlDocument();
-                    XmlNode documentElement2 = xmlDocument2.DocumentElement;
-                    XmlElement newChild2 = xmlDocument2.CreateElement("GameStats");
-                    if (documentElement2 != null)
-                    {
-                        documentElement2.AppendChild(newChild2);
-                    }
-                    else
-                    {
-                        xmlDocument2.AppendChild(newChild2);
-                    }
-                    xmlDocument2.Save(pirateSaveStatsName);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
+
             Dictionary<string, string> dictionary = ReadBaconSettings();
             if (dictionary.TryGetValue("HyperJumpThreshhold", out var value) && int.TryParse(value, out var result))
             {
@@ -673,6 +628,55 @@ namespace BaconDistantWorlds
                 if (bool.TryParse(value, out result7))
                 {
                     saveStats = result7;
+                    if (saveStats)
+                    {
+                        empireSaveStatsName = "SaveStatsEmpire" + main._Game.Galaxy.RandomSeed + ".xml";
+                        pirateSaveStatsName = "SaveStatsPirates" + main._Game.Galaxy.RandomSeed + ".xml";
+                        if (!File.Exists(empireSaveStatsName))
+                        {
+                            try
+                            {
+                                XmlDocument xmlDocument = new XmlDocument();
+                                XmlNode documentElement = xmlDocument.DocumentElement;
+                                XmlElement newChild = xmlDocument.CreateElement("GameStats");
+                                if (documentElement != null)
+                                {
+                                    documentElement.AppendChild(newChild);
+                                }
+                                else
+                                {
+                                    xmlDocument.AppendChild(newChild);
+                                }
+                                xmlDocument.Save(empireSaveStatsName);
+                            }
+                            catch (Exception)
+                            {
+                                throw;
+                            }
+                        }
+                        if (!File.Exists(pirateSaveStatsName))
+                        {
+                            try
+                            {
+                                XmlDocument xmlDocument2 = new XmlDocument();
+                                XmlNode documentElement2 = xmlDocument2.DocumentElement;
+                                XmlElement newChild2 = xmlDocument2.CreateElement("GameStats");
+                                if (documentElement2 != null)
+                                {
+                                    documentElement2.AppendChild(newChild2);
+                                }
+                                else
+                                {
+                                    xmlDocument2.AppendChild(newChild2);
+                                }
+                                xmlDocument2.Save(pirateSaveStatsName);
+                            }
+                            catch (Exception)
+                            {
+                                throw;
+                            }
+                        }
+                    }
                 }
             }
             if (dictionary.TryGetValue("saveInterval", out value) && short.TryParse(value, out var result8))
@@ -1169,73 +1173,76 @@ namespace BaconDistantWorlds
 
         public static void ProcessGameStats(Main main, List<Empire> empireList, List<string> statsToTrack, string saveFilename)
         {
-            long num = main._Game.Galaxy.CurrentStarDate - main._Game.Galaxy.ActualStartDate;
-            int num2 = Galaxy.RealSecondsInGalacticYear * 1000;
-            string innerText = $"{(double)num / (double)num2:0.00}";
-            try
+            if (saveStats)
             {
-                XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(saveFilename);
-                XmlNode documentElement = xmlDocument.DocumentElement;
-                XmlNode xmlNode = null;
-                foreach (string item in statsToTrack)
+                long num = main._Game.Galaxy.CurrentStarDate - main._Game.Galaxy.ActualStartDate;
+                int num2 = Galaxy.RealSecondsInGalacticYear * 1000;
+                string innerText = $"{(double)num / (double)num2:0.00}";
+                try
                 {
-                    xmlNode = null;
-                    foreach (XmlNode childNode in xmlDocument.ChildNodes[0].ChildNodes)
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(saveFilename);
+                    XmlNode documentElement = xmlDocument.DocumentElement;
+                    XmlNode xmlNode = null;
+                    foreach (string item in statsToTrack)
                     {
-                        if (childNode.Attributes.Count > 0 && childNode.Attributes[0].InnerText == item)
+                        xmlNode = null;
+                        foreach (XmlNode childNode in xmlDocument.ChildNodes[0].ChildNodes)
                         {
-                            xmlNode = childNode;
-                            break;
-                        }
-                    }
-                    if (xmlNode == null)
-                    {
-                        XmlElement xmlElement = xmlDocument.CreateElement("GameStat");
-                        xmlElement.SetAttribute("name", item);
-                        xmlNode = xmlElement;
-                    }
-                    XmlNode xmlNode3 = xmlNode;
-                    XmlNode xmlNode4 = null;
-                    foreach (Empire empire in empireList)
-                    {
-                        xmlNode4 = null;
-                        foreach (XmlNode item2 in xmlNode3)
-                        {
-                            if (item2.Attributes != null && item2.Attributes[0].InnerText == empire.Name)
+                            if (childNode.Attributes.Count > 0 && childNode.Attributes[0].InnerText == item)
                             {
-                                xmlNode4 = item2;
+                                xmlNode = childNode;
                                 break;
                             }
                         }
-                        if (xmlNode4 == null)
+                        if (xmlNode == null)
                         {
-                            XmlElement xmlElement2 = xmlDocument.CreateElement("SpaceEmpire");
-                            xmlElement2.SetAttribute("name", empire.Name);
-                            xmlNode4 = xmlElement2;
+                            XmlElement xmlElement = xmlDocument.CreateElement("GameStat");
+                            xmlElement.SetAttribute("name", item);
+                            xmlNode = xmlElement;
                         }
-                        XmlNode xmlNode6 = xmlNode4;
-                        XmlElement xmlElement3 = xmlDocument.CreateElement("TimeAndValue");
-                        XmlElement xmlElement4 = xmlDocument.CreateElement("TimeAndValue");
-                        XmlElement xmlElement5 = xmlDocument.CreateElement("Time");
-                        xmlElement5.InnerText = innerText;
-                        XmlElement xmlElement6 = xmlDocument.CreateElement("Value");
-                        xmlElement6.InnerText = FindValueForThisNode(item, empire);
-                        xmlElement4.AppendChild(xmlElement5);
-                        xmlElement4.AppendChild(xmlElement6);
-                        xmlNode6.AppendChild(xmlElement4);
-                        xmlNode.AppendChild(xmlNode6);
-                        xmlDocument.DocumentElement.AppendChild(xmlNode);
+                        XmlNode xmlNode3 = xmlNode;
+                        XmlNode xmlNode4 = null;
+                        foreach (Empire empire in empireList)
+                        {
+                            xmlNode4 = null;
+                            foreach (XmlNode item2 in xmlNode3)
+                            {
+                                if (item2.Attributes != null && item2.Attributes[0].InnerText == empire.Name)
+                                {
+                                    xmlNode4 = item2;
+                                    break;
+                                }
+                            }
+                            if (xmlNode4 == null)
+                            {
+                                XmlElement xmlElement2 = xmlDocument.CreateElement("SpaceEmpire");
+                                xmlElement2.SetAttribute("name", empire.Name);
+                                xmlNode4 = xmlElement2;
+                            }
+                            XmlNode xmlNode6 = xmlNode4;
+                            XmlElement xmlElement3 = xmlDocument.CreateElement("TimeAndValue");
+                            XmlElement xmlElement4 = xmlDocument.CreateElement("TimeAndValue");
+                            XmlElement xmlElement5 = xmlDocument.CreateElement("Time");
+                            xmlElement5.InnerText = innerText;
+                            XmlElement xmlElement6 = xmlDocument.CreateElement("Value");
+                            xmlElement6.InnerText = FindValueForThisNode(item, empire);
+                            xmlElement4.AppendChild(xmlElement5);
+                            xmlElement4.AppendChild(xmlElement6);
+                            xmlNode6.AppendChild(xmlElement4);
+                            xmlNode.AppendChild(xmlNode6);
+                            xmlDocument.DocumentElement.AppendChild(xmlNode);
+                        }
                     }
+                    xmlDocument.Save(saveFilename);
                 }
-                xmlDocument.Save(saveFilename);
-            }
-            catch (FileNotFoundException)
-            {
-            }
-            catch (Exception ex2)
-            {
-                string stackTrace = ex2.StackTrace;
+                catch (FileNotFoundException)
+                {
+                }
+                catch (Exception ex2)
+                {
+                    string stackTrace = ex2.StackTrace;
+                }
             }
         }
 
@@ -1291,13 +1298,9 @@ namespace BaconDistantWorlds
             //IL_0068: Expected O, but got Unknown
             Point point = ((Control)(object)main).PointToClient(MouseHelper.GetCursorPosition());
             object obj = main.method_143(main.int_15, main.int_16, true);
-            Keyboard keyboard = new Keyboard();
-            if (!keyboard.AltKeyDown)
-            {
-                return;
-            }
+
             object obj2 = null;
-            main.actionMenu.Items.Clear();
+            //main.actionMenu.Items.Clear();
             ShipAction shipAction = null;
             main.actionMenu.Renderer = (ToolStripRenderer)new CustomToolStripRenderer(main.font_3);
             if (main._Game.SelectedObject == null)
@@ -1305,12 +1308,15 @@ namespace BaconDistantWorlds
                 return;
             }
             obj2 = ((main._Game.SelectedObject is BuiltObject) ? ((BuiltObject)main._Game.SelectedObject) : ((!(main._Game.SelectedObject is Habitat)) ? main._Game.SelectedObject : ((Habitat)main._Game.SelectedObject)));
-            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem("Hold position toggle");
-            shipAction = main.method_315(BuiltObjectMissionType.Undefined, obj2);
-            shipAction.Hint = "sleep";
-            shipAction.ExtraData = "This toggles sleep for a ship";
-            toolStripMenuItem.Tag = shipAction;
-            main.actionMenu.Items.Add(toolStripMenuItem);
+            if (main._Game.SelectedObject is BuiltObject ship)
+            {
+                ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem("Hold position toggle");
+                shipAction = main.method_315(BuiltObjectMissionType.Undefined, ship);
+                shipAction.Hint = "sleep";
+                shipAction.ExtraData = "This toggles sleep for a ship";
+                toolStripMenuItem.Tag = shipAction;
+                main.actionMenu.Items.Add(toolStripMenuItem);
+            }
             if (CanDeployAsteroidColony(main, obj2, obj))
             {
                 ToolStripMenuItem toolStripMenuItem2 = new ToolStripMenuItem("Deploy Asteroid Colony");
@@ -1321,6 +1327,40 @@ namespace BaconDistantWorlds
                 shipAction2.Target2 = obj;
                 toolStripMenuItem2.Tag = shipAction2;
                 main.actionMenu.Items.Add(toolStripMenuItem2);
+            }
+            else if(obj2 is BuiltObject ship2 && ship2.SubRole == BuiltObjectSubRole.ColonyShip && ship2.Empire == main._Game.PlayerEmpire)
+            {
+                ToolStripMenuItem toolStripMenuItem2 = new ToolStripMenuItem("Deploy Asteroid Colony");
+                toolStripMenuItem2.Enabled = false;
+                toolStripMenuItem2.ToolTipText = "You need to select Colonizer and move it near asteroid to use that command.";
+                main.actionMenu.Items.Add(toolStripMenuItem2);
+            }
+            if (obj is Habitat && (obj as Habitat).InvadingTroops != null)
+            {
+                TroopList invadingTroops = (obj as Habitat).InvadingTroops;
+                if (invadingTroops != null && invadingTroops.Count > 0 && ((obj as Habitat).InvadingTroops[0]?.Empire == main._Game.PlayerEmpire || (obj as Habitat).Empire == main._Game.PlayerEmpire))
+                {
+                    Habitat habitat = obj as Habitat;
+                    ToolStripMenuItem toolStripMenuItem5 = new ToolStripMenuItem("Evaluate Tactics");
+                    ShipAction shipAction5 = main.method_315(BuiltObjectMissionType.Undefined, obj2);
+                    shipAction5.Hint = "invasionCommand";
+                    shipAction5.ExtraData = "Try to influence battle by analyzing enemy tactics.";
+                    shipAction5.Target = obj2;
+                    shipAction5.Target2 = obj;
+                    toolStripMenuItem5.Tag = shipAction5;
+                    main.actionMenu.Items.Add(toolStripMenuItem5);
+                }
+            }
+            else
+            {
+                ToolStripMenuItem toolStripMenuItem5 = new ToolStripMenuItem("Evaluate Tactics");
+                toolStripMenuItem5.Enabled = false;
+                toolStripMenuItem5.ToolTipText = "You need to have your empire troops invading colony to use that command.";
+                main.actionMenu.Items.Add(toolStripMenuItem5);
+            }
+            if (!new Keyboard().AltKeyDown)
+            {
+                return;
             }
             if (BaconBuiltObject.IsFreeTrader(main, obj2))
             {
@@ -1353,22 +1393,6 @@ namespace BaconDistantWorlds
                     shipAction4.Target2 = obj;
                     toolStripMenuItem4.Tag = shipAction4;
                     main.actionMenu.Items.Add(toolStripMenuItem4);
-                }
-            }
-            if (obj is Habitat && (obj as Habitat).InvadingTroops != null)
-            {
-                TroopList invadingTroops = (obj as Habitat).InvadingTroops;
-                if (invadingTroops != null && invadingTroops.Count > 0 && ((obj as Habitat).InvadingTroops[0]?.Empire == main._Game.PlayerEmpire || (obj as Habitat).Empire == main._Game.PlayerEmpire))
-                {
-                    Habitat habitat = obj as Habitat;
-                    ToolStripMenuItem toolStripMenuItem5 = new ToolStripMenuItem("Evaluate Tactics");
-                    ShipAction shipAction5 = main.method_315(BuiltObjectMissionType.Undefined, obj2);
-                    shipAction5.Hint = "invasionCommand";
-                    shipAction5.ExtraData = "Try to influence battle by analyzing enemy tactics.";
-                    shipAction5.Target = obj2;
-                    shipAction5.Target2 = obj;
-                    toolStripMenuItem5.Tag = shipAction5;
-                    main.actionMenu.Items.Add(toolStripMenuItem5);
                 }
             }
             if (IsScienceShip(main, obj2))
@@ -1873,6 +1897,7 @@ namespace BaconDistantWorlds
             }
             else if (text == TextResolver.GetText("Space Ports"))
             {
+                list.Add(BuiltObjectSubRole.Outpost);
                 list.Add(BuiltObjectSubRole.SmallSpacePort);
                 list.Add(BuiltObjectSubRole.MediumSpacePort);
                 list.Add(BuiltObjectSubRole.LargeSpacePort);

@@ -725,6 +725,11 @@ namespace DistantWorlds.Types
                     descriptions[2] = TextResolver.GetText("Facility Maintenance Cost");
                     values[2] = planetaryFacility.Maintenance.ToString("#,###,##0") + " " + TextResolver.GetText("credits");
                     break;
+                case PlanetaryFacilityType.DiplomacyAcademy:
+                    descriptions[1] = planetaryFacility.Description;
+                    descriptions[2] = TextResolver.GetText("Facility Maintenance Cost");
+                    values[2] = planetaryFacility.Maintenance.ToString("#,###,##0") + " " + TextResolver.GetText("credits");
+                    break;
                 case PlanetaryFacilityType.ScienceAcademy:
                     descriptions[1] = planetaryFacility.Description;
                     descriptions[2] = TextResolver.GetText("Facility Maintenance Cost");
@@ -1101,7 +1106,6 @@ namespace DistantWorlds.Types
 
         private Habitat SetupSun(GalaxyShape galaxyShape)
         {
-            int num = 0;
             double num2 = 0.0;
             double num3 = 0.0;
             double val = 300000.0 + 175000000.0 / Math.Sqrt(StarCount);
@@ -1902,8 +1906,11 @@ namespace DistantWorlds.Types
                         {
                             habitat3 = GenerateTreasureAsteroid(habitat, num31, num30, flag3, num19, doInitialMove: true);
                         }
-                        asteroidField.Add(habitat3);
-                        habitatList.Add(habitat3);
+                        if (habitat3 != null)
+                        {
+                            asteroidField.Add(habitat3);
+                            habitatList.Add(habitat3);
+                        }
                     }
                 }
             }
@@ -2344,6 +2351,9 @@ namespace DistantWorlds.Types
                 case BuiltObjectSubRole.GasMiningShip:
                 case BuiltObjectSubRole.MiningShip:
                     empty = SelectRandomUniqueStandardShipName(parentHabitat);
+                    break;
+                case BuiltObjectSubRole.Outpost:
+                    empty = text + " " + "Outpost";
                     break;
                 case BuiltObjectSubRole.SmallSpacePort:
                 case BuiltObjectSubRole.MediumSpacePort:
@@ -3200,6 +3210,7 @@ namespace DistantWorlds.Types
             RebuildSystemIndexes();
             RebuildGalaxyLocationIndexes();
             RebuildBuiltObjectIndexes();
+            FillSystemInfoByDistance();
         }
 
         public void RebuildBuiltObjectIndexes()
@@ -4999,6 +5010,7 @@ namespace DistantWorlds.Types
                             _ => IndustryType.Undefined,
                         };
                         break;
+                    case BuiltObjectSubRole.Outpost:
                     case BuiltObjectSubRole.SmallSpacePort:
                     case BuiltObjectSubRole.MediumSpacePort:
                     case BuiltObjectSubRole.LargeSpacePort:

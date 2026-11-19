@@ -41,7 +41,7 @@ namespace DistantWorlds.Controls
       gridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
       gridViewImageColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
       gridViewImageColumn.ValueType = typeof (Image);
-      gridViewImageColumn.Width = 30;
+      gridViewImageColumn.Width = UiScale.S(30);
       gridViewImageColumn.FillWeight = 30f;
       this._Grid.Columns.Add((DataGridViewColumn) gridViewImageColumn);
       DataGridViewLinkColumn gridViewLinkColumn = new DataGridViewLinkColumn();
@@ -55,7 +55,7 @@ namespace DistantWorlds.Controls
       gridViewLinkColumn.VisitedLinkColor = this.Grid.DefaultCellStyle.ForeColor;
       gridViewLinkColumn.SortMode = DataGridViewColumnSortMode.Automatic;
       gridViewLinkColumn.ValueType = typeof (string);
-      gridViewLinkColumn.Width = 160;
+      gridViewLinkColumn.Width = UiScale.S(160);
       gridViewLinkColumn.FillWeight = 160f;
       this._Grid.Columns.Add((DataGridViewColumn) gridViewLinkColumn);
       DataGridViewTextBoxColumn viewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -64,7 +64,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn1.ReadOnly = true;
       viewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn1.ValueType = typeof (string);
-      viewTextBoxColumn1.Width = 70;
+      viewTextBoxColumn1.Width = UiScale.S(70);
       viewTextBoxColumn1.FillWeight = 70f;
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn1);
       DataGridViewTextBoxColumn viewTextBoxColumn2 = new DataGridViewTextBoxColumn();
@@ -73,7 +73,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn2.ReadOnly = true;
       viewTextBoxColumn2.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn2.ValueType = typeof (double);
-      viewTextBoxColumn2.Width = 50;
+      viewTextBoxColumn2.Width = UiScale.S(50);
       viewTextBoxColumn2.FillWeight = 50f;
       viewTextBoxColumn2.DefaultCellStyle.Format = "0.0";
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn2);
@@ -83,7 +83,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn3.ReadOnly = true;
       viewTextBoxColumn3.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn3.ValueType = typeof (int);
-      viewTextBoxColumn3.Width = 50;
+      viewTextBoxColumn3.Width = UiScale.S(50);
       viewTextBoxColumn3.FillWeight = 50f;
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn3);
       DataGridViewTextBoxColumn viewTextBoxColumn4 = new DataGridViewTextBoxColumn();
@@ -92,7 +92,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn4.ReadOnly = true;
       viewTextBoxColumn4.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn4.ValueType = typeof (double);
-      viewTextBoxColumn4.Width = 50;
+      viewTextBoxColumn4.Width = UiScale.S(50);
       viewTextBoxColumn4.FillWeight = 50f;
       viewTextBoxColumn4.DefaultCellStyle.Format = "0.0K";
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn4);
@@ -102,7 +102,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn5.ReadOnly = true;
       viewTextBoxColumn5.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn5.ValueType = typeof (double);
-      viewTextBoxColumn5.Width = 50;
+      viewTextBoxColumn5.Width = UiScale.S(50);
       viewTextBoxColumn5.FillWeight = 50f;
       viewTextBoxColumn5.DefaultCellStyle.Format = "0.0K";
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn5);
@@ -112,7 +112,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn6.ReadOnly = true;
       viewTextBoxColumn6.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn6.ValueType = typeof (double);
-      viewTextBoxColumn6.Width = 50;
+      viewTextBoxColumn6.Width = UiScale.S(50);
       viewTextBoxColumn6.FillWeight = 50f;
       viewTextBoxColumn6.DefaultCellStyle.Format = "0.0K";
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn6);
@@ -122,7 +122,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn7.ReadOnly = true;
       viewTextBoxColumn7.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn7.ValueType = typeof (double);
-      viewTextBoxColumn7.Width = 50;
+      viewTextBoxColumn7.Width = UiScale.S(50);
       viewTextBoxColumn7.FillWeight = 50f;
       viewTextBoxColumn7.DefaultCellStyle.Format = "0.0K";
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn7);
@@ -132,7 +132,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn8.ReadOnly = true;
       viewTextBoxColumn8.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn8.ValueType = typeof (double);
-      viewTextBoxColumn8.Width = 50;
+      viewTextBoxColumn8.Width = UiScale.S(50);
       viewTextBoxColumn8.FillWeight = 50f;
       viewTextBoxColumn8.DefaultCellStyle.Format = "0.0K";
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn8);
@@ -142,7 +142,7 @@ namespace DistantWorlds.Controls
       viewTextBoxColumn9.ReadOnly = true;
       viewTextBoxColumn9.SortMode = DataGridViewColumnSortMode.Automatic;
       viewTextBoxColumn9.ValueType = typeof (double);
-      viewTextBoxColumn9.Width = 50;
+      viewTextBoxColumn9.Width = UiScale.S(50);
       viewTextBoxColumn9.FillWeight = 50f;
       viewTextBoxColumn9.DefaultCellStyle.Format = "0.0K";
       this._Grid.Columns.Add((DataGridViewColumn) viewTextBoxColumn9);

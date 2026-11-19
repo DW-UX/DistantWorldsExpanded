@@ -2,11 +2,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
@@ -21,7 +23,6 @@ namespace DistantWorlds.Types
         {
             string empty = string.Empty;
             bool flag = CheckRuinsHaveBenefit(ruin, PlayerEmpire);
-            bool flag2 = false;
             if ((!ruin.PlayerEmpireEncountered || ruin.Type != RuinType.UnlockResearchProject) && (!ruin.PlayerEmpireEncountered || flag || 1 == 0))
             {
                 empty = empty + "(" + TextResolver.GetText("Not Investigated - Details Unknown") + ")";
@@ -323,12 +324,12 @@ namespace DistantWorlds.Types
             return SelectRace(nativeHabitatType, byte.MaxValue);
         }
 
-        private Race SelectRace(HabitatType nativeHabitatType, byte raceFamilyIdToExclude)
+        private Race SelectRace(HabitatType nativeHabitatType, int raceFamilyIdToExclude)
         {
-            return SelectRace(nativeHabitatType, new List<byte> { raceFamilyIdToExclude });
+            return SelectRace(nativeHabitatType, new List<int> { raceFamilyIdToExclude });
         }
 
-        private Race SelectRace(HabitatType nativeHabitatType, List<byte> raceFamilyIdsToExclude)
+        private Race SelectRace(HabitatType nativeHabitatType, List<int> raceFamilyIdsToExclude)
         {
             Race race = null;
             int num = 0;
@@ -2736,7 +2737,6 @@ namespace DistantWorlds.Types
 
         public double CalculateAngleFromCoords(double x, double y, double centerX, double centerY, double distance)
         {
-            double num = 0.0;
             double num2 = Math.PI / 2.0;
             double num3 = num2 * -1.0;
             if (x < centerX)
@@ -3228,7 +3228,7 @@ namespace DistantWorlds.Types
                                 continue;
                             }
                             bool flag2 = true;
-                            if (empire != null && empire != IndependentEmpire && item2.SubRole != BuiltObjectSubRole.SmallSpacePort && item2.SubRole != BuiltObjectSubRole.MediumSpacePort && item2.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                            if (empire != null && empire != IndependentEmpire && item2.SubRole != BuiltObjectSubRole.Outpost && item2.SubRole != BuiltObjectSubRole.SmallSpacePort && item2.SubRole != BuiltObjectSubRole.MediumSpacePort && item2.SubRole != BuiltObjectSubRole.LargeSpacePort)
                             {
                                 flag2 = empire.IsObjectVisibleToThisEmpire(item2, includeLongRangeScanners: true, includeShipsOutsideSystems: false);
                             }
@@ -3391,7 +3391,7 @@ namespace DistantWorlds.Types
                                 continue;
                             }
                             bool flag4 = true;
-                            if (empire != null && empire != IndependentEmpire && builtObject2.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject2.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject2.SubRole != BuiltObjectSubRole.LargeSpacePort)
+                            if (empire != null && empire != IndependentEmpire && builtObject2.SubRole != BuiltObjectSubRole.Outpost && builtObject2.SubRole != BuiltObjectSubRole.SmallSpacePort && builtObject2.SubRole != BuiltObjectSubRole.MediumSpacePort && builtObject2.SubRole != BuiltObjectSubRole.LargeSpacePort)
                             {
                                 flag4 = empire.IsObjectVisibleToThisEmpire(builtObject2, includeLongRangeScanners: true, includeShipsOutsideSystems: false);
                             }
@@ -3465,7 +3465,7 @@ namespace DistantWorlds.Types
                     }
                 }
             }
-            else if (refuellingEmpire.PirateEmpireBaseHabitat != null && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject.IsResourceExtractor && builtObject.ParentHabitat != null && builtObject.ParentHabitat.Resources != null)
+            else if (refuellingEmpire.PirateEmpireBaseHabitat != null && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort) && builtObject.IsResourceExtractor && builtObject.ParentHabitat != null && builtObject.ParentHabitat.Resources != null)
             {
                 bool flag = true;
                 for (int j = 0; j < fuelTypes.Count; j++)
@@ -3533,6 +3533,38 @@ namespace DistantWorlds.Types
             return result;
         }
 
+        public Habitat FastFindNearestUncolonizedOwnedSystem(Habitat hab)
+        {
+            Habitat result = null;
+            var topHab = GetTopHabitat(hab);
+            //var test = _SystemInfoByDistance.Values.Any(x => x.Any(y => y.Habitats.Contains(topHab)));
+            foreach (var item in _SystemInfoByDistance[topHab.SystemInfo])
+            {
+
+                int num = EmpireTerritory.CheckSystemOwnership(this, item.SystemStar, out bool disputed);
+                if (num < 0)
+                {
+                    continue;
+                }
+                if ((item.DominantEmpire != null && item.DominantEmpire.Empire != null))
+                {
+                    continue;
+                }
+                Empire byEmpireId = Empires.GetByEmpireId(num);
+                if (byEmpireId != null && !byEmpireId.Reclusive)
+                {
+                    result = item.SystemStar;
+                    break;
+                }
+            }
+            return result;
+        }
+        public Habitat GetTopHabitat(Habitat hab)
+        {
+            if (hab.Parent != null)
+                return GetTopHabitat(hab.Parent);
+            return hab;
+        }
         public Habitat FastFindNearestUncolonizedOwnedSystem(double x, double y)
         {
             double num = double.MaxValue;

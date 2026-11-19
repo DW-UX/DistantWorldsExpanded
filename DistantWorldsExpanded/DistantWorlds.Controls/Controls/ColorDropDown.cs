@@ -24,7 +24,7 @@ namespace DistantWorlds.Controls
       this.FlatStyle = FlatStyle.Popup;
       this.BackColor = Color.FromArgb(48, 48, 64);
       this.ForeColor = Color.FromArgb(170, 170, 170);
-      this.Font = new Font("Verdana", 8.25f);
+      this.Font = UiScale.NewFont("Verdana", 8.25f);
     }
 
     public void Ignite() => this.Ignite(false, false, false, Color.Empty);
@@ -114,7 +114,7 @@ namespace DistantWorlds.Controls
       if (this._Colors != null && e.Index >= 0 && e.Index < this._Colors.Count)
       {
         SolidBrush solidBrush2 = new SolidBrush(this._Colors[e.Index]);
-        Rectangle rect = new Rectangle(1, e.Bounds.Y + 1, e.Bounds.Width - 2, e.Bounds.Height - 2);
+        Rectangle rect = new Rectangle(UiScale.S(1), e.Bounds.Y + UiScale.S(1), e.Bounds.Width - UiScale.S(2), e.Bounds.Height - UiScale.S(2));
         e.Graphics.FillRectangle((Brush) solidBrush2, rect);
       }
       e.DrawFocusRectangle();

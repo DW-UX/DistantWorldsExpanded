@@ -23,8 +23,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ExpansionMod.Objects;
-using BaconDistantWorlds.HotKeys;
 using BaconDistantWorlds.Forms;
+using ExpansionMod.HotKeyMapping;
 
 namespace BaconDistantWorlds
 {
@@ -119,7 +119,7 @@ namespace BaconDistantWorlds
 
         public static MessageBoxEx method_372(string string_30, string string_31)
         {
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             string_30 = string_30.Replace("\n", Environment.NewLine);
             messageBox.Text = string_30;
             messageBox.Caption = string_31;
@@ -134,7 +134,7 @@ namespace BaconDistantWorlds
         {
             if (BaconMain.settingsInitialized)
             {
-                var hotKeyManager = BaconMain.EntryPointClass.GetHotKeyManager() as HotKeyManager;
+                var hotKeyManager = BaconMain.EntryPointClass.GetHotKeyManager() as HotKeyManagerBacon;
                 //hotKeyManager.GetMappedTargetByKeyCode(e.KeyCode, out KeyMappingTarget target);
 
                 MappedHotKey target;
@@ -144,7 +144,7 @@ namespace BaconDistantWorlds
                     //{
                     //case Keys.Return:
                     int targetId;
-                    if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowDetailedInfo, out targetId) &&
+                    if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowDetailedInfo, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
 
@@ -154,7 +154,7 @@ namespace BaconDistantWorlds
                             e.Handled = true;
                         }
                     }
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowMissionCommand, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowMissionCommand, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -165,7 +165,7 @@ namespace BaconDistantWorlds
                         }
                     }
                     //case Keys.D3:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignCargoMission, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.AssignCargoMission, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -177,7 +177,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.D4:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.SetFighterTarget, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.SetFighterTarget, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -189,7 +189,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.D5:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttackAll, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.OrderBombersToAttackAll, out targetId) &&
                     targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -201,7 +201,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.D6:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
                 targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -213,7 +213,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.D7:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.OrderBombersToAttack, out targetId) &&
             targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -225,7 +225,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.A:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ToggleAutomateCarrierOps, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ToggleAutomateCarrierOps, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -236,7 +236,7 @@ namespace BaconDistantWorlds
                         }
                         //break;
                     }
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ToggleShipAutoBaconImpl, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ToggleShipAutoBaconImpl, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).Empire == BaconBuiltObject.myMain._Game.PlayerEmpire && (BaconBuiltObject.myMain._Game.SelectedObject as BuiltObject).IsAutoControlled)
@@ -248,7 +248,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.B:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowCustomBomberForm, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowCustomBomberForm, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -275,7 +275,7 @@ namespace BaconDistantWorlds
                     //                //break;
                     //            }
                     //case Keys.D:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CalculateDistance, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.CalculateDistance, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -287,7 +287,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.E:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShipFinder, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShipFinder, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -299,7 +299,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.F:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.FixExplorerCurrentSystem, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.FixExplorerCurrentSystem, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -321,7 +321,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.M:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignMiningShipToTarget, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.AssignMiningShipToTarget, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -333,25 +333,27 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.P:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowPrisonForm, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowPrisonForm, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
                         {
-                            if (!BaconMain.prisonFormOpen)
-                            {
-                                BaconMain.prisonFormOpen = true;
-                                BaconEmpire.ShowPrisonForm(BaconBuiltObject.myMain);
-                            }
-                            else if (BaconMain.prisonForm != null)
-                                BaconMain.prisonForm.BringToFront();
+                            //if (!BaconMain.prisonFormOpen)
+                            //{
+                            //BaconMain.prisonFormOpen = true;
+                            //BaconEmpire.ShowPrisonForm(BaconBuiltObject.myMain);
+                            using var prisonForm = new prisonForm(BaconBuiltObject.myMain);
+                            prisonForm.ShowDialog(BaconBuiltObject.myMain);
+                            //}
+                            //else if (BaconMain.prisonForm != null)
+                            //    BaconMain.prisonForm.BringToFront();
                             e.Handled = true;
                             //break;
                         }
                         //break;
                     }
                     //case Keys.Q:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.IncreaseDockingBayCapacity, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.IncreaseDockingBayCapacity, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -362,7 +364,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.R:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowDamagedComponents, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowDamagedComponents, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -372,7 +374,7 @@ namespace BaconDistantWorlds
                             //break;
                         }
                     }
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.RevealIfPirate, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.RevealIfPirate, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -382,7 +384,7 @@ namespace BaconDistantWorlds
                             //break;
                         }
                     }
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.RushStateShips, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.RushStateShips, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Shift)
@@ -394,7 +396,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.S:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ShowStats, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ShowStats, out targetId) &&
                     targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -406,7 +408,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.T:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AddShipToTradeList, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.AddShipToTradeList, out targetId) &&
                 targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -418,7 +420,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.U:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.ForceUnloadAtDestination, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.ForceUnloadAtDestination, out targetId) &&
            targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -430,7 +432,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.W:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.AssignPassengershipMission, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.AssignPassengershipMission, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Control)
@@ -441,7 +443,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.OemSemicolon:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CycleSelectedByRoleBackward, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.CycleSelectedByRoleBackward, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -457,7 +459,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.OemQuestion:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.GetParentCarrier, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.GetParentCarrier, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -468,7 +470,7 @@ namespace BaconDistantWorlds
                         //break;
                     }
                     //case Keys.OemQuotes:
-                    else if (hotKeyManager.ResolveTargetFriendlyName(BaconKeyMappingFriendlyNames.CycleSelectedByRoleForward, out targetId) &&
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.CycleSelectedByRoleForward, out targetId) &&
         targetId == target.Parent.TargetMethodId)
                     {
                         //if (e.Alt)
@@ -480,6 +482,23 @@ namespace BaconDistantWorlds
                             else if (BaconBuiltObject.myMain._Game.SelectedObject is ShipGroup && (BaconBuiltObject.myMain._Game.SelectedObject as ShipGroup).Empire == BaconBuiltObject.myMain._Game.PlayerEmpire)
                                 BaconBuiltObject.CycleFleetSelected(BaconBuiltObject.myMain, "forward");
                             //break;
+                        }
+                    }
+                    else if (hotKeyManager.ResolveTargetFriendlyName(KeyMappingFriendlyNames.DisableBaseShipyards, out targetId) &&
+        targetId == target.Parent.TargetMethodId)
+                    {
+                        if (BaconBuiltObject.myMain._Game.SelectedObject is BuiltObject selectedObject)
+                        {
+                            if (selectedObject.BaseShipyardDisabled)
+                            {
+                                selectedObject.BaseShipyardDisabled = false;
+                                selectedObject.Name = selectedObject.Name.Replace("--", "");
+                            }
+                            else
+                            {
+                                selectedObject.BaseShipyardDisabled = true;
+                                selectedObject.Name = "--" + selectedObject.Name;
+                            }
                         }
                     }
                 }
@@ -686,7 +705,7 @@ namespace BaconDistantWorlds
             }
             string str1 = stringBuilder.ToString();
             string str2 = selectedObject.Name + " Damaged Components";
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = str1;
             messageBox.Caption = str2;
             messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -712,7 +731,7 @@ namespace BaconDistantWorlds
             {
                 string str1 = "Distance from " + BaconBuiltObject.fighterTarget.Name + " to " + (main._Game.SelectedObject as StellarObject).Name + " is " + ((int)distanceStatic).ToString();
                 string str2 = "Distance";
-                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
                 messageBox.Text = str1;
                 messageBox.Caption = str2;
                 messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -728,36 +747,38 @@ namespace BaconDistantWorlds
 
         public static void ToggleAutomateCarrierOps(Main main, object selectedObject)
         {
-            BuiltObject builtObject = (BuiltObject)null;
-            Fighter fighter = (Fighter)null;
             switch (selectedObject)
             {
-                case BuiltObject _:
-                    builtObject = selectedObject as BuiltObject;
+                case BuiltObject ship:
+                    if (ship.Fighters == null || ship.Empire != main._Game.PlayerEmpire)
+                        return;
+                    if (ship.BaconCarrierEnabled)
+                    {
+                        ship.Name = ship.Name.Replace("*", "");
+                        ship.BaconCarrierEnabled = false;
+                    }
+                    else
+                    {
+                        ship.Name = "*" + ship.Name;
+                        ship.BaconCarrierEnabled = true;
+                    }
                     break;
-                case Fighter _:
-                    fighter = selectedObject as Fighter;
+                case Fighter fighter:
+                    if (fighter == null)
+                        return;
+                    if (fighter.BaconAutomationEnabled)
+                    {
+                        fighter.BaconAutomationEnabled = false;
+                        fighter.Name = fighter.Name.Replace("!", "");
+                    }
+                    else
+                    {
+                        fighter.Name = "!" + fighter.Name;
+                        fighter.BaconAutomationEnabled = true;
+                    }
                     break;
                 default:
                     return;
-            }
-            if (builtObject != null)
-            {
-                if (builtObject.Fighters == null || builtObject.Empire != main._Game.PlayerEmpire)
-                    return;
-                if (builtObject.Name.StartsWith("*"))
-                    builtObject.Name = builtObject.Name.Replace("*", "");
-                else
-                    builtObject.Name = "*" + builtObject.Name;
-            }
-            else
-            {
-                if (fighter == null)
-                    return;
-                if (fighter.Name.StartsWith("!"))
-                    fighter.Name = fighter.Name.Replace("!", "");
-                else
-                    fighter.Name = "!" + fighter.Name;
             }
         }
 
@@ -811,11 +832,23 @@ namespace BaconDistantWorlds
             num = 1;
         label_5:
             if (num != 0 || shipOrFighter is ShipGroup && (shipOrFighter as ShipGroup).Ships[0].Empire != main._Game.PlayerEmpire || shipOrFighter is BuiltObjectList && (shipOrFighter as BuiltObjectList)[0].Empire != main._Game.PlayerEmpire || shipOrFighter is StellarObject && (shipOrFighter as StellarObject).Empire != main._Game.PlayerEmpire)
+            {
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
+                messageBox.Text = "Selected ship can't use that command. Command can only be applied to single ship or base of your empire";
+                messageBox.Caption = "Wrong target for command";
+                messageBox.AddButton(MessageBoxExButtons.Ok);
+                messageBox.Icon = MessageBoxExIcon.None;
+                bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                    main._Game.Galaxy.Pause();
+                messageBox.Show();
+                if (!flag)
+                    main._Game.Galaxy.Resume();
                 return;
+            }
             switch (shipOrFighter)
             {
-                case BuiltObject _:
-                    BuiltObject builtObject = shipOrFighter as BuiltObject;
+                case BuiltObject builtObject:
                     if (builtObject.Fighters == null)
                         break;
                     FighterList source1 = new FighterList();
@@ -830,20 +863,26 @@ namespace BaconDistantWorlds
                             if (fighter.MissionType != FighterMissionType.ReturnToCarrier)
                             {
                                 fighter.AssignAttackTarget(BaconBuiltObject.fighterTarget);
-                                if (!fighter.Name.StartsWith("!"))
+                                if (!fighter.BaconAutomationEnabled)
+                                {
                                     fighter.Name = "!" + fighter.Name;
+                                    fighter.BaconAutomationEnabled = true;
+                                }
                             }
                         }
                     }
                     break;
-                case Fighter _:
-                    if ((shipOrFighter as Fighter).MissionType == FighterMissionType.ReturnToCarrier)
+                case Fighter fighter:
+                    if (fighter.MissionType == FighterMissionType.ReturnToCarrier)
                         break;
-                    if ((shipOrFighter as Fighter).OnboardCarrier)
-                        (shipOrFighter as Fighter).ParentBuiltObject.LaunchFighter(shipOrFighter as Fighter);
-                    (shipOrFighter as Fighter).AssignAttackTarget(BaconBuiltObject.fighterTarget);
-                    if (!(shipOrFighter as Fighter).Name.StartsWith("!"))
-                        (shipOrFighter as Fighter).Name = "!" + (shipOrFighter as Fighter).Name;
+                    if (fighter.OnboardCarrier)
+                        fighter.ParentBuiltObject.LaunchFighter(fighter);
+                    fighter.AssignAttackTarget(BaconBuiltObject.fighterTarget);
+                    if (!fighter.BaconAutomationEnabled)
+                    {
+                        fighter.Name = "!" + fighter.Name;
+                        fighter.BaconAutomationEnabled = true;
+                    }
                     break;
                 case BuiltObjectList _:
                     using (IEnumerator<BuiltObject> enumerator = ((IEnumerable<BuiltObject>)shipOrFighter).GetEnumerator())
@@ -865,8 +904,11 @@ namespace BaconDistantWorlds
                                         if (fighter.MissionType != FighterMissionType.ReturnToCarrier)
                                         {
                                             fighter.AssignAttackTarget(BaconBuiltObject.fighterTarget);
-                                            if (!fighter.Name.StartsWith("!"))
+                                            if (!fighter.BaconAutomationEnabled)
+                                            {
                                                 fighter.Name = "!" + fighter.Name;
+                                                fighter.BaconAutomationEnabled = true;
+                                            }
                                         }
                                     }
                                 }
@@ -891,8 +933,11 @@ namespace BaconDistantWorlds
                                     if (fighter.MissionType != FighterMissionType.ReturnToCarrier)
                                     {
                                         fighter.AssignAttackTarget(BaconBuiltObject.fighterTarget);
-                                        if (!fighter.Name.StartsWith("!"))
+                                        if (!fighter.BaconAutomationEnabled)
+                                        {
                                             fighter.Name = "!" + fighter.Name;
+                                            fighter.BaconAutomationEnabled = true;
+                                        }
                                     }
                                 }
                             }
@@ -905,10 +950,36 @@ namespace BaconDistantWorlds
         public static void TransferFighter(Main main, object fighterOrShip)
         {
             if (!(fighterOrShip is Fighter) && !(fighterOrShip is BuiltObject) || BaconBuiltObject.fighterTarget == null || !(BaconBuiltObject.fighterTarget is BuiltObject) || (BaconBuiltObject.fighterTarget as BuiltObject).ActualEmpire != main._Game.PlayerEmpire)
+            {
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
+                messageBox.Text = "Selected ship can't use that command. Selected ship must be fighter/bomber and target set to other carrier.";
+                messageBox.Caption = "Wrong target for command";
+                messageBox.AddButton(MessageBoxExButtons.Ok);
+                messageBox.Icon = MessageBoxExIcon.None;
+                bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                    main._Game.Galaxy.Pause();
+                messageBox.Show();
+                if (!flag)
+                    main._Game.Galaxy.Resume();
                 return;
+            }
             BuiltObject fighterTarget = BaconBuiltObject.fighterTarget as BuiltObject;
             if (fighterTarget.Fighters == null || fighterTarget.FighterRepairRate <= 0)
+            {
+                MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
+                messageBox.Text = "Selected ship can't use that command. Target carrier can't transfer in fighters/bombers";
+                messageBox.Caption = "Wrong target for command";
+                messageBox.AddButton(MessageBoxExButtons.Ok);
+                messageBox.Icon = MessageBoxExIcon.None;
+                bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
+                if (!flag)
+                    main._Game.Galaxy.Pause();
+                messageBox.Show();
+                if (!flag)
+                    main._Game.Galaxy.Resume();
                 return;
+            }
             List<Fighter> source = new List<Fighter>();
             if (fighterOrShip is Fighter && (fighterOrShip as Fighter).Empire == main._Game.PlayerEmpire)
                 source.Add(fighterOrShip as Fighter);
@@ -1055,7 +1126,6 @@ namespace BaconDistantWorlds
             string str2 = "";
             string str3 = "";
             string str4 = "";
-            string str5 = "";
             object target = ship?.Mission?.Target;
             object secondaryTarget = ship?.Mission?.SecondaryTarget;
             if (ship.Mission != null && ship.Mission.Cargo != null)
@@ -1098,7 +1168,7 @@ namespace BaconDistantWorlds
                         break;
                 }
             }
-            str5 = "Mission Information";
+
             string str6;
             if (ship.Mission != null && ship.Mission.Type == BuiltObjectMissionType.Transport)
                 str6 = "Transport" + (ship.BaconValues == null || !ship.BaconValues.ContainsKey("RepeatingMission") ? "" : " (repeating)") + Environment.NewLine + "From: " + str1 + Environment.NewLine + "To: " + str2 + Environment.NewLine + Environment.NewLine + "Mission Cargo: " + Environment.NewLine + str3 + Environment.NewLine + Environment.NewLine + "Currently carrying: " + Environment.NewLine + str4;
@@ -1108,7 +1178,6 @@ namespace BaconDistantWorlds
             }
             else
             {
-                str5 = "Cargo";
                 str6 = str4;
             }
             return str6;
@@ -1116,7 +1185,7 @@ namespace BaconDistantWorlds
 
         public static void ShowMessageBox(Main main, string text, string caption)
         {
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = text;
             messageBox.Caption = caption;
             messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -1131,7 +1200,7 @@ namespace BaconDistantWorlds
         }
         public static void ShowMessageBox(Main main, Exception ex, string caption)
         {
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = ex.ToString();
             messageBox.Caption = caption;
             messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -2152,7 +2221,7 @@ namespace BaconDistantWorlds
             bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
             if (!flag)
                 main._Game.Galaxy.Pause();
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = stringBuilder.ToString();
             messageBox.Caption = "Battle Stats";
             messageBox.AddButton(MessageBoxExButtons.Ok);
@@ -3663,7 +3732,7 @@ namespace BaconDistantWorlds
                     {
                         if (x.Role != BuiltObjectRole.Base)
                             return false;
-                        return x.SubRole == BuiltObjectSubRole.LargeSpacePort || x.SubRole == BuiltObjectSubRole.MediumSpacePort || x.SubRole == BuiltObjectSubRole.SmallSpacePort || x.SubRole == BuiltObjectSubRole.GenericBase;
+                        return x.SubRole == BuiltObjectSubRole.LargeSpacePort || x.SubRole == BuiltObjectSubRole.MediumSpacePort || x.SubRole == BuiltObjectSubRole.SmallSpacePort || x.SubRole == BuiltObjectSubRole.GenericBase || x.SubRole == BuiltObjectSubRole.Outpost;
                     })).ToList<BuiltObject>();
                     if (list3.Any<BuiltObject>())
                     {
@@ -3922,7 +3991,7 @@ namespace BaconDistantWorlds
             bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
             if (!flag)
                 main._Game.Galaxy.Pause();
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = message;
             messageBox.Caption = caption;
             messageBox.AddButton(MessageBoxExButtons.Yes);
@@ -3939,7 +4008,7 @@ namespace BaconDistantWorlds
             bool flag = main._Game.Galaxy.TimeState == GalaxyTimeState.Paused;
             if (!flag)
                 main._Game.Galaxy.Pause();
-            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, new Font("Verdana", 9f, FontStyle.Regular));
+            MessageBoxEx messageBox = MessageBoxExManager.CreateMessageBox((string)null, UiScale.NewFont("Verdana", 9f, FontStyle.Regular));
             messageBox.Text = message;
             messageBox.Caption = caption;
             messageBox.Icon = MessageBoxExIcon.None;
@@ -5116,7 +5185,7 @@ namespace BaconDistantWorlds
                 StellarObjectList coloniesToExclude = new StellarObjectList();
                 foreach (BuiltObject spacePort in (SyncList<BuiltObject>)ship.ActualEmpire.SpacePorts)
                 {
-                    if (spacePort.Name.StartsWith("--"))
+                    if (spacePort.BaseShipyardDisabled)
                         coloniesToExclude.Add((StellarObject)spacePort);
                 }
                 Habitat habitat = ship.ActualEmpire.SelectRandomSpacePortColony(coloniesToExclude);
@@ -5164,12 +5233,10 @@ namespace BaconDistantWorlds
             if (attacker != null && attacker.CargoSpace > 0 && attacker.BaconValues != null && attacker.BaconValues.ContainsKey("cash"))
             {
                 WeaponList weapons = attacker.Weapons;
-                int num1 = 0;
                 float num2;
                 if (weapons == null || weapons.Count == 0)
                 {
                     num2 = 1f;
-                    num1 = 1;
                 }
                 else
                 {

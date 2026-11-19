@@ -5,7 +5,7 @@ using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Windows.Forms;
 using DistantWorlds.Types;
-using Ionic.Zip;
+//using Ionic.Zip;
 using Microsoft.Xna.Framework.Audio;
 using SharpDX.Multimedia;
 //using Microsoft.DirectX.DirectSound;
@@ -156,15 +156,17 @@ namespace DistantWorlds
                     res = new FileStream(string_2, FileMode.Open, FileAccess.Read);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                string textEx = $"Could not load required sound: {string_2}\r\n{ex.ToString()}";
+                MessageBox.Show(textEx, TextResolver.GetText("Error loading file"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Environment.Exit(-1);
             }
             if (res != null)
             {
                 return res;
             }
-            string text = string.Format(TextResolver.GetText("Could not load required sound"), string_2);
+            string text = $"Could not load required sound: {string_2}";
             MessageBox.Show(text, TextResolver.GetText("Error loading file"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             Environment.Exit(-1);
             return null;
@@ -503,6 +505,9 @@ namespace DistantWorlds
                 case (EmpireMessageType)92:
                 case (EmpireMessageType)96:
                     text = "message_major.wav";
+                    break;
+                default:
+                    text = "message_minor.wav";
                     break;
             }
             soundEffectRequest.Filename = text;

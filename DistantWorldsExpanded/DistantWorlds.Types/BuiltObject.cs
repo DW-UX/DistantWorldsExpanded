@@ -18,6 +18,10 @@ namespace DistantWorlds.Types
     [Serializable]
     public partial class BuiltObject : StellarObject, IComparable, IComparable<StellarObject>, IComparable<BuiltObject>, IComparable<Habitat>, IComparable<Creature>, ISerializable
     {
+        [OptionalField]
+        public bool BaseShipyardDisabled = false;
+        [OptionalField]
+        public bool BaconCarrierEnabled = false;
         public object _LockObject = new object();
 
         public int BuiltObjectID;
@@ -837,7 +841,7 @@ namespace DistantWorlds.Types
                 {
                     return 536870911;
                 }
-                if (Empire != null && (SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort))
+                if (Empire != null && (SubRole == BuiltObjectSubRole.Outpost || SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort))
                 {
                     return 536870911;
                 }
@@ -1505,6 +1509,7 @@ namespace DistantWorlds.Types
                     case BuiltObjectRole.Base:
                         switch (SubRole)
                         {
+                            case BuiltObjectSubRole.Outpost:
                             case BuiltObjectSubRole.SmallSpacePort:
                             case BuiltObjectSubRole.MediumSpacePort:
                             case BuiltObjectSubRole.LargeSpacePort:
@@ -2875,7 +2880,7 @@ namespace DistantWorlds.Types
                 }
                 Troops = null;
             }
-            if (Armor > 0 && (SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort) && ParentHabitat != null && ParentHabitat.Population != null && ParentHabitat.Population.DominantRace != null)
+            if (Armor > 0 && (SubRole == BuiltObjectSubRole.Outpost || SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort) && ParentHabitat != null && ParentHabitat.Population != null && ParentHabitat.Population.DominantRace != null)
             {
                 Race dominantRace = ParentHabitat.Population.DominantRace;
                 if (dominantRace.SpaceportArmorStrengthFactor != 0.0)
@@ -3263,7 +3268,7 @@ namespace DistantWorlds.Types
             }
             if (IsSpacePort && !HasBeenDestroyed && DockingBays != null && DockingBays.Count > 0)
             {
-                if (ParentHabitat != null && (SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort) && !actualEmpire2.SpacePorts.Contains(this))
+                if (ParentHabitat != null && (SubRole == BuiltObjectSubRole.Outpost || SubRole == BuiltObjectSubRole.SmallSpacePort || SubRole == BuiltObjectSubRole.MediumSpacePort || SubRole == BuiltObjectSubRole.LargeSpacePort) && !actualEmpire2.SpacePorts.Contains(this))
                 {
                     actualEmpire2.SpacePorts.Add(this);
                 }
@@ -4190,7 +4195,7 @@ namespace DistantWorlds.Types
 
         private void FireTractorBeamsAtInvadingTroopTransports(DateTime time, bool inView)
         {
-            if (Role != BuiltObjectRole.Base || ParentHabitat == null || ParentHabitat.Empire != Empire || TractorBeamRange <= 0 || (SubRole != BuiltObjectSubRole.SmallSpacePort && SubRole != BuiltObjectSubRole.MediumSpacePort && SubRole != BuiltObjectSubRole.LargeSpacePort))
+            if (Role != BuiltObjectRole.Base || ParentHabitat == null || ParentHabitat.Empire != Empire || TractorBeamRange <= 0 || (SubRole != BuiltObjectSubRole.Outpost && SubRole != BuiltObjectSubRole.SmallSpacePort && SubRole != BuiltObjectSubRole.MediumSpacePort && SubRole != BuiltObjectSubRole.LargeSpacePort))
             {
                 return;
             }
@@ -4696,7 +4701,7 @@ namespace DistantWorlds.Types
 
         private void CheckForFuelOrdering()
         {
-            if (Empire == null || Empire == _Galaxy.IndependentEmpire || Empire.PirateEmpireBaseHabitat != null || (SubRole != BuiltObjectSubRole.SmallSpacePort && SubRole != BuiltObjectSubRole.MediumSpacePort && SubRole != BuiltObjectSubRole.LargeSpacePort))
+            if (Empire == null || Empire == _Galaxy.IndependentEmpire || Empire.PirateEmpireBaseHabitat != null || (SubRole != BuiltObjectSubRole.Outpost && SubRole != BuiltObjectSubRole.SmallSpacePort && SubRole != BuiltObjectSubRole.MediumSpacePort && SubRole != BuiltObjectSubRole.LargeSpacePort))
             {
                 return;
             }
@@ -5023,7 +5028,7 @@ namespace DistantWorlds.Types
             }
             if (Role == BuiltObjectRole.Base || SubRole == BuiltObjectSubRole.ResupplyShip)
             {
-                if (!CheckBaseCargoForFuel() && SubRole != BuiltObjectSubRole.SmallSpacePort && SubRole != BuiltObjectSubRole.MediumSpacePort && SubRole != BuiltObjectSubRole.LargeSpacePort && IsAutoControlled && (Mission == null || (Mission.Type != BuiltObjectMissionType.Escape && Mission.Type != BuiltObjectMissionType.Refuel)))
+                if (!CheckBaseCargoForFuel() && SubRole != BuiltObjectSubRole.Outpost && SubRole != BuiltObjectSubRole.SmallSpacePort && SubRole != BuiltObjectSubRole.MediumSpacePort && SubRole != BuiltObjectSubRole.LargeSpacePort && IsAutoControlled && (Mission == null || (Mission.Type != BuiltObjectMissionType.Escape && Mission.Type != BuiltObjectMissionType.Refuel)))
                 {
                     SetupRefuelling();
                 }

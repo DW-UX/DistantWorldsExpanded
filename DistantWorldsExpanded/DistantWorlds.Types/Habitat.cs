@@ -210,6 +210,9 @@ namespace DistantWorlds.Types
 
         public Dictionary<string, object> BaconValues;
 
+        [NonSerialized]
+        public SystemInfo SystemInfo;
+
         public float BaseQuality
         {
             get
@@ -2748,7 +2751,7 @@ namespace DistantWorlds.Types
             for (int i = 0; i < BasesAtHabitat.Count; i++)
             {
                 BuiltObject builtObject = BasesAtHabitat[i];
-                if (builtObject != null && !builtObject.HasBeenDestroyed && (builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
+                if (builtObject != null && !builtObject.HasBeenDestroyed && (builtObject.SubRole == BuiltObjectSubRole.Outpost || builtObject.SubRole == BuiltObjectSubRole.SmallSpacePort || builtObject.SubRole == BuiltObjectSubRole.MediumSpacePort || builtObject.SubRole == BuiltObjectSubRole.LargeSpacePort))
                 {
                     HasSpacePort = true;
                 }
@@ -5609,7 +5612,6 @@ namespace DistantWorlds.Types
             if (Empire != null && Empire.Capital != null && Empire.Capital != this)
             {
                 double num = _Galaxy.CalculateDistance(Empire.Capital.Xpos, Empire.Capital.Ypos, Xpos, Ypos);
-                double num2 = 1.0;
                 return num * Type switch
                 {
                     HabitatType.Ice => 1000.0,
@@ -7287,6 +7289,8 @@ namespace DistantWorlds.Types
                 }
                 result = (double)num2 / (double)num;
             }
+            if (double.IsNaN(result))
+                result = 0;
             return result;
         }
 

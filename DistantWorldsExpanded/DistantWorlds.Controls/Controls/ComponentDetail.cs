@@ -18,12 +18,12 @@ namespace DistantWorlds.Controls
     private Galaxy _Galaxy;
     private DistantWorlds.Types.Component _Component;
     private Bitmap _Image;
-    private int _RowHeight = 14;
+    private int _RowHeight = UiScale.S(14);
     private int _TopMargin = 10;
     private int _LeftMargin = 10;
-    private int _DescriptionX = 10;
-    private int _DescriptionWidth = 115;
-    private int _ValueX = 135;
+    private int _DescriptionX = UiScale.S(10);
+    private int _DescriptionWidth = UiScale.S(115);
+    private int _ValueX = UiScale.S(135);
     private int _ValueWidth = 40;
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
     private SolidBrush _BlackBrush = new SolidBrush(Color.Black);
@@ -37,12 +37,12 @@ namespace DistantWorlds.Controls
 
     public ComponentDetail()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
-      this._SmallFont = new Font(this.Font.FontFamily, 14.67f, FontStyle.Regular, GraphicsUnit.Pixel);
-      this._SmallBoldFont = new Font(this.Font.FontFamily, 14.67f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
+      this._SmallFont = UiScale.NewFont(this.Font.FontFamily, 14.67f, FontStyle.Regular, GraphicsUnit.Pixel);
+      this._SmallBoldFont = UiScale.NewFont(this.Font.FontFamily, 14.67f, FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData()
@@ -60,19 +60,19 @@ namespace DistantWorlds.Controls
       this._Image = componentImage;
       if (largeFont)
       {
-        this._RowHeight = 18;
-        this._BoldFont = new Font(this.Font.FontFamily, this.Font.Size + 4f, FontStyle.Bold, GraphicsUnit.Pixel);
-        this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 6f, FontStyle.Bold, GraphicsUnit.Pixel);
-        this._SmallFont = new Font(this.Font.FontFamily, 17f, FontStyle.Regular, GraphicsUnit.Pixel);
-        this._SmallBoldFont = new Font(this.Font.FontFamily, 17f, FontStyle.Bold, GraphicsUnit.Pixel);
+        this._RowHeight = UiScale.S(18);
+        this._BoldFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(4f), FontStyle.Bold, GraphicsUnit.Pixel);
+        this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(6f), FontStyle.Bold, GraphicsUnit.Pixel);
+        this._SmallFont = UiScale.NewFont(this.Font.FontFamily, 17f, FontStyle.Regular, GraphicsUnit.Pixel);
+        this._SmallBoldFont = UiScale.NewFont(this.Font.FontFamily, 17f, FontStyle.Bold, GraphicsUnit.Pixel);
       }
       else
       {
-        this._RowHeight = 14;
+        this._RowHeight = UiScale.S(14);
         this._BoldFont = new Font(this.Font, FontStyle.Bold);
-        this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
-        this._SmallFont = new Font(this.Font.FontFamily, 13f, FontStyle.Regular, GraphicsUnit.Pixel);
-        this._SmallBoldFont = new Font(this.Font.FontFamily, 13f, FontStyle.Bold, GraphicsUnit.Pixel);
+        this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
+        this._SmallFont = UiScale.NewFont(this.Font.FontFamily, 13f, FontStyle.Regular, GraphicsUnit.Pixel);
+        this._SmallBoldFont = UiScale.NewFont(this.Font.FontFamily, 13f, FontStyle.Bold, GraphicsUnit.Pixel);
       }
       this.Invalidate();
     }
@@ -107,9 +107,9 @@ namespace DistantWorlds.Controls
 
     public void ResetTextPositions()
     {
-      this._DescriptionX = 10;
-      this._DescriptionWidth = 115;
-      this._ValueX = 135;
+      this._DescriptionX = UiScale.S(10);
+      this._DescriptionWidth = UiScale.S(115);
+      this._ValueX = UiScale.S(135);
       this._ValueWidth = 40;
     }
 
@@ -129,11 +129,11 @@ namespace DistantWorlds.Controls
     {
       string[] descriptions = new string[8];
       string[] values = new string[8];
-      int num = 30;
+      int num = UiScale.S(30);
       Point location = new Point();
       graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-      location = new Point(this._DescriptionX - 2, 12);
+      location = new Point(this._DescriptionX - UiScale.S(2), UiScale.S(12));
       if (this._Component == null)
         return;
       string title;
@@ -141,17 +141,17 @@ namespace DistantWorlds.Controls
       string sizeCost;
       string staticEnergy;
       this._Galaxy.ResolveComponentDescriptionComplete(this._Galaxy.PlayerEmpire, this._Component, (ComponentImprovement) null, out title, out type, out sizeCost, out staticEnergy, out descriptions, out values);
-      int width = (int) ((double) this._Image.Width * (20.0 / (double) this._Image.Height));
-      int x = this.Width - (10 + width);
-      Rectangle rect = new Rectangle(x, 10, width, 20);
+      int width = (int) ((double) this._Image.Width * (UiScale.S(20.0) / (double) this._Image.Height));
+      int x = this.Width - (UiScale.S(10) + width);
+      Rectangle rect = new Rectangle(x, UiScale.S(10), width, UiScale.S(20));
       StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
       format1.Trimming = StringTrimming.EllipsisCharacter;
       SizeF sizeF1 = graphics.MeasureString(this._Component.Name, this._TitleFont, x - location.X, format1);
-      if ((double) sizeF1.Height > 22.0)
-        location.Y -= 7;
-      RectangleF layoutRectangle1 = new RectangleF((float) location.X, (float) location.Y, sizeF1.Width + 3f, sizeF1.Height + 3f);
+      if ((double) sizeF1.Height > UiScale.S(22.0))
+        location.Y -= UiScale.S(7);
+      RectangleF layoutRectangle1 = new RectangleF((float) location.X, (float) location.Y, sizeF1.Width + UiScale.S(3f), sizeF1.Height + UiScale.S(3f));
       graphics.DrawString(title, this._TitleFont, (Brush) this._BlackBrush, layoutRectangle1, format1);
-      layoutRectangle1 = new RectangleF(layoutRectangle1.X - 1f, layoutRectangle1.Y - 1f, layoutRectangle1.Width, layoutRectangle1.Height);
+      layoutRectangle1 = new RectangleF(layoutRectangle1.X - UiScale.S(1f), layoutRectangle1.Y - UiScale.S(1f), layoutRectangle1.Width, layoutRectangle1.Height);
       graphics.DrawString(title, this._TitleFont, (Brush) this._WhiteBrush, layoutRectangle1, format1);
       graphics.DrawImage((Image) this._Image, rect);
       int y1 = num + this._RowHeight;
@@ -165,7 +165,7 @@ namespace DistantWorlds.Controls
       {
         location = new Point(this._DescriptionX + this.CalculateRightAlignedOffsetPosition(graphics, TextResolver.GetText("Static Energy Used"), this._SmallFont, this._DescriptionWidth), y3);
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Static Energy Used"), this._SmallFont, location);
-        location = new Point(this._ValueX, y3 - 2);
+        location = new Point(this._ValueX, y3 - UiScale.S(2));
         this.DrawStringWithDropShadow(graphics, staticEnergy, this._SmallBoldFont, location);
         y3 += this._RowHeight;
       }
@@ -177,10 +177,10 @@ namespace DistantWorlds.Controls
           {
             StringFormat format2 = new StringFormat(StringFormatFlags.FitBlackBox);
             format2.Trimming = StringTrimming.EllipsisCharacter;
-            SizeF sizeF2 = graphics.MeasureString(descriptions[index], this._SmallFont, this.Width - 6, format2);
-            RectangleF layoutRectangle2 = new RectangleF(4f, (float) y3, sizeF2.Width + 3f, sizeF2.Height + 3f);
+            SizeF sizeF2 = graphics.MeasureString(descriptions[index], this._SmallFont, this.Width - UiScale.S(6), format2);
+            RectangleF layoutRectangle2 = new RectangleF(UiScale.S(4f), (float) y3, sizeF2.Width + UiScale.S(3f), sizeF2.Height + UiScale.S(3f));
             graphics.DrawString(descriptions[index], this._SmallFont, (Brush) this._BlackBrush, layoutRectangle2, format2);
-            layoutRectangle2 = new RectangleF(layoutRectangle2.X - 1f, layoutRectangle2.Y - 1f, layoutRectangle2.Width, layoutRectangle2.Height);
+            layoutRectangle2 = new RectangleF(layoutRectangle2.X - UiScale.S(1f), layoutRectangle2.Y - UiScale.S(1f), layoutRectangle2.Width, layoutRectangle2.Height);
             graphics.DrawString(descriptions[index], this._SmallFont, (Brush) this._WhiteBrush, layoutRectangle2, format2);
             y3 += (int) sizeF2.Height;
           }
@@ -188,9 +188,9 @@ namespace DistantWorlds.Controls
           {
             location = new Point(this._DescriptionX + this.CalculateRightAlignedOffsetPosition(graphics, descriptions[index], this._SmallFont, this._DescriptionWidth), y3);
             this.DrawStringWithDropShadow(graphics, descriptions[index], this._SmallFont, location);
-            location = new Point(this._ValueX, y3 - 1);
+            location = new Point(this._ValueX, y3 - UiScale.S(1));
             this.DrawStringWithDropShadow(graphics, values[index], this._SmallBoldFont, location);
-            y3 += this._RowHeight - 1;
+            y3 += this._RowHeight - UiScale.S(1);
           }
         }
       }
@@ -224,9 +224,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
 

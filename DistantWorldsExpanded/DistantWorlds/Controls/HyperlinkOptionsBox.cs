@@ -57,7 +57,7 @@ namespace DistantWorlds.Controls
 
         public void KickStart(Main parentForm, Galaxy galaxy, Cursor defaultMouseCursor)
         {
-            int_2 = 5;
+            int_2 = UiScale.S(5);
             cursor_0 = defaultMouseCursor;
             Cursor = defaultMouseCursor;
             font_0 = _FontCache.GenerateFont(18.67f, isBold: false);
@@ -73,8 +73,8 @@ namespace DistantWorlds.Controls
             list_0 = new List<LinkLabel>();
             list_1 = new List<double>();
             //int_0 = 5;
-            font_0 = new Font("Verdana", 9f, FontStyle.Regular);
-            int_2 = 12;
+            font_0 = UiScale.NewFont("Verdana", 9f, FontStyle.Regular);
+            int_2 = UiScale.S(12);
             dateTime_0 = DateTime.Now.ToUniversalTime();
             float_0 = 15.33f;
             SetFont(16.67f);
@@ -163,7 +163,7 @@ namespace DistantWorlds.Controls
             linkLabel.Width = base.ClientRectangle.Width - int_2 * 2;
             linkLabel.Font = font_0;
             linkLabel.Text = text;
-            linkLabel.Height += 2;
+            linkLabel.Height += UiScale.S(2);
             linkLabel.LinkBehavior = LinkBehavior.HoverUnderline;
             linkLabel.LinkColor = Color.Yellow;
             linkLabel.ActiveLinkColor = Color.Orange;
@@ -184,16 +184,16 @@ namespace DistantWorlds.Controls
             SizeF sizeF = graphics.MeasureString(text, font_0, base.ClientRectangle.Width - int_2 * 2, StringFormat.GenericDefault);
             linkLabel.Location = new Point(int_2, (int)num);
             linkLabel.Visible = true;
-            linkLabel.Height = (int)sizeF.Height + 2;
-            int_1 += (int)sizeF.Height + 5;
+            linkLabel.Height = (int)sizeF.Height + UiScale.S(2);
+            int_1 += (int)sizeF.Height + UiScale.S(5);
             list_0.Add(linkLabel);
             list_1.Add(num);
             double num2 = 0.0;
             foreach (LinkLabel item in list_0)
             {
-                num2 += (double)(item.Height + 5);
+                num2 += (double)(item.Height + UiScale.S(5));
             }
-            num2 -= 5.0;
+            num2 -= UiScale.S(5.0);
             int num3 = (base.ClientRectangle.Height - int_2 * 2 - (int)num2) / 2;
             for (int i = 0; i < list_0.Count; i++)
             {

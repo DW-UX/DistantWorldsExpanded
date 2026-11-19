@@ -22,9 +22,9 @@ namespace DistantWorlds.Controls
             //just in case anyone uses this, if you specify no border, you will have to add 4 instead
 
             if (this.BorderStyle != BorderStyle.None)
-            { this.Controls[1].Width = Width - 4; }
+            { this.Controls[1].Width = Width - UiScale.S(4); }
             else
-            { this.Controls[1].Width = Width + 4; }
+            { this.Controls[1].Width = Width + UiScale.S(4); }
         }
     }
 }

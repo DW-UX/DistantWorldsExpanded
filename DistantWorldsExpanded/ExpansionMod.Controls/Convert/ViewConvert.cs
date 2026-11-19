@@ -21,7 +21,7 @@ namespace ExpansionMod.Controls
         {
             var res = new KeyMappingTarget()
             {
-                FriendlyName = target.FriendlyName,
+                KeyTarget = target.KeyTarget,
                 TargetMethodId = target.TargetMethodId
             };
             res.MappedHotKeys = CoverntMappedHotKey(target.MappedHotKeys, res);
@@ -40,7 +40,7 @@ namespace ExpansionMod.Controls
         {
             return new ViewKeyMappingTarget()
             {
-                FriendlyName = target.FriendlyName,
+                KeyTarget = target.KeyTarget,
                 MappedHotKeys = CoverntMappedHotKey(target.MappedHotKeys),
                 TargetMethodId = target.TargetMethodId
             };

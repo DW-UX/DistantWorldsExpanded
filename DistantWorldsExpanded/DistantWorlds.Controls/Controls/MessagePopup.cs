@@ -42,20 +42,20 @@ namespace DistantWorlds.Controls
     private Bitmap _FlagImage;
     private string _MessageDescription;
     private string _Message = string.Empty;
-    private int _Padding = 12;
+    private int _Padding = UiScale.S(12);
 
     public MessagePopup()
     {
       this.SetFont(16.67f);
       this.BorderColor = Color.FromArgb(0, 0, (int) byte.MaxValue);
       this.BorderStyle = BorderStyle.FixedSingle;
-      this.BorderWidth = 3;
+      this.BorderWidth = UiScale.S(3);
       this.CurveMode = CornerCurveMode.None;
-      this.Curvature = 20;
+      this.Curvature = UiScale.S(20);
       this.GradientMode = LinearGradientMode.Vertical;
       this.BackColor = Color.FromArgb(8, 8, 32);
       this.BackColor2 = Color.Navy;
-      this.Padding = new Padding(12);
+      this.Padding = new Padding(UiScale.S(12));
     }
 
     public void SetPosition(int x, int y) => this.Location = new Point(x, y);
@@ -1077,11 +1077,11 @@ namespace DistantWorlds.Controls
       e.Graphics.DrawImage((Image) this._MainImage, x, y);
       if (this._FlagImage != null)
       {
-        Rectangle rect = new Rectangle((this.ClientRectangle.Width - 50) / 2, y + this._MainImage.Height + this._Padding + ((int) sizeF.Height - 30) / 2, 50, 30);
+        Rectangle rect = new Rectangle((this.ClientRectangle.Width - UiScale.S(50)) / 2, y + this._MainImage.Height + this._Padding + ((int) sizeF.Height - UiScale.S(30)) / 2, UiScale.S(50), UiScale.S(30));
         e.Graphics.DrawImage((Image) this._FlagImage, rect);
       }
       RectangleF layoutRectangle1 = new RectangleF((float) this._Padding, (float) (y + this._MainImage.Height + this._Padding), (float) (this.ClientRectangle.Width - this._Padding * 2), (float) (this.ClientRectangle.Height - this._Padding * 2));
-      RectangleF layoutRectangle2 = new RectangleF((float) (this._Padding + 1), (float) (y + this._MainImage.Height + this._Padding + 1), (float) (this.ClientRectangle.Width - this._Padding * 2), (float) (this.ClientRectangle.Height - this._Padding * 2));
+      RectangleF layoutRectangle2 = new RectangleF((float) (this._Padding + UiScale.S(1)), (float) (y + this._MainImage.Height + this._Padding + UiScale.S(1)), (float) (this.ClientRectangle.Width - this._Padding * 2), (float) (this.ClientRectangle.Height - this._Padding * 2));
       using (SolidBrush solidBrush1 = new SolidBrush(Color.FromArgb(170, 170, 170)))
       {
         using (SolidBrush solidBrush2 = new SolidBrush(Color.Black))

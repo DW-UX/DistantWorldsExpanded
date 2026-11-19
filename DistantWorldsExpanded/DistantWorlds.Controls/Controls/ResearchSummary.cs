@@ -15,9 +15,9 @@ namespace DistantWorlds.Controls
   {
     private Galaxy _Galaxy;
     private Empire _Empire;
-    private int _RowHeight = 14;
-    private int _TopMargin = 10;
-    private int _LeftMargin = 10;
+    private int _RowHeight = UiScale.S(14);
+    private int _TopMargin = UiScale.S(10);
+    private int _LeftMargin = UiScale.S(10);
     private SolidBrush _WhiteBrush = new SolidBrush(Color.FromArgb(170, 170, 170));
     private SolidBrush _BlackBrush = new SolidBrush(Color.Black);
     private SolidBrush _RedBrush = new SolidBrush(Color.Red);
@@ -28,10 +28,10 @@ namespace DistantWorlds.Controls
 
     public ResearchSummary()
     {
-      this.Font = new Font("Verdana", 8f);
+      this.Font = UiScale.NewFont("Verdana", 8f);
       this.SetFont(15.33f);
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 3f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(3f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     public void ClearData()
@@ -45,7 +45,7 @@ namespace DistantWorlds.Controls
       this._Galaxy = galaxy;
       this._Empire = empire;
       this._BoldFont = new Font(this.Font, FontStyle.Bold);
-      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + 2f, FontStyle.Bold, GraphicsUnit.Pixel);
+      this._TitleFont = new Font(this.Font.FontFamily, this.Font.Size + UiScale.S(2f), FontStyle.Bold, GraphicsUnit.Pixel);
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -77,9 +77,9 @@ namespace DistantWorlds.Controls
     private void DrawResearchSummary(Graphics graphics)
     {
       int leftMargin = this._LeftMargin;
-      int x1 = this._LeftMargin + 325;
-      int x2 = this._LeftMargin + 410;
-      int x3 = this._LeftMargin + 495;
+      int x1 = this._LeftMargin + UiScale.S(325);
+      int x2 = this._LeftMargin + UiScale.S(410);
+      int x3 = this._LeftMargin + UiScale.S(495);
       int topMargin = this._TopMargin;
       Point location = new Point(this._LeftMargin, topMargin);
       if (this._Empire == null)
@@ -93,7 +93,7 @@ namespace DistantWorlds.Controls
       location = new Point(x3, topMargin);
       this.DrawStringWithDropShadow(graphics, this._Empire.ResearchHighTechPotential.ToString("#0,K"), this._TitleFont, location);
       int y = topMargin + (int) ((double) this._RowHeight * 1.7);
-      Rectangle rect = new Rectangle(this._LeftMargin - 2, y - 1, this.ClientRectangle.Width - this._LeftMargin * 2, this._RowHeight + 8);
+      Rectangle rect = new Rectangle(this._LeftMargin - UiScale.S(2), y - UiScale.S(1), this.ClientRectangle.Width - this._LeftMargin * 2, this._RowHeight + UiScale.S(8));
       SolidBrush solidBrush = new SolidBrush(Color.FromArgb(96, (int) byte.MaxValue, 64, 128));
       graphics.FillRectangle((Brush) solidBrush, rect);
       location = new Point(leftMargin, y);
@@ -134,9 +134,9 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      location = new Point(location.X + 1, location.Y + 1);
+      location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
-      location = new Point(location.X - 1, location.Y - 1);
+      location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
     }
 

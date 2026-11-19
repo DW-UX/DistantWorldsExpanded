@@ -41,14 +41,16 @@ namespace DistantWorlds.Controls
     }
 
     [Browsable(false)]
-    public Color DirectionCtrlColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DirectionCtrlColor
     {
       get => this.directionCtrl.Color;
       set => this.directionCtrl.Color = value;
     }
 
     [Browsable(false)]
-    public Color DirectionCtrlHoverColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color DirectionCtrlHoverColor
     {
       get => this.directionCtrl.HoverColor;
       set => this.directionCtrl.HoverColor = value;
@@ -75,17 +77,18 @@ namespace DistantWorlds.Controls
 
     [Description("Get or set the image to be displayed in the caption")]
     [Category("Appearance")]
-    public Image CaptionIcon
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Image CaptionIcon
     {
       get => this.captionIcon;
       set
       {
         if (value != null)
         {
-          int width = 16;
+          int width = UiScale.S(16);
           double num = (double) width / (double) value.Width;
           int height = (int) ((double) value.Height * num);
-          this.captionIcon = this.PrescaleImage(value, 16, 16, width, height);
+          this.captionIcon = this.PrescaleImage(value, UiScale.S(16), UiScale.S(16), width, height);
         }
         else
           this.captionIcon = (Image) null;
@@ -95,7 +98,8 @@ namespace DistantWorlds.Controls
 
     [Description("Get/Set the text to be displayed")]
     [Category("Appearance")]
-    public string CaptionText
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public string CaptionText
     {
       get => this.text;
       set
@@ -107,7 +111,8 @@ namespace DistantWorlds.Controls
 
     [Description("The font for this control also used to draw the text in the caption")]
     [Category("Appearance")]
-    public Font CaptionFont
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Font CaptionFont
     {
       get => this.Font;
       set
@@ -119,7 +124,8 @@ namespace DistantWorlds.Controls
 
     [Description("The starting color for the gradient brush")]
     [Category("Appearance")]
-    public Color ColorOne
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ColorOne
     {
       get => this.colorOne;
       set
@@ -132,7 +138,8 @@ namespace DistantWorlds.Controls
 
     [Description("The end color for the gradient brush ")]
     [Category("Appearance")]
-    public Color ColorTwo
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ColorTwo
     {
       get => this.colorTwo;
       set
@@ -145,7 +152,8 @@ namespace DistantWorlds.Controls
 
     [Description("The color used for drawing caption text ")]
     [Category("Appearance")]
-    public Color TextColor
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color TextColor
     {
       get => this.textColor;
       set
@@ -157,7 +165,8 @@ namespace DistantWorlds.Controls
 
     [Category("Appearance")]
     [Description("The brush used in painting the caption")]
-    public BrushType BrushType
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public BrushType BrushType
     {
       get => this.brushType;
       set
@@ -204,9 +213,9 @@ namespace DistantWorlds.Controls
         int width = this.Width;
         int height = this.Height;
         if (width == 0)
-          width = 1;
+          width = UiScale.S(1);
         if (height == 0)
-          height = 1;
+          height = UiScale.S(1);
         if (this.directionCtrl.DirectionStyle == DirectionStyle.Up || this.directionCtrl.DirectionStyle == DirectionStyle.Down)
           this.brush = (Brush) new LinearGradientBrush(new Rectangle(0, 0, width, height), this.colorOne, this.colorTwo, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
         else
@@ -243,8 +252,8 @@ namespace DistantWorlds.Controls
         stringFormat = new StringFormat(StringFormatFlags.DirectionVertical);
         num1 = (float) (((double) this.Width - (double) e.Graphics.MeasureString(this.text, this.Font, new PointF(0.0f, 0.0f), stringFormat).Width) * 0.5);
       }
-      float num3 = num2 - 2f;
-      float num4 = num1 + 3f;
+      float num3 = num2 - UiScale.S(2f);
+      float num4 = num1 + UiScale.S(3f);
       if (this.captionIcon != null)
       {
         if (this.Width >= this.Height)

@@ -135,7 +135,7 @@ namespace DistantWorlds.Controls
     {
       base.OnDrawItem(e);
       e.DrawBackground();
-      PointF point = new PointF(30f, (float) (e.Bounds.Y + 2));
+      PointF point = new PointF(UiScale.S(30f), (float) (e.Bounds.Y + UiScale.S(2)));
       Font font = this.Font;
       SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._Troops != null && this._Troops.Count > 0 && e.Index >= 0)
@@ -172,10 +172,10 @@ namespace DistantWorlds.Controls
         }
         if (bitmap != null)
         {
-          int height = e.Bounds.Height - 2;
+          int height = e.Bounds.Height - UiScale.S(2);
           double num = (double) height / (double) bitmap.Height;
           int width = (int) ((double) bitmap.Width * num);
-          rect = new Rectangle((30 - bitmap.Width) / 2, e.Bounds.Y + 1, width, height);
+          rect = new Rectangle((UiScale.S(30) - bitmap.Width) / 2, e.Bounds.Y + UiScale.S(1), width, height);
           e.Graphics.DrawImage((Image) bitmap, rect);
         }
       }
