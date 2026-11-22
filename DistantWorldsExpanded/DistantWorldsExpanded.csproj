@@ -36,10 +36,10 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DebugType>full</DebugType>
+	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DebugType>full</DebugType>
+	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 	<ItemGroup>
 		<RuntimeHostConfigurationOption Include="System.GC.LOHThreshold" Value="2097152" />

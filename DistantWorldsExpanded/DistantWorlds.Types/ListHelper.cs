@@ -131,25 +131,25 @@ namespace DistantWorlds.Types
             return arrayThreadSafe;
         }
 
-        public static StellarObject[] ToArrayThreadSafe(StellarObjectList list)
-        {
-            int length = 0;
-            if (list != null)
-                length = list.Count;
-            StellarObject[] arrayThreadSafe = new StellarObject[length];
-            try
-            {
-                if (length > 0)
-                {
-                    for (int index = 0; index < length; ++index)
-                        arrayThreadSafe[index] = list[index];
-                }
-            }
-            catch
-            {
-            }
-            return arrayThreadSafe;
-        }
+        //public static StellarObject[] ToArrayThreadSafe(StellarObjectList list)
+        //{
+        //    int length = 0;
+        //    if (list != null)
+        //        length = list.Count;
+        //    StellarObject[] arrayThreadSafe = new StellarObject[length];
+        //    try
+        //    {
+        //        if (length > 0)
+        //        {
+        //            for (int index = 0; index < length; ++index)
+        //                arrayThreadSafe[index] = list[index];
+        //        }
+        //    }
+        //    catch
+        //    {
+        //    }
+        //    return arrayThreadSafe;
+        //}
 
         public static Creature[] ToArrayThreadSafe(CreatureList list)
         {

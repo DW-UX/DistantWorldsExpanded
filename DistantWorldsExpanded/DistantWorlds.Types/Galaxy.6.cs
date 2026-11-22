@@ -4655,17 +4655,17 @@ namespace DistantWorlds.Types
             return habitatList;
         }
 
-        public StellarObject[] SortStellarObjectsByDistanceThreadsafe(double x, double y, StellarObjectList stellarObjects)
+        public double[] SortStellarObjectsByDistanceThreadsafe(double x, double y, StellarObjectList stellarObjects, out List<StellarObject> clonedList)
         {
-            StellarObject[] array = ListHelper.ToArrayThreadSafe(stellarObjects);
-            int num = array.Length;
-            double[] array2 = new double[num];
-            for (int i = 0; i < num; i++)
+            var data = stellarObjects.CloneThreadSafe();
+            clonedList = data;
+            double[] array2 = new double[data.Count];
+            for (int i = 0; i < data.Count; i++)
             {
-                array2[i] = CalculateDistanceSquared(x, y, array[i].Xpos, array[i].Ypos);
+                array2[i] = CalculateDistanceSquared(x, y, data[i].Xpos, data[i].Ypos);
             }
-            Array.Sort(array2, array);
-            return array;
+            //Array.Sort(array2, array);
+            return array2;
         }
 
         public BuiltObject[] SortBuiltObjectsByDistanceThreadsafe(double x, double y, BuiltObjectList builtObjects)

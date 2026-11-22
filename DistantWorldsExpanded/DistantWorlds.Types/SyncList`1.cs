@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading;
 
@@ -17,6 +18,8 @@ namespace DistantWorlds.Types
 
         [NonSerialized]
         internal Lock _LockObject = new();
+        [NonSerialized]
+        internal List<T> _snapshot;
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext _) => _LockObject = new Lock();
@@ -24,22 +27,41 @@ namespace DistantWorlds.Types
         public new void Add(T item)
         {
             lock (this._LockObject)
+            {
                 base.Add(item);
+                _snapshot = null;
+            }
         }
 
         public new void Remove(T item)
         {
             lock (this._LockObject)
-                base.Remove(item);
+            {
+                bool removed = base.Remove(item);
+                if (removed) _snapshot = null;
+            }
         }
 
         public new void AddRange(IEnumerable<T> items)
         {
             lock (this._LockObject)
+            {
                 base.AddRange(items);
+                _snapshot = null;
+            }
         }
 
 
+        public List<T> CloneThreadSafe()
+        {
+            var snap = Volatile.Read(ref _snapshot);
+            if (snap != null) return snap;          // lock-free fast path
+
+            lock (this._LockObject)
+            {
+                return _snapshot ??= this.ToList();
+            }
+        }
 
         public IEnumerator<T> GetEnumerator() => (IEnumerator<T>)new SyncListEnumerator<T>(this);
     }

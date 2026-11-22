@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DistantWorlds.Types
 {
@@ -1312,7 +1313,7 @@ namespace DistantWorlds.Types
         public int CountResourceSupplyLocations(byte resourceId, bool includeIndependentColonies)
         {
             int num = 0;
-            BuiltObjectList builtObjectList = new BuiltObjectList();            
+            BuiltObjectList builtObjectList = new BuiltObjectList();
             builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjects));
             builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(PrivateBuiltObjects));
             for (int i = 0; i < Colonies.Count; i++)
@@ -3767,32 +3768,32 @@ namespace DistantWorlds.Types
             StellarObject stellarObject = null;
             if (includeResupplyShips)
             {
-                StellarObject[] array = _Galaxy.SortStellarObjectsByDistanceThreadsafe(x, y, _RefuellingLocationsMilitaryOnly);
-                foreach (StellarObject stellarObject2 in array)
+                double[] array = _Galaxy.SortStellarObjectsByDistanceThreadsafe(x, y, _RefuellingLocationsMilitaryOnly, out var clonedRefuelMilOnly);
+                for (int i = 0; i < array.Length; i++)
                 {
-                    if (stellarObject2 == null || !(stellarObject2 is BuiltObject))
+                    StellarObject stellarObject2 = clonedRefuelMilOnly[i];
+                    if (stellarObject2 is BuiltObject builtObject)
                     {
-                        continue;
-                    }
-                    BuiltObject builtObject = (BuiltObject)stellarObject2;
-                    if (_Galaxy.CheckFuelSuppliedAtLocation(fuelTypes, builtObject, this, mustHaveActualSupply))
-                    {
-                        if (builtObject.DockingBayWaitQueue != null && builtObject.DockingBayWaitQueue.Count < num2 && builtObject.DockingBays != null && builtObject.DockingBays.Count > 0)
+                        if (_Galaxy.CheckFuelSuppliedAtLocation(fuelTypes, builtObject, this, mustHaveActualSupply))
                         {
-                            result = builtObject;
-                            num = _Galaxy.CalculateDistance(x, y, builtObject.Xpos, builtObject.Ypos);
-                            break;
-                        }
-                        if (stellarObject == null)
-                        {
-                            stellarObject = builtObject;
+                            if (builtObject.DockingBayWaitQueue != null && builtObject.DockingBayWaitQueue.Count < num2 && builtObject.DockingBays != null && builtObject.DockingBays.Count > 0)
+                            {
+                                result = builtObject;
+                                num = _Galaxy.CalculateDistance(x, y, builtObject.Xpos, builtObject.Ypos);
+                                break;
+                            }
+                            if (stellarObject == null)
+                            {
+                                stellarObject = builtObject;
+                            }
                         }
                     }
                 }
             }
-            StellarObject[] array2 = _Galaxy.SortStellarObjectsByDistanceThreadsafe(x, y, _RefuellingLocations);
-            foreach (StellarObject stellarObject3 in array2)
+            double[] array2 = _Galaxy.SortStellarObjectsByDistanceThreadsafe(x, y, _RefuellingLocations, out var clonedRefLoc1);
+            for (int i = 0; i < array2.Length; i++)
             {
+                StellarObject stellarObject3 = clonedRefLoc1[i];
                 if (stellarObject3 == null || !_Galaxy.CheckEmpireCanRefuelAtEmpire(shipToRefuel, this, stellarObject3.Empire))
                 {
                     continue;
