@@ -6,34 +6,41 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Threading;
 
 namespace DistantWorlds.Types
 {
-  [Serializable]
-  public class SyncList<T> : List<T>
-  {
-    internal System.Threading.Lock _LockObject = new System.Threading.Lock();
-
-    public new void Add(T item)
+    [Serializable]
+    public class SyncList<T> : List<T>
     {
-      lock (this._LockObject)
-        base.Add(item);
+
+        [NonSerialized]
+        internal Lock _LockObject = new();
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext _) => _LockObject = new Lock();
+
+        public new void Add(T item)
+        {
+            lock (this._LockObject)
+                base.Add(item);
+        }
+
+        public new void Remove(T item)
+        {
+            lock (this._LockObject)
+                base.Remove(item);
+        }
+
+        public new void AddRange(IEnumerable<T> items)
+        {
+            lock (this._LockObject)
+                base.AddRange(items);
+        }
+
+
+
+        public IEnumerator<T> GetEnumerator() => (IEnumerator<T>)new SyncListEnumerator<T>(this);
     }
-
-    public void Remove(T item)
-    {
-      lock (this._LockObject)
-        base.Remove(item);
-    }
-
-    public new void AddRange(IEnumerable<T> items)
-    {
-      lock (this._LockObject)
-        base.AddRange(items);
-    }
-
-        
-
-    public IEnumerator<T> GetEnumerator() => (IEnumerator<T>) new SyncListEnumerator<T>(this);
-  }
 }

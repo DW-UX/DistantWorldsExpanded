@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace DistantWorlds.Controls
@@ -24,31 +25,31 @@ namespace DistantWorlds.Controls
 
         private Cursor cursor_0;
 
-        private List<LinkLabel> list_0;
-
-        private List<double> list_1;
-
-        //private int int_0;
-
         private double double_0;
 
-        private object object_0;
-
-        private object object_1;
-
-        private double double_1;
+        private Lock object_0;
 
         private Font font_0;
 
-        private int int_1;
-
-        private int int_2;
-
-        private double double_2;
-
         private DateTime dateTime_0;
 
-        private bool bool_1;
+        // Number of LinkLabels (visible rows). The labels are created once and never moved afterwards.
+        private const int SlotCount = 4;
+
+        private struct SlotData
+        {
+            public string Text;
+            public object Data;
+            public bool Visited;
+        }
+
+        private LinkLabel[] slots;                                   // [0] = top row (oldest), [SlotCount-1] = bottom row (newest)
+        private int shownCount;                                      // rows in use; they are always the bottom 'shownCount' slots
+        private readonly Queue<SlotData> pending = new Queue<SlotData>();   // added, but not yet released to a slot (guarded by object_0)
+        private readonly List<SlotData> scratch = new List<SlotData>();
+        private double releaseCredit;                                // game seconds collected towards releasing the next pending item
+        private bool clearRequested;                                 // ClearItems() was called, slots are reset on the next method_3()
+        private int rowPitch;                                        // label height + 1px gap
 
         private int ctrlName = 0;
         public void ClearData()
@@ -283,25 +284,17 @@ namespace DistantWorlds.Controls
             base.Curvature = UiScale.S(15);
             base.BorderWidth = UiScale.S(1);
             DoRegionClip();
-            list_0 = new List<LinkLabel>();
-            list_1 = new List<double>();
-            double_1 = 0.0;
-            dateTime_0 = galaxy_0.CurrentDateTime;
-            double_2 = 0.0;
+            CreateSlots();
+            ClearItems();
             bool_0 = true;
         }
 
         public ScrollingLinkList() : base()
         {
-            
-            list_0 = new List<LinkLabel>();
-            list_1 = new List<double>();
-            //int_0 = 4;
+
             double_0 = 20.0;
-            object_0 = new object();
-            object_1 = new object();
+            object_0 = new Lock();
             font_0 = UiScale.NewFont("Verdana", 8.25f, FontStyle.Regular);
-            int_2 = 5;
             dateTime_0 = DateTime.Now.ToUniversalTime();
             base.BorderColor = Color.FromArgb(67, 67, 77);
             base.BorderStyle = BorderStyle.FixedSingle;
@@ -314,81 +307,20 @@ namespace DistantWorlds.Controls
             base.BorderWidth = UiScale.S(1);
         }
 
-        public void ClearItems()
-        {
-            lock (object_0)
-            {
-                bool_1 = false;
-                foreach (LinkLabel item in list_0)
-                {
-                    item.Cursor = null;
-                    item.Parent = null;
-                    if (item.Links != null && item.Links.Count > 0)
-                    {
-                        item.Links[0].LinkData = null;
-                    }
-                    item.LinkClicked -= main_0.method_249;
-                    item.MouseEnter -= main_0.method_247;
-                    item.MouseLeave -= main_0.method_248;
-                    item.Dispose();
-                }
-                list_0.Clear();
-                lock (object_1)
-                {
-                    double_1 = 0.0;
-                }
-                list_1 = new List<double>();
-                if (galaxy_0 != null)
-                {
-                    dateTime_0 = galaxy_0.CurrentDateTime;
-                }
-                else
-                {
-                    dateTime_0 = DateTime.Now.ToUniversalTime();
-                }
-                double_2 = 0.0;
-                bool_1 = true;
-            }
-        }
+        // Seconds of game time between two messages becoming visible
+        // (same pace as the old scrolling: double_0 pixels per second, one row = rowPitch pixels).
+        private double ReleaseInterval => rowPitch / double_0;
 
-        [SpecialName]
-        private double method_0()
+        private void CreateSlots()
         {
-            lock (object_1)
-            {
-                return double_1;
-            }
-        }
-
-        private double method_1(double double_3)
-        {
-            lock (object_1)
-            {
-                double_1 += double_3;
-                return double_1 - double_3;
-            }
-        }
-
-        private double method_2(double double_3)
-        {
-            lock (object_1)
-            {
-                double_1 -= double_3;
-                return double_1 + double_3;
-            }
-        }
-
-        public void AddItem(string text, object relatedObject)
-        {
-            if (!bool_0)
+            if (slots != null)
             {
                 return;
             }
-            lock (object_0)
+            slots = new LinkLabel[SlotCount];
+            for (int i = 0; i < SlotCount; i++)
             {
-                bool_1 = false;
                 LinkLabel linkLabel = new LinkLabel();
-                string text3 = (linkLabel.Text = text.Replace("\n", " "));
                 linkLabel.LinkBehavior = LinkBehavior.HoverUnderline;
                 linkLabel.LinkColor = Color.FromArgb(170, 170, 170);
                 linkLabel.ActiveLinkColor = Color.Yellow;
@@ -397,101 +329,235 @@ namespace DistantWorlds.Controls
                 linkLabel.BorderStyle = BorderStyle.None;
                 linkLabel.Font = font_0;
                 linkLabel.TextAlign = ContentAlignment.MiddleCenter;
-                linkLabel.LinkArea = new LinkArea(0, text.Length);
-                linkLabel.Parent = this;
-                linkLabel.Width = base.ClientRectangle.Width;
                 linkLabel.Height = UiScale.S(18);
-                if (linkLabel.Links != null && linkLabel.Links.Count > 0)
-                {
-                    linkLabel.Links[0].LinkData = relatedObject;
-                }
+                linkLabel.Name = Guid.NewGuid().ToString();
+                linkLabel.Cursor = cursor_0;
+                linkLabel.Visible = false;
                 linkLabel.LinkClicked += main_0.method_249;
                 linkLabel.MouseEnter += main_0.method_247;
                 linkLabel.MouseLeave += main_0.method_248;
-                linkLabel.Name = Guid.NewGuid().ToString();
-                linkLabel.Cursor = cursor_0;
-                int_1 = linkLabel.Height;
-                double_2 = (double)int_1 * -1.0 + (double)int_2;
-                double num = base.ClientRectangle.Height;
-                num = (double)base.ClientRectangle.Height + method_1(int_1 + UiScale.S(1));
-                linkLabel.Location = new Point(0, (int)num);
-                list_0.Add(linkLabel);
-                list_1.Add(num);
-                bool_1 = true;
+                linkLabel.Parent = this;
+                slots[i] = linkLabel;
+            }
+            LayoutSlots();
+        }
+
+        // Rows are bottom-aligned, same resting positions as before: top = ClientHeight - rowPitch * (rows below + 1)
+        private void LayoutSlots()
+        {
+            if (slots == null)
+            {
+                return;
+            }
+            int height = UiScale.S(18);
+            rowPitch = height + UiScale.S(1);
+            int width = base.ClientRectangle.Width;
+            int bottom = base.ClientRectangle.Height;
+            for (int i = 0; i < SlotCount; i++)
+            {
+                slots[i].SetBounds(0, bottom - (SlotCount - i) * rowPitch, width, height);
             }
         }
 
+        protected override void OnResize(EventArgs eventargs)
+        {
+            base.OnResize(eventargs);
+            LayoutSlots();
+        }
+
+        public void ClearItems()
+        {
+            DateTime dateTime = (galaxy_0 != null) ? galaxy_0.CurrentDateTime : DateTime.Now.ToUniversalTime();
+            lock (object_0)
+            {
+                pending.Clear();
+                releaseCredit = ReleaseInterval;
+                clearRequested = true;
+                dateTime_0 = dateTime;
+            }
+            // Labels are only touched on the UI thread: reset them now if we are on it,
+            // otherwise the next method_3() does it.
+            if (!InvokeRequired)
+            {
+                method_3();
+            }
+        }
+
+        // Can be called from any thread: it only queues the data. The labels are updated by method_3().
+        public void AddItem(string text, object relatedObject)
+        {
+            if (!bool_0 || string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+            SlotData item = new SlotData
+            {
+                Text = text.Replace("\n", " "),
+                Data = relatedObject
+            };
+            lock (object_0)
+            {
+                pending.Enqueue(item);
+            }
+        }
+
+        // Called on every tick (UI thread). Releases queued items one by one at the old scroll pace;
+        // each release shifts the texts/link data of the 5 labels up by one row. No control is moved.
         public void method_3()
         {
-            DateTime dateTime = ((galaxy_0 == null) ? dateTime_0 : galaxy_0.CurrentDateTime);
-            if (bool_1)
+            DateTime dateTime = (galaxy_0 == null) ? dateTime_0 : galaxy_0.CurrentDateTime;
+            List<object> expired = null;
+            lock (object_0)
             {
-                bool_1 = false;
-                double num = 0.0;
-                num = method_0();
-                if (num > 0.0)
+                double elapsed = dateTime.Subtract(dateTime_0).TotalSeconds;
+                dateTime_0 = dateTime;
+                if (slots == null)
                 {
-                    SuspendLayout();
-                    List<int> list = new List<int>();
-                    double totalSeconds = dateTime.Subtract(dateTime_0).TotalSeconds;
-                    double num2 = double_0 * totalSeconds;
-                    if (num2 > num)
-                    {
-                        num2 = num;
-                    }
-                    for (int i = 0; i < list_0.Count; i++)
-                    {
-                        LinkLabel linkLabel = list_0[i];
-                        double num3 = list_1[i];
-                        double num4 = num3 - num2;
-                        list_1[i] = num4;
-                        int num5 = (int)num4;
-                        if (linkLabel.Top != num5)
-                        {
-                            linkLabel.Top = num5;
-                        }
-                        if (num4 < double_2)
-                        {
-                            list.Add(i);
-                        }
-                    }
-                    method_2(num2);
-                    if (list.Count > 0)
-                    {
-                        for (int num6 = list.Count - 1; num6 >= 0; num6--)
-                        {
-                            if (base.Controls.Contains(list_0[list[num6]]))
-                            {
-                                base.Controls.Remove(list_0[list[num6]]);
-                                object linkData = list_0[list[num6]].Links[0].LinkData;
-                                if (linkData != null)
-                                {
-                                    if (linkData is EmpireMessage empireMessage_)
-                                    {
-                                        main_0.method_244(empireMessage_);
-                                    }
-                                    else
-                                    {
-                                        main_0.method_245(linkData);
-                                    }
-                                    list_0[list[num6]].Links[0] = null;
-                                    list_0[list[num6]].Links.Clear();
-                                }
-                                list_0[list[num6]].LinkClicked -= main_0.method_249;
-                                list_0[list[num6]].MouseEnter -= main_0.method_247;
-                                list_0[list[num6]].MouseLeave -= main_0.method_248;
-                                list_0[list[num6]].Parent = null;
-                                list_0[list[num6]].Cursor = null;
-                                list_0.RemoveAt(list[num6]);
-                            }
-                            list_1.RemoveAt(list[num6]);
-                        }
-                    }
-                    ResumeLayout();
+                    return;
                 }
-                bool_1 = true;
+                if (clearRequested)
+                {
+                    clearRequested = false;
+                    ResetSlots();
+                }
+                double interval = ReleaseInterval;
+                if (pending.Count == 0)
+                {
+                    // idle: the next added item is shown on the very next tick
+                    releaseCredit = interval;
+                    return;
+                }
+                if (elapsed > 0.0)
+                {
+                    releaseCredit += elapsed;
+                }
+                int due = 0;
+                while (due < pending.Count && releaseCredit >= interval)
+                {
+                    releaseCredit -= interval;
+                    due++;
+                }
+                if (due == 0)
+                {
+                    return;
+                }
+                expired = ShowNext(due);
+                if (pending.Count == 0)
+                {
+                    releaseCredit = interval;
+                }
             }
-            dateTime_0 = dateTime;
+            // Items pushed out at the top (outside the lock, the handlers may call AddItem)
+            if (expired != null)
+            {
+                foreach (object linkData in expired)
+                {
+                    if (linkData is EmpireMessage empireMessage_)
+                    {
+                        main_0.method_244(empireMessage_);
+                    }
+                    else
+                    {
+                        main_0.method_245(linkData);
+                    }
+                }
+            }
+        }
+
+        // Moves 'count' items from the pending queue into the slots.
+        // Returns link data of the items that left the list at the top (null if none).
+        private List<object> ShowNext(int count)
+        {
+            // current rows (oldest first) followed by the new ones
+            scratch.Clear();
+            for (int i = SlotCount - shownCount; i < SlotCount; i++)
+            {
+                scratch.Add(ReadSlot(slots[i]));
+            }
+            for (int i = 0; i < count; i++)
+            {
+                scratch.Add(pending.Dequeue());
+            }
+
+            // everything above the last SlotCount items has scrolled out
+            int drop = Math.Max(0, scratch.Count - SlotCount);
+            List<object> expired = null;
+            for (int i = 0; i < drop; i++)
+            {
+                if (scratch[i].Data != null)
+                {
+                    expired ??= new List<object>();
+                    expired.Add(scratch[i].Data);
+                }
+            }
+
+            // write the rest bottom-aligned
+            int keep = scratch.Count - drop;
+            int firstUsed = SlotCount - keep;
+            for (int i = 0; i < SlotCount; i++)
+            {
+                if (i < firstUsed)
+                {
+                    HideSlot(slots[i]);
+                }
+                else
+                {
+                    WriteSlot(slots[i], scratch[drop + i - firstUsed]);
+                }
+            }
+            shownCount = keep;
+            scratch.Clear();
+            return expired;
+        }
+
+        private void ResetSlots()
+        {
+            for (int i = 0; i < SlotCount; i++)
+            {
+                HideSlot(slots[i]);
+            }
+            shownCount = 0;
+        }
+
+        private static SlotData ReadSlot(LinkLabel label)
+        {
+            SlotData result = new SlotData { Text = label.Text };
+            if (label.Links.Count > 0)
+            {
+                result.Data = label.Links[0].LinkData;
+                result.Visited = label.Links[0].Visited;
+            }
+            return result;
+        }
+
+        private static void WriteSlot(LinkLabel label, SlotData slotData)
+        {
+            if (label.Links.Count > 0)
+            {
+                LinkLabel.Link current = label.Links[0];
+                if (label.Text == slotData.Text && ReferenceEquals(current.LinkData, slotData.Data) && current.Visited == slotData.Visited)
+                {
+                    return; // row already shows exactly this
+                }
+            }
+            label.Links.Clear();
+            label.Text = slotData.Text;
+            label.LinkArea = new LinkArea(0, slotData.Text.Length);
+            LinkLabel.Link link = label.Links[0];
+            link.LinkData = slotData.Data;
+            link.Visited = slotData.Visited;
+            label.Visible = true;
+        }
+
+        private static void HideSlot(LinkLabel label)
+        {
+            if (label.Text.Length == 0 && label.Links.Count == 0)
+            {
+                return; // already empty
+            }
+            label.Links.Clear(); // also drops the reference to the related object
+            label.Text = string.Empty;
+            label.Visible = false;
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
