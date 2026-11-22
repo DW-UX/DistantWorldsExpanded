@@ -33,12 +33,13 @@
 		<BaseOutputPath></BaseOutputPath>
 		<AssemblyVersion>3.0.0.1</AssemblyVersion>
 		<FileVersion>3.0.0.1</FileVersion>
+		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+	  <DebugType>full</DebugType>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+	  <DebugType>full</DebugType>
 	</PropertyGroup>
 	<ItemGroup>
 		<RuntimeHostConfigurationOption Include="System.GC.LOHThreshold" Value="2097152" />
@@ -100,11 +101,11 @@
 		<PackageReference Include="MimeKitLite" Version="4.2.0" />
 		<PackageReference Include="NAudio" Version="2.2.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="nkast.Kni.Platform.WinForms.DX11" Version="4.0.9001" />
+		<PackageReference Include="nkast.Kni.Platform.WinForms.DX11" Version="4.3.9001" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
-		<PackageReference Include="System.Drawing.Common" Version="9.0.1" />
-		<PackageReference Include="System.Runtime.Serialization.Formatters" Version="9.0.1" />
+		<PackageReference Include="System.Drawing.Common" Version="9.0.23" />
+		<PackageReference Include="System.Runtime.Serialization.Formatters" Version="9.0.23" />
 		<!--<PackageReference Include="System.Management" Version="7.0.2" />-->
 	</ItemGroup>
 	<Choose>

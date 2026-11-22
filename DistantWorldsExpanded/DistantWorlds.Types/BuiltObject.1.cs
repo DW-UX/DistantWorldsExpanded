@@ -2300,6 +2300,15 @@ namespace DistantWorlds.Types
             float num = 0f;
             if (Weapons != null)
             {
+                num=_firepower;
+            }
+            return (int)num;
+        }
+        public void ResetCalculateFirepowerFactorImpl()
+        {
+            float num = 0f;
+            if (Weapons != null)
+            {
                 for (int i = 0; i < Weapons.Count; i++)
                 {
                     Weapon weapon = Weapons[i];
@@ -2309,8 +2318,9 @@ namespace DistantWorlds.Types
                     }
                 }
             }
-            return (int)num;
+           _firepower = num;
         }
+
 
         public double ReducedRange(double fuelReservePortion)
         {

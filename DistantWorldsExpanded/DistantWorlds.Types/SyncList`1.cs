@@ -12,7 +12,7 @@ namespace DistantWorlds.Types
   [Serializable]
   public class SyncList<T> : List<T>
   {
-    internal object _LockObject = new object();
+    internal System.Threading.Lock _LockObject = new System.Threading.Lock();
 
     public new void Add(T item)
     {

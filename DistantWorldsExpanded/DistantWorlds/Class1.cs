@@ -31,7 +31,7 @@ internal class Class1 : IGraphicsDeviceService
         this.presentationParameters_0.MultiSampleCount = 4;
         this.presentationParameters_0.DepthStencilFormat = DepthFormat.Depth24;
         this.presentationParameters_0.DeviceWindowHandle = intptr_0;
-        this.presentationParameters_0.PresentationInterval = PresentInterval.Default;
+        this.presentationParameters_0.PresentationInterval = PresentInterval.Immediate;
         this.graphicsDevice_0 = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.Reach, this.presentationParameters_0);
     }
 

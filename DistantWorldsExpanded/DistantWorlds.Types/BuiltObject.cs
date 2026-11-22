@@ -18,6 +18,8 @@ namespace DistantWorlds.Types
     [Serializable]
     public partial class BuiltObject : StellarObject, IComparable, IComparable<StellarObject>, IComparable<BuiltObject>, IComparable<Habitat>, IComparable<Creature>, ISerializable
     {
+        [NonSerialized]
+        private float _firepower = 0;
         [OptionalField]
         public bool BaseShipyardDisabled = false;
         [OptionalField]
@@ -1190,6 +1192,7 @@ namespace DistantWorlds.Types
             RetrofitBaseConstructionQueue = (ConstructionQueue)info.GetValue("RtBCQ", typeof(ConstructionQueue));
             RetrofitBaseManufacturingQueue = (ManufacturingQueue)info.GetValue("RtBMQ", typeof(ManufacturingQueue));
             BaconBuiltObject.DeserializeExtraFields(this, info);
+            ResetCalculateFirepowerFactorImpl();
         }
 
         public new void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -2829,6 +2832,7 @@ namespace DistantWorlds.Types
                 {
                     Weapons.Add(weaponList2[k]);
                 }
+                ResetCalculateFirepowerFactorImpl();
             }
             UndamagedComponentSize = num32;
             if (num2 > 0)

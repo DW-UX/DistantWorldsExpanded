@@ -2070,15 +2070,17 @@ namespace DistantWorlds.Controls
             {
                 return;
             }
-            presentationParameters_0 = new PresentationParameters();
-            presentationParameters_0.BackBufferWidth = base.Width;
-            presentationParameters_0.BackBufferHeight = base.Height;
-            presentationParameters_0.BackBufferFormat = SurfaceFormat.Color;
-            presentationParameters_0.DepthStencilFormat = DepthFormat.Depth24;
-            presentationParameters_0.MultiSampleCount = 4;
-            presentationParameters_0.PresentationInterval = PresentInterval.Default;
-            presentationParameters_0.IsFullScreen = false;
-            presentationParameters_0.DeviceWindowHandle = base.Handle;
+            //GraphicsDevice.PresentationParameters  = new PresentationParameters();
+            GraphicsDevice.PresentationParameters.BackBufferWidth = base.Width;
+            GraphicsDevice.PresentationParameters.BackBufferHeight = base.Height;
+            GraphicsDevice.PresentationParameters.BackBufferFormat = SurfaceFormat.Color;
+            GraphicsDevice.PresentationParameters.DepthStencilFormat = DepthFormat.Depth24;
+            GraphicsDevice.PresentationParameters.MultiSampleCount = 4;
+            GraphicsDevice.PresentationParameters.PresentationInterval = PresentInterval.Immediate;
+            GraphicsDevice.PresentationParameters.IsFullScreen = false;
+            GraphicsDevice.PresentationParameters.DeviceWindowHandle = base.Handle;
+            //GraphicsDevice.PresentationParameters = presentationParameters_0;
+            GraphicsDevice.Reset();
             spriteBatch_0 = new SpriteBatch(GraphicsDevice);
             spriteBatch_1 = new SpriteBatch(GraphicsDevice);
             XnaDrawingHelper.Initialize(GraphicsDevice);

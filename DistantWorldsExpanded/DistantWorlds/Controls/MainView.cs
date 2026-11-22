@@ -539,7 +539,7 @@ namespace DistantWorlds.Controls
 
         internal SpriteBatch spriteBatch_1;
 
-        private PresentationParameters presentationParameters_0;
+        //private PresentationParameters presentationParameters_0;
 
         private Class1 class1_0;
 
@@ -1344,10 +1344,10 @@ namespace DistantWorlds.Controls
         {
             if (Main.ApplicationIsActivated())
             {
-                presentationParameters_0.BackBufferWidth = Math.Max(presentationParameters_0.BackBufferWidth, int_11);
-                presentationParameters_0.BackBufferHeight = Math.Max(presentationParameters_0.BackBufferHeight, int_12);
+                GraphicsDevice.PresentationParameters.BackBufferWidth = Math.Max(GraphicsDevice.PresentationParameters.BackBufferWidth, int_11);
+                GraphicsDevice.PresentationParameters.BackBufferHeight = Math.Max(GraphicsDevice.PresentationParameters.BackBufferHeight, int_12);
                 Thread.Sleep(100);
-                class1_0.method_1(presentationParameters_0.BackBufferWidth, presentationParameters_0.BackBufferHeight);
+                class1_0.method_1(GraphicsDevice.PresentationParameters.BackBufferWidth, GraphicsDevice.PresentationParameters.BackBufferHeight);
             }
         }
 
