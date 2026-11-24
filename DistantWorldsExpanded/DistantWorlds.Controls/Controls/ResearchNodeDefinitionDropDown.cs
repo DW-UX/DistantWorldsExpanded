@@ -92,17 +92,17 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(0.0f, (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       string empty = string.Empty;
       if (this._AllowNullNode && e.Index == 0)
-        e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font, (Brush) solidBrush, point);
+        e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font,  solidBrush, point);
       else if (this._ResearchNodes != null && this._ResearchNodes.Length > 0 && e.Index >= 0)
       {
         int index = e.Index;
         if (this._AllowNullNode)
           --index;
         string s = this._ResearchNodes[index].Name + " (" + Galaxy.ResolveDescription(this._ResearchNodes[index].Category) + ")";
-        e.Graphics.DrawString(s, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(s, font,  solidBrush, point);
       }
       e.DrawFocusRectangle();
     }

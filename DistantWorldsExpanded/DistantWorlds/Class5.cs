@@ -37,22 +37,22 @@ internal static class Class5
     //public static Stopwatch _sw = new Stopwatch();
     internal static void smethod_0()
     {
-        var gcThread = new Thread(static () => {
-            for (;;) {
-                if (_IsExiting) return;
-                GC.Collect(0, GCCollectionMode.Forced, false, false);
-                if (_IsExiting) return;
-                try {
-                    Thread.Sleep(1000 / 30);
-                }
-                catch (ThreadInterruptedException) {
-                    if (_IsExiting) return;
-                }
-            }
-        }) { IsBackground = true, Name = "GC Watcher Thread"};
+        //var gcThread = new Thread(static () => {
+        //    for (;;) {
+        //        if (_IsExiting) return;
+        //        GC.Collect(0, GCCollectionMode.Forced, false, false);
+        //        if (_IsExiting) return;
+        //        try {
+        //            Thread.Sleep(1000 / 30);
+        //        }
+        //        catch (ThreadInterruptedException) {
+        //            if (_IsExiting) return;
+        //        }
+        //    }
+        //}) { IsBackground = true, Name = "GC Watcher Thread"};
         try {
-            GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
-            gcThread.Start();
+            //GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
+            //gcThread.Start();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
@@ -86,7 +86,7 @@ internal static class Class5
         }
         finally {
             _IsExiting = true;
-            gcThread.Interrupt();
+            //gcThread.Interrupt();
             Main._FileDB?.Close();
         }
     }

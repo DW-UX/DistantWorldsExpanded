@@ -261,7 +261,8 @@ namespace DistantWorlds
             graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             graphics.CompositingQuality = CompositingQuality.HighQuality;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            graphics.FillRectangle(new SolidBrush(Color.Black), new Rectangle(0, 0, bitmap_0.Width, bitmap_0.Height));
+            using Brush brush = new SolidBrush(Color.Black);
+            graphics.FillRectangle(brush, new Rectangle(0, 0, bitmap_0.Width, bitmap_0.Height));
             graphics.DrawImage(sourceImage, new Rectangle(0, 0, bitmap_0.Width, bitmap_0.Height), sourceRectangle, GraphicsUnit.Pixel);
             ApplyNoiseToImage(bitmap_0, new Rectangle(0, 0, bitmap_0.Width, bitmap_0.Height), byte_0);
             return bitmap_0;
@@ -292,8 +293,8 @@ namespace DistantWorlds
                     int int_5 = (int)((double)i * num5);
                     int int_6 = (int)((double)j * num6);
                     Point[] point_2 = method_1(point_, int_5, int_6);
-                    GraphicsPath graphicsPath = method_2(point_2);
-                    PathGradientBrush brush = method_3(graphicsPath, color_);
+                    using GraphicsPath graphicsPath = method_2(point_2);
+                    using PathGradientBrush brush = method_3(graphicsPath, color_);
                     graphics.FillPath(brush, graphicsPath);
                 }
             }

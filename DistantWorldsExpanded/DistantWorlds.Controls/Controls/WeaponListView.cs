@@ -144,7 +144,8 @@ namespace DistantWorlds.Controls
             graphics.CompositingQuality = CompositingQuality.HighSpeed;
             graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            graphics.FillRectangle((Brush)new SolidBrush(Color.Transparent), 0, 0, this._DamageGraphWidth, this._DamageGraphHeight);
+            using Brush brush =  new SolidBrush(Color.Transparent);
+            graphics.FillRectangle(brush, 0, 0, this._DamageGraphWidth, this._DamageGraphHeight);
             Point[] points = new Point[4]
             {
         new Point(0, (int) (num5 - num6)),
@@ -152,8 +153,8 @@ namespace DistantWorlds.Controls
         new Point(x, (int) (num5 + num7)),
         new Point(x, (int) (num5 - num7))
             };
-            SolidBrush solidBrush = new SolidBrush(Color.Red);
-            graphics.FillPolygon((Brush)solidBrush, points);
+            using SolidBrush solidBrush = new SolidBrush(Color.Red);
+            graphics.FillPolygon(solidBrush, points);
             return damageGraph;
         }
 

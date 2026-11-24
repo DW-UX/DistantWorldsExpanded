@@ -110,7 +110,7 @@ namespace DistantWorlds.Controls
             break;
         }
         string s = Galaxy.ResolveDescription(this._DiplomaticRelationTypes[index]);
-        e.Graphics.DrawString(s, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(s, font,  solidBrush, point);
       }
       e.DrawFocusRectangle();
     }

@@ -103,12 +103,12 @@ namespace DistantWorlds.Controls
               int skillLevel = character.GetSkillLevel(skill.Type);
               string text2 = ((double) skillLevel / 100.0).ToString("+0%;-0%");
               if (skillLevel >= 0)
-                this.DrawStringWithDropShadow(graphics, text2, this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._GreenBrush);
+                this.DrawStringWithDropShadow(graphics, text2, this._HugeFont, new Point(x1, y - UiScale.S(5)),  this._GreenBrush);
               else
-                this.DrawStringWithDropShadow(graphics, text2, this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._RedBrush);
+                this.DrawStringWithDropShadow(graphics, text2, this._HugeFont, new Point(x1, y - UiScale.S(5)),  this._RedBrush);
             }
             else
-              this.DrawStringWithDropShadow(graphics, "?%", this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._WhiteBrush);
+              this.DrawStringWithDropShadow(graphics, "?%", this._HugeFont, new Point(x1, y - UiScale.S(5)),  this._WhiteBrush);
             float num4 = skill.Progress / skill.NextProgressThreshold;
             this.DrawBarGraph(skill.NextProgressThreshold, skill.Progress, height, num2, Color.FromArgb(40, 40, 40), Color.FromArgb(170, 170, 170), Color.FromArgb(96, 0, 0, 0), graphics, new Point(x2, y - UiScale.S(2)), num4.ToString("0%"));
             y = y + (int) size.Height + num3;
@@ -133,12 +133,12 @@ namespace DistantWorlds.Controls
               {
                 string text4 = ((double) skillLevel / 100.0).ToString("+0%;-0%");
                 if (skillLevel >= 0)
-                  this.DrawStringWithDropShadow(graphics, text4, this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._GreenBrush);
+                  this.DrawStringWithDropShadow(graphics, text4, this._HugeFont, new Point(x1, y - UiScale.S(5)),  this._GreenBrush);
                 else
-                  this.DrawStringWithDropShadow(graphics, text4, this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._RedBrush);
+                  this.DrawStringWithDropShadow(graphics, text4, this._HugeFont, new Point(x1, y - UiScale.S(5)),  this._RedBrush);
               }
               else
-                this.DrawStringWithDropShadow(graphics, "?%", this._HugeFont, new Point(x1, y - UiScale.S(5)), (Brush) this._WhiteBrush);
+                this.DrawStringWithDropShadow(graphics, "?%", this._HugeFont, new Point(x1, y - UiScale.S(5)),  this._WhiteBrush);
               string text5 = "(" + TextResolver.GetText("from Trait") + ")";
               SizeF sizeF = graphics.MeasureString(text5, this.Font, num2);
               this.DrawStringWithDropShadow(graphics, text5, this.Font, new Point(x2 + (num2 - (int) sizeF.Width) / 2, y + UiScale.S(1)));
@@ -174,19 +174,19 @@ namespace DistantWorlds.Controls
       Rectangle rect3 = new Rectangle(point1.X - UiScale.S(1), point1.Y, width2 + UiScale.S(2), height);
       using (SolidBrush solidBrush = new SolidBrush(backgroundColor))
       {
-        graphics.FillRectangle((Brush) solidBrush, rect1);
+        graphics.FillRectangle( solidBrush, rect1);
         if (rect2.Width > 0)
         {
           using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect3, fillColorStart, fillColorEnd, System.Drawing.Drawing2D.LinearGradientMode.Horizontal))
-            graphics.FillRectangle((Brush) linearGradientBrush, rect2);
+            graphics.FillRectangle( linearGradientBrush, rect2);
         }
       }
       SizeF sizeF = graphics.MeasureString(currentValueText, this.Font);
       int width3 = (int) sizeF.Width;
       int height1 = (int) sizeF.Height;
       Point point2 = new Point(point1.X + (width1 - width3) / 2, point1.Y + (height - height1) / 2 + UiScale.S(2));
-      graphics.DrawString(currentValueText, this.Font, (Brush) this._BlackBrush, new PointF((float) point2.X + UiScale.S(1f), (float) point2.Y + UiScale.S(1f)));
-      graphics.DrawString(currentValueText, this.Font, (Brush) this._WhiteBrush, new PointF((float) point2.X, (float) point2.Y));
+      graphics.DrawString(currentValueText, this.Font,  this._BlackBrush, new PointF((float) point2.X + UiScale.S(1f), (float) point2.Y + UiScale.S(1f)));
+      graphics.DrawString(currentValueText, this.Font,  this._WhiteBrush, new PointF((float) point2.X, (float) point2.Y));
     }
 
     private void DrawStringWithDropShadow(
@@ -195,7 +195,7 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      this.DrawStringWithDropShadow(graphics, text, font, location, (Brush) this._WhiteBrush);
+      this.DrawStringWithDropShadow(graphics, text, font, location,  this._WhiteBrush);
     }
 
     private void DrawStringWithDropShadow(
@@ -206,7 +206,7 @@ namespace DistantWorlds.Controls
       Brush brush)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, brush, (PointF) location);
     }
@@ -232,18 +232,19 @@ namespace DistantWorlds.Controls
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       PointF pointF = new PointF((float) location.X, (float) location.Y);
       RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
+      using StringFormat format = StringFormat.GenericTypographic;
+      graphics.DrawString(text, font,  this._BlackBrush, layoutRectangle, format);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       pointF = new PointF((float) location.X, (float) location.Y);
       layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       if (textColor.IsEmpty)
       {
-        graphics.DrawString(text, font, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);
+        graphics.DrawString(text, font,  this._WhiteBrush, layoutRectangle, format);
       }
       else
       {
         using (SolidBrush solidBrush = new SolidBrush(textColor))
-          graphics.DrawString(text, font, (Brush) solidBrush, layoutRectangle, StringFormat.GenericTypographic);
+          graphics.DrawString(text, font,  solidBrush, layoutRectangle, format);
       }
     }
   }

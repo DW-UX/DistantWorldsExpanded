@@ -179,10 +179,9 @@ namespace DistantWorlds.Types
             }
             if (colony.Characters != null)
             {
-                Character[] array = ListHelper.ToArrayThreadSafe(colony.Characters);
-                for (int l = 0; l < array.Length; l++)
+              foreach(var item in colony.Characters.CloneThreadSafe())
                 {
-                    array[l].CompleteEmpireChange(newEmpire);
+                    item.CompleteEmpireChange(newEmpire);
                 }
             }
             if (newEmpire != null)
@@ -790,10 +789,9 @@ namespace DistantWorlds.Types
             {
                 if (newEmpire == null)
                 {
-                    Fighter[] array = ListHelper.ToArrayThreadSafe(builtObject.Fighters);
-                    for (int m = 0; m < array.Length; m++)
+                    foreach(var item in builtObject.Fighters.CloneThreadSafe())
                     {
-                        array[m].CompleteTeardown(_Galaxy);
+                        item.CompleteTeardown(_Galaxy);
                     }
                 }
                 else
@@ -807,8 +805,7 @@ namespace DistantWorlds.Types
             }
             if (builtObject.Characters != null && builtObject.Characters.Count > 0)
             {
-                Character[] array2 = ListHelper.ToArrayThreadSafe(builtObject.Characters);
-                foreach (Character character in array2)
+                foreach (Character character in builtObject.Characters.CloneThreadSafe())
                 {
                     character.Kill(_Galaxy);
                 }

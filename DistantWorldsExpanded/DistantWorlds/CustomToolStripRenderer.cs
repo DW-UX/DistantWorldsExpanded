@@ -49,14 +49,14 @@ namespace DistantWorlds
 
         protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
         {
-            Pen pen = new Pen(Color.Gray);
+            using Pen pen = new Pen(Color.Gray);
             e.Graphics.DrawLine(pen, UiScale.S(4), e.Item.Bounds.Height / 2, e.Item.Bounds.Width - UiScale.S(8), e.Item.Bounds.Height / 2);
             pen.Dispose();
         }
 
         protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
         {
-            LinearGradientBrush linearGradientBrush = new LinearGradientBrush(e.AffectedBounds, Color.FromArgb(16, 16, 24), Color.FromArgb(56, 56, 72), 0f);
+            using LinearGradientBrush linearGradientBrush = new LinearGradientBrush(e.AffectedBounds, Color.FromArgb(16, 16, 24), Color.FromArgb(56, 56, 72), 0f);
             e.Graphics.FillRectangle(linearGradientBrush, e.AffectedBounds);
             linearGradientBrush.Dispose();
         }
@@ -65,14 +65,14 @@ namespace DistantWorlds
         {
             if (!e.Item.Selected && !e.Item.Pressed)
             {
-                LinearGradientBrush linearGradientBrush = new LinearGradientBrush(e.Item.Bounds, Color.FromArgb(16, 16, 24), Color.FromArgb(56, 56, 72), 0f);
+                using LinearGradientBrush linearGradientBrush = new LinearGradientBrush(e.Item.Bounds, Color.FromArgb(16, 16, 24), Color.FromArgb(56, 56, 72), 0f);
                 e.Graphics.FillRectangle(linearGradientBrush, e.Item.Bounds);
                 linearGradientBrush.Dispose();
             }
             else
             {
                 Rectangle rect = new Rectangle(0, 0, e.Item.Width, e.Item.Height);
-                LinearGradientBrush linearGradientBrush2 = new LinearGradientBrush(rect, Color.FromArgb(64, 64, 80), Color.FromArgb(128, 128, 144), 0f);
+                using LinearGradientBrush linearGradientBrush2 = new LinearGradientBrush(rect, Color.FromArgb(64, 64, 80), Color.FromArgb(128, 128, 144), 0f);
                 e.Graphics.FillRectangle(linearGradientBrush2, rect);
                 linearGradientBrush2.Dispose();
             }

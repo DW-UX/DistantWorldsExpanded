@@ -240,7 +240,7 @@ namespace DistantWorlds.Types
     public ResearchNodeList ResolveMoreAdvancedProjects(Empire giverEmpire, bool includeSpecialTech)
     {
       ResearchNodeList researchNodeList = new ResearchNodeList();
-      foreach (ResearchNode researchNode in ListHelper.ToArrayThreadSafe(this.NextProjects))
+      foreach (ResearchNode researchNode in this.NextProjects.CloneThreadSafe())
       {
         if (researchNode != null)
         {
@@ -982,7 +982,7 @@ namespace DistantWorlds.Types
       ResearchNode lowestNextProject = (ResearchNode) null;
       if (this.NextProjects != null && this.NextProjects.Count > 0)
       {
-        ResearchNode[] arrayThreadSafe = ListHelper.ToArrayThreadSafe(this.NextProjects);
+        List<ResearchNode> arrayThreadSafe = this.NextProjects.CloneThreadSafe();
         ComponentList raceAllowedComponents = galaxy.ResearchNodeDefinitions.ResolveRaceSpecificComponents(race, true);
         ResearchNodeList projects = new ResearchNodeList();
         projects.AddRange((IEnumerable<ResearchNode>) arrayThreadSafe);

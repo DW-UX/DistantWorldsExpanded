@@ -2087,23 +2087,21 @@ namespace BaconDistantWorlds
             return shiplist;
         }
 
-        public static BuiltObjectList OrderByDistanceBuiltObjects(Main main, BuiltObjectList shiplist)
+        public static List<BuiltObject> OrderByDistanceBuiltObjects(Main main, List<BuiltObject> shiplist)
         {
             List<BuiltObject> list = new List<BuiltObject>();
-            List<BuiltObject> source = shiplist.ToList();
             BuiltObjectList builtObjectList = new BuiltObjectList();
             if (main._Game.SelectedObject != null)
             {
                 StellarObject selected = main._Game.SelectedObject as StellarObject;
                 if (selected != null)
                 {
-                    list = source.OrderBy((BuiltObject x) => Galaxy.CalculateDistanceSquaredStatic(selected.Xpos, selected.Ypos, x.Xpos, x.Ypos)).ToList();
-                }
-            }
-            if (list.Any())
-            {
-                builtObjectList.AddRange(list);
+                    builtObjectList.AddRange( shiplist.OrderBy((BuiltObject x) => Galaxy.CalculateDistanceSquaredStatic(selected.Xpos, selected.Ypos, x.Xpos, x.Ypos)));
+                if(builtObjectList.Count>0)
                 return builtObjectList;
+                else
+                return shiplist;
+                }
             }
             return shiplist;
         }
@@ -2287,15 +2285,15 @@ namespace BaconDistantWorlds
             string titleText = itemListPanel_0.TitleText;
             if (titleText == TextResolver.GetText("Colonies"))
             {
-                main.list_6.AddRange(ListHelper.ToArrayThreadSafe(main._Game.PlayerEmpire.Colonies));
+                main.list_6.AddRange(main._Game.PlayerEmpire.Colonies.CloneThreadSafe());
             }
             else if (titleText == TextResolver.GetText("Characters"))
             {
-                main.list_6.AddRange(ListHelper.ToArrayThreadSafe(main._Game.PlayerEmpire.Characters));
+                main.list_6.AddRange(main._Game.PlayerEmpire.Characters.CloneThreadSafe());
             }
             else if (titleText == TextResolver.GetText("Space Ports") + " / " + TextResolver.GetText("Construction Yards"))
             {
-                main.list_6.AddRange(ListHelper.ToArrayThreadSafe(main._Game.PlayerEmpire.SpacePorts));
+                main.list_6.AddRange(main._Game.PlayerEmpire.SpacePorts.CloneThreadSafe());
             }
             else if (titleText == TextResolver.GetText("Mining Stations"))
             {
@@ -2309,16 +2307,16 @@ namespace BaconDistantWorlds
                 });
                 }
                 builtObjects = BaconHabitat.FilterParentHabitatListByResource(main, builtObjects, resourceFilter);
-                main.list_6.AddRange(ListHelper.ToArrayThreadSafe(OrderByDistanceBuiltObjects(main, builtObjects)));
+                main.list_6.AddRange(OrderByDistanceBuiltObjects(main, builtObjects));
             }
             else if (titleText == TextResolver.GetText("Construction Ships"))
             {
-                main.list_6.AddRange(ListHelper.ToArrayThreadSafe(OrderByDistanceBuiltObjects(main, main._Game.PlayerEmpire.ConstructionShips)));
+                main.list_6.AddRange(OrderByDistanceBuiltObjects(main, main._Game.PlayerEmpire.ConstructionShips.CloneThreadSafe()));
             }
             else if (titleText == TextResolver.GetText("Exploration Ships"))
             {
                 BuiltObjectList builtObjectsBySubRole = main._Game.PlayerEmpire.BuiltObjects.GetBuiltObjectsBySubRole(new List<BuiltObjectSubRole> { BuiltObjectSubRole.ExplorationShip });
-                main.list_6.AddRange(ListHelper.ToArrayThreadSafe(OrderByDistanceBuiltObjects(main, builtObjectsBySubRole)));
+                main.list_6.AddRange(OrderByDistanceBuiltObjects(main, builtObjectsBySubRole.CloneThreadSafe()));
             }
             else if (titleText == TextResolver.GetText("Enemy Targets"))
             {
@@ -2361,7 +2359,7 @@ namespace BaconDistantWorlds
                 else if (titleText == TextResolver.GetText("Potential Research Locations"))
                 {
                     HabitatList habitatList = main._Game.PlayerEmpire.DetermineResearchStationLocation(allowOccupiedSystems: true, mustHaveBuildableResearchStationDesign: false, assignToResearchHabitats: false);
-                    main.list_6.AddRange(ListHelper.ToArrayThreadSafe(OrderByDistanceHabitats(main, habitatList)));
+                    main.list_6.AddRange(OrderByDistanceHabitats(main, habitatList).CloneThreadSafe());
                 }
                 else if (titleText == TextResolver.GetText("Potential Resort Locations"))
                 {

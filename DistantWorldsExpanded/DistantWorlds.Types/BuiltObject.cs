@@ -2017,7 +2017,7 @@ namespace DistantWorlds.Types
             {
                 return;
             }
-            Character[] array = ListHelper.ToArrayThreadSafe(Characters);
+            List<Character >array = Characters.CloneThreadSafe();
             foreach (Character character in array)
             {
                 if (character == null || character.Empire == null)

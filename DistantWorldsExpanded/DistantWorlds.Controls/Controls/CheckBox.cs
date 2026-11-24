@@ -99,9 +99,13 @@ public partial class CheckBox : System.Windows.Forms.CheckBox
         var state = Checked ? ButtonState.Checked : ButtonState.Normal;
 
         if (_foreBrush?.Color != ForeColor)
-            _foreBrush = new(ForeColor);
+            {
+                _foreBrush?.Dispose();
+                _foreBrush = new(ForeColor);}
         if (_backPen?.Color != BackColor)
-            _backPen = new(BackColor);
+           {
+            _backPen?.Dispose(); 
+            _backPen = new(BackColor);}
 
         switch (CheckAlign)
         {

@@ -1314,8 +1314,8 @@ namespace DistantWorlds.Types
         {
             int num = 0;
             BuiltObjectList builtObjectList = new BuiltObjectList();
-            builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjects));
-            builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(PrivateBuiltObjects));
+            builtObjectList.AddRange(BuiltObjects.CloneThreadSafe());
+            builtObjectList.AddRange(PrivateBuiltObjects.CloneThreadSafe());
             for (int i = 0; i < Colonies.Count; i++)
             {
                 Habitat habitat = Colonies[i];

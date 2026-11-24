@@ -62,7 +62,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return (width - width1) / 2;
     }
 
@@ -72,7 +73,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return width - width1;
     }
 
@@ -112,7 +114,7 @@ namespace DistantWorlds.Controls
       point = new Point(x2, y4);
       double num1 = (double) (this._Design.ReactorPowerOutput - this._Design.StaticEnergyConsumption);
       SolidBrush solidBrush = this.SelectGoodBadBrush(num1);
-      graphics.DrawString(num1.ToString("###0"), this._BoldFont, (Brush) solidBrush, (PointF) point);
+      graphics.DrawString(num1.ToString("###0"), this._BoldFont,  solidBrush, (PointF) point);
       int y5 = y4 + this._RowHeight + this._RowHeight;
       point = new Point(x1, y5);
       string str1 = TextResolver.GetText("Fuel Type") + " = ";
@@ -169,9 +171,9 @@ namespace DistantWorlds.Controls
       Point location)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._WhiteBrush, (PointF) location);
     }
 
     protected override void Dispose(bool disposing)

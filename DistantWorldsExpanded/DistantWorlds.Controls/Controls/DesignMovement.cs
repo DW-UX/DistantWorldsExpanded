@@ -71,7 +71,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return (width - width1) / 2;
     }
 
@@ -81,7 +82,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return width - width1;
     }
 
@@ -104,12 +106,12 @@ namespace DistantWorlds.Controls
       int num3 = this._TopMargin + this._RowHeight * 4 + UiScale.S(60) + UiScale.S(4);
       int y4 = this._TopMargin + this._RowHeight * 4 + UiScale.S(66) + UiScale.S(4);
       int y5 = this._TopMargin + this._RowHeight * 5 + UiScale.S(72) + UiScale.S(4);
-      SolidBrush solidBrush1 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, (int) byte.MaxValue, 80));
-      SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, 168, 80));
-      SolidBrush solidBrush3 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, 80, 80));
-      SolidBrush solidBrush4 = new SolidBrush(Color.FromArgb(80, 80, 80, (int) byte.MaxValue));
-      SolidBrush solidBrush5 = new SolidBrush(Color.FromArgb(90, 140, 140, 140));
-      SolidBrush solidBrush6 = new SolidBrush(Color.FromArgb(90, 80, 80, 80));
+      using SolidBrush solidBrush1 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, (int) byte.MaxValue, 80));
+      using SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, 168, 80));
+      using SolidBrush solidBrush3 = new SolidBrush(Color.FromArgb(80, (int) byte.MaxValue, 80, 80));
+      using SolidBrush solidBrush4 = new SolidBrush(Color.FromArgb(80, 80, 80, (int) byte.MaxValue));
+      using SolidBrush solidBrush5 = new SolidBrush(Color.FromArgb(90, 140, 140, 140));
+      using SolidBrush solidBrush6 = new SolidBrush(Color.FromArgb(90, 80, 80, 80));
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       Point location = new Point();
@@ -124,12 +126,12 @@ namespace DistantWorlds.Controls
       }
       else
       {
-        graphics.FillRectangle((Brush) solidBrush5, x1, y2, UiScale.S(280), y3 - y2);
-        graphics.FillRectangle((Brush) solidBrush6, x1, y3, UiScale.S(280), num2 - y3);
-        graphics.FillRectangle((Brush) solidBrush1, num1, y1, width2, num3 - y1);
-        graphics.FillRectangle((Brush) solidBrush2, x2, y1, width3, num3 - y1);
-        graphics.FillRectangle((Brush) solidBrush3, x3, y1, width4, num3 - y1);
-        graphics.FillRectangle((Brush) solidBrush4, x4, y1, width5, num3 - y1);
+        graphics.FillRectangle( solidBrush5, x1, y2, UiScale.S(280), y3 - y2);
+        graphics.FillRectangle( solidBrush6, x1, y3, UiScale.S(280), num2 - y3);
+        graphics.FillRectangle( solidBrush1, num1, y1, width2, num3 - y1);
+        graphics.FillRectangle( solidBrush2, x2, y1, width3, num3 - y1);
+        graphics.FillRectangle( solidBrush3, x3, y1, width4, num3 - y1);
+        graphics.FillRectangle( solidBrush4, x4, y1, width5, num3 - y1);
         int alignedOffsetPosition1 = this.CalculateCenterAlignedOffsetPosition(graphics, TextResolver.GetText("Impulse"), this.Font, width2);
         location = new Point(num1 + alignedOffsetPosition1, y1);
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Impulse"), this.Font, location);
@@ -181,12 +183,12 @@ namespace DistantWorlds.Controls
         int num4 = Math.Max(this._Design.TopSpeedFuelBurn, this._Design.WarpSpeedFuelBurn);
         int energyConsumption = this._Design.StaticEnergyConsumption;
         double num5 = 60.0 / (double) (energyConsumption + num4);
-        Pen pen1 = new Pen((Brush) this._WhiteBrush, 2f);
+        using Pen pen1 = new Pen( this._WhiteBrush, 2f);
         pen1.DashStyle = DashStyle.Dash;
-        Pen pen2 = new Pen((Brush) this._WhiteBrush, 3f);
+        using Pen pen2 = new Pen( this._WhiteBrush, 3f);
         int num6 = num3 - (int) ((double) energyConsumption * num5);
         graphics.DrawLine(pen1, num1, num6, x4 + width5, num6);
-        Font font = new Font(this.Font.FontFamily, this.Font.Size - UiScale.S(2f), GraphicsUnit.Pixel);
+        using Font font = new Font(this.Font.FontFamily, this.Font.Size - UiScale.S(2f), GraphicsUnit.Pixel);
         int alignedOffsetPosition17 = this.CalculateCenterAlignedOffsetPosition(graphics, TextResolver.GetText("Static Energy Usage"), font, UiScale.S(220));
         location = new Point(num1 + alignedOffsetPosition17, num6 + UiScale.S(1));
         this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Static Energy Usage"), font, location);
@@ -247,9 +249,9 @@ namespace DistantWorlds.Controls
       Point location)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._WhiteBrush, (PointF) location);
     }
   }
 }

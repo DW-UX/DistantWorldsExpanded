@@ -209,7 +209,7 @@ namespace DistantWorlds.Controls
     private void DrawBackground(Graphics graphics)
     {
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
-      GraphicsPath path = this.GetPath(this.ClientRectangle);
+      using GraphicsPath path = this.GetPath(this.ClientRectangle);
       Rectangle clientRectangle = this.ClientRectangle;
       if (this.ClientRectangle.Width == 0)
         ++clientRectangle.Width;
@@ -235,7 +235,7 @@ namespace DistantWorlds.Controls
         linearGradientBrush = new LinearGradientBrush(clientRectangle, this._BackColour1, this._BackColour2, (System.Drawing.Drawing2D.LinearGradientMode) this._GradientMode);
         linearGradientBrush.InterpolationColors = colorBlend;
       }
-      graphics.FillPath((Brush) linearGradientBrush, path);
+      graphics.FillPath( linearGradientBrush, path);
       linearGradientBrush.Dispose();
       switch (this._BorderStyle)
       {
@@ -279,7 +279,7 @@ namespace DistantWorlds.Controls
           num1 = this.AdjustedCurve;
           break;
       }
-      Pen pen1 = new Pen(this._BorderColour, (float) this._BorderWidth);
+      using Pen pen1 = new Pen(this._BorderColour, (float) this._BorderWidth);
       if (num1 == 0)
       {
         graphics.DrawRectangle(pen1, clientRectangle);
@@ -300,19 +300,19 @@ namespace DistantWorlds.Controls
           num7 = num1;
         if ((this._CurveMode & CornerCurveMode.TopLeft) != CornerCurveMode.None)
           num5 = num1;
-        Pen pen2 = new Pen(Color.Black, 0.5f);
-        Pen pen3 = new Pen(topColor, (float) this._BorderWidth);
-        Pen pen4 = new Pen(leftColor, (float) this._BorderWidth);
-        Pen pen5 = new Pen(rightColor, (float) this._BorderWidth);
-        Pen pen6 = new Pen(bottomColor, (float) this._BorderWidth);
-        LinearGradientBrush linearGradientBrush1 = new LinearGradientBrush(new Rectangle(0, 0, num1, num1), topColor, leftColor, System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
-        Pen pen7 = new Pen((Brush) linearGradientBrush1, (float) this._BorderWidth);
-        LinearGradientBrush linearGradientBrush2 = new LinearGradientBrush(new Rectangle(clientRectangle.Width - num1, 0, num1, num1), topColor, rightColor, System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal);
-        Pen pen8 = new Pen((Brush) linearGradientBrush2, (float) this._BorderWidth);
-        LinearGradientBrush linearGradientBrush3 = new LinearGradientBrush(new Rectangle(0, clientRectangle.Height - num1, num1, num1), leftColor, bottomColor, System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal);
-        Pen pen9 = new Pen((Brush) linearGradientBrush3, (float) this._BorderWidth);
-        LinearGradientBrush linearGradientBrush4 = new LinearGradientBrush(new Rectangle(clientRectangle.Width - num1, clientRectangle.Height - num1, num1, num1), rightColor, bottomColor, System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
-        Pen pen10 = new Pen((Brush) linearGradientBrush4, (float) this._BorderWidth);
+        using Pen pen2 = new Pen(Color.Black, 0.5f);
+        using Pen pen3 = new Pen(topColor, (float) this._BorderWidth);
+        using Pen pen4 = new Pen(leftColor, (float) this._BorderWidth);
+        using Pen pen5 = new Pen(rightColor, (float) this._BorderWidth);
+        using Pen pen6 = new Pen(bottomColor, (float) this._BorderWidth);
+        using LinearGradientBrush linearGradientBrush1 = new LinearGradientBrush(new Rectangle(0, 0, num1, num1), topColor, leftColor, System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
+        using Pen pen7 = new Pen( linearGradientBrush1, (float) this._BorderWidth);
+        using LinearGradientBrush linearGradientBrush2 = new LinearGradientBrush(new Rectangle(clientRectangle.Width - num1, 0, num1, num1), topColor, rightColor, System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal);
+        using Pen pen8 = new Pen( linearGradientBrush2, (float) this._BorderWidth);
+        using LinearGradientBrush linearGradientBrush3 = new LinearGradientBrush(new Rectangle(0, clientRectangle.Height - num1, num1, num1), leftColor, bottomColor, System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal);
+        using Pen pen9 = new Pen( linearGradientBrush3, (float) this._BorderWidth);
+        using LinearGradientBrush linearGradientBrush4 = new LinearGradientBrush(new Rectangle(clientRectangle.Width - num1, clientRectangle.Height - num1, num1, num1), rightColor, bottomColor, System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
+        using Pen pen10 = new Pen( linearGradientBrush4, (float) this._BorderWidth);
         int num8 = 0;
         int num9 = (this._CurveMode & CornerCurveMode.TopRight) == CornerCurveMode.None ? UiScale.S(1) : num1 * 2;
         graphics.DrawArc(pen8, num3 - num9, num8, num9, num9, 270, 90);
@@ -342,27 +342,27 @@ namespace DistantWorlds.Controls
       }
     }
 
-    private static GraphicsPath CreateRoundRectangleCorrected(RectangleF rectangle, float radius)
-    {
-      GraphicsPath rectangleCorrected = new GraphicsPath();
-      float left = rectangle.Left;
-      float top = rectangle.Top;
-      float width = rectangle.Width;
-      float height = rectangle.Height;
-      float num1 = radius * 2f;
-      float num2 = num1 + UiScale.S(1f);
-      float num3 = radius;
-      rectangleCorrected.AddArc(left, top, num1, num1, 180f, 90f);
-      rectangleCorrected.AddLine(left + num3, top + UiScale.S(1f), left + width - num3, top + UiScale.S(1f));
-      rectangleCorrected.AddArc(left + width - num2, top, num1, num1, 270f, 90f);
-      rectangleCorrected.AddLine((float) ((double) left + (double) width - UiScale.S(1.0)), top + num3, (float) ((double) left + (double) width - UiScale.S(1.0)), top + height - num3);
-      rectangleCorrected.AddArc(left + width - num2, top + height - num2, num1, num1, 0.0f, 90f);
-      rectangleCorrected.AddLine(left + width - num3, (float) ((double) top + (double) height - UiScale.S(1.0)), left + num3, (float) ((double) top + (double) height - UiScale.S(1.0)));
-      rectangleCorrected.AddArc(left, top + height - num2, num1, num1, 90f, 90f);
-      rectangleCorrected.AddLine(left + UiScale.S(1f), top + height - num3, left + UiScale.S(1f), top + num3);
-      rectangleCorrected.CloseFigure();
-      return rectangleCorrected;
-    }
+    // private static GraphicsPath CreateRoundRectangleCorrected(RectangleF rectangle, float radius)
+    // {
+    //   GraphicsPath rectangleCorrected = new GraphicsPath();
+    //   float left = rectangle.Left;
+    //   float top = rectangle.Top;
+    //   float width = rectangle.Width;
+    //   float height = rectangle.Height;
+    //   float num1 = radius * 2f;
+    //   float num2 = num1 + UiScale.S(1f);
+    //   float num3 = radius;
+    //   rectangleCorrected.AddArc(left, top, num1, num1, 180f, 90f);
+    //   rectangleCorrected.AddLine(left + num3, top + UiScale.S(1f), left + width - num3, top + UiScale.S(1f));
+    //   rectangleCorrected.AddArc(left + width - num2, top, num1, num1, 270f, 90f);
+    //   rectangleCorrected.AddLine((float) ((double) left + (double) width - UiScale.S(1.0)), top + num3, (float) ((double) left + (double) width - UiScale.S(1.0)), top + height - num3);
+    //   rectangleCorrected.AddArc(left + width - num2, top + height - num2, num1, num1, 0.0f, 90f);
+    //   rectangleCorrected.AddLine(left + width - num3, (float) ((double) top + (double) height - UiScale.S(1.0)), left + num3, (float) ((double) top + (double) height - UiScale.S(1.0)));
+    //   rectangleCorrected.AddArc(left, top + height - num2, num1, num1, 90f, 90f);
+    //   rectangleCorrected.AddLine(left + UiScale.S(1f), top + height - num3, left + UiScale.S(1f), top + num3);
+    //   rectangleCorrected.CloseFigure();
+    //   return rectangleCorrected;
+    // }
 
     private GraphicsPath DefineOutline(Rectangle rect)
     {
@@ -413,7 +413,10 @@ namespace DistantWorlds.Controls
       int num = Math.Max(0, this.BorderWidth - UiScale.S(1));
       rectangleF.Inflate((float) num, (float) num);
       using (GraphicsPath path = this.DefineOutline(new Rectangle((int) rectangleF.X, (int) rectangleF.Y, (int) rectangleF.Width, (int) rectangleF.Height)))
-        this.Region = new Region(path);
+        {
+          Region oldReg = this.Region;
+          this.Region = new Region(path);
+          oldReg?.Dispose();}
     }
 
     protected override void OnPaintBackground(PaintEventArgs e)

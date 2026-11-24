@@ -93,13 +93,15 @@ namespace DistantWorlds.Controls
 
         private int method_0(Graphics graphics_0, string string_0, Font font_2, int int_4)
         {
-            int num = (int)graphics_0.MeasureString(string_0, font_2, int_4, StringFormat.GenericTypographic).Width;
+            using StringFormat format = StringFormat.GenericTypographic;
+            int num = (int)graphics_0.MeasureString(string_0, font_2, int_4, format).Width;
             return (int_4 - num) / 2;
         }
 
         private int method_1(Graphics graphics_0, string string_0, Font font_2, int int_4)
         {
-            int num = (int)graphics_0.MeasureString(string_0, font_2, int_4, StringFormat.GenericTypographic).Width;
+            using StringFormat format = StringFormat.GenericTypographic;
+            int num = (int)graphics_0.MeasureString(string_0, font_2, int_4, format).Width;
             return int_4 - num;
         }
 
@@ -296,8 +298,9 @@ namespace DistantWorlds.Controls
                 }
             }
             point = new Point(num2, num4 - num3);
+            using StringFormat format = StringFormat.GenericTypographic;
             string string_ = string.Format(TextResolver.GetText("X colonies in Y systems"), empire_0.Colonies.Count.ToString(), habitatList.Count.ToString());
-            SizeF sizeF = graphics_0.MeasureString(string_, font_0, base.Width, StringFormat.GenericTypographic);
+            SizeF sizeF = graphics_0.MeasureString(string_, font_0, base.Width, format);
             method_8(graphics_0, string_, font_0, point);
             empirePriorityList = galaxy_0.DetermineOrderedKnownEmpires(empire_0, EmpireComparisonType.Territory);
             num5 = empirePriorityList.IndexOf(empire_0);
@@ -310,7 +313,7 @@ namespace DistantWorlds.Controls
             method_8(point_0: new Point(num + method_1(graphics_0, TextResolver.GetText("Population"), Font, int_), num4), graphics_0: graphics_0, string_0: TextResolver.GetText("Population"), font_2: Font);
             point = new Point(num2, num4 - num3);
             string string_2 = empire_0.TotalPopulation.ToString("0,,M");
-            sizeF = graphics_0.MeasureString(string_2, font_0, base.Width, StringFormat.GenericTypographic);
+            sizeF = graphics_0.MeasureString(string_2, font_0, base.Width, format);
             method_8(graphics_0, string_2, font_0, point);
             empirePriorityList = galaxy_0.DetermineOrderedKnownEmpires(empire_0, EmpireComparisonType.Population);
             num5 = empirePriorityList.IndexOf(empire_0);
@@ -323,7 +326,7 @@ namespace DistantWorlds.Controls
             method_8(point_0: new Point(num + method_1(graphics_0, TextResolver.GetText("Strategic Value"), Font, int_), num4), graphics_0: graphics_0, string_0: TextResolver.GetText("Strategic Value"), font_2: Font);
             point = new Point(num2, num4 - num3);
             string string_3 = empire_0.TotalColonyStrategicValue.ToString("0,K");
-            sizeF = graphics_0.MeasureString(string_3, font_0, base.Width, StringFormat.GenericTypographic);
+            sizeF = graphics_0.MeasureString(string_3, font_0, base.Width, format);
             method_8(graphics_0, string_3, font_0, point);
             empirePriorityList = galaxy_0.DetermineOrderedKnownEmpires(empire_0, EmpireComparisonType.StrategicValue);
             num5 = empirePriorityList.IndexOf(empire_0);
@@ -530,10 +533,11 @@ namespace DistantWorlds.Controls
 
         private void method_9(Graphics graphics_0, string string_0, Font font_2, Point point_0, SolidBrush solidBrush_4)
         {
+            using StringFormat format = StringFormat.GenericTypographic;
             point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
-            graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
+            graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, format);
             point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
-            graphics_0.DrawString(string_0, font_2, solidBrush_4, point_0, StringFormat.GenericTypographic);
+            graphics_0.DrawString(string_0, font_2, solidBrush_4, point_0, format);
         }
 
         private void method_10(Graphics graphics_0, string string_0, Font font_2, Point point_0, Brush brush_0, SizeF sizeF_0)
@@ -542,11 +546,11 @@ namespace DistantWorlds.Controls
             {
                 point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                StringFormat genericTypographic = StringFormat.GenericTypographic;
-                graphics_0.DrawString(string_0, font_2, solidBrush_1, layoutRectangle, genericTypographic);
+                using StringFormat format = StringFormat.GenericTypographic;
+                graphics_0.DrawString(string_0, font_2, solidBrush_1, layoutRectangle, format);
                 point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle, genericTypographic);
+                graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle, format);
             }
             else
             {

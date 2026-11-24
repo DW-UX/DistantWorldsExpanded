@@ -339,7 +339,7 @@ namespace DistantWorlds.Controls
 
         private SolidBrush solidBrush_18;
 
-        private SolidBrush MlpRhYjTejC;
+        private SolidBrush solidBrush_21;
 
         private SolidBrush solidBrush_19;
 
@@ -658,7 +658,7 @@ namespace DistantWorlds.Controls
             solidBrush_16 = new SolidBrush(System.Drawing.Color.FromArgb(112, 112, 120));
             solidBrush_17 = new SolidBrush(System.Drawing.Color.FromArgb(88, 88, 96));
             solidBrush_18 = new SolidBrush(System.Drawing.Color.FromArgb(88, 88, 96));
-            MlpRhYjTejC = new SolidBrush(System.Drawing.Color.FromArgb(128, 128, 136));
+            solidBrush_21 = new SolidBrush(System.Drawing.Color.FromArgb(128, 128, 136));
             solidBrush_19 = new SolidBrush(System.Drawing.Color.FromArgb(104, 104, 112));
             solidBrush_20 = new SolidBrush(System.Drawing.Color.FromArgb(104, 104, 112));
             pen_9 = new Pen(color_10, 2f);
@@ -1187,8 +1187,9 @@ namespace DistantWorlds.Controls
             }
             graphics_0.DrawString(main_0.string_21 + text, font_1, solidBrush_0, new System.Drawing.Point(10, 120));
             if (main_0.double_0 < 100.0)
-            {
-                SizeF sizeF = graphics_0.MeasureString(main_0.string_22, font_1, 500, StringFormat.GenericTypographic);
+            {  
+                using StringFormat format = StringFormat.GenericTypographic;
+                SizeF sizeF = graphics_0.MeasureString(main_0.string_22, font_1, 500, format);
                 int num = base.Width - ((int)sizeF.Width + 40);
                 graphics_0.DrawString(main_0.string_22, font_1, solidBrush_0, new System.Drawing.Point(num, 67));
             }
@@ -1436,7 +1437,7 @@ namespace DistantWorlds.Controls
             solidBrush_16 = new SolidBrush(System.Drawing.Color.FromArgb(176, 176, 176));
             solidBrush_17 = new SolidBrush(System.Drawing.Color.FromArgb(128, 128, 128));
             solidBrush_18 = new SolidBrush(System.Drawing.Color.FromArgb(88, 88, 88));
-            MlpRhYjTejC = new SolidBrush(System.Drawing.Color.FromArgb(192, 192, 192));
+            solidBrush_21 = new SolidBrush(System.Drawing.Color.FromArgb(192, 192, 192));
             solidBrush_19 = new SolidBrush(System.Drawing.Color.FromArgb(144, 144, 144));
             solidBrush_20 = new SolidBrush(System.Drawing.Color.FromArgb(104, 104, 104));
             color_2 = System.Drawing.Color.FromArgb(255, 255, 255, 0);
@@ -1752,7 +1753,8 @@ namespace DistantWorlds.Controls
                         }
                         if (!string.IsNullOrEmpty(main_0.string_19))
                         {
-                            SizeF sizeF = e.Graphics.MeasureString(main_0.string_19, main_0.font_6, 600, StringFormat.GenericDefault);
+                            using StringFormat format = StringFormat.GenericTypographic;
+                            SizeF sizeF = e.Graphics.MeasureString(main_0.string_19, main_0.font_6, 600, format);
                             System.Drawing.Point point3 = new System.Drawing.Point(point_4.X - (int)(sizeF.Width / 2f), point_4.Y);
                             System.Drawing.Point point4 = new System.Drawing.Point(point3.X + 1, point3.Y + 1);
                             e.Graphics.DrawString(main_0.string_19, main_0.font_6, solidBrush_2, point4);
@@ -1761,15 +1763,16 @@ namespace DistantWorlds.Controls
                     }
                     if (galaxy_0.TimeState == GalaxyTimeState.Paused && !main_0.pnlGameEditor.Visible && !bool_8)
                     {
+                        using StringFormat format = StringFormat.GenericTypographic;
                         e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
                         string s = TextResolver.GetText("Game Paused");
-                        SizeF sizeF2 = e.Graphics.MeasureString(s, main_0.font_1, 600, StringFormat.GenericDefault);
+                        SizeF sizeF2 = e.Graphics.MeasureString(s, main_0.font_1, 600, format);
                         System.Drawing.Point point5 = new System.Drawing.Point((base.Width - (int)sizeF2.Width) / 2, 205);
                         System.Drawing.Point point6 = new System.Drawing.Point(point5.X + 1, point5.Y + 1);
                         e.Graphics.DrawString(s, main_0.font_1, solidBrush_2, point6);
                         e.Graphics.DrawString(s, main_0.font_1, solidBrush_1, point5);
                         string s2 = "(" + TextResolver.GetText("Press Spacebar or Pause key to resume") + ")";
-                        SizeF sizeF3 = e.Graphics.MeasureString(s2, main_0.font_6, 600, StringFormat.GenericDefault);
+                        SizeF sizeF3 = e.Graphics.MeasureString(s2, main_0.font_6, 600, format);
                         System.Drawing.Point point7 = new System.Drawing.Point((base.Width - (int)sizeF3.Width) / 2, 230);
                         System.Drawing.Point point8 = new System.Drawing.Point(point7.X + 1, point7.Y + 1);
                         e.Graphics.DrawString(s2, main_0.font_6, solidBrush_2, point8);
@@ -1778,8 +1781,9 @@ namespace DistantWorlds.Controls
                     }
                     if (!string.IsNullOrEmpty(main_0.string_20))
                     {
+                        using StringFormat format = StringFormat.GenericTypographic;
                         e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-                        SizeF sizeF4 = e.Graphics.MeasureString(main_0.string_20, main_0.font_1, 600, StringFormat.GenericDefault);
+                        SizeF sizeF4 = e.Graphics.MeasureString(main_0.string_20, main_0.font_1, 600, format);
                         System.Drawing.Point point9 = new System.Drawing.Point((base.Width - (int)sizeF4.Width) / 2, 260);
                         System.Drawing.Point point10 = new System.Drawing.Point(point9.X + 1, point9.Y + 1);
                         e.Graphics.DrawString(main_0.string_20, main_0.font_1, solidBrush_2, point10);
@@ -2410,21 +2414,39 @@ namespace DistantWorlds.Controls
         {
             if (bool_9)
             {
+                solidBrush_6?.Dispose();
+                solidBrush_7?.Dispose();
+                solidBrush_8?.Dispose();
+                solidBrush_9?.Dispose();
                 solidBrush_6 = new SolidBrush(System.Drawing.Color.FromArgb(255, 255, 255));
                 solidBrush_7 = new SolidBrush(System.Drawing.Color.FromArgb(255, 255, 255));
                 solidBrush_8 = new SolidBrush(System.Drawing.Color.FromArgb(255, 255, 255));
                 solidBrush_9 = new SolidBrush(System.Drawing.Color.FromArgb(127, 127, 127));
                 return;
             }
+            solidBrush_13?.Dispose();  
+            solidBrush_14?.Dispose();  
+            solidBrush_15?.Dispose();  
+            solidBrush_16?.Dispose();  
+            solidBrush_17?.Dispose();  
+            solidBrush_18?.Dispose();  
+            solidBrush_21?.Dispose();  
+            solidBrush_19?.Dispose();  
+            solidBrush_20?.Dispose();              
             solidBrush_13 = new SolidBrush(System.Drawing.Color.FromArgb(160, 160, 160));
             solidBrush_14 = new SolidBrush(System.Drawing.Color.FromArgb(112, 112, 112));
             solidBrush_15 = new SolidBrush(System.Drawing.Color.FromArgb(72, 72, 72));
             solidBrush_16 = new SolidBrush(System.Drawing.Color.FromArgb(176, 176, 176));
             solidBrush_17 = new SolidBrush(System.Drawing.Color.FromArgb(128, 128, 128));
             solidBrush_18 = new SolidBrush(System.Drawing.Color.FromArgb(88, 88, 88));
-            MlpRhYjTejC = new SolidBrush(System.Drawing.Color.FromArgb(192, 192, 192));
+            solidBrush_21 = new SolidBrush(System.Drawing.Color.FromArgb(192, 192, 192));
             solidBrush_19 = new SolidBrush(System.Drawing.Color.FromArgb(144, 144, 144));
             solidBrush_20 = new SolidBrush(System.Drawing.Color.FromArgb(104, 104, 104));
+            
+                solidBrush_6?.Dispose();
+                solidBrush_7?.Dispose();
+                solidBrush_8?.Dispose();
+                solidBrush_9?.Dispose();
             if (main_0.double_0 <= 20.0)
             {
                 solidBrush_6 = solidBrush_10;
@@ -2442,7 +2464,7 @@ namespace DistantWorlds.Controls
             else
             {
                 solidBrush_6 = solidBrush_12;
-                solidBrush_7 = MlpRhYjTejC;
+                solidBrush_7 = solidBrush_21;
                 solidBrush_8 = solidBrush_19;
                 solidBrush_9 = solidBrush_20;
             }
@@ -2508,7 +2530,8 @@ namespace DistantWorlds.Controls
             }
             if (graphicsPath_4.PointCount > 0)
             {
-                graphics_0.ExcludeClip(new Region(graphicsPath_4));
+                using var reg = new Region(graphicsPath_4);
+                graphics_0.ExcludeClip(reg);
             }
             graphics_0.DrawLines(pen_0, point_0);
             graphics_0.SetClip(base.ClientRectangle);

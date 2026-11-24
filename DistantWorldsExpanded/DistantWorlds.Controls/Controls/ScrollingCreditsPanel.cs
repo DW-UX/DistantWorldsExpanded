@@ -122,9 +122,9 @@ namespace DistantWorlds.Controls
                 case string _:
                   string s = (string) obj;
                   RectangleF layoutRectangle = new RectangleF((float) x + UiScale.S(1f), (float) scrollingItemTop + UiScale.S(1f), itemSize.Width + UiScale.S(1f), itemSize.Height + UiScale.S(1f));
-                  graphics.DrawString(s, this._DefaultFont, (Brush) solidBrush2, layoutRectangle);
+                  graphics.DrawString(s, this._DefaultFont,  solidBrush2, layoutRectangle);
                   layoutRectangle = new RectangleF((float) x, (float) scrollingItemTop, itemSize.Width + UiScale.S(1f), itemSize.Height + UiScale.S(1f));
-                  graphics.DrawString(s, this._DefaultFont, (Brush) solidBrush1, layoutRectangle);
+                  graphics.DrawString(s, this._DefaultFont,  solidBrush1, layoutRectangle);
                   continue;
                 case Bitmap _:
                   Bitmap bitmap = (Bitmap) obj;

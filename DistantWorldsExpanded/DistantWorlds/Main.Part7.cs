@@ -250,8 +250,7 @@ namespace DistantWorlds
                                     fighterSpecification = builtObject.Empire.Research.IdentifyLatestFighterSpecification();
                                     fighterSpecification2 = builtObject.Empire.Research.IdentifyLatestBomberSpecification();
                                 }
-                                Fighter[] array = ListHelper.ToArrayThreadSafe(builtObject.Fighters);
-                                foreach (Fighter fighter2 in array)
+                                foreach (Fighter fighter2 in builtObject.Fighters.CloneThreadSafe())
                                 {
                                     if (fighter2.Specification == null)
                                     {
@@ -586,8 +585,7 @@ namespace DistantWorlds
                                         fighterSpecification3 = builtObject.Empire.Research.IdentifyLatestFighterSpecification();
                                         fighterSpecification4 = builtObject.Empire.Research.IdentifyLatestBomberSpecification();
                                     }
-                                    Fighter[] array2 = ListHelper.ToArrayThreadSafe(builtObject.Fighters);
-                                    foreach (Fighter fighter3 in array2)
+                                    foreach (Fighter fighter3 in builtObject.Fighters.CloneThreadSafe())
                                     {
                                         if (fighter3.Specification == null)
                                         {
@@ -4841,8 +4839,9 @@ namespace DistantWorlds
             int num2 = 0;
             using (Graphics graphics = lblSaveLoadMessage.CreateGraphics())
             {
-                num = (int)graphics.MeasureString(string_30, font_2, UiScale.S(320), StringFormat.GenericTypographic).Width;
-                num2 = (int)graphics.MeasureString(string_30, font_2, UiScale.S(320), StringFormat.GenericTypographic).Height;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {num = (int)graphics.MeasureString(string_30, font_2, UiScale.S(320), format).Width;
+                num2 = (int)graphics.MeasureString(string_30, font_2, UiScale.S(320), format).Height;}
             }
             lblSaveLoadMessage.Size = new Size(num + UiScale.S(2), num2 + UiScale.S(2));
             lblSaveLoadMessage.Location = new Point((pnlSaveLoadProgress.Width - num) / 2, UiScale.S(13));

@@ -134,7 +134,7 @@ namespace DistantWorlds.Controls
         if (!this.HighlightFleetLeadShipsColor.IsEmpty && this._BuiltObjects[e.Index].ShipGroup != null && this._BuiltObjects[e.Index].ShipGroup.LeadShip == this._BuiltObjects[e.Index])
         {
           using (SolidBrush solidBrush = new SolidBrush(this.HighlightFleetLeadShipsColor))
-            e.Graphics.FillRectangle((Brush) solidBrush, e.Bounds);
+            e.Graphics.FillRectangle( solidBrush, e.Bounds);
         }
         if (this._BuiltObjects[e.Index].Empire != null && this._BuiltObjects[e.Index].Empire != this._Galaxy.IndependentEmpire)
         {
@@ -161,8 +161,8 @@ namespace DistantWorlds.Controls
         e.Graphics.DrawImage((Image) builtObjectImage, rect);
         PointF point = new PointF((float) (x1 + width1 + UiScale.S(4)), (float) (e.Bounds.Y + Math.Max(UiScale.S(1), (this.ItemHeight - UiScale.S(20)) / 2)));
         Font font = this.Font;
-        SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
-        e.Graphics.DrawString(this._BuiltObjects[e.Index].Name, font, (Brush) solidBrush1, point);
+        using SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
+        e.Graphics.DrawString(this._BuiltObjects[e.Index].Name, font,  solidBrush1, point);
       }
       e.DrawFocusRectangle();
     }

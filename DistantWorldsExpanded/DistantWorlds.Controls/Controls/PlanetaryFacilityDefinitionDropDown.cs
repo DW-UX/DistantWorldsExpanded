@@ -129,10 +129,10 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(23f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       string empty = string.Empty;
       if (this._AllowNull && e.Index == 0)
-        e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font, (Brush) solidBrush, point);
+        e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font,  solidBrush, point);
       else if (this._Facilities != null && this._Facilities.Count > 0 && e.Index >= 0)
       {
         int index = e.Index;
@@ -140,7 +140,7 @@ namespace DistantWorlds.Controls
           --index;
         double planetaryFacilityCost = Galaxy.CalculatePlanetaryFacilityCost(this._Facilities[index], this._Empire);
         string s = this._Facilities[index].Name + " (" + planetaryFacilityCost.ToString("#,###,##0") + " " + TextResolver.GetText("credits") + ")";
-        e.Graphics.DrawString(s, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(s, font,  solidBrush, point);
         Rectangle rect = new Rectangle();
         Bitmap facilityImage = this._FacilityImages[(int) this._Facilities[index].PictureRef];
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;

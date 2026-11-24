@@ -594,9 +594,10 @@ namespace DistantWorlds.Controls
       }
       int width = Math.Max(num6, benefitCount * num6);
       Rectangle rect = new Rectangle(location.X, location.Y, width, height);
-      graphics.FillRectangle((Brush) this._BlackTransparentBrush, rect);
+      graphics.FillRectangle( this._BlackTransparentBrush, rect);
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-      graphics.DrawString(project.Name, this._LargeFontBold, (Brush) this._WhiteBrush, new PointF(num4, y1), StringFormat.GenericTypographic);
+      using StringFormat format = StringFormat.GenericTypographic;
+      graphics.DrawString(project.Name, this._LargeFontBold,  this._WhiteBrush, new PointF(num4, y1), format);
       float y2 = y1 + num1;
       bool flag1 = true;
       if (project.AllowedRaces != null && project.AllowedRaces.Count > 0)
@@ -612,7 +613,7 @@ namespace DistantWorlds.Controls
         if (!string.IsNullOrEmpty(str1) && str1.Length >= 2)
           str1 = str1.Substring(0, str1.Length - 2);
         string str2 = "(" + string.Format(TextResolver.GetText("RACE only"), (object) str1) + ")";
-        graphics.DrawString(str2.ToUpper(CultureInfo.InvariantCulture), this._LargeFont, (Brush) this._UnresearchableBrush, new PointF(num4, y2), StringFormat.GenericTypographic);
+        graphics.DrawString(str2.ToUpper(CultureInfo.InvariantCulture), this._LargeFont,  this._UnresearchableBrush, new PointF(num4, y2), format);
         y2 += num1;
       }
       if (project.DisallowedRaces != null && project.DisallowedRaces.Count > 0)
@@ -628,7 +629,7 @@ namespace DistantWorlds.Controls
         if (!string.IsNullOrEmpty(str3) && str3.Length >= 2)
           str3 = str3.Substring(0, str3.Length - 2);
         string str4 = "(" + string.Format(TextResolver.GetText("Not RACE"), (object) str3) + ")";
-        graphics.DrawString(str4.ToUpper(CultureInfo.InvariantCulture), this._LargeFont, (Brush) this._UnresearchableBrush, new PointF(num4, y2), StringFormat.GenericTypographic);
+        graphics.DrawString(str4.ToUpper(CultureInfo.InvariantCulture), this._LargeFont,  this._UnresearchableBrush, new PointF(num4, y2), format);
         y2 += num1;
       }
       if (flag1)
@@ -637,7 +638,7 @@ namespace DistantWorlds.Controls
         {
           if (this._Research.CanResearchNode(project))
           {
-            graphics.DrawString("(" + TextResolver.GetText("Click to queue research") + ")", this._LargeFont, (Brush) this._WhiteBrush, new PointF(num4, y2), StringFormat.GenericTypographic);
+            graphics.DrawString("(" + TextResolver.GetText("Click to queue research") + ")", this._LargeFont,  this._WhiteBrush, new PointF(num4, y2), format);
             y2 += num1;
           }
           else
@@ -656,11 +657,11 @@ namespace DistantWorlds.Controls
                 flag2 = true;
                 string str6 = str5.Substring(0, str5.Length - 3);
                 string str7 = string.Format(TextResolver.GetText("Must first research PROJECT"), (object) str6);
-                StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox);
+                using StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
                 format.Trimming = StringTrimming.EllipsisCharacter;
-                SizeF sizeF = graphics.MeasureString(str7, this._NormalFontBold, num6 - UiScale.S(10), format);
+                SizeF sizeF = graphics.MeasureString(str7, this._NormalFontBold, num6 - UiScale.S(10), format1);
                 RectangleF layoutRectangle = new RectangleF(num4, y2, sizeF.Width + UiScale.S(3f), sizeF.Height + UiScale.S(3f));
-                graphics.DrawString(str7, this._NormalFontBold, (Brush) this._RedBrush, layoutRectangle, format);
+                graphics.DrawString(str7, this._NormalFontBold,  this._RedBrush, layoutRectangle, format1);
                 y2 += sizeF.Height;
               }
             }
@@ -676,16 +677,16 @@ namespace DistantWorlds.Controls
                   str = TextResolver.GetText("Project is disabled. Must enable through game event");
                   break;
               }
-              StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox);
+              using StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
               format.Trimming = StringTrimming.EllipsisCharacter;
-              SizeF sizeF = graphics.MeasureString(str, this._NormalFontBold, num6 - UiScale.S(10), format);
+              SizeF sizeF = graphics.MeasureString(str, this._NormalFontBold, num6 - UiScale.S(10), format1);
               RectangleF layoutRectangle = new RectangleF(num4, y2, sizeF.Width + UiScale.S(3f), sizeF.Height + UiScale.S(3f));
-              graphics.DrawString(str, this._NormalFontBold, (Brush) this._RedBrush, layoutRectangle, format);
+              graphics.DrawString(str, this._NormalFontBold,  this._RedBrush, layoutRectangle, format1);
               y2 += sizeF.Height;
             }
             else if (!flag2)
             {
-              graphics.DrawString(TextResolver.GetText("Must first research preceding project"), this._NormalFontBold, (Brush) this._RedBrush, new PointF(num4, y2), StringFormat.GenericTypographic);
+              graphics.DrawString(TextResolver.GetText("Must first research preceding project"), this._NormalFontBold,  this._RedBrush, new PointF(num4, y2), format);
               y2 += num3;
             }
           }
@@ -694,24 +695,24 @@ namespace DistantWorlds.Controls
         {
           if (project.IsRushing)
           {
-            graphics.DrawString("(" + TextResolver.GetText("Cannot cancel crash programs") + ")", this._LargeFont, (Brush) this._RedBrush, new PointF(num4, y2), StringFormat.GenericTypographic);
+            graphics.DrawString("(" + TextResolver.GetText("Cannot cancel crash programs") + ")", this._LargeFont,  this._RedBrush, new PointF(num4, y2), format);
             y2 += num1;
           }
           else
           {
-            graphics.DrawString("(" + TextResolver.GetText("Right-click to cancel") + ")", this._LargeFont, (Brush) this._WhiteBrush, new PointF(num4, y2), StringFormat.GenericTypographic);
+            graphics.DrawString("(" + TextResolver.GetText("Right-click to cancel") + ")", this._LargeFont,  this._WhiteBrush, new PointF(num4, y2), format);
             y2 += num1;
           }
         }
       }
       if (project.IsRushing && !project.IsResearched)
       {
-        graphics.DrawString(TextResolver.GetText("CRASH  RESEARCH  (3x speed)"), this._LargeFont, (Brush) this._WhiteBrush, new PointF(num4, y2), StringFormat.GenericTypographic);
+        graphics.DrawString(TextResolver.GetText("CRASH  RESEARCH  (3x speed)"), this._LargeFont,  this._WhiteBrush, new PointF(num4, y2), format);
         y2 += num1;
       }
       else if (researchQueueIndex == 0)
       {
-        graphics.DrawString("(" + TextResolver.GetText("Click to initiate Crash Program") + ")", this._LargeFont, (Brush) this._WhiteBrush, new PointF(num4, y2), StringFormat.GenericTypographic);
+        graphics.DrawString("(" + TextResolver.GetText("Click to initiate Crash Program") + ")", this._LargeFont,  this._WhiteBrush, new PointF(num4, y2), format);
         y2 += num1;
       }
       float y3 = y2 + UiScale.S(5f);
@@ -726,9 +727,9 @@ namespace DistantWorlds.Controls
       else if (researchQueueIndex > 0)
         s = s + "   (" + string.Format(TextResolver.GetText("#X in queue"), (object) (researchQueueIndex + 1).ToString()) + ")";
       if (project.IsResearched)
-        graphics.DrawString(s, this._LargeFont, (Brush) this._UnresearchableBrush, new PointF(num4, y3), StringFormat.GenericTypographic);
+        graphics.DrawString(s, this._LargeFont,  this._UnresearchableBrush, new PointF(num4, y3), format);
       else
-        graphics.DrawString(s, this._LargeFont, (Brush) this._WhiteBrush, new PointF(num4, y3), StringFormat.GenericTypographic);
+        graphics.DrawString(s, this._LargeFont,  this._WhiteBrush, new PointF(num4, y3), format);
       float num9 = y3 + num1;
       float num10 = UiScale.S(150f);
       List<string[]> allDescriptions;
@@ -745,11 +746,11 @@ namespace DistantWorlds.Controls
         float num13 = num11;
         if (index1 < allDescriptions.Count - 1 && allDescriptions.Count > 1)
           graphics.DrawLine(this._FadedDotPen, (float) ((double) x + (double) num6 - UiScale.S(3.0)), num13, (float) ((double) x + (double) num6 - UiScale.S(3.0)), num13 + num10);
-        StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
+        using StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
         format1.Trimming = StringTrimming.EllipsisCharacter;
         SizeF sizeF1 = graphics.MeasureString(strArray1[0], this._NormalFontBold, num6 - UiScale.S(10), format1);
         RectangleF layoutRectangle1 = new RectangleF(x, num13, sizeF1.Width + UiScale.S(3f), sizeF1.Height + UiScale.S(3f));
-        graphics.DrawString(strArray1[0], this._NormalFontBold, (Brush) this._WhiteBrush, layoutRectangle1, format1);
+        graphics.DrawString(strArray1[0], this._NormalFontBold,  this._WhiteBrush, layoutRectangle1, format1);
         float y4 = num13 + sizeF1.Height;
         if (strArray1.Length > 1)
         {
@@ -758,19 +759,19 @@ namespace DistantWorlds.Controls
             if (string.IsNullOrEmpty(strArray2[index2]))
             {
               float y5 = y4 + UiScale.S(5f);
-              StringFormat format2 = new StringFormat(StringFormatFlags.FitBlackBox);
+              using StringFormat format2 = new StringFormat(StringFormatFlags.FitBlackBox);
               format2.Trimming = StringTrimming.EllipsisCharacter;
               SizeF sizeF2 = graphics.MeasureString(strArray1[index2], this._NormalFont, num6 - UiScale.S(10), format2);
               RectangleF layoutRectangle2 = new RectangleF(x, y5, sizeF2.Width + UiScale.S(3f), sizeF2.Height + UiScale.S(3f));
-              graphics.DrawString(strArray1[index2], this._NormalFont, (Brush) this._WhiteBrush, layoutRectangle2, format2);
+              graphics.DrawString(strArray1[index2], this._NormalFont,  this._WhiteBrush, layoutRectangle2, format2);
               y4 = y5 + sizeF2.Height;
             }
             else
             {
-              SizeF sizeF3 = graphics.MeasureString(strArray1[index2], this._NormalFont, num6, StringFormat.GenericTypographic);
+              SizeF sizeF3 = graphics.MeasureString(strArray1[index2], this._NormalFont, num6, format);
               float num14 = num12 - sizeF3.Width;
-              graphics.DrawString(strArray1[index2], this._NormalFont, (Brush) this._WhiteBrush, new PointF((float) ((double) x + (double) num14 - UiScale.S(5.0)), y4), StringFormat.GenericTypographic);
-              graphics.DrawString(strArray2[index2], this._NormalFontBold, (Brush) this._WhiteBrush, new PointF(x + num12, y4), StringFormat.GenericTypographic);
+              graphics.DrawString(strArray1[index2], this._NormalFont,  this._WhiteBrush, new PointF((float) ((double) x + (double) num14 - UiScale.S(5.0)), y4), format);
+              graphics.DrawString(strArray2[index2], this._NormalFontBold,  this._WhiteBrush, new PointF(x + num12, y4), format);
               y4 += sizeF3.Height - UiScale.S(1f);
             }
           }
@@ -1387,7 +1388,7 @@ namespace DistantWorlds.Controls
               using (SolidBrush solidBrush = new SolidBrush(color))
               {
                 graphics1.SmoothingMode = SmoothingMode.AntiAlias;
-                graphics1.FillPath((Brush) solidBrush, roundRectangle);
+                graphics1.FillPath( solidBrush, roundRectangle);
                 graphics1.SmoothingMode = SmoothingMode.None;
               }
             }
@@ -1471,8 +1472,8 @@ namespace DistantWorlds.Controls
               string s = researchNode.Name;
               if (researchQueueIndex >= 0)
                 s = s + " (" + (researchQueueIndex + 1).ToString() + ")";
-              graphics1.DrawString(s, headingFont, (Brush) solidBrush2, new PointF(point.X + UiScale.S(1f), point.Y + UiScale.S(1f)));
-              graphics1.DrawString(s, headingFont, (Brush) solidBrush1, point);
+              graphics1.DrawString(s, headingFont,  solidBrush2, new PointF(point.X + UiScale.S(1f), point.Y + UiScale.S(1f)));
+              graphics1.DrawString(s, headingFont,  solidBrush1, point);
             }
           }
           if (nodeImages != null)
@@ -1485,7 +1486,8 @@ namespace DistantWorlds.Controls
           {
             string s = Galaxy.ResolveDescription(researchNode);
             RectangleF layoutRectangle = new RectangleF(UiScale.S(43f) + (float) num1, UiScale.S(17f) + (float) num1, (float) (width - UiScale.S(48)), (float) (height - UiScale.S(18)));
-            graphics1.DrawString(s, font, (Brush) solidBrush, layoutRectangle, StringFormat.GenericTypographic);
+            using StringFormat format = StringFormat.GenericTypographic;
+            graphics1.DrawString(s, font,  solidBrush, layoutRectangle, format);
           }
         }
 label_114:
@@ -1850,10 +1852,10 @@ label_114:
       LinearGradientBrush linearGradientBrush = (LinearGradientBrush) null;
       if (rect2.Width > 0)
         linearGradientBrush = new LinearGradientBrush(rect3, color1, color2, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
-      SolidBrush solidBrush = new SolidBrush(backgroundColor);
-      graphics.FillRectangle((Brush) solidBrush, rect1);
+      using SolidBrush solidBrush = new SolidBrush(backgroundColor);
+      graphics.FillRectangle( solidBrush, rect1);
       if (rect2.Width > 0)
-        graphics.FillRectangle((Brush) linearGradientBrush, rect2);
+        graphics.FillRectangle( linearGradientBrush, rect2);
       linearGradientBrush?.Dispose();
       solidBrush.Dispose();
     }
@@ -2045,23 +2047,23 @@ label_114:
         {
           if (!restricted)
           {
-            using (Brush brush = (Brush) new HatchBrush(HatchStyle.WideDownwardDiagonal, outerBorderColor))
+            using (Brush brush =  new HatchBrush(HatchStyle.WideDownwardDiagonal, outerBorderColor))
               g.FillPath(brush, roundRectangle);
           }
           else
           {
-            using (Brush brush = (Brush) new HatchBrush(HatchStyle.DarkUpwardDiagonal, outerBorderColor))
+            using (Brush brush =  new HatchBrush(HatchStyle.DarkUpwardDiagonal, outerBorderColor))
               g.FillPath(brush, roundRectangle);
           }
         }
         else if (!restricted)
         {
-          using (Brush brush = (Brush) new HatchBrush(HatchStyle.WideDownwardDiagonal, outerBorderColor))
+          using (Brush brush =  new HatchBrush(HatchStyle.WideDownwardDiagonal, outerBorderColor))
             g.FillPath(brush, roundRectangle);
         }
         else
         {
-          using (Brush brush = (Brush) new SolidBrush(outerBorderColor))
+          using (Brush brush =  new SolidBrush(outerBorderColor))
             g.FillPath(brush, roundRectangle);
         }
       }
@@ -2082,7 +2084,7 @@ label_114:
               {
                 Color.FromArgb(0, glowColor)
               };
-              g.FillPath((Brush) pathGradientBrush, bottomRadialPath);
+              g.FillPath( pathGradientBrush, bottomRadialPath);
             }
           }
           g.ResetClip();
@@ -2098,7 +2100,7 @@ label_114:
           if (pressed | !enabled)
             alpha = (int) (0.40000000596046448 * (double) alpha + 0.5);
           using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rectangle2, Color.FromArgb(alpha, shineColor), Color.FromArgb(alpha / 3, shineColor), System.Drawing.Drawing2D.LinearGradientMode.Vertical))
-            g.FillPath((Brush) linearGradientBrush, topRoundRectangle);
+            g.FillPath( linearGradientBrush, topRoundRectangle);
         }
         rectangle2.Height -= 2;
       }
@@ -2114,7 +2116,6 @@ label_114:
 
     private GraphicsPath CreateRoundRectangle(RectangleF rectangle, float radius)
     {
-      GraphicsPath graphicsPath = new GraphicsPath();
       double left = (double) rectangle.Left;
       double top = (double) rectangle.Top;
       double width = (double) rectangle.Width;
@@ -2187,7 +2188,6 @@ label_114:
 
     private GraphicsPath CreateTopRoundRectangle(Rectangle rectangle, int radius)
     {
-      GraphicsPath graphicsPath = new GraphicsPath();
       int left = rectangle.Left;
       int top = rectangle.Top;
       int width = rectangle.Width;

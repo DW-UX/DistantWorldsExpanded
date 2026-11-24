@@ -66,7 +66,7 @@ namespace DistantWorlds.Controls
       base.OnDrawItem(e);
       e.DrawBackground();
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (e.Index >= 0)
       {
         Bitmap smallFlagPicture = (Bitmap) null;

@@ -196,27 +196,25 @@ namespace DistantWorlds.Controls
     private void DrawBackground(Graphics graphics)
     {
       graphics.SmoothingMode = SmoothingMode.AntiAlias;
-      GraphicsPath path = this.GetPath();
+      using GraphicsPath path = this.GetPath();
       Rectangle clientRectangle = this.ClientRectangle;
       if (this.ClientRectangle.Width == 0)
         ++clientRectangle.Width;
       if (this.ClientRectangle.Height == 0)
         ++clientRectangle.Height;
-      LinearGradientBrush linearGradientBrush = this._GradientMode != LinearGradientMode.None ? new LinearGradientBrush(clientRectangle, this._BackColour1, this._BackColour2, (System.Drawing.Drawing2D.LinearGradientMode) this._GradientMode) : new LinearGradientBrush(clientRectangle, this._BackColour1, this._BackColour1, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
-      graphics.FillPath((Brush) linearGradientBrush, path);
+      using LinearGradientBrush linearGradientBrush = this._GradientMode != LinearGradientMode.None ? new LinearGradientBrush(clientRectangle, this._BackColour1, this._BackColour2, (System.Drawing.Drawing2D.LinearGradientMode) this._GradientMode) : new LinearGradientBrush(clientRectangle, this._BackColour1, this._BackColour1, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
+      graphics.FillPath( linearGradientBrush, path);
       linearGradientBrush.Dispose();
       switch (this._BorderStyle)
       {
         case BorderStyle.FixedSingle:
-          Pen pen = new Pen(this._BorderColour, (float) this._BorderWidth);
-          graphics.DrawPath(pen, path);
-          pen.Dispose();
+          using (Pen pen = new Pen(this._BorderColour, (float) this._BorderWidth))
+         { graphics.DrawPath(pen, path);}
           break;
         case BorderStyle.Fixed3D:
           PersistentGradientPanel.DrawBorder3D(graphics, this.ClientRectangle);
           break;
       }
-      linearGradientBrush.Dispose();
       path.Dispose();
     }
 
@@ -510,15 +508,17 @@ namespace DistantWorlds.Controls
           graphics.DrawImage(this._SmallPicture, this._SmallPictureLocation);
       }
       int y = UiScale.S(6);
+      using Brush brush1 =  new SolidBrush(Color.Black);
+      using Brush brush2 =  new SolidBrush(Color.White);
       if (!string.IsNullOrEmpty(this._Title))
       {
-        graphics.DrawString(this._Title, font, (Brush) new SolidBrush(Color.Black), new PointF(UiScale.S(7f), (float) (y + UiScale.S(1))));
-        graphics.DrawString(this._Title, font, (Brush) new SolidBrush(Color.White), new PointF(UiScale.S(6f), (float) y));
+        graphics.DrawString(this._Title, font,  brush1, new PointF(UiScale.S(7f), (float) (y + UiScale.S(1))));
+        graphics.DrawString(this._Title, font,  brush2, new PointF(UiScale.S(6f), (float) y));
         SizeF sizeF = graphics.MeasureString(this._Title, font);
         y += (int) sizeF.Height + UiScale.S(6);
       }
-      graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(Color.Black), new PointF(UiScale.S(7f), (float) (y + UiScale.S(1))));
-      graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(Color.White), new PointF(UiScale.S(6f), (float) y));
+      graphics.DrawString(this._Text, this.Font, brush1, new PointF(UiScale.S(7f), (float) (y + UiScale.S(1))));
+      graphics.DrawString(this._Text, this.Font,  brush2, new PointF(UiScale.S(6f), (float) y));
     }
 
     protected override void OnPaint(PaintEventArgs e)

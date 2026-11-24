@@ -1169,9 +1169,8 @@ namespace DistantWorlds.Types
         private BuiltObject FindNearestKnownBaseForPirateAttackInIndex(double x, double y, GalaxyIndex index, out double distance, Empire attackingEmpire, EmpireList empiresToExclude)
         {
             BuiltObject builtObject = null;
-            BuiltObject[] array = ListHelper.ToArrayThreadSafe(BuiltObjectIndex[index.X][index.Y]);
             distance = double.MaxValue;
-            foreach (BuiltObject builtObject2 in array)
+            foreach (BuiltObject builtObject2 in BuiltObjectIndex[index.X][index.Y].CloneThreadSafe())
             {
                 if (builtObject2 == null || builtObject2.HasBeenDestroyed || builtObject2.Role != BuiltObjectRole.Base || empiresToExclude.Contains(builtObject2.Empire) || builtObject2.Empire == IndependentEmpire || builtObject2.Empire == null)
                 {
@@ -1449,11 +1448,10 @@ namespace DistantWorlds.Types
         private BuiltObject FindNearestBuiltObjectInIndex(int x, int y, GalaxyIndex index, out double distance, BuiltObjectSubRole subRole, bool includeSecondaryEmpires)
         {
             BuiltObject builtObject = null;
-            BuiltObject[] array = ListHelper.ToArrayThreadSafe(BuiltObjectIndex[index.X][index.Y]);
             distance = double.MaxValue;
-            if (array != null)
+            if (BuiltObjectIndex[index.X][index.Y] != null)
             {
-                foreach (BuiltObject builtObject2 in array)
+                foreach (BuiltObject builtObject2 in BuiltObjectIndex[index.X][index.Y].CloneThreadSafe())
                 {
                     if (builtObject2 == null)
                     {
@@ -3226,12 +3224,11 @@ namespace DistantWorlds.Types
         {
             BuiltObjectList builtObjectList = new BuiltObjectList();
             threatLevels = new List<int>();
-            List<BuiltObject[]> builtObjectsAtLocationByArrays = GetBuiltObjectsAtLocationByArrays(systemStar.Xpos, systemStar.Ypos, MaxSolarSystemSize * 2);
-            _ = targetEmpire.PirateEmpireBaseHabitat;
+            List<List<BuiltObject>> builtObjectsAtLocationByArrays = GetBuiltObjectsAtLocationByArrays(systemStar.Xpos, systemStar.Ypos, MaxSolarSystemSize * 2);
+            
             for (int i = 0; i < builtObjectsAtLocationByArrays.Count; i++)
             {
-                int num = builtObjectsAtLocationByArrays[i].Length;
-                for (int j = 0; j < num; j++)
+                for (int j = 0; j < builtObjectsAtLocationByArrays[i].Count; j++)
                 {
                     BuiltObject builtObject = builtObjectsAtLocationByArrays[i][j];
                     if (builtObject != null && builtObject.NearestSystemStar == systemStar && builtObject.Empire != targetEmpire)
@@ -3340,7 +3337,7 @@ namespace DistantWorlds.Types
             int y = (int)num2 / IndexSize;
             CorrectIndexCoords(ref x, ref y);
             num3 += (double)(MaxSolarSystemSize * 2);
-            List<BuiltObject[]> builtObjectsAtLocationByArrays = GetBuiltObjectsAtLocationByArrays(num, num2, (int)num3);
+            List<List<BuiltObject>> builtObjectsAtLocationByArrays = GetBuiltObjectsAtLocationByArrays(num, num2, (int)num3);
             num3 *= num3;
             int num8 = 10;
             if (empire == null)
@@ -3349,7 +3346,7 @@ namespace DistantWorlds.Types
             }
             for (int j = 0; j < builtObjectsAtLocationByArrays.Count; j++)
             {
-                for (int k = 0; k < builtObjectsAtLocationByArrays[j].Length; k++)
+                for (int k = 0; k < builtObjectsAtLocationByArrays[j].Count; k++)
                 {
                     BuiltObject builtObject3 = builtObjectsAtLocationByArrays[j][k];
                     if (builtObject3 != null)

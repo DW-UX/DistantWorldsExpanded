@@ -92,19 +92,19 @@ namespace DistantWorlds
             fbmNoise_0 = new DistantWorlds.FbmNoise(int_0);
         }
 
-        private RectangleF method_0(GraphicsPath graphicsPath_0)
-        {
-            PointF location = new Point(1000000, 1000000);
-            PointF pointF = new Point(-1000000, -1000000);
-            PointF[] pathPoints = graphicsPath_0.PathPoints;
-            for (int i = 0; i < pathPoints.Length; i++)
-            {
-                PointF pointF2 = pathPoints[i];
-                location = new PointF((pointF2.X < location.X) ? pointF2.X : location.X, (pointF2.Y < location.Y) ? pointF2.Y : location.Y);
-                pointF = new PointF((pointF2.X > pointF.X) ? pointF2.X : pointF.X, (pointF2.Y > pointF.Y) ? pointF2.Y : pointF.Y);
-            }
-            return new RectangleF(location, new SizeF(pointF.X - location.X, pointF.Y - location.Y));
-        }
+        // private RectangleF method_0(GraphicsPath graphicsPath_0)
+        // {
+        //     PointF location = new Point(1000000, 1000000);
+        //     PointF pointF = new Point(-1000000, -1000000);
+        //     PointF[] pathPoints = graphicsPath_0.PathPoints;
+        //     for (int i = 0; i < pathPoints.Length; i++)
+        //     {
+        //         PointF pointF2 = pathPoints[i];
+        //         location = new PointF((pointF2.X < location.X) ? pointF2.X : location.X, (pointF2.Y < location.Y) ? pointF2.Y : location.Y);
+        //         pointF = new PointF((pointF2.X > pointF.X) ? pointF2.X : pointF.X, (pointF2.Y > pointF.Y) ? pointF2.Y : pointF.Y);
+        //     }
+        //     return new RectangleF(location, new SizeF(pointF.X - location.X, pointF.Y - location.Y));
+        // }
 
         private RectangleF method_1(GraphicsPath graphicsPath_0)
         {
@@ -136,14 +136,14 @@ namespace DistantWorlds
             return new RectangleF(num, num3, num2 - num, num4 - num3);
         }
 
-        private void method_2(ref GraphicsPath graphicsPath_0, float float_0, float float_1)
-        {
-            for (int i = 0; i < graphicsPath_0.PathPoints.Length; i++)
-            {
-                ref PointF reference = ref graphicsPath_0.PathPoints[i];
-                reference = new PointF(graphicsPath_0.PathPoints[i].X + float_0, graphicsPath_0.PathPoints[i].Y + float_1);
-            }
-        }
+        // private void method_2(ref GraphicsPath graphicsPath_0, float float_0, float float_1)
+        // {
+        //     for (int i = 0; i < graphicsPath_0.PathPoints.Length; i++)
+        //     {
+        //         ref PointF reference = ref graphicsPath_0.PathPoints[i];
+        //         reference = new PointF(graphicsPath_0.PathPoints[i].X + float_0, graphicsPath_0.PathPoints[i].Y + float_1);
+        //     }
+        // }
 
         private List<Color> method_3(int int_5)
         {
@@ -502,11 +502,13 @@ namespace DistantWorlds
                 }
                 if (bool_1)
                 {
-                    graphics.FillRectangle(new SolidBrush(Color.Transparent), 0, 0, bitmap2.Width, bitmap2.Height);
+                using Brush brush = new SolidBrush(Color.Transparent);
+                    graphics.FillRectangle(brush, 0, 0, bitmap2.Width, bitmap2.Height);
                 }
                 else
                 {
-                    graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, bitmap2.Width, bitmap2.Height);
+                using Brush brush = new SolidBrush(Color.Black);
+                    graphics.FillRectangle(brush, 0, 0, bitmap2.Width, bitmap2.Height);
                 }
                 for (int k = 0; k < num; k++)
                 {
@@ -610,11 +612,13 @@ namespace DistantWorlds
                 }
                 if (transparentBackground)
                 {
-                    graphics.FillRectangle(new SolidBrush(Color.Transparent), 0, 0, bitmap2.Width, bitmap2.Height);
+                using Brush brush = new SolidBrush(Color.Transparent);
+                    graphics.FillRectangle(brush, 0, 0, bitmap2.Width, bitmap2.Height);
                 }
                 else
                 {
-                    graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, bitmap2.Width, bitmap2.Height);
+                using Brush brush = new SolidBrush(Color.Black);
+                    graphics.FillRectangle(brush, 0, 0, bitmap2.Width, bitmap2.Height);
                 }
                 for (int k = 0; k < num; k++)
                 {
@@ -852,10 +856,11 @@ namespace DistantWorlds
                 {
                     method_6(graphics);
                 }
-                graphics.FillRectangle(new SolidBrush(Color.Transparent), 0, 0, bitmap.Width, bitmap.Height);
+                using Brush brush2 = new SolidBrush(Color.Transparent);
+                graphics.FillRectangle(brush2, 0, 0, bitmap.Width, bitmap.Height);
                 method_8(graphics);
-                using PathGradientBrush brush = method_17(graphicsPath, int_2, int_3, color);
-                graphics.FillPath(brush, graphicsPath);
+                using PathGradientBrush brush1 = method_17(graphicsPath, int_2, int_3, color);
+                graphics.FillPath(brush1, graphicsPath);
             }
             return method_15(bitmap, 0);
         }

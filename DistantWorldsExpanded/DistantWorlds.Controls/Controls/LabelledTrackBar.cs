@@ -226,12 +226,14 @@ namespace DistantWorlds.Controls
     {
       e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       base.OnPaint(e);
+        using StringFormat format = StringFormat.GenericDefault;
       if (!string.IsNullOrEmpty(this._LabelText))
       {
         Font font = new Font(this.Font, FontStyle.Bold);
-        SizeF sizeF = e.Graphics.MeasureString(this._LabelText, font, new SizeF((float) this._LabelWidth, (float) this.Height), StringFormat.GenericDefault);
+        SizeF sizeF = e.Graphics.MeasureString(this._LabelText, font, new SizeF((float) this._LabelWidth, (float) this.Height), format);
         RectangleF layoutRectangle = new RectangleF((float) (((double) this._LabelWidth - (double) sizeF.Width) / 2.0), (float) (((double) this.Height - (double) sizeF.Height) / 2.0), sizeF.Width + UiScale.S(1f), sizeF.Height + UiScale.S(1f));
-        e.Graphics.DrawString(this._LabelText, font, (Brush) new SolidBrush(this.ForeColor), layoutRectangle, StringFormat.GenericDefault);
+              using Brush brush =  new SolidBrush(this.ForeColor);
+        e.Graphics.DrawString(this._LabelText, font,  brush, layoutRectangle, format);
       }
       if (this._LinkLabel != null && !string.IsNullOrEmpty(this._LinkLabel.Text))
       {
@@ -244,8 +246,9 @@ namespace DistantWorlds.Controls
       for (int index = 0; index < this._Labels.Length; ++index)
       {
         int x = this._Padding + this._LabelWidth + this._SliderOffset - UiScale.S(1) + this._Slider.ThumbSize / 2 + (int) ((double) (this._Slider.Width - this._Slider.ThumbSize) * ((double) index / (double) (this._Labels.Length - 1)));
-        e.Graphics.FillRectangle((Brush) new SolidBrush(this._Slider.BarInnerColor), x, this.Height - (this._SliderHeight + this._Padding), UiScale.S(2), UiScale.S(7));
-        SizeF sizeF = e.Graphics.MeasureString(this._Labels[index], this.Font, width, StringFormat.GenericDefault);
+        using Brush brush =  new SolidBrush(this._Slider.BarInnerColor);
+        e.Graphics.FillRectangle( brush, x, this.Height - (this._SliderHeight + this._Padding), UiScale.S(2), UiScale.S(7));
+        SizeF sizeF = e.Graphics.MeasureString(this._Labels[index], this.Font, width, format);
         // Keep the first and last captions inside the control, or their ends are cut off.
         float captionX = Math.Max(0f, Math.Min((float) x - sizeF.Width / 2f, (float) this.Width - sizeF.Width - UiScale.S(1f)));
         PointF pointF = new PointF(captionX, (float) padding);

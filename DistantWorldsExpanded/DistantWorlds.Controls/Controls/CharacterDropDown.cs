@@ -185,7 +185,7 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(60f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (e.Index >= 0)
       {
         int num1 = 0;
@@ -204,11 +204,11 @@ namespace DistantWorlds.Controls
             role = this._CharacterRoles[index];
         }
         if (this._AllowNullSelection && e.Index == 0)
-          e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font, (Brush) solidBrush, point);
+          e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font,  solidBrush, point);
         else if (role != CharacterRole.Undefined)
         {
           string s = "(" + string.Format(TextResolver.GetText("Random CHARACTER ROLE"), (object) Galaxy.ResolveDescription(role)) + ")";
-          e.Graphics.DrawString(s, font, (Brush) solidBrush, point);
+          e.Graphics.DrawString(s, font,  solidBrush, point);
           Rectangle rect = new Rectangle();
           if (this._Empire != null && this._Empire != this._Galaxy.IndependentEmpire)
           {
@@ -241,7 +241,7 @@ namespace DistantWorlds.Controls
             Character character = this._Characters[index];
             if (character != null)
             {
-              e.Graphics.DrawString(character.Name, font, (Brush) solidBrush, point);
+              e.Graphics.DrawString(character.Name, font,  solidBrush, point);
               Rectangle rect = new Rectangle();
               if (character.Empire != null && character.Empire != this._Galaxy.IndependentEmpire)
               {

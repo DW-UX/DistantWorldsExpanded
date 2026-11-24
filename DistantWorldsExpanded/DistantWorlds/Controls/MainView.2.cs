@@ -2180,13 +2180,15 @@ namespace DistantWorlds.Controls
 
         public void DrawShipSymbol(Graphics graphics, BuiltObject builtObject, System.Drawing.Color color, float x, float y, float width, float height, float originalWidth, float originalHeight, bool fillInterior, double zoomFactor)
         {
-            Pen pen = new Pen(color, 2f);
-            SolidBrush solidBrush = new SolidBrush(color);
+            Pen pen;
+            using SolidBrush solidBrush = new SolidBrush(color);
             if (fillInterior)
             {
                 System.Drawing.Color color2 = method_226(color, 64);
                 pen = new Pen(color2, 2f);
             }
+            else
+            {pen = new Pen(color, 2f);}
             if (zoomFactor <= 50.0 && builtObject.Owner == null && builtObject.Empire != galaxy_0.IndependentEmpire && builtObject.Empire != null)
             {
                 pen.DashStyle = DashStyle.Dot;
@@ -3067,7 +3069,7 @@ namespace DistantWorlds.Controls
         private void method_211(float float_0, float float_1, float float_2, float float_3, Graphics graphics_0)
         {
             method_213();
-            Pen pen = new Pen(color_5, 5f);
+            using Pen pen = new Pen(color_5, 5f);
             pen.EndCap = LineCap.Round;
             pen.StartCap = LineCap.Round;
             double num = 0.0;
@@ -3120,7 +3122,7 @@ namespace DistantWorlds.Controls
             graphics_0.DrawArc(pen, rect, num5, 70f);
             graphics_0.DrawArc(pen, rect, num6, 70f);
             graphics_0.DrawArc(pen, rect, num7, 70f);
-            Pen pen2 = new Pen(color_6, 2f);
+            using Pen pen2 = new Pen(color_6, 2f);
             pen2.EndCap = LineCap.Round;
             pen2.StartCap = LineCap.Round;
             graphics_0.DrawArc(pen2, rect, num4, 70f);
@@ -4035,7 +4037,7 @@ namespace DistantWorlds.Controls
                 flag19 = main_0.gameOptions_0.MapOverlayResearchLocations;
                 flag20 = main_0.gameOptions_0.MapOverlayLongRangeScanners;
             }
-            Pen pen = new Pen(System.Drawing.Color.FromArgb(int_15, 112, 112, 112), 1.5f);
+            using Pen pen = new Pen(System.Drawing.Color.FromArgb(int_15, 112, 112, 112), 1.5f);
             pen.DashStyle = DashStyle.Dash;
             int num = (int)((double)Galaxy.SizeX / double_15);
             double double_16 = (double)int_13 * double_15;
@@ -4046,10 +4048,12 @@ namespace DistantWorlds.Controls
             int int_19 = 0;
             method_225(int_11, int_12, double_16, double_17, ref int_16, ref int_17, ref int_18, ref int_19);
             double num2 = (double)num / (double)Galaxy.SectorMaxX;
-            SizeF sizeF = graphics_0.MeasureString("H", font_3, 200, StringFormat.GenericTypographic);
+            SizeF sizeF;
+            using(StringFormat format = StringFormat.GenericTypographic)
+            {sizeF = graphics_0.MeasureString("H", font_3, 200, format);}
             float num3 = (float)(num2 / 2.0 - (double)sizeF.Width / 2.0);
             float num4 = (float)(num2 / 2.0 - (double)sizeF.Height / 2.0);
-            SolidBrush solidBrush = new SolidBrush(main_0.color_7);
+            using SolidBrush solidBrush = new SolidBrush(main_0.color_7);
             int num5 = galaxy_0.ResolveSector(int_16, int_12).X;
             int num6 = galaxy_0.ResolveSector(int_17, int_12).X;
             int num7 = galaxy_0.ResolveSector(int_11, int_18).Y;
@@ -4334,8 +4338,8 @@ namespace DistantWorlds.Controls
                 {
                     continue;
                 }
-                Pen pen7 = method_268(empire, flag, systemInfo, int_15);
-                Brush brush = method_269(empire, flag, systemInfo, int_15);
+                using Pen pen7 = method_268(empire, flag, systemInfo, int_15);
+                using Brush brush = method_269(empire, flag, systemInfo, int_15);
                 int val4 = (int)((double)systemInfo.SystemStar.Diameter / (double_15 / 70.0));
                 val4 = Math.Min(Math.Max(8, val4), 25);
                 if (systemInfo.SystemStar.Type == HabitatType.SuperNova)
@@ -4549,7 +4553,9 @@ namespace DistantWorlds.Controls
                         {
                             graphics_0.DrawImage(srcRect: new System.Drawing.Rectangle(0, 0, main_0.bitmap_55.Width, main_0.bitmap_55.Height), destRect: new System.Drawing.Rectangle((int)(num36 + 1f + val3 + num57), (int)(num37 - (float)(font.Height - 1)), (int)num58, (int)num58), image: main_0.bitmap_55, srcUnit: GraphicsUnit.Pixel);
                         }
-                        float num61 = graphics_0.MeasureString(name, font, 300, StringFormat.GenericDefault).Width;
+                        float num61;
+                        using StringFormat format = StringFormat.GenericTypographic;
+                        num61 = graphics_0.MeasureString(name, font, 300, format).Width;
                         if (systemInfo.HasRuins)
                         {
                             float num62 = num36 + val3 + 1f + (float)num56 + num61;
@@ -4567,7 +4573,8 @@ namespace DistantWorlds.Controls
                             int num65 = (int)num37 + 1;
                             System.Drawing.Point point_2 = new System.Drawing.Point(num59 + 0, num65);
                             string string_ = systemInfo.DominantEmpire.TotalStrategicValue.ToString("0,K");
-                            int num66 = (int)graphics_0.MeasureString(string_, Font, 200, StringFormat.GenericTypographic).Width;
+                            SizeF sizeF3 = graphics_0.MeasureString(string_, Font, 200, format);
+                            int num66 = (int)sizeF3.Width;
                             method_266(graphics_0, string_, Font, point_2);
                             num64 = 0 + num66;
                             num64 += 10;
@@ -4575,7 +4582,8 @@ namespace DistantWorlds.Controls
                             num64 += main_0.bitmap_37.Width;
                             point_2 = new System.Drawing.Point(num59 + num64, num65);
                             string string_2 = systemInfo.DominantEmpire.ColonyCount.ToString();
-                            int num67 = (int)graphics_0.MeasureString(string_2, Font, 200, StringFormat.GenericTypographic).Width;
+                            SizeF sizeF4 = graphics_0.MeasureString(string_2, Font, 200, format);
+                            int num67 = (int)sizeF4.Width;
                             method_266(graphics_0, string_2, Font, point_2);
                             num64 += num67;
                             num64 += 8;
@@ -4587,7 +4595,8 @@ namespace DistantWorlds.Controls
                             {
                                 string_3 = "?";
                             }
-                            _ = graphics_0.MeasureString(string_3, Font, 200, StringFormat.GenericTypographic).Width;
+                            // using(StringFormat format = StringFormat.GenericTypographic)
+                            // {graphics_0.MeasureString(string_3, Font, 200, format);}
                             method_266(graphics_0, string_3, Font, point_2);
                         }
                     }
@@ -4687,7 +4696,9 @@ namespace DistantWorlds.Controls
                         {
                             Font font2 = font_0;
                             font2 = ((galaxyLocation.Type == GalaxyLocationType.NebulaCloud) ? ((double_15 > 4000.0) ? font_2 : ((!(double_15 > 1000.0)) ? font_1 : font_0)) : ((double_15 > 4000.0) ? font_3 : ((!(double_15 > 1000.0)) ? font_0 : font_2)));
-                            SizeF sizeF2 = graphics_0.MeasureString(galaxyLocation.Name, font2, 250, StringFormat.GenericTypographic);
+                            SizeF sizeF2;
+                            using(StringFormat format = StringFormat.GenericTypographic)
+                            {sizeF2 = graphics_0.MeasureString(galaxyLocation.Name, font2, 250, format);}
                             int num73 = num71 - (int)(sizeF2.Width / 2f);
                             int num74 = num72 - (int)(sizeF2.Height / 2f);
                             if (galaxyLocation.Type != GalaxyLocationType.NebulaCloud)
@@ -5001,15 +5012,15 @@ namespace DistantWorlds.Controls
                 {
                     num92 = 12;
                 }
-                SolidBrush solidBrush2 = new SolidBrush(color);
+                using SolidBrush solidBrush2 = new SolidBrush(color);
                 if (empire != null)
                 {
                     if (flag2)
                     {
                         method_256(graphics_0, solidBrush2, empire, double_15, num92, int_13, int_14, int_16, int_17, int_18, int_19, empire);
                     }
-                    SolidBrush solidBrush3 = new SolidBrush(color2);
-                    SolidBrush solidBrush4 = new SolidBrush(color3);
+                    using SolidBrush solidBrush3 = new SolidBrush(color2);
+                    using SolidBrush solidBrush4 = new SolidBrush(color3);
                     for (int num93 = 0; num93 < galaxy_0.Empires.Count; num93++)
                     {
                         Empire empire5 = galaxy_0.Empires[num93];
@@ -5144,7 +5155,7 @@ namespace DistantWorlds.Controls
             Vector2 vector = spriteFont_0.MeasureString("H");
             float num6 = (float)(num5 / 2.0 - (double)vector.X / 2.0);
             float num7 = (float)(num5 / 2.0 - (double)vector.Y / 2.0);
-            SolidBrush solidBrush = new SolidBrush(main_0.color_7);
+            using SolidBrush solidBrush = new SolidBrush(main_0.color_7);
             int num8 = galaxy_0.ResolveSector(int_16, int_12).X;
             int num9 = galaxy_0.ResolveSector(int_17, int_12).X;
             int num10 = galaxy_0.ResolveSector(int_11, int_18).Y;
@@ -5264,8 +5275,7 @@ namespace DistantWorlds.Controls
                     }
                     if (systemInfo.DominantEmpire.Empire.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars.Count > 0)
                     {
-                        Habitat[] array = ListHelper.ToArrayThreadSafe(systemInfo.DominantEmpire.Empire.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars);
-                        foreach (Habitat habitat2 in array)
+                        foreach (Habitat habitat2 in systemInfo.DominantEmpire.Empire.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars.CloneThreadSafe())
                         {
                             if (habitatList.Contains(habitat2) || habitat2 == null)
                             {
@@ -5314,10 +5324,9 @@ namespace DistantWorlds.Controls
                             {
                                 continue;
                             }
-                            ListHelper.ToArrayThreadSafe(empire2.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars);
-                            for (int num31 = 0; num31 < empire2.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars.Count; num31++)
+                            foreach(var item in empire2.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars.CloneThreadSafe())
                             {
-                                Habitat habitat4 = empire2.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars[num31];
+                                Habitat habitat4 = item;
                                 if (habitatList.Contains(habitat4) || habitat4 == null)
                                 {
                                     continue;
@@ -5355,8 +5364,8 @@ namespace DistantWorlds.Controls
                 {
                     continue;
                 }
-                Pen pen = method_268(empire, flag2, systemInfo, int_15);
-                SolidBrush solidBrush2 = method_269(empire, flag2, systemInfo, int_15);
+                using Pen pen = method_268(empire, flag2, systemInfo, int_15);
+                using SolidBrush solidBrush2 = method_269(empire, flag2, systemInfo, int_15);
                 int val4 = (int)((double)systemInfo.SystemStar.Diameter / (double_15 / 70.0));
                 val4 = Math.Min(Math.Max(8, val4), 25);
                 if (systemInfo.SystemStar.Type == HabitatType.SuperNova)
@@ -5812,19 +5821,10 @@ namespace DistantWorlds.Controls
                         {
                             continue;
                         }
-                        BuiltObject[] array4 = ListHelper.ToArrayThreadSafe(galaxy_0.BuiltObjectIndex[num63][num64]);
-                        for (int num65 = 0; num65 < array4.Length; num65++)
+                        foreach(var item in galaxy_0.BuiltObjectIndex[num63][num64].CloneThreadSafe())
                         {
-                            BuiltObject builtObject = null;
-                            if (array4.Length > num65)
-                            {
-                                builtObject = array4[num65];
-                                if (builtObject == null || builtObject.HasBeenDestroyed)
-                                {
-                                    builtObject = null;
-                                }
-                            }
-                            if (builtObject == null)
+                            BuiltObject builtObject = item;
+                            if (builtObject == null|| builtObject.HasBeenDestroyed)
                             {
                                 continue;
                             }
@@ -5833,11 +5833,9 @@ namespace DistantWorlds.Controls
                             bool flag31 = false;
                             if (builtObject.Empire == empire)
                             {
-                                _ = builtObject.Empire.MainColor;
                             }
                             else if (builtObject.Empire != null && builtObject.Empire.PirateEmpireBaseHabitat != null)
                             {
-                                _ = builtObject.Empire.MainColor;
                                 flag30 = true;
                                 if (builtObject.Empire.MainColor == System.Drawing.Color.FromArgb(1, 1, 1))
                                 {
@@ -5846,12 +5844,10 @@ namespace DistantWorlds.Controls
                             }
                             else if (empireList.Contains(builtObject.Empire))
                             {
-                                _ = builtObject.Empire.MainColor;
                                 flag30 = true;
                             }
                             else if (builtObject.Empire != null)
                             {
-                                _ = builtObject.Empire.MainColor;
                             }
                             switch (builtObject.SubRole)
                             {
@@ -6058,7 +6054,7 @@ namespace DistantWorlds.Controls
             }
             if (double_15 > num16 && !flag)
             {
-                BuiltObject[] array5 = ListHelper.ToArrayThreadSafe(empire.KnownPirateBases);
+                List<BuiltObject> array5 = empire.KnownPirateBases.CloneThreadSafe();
                 if (main_0._Game.GodMode)
                 {
                     BuiltObjectList builtObjectList3 = new BuiltObjectList();
@@ -6070,7 +6066,7 @@ namespace DistantWorlds.Controls
                             builtObjectList3.Add(empire4.PirateEmpireBaseHabitat.BasesAtHabitat[0]);
                         }
                     }
-                    array5 = ListHelper.ToArrayThreadSafe(builtObjectList3);
+                    array5 = builtObjectList3.CloneThreadSafe();
                 }
                 foreach (BuiltObject builtObject3 in array5)
                 {
@@ -6136,15 +6132,15 @@ namespace DistantWorlds.Controls
                 {
                     num82 = 12;
                 }
-                SolidBrush solidBrush3 = new SolidBrush(color2);
+                using SolidBrush solidBrush3 = new SolidBrush(color2);
                 if (empire != null)
                 {
                     if (flag3)
                     {
                         method_258(spriteBatch_2, solidBrush3, empire, double_15, num82, int_13, int_14, int_16, int_17, int_18, int_19, empire);
                     }
-                    SolidBrush solidBrush4 = new SolidBrush(color3);
-                    SolidBrush solidBrush5 = new SolidBrush(color4);
+                    using SolidBrush solidBrush4 = new SolidBrush(color3);
+                    using SolidBrush solidBrush5 = new SolidBrush(color4);
                     Empire[] array6 = ListHelper.ToArrayThreadSafe(galaxy_0.Empires);
                     foreach (Empire empire5 in array6)
                     {
@@ -6328,9 +6324,13 @@ namespace DistantWorlds.Controls
             {
                 System.Drawing.Color color3 = method_263(color);
                 string s = shipGroup_1.Ships.Count.ToString();
-                float num2 = float_0 + ((float)int_11 - graphics_0.MeasureString(s, font_3, 100, StringFormat.GenericTypographic).Width) / 2f;
+                SizeF sizeF5;
+                using StringFormat format = StringFormat.GenericTypographic;
+                sizeF5 = graphics_0.MeasureString(s, font_3, 100, format);
+                float num2 = float_0 + ((float)int_11 - sizeF5.Width) / 2f;
                 float num3 = float_1 + (float)int_11 * 0.1f;
-                graphics_0.DrawString(point: new PointF(num2, num3), s: s, font: font_3, brush: new SolidBrush(color3), format: StringFormat.GenericTypographic);
+                using Brush brush = new SolidBrush(color3);
+                graphics_0.DrawString(point: new PointF(num2, num3), s: s, font: font_3, brush: brush, format: format);
             }
             pen?.Dispose();
             solidBrush?.Dispose();
@@ -6584,10 +6584,12 @@ namespace DistantWorlds.Controls
             float num4 = num3 / 2f;
             float num5 = num3 * 0.17f;
             float num6 = num3 * 0.83f;
+            
+                using Brush brush = new SolidBrush(pen_11.Color);
             switch (builtObjectRole_0)
             {
                 case BuiltObjectRole.Military:
-                    graphics_0.FillRectangle(new SolidBrush(pen_11.Color), num + num4 - 1f, num2 + num4 - 1f, 2f, 2f);
+                    graphics_0.FillRectangle(brush, num + num4 - 1f, num2 + num4 - 1f, 2f, 2f);
                     break;
                 case BuiltObjectRole.Exploration:
                     graphics_0.DrawLine(pen_11, num + num5, num2 + num5, num + num6, num2 + num6);
@@ -6626,23 +6628,28 @@ namespace DistantWorlds.Controls
                 graphicsPath.AddEllipse(rect);
                 using (new Region(graphicsPath))
                 {
-                    Bitmap bitmap2 = new Bitmap(num, num, PixelFormat.Format32bppPArgb);
+                    using Bitmap bitmap2 = new Bitmap(num, num, PixelFormat.Format32bppPArgb);
+                     Bitmap bitmap3;
                     using (Graphics graphics = Graphics.FromImage(bitmap2))
                     {
-                        SolidBrush brush = new SolidBrush(systemInfo_1.DominantEmpire.Empire.SecondaryColor);
+                        using SolidBrush brush = new SolidBrush(systemInfo_1.DominantEmpire.Empire.SecondaryColor);
                         System.Drawing.Rectangle rect2 = new System.Drawing.Rectangle(0, 0, num, num);
                         graphics.FillRectangle(brush, rect2);
                         graphics.DrawImage(systemInfo_1.DominantEmpire.Empire.LargeFlagPicture, 0, (num - num2) / 2, num, num2);
                         if (int_11 < 255)
                         {
-                            bitmap2 = method_16(bitmap2, (float)int_11 / 255f);
+                            bitmap3 = method_16(bitmap2, (float)int_11 / 255f);
                         }
+                        else
+                       { bitmap3=bitmap2;}
                     }
-                    TextureBrush brush2 = new TextureBrush(bitmap2);
+                    using TextureBrush brush2 = new TextureBrush(bitmap3);
                     using Graphics graphics2 = Graphics.FromImage(bitmap);
                     graphics2.InterpolationMode = InterpolationMode.High;
                     graphics2.SmoothingMode = SmoothingMode.AntiAlias;
                     graphics2.FillPath(brush2, graphicsPath);
+                    bitmap2.Dispose();
+                    bitmap3.Dispose();
                 }
             }
             return main_0.PrecacheScaledBitmap(bitmap, rectangle_5.Width, rectangle_5.Height);

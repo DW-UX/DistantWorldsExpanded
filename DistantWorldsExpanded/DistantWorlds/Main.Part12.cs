@@ -2310,6 +2310,10 @@ namespace DistantWorlds
             List<Bitmap> list = method_396();
             tbtnResearch.InitializeImages(bitmap_21, bitmap_6, list.ToArray(), bitmap_8, bitmap_78, bitmap_83, bitmap_23, bitmap_24, bitmap_25, bitmap_26);
             pnlResearchTree.InitializeImages(bitmap_21, bitmap_6, list.ToArray(), raceImageCache_0.GetRaceImages(), bitmap_8, bitmap_78, bitmap_38, bitmap_23, bitmap_24, bitmap_25, bitmap_26, bitmap_9);
+            solidBrush_0?.Dispose();
+            solidBrush_1?.Dispose();
+            solidBrush_2?.Dispose();
+            solidBrush_3?.Dispose();
             solidBrush_0 = new SolidBrush(Color.Transparent);
             solidBrush_1 = new SolidBrush(color_3);
             pen_0 = new Pen(color_4, 1f);
@@ -4605,15 +4609,15 @@ namespace DistantWorlds
             Bitmap bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
             Graphics graphics = Graphics.FromImage(bitmap);
             okQtJmsUqH(graphics);
-            SolidBrush brush = new SolidBrush(mainColor);
+            using SolidBrush brush = new SolidBrush(mainColor);
             graphics.FillRectangle(brush, 0, 0, bitmap.Width, bitmap.Height);
             image.MakeTransparent(Color.FromArgb(255, 0, 0));
             graphics.DrawImageUnscaled(image, 0, 0);
             Bitmap bitmap2 = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format32bppPArgb);
             graphics = Graphics.FromImage(bitmap2);
             okQtJmsUqH(graphics);
-            brush = new SolidBrush(secondaryColor);
-            graphics.FillRectangle(brush, 0, 0, bitmap2.Width, bitmap2.Height);
+            using Brush brush2 = new SolidBrush(secondaryColor);
+            graphics.FillRectangle(brush2, 0, 0, bitmap2.Width, bitmap2.Height);
             bitmap.MakeTransparent(Color.FromArgb(0, 255, 0));
             graphics.DrawImageUnscaled(bitmap, 0, 0);
             bitmap2.MakeTransparent(Color.Black);
@@ -5026,7 +5030,7 @@ namespace DistantWorlds
                 int num2 = bitmap_225.Width * bitmap_225.Height;
                 int int_ = (int)((double)num2 * 0.7 * num);
                 Random random_ = new Random(builtObject_8.BuiltObjectID);
-                HatchBrush brush_ = new HatchBrush(HatchStyle.Cross, Color.FromArgb(160, 160, 160), Color.FromArgb(1, 1, 1));
+                using HatchBrush brush_ = new HatchBrush(HatchStyle.Cross, Color.FromArgb(160, 160, 160), Color.FromArgb(1, 1, 1));
                 return method_113(bitmap_225, bitmap_226, brush_, int_, random_);
             }
             return bitmap_225;
@@ -5040,7 +5044,7 @@ namespace DistantWorlds
                 int num2 = bitmap_225.Width * bitmap_225.Height;
                 int int_ = (int)((double)num2 * 0.7 * num);
                 Random random_ = new Random(fighter_0.FighterID);
-                HatchBrush brush_ = new HatchBrush(HatchStyle.Cross, Color.FromArgb(160, 160, 160), Color.FromArgb(1, 1, 1));
+                using HatchBrush brush_ = new HatchBrush(HatchStyle.Cross, Color.FromArgb(160, 160, 160), Color.FromArgb(1, 1, 1));
                 return method_113(bitmap_225, bitmap_226, brush_, int_, random_);
             }
             return bitmap_225;
@@ -5054,30 +5058,29 @@ namespace DistantWorlds
                 int num2 = bitmap_225.Width * bitmap_225.Height;
                 int int_ = (int)((double)num2 * 0.3 * num);
                 Random random_ = new Random(creature_2.CreatureID);
-                SolidBrush brush_ = new SolidBrush(Color.FromArgb(1, 1, 1));
-                switch (creature_2.Type)
-                {
-                    case CreatureType.Kaltor:
-                        brush_ = new SolidBrush(Color.FromArgb(110, 32, 80));
-                        goto default;
-                    case CreatureType.RockSpaceSlug:
-                        brush_ = new SolidBrush(Color.FromArgb(64, 32, 36));
-                        goto default;
-                    case CreatureType.DesertSpaceSlug:
-                        brush_ = new SolidBrush(Color.FromArgb(160, 56, 0));
-                        goto default;
-                    case CreatureType.Ardilus:
-                        brush_ = new SolidBrush(Color.FromArgb(48, 8, 20));
-                        goto default;
-                    default:
-                        return method_113(bitmap_225, bitmap_226, brush_, int_, random_);
-                    case CreatureType.SilverMist:
+                
+                    if(creature_2.Type== CreatureType.Kaltor)
+                      { using SolidBrush brush_ = new SolidBrush(Color.FromArgb(110, 32, 80));
+                        return method_113(bitmap_225, bitmap_226, brush_, int_, random_);}
+                    else if(creature_2.Type==  CreatureType.RockSpaceSlug)
+                       {using SolidBrush brush_ = new SolidBrush(Color.FromArgb(64, 32, 36));
+                        return method_113(bitmap_225, bitmap_226, brush_, int_, random_);}
+                   else if(creature_2.Type==   CreatureType.DesertSpaceSlug)
+                       { using SolidBrush brush_ = new SolidBrush(Color.FromArgb(160, 56, 0));
+                        return method_113(bitmap_225, bitmap_226, brush_, int_, random_);}
+                    else if(creature_2.Type==   CreatureType.Ardilus)
+                        {using SolidBrush brush_ = new SolidBrush(Color.FromArgb(48, 8, 20));
+                        return method_113(bitmap_225, bitmap_226, brush_, int_, random_);}
+                    else if(creature_2.Type==   CreatureType.SilverMist)
                         {
                             float val = 1f - 0.95f * ((float)creature_2.Damage / (float)creature_2.DamageKillThreshhold);
                             val = Math.Min(1f, Math.Max(0f, val));
                             return method_376(bitmap_225, val);
                         }
-                }
+                    else 
+                       { using SolidBrush brush_ = new SolidBrush(Color.FromArgb(1, 1, 1));
+                        return method_113(bitmap_225, bitmap_226, brush_, int_, random_);}
+                
             }
             return bitmap_225;
         }

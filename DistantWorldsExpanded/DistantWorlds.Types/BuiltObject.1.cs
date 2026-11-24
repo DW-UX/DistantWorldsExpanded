@@ -1749,11 +1749,10 @@ namespace DistantWorlds.Types
             _HyperjumpDisabledLocation = false;
             int num = 1200;
             num += Galaxy.MaxSolarSystemSize * 2;
-            List<BuiltObject[]> builtObjectsAtLocationByArrays = _Galaxy.GetBuiltObjectsAtLocationByArrays(Xpos, Ypos, num);
+            List<List<BuiltObject>> builtObjectsAtLocationByArrays = _Galaxy.GetBuiltObjectsAtLocationByArrays(Xpos, Ypos, num);
             for (int j = 0; j < builtObjectsAtLocationByArrays.Count; j++)
             {
-                int num2 = builtObjectsAtLocationByArrays[j].Length;
-                for (int k = 0; k < num2; k++)
+                for (int k = 0; k < builtObjectsAtLocationByArrays[j].Count; k++)
                 {
                     BuiltObject builtObject = builtObjectsAtLocationByArrays[j][k];
                     if (builtObject != null && builtObject.HyperDenyActive && _Galaxy.CheckWithinDistancePotential(builtObject.WeaponHyperDenyRange, Xpos, Ypos, builtObject.Xpos, builtObject.Ypos))
@@ -1771,11 +1770,10 @@ namespace DistantWorlds.Types
 
         private BuiltObject CheckForHyperExitGravityWell(double x, double y)
         {
-            List<BuiltObject[]> builtObjectsAtLocationByArrays = _Galaxy.GetBuiltObjectsAtLocationByArrays(x, y, 4000);
+            List<List<BuiltObject>> builtObjectsAtLocationByArrays = _Galaxy.GetBuiltObjectsAtLocationByArrays(x, y, 4000);
             for (int i = 0; i < builtObjectsAtLocationByArrays.Count; i++)
             {
-                int num = builtObjectsAtLocationByArrays[i].Length;
-                for (int j = 0; j < num; j++)
+                for (int j = 0; j < builtObjectsAtLocationByArrays[i].Count; j++)
                 {
                     BuiltObject builtObject = builtObjectsAtLocationByArrays[i][j];
                     if (builtObject == null || builtObject.HyperStopRange <= 0 || builtObject.Empire == null || builtObject.Empire == Empire)
@@ -1860,12 +1858,11 @@ namespace DistantWorlds.Types
             int x = (int)(Xpos / (double)Galaxy.IndexSize);
             int y = (int)(Ypos / (double)Galaxy.IndexSize);
             Galaxy.CorrectIndexCoords(ref x, ref y);
-            BuiltObject[] array = ListHelper.ToArrayThreadSafe(_Galaxy.BuiltObjectIndex[x][y]);
             int num3 = (int)Xpos - Galaxy.MaxSolarSystemSize * 2 + 500;
             int num4 = (int)Xpos + Galaxy.MaxSolarSystemSize * 2 + 500;
             int num5 = (int)Ypos - Galaxy.MaxSolarSystemSize * 2 + 500;
             int num6 = (int)Ypos + Galaxy.MaxSolarSystemSize * 2 + 500;
-            foreach (BuiltObject builtObject in array)
+            foreach (BuiltObject builtObject in _Galaxy.BuiltObjectIndex[x][y].CloneThreadSafe())
             {
                 if (builtObject == null || !(builtObject.Xpos >= (double)num3) || !(builtObject.Xpos <= (double)num4) || !(builtObject.Ypos >= (double)num5) || !(builtObject.Ypos <= (double)num6) || builtObject.Role == BuiltObjectRole.Military || !Empire.EmpiresToAttack.Contains(builtObject.Empire))
                 {
@@ -3044,8 +3041,7 @@ namespace DistantWorlds.Types
                     }
                     if (Characters != null && Characters.Count > 0)
                     {
-                        Character[] array = ListHelper.ToArrayThreadSafe(Characters);
-                        foreach (Character character in array)
+                        foreach (Character character in Characters.CloneThreadSafe())
                         {
                             if (character != null)
                             {

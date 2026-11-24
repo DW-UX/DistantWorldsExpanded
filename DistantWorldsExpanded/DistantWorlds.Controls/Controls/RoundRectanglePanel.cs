@@ -36,11 +36,6 @@ namespace DistantWorlds.Controls
 
     private static GraphicsPath CreateRoundRectangle(RectangleF rectangle, float radius)
     {
-      GraphicsPath graphicsPath = new GraphicsPath();
-      double left = (double) rectangle.Left;
-      double top = (double) rectangle.Top;
-      double width = (double) rectangle.Width;
-      double height = (double) rectangle.Height;
       float diameter = radius * 2f;
       return RoundRectanglePanel.DefineOutline(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height, diameter, radius, 0.0f);
     }

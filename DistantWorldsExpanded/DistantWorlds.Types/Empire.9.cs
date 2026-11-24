@@ -3476,8 +3476,7 @@ namespace DistantWorlds.Types
             if (includeShipsOutsideSystems)
             {
                 GalaxyIndex galaxyIndex = Galaxy.ResolveIndex(x, y);
-                BuiltObject[] array = ListHelper.ToArrayThreadSafe(_Galaxy.BuiltObjectIndex[galaxyIndex.X][galaxyIndex.Y]);
-                foreach (BuiltObject builtObject2 in array)
+                foreach (BuiltObject builtObject2 in _Galaxy.BuiltObjectIndex[galaxyIndex.X][galaxyIndex.Y].CloneThreadSafe())
                 {
                     if (builtObject2 == null || builtObject2.NearestSystemStar != null || ((builtObject2.WarpSpeed <= 0 || !(builtObject2.CurrentSpeed < (float)builtObject2.WarpSpeed)) && !(builtObject2.CurrentSpeed <= (float)builtObject2.TopSpeed)) || builtObject2.Empire != this)
                     {

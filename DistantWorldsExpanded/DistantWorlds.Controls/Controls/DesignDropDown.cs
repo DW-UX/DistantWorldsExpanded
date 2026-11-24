@@ -131,17 +131,17 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(49f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       string empty = string.Empty;
       if (this._AllowNullDesign && e.Index == 0)
-        e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font, (Brush) solidBrush, point);
+        e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font,  solidBrush, point);
       else if (this._Designs != null && this._Designs.Count > 0 && e.Index >= 0)
       {
         int index = e.Index;
         if (this._AllowNullDesign)
           --index;
         string s = Galaxy.ResolveDescription(this._Designs[index].SubRole) + " (" + this._Designs[index].Name + ")";
-        e.Graphics.DrawString(s, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(s, font,  solidBrush, point);
         Rectangle rect = new Rectangle();
         if (this._Designs[index].Empire != null && this._Designs[index].Empire != this._IndependentEmpire)
         {

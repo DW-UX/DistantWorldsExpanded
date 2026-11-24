@@ -463,7 +463,9 @@ namespace DistantWorlds.Controls
                 graphics_0.DrawImage(bitmap2, destRect3, 0, 0, bitmap2.Width, bitmap2.Height, GraphicsUnit.Pixel);
             }
             double num21 = (double)num / (double)Galaxy.SectorMaxX;
-            SizeF sizeF = graphics_0.MeasureString("H", font_0, UiScale.S(200), StringFormat.GenericTypographic);
+            SizeF sizeF;
+            using StringFormat format = StringFormat.GenericTypographic;
+            {sizeF = graphics_0.MeasureString("H", font_0, UiScale.S(200), format);}
             int num22 = (int)(num21 / 2.0 - (double)sizeF.Width / 2.0);
             int num23 = (int)(num21 / 2.0 - (double)sizeF.Height / 2.0);
             int num24 = galaxy_0.ResolveSector(int_8, int_5).X;
@@ -549,16 +551,21 @@ namespace DistantWorlds.Controls
                 float num38 = num28;
                 if (int_2 > 0)
                 {
+                    brush?.Dispose();
                     brush = new SolidBrush(Color.FromArgb(80, 80, 80));
                 }
                 else if (habitatList_0 != null)
                 {
-                    brush = new SolidBrush(Color.FromArgb(80, 80, 80));
+                    brush?.Dispose();
                     if (habitatList_0.Contains(systemInfo.SystemStar))
                     {
                         flag3 = true;
                         brush = new SolidBrush(Color.Yellow);
                         num38 = num29;
+                    }
+                    else
+                    {
+                    brush = new SolidBrush(Color.FromArgb(80, 80, 80));
                     }
                 }
                 SystemVisibilityStatus systemVisibilityStatus = playerEmpire.CheckSystemVisibilityStatus(systemInfo.SystemStar.SystemIndex);
@@ -566,7 +573,6 @@ namespace DistantWorlds.Controls
                 {
                     float num39 = 0f;
                     float num40 = 0f;
-                    Pen pen = null;
                     HabitatList linkSystemStars = systemInfo.DominantEmpire.Empire.SystemVisibility[systemInfo.SystemStar.SystemIndex].LinkSystemStars;
                     if (linkSystemStars.Count > 0)
                     {
@@ -576,7 +582,7 @@ namespace DistantWorlds.Controls
                             SystemVisibilityStatus systemVisibilityStatus2 = playerEmpire.CheckSystemVisibilityStatus(habitat.SystemIndex);
                             if (systemVisibilityStatus2 == SystemVisibilityStatus.Visible || systemVisibilityStatus2 == SystemVisibilityStatus.Explored)
                             {
-                                pen = new Pen(systemInfo.DominantEmpire.Empire.MainColor, 1f);
+                                using Pen pen = new Pen(systemInfo.DominantEmpire.Empire.MainColor, 1f);
                                 num39 = (float)((habitat.Xpos - (double)int_8) / double_5);
                                 num40 = (float)((habitat.Ypos - (double)int_10) / double_5);
                                 pen.DashPattern = new float[2] { 2f, 1.5f };
@@ -599,7 +605,7 @@ namespace DistantWorlds.Controls
                                 SystemVisibilityStatus systemVisibilityStatus3 = playerEmpire.CheckSystemVisibilityStatus(habitat2.SystemIndex);
                                 if (systemVisibilityStatus3 == SystemVisibilityStatus.Visible || systemVisibilityStatus3 == SystemVisibilityStatus.Explored || main_0._Game.GodMode)
                                 {
-                                    pen = new Pen(systemInfo.DominantEmpire.Empire.MainColor, 1f);
+                                    using Pen pen = new Pen(systemInfo.DominantEmpire.Empire.MainColor, 1f);
                                     num39 = (float)((habitat2.Xpos - (double)int_8) / double_5);
                                     num40 = (float)((habitat2.Ypos - (double)int_10) / double_5);
                                     pen.DashPattern = new float[2] { 3f, 5f };
@@ -623,7 +629,7 @@ namespace DistantWorlds.Controls
                                     SystemVisibilityStatus systemVisibilityStatus4 = playerEmpire.CheckSystemVisibilityStatus(habitat3.SystemIndex);
                                     if (systemVisibilityStatus4 == SystemVisibilityStatus.Visible || systemVisibilityStatus4 == SystemVisibilityStatus.Explored)
                                     {
-                                        pen = new Pen(empire.MainColor, 1f);
+                                        using Pen pen = new Pen(empire.MainColor, 1f);
                                         num39 = (float)((habitat3.Xpos - (double)int_8) / double_5);
                                         num40 = (float)((habitat3.Ypos - (double)int_10) / double_5);
                                         pen.DashPattern = new float[2] { 2f, 1.5f };
@@ -648,7 +654,7 @@ namespace DistantWorlds.Controls
                                     SystemVisibilityStatus systemVisibilityStatus5 = playerEmpire.CheckSystemVisibilityStatus(habitat4.SystemIndex);
                                     if (systemVisibilityStatus5 == SystemVisibilityStatus.Visible || systemVisibilityStatus5 == SystemVisibilityStatus.Explored || main_0._Game.GodMode)
                                     {
-                                        pen = new Pen(empire.MainColor, 1f);
+                                        using Pen pen = new Pen(empire.MainColor, 1f);
                                         num39 = (float)((habitat4.Xpos - (double)int_8) / double_5);
                                         num40 = (float)((habitat4.Ypos - (double)int_10) / double_5);
                                         pen.DashPattern = new float[2] { 3f, 5f };
@@ -659,7 +665,7 @@ namespace DistantWorlds.Controls
                         }
                     }
                     RectangleF rect = new RectangleF(num36 - (num38 + UiScale.S(4f)) / 2f, num37 - (num38 + UiScale.S(4f)) / 2f, num38 + UiScale.S(4f), num38 + UiScale.S(4f));
-                    Pen pen2 = new Pen(systemInfo.DominantEmpire.Empire.MainColor, 2f);
+                    using Pen pen2 = new Pen(systemInfo.DominantEmpire.Empire.MainColor, 2f);
                     if (systemInfo.OtherEmpires != null && systemInfo.OtherEmpires.Count > 0)
                     {
                         pen2.DashStyle = DashStyle.Dash;
@@ -675,8 +681,9 @@ namespace DistantWorlds.Controls
                 {
                     graphics_0.FillEllipse(brush, rect2);
                 }
+                brush?.Dispose();
             }
-            SolidBrush brush2 = new SolidBrush(Color.Yellow);
+            using SolidBrush brush2 = new SolidBrush(Color.Yellow);
             foreach (Point item in list_0)
             {
                 int num43 = (int)((double)item.X / double_4);

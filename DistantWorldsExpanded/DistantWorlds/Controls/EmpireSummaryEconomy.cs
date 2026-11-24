@@ -88,13 +88,15 @@ namespace DistantWorlds.Controls
 
         private int method_0(Graphics graphics_0, string string_0, Font font_2, int int_2)
         {
-            int num = (int)graphics_0.MeasureString(string_0, font_2, int_2, StringFormat.GenericTypographic).Width;
+            using StringFormat format = StringFormat.GenericTypographic;
+            int num = (int)graphics_0.MeasureString(string_0, font_2, int_2, format).Width;
             return (int_2 - num) / 2;
         }
 
         private int method_1(Graphics graphics_0, string string_0, Font font_2, int int_2)
         {
-            int num = (int)graphics_0.MeasureString(string_0, font_2, int_2, StringFormat.GenericTypographic).Width;
+            using StringFormat format = StringFormat.GenericTypographic;
+            int num = (int)graphics_0.MeasureString(string_0, font_2, int_2, format).Width;
             return int_2 - num;
         }
 
@@ -309,11 +311,11 @@ namespace DistantWorlds.Controls
                 empire_0.PurchaseStateFuel(0.0);
                 empire_0.PurchasePrivateFuel(0.0);
             }
-            SolidBrush brush = new SolidBrush(Color.FromArgb(32, 80, 80, 255));
-            SolidBrush brush2 = new SolidBrush(Color.FromArgb(40, 80, 80, 255));
-            SolidBrush brush3 = new SolidBrush(Color.FromArgb(32, 80, 80, 80));
-            SolidBrush brush4 = new SolidBrush(Color.FromArgb(50, 80, 80, 80));
-            SolidBrush brush5 = new SolidBrush(Color.FromArgb(80, 100, 100, 100));
+            using SolidBrush brush = new SolidBrush(Color.FromArgb(32, 80, 80, 255));
+            using SolidBrush brush2 = new SolidBrush(Color.FromArgb(40, 80, 80, 255));
+            using SolidBrush brush3 = new SolidBrush(Color.FromArgb(32, 80, 80, 80));
+            using SolidBrush brush4 = new SolidBrush(Color.FromArgb(50, 80, 80, 80));
+            using SolidBrush brush5 = new SolidBrush(Color.FromArgb(80, 100, 100, 100));
             graphics_0.FillRectangle(brush, num2 - num14, num9 - (int_0 * 2 + num14), num + num3 + num14 * 3, num13 - num9 + int_0 * 5 + num14 * 2);
             graphics_0.FillRectangle(brush3, num6 - num14, num9 - (int_0 * 2 + num14), num5 + num7 + num14 * 3, num13 - num9 + int_0 * 5 + num14 * 2);
             graphics_0.FillRectangle(brush2, num4 + num14 * 2, num9 - (int_0 * 2 + num14), num3, num13 - num9 + int_0 * 5 + num14 * 2);
@@ -499,28 +501,30 @@ namespace DistantWorlds.Controls
 
         private void atRsyCrma(Graphics graphics_0, string string_0, Font font_2, Point point_0, SolidBrush solidBrush_3)
         {
+            using StringFormat format = StringFormat.GenericTypographic;
             point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
-            graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
+            graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, format);
             point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
-            graphics_0.DrawString(string_0, font_2, solidBrush_3, point_0, StringFormat.GenericTypographic);
+            graphics_0.DrawString(string_0, font_2, solidBrush_3, point_0, format);
         }
 
         private void method_8(Graphics graphics_0, string string_0, Font font_2, Point point_0, Brush brush_0, SizeF sizeF_0)
         {
+            using StringFormat format = StringFormat.GenericTypographic;
             if (sizeF_0 != SizeF.Empty)
             {
                 point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
-                graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_2, brush: solidBrush_1, format: StringFormat.GenericTypographic);
+                graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_2, brush: solidBrush_1, format: format);
                 point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 RectangleF layoutRectangle2 = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle2, StringFormat.GenericTypographic);
+                graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle2, format);
             }
             else
             {
                 point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
-                graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, StringFormat.GenericTypographic);
+                graphics_0.DrawString(string_0, font_2, solidBrush_1, point_0, format);
                 point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
-                graphics_0.DrawString(string_0, font_2, brush_0, point_0, StringFormat.GenericTypographic);
+                graphics_0.DrawString(string_0, font_2, brush_0, point_0, format);
             }
         }
 

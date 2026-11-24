@@ -309,7 +309,7 @@ namespace DistantWorlds.Controls
                         width1 = maximumWidth;
                     }
                     bitmap = new Bitmap(width1, 18, PixelFormat.Format32bppPArgb);
-                    Graphics graphics = Graphics.FromImage((Image)bitmap);
+                    using Graphics graphics = Graphics.FromImage((Image)bitmap);
                     graphics.CompositingQuality = CompositingQuality.HighSpeed;
                     graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
                     graphics.SmoothingMode = SmoothingMode.None;

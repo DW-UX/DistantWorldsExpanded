@@ -146,7 +146,8 @@ namespace DistantWorlds.Controls
                 this._RaceImages[index] = this.PrescaleImage(raceImages[index], 40, 40);
             this._BlankImage = new Bitmap(10, 10, PixelFormat.Format32bppPArgb);
             Graphics graphics = Graphics.FromImage((Image)this._BlankImage);
-            graphics.FillRectangle((Brush)new SolidBrush(Color.Transparent), 0, 0, 10, 10);
+            using Brush brush =  new SolidBrush(Color.Transparent);
+            graphics.FillRectangle(brush, 0, 0, 10, 10);
             graphics.Dispose();
         }
 

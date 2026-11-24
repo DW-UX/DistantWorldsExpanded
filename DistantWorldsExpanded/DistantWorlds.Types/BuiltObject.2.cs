@@ -3499,8 +3499,7 @@ namespace DistantWorlds.Types
                                         {
                                             continue;
                                         }
-                                        Character[] array = ListHelper.ToArrayThreadSafe(characterList);
-                                        foreach (Character character in array)
+                                        foreach (Character character in characterList.CloneThreadSafe())
                                         {
                                             if (character != null && character.Empire == Empire)
                                             {
@@ -5218,8 +5217,7 @@ namespace DistantWorlds.Types
             }
             if (Characters != null && Characters.Count > 0)
             {
-                Character[] array = ListHelper.ToArrayThreadSafe(Characters);
-                foreach (Character character in array)
+                foreach (Character character in Characters.CloneThreadSafe())
                 {
                     if (Role == BuiltObjectRole.Base)
                     {
@@ -5940,25 +5938,23 @@ namespace DistantWorlds.Types
                     habitat.Population.RecalculateTotalAmount();
                     if (habitat.Population.Count <= 0 || habitat.Population.TotalAmount <= 0)
                     {
-                        Character[] array = ListHelper.ToArrayThreadSafe(habitat.Characters);
-                        for (int l = 0; l < array.Length; l++)
+                        foreach(var item in habitat.Characters.CloneThreadSafe())
                         {
                             if (Empire != null && Empire.Counters != null)
                             {
-                                Empire.Counters.ProcessCharacterDeath(array[l]);
+                                Empire.Counters.ProcessCharacterDeath(item);
                             }
-                            array[l].SendDeathMessage(CharacterDeathType.ColonyBombardment, _Galaxy);
-                            array[l].Kill(_Galaxy);
+                            item.SendDeathMessage(CharacterDeathType.ColonyBombardment, _Galaxy);
+                            item.Kill(_Galaxy);
                         }
-                        Character[] array2 = ListHelper.ToArrayThreadSafe(habitat.InvadingCharacters);
-                        for (int m = 0; m < array2.Length; m++)
+                        foreach(var item in habitat.InvadingCharacters.CloneThreadSafe())
                         {
                             if (Empire != null && Empire.Counters != null)
                             {
-                                Empire.Counters.ProcessCharacterDeath(array2[m]);
+                                Empire.Counters.ProcessCharacterDeath(item);
                             }
-                            array2[m].SendDeathMessage(CharacterDeathType.ColonyBombardment, _Galaxy);
-                            array2[m].Kill(_Galaxy);
+                            item.SendDeathMessage(CharacterDeathType.ColonyBombardment, _Galaxy);
+                            item.Kill(_Galaxy);
                         }
                         habitat.ClearColony(ActualEmpire);
                     }

@@ -200,20 +200,17 @@ namespace DistantWorlds.Controls
       int rowTemplateHeight = this._EmpireListView.RowTemplateHeight;
       int width1 = this._Relations.Width;
       Pen pen1 = (Pen) null;
-      Pen pen2 = new Pen(Color.FromArgb(96, 96, 96), 30f);
-      Pen pen3 = new Pen(Color.FromArgb(60, 60, 72), 3f);
-      Pen pen4 = new Pen(Color.FromArgb(64, 64, 232), 3f);
-      Pen pen5 = new Pen(Color.FromArgb(112, 112, (int) byte.MaxValue), 3f);
-      Pen pen6 = new Pen(Color.FromArgb(0, (int) byte.MaxValue, 0), 3f);
-      Pen pen7 = new Pen(Color.FromArgb(128, 128, 128), 3f);
-      Pen pen8 = new Pen(Color.Yellow, 3f);
-      Pen pen9 = new Pen(Color.Yellow, 3f);
-      Pen pen10 = new Pen(Color.Orange, 3f);
-      Pen pen11 = new Pen(Color.FromArgb((int) byte.MaxValue, 0, 0), 3f);
-      Pen pen12 = new Pen(Color.Tan, 3f);
-      Pen pen13 = new Pen(Color.FromArgb(160, 160, (int) byte.MaxValue), 3f);
-      Pen pen14 = new Pen(Color.FromArgb((int) byte.MaxValue, 160, 160), 3f);
-      Pen pen15 = new Pen(Color.FromArgb((int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue), 3f);
+      using Pen pen2 = new Pen(Color.FromArgb(96, 96, 96), 30f);
+      using Pen pen3 = new Pen(Color.FromArgb(60, 60, 72), 3f);
+      using Pen pen4 = new Pen(Color.FromArgb(64, 64, 232), 3f);
+      using Pen pen5 = new Pen(Color.FromArgb(112, 112, (int) byte.MaxValue), 3f);
+      using Pen pen6 = new Pen(Color.FromArgb(0, (int) byte.MaxValue, 0), 3f);
+      using Pen pen7 = new Pen(Color.FromArgb(128, 128, 128), 3f);
+      using Pen pen8 = new Pen(Color.Yellow, 3f);
+      using Pen pen9 = new Pen(Color.Yellow, 3f);
+      using Pen pen10 = new Pen(Color.Orange, 3f);
+      using Pen pen11 = new Pen(Color.FromArgb((int) byte.MaxValue, 0, 0), 3f);
+      using Pen pen13 = new Pen(Color.FromArgb(160, 160, (int) byte.MaxValue), 3f);
       graphics.Clear(this._Relations.BackColor);
       if (this._Empires == null || scrollingRowIndex > this._Empires.Count || scrollingRowIndex < 0)
         return;
@@ -237,8 +234,8 @@ namespace DistantWorlds.Controls
           {
             graphics.DrawLine(pen1, 0, num3, width1, num3);
             Rectangle rect = new Rectangle(0, num3 - UiScale.S(1), UiScale.S(10), UiScale.S(3));
-            LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
-            graphics.FillRectangle((Brush) linearGradientBrush, rect);
+            using LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+            graphics.FillRectangle( linearGradientBrush, rect);
             int y = num3 - UiScale.S(13);
             string str = this._SelectedEmpire.ResolveFeelingDescription(this._Empires[tag].ObtainPirateRelation(this._SelectedEmpire));
             graphics.MeasureString(str, this._EmpireListView.Font);
@@ -263,8 +260,8 @@ namespace DistantWorlds.Controls
             {
               graphics.DrawLine(pen1, 0, num3, width1, num3);
               Rectangle rect = new Rectangle(0, num3 - UiScale.S(1), UiScale.S(10), UiScale.S(3));
-              LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
-              graphics.FillRectangle((Brush) linearGradientBrush, rect);
+              using LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+              graphics.FillRectangle( linearGradientBrush, rect);
               int y = num3 - UiScale.S(13);
               string str = this._SelectedEmpire.ResolveFeelingDescription(this._Empires[tag].ObtainPirateRelation(this._SelectedEmpire));
               graphics.MeasureString(str, this._EmpireListView.Font);
@@ -312,12 +309,12 @@ namespace DistantWorlds.Controls
             {
               graphics.DrawLine(pen1, 0, num3, width1, num3);
               Rectangle rect = new Rectangle(0, num3 - UiScale.S(1), UiScale.S(10), UiScale.S(3));
-              LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
-              graphics.FillRectangle((Brush) linearGradientBrush, rect);
+              using LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, pen3.Color, pen1.Color, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+              graphics.FillRectangle( linearGradientBrush, rect);
             }
             else
             {
-              SolidBrush solidBrush = new SolidBrush(pen1.Color);
+              using SolidBrush solidBrush = new SolidBrush(pen1.Color);
               Point[] points = new Point[4];
               if (diplomaticRelation1.Initiator == diplomaticRelation1.ThisEmpire)
               {
@@ -334,7 +331,7 @@ namespace DistantWorlds.Controls
                 points[3] = new Point(width1, num3 - 1);
               }
               graphics.SmoothingMode = SmoothingMode.AntiAlias;
-              graphics.FillPolygon((Brush) solidBrush, points);
+              graphics.FillPolygon( solidBrush, points);
               graphics.SmoothingMode = SmoothingMode.None;
             }
             y1 = num3 - UiScale.S(13);
@@ -345,7 +342,7 @@ namespace DistantWorlds.Controls
             int x1 = (this._RelationViewWidth - (int) sizeF.Width) / 2 - UiScale.S(10);
             graphics.DrawString(str1, this._EmpireListView.Font, pen1.Brush, (PointF) new Point(x1, y1));
             string str2 = this._Empire.ResolveFeelingDescription(this._Empires[tag].EmpireEvaluations[this._SelectedEmpire]);
-            sizeF = graphics.MeasureString(str2, this._EmpireListView.Font);
+            //sizeF = graphics.MeasureString(str2, this._EmpireListView.Font);
             int x2 = UiScale.S(2);
             graphics.DrawString(str2, this._EmpireListView.Font, pen1.Brush, (PointF) new Point(x2, y1));
           }
@@ -414,6 +411,7 @@ namespace DistantWorlds.Controls
         }
         ++num2;
       }
+      pen1?.Dispose();
     }
 
     private void LoadDiplomaticRelations(Empire empire)

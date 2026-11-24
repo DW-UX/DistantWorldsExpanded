@@ -60,7 +60,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return (width - width1) / 2;
     }
 
@@ -70,7 +71,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return width - width1;
     }
 
@@ -94,8 +96,8 @@ namespace DistantWorlds.Controls
       this.DrawStringWithDropShadow(graphics, this._Empire.ResearchHighTechPotential.ToString("#0,K"), this._TitleFont, location);
       int y = topMargin + (int) ((double) this._RowHeight * 1.7);
       Rectangle rect = new Rectangle(this._LeftMargin - UiScale.S(2), y - UiScale.S(1), this.ClientRectangle.Width - this._LeftMargin * 2, this._RowHeight + UiScale.S(8));
-      SolidBrush solidBrush = new SolidBrush(Color.FromArgb(96, (int) byte.MaxValue, 64, 128));
-      graphics.FillRectangle((Brush) solidBrush, rect);
+      using SolidBrush solidBrush = new SolidBrush(Color.FromArgb(96, (int) byte.MaxValue, 64, 128));
+      graphics.FillRectangle( solidBrush, rect);
       location = new Point(leftMargin, y);
       this.DrawStringWithDropShadow(graphics, TextResolver.GetText("Actual Output (including bonuses)"), this._TitleFont, location);
       location = new Point(x1, y);
@@ -135,9 +137,9 @@ namespace DistantWorlds.Controls
       Point location)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._WhiteBrush, (PointF) location);
     }
 
     protected override void Dispose(bool disposing)

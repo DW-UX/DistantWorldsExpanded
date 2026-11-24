@@ -605,14 +605,15 @@ namespace DistantWorlds.Controls
       }
       int y1 = UiScale.S(10);
       string text = Galaxy.ResolveDescription(character.Role);
-      Point location = new Point(UiScale.S(270) + (UiScale.S(120) - (int) graphics.MeasureString(text, this._BoldFont, UiScale.S(120), StringFormat.GenericDefault).Width) / 2, y1);
+      using StringFormat format = StringFormat.GenericDefault;
+      Point location = new Point(UiScale.S(270) + (UiScale.S(120) - (int) graphics.MeasureString(text, this._BoldFont, UiScale.S(120), format).Width) / 2, y1);
       this.DrawStringWithDropShadow(graphics, text, this._BoldFont, location);
       int y2 = UiScale.S(108);
       string s = Galaxy.ResolveDescriptionCharacterTask(character, this._Galaxy);
       if (string.IsNullOrEmpty(s))
         s = Galaxy.ResolveCharacterLocationDescription(character);
       RectangleF layoutRectangle = new RectangleF(UiScale.S(270f), (float) y2, UiScale.S(120f), UiScale.S(152f));
-      graphics.DrawString(s, this._LargeFont, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);
+      graphics.DrawString(s, this._LargeFont,  this._WhiteBrush, layoutRectangle, format);
     }
 
     private Bitmap GenerateCharacterPlanetCompositeImage(
@@ -679,9 +680,9 @@ namespace DistantWorlds.Controls
       Point location)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._WhiteBrush, (PointF) location);
     }
 
     private void DrawStringWithDropShadowBounded(
@@ -694,11 +695,12 @@ namespace DistantWorlds.Controls
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       PointF pointF = new PointF((float) location.X, (float) location.Y);
       RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
+      using StringFormat format = StringFormat.GenericTypographic;
+      graphics.DrawString(text, font,  this._BlackBrush, layoutRectangle, format);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       pointF = new PointF((float) location.X, (float) location.Y);
       layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
-      graphics.DrawString(text, font, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);
+      graphics.DrawString(text, font,  this._WhiteBrush, layoutRectangle, format);
     }
 
     private void txtName_Enter(object sender, EventArgs e)

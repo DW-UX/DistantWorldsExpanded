@@ -53,15 +53,15 @@ namespace DistantWorlds.Controls
         return;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(64, 128, 128, 128)))
-        graphics.FillRectangle((Brush) solidBrush, this.ClientRectangle);
+        graphics.FillRectangle( solidBrush, this.ClientRectangle);
       int margin = this._Margin;
       SizeF maxSize = new SizeF((float) (this.Width - this._Margin * 2), (float) (this.Height - this._Margin * 2));
-      GraphicsHelper.DrawStringWithDropShadow(graphics, this._GalaxySummary.Title, this._LargeFont, new Point(this._Margin, margin), (Brush) this._Brush, maxSize);
+      GraphicsHelper.DrawStringWithDropShadow(graphics, this._GalaxySummary.Title, this._LargeFont, new Point(this._Margin, margin),  this._Brush, maxSize);
       int y1 = margin + this._LargeFont.Height + this._SpaceHeight;
       string text = string.Format(TextResolver.GetText("Physical Galaxy Description"), (object) this._GalaxySummary.StarCount.ToString(), (object) Galaxy.ResolveDescription(this._GalaxySummary.Shape), (object) this._GalaxySummary.SectorWidth.ToString(), (object) this._GalaxySummary.SectorHeight.ToString());
-      GraphicsHelper.DrawStringWithDropShadow(graphics, text, this._BoldFont, new Point(this._Margin, y1), (Brush) this._Brush, maxSize);
+      GraphicsHelper.DrawStringWithDropShadow(graphics, text, this._BoldFont, new Point(this._Margin, y1),  this._Brush, maxSize);
       int y2 = y1 + this._LineHeight + this._LineHeight + this._LineHeight;
-      GraphicsHelper.DrawStringWithDropShadow(graphics, this._GalaxySummary.Description, this._NormalFont, new Point(this._Margin, y2), (Brush) this._Brush, maxSize);
+      GraphicsHelper.DrawStringWithDropShadow(graphics, this._GalaxySummary.Description, this._NormalFont, new Point(this._Margin, y2),  this._Brush, maxSize);
     }
   }
 }

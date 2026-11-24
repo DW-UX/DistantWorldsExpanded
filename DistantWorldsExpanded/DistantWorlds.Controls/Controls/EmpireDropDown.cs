@@ -165,13 +165,13 @@ namespace DistantWorlds.Controls
       int num1 = 0;
       PointF point = new PointF(UiScale.S(30f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
-      SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, 0, 128));
+     using  SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, 0, 128));
       if (this._IncludeNoEmpire)
       {
         if (e.Index == num1)
         {
-          e.Graphics.DrawString(this._NoEmpire, font, (Brush) solidBrush1, point);
+          e.Graphics.DrawString(this._NoEmpire, font,  solidBrush1, point);
           return;
         }
         ++num1;
@@ -180,7 +180,7 @@ namespace DistantWorlds.Controls
       {
         if (e.Index == num1)
         {
-          e.Graphics.DrawString(this._IndependentEmpire.Name, font, (Brush) solidBrush1, point);
+          e.Graphics.DrawString(this._IndependentEmpire.Name, font,  solidBrush1, point);
           return;
         }
         ++num1;
@@ -193,8 +193,8 @@ namespace DistantWorlds.Controls
         {
           int index = e.Index - num2;
           if (this._Empires[index] == this._PlayerEmpire)
-            e.Graphics.FillRectangle((Brush) solidBrush2, e.Bounds);
-          e.Graphics.DrawString(this._Empires[index].Name, font, (Brush) solidBrush1, point);
+            e.Graphics.FillRectangle( solidBrush2, e.Bounds);
+          e.Graphics.DrawString(this._Empires[index].Name, font,  solidBrush1, point);
           Bitmap largeFlagPicture = this._Empires[index].LargeFlagPicture;
           e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
           e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -214,7 +214,7 @@ namespace DistantWorlds.Controls
       if (e.Index < num4 || e.Index >= num5)
         return;
       int index1 = e.Index - num4;
-      e.Graphics.DrawString(this._PirateFactions[index1].Name, font, (Brush) solidBrush1, point);
+      e.Graphics.DrawString(this._PirateFactions[index1].Name, font,  solidBrush1, point);
       Bitmap largeFlagPicture1 = this._PirateFactions[index1].LargeFlagPicture;
       e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
       e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;

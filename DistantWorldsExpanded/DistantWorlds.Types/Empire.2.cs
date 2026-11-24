@@ -1304,8 +1304,8 @@ namespace DistantWorlds.Types
                     DiplomaticRelation diplomaticRelation2 = diplomaticRelation.OtherEmpire.ObtainDiplomaticRelation(this);
                     if (diplomaticRelation2.Strategy == DiplomaticStrategy.Conquer)
                     {
-                        stellarObjectList.AddRange(ListHelper.ToArrayThreadSafe(diplomaticRelation2.WarObjectiveBases));
-                        stellarObjectList.AddRange(ListHelper.ToArrayThreadSafe(diplomaticRelation2.WarObjectiveColonies));
+                        stellarObjectList.AddRange(diplomaticRelation2.WarObjectiveBases.CloneThreadSafe());
+                        stellarObjectList.AddRange(diplomaticRelation2.WarObjectiveColonies.CloneThreadSafe());
                     }
                 }
             }

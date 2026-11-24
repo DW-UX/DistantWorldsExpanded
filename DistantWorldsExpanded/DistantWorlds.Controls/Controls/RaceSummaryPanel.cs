@@ -72,7 +72,7 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      this.DrawStringWithDropShadow(graphics, text, font, location, (Brush) this._WhiteBrush);
+      this.DrawStringWithDropShadow(graphics, text, font, location,  this._WhiteBrush);
     }
 
     private void DrawStringWithDropShadow(
@@ -83,7 +83,7 @@ namespace DistantWorlds.Controls
       Brush brush)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       graphics.DrawString(text, font, brush, (PointF) location);
     }
@@ -109,18 +109,19 @@ namespace DistantWorlds.Controls
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
       PointF pointF = new PointF((float) location.X, (float) location.Y);
       RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
+      using StringFormat format = StringFormat.GenericTypographic;
+      graphics.DrawString(text, font,  this._BlackBrush, layoutRectangle, format);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
       pointF = new PointF((float) location.X, (float) location.Y);
       layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
       if (textColor.IsEmpty)
       {
-        graphics.DrawString(text, font, (Brush) this._WhiteBrush, layoutRectangle, StringFormat.GenericTypographic);
+        graphics.DrawString(text, font,  this._WhiteBrush, layoutRectangle, format);
       }
       else
       {
         using (SolidBrush solidBrush = new SolidBrush(textColor))
-          graphics.DrawString(text, font, (Brush) solidBrush, layoutRectangle, StringFormat.GenericTypographic);
+          graphics.DrawString(text, font,  solidBrush, layoutRectangle, format);
       }
     }
   }

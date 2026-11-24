@@ -467,7 +467,7 @@ namespace DistantWorlds.Types
             {
                 SizeF sizeF = graphics.MeasureString(text, font, maxSize);
                 int x = location.X - (int)((double)sizeF.Width / 2.0);
-                GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, new Point(x, location.Y), (Brush)brush, maxSize);
+                GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, new Point(x, location.Y), brush, maxSize);
             }
         }
 
@@ -502,7 +502,7 @@ namespace DistantWorlds.Types
         {
             SizeF sizeF = graphics.MeasureString(text, font, textArea.Width);
             int x = textArea.X + textArea.Width / 2 - (int)((double)sizeF.Width / 2.0);
-            GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, new Point(x, textArea.Y), (Brush)brush, (Brush)dropShadowBrush, new SizeF(sizeF.Width + UiScale.S(2f), sizeF.Height + UiScale.S(2f)));
+            GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, new Point(x, textArea.Y), brush, dropShadowBrush, new SizeF(sizeF.Width + UiScale.S(2f), sizeF.Height + UiScale.S(2f)));
             return (int)sizeF.Height + UiScale.S(1);
         }
 
@@ -524,10 +524,11 @@ namespace DistantWorlds.Types
           SolidBrush brush)
         {
             location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
+            using StringFormat format = StringFormat.GenericTypographic;
             using (SolidBrush solidBrush = new SolidBrush(Color.Black))
-                graphics.DrawString(text, font, (Brush)solidBrush, (PointF)location, StringFormat.GenericTypographic);
+                graphics.DrawString(text, font, solidBrush, (PointF)location, format);
             location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-            graphics.DrawString(text, font, (Brush)brush, (PointF)location, StringFormat.GenericTypographic);
+            graphics.DrawString(text, font, brush, (PointF)location, format);
         }
 
         public static void DrawStringWithDropShadow(
@@ -539,7 +540,7 @@ namespace DistantWorlds.Types
           SizeF maxSize)
         {
             using (SolidBrush dropShadowBrush = new SolidBrush(Color.Black))
-                GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, location, brush, (Brush)dropShadowBrush, maxSize);
+                GraphicsHelper.DrawStringWithDropShadow(graphics, text, font, location, brush, dropShadowBrush, maxSize);
         }
 
         public static void DrawStringWithDropShadow(
@@ -556,7 +557,7 @@ namespace DistantWorlds.Types
                 bool flag = false;
                 location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF((float)location.X, (float)location.Y, maxSize.Width, maxSize.Height);
-                StringFormat genericTypographic = StringFormat.GenericTypographic;
+                using StringFormat genericTypographic = StringFormat.GenericTypographic;
                 //genericTypographic.Trimming = StringTrimming.None;
                 //var test2 = new Region();
                 //test2.MakeInfinite();

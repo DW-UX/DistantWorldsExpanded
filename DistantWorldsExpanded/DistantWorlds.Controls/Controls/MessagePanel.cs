@@ -63,9 +63,12 @@ namespace DistantWorlds.Controls
       this._Padding = UiScale.S(6);
       RectangleF layoutRectangle = new RectangleF((float) this._Padding, (float) this._Padding, (float) (this.ClientRectangle.Width - this._Padding * 2), (float) (this.ClientRectangle.Height - this._Padding * 2));
       e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-      e.Graphics.DrawString(this._Message, this.Font, (Brush) new SolidBrush(Color.FromArgb(0, 0, 0)), layoutRectangle, StringFormat.GenericDefault);
+      using StringFormat format = StringFormat.GenericDefault;
+      using Brush brush1 =  new SolidBrush(Color.FromArgb(0, 0, 0));
+      using Brush brush2 =  new SolidBrush(Color.FromArgb(224, 224, 224));
+      e.Graphics.DrawString(this._Message, this.Font,brush1  , layoutRectangle, format);
       layoutRectangle.Offset(UiScale.S(-1f), UiScale.S(-1f));
-      e.Graphics.DrawString(this._Message, this.Font, (Brush) new SolidBrush(Color.FromArgb(224, 224, 224)), layoutRectangle, StringFormat.GenericDefault);
+      e.Graphics.DrawString(this._Message, this.Font, brush2 , layoutRectangle, format);
     }
   }
 }

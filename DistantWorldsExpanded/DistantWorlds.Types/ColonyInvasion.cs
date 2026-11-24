@@ -1116,7 +1116,7 @@ namespace DistantWorlds.Types
           if (this._Colony.Empire.PirateEmpireBaseHabitat != null && this._Colony.Empire.MainColor == Color.FromArgb(1, 1, 1))
             color = Color.FromArgb(48, 48, 48);
           using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(32, 32, 32)))
-            graphics.FillRectangle((Brush) solidBrush, new Rectangle(0, 0, this.Size.Width, this._HeaderSize));
+            graphics.FillRectangle( solidBrush, new Rectangle(0, 0, this.Size.Width, this._HeaderSize));
         }
         int num1 = this.Size.Width - this._SpaceImage.Width;
         Rectangle destRect1 = new Rectangle(0, this._HeaderSize, num1, this.Size.Height - this._HeaderSize);
@@ -1149,7 +1149,7 @@ namespace DistantWorlds.Types
         }
         Rectangle rect = new Rectangle(num1 - UiScale.S(1), this._HeaderSize, UiScale.S(40), this.Size.Height - this._HeaderSize);
         using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rect, color1, Color.Transparent, LinearGradientMode.Horizontal))
-          graphics.FillRectangle((Brush) linearGradientBrush, rect);
+          graphics.FillRectangle( linearGradientBrush, rect);
         int num2 = this._AttackingTroopsArmorX;
         int defendingStrength = 0;
         int attackingStrength = 0;
@@ -1189,7 +1189,7 @@ namespace DistantWorlds.Types
           {
             int y3 = y1 + this._LargeFont.Height + index * (this._NormalFont.Height - UiScale.S(2));
             this.DrawStringWithDropShadow(graphics, modifierAmountsDefense[index].ToString("+0%;-0%"), this._NormalFont, new Point(UiScale.S(5), y3));
-            this.DrawStringWithDropShadow(graphics, modifierReasonsDefense[index], this._NormalFont, new Point(UiScale.S(5) + num3, y3), (Brush) this._WhiteBrush, maxSize2);
+            this.DrawStringWithDropShadow(graphics, modifierReasonsDefense[index], this._NormalFont, new Point(UiScale.S(5) + num3, y3),  this._WhiteBrush, maxSize2);
           }
           if (invader != null)
           {
@@ -1202,7 +1202,7 @@ namespace DistantWorlds.Types
             {
               int y4 = y2 + this._LargeFont.Height + index * (this._NormalFont.Height - UiScale.S(2));
               this.DrawStringWithDropShadow(graphics, modifierAmountsAttack[index].ToString("+0%;-0%"), this._NormalFont, new Point(UiScale.S(5) + x, y4));
-              this.DrawStringWithDropShadow(graphics, modifierReasonsAttack[index], this._NormalFont, new Point(UiScale.S(5) + x + num3, y4), (Brush) this._WhiteBrush, maxSize2);
+              this.DrawStringWithDropShadow(graphics, modifierReasonsAttack[index], this._NormalFont, new Point(UiScale.S(5) + x + num3, y4),  this._WhiteBrush, maxSize2);
             }
           }
           if (invader != null)
@@ -1233,12 +1233,12 @@ namespace DistantWorlds.Types
             if (defender != null)
             {
               using (SolidBrush solidBrush = new SolidBrush(defender.MainColor))
-                graphics.FillRectangle((Brush) solidBrush, new Rectangle(this._DefendingTroopsSpecialForcesX, this._HeaderSize + UiScale.S(5), width, this._StatusBarAreaHeight - UiScale.S(10)));
+                graphics.FillRectangle( solidBrush, new Rectangle(this._DefendingTroopsSpecialForcesX, this._HeaderSize + UiScale.S(5), width, this._StatusBarAreaHeight - UiScale.S(10)));
             }
             if (invader != null)
             {
               using (SolidBrush solidBrush = new SolidBrush(invader.MainColor))
-                graphics.FillRectangle((Brush) solidBrush, new Rectangle(num2, this._HeaderSize + UiScale.S(5), width - (num2 - this._DefendingTroopsSpecialForcesX), this._StatusBarAreaHeight - UiScale.S(10)));
+                graphics.FillRectangle( solidBrush, new Rectangle(num2, this._HeaderSize + UiScale.S(5), width - (num2 - this._DefendingTroopsSpecialForcesX), this._StatusBarAreaHeight - UiScale.S(10)));
             }
             this.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Battle Strength Description"), (object) defendingStrength.ToString("0,K"), (object) attackingStrength.ToString("0,K")), this._NormalBoldFont, new Point(this._DefendingTroopsSpecialForcesX + width / 2, this._HeaderSize + UiScale.S(6)));
           }
@@ -1262,7 +1262,7 @@ namespace DistantWorlds.Types
           using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(128, 160, 224, (int) byte.MaxValue)))
           {
             Rectangle rectangle = new Rectangle(this._AttackingForcesLowerAtmosphereX + (this._AttackingForcesOrbitX - this._AttackingForcesLowerAtmosphereX) / 2 - UiScale.S(3), area.Top, UiScale.S(6), area.Bottom);
-            graphics.FillRectangle((Brush) solidBrush, rectangle);
+            graphics.FillRectangle( solidBrush, rectangle);
             this.AddHotspot(rectangle, (object) 1, TextResolver.GetText("Planetary Facility Planetary Shield"));
           }
         }
@@ -1309,7 +1309,7 @@ namespace DistantWorlds.Types
               if (bitmap != null && rectangle.Width > bitmap.Width)
                 bitmap = this._CharacterImageCache.ObtainCharacterImage(character);
               using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(alpha, character.Empire.MainColor)))
-                graphics.FillRectangle((Brush) solidBrush, rectangle);
+                graphics.FillRectangle( solidBrush, rectangle);
               graphics.DrawImage((Image) bitmap, rectangle, new Rectangle(0, 0, bitmap.Width, bitmap.Height), GraphicsUnit.Pixel);
               this.AddHotspot(rectangle, (object) character, character.Name + " (" + Galaxy.ResolveDescription(character.Role) + ")");
             }
@@ -1363,8 +1363,8 @@ namespace DistantWorlds.Types
               this.AddHotspot(region, (object) relatedObject, message);
               int width = (int) ((double) troop.Readiness / 100.0 * (double) this._TroopSize.Width);
               if ((double) troop.Readiness < 100.0)
-                graphics.FillRectangle((Brush) this._RedBrush, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, UiScale.S(2)));
-              graphics.FillRectangle((Brush) this._GreenBrush, new Rectangle(rectangle.X, rectangle.Y, width, UiScale.S(2)));
+                graphics.FillRectangle( this._RedBrush, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, UiScale.S(2)));
+              graphics.FillRectangle( this._GreenBrush, new Rectangle(rectangle.X, rectangle.Y, width, UiScale.S(2)));
             }
           }
         }
@@ -1421,8 +1421,8 @@ namespace DistantWorlds.Types
               this.AddHotspot(region, (object) relatedObject, message);
               int width = (int) ((double) invadingTroop.Readiness / 100.0 * (double) this._TroopSize.Width);
               if ((double) invadingTroop.Readiness < 100.0)
-                graphics.FillRectangle((Brush) this._RedBrush, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, UiScale.S(2)));
-              graphics.FillRectangle((Brush) this._GreenBrush, new Rectangle(rectangle.X, rectangle.Y, width, UiScale.S(2)));
+                graphics.FillRectangle( this._RedBrush, new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, UiScale.S(2)));
+              graphics.FillRectangle( this._GreenBrush, new Rectangle(rectangle.X, rectangle.Y, width, UiScale.S(2)));
             }
           }
         }
@@ -1448,7 +1448,7 @@ namespace DistantWorlds.Types
                   bitmap = this._CharacterImageCache.ObtainCharacterImage(invadingCharacter);
               }
               using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(alpha, invadingCharacter.Empire.MainColor)))
-                graphics.FillRectangle((Brush) solidBrush, rectangle);
+                graphics.FillRectangle( solidBrush, rectangle);
               graphics.DrawImage((Image) bitmap, rectangle, new Rectangle(0, 0, bitmap.Width, bitmap.Height), GraphicsUnit.Pixel);
               this.AddHotspot(rectangle, (object) invadingCharacter, invadingCharacter.Name + " (" + Galaxy.ResolveDescription(invadingCharacter.Role) + ")");
             }
@@ -1482,7 +1482,7 @@ namespace DistantWorlds.Types
         if (this._HoveredHotspot != null)
         {
           Point location = new Point(this.Size.Width / 2, this._HeaderSize - UiScale.S(20));
-          this.DrawStringWithDropShadowCentered(graphics, this._HoveredHotspot.HoverMessage, this._NormalFont, location, (Brush) this._YellowBrush);
+          this.DrawStringWithDropShadowCentered(graphics, this._HoveredHotspot.HoverMessage, this._NormalFont, location,  this._YellowBrush);
           using (Pen pen = new Pen(Color.FromArgb(170, 170, 170), 1f))
           {
             pen.DashStyle = DashStyle.Dot;
@@ -1575,7 +1575,7 @@ namespace DistantWorlds.Types
       Point location,
       SizeF maxSize)
     {
-      this.DrawStringWithDropShadowCentered(graphics, text, font, location, (Brush) this._WhiteBrush, maxSize);
+      this.DrawStringWithDropShadowCentered(graphics, text, font, location,  this._WhiteBrush, maxSize);
     }
 
     private void DrawStringWithDropShadowCentered(
@@ -1606,7 +1606,7 @@ namespace DistantWorlds.Types
       Font font,
       Point location)
     {
-      this.DrawStringWithDropShadow(graphics, text, font, location, (Brush) this._WhiteBrush);
+      this.DrawStringWithDropShadow(graphics, text, font, location,  this._WhiteBrush);
     }
 
     private void DrawStringWithDropShadow(
@@ -1631,7 +1631,7 @@ namespace DistantWorlds.Types
       {
         location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
         RectangleF layoutRectangle = new RectangleF((float) location.X, (float) location.Y, maxSize.Width, maxSize.Height);
-        graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
+        graphics.DrawString(text, font,  this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
         location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         layoutRectangle = new RectangleF((float) location.X, (float) location.Y, maxSize.Width, maxSize.Height);
         graphics.DrawString(text, font, brush, layoutRectangle, StringFormat.GenericTypographic);
@@ -1639,7 +1639,7 @@ namespace DistantWorlds.Types
       else
       {
         location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-        graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+        graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
         location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         graphics.DrawString(text, font, brush, (PointF) location);
       }

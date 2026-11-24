@@ -85,7 +85,7 @@ namespace DistantWorlds.Controls
           if (e.Index >= 0)
           {
             if (e.Index < num)
-              e.Graphics.DrawString(Galaxy.ResolveDescription(this._DesignImageScalingModes[e.Index]), font, (Brush) solidBrush, point);
+              e.Graphics.DrawString(Galaxy.ResolveDescription(this._DesignImageScalingModes[e.Index]), font,  solidBrush, point);
           }
         }
       }

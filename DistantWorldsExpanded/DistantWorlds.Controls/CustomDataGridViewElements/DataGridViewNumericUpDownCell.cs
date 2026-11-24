@@ -321,13 +321,13 @@ namespace DistantWorlds.Controls
                     color1 = cellStyle.BackColor;
                     color2 = cellStyle.ForeColor;
                 }
-                SolidBrush solidBrush1 = new SolidBrush(color1);
-                graphics.FillRectangle((Brush)solidBrush1, cellBounds);
-                SolidBrush solidBrush2 = new SolidBrush(color2);
+                using SolidBrush solidBrush1 = new SolidBrush(color1);
+                graphics.FillRectangle(solidBrush1, cellBounds);
+                using SolidBrush solidBrush2 = new SolidBrush(color2);
                 SizeF sizeF = graphics.MeasureString(formattedValue as string, cellStyle.Font);
                 float x = (float)(cellBounds.X + UiScale.S(2));
                 float num = (float)cellBounds.Y + (float)(((double)cellBounds.Height - (double)sizeF.Height) / 2.0);
-                graphics.DrawString(formattedValue as string, cellStyle.Font, (Brush)solidBrush2, x, num + UiScale.S(1f));
+                graphics.DrawString(formattedValue as string, cellStyle.Font, solidBrush2, x, num + UiScale.S(1f));
             }
             if (!DataGridViewNumericUpDownCell.PartPainted(paintParts, DataGridViewPaintParts.ErrorIcon))
                 return;

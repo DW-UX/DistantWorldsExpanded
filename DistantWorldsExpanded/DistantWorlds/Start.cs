@@ -1307,8 +1307,10 @@ namespace DistantWorlds
                 lblMenuHints.Location = new Point(pnlButtons.Location.X - (num23 + UiScale.S(30)), pnlButtons.Location.Y + pnlButtons.Height / 2 - UiScale.S(50));
                 lblCopyright.Visible = false;
                 string text3 = TextResolver.GetText("Copyright");
-                Graphics graphics = CreateGraphics();
-                int num24 = (int)graphics.MeasureString(text3, lnkCopyright.Font, UiScale.S(600), StringFormat.GenericTypographic).Width;
+                using Graphics graphics = CreateGraphics();
+                int num24;
+                using(StringFormat format = StringFormat.GenericTypographic)
+               { num24  = (int)graphics.MeasureString(text3, lnkCopyright.Font, UiScale.S(600), format).Width;}
                 lnkCopyright.Location = new Point((num - num24) / 2, num2 - UiScale.S(25));
                 lnkCopyright.Text = text3;
                 picTitle.Visible = false;
@@ -1690,9 +1692,10 @@ namespace DistantWorlds
             picSaveLoadGalaxy.Size = new Size(bitmap_0.Width, bitmap_0.Height);
             picSaveLoadGalaxy.Location = location;
             picSaveLoadGalaxy.BringToFront();
-            Graphics graphics = lblSaveLoadMessage.CreateGraphics();
-            int num = (int)graphics.MeasureString(string_2, pnlSaveLoadProgress.Font, UiScale.S(320), StringFormat.GenericTypographic).Width;
-            int num2 = (int)graphics.MeasureString(string_2, pnlSaveLoadProgress.Font, UiScale.S(320), StringFormat.GenericTypographic).Height;
+            using Graphics graphics = lblSaveLoadMessage.CreateGraphics();
+            using var format = StringFormat.GenericTypographic;
+            int num = (int)graphics.MeasureString(string_2, pnlSaveLoadProgress.Font, UiScale.S(320),format).Width;
+            int num2 = (int)graphics.MeasureString(string_2, pnlSaveLoadProgress.Font, UiScale.S(320), format).Height;
             lblSaveLoadMessage.Size = new Size(num + UiScale.S(2), num2 + UiScale.S(2));
             lblSaveLoadMessage.Location = new Point((pnlSaveLoadProgress.Width - num) / 2, UiScale.S(13));
             lblSaveLoadMessage.Font = font_7;

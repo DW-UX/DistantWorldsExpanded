@@ -191,12 +191,12 @@ namespace DistantWorlds.Controls
           }
           point = new Point(location.X + num + this._ImageSize - UiScale.S(1), location.Y);
           string text = (researchNode.Progress / researchNode.Cost).ToString("0%");
-          this.DrawStringWithDropShadow(graphics, text, this._Font, point, (Brush) solidBrush);
+          this.DrawStringWithDropShadow(graphics, text, this._Font, point,  solidBrush);
         }
         else
         {
           point = new Point(location.X + num, location.Y);
-          this.DrawStringWithDropShadow(graphics, "  -----", this._Font, point, (Brush) solidBrush);
+          this.DrawStringWithDropShadow(graphics, "  -----", this._Font, point,  solidBrush);
         }
       }
     }
@@ -372,7 +372,7 @@ namespace DistantWorlds.Controls
       Font font,
       Point location)
     {
-      this.DrawStringWithDropShadow(graphics, text, font, location, (Brush) this._WhiteBrush);
+      this.DrawStringWithDropShadow(graphics, text, font, location,  this._WhiteBrush);
     }
 
     private void DrawStringWithDropShadow(
@@ -397,15 +397,16 @@ namespace DistantWorlds.Controls
       {
         location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
         RectangleF layoutRectangle = new RectangleF((float) location.X, (float) location.Y, maxSize.Width, maxSize.Height);
-        graphics.DrawString(text, font, (Brush) this._BlackBrush, layoutRectangle, StringFormat.GenericTypographic);
+        using StringFormat format = StringFormat.GenericTypographic;
+        graphics.DrawString(text, font,  this._BlackBrush, layoutRectangle, format);
         location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         layoutRectangle = new RectangleF((float) location.X, (float) location.Y, maxSize.Width, maxSize.Height);
-        graphics.DrawString(text, font, brush, layoutRectangle, StringFormat.GenericTypographic);
+        graphics.DrawString(text, font, brush, layoutRectangle, format);
       }
       else
       {
         location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-        graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+        graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
         location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         graphics.DrawString(text, font, brush, (PointF) location);
       }

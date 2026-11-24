@@ -41,7 +41,9 @@ namespace DistantWorlds.Controls
       e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
       e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       RectangleF layoutRectangle = new RectangleF(0.0f, 0.0f, (float) this.Width, (float) this.Height);
-      e.Graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(Color.White), layoutRectangle, StringFormat.GenericTypographic);
+      using StringFormat format = StringFormat.GenericTypographic;
+      using Brush brush =  new SolidBrush(Color.White);
+      e.Graphics.DrawString(this._Text, this.Font,  brush, layoutRectangle, format);
     }
   }
 }

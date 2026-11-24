@@ -24,7 +24,7 @@ namespace DistantWorlds.Controls
     private Rectangle thumbHalfRect;
     private Rectangle elapsedRect;
     private int thumbSize = UiScale.S(15);
-    private GraphicsPath thumbCustomShape;
+    // private GraphicsPath thumbCustomShape;
     private Size thumbRoundRectSize = new Size(UiScale.S(8), UiScale.S(8));
     private Size borderRoundRectSize = new Size(UiScale.S(8), UiScale.S(8));
     private Orientation barOrientation;
@@ -119,20 +119,20 @@ namespace DistantWorlds.Controls
       }
     }
 
-    [Description("Set Slider's thumb's custom shape")]
-    [Category("ColorSlider")]
-    [Browsable(false)]
-    [DefaultValue(typeof (GraphicsPath), "null")]
-    public GraphicsPath ThumbCustomShape
-    {
-      get => this.thumbCustomShape;
-      set
-      {
-        this.thumbCustomShape = value;
-        this.thumbSize = (this.barOrientation == Orientation.Horizontal ? (int) value.GetBounds().Width : (int) value.GetBounds().Height) + UiScale.S(1);
-        this.Invalidate();
-      }
-    }
+    // [Description("Set Slider's thumb's custom shape")]
+    // [Category("ColorSlider")]
+    // [Browsable(false)]
+    // [DefaultValue(typeof (GraphicsPath), "null")]
+    // public GraphicsPath ThumbCustomShape
+    // {
+    //   get => this.thumbCustomShape;
+    //   set
+    //   {
+    //     this.thumbCustomShape = value;
+    //     this.thumbSize = (this.barOrientation == Orientation.Horizontal ? (int) value.GetBounds().Width : (int) value.GetBounds().Height) + UiScale.S(1);
+    //     this.Invalidate();
+    //   }
+    // }
 
     [DefaultValue(typeof (Size), "8; 8")]
     [Category("ColorSlider")]
@@ -186,8 +186,8 @@ namespace DistantWorlds.Controls
         int width = this.Width;
         this.Width = this.Height;
         this.Height = width;
-        if (this.thumbCustomShape != null)
-          this.thumbSize = (this.barOrientation == Orientation.Horizontal ? (int) this.thumbCustomShape.GetBounds().Width : (int) this.thumbCustomShape.GetBounds().Height) + UiScale.S(1);
+        // if (this.thumbCustomShape != null)
+        //   this.thumbSize = (this.barOrientation == Orientation.Horizontal ? (int) this.thumbCustomShape.GetBounds().Width : (int) this.thumbCustomShape.GetBounds().Height) + UiScale.S(1);
         this.Invalidate();
       }
     }
@@ -457,6 +457,7 @@ namespace DistantWorlds.Controls
       Color elapsedOuterColorPaint,
       Color elapsedInnerColorPaint)
     {
+        GraphicsPath path = null;
       try
       {
         this.thumbRect = this.barOrientation != Orientation.Horizontal ? new Rectangle(UiScale.S(1), (this.trackerValue - this.barMinimum) * (this.ClientRectangle.Height - this.thumbSize) / (this.barMaximum - this.barMinimum), this.ClientRectangle.Width - UiScale.S(3), this.thumbSize - UiScale.S(1)) : new Rectangle((this.trackerValue - this.barMinimum) * (this.ClientRectangle.Width - this.thumbSize) / (this.barMaximum - this.barMinimum), UiScale.S(1), this.thumbSize - UiScale.S(1), this.ClientRectangle.Height - UiScale.S(3));
@@ -483,33 +484,32 @@ namespace DistantWorlds.Controls
           this.elapsedRect = this.barRect;
           this.elapsedRect.Height = this.thumbRect.Top + this.thumbSize / 2;
         }
-        GraphicsPath path;
-        if (this.thumbCustomShape == null)
-        {
+        // if (this.thumbCustomShape == null)
+        // {
           path = ColorSlider.CreateRoundRectPath(this.thumbRect, this.thumbRoundRectSize);
-        }
-        else
-        {
-          path = this.thumbCustomShape;
-          Matrix matrix = new Matrix();
-          matrix.Translate((float) this.thumbRect.Left - path.GetBounds().Left, (float) this.thumbRect.Top - path.GetBounds().Top);
-          path.Transform(matrix);
-        }
+        // }
+        // else
+        // {
+        //   path = this.thumbCustomShape;
+        //   Matrix matrix = new Matrix();
+        //   matrix.Translate((float) this.thumbRect.Left - this.thumbCustomShape.GetBounds().Left, (float) this.thumbRect.Top - this.thumbCustomShape.GetBounds().Top);
+        //   path.Transform(matrix);
+        // }
         using (LinearGradientBrush linearGradientBrush1 = new LinearGradientBrush(this.barHalfRect, barOuterColorPaint, barInnerColorPaint, linearGradientMode))
         {
           linearGradientBrush1.WrapMode = WrapMode.TileFlipXY;
-          e.Graphics.FillRectangle((Brush) linearGradientBrush1, this.barRect);
+          e.Graphics.FillRectangle( linearGradientBrush1, this.barRect);
           using (LinearGradientBrush linearGradientBrush2 = new LinearGradientBrush(this.barHalfRect, elapsedOuterColorPaint, elapsedInnerColorPaint, linearGradientMode))
           {
             linearGradientBrush2.WrapMode = WrapMode.TileFlipXY;
             if (this.Capture && this.drawSemitransparentThumb)
             {
-              Region region = new Region(this.elapsedRect);
+              using Region region = new Region(this.elapsedRect);
               region.Exclude(path);
-              e.Graphics.FillRegion((Brush) linearGradientBrush2, region);
+              e.Graphics.FillRegion( linearGradientBrush2, region);
             }
             else
-              e.Graphics.FillRectangle((Brush) linearGradientBrush2, this.elapsedRect);
+              e.Graphics.FillRectangle( linearGradientBrush2, this.elapsedRect);
           }
           using (Pen pen = new Pen(barPenColorPaint, 0.5f))
             e.Graphics.DrawRectangle(pen, this.barRect);
@@ -525,7 +525,7 @@ namespace DistantWorlds.Controls
         {
           linearGradientBrush.WrapMode = WrapMode.TileFlipXY;
           e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-          e.Graphics.FillPath((Brush) linearGradientBrush, path);
+          e.Graphics.FillPath( linearGradientBrush, path);
           Color color = thumbPenColorPaint;
           if (this.mouseEffects && (this.Capture || this.mouseInThumbRegion))
             color = ControlPaint.Dark(color);
@@ -552,6 +552,8 @@ namespace DistantWorlds.Controls
       {
         Console.WriteLine("DrawBackGround Error in " + this.Name + ":" + ex.ToString());
       }
+      finally
+      {path?.Dispose();}
     }
 
     protected override void OnEnabledChanged(EventArgs e)

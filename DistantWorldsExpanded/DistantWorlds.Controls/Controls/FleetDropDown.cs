@@ -125,7 +125,7 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(60f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._Fleets != null && e.Index >= 0)
       {
         int num1 = 0;
@@ -133,12 +133,12 @@ namespace DistantWorlds.Controls
           ++num1;
         if (this._NullFleetSelection && e.Index == 0)
         {
-          e.Graphics.DrawString("(" + TextResolver.GetText("No Fleet") + ")", font, (Brush) solidBrush, point);
+          e.Graphics.DrawString("(" + TextResolver.GetText("No Fleet") + ")", font,  solidBrush, point);
         }
         else
         {
           int index = e.Index - num1;
-          e.Graphics.DrawString(this._Fleets[index].Name, font, (Brush) solidBrush, point);
+          e.Graphics.DrawString(this._Fleets[index].Name, font,  solidBrush, point);
           Rectangle rect = new Rectangle();
           if (this._Fleets[index].Empire != null && this._Fleets[index].Empire != this._Galaxy.IndependentEmpire)
           {

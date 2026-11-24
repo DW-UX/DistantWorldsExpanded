@@ -4,7 +4,7 @@
 		<OutputType>WinExe</OutputType>
 		<RootNamespace>DistantWorlds</RootNamespace>
 		<AssemblyName>DistantWorlds</AssemblyName>
-		<TargetFramework>net9.0-windows</TargetFramework>
+		<TargetFramework>net10.0-windows</TargetFramework>
 		<UseWindowsForms>True</UseWindowsForms>
 		<DistantWorldsVersion>$(DistantWorldsVersion)</DistantWorldsVersion>
 		<InformationalVersion>$(DistantWorldsVersion)-DWUX-$(ExpansionModVersion)</InformationalVersion>
@@ -17,6 +17,7 @@
 		<DefineConstants Condition="'$(RuntimeIdentifier)'=='win-x64'">$(DefineConstants);WIN64</DefineConstants>
 		<DefineConstants Condition="'$(RuntimeIdentifier)'==''">$(DefineConstants);ANY_PLATFORM</DefineConstants>
 		<Platforms>AnyCPU</Platforms>
+		<Configurations>Debug;Release;ReleasePublish</Configurations>
 	</PropertyGroup>
 	<PropertyGroup>
 		<DebuggerSupport>true</DebuggerSupport>
@@ -31,14 +32,17 @@
 		<TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
 		<TieredPGO>true</TieredPGO>
 		<BaseOutputPath></BaseOutputPath>
-		<AssemblyVersion>3.0.0.1</AssemblyVersion>
-		<FileVersion>3.0.0.1</FileVersion>
+		<AssemblyVersion>3.0.0.2</AssemblyVersion>
+		<FileVersion>3.0.0.2</FileVersion>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+	  <DebugType>full</DebugType>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleasePublish|AnyCPU'">
 	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 	<ItemGroup>

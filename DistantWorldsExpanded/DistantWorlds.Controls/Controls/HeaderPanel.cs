@@ -144,7 +144,10 @@ namespace DistantWorlds.Controls
       graphics.DrawImage(this._Icon, rect);
     }
 
-    private void DrawTitle(Graphics graphics) => graphics.DrawString(this._TitleText, this._TitleFont, (Brush) new SolidBrush(this._TextColor), (PointF) this._TitleLocation);
+    private void DrawTitle(Graphics graphics) {
+      using Brush brush =  new SolidBrush(this._TextColor);
+      graphics.DrawString(this._TitleText, this._TitleFont, brush, (PointF) this._TitleLocation);
+    }
 
     protected override void OnPaint(PaintEventArgs e)
     {
@@ -189,7 +192,7 @@ namespace DistantWorlds.Controls
       using (GraphicsPath path = new GraphicsPath())
       {
         path.AddRectangle(rectangle1);
-        using (Brush brush = (Brush) new SolidBrush(backColor))
+        using (Brush brush =  new SolidBrush(backColor))
           g.FillPath(brush, path);
       }
       if ((hovered || animating) && !pressed)
@@ -210,7 +213,7 @@ namespace DistantWorlds.Controls
               {
                 Color.FromArgb(0, glowColor)
               };
-              g.FillPath((Brush) pathGradientBrush, bottomRadialPath);
+              g.FillPath( pathGradientBrush, bottomRadialPath);
             }
           }
           g.ResetClip();
@@ -226,7 +229,7 @@ namespace DistantWorlds.Controls
           if (pressed | !enabled)
             alpha = (int) (0.40000000596046448 * (double) alpha + 0.5);
           using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rectangle2, Color.FromArgb(alpha, shineColor), Color.FromArgb(alpha / 3, shineColor), System.Drawing.Drawing2D.LinearGradientMode.Vertical))
-            g.FillPath((Brush) linearGradientBrush, topRoundRectangle);
+            g.FillPath( linearGradientBrush, topRoundRectangle);
         }
         rectangle2.Height -= 2;
       }

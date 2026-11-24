@@ -185,7 +185,7 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(0.0f, (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
       if (this.PirateRelationMode)
       {
         if (this._PirateRelationTypes != null && e.Index >= 0 && e.Index < this._PirateRelationTypes.Count)
@@ -205,13 +205,13 @@ namespace DistantWorlds.Controls
               s = TextResolver.GetText("Pirate Protection");
               break;
           }
-          e.Graphics.DrawString(s, font, (Brush) solidBrush2, point);
+          e.Graphics.DrawString(s, font,  solidBrush2, point);
         }
       }
       else if (this._DiplomaticRelationTypes != null && e.Index >= 0 && e.Index < this._DiplomaticRelationTypes.Count)
       {
         SolidBrush solidBrush3 = this.SelectBrush((DiplomaticRelationType) this._DiplomaticRelationTypes[e.Index]);
-        e.Graphics.DrawString(Galaxy.ResolveDescription((DiplomaticRelationType) this._DiplomaticRelationTypes[e.Index]), font, (Brush) solidBrush3, point);
+        e.Graphics.DrawString(Galaxy.ResolveDescription((DiplomaticRelationType) this._DiplomaticRelationTypes[e.Index]), font,  solidBrush3, point);
       }
       e.DrawFocusRectangle();
     }

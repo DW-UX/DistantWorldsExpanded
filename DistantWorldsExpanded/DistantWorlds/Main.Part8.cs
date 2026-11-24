@@ -485,8 +485,10 @@ namespace DistantWorlds
             lblDiplomacyTalkTitle.BackColor = Color.Transparent;
             string name = empire_5.Name;
             lblDiplomacyTalkTitle.Text = name;
-            Graphics graphics = lblDiplomacyTalkTitle.CreateGraphics();
-            int num = UiScale.S(55) + (int)graphics.MeasureString(name, lblDiplomacyTalkTitle.Font, UiScale.S(410), StringFormat.GenericDefault).Width;
+            using Graphics graphics = lblDiplomacyTalkTitle.CreateGraphics();
+            int num;
+            using(StringFormat format = StringFormat.GenericDefault)
+            {num = UiScale.S(55) + (int)graphics.MeasureString(name, lblDiplomacyTalkTitle.Font, UiScale.S(410), format).Width;}
             int num2 = (pnlDiplomacyTalkPanel.Width - num) / 2;
             picFlag.Size = new Size(UiScale.S(50), UiScale.S(30));
             picFlag.Location = new Point(num2, UiScale.S(8));
@@ -551,8 +553,10 @@ namespace DistantWorlds
                 lblDiplomacyTalkTitle.BackColor = Color.Transparent;
                 string name = empire_5.Name;
                 lblDiplomacyTalkTitle.Text = name;
-                Graphics graphics = lblDiplomacyTalkTitle.CreateGraphics();
-                int num = UiScale.S(55) + (int)graphics.MeasureString(name, lblDiplomacyTalkTitle.Font, UiScale.S(410), StringFormat.GenericDefault).Width;
+                using Graphics graphics = lblDiplomacyTalkTitle.CreateGraphics();
+                int num;
+                using(StringFormat format = StringFormat.GenericDefault)
+                num = UiScale.S(55) + (int)graphics.MeasureString(name, lblDiplomacyTalkTitle.Font, UiScale.S(410), format).Width;
                 int num2 = (pnlDiplomacyTalkPanel.Width - num) / 2;
                 picFlag.Size = new Size(UiScale.S(50), UiScale.S(30));
                 picFlag.Location = new Point(num2, UiScale.S(8));
@@ -653,8 +657,10 @@ namespace DistantWorlds
                 lblDiplomacyTalkTitle.BackColor = Color.Transparent;
                 string name = empire_5.Name;
                 lblDiplomacyTalkTitle.Text = name;
-                Graphics graphics = lblDiplomacyTalkTitle.CreateGraphics();
-                int num = UiScale.S(55) + (int)graphics.MeasureString(name, lblDiplomacyTalkTitle.Font, UiScale.S(410), StringFormat.GenericDefault).Width;
+                using Graphics graphics = lblDiplomacyTalkTitle.CreateGraphics();
+                int num;
+                using(StringFormat format = StringFormat.GenericDefault)
+                {num = UiScale.S(55) + (int)graphics.MeasureString(name, lblDiplomacyTalkTitle.Font, UiScale.S(410), format).Width;}
                 int num2 = (pnlDiplomacyTalkPanel.Width - num) / 2;
                 picFlag.Size = new Size(UiScale.S(50), UiScale.S(30));
                 picFlag.Location = new Point(num2, UiScale.S(8));

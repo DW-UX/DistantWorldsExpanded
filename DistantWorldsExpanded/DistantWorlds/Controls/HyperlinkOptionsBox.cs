@@ -181,7 +181,8 @@ namespace DistantWorlds.Controls
             double num = (double)int_1 + (double)int_2;
             Graphics graphics = linkLabel.CreateGraphics();
             graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            SizeF sizeF = graphics.MeasureString(text, font_0, base.ClientRectangle.Width - int_2 * 2, StringFormat.GenericDefault);
+            using StringFormat format = StringFormat.GenericDefault;
+            SizeF sizeF = graphics.MeasureString(text, font_0, base.ClientRectangle.Width - int_2 * 2, format);
             linkLabel.Location = new Point(int_2, (int)num);
             linkLabel.Visible = true;
             linkLabel.Height = (int)sizeF.Height + UiScale.S(2);

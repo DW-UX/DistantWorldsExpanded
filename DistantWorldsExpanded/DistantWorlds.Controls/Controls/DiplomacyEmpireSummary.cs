@@ -71,7 +71,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return (width - width1) / 2;
     }
 
@@ -81,7 +82,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return width - width1;
     }
 
@@ -97,9 +99,9 @@ namespace DistantWorlds.Controls
       this.DrawStringWithDropShadow(graphics, string.Format(TextResolver.GetText("FEELING with us"), (object) str1), this.Font, point);
       int y1 = topMargin1 + this._RowHeight;
       DiplomaticRelation diplomaticRelation = this._Empire.DiplomaticRelations[this._PlayerEmpire];
-      SolidBrush solidBrush = new SolidBrush(this._Galaxy.SelectDiplomaticRelationColor(diplomaticRelation.Type));
+      using SolidBrush solidBrush = new SolidBrush(this._Galaxy.SelectDiplomaticRelationColor(diplomaticRelation.Type));
       point = new Point(this._LeftMargin, y1);
-      graphics.DrawString(Galaxy.ResolveDescription(diplomaticRelation.Type), this.Font, (Brush) solidBrush, (PointF) point);
+      graphics.DrawString(Galaxy.ResolveDescription(diplomaticRelation.Type), this.Font,  solidBrush, (PointF) point);
       int y2 = y1 + this._RowHeight;
       point = new Point(this._LeftMargin, y2);
       this.DrawStringWithDropShadow(graphics, this._Empire.GovernmentAttributes.Name, this.Font, point);
@@ -181,9 +183,9 @@ namespace DistantWorlds.Controls
       Point location)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._WhiteBrush, (PointF) location);
     }
   }
 }

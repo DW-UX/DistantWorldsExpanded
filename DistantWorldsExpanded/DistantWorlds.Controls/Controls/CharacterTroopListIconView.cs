@@ -316,14 +316,14 @@ namespace DistantWorlds.Controls
 
         private Bitmap FadeImage(Bitmap image)
         {
-            SolidBrush solidBrush1 = new SolidBrush(Color.FromArgb(192, 48, 48, 64));
-            SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb((int)byte.MaxValue, 48, 48, 64));
+            using SolidBrush solidBrush1 = new SolidBrush(Color.FromArgb(192, 48, 48, 64));
+            using SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb((int)byte.MaxValue, 48, 48, 64));
             Bitmap bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppPArgb);
             Graphics graphics = Graphics.FromImage((Image)bitmap);
             Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-            graphics.FillRectangle((Brush)solidBrush2, rect);
+            graphics.FillRectangle(solidBrush2, rect);
             graphics.DrawImage((Image)image, rect);
-            graphics.FillRectangle((Brush)solidBrush1, rect);
+            graphics.FillRectangle(solidBrush1, rect);
             bitmap.GetPixel(0, 0);
             return bitmap;
         }

@@ -41,13 +41,13 @@ namespace BaconDistantWorlds
       if (BaconInfoPanel.shadow)
       {
         location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-        graphics.DrawString(text, font, (Brush) panel._BlackBrush, (PointF) location);
+        graphics.DrawString(text, font,  panel._BlackBrush, (PointF) location);
         location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
         using (SolidBrush solidBrush = new SolidBrush(color))
-          graphics.DrawString(text, font, (Brush) solidBrush, (PointF) location);
+          graphics.DrawString(text, font,  solidBrush, (PointF) location);
       }
       else
-        graphics.DrawString(text, font, (Brush) panel._RedBrush, (PointF) location);
+        graphics.DrawString(text, font,  panel._RedBrush, (PointF) location);
     }
 
     public static void DrawStringRedWithDropShadow(
@@ -60,12 +60,12 @@ namespace BaconDistantWorlds
       if (BaconInfoPanel.shadow)
       {
         location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-        graphics.DrawString(text, font, (Brush) panel._BlackBrush, (PointF) location);
+        graphics.DrawString(text, font,  panel._BlackBrush, (PointF) location);
         location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-        graphics.DrawString(text, font, (Brush) panel._RedBrush, (PointF) location);
+        graphics.DrawString(text, font,  panel._RedBrush, (PointF) location);
       }
       else
-        graphics.DrawString(text, font, (Brush) panel._RedBrush, (PointF) location);
+        graphics.DrawString(text, font,  panel._RedBrush, (PointF) location);
     }
 
     public static void DrawStringWithDropShadow(
@@ -81,9 +81,9 @@ namespace BaconDistantWorlds
         location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
         using (SolidBrush solidBrush = new SolidBrush(panel.CheckDropshadowColor(brush.Color)))
         {
-          graphics.DrawString(text, font, (Brush) solidBrush, (PointF) location);
+          graphics.DrawString(text, font,  solidBrush, (PointF) location);
           location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-          graphics.DrawString(text, font, (Brush) brush, (PointF) location);
+          graphics.DrawString(text, font,  brush, (PointF) location);
         }
       }
       else
@@ -93,7 +93,7 @@ namespace BaconDistantWorlds
           solidBrush.Color = Color.White;
           // Draw with the panel's own font: the rows and columns are measured for it, and a
           // wider substitute face makes the values run into each other.
-          graphics.DrawString(text, font, (Brush) solidBrush, (PointF) location);
+          graphics.DrawString(text, font,  solidBrush, (PointF) location);
         }
       }
     }
@@ -107,31 +107,28 @@ namespace BaconDistantWorlds
       SolidBrush brush,
       int maxWidth)
     {
-      if (BaconInfoPanel.shadow)
-      {
-        StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox)
-        {
+        using(StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox){
           Trimming = StringTrimming.EllipsisCharacter
-        };
-        SizeF sizeF = graphics.MeasureString(text, font, maxWidth, format);
-        RectangleF layoutRectangle1 = new RectangleF((float) location.X + UiScale.S(1f), (float) location.Y + UiScale.S(1f), sizeF.Width + UiScale.S(3f), sizeF.Height + UiScale.S(3f));
-        using (SolidBrush solidBrush = new SolidBrush(panel.CheckDropshadowColor(brush.Color)))
+        })
         {
-          graphics.DrawString(text, font, (Brush) solidBrush, layoutRectangle1, format);
-          RectangleF layoutRectangle2 = new RectangleF((float) location.X, (float) location.Y, sizeF.Width + UiScale.S(3f), sizeF.Height + UiScale.S(3f));
-          graphics.DrawString(text, font, (Brush) brush, layoutRectangle2, format);
-        }
-      }
-      else
-      {
-        StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox)
-        {
-          Trimming = StringTrimming.EllipsisCharacter
-        };
-        SizeF sizeF = graphics.MeasureString(text, font, maxWidth, format);
-        RectangleF layoutRectangle = new RectangleF((float) location.X, (float) location.Y, sizeF.Width + UiScale.S(3f), sizeF.Height + UiScale.S(3f));
-        using (SolidBrush solidBrush = new SolidBrush(panel.CheckDropshadowColor(brush.Color)))
-          graphics.DrawString(text, font, (Brush) solidBrush, layoutRectangle, format);
+          if (BaconInfoPanel.shadow)
+          {
+            SizeF sizeF = graphics.MeasureString(text, font, maxWidth, format);
+            RectangleF layoutRectangle1 = new RectangleF((float) location.X + UiScale.S(1f), (float) location.Y + UiScale.S(1f), sizeF.Width + UiScale.S(3f), sizeF.Height + UiScale.S(3f));
+            using (SolidBrush solidBrush = new SolidBrush(panel.CheckDropshadowColor(brush.Color)))
+            {
+              graphics.DrawString(text, font,  solidBrush, layoutRectangle1, format);
+              RectangleF layoutRectangle2 = new RectangleF((float) location.X, (float) location.Y, sizeF.Width + UiScale.S(3f), sizeF.Height + UiScale.S(3f));
+              graphics.DrawString(text, font,  brush, layoutRectangle2, format);
+            }
+          }
+          else
+          {
+            SizeF sizeF = graphics.MeasureString(text, font, maxWidth, format);
+            RectangleF layoutRectangle = new RectangleF((float) location.X, (float) location.Y, sizeF.Width + UiScale.S(3f), sizeF.Height + UiScale.S(3f));
+            using (SolidBrush solidBrush = new SolidBrush(panel.CheckDropshadowColor(brush.Color)))
+              graphics.DrawString(text, font,  solidBrush, layoutRectangle, format);
+          }
       }
     }
 
@@ -152,11 +149,11 @@ namespace BaconDistantWorlds
         {
           format.Trimming = StringTrimming.EllipsisWord;
           RectangleF layoutRectangle = new RectangleF(pointF1.X, pointF1.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
-          graphics.DrawString(text, font, (Brush) panel._BlackBrush, layoutRectangle, format);
+          graphics.DrawString(text, font,  panel._BlackBrush, layoutRectangle, format);
           location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
           PointF pointF2 = new PointF((float) location.X, (float) location.Y);
           layoutRectangle = new RectangleF(pointF2.X, pointF2.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
-          graphics.DrawString(text, font, (Brush) brush, layoutRectangle, format);
+          graphics.DrawString(text, font,  brush, layoutRectangle, format);
         }
       }
       else
@@ -168,7 +165,7 @@ namespace BaconDistantWorlds
           format.Trimming = StringTrimming.EllipsisWord;
           RectangleF layoutRectangle = new RectangleF(pointF.X, pointF.Y, size.Width + UiScale.S(2f), size.Height + UiScale.S(2f));
           using (SolidBrush solidBrush = new SolidBrush(Color.White))
-            graphics.DrawString(text, font, (Brush) solidBrush, layoutRectangle, format);
+            graphics.DrawString(text, font,  solidBrush, layoutRectangle, format);
         }
       }
     }
@@ -190,7 +187,7 @@ namespace BaconDistantWorlds
         graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
         graphics.CompositingQuality = CompositingQuality.HighQuality;
         graphics.InterpolationMode = InterpolationMode.Bilinear;
-        SolidBrush solidBrush = new SolidBrush(infoPanel._UnknownColor);
+        using SolidBrush solidBrush = new SolidBrush(infoPanel._UnknownColor);
         bool flag1 = false;
         if (builtObject.Empire != infoPanel._Game.PlayerEmpire)
         {
@@ -213,12 +210,20 @@ namespace BaconDistantWorlds
         int x1 = UiScale.S(5);
         Rectangle clientRectangle = infoPanel.ClientRectangle;
         int num1 = clientRectangle.Width - UiScale.S(10);
-        SizeF sizeF1 = graphics.MeasureString(TextResolver.GetText("Weapons"), infoPanel._NormalFontBold, infoPanel._MaxGraphTextWidth, StringFormat.GenericTypographic);
-        int width1 = (int) sizeF1.Width;
-        if (builtObject.IsPlanetDestroyer)
+        SizeF sizeF1;
+        int width1;
+        using(StringFormat format = StringFormat.GenericTypographic)
         {
-          sizeF1 = graphics.MeasureString(TextResolver.GetText("SuperLaser"), infoPanel._NormalFontBold, infoPanel._MaxGraphTextWidth, StringFormat.GenericTypographic);
+        if (builtObject.IsPlanetDestroyer)
+        { 
+          sizeF1 = graphics.MeasureString(TextResolver.GetText("SuperLaser"), infoPanel._NormalFontBold, infoPanel._MaxGraphTextWidth, format);
           width1 = (int) sizeF1.Width;
+        }
+        else
+        {
+          sizeF1 = graphics.MeasureString(TextResolver.GetText("Weapons"), infoPanel._NormalFontBold, infoPanel._MaxGraphTextWidth, format);
+          width1 = (int) sizeF1.Width;
+         }
         }
         Color backgroundColor = Color.FromArgb((int) sbyte.MaxValue, 8, 8, 48);
         Font titleFont = infoPanel._TitleFont;
@@ -227,10 +232,11 @@ namespace BaconDistantWorlds
         Point point1 = new Point(num1 - (flagSizeSmall.Width - UiScale.S(5)), UiScale.S(4));
         if (infoPanel._ActualEmpire == infoPanel._Galaxy.IndependentEmpire)
         {
-          sizeF1 = graphics.MeasureString(infoPanel._ActualEmpire.Name, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, StringFormat.GenericTypographic);
+          using(StringFormat format = StringFormat.GenericTypographic)
+          { sizeF1 = graphics.MeasureString(infoPanel._ActualEmpire.Name, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, format); }
           int width2 = (int) sizeF1.Width;
           PointF point2 = new PointF((float) (num1 - width2), UiScale.S(6f));
-          graphics.DrawString(infoPanel._ActualEmpire.Name, infoPanel._NormalFont, (Brush) infoPanel._WhiteBrush, point2);
+          graphics.DrawString(infoPanel._ActualEmpire.Name, infoPanel._NormalFont,  infoPanel._WhiteBrush, point2);
         }
         else
         {
@@ -341,7 +347,9 @@ namespace BaconDistantWorlds
               }
               else
                 text2 = text2 + " (" + builtObject.SubsequentMissions.Count.ToString() + " " + TextResolver.GetText("queued") + ")";
-              SizeF size = graphics.MeasureString(text2, infoPanel._NormalFont, num1, StringFormat.GenericDefault);
+              SizeF size;
+              using(StringFormat format = StringFormat.GenericDefault)
+              {  size= graphics.MeasureString(text2, infoPanel._NormalFont, num1, format);}
               BaconInfoPanel.DrawStringWithDropShadowBounded(infoPanel, graphics, text2, infoPanel._NormalFont, point4, size, infoPanel._WhiteBrush);
               y4 += (int) size.Height;
             }
@@ -395,7 +403,7 @@ namespace BaconDistantWorlds
         clientRectangle = infoPanel.ClientRectangle;
         int height = clientRectangle.Height - (num4 + 2);
         local = new Rectangle(x4, y6, width4, height);
-        graphics.FillRectangle((Brush) infoPanel._LabelAreaBrush, rect1);
+        graphics.FillRectangle( infoPanel._LabelAreaBrush, rect1);
         int num5 = num3 - UiScale.S(5);
         point4 = new Point(x1, y5);
         string str1 = infoPanel._Galaxy.DisplayBuiltObjectSubRole(builtObject.Role, builtObject.SubRole);
@@ -433,7 +441,9 @@ namespace BaconDistantWorlds
             }
             if (builtObject.Empire == infoPanel._Game.PlayerEmpire && builtObject.ShipGroup != null)
             {
-              SizeF sizeF2 = graphics.MeasureString(text, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, StringFormat.GenericTypographic);
+              SizeF sizeF2;
+              using(StringFormat format = StringFormat.GenericTypographic)
+              sizeF2 = graphics.MeasureString(text, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, format);
               infoPanel.AddHotspot(new Rectangle(x1 + num6, y8, (int) sizeF2.Width + 7, (int) sizeF2.Height + 1), (object) builtObject.ShipGroup, builtObject.ShipGroup.Name + " (" + TextResolver.GetText("click to select Fleet") + ")");
             }
             point4 = new Point(x1 + num6, y8);
@@ -445,7 +455,8 @@ namespace BaconDistantWorlds
             infoPanel.DrawLabel(graphics, "WPT ETA", num5 - UiScale.S(12), point4);
             int num7 = UiScale.S(10) + num5 + UiScale.S(2);
             string text = Math.Truncate(Math.Sqrt(BaconBuiltObject.FindRangeSquaredToTarget(builtObject)) / (double) builtObject.CurrentSpeed).ToString();
-            graphics.MeasureString(text, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, StringFormat.GenericTypographic);
+            using(StringFormat format = StringFormat.GenericTypographic)
+            {graphics.MeasureString(text, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, format);}
             point4 = new Point(x1 + num7, y8);
             BaconInfoPanel.DrawStringWithDropShadow(infoPanel, graphics, text, infoPanel._NormalFont, point4, infoPanel._WhiteBrush);
             y8 += rowHeight;
@@ -456,7 +467,9 @@ namespace BaconDistantWorlds
         infoPanel.DrawLabelledDescription(graphics, TextResolver.GetText("Design"), num5, str2, point4);
         if (infoPanel._ActualEmpire == infoPanel._Game.PlayerEmpire)
         {
-          SizeF sizeF3 = graphics.MeasureString(str2, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, StringFormat.GenericTypographic);
+          SizeF sizeF3;          
+              using(StringFormat format = StringFormat.GenericTypographic)
+        { sizeF3 = graphics.MeasureString(str2, infoPanel._NormalFont, infoPanel._MaxGraphTextWidth, format);}
           infoPanel.AddHotspot(new Rectangle(x1 + num5 + 10, point4.Y, (int) sizeF3.Width + 7, (int) sizeF3.Height + 1), (object) builtObject.Design, builtObject.Design.Name + " (" + TextResolver.GetText("click for design details") + ")");
         }
         int y9 = y8 + rowHeight;
@@ -562,7 +575,9 @@ namespace BaconDistantWorlds
             point4 = new Point(x1, y11);
             infoPanel.DrawLabel(graphics, TextResolver.GetText("Colonize"), num5, point4);
             int width5 = num1 - num5;
-            SizeF size = graphics.MeasureString(text8, infoPanel._NormalFont, width5, StringFormat.GenericDefault);
+            SizeF size;
+            using(StringFormat format = StringFormat.GenericDefault)
+            { size = graphics.MeasureString(text8, infoPanel._NormalFont, width5, format);}
             point4 = new Point(x1 + num5 + UiScale.S(10), y11);
             BaconInfoPanel.DrawStringWithDropShadowBounded(infoPanel, graphics, text8, infoPanel._NormalFont, point4, size, infoPanel._WhiteBrush);
             y10 = y11 + (int) size.Height;
@@ -780,7 +795,9 @@ namespace BaconDistantWorlds
           point4 = new Point(x1, y17);
           infoPanel.DrawLabel(graphics, TextResolver.GetText("Bonuses"), num5, point4);
           int width6 = num1 - num5;
-          SizeF size = graphics.MeasureString(infoPanel._CharacterBonuses, infoPanel._NormalFont, width6, StringFormat.GenericDefault);
+          SizeF size;
+          using(StringFormat format = StringFormat.GenericDefault)
+          {size = graphics.MeasureString(infoPanel._CharacterBonuses, infoPanel._NormalFont, width6, format);}
           point4 = new Point(x1 + num5 + UiScale.S(10), y17 + UiScale.S(1));
           BaconInfoPanel.DrawStringWithDropShadowBounded(infoPanel, graphics, infoPanel._CharacterBonuses, infoPanel._NormalFont, point4, size, infoPanel._WhiteBrush);
           int num12 = y17 + (int) size.Height;
@@ -791,7 +808,7 @@ namespace BaconDistantWorlds
 
     public static void DrawShipGroup(InfoPanel infoPanel, ShipGroup shipGroup, Graphics graphics)
     {
-      SolidBrush solidBrush = new SolidBrush(infoPanel._UnknownColor);
+      using SolidBrush solidBrush = new SolidBrush(infoPanel._UnknownColor);
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       graphics.CompositingQuality = CompositingQuality.HighQuality;
       graphics.InterpolationMode = InterpolationMode.Bilinear;
@@ -811,7 +828,9 @@ namespace BaconDistantWorlds
           infoPanel.AddHotspot(new Rectangle(point1, infoPanel._EmpirePicture.Size), (object) shipGroup.Empire, shipGroup.Empire.Name + " (" + TextResolver.GetText("click for details") + ")");
       }
       Font titleFont = infoPanel._TitleFont;
-      int width2 = (int) graphics.MeasureString(TextResolver.GetText("Lead Ship"), infoPanel._NormalFontBold, infoPanel._MaxGraphTextWidth, StringFormat.GenericTypographic).Width;
+      int width2;
+      using(StringFormat format = StringFormat.GenericTypographic)
+      {width2 = (int) graphics.MeasureString(TextResolver.GetText("Lead Ship"), infoPanel._NormalFontBold, infoPanel._MaxGraphTextWidth, format).Width;}
       int num1 = width1 - width2;
       Point point2 = new Point(x1, y1);
       using (SolidBrush brush = new SolidBrush(infoPanel._EmpireColor))
@@ -842,7 +861,9 @@ namespace BaconDistantWorlds
           }
           else
             text2 = text2 + " (" + shipGroup.SubsequentMissions.Count.ToString() + " " + TextResolver.GetText("queued") + ")";
-          SizeF size = graphics.MeasureString(text2, infoPanel._NormalFont, width1, StringFormat.GenericTypographic);
+            SizeF size;      
+            using(StringFormat format = StringFormat.GenericTypographic)
+          {size = graphics.MeasureString(text2, infoPanel._NormalFont, width1, format);}
           BaconInfoPanel.DrawStringWithDropShadowBounded(infoPanel, graphics, text2, infoPanel._NormalFont, point2, size, infoPanel._WhiteBrush);
           y3 = y2 + (int) size.Height;
         }
@@ -874,7 +895,7 @@ namespace BaconDistantWorlds
       Rectangle clientRectangle = infoPanel.ClientRectangle;
       int height1 = clientRectangle.Height - (num3 + 2);
       local = new Rectangle(x2, y5, width3, height1);
-      graphics.FillRectangle((Brush) infoPanel._LabelAreaBrush, rect1);
+      graphics.FillRectangle( infoPanel._LabelAreaBrush, rect1);
       int labelWidth = num2 - UiScale.S(5);
       point2 = new Point(x1, y4);
       infoPanel.DrawLabelledDescription(graphics, TextResolver.GetText("Empire"), labelWidth, shipGroup.Empire.Name, point2);
@@ -1015,7 +1036,8 @@ namespace BaconDistantWorlds
             BuiltObject ship = shipGroup.Ships[index1];
             if (ship.Components.Count<BuiltObjectComponent>((Func<BuiltObjectComponent, bool>) (zz => zz.Category == ComponentCategoryType.HyperDrive)) > 0 && shipGroup.Ships[index1].WarpSpeed == 0)
             {
-              graphics.FillRectangle((Brush) new SolidBrush(Color.FromArgb(64, 0, (int) byte.MaxValue, (int) byte.MaxValue)), rectangle);
+              using Brush brush =new SolidBrush(Color.FromArgb(64, 0, (int) byte.MaxValue, (int) byte.MaxValue));
+              graphics.FillRectangle( brush, rectangle);
             }
             else
             {
@@ -1029,15 +1051,20 @@ namespace BaconDistantWorlds
                 }
               }
               if (flag2)
-                graphics.FillRectangle((Brush) new SolidBrush(Color.FromArgb(64, (int) byte.MaxValue, (int) byte.MaxValue, 0)), rectangle);
+               {
+                using Brush brush = new SolidBrush(Color.FromArgb(64, (int) byte.MaxValue, (int) byte.MaxValue, 0));
+                 graphics.FillRectangle( brush, rectangle);}
               else
-                graphics.FillRectangle((Brush) new SolidBrush(Color.FromArgb(64, (int) byte.MaxValue, 0, 64)), rectangle);
+              {  
+                using Brush brush = new SolidBrush(Color.FromArgb(64, (int) byte.MaxValue, 0, 64));
+                graphics.FillRectangle( brush, rectangle);}
             }
           }
         }
         else if (shipGroup.Ships[index1].UnbuiltComponentCount > 0 && ((shipGroup.Empire == infoPanel._Game.PlayerEmpire ? 1 : (infoPanel._Game.GodMode ? 1 : 0)) | (flag1 ? 1 : 0)) != 0)
         {
-          graphics.FillRectangle((Brush) new SolidBrush(Color.FromArgb(32, (int) byte.MaxValue, 128, 0)), rectangle);
+                using Brush brush = new SolidBrush(Color.FromArgb(32, (int) byte.MaxValue, 128, 0));
+          graphics.FillRectangle( brush, rectangle);
           str = TextResolver.GetText("Under construction");
         }
         graphics.DrawImage(builtObjectImage, destRect, srcRect, GraphicsUnit.Pixel);
@@ -1052,7 +1079,9 @@ namespace BaconDistantWorlds
         {
           int height2 = (int) (shipGroup.Ships[index1].CurrentFuel / (double) shipGroup.Ships[index1].FuelCapacity * (double) (num11 - 4));
           Rectangle rect2 = new Rectangle(x1 + labelWidth + UiScale.S(10) + num9 + num11 - UiScale.S(4), num8 + num10 + (num11 - UiScale.S(2) - height2), UiScale.S(2), height2);
-          graphics.FillRectangle((Brush) new SolidBrush(Color.Green), rect2);
+          
+                using Brush brush = new SolidBrush(Color.Green);
+                graphics.FillRectangle( brush, rect2);
         }
         ++index1;
         if (num11 > num12)
@@ -1070,7 +1099,9 @@ namespace BaconDistantWorlds
         point2 = new Point(x1, y11);
         infoPanel.DrawLabel(graphics, TextResolver.GetText("Bonuses"), labelWidth, point2);
         int width4 = width1 - labelWidth;
-        SizeF size = graphics.MeasureString(infoPanel._CharacterBonuses, infoPanel._NormalFont, width4, StringFormat.GenericDefault);
+         SizeF size;     
+          using(StringFormat format = StringFormat.GenericDefault)
+        {size = graphics.MeasureString(infoPanel._CharacterBonuses, infoPanel._NormalFont, width4,format);}
         point2 = new Point(x1 + labelWidth + UiScale.S(10), y11 + UiScale.S(1));
         infoPanel.DrawStringWithDropShadowBounded(graphics, infoPanel._CharacterBonuses, infoPanel._NormalFont, point2, size);
         int num15 = y11 + (int) size.Height;

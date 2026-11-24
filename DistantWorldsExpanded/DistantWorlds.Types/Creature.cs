@@ -1432,17 +1432,15 @@ namespace DistantWorlds.Types
               habitat.Troops.Clear();
               habitat.TroopsToRecruit.Clear();
               habitat.InvadingTroops.Clear();
-              Character[] arrayThreadSafe1 = ListHelper.ToArrayThreadSafe(habitat.Characters);
-              for (int index = 0; index < arrayThreadSafe1.Length; ++index)
+              foreach(var item in habitat.Characters.CloneThreadSafe())
               {
-                arrayThreadSafe1[index].SendDeathMessage(CharacterDeathType.GenericDeath, this._Galaxy);
-                arrayThreadSafe1[index].Kill(this._Galaxy);
+                item.SendDeathMessage(CharacterDeathType.GenericDeath, this._Galaxy);
+                item.Kill(this._Galaxy);
               }
-              Character[] arrayThreadSafe2 = ListHelper.ToArrayThreadSafe(habitat.InvadingCharacters);
-              for (int index = 0; index < arrayThreadSafe2.Length; ++index)
+              foreach(var item in habitat.InvadingCharacters.CloneThreadSafe())
               {
-                arrayThreadSafe2[index].SendDeathMessage(CharacterDeathType.GenericDeath, this._Galaxy);
-                arrayThreadSafe2[index].Kill(this._Galaxy);
+                item.SendDeathMessage(CharacterDeathType.GenericDeath, this._Galaxy);
+                item.Kill(this._Galaxy);
               }
               habitat.Empire = (Empire) null;
               habitat.ManufacturingQueue = (ManufacturingQueue) null;

@@ -92,10 +92,10 @@ namespace DistantWorlds.Controls
         this.imageHover.Dispose();
         this.imageHover = (Image) null;
       }
-      Brush brush1 = (Brush) new SolidBrush(this.color);
+      using Brush brush1 =  new SolidBrush(this.color);
       this.image = this.CreateImage(brush1, true);
       brush1.Dispose();
-      Brush brush2 = (Brush) new SolidBrush(this.hoverColor);
+      using Brush brush2 =  new SolidBrush(this.hoverColor);
       this.imageHover = this.CreateImage(brush2, false);
       brush2.Dispose();
     }
@@ -103,7 +103,7 @@ namespace DistantWorlds.Controls
     private Image CreateImage(Brush brush, bool flag)
     {
       string str = "»";
-      StringFormat format = new StringFormat();
+      using StringFormat format = new StringFormat();
       format.Alignment = StringAlignment.Center;
       format.LineAlignment = StringAlignment.Center;
       int width = this.Width;

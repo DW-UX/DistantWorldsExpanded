@@ -121,7 +121,7 @@ namespace DistantWorlds.Controls
         return;
       graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(64, this._EmpireSummary.MainColor)))
-        graphics.FillRectangle((Brush) solidBrush, this.ClientRectangle);
+        graphics.FillRectangle( solidBrush, this.ClientRectangle);
       int margin = this._Margin;
       SizeF maxSize = new SizeF((float) (this.Width - this._Margin * 2), (float) (this.Height - this._Margin * 2));
       if (this._Image == null)
@@ -134,14 +134,14 @@ namespace DistantWorlds.Controls
       }
       int y1 = this._LineHeight + this._SpaceHeight;
       using (SolidBrush solidBrush = new SolidBrush(this._EmpireSummary.MainColor))
-        GraphicsHelper.DrawStringWithDropShadow(graphics, this._EmpireSummary.Name, this._LargeFont, new Point(this._Margin, y1), (Brush) solidBrush, maxSize);
+        GraphicsHelper.DrawStringWithDropShadow(graphics, this._EmpireSummary.Name, this._LargeFont, new Point(this._Margin, y1),  solidBrush, maxSize);
       int y2 = y1 + this._LargeFont.Height;
       int y3;
       if (this._EmpireSummary.IsPirateFaction)
       {
         string str = Galaxy.ResolveDescription(this._EmpireSummary.PiratePlayStyle);
         string text = string.Format(TextResolver.GetText("Empire Summary Race Pirate Description"), (object) this._EmpireSummary.RaceName, (object) str);
-        GraphicsHelper.DrawStringWithDropShadow(graphics, text, this._BoldFont, new Point(this._Margin, y2), (Brush) this._Brush, maxSize);
+        GraphicsHelper.DrawStringWithDropShadow(graphics, text, this._BoldFont, new Point(this._Margin, y2),  this._Brush, maxSize);
         y3 = y2 + this._LineHeight + this._LineHeight;
       }
       else
@@ -150,16 +150,16 @@ namespace DistantWorlds.Controls
         if (Galaxy.GovernmentsStatic.Count > this._EmpireSummary.GovernmentId && this._EmpireSummary.GovernmentId >= 0)
           governmentAttributes = Galaxy.GovernmentsStatic[this._EmpireSummary.GovernmentId];
         string text = string.Format(TextResolver.GetText("Empire Summary Race Government Description"), (object) this._EmpireSummary.RaceName, (object) governmentAttributes.Name);
-        GraphicsHelper.DrawStringWithDropShadow(graphics, text, this._BoldFont, new Point(this._Margin, y2), (Brush) this._Brush, maxSize);
+        GraphicsHelper.DrawStringWithDropShadow(graphics, text, this._BoldFont, new Point(this._Margin, y2),  this._Brush, maxSize);
         y3 = y2 + this._LineHeight + this._LineHeight;
       }
       string text1 = string.Format(TextResolver.GetText("Empire Summary Colonies Description"), (object) this._EmpireSummary.ColonyCount.ToString(), (object) this._EmpireSummary.SystemCount.ToString(), (object) this._EmpireSummary.SpaceportCount.ToString());
-      GraphicsHelper.DrawStringWithDropShadow(graphics, text1, this._NormalFont, new Point(this._Margin, y3), (Brush) this._Brush, maxSize);
+      GraphicsHelper.DrawStringWithDropShadow(graphics, text1, this._NormalFont, new Point(this._Margin, y3),  this._Brush, maxSize);
       int y4 = y3 + this._LineHeight + this._SpaceHeight;
       string text2 = string.Format(TextResolver.GetText("Empire Summary Economy Description"), (object) this._EmpireSummary.Money.ToString("###,###,##0"), (object) this._EmpireSummary.Cashflow.ToString("###,###,##0"));
-      GraphicsHelper.DrawStringWithDropShadow(graphics, text2, this._NormalFont, new Point(this._Margin, y4), (Brush) this._Brush, maxSize);
+      GraphicsHelper.DrawStringWithDropShadow(graphics, text2, this._NormalFont, new Point(this._Margin, y4),  this._Brush, maxSize);
       int y5 = y4 + this._LineHeight + this._SpaceHeight + this._LineHeight + this._LineHeight;
-      GraphicsHelper.DrawStringWithDropShadow(graphics, this._EmpireSummary.Description, this._NormalFont, new Point(this._Margin, y5), (Brush) this._Brush, maxSize);
+      GraphicsHelper.DrawStringWithDropShadow(graphics, this._EmpireSummary.Description, this._NormalFont, new Point(this._Margin, y5),  this._Brush, maxSize);
     }
   }
 }

@@ -95,23 +95,29 @@ namespace DistantWorlds.Controls
         color1 = cellStyle.BackColor;
         color2 = cellStyle.ForeColor;
       }
-      SolidBrush solidBrush1 = new SolidBrush(color1);
-      graphics.FillRectangle((Brush) solidBrush1, cellBounds);
+      using SolidBrush solidBrush1 = new SolidBrush(color1);
+      graphics.FillRectangle( solidBrush1, cellBounds);
       SolidBrush solidBrush2 = new SolidBrush(color2);
       SizeF sizeF = graphics.MeasureString(formattedValue as string, cellStyle.Font);
       float x = (float) (cellBounds.X + UiScale.S(2));
       float num = (float) cellBounds.Y + (float) (((double) cellBounds.Height - (double) sizeF.Height) / 2.0);
+      Font font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold);
       switch (value)
       {
         case DiplomaticRelationType diplomaticRelationType1:
           solidBrush2 = this.SelectBrush(diplomaticRelationType1);
+      graphics.DrawString(formattedValue as string, font,  solidBrush2, x, num + UiScale.S(1f));
           break;
         case PirateRelationType diplomaticRelationType2:
           solidBrush2 = this.SelectBrush(diplomaticRelationType2);
+      graphics.DrawString(formattedValue as string, font,  solidBrush2, x, num + UiScale.S(1f));
           break;
+          default:
+          
+      graphics.DrawString(formattedValue as string, font,  solidBrush2, x, num + UiScale.S(1f));
+      solidBrush2.Dispose();
+      break;
       }
-      Font font = UiScale.NewFont("Verdana", 8.25f, FontStyle.Bold);
-      graphics.DrawString(formattedValue as string, font, (Brush) solidBrush2, x, num + UiScale.S(1f));
     }
 
     private static bool PartPainted(

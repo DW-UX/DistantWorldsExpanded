@@ -739,14 +739,14 @@ namespace DistantWorlds.Controls
       rectangle2.Height >>= 1;
       using (GraphicsPath roundRectangle = GlassButton.CreateRoundRectangle(rectangle1, radius - UiScale.S(2), instance))
       {
-        using (Brush brush = (Brush) new SolidBrush(outerBorderColor))
+        using (Brush brush =  new SolidBrush(outerBorderColor))
           g.FillPath(brush, roundRectangle);
         if (!enabled)
         {
           if (emphasizeDisabled)
           {
             using (HatchBrush hatchBrush = new HatchBrush(HatchStyle.Percent50, Color.FromArgb(1, shineColor)))
-              g.FillPath((Brush) hatchBrush, roundRectangle);
+              g.FillPath( hatchBrush, roundRectangle);
           }
         }
       }
@@ -767,7 +767,7 @@ namespace DistantWorlds.Controls
               {
                 Color.FromArgb(0, glowColor)
               };
-              g.FillPath((Brush) pathGradientBrush, bottomRadialPath);
+              g.FillPath( pathGradientBrush, bottomRadialPath);
             }
           }
           g.ResetClip();
@@ -783,7 +783,7 @@ namespace DistantWorlds.Controls
           if (pressed | !enabled)
             alpha = (int) (0.40000000596046448 * (double) alpha + 0.5);
           using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rectangle2, Color.FromArgb(alpha, shineColor), Color.FromArgb(alpha / 3, shineColor), System.Drawing.Drawing2D.LinearGradientMode.Vertical))
-            g.FillPath((Brush) linearGradientBrush, topRoundRectangle);
+            g.FillPath( linearGradientBrush, topRoundRectangle);
         }
         rectangle2.Height -= 2;
       }
@@ -900,7 +900,7 @@ namespace DistantWorlds.Controls
     {
       if (string.IsNullOrEmpty(this.Text))
         return;
-      StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox);
+      using StringFormat format = new StringFormat(StringFormatFlags.FitBlackBox);
       format.Trimming = StringTrimming.EllipsisCharacter;
       SizeF sizeF1 = graphics.MeasureString(this.Text, this.Font, this.Width, format);
       SizeF sizeF2 = SizeF.Empty;
@@ -920,10 +920,10 @@ namespace DistantWorlds.Controls
           if (this.EmphasizeDisabled)
           {
             RectangleF layoutRectangle = new RectangleF(x1 + UiScale.S(1f), y1 + UiScale.S(1f), sizeF1.Width + UiScale.S(3f), sizeF1.Height + UiScale.S(3f));
-            graphics.DrawString(this.Text, this.Font, (Brush) solidBrush2, layoutRectangle, format);
+            graphics.DrawString(this.Text, this.Font,  solidBrush2, layoutRectangle, format);
           }
           RectangleF layoutRectangle1 = new RectangleF(x1, y1, sizeF1.Width + UiScale.S(3f), sizeF1.Height + UiScale.S(3f));
-          graphics.DrawString(this.Text, this.Font, (Brush) solidBrush1, layoutRectangle1, format);
+          graphics.DrawString(this.Text, this.Font,  solidBrush1, layoutRectangle1, format);
           if (string.IsNullOrEmpty(this.MinorText))
             return;
           float x2 = (float) (((double) this.Width - (double) sizeF2.Width) / 2.0);
@@ -931,10 +931,10 @@ namespace DistantWorlds.Controls
           if (this.EmphasizeDisabled)
           {
             RectangleF layoutRectangle2 = new RectangleF(x2 + UiScale.S(1f), y2 + UiScale.S(1f), sizeF2.Width + UiScale.S(3f), sizeF2.Height + UiScale.S(3f));
-            graphics.DrawString(this.MinorText, this.MinorFont, (Brush) solidBrush2, layoutRectangle2, format);
+            graphics.DrawString(this.MinorText, this.MinorFont,  solidBrush2, layoutRectangle2, format);
           }
           RectangleF layoutRectangle3 = new RectangleF(x2, y2, sizeF2.Width + UiScale.S(3f), sizeF2.Height + UiScale.S(3f));
-          graphics.DrawString(this.MinorText, this.MinorFont, (Brush) solidBrush1, layoutRectangle3, format);
+          graphics.DrawString(this.MinorText, this.MinorFont,  solidBrush1, layoutRectangle3, format);
         }
       }
     }
@@ -952,7 +952,6 @@ namespace DistantWorlds.Controls
       float radius,
       GlassButton instance)
     {
-      GraphicsPath graphicsPath = new GraphicsPath();
       double left = (double) rectangle.Left;
       double top = (double) rectangle.Top;
       double width = (double) rectangle.Width;
@@ -1045,7 +1044,6 @@ namespace DistantWorlds.Controls
       int radius,
       GlassButton instance)
     {
-      GraphicsPath graphicsPath = new GraphicsPath();
       int left = rectangle.Left;
       int top = rectangle.Top;
       int width = rectangle.Width;

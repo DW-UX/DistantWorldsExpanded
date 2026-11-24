@@ -116,9 +116,9 @@ namespace DistantWorlds.Controls
       float num1 = (float) ((double) (this.ClientRectangle.Height - this.Font.Height) / 2.0 - UiScale.S(2.0));
       PointF point = new PointF((float) this.ClientRectangle.Height, (float) e.Bounds.Y + num1);
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._AllowRandomRace && e.Index == 0)
-        e.Graphics.DrawString("(" + TextResolver.GetText("Random") + ")", font, (Brush) solidBrush, point);
+        e.Graphics.DrawString("(" + TextResolver.GetText("Random") + ")", font,  solidBrush, point);
       else if (this._Races != null && this._Races.Count > 0 && e.Index >= 0)
       {
         int index = e.Index;
@@ -126,7 +126,7 @@ namespace DistantWorlds.Controls
           --index;
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        e.Graphics.DrawString(this._Races[index].Name, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(this._Races[index].Name, font,  solidBrush, point);
         Rectangle rect = new Rectangle();
         Bitmap raceImage = this._RaceImages[this._Races[index].PictureRef];
         int height = e.Bounds.Height - UiScale.S(2);

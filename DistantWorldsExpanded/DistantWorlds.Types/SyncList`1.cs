@@ -41,6 +41,16 @@ namespace DistantWorlds.Types
                 if (removed) _snapshot = null;
             }
         }
+        public void Remove(List<T> items)
+        {
+            lock (this._LockObject)
+            {
+                bool removed =true;
+                foreach(var item in items)
+                 removed&=base.Remove(item);
+                if (removed) _snapshot = null;
+            }
+        }
 
         public new void AddRange(IEnumerable<T> items)
         {

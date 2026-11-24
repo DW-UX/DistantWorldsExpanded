@@ -4670,7 +4670,7 @@ namespace DistantWorlds.Types
 
         public BuiltObject[] SortBuiltObjectsByDistanceThreadsafe(double x, double y, BuiltObjectList builtObjects)
         {
-            BuiltObject[] array = ListHelper.ToArrayThreadSafe(builtObjects);
+            BuiltObject[] array = builtObjects.CloneThreadSafe().ToArray();
             double[] array2 = new double[array.Length];
             for (int i = 0; i < array.Length; i++)
             {

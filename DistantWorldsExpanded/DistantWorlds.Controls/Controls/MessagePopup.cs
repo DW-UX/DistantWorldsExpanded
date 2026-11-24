@@ -1055,11 +1055,11 @@ namespace DistantWorlds.Controls
         graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
         graphics.SmoothingMode = SmoothingMode.AntiAlias;
         int num = image.Height / 10;
-        SolidBrush solidBrush = new SolidBrush(Color.Black);
+        using SolidBrush solidBrush = new SolidBrush(Color.Black);
         for (int index = 0; index < num; ++index)
         {
           Rectangle rect = new Rectangle(0, index * 10, bitmap.Width, 2);
-          graphics.FillRectangle((Brush) solidBrush, rect);
+          graphics.FillRectangle( solidBrush, rect);
         }
       }
       bitmap.MakeTransparent(Color.Black);
@@ -1070,9 +1070,10 @@ namespace DistantWorlds.Controls
     {
       if (this._MainImage == null || this._MainImage.PixelFormat == PixelFormat.Undefined)
         return;
+      using StringFormat format = StringFormat.GenericTypographic;
       e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       int x = (this.ClientRectangle.Width - this._MainImage.Width) / 2;
-      SizeF sizeF = e.Graphics.MeasureString(this._MessageDescription, this.Font, this.Width - this._Padding * 2, StringFormat.GenericTypographic);
+      SizeF sizeF = e.Graphics.MeasureString(this._MessageDescription, this.Font, this.Width - this._Padding * 2, format);
       int y = Math.Max(0, this.ClientRectangle.Height - (this._MainImage.Height + this._Padding + (int) sizeF.Height)) / 2;
       e.Graphics.DrawImage((Image) this._MainImage, x, y);
       if (this._FlagImage != null)
@@ -1086,8 +1087,8 @@ namespace DistantWorlds.Controls
       {
         using (SolidBrush solidBrush2 = new SolidBrush(Color.Black))
         {
-          e.Graphics.DrawString(this._MessageDescription, this.Font, (Brush) solidBrush2, layoutRectangle2, StringFormat.GenericTypographic);
-          e.Graphics.DrawString(this._MessageDescription, this.Font, (Brush) solidBrush1, layoutRectangle1, StringFormat.GenericTypographic);
+          e.Graphics.DrawString(this._MessageDescription, this.Font,  solidBrush2, layoutRectangle2, format);
+          e.Graphics.DrawString(this._MessageDescription, this.Font,  solidBrush1, layoutRectangle1, format);
         }
       }
     }

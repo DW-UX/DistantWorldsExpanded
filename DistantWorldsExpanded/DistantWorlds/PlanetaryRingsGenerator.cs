@@ -102,21 +102,21 @@ namespace DistantWorlds
                 graphics.CompositingQuality = CompositingQuality.HighSpeed;
                 graphics.InterpolationMode = InterpolationMode.Bilinear;
                 graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                SolidBrush brush = new SolidBrush(Color.Transparent);
+                using SolidBrush brush = new SolidBrush(Color.Transparent);
                 graphics.FillRectangle(brush, 0, 0, int_2, num);
                 int num2 = random_0.Next(0, color_0.Length);
                 int num3 = (int)((double)int_2 * 0.5 + (double)int_2 * random_0.NextDouble() * 0.2);
                 Rectangle rect = method_3(int_1, num, int_2, num3);
-                Pen pen = new Pen(color_0[num2], num3);
-                graphics.DrawEllipse(pen, rect);
+                using Pen pen1 = new Pen(color_0[num2], num3);
+                graphics.DrawEllipse(pen1, rect);
                 int num4 = random_0.Next(2, 6);
                 for (int i = 0; i < num4; i++)
                 {
                     num2 = random_0.Next(0, color_0.Length);
                     num3 = (int)((double)int_2 * 0.5 * random_0.NextDouble());
                     rect = method_3(int_1, num, int_2, num3);
-                    pen = new Pen(color_0[num2], num3);
-                    graphics.DrawEllipse(pen, rect);
+                    using Pen pen3 = new Pen(color_0[num2], num3);
+                    graphics.DrawEllipse(pen3, rect);
                 }
                 int num5 = random_0.Next(30, 50);
                 for (int j = 0; j < num5; j++)
@@ -125,7 +125,7 @@ namespace DistantWorlds
                     num3 = 1 + random_0.Next(0, 2);
                     Color color = color_0[num2];
                     rect = method_3(int_1, num, int_2, num3);
-                    pen = new Pen(color, num3);
+                    using Pen pen = new Pen(color, num3);
                     graphics.DrawEllipse(pen, rect);
                 }
             }

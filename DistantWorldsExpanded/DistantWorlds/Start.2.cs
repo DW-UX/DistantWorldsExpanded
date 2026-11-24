@@ -522,13 +522,13 @@ namespace DistantWorlds
                     empire.PrivateMoney = 8.9884656743115785E+307;
                     Bitmap bitmap = new Bitmap(100, 60, PixelFormat.Format32bppPArgb);
                     Graphics graphics = Graphics.FromImage(bitmap);
-                    SolidBrush brush = new SolidBrush(Color.Transparent);
+                    using SolidBrush brush = new SolidBrush(Color.Transparent);
                     graphics.FillRectangle(brush, 0, 0, 100, 60);
                     empire.LargeFlagPicture = bitmap;
                     Bitmap bitmap2 = new Bitmap(12, 7, PixelFormat.Format32bppPArgb);
                     graphics = Graphics.FromImage(bitmap2);
-                    brush = new SolidBrush(Color.Transparent);
-                    graphics.FillRectangle(brush, 0, 0, 12, 7);
+                    using Brush brush2 = new SolidBrush(Color.Transparent);
+                    graphics.FillRectangle(brush2, 0, 0, 12, 7);
                     empire.SmallFlagPicture = bitmap2;
                     galaxy.IndependentEmpire = empire;
                 }
@@ -2866,7 +2866,7 @@ namespace DistantWorlds
                 num5 += num3 / 2;
                 num6 -= num3;
                 Rectangle rect = new Rectangle(num5, num5, num6, num6);
-                Pen pen = new Pen(solidBrush_0, num3);
+                using Pen pen = new Pen(solidBrush_0, num3);
                 graphics.DrawArc(pen, rect, 0f, 360f);
             }
         }

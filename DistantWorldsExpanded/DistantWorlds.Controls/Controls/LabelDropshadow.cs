@@ -52,10 +52,12 @@ namespace DistantWorlds.Controls
       e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
       SizeF sizeF = e.Graphics.MeasureString(this._Text, this.Font, this.Width, StringFormat.GenericTypographic);
       float x = Math.Max(0.0f, (float) (((double) this.Width - (double) sizeF.Width) / 2.0));
+      using Brush brush1 =  new SolidBrush(this.DropshadowColor);
+      using Brush brush2 =  new SolidBrush(this.ForeColor);
       RectangleF layoutRectangle = new RectangleF(x + (float) this._DropshadowOffset, (float) this._DropshadowOffset, sizeF.Width + UiScale.S(2f), (float) this.Height + UiScale.S(2f));
-      e.Graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(this.DropshadowColor), layoutRectangle, StringFormat.GenericTypographic);
+      e.Graphics.DrawString(this._Text, this.Font,  brush1, layoutRectangle, StringFormat.GenericTypographic);
       layoutRectangle = new RectangleF(x, 0.0f, sizeF.Width + UiScale.S(2f), (float) this.Height + UiScale.S(2f));
-      e.Graphics.DrawString(this._Text, this.Font, (Brush) new SolidBrush(this.ForeColor), layoutRectangle, StringFormat.GenericTypographic);
+      e.Graphics.DrawString(this._Text, this.Font,  brush2, layoutRectangle, StringFormat.GenericTypographic);
     }
   }
 }

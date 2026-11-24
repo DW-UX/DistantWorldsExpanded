@@ -1045,10 +1045,11 @@ namespace DistantWorlds
             {
                 point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                graphics_0.DrawString(string_0, font_2, brush, layoutRectangle, StringFormat.GenericTypographic);
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {graphics_0.DrawString(string_0, font_2, brush, layoutRectangle, format);
                 point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle, StringFormat.GenericTypographic);
+                graphics_0.DrawString(string_0, font_2, brush_0, layoutRectangle, format);}
             }
             else
             {

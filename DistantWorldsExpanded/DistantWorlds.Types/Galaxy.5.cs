@@ -2972,7 +2972,7 @@ namespace DistantWorlds.Types
                 BuiltObject builtObject = builtObjects[i];
                 if (builtObject != null && builtObject.Fighters != null && builtObject.Fighters.Count > 0)
                 {
-                    fighterList.AddRange(ListHelper.ToArrayThreadSafe(builtObject.Fighters));
+                    fighterList.AddRange(builtObject.Fighters.CloneThreadSafe());
                 }
             }
             return fighterList;
@@ -3017,15 +3017,13 @@ namespace DistantWorlds.Types
 
         public int CalculateNearbyOverallStrength(double x, double y, Empire empire, double range)
         {
-            BuiltObjectList builtObjectList = new BuiltObjectList();
             int x2 = (int)x / IndexSize;
             int y2 = (int)y / IndexSize;
             CorrectIndexCoords(ref x2, ref y2);
-            builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[x2][y2]));
-            return CalculateNearbyOverallStrength(x, y, empire, range, builtObjectList);
+            return CalculateNearbyOverallStrength(x, y, empire, range, BuiltObjectIndex[x2][y2].CloneThreadSafe());
         }
 
-        public int CalculateNearbyOverallStrength(double x, double y, Empire empire, double range, BuiltObjectList builtObjects)
+        public int CalculateNearbyOverallStrength(double x, double y, Empire empire, double range, List<BuiltObject> builtObjects)
         {
             int num = 0;
             double num2 = range * range;
@@ -3094,13 +3092,13 @@ namespace DistantWorlds.Types
             return builtObjectList;
         }
 
-        public List<BuiltObject[]> GetBuiltObjectsAtLocationByArrays(double x, double y, int range)
+        public List<List<BuiltObject>> GetBuiltObjectsAtLocationByArrays(double x, double y, int range)
         {
-            List<BuiltObject[]> list = new List<BuiltObject[]>();
+            List<List<BuiltObject>> list = new List<List<BuiltObject>>();
             int x2 = (int)x / IndexSize;
             int y2 = (int)y / IndexSize;
             CorrectIndexCoords(ref x2, ref y2);
-            list.Add(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[x2][y2]));
+            list.Add(BuiltObjectIndex[x2][y2].CloneThreadSafe());
             int nearestX;
             int nearestY;
             int num = DetermineClosestIndexEdgesCustom((int)x, (int)y, x2, x2, y2, y2, out nearestX, out nearestY);
@@ -3110,15 +3108,15 @@ namespace DistantWorlds.Types
                 int num3 = y2 + nearestY;
                 if (num3 < IndexMaxY && num3 >= 0)
                 {
-                    list.Add(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[x2][num3]));
+                    list.Add(BuiltObjectIndex[x2][num3].CloneThreadSafe());
                 }
                 if (num2 < IndexMaxX && num2 >= 0)
                 {
-                    list.Add(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[num2][y2]));
+                    list.Add(BuiltObjectIndex[num2][y2].CloneThreadSafe());
                 }
                 if (num2 < IndexMaxX && num2 >= 0 && num3 < IndexMaxY && num3 >= 0)
                 {
-                    list.Add(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[num2][num3]));
+                    list.Add(BuiltObjectIndex[num2][num3].CloneThreadSafe());
                 }
             }
             return list;
@@ -3130,7 +3128,7 @@ namespace DistantWorlds.Types
             int x2 = (int)x / IndexSize;
             int y2 = (int)y / IndexSize;
             CorrectIndexCoords(ref x2, ref y2);
-            builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[x2][y2]));
+            builtObjectList.AddRange(BuiltObjectIndex[x2][y2].CloneThreadSafe());
             int nearestX;
             int nearestY;
             int num = DetermineClosestIndexEdgesCustom((int)x, (int)y, x2, x2, y2, y2, out nearestX, out nearestY);
@@ -3140,15 +3138,15 @@ namespace DistantWorlds.Types
                 int num3 = y2 + nearestY;
                 if (num3 < IndexMaxY && num3 >= 0)
                 {
-                    builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[x2][num3]));
+                    builtObjectList.AddRange(BuiltObjectIndex[x2][num3].CloneThreadSafe());
                 }
                 if (num2 < IndexMaxX && num2 >= 0)
                 {
-                    builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[num2][y2]));
+                    builtObjectList.AddRange(BuiltObjectIndex[num2][y2].CloneThreadSafe());
                 }
                 if (num2 < IndexMaxX && num2 >= 0 && num3 < IndexMaxY && num3 >= 0)
                 {
-                    builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[num2][num3]));
+                    builtObjectList.AddRange(BuiltObjectIndex[num2][num3].CloneThreadSafe());
                 }
             }
             return builtObjectList;
@@ -3167,7 +3165,7 @@ namespace DistantWorlds.Types
             {
                 for (int j = y2; j <= y3; j++)
                 {
-                    builtObjectList.AddRange(ListHelper.ToArrayThreadSafe(BuiltObjectIndex[i][j]));
+                    builtObjectList.AddRange(BuiltObjectIndex[i][j].CloneThreadSafe());
                 }
             }
             return builtObjectList;

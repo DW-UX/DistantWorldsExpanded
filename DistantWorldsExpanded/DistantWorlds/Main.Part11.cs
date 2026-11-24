@@ -165,7 +165,7 @@ namespace DistantWorlds {
             graphics.SmoothingMode = SmoothingMode.None;
             Rectangle srcRect = new Rectangle(0, 0, bitmap_226.Width, bitmap_226.Height);
             Rectangle destRect = new Rectangle(0, 0, bitmap_225.Width, bitmap_225.Height);
-            SolidBrush brush = new SolidBrush(Color.Black);
+            using SolidBrush brush = new SolidBrush(Color.Black);
             graphics.FillRectangle(brush, new Rectangle(0, 0, bitmap_225.Width, UiScale.S(1)));
             graphics.FillRectangle(brush, new Rectangle(0, 0, UiScale.S(1), bitmap_225.Height));
             graphics.FillRectangle(brush, new Rectangle(bitmap_225.Width - UiScale.S(1), 0, UiScale.S(1), bitmap_225.Height));
@@ -1375,13 +1375,12 @@ namespace DistantWorlds {
                     double num4 = (double)num2 * double_0;
                     int num5 = (int)((double)mainView.ClientRectangle.Width * double_0);
                     num5 += Galaxy.MaxSolarSystemSize * 2;
-                    List<BuiltObject[]> builtObjectsAtLocationByArrays = _Game.Galaxy.GetBuiltObjectsAtLocationByArrays(int_64, int_65, num5);
+                    List<List<BuiltObject>> builtObjectsAtLocationByArrays = _Game.Galaxy.GetBuiltObjectsAtLocationByArrays(int_64, int_65, num5);
                     double num6 = double.MaxValue;
                     ShipGroup shipGroup = null;
                     for (int i = 0; i < builtObjectsAtLocationByArrays.Count; i++)
                     {
-                        int num7 = builtObjectsAtLocationByArrays[i].Length;
-                        for (int j = 0; j < num7; j++)
+                        for (int j = 0; j < builtObjectsAtLocationByArrays[i].Count; j++)
                         {
                             BuiltObject builtObject = builtObjectsAtLocationByArrays[i][j];
                             if (builtObject != null && builtObject.ShipGroup != null && builtObject.ShipGroup.LeadShip == builtObject && (_Game.GodMode || _Game.PlayerEmpire.IsObjectVisibleToThisEmpire(builtObject)))
@@ -1425,8 +1424,7 @@ namespace DistantWorlds {
                         BuiltObject result = null;
                         for (int l = 0; l < builtObjectsAtLocationByArrays.Count; l++)
                         {
-                            int num9 = builtObjectsAtLocationByArrays[l].Length;
-                            for (int m = 0; m < num9; m++)
+                            for (int m = 0; m < builtObjectsAtLocationByArrays[l].Count; m++)
                             {
                                 BuiltObject builtObject2 = builtObjectsAtLocationByArrays[l][m];
                                 if (builtObject2 == null || (!_Game.GodMode && !_Game.PlayerEmpire.IsObjectVisibleToThisEmpire(builtObject2)))
@@ -1509,7 +1507,7 @@ namespace DistantWorlds {
                     CreatureList creatureList = new CreatureList();
                     if (num15 <= (double)(Galaxy.MaxSolarSystemSize + 5000))
                     {
-                        creatureList.AddRange(ListHelper.ToArrayThreadSafe(_Game.Galaxy.Systems[habitat2.SystemIndex].Creatures));
+                        creatureList.AddRange(_Game.Galaxy.Systems[habitat2.SystemIndex].Creatures.CloneThreadSafe());
                     }
                     else
                     {
@@ -1519,7 +1517,7 @@ namespace DistantWorlds {
                             GalaxyLocation galaxyLocation = galaxyLocationList[num16];
                             if (galaxyLocation != null && galaxyLocation.RelatedCreatures != null)
                             {
-                                creatureList.AddRange(ListHelper.ToArrayThreadSafe(galaxyLocation.RelatedCreatures));
+                                creatureList.AddRange(galaxyLocation.RelatedCreatures.CloneThreadSafe());
                             }
                         }
                     }
@@ -1560,7 +1558,7 @@ namespace DistantWorlds {
                 }
                 int num29 = (int)((double)mainView.ClientRectangle.Width * double_0);
                 num29 += Galaxy.MaxSolarSystemSize * 2;
-                List<BuiltObject[]> builtObjectsAtLocationByArrays2 = _Game.Galaxy.GetBuiltObjectsAtLocationByArrays(int_64, int_65, num29);
+                List<List<BuiltObject>> builtObjectsAtLocationByArrays2 = _Game.Galaxy.GetBuiltObjectsAtLocationByArrays(int_64, int_65, num29);
                 double maxWidth2 = 0.0;
                 double num30 = CalculateShipZoomFactor(double_0, out maxWidth2);
                 num13 = double_0 / num30;
@@ -1568,8 +1566,7 @@ namespace DistantWorlds {
                 int num31 = 536870911;
                 for (int num32 = 0; num32 < builtObjectsAtLocationByArrays2.Count; num32++)
                 {
-                    int num33 = builtObjectsAtLocationByArrays2[num32].Length;
-                    for (int num34 = 0; num34 < num33; num34++)
+                    for (int num34 = 0; num34 < builtObjectsAtLocationByArrays2[num32].Count; num34++)
                     {
                         BuiltObject builtObject4 = builtObjectsAtLocationByArrays2[num32][num34];
                         if (builtObject4 == null)
@@ -2047,8 +2044,10 @@ namespace DistantWorlds {
 
         private void method_153(string string_30)
         {
-            graphics_2.DrawString(string_30, font_2, new SolidBrush(Color.Black), new PointF(UiScale.S(9f), UiScale.S(9f)));
-            graphics_2.DrawString(string_30, font_2, new SolidBrush(Color.White), new PointF(UiScale.S(8f), UiScale.S(8f)));
+                using Brush brush1 = new SolidBrush(Color.Black);
+                using Brush brush2 = new SolidBrush(Color.White);
+            graphics_2.DrawString(string_30, font_2,brush1 , new PointF(UiScale.S(9f), UiScale.S(9f)));
+            graphics_2.DrawString(string_30, font_2, brush2, new PointF(UiScale.S(8f), UiScale.S(8f)));
         }
 
         private void gmapMain_MouseDoubleClick(object sender, MouseEventArgs e)

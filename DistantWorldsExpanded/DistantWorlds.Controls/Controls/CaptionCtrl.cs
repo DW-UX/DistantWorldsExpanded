@@ -206,7 +206,8 @@ namespace DistantWorlds.Controls
         this.brush.Dispose();
       if (this.brushType == BrushType.Solid)
       {
-        this.brush = (Brush) new SolidBrush(this.colorOne);
+         this.brush ?.Dispose();
+        this.brush =  new SolidBrush(this.colorOne);
       }
       else
       {
@@ -216,10 +217,11 @@ namespace DistantWorlds.Controls
           width = UiScale.S(1);
         if (height == 0)
           height = UiScale.S(1);
+           this.brush ?.Dispose();
         if (this.directionCtrl.DirectionStyle == DirectionStyle.Up || this.directionCtrl.DirectionStyle == DirectionStyle.Down)
-          this.brush = (Brush) new LinearGradientBrush(new Rectangle(0, 0, width, height), this.colorOne, this.colorTwo, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
+          this.brush =  new LinearGradientBrush(new Rectangle(0, 0, width, height), this.colorOne, this.colorTwo, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
         else
-          this.brush = (Brush) new LinearGradientBrush(new Rectangle(0, 0, width, height), this.colorOne, this.colorTwo, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+          this.brush =  new LinearGradientBrush(new Rectangle(0, 0, width, height), this.colorOne, this.colorTwo, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
       }
     }
 
@@ -254,22 +256,24 @@ namespace DistantWorlds.Controls
       }
       float num3 = num2 - UiScale.S(2f);
       float num4 = num1 + UiScale.S(3f);
+      using Brush brush = new SolidBrush(this.textColor);
       if (this.captionIcon != null)
       {
         if (this.Width >= this.Height)
         {
           e.Graphics.DrawImage(this.captionIcon, this.cornerSquare / 6, this.cornerSquare / 6);
-          e.Graphics.DrawString(this.text, this.Font, (Brush) new SolidBrush(this.textColor), new PointF(num4 + (float) (this.cornerSquare / 6) + (float) this.captionIcon.Width, num3 + (float) (this.cornerSquare / 6)), stringFormat);
+          e.Graphics.DrawString(this.text, this.Font, brush , new PointF(num4 + (float) (this.cornerSquare / 6) + (float) this.captionIcon.Width, num3 + (float) (this.cornerSquare / 6)), stringFormat);
         }
         else
         {
           e.Graphics.DrawImage(this.captionIcon, this.cornerSquare / 6, this.cornerSquare / 6);
-          e.Graphics.DrawString(this.text, this.Font, (Brush) new SolidBrush(this.textColor), new PointF(num4 + (float) (this.cornerSquare / 6), num3 + (float) (this.cornerSquare / 6) + (float) this.captionIcon.Height), stringFormat);
+          e.Graphics.DrawString(this.text, this.Font, brush, new PointF(num4 + (float) (this.cornerSquare / 6), num3 + (float) (this.cornerSquare / 6) + (float) this.captionIcon.Height), stringFormat);
         }
       }
       else
-        e.Graphics.DrawString(this.text, this.Font, (Brush) new SolidBrush(this.textColor), new PointF(num4 + (float) (this.cornerSquare / 6), num3 + (float) (this.cornerSquare / 6)), stringFormat);
-    }
+        e.Graphics.DrawString(this.text, this.Font, brush, new PointF(num4 + (float) (this.cornerSquare / 6), num3 + (float) (this.cornerSquare / 6)), stringFormat);
+          stringFormat.Dispose();
+          }
 
     protected override void OnMouseClick(MouseEventArgs e)
     {
@@ -319,7 +323,9 @@ namespace DistantWorlds.Controls
         this.directionCtrl.Height = this.Width;
       }
       this.InitializeBrush();
+      Region oldReg = this.Region;
       this.Region = new Region(this.regionPath);
+      oldReg?.Dispose();
     }
   }
 }

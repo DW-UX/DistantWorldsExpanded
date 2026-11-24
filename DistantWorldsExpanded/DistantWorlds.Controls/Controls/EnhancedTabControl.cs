@@ -24,15 +24,18 @@ namespace DistantWorlds.Controls
     protected override void OnPaint(PaintEventArgs e)
     {
       base.OnPaint(e);
-      e.Graphics.FillRectangle((Brush) new SolidBrush(Color.FromArgb(64, 64, 80)), this.Bounds);
+      using Brush brush =   new SolidBrush(Color.FromArgb(64, 64, 80));
+      e.Graphics.FillRectangle( brush, this.Bounds);
     }
 
     private void tab_DrawItem(object sender, DrawItemEventArgs e)
     {
       Color white = Color.White;
       Color color = Color.FromArgb(64, 64, 80);
-      e.Graphics.FillRectangle((Brush) new SolidBrush(Color.FromArgb(128, 128, 144)), this.ClientRectangle);
-      e.Graphics.FillRectangle((Brush) new SolidBrush(color), new Rectangle(UiScale.S(3), UiScale.S(21), this.Width - UiScale.S(6), UiScale.S(5)));
+      using Brush brush1 =   new SolidBrush(Color.FromArgb(128, 128, 144));
+      using Brush brush2 =   new SolidBrush(color);
+      e.Graphics.FillRectangle( brush1, this.ClientRectangle);
+      e.Graphics.FillRectangle(brush2 , new Rectangle(UiScale.S(3), UiScale.S(21), this.Width - UiScale.S(6), UiScale.S(5)));
       for (int index = 0; index < this.TabCount; ++index)
       {
         string text = this.TabPages[index].Text;
@@ -58,17 +61,18 @@ namespace DistantWorlds.Controls
         foreColor = Color.Yellow;
         font = new Font(e.Font, FontStyle.Regular);
       }
-      Brush brush1 = (Brush) new SolidBrush(foreColor);
+      using Brush brush1 =  new SolidBrush(foreColor);
       Rectangle rectangle = e.Bounds;
-      Brush brush2 = (Brush) new SolidBrush(backColor);
+      using Brush brush2 =  new SolidBrush(backColor);
       string text = tabControl.TabPages[e.Index].Text;
       // Windows sizes each tab for its caption; lay the caption out without the extra
       // padding and wrapping of the default format, or its last letters drop out of the tab.
-      StringFormat format = new StringFormat(StringFormat.GenericTypographic);
+      using StringFormat format = StringFormat.GenericTypographic;
       format.Alignment = StringAlignment.Center;
       format.FormatFlags |= StringFormatFlags.NoWrap | StringFormatFlags.NoClip;
       e.Graphics.FillRectangle(brush2, rectangle);
-      e.Graphics.DrawRectangle(new Pen(Color.FromArgb(128, 128, 144)), rectangle);
+      using Pen pen = new Pen(Color.FromArgb(128, 128, 144));
+      e.Graphics.DrawRectangle(pen, rectangle);
       e.Graphics.FillRectangle(brush2, new Rectangle(rectangle.X, rectangle.Y + rectangle.Height - UiScale.S(1), rectangle.Width, UiScale.S(2)));
       rectangle = new Rectangle(rectangle.X, rectangle.Y + UiScale.S(3), rectangle.Width, rectangle.Height - UiScale.S(3));
       e.Graphics.DrawString(caption, font, brush1, (RectangleF) rectangle, format);

@@ -73,7 +73,8 @@ namespace DistantWorlds {
             SizeF sizeF = SizeF.Empty;
             using (Graphics graphics = panel_1.CreateGraphics())
             {
-                sizeF = graphics.MeasureString(string_30, font_9, panel_1.Width, StringFormat.GenericDefault);
+                using(StringFormat format = StringFormat.GenericDefault)
+                sizeF = graphics.MeasureString(string_30, font_9, panel_1.Width,format);
             }
             Label label = new Label();
             label.Size = new Size(panel_1.Width, (int)sizeF.Height + UiScale.S(2));

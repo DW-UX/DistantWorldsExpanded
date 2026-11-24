@@ -345,14 +345,17 @@ namespace DistantWorlds
                 }
             }
             int num10 = UiScale.S(6);
+                using Brush brush1 = new SolidBrush(Color.Black);
+                using Brush brush2 = new SolidBrush(Color.White);
             if (!string.IsNullOrEmpty(string_0))
             {
-                graphics2.DrawString(string_0, font, new SolidBrush(Color.Black), new PointF(UiScale.S(7f), num10 + UiScale.S(1)));
-                graphics2.DrawString(string_0, font, new SolidBrush(Color.White), new PointF(UiScale.S(6f), num10));
+                
+                graphics2.DrawString(string_0, font, brush1, new PointF(UiScale.S(7f), num10 + UiScale.S(1)));
+                graphics2.DrawString(string_0, font, brush2, new PointF(UiScale.S(6f), num10));
                 num10 += (int)graphics2.MeasureString(string_0, font).Height + UiScale.S(6);
             }
-            graphics2.DrawString(string_1, Font, new SolidBrush(Color.Black), new PointF(UiScale.S(7f), num10 + UiScale.S(1)));
-            graphics2.DrawString(string_1, Font, new SolidBrush(Color.White), new PointF(UiScale.S(6f), num10));
+            graphics2.DrawString(string_1, Font, brush1, new PointF(UiScale.S(7f), num10 + UiScale.S(1)));
+            graphics2.DrawString(string_1, Font, brush2, new PointF(UiScale.S(6f), num10));
         }
 
         protected override void OnPaint(PaintEventArgs e)

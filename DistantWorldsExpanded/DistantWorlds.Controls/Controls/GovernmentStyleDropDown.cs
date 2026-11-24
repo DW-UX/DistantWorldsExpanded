@@ -104,7 +104,7 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(0.0f, (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       int num = 0;
       if (this._GovernmentStyles != null)
         num = this._GovernmentStyles.Count;
@@ -115,12 +115,12 @@ namespace DistantWorlds.Controls
         if (this.AllowNullItem)
         {
           if (e.Index == 0)
-            e.Graphics.DrawString(this.NullItemText, font, (Brush) solidBrush, point);
+            e.Graphics.DrawString(this.NullItemText, font,  solidBrush, point);
           else
-            e.Graphics.DrawString(this._GovernmentStyles[e.Index - 1].Name, font, (Brush) solidBrush, point);
+            e.Graphics.DrawString(this._GovernmentStyles[e.Index - 1].Name, font,  solidBrush, point);
         }
         else
-          e.Graphics.DrawString(this._GovernmentStyles[e.Index].Name, font, (Brush) solidBrush, point);
+          e.Graphics.DrawString(this._GovernmentStyles[e.Index].Name, font,  solidBrush, point);
       }
       e.DrawFocusRectangle();
     }

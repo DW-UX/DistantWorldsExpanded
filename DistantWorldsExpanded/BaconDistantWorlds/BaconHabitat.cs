@@ -1043,15 +1043,13 @@ namespace BaconDistantWorlds
           BuiltObjectList builtObjects,
           int resourceID)
         {
+            var res = new BuiltObjectList();
             if (resourceID < 0)
-                return builtObjects;
-            BuiltObjectList builtObjectList = new BuiltObjectList();
-            for (int index = 0; index < builtObjects.Count; ++index)
-            {
-                if (builtObjects[index].ParentHabitat != null && builtObjects[index].ParentHabitat.Resources.ContainsId((byte)resourceID))
-                    builtObjectList.Add(builtObjects[index]);
-            }
-            return builtObjectList;
+               {res.AddRange(builtObjects.CloneThreadSafe());
+                 return res;}
+            else
+            res.AddRange(builtObjects.Where(x=> x.ParentHabitat != null && x.ParentHabitat.Resources.ContainsId((byte)resourceID)).ToList());
+            return res;
         }
 
         public static void BuildShipForPirate(

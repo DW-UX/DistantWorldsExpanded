@@ -2408,8 +2408,7 @@ namespace DistantWorlds.Types
                     graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     graphics.CompositingQuality = CompositingQuality.HighQuality;
                     graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    SolidBrush brush = new SolidBrush(mainColor);
-                    new SolidBrush(secondaryColor);
+                    using SolidBrush brush = new SolidBrush(mainColor);
                     Rectangle rectangle = new Rectangle(0, 0, 100, 60);
                     graphics.FillRectangle(brush, rectangle);
                     using Bitmap bitmap2 = TintBitmap(bitmap, secondaryColor);

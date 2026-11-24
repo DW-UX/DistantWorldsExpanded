@@ -109,10 +109,10 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(56f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._Habitats != null && this._Habitats.Count > 0 && e.Index >= 0)
       {
-        e.Graphics.DrawString(this._Habitats[e.Index].Name, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(this._Habitats[e.Index].Name, font,  solidBrush, point);
         Rectangle rect = new Rectangle();
         if (this._Habitats[e.Index].Empire != null && this._Habitats[e.Index].Empire != this._Galaxy.IndependentEmpire)
         {

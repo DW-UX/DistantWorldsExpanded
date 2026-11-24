@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
+        <Configurations>Debug;Release;ReleasePublish</Configurations>
     </PropertyGroup>
 
 </Project>

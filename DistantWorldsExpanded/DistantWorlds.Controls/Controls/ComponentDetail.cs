@@ -91,7 +91,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return (width - width1) / 2;
     }
 
@@ -101,7 +102,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericTypographic;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return width - width1;
     }
 
@@ -144,15 +146,15 @@ namespace DistantWorlds.Controls
       int width = (int) ((double) this._Image.Width * (UiScale.S(20.0) / (double) this._Image.Height));
       int x = this.Width - (UiScale.S(10) + width);
       Rectangle rect = new Rectangle(x, UiScale.S(10), width, UiScale.S(20));
-      StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
+      using StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
       format1.Trimming = StringTrimming.EllipsisCharacter;
       SizeF sizeF1 = graphics.MeasureString(this._Component.Name, this._TitleFont, x - location.X, format1);
       if ((double) sizeF1.Height > UiScale.S(22.0))
         location.Y -= UiScale.S(7);
       RectangleF layoutRectangle1 = new RectangleF((float) location.X, (float) location.Y, sizeF1.Width + UiScale.S(3f), sizeF1.Height + UiScale.S(3f));
-      graphics.DrawString(title, this._TitleFont, (Brush) this._BlackBrush, layoutRectangle1, format1);
+      graphics.DrawString(title, this._TitleFont,  this._BlackBrush, layoutRectangle1, format1);
       layoutRectangle1 = new RectangleF(layoutRectangle1.X - UiScale.S(1f), layoutRectangle1.Y - UiScale.S(1f), layoutRectangle1.Width, layoutRectangle1.Height);
-      graphics.DrawString(title, this._TitleFont, (Brush) this._WhiteBrush, layoutRectangle1, format1);
+      graphics.DrawString(title, this._TitleFont,  this._WhiteBrush, layoutRectangle1, format1);
       graphics.DrawImage((Image) this._Image, rect);
       int y1 = num + this._RowHeight;
       location = new Point(this._DescriptionX, y1);
@@ -175,13 +177,13 @@ namespace DistantWorlds.Controls
         {
           if (string.IsNullOrEmpty(values[index]))
           {
-            StringFormat format2 = new StringFormat(StringFormatFlags.FitBlackBox);
+            using StringFormat format2 = new StringFormat(StringFormatFlags.FitBlackBox);
             format2.Trimming = StringTrimming.EllipsisCharacter;
             SizeF sizeF2 = graphics.MeasureString(descriptions[index], this._SmallFont, this.Width - UiScale.S(6), format2);
             RectangleF layoutRectangle2 = new RectangleF(UiScale.S(4f), (float) y3, sizeF2.Width + UiScale.S(3f), sizeF2.Height + UiScale.S(3f));
-            graphics.DrawString(descriptions[index], this._SmallFont, (Brush) this._BlackBrush, layoutRectangle2, format2);
+            graphics.DrawString(descriptions[index], this._SmallFont,  this._BlackBrush, layoutRectangle2, format2);
             layoutRectangle2 = new RectangleF(layoutRectangle2.X - UiScale.S(1f), layoutRectangle2.Y - UiScale.S(1f), layoutRectangle2.Width, layoutRectangle2.Height);
-            graphics.DrawString(descriptions[index], this._SmallFont, (Brush) this._WhiteBrush, layoutRectangle2, format2);
+            graphics.DrawString(descriptions[index], this._SmallFont,  this._WhiteBrush, layoutRectangle2, format2);
             y3 += (int) sizeF2.Height;
           }
           else
@@ -225,9 +227,9 @@ namespace DistantWorlds.Controls
       Point location)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._WhiteBrush, (PointF) location);
     }
 
     protected override void Dispose(bool disposing)

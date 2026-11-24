@@ -380,11 +380,11 @@ namespace DistantWorlds.Controls
       int y1 = this._FactionDetailArea.Y + this._Margin;
       int width = this._FactionDetailArea.Width - this._DoubleMargin;
       using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(48, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
-        graphics.FillRectangle((Brush) solidBrush, this._FactionDetailArea);
+        graphics.FillRectangle( solidBrush, this._FactionDetailArea);
       if (selectFaction == null || gameSummary == null)
         return;
       using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(64, selectFaction.MainColor)))
-        graphics.FillRectangle((Brush) solidBrush, this._FactionDetailArea);
+        graphics.FillRectangle( solidBrush, this._FactionDetailArea);
       Bitmap dominantRaceImage = this._RaceImageCache.GetEmpireDominantRaceImage(selectFaction);
       if (dominantRaceImage != null)
       {
@@ -484,7 +484,7 @@ namespace DistantWorlds.Controls
       int y1 = this._FactionAchievementArea.Y;
       graphics.SetClip(this._FactionAchievementArea);
       using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(48, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
-        graphics.FillRectangle((Brush) solidBrush, this._FactionAchievementArea);
+        graphics.FillRectangle( solidBrush, this._FactionAchievementArea);
       using (SolidBrush brush = new SolidBrush(Color.FromArgb(24, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
       {
         using (SolidBrush dropShadowBrush = new SolidBrush(Color.FromArgb(24, 0, 0, 0)))
@@ -519,9 +519,9 @@ namespace DistantWorlds.Controls
       }
       int y3 = this._FactionAchievementArea.Top + (this._FactionAchievementArea.Height - this._LeftArrow.Height) / 2;
       if (this._HoveredElement == (object) "scrollfactionachievementleft")
-        graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(this._FactionAchievementArea.X, this._FactionAchievementArea.Y, this._ScrollArrowWidth, this._FactionAchievementArea.Height));
+        graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(this._FactionAchievementArea.X, this._FactionAchievementArea.Y, this._ScrollArrowWidth, this._FactionAchievementArea.Height));
       else if (this._HoveredElement == (object) "scrollfactionachievementright")
-        graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(this._FactionAchievementArea.Right - this._ScrollArrowWidth, this._FactionAchievementArea.Y, this._ScrollArrowWidth, this._FactionAchievementArea.Height));
+        graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(this._FactionAchievementArea.Right - this._ScrollArrowWidth, this._FactionAchievementArea.Y, this._ScrollArrowWidth, this._FactionAchievementArea.Height));
       graphics.DrawImage((Image) this._LeftArrow, new Point(this._FactionAchievementArea.X, y3));
       graphics.DrawImage((Image) this._RightArrow, new Point(this._FactionAchievementArea.Right - this._ScrollArrowWidth, y3));
       graphics.ResetClip();
@@ -584,7 +584,7 @@ namespace DistantWorlds.Controls
           int top = rectangle.Top;
           int height = UiScale.S(20);
           using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(192, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
-            graphics.FillRectangle((Brush) solidBrush, rectangle);
+            graphics.FillRectangle( solidBrush, rectangle);
           using (SolidBrush brush = new SolidBrush(Color.Orange))
           {
             int y1 = top + GraphicsHelper.DrawStringWithDropShadowCentered(graphics, string.Format(TextResolver.GetText("Game Summary Score"), (object) empireScore.ToString("###,###,##0")), this._BoldFont, brush, rectangle);
@@ -631,7 +631,7 @@ namespace DistantWorlds.Controls
       bool showMedalImage)
     {
       using (SolidBrush solidBrush = new SolidBrush(backgroundColor))
-        graphics.FillRectangle((Brush) solidBrush, rectangle);
+        graphics.FillRectangle( solidBrush, rectangle);
       int y1 = rectangle.Top;
       if (showMedalImage)
       {
@@ -667,7 +667,7 @@ namespace DistantWorlds.Controls
       int y1 = this._FactionSummaryArea.Y + this._Margin;
       graphics.SetClip(this._FactionSummaryArea);
       using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(48, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
-        graphics.FillRectangle((Brush) solidBrush, this._FactionSummaryArea);
+        graphics.FillRectangle( solidBrush, this._FactionSummaryArea);
       using (SolidBrush brush = new SolidBrush(Color.FromArgb(24, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
       {
         using (SolidBrush dropShadowBrush = new SolidBrush(Color.FromArgb(24, 0, 0, 0)))
@@ -686,7 +686,7 @@ namespace DistantWorlds.Controls
           {
             int x1 = num1 + this._ScrollArrowWidth + index1 * (this._RaceSize.Width + this._Gap) - this._FactionSummaryScrollPosition;
             if (this._HoveredElement == empire)
-              graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(x1, y1, this._RaceSize.Width, this._FactionSummaryArea.Height - this._DoubleMargin));
+              graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(x1, y1, this._RaceSize.Width, this._FactionSummaryArea.Height - this._DoubleMargin));
             if (x1 + this._RaceSize.Width >= 0 && x1 < this._FactionSummaryArea.Right)
             {
               GraphicsHelper.SetGraphicsQuality(graphics, GraphicsQuality.High);
@@ -726,9 +726,9 @@ namespace DistantWorlds.Controls
       }
       int y2 = this._FactionSummaryArea.Top + (this._FactionSummaryArea.Height - this._LeftArrow.Height) / 2;
       if (this._HoveredElement == (object) "scrollfactionsummaryleft")
-        graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(this._FactionSummaryArea.X, this._FactionSummaryArea.Y, this._ScrollArrowWidth, this._FactionSummaryArea.Height));
+        graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(this._FactionSummaryArea.X, this._FactionSummaryArea.Y, this._ScrollArrowWidth, this._FactionSummaryArea.Height));
       else if (this._HoveredElement == (object) "scrollfactionsummaryright")
-        graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(this._FactionSummaryArea.Right - this._ScrollArrowWidth, this._FactionSummaryArea.Y, this._ScrollArrowWidth, this._FactionSummaryArea.Height));
+        graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(this._FactionSummaryArea.Right - this._ScrollArrowWidth, this._FactionSummaryArea.Y, this._ScrollArrowWidth, this._FactionSummaryArea.Height));
       graphics.DrawImage((Image) this._LeftArrow, new Point(this._FactionSummaryArea.X, y2));
       graphics.DrawImage((Image) this._RightArrow, new Point(this._FactionSummaryArea.Right - this._ScrollArrowWidth, y2));
       graphics.ResetClip();
@@ -744,7 +744,7 @@ namespace DistantWorlds.Controls
       int y1 = this._AchievementCollectionArea.Y;
       graphics.SetClip(this._AchievementCollectionArea);
       using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(48, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
-        graphics.FillRectangle((Brush) solidBrush, this._AchievementCollectionArea);
+        graphics.FillRectangle( solidBrush, this._AchievementCollectionArea);
       using (SolidBrush brush = new SolidBrush(Color.FromArgb(24, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
       {
         using (SolidBrush dropShadowBrush = new SolidBrush(Color.FromArgb(24, 0, 0, 0)))
@@ -777,9 +777,9 @@ namespace DistantWorlds.Controls
       }
       int y2 = this._AchievementCollectionArea.Top + (this._AchievementCollectionArea.Height - this._LeftArrow.Height) / 2;
       if (this._HoveredElement == (object) "scrollachievementcollectionleft")
-        graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(this._AchievementCollectionArea.X, this._AchievementCollectionArea.Y, this._ScrollArrowWidth, this._AchievementCollectionArea.Height));
+        graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(this._AchievementCollectionArea.X, this._AchievementCollectionArea.Y, this._ScrollArrowWidth, this._AchievementCollectionArea.Height));
       else if (this._HoveredElement == (object) "scrollachievementcollectionright")
-        graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(this._AchievementCollectionArea.Right - this._ScrollArrowWidth, this._AchievementCollectionArea.Y, this._ScrollArrowWidth, this._AchievementCollectionArea.Height));
+        graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(this._AchievementCollectionArea.Right - this._ScrollArrowWidth, this._AchievementCollectionArea.Y, this._ScrollArrowWidth, this._AchievementCollectionArea.Height));
       graphics.DrawImage((Image) this._LeftArrow, new Point(this._AchievementCollectionArea.X, y2));
       graphics.DrawImage((Image) this._RightArrow, new Point(this._AchievementCollectionArea.Right - this._ScrollArrowWidth, y2));
       graphics.ResetClip();
@@ -797,7 +797,7 @@ namespace DistantWorlds.Controls
       int num2 = this._GameSummaryCollectionArea.Y + this._Margin;
       graphics.SetClip(this._GameSummaryCollectionArea);
       using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(48, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
-        graphics.FillRectangle((Brush) solidBrush, this._GameSummaryCollectionArea);
+        graphics.FillRectangle( solidBrush, this._GameSummaryCollectionArea);
       using (SolidBrush brush = new SolidBrush(Color.FromArgb(24, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
       {
         using (SolidBrush dropShadowBrush = new SolidBrush(Color.FromArgb(24, 0, 0, 0)))
@@ -819,12 +819,12 @@ namespace DistantWorlds.Controls
               if (gameSummary == this._CurrentGame.Galaxy.GameSummary)
               {
                 using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
-                  graphics.FillRectangle((Brush) solidBrush, new Rectangle(this._GameSummaryCollectionArea.X, y, this._GameSummaryCollectionArea.Width, GameSummaryPanel.MedalVerySmallSize.Height));
+                  graphics.FillRectangle( solidBrush, new Rectangle(this._GameSummaryCollectionArea.X, y, this._GameSummaryCollectionArea.Width, GameSummaryPanel.MedalVerySmallSize.Height));
               }
               else if (index1 % 2 == 0)
               {
                 using (SolidBrush solidBrush = new SolidBrush(Color.FromArgb(48, (int) byte.MaxValue, (int) byte.MaxValue, (int) byte.MaxValue)))
-                  graphics.FillRectangle((Brush) solidBrush, new Rectangle(this._GameSummaryCollectionArea.X, y, this._GameSummaryCollectionArea.Width, GameSummaryPanel.MedalVerySmallSize.Height));
+                  graphics.FillRectangle( solidBrush, new Rectangle(this._GameSummaryCollectionArea.X, y, this._GameSummaryCollectionArea.Width, GameSummaryPanel.MedalVerySmallSize.Height));
               }
               int x1 = num1;
               Bitmap raceImage = this._RaceImageCache.GetRaceImage(gameSummary.PlayerRace.PictureRef);
@@ -878,9 +878,9 @@ namespace DistantWorlds.Controls
       }
       int x = this._GameSummaryCollectionArea.Left + (this._GameSummaryCollectionArea.Width - this._UpArrow.Width) / 2;
       if (this._HoveredElement == (object) "scrollgamesummarycollectionup")
-        graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(this._GameSummaryCollectionArea.X, this._GameSummaryCollectionArea.Y, this._GameSummaryCollectionArea.Width, this._ScrollArrowHeight));
+        graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(this._GameSummaryCollectionArea.X, this._GameSummaryCollectionArea.Y, this._GameSummaryCollectionArea.Width, this._ScrollArrowHeight));
       else if (this._HoveredElement == (object) "scrollgamesummarycollectiondown")
-        graphics.FillRectangle((Brush) this._HoverHighlightBrush, new Rectangle(this._GameSummaryCollectionArea.X, this._GameSummaryCollectionArea.Bottom - this._ScrollArrowHeight, this._GameSummaryCollectionArea.Width, this._ScrollArrowHeight));
+        graphics.FillRectangle( this._HoverHighlightBrush, new Rectangle(this._GameSummaryCollectionArea.X, this._GameSummaryCollectionArea.Bottom - this._ScrollArrowHeight, this._GameSummaryCollectionArea.Width, this._ScrollArrowHeight));
       graphics.DrawImage((Image) this._UpArrow, new Point(x, this._GameSummaryCollectionArea.Y));
       graphics.DrawImage((Image) this._DownArrow, new Point(x, this._GameSummaryCollectionArea.Bottom - this._ScrollArrowHeight));
       graphics.ResetClip();

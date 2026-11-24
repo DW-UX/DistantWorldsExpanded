@@ -79,7 +79,8 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericDefault;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return (width - width1) / 2;
     }
 
@@ -89,16 +90,18 @@ namespace DistantWorlds.Controls
       Font font,
       int width)
     {
-      int width1 = (int) graphics.MeasureString(text, font, width, StringFormat.GenericTypographic).Width;
+      using StringFormat format = StringFormat.GenericDefault;
+      int width1 = (int) graphics.MeasureString(text, font, width, format).Width;
       return width - width1;
     }
 
     private void DrawKeyItem(Graphics graphics, Color color, string description, Point location)
     {
       Point location1 = new Point(location.X + UiScale.S(10), location.Y + UiScale.S(2));
-      graphics.FillRectangle((Brush) new SolidBrush(color), new Rectangle(location1, new Size(UiScale.S(10), UiScale.S(10))));
+      using Brush brush =  new SolidBrush(color);
+      graphics.FillRectangle( brush, new Rectangle(location1, new Size(UiScale.S(10), UiScale.S(10))));
       Point point = new Point(location.X + UiScale.S(26), location.Y);
-      graphics.DrawString(description, this.Font, (Brush) this._WhiteBrush, (PointF) point);
+      graphics.DrawString(description, this.Font,  this._WhiteBrush, (PointF) point);
     }
 
     private void DrawColorKey(Graphics graphics)
@@ -199,9 +202,9 @@ namespace DistantWorlds.Controls
       Point location)
     {
       location = new Point(location.X + UiScale.S(1), location.Y + UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._BlackBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._BlackBrush, (PointF) location);
       location = new Point(location.X - UiScale.S(1), location.Y - UiScale.S(1));
-      graphics.DrawString(text, font, (Brush) this._WhiteBrush, (PointF) location);
+      graphics.DrawString(text, font,  this._WhiteBrush, (PointF) location);
     }
   }
 }

@@ -1236,16 +1236,12 @@ namespace DistantWorlds.Types
                 {
                     independentColonies.Add(habitat3);
                 }
-            }
-            for (int k = 0; k < _Galaxy.Habitats.Count; k++)
-            {
-                Habitat habitat4 = _Galaxy.Habitats[k];
-                if (habitat4.Ruin != null && (habitat4.Empire == null || habitat4.Empire == _Galaxy.IndependentEmpire) && pirateFaction.CheckSystemExplored(habitat4.SystemIndex))
+                if (habitat3.Ruin != null && (habitat3.Empire == null || habitat3.Empire == _Galaxy.IndependentEmpire) && pirateFaction.CheckSystemExplored(habitat3.SystemIndex))
                 {
-                    double num = _Galaxy.CalculateDistance(habitat4.Xpos, habitat4.Ypos, pirateFaction.PirateEmpireBaseHabitat.Xpos, pirateFaction.PirateEmpireBaseHabitat.Ypos);
-                    if (num < (double)Galaxy.SectorSize * 2.0 && !buyingEmpire.CheckSystemExplored(habitat4.SystemIndex))
+                    double num = _Galaxy.CalculateDistance(habitat3.Xpos, habitat3.Ypos, pirateFaction.PirateEmpireBaseHabitat.Xpos, pirateFaction.PirateEmpireBaseHabitat.Ypos);
+                    if (num < (double)Galaxy.SectorSize * 2.0 && !buyingEmpire.CheckSystemExplored(habitat3.SystemIndex))
                     {
-                        ruinHabitats.Add(habitat4);
+                        ruinHabitats.Add(habitat3);
                     }
                 }
             }

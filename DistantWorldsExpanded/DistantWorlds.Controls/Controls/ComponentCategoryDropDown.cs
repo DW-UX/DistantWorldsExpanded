@@ -180,8 +180,8 @@ namespace DistantWorlds.Controls
       int width = UiScale.S(20);
       PointF point = new PointF(UiScale.S(28f), (float) (e.Bounds.Y + UiScale.S(3)));
       Font font = this.Font;
-      SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
-      SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, 0, 128));
+      using SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, 0, 128));
       if (this._Categories != null && this._Categories.Count > 0 && e.Index >= 0)
       {
         ComponentCategoryType category = this._Categories[e.Index];
@@ -199,7 +199,7 @@ namespace DistantWorlds.Controls
           Rectangle rect = new Rectangle(e.Bounds.X + (UiScale.S(20) - width) / 2, e.Bounds.Y + (UiScale.S(20) - height) / 2, width, height);
           e.Graphics.DrawImage((Image) bitmap, rect);
           string s = Galaxy.ResolveDescription(category);
-          e.Graphics.DrawString(s, font, (Brush) solidBrush1, point);
+          e.Graphics.DrawString(s, font,  solidBrush1, point);
         }
       }
       e.DrawFocusRectangle();

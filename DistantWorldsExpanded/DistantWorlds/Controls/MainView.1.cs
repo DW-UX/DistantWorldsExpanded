@@ -684,12 +684,12 @@ namespace DistantWorlds.Controls
                                 int num56 = (int)((double)int_2 * 0.07);
                                 int num57 = num36 + (int_ - num55) / 2;
                                 int num58 = num37 + (int_2 - num56) / 2;
-                                if (color_15 == System.Drawing.Color.Empty)
-                                {
-                                    using (new SolidBrush(System.Drawing.Color.Black))
-                                    {
-                                    }
-                                }
+                                // if (color_15 == System.Drawing.Color.Empty)
+                                // {
+                                //     using (new SolidBrush(System.Drawing.Color.Black))
+                                //     {
+                                //     }
+                                // }
                                 num55 = (int)((double)int_ * 1.0);
                                 num56 = (int)((double)int_2 * 1.0);
                                 num57 = num36 + (int_ - num55) / 2;
@@ -1566,7 +1566,7 @@ namespace DistantWorlds.Controls
                 _ = MouseHelper.GetCursorPosition().Y;
                 if (num5 <= (double)(Galaxy.MaxSolarSystemSize + 5000))
                 {
-                    creatureList.AddRange(ListHelper.ToArrayThreadSafe(galaxy_0.Systems[habitat.SystemIndex].Creatures));
+                    creatureList.AddRange(galaxy_0.Systems[habitat.SystemIndex].Creatures.CloneThreadSafe());
                 }
                 else
                 {
@@ -1574,7 +1574,7 @@ namespace DistantWorlds.Controls
                     for (int num159 = 0; num159 < galaxyLocationList4.Count; num159++)
                     {
                         GalaxyLocation galaxyLocation2 = galaxyLocationList4[num159];
-                        creatureList.AddRange(ListHelper.ToArrayThreadSafe(galaxyLocation2.RelatedCreatures));
+                        creatureList.AddRange(galaxyLocation2.RelatedCreatures.CloneThreadSafe());
                         for (int num160 = 0; num160 < galaxyLocation2.RelatedCreatures.Count; num160++)
                         {
                             Creature creature = galaxyLocation2.RelatedCreatures[num160];
@@ -2254,7 +2254,8 @@ namespace DistantWorlds.Controls
             using (Graphics graphics = CreateGraphics())
             {
                 method_177(graphics);
-                sizeF = graphics.MeasureString(habitat_1.Name, font, 200, StringFormat.GenericDefault);
+                using StringFormat format = StringFormat.GenericDefault;
+                sizeF = graphics.MeasureString(habitat_1.Name, font, 200, format);
             }
             if (!bool_13)
             {
@@ -2278,6 +2279,7 @@ namespace DistantWorlds.Controls
             SolidBrush solidBrush = new SolidBrush(color_1);
             if (habitat_1.Empire != null && habitat_1.Empire != galaxy_0.IndependentEmpire)
             {
+                solidBrush?.Dispose();
                 solidBrush = new SolidBrush(habitat_1.Empire.MainColor);
             }
             if (bool_13)
@@ -2369,7 +2371,8 @@ namespace DistantWorlds.Controls
             {
                 font = font_0;
             }
-            SizeF sizeF = graphics_0.MeasureString(habitat_1.Name, font, 200, StringFormat.GenericDefault);
+            using StringFormat format = StringFormat.GenericDefault;
+            SizeF sizeF = graphics_0.MeasureString(habitat_1.Name, font, 200, format);
             if (!bool_13)
             {
                 sizeF = new SizeF(1f, sizeF.Height);
@@ -2382,6 +2385,7 @@ namespace DistantWorlds.Controls
             SolidBrush solidBrush = new SolidBrush(color_1);
             if (habitat_1.Empire != null && habitat_1.Empire != galaxy_0.IndependentEmpire)
             {
+                solidBrush.Dispose();
                 solidBrush = new SolidBrush(habitat_1.Empire.MainColor);
             }
             if (bool_13)
@@ -2478,7 +2482,8 @@ namespace DistantWorlds.Controls
             using (Pen pen = new Pen(mainColor, 1f))
             {
                 graphics_0.FillPolygon(solidBrush_2, list.ToArray());
-                graphics_0.FillPolygon(new SolidBrush(pen.Color), list2.ToArray());
+                using Brush brush = new SolidBrush(pen.Color);
+                graphics_0.FillPolygon(brush, list2.ToArray());
                 graphics_0.DrawPolygon(pen, list.ToArray());
             }
             List<System.Drawing.Point> list3 = new List<System.Drawing.Point>();
@@ -2647,7 +2652,8 @@ namespace DistantWorlds.Controls
             using (Pen pen = new Pen(color, 1f))
             {
                 graphics2.FillPolygon(solidBrush_2, list.ToArray());
-                graphics2.FillPolygon(new SolidBrush(pen.Color), list2.ToArray());
+                using Brush brush = new SolidBrush(pen.Color);
+                graphics2.FillPolygon(brush, list2.ToArray());
                 graphics2.DrawPolygon(pen, list.ToArray());
             }
             List<System.Drawing.Point> list3 = new List<System.Drawing.Point>();

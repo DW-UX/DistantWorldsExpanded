@@ -79,13 +79,15 @@ namespace DistantWorlds.Controls
 
         private int method_0(Graphics graphics_0, string string_0, Font font_2, int int_3)
         {
-            int num = (int)graphics_0.MeasureString(string_0, font_2, int_3, StringFormat.GenericTypographic).Width;
+            using StringFormat format = StringFormat.GenericTypographic;
+            int num = (int)graphics_0.MeasureString(string_0, font_2, int_3, format).Width;
             return (int_3 - num) / 2;
         }
 
         private int method_1(Graphics graphics_0, string string_0, Font font_2, int int_3)
         {
-            int num = (int)graphics_0.MeasureString(string_0, font_2, int_3, StringFormat.GenericTypographic).Width;
+            using StringFormat format = StringFormat.GenericTypographic;
+            int num = (int)graphics_0.MeasureString(string_0, font_2, int_3, format).Width;
             return int_3 - num;
         }
 

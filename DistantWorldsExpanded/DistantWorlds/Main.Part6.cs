@@ -3919,7 +3919,9 @@ namespace DistantWorlds
             }
             Bitmap image = new Bitmap(UiScale.S(250), UiScale.S(120), PixelFormat.Format32bppPArgb);
             Graphics graphics = Graphics.FromImage(image);
-            int num2 = UiScale.S(65) - (int)(graphics.MeasureString(text, lblGameEndComment.Font, new SizeF(UiScale.S(200f), UiScale.S(100f)), StringFormat.GenericTypographic).Width / 2f);
+            int num2;
+            using(StringFormat format = StringFormat.GenericTypographic)
+            {num2 = UiScale.S(65) - (int)(graphics.MeasureString(text, lblGameEndComment.Font, new SizeF(UiScale.S(200f), UiScale.S(100f)), format).Width / 2f);}
             lblGameEndComment.Parent = picGameEndPicture;
             lblGameEndComment.Location = new Point(list[num].X + num2, list[num].Y + UiScale.S(60));
             lblGameEndCommentDropShadow.Location = new Point(list[num].X + num2 + UiScale.S(1), list[num].Y + UiScale.S(60) + UiScale.S(1));
@@ -3951,7 +3953,7 @@ namespace DistantWorlds
                     int val = (int)((double)(i + 1) * (num2 / (double)num));
                     val = Math.Max(0, Math.Min(255, val));
                     Color color = Color.FromArgb(val, baseColor);
-                    SolidBrush brush = new SolidBrush(color);
+                    using SolidBrush brush = new SolidBrush(color);
                     Rectangle rect = new Rectangle(i, i, int_65 + num * 2 - i * UiScale.S(2), int_65 + num * 2 - i * UiScale.S(2));
                     graphics.FillRectangle(brush, rect);
                     rect = new Rectangle(int_65 + num + i, (int_65 - (int)((double)int_65 * 0.6)) / 2 + i, int_65 + num * 2 - i * UiScale.S(2), (int)((double)int_65 * 0.6) + num * 2 - i * UiScale.S(2));
@@ -3987,16 +3989,18 @@ namespace DistantWorlds
             }
             if (!string.IsNullOrEmpty(empty))
             {
-                SolidBrush brush2 = new SolidBrush(Color.FromArgb(160, Color.Red));
-                SolidBrush brush3 = new SolidBrush(Color.FromArgb(160, Color.Black));
+                using SolidBrush brush2 = new SolidBrush(Color.FromArgb(160, Color.Red));
+                using SolidBrush brush3 = new SolidBrush(Color.FromArgb(160, Color.Black));
                 Font font = ((IFontCache)this).GenerateFont(22f, isBold: true);
-                SizeF sizeF = graphics.MeasureString(empty, font, UiScale.S(400), StringFormat.GenericTypographic);
+                SizeF sizeF;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF = graphics.MeasureString(empty, font, UiScale.S(400), format);
                 int num4 = (num3 + (int_64 + UiScale.S(10)) - (int)sizeF.Width) / 2;
                 int num5 = num3 + int_65 / 2 - (int)sizeF.Height / 2;
                 Point point = new Point(num4 + UiScale.S(1), num5 + UiScale.S(1));
-                graphics.DrawString(empty, font, brush3, point, StringFormat.GenericTypographic);
+                graphics.DrawString(empty, font, brush3, point, format);
                 Point point2 = new Point(num4, num5);
-                graphics.DrawString(empty, font, brush2, point2, StringFormat.GenericTypographic);
+                graphics.DrawString(empty, font, brush2, point2, format);}
             }
             return bitmap;
         }

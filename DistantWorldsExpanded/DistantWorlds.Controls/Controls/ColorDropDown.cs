@@ -110,12 +110,12 @@ namespace DistantWorlds.Controls
       base.OnDrawItem(e);
       e.DrawBackground();
       Font font = this.Font;
-      SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
       if (this._Colors != null && e.Index >= 0 && e.Index < this._Colors.Count)
       {
-        SolidBrush solidBrush2 = new SolidBrush(this._Colors[e.Index]);
+        using SolidBrush solidBrush2 = new SolidBrush(this._Colors[e.Index]);
         Rectangle rect = new Rectangle(UiScale.S(1), e.Bounds.Y + UiScale.S(1), e.Bounds.Width - UiScale.S(2), e.Bounds.Height - UiScale.S(2));
-        e.Graphics.FillRectangle((Brush) solidBrush2, rect);
+        e.Graphics.FillRectangle( solidBrush2, rect);
       }
       e.DrawFocusRectangle();
     }

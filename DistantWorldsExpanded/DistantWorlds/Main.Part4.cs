@@ -4865,10 +4865,14 @@ namespace DistantWorlds {
             using (Graphics graphics = Graphics.FromImage(bitmap_225))
             {
                 Font font = font_1;
-                SizeF sizeF = graphics.MeasureString(string_30, font, UiScale.S(800), StringFormat.GenericTypographic);
+                SizeF sizeF;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF = graphics.MeasureString(string_30, font, UiScale.S(800), format);}
                 lblStoryEventTitle.Size = new Size((int)sizeF.Width + UiScale.S(5), (int)sizeF.Height + UiScale.S(10));
                 font = font_7;
-                SizeF sizeF2 = graphics.MeasureString(string_31, font, UiScale.S(800), StringFormat.GenericTypographic);
+                SizeF sizeF2;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF2 = graphics.MeasureString(string_31, font, UiScale.S(800), format);}
                 lblStoryEventText.Size = new Size((int)sizeF2.Width + UiScale.S(5), (int)sizeF2.Height + UiScale.S(10));
                 int val = (mainView.Height - ((int)sizeF.Height + UiScale.S(12) + (int)sizeF2.Height + btnStoryEventClose.Height + num)) / 2;
                 val = Math.Max(UiScale.S(5), val);
@@ -4969,10 +4973,14 @@ namespace DistantWorlds {
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
                 Font font = font_1;
-                SizeF sizeF = graphics.MeasureString(string_30, font, UiScale.S(800), StringFormat.GenericTypographic);
+                SizeF sizeF;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                sizeF = graphics.MeasureString(string_30, font, UiScale.S(800), format);
                 lblStoryEventTitle.Size = new Size((int)sizeF.Width + UiScale.S(5), (int)sizeF.Height + UiScale.S(10));
                 font = font_7;
-                SizeF sizeF2 = graphics.MeasureString(string_31, font, UiScale.S(800), StringFormat.GenericTypographic);
+                SizeF sizeF2;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                sizeF2 = graphics.MeasureString(string_31, font, UiScale.S(800), format);
                 lblStoryEventText.Size = new Size((int)sizeF2.Width + UiScale.S(5), (int)sizeF2.Height + UiScale.S(10));
                 int val = (mainView.Height - ((int)sizeF.Height + UiScale.S(12) + (int)sizeF2.Height + btnStoryEventClose.Height + num)) / 2;
                 val = Math.Max(UiScale.S(5), val);

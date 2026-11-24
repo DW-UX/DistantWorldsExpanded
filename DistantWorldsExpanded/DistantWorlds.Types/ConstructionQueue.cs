@@ -497,28 +497,25 @@ namespace DistantWorlds.Types
                             {
                                 if (_ParentBuiltObject.ParentHabitat.Characters != null)
                                 {
-                                    Character[] array = ListHelper.ToArrayThreadSafe(shipUnderConstruction2.Characters);
-                                    for (int i = 0; i < array.Length; i++)
+                                    foreach(var item in shipUnderConstruction2.Characters.CloneThreadSafe())
                                     {
-                                        array[i]?.CompleteLocationTransfer(_ParentBuiltObject.ParentHabitat, _Galaxy);
+                                        item?.CompleteLocationTransfer(_ParentBuiltObject.ParentHabitat, _Galaxy);
                                     }
                                 }
                             }
                             else if (_ParentBuiltObject.Characters != null)
                             {
-                                Character[] array2 = ListHelper.ToArrayThreadSafe(shipUnderConstruction2.Characters);
-                                for (int j = 0; j < array2.Length; j++)
+                                    foreach(var item in shipUnderConstruction2.Characters.CloneThreadSafe())
                                 {
-                                    array2[j]?.CompleteLocationTransfer(_ParentBuiltObject, _Galaxy);
+                                    item?.CompleteLocationTransfer(_ParentBuiltObject, _Galaxy);
                                 }
                             }
                         }
                         else if (_ParentHabitat != null && _ParentHabitat.Characters != null)
                         {
-                            Character[] array3 = ListHelper.ToArrayThreadSafe(shipUnderConstruction2.Characters);
-                            for (int k = 0; k < array3.Length; k++)
+                                    foreach(var item in shipUnderConstruction2.Characters.CloneThreadSafe())
                             {
-                                array3[k]?.CompleteLocationTransfer(_ParentHabitat, _Galaxy);
+                                item?.CompleteLocationTransfer(_ParentHabitat, _Galaxy);
                             }
                         }
                     }

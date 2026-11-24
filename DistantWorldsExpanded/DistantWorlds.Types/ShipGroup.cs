@@ -1316,7 +1316,7 @@ namespace DistantWorlds.Types
         {
           BuiltObject ship = this.Ships[index];
           if (ship != null && ship.Characters != null && ship.Characters.Count > 0)
-            characters.AddRange((IEnumerable<Character>) ListHelper.ToArrayThreadSafe(ship.Characters));
+            characters.AddRange(ship.Characters.CloneThreadSafe());
         }
       }
       return characters;
@@ -3061,7 +3061,7 @@ namespace DistantWorlds.Types
       get
       {
         int overallStrengthFactor = 0;
-        foreach (BuiltObject builtObject in ListHelper.ToArrayThreadSafe(this.Ships))
+        foreach (BuiltObject builtObject in this.Ships.CloneThreadSafe())
         {
           if (builtObject != null)
             overallStrengthFactor += builtObject.CalculateOverallStrengthFactor();

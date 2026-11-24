@@ -91,11 +91,11 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(40f), (float) (e.Bounds.Y + UiScale.S(1)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._Systems[e.Index].SystemStar != null)
-        e.Graphics.DrawString(this._Systems[e.Index].SystemStar.Name, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(this._Systems[e.Index].SystemStar.Name, font,  solidBrush, point);
       else
-        e.Graphics.DrawString("(" + TextResolver.GetText("Unknown") + ")", font, (Brush) solidBrush, point);
+        e.Graphics.DrawString("(" + TextResolver.GetText("Unknown") + ")", font,  solidBrush, point);
       Rectangle rect = new Rectangle();
       if (this._Systems[e.Index].DominantEmpire != null && this._Systems[e.Index].DominantEmpire.Empire != null && this._Systems[e.Index].DominantEmpire.Empire != this._Galaxy.IndependentEmpire)
       {

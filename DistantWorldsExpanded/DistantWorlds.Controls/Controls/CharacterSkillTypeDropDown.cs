@@ -97,8 +97,8 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(2f), (float) (e.Bounds.Y + UiScale.S(3)));
       Font font = this.Font;
-      SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
-      SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, 0, 128));
+      using SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush2 = new SolidBrush(Color.FromArgb(128, (int) byte.MaxValue, 0, 128));
       int num = 0;
       if (this._AllowNullValue)
         ++num;
@@ -107,7 +107,7 @@ namespace DistantWorlds.Controls
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
         string s = "(" + TextResolver.GetText("None") + ")";
-        e.Graphics.DrawString(s, font, (Brush) solidBrush1, point);
+        e.Graphics.DrawString(s, font,  solidBrush1, point);
       }
       else if (this._SkillTypes != null && this._SkillTypes.Count > 0 && e.Index >= num)
       {
@@ -117,7 +117,7 @@ namespace DistantWorlds.Controls
           e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
           e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
           string s = Galaxy.ResolveDescription(skillType);
-          e.Graphics.DrawString(s, font, (Brush) solidBrush1, point);
+          e.Graphics.DrawString(s, font,  solidBrush1, point);
         }
       }
       e.DrawFocusRectangle();

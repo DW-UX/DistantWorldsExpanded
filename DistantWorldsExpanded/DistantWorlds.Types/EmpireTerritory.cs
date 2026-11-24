@@ -616,7 +616,7 @@ namespace DistantWorlds.Types
                                 using (SolidBrush solidBrush1 = new SolidBrush(color))
                                 {
                                     graphics2.Clear(Color.Black);
-                                    graphics2.FillEllipse((Brush)solidBrush1, 0, 0, centerOffset * 2, centerOffset * 2);
+                                    graphics2.FillEllipse(solidBrush1, 0, 0, centerOffset * 2, centerOffset * 2);
                                     for (int index4 = 0; index4 < empireTerritoryColony.OverlappingColonies.Count; ++index4)
                                     {
                                         Habitat overlappingColony = empireTerritoryColony.OverlappingColonies[index4];
@@ -654,7 +654,7 @@ namespace DistantWorlds.Types
                                                         {
                                                             using (SolidBrush solidBrush2 = new SolidBrush(Color.Black))
                                                             {
-                                                                graphics2.FillPath((Brush)solidBrush2, path);
+                                                                graphics2.FillPath(solidBrush2, path);
                                                                 continue;
                                                             }
                                                         }
@@ -683,7 +683,7 @@ namespace DistantWorlds.Types
                             {
                                 int num18 = (int)((colony.Xpos - (double)galaxySection.X) / scaleFactor);
                                 int num19 = (int)((colony.Ypos - (double)galaxySection.Y) / scaleFactor);
-                                graphics1.FillEllipse((Brush)solidBrush, new Rectangle(num18 - num17, num19 - num17, num17 * 2, num17 * 2));
+                                graphics1.FillEllipse(solidBrush, new Rectangle(num18 - num17, num19 - num17, num17 * 2, num17 * 2));
                             }
                         }
                     }

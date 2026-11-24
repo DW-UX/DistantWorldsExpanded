@@ -67,11 +67,13 @@ namespace DistantWorlds.Controls
             rectangle.Height--;
             using (GraphicsPath path = smethod_3(rectangle, int_3, gradientPanel_0))
             {
-                Pen pen = new Pen(color_0);
+                Pen pen;
                 if (bool_6)
                 {
                     pen = new Pen(Color.Black);
                 }
+                else
+                { pen= new Pen(color_0);}
                 graphics_0.DrawPath(pen, path);
                 pen.Dispose();
             }
@@ -120,7 +122,7 @@ namespace DistantWorlds.Controls
             }
             using (GraphicsPath path5 = smethod_3(rectangle, int_3 - UiScale.S(1), gradientPanel_0))
             {
-                Pen pen2 = new Pen(color_4);
+                using Pen pen2 = new Pen(color_4);
                 graphics_0.DrawPath(pen2, path5);
             }
             graphics_0.SmoothingMode = smoothingMode;
@@ -141,7 +143,6 @@ namespace DistantWorlds.Controls
 
         private static GraphicsPath smethod_2(Rectangle rectangle_0, int int_3, GradientPanel gradientPanel_0)
         {
-            GraphicsPath graphicsPath = new GraphicsPath();
             _ = rectangle_0.Left;
             _ = rectangle_0.Top;
             _ = rectangle_0.Width;
@@ -158,7 +159,6 @@ namespace DistantWorlds.Controls
 
         private static GraphicsPath smethod_4(RectangleF rectangleF_0, float float_0, GradientPanel gradientPanel_0)
         {
-            GraphicsPath graphicsPath = new GraphicsPath();
             _ = rectangleF_0.Left;
             _ = rectangleF_0.Top;
             _ = rectangleF_0.Width;

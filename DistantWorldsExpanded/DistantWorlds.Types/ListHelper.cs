@@ -10,65 +10,65 @@ namespace DistantWorlds.Types
 {
     public static class ListHelper
     {
-        public static ResearchNode[] ToArrayThreadSafe(ResearchNodeList list)
-        {
-            int length = 0;
-            if (list != null)
-                length = list.Count;
-            ResearchNode[] arrayThreadSafe = new ResearchNode[length];
-            try
-            {
-                if (length > 0)
-                {
-                    for (int index = 0; index < length; ++index)
-                        arrayThreadSafe[index] = list[index];
-                }
-            }
-            catch
-            {
-            }
-            return arrayThreadSafe;
-        }
+        // public static ResearchNode[] ToArrayThreadSafe(ResearchNodeList list)
+        // {
+        //     int length = 0;
+        //     if (list != null)
+        //         length = list.Count;
+        //     ResearchNode[] arrayThreadSafe = new ResearchNode[length];
+        //     try
+        //     {
+        //         if (length > 0)
+        //         {
+        //             for (int index = 0; index < length; ++index)
+        //                 arrayThreadSafe[index] = list[index];
+        //         }
+        //     }
+        //     catch
+        //     {
+        //     }
+        //     return arrayThreadSafe;
+        // }
 
-        public static HabitatResource[] ToArrayThreadSafe(HabitatResourceList list)
-        {
-            int length = 0;
-            if (list != null)
-                length = list.Count;
-            HabitatResource[] arrayThreadSafe = new HabitatResource[length];
-            try
-            {
-                if (length > 0)
-                {
-                    for (int index = 0; index < length; ++index)
-                        arrayThreadSafe[index] = list[index];
-                }
-            }
-            catch
-            {
-            }
-            return arrayThreadSafe;
-        }
+        // public static HabitatResource[] ToArrayThreadSafe(HabitatResourceList list)
+        // {
+        //     int length = 0;
+        //     if (list != null)
+        //         length = list.Count;
+        //     HabitatResource[] arrayThreadSafe = new HabitatResource[length];
+        //     try
+        //     {
+        //         if (length > 0)
+        //         {
+        //             for (int index = 0; index < length; ++index)
+        //                 arrayThreadSafe[index] = list[index];
+        //         }
+        //     }
+        //     catch
+        //     {
+        //     }
+        //     return arrayThreadSafe;
+        // }
 
-        public static BuiltObject[] ToArrayThreadSafe(BuiltObjectList list)
-        {
-            int length = 0;
-            if (list != null)
-                length = list.Count;
-            BuiltObject[] arrayThreadSafe = new BuiltObject[length];
-            try
-            {
-                if (length > 0)
-                {
-                    for (int index = 0; index < length; ++index)
-                        arrayThreadSafe[index] = list[index];
-                }
-            }
-            catch
-            {
-            }
-            return arrayThreadSafe;
-        }
+        // public static BuiltObject[] ToArrayThreadSafe(BuiltObjectList list)
+        // {
+        //     int length = 0;
+        //     if (list != null)
+        //         length = list.Count;
+        //     BuiltObject[] arrayThreadSafe = new BuiltObject[length];
+        //     try
+        //     {
+        //         if (length > 0)
+        //         {
+        //             for (int index = 0; index < length; ++index)
+        //                 arrayThreadSafe[index] = list[index];
+        //         }
+        //     }
+        //     catch
+        //     {
+        //     }
+        //     return arrayThreadSafe;
+        // }
 
         public static EventActionExecutionPackage[] ToArrayThreadSafe(
           EventActionExecutionPackageList list)
@@ -91,25 +91,25 @@ namespace DistantWorlds.Types
             return arrayThreadSafe;
         }
 
-        public static Habitat[] ToArrayThreadSafe(HabitatList list)
-        {
-            int length = 0;
-            if (list != null)
-                length = list.Count;
-            Habitat[] arrayThreadSafe = new Habitat[length];
-            try
-            {
-                if (length > 0)
-                {
-                    for (int index = 0; index < length; ++index)
-                        arrayThreadSafe[index] = list[index];
-                }
-            }
-            catch
-            {
-            }
-            return arrayThreadSafe;
-        }
+        // public static Habitat[] ToArrayThreadSafe(HabitatList list)
+        // {
+        //     int length = 0;
+        //     if (list != null)
+        //         length = list.Count;
+        //     Habitat[] arrayThreadSafe = new Habitat[length];
+        //     try
+        //     {
+        //         if (length > 0)
+        //         {
+        //             for (int index = 0; index < length; ++index)
+        //                 arrayThreadSafe[index] = list[index];
+        //         }
+        //     }
+        //     catch
+        //     {
+        //     }
+        //     return arrayThreadSafe;
+        // }
 
         public static object[] ToArrayThreadSafe(List<object> list)
         {
@@ -151,65 +151,65 @@ namespace DistantWorlds.Types
         //    return arrayThreadSafe;
         //}
 
-        public static Creature[] ToArrayThreadSafe(CreatureList list)
-        {
-            int length = 0;
-            if (list != null)
-                length = list.Count;
-            Creature[] arrayThreadSafe = new Creature[length];
-            try
-            {
-                if (length > 0)
-                {
-                    for (int index = 0; index < length; ++index)
-                        arrayThreadSafe[index] = list[index];
-                }
-            }
-            catch
-            {
-            }
-            return arrayThreadSafe;
-        }
+        // public static Creature[] ToArrayThreadSafe(CreatureList list)
+        // {
+        //     int length = 0;
+        //     if (list != null)
+        //         length = list.Count;
+        //     Creature[] arrayThreadSafe = new Creature[length];
+        //     try
+        //     {
+        //         if (length > 0)
+        //         {
+        //             for (int index = 0; index < length; ++index)
+        //                 arrayThreadSafe[index] = list[index];
+        //         }
+        //     }
+        //     catch
+        //     {
+        //     }
+        //     return arrayThreadSafe;
+        // }
 
-        public static Character[] ToArrayThreadSafe(CharacterList list)
-        {
-            int length = 0;
-            if (list != null)
-                length = list.Count;
-            Character[] arrayThreadSafe = new Character[length];
-            try
-            {
-                if (length > 0)
-                {
-                    for (int index = 0; index < length; ++index)
-                        arrayThreadSafe[index] = list[index];
-                }
-            }
-            catch
-            {
-            }
-            return arrayThreadSafe;
-        }
+        //  public static Character[] ToArrayThreadSafe(CharacterList list)
+        //  {
+        //      int length = 0;
+        //      if (list != null)
+        //          length = list.Count;
+        //      Character[] arrayThreadSafe = new Character[length];
+        //      try
+        //      {
+        //          if (length > 0)
+        //          {
+        //              for (int index = 0; index < length; ++index)
+        //                  arrayThreadSafe[index] = list[index];
+        //          }
+        //      }
+        //      catch
+        //      {
+        //      }
+        //      return arrayThreadSafe;
+        //  }
 
-        public static Fighter[] ToArrayThreadSafe(FighterList list)
-        {
-            int length = 0;
-            if (list != null)
-                length = list.Count;
-            Fighter[] arrayThreadSafe = new Fighter[length];
-            try
-            {
-                if (length > 0)
-                {
-                    for (int index = 0; index < length; ++index)
-                        arrayThreadSafe[index] = list[index];
-                }
-            }
-            catch
-            {
-            }
-            return arrayThreadSafe;
-        }
+        // public static Fighter[] ToArrayThreadSafe(FighterList list)
+        // {
+        //     int length = 0;
+        //     if (list != null)
+        //         length = list.Count;
+        //     Fighter[] arrayThreadSafe = new Fighter[length];
+        //     try
+        //     {
+        //         if (length > 0)
+        //         {
+        //             for (int index = 0; index < length; ++index)
+        //                 arrayThreadSafe[index] = list[index];
+        //         }
+        //     }
+        //     catch
+        //     {
+        //     }
+        //     return arrayThreadSafe;
+        // }
 
         public static Troop[] ToArrayThreadSafe(TroopList list)
         {

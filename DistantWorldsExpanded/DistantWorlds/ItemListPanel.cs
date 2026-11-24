@@ -2,7 +2,7 @@
 // Type: DistantWorlds.ItemListPanel
 // Assembly: DistantWorlds, Version=1.9.5.12, Culture=neutral, PublicKeyToken=null
 // MVID: DFB67E2D-B390-4FC8-9690-CA3C0824704F
-// Assembly location: F:\SteamLibrary\steamapps\common\Distant Worlds Universe\DistantWorlds - Copy-Unpacked.exe
+// Assembly location: [REDACTED]
 
 using DistantWorlds.Types;
 using System;
@@ -579,7 +579,9 @@ namespace DistantWorlds
                 return;
             }
             string text = "(" + string.Format(TextResolver.GetText("No ITEMS"), TitleText) + ")";
-            SizeF sizeF = graphics_0.MeasureString(text, Container.LargeBoldFont, rectangle_0.Width, StringFormat.GenericTypographic);
+            SizeF sizeF;
+            using(StringFormat format = StringFormat.GenericTypographic)
+            {sizeF = graphics_0.MeasureString(text, Container.LargeBoldFont, rectangle_0.Width, format);}
             int num4 = (rectangle_0.Width - (int)sizeF.Width) / 2;
             int num5 = (rectangle_0.Height - (int)sizeF.Height) / 2;
             Point point_ = new Point(rectangle_0.X + num4, rectangle_0.Y + num5);
@@ -669,7 +671,9 @@ namespace DistantWorlds
                     graphics_0.DrawImage(bitmap, new Point(num25, int_2 + UiScale.S(5)));
                     num25 += bitmap.Width + num3;
                 }
-                SizeF sizeF = graphics_0.MeasureString(galaxyLocation.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
+                SizeF sizeF;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF = graphics_0.MeasureString(galaxyLocation.Name, Container.BoldFont, int_3, format);}
                 if (empire != null && empire.PirateEmpireBaseHabitat == null && empire != Container.Parent._Game.Galaxy.IndependentEmpire)
                 {
                     using SolidBrush brush_ = new SolidBrush(empire.MainColor);
@@ -702,7 +706,9 @@ namespace DistantWorlds
                 Rectangle rect = new Rectangle(int_1 + UiScale.S(5), int_2 + UiScale.S(5), imageSize, imageSize);
                 graphics_0.DrawImage(image, rect);
                 int num26 = int_1 + (UiScale.S(5) + num17 + num3);
-                SizeF sizeF2 = graphics_0.MeasureString(character.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
+                SizeF sizeF2;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF2 = graphics_0.MeasureString(character.Name, Container.BoldFont, int_3, format);}
                 method_12(graphics_0, character.Name, Container.BoldFont, new Point(num26, int_2 + num));
                 string string_ = "(" + Galaxy.ResolveDescription(character.Role) + ")";
                 method_12(graphics_0, string_, Container.SmallFont, new Point(num26 + (int)sizeF2.Width + num5, int_2 + num4));
@@ -719,7 +725,8 @@ namespace DistantWorlds
                         }
                     }
                 }
-                graphics_0.MeasureString(text3, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {graphics_0.MeasureString(text3, Container.SmallFont, Container.Area.Width, format);}
                 method_12(graphics_0, text3, Container.SmallFont, new Point(num26, int_2 + num15));
             }
             else if (object_1 is Habitat)
@@ -740,7 +747,9 @@ namespace DistantWorlds
                         graphics_0.DrawImage(Container.RaceImageCache.GetRaceImageSize30(habitat2.Population.DominantRace.PictureRef, useTransparent: true), new Point(int_1 + UiScale.S(5) + imageSize + num3, int_2 + num3));
                     }
                     int num27 = int_1 + (UiScale.S(5) + imageSize + num3 + imageSize + num3);
-                    SizeF sizeF3 = graphics_0.MeasureString(habitat2.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
+                    SizeF sizeF3;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF3 = graphics_0.MeasureString(habitat2.Name, Container.BoldFont, int_3, format);}
                     Color color2 = Container.WhiteBrush.Color;
                     if (habitat2.Empire != null && habitat2.Empire != galaxy_0.IndependentEmpire)
                     {
@@ -769,7 +778,9 @@ namespace DistantWorlds
                     if (habitat2.Population != null && habitat2.Population.DominantRace != null)
                     {
                         string text5 = habitat2.Population.TotalAmount.ToString("0,,M");
-                        SizeF sizeF4 = graphics_0.MeasureString(text5, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF4;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF4 = graphics_0.MeasureString(text5, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text5, Container.SmallFont, new Point(num27, int_2 + num15));
                         num27 += (int)sizeF4.Width + num6;
                     }
@@ -808,7 +819,9 @@ namespace DistantWorlds
                     else
                     {
                         string text6 = "(" + TextResolver.GetText("Unknown resources") + ")";
-                        SizeF sizeF5 = graphics_0.MeasureString(text6, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF5;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF5 = graphics_0.MeasureString(text6, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text6, Container.SmallFont, new Point(num27, int_2 + num15));
                         num27 += (int)sizeF5.Width + num6;
                     }
@@ -818,7 +831,9 @@ namespace DistantWorlds
                         return;
                     }
                     string text7 = TextResolver.GetText("Control") + ": " + byFaction.ControlLevel.ToString("0%");
-                    SizeF sizeF6 = graphics_0.MeasureString(text7, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                    SizeF sizeF6;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF6 = graphics_0.MeasureString(text7, Container.SmallFont, Container.Area.Width, format);}
                     method_12(graphics_0, text7, Container.SmallFont, new Point(num27, int_2 + num15));
                     num27 += (int)sizeF6.Width + num5;
                     if (!byFaction.HasFacilityControl || habitat2.Facilities == null)
@@ -886,7 +901,9 @@ namespace DistantWorlds
                         graphics_0.DrawImage(rect: new Rectangle(int_1 + UiScale.S(5) + imageSize + num3, int_2 + num3, imageSize, imageSize), image: Container.RaceImageCache.GetRaceImageSize30(habitat2.Population.DominantRace.PictureRef, useTransparent: true));
                     }
                     int num29 = int_1 + (UiScale.S(5) + imageSize + num3 + imageSize + num3);
-                    SizeF sizeF7 = graphics_0.MeasureString(habitat2.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
+                    SizeF sizeF7;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF7 = graphics_0.MeasureString(habitat2.Name, Container.BoldFont, int_3, format);}
                     method_12(graphics_0, habitat2.Name, Container.BoldFont, new Point(num29, int_2 + num));
                     string text8 = "(" + ((double)habitat2.Diameter / 10.0).ToString("0.0") + "K";
                     Habitat habitat4 = Galaxy.DetermineHabitatSystemStar(habitat2);
@@ -968,7 +985,9 @@ namespace DistantWorlds
                 {
                     num30 += imageSize + num3;
                 }
-                SizeF sizeF8 = graphics_0.MeasureString(habitat2.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
+                SizeF sizeF8;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF8 = graphics_0.MeasureString(habitat2.Name, Container.BoldFont, int_3, format);}
                 string string_6 = string.Empty;
                 Color color3 = method_1(habitat2, ColonizationFocus, MiningFocus, galaxy_0, out string_6);
                 using (SolidBrush brush_4 = new SolidBrush(color3))
@@ -998,7 +1017,9 @@ namespace DistantWorlds
                 if (habitat2.Population != null && habitat2.Population.DominantRace != null)
                 {
                     string text9 = habitat2.Population.TotalAmount.ToString("0,,M");
-                    SizeF sizeF9 = graphics_0.MeasureString(text9, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                    SizeF sizeF9;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF9 = graphics_0.MeasureString(text9, Container.SmallFont, Container.Area.Width, format);}
                     method_12(graphics_0, text9, Container.SmallFont, new Point(num30, int_2 + num15));
                     num30 += (int)sizeF9.Width + num10;
                 }
@@ -1037,7 +1058,9 @@ namespace DistantWorlds
                 else
                 {
                     string text10 = "(" + TextResolver.GetText("Unknown resources") + ")";
-                    SizeF sizeF10 = graphics_0.MeasureString(text10, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                    SizeF sizeF10;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF10 = graphics_0.MeasureString(text10, Container.SmallFont, Container.Area.Width, format);}
                     method_12(graphics_0, text10, Container.SmallFont, new Point(num30, int_2 + num15));
                     num30 += (int)sizeF10.Width + num6;
                 }
@@ -1061,7 +1084,9 @@ namespace DistantWorlds
                 }
                 if (!string.IsNullOrEmpty(text11))
                 {
-                    SizeF sizeF11 = graphics_0.MeasureString(text11, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                    SizeF sizeF11;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF11 = graphics_0.MeasureString(text11, Container.SmallFont, Container.Area.Width, format);}
                     method_12(graphics_0, text11, Container.SmallFont, new Point(num30, int_2 + num15));
                     num30 += (int)sizeF11.Width + num6;
                 }
@@ -1120,7 +1145,9 @@ namespace DistantWorlds
                     graphics_0.DrawImage(Container.ConstructionStalledImage, new Point(int_1 + UiScale.S(5), int_2 + num13));
                 }
                 int num33 = int_1 + (UiScale.S(5) + imageSize + num3);
-                SizeF sizeF12 = graphics_0.MeasureString(builtObject3.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
+                SizeF sizeF12;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF12 = graphics_0.MeasureString(builtObject3.Name, Container.BoldFont, int_3, format);}
                 Color color4 = Color.FromArgb(170, 170, 170);
                 if (builtObject3.DamagedComponentCount > 0)
                 {
@@ -1138,12 +1165,16 @@ namespace DistantWorlds
                 method_12(graphics_0, text12, Container.SmallFont, new Point(num33 + (int)sizeF12.Width + num5, int_2 + num4));
                 if (builtObject3.Role != BuiltObjectRole.Base && builtObject3.IsAutoControlled)
                 {
-                    SizeF sizeF13 = graphics_0.MeasureString(text12, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                    SizeF sizeF13;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF13 = graphics_0.MeasureString(text12, Container.SmallFont, Container.Area.Width, format);}
                     graphics_0.DrawImage(Container.AutomateImage, new Point(num33 + (int)sizeF12.Width + num5 + (int)sizeF13.Width + num5, int_2 + num3));
                 }
                 if (builtObject3.ShipGroup != null)
                 {
-                    SizeF sizeF14 = graphics_0.MeasureString(text12, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                    SizeF sizeF14;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF14 = graphics_0.MeasureString(text12, Container.SmallFont, Container.Area.Width, format);}
                     int num34 = num33 + (int)sizeF12.Width + num5 + (int)sizeF14.Width + num5;
                     if (builtObject3.IsAutoControlled)
                     {
@@ -1156,30 +1187,39 @@ namespace DistantWorlds
                     if (builtObject3.SubRole == BuiltObjectSubRole.ExplorationShip)
                     {
                         string text13 = Galaxy.ResolveDescription(builtObject3.Empire, builtObject3.Mission);
-                        SizeF sizeF15 = graphics_0.MeasureString(text13, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF15;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF15 = graphics_0.MeasureString(text13, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text13, Container.SmallFont, new Point(num33, int_2 + num15));
                         num33 += (int)sizeF15.Width + num10;
                         graphics_0.DrawImage(Container.RefuelImage, new Point(num33, int_2 + num14));
                         string text14 = (builtObject3.CurrentFuel / Math.Max(1.0, builtObject3.FuelCapacity)).ToString("0%");
-                        graphics_0.MeasureString(text14, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {graphics_0.MeasureString(text14, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text14, Container.SmallFont, new Point(num33 + Container.RefuelImage.Width + UiScale.S(2), int_2 + num15));
                     }
                     else if (builtObject3.Role == BuiltObjectRole.Military)
                     {
                         string text15 = Galaxy.ResolveDescription(builtObject3.Empire, builtObject3.Mission);
-                        SizeF sizeF16 = graphics_0.MeasureString(text15, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF16;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF16 = graphics_0.MeasureString(text15, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text15, Container.SmallFont, new Point(num33, int_2 + num15));
                         num33 += (int)sizeF16.Width + num6;
                         graphics_0.DrawImage(Container.FirepowerImage, new Point(num33, int_2 + num14));
                         num33 += Container.FirepowerImage.Width;
                         string text16 = builtObject3.FirepowerRaw.ToString();
-                        SizeF sizeF17 = graphics_0.MeasureString(text16, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF17;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF17 = graphics_0.MeasureString(text16, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text16, Container.SmallFont, new Point(num33, int_2 + num15));
                         num33 += (int)sizeF17.Width + num6;
                         graphics_0.DrawImage(Container.RefuelImage, new Point(num33, int_2 + num14));
                         num33 += Container.RefuelImage.Width + UiScale.S(2);
                         string text17 = (builtObject3.CurrentFuel / Math.Max(1.0, builtObject3.FuelCapacity)).ToString("0%");
-                        SizeF sizeF18 = graphics_0.MeasureString(text17, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF18;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF18 = graphics_0.MeasureString(text17, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text17, Container.SmallFont, new Point(num33, int_2 + num15));
                         num33 += (int)sizeF18.Width + num6;
                         if (builtObject3.Troops != null && builtObject3.Troops.Count > 0)
@@ -1194,7 +1234,9 @@ namespace DistantWorlds
                                 num33 += Container.TroopImage.Width + UiScale.S(2);
                             }
                             string text18 = builtObject3.Troops.Count.ToString();
-                            SizeF sizeF19 = graphics_0.MeasureString(text18, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                            SizeF sizeF19;
+                            using(StringFormat format = StringFormat.GenericTypographic)
+                            {sizeF19 = graphics_0.MeasureString(text18, Container.SmallFont, Container.Area.Width, format);}
                             method_12(graphics_0, text18, Container.SmallFont, new Point(num33, int_2 + num15));
                             num33 += (int)sizeF19.Width + num6;
                         }
@@ -1217,20 +1259,26 @@ namespace DistantWorlds
                             num33 += Container.FighterImage.Width + UiScale.S(2);
                         }
                         string text19 = builtObject3.Fighters.Count.ToString();
-                        SizeF sizeF20 = graphics_0.MeasureString(text19, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF20;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF20 = graphics_0.MeasureString(text19, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text19, Container.SmallFont, new Point(num33, int_2 + num15));
                         num33 += (int)sizeF20.Width + num6;
                     }
                     else if (builtObject3.SubRole == BuiltObjectSubRole.ConstructionShip)
                     {
                         string text20 = Galaxy.ResolveDescription(builtObject3.Empire, builtObject3.Mission);
-                        SizeF sizeF_ = graphics_0.MeasureString(text20, Container.SmallFont, width, StringFormat.GenericTypographic);
+                        SizeF sizeF_;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF_ = graphics_0.MeasureString(text20, Container.SmallFont, width, format);}
                         method_15(graphics_0, text20, Container.SmallFont, new Point(num33, int_2 + num15), Container.WhiteBrush, sizeF_);
                         num33 += (int)sizeF_.Width + num6;
                         graphics_0.DrawImage(Container.RefuelImage, new Point(num33, int_2 + num14));
                         num33 += Container.RefuelImage.Width + UiScale.S(2);
                         string text21 = (builtObject3.CurrentFuel / Math.Max(1.0, builtObject3.FuelCapacity)).ToString("0%");
-                        SizeF sizeF21 = graphics_0.MeasureString(text21, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF21;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF21 = graphics_0.MeasureString(text21, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text21, Container.SmallFont, new Point(num33, int_2 + num15));
                         num33 += (int)sizeF21.Width + num10;
                         if (builtObject3.ConstructionQueue == null || builtObject3.ConstructionQueue.ConstructionYards == null || builtObject3.ConstructionQueue.ConstructionYards.Count <= 0)
@@ -1277,32 +1325,39 @@ namespace DistantWorlds
                             graphics_0.DrawImage(Container.FirepowerImage, new Point(num33, int_2 + num14));
                             num33 += Container.FirepowerImage.Width;
                             string text22 = builtObject3.FirepowerRaw.ToString();
-                            SizeF sizeF22 = graphics_0.MeasureString(text22, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                            SizeF sizeF22;
+                            using(StringFormat format = StringFormat.GenericTypographic)
+                            {sizeF22 = graphics_0.MeasureString(text22, Container.SmallFont, Container.Area.Width, format);}
                             method_12(graphics_0, text22, Container.SmallFont, new Point(num33, int_2 + num15));
                             num33 += (int)sizeF22.Width + num10;
                         }
                         else
                         {
                             string text23 = Galaxy.ResolveDescription(builtObject3.Empire, builtObject3.Mission);
-                            SizeF sizeF23 = graphics_0.MeasureString(text23, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                            SizeF sizeF23;
+                            using(StringFormat format = StringFormat.GenericTypographic)
+                            {sizeF23 = graphics_0.MeasureString(text23, Container.SmallFont, Container.Area.Width, format);}
                             method_12(graphics_0, text23, Container.SmallFont, new Point(num33, int_2 + num15));
                             num33 += (int)sizeF23.Width + num10;
                             graphics_0.DrawImage(Container.RefuelImage, new Point(num33, int_2 + num14));
                             num33 += Container.RefuelImage.Width + UiScale.S(2);
                             string text24 = (builtObject3.CurrentFuel / Math.Max(1.0, builtObject3.FuelCapacity)).ToString("0%");
-                            SizeF sizeF24 = graphics_0.MeasureString(text24, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                            SizeF sizeF24;
+                            using(StringFormat format = StringFormat.GenericTypographic)
+                            {sizeF24 = graphics_0.MeasureString(text24, Container.SmallFont, Container.Area.Width, format);}
                             method_12(graphics_0, text24, Container.SmallFont, new Point(num33, int_2 + num15));
                             num33 += (int)sizeF24.Width + num10;
                         }
                     }
                     else if (builtObject3.ParentHabitat != null && builtObject3.ParentHabitat.Resources != null && builtObject3.ParentHabitat.Resources.Count > 0)
                     {
-                        HabitatResource[] array = ListHelper.ToArrayThreadSafe(builtObject3.ParentHabitat.Resources);
                         string text25 = TextResolver.GetText("Mining") + ":";
-                        SizeF sizeF25 = graphics_0.MeasureString(text25, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF25;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF25 = graphics_0.MeasureString(text25, Container.SmallFont, Container.Area.Width, format);}
                         method_12(graphics_0, text25, Container.SmallFont, new Point(num33, int_2 + num15));
                         num33 += (int)sizeF25.Width + num3;
-                        foreach (HabitatResource habitatResource3 in array)
+                        foreach (HabitatResource habitatResource3 in builtObject3.ParentHabitat.Resources.CloneThreadSafe())
                         {
                             if (habitatResource3 != null)
                             {
@@ -1321,7 +1376,9 @@ namespace DistantWorlds
                 graphics_0.DrawImage(Container.FirepowerImage, new Point(num33, int_2 + num14));
                 num33 += Container.FirepowerImage.Width;
                 string text26 = builtObject3.FirepowerRaw.ToString();
-                SizeF sizeF26 = graphics_0.MeasureString(text26, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                SizeF sizeF26;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF26 = graphics_0.MeasureString(text26, Container.SmallFont, Container.Area.Width, format);}
                 method_12(graphics_0, text26, Container.SmallFont, new Point(num33, int_2 + num15));
                 num33 += (int)sizeF26.Width + num10;
                 if (builtObject3.ConstructionQueue == null || builtObject3.ConstructionQueue.ConstructionYards == null || builtObject3.ConstructionQueue.ConstructionYards.Count <= 0)
@@ -1392,7 +1449,9 @@ namespace DistantWorlds
                     }
                 }
                 int num38 = int_1 + (UiScale.S(5) + imageSize + num3);
-                SizeF sizeF27 = graphics_0.MeasureString(shipGroup.Name, Container.BoldFont, int_3, StringFormat.GenericTypographic);
+                SizeF sizeF27;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF27 = graphics_0.MeasureString(shipGroup.Name, Container.BoldFont, int_3, format);}
                 method_12(graphics_0, shipGroup.Name, Container.BoldFont, new Point(num38, int_2 + num));
                 string text27 = "(" + shipGroup.Ships.Count + " " + TextResolver.GetText("Ships").ToLower(CultureInfo.InvariantCulture) + ")";
                 method_12(graphics_0, text27, Container.SmallFont, new Point(num38 + (int)sizeF27.Width + num8, int_2 + num4));
@@ -1417,17 +1476,23 @@ namespace DistantWorlds
                 }
                 if (shipGroup.LeadShip != null && shipGroup.LeadShip.IsAutoControlled)
                 {
-                    SizeF sizeF28 = graphics_0.MeasureString(text27, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                    SizeF sizeF28;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF28 = graphics_0.MeasureString(text27, Container.SmallFont, Container.Area.Width, format);}
                     graphics_0.DrawImage(Container.AutomateImage, new Point(num38 + (int)sizeF27.Width + num8 + (int)sizeF28.Width + num6, int_2 + num3));
                 }
                 string text28 = Galaxy.ResolveDescription(shipGroup.Empire, shipGroup.Mission);
-                SizeF sizeF29 = graphics_0.MeasureString(text28, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                SizeF sizeF29;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF29 = graphics_0.MeasureString(text28, Container.SmallFont, Container.Area.Width, format);}
                 method_12(graphics_0, text28, Container.SmallFont, new Point(num38, int_2 + num15));
                 num38 += (int)sizeF29.Width + num10;
                 graphics_0.DrawImage(Container.FirepowerImage, new Point(num38, int_2 + num14));
                 num38 += Container.FirepowerImage.Width;
                 string text29 = shipGroup.TotalFirepower.ToString();
-                SizeF sizeF30 = graphics_0.MeasureString(text29, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                SizeF sizeF30;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF30 = graphics_0.MeasureString(text29, Container.SmallFont, Container.Area.Width, format);}
                 method_12(graphics_0, text29, Container.SmallFont, new Point(num38, int_2 + num15));
                 num38 += (int)sizeF30.Width + num6;
                 int totalTroopCount = shipGroup.TotalTroopCount;
@@ -1443,7 +1508,9 @@ namespace DistantWorlds
                         num38 += Container.TroopImage.Width + UiScale.S(2);
                     }
                     string text30 = totalTroopCount.ToString();
-                    SizeF sizeF31 = graphics_0.MeasureString(text30, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                    SizeF sizeF31;
+                    using(StringFormat format = StringFormat.GenericTypographic)
+                    {sizeF31 = graphics_0.MeasureString(text30, Container.SmallFont, Container.Area.Width, format);}
                     method_12(graphics_0, text30, Container.SmallFont, new Point(num38, int_2 + num15));
                     num38 += (int)sizeF31.Width + num6;
                 }
@@ -1467,7 +1534,9 @@ namespace DistantWorlds
                     num38 += Container.FighterImage.Width + UiScale.S(2);
                 }
                 string text31 = totalFighterCount.ToString();
-                SizeF sizeF32 = graphics_0.MeasureString(text31, Container.SmallFont, Container.Area.Width, StringFormat.GenericTypographic);
+                SizeF sizeF32;
+                using(StringFormat format = StringFormat.GenericTypographic)
+                {sizeF32 = graphics_0.MeasureString(text31, Container.SmallFont, Container.Area.Width, format);}
                 method_12(graphics_0, text31, Container.SmallFont, new Point(num38, int_2 + num15));
                 num38 += (int)sizeF32.Width + num6;
             }
@@ -1533,7 +1602,9 @@ namespace DistantWorlds
                         int num40 = (int)((float)Container.Area.Width * 0.67f);
                         SizeF sizeF_2 = new SizeF(num40, num13);
                         string name = prioritizedTarget.Name;
-                        SizeF sizeF33 = graphics_0.MeasureString(name, Container.BoldFont, num40, StringFormat.GenericTypographic);
+                        SizeF sizeF33;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF33 = graphics_0.MeasureString(name, Container.BoldFont, num40, format);}
                         method_14(graphics_0, name, Container.BoldFont, point_, brush_7, sizeF_2, bool_9: false);
                         if (prioritizedTarget.Empire != null)
                         {
@@ -1551,9 +1622,13 @@ namespace DistantWorlds
                     if (shipGroup2 != null)
                     {
                         string text32 = string.Format(TextResolver.GetText("FLEET attacking"), shipGroup2.Name);
-                        SizeF sizeF34 = graphics_0.MeasureString(text32, Container.LargeBoldFont, int_3, StringFormat.GenericTypographic);
+                        SizeF sizeF34;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF34 = graphics_0.MeasureString(text32, Container.LargeBoldFont, int_3, format);}
                         string text33 = "(" + TextResolver.GetText("Right-click to cancel").ToLower(CultureInfo.InvariantCulture) + ")";
-                        SizeF sizeF35 = graphics_0.MeasureString(text33, Container.SmallFont, int_3, StringFormat.GenericTypographic);
+                        SizeF sizeF35;
+                        using(StringFormat format = StringFormat.GenericTypographic)
+                        {sizeF35 = graphics_0.MeasureString(text33, Container.SmallFont, int_3, format);}
                         sizeF35 = new SizeF(sizeF35.Width, sizeF35.Height - (float)num2);
                         int num41 = (int_3 - (int)sizeF34.Width) / 2;
                         int num42 = (int_4 - (int)(sizeF34.Height + sizeF35.Height)) / 2;
@@ -2459,6 +2534,7 @@ namespace DistantWorlds
                 StringFormat stringFormat = StringFormat.GenericTypographic;
                 if (bool_9)
                 {
+                    stringFormat.Dispose();
                     stringFormat = new StringFormat();
                     stringFormat.Alignment = StringAlignment.Center;
                 }
@@ -2466,6 +2542,7 @@ namespace DistantWorlds
                 point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
                 graphics_0.DrawString(string_0, font_0, brush_0, layoutRectangle, stringFormat);
+                stringFormat.Dispose();
             }
             else
             {
@@ -2482,12 +2559,12 @@ namespace DistantWorlds
             {
                 point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
                 RectangleF layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                StringFormat stringFormat = new StringFormat(StringFormat.GenericTypographic);
-                stringFormat.Trimming = StringTrimming.EllipsisCharacter;
+                using(StringFormat stringFormat = new StringFormat(StringFormat.GenericTypographic))
+                {stringFormat.Trimming = StringTrimming.EllipsisCharacter;
                 graphics_0.DrawString(string_0, font_0, Container.BlackBrush, layoutRectangle, stringFormat);
                 point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 layoutRectangle = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                graphics_0.DrawString(string_0, font_0, brush_0, layoutRectangle, stringFormat);
+                graphics_0.DrawString(string_0, font_0, brush_0, layoutRectangle, stringFormat);}
             }
             else
             {
@@ -2499,3 +2576,4 @@ namespace DistantWorlds
         }
     }
 }
+ 

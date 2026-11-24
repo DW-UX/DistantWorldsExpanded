@@ -137,7 +137,7 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(30f), (float) (e.Bounds.Y + UiScale.S(2)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._Troops != null && this._Troops.Count > 0 && e.Index >= 0)
       {
         int index = e.Index;
@@ -149,7 +149,7 @@ namespace DistantWorlds.Controls
           s = this._Troops[index].Name + "  (" + this._Troops[index].Race.Name + " " + Galaxy.ResolveDescription(this._Troops[index].Type) + ")";
         else
           s = this._Troops[index].Name + "  (" + Galaxy.ResolveDescription(this._Troops[index].Type) + ")";
-        e.Graphics.DrawString(s, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(s, font,  solidBrush, point);
         Rectangle rect = new Rectangle();
         Bitmap bitmap = (Bitmap) null;
         switch (this._Troops[index].Type)

@@ -3527,21 +3527,20 @@ namespace DistantWorlds.Types
                 galaxy.InvasionFailures++;
                 if (InvadingCharacters != null && InvadingCharacters.Count > 0)
                 {
-                    Character[] array = ListHelper.ToArrayThreadSafe(InvadingCharacters);
-                    for (int l = 0; l < array.Length; l++)
+                    foreach(var item in InvadingCharacters.CloneThreadSafe())
                     {
-                        if (array[l] != null)
+                        if (item != null)
                         {
                             if (Empire != null && Empire.Counters != null)
                             {
-                                Empire.Counters.ProcessCharacterDeath(array[l]);
+                                Empire.Counters.ProcessCharacterDeath(item);
                             }
                             if (ColonyInvasion != null)
                             {
-                                ColonyInvasion.AddExplosion(array[l], isLarge: true, null);
+                                ColonyInvasion.AddExplosion(item, isLarge: true, null);
                             }
-                            array[l].SendDeathMessage(CharacterDeathType.ColonyInvasion, _Galaxy);
-                            array[l].Kill(_Galaxy);
+                            item.SendDeathMessage(CharacterDeathType.ColonyInvasion, _Galaxy);
+                            item.Kill(_Galaxy);
                         }
                     }
                 }
@@ -3876,8 +3875,7 @@ namespace DistantWorlds.Types
                 }
                 if (Characters != null && Characters.Count > 0)
                 {
-                    Character[] array3 = ListHelper.ToArrayThreadSafe(Characters);
-                    foreach (Character character3 in array3)
+                    foreach (Character character3 in Characters.CloneThreadSafe())
                     {
                         if (character3 == null)
                         {
@@ -5533,14 +5531,13 @@ namespace DistantWorlds.Types
         {
             double num = 0.0;
             int num2 = 0;
-            HabitatResource[] array = ListHelper.ToArrayThreadSafe(Resources);
-            for (int i = 0; i < array.Length; i++)
+            foreach(var item in Resources.CloneThreadSafe())
             {
                 num2++;
-                double val = galaxy.ResourceCurrentPrices[array[i].ResourceID];
+                double val = galaxy.ResourceCurrentPrices[item.ResourceID];
                 val = Math.Max(1.0, val);
                 double num3 = val * val;
-                double d = array[i].Abundance;
+                double d = item.Abundance;
                 d = Math.Sqrt(d) * 100.0;
                 num += num3 / 100.0 * d;
             }
@@ -7515,18 +7512,16 @@ namespace DistantWorlds.Types
             }
             if (Characters != null && Characters.Count > 0)
             {
-                Character[] array = ListHelper.ToArrayThreadSafe(Characters);
-                for (int l = 0; l < array.Length; l++)
+                foreach(var item in Characters.CloneThreadSafe())
                 {
-                    array[l].Kill(_Galaxy);
+                    item.Kill(_Galaxy);
                 }
             }
             if (InvadingCharacters != null && InvadingCharacters.Count > 0)
             {
-                Character[] array2 = ListHelper.ToArrayThreadSafe(InvadingCharacters);
-                for (int m = 0; m < array2.Length; m++)
+                foreach(var item in InvadingCharacters.CloneThreadSafe())
                 {
-                    array2[m].Kill(_Galaxy);
+                    item.Kill(_Galaxy);
                 }
             }
             if (ConstructionQueue != null)

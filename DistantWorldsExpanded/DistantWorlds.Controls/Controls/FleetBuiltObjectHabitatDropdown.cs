@@ -215,7 +215,7 @@ namespace DistantWorlds.Controls
         e.DrawBackground();
         PointF point = new PointF(UiScale.S(60f), (float) (e.Bounds.Y + UiScale.S(1)));
         Font font = this.Font;
-        SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
+        using SolidBrush solidBrush1 = new SolidBrush(this.ForeColor);
         if (e.Index >= 0 && (this._Fleets != null || this._BuiltObjects != null || this._Habitats != null))
         {
           int num1 = 0;
@@ -243,7 +243,7 @@ namespace DistantWorlds.Controls
           }
           if (this._NullFleetSelection && e.Index == 0)
           {
-            e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font, (Brush) solidBrush1, point);
+            e.Graphics.DrawString("(" + TextResolver.GetText("None") + ")", font,  solidBrush1, point);
           }
           else
           {
@@ -255,7 +255,7 @@ namespace DistantWorlds.Controls
                 ShipGroup fleet = this._Fleets[index];
                 if (fleet != null)
                 {
-                  e.Graphics.DrawString(fleet.Name, font, (Brush) solidBrush1, point);
+                  e.Graphics.DrawString(fleet.Name, font,  solidBrush1, point);
                   Rectangle rect = new Rectangle();
                   if (fleet.Empire != null && fleet.Empire != this._Galaxy.IndependentEmpire)
                   {
@@ -288,11 +288,11 @@ namespace DistantWorlds.Controls
                 if (!this.HighlightFleetLeadShipsColor.IsEmpty && builtObject.ShipGroup != null && builtObject.ShipGroup.LeadShip == builtObject)
                 {
                   using (SolidBrush solidBrush2 = new SolidBrush(this.HighlightFleetLeadShipsColor))
-                    e.Graphics.FillRectangle((Brush) solidBrush2, e.Bounds);
+                    e.Graphics.FillRectangle( solidBrush2, e.Bounds);
                 }
                 if (builtObject != null)
                 {
-                  e.Graphics.DrawString(builtObject.Name, font, (Brush) solidBrush1, point);
+                  e.Graphics.DrawString(builtObject.Name, font,  solidBrush1, point);
                   Rectangle rect = new Rectangle();
                   if (builtObject.Empire != null && builtObject.Empire != this._Galaxy.IndependentEmpire)
                   {
@@ -327,7 +327,7 @@ namespace DistantWorlds.Controls
                 Habitat habitat = this._Habitats[index];
                 if (habitat != null)
                 {
-                  e.Graphics.DrawString(habitat.Name, font, (Brush) solidBrush1, point);
+                  e.Graphics.DrawString(habitat.Name, font,  solidBrush1, point);
                   Rectangle rect = new Rectangle();
                   if (habitat.Empire != null && habitat.Empire != this._Galaxy.IndependentEmpire)
                   {

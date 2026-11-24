@@ -32,7 +32,7 @@ namespace DistantWorlds.Controls
       this.imageHeight = bm.Height;
     }
 
-    public void SetRegion(GraphicsPath gp) => this.Region = new Region(gp);
+    // public void SetRegion(GraphicsPath gp) => this.Region = new Region(gp);
 
     public TransparentButton() => this.InitializeComponent();
 

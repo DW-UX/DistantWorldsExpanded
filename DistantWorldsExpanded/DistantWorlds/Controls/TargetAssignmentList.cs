@@ -781,7 +781,8 @@ namespace DistantWorlds.Controls
                     {
                         SizeF sizeF_ = new SizeF(UiScale.S(200f), UiScale.S(20f));
                         string name = prioritizedTargetList_0[i].Name;
-                        SizeF sizeF = graphics.MeasureString(name, font_1, UiScale.S(200), StringFormat.GenericTypographic);
+                        using StringFormat format = StringFormat.GenericTypographic;
+                        SizeF sizeF = graphics.MeasureString(name, font_1, UiScale.S(200), format);
                         method_13(graphics, name, font_1, point_, brush_, sizeF_);
                         method_13(point_0: new Point(point_.X + (int)(sizeF.Width + UiScale.S(6f)), point_.Y + UiScale.S(1)), graphics_0: graphics, string_0: "(" + prioritizedTargetList_0[i].Empire.Name + ")", font_3: font_0, brush_0: brush_, sizeF_0: sizeF_);
                     }
@@ -799,10 +800,11 @@ namespace DistantWorlds.Controls
                     graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     if (shipGroup != null)
                     {
+                        using StringFormat format = StringFormat.GenericTypographic;
                         string text = string.Format(TextResolver.GetText("FLEET attacking"), shipGroup.Name);
-                        SizeF sizeF2 = graphics.MeasureString(text, font_2, rectangle_0.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF2 = graphics.MeasureString(text, font_2, rectangle_0.Width, format);
                         string text2 = "(" + TextResolver.GetText("right-click to cancel").ToLower(CultureInfo.InvariantCulture) + ")";
-                        SizeF sizeF3 = graphics.MeasureString(text2, font_0, rectangle_0.Width, StringFormat.GenericTypographic);
+                        SizeF sizeF3 = graphics.MeasureString(text2, font_0, rectangle_0.Width, format);
                         sizeF3 = new SizeF(sizeF3.Width, sizeF3.Height - UiScale.S(4f));
                         int num6 = (rect2.Width - (int)sizeF2.Width) / 2;
                         int num7 = (rect2.Height - (int)(sizeF2.Height + sizeF3.Height)) / 2;
@@ -884,11 +886,12 @@ namespace DistantWorlds.Controls
         {
             if (sizeF_0 != SizeF.Empty)
             {
+                using StringFormat format = StringFormat.GenericTypographic;
                 point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
-                graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_3, brush: solidBrush_1, format: StringFormat.GenericTypographic);
+                graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_3, brush: solidBrush_1, format: format);
                 point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 RectangleF layoutRectangle2 = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                graphics_0.DrawString(string_0, font_3, brush_0, layoutRectangle2, StringFormat.GenericTypographic);
+                graphics_0.DrawString(string_0, font_3, brush_0, layoutRectangle2, format);
             }
             else
             {

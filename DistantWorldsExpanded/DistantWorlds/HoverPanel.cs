@@ -406,7 +406,9 @@ namespace DistantWorlds
             graphics_0.DrawImageUnscaled(point: new Point(x, y), image: bitmap_2[fighter_1.PictureRef]);
             x += bitmap_2[fighter_1.PictureRef].Width;
             x += int_1;
-            SizeF sizeF = graphics_0.MeasureString(fighter_1.Name, font_2, rectangle_0.Width - x, StringFormat.GenericTypographic);
+            SizeF sizeF;
+            using(StringFormat format = StringFormat.GenericTypographic)
+             {sizeF = graphics_0.MeasureString(fighter_1.Name, font_2, rectangle_0.Width - x, format);}
             sizeF = new SizeF(sizeF.Width, sizeF.Height + UiScale.S(2f));
             method_11(point_0: new Point(x, y + (int_0 * 2 - (int)sizeF.Height) / 2), graphics_0: graphics_0, string_0: fighter_1.Name, font_3: font_2, brush_0: solidBrush_1, sizeF_0: sizeF);
             y += int_0 * 2;
@@ -469,7 +471,9 @@ namespace DistantWorlds
                 x += bitmap.Width;
                 x += int_1;
             }
-            SizeF sizeF = graphics_0.MeasureString(builtObject_1.Name, font_2, rectangle_0.Width - x, StringFormat.GenericTypographic);
+            SizeF sizeF;     
+             using(StringFormat format = StringFormat.GenericTypographic)
+             {sizeF = graphics_0.MeasureString(builtObject_1.Name, font_2, rectangle_0.Width - x, format);}
             sizeF = new SizeF(sizeF.Width, sizeF.Height + UiScale.S(2f));
             method_11(point_0: new Point(x, y + (int_0 * 2 - (int)sizeF.Height) / 2), graphics_0: graphics_0, string_0: builtObject_1.Name, font_3: font_2, brush_0: solidBrush_1, sizeF_0: sizeF);
             y += int_0 * 2;
@@ -542,7 +546,9 @@ namespace DistantWorlds
             }
             string text = Galaxy.ResolveMissionDescription(fighter_1);
             Rectangle rectangle_ = main_0.rectangle_0;
-            SizeF sizeF = graphics_0.MeasureString(text, font_0, rectangle_.Width - point_0.X, StringFormat.GenericTypographic);
+            SizeF sizeF;      
+            using(StringFormat format = StringFormat.GenericTypographic)
+           { sizeF = graphics_0.MeasureString(text, font_0, rectangle_.Width - point_0.X, format);}
             method_11(sizeF_0: new SizeF(sizeF.Width, sizeF.Height + UiScale.S(2f)), graphics_0: graphics_0, string_0: text, font_3: font_0, point_0: point_0, brush_0: solidBrush_1);
         }
 
@@ -589,7 +595,9 @@ namespace DistantWorlds
             }
             string text = Galaxy.ResolveDescription(empire, builtObject_1.Mission);
             Rectangle rectangle_ = main_0.rectangle_0;
-            SizeF sizeF = graphics_0.MeasureString(text, font_0, rectangle_.Width - point_0.X, StringFormat.GenericTypographic);
+            SizeF sizeF;     
+             using(StringFormat format = StringFormat.GenericTypographic)
+            {sizeF = graphics_0.MeasureString(text, font_0, rectangle_.Width - point_0.X, format);}
             sizeF = new SizeF(sizeF.Width, sizeF.Height + UiScale.S(2f));
             if (builtObject_1.Mission != null && builtObject_1.Mission.Type != 0)
             {
@@ -634,11 +642,12 @@ namespace DistantWorlds
         {
             if (sizeF_0 != SizeF.Empty)
             {
-                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));
-                graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_3, brush: solidBrush_2, format: StringFormat.GenericTypographic);
+                point_0 = new Point(point_0.X + UiScale.S(1), point_0.Y + UiScale.S(1));     
+                 using(StringFormat format = StringFormat.GenericTypographic)
+                {graphics_0.DrawString(layoutRectangle: new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height), s: string_0, font: font_3, brush: solidBrush_2, format: format);
                 point_0 = new Point(point_0.X - UiScale.S(1), point_0.Y - UiScale.S(1));
                 RectangleF layoutRectangle2 = new RectangleF(point_0.X, point_0.Y, sizeF_0.Width, sizeF_0.Height);
-                graphics_0.DrawString(string_0, font_3, brush_0, layoutRectangle2, StringFormat.GenericTypographic);
+                graphics_0.DrawString(string_0, font_3, brush_0, layoutRectangle2, format);}
             }
             else
             {

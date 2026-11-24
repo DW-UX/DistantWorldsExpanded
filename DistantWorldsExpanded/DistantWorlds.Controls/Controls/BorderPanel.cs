@@ -159,10 +159,10 @@ namespace DistantWorlds.Controls
       int num2 = this.ClientRectangle.Width - UiScale.S(1);
       int num3 = 0;
       int num4 = this.ClientRectangle.Height - UiScale.S(1);
-      Pen pen1 = new Pen(this._BorderColor1, 1f);
-      Pen pen2 = new Pen(this._BorderColor2, 1f);
-      Pen pen3 = new Pen(this._BorderColor3, 1f);
-      Pen pen4 = new Pen(this._BorderColor4, 1f);
+      using Pen pen1 = new Pen(this._BorderColor1, 1f);
+      using Pen pen2 = new Pen(this._BorderColor2, 1f);
+      using Pen pen3 = new Pen(this._BorderColor3, 1f);
+      using Pen pen4 = new Pen(this._BorderColor4, 1f);
       for (int index = 0; index < this._BorderSize; ++index)
       {
         e.Graphics.DrawLine(pen1, num1 + index, num3 + index, num2 - index, num3 + index);

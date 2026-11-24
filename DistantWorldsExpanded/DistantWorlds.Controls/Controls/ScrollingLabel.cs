@@ -203,7 +203,8 @@ namespace DistantWorlds.Controls
         {
           using (Graphics graphics = this.CreateGraphics())
           {
-            SizeF sizeF = graphics.MeasureString(control.Text, control.Font, this.Width, StringFormat.GenericDefault);
+            using StringFormat format = StringFormat.GenericDefault;
+            SizeF sizeF = graphics.MeasureString(control.Text, control.Font, this.Width, format);
             Size size = new Size((int) sizeF.Width + UiScale.S(1), (int) sizeF.Height + UiScale.S(1));
             control.MinimumSize = size;
             control.Size = size;

@@ -185,11 +185,11 @@ namespace DistantWorlds.Controls
       e.DrawBackground();
       PointF point = new PointF(UiScale.S(30f), (float) (e.Bounds.Y + UiScale.S(2)));
       Font font = this.Font;
-      SolidBrush solidBrush = new SolidBrush(this.ForeColor);
+      using SolidBrush solidBrush = new SolidBrush(this.ForeColor);
       if (this._AllowNullResource && e.Index == 0)
-        e.Graphics.DrawString(this._AllowNullResourceText, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(this._AllowNullResourceText, font,  solidBrush, point);
       else if (this._AllowCriticalResources && !this._AllowNullResource && e.Index == 0 || this._AllowCriticalResources && this._AllowNullResource && e.Index == 1)
-        e.Graphics.DrawString(TextResolver.GetText("Critical Empire Resources"), font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(TextResolver.GetText("Critical Empire Resources"), font,  solidBrush, point);
       else if (this._Resources != null && this._Resources.Count > 0 && e.Index >= 0)
       {
         int index = e.Index;
@@ -199,7 +199,7 @@ namespace DistantWorlds.Controls
           --index;
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        e.Graphics.DrawString(this._Resources[index].Name, font, (Brush) solidBrush, point);
+        e.Graphics.DrawString(this._Resources[index].Name, font,  solidBrush, point);
         Rectangle rect = new Rectangle();
         Bitmap resourceImage = this._ResourceImages[this._Resources[index].PictureRef];
         int height = e.Bounds.Height - UiScale.S(2);

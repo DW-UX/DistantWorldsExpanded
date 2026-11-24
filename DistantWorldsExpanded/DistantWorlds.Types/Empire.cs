@@ -5412,8 +5412,7 @@ namespace DistantWorlds.Types
             }
             if (Characters != null)
             {
-                Character[] array = ListHelper.ToArrayThreadSafe(Characters);
-                foreach (Character character in array)
+                foreach (Character character in Characters.CloneThreadSafe())
                 {
                     if (character != null)
                     {

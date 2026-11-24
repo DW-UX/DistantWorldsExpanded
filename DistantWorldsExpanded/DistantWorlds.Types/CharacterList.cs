@@ -20,27 +20,25 @@ namespace DistantWorlds.Types
       Empire empire,
       StellarObject location)
     {
-      lock (this._LockObject)
-      {
-        if (this.Contains(character))
+      var cloned = this.CloneThreadSafe();
+        if (cloned.Contains(character))
         {
           character.Activate(galaxy, empire, location);
           this.Remove(character);
           return true;
         }
-      }
+      
       return false;
     }
 
     public Character ObtainNextCharacter(CharacterRole role)
     {
-      lock (this._LockObject)
-      {
+      var cloned = this.CloneThreadSafe();
         Character nextCharacter = (Character) null;
         this.Sort();
-        for (int index = 0; index < this.Count; ++index)
+        for (int index = 0; index < cloned.Count; ++index)
         {
-          Character character = this[index];
+          Character character = cloned[index];
           if (character != null && character.AppearanceOrder >= 0 && (role == CharacterRole.Undefined || character.Role == role))
           {
             nextCharacter = character;
@@ -50,48 +48,51 @@ namespace DistantWorlds.Types
         if (nextCharacter != null)
           this.Remove(nextCharacter);
         return nextCharacter;
-      }
+      
     }
 
     public CharacterList ObtainStartingCharactersExcludingRoles(List<CharacterRole> rolesToExclude)
     {
-      lock (this._LockObject)
-      {
+      
+      var cloned = this.CloneThreadSafe();
         CharacterList charactersExcludingRoles = new CharacterList();
-        for (int index = 0; index < this.Count; ++index)
+        for (int index = 0; index < cloned.Count; ++index)
         {
-          Character character = this[index];
+          Character character = cloned[index];
           if (character != null && character.AppearanceOrder == 0 && !rolesToExclude.Contains(character.Role))
             charactersExcludingRoles.Add(character);
         }
-        for (int index = 0; index < charactersExcludingRoles.Count; ++index)
-          this.Remove(charactersExcludingRoles[index]);
+        // for (int index = 0; index < charactersExcludingRoles.Count; ++index)
+        //   this.Remove(charactersExcludingRoles[index]);
+        this.Remove(charactersExcludingRoles);
         return charactersExcludingRoles;
-      }
+      
     }
 
     public CharacterList ObtainStartingCharacters()
     {
-      lock (this._LockObject)
-      {
+      
+      var cloned = this.CloneThreadSafe();
         CharacterList startingCharacters = new CharacterList();
-        for (int index = 0; index < this.Count; ++index)
+        for (int index = 0; index < cloned.Count; ++index)
         {
-          Character character = this[index];
+          Character character = cloned[index];
           if (character != null && character.AppearanceOrder == 0)
             startingCharacters.Add(character);
         }
-        for (int index = 0; index < startingCharacters.Count; ++index)
-          this.Remove(startingCharacters[index]);
+        // for (int index = 0; index < startingCharacters.Count; ++index)
+        //   this.Remove(startingCharacters[index]);
+        this.Remove(startingCharacters);
         return startingCharacters;
-      }
+      
     }
 
     public bool CheckCharactersOfEmpirePresent(Empire empire)
     {
-      for (int index = 0; index < this.Count; ++index)
+      var cloned = this.CloneThreadSafe();
+      for (int index = 0; index < cloned.Count; ++index)
       {
-        Character character = this[index];
+        Character character = cloned[index];
         if (character != null && character.Empire == empire)
           return true;
       }
@@ -462,17 +463,16 @@ namespace DistantWorlds.Types
       double num = 0.0;
       if (this.Count > 0)
       {
-        List<int> intList = new List<int>();
-        for (int index = 0; index < this.Count; ++index)
-        {
-          Character character = this[index];
-          intList.Add(character.ResearchWeapons);
-        }
-        Character[] arrayThreadSafe = ListHelper.ToArrayThreadSafe(this);
-        Array.Sort<int, Character>(intList.ToArray(), arrayThreadSafe);
-        Array.Reverse((Array) arrayThreadSafe);
-        for (int index = 0; index < arrayThreadSafe.Length; ++index)
-          num += (double) arrayThreadSafe[index].ResearchWeapons / (double) (index + 1);
+        // List<int> intList = new List<int>();
+        // for (int index = 0; index < this.Count; ++index)
+        // {
+        //   Character character = this[index];
+        //   intList.Add(character.ResearchWeapons);
+        // }
+        List<Character> cloned = this.CloneThreadSafe();
+        cloned.Sort((a, b) => b.ResearchWeapons.CompareTo(a.ResearchWeapons));
+        for (int index = 0; index < cloned.Count; ++index)
+          num += (double) cloned[index].ResearchWeapons / (double) (index + 1);
         num /= 100.0;
       }
       return num;
@@ -480,35 +480,37 @@ namespace DistantWorlds.Types
 
     public double TotalDiminishingResearchBonusesEnergy()
     {
-      List<int> intList = new List<int>();
-      for (int index = 0; index < this.Count; ++index)
-      {
-        Character character = this[index];
-        intList.Add(character.ResearchEnergy);
-      }
-      Character[] arrayThreadSafe = ListHelper.ToArrayThreadSafe(this);
-      Array.Sort<int, Character>(intList.ToArray(), arrayThreadSafe);
-      Array.Reverse((Array) arrayThreadSafe);
+      // List<int> intList = new List<int>();
+      // for (int index = 0; index < this.Count; ++index)
+      // {
+      //   Character character = this[index];
+      //   intList.Add(character.ResearchEnergy);
+      // }
+        List<Character> cloned = this.CloneThreadSafe();
+        cloned.Sort((a, b) => b.ResearchEnergy.CompareTo(a.ResearchEnergy));
+      // Array.Sort<int, Character>(intList.ToArray(), arrayThreadSafe);
+      // Array.Reverse((Array) arrayThreadSafe);
       double num = 0.0;
-      for (int index = 0; index < arrayThreadSafe.Length; ++index)
-        num += (double) arrayThreadSafe[index].ResearchEnergy / (double) (index + 1);
+      for (int index = 0; index < cloned.Count; ++index)
+        num += (double) cloned[index].ResearchEnergy / (double) (index + 1);
       return num / 100.0;
     }
 
     public double TotalDiminishingResearchBonusesHighTech()
     {
-      List<int> intList = new List<int>();
-      for (int index = 0; index < this.Count; ++index)
-      {
-        Character character = this[index];
-        intList.Add(character.ResearchHighTech);
-      }
-      Character[] arrayThreadSafe = ListHelper.ToArrayThreadSafe(this);
-      Array.Sort<int, Character>(intList.ToArray(), arrayThreadSafe);
-      Array.Reverse((Array) arrayThreadSafe);
+      // List<int> intList = new List<int>();
+      // for (int index = 0; index < this.Count; ++index)
+      // {
+      //   Character character = this[index];
+      //   intList.Add(character.ResearchHighTech);
+      // }
+        List<Character> cloned = this.CloneThreadSafe();
+        cloned.Sort((a, b) => b.ResearchHighTech.CompareTo(a.ResearchHighTech));
+      // Array.Sort<int, Character>(intList.ToArray(), arrayThreadSafe);
+      // Array.Reverse((Array) arrayThreadSafe);
       double num = 0.0;
-      for (int index = 0; index < arrayThreadSafe.Length; ++index)
-        num += (double) arrayThreadSafe[index].ResearchHighTech / (double) (index + 1);
+      for (int index = 0; index < cloned.Count; ++index)
+        num += (double) cloned[index].ResearchHighTech / (double) (index + 1);
       return num / 100.0;
     }
 

@@ -57,6 +57,7 @@ namespace DistantWorlds.Controls
           List<string[]> allDescriptions;
           List<string[]> allValues;
           this._Galaxy.GenerateBenefitDetail(project, this._Empire, out allDescriptions, out allValues);
+          using StringFormat format = StringFormat.GenericTypographic;
           using (Font font1 = UiScale.NewFont(this.Font.FontFamily, 20f, FontStyle.Regular, GraphicsUnit.Pixel))
           {
             using (Font font2 = UiScale.NewFont(this.Font.FontFamily, 20f, FontStyle.Bold, GraphicsUnit.Pixel))
@@ -65,10 +66,10 @@ namespace DistantWorlds.Controls
               {
                 using (Font font4 = UiScale.NewFont(this.Font.FontFamily, 17f, FontStyle.Bold, GraphicsUnit.Pixel))
                 {
-                  graphics.DrawString(project.Name, font2, (Brush) this._WhiteBrush, new PointF(margin1, margin2), StringFormat.GenericTypographic);
+                  graphics.DrawString(project.Name, font2,  this._WhiteBrush, new PointF(margin1, margin2), format);
                   margin2 += UiScale.S(22f);
                   string s = TextResolver.GetText("Project Size") + ": " + project.Cost.ToString("0,K");
-                  graphics.DrawString(s, font1, (Brush) this._WhiteBrush, new PointF(margin1, margin2), StringFormat.GenericTypographic);
+                  graphics.DrawString(s, font1,  this._WhiteBrush, new PointF(margin1, margin2), format);
                   margin2 += UiScale.S(22f);
                   for (int index1 = 0; index1 < allDescriptions.Count; ++index1)
                   {
@@ -81,11 +82,11 @@ namespace DistantWorlds.Controls
                     string[] strArray1 = allDescriptions[index1];
                     string[] strArray2 = allValues[index1];
                     float num1 = margin1 + ((float) this._ItemWidth - UiScale.S(160f));
-                    StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
+                    using StringFormat format1 = new StringFormat(StringFormatFlags.FitBlackBox);
                     format1.Trimming = StringTrimming.EllipsisCharacter;
                     SizeF sizeF1 = graphics.MeasureString(strArray1[0], font4, this._ItemWidth - UiScale.S(10), format1);
                     RectangleF layoutRectangle1 = new RectangleF(margin1, margin2, sizeF1.Width + UiScale.S(3f), sizeF1.Height + UiScale.S(3f));
-                    graphics.DrawString(strArray1[0], font4, (Brush) this._WhiteBrush, layoutRectangle1, format1);
+                    graphics.DrawString(strArray1[0], font4,  this._WhiteBrush, layoutRectangle1, format1);
                     margin2 += sizeF1.Height;
                     if (strArray1.Length > 1)
                     {
@@ -93,19 +94,17 @@ namespace DistantWorlds.Controls
                       {
                         if (string.IsNullOrEmpty(strArray2[index2]))
                         {
-                          StringFormat format2 = new StringFormat(StringFormatFlags.FitBlackBox);
-                          format2.Trimming = StringTrimming.EllipsisCharacter;
-                          SizeF sizeF2 = graphics.MeasureString(strArray1[index2], font3, this._ItemWidth - UiScale.S(10), format2);
+                          SizeF sizeF2 = graphics.MeasureString(strArray1[index2], font3, this._ItemWidth - UiScale.S(10), format1);
                           RectangleF layoutRectangle2 = new RectangleF(margin1, margin2, sizeF2.Width + UiScale.S(3f), sizeF2.Height + UiScale.S(3f));
-                          graphics.DrawString(strArray1[index2], font3, (Brush) this._WhiteBrush, layoutRectangle2, format2);
+                          graphics.DrawString(strArray1[index2], font3,  this._WhiteBrush, layoutRectangle2, format1);
                           margin2 += sizeF2.Height;
                         }
                         else
                         {
-                          SizeF sizeF3 = graphics.MeasureString(strArray1[index2], font3, this._ItemWidth, StringFormat.GenericTypographic);
+                          SizeF sizeF3 = graphics.MeasureString(strArray1[index2], font3, this._ItemWidth, format);
                           float num2 = num1 - sizeF3.Width;
-                          graphics.DrawString(strArray1[index2], font3, (Brush) this._WhiteBrush, new PointF((float) ((double) margin1 + (double) num2 - UiScale.S(5.0)), margin2), StringFormat.GenericTypographic);
-                          graphics.DrawString(strArray2[index2], font4, (Brush) this._WhiteBrush, new PointF(margin1 + num1, margin2), StringFormat.GenericTypographic);
+                          graphics.DrawString(strArray1[index2], font3,  this._WhiteBrush, new PointF((float) ((double) margin1 + (double) num2 - UiScale.S(5.0)), margin2), format);
+                          graphics.DrawString(strArray2[index2], font4,  this._WhiteBrush, new PointF(margin1 + num1, margin2), format);
                           margin2 += UiScale.S(18f);
                         }
                       }
