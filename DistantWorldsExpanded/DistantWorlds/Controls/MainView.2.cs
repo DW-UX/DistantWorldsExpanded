@@ -2188,7 +2188,7 @@ namespace DistantWorlds.Controls
                 pen = new Pen(color2, 2f);
             }
             else
-            {pen = new Pen(color, 2f);}
+            { pen = new Pen(color, 2f); }
             if (zoomFactor <= 50.0 && builtObject.Owner == null && builtObject.Empire != galaxy_0.IndependentEmpire && builtObject.Empire != null)
             {
                 pen.DashStyle = DashStyle.Dot;
@@ -3926,6 +3926,7 @@ namespace DistantWorlds.Controls
         {
             System.Drawing.Color color = System.Drawing.Color.FromArgb(96, 255, 0, 64);
             System.Drawing.Color color2 = System.Drawing.Color.FromArgb(96, 64, 0, 255);
+            HashSet<(double x, double y)> posturePoints = new HashSet<(double x, double y)>();
             for (int i = 0; i < empire_0.ShipGroups.Count; i++)
             {
                 ShipGroup shipGroup = empire_0.ShipGroups[i];
@@ -3946,26 +3947,41 @@ namespace DistantWorlds.Controls
                     }
                     float num2 = (float)((shipGroup.AttackPoint.Xpos - (double)int_13) / double_15);
                     float num3 = (float)((shipGroup.AttackPoint.Ypos - (double)int_14) / double_15);
-                    if (num > 0f && num2 + num > 0f && num2 - num < (float)int_11 && num3 + num > 0f && num3 - num < (float)int_12)
+                    var point = (shipGroup.AttackPoint.Xpos, shipGroup.AttackPoint.Ypos);
+                    if (!posturePoints.Contains(point) && num > 0f && num2 + num > 0f && num2 - num < (float)int_11 && num3 + num > 0f && num3 - num < (float)int_12)
                     {
                         RectangleF rectangleF = new RectangleF(num2 - num, num3 - num, num * 2f, num * 2f);
                         System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle((int)rectangleF.X, (int)rectangleF.Y, (int)rectangleF.Width, (int)rectangleF.Height);
                         XnaDrawingHelper.DrawTexture(spriteBatch_2, texture2D_17, rectangle, 0f, color);
                         XnaDrawingHelper.DrawCircle(spriteBatch_2, rectangle, 100, color, 1);
+                        posturePoints.Add(point);
                     }
                     if (shipGroup.GatherPoint != null)
                     {
+                        var pointG = (shipGroup.AttackPoint.Xpos, shipGroup.AttackPoint.Ypos);
+                        if(posturePoints.Contains(pointG))
+                            continue;
+                        // View rectangle in screen coordinates (adjust to your viewport size)
+                        int viewW = 0, viewH = 0;
+                        main_0.GetMouseWorldCoorinates(ref viewW, ref viewH);
                         float x = (float)((shipGroup.GatherPoint.Xpos - (double)int_13) / double_15);
                         float y = (float)((shipGroup.GatherPoint.Ypos - (double)int_14) / double_15);
-                        using (new Pen(color))
+                        //todo finish cliping of lines, get main view coord to clip with
+                        //if (Math.Max(x, num2) < 0 || Math.Min(x, num2) > viewW || Math.Max(y, num3) < 0 || Math.Min(y, num3) > viewH)
+                        //{ continue; }
+                        if (ClipLine(ref x, ref y, ref num2, ref num3, int_13, int_14, (float)(int_13 + this.Width * double_0), (float)(int_14 + this.Height * double_0)))
                         {
                             XnaDrawingHelper.DrawLine(spriteBatch_2, x, y, num2, num3, color, 3, dashed: true, texture2D_35);
+                            posturePoints.Add(pointG);
                         }
                     }
                 }
-                else if (shipGroup.Posture == FleetPosture.Defend && shipGroup.GatherPoint != null)
+                else if ( shipGroup.Posture == FleetPosture.Defend && shipGroup.GatherPoint != null)
                 {
                     float num4 = 0f;
+                        var pointG = (shipGroup.GatherPoint.Xpos, shipGroup.GatherPoint.Ypos);
+                    if(posturePoints.Contains(pointG))
+                        continue;
                     if (shipGroup.PostureRangeSquared > 2250000.0 && shipGroup.PostureRangeSquared < 3.4028234663852886E+38)
                     {
                         num4 = (float)(Math.Sqrt(shipGroup.PostureRangeSquared) / double_15);
@@ -3978,9 +3994,99 @@ namespace DistantWorlds.Controls
                         System.Drawing.Rectangle rectangle2 = new System.Drawing.Rectangle((int)rectangleF2.X, (int)rectangleF2.Y, (int)rectangleF2.Width, (int)rectangleF2.Height);
                         XnaDrawingHelper.DrawTexture(spriteBatch_2, texture2D_17, rectangle2, 0f, color2);
                         XnaDrawingHelper.DrawCircle(spriteBatch_2, rectangle2, 100, color2, 1);
+                        posturePoints.Add(pointG);
                     }
                 }
             }
+        }
+        public static bool ClipLine(ref float x0, ref float y0, ref float x1, ref float y1,
+                            float xmin, float ymin, float xmax, float ymax)
+        {
+            float dx = x1 - x0;
+            float dy = y1 - y0;
+            float t0 = 0f, t1 = 1f;
+            float t;
+
+            // Left edge: p = -dx, q = x0 - xmin
+            if (dx == 0f)
+            {
+                if (x0 < xmin) return false;
+            }
+            else
+            {
+                t = (xmin - x0) / dx;
+                if (dx > 0f)
+                {
+                    if (t > t1) return false;
+                    if (t > t0) t0 = t;
+                }
+                else
+                {
+                    if (t < t0) return false;
+                    if (t < t1) t1 = t;
+                }
+            }
+
+            // Right edge: p = dx, q = xmax - x0
+            if (dx == 0f)
+            {
+                if (x0 > xmax) return false;
+            }
+            else
+            {
+                t = (xmax - x0) / dx;
+                if (dx > 0f)
+                {
+                    if (t < t0) return false;
+                    if (t < t1) t1 = t;
+                }
+                else
+                {
+                    if (t > t1) return false;
+                    if (t > t0) t0 = t;
+                }
+            }
+
+            // Top edge: p = -dy, q = y0 - ymin
+            if (dy == 0f)
+            {
+                if (y0 < ymin) return false;
+            }
+            else
+            {
+                t = (ymin - y0) / dy;
+                if (dy > 0f) { if (t > t1) return false; if (t > t0) t0 = t; }
+                else { if (t < t0) return false; if (t < t1) t1 = t; }
+            }
+
+            // Bottom edge: p = dy, q = ymax - y0
+            if (dy == 0f)
+            {
+                if (y0 > ymax) return false;
+            }
+            else
+            {
+                t = (ymax - y0) / dy;
+                if (dy > 0f)
+                {
+                    if (t < t0) return false;
+                    if (t < t1) t1 = t;
+                }
+                else
+                {
+                    if (t > t1) return false;
+                    if (t > t0) t0 = t;
+                }
+            }
+
+            if (t0 > t1) return false;
+
+            float nx0 = x0 + t0 * dx;
+            float ny0 = y0 + t0 * dy;
+            float nx1 = x0 + t1 * dx;
+            float ny1 = y0 + t1 * dy;
+            x0 = nx0; y0 = ny0; x1 = nx1; y1 = ny1;
+            return true;
         }
 
         private void method_248(int int_11, int int_12, int int_13, int int_14, double double_15, Graphics graphics_0, int int_15)
@@ -4049,8 +4155,8 @@ namespace DistantWorlds.Controls
             method_225(int_11, int_12, double_16, double_17, ref int_16, ref int_17, ref int_18, ref int_19);
             double num2 = (double)num / (double)Galaxy.SectorMaxX;
             SizeF sizeF;
-            using(StringFormat format = StringFormat.GenericTypographic)
-            {sizeF = graphics_0.MeasureString("H", font_3, 200, format);}
+            using (StringFormat format = StringFormat.GenericTypographic)
+            { sizeF = graphics_0.MeasureString("H", font_3, 200, format); }
             float num3 = (float)(num2 / 2.0 - (double)sizeF.Width / 2.0);
             float num4 = (float)(num2 / 2.0 - (double)sizeF.Height / 2.0);
             using SolidBrush solidBrush = new SolidBrush(main_0.color_7);
@@ -4697,8 +4803,8 @@ namespace DistantWorlds.Controls
                             Font font2 = font_0;
                             font2 = ((galaxyLocation.Type == GalaxyLocationType.NebulaCloud) ? ((double_15 > 4000.0) ? font_2 : ((!(double_15 > 1000.0)) ? font_1 : font_0)) : ((double_15 > 4000.0) ? font_3 : ((!(double_15 > 1000.0)) ? font_0 : font_2)));
                             SizeF sizeF2;
-                            using(StringFormat format = StringFormat.GenericTypographic)
-                            {sizeF2 = graphics_0.MeasureString(galaxyLocation.Name, font2, 250, format);}
+                            using (StringFormat format = StringFormat.GenericTypographic)
+                            { sizeF2 = graphics_0.MeasureString(galaxyLocation.Name, font2, 250, format); }
                             int num73 = num71 - (int)(sizeF2.Width / 2f);
                             int num74 = num72 - (int)(sizeF2.Height / 2f);
                             if (galaxyLocation.Type != GalaxyLocationType.NebulaCloud)
@@ -5324,7 +5430,7 @@ namespace DistantWorlds.Controls
                             {
                                 continue;
                             }
-                            foreach(var item in empire2.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars.CloneThreadSafe())
+                            foreach (var item in empire2.SystemVisibility[systemInfo.SystemStar.SystemIndex].ReciprocalLinkSystemStars.CloneThreadSafe())
                             {
                                 Habitat habitat4 = item;
                                 if (habitatList.Contains(habitat4) || habitat4 == null)
@@ -5821,10 +5927,10 @@ namespace DistantWorlds.Controls
                         {
                             continue;
                         }
-                        foreach(var item in galaxy_0.BuiltObjectIndex[num63][num64].CloneThreadSafe())
+                        foreach (var item in galaxy_0.BuiltObjectIndex[num63][num64].CloneThreadSafe())
                         {
                             BuiltObject builtObject = item;
-                            if (builtObject == null|| builtObject.HasBeenDestroyed)
+                            if (builtObject == null || builtObject.HasBeenDestroyed)
                             {
                                 continue;
                             }
@@ -6584,8 +6690,8 @@ namespace DistantWorlds.Controls
             float num4 = num3 / 2f;
             float num5 = num3 * 0.17f;
             float num6 = num3 * 0.83f;
-            
-                using Brush brush = new SolidBrush(pen_11.Color);
+
+            using Brush brush = new SolidBrush(pen_11.Color);
             switch (builtObjectRole_0)
             {
                 case BuiltObjectRole.Military:
@@ -6629,7 +6735,7 @@ namespace DistantWorlds.Controls
                 using (new Region(graphicsPath))
                 {
                     using Bitmap bitmap2 = new Bitmap(num, num, PixelFormat.Format32bppPArgb);
-                     Bitmap bitmap3;
+                    Bitmap bitmap3;
                     using (Graphics graphics = Graphics.FromImage(bitmap2))
                     {
                         using SolidBrush brush = new SolidBrush(systemInfo_1.DominantEmpire.Empire.SecondaryColor);
@@ -6641,7 +6747,7 @@ namespace DistantWorlds.Controls
                             bitmap3 = method_16(bitmap2, (float)int_11 / 255f);
                         }
                         else
-                       { bitmap3=bitmap2;}
+                        { bitmap3 = bitmap2; }
                     }
                     using TextureBrush brush2 = new TextureBrush(bitmap3);
                     using Graphics graphics2 = Graphics.FromImage(bitmap);

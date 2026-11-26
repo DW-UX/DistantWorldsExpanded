@@ -1296,7 +1296,7 @@ namespace BaconDistantWorlds
         {
             //IL_005e: Unknown result type (might be due to invalid IL or missing references)
             //IL_0068: Expected O, but got Unknown
-            Point point = ((Control)(object)main).PointToClient(MouseHelper.GetCursorPosition());
+            //Point point = ((Control)(object)main).PointToClient(MouseHelper.GetCursorPosition());
             object obj = main.method_143(main.int_15, main.int_16, true);
 
             object obj2 = null;

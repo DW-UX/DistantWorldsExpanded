@@ -44,6 +44,7 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleasePublish|AnyCPU'">
 	  <DebugType>embedded</DebugType>
+	  <Optimize>True</Optimize>
 	</PropertyGroup>
 	<ItemGroup>
 		<RuntimeHostConfigurationOption Include="System.GC.LOHThreshold" Value="2097152" />
@@ -62,40 +63,40 @@
 		<KnownFrameworkReference Update="Microsoft.WindowsDesktop.App.WindowsForms" IsWindowsOnly="false" />
 	</ItemGroup>
 	<ItemGroup>
-		<FormCandidate Include="**/Forms/*.cs" />
+		<FormCandidate Include="*/Forms/*.cs" />
 		<Compile Remove="@(FormCandidate)" />
 		<Compile Remove="DistantWorlds\FastBitmap.cs" />
-		<Compile Include="@(FormCandidate)" Exclude="**/Forms/*.Designer.cs">
+		<Compile Include="@(FormCandidate)" Exclude="*/Forms/*.Designer.cs">
 			<SubType>Form</SubType>
 		</Compile>
-		<Compile Include="**/Forms/*.Designer.cs" />
+		<Compile Include="*/Forms/*.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<ControlCandidate Include="**/Controls/*.cs" />
+		<ControlCandidate Include="*/Controls/*.cs" />
 		<Compile Remove="@(ControlCandidate)" />
-		<Compile Include="@(ControlCandidate)" Exclude="**/Controls/*.Designer.cs">
+		<Compile Include="@(ControlCandidate)" Exclude="*/Controls/*.Designer.cs">
 			<SubType>UserControl</SubType>
 		</Compile>
-		<Compile Include="**/Controls/*.Designer.cs" />
+		<Compile Include="*/Controls/*.Designer.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Remove="BaconDistantWorlds\HotKeys\**" />
-		<Compile Remove="DistantWorlds.Controls\Mods\**" />
-		<Compile Remove="DistantWorlds.Types\EM interface\**" />
-		<Compile Remove="DistantWorlds.Types\Mods\**" />
-		<Compile Remove="DistantWorlds\Mods\**" />
-		<ControlCandidate Remove="BaconDistantWorlds\HotKeys\**" />
-		<EmbeddedResource Remove="BaconDistantWorlds\HotKeys\**" />
-		<EmbeddedResource Remove="DistantWorlds.Controls\Mods\**" />
-		<EmbeddedResource Remove="DistantWorlds.Types\EM interface\**" />
-		<EmbeddedResource Remove="DistantWorlds.Types\Mods\**" />
-		<EmbeddedResource Remove="DistantWorlds\Mods\**" />
-		<FormCandidate Remove="BaconDistantWorlds\HotKeys\**" />
-		<None Remove="BaconDistantWorlds\HotKeys\**" />
-		<None Remove="DistantWorlds.Controls\Mods\**" />
-		<None Remove="DistantWorlds.Types\EM interface\**" />
-		<None Remove="DistantWorlds.Types\Mods\**" />
-		<None Remove="DistantWorlds\Mods\**" />
+		<Compile Remove="BaconDistantWorlds\HotKeys\*" />
+		<Compile Remove="DistantWorlds.Controls\Mods\*" />
+		<Compile Remove="DistantWorlds.Types\EM interface\*" />
+		<Compile Remove="DistantWorlds.Types\Mods\*" />
+		<Compile Remove="DistantWorlds\Mods\*" />
+		<ControlCandidate Remove="BaconDistantWorlds\HotKeys\*" />
+		<EmbeddedResource Remove="BaconDistantWorlds\HotKeys\*" />
+		<EmbeddedResource Remove="DistantWorlds.Controls\Mods\*" />
+		<EmbeddedResource Remove="DistantWorlds.Types\EM interface\*" />
+		<EmbeddedResource Remove="DistantWorlds.Types\Mods\*" />
+		<EmbeddedResource Remove="DistantWorlds\Mods\*" />
+		<FormCandidate Remove="BaconDistantWorlds\HotKeys\*" />
+		<None Remove="BaconDistantWorlds\HotKeys\*" />
+		<None Remove="DistantWorlds.Controls\Mods\*" />
+		<None Remove="DistantWorlds.Types\EM interface\*" />
+		<None Remove="DistantWorlds.Types\Mods\*" />
+		<None Remove="DistantWorlds\Mods\*" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="DotNetZip" Version="1.16.0" />

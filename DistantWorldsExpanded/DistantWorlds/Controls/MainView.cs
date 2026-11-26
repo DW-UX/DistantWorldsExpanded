@@ -4174,8 +4174,8 @@ namespace DistantWorlds.Controls
                 double num54 = main_0.CalculateShipZoomFactor(main_0.double_0, out maxWidth);
                 BuiltObjectList builtObjectList = new BuiltObjectList();
                 FighterList fighterList = new FighterList();
-                _ = MouseHelper.GetCursorPosition().X;
-                _ = MouseHelper.GetCursorPosition().Y;
+                //_ = MouseHelper.GetCursorPosition().X;
+                //_ = MouseHelper.GetCursorPosition().Y;
                 for (int num55 = 0; num55 < builtObjectsAtLocation.Count; num55++)
                 {
                     BuiltObject builtObject4 = builtObjectsAtLocation[num55];
@@ -4796,8 +4796,8 @@ namespace DistantWorlds.Controls
                 double num132 = main_0.CalculateCreatureZoomFactor(main_0.double_0, out maxWidth2);
                 CreatureList creatureList = new CreatureList();
                 new Keyboard();
-                _ = MouseHelper.GetCursorPosition().X;
-                _ = MouseHelper.GetCursorPosition().Y;
+                //_ = MouseHelper.GetCursorPosition().X;
+                //_ = MouseHelper.GetCursorPosition().Y;
                 if (num5 <= (double)(Galaxy.MaxSolarSystemSize + 5000))
                 {
                     creatureList.AddRange(galaxy_0.Systems[habitat.SystemIndex].Creatures);

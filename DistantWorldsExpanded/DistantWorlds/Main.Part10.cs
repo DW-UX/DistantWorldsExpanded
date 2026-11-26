@@ -54,7 +54,7 @@ namespace DistantWorlds {
             }
             int int_ = point.X;
             int int_2 = point.Y;
-            method_151(ref int_, ref int_2);
+            GetMouseWorldCoorinates(ref int_, ref int_2);
             Point point2 = PointToClient(MouseHelper.GetCursorPosition());
             int_17 = point2.X;
             int_18 = point2.Y;
@@ -1167,7 +1167,7 @@ namespace DistantWorlds {
                 Point point2 = PointToClient(MouseHelper.GetCursorPosition());
                 int int_ = point2.X;
                 int int_2 = point2.Y;
-                method_151(ref int_, ref int_2);
+                GetMouseWorldCoorinates(ref int_, ref int_2);
                 object obj = method_143(int_, int_2, bool_28: false);
                 int_11 = 0;
                 if (obj != null)
@@ -2982,7 +2982,7 @@ namespace DistantWorlds {
             Point point = PointToClient(MouseHelper.GetCursorPosition());
             int int_ = point.X;
             int int_2 = point.Y;
-            method_151(ref int_, ref int_2);
+            GetMouseWorldCoorinates(ref int_, ref int_2);
             itemListCollectionPanel_0.MouseDown(e.Location);
             bool_16 = false;
             int_32 = int_;
@@ -2995,7 +2995,7 @@ namespace DistantWorlds {
             Point pt = PointToClient(MouseHelper.GetCursorPosition());
             int int_ = pt.X;
             int int_2 = pt.Y;
-            method_151(ref int_, ref int_2);
+            GetMouseWorldCoorinates(ref int_, ref int_2);
             if (method_470() || itemListCollectionPanel_0.AreaMaximum.Contains(pt) || (int_ == int_32 && int_2 == int_33))
             {
                 return;
@@ -3055,7 +3055,7 @@ namespace DistantWorlds {
             Point point = PointToClient(MouseHelper.GetCursorPosition());
             int int_ = point.X;
             int int_2 = point.Y;
-            method_151(ref int_, ref int_2);
+            GetMouseWorldCoorinates(ref int_, ref int_2);
             if (bool_16 || (!method_470() && (diplomaticMessageQueue_0.CheckClick(e.Location) || itemListCollectionPanel_0.CheckClick(e.Location, e.Button, isDoubleClick: false))))
             {
                 return;

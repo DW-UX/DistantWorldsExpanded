@@ -443,7 +443,7 @@ namespace DistantWorlds
                 Point point = PointToClient(MouseHelper.GetCursorPosition());
                 int int_ = point.X;
                 int int_2 = point.Y;
-                method_151(ref int_, ref int_2);
+                GetMouseWorldCoorinates(ref int_, ref int_2);
                 bool flag = true;
                 if (num == double_0)
                 {

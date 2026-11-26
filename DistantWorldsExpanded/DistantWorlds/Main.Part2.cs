@@ -4901,7 +4901,7 @@ namespace DistantWorlds {
             {
                 int xCoord = coord.X;
                 int yCoord = coord.Y;
-                method_151(ref xCoord, ref yCoord);
+                GetMouseWorldCoorinates(ref xCoord, ref yCoord);
                 double energyCollection = 0;
                 Habitat nearestSystem = this._Game.Galaxy.FastFindNearestSystem(xCoord, yCoord);
                 int currentCollectionValue = 0;

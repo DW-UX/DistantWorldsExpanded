@@ -1186,7 +1186,7 @@ namespace DistantWorlds
                     {
                         int_ = actionMenu.Left;
                         int_2 = actionMenu.Top;
-                        method_151(ref int_, ref int_2);
+                        GetMouseWorldCoorinates(ref int_, ref int_2);
                     }
                     else if (!shipAction_1.Position.IsEmpty)
                     {
@@ -3498,7 +3498,7 @@ namespace DistantWorlds
             Point point = PointToClient(MouseHelper.GetCursorPosition());
             int int_ = point.X;
             int int_2 = point.Y;
-            method_151(ref int_, ref int_2);
+            GetMouseWorldCoorinates(ref int_, ref int_2);
             if (itemListCollectionPanel_0.CheckClick(e.Location, e.Button, isDoubleClick: true))
             {
                 return;
@@ -3684,7 +3684,7 @@ namespace DistantWorlds
                 Point point = PointToClient(MouseHelper.GetCursorPosition());
                 int int_ = point.X;
                 int int_2 = point.Y;
-                method_151(ref int_, ref int_2);
+                GetMouseWorldCoorinates(ref int_, ref int_2);
                 if (selectionMenu.Items == null || selectionMenu.Items.Count == 0)
                 {
                     VxFuqrlDb8(int_, int_2);

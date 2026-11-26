@@ -1867,7 +1867,7 @@ namespace DistantWorlds {
             int_65 = (int)((double)(int_65 - mainView.Height / 2) * double_7) + int_14;
         }
 
-        private void method_151(ref int int_64, ref int int_65)
+        internal void GetMouseWorldCoorinates(ref int int_64, ref int int_65)
         {
             int_64 = (int)((double)(int_64 - mainView.Width / 2) * double_0) + int_13;
             int_65 = (int)((double)(int_65 - mainView.Height / 2) * double_0) + int_14;
